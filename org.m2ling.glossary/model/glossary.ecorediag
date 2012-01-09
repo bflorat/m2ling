@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<notation:Diagram xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.2/notation" xmi:id="_gwZU0TrZEeG4V90rrDq7sA" type="EcoreTools" measurementUnit="Pixel">
+  <children xmi:type="notation:Node" xmi:id="_kLaDIDrZEeG4V90rrDq7sA" type="1001">
+    <children xmi:type="notation:Node" xmi:id="_kLaqMDrZEeG4V90rrDq7sA" type="4001"/>
+    <children xmi:type="notation:Node" xmi:id="_kLb4UDrZEeG4V90rrDq7sA" type="5001">
+      <styles xmi:type="notation:DrawerStyle" xmi:id="_kLb4UTrZEeG4V90rrDq7sA"/>
+      <styles xmi:type="notation:SortingStyle" xmi:id="_kLb4UjrZEeG4V90rrDq7sA"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_kLb4UzrZEeG4V90rrDq7sA"/>
+    </children>
+    <children xmi:type="notation:Node" xmi:id="_kLb4VDrZEeG4V90rrDq7sA" type="5002">
+      <styles xmi:type="notation:DrawerStyle" xmi:id="_kLb4VTrZEeG4V90rrDq7sA"/>
+      <styles xmi:type="notation:SortingStyle" xmi:id="_kLb4VjrZEeG4V90rrDq7sA"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_kLb4VzrZEeG4V90rrDq7sA"/>
+    </children>
+    <styles xmi:type="notation:ShapeStyle" xmi:id="_kLaDITrZEeG4V90rrDq7sA" fontColor="4210752" fontName="Droid Sans" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
+    <element xmi:type="ecore:EClass" href="glossary.ecore#//glossary"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_kLaDIjrZEeG4V90rrDq7sA" x="225" y="58"/>
+  </children>
+  <children xmi:type="notation:Node" xmi:id="_lXv6cDrZEeG4V90rrDq7sA" type="1001">
+    <children xmi:type="notation:Node" xmi:id="_lXxIkDrZEeG4V90rrDq7sA" type="4001"/>
+    <children xmi:type="notation:Node" xmi:id="_lXxIkTrZEeG4V90rrDq7sA" type="5001">
+      <children xmi:type="notation:Node" xmi:id="_-sZjoTrbEeGn9N7DHYe2iA" type="2001">
+        <element xmi:type="ecore:EAttribute" href="glossary.ecore#//term/name"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_-sZjojrbEeGn9N7DHYe2iA"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_1vtAUDrZEeG4V90rrDq7sA" type="2001">
+        <element xmi:type="ecore:EAttribute" href="glossary.ecore#//term/internal_definition"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_1vtAUTrZEeG4V90rrDq7sA"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_4_IwwDrZEeG4V90rrDq7sA" type="2001">
+        <element xmi:type="ecore:EAttribute" href="glossary.ecore#//term/user_definition"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_4_IwwTrZEeG4V90rrDq7sA"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_i4MAYDrcEeGn9N7DHYe2iA" type="2001">
+        <element xmi:type="ecore:EAttribute" href="glossary.ecore#//term/comment"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_i4MAYTrcEeGn9N7DHYe2iA"/>
+      </children>
+      <styles xmi:type="notation:DrawerStyle" xmi:id="_lXxIkjrZEeG4V90rrDq7sA"/>
+      <styles xmi:type="notation:SortingStyle" xmi:id="_lXxIkzrZEeG4V90rrDq7sA"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_lXxIlDrZEeG4V90rrDq7sA"/>
+    </children>
+    <children xmi:type="notation:Node" xmi:id="_lXxIlTrZEeG4V90rrDq7sA" type="5002">
+      <styles xmi:type="notation:DrawerStyle" xmi:id="_lXxIljrZEeG4V90rrDq7sA"/>
+      <styles xmi:type="notation:SortingStyle" xmi:id="_lXxIlzrZEeG4V90rrDq7sA"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_lXxImDrZEeG4V90rrDq7sA"/>
+    </children>
+    <styles xmi:type="notation:ShapeStyle" xmi:id="_lXv6cTrZEeG4V90rrDq7sA" fontColor="4210752" fontName="Droid Sans" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
+    <element xmi:type="ecore:EClass" href="glossary.ecore#//term"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_lXv6cjrZEeG4V90rrDq7sA" x="180" y="168"/>
+  </children>
+  <children xmi:type="notation:Shape" xmi:id="_ZG8v0DrcEeGn9N7DHYe2iA" type="Note" fontName="Droid Sans" description="This micro-DSL provides a formal and shared definition of any functional term used in the m2ling tools specifications &#xA;(aka &quot;Ubiquious language&quot;).&#xA;Before introducing any new conceptual term, check this list and make it a living document.&#xA;Note that these definitions bounds are limited to m2ling projects, they are not intended to be general, &#xA;the only important thing being to ensure that every m2ling contributors and tools share the same meaning for a term. &#xA;&#xA;To map these definitions from specifications, use the ~ ~  notation (spaces allowed between the tildes). &#xA;Example : &quot;Given a ~parameter definition~, when ... then ...&quot; &#xA;" fillColor="13369343" transparency="0" lineColor="6737151" lineWidth="1">
+    <children xmi:type="notation:BasicDecorationNode" xmi:id="_ZHCPYDrcEeGn9N7DHYe2iA" type="DiagramName">
+      <element xsi:nil="true"/>
+    </children>
+    <children xmi:type="notation:BasicDecorationNode" xmi:id="_ZHCPYTrcEeGn9N7DHYe2iA" type="Description">
+      <element xsi:nil="true"/>
+    </children>
+    <styles xmi:type="notation:TextStyle" xmi:id="_ZG8v0TrcEeGn9N7DHYe2iA"/>
+    <styles xmi:type="notation:LineTypeStyle" xmi:id="_ZG8v0jrcEeGn9N7DHYe2iA"/>
+    <element xsi:nil="true"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_ZG8v0zrcEeGn9N7DHYe2iA" x="420" y="36"/>
+  </children>
+  <children xmi:type="notation:Shape" xmi:id="_lgdDIDrcEeGn9N7DHYe2iA" type="Note" fontName="Droid Sans" description="name : term name, only a single occurence for the entire m2ling projects pool&#xA;internal_definition : definition directed towards m2ling components creators&#xA;user_definition : definition directed towards m2ling components end-users&#xA;comment : TODO, discussions... please provide your initials&#xA;&#xA;if only one of internal|users definitions is provided, it is used for both definitions. " fillColor="13369343" transparency="0" lineColor="6737151" lineWidth="1">
+    <children xmi:type="notation:BasicDecorationNode" xmi:id="_lgeRQDrcEeGn9N7DHYe2iA" type="DiagramName">
+      <element xsi:nil="true"/>
+    </children>
+    <children xmi:type="notation:BasicDecorationNode" xmi:id="_lge4UDrcEeGn9N7DHYe2iA" type="Description">
+      <element xsi:nil="true"/>
+    </children>
+    <styles xmi:type="notation:TextStyle" xmi:id="_lgdDITrcEeGn9N7DHYe2iA"/>
+    <styles xmi:type="notation:LineTypeStyle" xmi:id="_lgdDIjrcEeGn9N7DHYe2iA"/>
+    <element xsi:nil="true"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_lgdDIzrcEeGn9N7DHYe2iA" x="454" y="214"/>
+  </children>
+  <styles xmi:type="notation:DiagramStyle" xmi:id="_gwZ74DrZEeG4V90rrDq7sA"/>
+  <element xmi:type="ecore:EPackage" href="glossary.ecore#/"/>
+  <edges xmi:type="notation:Edge" xmi:id="_wkccYDrZEeG4V90rrDq7sA" type="3002" source="_kLaDIDrZEeG4V90rrDq7sA" target="_lXv6cDrZEeG4V90rrDq7sA">
+    <children xmi:type="notation:Node" xmi:id="_wkdDcDrZEeG4V90rrDq7sA" type="4011">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_wkdDcTrZEeG4V90rrDq7sA" x="-30" y="-40"/>
+    </children>
+    <children xmi:type="notation:Node" xmi:id="_wkdDcjrZEeG4V90rrDq7sA" type="4012">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_wkdDczrZEeG4V90rrDq7sA" x="-7" y="33"/>
+    </children>
+    <styles xmi:type="notation:ConnectorStyle" xmi:id="_wkccYTrZEeG4V90rrDq7sA" lineColor="4210752"/>
+    <styles xmi:type="notation:FontStyle" xmi:id="_wkccYjrZEeG4V90rrDq7sA" fontColor="4210752" fontName="Droid Sans" fontHeight="10"/>
+    <element xmi:type="ecore:EReference" href="glossary.ecore#//glossary/contents"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_wkccYzrZEeG4V90rrDq7sA" points="[-8, 21, 17, -76]$[-34, 77, -9, -20]"/>
+  </edges>
+</notation:Diagram>

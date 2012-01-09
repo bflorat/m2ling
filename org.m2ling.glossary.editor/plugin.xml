@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+
+<!--
+ <copyright>
+ </copyright>
+
+ $Id$
+-->
+
+<plugin>
+
+   <extension point="org.eclipse.ui.newWizards">
+      <category
+            id="org.eclipse.emf.ecore.Wizard.category.ID"
+            name="%_UI_Wizard_category"/>
+      <wizard
+            id="m2ling_glossary.presentation.M2ling_glossaryModelWizardID"
+            name="%_UI_M2ling_glossaryModelWizard_label"
+            class="m2ling_glossary.presentation.M2ling_glossaryModelWizard"
+            category="org.eclipse.emf.ecore.Wizard.category.ID"
+            icon="icons/full/obj16/M2ling_glossaryModelFile.gif">
+         <description>%_UI_M2ling_glossaryModelWizard_description</description>
+         <selection class="org.eclipse.core.resources.IResource"/>
+      </wizard>
+   </extension>
+
+   <extension point="org.eclipse.ui.editors">
+      <editor
+            id="m2ling_glossary.presentation.M2ling_glossaryEditorID"
+            name="%_UI_M2ling_glossaryEditor_label"
+            icon="icons/full/obj16/M2ling_glossaryModelFile.gif"
+            extensions="m2ling_glossary"
+            class="m2ling_glossary.presentation.M2ling_glossaryEditor"
+            contributorClass="m2ling_glossary.presentation.M2ling_glossaryActionBarContributor">
+      </editor>
+   </extension>
+
+</plugin>
