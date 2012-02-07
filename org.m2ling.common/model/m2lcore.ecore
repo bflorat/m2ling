@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="m2lingcore"
+    nsURI="http://m2ling.org/core/1.0" nsPrefix="m2lingcore">
+  <eClassifiers xsi:type="ecore:EClass" name="EngineType" eSuperTypes="#//HasName">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="componentTypes" upperBound="-1"
+        eType="#//ComponentType" eOpposite="#//ComponentType/engineType"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="subTypes" upperBound="-1"
+        eType="#//EngineType" containment="true" eOpposite="#//EngineType/parent"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="parent" eType="#//EngineType"
+        eOpposite="#//EngineType/subTypes"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ComponentType" eSuperTypes="#//HasName">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="subTypes" upperBound="-1"
+        eType="#//ComponentType" containment="true" eOpposite="#//ComponentType/parent"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="engineType" lowerBound="1"
+        eType="#//EngineType" eOpposite="#//EngineType/componentTypes"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="parent" eType="#//ComponentType"
+        eOpposite="#//ComponentType/subTypes"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Engine" eSuperTypes="#//HasName #//HasVersion #//HasParameterDefinitions">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="type" lowerBound="1" eType="#//EngineType"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="subEngines" upperBound="-1"
+        eType="#//Engine" containment="true" eOpposite="#//Engine/parent"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="components" upperBound="-1"
+        eType="#//Component" eOpposite="#//Component/engine"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="parent" eType="#//Engine"
+        eOpposite="#//Engine/subEngines"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Component" eSuperTypes="#//HasName #//HasVersion #//HasParameterDefinitions">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="type" lowerBound="1" eType="#//ComponentType"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="subComponents" upperBound="-1"
+        eType="#//Component" containment="true" eOpposite="#//Component/parent"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="engine" lowerBound="1"
+        eType="#//Engine" eOpposite="#//Engine/components"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="parent" eType="#//Component"
+        eOpposite="#//Component/subComponents"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="HasName" abstract="true">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="id" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="keywords" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Architecture" eSuperTypes="#//HasName">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="engineTypes" upperBound="-1"
+        eType="#//EngineType" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="System" eSuperTypes="#//HasName">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="executionEngines" upperBound="-1"
+        eType="#//Engine" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="architecture" lowerBound="1"
+        eType="#//Architecture"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="EngineNode" eSuperTypes="#//HasName #//HasParameterValues">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="engine" lowerBound="1"
+        eType="#//Engine"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="subNodes" upperBound="-1"
+        eType="#//EngineNode" containment="true" eOpposite="#//EngineNode/parent"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="componentNodes" upperBound="-1"
+        eType="#//ComponentNode" eOpposite="#//ComponentNode/engineNode"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="parent" eType="#//EngineNode"
+        eOpposite="#//EngineNode/subNodes"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ComponentNode" eSuperTypes="#//HasName #//HasParameterValues">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="component" lowerBound="1"
+        eType="#//Component"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="engineNode" lowerBound="1"
+        eType="#//EngineNode" eOpposite="#//EngineNode/componentNodes"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="subNodes" upperBound="-1"
+        eType="#//ComponentNode" containment="true" eOpposite="#//ComponentNode/parent"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="parent" eType="#//ComponentNode"
+        eOpposite="#//ComponentNode/subNodes"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ParameterValue">
+    <eOperations name="getFinalValue"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="parent" lowerBound="1"
+        eType="#//HasParameterValues" eOpposite="#//HasParameterValues/parameters"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="definition" lowerBound="1"
+        eType="#//ParameterDefinition"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ParameterDefinition" abstract="true">
+    <eOperations name="castParentAsComponent">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Helper method that allows to cast the parent as a component (to be used with component parameter descriptions)&#xD;&#xA;"/>
+      </eAnnotations>
+    </eOperations>
+    <eOperations name="castParentAsEngine">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Helper method that allows to cast the parent as a component (to be used with engine parameter descriptions)"/>
+      </eAnnotations>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="parent" lowerBound="1"
+        eType="#//HasParameterDefinitions" eOpposite="#//HasParameterDefinitions/parameters"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="constraints" upperBound="-1"
+        eType="#//ParameterConstraint" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" eType="#//ParameterType"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="description" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="defaultValue" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="exampleValue" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="derivationExpression" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="format" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Gives the format to apply to the parameter value (mapped on a SimpleDateFormat for a date, on a DecimalFormat for an integer or a float). Must be null for boolean and string parameters."/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="overriders" upperBound="-1"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="overriders" upperBound="-1"
+        eType="#//ParamDefOverrider" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="longDescription" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="HasVersion" abstract="true">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="version" lowerBound="1"
+        upperBound="-1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="HasParameterDefinitions" abstract="true">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="parameters" upperBound="-1"
+        eType="#//ParameterDefinition" containment="true" eOpposite="#//ParameterDefinition/parent"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="allParameters" upperBound="-1"
+        eType="#//ParameterDefinition" changeable="false" volatile="true" derived="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="HasParameterValues" abstract="true">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="parameters" upperBound="-1"
+        eType="#//ParameterValue" containment="true" eOpposite="#//ParameterValue/parent"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="allParameters" upperBound="-1"
+        eType="#//ParameterValue"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ParameterConstraint" abstract="true"/>
+  <eClassifiers xsi:type="ecore:EEnum" name="ParameterType">
+    <eLiterals name="BOOLEAN"/>
+    <eLiterals name="DATE" value="1"/>
+    <eLiterals name="FLOAT" value="2"/>
+    <eLiterals name="INTEGER" value="3"/>
+    <eLiterals name="STRING" value="4"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="FloatConstraint" eSuperTypes="#//ParameterConstraint"/>
+  <eClassifiers xsi:type="ecore:EClass" name="MinConstraint" eSuperTypes="#//BoundaryConstraint"/>
+  <eClassifiers xsi:type="ecore:EClass" name="BoundaryConstraint" abstract="true"
+      eSuperTypes="#//ParameterConstraint">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="inclusive" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="NumberConstraintType">
+    <eLiterals name="integer"/>
+    <eLiterals name="float" value="1"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="URLConstraint" eSuperTypes="#//ParameterConstraint"/>
+  <eClassifiers xsi:type="ecore:EClass" name="NotNullConstraint" eSuperTypes="#//ParameterConstraint"/>
+  <eClassifiers xsi:type="ecore:EClass" name="RegexpConstraint" eSuperTypes="#//ParameterConstraint">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="regexp" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="OCLConstraint" eSuperTypes="#//ParameterConstraint">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="expression" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="IntegerConstraint" eSuperTypes="#//ParameterConstraint"/>
+  <eClassifiers xsi:type="ecore:EClass" name="MaxConstraint" eSuperTypes="#//BoundaryConstraint"/>
+  <eClassifiers xsi:type="ecore:EClass" name="EMailConstraint" eSuperTypes="#//ParameterConstraint"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Environnement" eSuperTypes="#//HasParameterValues">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="componentNodes" upperBound="-1"
+        eType="#//ComponentNode" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="engineNodes" upperBound="-1"
+        eType="#//EngineNode" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="profile" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="componentNodeGroups" upperBound="-1"
+        eType="#//ComponentNodeGroup" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="engineNodeGroups" upperBound="-1"
+        eType="#//EngineNodeGroup" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Architecture" eSuperTypes="#//HasParameterDefinitions">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="engines" upperBound="-1"
+        eType="#//Engine" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="components" upperBound="-1"
+        eType="#//Component" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="componentGroups" upperBound="-1"
+        eType="#//ComponentGroup" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="engineGroups" upperBound="-1"
+        eType="#//EngineGroup" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Concepts">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="componentTypes" upperBound="-1"
+        eType="#//ComponentType" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="engineTypes" upperBound="-1"
+        eType="#//EngineType" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EDataType" name="EStructuralFeature" instanceClassName="org.eclipse.emf.ecore.EStructuralFeature"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ParamDefOverrider">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="overridedFeature" eType="#//EStructuralFeature"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="profile" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ComponentGroup" eSuperTypes="#//HasParameterDefinitions">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="components" upperBound="-1"
+        eType="#//Component"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="EngineGroup" eSuperTypes="#//HasParameterDefinitions">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="engines" upperBound="-1"
+        eType="#//Engine"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="EngineNodeGroup" eSuperTypes="#//HasParameterValues">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="engineNodes" upperBound="-1"
+        eType="#//EngineNode"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ComponentNodeGroup" eSuperTypes="#//HasParameterValues">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="componentNodes" upperBound="-1"
+        eType="#//ComponentNode"/>
+  </eClassifiers>
+</ecore:EPackage>
