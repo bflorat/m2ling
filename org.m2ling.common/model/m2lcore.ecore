@@ -3,7 +3,7 @@
     xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="m2lingcore"
     nsURI="http://m2ling.org/core/1.0" nsPrefix="m2lingcore">
-  <eClassifiers xsi:type="ecore:EClass" name="EngineType" eSuperTypes="#//HasName #//ConceptItem">
+  <eClassifiers xsi:type="ecore:EClass" name="EngineType" eSuperTypes="#//HasName">
     <eStructuralFeatures xsi:type="ecore:EReference" name="componentTypes" upperBound="-1"
         eType="#//ComponentType" eOpposite="#//ComponentType/engineType"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="subTypes" upperBound="-1"
@@ -11,7 +11,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="parent" eType="#//EngineType"
         eOpposite="#//EngineType/subTypes"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="ComponentType" eSuperTypes="#//HasName #//ConceptItem">
+  <eClassifiers xsi:type="ecore:EClass" name="ComponentType" eSuperTypes="#//HasName">
     <eStructuralFeatures xsi:type="ecore:EReference" name="subTypes" upperBound="-1"
         eType="#//ComponentType" containment="true" eOpposite="#//ComponentType/parent"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="engineType" lowerBound="1"
@@ -19,7 +19,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="parent" eType="#//ComponentType"
         eOpposite="#//ComponentType/subTypes"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Engine" eSuperTypes="#//HasName #//ArchitectureItem #//HasParameterDefinitions">
+  <eClassifiers xsi:type="ecore:EClass" name="Engine" eSuperTypes="#//HasName #//HasVersion #//HasParameterDefinitions">
     <eStructuralFeatures xsi:type="ecore:EReference" name="type" lowerBound="1" eType="#//EngineType"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="subEngines" upperBound="-1"
         eType="#//Engine" containment="true" eOpposite="#//Engine/parent"/>
@@ -28,7 +28,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="parent" eType="#//Engine"
         eOpposite="#//Engine/subEngines"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Component" eSuperTypes="#//HasName #//ArchitectureItem #//HasParameterDefinitions">
+  <eClassifiers xsi:type="ecore:EClass" name="Component" eSuperTypes="#//HasName #//HasVersion #//HasParameterDefinitions">
     <eStructuralFeatures xsi:type="ecore:EReference" name="type" lowerBound="1" eType="#//ComponentType"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="subComponents" upperBound="-1"
         eType="#//Component" containment="true" eOpposite="#//Component/parent"/>
@@ -52,7 +52,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="architecture" lowerBound="1"
         eType="#//Architecture"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="EngineNode" eSuperTypes="#//HasName #//HasParameterValues #//RuntimeItem">
+  <eClassifiers xsi:type="ecore:EClass" name="EngineNode" eSuperTypes="#//HasName #//HasParameterValues">
     <eStructuralFeatures xsi:type="ecore:EReference" name="engine" lowerBound="1"
         eType="#//Engine"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="subNodes" upperBound="-1"
@@ -62,7 +62,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="parent" eType="#//EngineNode"
         eOpposite="#//EngineNode/subNodes"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="ComponentNode" eSuperTypes="#//HasName #//HasParameterValues #//RuntimeItem">
+  <eClassifiers xsi:type="ecore:EClass" name="ComponentNode" eSuperTypes="#//HasName #//HasParameterValues">
     <eStructuralFeatures xsi:type="ecore:EReference" name="component" lowerBound="1"
         eType="#//Component"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="engineNode" lowerBound="1"
@@ -75,7 +75,7 @@
   <eClassifiers xsi:type="ecore:EClass" name="ParameterValue">
     <eOperations name="getFinalValue"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="parent" lowerBound="1"
-        eType="#//HasParameterValues" eOpposite="#//HasParameterValues/parameterValues"/>
+        eType="#//HasParameterValues" eOpposite="#//HasParameterValues/parameters"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="definition" lowerBound="1"
         eType="#//ParameterDefinition"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
@@ -110,9 +110,8 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="overriders" upperBound="-1"
         eType="#//ParamDefOverrider" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="longDescription" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="installationOnly" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="ArchitectureItem" abstract="true">
+  <eClassifiers xsi:type="ecore:EClass" name="HasVersion" abstract="true">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="version" lowerBound="1"
         upperBound="-1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
@@ -123,7 +122,7 @@
         eType="#//ParameterDefinition" changeable="false" volatile="true" derived="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="HasParameterValues" abstract="true">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="parameterValues" upperBound="-1"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="parameters" upperBound="-1"
         eType="#//ParameterValue" containment="true" eOpposite="#//ParameterValue/parent"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="allParameters" upperBound="-1"
         eType="#//ParameterValue"/>
@@ -191,26 +190,20 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="profile" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="ComponentGroup" eSuperTypes="#//HasParameterDefinitions #//ArchitectureItem">
+  <eClassifiers xsi:type="ecore:EClass" name="ComponentGroup" eSuperTypes="#//HasParameterDefinitions">
     <eStructuralFeatures xsi:type="ecore:EReference" name="components" upperBound="-1"
         eType="#//Component"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="EngineGroup" eSuperTypes="#//HasParameterDefinitions #//ArchitectureItem">
+  <eClassifiers xsi:type="ecore:EClass" name="EngineGroup" eSuperTypes="#//HasParameterDefinitions">
     <eStructuralFeatures xsi:type="ecore:EReference" name="engines" upperBound="-1"
         eType="#//Engine"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="EngineNodeGroup" eSuperTypes="#//HasParameterValues #//RuntimeItem">
+  <eClassifiers xsi:type="ecore:EClass" name="EngineNodeGroup" eSuperTypes="#//HasParameterValues">
     <eStructuralFeatures xsi:type="ecore:EReference" name="engineNodes" upperBound="-1"
         eType="#//EngineNode"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="ComponentNodeGroup" eSuperTypes="#//HasParameterValues #//RuntimeItem">
+  <eClassifiers xsi:type="ecore:EClass" name="ComponentNodeGroup" eSuperTypes="#//HasParameterValues">
     <eStructuralFeatures xsi:type="ecore:EReference" name="componentNodes" upperBound="-1"
         eType="#//ComponentNode"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="ConceptItem" abstract="true">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="version" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="RuntimeItem" abstract="true">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="version" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
 </ecore:EPackage>

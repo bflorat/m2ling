@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="defaultname"
+    nsURI="http://defaultname/1.0" nsPrefix="defaultname">
+  <eClassifiers xsi:type="ecore:EClass" name="System">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="instanceOf" eType="#//System"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="dependsOn" upperBound="-1"
+        eType="#//System"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="isConfiguredBy" upperBound="-1"
+        eType="#//Parameter" eOpposite="#//Parameter/scopes"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="isComposedOf" upperBound="-1"
+        eType="#//System"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="realizes" upperBound="-1"
+        eType="#//Capability"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="has" upperBound="-1" eType="#//ContextElement"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="isDescribedBy" lowerBound="1"
+        eType="#//ArchitectureDescription"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="realizes" lowerBound="1"
+        upperBound="-1" eType="#//Function"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="exposes" upperBound="-1"
+        eType="#//Interface"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="isRunnedBy" lowerBound="1"
+        eType="#//EngineSystem" eOpposite="#//EngineSystem/runs"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="version:String"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Parameter">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="isDerivedFrom" upperBound="-1"
+        eType="#//Parameter"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="scopes" upperBound="-1"
+        eType="#//System" eOpposite="#//System/isConfiguredBy"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="NamedElement">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="id:String"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name:String"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="namespace:String"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="keyword:List&lt;String>"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="EngineSystem" eSuperTypes="#//System">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="runs" upperBound="-1" eType="#//System"
+        eOpposite="#//System/isRunnedBy"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Capability">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="isDescribedBy" upperBound="-1"
+        eType="#//Agreement"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Agreement"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ContextElement"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ArchitectureDescription">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="contains" lowerBound="1"
+        upperBound="-1" eType="#//ViewPoint"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="contains" lowerBound="1"
+        upperBound="-1" eType="#//View"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="contains" upperBound="-1"
+        eType="#//Rationnal"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="" upperBound="-1" eType="#//Correspondance"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="contains" upperBound="-1"
+        eType="#//CorrespondanceRule"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="contains" upperBound="-1"
+        eType="#//Correspondance"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Rationnal"/>
+  <eClassifiers xsi:type="ecore:EClass" name="View">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="conformsTo" lowerBound="1"
+        eType="#//ViewPoint"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="contains" lowerBound="1"
+        upperBound="-1" eType="#//ArchitectureModel"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ViewPoint">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="EReference0" eType="#//View"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="isIssuedBy" lowerBound="1"
+        upperBound="-1" eType="#//Organisation"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="contains" eType="#//ModelKind"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ArchitectureModel">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="conformsTo" eType="#//ModelKind"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Goal"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Concern">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="addressedBy" lowerBound="1"
+        upperBound="-1" eType="#//Capability"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Stakeholder">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="has" upperBound="-1" eType="#//Concern"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="isMemberOf" lowerBound="1"
+        upperBound="-1" eType="#//Organisation" eOpposite="#//Organisation/owns"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="job"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="role"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="holds" upperBound="-1"
+        eType="#//Goal"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="UserStakeholder" eSuperTypes="#//Stakeholder">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="uses" upperBound="-1" eType="#//System"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="BuilderStakeholder" eSuperTypes="#//Stakeholder">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="builds" upperBound="-1"
+        eType="#//System"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Function">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="fullfils" eType="#//Goal"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Organisation">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="owns" lowerBound="1" upperBound="-1"
+        eType="#//Stakeholder" eOpposite="#//Stakeholder/isMemberOf"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="has" upperBound="-1" eType="#//Goal"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Interface">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="type"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="In" eSuperTypes="#//Interface"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Out" eSuperTypes="#//Interface"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ModelKind"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Correspondance"/>
+  <eClassifiers xsi:type="ecore:EClass" name="CorrespondanceRule"/>
+</ecore:EPackage>
