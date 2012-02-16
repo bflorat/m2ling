@@ -155,16 +155,6 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="engineNodeGroups" upperBound="-1"
         eType="#//EngineNodeGroup" containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Architecture" eSuperTypes="#//HasParameterDefinitions #//ArchitectureItem">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="engines" upperBound="-1"
-        eType="#//Engine" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="components" upperBound="-1"
-        eType="#//Component" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="componentGroups" upperBound="-1"
-        eType="#//ComponentGroup" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="engineGroups" upperBound="-1"
-        eType="#//EngineGroup" containment="true"/>
-  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Concepts" eSuperTypes="#//ConceptItem">
     <eStructuralFeatures xsi:type="ecore:EReference" name="componentTypes" upperBound="-1"
         eType="#//ComponentType" containment="true"/>
@@ -202,5 +192,15 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="RuntimeItem" abstract="true" eSuperTypes="#//HasName">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="version" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Project" eSuperTypes="#//ArchitectureItem #//HasParameterDefinitions">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="componentsGroups" upperBound="-1"
+        eType="#//ComponentGroup"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="components" upperBound="-1"
+        eType="#//Component"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="engines" upperBound="-1"
+        eType="#//Engine"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="engineGroups" upperBound="-1"
+        eType="#//EngineGroup"/>
   </eClassifiers>
 </ecore:EPackage>
