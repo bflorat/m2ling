@@ -46,7 +46,6 @@
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="id" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1"
           eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-      <eStructuralFeatures xsi:type="ecore:EAttribute" name="keywords" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="EngineNode" eSuperTypes="#//core/EngineNodeGroup">
       <eStructuralFeatures xsi:type="ecore:EReference" name="engine" lowerBound="1"
@@ -122,9 +121,44 @@
       <eStructuralFeatures xsi:type="ecore:EReference" name="engineGroups" upperBound="-1"
           eType="#//core/EngineGroup"/>
     </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="HasTags" abstract="true">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="tags" eType="#//core/Tag"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="tagGroups" lowerBound="1"
+          upperBound="-1" eType="#//core/TagGroup"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Tag">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" lowerBound="1"
+          eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="TagGroup">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="tags" lowerBound="1"
+          upperBound="-1" eType="#//core/Tag"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="HasComment">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="comment" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="HasCustomProperties">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="customProperties" eType="#//core/CustomProperty"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="CustomProperty">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1"
+          eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="defaultValue" lowerBound="1"
+          eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" eType="#//core/CustomPropertyType"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EEnum" name="CustomPropertyType">
+      <eLiterals name="STRING"/>
+      <eLiterals name="FLOAT" value="1"/>
+      <eLiterals name="INTEGER" value="2"/>
+      <eLiterals name="DATE" value="3"/>
+      <eLiterals name="BOOLEAN" value="4"/>
+      <eLiterals name="TAG_GROUP" value="5"/>
+    </eClassifiers>
   </eSubpackages>
   <eSubpackages name="parameters" nsURI="http://m2ling.org/parameters/1.0" nsPrefix="parameters">
-    <eClassifiers xsi:type="ecore:EClass" name="ParameterValue">
+    <eClassifiers xsi:type="ecore:EClass" name="ParameterValue" eSuperTypes="#//core/HasComment #//core/HasCustomProperties">
       <eOperations name="getFinalValue"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="parent" lowerBound="1"
           eType="#//parameters/HasParameterValues" eOpposite="#//parameters/HasParameterValues/parameterValues"/>
@@ -132,7 +166,8 @@
           eType="#//parameters/ParameterDefinition"/>
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     </eClassifiers>
-    <eClassifiers xsi:type="ecore:EClass" name="ParameterDefinition" abstract="true">
+    <eClassifiers xsi:type="ecore:EClass" name="ParameterDefinition" abstract="true"
+        eSuperTypes="#//core/HasComment #//core/HasCustomProperties #//core/HasName">
       <eOperations name="castParentAsComponent">
         <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
           <details key="documentation" value="Helper method that allows to cast the parent as a component (to be used with component parameter descriptions)&#xD;&#xA;"/>
@@ -153,15 +188,9 @@
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="exampleValue" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="derivationExpression"
           eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-      <eStructuralFeatures xsi:type="ecore:EAttribute" name="format" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
-        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-          <details key="documentation" value="Gives the format to apply to the parameter value (mapped on a SimpleDateFormat for a date, on a DecimalFormat for an integer or a float). Must be null for boolean and string parameters."/>
-        </eAnnotations>
-      </eStructuralFeatures>
       <eStructuralFeatures xsi:type="ecore:EReference" name="overriders" upperBound="-1"
           eType="#//parameters/ParamDefOverrider" containment="true"/>
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="longDescription" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-      <eStructuralFeatures xsi:type="ecore:EAttribute" name="installationOnly" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="EReference0" eType="#//core/EngineType"/>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="HasParameterDefinitions" abstract="true">
@@ -192,10 +221,6 @@
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble"/>
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="inclusive" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
     </eClassifiers>
-    <eClassifiers xsi:type="ecore:EEnum" name="NumberConstraintType">
-      <eLiterals name="integer"/>
-      <eLiterals name="float" value="1"/>
-    </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="URLConstraint" eSuperTypes="#//parameters/ParameterConstraint"/>
     <eClassifiers xsi:type="ecore:EClass" name="NotNullConstraint" eSuperTypes="#//parameters/ParameterConstraint"/>
     <eClassifiers xsi:type="ecore:EClass" name="RegexpConstraint" eSuperTypes="#//parameters/ParameterConstraint">
@@ -213,5 +238,6 @@
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="profile" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="FormatConstraint" eSuperTypes="#//parameters/ParameterConstraint"/>
   </eSubpackages>
 </ecore:EPackage>
