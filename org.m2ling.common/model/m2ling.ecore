@@ -156,15 +156,15 @@
       <eLiterals name="BOOLEAN" value="4"/>
       <eLiterals name="TAG_GROUP" value="5"/>
     </eClassifiers>
-    <eClassifiers xsi:type="ecore:EClass" name="CommunicationType">
+    <eClassifiers xsi:type="ecore:EClass" name="LinkType">
       <eStructuralFeatures xsi:type="ecore:EReference" name="sourceType" lowerBound="1"
           eType="#//core/ConceptItem"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="destinationType" lowerBound="1"
           eType="#//core/ConceptItem"/>
     </eClassifiers>
-    <eClassifiers xsi:type="ecore:EClass" name="Communication">
+    <eClassifiers xsi:type="ecore:EClass" name="Link">
       <eStructuralFeatures xsi:type="ecore:EReference" name="type" lowerBound="1"
-          eType="#//core/CommunicationType"/>
+          eType="#//core/LinkType"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="source" lowerBound="1"
           eType="#//core/ArchitectureItem"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="destination" lowerBound="1"
@@ -176,7 +176,7 @@
       <eStructuralFeatures xsi:type="ecore:EReference" name="destination" lowerBound="1"
           eType="#//core/RuntimeItem"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="type" lowerBound="1"
-          eType="#//core/Communication"/>
+          eType="#//core/Link"/>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="HasParameterDefinitions" abstract="true"/>
     <eClassifiers xsi:type="ecore:EClass" name="HasParameterValues" abstract="true"/>
