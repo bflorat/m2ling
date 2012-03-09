@@ -2,7 +2,7 @@
 <ecore:EPackage xmi:version="2.0"
     xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="m2ling"
-    nsURI="http://m2ling.org/1.0" nsPrefix="m2ling">
+    nsURI="http://m2ling.org" nsPrefix="m2ling">
   <eSubpackages name="core" nsURI="http://m2ling.org/core/1.0" nsPrefix="core">
     <eClassifiers xsi:type="ecore:EClass" name="EngineType" eSuperTypes="#//core/ConceptItem">
       <eStructuralFeatures xsi:type="ecore:EReference" name="componentTypes" upperBound="-1"
@@ -180,74 +180,6 @@
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="HasParameterDefinitions" abstract="true"/>
     <eClassifiers xsi:type="ecore:EClass" name="HasParameterValues" abstract="true"/>
-  </eSubpackages>
-  <eSubpackages name="parameters" nsURI="http://m2ling.org/parameters/1.0" nsPrefix="parameters">
-    <eClassifiers xsi:type="ecore:EClass" name="ParameterValue" eSuperTypes="#//core/HasComment #//core/HasCustomProperties">
-      <eOperations name="getFinalValue"/>
-      <eStructuralFeatures xsi:type="ecore:EReference" name="parent" lowerBound="1"
-          eType="#//core/HasParameterValues"/>
-      <eStructuralFeatures xsi:type="ecore:EReference" name="definition" lowerBound="1"
-          eType="#//parameters/ParameterDefinition"/>
-      <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    </eClassifiers>
-    <eClassifiers xsi:type="ecore:EClass" name="ParameterDefinition" abstract="true"
-        eSuperTypes="#//core/HasComment #//core/HasCustomProperties #//core/HasName">
-      <eOperations name="castParentAsComponent">
-        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-          <details key="documentation" value="Helper method that allows to cast the parent as a component (to be used with component parameter descriptions)&#xD;&#xA;"/>
-        </eAnnotations>
-      </eOperations>
-      <eOperations name="castParentAsEngine">
-        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-          <details key="documentation" value="Helper method that allows to cast the parent as a component (to be used with engine parameter descriptions)"/>
-        </eAnnotations>
-      </eOperations>
-      <eStructuralFeatures xsi:type="ecore:EReference" name="parent" lowerBound="1"
-          eType="#//core/HasParameterDefinitions"/>
-      <eStructuralFeatures xsi:type="ecore:EReference" name="constraints" upperBound="-1"
-          eType="#//parameters/ParameterConstraint" containment="true"/>
-      <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" eType="#//parameters/ParameterType"/>
-      <eStructuralFeatures xsi:type="ecore:EAttribute" name="description" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-      <eStructuralFeatures xsi:type="ecore:EAttribute" name="defaultValue" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-      <eStructuralFeatures xsi:type="ecore:EAttribute" name="exampleValue" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-      <eStructuralFeatures xsi:type="ecore:EAttribute" name="derivationExpression"
-          eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-      <eStructuralFeatures xsi:type="ecore:EReference" name="overriders" upperBound="-1"
-          eType="#//parameters/ParamDefOverrider" containment="true"/>
-      <eStructuralFeatures xsi:type="ecore:EAttribute" name="longDescription" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    </eClassifiers>
-    <eClassifiers xsi:type="ecore:EClass" name="ParameterConstraint" abstract="true"/>
-    <eClassifiers xsi:type="ecore:EEnum" name="ParameterType">
-      <eLiterals name="BOOLEAN"/>
-      <eLiterals name="DATE" value="1"/>
-      <eLiterals name="FLOAT" value="2"/>
-      <eLiterals name="INTEGER" value="3"/>
-      <eLiterals name="STRING" value="4"/>
-    </eClassifiers>
-    <eClassifiers xsi:type="ecore:EClass" name="FloatConstraint" eSuperTypes="#//parameters/ParameterConstraint"/>
-    <eClassifiers xsi:type="ecore:EClass" name="MinConstraint" eSuperTypes="#//parameters/BoundaryConstraint"/>
-    <eClassifiers xsi:type="ecore:EClass" name="BoundaryConstraint" abstract="true"
-        eSuperTypes="#//parameters/ParameterConstraint">
-      <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble"/>
-      <eStructuralFeatures xsi:type="ecore:EAttribute" name="inclusive" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
-    </eClassifiers>
-    <eClassifiers xsi:type="ecore:EClass" name="URLConstraint" eSuperTypes="#//parameters/ParameterConstraint"/>
-    <eClassifiers xsi:type="ecore:EClass" name="NotNullConstraint" eSuperTypes="#//parameters/ParameterConstraint"/>
-    <eClassifiers xsi:type="ecore:EClass" name="RegexpConstraint" eSuperTypes="#//parameters/ParameterConstraint">
-      <eStructuralFeatures xsi:type="ecore:EAttribute" name="regexp" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    </eClassifiers>
-    <eClassifiers xsi:type="ecore:EClass" name="OCLConstraint" eSuperTypes="#//parameters/ParameterConstraint">
-      <eStructuralFeatures xsi:type="ecore:EAttribute" name="expression" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    </eClassifiers>
-    <eClassifiers xsi:type="ecore:EClass" name="IntegerConstraint" eSuperTypes="#//parameters/ParameterConstraint"/>
-    <eClassifiers xsi:type="ecore:EClass" name="MaxConstraint" eSuperTypes="#//parameters/BoundaryConstraint"/>
-    <eClassifiers xsi:type="ecore:EClass" name="EMailConstraint" eSuperTypes="#//parameters/ParameterConstraint"/>
-    <eClassifiers xsi:type="ecore:EDataType" name="EStructuralFeature" instanceClassName="org.eclipse.emf.ecore.EStructuralFeature"/>
-    <eClassifiers xsi:type="ecore:EClass" name="ParamDefOverrider">
-      <eStructuralFeatures xsi:type="ecore:EAttribute" name="overridedFeature" eType="#//parameters/EStructuralFeature"/>
-      <eStructuralFeatures xsi:type="ecore:EAttribute" name="profile" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-      <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    </eClassifiers>
-    <eClassifiers xsi:type="ecore:EClass" name="FormatConstraint" eSuperTypes="#//parameters/ParameterConstraint"/>
+    <eClassifiers xsi:type="ecore:EClass" name="test"/>
   </eSubpackages>
 </ecore:EPackage>

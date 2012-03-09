@@ -16,7 +16,7 @@
     <children xmi:type="notation:Node" xmi:id="_Zc2Boll4EeGeoaZMFQdv5A" type="4001"/>
     <children xmi:type="notation:Node" xmi:id="_Zc2Bo1l4EeGeoaZMFQdv5A" type="5001">
       <children xmi:type="notation:Node" xmi:id="_Zc2Bq1l4EeGeoaZMFQdv5A" type="2001">
-        <element xmi:type="ecore:EAttribute" href="m2ling.ecore#//parameters/ParameterValue/value"/>
+        <element xmi:type="ecore:EAttribute" href="m2ling-core.ecore#//parameters/ParameterValue/value"/>
         <layoutConstraint xmi:type="notation:Location" xmi:id="_Zc2BrFl4EeGeoaZMFQdv5A"/>
       </children>
       <styles xmi:type="notation:DrawerStyle" xmi:id="_Zc2BpFl4EeGeoaZMFQdv5A"/>
@@ -25,7 +25,7 @@
     </children>
     <children xmi:type="notation:Node" xmi:id="_Zc2Bp1l4EeGeoaZMFQdv5A" type="5002">
       <children xmi:type="notation:Node" xmi:id="_Zc2BrVl4EeGeoaZMFQdv5A" type="2002">
-        <element xmi:type="ecore:EOperation" href="m2ling.ecore#//parameters/ParameterValue/getFinalValue"/>
+        <element xmi:type="ecore:EOperation" href="m2ling-core.ecore#//parameters/ParameterValue/getFinalValue"/>
         <layoutConstraint xmi:type="notation:Location" xmi:id="_Zc2Brll4EeGeoaZMFQdv5A"/>
       </children>
       <styles xmi:type="notation:DrawerStyle" xmi:id="_Zc2BqFl4EeGeoaZMFQdv5A"/>
@@ -33,34 +33,34 @@
       <styles xmi:type="notation:FilteringStyle" xmi:id="_Zc2Bqll4EeGeoaZMFQdv5A"/>
     </children>
     <styles xmi:type="notation:ShapeStyle" xmi:id="_Zc2BoFl4EeGeoaZMFQdv5A" fontColor="4210752" fontName="Sans" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
-    <element xmi:type="ecore:EClass" href="m2ling.ecore#//parameters/ParameterValue"/>
+    <element xmi:type="ecore:EClass" href="m2ling-core.ecore#//parameters/ParameterValue"/>
     <layoutConstraint xmi:type="notation:Bounds" xmi:id="_Zc2BoVl4EeGeoaZMFQdv5A" x="1068" y="264"/>
   </children>
   <children xmi:type="notation:Node" xmi:id="_Zc2Br1l4EeGeoaZMFQdv5A" type="1001">
     <children xmi:type="notation:Node" xmi:id="_Zc2osFl4EeGeoaZMFQdv5A" type="4001"/>
     <children xmi:type="notation:Node" xmi:id="_Zc2osVl4EeGeoaZMFQdv5A" type="5001">
       <children xmi:type="notation:Node" xmi:id="_Zc2ouVl4EeGeoaZMFQdv5A" type="2001">
-        <element xmi:type="ecore:EAttribute" href="m2ling.ecore#//parameters/ParameterDefinition/type"/>
+        <element xmi:type="ecore:EAttribute" href="m2ling-core.ecore#//parameters/ParameterDefinition/type"/>
         <layoutConstraint xmi:type="notation:Location" xmi:id="_Zc2oull4EeGeoaZMFQdv5A"/>
       </children>
       <children xmi:type="notation:Node" xmi:id="_Zc2ou1l4EeGeoaZMFQdv5A" type="2001">
-        <element xmi:type="ecore:EAttribute" href="m2ling.ecore#//parameters/ParameterDefinition/description"/>
+        <element xmi:type="ecore:EAttribute" href="m2ling-core.ecore#//parameters/ParameterDefinition/description"/>
         <layoutConstraint xmi:type="notation:Location" xmi:id="_Zc2ovFl4EeGeoaZMFQdv5A"/>
       </children>
       <children xmi:type="notation:Node" xmi:id="_Zc2ovVl4EeGeoaZMFQdv5A" type="2001">
-        <element xmi:type="ecore:EAttribute" href="m2ling.ecore#//parameters/ParameterDefinition/defaultValue"/>
+        <element xmi:type="ecore:EAttribute" href="m2ling-core.ecore#//parameters/ParameterDefinition/defaultValue"/>
         <layoutConstraint xmi:type="notation:Location" xmi:id="_Zc2ovll4EeGeoaZMFQdv5A"/>
       </children>
       <children xmi:type="notation:Node" xmi:id="_Zc2ov1l4EeGeoaZMFQdv5A" type="2001">
-        <element xmi:type="ecore:EAttribute" href="m2ling.ecore#//parameters/ParameterDefinition/exampleValue"/>
+        <element xmi:type="ecore:EAttribute" href="m2ling-core.ecore#//parameters/ParameterDefinition/exampleValue"/>
         <layoutConstraint xmi:type="notation:Location" xmi:id="_Zc2owFl4EeGeoaZMFQdv5A"/>
       </children>
       <children xmi:type="notation:Node" xmi:id="_Zc2owVl4EeGeoaZMFQdv5A" type="2001">
-        <element xmi:type="ecore:EAttribute" href="m2ling.ecore#//parameters/ParameterDefinition/derivationExpression"/>
+        <element xmi:type="ecore:EAttribute" href="m2ling-core.ecore#//parameters/ParameterDefinition/derivationExpression"/>
         <layoutConstraint xmi:type="notation:Location" xmi:id="_Zc2owll4EeGeoaZMFQdv5A"/>
       </children>
       <children xmi:type="notation:Node" xmi:id="_Zc3Pwll4EeGeoaZMFQdv5A" type="2001">
-        <element xmi:type="ecore:EAttribute" href="m2ling.ecore#//parameters/ParameterDefinition/longDescription"/>
+        <element xmi:type="ecore:EAttribute" href="m2ling-core.ecore#//parameters/ParameterDefinition/longDescription"/>
         <layoutConstraint xmi:type="notation:Location" xmi:id="_Zc3Pw1l4EeGeoaZMFQdv5A"/>
       </children>
       <styles xmi:type="notation:DrawerStyle" xmi:id="_Zc2osll4EeGeoaZMFQdv5A"/>
@@ -69,11 +69,11 @@
     </children>
     <children xmi:type="notation:Node" xmi:id="_Zc2otVl4EeGeoaZMFQdv5A" type="5002">
       <children xmi:type="notation:Node" xmi:id="_Zc3Pxll4EeGeoaZMFQdv5A" type="2002">
-        <element xmi:type="ecore:EOperation" href="m2ling.ecore#//parameters/ParameterDefinition/castParentAsComponent"/>
+        <element xmi:type="ecore:EOperation" href="m2ling-core.ecore#//parameters/ParameterDefinition/castParentAsComponent"/>
         <layoutConstraint xmi:type="notation:Location" xmi:id="_Zc3Px1l4EeGeoaZMFQdv5A"/>
       </children>
       <children xmi:type="notation:Node" xmi:id="_Zc3PyFl4EeGeoaZMFQdv5A" type="2002">
-        <element xmi:type="ecore:EOperation" href="m2ling.ecore#//parameters/ParameterDefinition/castParentAsEngine"/>
+        <element xmi:type="ecore:EOperation" href="m2ling-core.ecore#//parameters/ParameterDefinition/castParentAsEngine"/>
         <layoutConstraint xmi:type="notation:Location" xmi:id="_Zc3PyVl4EeGeoaZMFQdv5A"/>
       </children>
       <styles xmi:type="notation:DrawerStyle" xmi:id="_Zc2otll4EeGeoaZMFQdv5A"/>
@@ -81,7 +81,7 @@
       <styles xmi:type="notation:FilteringStyle" xmi:id="_Zc2ouFl4EeGeoaZMFQdv5A"/>
     </children>
     <styles xmi:type="notation:ShapeStyle" xmi:id="_Zc2BsFl4EeGeoaZMFQdv5A" fontColor="4210752" fontName="Sans" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
-    <element xmi:type="ecore:EClass" href="m2ling.ecore#//parameters/ParameterDefinition"/>
+    <element xmi:type="ecore:EClass" href="m2ling-core.ecore#//parameters/ParameterDefinition"/>
     <layoutConstraint xmi:type="notation:Bounds" xmi:id="_Zc2BsVl4EeGeoaZMFQdv5A" x="588" y="276"/>
   </children>
   <children xmi:type="notation:Node" xmi:id="_Zc325Fl4EeGeoaZMFQdv5A" type="1001">
@@ -97,30 +97,30 @@
       <styles xmi:type="notation:FilteringStyle" xmi:id="_Zc3271l4EeGeoaZMFQdv5A"/>
     </children>
     <styles xmi:type="notation:ShapeStyle" xmi:id="_Zc325Vl4EeGeoaZMFQdv5A" fontColor="4210752" fontName="Sans" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
-    <element xmi:type="ecore:EClass" href="m2ling.ecore#//parameters/ParameterConstraint"/>
+    <element xmi:type="ecore:EClass" href="m2ling-core.ecore#//parameters/ParameterConstraint"/>
     <layoutConstraint xmi:type="notation:Bounds" xmi:id="_Zc325ll4EeGeoaZMFQdv5A" x="612" y="588"/>
   </children>
   <children xmi:type="notation:Node" xmi:id="_Zc4d4Fl4EeGeoaZMFQdv5A" type="1005">
     <children xmi:type="notation:Node" xmi:id="_Zc5E8Fl4EeGeoaZMFQdv5A" type="4010"/>
     <children xmi:type="notation:Node" xmi:id="_Zc5E8Vl4EeGeoaZMFQdv5A" type="5008">
       <children xmi:type="notation:Node" xmi:id="_Zc5E9Vl4EeGeoaZMFQdv5A" type="2006">
-        <element xmi:type="ecore:EEnumLiteral" href="m2ling.ecore#//parameters/ParameterType/BOOLEAN"/>
+        <element xmi:type="ecore:EEnumLiteral" href="m2ling-core.ecore#//parameters/ParameterType/BOOLEAN"/>
         <layoutConstraint xmi:type="notation:Location" xmi:id="_Zc5E9ll4EeGeoaZMFQdv5A"/>
       </children>
       <children xmi:type="notation:Node" xmi:id="_Zc5E91l4EeGeoaZMFQdv5A" type="2006">
-        <element xmi:type="ecore:EEnumLiteral" href="m2ling.ecore#//parameters/ParameterType/DATE"/>
+        <element xmi:type="ecore:EEnumLiteral" href="m2ling-core.ecore#//parameters/ParameterType/DATE"/>
         <layoutConstraint xmi:type="notation:Location" xmi:id="_Zc5E-Fl4EeGeoaZMFQdv5A"/>
       </children>
       <children xmi:type="notation:Node" xmi:id="_Zc5sAFl4EeGeoaZMFQdv5A" type="2006">
-        <element xmi:type="ecore:EEnumLiteral" href="m2ling.ecore#//parameters/ParameterType/FLOAT"/>
+        <element xmi:type="ecore:EEnumLiteral" href="m2ling-core.ecore#//parameters/ParameterType/FLOAT"/>
         <layoutConstraint xmi:type="notation:Location" xmi:id="_Zc5sAVl4EeGeoaZMFQdv5A"/>
       </children>
       <children xmi:type="notation:Node" xmi:id="_Zc5sAll4EeGeoaZMFQdv5A" type="2006">
-        <element xmi:type="ecore:EEnumLiteral" href="m2ling.ecore#//parameters/ParameterType/INTEGER"/>
+        <element xmi:type="ecore:EEnumLiteral" href="m2ling-core.ecore#//parameters/ParameterType/INTEGER"/>
         <layoutConstraint xmi:type="notation:Location" xmi:id="_Zc5sA1l4EeGeoaZMFQdv5A"/>
       </children>
       <children xmi:type="notation:Node" xmi:id="_Zc5sBFl4EeGeoaZMFQdv5A" type="2006">
-        <element xmi:type="ecore:EEnumLiteral" href="m2ling.ecore#//parameters/ParameterType/STRING"/>
+        <element xmi:type="ecore:EEnumLiteral" href="m2ling-core.ecore#//parameters/ParameterType/STRING"/>
         <layoutConstraint xmi:type="notation:Location" xmi:id="_Zc5sBVl4EeGeoaZMFQdv5A"/>
       </children>
       <styles xmi:type="notation:DrawerStyle" xmi:id="_Zc5E8ll4EeGeoaZMFQdv5A"/>
@@ -128,7 +128,7 @@
       <styles xmi:type="notation:FilteringStyle" xmi:id="_Zc5E9Fl4EeGeoaZMFQdv5A"/>
     </children>
     <styles xmi:type="notation:ShapeStyle" xmi:id="_Zc4d4Vl4EeGeoaZMFQdv5A" fontColor="4210752" fontName="Sans" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
-    <element xmi:type="ecore:EEnum" href="m2ling.ecore#//parameters/ParameterType"/>
+    <element xmi:type="ecore:EEnum" href="m2ling-core.ecore#//parameters/ParameterType"/>
     <layoutConstraint xmi:type="notation:Bounds" xmi:id="_Zc4d4ll4EeGeoaZMFQdv5A" x="144" y="780"/>
   </children>
   <children xmi:type="notation:Node" xmi:id="_Zc5sBll4EeGeoaZMFQdv5A" type="1001">
@@ -144,7 +144,7 @@
       <styles xmi:type="notation:FilteringStyle" xmi:id="_Zc5sEVl4EeGeoaZMFQdv5A"/>
     </children>
     <styles xmi:type="notation:ShapeStyle" xmi:id="_Zc5sB1l4EeGeoaZMFQdv5A" fontColor="4210752" fontName="Sans" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
-    <element xmi:type="ecore:EClass" href="m2ling.ecore#//parameters/FloatConstraint"/>
+    <element xmi:type="ecore:EClass" href="m2ling-core.ecore#//parameters/FloatConstraint"/>
     <layoutConstraint xmi:type="notation:Bounds" xmi:id="_Zc5sCFl4EeGeoaZMFQdv5A" x="576" y="708"/>
   </children>
   <children xmi:type="notation:Node" xmi:id="_Zc5sEll4EeGeoaZMFQdv5A" type="1001">
@@ -160,18 +160,18 @@
       <styles xmi:type="notation:FilteringStyle" xmi:id="_Zc6TGFl4EeGeoaZMFQdv5A"/>
     </children>
     <styles xmi:type="notation:ShapeStyle" xmi:id="_Zc5sE1l4EeGeoaZMFQdv5A" fontColor="4210752" fontName="Sans" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
-    <element xmi:type="ecore:EClass" href="m2ling.ecore#//parameters/MinConstraint"/>
+    <element xmi:type="ecore:EClass" href="m2ling-core.ecore#//parameters/MinConstraint"/>
     <layoutConstraint xmi:type="notation:Bounds" xmi:id="_Zc5sFFl4EeGeoaZMFQdv5A" x="468" y="828"/>
   </children>
   <children xmi:type="notation:Node" xmi:id="_Zc6TGVl4EeGeoaZMFQdv5A" type="1001">
     <children xmi:type="notation:Node" xmi:id="_Zc6THFl4EeGeoaZMFQdv5A" type="4001"/>
     <children xmi:type="notation:Node" xmi:id="_Zc6THVl4EeGeoaZMFQdv5A" type="5001">
       <children xmi:type="notation:Node" xmi:id="_Zc6TJVl4EeGeoaZMFQdv5A" type="2001">
-        <element xmi:type="ecore:EAttribute" href="m2ling.ecore#//parameters/BoundaryConstraint/value"/>
+        <element xmi:type="ecore:EAttribute" href="m2ling-core.ecore#//parameters/BoundaryConstraint/value"/>
         <layoutConstraint xmi:type="notation:Location" xmi:id="_Zc6TJll4EeGeoaZMFQdv5A"/>
       </children>
       <children xmi:type="notation:Node" xmi:id="_Zc6TJ1l4EeGeoaZMFQdv5A" type="2001">
-        <element xmi:type="ecore:EAttribute" href="m2ling.ecore#//parameters/BoundaryConstraint/inclusive"/>
+        <element xmi:type="ecore:EAttribute" href="m2ling-core.ecore#//parameters/BoundaryConstraint/inclusive"/>
         <layoutConstraint xmi:type="notation:Location" xmi:id="_Zc6TKFl4EeGeoaZMFQdv5A"/>
       </children>
       <styles xmi:type="notation:DrawerStyle" xmi:id="_Zc6THll4EeGeoaZMFQdv5A"/>
@@ -184,7 +184,7 @@
       <styles xmi:type="notation:FilteringStyle" xmi:id="_Zc6TJFl4EeGeoaZMFQdv5A"/>
     </children>
     <styles xmi:type="notation:ShapeStyle" xmi:id="_Zc6TGll4EeGeoaZMFQdv5A" fontColor="4210752" fontName="Sans" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
-    <element xmi:type="ecore:EClass" href="m2ling.ecore#//parameters/BoundaryConstraint"/>
+    <element xmi:type="ecore:EClass" href="m2ling-core.ecore#//parameters/BoundaryConstraint"/>
     <layoutConstraint xmi:type="notation:Bounds" xmi:id="_Zc6TG1l4EeGeoaZMFQdv5A" x="360" y="708"/>
   </children>
   <children xmi:type="notation:Node" xmi:id="_Zc66LFl4EeGeoaZMFQdv5A" type="1001">
@@ -200,7 +200,7 @@
       <styles xmi:type="notation:FilteringStyle" xmi:id="_Zc66N1l4EeGeoaZMFQdv5A"/>
     </children>
     <styles xmi:type="notation:ShapeStyle" xmi:id="_Zc66LVl4EeGeoaZMFQdv5A" fontColor="4210752" fontName="Sans" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
-    <element xmi:type="ecore:EClass" href="m2ling.ecore#//parameters/URLConstraint"/>
+    <element xmi:type="ecore:EClass" href="m2ling-core.ecore#//parameters/URLConstraint"/>
     <layoutConstraint xmi:type="notation:Bounds" xmi:id="_Zc66Lll4EeGeoaZMFQdv5A" x="-36" y="708"/>
   </children>
   <children xmi:type="notation:Node" xmi:id="_Zc7hMFl4EeGeoaZMFQdv5A" type="1001">
@@ -216,14 +216,14 @@
       <styles xmi:type="notation:FilteringStyle" xmi:id="_Zc7hO1l4EeGeoaZMFQdv5A"/>
     </children>
     <styles xmi:type="notation:ShapeStyle" xmi:id="_Zc7hMVl4EeGeoaZMFQdv5A" fontColor="4210752" fontName="Sans" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
-    <element xmi:type="ecore:EClass" href="m2ling.ecore#//parameters/NotNullConstraint"/>
+    <element xmi:type="ecore:EClass" href="m2ling-core.ecore#//parameters/NotNullConstraint"/>
     <layoutConstraint xmi:type="notation:Bounds" xmi:id="_Zc7hMll4EeGeoaZMFQdv5A" x="1332" y="708"/>
   </children>
   <children xmi:type="notation:Node" xmi:id="_Zc7hPFl4EeGeoaZMFQdv5A" type="1001">
     <children xmi:type="notation:Node" xmi:id="_Zc7hP1l4EeGeoaZMFQdv5A" type="4001"/>
     <children xmi:type="notation:Node" xmi:id="_Zc7hQFl4EeGeoaZMFQdv5A" type="5001">
       <children xmi:type="notation:Node" xmi:id="_Zc7hSFl4EeGeoaZMFQdv5A" type="2001">
-        <element xmi:type="ecore:EAttribute" href="m2ling.ecore#//parameters/RegexpConstraint/regexp"/>
+        <element xmi:type="ecore:EAttribute" href="m2ling-core.ecore#//parameters/RegexpConstraint/regexp"/>
         <layoutConstraint xmi:type="notation:Location" xmi:id="_Zc7hSVl4EeGeoaZMFQdv5A"/>
       </children>
       <styles xmi:type="notation:DrawerStyle" xmi:id="_Zc7hQVl4EeGeoaZMFQdv5A"/>
@@ -236,14 +236,14 @@
       <styles xmi:type="notation:FilteringStyle" xmi:id="_Zc7hR1l4EeGeoaZMFQdv5A"/>
     </children>
     <styles xmi:type="notation:ShapeStyle" xmi:id="_Zc7hPVl4EeGeoaZMFQdv5A" fontColor="4210752" fontName="Sans" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
-    <element xmi:type="ecore:EClass" href="m2ling.ecore#//parameters/RegexpConstraint"/>
+    <element xmi:type="ecore:EClass" href="m2ling-core.ecore#//parameters/RegexpConstraint"/>
     <layoutConstraint xmi:type="notation:Bounds" xmi:id="_Zc7hPll4EeGeoaZMFQdv5A" x="960" y="708"/>
   </children>
   <children xmi:type="notation:Node" xmi:id="_Zc8IQFl4EeGeoaZMFQdv5A" type="1001">
     <children xmi:type="notation:Node" xmi:id="_Zc8IQ1l4EeGeoaZMFQdv5A" type="4001"/>
     <children xmi:type="notation:Node" xmi:id="_Zc8IRFl4EeGeoaZMFQdv5A" type="5001">
       <children xmi:type="notation:Node" xmi:id="_Zc8ITFl4EeGeoaZMFQdv5A" type="2001">
-        <element xmi:type="ecore:EAttribute" href="m2ling.ecore#//parameters/OCLConstraint/expression"/>
+        <element xmi:type="ecore:EAttribute" href="m2ling-core.ecore#//parameters/OCLConstraint/expression"/>
         <layoutConstraint xmi:type="notation:Location" xmi:id="_Zc8ITVl4EeGeoaZMFQdv5A"/>
       </children>
       <styles xmi:type="notation:DrawerStyle" xmi:id="_Zc8IRVl4EeGeoaZMFQdv5A"/>
@@ -256,7 +256,7 @@
       <styles xmi:type="notation:FilteringStyle" xmi:id="_Zc8IS1l4EeGeoaZMFQdv5A"/>
     </children>
     <styles xmi:type="notation:ShapeStyle" xmi:id="_Zc8IQVl4EeGeoaZMFQdv5A" fontColor="4210752" fontName="Sans" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
-    <element xmi:type="ecore:EClass" href="m2ling.ecore#//parameters/OCLConstraint"/>
+    <element xmi:type="ecore:EClass" href="m2ling-core.ecore#//parameters/OCLConstraint"/>
     <layoutConstraint xmi:type="notation:Bounds" xmi:id="_Zc8IQll4EeGeoaZMFQdv5A" x="144" y="708"/>
   </children>
   <children xmi:type="notation:Node" xmi:id="_Zc8ITll4EeGeoaZMFQdv5A" type="1001">
@@ -272,7 +272,7 @@
       <styles xmi:type="notation:FilteringStyle" xmi:id="_Zc8IWVl4EeGeoaZMFQdv5A"/>
     </children>
     <styles xmi:type="notation:ShapeStyle" xmi:id="_Zc8IT1l4EeGeoaZMFQdv5A" fontColor="4210752" fontName="Sans" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
-    <element xmi:type="ecore:EClass" href="m2ling.ecore#//parameters/IntegerConstraint"/>
+    <element xmi:type="ecore:EClass" href="m2ling-core.ecore#//parameters/IntegerConstraint"/>
     <layoutConstraint xmi:type="notation:Bounds" xmi:id="_Zc8IUFl4EeGeoaZMFQdv5A" x="756" y="708"/>
   </children>
   <children xmi:type="notation:Node" xmi:id="_Zc8IWll4EeGeoaZMFQdv5A" type="1001">
@@ -288,7 +288,7 @@
       <styles xmi:type="notation:FilteringStyle" xmi:id="_Zc8vWFl4EeGeoaZMFQdv5A"/>
     </children>
     <styles xmi:type="notation:ShapeStyle" xmi:id="_Zc8IW1l4EeGeoaZMFQdv5A" fontColor="4210752" fontName="Sans" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
-    <element xmi:type="ecore:EClass" href="m2ling.ecore#//parameters/MaxConstraint"/>
+    <element xmi:type="ecore:EClass" href="m2ling-core.ecore#//parameters/MaxConstraint"/>
     <layoutConstraint xmi:type="notation:Bounds" xmi:id="_Zc8IXFl4EeGeoaZMFQdv5A" x="300" y="828"/>
   </children>
   <children xmi:type="notation:Node" xmi:id="_Zc8vWVl4EeGeoaZMFQdv5A" type="1001">
@@ -304,22 +304,22 @@
       <styles xmi:type="notation:FilteringStyle" xmi:id="_Zc8vZFl4EeGeoaZMFQdv5A"/>
     </children>
     <styles xmi:type="notation:ShapeStyle" xmi:id="_Zc8vWll4EeGeoaZMFQdv5A" fontColor="4210752" fontName="Sans" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
-    <element xmi:type="ecore:EClass" href="m2ling.ecore#//parameters/EMailConstraint"/>
+    <element xmi:type="ecore:EClass" href="m2ling-core.ecore#//parameters/EMailConstraint"/>
     <layoutConstraint xmi:type="notation:Bounds" xmi:id="_Zc8vW1l4EeGeoaZMFQdv5A" x="1152" y="708"/>
   </children>
   <children xmi:type="notation:Node" xmi:id="_Zc99cFl4EeGeoaZMFQdv5A" type="1001">
     <children xmi:type="notation:Node" xmi:id="_Zc99c1l4EeGeoaZMFQdv5A" type="4001"/>
     <children xmi:type="notation:Node" xmi:id="_Zc99dFl4EeGeoaZMFQdv5A" type="5001">
       <children xmi:type="notation:Node" xmi:id="_Zc99fFl4EeGeoaZMFQdv5A" type="2001">
-        <element xmi:type="ecore:EAttribute" href="m2ling.ecore#//parameters/ParamDefOverrider/overridedFeature"/>
+        <element xmi:type="ecore:EAttribute" href="m2ling-core.ecore#//parameters/ParamDefOverrider/overridedFeature"/>
         <layoutConstraint xmi:type="notation:Location" xmi:id="_Zc99fVl4EeGeoaZMFQdv5A"/>
       </children>
       <children xmi:type="notation:Node" xmi:id="_Zc99fll4EeGeoaZMFQdv5A" type="2001">
-        <element xmi:type="ecore:EAttribute" href="m2ling.ecore#//parameters/ParamDefOverrider/profile"/>
+        <element xmi:type="ecore:EAttribute" href="m2ling-core.ecore#//parameters/ParamDefOverrider/profile"/>
         <layoutConstraint xmi:type="notation:Location" xmi:id="_Zc99f1l4EeGeoaZMFQdv5A"/>
       </children>
       <children xmi:type="notation:Node" xmi:id="_Zc99gFl4EeGeoaZMFQdv5A" type="2001">
-        <element xmi:type="ecore:EAttribute" href="m2ling.ecore#//parameters/ParamDefOverrider/value"/>
+        <element xmi:type="ecore:EAttribute" href="m2ling-core.ecore#//parameters/ParamDefOverrider/value"/>
         <layoutConstraint xmi:type="notation:Location" xmi:id="_Zc99gVl4EeGeoaZMFQdv5A"/>
       </children>
       <styles xmi:type="notation:DrawerStyle" xmi:id="_Zc99dVl4EeGeoaZMFQdv5A"/>
@@ -332,7 +332,7 @@
       <styles xmi:type="notation:FilteringStyle" xmi:id="_Zc99e1l4EeGeoaZMFQdv5A"/>
     </children>
     <styles xmi:type="notation:ShapeStyle" xmi:id="_Zc99cVl4EeGeoaZMFQdv5A" fontColor="4210752" fontName="Sans" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
-    <element xmi:type="ecore:EClass" href="m2ling.ecore#//parameters/ParamDefOverrider"/>
+    <element xmi:type="ecore:EClass" href="m2ling-core.ecore#//parameters/ParamDefOverrider"/>
     <layoutConstraint xmi:type="notation:Bounds" xmi:id="_Zc99cll4EeGeoaZMFQdv5A" x="252" y="432"/>
   </children>
   <children xmi:type="notation:Shape" xmi:id="_2sMzkFl_EeGeoaZMFQdv5A" type="Text" fontName="Sans" description="constraints">
@@ -358,7 +358,7 @@
       <styles xmi:type="notation:FilteringStyle" xmi:id="_zPyvZFmFEeGeoaZMFQdv5A"/>
     </children>
     <styles xmi:type="notation:ShapeStyle" xmi:id="_zPyIUVmFEeGeoaZMFQdv5A" fontColor="4210752" fontName="Sans" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
-    <element xmi:type="ecore:EClass" href="m2ling.ecore#//parameters/FormatConstraint"/>
+    <element xmi:type="ecore:EClass" href="m2ling-core.ecore#//parameters/FormatConstraint"/>
     <layoutConstraint xmi:type="notation:Bounds" xmi:id="_zPyIUlmFEeGeoaZMFQdv5A" x="732" y="820"/>
   </children>
   <children xmi:type="notation:Shape" xmi:id="_oxHpsFmIEeGeoaZMFQdv5A" type="Note" fontName="Sans" description="ParameterDefinition and ParameterValue extends HasCustomProperties, HasComment, HasTag" fillColor="13369343" transparency="0" lineColor="6737151" lineWidth="1">
@@ -389,7 +389,7 @@
       <styles xmi:type="notation:FilteringStyle" xmi:id="_-pfrOFmIEeGeoaZMFQdv5A"/>
     </children>
     <styles xmi:type="notation:ShapeStyle" xmi:id="_-pfEIVmIEeGeoaZMFQdv5A" fontColor="4210752" fontName="Sans" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
-    <element xmi:type="ecore:EClass" href="m2ling.ecore#//core/HasName"/>
+    <element xmi:type="ecore:EClass" href="m2ling-core.ecore#//core/HasName"/>
     <layoutConstraint xmi:type="notation:Bounds" xmi:id="_-pfEIlmIEeGeoaZMFQdv5A" x="312" y="276"/>
   </children>
   <children xmi:type="notation:Node" xmi:id="_AHxDoGe5EeGsDNAUc-f6MQ" type="1001">
@@ -410,7 +410,7 @@
       <layoutConstraint xmi:type="notation:Ratio" xmi:id="_LaFSIWfJEeGsDNAUc-f6MQ" value="0.20689655172413793"/>
     </children>
     <styles xmi:type="notation:ShapeStyle" xmi:id="_AHxDoWe5EeGsDNAUc-f6MQ" fontColor="4210752" fontName="Sans" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
-    <element xmi:type="ecore:EClass" href="m2ling.ecore#//core/HasParameterDefinitions"/>
+    <element xmi:type="ecore:EClass" href="m2ling-core.ecore#//core/HasParameterDefinitions"/>
     <layoutConstraint xmi:type="notation:Bounds" xmi:id="_AHxDome5EeGsDNAUc-f6MQ" x="624" y="96"/>
   </children>
   <children xmi:type="notation:Node" xmi:id="_AHy422e5EeGsDNAUc-f6MQ" type="1001">
@@ -429,7 +429,7 @@
       <styles xmi:type="notation:FilteringStyle" xmi:id="_AHzf6Ge5EeGsDNAUc-f6MQ"/>
     </children>
     <styles xmi:type="notation:ShapeStyle" xmi:id="_AHy43Ge5EeGsDNAUc-f6MQ" fontColor="4210752" fontName="Sans" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
-    <element xmi:type="ecore:EClass" href="m2ling.ecore#//core/HasComment"/>
+    <element xmi:type="ecore:EClass" href="m2ling-core.ecore#//core/HasComment"/>
     <layoutConstraint xmi:type="notation:Bounds" xmi:id="_AHy43We5EeGsDNAUc-f6MQ" x="864" y="300"/>
   </children>
   <children xmi:type="notation:Node" xmi:id="_AH0G8me5EeGsDNAUc-f6MQ" type="1001">
@@ -448,7 +448,7 @@
       <styles xmi:type="notation:FilteringStyle" xmi:id="_AH0G_We5EeGsDNAUc-f6MQ"/>
     </children>
     <styles xmi:type="notation:ShapeStyle" xmi:id="_AH0G82e5EeGsDNAUc-f6MQ" fontColor="4210752" fontName="Sans" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
-    <element xmi:type="ecore:EClass" href="m2ling.ecore#//core/HasCustomProperties"/>
+    <element xmi:type="ecore:EClass" href="m2ling-core.ecore#//core/HasCustomProperties"/>
     <layoutConstraint xmi:type="notation:Bounds" xmi:id="_AH0G9Ge5EeGsDNAUc-f6MQ" x="864" y="156"/>
   </children>
   <children xmi:type="notation:Node" xmi:id="_VQmrUGfJEeGsDNAUc-f6MQ" type="1001">
@@ -467,11 +467,11 @@
       <styles xmi:type="notation:FilteringStyle" xmi:id="_VQn5eGfJEeGsDNAUc-f6MQ"/>
     </children>
     <styles xmi:type="notation:ShapeStyle" xmi:id="_VQmrUWfJEeGsDNAUc-f6MQ" fontColor="4210752" fontName="Sans" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
-    <element xmi:type="ecore:EClass" href="m2ling.ecore#//core/HasParameterValues"/>
+    <element xmi:type="ecore:EClass" href="m2ling-core.ecore#//core/HasParameterValues"/>
     <layoutConstraint xmi:type="notation:Bounds" xmi:id="_VQmrUmfJEeGsDNAUc-f6MQ" x="1056" y="84"/>
   </children>
   <styles xmi:type="notation:DiagramStyle" xmi:id="_ZcvT8Vl4EeGeoaZMFQdv5A"/>
-  <element xmi:type="ecore:EPackage" href="m2ling.ecore#//parameters"/>
+  <element xmi:type="ecore:EPackage" href="m2ling-core.ecore#//parameters"/>
   <edges xmi:type="notation:Edge" xmi:id="_Zc-kiFl4EeGeoaZMFQdv5A" type="3002" source="_Zc1akFl4EeGeoaZMFQdv5A" target="_Zc2Br1l4EeGeoaZMFQdv5A">
     <children xmi:type="notation:Node" xmi:id="_Zc-kjFl4EeGeoaZMFQdv5A" type="4011">
       <layoutConstraint xmi:type="notation:Location" xmi:id="_Zc-kjVl4EeGeoaZMFQdv5A" x="-10" y="-10"/>
@@ -481,7 +481,7 @@
     </children>
     <styles xmi:type="notation:ConnectorStyle" xmi:id="_Zc-kiVl4EeGeoaZMFQdv5A" routing="Rectilinear" lineColor="4210752"/>
     <styles xmi:type="notation:FontStyle" xmi:id="_Zc-kill4EeGeoaZMFQdv5A" fontColor="4210752" fontName="Sans" fontHeight="10"/>
-    <element xmi:type="ecore:EReference" href="m2ling.ecore#//parameters/ParameterValue/definition"/>
+    <element xmi:type="ecore:EReference" href="m2ling-core.ecore#//parameters/ParameterValue/definition"/>
     <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_Zc-ki1l4EeGeoaZMFQdv5A" points="[1, 57, 432, -114]$[1, 144, 432, -27]$[-111, 144, 320, -27]$[-111, 126, 320, -45]$[-319, 126, 112, -45]"/>
     <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_Zd_4MFl4EeGeoaZMFQdv5A" id="(0.5,0.0)"/>
     <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_Zd_4MVl4EeGeoaZMFQdv5A" id="(0.5,1.0)"/>
@@ -495,7 +495,7 @@
     </children>
     <styles xmi:type="notation:ConnectorStyle" xmi:id="_Zc_LkVl4EeGeoaZMFQdv5A" routing="Rectilinear" lineColor="4210752"/>
     <styles xmi:type="notation:FontStyle" xmi:id="_Zc_Lkll4EeGeoaZMFQdv5A" fontColor="4210752" fontName="Sans" fontHeight="10"/>
-    <element xmi:type="ecore:EReference" href="m2ling.ecore#//parameters/ParameterDefinition/constraints"/>
+    <element xmi:type="ecore:EReference" href="m2ling-core.ecore#//parameters/ParameterDefinition/constraints"/>
     <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_Zc_Lk1l4EeGeoaZMFQdv5A" points="[100, 159, 263, -86]$[100, 180, 263, -65]$[-133, 180, 30, -65]$[-133, 204, 30, -41]"/>
     <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_ZeBGVVl4EeGeoaZMFQdv5A" id="(0.061946902654867256,0.0)"/>
     <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_ZeBGVll4EeGeoaZMFQdv5A" id="(0.4968553459119497,1.0)"/>
@@ -509,7 +509,7 @@
     </children>
     <styles xmi:type="notation:ConnectorStyle" xmi:id="_Zc_LmVl4EeGeoaZMFQdv5A" routing="Rectilinear" lineColor="4210752"/>
     <styles xmi:type="notation:FontStyle" xmi:id="_Zc_Lmll4EeGeoaZMFQdv5A" fontColor="4210752" fontName="Sans" fontHeight="10"/>
-    <element xmi:type="ecore:EReference" href="m2ling.ecore#//parameters/ParameterDefinition/overriders"/>
+    <element xmi:type="ecore:EReference" href="m2ling-core.ecore#//parameters/ParameterDefinition/overriders"/>
     <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_Zc_Lm1l4EeGeoaZMFQdv5A" points="[0, 0, 233, 136]$[0, -30, 233, 106]$[-233, -30, 0, 106]$[-233, -136, 0, 0]"/>
     <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_ZeBGU1l4EeGeoaZMFQdv5A" id="(0.12389380530973451,0.0)"/>
     <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_ZeBGVFl4EeGeoaZMFQdv5A" id="(0.5,1.0)"/>
@@ -617,7 +617,7 @@
     </children>
     <styles xmi:type="notation:ConnectorStyle" xmi:id="_AH_GEWe5EeGsDNAUc-f6MQ" routing="Rectilinear" lineColor="4210752"/>
     <styles xmi:type="notation:FontStyle" xmi:id="_AH_GEme5EeGsDNAUc-f6MQ" fontColor="4210752" fontName="Sans" fontHeight="10"/>
-    <element xmi:type="ecore:EReference" href="m2ling.ecore#//parameters/ParameterDefinition/parent"/>
+    <element xmi:type="ecore:EReference" href="m2ling-core.ecore#//parameters/ParameterDefinition/parent"/>
     <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_AH_GE2e5EeGsDNAUc-f6MQ" points="[-14, -159, -6, 132]$[-16, -195, -8, 96]$[-16, -233, -8, 58]"/>
     <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_kD3rUmfJEeGsDNAUc-f6MQ" id="(0.5,1.0)"/>
     <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_kD3rU2fJEeGsDNAUc-f6MQ" id="(0.49732620320855614,0.0)"/>
@@ -647,7 +647,7 @@
     </children>
     <styles xmi:type="notation:ConnectorStyle" xmi:id="_VQq8wWfJEeGsDNAUc-f6MQ" routing="Rectilinear" lineColor="4210752"/>
     <styles xmi:type="notation:FontStyle" xmi:id="_VQq8wmfJEeGsDNAUc-f6MQ" fontColor="4210752" fontName="Sans" fontHeight="10"/>
-    <element xmi:type="ecore:EReference" href="m2ling.ecore#//parameters/ParameterValue/parent"/>
+    <element xmi:type="ecore:EReference" href="m2ling-core.ecore#//parameters/ParameterValue/parent"/>
     <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_VQq8w2fJEeGsDNAUc-f6MQ" points="[9, -57, 5, 180]$[9, -179, 5, 58]"/>
     <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_r8LxwGfREeGl_-egMuGV0w" id="(0.5,1.0)"/>
     <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_r8LxwWfREeGl_-egMuGV0w" id="(0.5,0.0)"/>
