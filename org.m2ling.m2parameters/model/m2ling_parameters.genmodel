@@ -1,13 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <genmodel:GenModel xmi:version="2.0"
     xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
-    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/org.m2ling.common/src-gen"
-    modelPluginID="org.m2ling.common" modelName="M2ling-core" importerID="org.eclipse.emf.importer.ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/org.m2ling.m2parameters/src"
+    modelPluginID="org.m2ling.m2parameters" modelName="M2ling_parameters" importerID="org.eclipse.emf.importer.ecore"
     complianceLevel="6.0" copyrightFields="false">
-  <foreignModel>m2ling.ecore</foreignModel>
+  <foreignModel>../../org.m2ling.common/model/m2ling.ecore</foreignModel>
   <genPackages prefix="M2ling" disposableProviderFactory="true" ecorePackage="m2ling.ecore#/">
-    <nestedGenPackages prefix="Core" basePackage="org.m2ling.domain" disposableProviderFactory="true"
-        ecorePackage="m2ling.ecore#//core">
+    <nestedGenPackages prefix="Core" disposableProviderFactory="true" ecorePackage="m2ling.ecore#//core">
       <genEnums typeSafeEnumCompatible="false" ecoreEnum="m2ling.ecore#//core/CustomPropertyType">
         <genEnumLiterals ecoreEnumLiteral="m2ling.ecore#//core/CustomPropertyType/STRING"/>
         <genEnumLiterals ecoreEnumLiteral="m2ling.ecore#//core/CustomPropertyType/FLOAT"/>
@@ -137,19 +136,19 @@
         <genFeatures createChild="false" ecoreFeature="ecore:EAttribute m2ling.ecore#//core/CustomProperty/type"/>
         <genFeatures createChild="false" ecoreFeature="ecore:EAttribute m2ling.ecore#//core/CustomProperty/value"/>
       </genClasses>
-      <genClasses ecoreClass="m2ling.ecore#//core/LinkType">
+      <genClasses ecoreClass="m2ling.ecore#//core/CommunicationType">
         <genFeatures notify="false" createChild="false" propertySortChoices="true"
-            ecoreFeature="ecore:EReference m2ling.ecore#//core/LinkType/sourceType"/>
+            ecoreFeature="ecore:EReference m2ling.ecore#//core/CommunicationType/sourceType"/>
         <genFeatures notify="false" createChild="false" propertySortChoices="true"
-            ecoreFeature="ecore:EReference m2ling.ecore#//core/LinkType/destinationType"/>
+            ecoreFeature="ecore:EReference m2ling.ecore#//core/CommunicationType/destinationType"/>
       </genClasses>
-      <genClasses ecoreClass="m2ling.ecore#//core/Link">
+      <genClasses ecoreClass="m2ling.ecore#//core/Communication">
         <genFeatures notify="false" createChild="false" propertySortChoices="true"
-            ecoreFeature="ecore:EReference m2ling.ecore#//core/Link/type"/>
+            ecoreFeature="ecore:EReference m2ling.ecore#//core/Communication/type"/>
         <genFeatures notify="false" createChild="false" propertySortChoices="true"
-            ecoreFeature="ecore:EReference m2ling.ecore#//core/Link/source"/>
+            ecoreFeature="ecore:EReference m2ling.ecore#//core/Communication/source"/>
         <genFeatures notify="false" createChild="false" propertySortChoices="true"
-            ecoreFeature="ecore:EReference m2ling.ecore#//core/Link/destination"/>
+            ecoreFeature="ecore:EReference m2ling.ecore#//core/Communication/destination"/>
       </genClasses>
       <genClasses ecoreClass="m2ling.ecore#//core/Stream">
         <genFeatures notify="false" createChild="false" propertySortChoices="true"
@@ -162,8 +161,7 @@
       <genClasses image="false" ecoreClass="m2ling.ecore#//core/HasParameterDefinitions"/>
       <genClasses image="false" ecoreClass="m2ling.ecore#//core/HasParameterValues"/>
     </nestedGenPackages>
-    <nestedGenPackages prefix="Parameters" basePackage="org.m2ling.domain" disposableProviderFactory="true"
-        ecorePackage="m2ling.ecore#//parameters">
+    <nestedGenPackages prefix="Parameters" disposableProviderFactory="true" ecorePackage="m2ling.ecore#//parameters">
       <genEnums typeSafeEnumCompatible="false" ecoreEnum="m2ling.ecore#//parameters/ParameterType">
         <genEnumLiterals ecoreEnumLiteral="m2ling.ecore#//parameters/ParameterType/BOOLEAN"/>
         <genEnumLiterals ecoreEnumLiteral="m2ling.ecore#//parameters/ParameterType/DATE"/>
