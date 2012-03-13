@@ -250,4 +250,7 @@
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="FormatConstraint" eSuperTypes="#//parameters/ParameterConstraint"/>
   </eSubpackages>
+  <eSubpackages name="principles" nsURI="http://m2ling.org/principles/1.0" nsPrefix="principles">
+    <eClassifiers xsi:type="ecore:EClass" name="Rule" eSuperTypes="#//core/ConceptItem"/>
+  </eSubpackages>
 </ecore:EPackage>
