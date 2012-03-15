@@ -42,7 +42,7 @@
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="ifactor" upperBound="-1"
           eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
     </eClassifiers>
-    <eClassifiers xsi:type="ecore:EClass" name="HasName" abstract="true">
+    <eClassifiers xsi:type="ecore:EClass" name="HasNameAndID" abstract="true">
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="id" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1"
           eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
@@ -78,7 +78,7 @@
           eType="#//core/EngineNodeGroup" containment="true"/>
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="profile" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     </eClassifiers>
-    <eClassifiers xsi:type="ecore:EClass" name="Concepts" eSuperTypes="#//core/ConceptItem">
+    <eClassifiers xsi:type="ecore:EClass" name="ViewPoint" eSuperTypes="#//core/ConceptItem">
       <eStructuralFeatures xsi:type="ecore:EReference" name="componentTypes" upperBound="-1"
           eType="#//core/ComponentType" containment="true"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="engineTypes" upperBound="-1"
@@ -101,14 +101,14 @@
           eType="#//core/ComponentNode"/>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="ArchitectureItem" abstract="true"
-        eSuperTypes="#//core/HasName #//core/HasParameterDefinitions">
+        eSuperTypes="#//core/HasNameAndID #//core/HasParameterDefinitions #//core/HasComment #//core/HasTags">
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="version" lowerBound="1"
           upperBound="-1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     </eClassifiers>
-    <eClassifiers xsi:type="ecore:EClass" name="ConceptItem" abstract="true" eSuperTypes="#//core/HasName">
+    <eClassifiers xsi:type="ecore:EClass" name="ConceptItem" abstract="true" eSuperTypes="#//core/HasNameAndID #//core/HasCustomProperties #//core/HasComment #//core/HasTags">
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="version" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     </eClassifiers>
-    <eClassifiers xsi:type="ecore:EClass" name="RuntimeItem" abstract="true" eSuperTypes="#//core/HasName #//core/HasParameterValues">
+    <eClassifiers xsi:type="ecore:EClass" name="RuntimeItem" abstract="true" eSuperTypes="#//core/HasNameAndID #//core/HasParameterValues #//core/HasComment #//core/HasTags">
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="version" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="Project" eSuperTypes="#//core/ArchitectureItem">
@@ -180,6 +180,18 @@
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="HasParameterDefinitions" abstract="true"/>
     <eClassifiers xsi:type="ecore:EClass" name="HasParameterValues" abstract="true"/>
+    <eClassifiers xsi:type="ecore:EClass" name="Concern">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="viewPoints" upperBound="-1"
+          eType="#//core/ViewPoint"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Stakeholder">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="concerns" upperBound="-1"
+          eType="#//core/Concern"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="projects" upperBound="-1"
+          eType="#//core/Project"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="environments" upperBound="-1"
+          eType="#//core/Environnement"/>
+    </eClassifiers>
   </eSubpackages>
   <eSubpackages name="parameters" nsURI="http://m2ling.org/parameters/1.0" nsPrefix="parameters">
     <eClassifiers xsi:type="ecore:EClass" name="ParameterValue" eSuperTypes="#//core/HasComment #//core/HasCustomProperties">
@@ -191,7 +203,7 @@
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="ParameterDefinition" abstract="true"
-        eSuperTypes="#//core/HasComment #//core/HasCustomProperties #//core/HasName">
+        eSuperTypes="#//core/HasComment #//core/HasCustomProperties #//core/HasNameAndID">
       <eOperations name="castParentAsComponent">
         <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
           <details key="documentation" value="Helper method that allows to cast the parent as a component (to be used with component parameter descriptions)&#xD;&#xA;"/>
