@@ -111,7 +111,7 @@
         <layoutConstraint xmi:type="notation:Location" xmi:id="_Zc99fVl4EeGeoaZMFQdv5A"/>
       </children>
       <children xmi:type="notation:Node" xmi:id="_Zc99fll4EeGeoaZMFQdv5A" type="2001">
-        <element xmi:type="ecore:EAttribute" href="m2ling.ecore#//parameters/ParamDefOverrider/profile"/>
+        <element xmi:type="ecore:EAttribute" href="m2ling.ecore#//parameters/ParamDefOverrider/environment"/>
         <layoutConstraint xmi:type="notation:Location" xmi:id="_Zc99f1l4EeGeoaZMFQdv5A"/>
       </children>
       <children xmi:type="notation:Node" xmi:id="_Zc99gFl4EeGeoaZMFQdv5A" type="2001">
