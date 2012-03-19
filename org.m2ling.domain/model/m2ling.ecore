@@ -22,6 +22,7 @@
           eOpposite="#//core/ComponentType/subTypes"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="bindedComponentType"
           eType="#//core/ComponentType"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="engineType" eType="#//core/ComponentType"/>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="Engine" eSuperTypes="#//core/EngineGroup">
       <eStructuralFeatures xsi:type="ecore:EReference" name="type" lowerBound="1"
@@ -44,6 +45,7 @@
           eOpposite="#//core/Component/subComponents"/>
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="ifactor" upperBound="-1"
           eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="engine" eType="#//core/Component"/>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="HasNameAndID" abstract="true">
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="id" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
@@ -69,6 +71,7 @@
           eType="#//core/ComponentNode" containment="true" eOpposite="#//core/ComponentNode/parent"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="parent" eType="#//core/ComponentNode"
           eOpposite="#//core/ComponentNode/subNodes"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="engine" eType="#//core/ComponentNode"/>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="ViewPoint" eSuperTypes="#//core/ConceptItem">
       <eStructuralFeatures xsi:type="ecore:EReference" name="componentTypes" upperBound="-1"
