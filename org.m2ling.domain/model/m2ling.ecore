@@ -165,10 +165,8 @@
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="fromStatus" eType="#//core/ActivityStatus"/>
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="toStatus" eType="#//core/ActivityStatus"/>
     </eClassifiers>
-    <eClassifiers xsi:type="ecore:EClass" name="OrganisationalUnit" eSuperTypes="#//core/HasComment #//core/HasCustomProperties #//core/HasNameAndID #//core/HasTags">
-      <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    </eClassifiers>
-    <eClassifiers xsi:type="ecore:EClass" name="Actor" eSuperTypes="#//core/HasCustomProperties #//core/HasNameAndID #//core/HasTags">
+    <eClassifiers xsi:type="ecore:EClass" name="OrganisationalUnit" eSuperTypes="#//core/HasComment #//core/HasCustomProperties #//core/HasNameAndID #//core/HasTags"/>
+    <eClassifiers xsi:type="ecore:EClass" name="Actor" eSuperTypes="#//core/HasCustomProperties #//core/HasTags">
       <eStructuralFeatures xsi:type="ecore:EReference" name="stakeholders" upperBound="-1"
           eType="#//core/Stakeholder" eOpposite="#//core/Stakeholder/actors"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="unit" lowerBound="1"
