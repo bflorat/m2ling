@@ -31,7 +31,10 @@
         <genFeatures notify="false" createChild="false" propertySortChoices="true"
             ecoreFeature="ecore:EReference m2ling.ecore#//core/Component/engine"/>
       </genClasses>
-      <genClasses image="false" ecoreClass="m2ling.ecore#//core/HasNameAndID"/>
+      <genClasses image="false" ecoreClass="m2ling.ecore#//core/HasNameAndID">
+        <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute m2ling.ecore#//core/HasNameAndID/iD"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute m2ling.ecore#//core/HasNameAndID/name"/>
+      </genClasses>
       <genClasses ecoreClass="m2ling.ecore#//core/ComponentNode">
         <genFeatures notify="false" createChild="false" propertySortChoices="true"
             ecoreFeature="ecore:EReference m2ling.ecore#//core/ComponentNode/component"/>

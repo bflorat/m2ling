@@ -3,6 +3,14 @@
   <children xmi:type="notation:Node" xmi:id="_XG0P8HQHEeGC1LCO92mMCg" type="1001">
     <children xmi:type="notation:Node" xmi:id="_XG4hYHQHEeGC1LCO92mMCg" type="4001"/>
     <children xmi:type="notation:Node" xmi:id="_XG5IcHQHEeGC1LCO92mMCg" type="5001">
+      <children xmi:type="notation:Node" xmi:id="_kd86AHm2EeGEvMHZDOlGeA" type="2001">
+        <element xmi:type="ecore:EAttribute" href="m2ling.ecore#//principles/Rule/status"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_kd86AXm2EeGEvMHZDOlGeA"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_DO5esHm3EeGEvMHZDOlGeA" type="2001">
+        <element xmi:type="ecore:EAttribute" href="m2ling.ecore#//principles/Rule/priority"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_DO5esXm3EeGEvMHZDOlGeA"/>
+      </children>
       <styles xmi:type="notation:DrawerStyle" xmi:id="_XG5IcXQHEeGC1LCO92mMCg"/>
       <styles xmi:type="notation:SortingStyle" xmi:id="_XG5IcnQHEeGC1LCO92mMCg"/>
       <styles xmi:type="notation:FilteringStyle" xmi:id="_XG5Ic3QHEeGC1LCO92mMCg"/>
@@ -33,7 +41,69 @@
     </children>
     <styles xmi:type="notation:ShapeStyle" xmi:id="_fnjh8XQHEeGC1LCO92mMCg" fontColor="4210752" fontName="Sans" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
     <element xmi:type="ecore:EClass" href="m2ling.ecore#//core/ConceptItem"/>
-    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_fnjh8nQHEeGC1LCO92mMCg" x="204" y="132"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_fnjh8nQHEeGC1LCO92mMCg" x="168" y="120"/>
+  </children>
+  <children xmi:type="notation:Node" xmi:id="_Wj4y4Hm2EeGEvMHZDOlGeA" type="1005">
+    <children xmi:type="notation:Node" xmi:id="_Wj4y43m2EeGEvMHZDOlGeA" type="4010"/>
+    <children xmi:type="notation:Node" xmi:id="_Wj5Z8Hm2EeGEvMHZDOlGeA" type="5008">
+      <children xmi:type="notation:Node" xmi:id="_ZMvrgHm2EeGEvMHZDOlGeA" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="m2ling.ecore#//principles/RuleStatus/TO_BE_STUDIED"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_ZMvrgXm2EeGEvMHZDOlGeA"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_cOTYAHm2EeGEvMHZDOlGeA" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="m2ling.ecore#//principles/RuleStatus/STUDIED"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_cOTYAXm2EeGEvMHZDOlGeA"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_dWsjcHm2EeGEvMHZDOlGeA" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="m2ling.ecore#//principles/RuleStatus/VALIDATED"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_dWsjcXm2EeGEvMHZDOlGeA"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_ff2BQHm2EeGEvMHZDOlGeA" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="m2ling.ecore#//principles/RuleStatus/REFUSED"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_ff2BQXm2EeGEvMHZDOlGeA"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_hRSJsHm2EeGEvMHZDOlGeA" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="m2ling.ecore#//principles/RuleStatus/OBSOLETE"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_hRSJsXm2EeGEvMHZDOlGeA"/>
+      </children>
+      <styles xmi:type="notation:DrawerStyle" xmi:id="_Wj5Z8Xm2EeGEvMHZDOlGeA"/>
+      <styles xmi:type="notation:SortingStyle" xmi:id="_Wj5Z8nm2EeGEvMHZDOlGeA"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_Wj5Z83m2EeGEvMHZDOlGeA"/>
+    </children>
+    <styles xmi:type="notation:ShapeStyle" xmi:id="_Wj4y4Xm2EeGEvMHZDOlGeA" fontColor="4210752" fontName="Sans" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
+    <element xmi:type="ecore:EEnum" href="m2ling.ecore#//principles/RuleStatus"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_Wj4y4nm2EeGEvMHZDOlGeA" x="24" y="120"/>
+  </children>
+  <children xmi:type="notation:Node" xmi:id="_7T26wHm2EeGEvMHZDOlGeA" type="1005">
+    <children xmi:type="notation:Node" xmi:id="_7T26w3m2EeGEvMHZDOlGeA" type="4010"/>
+    <children xmi:type="notation:Node" xmi:id="_7T3h0Hm2EeGEvMHZDOlGeA" type="5008">
+      <children xmi:type="notation:Node" xmi:id="_8fZg0Hm2EeGEvMHZDOlGeA" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="m2ling.ecore#//principles/Priority/VERY_LOW"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_8faH4Hm2EeGEvMHZDOlGeA"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="__ON3gHm2EeGEvMHZDOlGeA" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="m2ling.ecore#//principles/Priority/LOW"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="__ON3gXm2EeGEvMHZDOlGeA"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="__1ItkHm2EeGEvMHZDOlGeA" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="m2ling.ecore#//principles/Priority/MEDIUM"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="__1ItkXm2EeGEvMHZDOlGeA"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_BY3xMHm3EeGEvMHZDOlGeA" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="m2ling.ecore#//principles/Priority/HIGH"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_BY3xMXm3EeGEvMHZDOlGeA"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_CC7a0Hm3EeGEvMHZDOlGeA" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="m2ling.ecore#//principles/Priority/VERY_HIGH"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_CC7a0Xm3EeGEvMHZDOlGeA"/>
+      </children>
+      <styles xmi:type="notation:DrawerStyle" xmi:id="_7T3h0Xm2EeGEvMHZDOlGeA"/>
+      <styles xmi:type="notation:SortingStyle" xmi:id="_7T3h0nm2EeGEvMHZDOlGeA"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_7T3h03m2EeGEvMHZDOlGeA"/>
+    </children>
+    <styles xmi:type="notation:ShapeStyle" xmi:id="_7T26wXm2EeGEvMHZDOlGeA" fontColor="4210752" fontName="Sans" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
+    <element xmi:type="ecore:EEnum" href="m2ling.ecore#//principles/Priority"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_7T26wnm2EeGEvMHZDOlGeA" x="12" y="276"/>
   </children>
   <styles xmi:type="notation:DiagramStyle" xmi:id="_XGGeQnQHEeGC1LCO92mMCg"/>
   <element xmi:type="ecore:EPackage" href="m2ling.ecore#//principles"/>

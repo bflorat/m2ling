@@ -167,6 +167,10 @@
   <children xmi:type="notation:Node" xmi:id="_OiSYkFl4EeGeoaZMFQdv5A" type="1001">
     <children xmi:type="notation:Node" xmi:id="_OiSYk1l4EeGeoaZMFQdv5A" type="4001"/>
     <children xmi:type="notation:Node" xmi:id="_OiSYlFl4EeGeoaZMFQdv5A" type="5001">
+      <children xmi:type="notation:Node" xmi:id="_cQhmkHmrEeGEvMHZDOlGeA" type="2001">
+        <element xmi:type="ecore:EAttribute" href="m2ling.ecore#//core/ConceptItem/label"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_cQhmkXmrEeGEvMHZDOlGeA"/>
+      </children>
       <styles xmi:type="notation:DrawerStyle" xmi:id="_OiSYlVl4EeGeoaZMFQdv5A"/>
       <styles xmi:type="notation:SortingStyle" xmi:id="_OiSYlll4EeGeoaZMFQdv5A"/>
       <styles xmi:type="notation:FilteringStyle" xmi:id="_OiSYl1l4EeGeoaZMFQdv5A"/>
@@ -236,7 +240,7 @@
     <element xsi:nil="true"/>
     <layoutConstraint xmi:type="notation:Bounds" xmi:id="_QpzesFl4EeGeoaZMFQdv5A" x="1584" y="456" width="219" height="258"/>
   </children>
-  <children xmi:type="notation:Shape" xmi:id="_QpzesVl4EeGeoaZMFQdv5A" type="Note" fontName="Segoe UI" fontHeight="8" description="M1's root element (with root containement features). Project is ArchitectureItem and contains Component[Groups] and Engine[Groups]" fillColor="13369343" transparency="0" lineColor="6737151" lineWidth="1">
+  <children xmi:type="notation:Shape" xmi:id="_QpzesVl4EeGeoaZMFQdv5A" type="Note" fontName="Segoe UI" fontHeight="8" description="M1's root element (with root containement features). Project is ArchitectureItem and contains Component[Groups] " fillColor="13369343" transparency="0" lineColor="6737151" lineWidth="1">
     <children xmi:type="notation:BasicDecorationNode" xmi:id="_Qpzesll4EeGeoaZMFQdv5A" type="DiagramName">
       <element xsi:nil="true"/>
     </children>
@@ -248,7 +252,7 @@
     <element xsi:nil="true"/>
     <layoutConstraint xmi:type="notation:Bounds" xmi:id="_Qpzetll4EeGeoaZMFQdv5A" x="396" y="768" width="292" height="65"/>
   </children>
-  <children xmi:type="notation:Shape" xmi:id="_Qpzet1l4EeGeoaZMFQdv5A" type="Note" fontName="Segoe UI" fontHeight="8" description="M2's root element (with root containement features). Concepts contains EngineTypes and ComponentTypes" fillColor="13369343" transparency="0" lineColor="6737151" lineWidth="1">
+  <children xmi:type="notation:Shape" xmi:id="_Qpzet1l4EeGeoaZMFQdv5A" type="Note" fontName="Segoe UI" fontHeight="8" description="M2's root element (with root containement features). Concepts containsComponentTypes" fillColor="13369343" transparency="0" lineColor="6737151" lineWidth="1">
     <children xmi:type="notation:BasicDecorationNode" xmi:id="_QpzeuFl4EeGeoaZMFQdv5A" type="DiagramName">
       <element xsi:nil="true"/>
     </children>
@@ -260,7 +264,7 @@
     <element xsi:nil="true"/>
     <layoutConstraint xmi:type="notation:Bounds" xmi:id="_QpzevFl4EeGeoaZMFQdv5A" x="60" y="768" width="277" height="65"/>
   </children>
-  <children xmi:type="notation:Shape" xmi:id="_QpzevVl4EeGeoaZMFQdv5A" type="Note" fontName="Segoe UI" fontHeight="8" description="M0's root element (with root containement features). Environment is RuntimeItem and contains ComponentNode[Groups] and EngineNode[Groups]" fillColor="13369343" transparency="0" lineColor="6737151" lineWidth="1">
+  <children xmi:type="notation:Shape" xmi:id="_QpzevVl4EeGeoaZMFQdv5A" type="Note" fontName="Segoe UI" fontHeight="8" description="M0 level" fillColor="13369343" transparency="0" lineColor="6737151" lineWidth="1">
     <children xmi:type="notation:BasicDecorationNode" xmi:id="_Qpzevll4EeGeoaZMFQdv5A" type="DiagramName">
       <element xsi:nil="true"/>
     </children>
@@ -949,5 +953,33 @@
     <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_Spk_o3coEeGTIsERRp-woQ" points="[35, -8, 35, -8]$[35, -37, 35, -37]$[-1, -37, -1, -37]$[-1, -8, -1, -8]"/>
     <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_Spp4IHcoEeGTIsERRp-woQ" id="(0.18627450980392157,0.20930232558139536)"/>
     <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_Spp4IXcoEeGTIsERRp-woQ" id="(0.18627450980392157,0.20930232558139536)"/>
+  </edges>
+  <edges xmi:type="notation:Edge" xmi:id="_esJc0HcsEeGTIsERRp-woQ" type="3002" source="_OiLq5Fl4EeGeoaZMFQdv5A" target="_OiLq5Fl4EeGeoaZMFQdv5A">
+    <children xmi:type="notation:Node" xmi:id="_esJc1HcsEeGTIsERRp-woQ" type="4011">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_esJc1XcsEeGTIsERRp-woQ" x="-10" y="-10"/>
+    </children>
+    <children xmi:type="notation:Node" xmi:id="_esJc1ncsEeGTIsERRp-woQ" type="4012">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_esJc13csEeGTIsERRp-woQ" x="10" y="10"/>
+    </children>
+    <styles xmi:type="notation:ConnectorStyle" xmi:id="_esJc0XcsEeGTIsERRp-woQ" routing="Rectilinear" lineColor="4210752"/>
+    <styles xmi:type="notation:FontStyle" xmi:id="_esJc0ncsEeGTIsERRp-woQ" fontColor="4210752" fontName="Sans" fontHeight="10"/>
+    <element xmi:type="ecore:EReference" href="m2ling.ecore#//core/ComponentType/engineType"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_esJc03csEeGTIsERRp-woQ" points="[3, 2, 3, 2]$[96, 57, 96, 57]$[35, 65, 35, 65]$[1, 2, 1, 2]"/>
+    <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_esKq8HcsEeGTIsERRp-woQ" id="(0.6196078431372549,0.9534883720930233)"/>
+    <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_esKq8XcsEeGTIsERRp-woQ" id="(0.6196078431372549,0.9534883720930233)"/>
+  </edges>
+  <edges xmi:type="notation:Edge" xmi:id="_m91e0HmgEeGEvMHZDOlGeA" type="3002" source="_OiPVS1l4EeGeoaZMFQdv5A" target="_OiPVS1l4EeGeoaZMFQdv5A">
+    <children xmi:type="notation:Node" xmi:id="_m92s8HmgEeGEvMHZDOlGeA" type="4011">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_m92s8XmgEeGEvMHZDOlGeA" x="-10" y="-10"/>
+    </children>
+    <children xmi:type="notation:Node" xmi:id="_m92s8nmgEeGEvMHZDOlGeA" type="4012">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_m92s83mgEeGEvMHZDOlGeA" x="10" y="10"/>
+    </children>
+    <styles xmi:type="notation:ConnectorStyle" xmi:id="_m91e0XmgEeGEvMHZDOlGeA" routing="Rectilinear" lineColor="4210752"/>
+    <styles xmi:type="notation:FontStyle" xmi:id="_m91e0nmgEeGEvMHZDOlGeA" fontColor="4210752" fontName="Sans" fontHeight="10"/>
+    <element xmi:type="ecore:EReference" href="m2ling.ecore#//core/ViewPoint/baseViewpoint"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_m91e03mgEeGEvMHZDOlGeA" points="[-13, 12, -15, 12]$[-73, 12, -75, 12]$[-73, -43, -75, -43]$[62, -43, 60, -43]$[62, -19, 60, -19]"/>
+    <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_m937EHmgEeGEvMHZDOlGeA" id="(0.13725490196078433,0.46511627906976744)"/>
+    <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_m94iIHmgEeGEvMHZDOlGeA" id="(0.1568627450980392,0.46511627906976744)"/>
   </edges>
 </notation:Diagram>
