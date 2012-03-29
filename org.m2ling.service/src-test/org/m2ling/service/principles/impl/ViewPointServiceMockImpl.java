@@ -69,9 +69,9 @@ public final class ViewPointServiceMockImpl implements ViewPointService {
 	}
 	
 	private void populateStakeHolders() {
-		Stakeholder vpApp = CoreFactory.eINSTANCE.createViewPoint();
-		vpApp.setName("Project Architecture");
-		mockVPs.put(vpApp.getName(), vpApp);
+	//	Stakeholder vpApp = CoreFactory.eINSTANCE.createViewPoint();
+	//	vpApp.setName("Project Architecture");
+	//	mockVPs.put(vpApp.getName(), vpApp);
 	}
 
 	/*
