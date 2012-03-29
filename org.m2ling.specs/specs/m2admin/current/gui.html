@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>Insert title here</title>
+</head>
+<body>
+	<h1>m2admin GUI specifications</h1>
+	Note : m2admin can't delete or create new viewpoints, views : it should be done using the m2principles application.
+	<pre>
++ Authorizations [] (three buttons to create views etc..)
+  + Organizational Unit [New] (one create button + list the OU)
+   * DEV1 [Delete] ([OU name])
+  + Viewpoints [] (List viewpoints)  
+   * ArchiApp (<view point label>)
+    + Stakeholders [New] [Delete] (#1)
+     + Actors @see OU
+      * sdeveloper [delete] (#2)
+  + Views @see viewpoints
+   + BikesOnline {ArchiApp} [] (view label)
+    + Stakeholders ... @ see structure viewpoints      
+    
+#1 Stakeholder form :
+Name : [DEV]  Label: []
+Access level : [[READ,WRITE,DELETE,CREATE]]
+    
+#2 Actor form :
+Name : [DEV]  
+OU : [[one or more OU]]
+
+	 
+	</pre>
+</body>
+</html>
+
+
