@@ -4,7 +4,6 @@
 package org.m2ling.domain.core.impl;
 
 import org.eclipse.emf.ecore.EClass;
-
 import org.m2ling.domain.core.CorePackage;
 import org.m2ling.domain.core.NotNullConstraint;
 

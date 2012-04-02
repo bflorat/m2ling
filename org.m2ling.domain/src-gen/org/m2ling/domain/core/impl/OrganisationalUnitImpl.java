@@ -3,27 +3,17 @@
  */
 package org.m2ling.domain.core.impl;
 
-import java.util.Collection;
-
 import org.eclipse.emf.common.notify.Notification;
-
 import org.eclipse.emf.common.util.EList;
-
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
-
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-
-import org.eclipse.emf.ecore.util.EObjectResolvingEList;
-
 import org.m2ling.domain.core.CorePackage;
 import org.m2ling.domain.core.CustomProperty;
 import org.m2ling.domain.core.HasCustomProperties;
 import org.m2ling.domain.core.HasNameAndID;
 import org.m2ling.domain.core.HasTags;
 import org.m2ling.domain.core.OrganisationalUnit;
-import org.m2ling.domain.core.Tag;
-import org.m2ling.domain.core.TagGroup;
 
 /**
  * <!-- begin-user-doc -->
@@ -36,7 +26,6 @@ import org.m2ling.domain.core.TagGroup;
  *   <li>{@link org.m2ling.domain.core.impl.OrganisationalUnitImpl#getID <em>ID</em>}</li>
  *   <li>{@link org.m2ling.domain.core.impl.OrganisationalUnitImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.m2ling.domain.core.impl.OrganisationalUnitImpl#getTags <em>Tags</em>}</li>
- *   <li>{@link org.m2ling.domain.core.impl.OrganisationalUnitImpl#getTagGroups <em>Tag Groups</em>}</li>
  * </ul>
  * </p>
  *
@@ -110,24 +99,24 @@ public class OrganisationalUnitImpl extends HasCommentImpl implements Organisati
 	protected boolean nameESet;
 
 	/**
-	 * The cached value of the '{@link #getTags() <em>Tags</em>}' reference list.
+	 * The default value of the '{@link #getTags() <em>Tags</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getTags()
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<Tag> tags;
+	protected static final String[] TAGS_EDEFAULT = null;
 
 	/**
-	 * The cached value of the '{@link #getTagGroups() <em>Tag Groups</em>}' reference list.
+	 * The cached value of the '{@link #getTags() <em>Tags</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getTagGroups()
+	 * @see #getTags()
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<TagGroup> tagGroups;
+	protected String[] tags = TAGS_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -246,10 +235,7 @@ public class OrganisationalUnitImpl extends HasCommentImpl implements Organisati
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<Tag> getTags() {
-		if (tags == null) {
-			tags = new EObjectResolvingEList<Tag>(Tag.class, this, CorePackage.ORGANISATIONAL_UNIT__TAGS);
-		}
+	public String[] getTags() {
 		return tags;
 	}
 
@@ -258,11 +244,11 @@ public class OrganisationalUnitImpl extends HasCommentImpl implements Organisati
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<TagGroup> getTagGroups() {
-		if (tagGroups == null) {
-			tagGroups = new EObjectResolvingEList<TagGroup>(TagGroup.class, this, CorePackage.ORGANISATIONAL_UNIT__TAG_GROUPS);
-		}
-		return tagGroups;
+	public void setTags(String[] newTags) {
+		String[] oldTags = tags;
+		tags = newTags;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, CorePackage.ORGANISATIONAL_UNIT__TAGS, oldTags, tags));
 	}
 
 	/**
@@ -282,8 +268,6 @@ public class OrganisationalUnitImpl extends HasCommentImpl implements Organisati
 				return getName();
 			case CorePackage.ORGANISATIONAL_UNIT__TAGS:
 				return getTags();
-			case CorePackage.ORGANISATIONAL_UNIT__TAG_GROUPS:
-				return getTagGroups();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -304,12 +288,7 @@ public class OrganisationalUnitImpl extends HasCommentImpl implements Organisati
 				setName((String)newValue);
 				return;
 			case CorePackage.ORGANISATIONAL_UNIT__TAGS:
-				getTags().clear();
-				getTags().addAll((Collection<? extends Tag>)newValue);
-				return;
-			case CorePackage.ORGANISATIONAL_UNIT__TAG_GROUPS:
-				getTagGroups().clear();
-				getTagGroups().addAll((Collection<? extends TagGroup>)newValue);
+				setTags((String[])newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -330,10 +309,7 @@ public class OrganisationalUnitImpl extends HasCommentImpl implements Organisati
 				unsetName();
 				return;
 			case CorePackage.ORGANISATIONAL_UNIT__TAGS:
-				getTags().clear();
-				return;
-			case CorePackage.ORGANISATIONAL_UNIT__TAG_GROUPS:
-				getTagGroups().clear();
+				setTags(TAGS_EDEFAULT);
 				return;
 		}
 		super.eUnset(featureID);
@@ -354,9 +330,7 @@ public class OrganisationalUnitImpl extends HasCommentImpl implements Organisati
 			case CorePackage.ORGANISATIONAL_UNIT__NAME:
 				return isSetName();
 			case CorePackage.ORGANISATIONAL_UNIT__TAGS:
-				return tags != null && !tags.isEmpty();
-			case CorePackage.ORGANISATIONAL_UNIT__TAG_GROUPS:
-				return tagGroups != null && !tagGroups.isEmpty();
+				return TAGS_EDEFAULT == null ? tags != null : !TAGS_EDEFAULT.equals(tags);
 		}
 		return super.eIsSet(featureID);
 	}
@@ -384,7 +358,6 @@ public class OrganisationalUnitImpl extends HasCommentImpl implements Organisati
 		if (baseClass == HasTags.class) {
 			switch (derivedFeatureID) {
 				case CorePackage.ORGANISATIONAL_UNIT__TAGS: return CorePackage.HAS_TAGS__TAGS;
-				case CorePackage.ORGANISATIONAL_UNIT__TAG_GROUPS: return CorePackage.HAS_TAGS__TAG_GROUPS;
 				default: return -1;
 			}
 		}
@@ -414,7 +387,6 @@ public class OrganisationalUnitImpl extends HasCommentImpl implements Organisati
 		if (baseClass == HasTags.class) {
 			switch (baseFeatureID) {
 				case CorePackage.HAS_TAGS__TAGS: return CorePackage.ORGANISATIONAL_UNIT__TAGS;
-				case CorePackage.HAS_TAGS__TAG_GROUPS: return CorePackage.ORGANISATIONAL_UNIT__TAG_GROUPS;
 				default: return -1;
 			}
 		}
@@ -435,6 +407,8 @@ public class OrganisationalUnitImpl extends HasCommentImpl implements Organisati
 		result.append(iD);
 		result.append(", name: ");
 		if (nameESet) result.append(name); else result.append("<unset>");
+		result.append(", tags: ");
+		result.append(tags);
 		result.append(')');
 		return result.toString();
 	}

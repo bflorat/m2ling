@@ -93,24 +93,6 @@ public interface CoreFactory extends EFactory {
 	View createView();
 
 	/**
-	 * Returns a new object of class '<em>Tag</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Tag</em>'.
-	 * @generated
-	 */
-	Tag createTag();
-
-	/**
-	 * Returns a new object of class '<em>Tag Group</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Tag Group</em>'.
-	 * @generated
-	 */
-	TagGroup createTagGroup();
-
-	/**
 	 * Returns a new object of class '<em>Has Comment</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -316,6 +298,15 @@ public interface CoreFactory extends EFactory {
 	 * @generated
 	 */
 	Authorization createAuthorization();
+
+	/**
+	 * Returns a new object of class '<em>Root</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Root</em>'.
+	 * @generated
+	 */
+	Root createRoot();
 
 	/**
 	 * Returns the package supported by this factory.

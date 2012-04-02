@@ -5,12 +5,12 @@ package org.m2ling.domain.core.impl;
 
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EEnum;
+import org.eclipse.emf.ecore.EGenericType;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
-
 import org.eclipse.emf.ecore.impl.EPackageImpl;
-
 import org.m2ling.domain.core.ACResource;
 import org.m2ling.domain.core.Activity;
 import org.m2ling.domain.core.ActivityStatus;
@@ -50,21 +50,18 @@ import org.m2ling.domain.core.NotNullConstraint;
 import org.m2ling.domain.core.OCLConstraint;
 import org.m2ling.domain.core.OrganisationalUnit;
 import org.m2ling.domain.core.RegexpConstraint;
+import org.m2ling.domain.core.Root;
 import org.m2ling.domain.core.RuntimeItem;
 import org.m2ling.domain.core.Stakeholder;
 import org.m2ling.domain.core.Stream;
-import org.m2ling.domain.core.Tag;
-import org.m2ling.domain.core.TagGroup;
+import org.m2ling.domain.core.Type;
+import org.m2ling.domain.core.Types;
 import org.m2ling.domain.core.URLConstraint;
 import org.m2ling.domain.core.View;
 import org.m2ling.domain.core.ViewPoint;
-
 import org.m2ling.domain.parameters.ParametersPackage;
-
 import org.m2ling.domain.parameters.impl.ParametersPackageImpl;
-
 import org.m2ling.domain.principles.PrinciplesPackage;
-
 import org.m2ling.domain.principles.impl.PrinciplesPackageImpl;
 
 /**
@@ -164,20 +161,6 @@ public class CorePackageImpl extends EPackageImpl implements CorePackage {
 	 * @generated
 	 */
 	private EClass hasTagsEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass tagEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass tagGroupEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -380,6 +363,13 @@ public class CorePackageImpl extends EPackageImpl implements CorePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	private EClass rootEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	private EEnum customPropertyTypeEEnum = null;
 
 	/**
@@ -395,6 +385,20 @@ public class CorePackageImpl extends EPackageImpl implements CorePackage {
 	 * @generated
 	 */
 	private EEnum autorizationTypeEEnum = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EEnum typeEEnum = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EDataType stringArrayEDataType = null;
 
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
@@ -668,6 +672,15 @@ public class CorePackageImpl extends EPackageImpl implements CorePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getViewPoint_Name() {
+		return (EAttribute)viewPointEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getComponentGroup() {
 		return componentGroupEClass;
 	}
@@ -794,53 +807,8 @@ public class CorePackageImpl extends EPackageImpl implements CorePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getHasTags_Tags() {
-		return (EReference)hasTagsEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getHasTags_TagGroups() {
-		return (EReference)hasTagsEClass.getEStructuralFeatures().get(1);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EClass getTag() {
-		return tagEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getTag_Text() {
-		return (EAttribute)tagEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EClass getTagGroup() {
-		return tagGroupEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getTagGroup_Tags() {
-		return (EReference)tagGroupEClass.getEStructuralFeatures().get(0);
+	public EAttribute getHasTags_Tags() {
+		return (EAttribute)hasTagsEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -1370,6 +1338,33 @@ public class CorePackageImpl extends EPackageImpl implements CorePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getRoot() {
+		return rootEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getRoot_Viewpoints() {
+		return (EReference)rootEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getRoot_Views() {
+		return (EReference)rootEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EEnum getCustomPropertyType() {
 		return customPropertyTypeEEnum;
 	}
@@ -1390,6 +1385,24 @@ public class CorePackageImpl extends EPackageImpl implements CorePackage {
 	 */
 	public EEnum getAutorizationType() {
 		return autorizationTypeEEnum;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EEnum getType() {
+		return typeEEnum;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EDataType getStringArray() {
+		return stringArrayEDataType;
 	}
 
 	/**
@@ -1446,6 +1459,7 @@ public class CorePackageImpl extends EPackageImpl implements CorePackage {
 		createEReference(viewPointEClass, VIEW_POINT__COMPONENT_TYPES);
 		createEReference(viewPointEClass, VIEW_POINT__ACTIVITIES);
 		createEReference(viewPointEClass, VIEW_POINT__BASE_VIEWPOINT);
+		createEAttribute(viewPointEClass, VIEW_POINT__NAME);
 
 		componentGroupEClass = createEClass(COMPONENT_GROUP);
 		createEReference(componentGroupEClass, COMPONENT_GROUP__COMPONENTS);
@@ -1467,14 +1481,7 @@ public class CorePackageImpl extends EPackageImpl implements CorePackage {
 		createEReference(viewEClass, VIEW__COMPONENTS);
 
 		hasTagsEClass = createEClass(HAS_TAGS);
-		createEReference(hasTagsEClass, HAS_TAGS__TAGS);
-		createEReference(hasTagsEClass, HAS_TAGS__TAG_GROUPS);
-
-		tagEClass = createEClass(TAG);
-		createEAttribute(tagEClass, TAG__TEXT);
-
-		tagGroupEClass = createEClass(TAG_GROUP);
-		createEReference(tagGroupEClass, TAG_GROUP__TAGS);
+		createEAttribute(hasTagsEClass, HAS_TAGS__TAGS);
 
 		hasCommentEClass = createEClass(HAS_COMMENT);
 
@@ -1562,10 +1569,18 @@ public class CorePackageImpl extends EPackageImpl implements CorePackage {
 		createEReference(authorizationEClass, AUTHORIZATION__RESOURCE);
 		createEReference(authorizationEClass, AUTHORIZATION__STAKEHOLDERS);
 
+		rootEClass = createEClass(ROOT);
+		createEReference(rootEClass, ROOT__VIEWPOINTS);
+		createEReference(rootEClass, ROOT__VIEWS);
+
 		// Create enums
 		customPropertyTypeEEnum = createEEnum(CUSTOM_PROPERTY_TYPE);
 		activityStatusEEnum = createEEnum(ACTIVITY_STATUS);
 		autorizationTypeEEnum = createEEnum(AUTORIZATION_TYPE);
+		typeEEnum = createEEnum(TYPE);
+
+		// Create data types
+		stringArrayEDataType = createEDataType(STRING_ARRAY);
 	}
 
 	/**
@@ -1597,6 +1612,7 @@ public class CorePackageImpl extends EPackageImpl implements CorePackage {
 
 		// Add supertypes to classes
 		componentTypeEClass.getESuperTypes().add(this.getConceptItem());
+		componentTypeEClass.getESuperTypes().add(this.getHasNameAndID());
 		componentEClass.getESuperTypes().add(this.getComponentGroup());
 		componentNodeEClass.getESuperTypes().add(this.getComponentNodeGroup());
 		viewPointEClass.getESuperTypes().add(this.getConceptItem());
@@ -1608,7 +1624,6 @@ public class CorePackageImpl extends EPackageImpl implements CorePackage {
 		architectureItemEClass.getESuperTypes().add(this.getHasTags());
 		architectureItemEClass.getESuperTypes().add(this.getHasParameterDefinitions());
 		architectureItemEClass.getESuperTypes().add(this.getHasConstraints());
-		conceptItemEClass.getESuperTypes().add(this.getHasNameAndID());
 		conceptItemEClass.getESuperTypes().add(this.getHasCustomProperties());
 		conceptItemEClass.getESuperTypes().add(this.getHasComment());
 		conceptItemEClass.getESuperTypes().add(this.getHasTags());
@@ -1621,6 +1636,8 @@ public class CorePackageImpl extends EPackageImpl implements CorePackage {
 		runtimeItemEClass.getESuperTypes().add(this.getHasConstraints());
 		viewEClass.getESuperTypes().add(this.getArchitectureItem());
 		viewEClass.getESuperTypes().add(this.getACResource());
+		linkTypeEClass.getESuperTypes().add(this.getConceptItem());
+		linkTypeEClass.getESuperTypes().add(this.getHasNameAndID());
 		stakeholderEClass.getESuperTypes().add(this.getHasNameAndID());
 		floatConstraintEClass.getESuperTypes().add(this.getConstraint());
 		minConstraintEClass.getESuperTypes().add(this.getBoundaryConstraint());
@@ -1669,6 +1686,7 @@ public class CorePackageImpl extends EPackageImpl implements CorePackage {
 		initEReference(getViewPoint_ComponentTypes(), this.getComponentType(), null, "componentTypes", null, 0, -1, ViewPoint.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getViewPoint_Activities(), this.getActivity(), null, "activities", null, 0, -1, ViewPoint.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getViewPoint_BaseViewpoint(), this.getViewPoint(), null, "baseViewpoint", null, 0, 1, ViewPoint.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getViewPoint_Name(), ecorePackage.getEString(), "name", null, 0, 1, ViewPoint.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(componentGroupEClass, ComponentGroup.class, "ComponentGroup", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getComponentGroup_Components(), this.getComponent(), null, "components", null, 0, -1, ComponentGroup.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1690,14 +1708,7 @@ public class CorePackageImpl extends EPackageImpl implements CorePackage {
 		initEReference(getView_Components(), this.getComponent(), null, "components", null, 0, -1, View.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(hasTagsEClass, HasTags.class, "HasTags", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getHasTags_Tags(), this.getTag(), null, "tags", null, 0, -1, HasTags.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getHasTags_TagGroups(), this.getTagGroup(), null, "tagGroups", null, 0, -1, HasTags.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-		initEClass(tagEClass, Tag.class, "Tag", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getTag_Text(), ecorePackage.getEString(), "text", "", 1, 1, Tag.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-		initEClass(tagGroupEClass, TagGroup.class, "TagGroup", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getTagGroup_Tags(), this.getTag(), null, "tags", null, 1, -1, TagGroup.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getHasTags_Tags(), this.getStringArray(), "tags", null, 0, 1, HasTags.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(hasCommentEClass, HasComment.class, "HasComment", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
@@ -1785,6 +1796,10 @@ public class CorePackageImpl extends EPackageImpl implements CorePackage {
 		initEReference(getAuthorization_Resource(), this.getACResource(), null, "resource", null, 1, 1, Authorization.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getAuthorization_Stakeholders(), this.getStakeholder(), null, "stakeholders", null, 0, -1, Authorization.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
+		initEClass(rootEClass, Root.class, "Root", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getRoot_Viewpoints(), this.getViewPoint(), null, "viewpoints", null, 0, -1, Root.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getRoot_Views(), this.getView(), null, "views", null, 0, -1, Root.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
 		// Initialize enums and add enum literals
 		initEEnum(customPropertyTypeEEnum, CustomPropertyType.class, "CustomPropertyType");
 
@@ -1799,6 +1814,17 @@ public class CorePackageImpl extends EPackageImpl implements CorePackage {
 		addEEnumLiteral(autorizationTypeEEnum, AutorizationType.WRITE);
 		addEEnumLiteral(autorizationTypeEEnum, AutorizationType.CREATE);
 		addEEnumLiteral(autorizationTypeEEnum, AutorizationType.DELETE);
+
+		initEEnum(typeEEnum, Type.class, "Type");
+		addEEnumLiteral(typeEEnum, Type.COMPONENT_TYPE);
+		addEEnumLiteral(typeEEnum, Type.LINK_TYPE);
+		addEEnumLiteral(typeEEnum, Type.COMPONENT);
+		addEEnumLiteral(typeEEnum, Type.LINK);
+		addEEnumLiteral(typeEEnum, Type.COMPONENT_NODE);
+		addEEnumLiteral(typeEEnum, Type.STREAM);
+
+		// Initialize data types
+		initEDataType(stringArrayEDataType, String[].class, "StringArray", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
 
 		// Create resource
 		createResource(eNS_URI);

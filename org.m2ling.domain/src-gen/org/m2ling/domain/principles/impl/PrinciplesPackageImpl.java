@@ -7,17 +7,11 @@ import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EEnum;
 import org.eclipse.emf.ecore.EPackage;
-
 import org.eclipse.emf.ecore.impl.EPackageImpl;
-
 import org.m2ling.domain.core.CorePackage;
-
 import org.m2ling.domain.core.impl.CorePackageImpl;
-
 import org.m2ling.domain.parameters.ParametersPackage;
-
 import org.m2ling.domain.parameters.impl.ParametersPackageImpl;
-
 import org.m2ling.domain.principles.PrinciplesFactory;
 import org.m2ling.domain.principles.PrinciplesPackage;
 import org.m2ling.domain.principles.Priority;

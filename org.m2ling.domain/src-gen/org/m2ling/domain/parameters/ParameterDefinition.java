@@ -4,7 +4,6 @@
 package org.m2ling.domain.parameters;
 
 import org.eclipse.emf.common.util.EList;
-
 import org.m2ling.domain.core.Constraint;
 import org.m2ling.domain.core.HasComment;
 import org.m2ling.domain.core.HasConstraints;

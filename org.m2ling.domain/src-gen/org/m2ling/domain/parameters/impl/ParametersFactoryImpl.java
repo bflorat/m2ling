@@ -8,12 +8,14 @@ import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EStructuralFeature;
-
 import org.eclipse.emf.ecore.impl.EFactoryImpl;
-
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
-
 import org.m2ling.domain.parameters.*;
+import org.m2ling.domain.parameters.ParamDefOverrider;
+import org.m2ling.domain.parameters.ParameterType;
+import org.m2ling.domain.parameters.ParameterValue;
+import org.m2ling.domain.parameters.ParametersFactory;
+import org.m2ling.domain.parameters.ParametersPackage;
 
 /**
  * <!-- begin-user-doc -->

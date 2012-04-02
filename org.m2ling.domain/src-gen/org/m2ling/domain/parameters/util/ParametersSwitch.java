@@ -5,15 +5,16 @@ package org.m2ling.domain.parameters.util;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
-
 import org.eclipse.emf.ecore.util.Switch;
-
 import org.m2ling.domain.core.HasComment;
 import org.m2ling.domain.core.HasConstraints;
 import org.m2ling.domain.core.HasCustomProperties;
 import org.m2ling.domain.core.HasNameAndID;
-
 import org.m2ling.domain.parameters.*;
+import org.m2ling.domain.parameters.ParamDefOverrider;
+import org.m2ling.domain.parameters.ParameterDefinition;
+import org.m2ling.domain.parameters.ParameterValue;
+import org.m2ling.domain.parameters.ParametersPackage;
 
 /**
  * <!-- begin-user-doc -->

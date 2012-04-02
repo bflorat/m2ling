@@ -99,7 +99,7 @@ public final class ViewPointServiceMockImpl implements ViewPointService {
 	 * @see org.m2ling.service.principles.ViewPointService#getViewpointByName(java.lang.String)
 	 */
 	@Override
-	public ViewPoint getViewpointByName(String name) {
+	public ViewPoint getViewPointByName(String name) {
 		return mockVPs.get(name);
 	}
 

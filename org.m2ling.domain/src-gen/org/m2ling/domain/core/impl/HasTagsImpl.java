@@ -3,20 +3,13 @@
  */
 package org.m2ling.domain.core.impl;
 
-import java.util.Collection;
-
+import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.util.EList;
-
 import org.eclipse.emf.ecore.EClass;
-
+import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
-
-import org.eclipse.emf.ecore.util.EObjectResolvingEList;
-
 import org.m2ling.domain.core.CorePackage;
 import org.m2ling.domain.core.HasTags;
-import org.m2ling.domain.core.Tag;
-import org.m2ling.domain.core.TagGroup;
 
 /**
  * <!-- begin-user-doc -->
@@ -26,7 +19,6 @@ import org.m2ling.domain.core.TagGroup;
  * The following features are implemented:
  * <ul>
  *   <li>{@link org.m2ling.domain.core.impl.HasTagsImpl#getTags <em>Tags</em>}</li>
- *   <li>{@link org.m2ling.domain.core.impl.HasTagsImpl#getTagGroups <em>Tag Groups</em>}</li>
  * </ul>
  * </p>
  *
@@ -41,24 +33,24 @@ public abstract class HasTagsImpl extends EObjectImpl implements HasTags {
 	public static final String copyright = "Copyright (C) Bertrand Florat";
 
 	/**
-	 * The cached value of the '{@link #getTags() <em>Tags</em>}' reference list.
+	 * The default value of the '{@link #getTags() <em>Tags</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getTags()
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<Tag> tags;
+	protected static final String[] TAGS_EDEFAULT = null;
 
 	/**
-	 * The cached value of the '{@link #getTagGroups() <em>Tag Groups</em>}' reference list.
+	 * The cached value of the '{@link #getTags() <em>Tags</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getTagGroups()
+	 * @see #getTags()
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<TagGroup> tagGroups;
+	protected String[] tags = TAGS_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -84,10 +76,7 @@ public abstract class HasTagsImpl extends EObjectImpl implements HasTags {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<Tag> getTags() {
-		if (tags == null) {
-			tags = new EObjectResolvingEList<Tag>(Tag.class, this, CorePackage.HAS_TAGS__TAGS);
-		}
+	public String[] getTags() {
 		return tags;
 	}
 
@@ -96,11 +85,11 @@ public abstract class HasTagsImpl extends EObjectImpl implements HasTags {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<TagGroup> getTagGroups() {
-		if (tagGroups == null) {
-			tagGroups = new EObjectResolvingEList<TagGroup>(TagGroup.class, this, CorePackage.HAS_TAGS__TAG_GROUPS);
-		}
-		return tagGroups;
+	public void setTags(String[] newTags) {
+		String[] oldTags = tags;
+		tags = newTags;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, CorePackage.HAS_TAGS__TAGS, oldTags, tags));
 	}
 
 	/**
@@ -113,8 +102,6 @@ public abstract class HasTagsImpl extends EObjectImpl implements HasTags {
 		switch (featureID) {
 			case CorePackage.HAS_TAGS__TAGS:
 				return getTags();
-			case CorePackage.HAS_TAGS__TAG_GROUPS:
-				return getTagGroups();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -129,12 +116,7 @@ public abstract class HasTagsImpl extends EObjectImpl implements HasTags {
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case CorePackage.HAS_TAGS__TAGS:
-				getTags().clear();
-				getTags().addAll((Collection<? extends Tag>)newValue);
-				return;
-			case CorePackage.HAS_TAGS__TAG_GROUPS:
-				getTagGroups().clear();
-				getTagGroups().addAll((Collection<? extends TagGroup>)newValue);
+				setTags((String[])newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -149,10 +131,7 @@ public abstract class HasTagsImpl extends EObjectImpl implements HasTags {
 	public void eUnset(int featureID) {
 		switch (featureID) {
 			case CorePackage.HAS_TAGS__TAGS:
-				getTags().clear();
-				return;
-			case CorePackage.HAS_TAGS__TAG_GROUPS:
-				getTagGroups().clear();
+				setTags(TAGS_EDEFAULT);
 				return;
 		}
 		super.eUnset(featureID);
@@ -167,11 +146,25 @@ public abstract class HasTagsImpl extends EObjectImpl implements HasTags {
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
 			case CorePackage.HAS_TAGS__TAGS:
-				return tags != null && !tags.isEmpty();
-			case CorePackage.HAS_TAGS__TAG_GROUPS:
-				return tagGroups != null && !tagGroups.isEmpty();
+				return TAGS_EDEFAULT == null ? tags != null : !TAGS_EDEFAULT.equals(tags);
 		}
 		return super.eIsSet(featureID);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public String toString() {
+		if (eIsProxy()) return super.toString();
+
+		StringBuffer result = new StringBuffer(super.toString());
+		result.append(" (tags: ");
+		result.append(tags);
+		result.append(')');
+		return result.toString();
 	}
 
 } //HasTagsImpl

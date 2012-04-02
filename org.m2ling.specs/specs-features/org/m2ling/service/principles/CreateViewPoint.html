@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:concordion="http://www.concordion.org/2007/concordion">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link href="../../common/concordion.css" rel="stylesheet"
+	type="text/css" />
+<title>Viewpoint creation</title>
+</head>
+<body>
+	<a href="../../common/m2ling.html">m2ling</a>&gt;
+	<a href="general.html">m2principles</a>&gt;
+	<a href="viewpoints.html">view points</a>
+
+	<H1>Viewpoint creation</H1>
+	<p>Administrators or actors with adequate authorizations can create
+		a new viewpoint to formalize aspects and rules of their concerns over
+		a system of interest.</p>
+
+	<h2>Automated</h2>
+	<div class="example">
+		<h3>Example</h3>
+		<p>
+			A new viewpoint created with name <b concordion:set="#name">ArchiApp</b>
+			should be called <b concordion:assertEquals="getViewPointName(#name)">ArchiApp</b>.
+		</p>
+	</div>
+
+	<h2>Manual</h2>
+	Nothing
+	<h2>Out of scope</h2>
+	Nothing
+
+	<h2>Further details</h2>
+	<ul>
+		<li><a href="ViewPointFromExisting.html">Viewpoint creation from existing base viewpoint</a>.</li>
+		<li><a href="ViewPointTags.html">Applying tags against viewpoints.</a></li>
+	</ul>
+</body>
+</html>

@@ -5,20 +5,17 @@ package org.m2ling.domain.principles.util;
 
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notifier;
-
 import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
-
 import org.eclipse.emf.ecore.EObject;
-
 import org.m2ling.domain.core.ConceptItem;
 import org.m2ling.domain.core.HasComment;
 import org.m2ling.domain.core.HasConstraints;
 import org.m2ling.domain.core.HasCustomProperties;
-import org.m2ling.domain.core.HasNameAndID;
 import org.m2ling.domain.core.HasParameterDefinitions;
 import org.m2ling.domain.core.HasTags;
-
 import org.m2ling.domain.principles.*;
+import org.m2ling.domain.principles.PrinciplesPackage;
+import org.m2ling.domain.principles.Rule;
 
 /**
  * <!-- begin-user-doc -->
@@ -88,10 +85,6 @@ public class PrinciplesAdapterFactory extends AdapterFactoryImpl {
 				return createRuleAdapter();
 			}
 			@Override
-			public Adapter caseHasNameAndID(HasNameAndID object) {
-				return createHasNameAndIDAdapter();
-			}
-			@Override
 			public Adapter caseHasCustomProperties(HasCustomProperties object) {
 				return createHasCustomPropertiesAdapter();
 			}
@@ -146,20 +139,6 @@ public class PrinciplesAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createRuleAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.m2ling.domain.core.HasNameAndID <em>Has Name And ID</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.m2ling.domain.core.HasNameAndID
-	 * @generated
-	 */
-	public Adapter createHasNameAndIDAdapter() {
 		return null;
 	}
 

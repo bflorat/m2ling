@@ -7,25 +7,18 @@ import java.util.Collection;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
-
 import org.eclipse.emf.common.util.EList;
-
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
-
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-
 import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 import org.eclipse.emf.ecore.util.EObjectWithInverseResolvingEList;
 import org.eclipse.emf.ecore.util.InternalEList;
-
 import org.m2ling.domain.core.Actor;
 import org.m2ling.domain.core.CorePackage;
 import org.m2ling.domain.core.HasTags;
 import org.m2ling.domain.core.OrganisationalUnit;
 import org.m2ling.domain.core.Stakeholder;
-import org.m2ling.domain.core.Tag;
-import org.m2ling.domain.core.TagGroup;
 
 /**
  * <!-- begin-user-doc -->
@@ -35,7 +28,6 @@ import org.m2ling.domain.core.TagGroup;
  * The following features are implemented:
  * <ul>
  *   <li>{@link org.m2ling.domain.core.impl.ActorImpl#getTags <em>Tags</em>}</li>
- *   <li>{@link org.m2ling.domain.core.impl.ActorImpl#getTagGroups <em>Tag Groups</em>}</li>
  *   <li>{@link org.m2ling.domain.core.impl.ActorImpl#getStakeholders <em>Stakeholders</em>}</li>
  *   <li>{@link org.m2ling.domain.core.impl.ActorImpl#getUnit <em>Unit</em>}</li>
  *   <li>{@link org.m2ling.domain.core.impl.ActorImpl#getUsername <em>Username</em>}</li>
@@ -55,24 +47,24 @@ public class ActorImpl extends HasCustomPropertiesImpl implements Actor {
 	public static final String copyright = "Copyright (C) Bertrand Florat";
 
 	/**
-	 * The cached value of the '{@link #getTags() <em>Tags</em>}' reference list.
+	 * The default value of the '{@link #getTags() <em>Tags</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getTags()
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<Tag> tags;
+	protected static final String[] TAGS_EDEFAULT = null;
 
 	/**
-	 * The cached value of the '{@link #getTagGroups() <em>Tag Groups</em>}' reference list.
+	 * The cached value of the '{@link #getTags() <em>Tags</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getTagGroups()
+	 * @see #getTags()
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<TagGroup> tagGroups;
+	protected String[] tags = TAGS_EDEFAULT;
 
 	/**
 	 * The cached value of the '{@link #getStakeholders() <em>Stakeholders</em>}' reference list.
@@ -178,10 +170,7 @@ public class ActorImpl extends HasCustomPropertiesImpl implements Actor {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<Tag> getTags() {
-		if (tags == null) {
-			tags = new EObjectResolvingEList<Tag>(Tag.class, this, CorePackage.ACTOR__TAGS);
-		}
+	public String[] getTags() {
 		return tags;
 	}
 
@@ -190,11 +179,11 @@ public class ActorImpl extends HasCustomPropertiesImpl implements Actor {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<TagGroup> getTagGroups() {
-		if (tagGroups == null) {
-			tagGroups = new EObjectResolvingEList<TagGroup>(TagGroup.class, this, CorePackage.ACTOR__TAG_GROUPS);
-		}
-		return tagGroups;
+	public void setTags(String[] newTags) {
+		String[] oldTags = tags;
+		tags = newTags;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, CorePackage.ACTOR__TAGS, oldTags, tags));
 	}
 
 	/**
@@ -323,8 +312,6 @@ public class ActorImpl extends HasCustomPropertiesImpl implements Actor {
 		switch (featureID) {
 			case CorePackage.ACTOR__TAGS:
 				return getTags();
-			case CorePackage.ACTOR__TAG_GROUPS:
-				return getTagGroups();
 			case CorePackage.ACTOR__STAKEHOLDERS:
 				return getStakeholders();
 			case CorePackage.ACTOR__UNIT:
@@ -349,12 +336,7 @@ public class ActorImpl extends HasCustomPropertiesImpl implements Actor {
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case CorePackage.ACTOR__TAGS:
-				getTags().clear();
-				getTags().addAll((Collection<? extends Tag>)newValue);
-				return;
-			case CorePackage.ACTOR__TAG_GROUPS:
-				getTagGroups().clear();
-				getTagGroups().addAll((Collection<? extends TagGroup>)newValue);
+				setTags((String[])newValue);
 				return;
 			case CorePackage.ACTOR__STAKEHOLDERS:
 				getStakeholders().clear();
@@ -386,10 +368,7 @@ public class ActorImpl extends HasCustomPropertiesImpl implements Actor {
 	public void eUnset(int featureID) {
 		switch (featureID) {
 			case CorePackage.ACTOR__TAGS:
-				getTags().clear();
-				return;
-			case CorePackage.ACTOR__TAG_GROUPS:
-				getTagGroups().clear();
+				setTags(TAGS_EDEFAULT);
 				return;
 			case CorePackage.ACTOR__STAKEHOLDERS:
 				getStakeholders().clear();
@@ -419,9 +398,7 @@ public class ActorImpl extends HasCustomPropertiesImpl implements Actor {
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
 			case CorePackage.ACTOR__TAGS:
-				return tags != null && !tags.isEmpty();
-			case CorePackage.ACTOR__TAG_GROUPS:
-				return tagGroups != null && !tagGroups.isEmpty();
+				return TAGS_EDEFAULT == null ? tags != null : !TAGS_EDEFAULT.equals(tags);
 			case CorePackage.ACTOR__STAKEHOLDERS:
 				return stakeholders != null && !stakeholders.isEmpty();
 			case CorePackage.ACTOR__UNIT:
@@ -446,7 +423,6 @@ public class ActorImpl extends HasCustomPropertiesImpl implements Actor {
 		if (baseClass == HasTags.class) {
 			switch (derivedFeatureID) {
 				case CorePackage.ACTOR__TAGS: return CorePackage.HAS_TAGS__TAGS;
-				case CorePackage.ACTOR__TAG_GROUPS: return CorePackage.HAS_TAGS__TAG_GROUPS;
 				default: return -1;
 			}
 		}
@@ -463,7 +439,6 @@ public class ActorImpl extends HasCustomPropertiesImpl implements Actor {
 		if (baseClass == HasTags.class) {
 			switch (baseFeatureID) {
 				case CorePackage.HAS_TAGS__TAGS: return CorePackage.ACTOR__TAGS;
-				case CorePackage.HAS_TAGS__TAG_GROUPS: return CorePackage.ACTOR__TAG_GROUPS;
 				default: return -1;
 			}
 		}
@@ -480,7 +455,9 @@ public class ActorImpl extends HasCustomPropertiesImpl implements Actor {
 		if (eIsProxy()) return super.toString();
 
 		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (username: ");
+		result.append(" (tags: ");
+		result.append(tags);
+		result.append(", username: ");
 		result.append(username);
 		result.append(", admin: ");
 		result.append(admin);

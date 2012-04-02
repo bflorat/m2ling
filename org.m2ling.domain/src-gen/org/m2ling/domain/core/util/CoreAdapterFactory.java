@@ -5,12 +5,51 @@ package org.m2ling.domain.core.util;
 
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notifier;
-
 import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
-
 import org.eclipse.emf.ecore.EObject;
-
 import org.m2ling.domain.core.*;
+import org.m2ling.domain.core.ACResource;
+import org.m2ling.domain.core.Activity;
+import org.m2ling.domain.core.ActivityTransition;
+import org.m2ling.domain.core.Actor;
+import org.m2ling.domain.core.ArchitectureItem;
+import org.m2ling.domain.core.Authorization;
+import org.m2ling.domain.core.BoundaryConstraint;
+import org.m2ling.domain.core.Component;
+import org.m2ling.domain.core.ComponentGroup;
+import org.m2ling.domain.core.ComponentNode;
+import org.m2ling.domain.core.ComponentNodeGroup;
+import org.m2ling.domain.core.ComponentType;
+import org.m2ling.domain.core.ConceptItem;
+import org.m2ling.domain.core.Constraint;
+import org.m2ling.domain.core.CorePackage;
+import org.m2ling.domain.core.CustomProperty;
+import org.m2ling.domain.core.EMailConstraint;
+import org.m2ling.domain.core.FloatConstraint;
+import org.m2ling.domain.core.FormatConstraint;
+import org.m2ling.domain.core.HasComment;
+import org.m2ling.domain.core.HasConstraints;
+import org.m2ling.domain.core.HasCustomProperties;
+import org.m2ling.domain.core.HasNameAndID;
+import org.m2ling.domain.core.HasParameterDefinitions;
+import org.m2ling.domain.core.HasParameterValues;
+import org.m2ling.domain.core.HasTags;
+import org.m2ling.domain.core.IntegerConstraint;
+import org.m2ling.domain.core.Link;
+import org.m2ling.domain.core.LinkType;
+import org.m2ling.domain.core.MaxConstraint;
+import org.m2ling.domain.core.MinConstraint;
+import org.m2ling.domain.core.NotNullConstraint;
+import org.m2ling.domain.core.OCLConstraint;
+import org.m2ling.domain.core.OrganisationalUnit;
+import org.m2ling.domain.core.RegexpConstraint;
+import org.m2ling.domain.core.Root;
+import org.m2ling.domain.core.RuntimeItem;
+import org.m2ling.domain.core.Stakeholder;
+import org.m2ling.domain.core.Stream;
+import org.m2ling.domain.core.URLConstraint;
+import org.m2ling.domain.core.View;
+import org.m2ling.domain.core.ViewPoint;
 
 /**
  * <!-- begin-user-doc -->
@@ -124,14 +163,6 @@ public class CoreAdapterFactory extends AdapterFactoryImpl {
 				return createHasTagsAdapter();
 			}
 			@Override
-			public Adapter caseTag(Tag object) {
-				return createTagAdapter();
-			}
-			@Override
-			public Adapter caseTagGroup(TagGroup object) {
-				return createTagGroupAdapter();
-			}
-			@Override
 			public Adapter caseHasComment(HasComment object) {
 				return createHasCommentAdapter();
 			}
@@ -242,6 +273,10 @@ public class CoreAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseAuthorization(Authorization object) {
 				return createAuthorizationAdapter();
+			}
+			@Override
+			public Adapter caseRoot(Root object) {
+				return createRootAdapter();
 			}
 			@Override
 			public Adapter defaultCase(EObject object) {
@@ -428,34 +463,6 @@ public class CoreAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createHasTagsAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.m2ling.domain.core.Tag <em>Tag</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.m2ling.domain.core.Tag
-	 * @generated
-	 */
-	public Adapter createTagAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.m2ling.domain.core.TagGroup <em>Tag Group</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.m2ling.domain.core.TagGroup
-	 * @generated
-	 */
-	public Adapter createTagGroupAdapter() {
 		return null;
 	}
 
@@ -848,6 +855,20 @@ public class CoreAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createAuthorizationAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.m2ling.domain.core.Root <em>Root</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.m2ling.domain.core.Root
+	 * @generated
+	 */
+	public Adapter createRootAdapter() {
 		return null;
 	}
 

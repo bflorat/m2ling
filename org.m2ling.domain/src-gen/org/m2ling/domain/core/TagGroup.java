@@ -4,7 +4,6 @@
 package org.m2ling.domain.core;
 
 import org.eclipse.emf.common.util.EList;
-
 import org.eclipse.emf.ecore.EObject;
 
 /**

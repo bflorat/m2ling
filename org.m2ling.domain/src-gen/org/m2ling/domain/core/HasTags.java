@@ -4,7 +4,6 @@
 package org.m2ling.domain.core;
 
 import org.eclipse.emf.common.util.EList;
-
 import org.eclipse.emf.ecore.EObject;
 
 /**
@@ -16,7 +15,6 @@ import org.eclipse.emf.ecore.EObject;
  * The following features are supported:
  * <ul>
  *   <li>{@link org.m2ling.domain.core.HasTags#getTags <em>Tags</em>}</li>
- *   <li>{@link org.m2ling.domain.core.HasTags#getTagGroups <em>Tag Groups</em>}</li>
  * </ul>
  * </p>
  *
@@ -33,35 +31,29 @@ public interface HasTags extends EObject {
 	String copyright = "Copyright (C) Bertrand Florat";
 
 	/**
-	 * Returns the value of the '<em><b>Tags</b></em>' reference list.
-	 * The list contents are of type {@link org.m2ling.domain.core.Tag}.
+	 * Returns the value of the '<em><b>Tags</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Tags</em>' reference list isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Tags</em>' reference list.
+	 * @return the value of the '<em>Tags</em>' attribute.
+	 * @see #setTags(String[])
 	 * @see org.m2ling.domain.core.CorePackage#getHasTags_Tags()
-	 * @model
+	 * @model dataType="org.m2ling.domain.core.StringArray"
 	 * @generated
 	 */
-	EList<Tag> getTags();
+	String[] getTags();
 
 	/**
-	 * Returns the value of the '<em><b>Tag Groups</b></em>' reference list.
-	 * The list contents are of type {@link org.m2ling.domain.core.TagGroup}.
+	 * Sets the value of the '{@link org.m2ling.domain.core.HasTags#getTags <em>Tags</em>}' attribute.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Tag Groups</em>' reference list isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Tag Groups</em>' reference list.
-	 * @see org.m2ling.domain.core.CorePackage#getHasTags_TagGroups()
-	 * @model
+	 * @param value the new value of the '<em>Tags</em>' attribute.
+	 * @see #getTags()
 	 * @generated
 	 */
-	EList<TagGroup> getTagGroups();
+	void setTags(String[] value);
 
 } // HasTags

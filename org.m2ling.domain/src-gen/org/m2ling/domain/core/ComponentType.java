@@ -24,7 +24,7 @@ import org.eclipse.emf.common.util.EList;
  * @model
  * @generated
  */
-public interface ComponentType extends ConceptItem {
+public interface ComponentType extends ConceptItem, HasNameAndID {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

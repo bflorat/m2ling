@@ -5,18 +5,16 @@ package org.m2ling.domain.principles.util;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
-
 import org.eclipse.emf.ecore.util.Switch;
-
 import org.m2ling.domain.core.ConceptItem;
 import org.m2ling.domain.core.HasComment;
 import org.m2ling.domain.core.HasConstraints;
 import org.m2ling.domain.core.HasCustomProperties;
-import org.m2ling.domain.core.HasNameAndID;
 import org.m2ling.domain.core.HasParameterDefinitions;
 import org.m2ling.domain.core.HasTags;
-
 import org.m2ling.domain.principles.*;
+import org.m2ling.domain.principles.PrinciplesPackage;
+import org.m2ling.domain.principles.Rule;
 
 /**
  * <!-- begin-user-doc -->
@@ -86,7 +84,6 @@ public class PrinciplesSwitch<T> extends Switch<T> {
 				Rule rule = (Rule)theEObject;
 				T result = caseRule(rule);
 				if (result == null) result = caseConceptItem(rule);
-				if (result == null) result = caseHasNameAndID(rule);
 				if (result == null) result = caseHasCustomProperties(rule);
 				if (result == null) result = caseHasComment(rule);
 				if (result == null) result = caseHasTags(rule);
@@ -111,21 +108,6 @@ public class PrinciplesSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseRule(Rule object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Has Name And ID</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Has Name And ID</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseHasNameAndID(HasNameAndID object) {
 		return null;
 	}
 

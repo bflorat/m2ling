@@ -1,0 +1,31 @@
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * org.m2ling.service.principles.ViewPointService#getTags(java.lang.String)
+	 */
+	@Override
+	public List<String> getTags(String name) {
+		ViewPoint vp = null;
+		for (ViewPoint v : root.getViewpoints()) {
+			if (name.equals(v.getName())) {
+				vp = v;
+			}
+		}
+		if (vp == null) {
+			throw new IllegalArgumentException("Viewpoint doesn't exist : "
+					+ name);
+		}
+		return Arrays.asList(vp.getTags());
+	}
+	
+	****************
+	
+	/**
+	 * Create a new tag DTO from given parameters.
+	 * @param text the tag text (can contain 
+	 * @return a VP DTO containing all useful VP data.
+	 */
+	public static TagDTO newTagDTO(String text) {
+		return new TagDTO(text);
+	}

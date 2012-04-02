@@ -7,7 +7,6 @@ import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EEnum;
 import org.eclipse.emf.ecore.EPackage;
-
 import org.m2ling.domain.core.CorePackage;
 
 /**
@@ -76,24 +75,6 @@ public interface PrinciplesPackage extends EPackage {
 	int RULE = 0;
 
 	/**
-	 * The feature id for the '<em><b>ID</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int RULE__ID = CorePackage.CONCEPT_ITEM__ID;
-
-	/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int RULE__NAME = CorePackage.CONCEPT_ITEM__NAME;
-
-	/**
 	 * The feature id for the '<em><b>Custom Properties</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -103,22 +84,13 @@ public interface PrinciplesPackage extends EPackage {
 	int RULE__CUSTOM_PROPERTIES = CorePackage.CONCEPT_ITEM__CUSTOM_PROPERTIES;
 
 	/**
-	 * The feature id for the '<em><b>Tags</b></em>' reference list.
+	 * The feature id for the '<em><b>Tags</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
 	int RULE__TAGS = CorePackage.CONCEPT_ITEM__TAGS;
-
-	/**
-	 * The feature id for the '<em><b>Tag Groups</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int RULE__TAG_GROUPS = CorePackage.CONCEPT_ITEM__TAG_GROUPS;
 
 	/**
 	 * The feature id for the '<em><b>Label</b></em>' attribute.

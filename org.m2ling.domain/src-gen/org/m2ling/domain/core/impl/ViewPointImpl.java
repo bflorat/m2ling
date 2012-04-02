@@ -7,18 +7,14 @@ import java.util.Collection;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
-
 import org.eclipse.emf.common.util.EList;
-
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.InternalEObject;
-
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 import org.eclipse.emf.ecore.util.InternalEList;
-
 import org.m2ling.domain.core.Activity;
 import org.m2ling.domain.core.ComponentType;
 import org.m2ling.domain.core.CorePackage;
@@ -34,6 +30,7 @@ import org.m2ling.domain.core.ViewPoint;
  *   <li>{@link org.m2ling.domain.core.impl.ViewPointImpl#getComponentTypes <em>Component Types</em>}</li>
  *   <li>{@link org.m2ling.domain.core.impl.ViewPointImpl#getActivities <em>Activities</em>}</li>
  *   <li>{@link org.m2ling.domain.core.impl.ViewPointImpl#getBaseViewpoint <em>Base Viewpoint</em>}</li>
+ *   <li>{@link org.m2ling.domain.core.impl.ViewPointImpl#getName <em>Name</em>}</li>
  * </ul>
  * </p>
  *
@@ -76,6 +73,26 @@ public class ViewPointImpl extends ConceptItemImpl implements ViewPoint {
 	 * @ordered
 	 */
 	protected ViewPoint baseViewpoint;
+
+	/**
+	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getName()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String NAME_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getName()
+	 * @generated
+	 * @ordered
+	 */
+	protected String name = NAME_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -163,6 +180,27 @@ public class ViewPointImpl extends ConceptItemImpl implements ViewPoint {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public String getName() {
+		return name;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setName(String newName) {
+		String oldName = name;
+		name = newName;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, CorePackage.VIEW_POINT__NAME, oldName, name));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
@@ -187,6 +225,8 @@ public class ViewPointImpl extends ConceptItemImpl implements ViewPoint {
 			case CorePackage.VIEW_POINT__BASE_VIEWPOINT:
 				if (resolve) return getBaseViewpoint();
 				return basicGetBaseViewpoint();
+			case CorePackage.VIEW_POINT__NAME:
+				return getName();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -211,6 +251,9 @@ public class ViewPointImpl extends ConceptItemImpl implements ViewPoint {
 			case CorePackage.VIEW_POINT__BASE_VIEWPOINT:
 				setBaseViewpoint((ViewPoint)newValue);
 				return;
+			case CorePackage.VIEW_POINT__NAME:
+				setName((String)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -232,6 +275,9 @@ public class ViewPointImpl extends ConceptItemImpl implements ViewPoint {
 			case CorePackage.VIEW_POINT__BASE_VIEWPOINT:
 				setBaseViewpoint((ViewPoint)null);
 				return;
+			case CorePackage.VIEW_POINT__NAME:
+				setName(NAME_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -250,8 +296,26 @@ public class ViewPointImpl extends ConceptItemImpl implements ViewPoint {
 				return activities != null && !activities.isEmpty();
 			case CorePackage.VIEW_POINT__BASE_VIEWPOINT:
 				return baseViewpoint != null;
+			case CorePackage.VIEW_POINT__NAME:
+				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
 		}
 		return super.eIsSet(featureID);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public String toString() {
+		if (eIsProxy()) return super.toString();
+
+		StringBuffer result = new StringBuffer(super.toString());
+		result.append(" (name: ");
+		result.append(name);
+		result.append(')');
+		return result.toString();
 	}
 
 } //ViewPointImpl

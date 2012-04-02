@@ -3,26 +3,16 @@
  */
 package org.m2ling.domain.core.impl;
 
-import java.util.Collection;
-
 import org.eclipse.emf.common.notify.Notification;
-
 import org.eclipse.emf.common.util.EList;
-
 import org.eclipse.emf.ecore.EClass;
-
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-
-import org.eclipse.emf.ecore.util.EObjectResolvingEList;
-
 import org.m2ling.domain.core.CorePackage;
 import org.m2ling.domain.core.HasComment;
 import org.m2ling.domain.core.HasConstraints;
 import org.m2ling.domain.core.HasParameterValues;
 import org.m2ling.domain.core.HasTags;
 import org.m2ling.domain.core.RuntimeItem;
-import org.m2ling.domain.core.Tag;
-import org.m2ling.domain.core.TagGroup;
 
 /**
  * <!-- begin-user-doc -->
@@ -32,7 +22,6 @@ import org.m2ling.domain.core.TagGroup;
  * The following features are implemented:
  * <ul>
  *   <li>{@link org.m2ling.domain.core.impl.RuntimeItemImpl#getTags <em>Tags</em>}</li>
- *   <li>{@link org.m2ling.domain.core.impl.RuntimeItemImpl#getTagGroups <em>Tag Groups</em>}</li>
  *   <li>{@link org.m2ling.domain.core.impl.RuntimeItemImpl#getLabel <em>Label</em>}</li>
  * </ul>
  * </p>
@@ -48,24 +37,24 @@ public abstract class RuntimeItemImpl extends HasNameAndIDImpl implements Runtim
 	public static final String copyright = "Copyright (C) Bertrand Florat";
 
 	/**
-	 * The cached value of the '{@link #getTags() <em>Tags</em>}' reference list.
+	 * The default value of the '{@link #getTags() <em>Tags</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getTags()
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<Tag> tags;
+	protected static final String[] TAGS_EDEFAULT = null;
 
 	/**
-	 * The cached value of the '{@link #getTagGroups() <em>Tag Groups</em>}' reference list.
+	 * The cached value of the '{@link #getTags() <em>Tags</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getTagGroups()
+	 * @see #getTags()
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<TagGroup> tagGroups;
+	protected String[] tags = TAGS_EDEFAULT;
 
 	/**
 	 * The default value of the '{@link #getLabel() <em>Label</em>}' attribute.
@@ -111,10 +100,7 @@ public abstract class RuntimeItemImpl extends HasNameAndIDImpl implements Runtim
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<Tag> getTags() {
-		if (tags == null) {
-			tags = new EObjectResolvingEList<Tag>(Tag.class, this, CorePackage.RUNTIME_ITEM__TAGS);
-		}
+	public String[] getTags() {
 		return tags;
 	}
 
@@ -123,11 +109,11 @@ public abstract class RuntimeItemImpl extends HasNameAndIDImpl implements Runtim
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<TagGroup> getTagGroups() {
-		if (tagGroups == null) {
-			tagGroups = new EObjectResolvingEList<TagGroup>(TagGroup.class, this, CorePackage.RUNTIME_ITEM__TAG_GROUPS);
-		}
-		return tagGroups;
+	public void setTags(String[] newTags) {
+		String[] oldTags = tags;
+		tags = newTags;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, CorePackage.RUNTIME_ITEM__TAGS, oldTags, tags));
 	}
 
 	/**
@@ -161,8 +147,6 @@ public abstract class RuntimeItemImpl extends HasNameAndIDImpl implements Runtim
 		switch (featureID) {
 			case CorePackage.RUNTIME_ITEM__TAGS:
 				return getTags();
-			case CorePackage.RUNTIME_ITEM__TAG_GROUPS:
-				return getTagGroups();
 			case CorePackage.RUNTIME_ITEM__LABEL:
 				return getLabel();
 		}
@@ -179,12 +163,7 @@ public abstract class RuntimeItemImpl extends HasNameAndIDImpl implements Runtim
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case CorePackage.RUNTIME_ITEM__TAGS:
-				getTags().clear();
-				getTags().addAll((Collection<? extends Tag>)newValue);
-				return;
-			case CorePackage.RUNTIME_ITEM__TAG_GROUPS:
-				getTagGroups().clear();
-				getTagGroups().addAll((Collection<? extends TagGroup>)newValue);
+				setTags((String[])newValue);
 				return;
 			case CorePackage.RUNTIME_ITEM__LABEL:
 				setLabel((String)newValue);
@@ -202,10 +181,7 @@ public abstract class RuntimeItemImpl extends HasNameAndIDImpl implements Runtim
 	public void eUnset(int featureID) {
 		switch (featureID) {
 			case CorePackage.RUNTIME_ITEM__TAGS:
-				getTags().clear();
-				return;
-			case CorePackage.RUNTIME_ITEM__TAG_GROUPS:
-				getTagGroups().clear();
+				setTags(TAGS_EDEFAULT);
 				return;
 			case CorePackage.RUNTIME_ITEM__LABEL:
 				setLabel(LABEL_EDEFAULT);
@@ -223,9 +199,7 @@ public abstract class RuntimeItemImpl extends HasNameAndIDImpl implements Runtim
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
 			case CorePackage.RUNTIME_ITEM__TAGS:
-				return tags != null && !tags.isEmpty();
-			case CorePackage.RUNTIME_ITEM__TAG_GROUPS:
-				return tagGroups != null && !tagGroups.isEmpty();
+				return TAGS_EDEFAULT == null ? tags != null : !TAGS_EDEFAULT.equals(tags);
 			case CorePackage.RUNTIME_ITEM__LABEL:
 				return LABEL_EDEFAULT == null ? label != null : !LABEL_EDEFAULT.equals(label);
 		}
@@ -247,7 +221,6 @@ public abstract class RuntimeItemImpl extends HasNameAndIDImpl implements Runtim
 		if (baseClass == HasTags.class) {
 			switch (derivedFeatureID) {
 				case CorePackage.RUNTIME_ITEM__TAGS: return CorePackage.HAS_TAGS__TAGS;
-				case CorePackage.RUNTIME_ITEM__TAG_GROUPS: return CorePackage.HAS_TAGS__TAG_GROUPS;
 				default: return -1;
 			}
 		}
@@ -279,7 +252,6 @@ public abstract class RuntimeItemImpl extends HasNameAndIDImpl implements Runtim
 		if (baseClass == HasTags.class) {
 			switch (baseFeatureID) {
 				case CorePackage.HAS_TAGS__TAGS: return CorePackage.RUNTIME_ITEM__TAGS;
-				case CorePackage.HAS_TAGS__TAG_GROUPS: return CorePackage.RUNTIME_ITEM__TAG_GROUPS;
 				default: return -1;
 			}
 		}
@@ -306,7 +278,9 @@ public abstract class RuntimeItemImpl extends HasNameAndIDImpl implements Runtim
 		if (eIsProxy()) return super.toString();
 
 		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (label: ");
+		result.append(" (tags: ");
+		result.append(tags);
+		result.append(", label: ");
 		result.append(label);
 		result.append(')');
 		return result.toString();

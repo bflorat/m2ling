@@ -20,7 +20,7 @@ package org.m2ling.domain.core;
  * @model abstract="true"
  * @generated
  */
-public interface ConceptItem extends HasNameAndID, HasCustomProperties, HasComment, HasTags, HasParameterDefinitions, HasConstraints {
+public interface ConceptItem extends HasCustomProperties, HasComment, HasTags, HasParameterDefinitions, HasConstraints {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

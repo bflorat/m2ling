@@ -3,7 +3,6 @@
  */
 package org.m2ling.domain.core;
 
-import org.eclipse.emf.ecore.EObject;
 
 /**
  * <!-- begin-user-doc -->
@@ -22,7 +21,7 @@ import org.eclipse.emf.ecore.EObject;
  * @model
  * @generated
  */
-public interface LinkType extends EObject {
+public interface LinkType extends ConceptItem, HasNameAndID {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

@@ -10,22 +10,16 @@ import org.eclipse.emf.ecore.EEnum;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
-
 import org.eclipse.emf.ecore.impl.EPackageImpl;
-
 import org.m2ling.domain.core.CorePackage;
-
 import org.m2ling.domain.core.impl.CorePackageImpl;
-
 import org.m2ling.domain.parameters.ParamDefOverrider;
 import org.m2ling.domain.parameters.ParameterDefinition;
 import org.m2ling.domain.parameters.ParameterType;
 import org.m2ling.domain.parameters.ParameterValue;
 import org.m2ling.domain.parameters.ParametersFactory;
 import org.m2ling.domain.parameters.ParametersPackage;
-
 import org.m2ling.domain.principles.PrinciplesPackage;
-
 import org.m2ling.domain.principles.impl.PrinciplesPackageImpl;
 
 /**
