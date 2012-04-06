@@ -1,5 +1,5 @@
 /**
- * Copyright (C) Bertrand Florat
+ * Copyright (C) 2012 Bertrand Florat
  */
 package org.m2ling.domain.core.impl;
 
@@ -34,7 +34,7 @@ public class LinkImpl extends EObjectImpl implements Link {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final String copyright = "Copyright (C) Bertrand Florat";
+	public static final String copyright = "Copyright (C) 2012 Bertrand Florat";
 
 	/**
 	 * The cached value of the '{@link #getType() <em>Type</em>}' reference.

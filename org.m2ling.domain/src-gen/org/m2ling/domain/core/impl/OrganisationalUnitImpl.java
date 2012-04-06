@@ -1,12 +1,16 @@
 /**
- * Copyright (C) Bertrand Florat
+ * Copyright (C) 2012 Bertrand Florat
  */
 package org.m2ling.domain.core.impl;
 
+import java.util.Collection;
+
 import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import org.eclipse.emf.ecore.util.EDataTypeUniqueEList;
 import org.m2ling.domain.core.CorePackage;
 import org.m2ling.domain.core.CustomProperty;
 import org.m2ling.domain.core.HasCustomProperties;
@@ -36,7 +40,7 @@ public class OrganisationalUnitImpl extends HasCommentImpl implements Organisati
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final String copyright = "Copyright (C) Bertrand Florat";
+	public static final String copyright = "Copyright (C) 2012 Bertrand Florat";
 
 	/**
 	 * The cached value of the '{@link #getCustomProperties() <em>Custom Properties</em>}' reference.
@@ -98,24 +102,14 @@ public class OrganisationalUnitImpl extends HasCommentImpl implements Organisati
 	protected boolean nameESet;
 
 	/**
-	 * The default value of the '{@link #getTags() <em>Tags</em>}' attribute.
+	 * The cached value of the '{@link #getTags() <em>Tags</em>}' attribute list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getTags()
 	 * @generated
 	 * @ordered
 	 */
-	protected static final String TAGS_EDEFAULT = "";
-
-	/**
-	 * The cached value of the '{@link #getTags() <em>Tags</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getTags()
-	 * @generated
-	 * @ordered
-	 */
-	protected String tags = TAGS_EDEFAULT;
+	protected EList<String> tags;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -234,20 +228,11 @@ public class OrganisationalUnitImpl extends HasCommentImpl implements Organisati
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public String getTags() {
+	public EList<String> getTags() {
+		if (tags == null) {
+			tags = new EDataTypeUniqueEList<String>(String.class, this, CorePackage.ORGANISATIONAL_UNIT__TAGS);
+		}
 		return tags;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setTags(String newTags) {
-		String oldTags = tags;
-		tags = newTags;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, CorePackage.ORGANISATIONAL_UNIT__TAGS, oldTags, tags));
 	}
 
 	/**
@@ -287,7 +272,8 @@ public class OrganisationalUnitImpl extends HasCommentImpl implements Organisati
 				setName((String)newValue);
 				return;
 			case CorePackage.ORGANISATIONAL_UNIT__TAGS:
-				setTags((String)newValue);
+				getTags().clear();
+				getTags().addAll((Collection<? extends String>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -308,7 +294,7 @@ public class OrganisationalUnitImpl extends HasCommentImpl implements Organisati
 				unsetName();
 				return;
 			case CorePackage.ORGANISATIONAL_UNIT__TAGS:
-				setTags(TAGS_EDEFAULT);
+				getTags().clear();
 				return;
 		}
 		super.eUnset(featureID);
@@ -329,7 +315,7 @@ public class OrganisationalUnitImpl extends HasCommentImpl implements Organisati
 			case CorePackage.ORGANISATIONAL_UNIT__NAME:
 				return isSetName();
 			case CorePackage.ORGANISATIONAL_UNIT__TAGS:
-				return TAGS_EDEFAULT == null ? tags != null : !TAGS_EDEFAULT.equals(tags);
+				return tags != null && !tags.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}

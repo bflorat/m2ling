@@ -1,5 +1,5 @@
 /**
- * Copyright (C) Bertrand Florat
+ * Copyright (C) 2012 Bertrand Florat
  */
 package org.m2ling.domain.core;
 
@@ -64,7 +64,7 @@ public enum ActivityStatus implements Enumerator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final String copyright = "Copyright (C) Bertrand Florat";
+	public static final String copyright = "Copyright (C) 2012 Bertrand Florat";
 
 	/**
 	 * The '<em><b>TODO</b></em>' literal value.

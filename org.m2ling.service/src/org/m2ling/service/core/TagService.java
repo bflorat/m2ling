@@ -1,15 +1,20 @@
 /*
- * Copyright (C) Bertrand Florat
+ * Copyright (C) 2012 Bertrand Florat
  */
 
 package org.m2ling.service.core;
 
+import java.util.List;
+
 import org.m2ling.domain.core.Type;
+import org.m2ling.exceptions.NotFoundException;
 
 /**
  * General contract for Tag services implementations.
  * 
- * <p>Every method can throw these runtime exceptions :</p>
+ * <p>
+ * Every method can throw these runtime exceptions :
+ * </p>
  * 
  * <li>IllegalAccessException if the caller has not required authorization to call this method</li>
  * 
@@ -19,8 +24,9 @@ import org.m2ling.domain.core.Type;
  * 
  * <li>IllegalArgumentException if provided arguments are null are invalid</li>
  * 
- * <br>  
- * @author Bertrand Florat <bertrand@florat.net> 
+ * <br>
+ * 
+ * @author Bertrand Florat <bertrand@florat.net>
  */
 
 public interface TagService {
@@ -33,11 +39,12 @@ public interface TagService {
 	 *           the HasTags item type
 	 * @param itemID
 	 *           the item ID to add tag to
-	 * @param text
-	 *           the tags values to add. If a single array element contain a comma, it is split
-	 *           automatically into several tags.
+	 * @param tags
+	 *           the tags values to add.
+	 * @throws IllegalArgumentException
+	 *            if a list element contains a comma or if the list is null or empty
 	 */
-	void addTags(Type type, String itemID, String[] tags);
+	void addTags(Type type, String itemID, List<String> tags);
 
 	/**
 	 * Set one or tags to a HasTag item.
@@ -46,11 +53,12 @@ public interface TagService {
 	 *           the HasTags item type
 	 * @param itemID
 	 *           the item ID to set tag to. Note that the item ID is not necessary a "iD" attribute.
-	 * @param text
-	 *           the tags values to set. If a single array element contain a comma, it is split
-	 *           automatically. If tags is null, all pre-existing tags are cleared.
+	 * @param tags
+	 *           the tags values to set. If the list is empty, all pre-existing tags are cleared.
+	 * @throws IllegalArgumentException
+	 *            if a list element contains a comma or if the list is null
 	 */
-	void setTags(Type type, String itemID, String[] tags);
+	void setTags(Type type, String itemID, List<String> tags);
 
 	/**
 	 * Remove a single from aHasTags item. If the tag doesn't exist, an
@@ -60,9 +68,14 @@ public interface TagService {
 	 *           the HasTags item type
 	 * @param itemID
 	 *           the item ID to remove tag from
-	 * @param text
+	 * @param tag
+	 *           the tag to remove
+	 * @throws IllegalArgumentException
+	 *            if tag is null
+	 * @throws NotFoundException
+	 *            if the tag didn't exist previously
 	 */
-	void removeTag(Type type, String itemID, String text);
+	void removeTag(Type type, String itemID, String tag);
 
 	/**
 	 * Return a list of all the tags attached to the provided item.
@@ -72,7 +85,8 @@ public interface TagService {
 	 * @param itemID
 	 *           the item ID to get tags from
 	 * @return a list of all the tags attached to the provided item. If the item has none tags, a
-	 *         void array is returned.
+	 *         void list is returned. * 
+	 * @throws IllegalStateException if the tags list is null
 	 */
-	String[] getAllTags(Type type, String itemID);
+	List<String> getAllTags(Type type, String itemID);
 }

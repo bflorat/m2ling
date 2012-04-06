@@ -1,5 +1,5 @@
 /**
- * Copyright (C) Bertrand Florat
+ * Copyright (C) 2012 Bertrand Florat
  */
 package org.m2ling.domain.principles;
 
@@ -30,7 +30,7 @@ public interface PrinciplesPackage extends EPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	String copyright = "Copyright (C) Bertrand Florat";
+	String copyright = "Copyright (C) 2012 Bertrand Florat";
 
 	/**
 	 * The package name.
@@ -84,7 +84,7 @@ public interface PrinciplesPackage extends EPackage {
 	int RULE__CUSTOM_PROPERTIES = CorePackage.CONCEPT_ITEM__CUSTOM_PROPERTIES;
 
 	/**
-	 * The feature id for the '<em><b>Tags</b></em>' attribute.
+	 * The feature id for the '<em><b>Tags</b></em>' attribute list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated

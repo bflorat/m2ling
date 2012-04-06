@@ -1,5 +1,5 @@
 /**
- * Copyright (C) Bertrand Florat
+ * Copyright (C) 2012 Bertrand Florat
  */
 package org.m2ling.domain.principles.util;
 
@@ -12,7 +12,6 @@ import org.m2ling.domain.core.HasConstraints;
 import org.m2ling.domain.core.HasCustomProperties;
 import org.m2ling.domain.core.HasParameterDefinitions;
 import org.m2ling.domain.core.HasTags;
-import org.m2ling.domain.principles.*;
 import org.m2ling.domain.principles.PrinciplesPackage;
 import org.m2ling.domain.principles.Rule;
 
@@ -35,7 +34,7 @@ public class PrinciplesSwitch<T> extends Switch<T> {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final String copyright = "Copyright (C) Bertrand Florat";
+	public static final String copyright = "Copyright (C) 2012 Bertrand Florat";
 
 	/**
 	 * The cached model package

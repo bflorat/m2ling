@@ -75,8 +75,8 @@
           eType="#//core/Component"/>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="HasTags" abstract="true">
-      <eStructuralFeatures xsi:type="ecore:EAttribute" name="tags" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
-          defaultValueLiteral=""/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="tags" upperBound="-1"
+          eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="HasComment"/>
     <eClassifiers xsi:type="ecore:EClass" name="HasCustomProperties">
@@ -187,7 +187,6 @@
       <eStructuralFeatures xsi:type="ecore:EReference" name="views" upperBound="-1"
           eType="#//core/View" containment="true"/>
     </eClassifiers>
-    <eClassifiers xsi:type="ecore:EDataType" name="StringArray" instanceClassName="java.lang.String[]"/>
     <eClassifiers xsi:type="ecore:EEnum" name="Type">
       <eLiterals name="COMPONENT_TYPE"/>
       <eLiterals name="LINK_TYPE" value="1"/>

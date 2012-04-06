@@ -1,7 +1,10 @@
 /**
- * Copyright (C) Bertrand Florat
+ * Copyright (C) 2012 Bertrand Florat
  */
 package org.m2ling.dto.core;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Tag DTO object used between layers.
@@ -12,7 +15,7 @@ public class ViewPointDTO {
 
 	private final String name;
 	private final String baseVPName;
-	private final String tags;
+	private final List<String> tags;
 	private final String label;
 
 	public static class Builder {
@@ -21,7 +24,7 @@ public class ViewPointDTO {
 		private final String name;
 
 		// Optional parameters
-		private String tags = null;
+		private List<String> tags = null;
 		private String baseVPName = null;
 		private String label = null;
 
@@ -29,7 +32,7 @@ public class ViewPointDTO {
 			this.name = name;
 		}
 
-		public Builder tags(String tags) {
+		public Builder tags(List<String> tags) {
 			this.tags = tags;
 			return this;
 		}
@@ -38,7 +41,7 @@ public class ViewPointDTO {
 			this.baseVPName = baseVPName;
 			return this;
 		}
-		
+
 		public Builder label(String label) {
 			this.label = label;
 			return this;
@@ -52,7 +55,7 @@ public class ViewPointDTO {
 
 	private ViewPointDTO(Builder builder) {
 		name = builder.name;
-		tags = builder.tags;
+		tags = new ArrayList<String>(builder.tags); // defensive copy
 		baseVPName = builder.baseVPName;
 		label = builder.label;
 	}
@@ -72,10 +75,11 @@ public class ViewPointDTO {
 	}
 
 	/**
-	 * @return the tags
+	 * Return a defensive copy of the tags.
+	 * @return a defensive copy of the tags
 	 */
-	public String getTags() {
-		return tags;
+	public List<String> getTags() {
+		return new ArrayList<String>(tags);
 	}
 
 	/**

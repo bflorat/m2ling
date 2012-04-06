@@ -1,5 +1,5 @@
 /**
- * Copyright (C) Bertrand Florat
+ * Copyright (C) 2012 Bertrand Florat
  */
 package org.m2ling.domain.parameters;
 
@@ -74,7 +74,7 @@ public enum ParameterType implements Enumerator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final String copyright = "Copyright (C) Bertrand Florat";
+	public static final String copyright = "Copyright (C) 2012 Bertrand Florat";
 
 	/**
 	 * The '<em><b>BOOLEAN</b></em>' literal value.

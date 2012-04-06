@@ -1,5 +1,5 @@
 /**
- * Copyright (C) Bertrand Florat
+ * Copyright (C) 2012 Bertrand Florat
  */
 package org.m2ling.domain.principles;
 
@@ -19,7 +19,7 @@ public interface PrinciplesFactory extends EFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	String copyright = "Copyright (C) Bertrand Florat";
+	String copyright = "Copyright (C) 2012 Bertrand Florat";
 
 	/**
 	 * The singleton instance of the factory.

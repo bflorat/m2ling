@@ -1,5 +1,5 @@
 /**
- * Copyright (C) Bertrand Florat
+ * Copyright (C) 2012 Bertrand Florat
  */
 package org.m2ling.service.util;
 
@@ -55,7 +55,7 @@ public class DTOConverter {
 			if (dto.getBaseVPName() != null) {
 				vp.setBaseViewpoint(CoreUtil.getViewPointByName(dto.getBaseVPName()));
 			}
-			vp.setTags(dto.getTags());
+			vp.getTags().addAll(dto.getTags());
 			return vp;
 		}
 
@@ -67,7 +67,11 @@ public class DTOConverter {
 		 * @return a new ViewPoint instance
 		 */
 		public static ViewPoint getViewPoint(ViewPointDTO dto) {
-			throw new IllegalStateException("TODO");
+			ViewPoint vp = CoreUtil.getViewPointByName(dto.getName());
+			if (vp != null) {
+				return vp;
+			}
+			return newViewPoint(dto);
 		}
 
 	}

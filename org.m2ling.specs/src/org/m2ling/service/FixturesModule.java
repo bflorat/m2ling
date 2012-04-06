@@ -1,9 +1,9 @@
 /**
- * Copyright (C) Bertrand Florat
+ * Copyright (C) 2012 Bertrand Florat
  */
 package org.m2ling.service;
 
-import org.m2ling.service.common.TagService;
+import org.m2ling.service.core.TagService;
 import org.m2ling.service.core.impl.TagServiceImpl;
 import org.m2ling.service.principles.ViewPointService;
 import org.m2ling.service.principles.impl.ViewPointServiceImpl;

@@ -1,6 +1,6 @@
 package org.m2ling.service.core.impl;
 /**
- * Copyright (C) Bertrand Florat
+ * Copyright (C) 2012 Bertrand Florat
  */
 
 

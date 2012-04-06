@@ -1,5 +1,5 @@
 /**
- * Copyright (C) Bertrand Florat
+ * Copyright (C) 2012 Bertrand Florat
  */
 package org.m2ling.domain.core.provider;
 
@@ -40,7 +40,7 @@ public class RuntimeItemItemProvider
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final String copyright = "Copyright (C) Bertrand Florat";
+	public static final String copyright = "Copyright (C) 2012 Bertrand Florat";
 
 	/**
 	 * This constructs an instance from a factory and a notifier.
@@ -85,7 +85,7 @@ public class RuntimeItemItemProvider
 				 CorePackage.Literals.HAS_TAGS__TAGS,
 				 true,
 				 false,
-				 true,
+				 false,
 				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
 				 null,
 				 null));
@@ -139,6 +139,7 @@ public class RuntimeItemItemProvider
 		updateChildren(notification);
 
 		switch (notification.getFeatureID(RuntimeItem.class)) {
+			case CorePackage.RUNTIME_ITEM__TAGS:
 			case CorePackage.RUNTIME_ITEM__LABEL:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;

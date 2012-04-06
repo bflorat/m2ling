@@ -1,11 +1,15 @@
 /**
- * Copyright (C) Bertrand Florat
+ * Copyright (C) 2012 Bertrand Florat
  */
 package org.m2ling.domain.core.impl;
 
+import java.util.Collection;
+
 import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import org.eclipse.emf.ecore.util.EDataTypeUniqueEList;
 import org.m2ling.domain.core.ConceptItem;
 import org.m2ling.domain.core.CorePackage;
 import org.m2ling.domain.core.HasComment;
@@ -33,27 +37,17 @@ public abstract class ConceptItemImpl extends HasCustomPropertiesImpl implements
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final String copyright = "Copyright (C) Bertrand Florat";
+	public static final String copyright = "Copyright (C) 2012 Bertrand Florat";
 
 	/**
-	 * The default value of the '{@link #getTags() <em>Tags</em>}' attribute.
+	 * The cached value of the '{@link #getTags() <em>Tags</em>}' attribute list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getTags()
 	 * @generated
 	 * @ordered
 	 */
-	protected static final String TAGS_EDEFAULT = "";
-
-	/**
-	 * The cached value of the '{@link #getTags() <em>Tags</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getTags()
-	 * @generated
-	 * @ordered
-	 */
-	protected String tags = TAGS_EDEFAULT;
+	protected EList<String> tags;
 
 	/**
 	 * The default value of the '{@link #getLabel() <em>Label</em>}' attribute.
@@ -99,20 +93,11 @@ public abstract class ConceptItemImpl extends HasCustomPropertiesImpl implements
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public String getTags() {
+	public EList<String> getTags() {
+		if (tags == null) {
+			tags = new EDataTypeUniqueEList<String>(String.class, this, CorePackage.CONCEPT_ITEM__TAGS);
+		}
 		return tags;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setTags(String newTags) {
-		String oldTags = tags;
-		tags = newTags;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, CorePackage.CONCEPT_ITEM__TAGS, oldTags, tags));
 	}
 
 	/**
@@ -162,7 +147,8 @@ public abstract class ConceptItemImpl extends HasCustomPropertiesImpl implements
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case CorePackage.CONCEPT_ITEM__TAGS:
-				setTags((String)newValue);
+				getTags().clear();
+				getTags().addAll((Collection<? extends String>)newValue);
 				return;
 			case CorePackage.CONCEPT_ITEM__LABEL:
 				setLabel((String)newValue);
@@ -180,7 +166,7 @@ public abstract class ConceptItemImpl extends HasCustomPropertiesImpl implements
 	public void eUnset(int featureID) {
 		switch (featureID) {
 			case CorePackage.CONCEPT_ITEM__TAGS:
-				setTags(TAGS_EDEFAULT);
+				getTags().clear();
 				return;
 			case CorePackage.CONCEPT_ITEM__LABEL:
 				setLabel(LABEL_EDEFAULT);
@@ -198,7 +184,7 @@ public abstract class ConceptItemImpl extends HasCustomPropertiesImpl implements
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
 			case CorePackage.CONCEPT_ITEM__TAGS:
-				return TAGS_EDEFAULT == null ? tags != null : !TAGS_EDEFAULT.equals(tags);
+				return tags != null && !tags.isEmpty();
 			case CorePackage.CONCEPT_ITEM__LABEL:
 				return LABEL_EDEFAULT == null ? label != null : !LABEL_EDEFAULT.equals(label);
 		}

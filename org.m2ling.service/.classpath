@@ -13,5 +13,6 @@
 	<classpathentry kind="lib" path="/prog/eclipse-modeling-3.7/plugins/org.eclipse.emf.ecore_2.7.0.v20120127-1122.jar"/>
 	<classpathentry kind="lib" path="/prog/eclipse-modeling-3.7/plugins/org.eclipse.emf.common_2.7.0.v20120127-1122.jar"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/org.m2ling.persistence"/>
+	<classpathentry exported="true" kind="lib" path="/prog/api/guava-11.0.2.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

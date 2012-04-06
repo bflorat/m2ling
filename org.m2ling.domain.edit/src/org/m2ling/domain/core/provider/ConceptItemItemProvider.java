@@ -1,5 +1,5 @@
 /**
- * Copyright (C) Bertrand Florat
+ * Copyright (C) 2012 Bertrand Florat
  */
 package org.m2ling.domain.core.provider;
 
@@ -9,7 +9,6 @@ import java.util.List;
 
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
 import org.eclipse.emf.edit.provider.IEditingDomainItemProvider;
 import org.eclipse.emf.edit.provider.IItemLabelProvider;
@@ -41,7 +40,7 @@ public class ConceptItemItemProvider
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final String copyright = "Copyright (C) Bertrand Florat";
+	public static final String copyright = "Copyright (C) 2012 Bertrand Florat";
 
 	/**
 	 * This constructs an instance from a factory and a notifier.
@@ -86,7 +85,7 @@ public class ConceptItemItemProvider
 				 CorePackage.Literals.HAS_TAGS__TAGS,
 				 true,
 				 false,
-				 true,
+				 false,
 				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
 				 null,
 				 null));
@@ -122,8 +121,7 @@ public class ConceptItemItemProvider
 	 */
 	@Override
 	public String getText(Object object) {
-		String[] labelValue = ((ConceptItem)object).getTags();
-		String label = labelValue == null ? null : labelValue.toString();
+		String label = ((ConceptItem)object).getLabel();
 		return label == null || label.length() == 0 ?
 			getString("_UI_ConceptItem_type") :
 			getString("_UI_ConceptItem_type") + " " + label;
@@ -141,6 +139,7 @@ public class ConceptItemItemProvider
 		updateChildren(notification);
 
 		switch (notification.getFeatureID(ConceptItem.class)) {
+			case CorePackage.CONCEPT_ITEM__TAGS:
 			case CorePackage.CONCEPT_ITEM__LABEL:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;

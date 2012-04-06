@@ -1,5 +1,5 @@
 /**
- * Copyright (C) Bertrand Florat
+ * Copyright (C) 2012 Bertrand Florat
  */
 package org.m2ling.domain.core;
 
@@ -27,7 +27,7 @@ public interface ComponentNodeGroup extends RuntimeItem {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	String copyright = "Copyright (C) Bertrand Florat";
+	String copyright = "Copyright (C) 2012 Bertrand Florat";
 
 	/**
 	 * Returns the value of the '<em><b>Component Nodes</b></em>' reference list.

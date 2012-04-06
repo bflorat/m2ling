@@ -1,5 +1,5 @@
 /**
- * Copyright (C) Bertrand Florat
+ * Copyright (C) 2012 Bertrand Florat
  */
 package org.m2ling.domain.principles.impl;
 
@@ -9,7 +9,6 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.impl.EFactoryImpl;
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
-import org.m2ling.domain.principles.*;
 import org.m2ling.domain.principles.PrinciplesFactory;
 import org.m2ling.domain.principles.PrinciplesPackage;
 import org.m2ling.domain.principles.Priority;
@@ -28,7 +27,7 @@ public class PrinciplesFactoryImpl extends EFactoryImpl implements PrinciplesFac
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final String copyright = "Copyright (C) Bertrand Florat";
+	public static final String copyright = "Copyright (C) 2012 Bertrand Florat";
 
 	/**
 	 * Creates the default factory implementation.

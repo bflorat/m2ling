@@ -1,5 +1,5 @@
 /**
- * Copyright (C) Bertrand Florat
+ * Copyright (C) 2012 Bertrand Florat
  */
 package org.m2ling.domain.core.provider;
 
@@ -40,7 +40,7 @@ public class OrganisationalUnitItemProvider
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final String copyright = "Copyright (C) Bertrand Florat";
+	public static final String copyright = "Copyright (C) 2012 Bertrand Florat";
 
 	/**
 	 * This constructs an instance from a factory and a notifier.
@@ -153,7 +153,7 @@ public class OrganisationalUnitItemProvider
 				 CorePackage.Literals.HAS_TAGS__TAGS,
 				 true,
 				 false,
-				 true,
+				 false,
 				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
 				 null,
 				 null));
@@ -198,6 +198,7 @@ public class OrganisationalUnitItemProvider
 		switch (notification.getFeatureID(OrganisationalUnit.class)) {
 			case CorePackage.ORGANISATIONAL_UNIT__ID:
 			case CorePackage.ORGANISATIONAL_UNIT__NAME:
+			case CorePackage.ORGANISATIONAL_UNIT__TAGS:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
 		}

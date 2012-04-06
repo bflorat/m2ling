@@ -1,8 +1,9 @@
 /**
- * Copyright (C) Bertrand Florat
+ * Copyright (C) 2012 Bertrand Florat
  */
 package org.m2ling.domain.core;
 
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 
 /**
@@ -23,8 +24,7 @@ import org.eclipse.emf.ecore.EObject;
  */
 public interface HasTags extends EObject {
 	
-	/** Tags separator **/
-	char TAGS_SEPARATOR = ',';
+	
 	
 	
 	/**
@@ -32,33 +32,22 @@ public interface HasTags extends EObject {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	String copyright = "Copyright (C) Bertrand Florat";
+	String copyright = "Copyright (C) 2012 Bertrand Florat";
 
 	/**
-	 * Returns the value of the '<em><b>Tags</b></em>' attribute.
-	 * The default value is <code>""</code>.
+	 * Returns the value of the '<em><b>Tags</b></em>' attribute list.
+	 * The list contents are of type {@link java.lang.String}.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Tags</em>' attribute isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Tags</em>' attribute.
-	 * @see #setTags(String)
+	 * @return the value of the '<em>Tags</em>' attribute list.
 	 * @see org.m2ling.domain.core.CorePackage#getHasTags_Tags()
-	 * @model default=""
+	 * @model
 	 * @generated
 	 */
-	String getTags();
-
-	/**
-	 * Sets the value of the '{@link org.m2ling.domain.core.HasTags#getTags <em>Tags</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Tags</em>' attribute.
-	 * @see #getTags()
-	 * @generated
-	 */
-	void setTags(String value);
+	EList<String> getTags();
 
 } // HasTags

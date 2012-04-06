@@ -5,7 +5,7 @@ import java.util.List;
 import org.m2ling.dto.core.ViewPointDTO;
 
 /**
- * Copyright (C) Bertrand Florat General contract for viewpoints services
+ * Copyright (C) 2012 Bertrand Florat General contract for viewpoints services
  * implementations
  */
 

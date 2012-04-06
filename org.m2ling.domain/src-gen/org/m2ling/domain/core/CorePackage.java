@@ -1,11 +1,10 @@
 /**
- * Copyright (C) Bertrand Florat
+ * Copyright (C) 2012 Bertrand Florat
  */
 package org.m2ling.domain.core;
 
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EEnum;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
@@ -31,7 +30,7 @@ public interface CorePackage extends EPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	String copyright = "Copyright (C) Bertrand Florat";
+	String copyright = "Copyright (C) 2012 Bertrand Florat";
 
 	/**
 	 * The package name.
@@ -233,7 +232,7 @@ public interface CorePackage extends EPackage {
 	int CONCEPT_ITEM__CUSTOM_PROPERTIES = HAS_CUSTOM_PROPERTIES__CUSTOM_PROPERTIES;
 
 	/**
-	 * The feature id for the '<em><b>Tags</b></em>' attribute.
+	 * The feature id for the '<em><b>Tags</b></em>' attribute list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -269,7 +268,7 @@ public interface CorePackage extends EPackage {
 	int COMPONENT_TYPE__CUSTOM_PROPERTIES = CONCEPT_ITEM__CUSTOM_PROPERTIES;
 
 	/**
-	 * The feature id for the '<em><b>Tags</b></em>' attribute.
+	 * The feature id for the '<em><b>Tags</b></em>' attribute list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -395,7 +394,7 @@ public interface CorePackage extends EPackage {
 	int ARCHITECTURE_ITEM__NAME = HAS_NAME_AND_ID__NAME;
 
 	/**
-	 * The feature id for the '<em><b>Tags</b></em>' attribute.
+	 * The feature id for the '<em><b>Tags</b></em>' attribute list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -440,7 +439,7 @@ public interface CorePackage extends EPackage {
 	int COMPONENT_GROUP__NAME = ARCHITECTURE_ITEM__NAME;
 
 	/**
-	 * The feature id for the '<em><b>Tags</b></em>' attribute.
+	 * The feature id for the '<em><b>Tags</b></em>' attribute list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -494,7 +493,7 @@ public interface CorePackage extends EPackage {
 	int COMPONENT__NAME = COMPONENT_GROUP__NAME;
 
 	/**
-	 * The feature id for the '<em><b>Tags</b></em>' attribute.
+	 * The feature id for the '<em><b>Tags</b></em>' attribute list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -584,7 +583,7 @@ public interface CorePackage extends EPackage {
 	int RUNTIME_ITEM__NAME = HAS_NAME_AND_ID__NAME;
 
 	/**
-	 * The feature id for the '<em><b>Tags</b></em>' attribute.
+	 * The feature id for the '<em><b>Tags</b></em>' attribute list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -629,7 +628,7 @@ public interface CorePackage extends EPackage {
 	int COMPONENT_NODE_GROUP__NAME = RUNTIME_ITEM__NAME;
 
 	/**
-	 * The feature id for the '<em><b>Tags</b></em>' attribute.
+	 * The feature id for the '<em><b>Tags</b></em>' attribute list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -683,7 +682,7 @@ public interface CorePackage extends EPackage {
 	int COMPONENT_NODE__NAME = COMPONENT_NODE_GROUP__NAME;
 
 	/**
-	 * The feature id for the '<em><b>Tags</b></em>' attribute.
+	 * The feature id for the '<em><b>Tags</b></em>' attribute list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -764,7 +763,7 @@ public interface CorePackage extends EPackage {
 	int VIEW_POINT__CUSTOM_PROPERTIES = CONCEPT_ITEM__CUSTOM_PROPERTIES;
 
 	/**
-	 * The feature id for the '<em><b>Tags</b></em>' attribute.
+	 * The feature id for the '<em><b>Tags</b></em>' attribute list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -845,7 +844,7 @@ public interface CorePackage extends EPackage {
 	int VIEW__NAME = ARCHITECTURE_ITEM__NAME;
 
 	/**
-	 * The feature id for the '<em><b>Tags</b></em>' attribute.
+	 * The feature id for the '<em><b>Tags</b></em>' attribute list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -890,7 +889,7 @@ public interface CorePackage extends EPackage {
 	int VIEW_FEATURE_COUNT = ARCHITECTURE_ITEM_FEATURE_COUNT + 2;
 
 	/**
-	 * The feature id for the '<em><b>Tags</b></em>' attribute.
+	 * The feature id for the '<em><b>Tags</b></em>' attribute list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -955,7 +954,7 @@ public interface CorePackage extends EPackage {
 	int LINK_TYPE__CUSTOM_PROPERTIES = CONCEPT_ITEM__CUSTOM_PROPERTIES;
 
 	/**
-	 * The feature id for the '<em><b>Tags</b></em>' attribute.
+	 * The feature id for the '<em><b>Tags</b></em>' attribute list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -1678,7 +1677,7 @@ public interface CorePackage extends EPackage {
 	int ORGANISATIONAL_UNIT__NAME = HAS_COMMENT_FEATURE_COUNT + 2;
 
 	/**
-	 * The feature id for the '<em><b>Tags</b></em>' attribute.
+	 * The feature id for the '<em><b>Tags</b></em>' attribute list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -1715,7 +1714,7 @@ public interface CorePackage extends EPackage {
 	int ACTOR__CUSTOM_PROPERTIES = HAS_CUSTOM_PROPERTIES__CUSTOM_PROPERTIES;
 
 	/**
-	 * The feature id for the '<em><b>Tags</b></em>' attribute.
+	 * The feature id for the '<em><b>Tags</b></em>' attribute list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -1919,16 +1918,6 @@ public interface CorePackage extends EPackage {
 	 * @generated
 	 */
 	int TYPE = 44;
-
-	/**
-	 * The meta object id for the '<em>String Array</em>' data type.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.m2ling.domain.core.impl.CorePackageImpl#getStringArray()
-	 * @generated
-	 */
-	int STRING_ARRAY = 45;
-
 
 	/**
 	 * Returns the meta object for class '{@link org.m2ling.domain.core.ComponentType <em>Component Type</em>}'.
@@ -2326,10 +2315,10 @@ public interface CorePackage extends EPackage {
 	EClass getHasTags();
 
 	/**
-	 * Returns the meta object for the attribute '{@link org.m2ling.domain.core.HasTags#getTags <em>Tags</em>}'.
+	 * Returns the meta object for the attribute list '{@link org.m2ling.domain.core.HasTags#getTags <em>Tags</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Tags</em>'.
+	 * @return the meta object for the attribute list '<em>Tags</em>'.
 	 * @see org.m2ling.domain.core.HasTags#getTags()
 	 * @see #getHasTags()
 	 * @generated
@@ -3019,16 +3008,6 @@ public interface CorePackage extends EPackage {
 	EEnum getType();
 
 	/**
-	 * Returns the meta object for data type '<em>String Array</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for data type '<em>String Array</em>'.
-	 * @model instanceClass="java.lang.String[]"
-	 * @generated
-	 */
-	EDataType getStringArray();
-
-	/**
 	 * Returns the factory that creates the instances of the model.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3371,7 +3350,7 @@ public interface CorePackage extends EPackage {
 		EClass HAS_TAGS = eINSTANCE.getHasTags();
 
 		/**
-		 * The meta object literal for the '<em><b>Tags</b></em>' attribute feature.
+		 * The meta object literal for the '<em><b>Tags</b></em>' attribute list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
@@ -3963,15 +3942,6 @@ public interface CorePackage extends EPackage {
 		 * @generated
 		 */
 		EEnum TYPE = eINSTANCE.getType();
-
-		/**
-		 * The meta object literal for the '<em>String Array</em>' data type.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see org.m2ling.domain.core.impl.CorePackageImpl#getStringArray()
-		 * @generated
-		 */
-		EDataType STRING_ARRAY = eINSTANCE.getStringArray();
 
 	}
 

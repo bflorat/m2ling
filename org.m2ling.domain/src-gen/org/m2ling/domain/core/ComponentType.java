@@ -1,5 +1,5 @@
 /**
- * Copyright (C) Bertrand Florat
+ * Copyright (C) 2012 Bertrand Florat
  */
 package org.m2ling.domain.core;
 
@@ -30,7 +30,7 @@ public interface ComponentType extends ConceptItem, HasNameAndID {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	String copyright = "Copyright (C) Bertrand Florat";
+	String copyright = "Copyright (C) 2012 Bertrand Florat";
 
 	/**
 	 * Returns the value of the '<em><b>Sub Types</b></em>' containment reference list.
