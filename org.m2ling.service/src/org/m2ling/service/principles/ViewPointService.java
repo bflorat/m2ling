@@ -43,14 +43,4 @@ public interface ViewPointService {
 	 */
 	ViewPointDTO getViewPointByName(String name);
 
-	/**
-	 * Apply one or more tags to the viewpoint given by the name.
-	 * 
-	 * @param name
-	 *            the viewpoint name
-	 * @param tags
-	 *            one ore more tags to set. If one of the string contains a coma
-	 *            or a semi-colon, it is splitted into several tags.
-	 */
-	void applyTags(String name, String... tags);
 }

@@ -43,6 +43,7 @@ import org.m2ling.domain.core.RegexpConstraint;
 import org.m2ling.domain.core.Root;
 import org.m2ling.domain.core.Stakeholder;
 import org.m2ling.domain.core.Stream;
+import org.m2ling.domain.core.Type;
 import org.m2ling.domain.core.URLConstraint;
 import org.m2ling.domain.core.View;
 import org.m2ling.domain.core.ViewPoint;

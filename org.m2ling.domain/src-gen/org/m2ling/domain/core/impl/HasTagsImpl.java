@@ -4,7 +4,6 @@
 package org.m2ling.domain.core.impl;
 
 import org.eclipse.emf.common.notify.Notification;
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
@@ -12,9 +11,8 @@ import org.m2ling.domain.core.CorePackage;
 import org.m2ling.domain.core.HasTags;
 
 /**
- * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Has Tags</b></em>'.
- * <!-- end-user-doc -->
+ * <!-- begin-user-doc --> An implementation of the model object '<em><b>Has Tags</b></em>'. <!--
+ * end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
@@ -26,8 +24,7 @@ import org.m2ling.domain.core.HasTags;
  */
 public abstract class HasTagsImpl extends EObjectImpl implements HasTags {
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	public static final String copyright = "Copyright (C) Bertrand Florat";
@@ -40,7 +37,7 @@ public abstract class HasTagsImpl extends EObjectImpl implements HasTags {
 	 * @generated
 	 * @ordered
 	 */
-	protected static final String[] TAGS_EDEFAULT = null;
+	protected static final String TAGS_EDEFAULT = "";
 
 	/**
 	 * The cached value of the '{@link #getTags() <em>Tags</em>}' attribute.
@@ -50,11 +47,10 @@ public abstract class HasTagsImpl extends EObjectImpl implements HasTags {
 	 * @generated
 	 * @ordered
 	 */
-	protected String[] tags = TAGS_EDEFAULT;
+	protected String tags = TAGS_EDEFAULT;
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	protected HasTagsImpl() {
@@ -62,8 +58,7 @@ public abstract class HasTagsImpl extends EObjectImpl implements HasTags {
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
@@ -72,29 +67,26 @@ public abstract class HasTagsImpl extends EObjectImpl implements HasTags {
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
-	public String[] getTags() {
+	public String getTags() {
 		return tags;
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setTags(String[] newTags) {
-		String[] oldTags = tags;
+	public void setTags(String newTags) {
+		String oldTags = tags;
 		tags = newTags;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, CorePackage.HAS_TAGS__TAGS, oldTags, tags));
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
@@ -107,24 +99,21 @@ public abstract class HasTagsImpl extends EObjectImpl implements HasTags {
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
-	@SuppressWarnings("unchecked")
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case CorePackage.HAS_TAGS__TAGS:
-				setTags((String[])newValue);
+				setTags((String)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
@@ -138,8 +127,7 @@ public abstract class HasTagsImpl extends EObjectImpl implements HasTags {
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
@@ -152,8 +140,7 @@ public abstract class HasTagsImpl extends EObjectImpl implements HasTags {
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
@@ -167,4 +154,4 @@ public abstract class HasTagsImpl extends EObjectImpl implements HasTags {
 		return result.toString();
 	}
 
-} //HasTagsImpl
+} // HasTagsImpl

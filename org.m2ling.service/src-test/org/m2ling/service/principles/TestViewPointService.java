@@ -14,7 +14,7 @@ import atunit.Unit;
 import com.google.inject.Inject;
 
 /**
- * @author bflorat
+ * @author Bertrand Florat <bertrand@florat.net>
  * 
  */
 @RunWith(AtUnit.class)

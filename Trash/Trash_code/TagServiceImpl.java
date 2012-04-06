@@ -1,3 +1,4 @@
+package org.m2ling.service.core.impl;
 /**
  * Copyright (C) Bertrand Florat
  */
@@ -17,7 +18,7 @@ import org.m2ling.service.common.TagService;
  * 
  * Default implementation of the TagService interface.
  * 
- * @author bflorat
+ * @author Bertrand Florat <bertrand@florat.net>
  * 
  */
 public class TagServiceImpl implements TagService {

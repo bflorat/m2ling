@@ -24,7 +24,7 @@ import org.m2ling.domain.core.ViewPoint;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.m2ling.domain.core.impl.RootImpl#getViewpoints <em>Viewpoints</em>}</li>
+ *   <li>{@link org.m2ling.domain.core.impl.RootImpl#getViewPoints <em>View Points</em>}</li>
  *   <li>{@link org.m2ling.domain.core.impl.RootImpl#getViews <em>Views</em>}</li>
  * </ul>
  * </p>
@@ -40,14 +40,14 @@ public class RootImpl extends EObjectImpl implements Root {
 	public static final String copyright = "Copyright (C) Bertrand Florat";
 
 	/**
-	 * The cached value of the '{@link #getViewpoints() <em>Viewpoints</em>}' containment reference list.
+	 * The cached value of the '{@link #getViewPoints() <em>View Points</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getViewpoints()
+	 * @see #getViewPoints()
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<ViewPoint> viewpoints;
+	protected EList<ViewPoint> viewPoints;
 
 	/**
 	 * The cached value of the '{@link #getViews() <em>Views</em>}' containment reference list.
@@ -83,11 +83,11 @@ public class RootImpl extends EObjectImpl implements Root {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<ViewPoint> getViewpoints() {
-		if (viewpoints == null) {
-			viewpoints = new EObjectContainmentEList<ViewPoint>(ViewPoint.class, this, CorePackage.ROOT__VIEWPOINTS);
+	public EList<ViewPoint> getViewPoints() {
+		if (viewPoints == null) {
+			viewPoints = new EObjectContainmentEList<ViewPoint>(ViewPoint.class, this, CorePackage.ROOT__VIEW_POINTS);
 		}
-		return viewpoints;
+		return viewPoints;
 	}
 
 	/**
@@ -110,8 +110,8 @@ public class RootImpl extends EObjectImpl implements Root {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case CorePackage.ROOT__VIEWPOINTS:
-				return ((InternalEList<?>)getViewpoints()).basicRemove(otherEnd, msgs);
+			case CorePackage.ROOT__VIEW_POINTS:
+				return ((InternalEList<?>)getViewPoints()).basicRemove(otherEnd, msgs);
 			case CorePackage.ROOT__VIEWS:
 				return ((InternalEList<?>)getViews()).basicRemove(otherEnd, msgs);
 		}
@@ -126,8 +126,8 @@ public class RootImpl extends EObjectImpl implements Root {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case CorePackage.ROOT__VIEWPOINTS:
-				return getViewpoints();
+			case CorePackage.ROOT__VIEW_POINTS:
+				return getViewPoints();
 			case CorePackage.ROOT__VIEWS:
 				return getViews();
 		}
@@ -143,9 +143,9 @@ public class RootImpl extends EObjectImpl implements Root {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case CorePackage.ROOT__VIEWPOINTS:
-				getViewpoints().clear();
-				getViewpoints().addAll((Collection<? extends ViewPoint>)newValue);
+			case CorePackage.ROOT__VIEW_POINTS:
+				getViewPoints().clear();
+				getViewPoints().addAll((Collection<? extends ViewPoint>)newValue);
 				return;
 			case CorePackage.ROOT__VIEWS:
 				getViews().clear();
@@ -163,8 +163,8 @@ public class RootImpl extends EObjectImpl implements Root {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case CorePackage.ROOT__VIEWPOINTS:
-				getViewpoints().clear();
+			case CorePackage.ROOT__VIEW_POINTS:
+				getViewPoints().clear();
 				return;
 			case CorePackage.ROOT__VIEWS:
 				getViews().clear();
@@ -181,8 +181,8 @@ public class RootImpl extends EObjectImpl implements Root {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case CorePackage.ROOT__VIEWPOINTS:
-				return viewpoints != null && !viewpoints.isEmpty();
+			case CorePackage.ROOT__VIEW_POINTS:
+				return viewPoints != null && !viewPoints.isEmpty();
 			case CorePackage.ROOT__VIEWS:
 				return views != null && !views.isEmpty();
 		}

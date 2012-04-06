@@ -3,14 +3,10 @@
  */
 package org.m2ling.service;
 
-import org.m2ling.service.principles.ViewPointService;
-import org.m2ling.service.principles.impl.ViewPointServiceMockImpl;
-
 import com.google.inject.AbstractModule;
-import com.google.inject.Singleton;
 
 /**
- * @author bflorat
+ * @author Bertrand Florat <bertrand@florat.net>
  * 
  */
 public abstract class AbstractTestCase extends AbstractModule {
@@ -22,7 +18,6 @@ public abstract class AbstractTestCase extends AbstractModule {
 	 */
 	@Override
 	protected void configure() {
-		bind(ViewPointService.class).to(ViewPointServiceMockImpl.class).in(Singleton.class);
 	}
 
 }

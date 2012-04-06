@@ -10,6 +10,6 @@
 	<classpathentry kind="lib" path="/prog/api/concordion-1.4.2/lib/ognl-2.6.9.jar"/>
 	<classpathentry kind="lib" path="/prog/api/concordion-1.4.2/lib/xom-1.2.5.jar"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/org.m2ling.service"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/org.m2ling.dto"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/org.m2ling.common"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

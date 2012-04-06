@@ -1853,13 +1853,13 @@ public interface CorePackage extends EPackage {
 	int ROOT = 40;
 
 	/**
-	 * The feature id for the '<em><b>Viewpoints</b></em>' containment reference list.
+	 * The feature id for the '<em><b>View Points</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ROOT__VIEWPOINTS = 0;
+	int ROOT__VIEW_POINTS = 0;
 
 	/**
 	 * The feature id for the '<em><b>Views</b></em>' containment reference list.
@@ -2957,15 +2957,15 @@ public interface CorePackage extends EPackage {
 	EClass getRoot();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link org.m2ling.domain.core.Root#getViewpoints <em>Viewpoints</em>}'.
+	 * Returns the meta object for the containment reference list '{@link org.m2ling.domain.core.Root#getViewPoints <em>View Points</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Viewpoints</em>'.
-	 * @see org.m2ling.domain.core.Root#getViewpoints()
+	 * @return the meta object for the containment reference list '<em>View Points</em>'.
+	 * @see org.m2ling.domain.core.Root#getViewPoints()
 	 * @see #getRoot()
 	 * @generated
 	 */
-	EReference getRoot_Viewpoints();
+	EReference getRoot_ViewPoints();
 
 	/**
 	 * Returns the meta object for the containment reference list '{@link org.m2ling.domain.core.Root#getViews <em>Views</em>}'.
@@ -3909,12 +3909,12 @@ public interface CorePackage extends EPackage {
 		EClass ROOT = eINSTANCE.getRoot();
 
 		/**
-		 * The meta object literal for the '<em><b>Viewpoints</b></em>' containment reference list feature.
+		 * The meta object literal for the '<em><b>View Points</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference ROOT__VIEWPOINTS = eINSTANCE.getRoot_Viewpoints();
+		EReference ROOT__VIEW_POINTS = eINSTANCE.getRoot_ViewPoints();
 
 		/**
 		 * The meta object literal for the '<em><b>Views</b></em>' containment reference list feature.

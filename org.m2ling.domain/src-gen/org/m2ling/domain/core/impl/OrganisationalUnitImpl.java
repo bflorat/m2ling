@@ -4,7 +4,6 @@
 package org.m2ling.domain.core.impl;
 
 import org.eclipse.emf.common.notify.Notification;
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
@@ -106,7 +105,7 @@ public class OrganisationalUnitImpl extends HasCommentImpl implements Organisati
 	 * @generated
 	 * @ordered
 	 */
-	protected static final String[] TAGS_EDEFAULT = null;
+	protected static final String TAGS_EDEFAULT = "";
 
 	/**
 	 * The cached value of the '{@link #getTags() <em>Tags</em>}' attribute.
@@ -116,7 +115,7 @@ public class OrganisationalUnitImpl extends HasCommentImpl implements Organisati
 	 * @generated
 	 * @ordered
 	 */
-	protected String[] tags = TAGS_EDEFAULT;
+	protected String tags = TAGS_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -235,7 +234,7 @@ public class OrganisationalUnitImpl extends HasCommentImpl implements Organisati
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public String[] getTags() {
+	public String getTags() {
 		return tags;
 	}
 
@@ -244,8 +243,8 @@ public class OrganisationalUnitImpl extends HasCommentImpl implements Organisati
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setTags(String[] newTags) {
-		String[] oldTags = tags;
+	public void setTags(String newTags) {
+		String oldTags = tags;
 		tags = newTags;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, CorePackage.ORGANISATIONAL_UNIT__TAGS, oldTags, tags));
@@ -288,7 +287,7 @@ public class OrganisationalUnitImpl extends HasCommentImpl implements Organisati
 				setName((String)newValue);
 				return;
 			case CorePackage.ORGANISATIONAL_UNIT__TAGS:
-				setTags((String[])newValue);
+				setTags((String)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);

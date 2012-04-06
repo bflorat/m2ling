@@ -11,7 +11,7 @@ import com.google.inject.Singleton;
 /**
  * Guice module for all service layer tests.
  * 
- * @author bflorat
+ * @author Bertrand Florat <bertrand@florat.net>
  * 
  */
 public class GuiceModule extends AbstractModule {

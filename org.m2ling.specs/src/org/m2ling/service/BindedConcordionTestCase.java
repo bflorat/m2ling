@@ -20,7 +20,7 @@ import com.google.inject.Module;
  * Note that an alternative is to use a explicit default binding in the interface like @ImplementedBy(ViewPointServiceImpl.class)
  * to avoid this module binding but it would be then impossible to change the implementation used by Concordion though it may be useful
  *  
- * @author bflorat
+ * @author Bertrand Florat <bertrand@florat.net>
  *
  */
 public class BindedConcordionTestCase extends ConcordionTestCase implements Module {

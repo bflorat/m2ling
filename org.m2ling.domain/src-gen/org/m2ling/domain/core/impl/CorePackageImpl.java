@@ -7,7 +7,6 @@ import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EEnum;
-import org.eclipse.emf.ecore.EGenericType;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.impl.EPackageImpl;
@@ -55,7 +54,6 @@ import org.m2ling.domain.core.RuntimeItem;
 import org.m2ling.domain.core.Stakeholder;
 import org.m2ling.domain.core.Stream;
 import org.m2ling.domain.core.Type;
-import org.m2ling.domain.core.Types;
 import org.m2ling.domain.core.URLConstraint;
 import org.m2ling.domain.core.View;
 import org.m2ling.domain.core.ViewPoint;
@@ -1347,7 +1345,7 @@ public class CorePackageImpl extends EPackageImpl implements CorePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getRoot_Viewpoints() {
+	public EReference getRoot_ViewPoints() {
 		return (EReference)rootEClass.getEStructuralFeatures().get(0);
 	}
 
@@ -1570,7 +1568,7 @@ public class CorePackageImpl extends EPackageImpl implements CorePackage {
 		createEReference(authorizationEClass, AUTHORIZATION__STAKEHOLDERS);
 
 		rootEClass = createEClass(ROOT);
-		createEReference(rootEClass, ROOT__VIEWPOINTS);
+		createEReference(rootEClass, ROOT__VIEW_POINTS);
 		createEReference(rootEClass, ROOT__VIEWS);
 
 		// Create enums
@@ -1708,7 +1706,7 @@ public class CorePackageImpl extends EPackageImpl implements CorePackage {
 		initEReference(getView_Components(), this.getComponent(), null, "components", null, 0, -1, View.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(hasTagsEClass, HasTags.class, "HasTags", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getHasTags_Tags(), this.getStringArray(), "tags", null, 0, 1, HasTags.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getHasTags_Tags(), ecorePackage.getEString(), "tags", "", 0, 1, HasTags.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(hasCommentEClass, HasComment.class, "HasComment", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
@@ -1797,7 +1795,7 @@ public class CorePackageImpl extends EPackageImpl implements CorePackage {
 		initEReference(getAuthorization_Stakeholders(), this.getStakeholder(), null, "stakeholders", null, 0, -1, Authorization.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(rootEClass, Root.class, "Root", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getRoot_Viewpoints(), this.getViewPoint(), null, "viewpoints", null, 0, -1, Root.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getRoot_ViewPoints(), this.getViewPoint(), null, "viewPoints", null, 0, -1, Root.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getRoot_Views(), this.getView(), null, "views", null, 0, -1, Root.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Initialize enums and add enum literals
@@ -1822,6 +1820,8 @@ public class CorePackageImpl extends EPackageImpl implements CorePackage {
 		addEEnumLiteral(typeEEnum, Type.LINK);
 		addEEnumLiteral(typeEEnum, Type.COMPONENT_NODE);
 		addEEnumLiteral(typeEEnum, Type.STREAM);
+		addEEnumLiteral(typeEEnum, Type.VIEWPOINT);
+		addEEnumLiteral(typeEEnum, Type.VIEW);
 
 		// Initialize data types
 		initEDataType(stringArrayEDataType, String[].class, "StringArray", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);

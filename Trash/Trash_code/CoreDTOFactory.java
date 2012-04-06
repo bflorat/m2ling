@@ -7,7 +7,7 @@ package org.m2ling.dto.core;
  * Common factory producing core package DTOs. All DTO classes are immutable so
  * defenssive copy are discouraged.
  * 
- * @author bflorat
+ * @author Bertrand Florat <bertrand@florat.net>
  * 
  */
 public class CoreDTOFactory {

@@ -3,7 +3,6 @@
  */
 package org.m2ling.domain.core;
 
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 
 /**
@@ -23,6 +22,11 @@ import org.eclipse.emf.ecore.EObject;
  * @generated
  */
 public interface HasTags extends EObject {
+	
+	/** Tags separator **/
+	char TAGS_SEPARATOR = ',';
+	
+	
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -32,19 +36,20 @@ public interface HasTags extends EObject {
 
 	/**
 	 * Returns the value of the '<em><b>Tags</b></em>' attribute.
+	 * The default value is <code>""</code>.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Tags</em>' reference list isn't clear,
+	 * If the meaning of the '<em>Tags</em>' attribute isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Tags</em>' attribute.
-	 * @see #setTags(String[])
+	 * @see #setTags(String)
 	 * @see org.m2ling.domain.core.CorePackage#getHasTags_Tags()
-	 * @model dataType="org.m2ling.domain.core.StringArray"
+	 * @model default=""
 	 * @generated
 	 */
-	String[] getTags();
+	String getTags();
 
 	/**
 	 * Sets the value of the '{@link org.m2ling.domain.core.HasTags#getTags <em>Tags</em>}' attribute.
@@ -54,6 +59,6 @@ public interface HasTags extends EObject {
 	 * @see #getTags()
 	 * @generated
 	 */
-	void setTags(String[] value);
+	void setTags(String value);
 
 } // HasTags

@@ -19,7 +19,7 @@ import org.m2ling.service.principles.ViewPointService;
 import com.google.inject.Singleton;
 
 /**
- * @author bflorat
+ * @author Bertrand Florat <bertrand@florat.net>
  * 
  */
 @Singleton

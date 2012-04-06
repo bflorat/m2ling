@@ -6,7 +6,7 @@
 /**
  * Tag DTO object used between layers.
  * 
- * @author bflorat
+ * @author Bertrand Florat <bertrand@florat.net>
  */
 public class TagDTO {
 

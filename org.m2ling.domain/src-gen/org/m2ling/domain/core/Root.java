@@ -14,7 +14,7 @@ import org.eclipse.emf.ecore.EObject;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link org.m2ling.domain.core.Root#getViewpoints <em>Viewpoints</em>}</li>
+ *   <li>{@link org.m2ling.domain.core.Root#getViewPoints <em>View Points</em>}</li>
  *   <li>{@link org.m2ling.domain.core.Root#getViews <em>Views</em>}</li>
  * </ul>
  * </p>
@@ -32,20 +32,20 @@ public interface Root extends EObject {
 	String copyright = "Copyright (C) Bertrand Florat";
 
 	/**
-	 * Returns the value of the '<em><b>Viewpoints</b></em>' containment reference list.
+	 * Returns the value of the '<em><b>View Points</b></em>' containment reference list.
 	 * The list contents are of type {@link org.m2ling.domain.core.ViewPoint}.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Viewpoints</em>' containment reference list isn't clear,
+	 * If the meaning of the '<em>View Points</em>' containment reference list isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Viewpoints</em>' containment reference list.
-	 * @see org.m2ling.domain.core.CorePackage#getRoot_Viewpoints()
+	 * @return the value of the '<em>View Points</em>' containment reference list.
+	 * @see org.m2ling.domain.core.CorePackage#getRoot_ViewPoints()
 	 * @model containment="true"
 	 * @generated
 	 */
-	EList<ViewPoint> getViewpoints();
+	EList<ViewPoint> getViewPoints();
 
 	/**
 	 * Returns the value of the '<em><b>Views</b></em>' containment reference list.

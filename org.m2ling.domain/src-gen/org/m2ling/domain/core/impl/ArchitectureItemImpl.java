@@ -4,7 +4,6 @@
 package org.m2ling.domain.core.impl;
 
 import org.eclipse.emf.common.notify.Notification;
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.m2ling.domain.core.ArchitectureItem;
@@ -44,7 +43,7 @@ public abstract class ArchitectureItemImpl extends HasNameAndIDImpl implements A
 	 * @generated
 	 * @ordered
 	 */
-	protected static final String[] TAGS_EDEFAULT = null;
+	protected static final String TAGS_EDEFAULT = "";
 
 	/**
 	 * The cached value of the '{@link #getTags() <em>Tags</em>}' attribute.
@@ -54,7 +53,7 @@ public abstract class ArchitectureItemImpl extends HasNameAndIDImpl implements A
 	 * @generated
 	 * @ordered
 	 */
-	protected String[] tags = TAGS_EDEFAULT;
+	protected String tags = TAGS_EDEFAULT;
 
 	/**
 	 * The default value of the '{@link #getLabel() <em>Label</em>}' attribute.
@@ -100,7 +99,7 @@ public abstract class ArchitectureItemImpl extends HasNameAndIDImpl implements A
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public String[] getTags() {
+	public String getTags() {
 		return tags;
 	}
 
@@ -109,8 +108,8 @@ public abstract class ArchitectureItemImpl extends HasNameAndIDImpl implements A
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setTags(String[] newTags) {
-		String[] oldTags = tags;
+	public void setTags(String newTags) {
+		String oldTags = tags;
 		tags = newTags;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, CorePackage.ARCHITECTURE_ITEM__TAGS, oldTags, tags));
@@ -163,7 +162,7 @@ public abstract class ArchitectureItemImpl extends HasNameAndIDImpl implements A
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case CorePackage.ARCHITECTURE_ITEM__TAGS:
-				setTags((String[])newValue);
+				setTags((String)newValue);
 				return;
 			case CorePackage.ARCHITECTURE_ITEM__LABEL:
 				setLabel((String)newValue);

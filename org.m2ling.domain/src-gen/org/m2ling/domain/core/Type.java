@@ -77,7 +77,23 @@ public enum Type implements Enumerator {
 	 * @generated
 	 * @ordered
 	 */
-	STREAM(5, "STREAM", "STREAM");
+	STREAM(5, "STREAM", "STREAM"), /**
+	 * The '<em><b>VIEWPOINT</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #VIEWPOINT_VALUE
+	 * @generated
+	 * @ordered
+	 */
+	VIEWPOINT(6, "VIEWPOINT", "VIEWPOINT"), /**
+	 * The '<em><b>VIEW</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #VIEW_VALUE
+	 * @generated
+	 * @ordered
+	 */
+	VIEW(7, "VIEW", "VIEW");
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -177,6 +193,36 @@ public enum Type implements Enumerator {
 	public static final int STREAM_VALUE = 5;
 
 	/**
+	 * The '<em><b>VIEWPOINT</b></em>' literal value.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of '<em><b>VIEWPOINT</b></em>' literal object isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @see #VIEWPOINT
+	 * @model
+	 * @generated
+	 * @ordered
+	 */
+	public static final int VIEWPOINT_VALUE = 6;
+
+	/**
+	 * The '<em><b>VIEW</b></em>' literal value.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of '<em><b>VIEW</b></em>' literal object isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @see #VIEW
+	 * @model
+	 * @generated
+	 * @ordered
+	 */
+	public static final int VIEW_VALUE = 7;
+
+	/**
 	 * An array of all the '<em><b>Type</b></em>' enumerators.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -190,6 +236,8 @@ public enum Type implements Enumerator {
 			LINK,
 			COMPONENT_NODE,
 			STREAM,
+			VIEWPOINT,
+			VIEW,
 		};
 
 	/**
@@ -246,6 +294,8 @@ public enum Type implements Enumerator {
 			case LINK_VALUE: return LINK;
 			case COMPONENT_NODE_VALUE: return COMPONENT_NODE;
 			case STREAM_VALUE: return STREAM;
+			case VIEWPOINT_VALUE: return VIEWPOINT;
+			case VIEW_VALUE: return VIEW;
 		}
 		return null;
 	}

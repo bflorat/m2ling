@@ -75,7 +75,8 @@
           eType="#//core/Component"/>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="HasTags" abstract="true">
-      <eStructuralFeatures xsi:type="ecore:EAttribute" name="tags" eType="#//core/StringArray"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="tags" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+          defaultValueLiteral=""/>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="HasComment"/>
     <eClassifiers xsi:type="ecore:EClass" name="HasCustomProperties">
@@ -181,7 +182,7 @@
           eType="#//core/Stakeholder"/>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="Root">
-      <eStructuralFeatures xsi:type="ecore:EReference" name="viewpoints" upperBound="-1"
+      <eStructuralFeatures xsi:type="ecore:EReference" name="viewPoints" upperBound="-1"
           eType="#//core/ViewPoint" containment="true"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="views" upperBound="-1"
           eType="#//core/View" containment="true"/>
@@ -194,6 +195,8 @@
       <eLiterals name="LINK" value="3"/>
       <eLiterals name="COMPONENT_NODE" value="4"/>
       <eLiterals name="STREAM" value="5"/>
+      <eLiterals name="VIEWPOINT" value="6"/>
+      <eLiterals name="VIEW" value="7"/>
     </eClassifiers>
   </eSubpackages>
   <eSubpackages name="parameters" nsURI="http://m2ling.org/parameters/1.0" nsPrefix="parameters">

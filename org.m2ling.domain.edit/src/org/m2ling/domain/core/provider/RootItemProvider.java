@@ -81,7 +81,7 @@ public class RootItemProvider
 	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
-			childrenFeatures.add(CorePackage.Literals.ROOT__VIEWPOINTS);
+			childrenFeatures.add(CorePackage.Literals.ROOT__VIEW_POINTS);
 			childrenFeatures.add(CorePackage.Literals.ROOT__VIEWS);
 		}
 		return childrenFeatures;
@@ -134,7 +134,7 @@ public class RootItemProvider
 		updateChildren(notification);
 
 		switch (notification.getFeatureID(Root.class)) {
-			case CorePackage.ROOT__VIEWPOINTS:
+			case CorePackage.ROOT__VIEW_POINTS:
 			case CorePackage.ROOT__VIEWS:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
@@ -155,7 +155,7 @@ public class RootItemProvider
 
 		newChildDescriptors.add
 			(createChildParameter
-				(CorePackage.Literals.ROOT__VIEWPOINTS,
+				(CorePackage.Literals.ROOT__VIEW_POINTS,
 				 CoreFactory.eINSTANCE.createViewPoint()));
 
 		newChildDescriptors.add

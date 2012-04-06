@@ -9,8 +9,9 @@
 	<classpathentry exported="true" kind="lib" path="/prog/api/guice-3.0/javax.inject.jar"/>
 	<classpathentry exported="true" kind="lib" path="/prog/api/guice-3.0/aopalliance.jar"/>
 	<classpathentry exported="true" kind="lib" path="/prog/api/atunit-1.0.1/atunit-1.0.1.jar"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/org.m2ling.dto"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/org.m2ling.common"/>
 	<classpathentry kind="lib" path="/prog/eclipse-modeling-3.7/plugins/org.eclipse.emf.ecore_2.7.0.v20120127-1122.jar"/>
 	<classpathentry kind="lib" path="/prog/eclipse-modeling-3.7/plugins/org.eclipse.emf.common_2.7.0.v20120127-1122.jar"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/org.m2ling.persistence"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

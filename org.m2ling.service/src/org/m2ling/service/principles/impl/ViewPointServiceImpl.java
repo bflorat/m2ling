@@ -4,23 +4,24 @@
 package org.m2ling.service.principles.impl;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import org.m2ling.domain.core.CoreFactory;
 import org.m2ling.domain.core.Root;
 import org.m2ling.domain.core.ViewPoint;
 import org.m2ling.dto.core.ViewPointDTO;
+import org.m2ling.persistence.ModelFactory;
 import org.m2ling.service.principles.ViewPointService;
 import org.m2ling.service.util.DTOConverter;
 
 import com.google.inject.Singleton;
 
+/**
+ * @author "Bertrand Florat <bertrand@florat.net>"
+ * 
+ */
 @Singleton
 public final class ViewPointServiceImpl implements ViewPointService {
-
-	// TODO
-	Root root = CoreFactory.eINSTANCE.createRoot();
 
 	ViewPointServiceImpl() {
 		super();
@@ -28,7 +29,8 @@ public final class ViewPointServiceImpl implements ViewPointService {
 
 	public List<ViewPointDTO> getAllViewPoints() {
 		List<ViewPointDTO> vpDTOs = new ArrayList<ViewPointDTO>(10);
-		for (ViewPoint vp : root.getViewpoints()) {
+		Root root = ModelFactory.getRoot();
+		for (ViewPoint vp : root.getViewPoints()) {
 			ViewPointDTO dto = DTOConverter.ToDTO.getViewPointDTO(vp);
 			vpDTOs.add(dto);
 		}
@@ -37,7 +39,8 @@ public final class ViewPointServiceImpl implements ViewPointService {
 
 	@Override
 	public ViewPointDTO getViewPointByName(String name) {
-		for (ViewPoint vp : root.getViewpoints()) {
+		Root root = ModelFactory.getRoot();
+		for (ViewPoint vp : root.getViewPoints()) {
 			if (name.equals(vp.getName())) {
 				return DTOConverter.ToDTO.getViewPointDTO(vp);
 			}
@@ -48,37 +51,15 @@ public final class ViewPointServiceImpl implements ViewPointService {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see
-	 * org.m2ling.service.principles.ViewPointService#createViewPoint(org.m2ling
+	 * @see org.m2ling.service.principles.ViewPointService#createViewPoint(org.m2ling
 	 * .dto.core.ViewPointDTO)
 	 */
 	@Override
 	public void createViewPoint(ViewPointDTO vpDTO) {
 		ViewPoint vp = CoreFactory.eINSTANCE.createViewPoint();
 		vp.setName(vpDTO.getName());
-		root.getViewpoints().add(vp);
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * org.m2ling.service.principles.ViewPointService#applyTags(java.lang.String
-	 * [])
-	 */
-	@Override
-	public void applyTags(String name, String... tags) {
-		ViewPoint vp = null;
-		for (ViewPoint v : root.getViewpoints()) {
-			if (name.equals(v.getName())) {
-				vp = v;
-			}
-		}
-		if (vp == null) {
-			throw new IllegalArgumentException("Viewpoint doesn't exist : "
-					+ name);
-		}
-		vp.setTags(tags);
+		Root root = ModelFactory.getRoot();
+		root.getViewPoints().add(vp);
 	}
 
 }
