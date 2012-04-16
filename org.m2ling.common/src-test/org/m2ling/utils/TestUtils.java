@@ -55,6 +55,8 @@ public class TestUtils {
 		((List<String>) it).addAll(Arrays.asList(new String[] { "foo", "bar" }));
 		List<String> list = Utils.listFromIterable(it);
 		assertTrue(list.size() == 2);
+		assertTrue(list.get(0).equals("foo"));
+		assertTrue(list.get(1).equals("bar"));
 	}
 
 }

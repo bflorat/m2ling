@@ -55,7 +55,11 @@ public class ViewPointDTO {
 
 	private ViewPointDTO(Builder builder) {
 		name = builder.name;
-		tags = new ArrayList<String>(builder.tags); // defensive copy
+		if (builder.tags != null && builder.tags.size() > 0) {
+			tags = new ArrayList<String>(builder.tags); // defensive copy
+		} else {
+			tags = null;
+		}
 		baseVPName = builder.baseVPName;
 		label = builder.label;
 	}
@@ -76,9 +80,13 @@ public class ViewPointDTO {
 
 	/**
 	 * Return a defensive copy of the tags.
+	 * 
 	 * @return a defensive copy of the tags
 	 */
 	public List<String> getTags() {
+		if (tags == null) {
+			return null;
+		}
 		return new ArrayList<String>(tags);
 	}
 

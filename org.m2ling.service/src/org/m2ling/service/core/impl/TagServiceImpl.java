@@ -117,7 +117,7 @@ public final class TagServiceImpl implements TagService {
 			logger.log(Level.SEVERE, msg);
 			throw new IllegalStateException(msg);
 		}
-		return null;
+		return tags;
 	}
 
 }

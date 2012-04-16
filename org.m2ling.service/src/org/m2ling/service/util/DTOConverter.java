@@ -7,6 +7,8 @@ import org.m2ling.domain.core.CoreFactory;
 import org.m2ling.domain.core.ViewPoint;
 import org.m2ling.dto.core.ViewPointDTO;
 
+import com.google.common.base.Strings;
+
 /**
  * 
  * Convert domain classes from and to DTO associated classes.
@@ -30,7 +32,11 @@ public class DTOConverter {
 
 		public static ViewPointDTO getViewPointDTO(ViewPoint vp) {
 			ViewPointDTO.Builder builder = new ViewPointDTO.Builder(vp.getName());
-			return builder.tags(vp.getTags()).base(vp.getBaseViewpoint().getName()).build();
+			builder.tags(vp.getTags());
+			if (vp.getBaseViewpoint() != null) {
+				builder.base(vp.getBaseViewpoint().getName());
+			}
+			return builder.build();
 		}
 	}
 
@@ -55,7 +61,16 @@ public class DTOConverter {
 			if (dto.getBaseVPName() != null) {
 				vp.setBaseViewpoint(CoreUtil.getViewPointByName(dto.getBaseVPName()));
 			}
-			vp.getTags().addAll(dto.getTags());
+			if (dto.getTags() != null) {
+				for (String tag : dto.getTags()) {
+					if (!Strings.isNullOrEmpty(tag)) {
+						vp.getTags().add(tag);
+					}
+				}
+			}
+			if (dto.getLabel() != null) {
+				vp.setLabel(dto.getLabel());
+			}
 			return vp;
 		}
 

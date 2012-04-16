@@ -1,6 +1,7 @@
 package org.m2ling.service.principles;
 
 import org.junit.runner.RunWith;
+import org.m2ling.dto.core.ViewPointDTO;
 import org.m2ling.service.BindedConcordionTestCase;
 
 import atunit.AtUnit;
@@ -28,6 +29,9 @@ public class CreateViewPointFixture extends BindedConcordionTestCase {
 	 * @return the new viewpoint name
 	 */
 	public String getViewPointName(String name) {
-		return service.createViewPoint(name).getName();
+		ViewPointDTO dto = new ViewPointDTO.Builder(name).build();
+		service.createViewPoint(dto);
+		ViewPointDTO checkedDTO = service.getViewPointByName(name);
+		return checkedDTO.getName();
 	}
 }

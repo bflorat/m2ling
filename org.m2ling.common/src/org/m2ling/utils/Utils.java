@@ -6,6 +6,7 @@ package org.m2ling.utils;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.google.common.base.Splitter;
 import com.google.common.base.Strings;
 
 /**
@@ -60,11 +61,23 @@ public class Utils {
 			if (Strings.isNullOrEmpty(s)) {
 				throw new IllegalArgumentException("Null or empty list element : " + s);
 			}
-			sb.append(',');
+			sb.append(s).append(',');
 		}
 		// Drop last trailing comma
 		sb.deleteCharAt(sb.length() - 1);
 		return sb.toString();
+	}
+
+	/**
+	 * Return a tag list from a string representation.
+	 * 
+	 * @param tagsAsString
+	 *           the string representation
+	 * @return a tag list from a string representation
+	 */
+	public static List<String> tagsFromString(String tagsAsString) {
+		Iterable<String> it = Splitter.on(',').trimResults().split(tagsAsString);
+		return listFromIterable(it);
 	}
 
 }

@@ -6,7 +6,6 @@ package org.m2ling.service.principles.impl;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.m2ling.domain.core.CoreFactory;
 import org.m2ling.domain.core.Root;
 import org.m2ling.domain.core.ViewPoint;
 import org.m2ling.dto.core.ViewPointDTO;
@@ -53,8 +52,7 @@ public final class ViewPointServiceImpl implements ViewPointService {
 	 */
 	@Override
 	public void createViewPoint(ViewPointDTO vpDTO) {
-		ViewPoint vp = CoreFactory.eINSTANCE.createViewPoint();
-		vp.setName(vpDTO.getName());
+		ViewPoint vp = DTOConverter.FromDTO.newViewPoint(vpDTO);
 		Root root = ModelFactory.getRoot();
 		root.getViewPoints().add(vp);
 	}
