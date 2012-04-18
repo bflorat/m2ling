@@ -1,0 +1,7 @@
+/**
+ Copyright 2012 Bertrand Florat.
+ Common Gradle settings for all runtime m2ling projects
+ 
+**/
+
+include 'org.m2ling.common','org.m2ling.domain','org.m2ling.persistence','org.m2ling.service','org.m2ling.specs'

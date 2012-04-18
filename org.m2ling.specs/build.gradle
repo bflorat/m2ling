@@ -1,0 +1,42 @@
+/**
+ Copyright 2012 Bertrand Florat
+ 
+ Executable specifications build script 
+**/
+
+defaultTasks('clean', 'test', 'copyStaticFiles');
+
+dependencies() {
+	//main
+	compile('org.concordion:concordion:1.4.2');
+	compile('com.google.inject:guice:3.0');
+	compile(project(':org.m2ling.service'));
+	//tests
+	testCompile('org.concordion:concordion:1.4.2');
+	testCompile('com.google.inject:guice:3.0');
+	testCompile(project(':org.m2ling.service'));
+}
+
+def File concordionOutputDir = file("${buildDir}/concordion-results");
+
+
+sourceSets{
+	test{
+		// We need to override the default src/test/resources maven directory here because
+		// concordion seems to forces html and fixtures classes being in the same directory. 
+		resources(){
+			srcDir 'src/test/java'
+		}
+	}
+}
+
+test {
+ systemProperties('concordion.output.dir': concordionOutputDir);
+}
+
+task copyStaticFiles(type:Copy){
+   description 'Copy static HTML along with fixtures generated HTML files...'
+   from 'src/test/java'
+   into concordionOutputDir
+	include '**/*_static.html'
+}

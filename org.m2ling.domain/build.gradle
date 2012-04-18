@@ -1,0 +1,14 @@
+/**
+Copyright 2012 Bertrand Florat
+
+Executable specifications build script
+**/
+
+dependencies{
+ compile(files('../libs/org.eclipse.emf.common_2.7.0.v20120127-1122.jar','../libs/org.eclipse.emf.ecore_2.7.0.v20120127-1122.jar'));
+}
+
+
+
+
+

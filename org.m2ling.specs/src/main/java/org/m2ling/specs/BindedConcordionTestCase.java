@@ -1,7 +1,7 @@
 /**
  * Copyright (C) 2012 Bertrand Florat
  */
-package org.m2ling.service;
+package org.m2ling.specs;
 
 import org.concordion.integration.junit3.ConcordionTestCase;
 import org.junit.Test;
@@ -27,7 +27,7 @@ public class BindedConcordionTestCase extends ConcordionTestCase implements Modu
 
 	private FixturesModule module = new FixturesModule();
 
-	protected BindedConcordionTestCase() {
+	public BindedConcordionTestCase() {
 		super();
 	}
 

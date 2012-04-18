@@ -6,9 +6,9 @@ import java.util.List;
 import org.junit.runner.RunWith;
 import org.m2ling.domain.core.Type;
 import org.m2ling.dto.core.ViewPointDTO;
-import org.m2ling.service.BindedConcordionTestCase;
 import org.m2ling.service.core.TagService;
 import org.m2ling.service.principles.ViewPointService;
+import org.m2ling.specs.BindedConcordionTestCase;
 import org.m2ling.utils.Utils;
 
 import atunit.AtUnit;

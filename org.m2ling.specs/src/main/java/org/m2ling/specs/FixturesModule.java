@@ -1,7 +1,7 @@
 /**
  * Copyright (C) 2012 Bertrand Florat
  */
-package org.m2ling.service;
+package org.m2ling.specs;
 
 import org.m2ling.service.core.TagService;
 import org.m2ling.service.core.impl.TagServiceImpl;

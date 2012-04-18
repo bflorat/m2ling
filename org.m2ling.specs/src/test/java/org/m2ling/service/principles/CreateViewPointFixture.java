@@ -2,7 +2,7 @@ package org.m2ling.service.principles;
 
 import org.junit.runner.RunWith;
 import org.m2ling.dto.core.ViewPointDTO;
-import org.m2ling.service.BindedConcordionTestCase;
+import org.m2ling.specs.BindedConcordionTestCase;
 
 import atunit.AtUnit;
 import atunit.Container;

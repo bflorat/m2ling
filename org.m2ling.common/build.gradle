@@ -1,0 +1,15 @@
+/**
+Copyright 2012 Bertrand Florat
+
+Executable specifications build script
+**/
+
+dependencies(){
+	compile('com.google.inject:guice:3.0');
+	compile('com.google.guava:guava:11.0');
+}
+
+
+
+
+
