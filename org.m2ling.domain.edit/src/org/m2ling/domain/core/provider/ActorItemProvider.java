@@ -89,7 +89,7 @@ public class ActorItemProvider
 				 CorePackage.Literals.HAS_TAGS__TAGS,
 				 true,
 				 false,
-				 false,
+				 true,
 				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
 				 null,
 				 null));
@@ -242,7 +242,6 @@ public class ActorItemProvider
 		updateChildren(notification);
 
 		switch (notification.getFeatureID(Actor.class)) {
-			case CorePackage.ACTOR__TAGS:
 			case CorePackage.ACTOR__USERNAME:
 			case CorePackage.ACTOR__ADMIN:
 			case CorePackage.ACTOR__PWD_HASH:

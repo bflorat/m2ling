@@ -85,7 +85,7 @@ public class RuntimeItemItemProvider
 				 CorePackage.Literals.HAS_TAGS__TAGS,
 				 true,
 				 false,
-				 false,
+				 true,
 				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
 				 null,
 				 null));
@@ -139,7 +139,6 @@ public class RuntimeItemItemProvider
 		updateChildren(notification);
 
 		switch (notification.getFeatureID(RuntimeItem.class)) {
-			case CorePackage.RUNTIME_ITEM__TAGS:
 			case CorePackage.RUNTIME_ITEM__LABEL:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;

@@ -153,7 +153,7 @@ public class OrganisationalUnitItemProvider
 				 CorePackage.Literals.HAS_TAGS__TAGS,
 				 true,
 				 false,
-				 false,
+				 true,
 				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
 				 null,
 				 null));
@@ -198,7 +198,6 @@ public class OrganisationalUnitItemProvider
 		switch (notification.getFeatureID(OrganisationalUnit.class)) {
 			case CorePackage.ORGANISATIONAL_UNIT__ID:
 			case CorePackage.ORGANISATIONAL_UNIT__NAME:
-			case CorePackage.ORGANISATIONAL_UNIT__TAGS:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
 		}

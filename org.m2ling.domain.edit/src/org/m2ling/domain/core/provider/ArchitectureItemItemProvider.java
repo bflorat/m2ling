@@ -85,7 +85,7 @@ public class ArchitectureItemItemProvider
 				 CorePackage.Literals.HAS_TAGS__TAGS,
 				 true,
 				 false,
-				 false,
+				 true,
 				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
 				 null,
 				 null));
@@ -139,7 +139,6 @@ public class ArchitectureItemItemProvider
 		updateChildren(notification);
 
 		switch (notification.getFeatureID(ArchitectureItem.class)) {
-			case CorePackage.ARCHITECTURE_ITEM__TAGS:
 			case CorePackage.ARCHITECTURE_ITEM__LABEL:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;

@@ -10,6 +10,7 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.impl.EFactoryImpl;
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
+import org.m2ling.domain.parameters.*;
 import org.m2ling.domain.parameters.ParamDefOverrider;
 import org.m2ling.domain.parameters.ParameterType;
 import org.m2ling.domain.parameters.ParameterValue;

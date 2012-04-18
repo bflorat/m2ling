@@ -1,19 +1,20 @@
 /**
  * Copyright (C) 2012 Bertrand Florat
  */
-package org.m2ling.domain.principles.util;
+package org.m2ling.domain.parameters.util;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.util.Switch;
-import org.m2ling.domain.core.ConceptItem;
 import org.m2ling.domain.core.HasComment;
 import org.m2ling.domain.core.HasConstraints;
 import org.m2ling.domain.core.HasCustomProperties;
-import org.m2ling.domain.core.HasParameterDefinitions;
-import org.m2ling.domain.core.HasTags;
-import org.m2ling.domain.principles.PrinciplesPackage;
-import org.m2ling.domain.principles.Rule;
+import org.m2ling.domain.core.HasNameAndID;
+import org.m2ling.domain.parameters.*;
+import org.m2ling.domain.parameters.ParamDefOverrider;
+import org.m2ling.domain.parameters.ParameterDefinition;
+import org.m2ling.domain.parameters.ParameterValue;
+import org.m2ling.domain.parameters.ParametersPackage;
 
 /**
  * <!-- begin-user-doc -->
@@ -25,10 +26,10 @@ import org.m2ling.domain.principles.Rule;
  * until a non-null result is returned,
  * which is the result of the switch.
  * <!-- end-user-doc -->
- * @see org.m2ling.domain.principles.PrinciplesPackage
+ * @see org.m2ling.domain.parameters.ParametersPackage
  * @generated
  */
-public class PrinciplesSwitch<T> extends Switch<T> {
+public class ParametersSwitch<T> extends Switch<T> {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -42,7 +43,7 @@ public class PrinciplesSwitch<T> extends Switch<T> {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected static PrinciplesPackage modelPackage;
+	protected static ParametersPackage modelPackage;
 
 	/**
 	 * Creates an instance of the switch.
@@ -50,9 +51,9 @@ public class PrinciplesSwitch<T> extends Switch<T> {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public PrinciplesSwitch() {
+	public ParametersSwitch() {
 		if (modelPackage == null) {
-			modelPackage = PrinciplesPackage.eINSTANCE;
+			modelPackage = ParametersPackage.eINSTANCE;
 		}
 	}
 
@@ -79,15 +80,27 @@ public class PrinciplesSwitch<T> extends Switch<T> {
 	@Override
 	protected T doSwitch(int classifierID, EObject theEObject) {
 		switch (classifierID) {
-			case PrinciplesPackage.RULE: {
-				Rule rule = (Rule)theEObject;
-				T result = caseRule(rule);
-				if (result == null) result = caseConceptItem(rule);
-				if (result == null) result = caseHasCustomProperties(rule);
-				if (result == null) result = caseHasComment(rule);
-				if (result == null) result = caseHasTags(rule);
-				if (result == null) result = caseHasParameterDefinitions(rule);
-				if (result == null) result = caseHasConstraints(rule);
+			case ParametersPackage.PARAMETER_VALUE: {
+				ParameterValue parameterValue = (ParameterValue)theEObject;
+				T result = caseParameterValue(parameterValue);
+				if (result == null) result = caseHasComment(parameterValue);
+				if (result == null) result = caseHasCustomProperties(parameterValue);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case ParametersPackage.PARAMETER_DEFINITION: {
+				ParameterDefinition parameterDefinition = (ParameterDefinition)theEObject;
+				T result = caseParameterDefinition(parameterDefinition);
+				if (result == null) result = caseHasComment(parameterDefinition);
+				if (result == null) result = caseHasCustomProperties(parameterDefinition);
+				if (result == null) result = caseHasNameAndID(parameterDefinition);
+				if (result == null) result = caseHasConstraints(parameterDefinition);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case ParametersPackage.PARAM_DEF_OVERRIDER: {
+				ParamDefOverrider paramDefOverrider = (ParamDefOverrider)theEObject;
+				T result = caseParamDefOverrider(paramDefOverrider);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -96,32 +109,47 @@ public class PrinciplesSwitch<T> extends Switch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Rule</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Parameter Value</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Rule</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Parameter Value</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseRule(Rule object) {
+	public T caseParameterValue(ParameterValue object) {
 		return null;
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Has Custom Properties</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Parameter Definition</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Has Custom Properties</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Parameter Definition</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseHasCustomProperties(HasCustomProperties object) {
+	public T caseParameterDefinition(ParameterDefinition object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Param Def Overrider</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Param Def Overrider</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseParamDefOverrider(ParamDefOverrider object) {
 		return null;
 	}
 
@@ -141,32 +169,32 @@ public class PrinciplesSwitch<T> extends Switch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Has Tags</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Has Custom Properties</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Has Tags</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Has Custom Properties</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseHasTags(HasTags object) {
+	public T caseHasCustomProperties(HasCustomProperties object) {
 		return null;
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Has Parameter Definitions</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Has Name And ID</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Has Parameter Definitions</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Has Name And ID</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseHasParameterDefinitions(HasParameterDefinitions object) {
+	public T caseHasNameAndID(HasNameAndID object) {
 		return null;
 	}
 
@@ -186,21 +214,6 @@ public class PrinciplesSwitch<T> extends Switch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Concept Item</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Concept Item</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseConceptItem(ConceptItem object) {
-		return null;
-	}
-
-	/**
 	 * Returns the result of interpreting the object as an instance of '<em>EObject</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
@@ -216,4 +229,4 @@ public class PrinciplesSwitch<T> extends Switch<T> {
 		return null;
 	}
 
-} //PrinciplesSwitch
+} //ParametersSwitch

@@ -85,7 +85,7 @@ public class ConceptItemItemProvider
 				 CorePackage.Literals.HAS_TAGS__TAGS,
 				 true,
 				 false,
-				 false,
+				 true,
 				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
 				 null,
 				 null));
@@ -139,7 +139,6 @@ public class ConceptItemItemProvider
 		updateChildren(notification);
 
 		switch (notification.getFeatureID(ConceptItem.class)) {
-			case CorePackage.CONCEPT_ITEM__TAGS:
 			case CorePackage.CONCEPT_ITEM__LABEL:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;

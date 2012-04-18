@@ -2,9 +2,9 @@
 <genmodel:GenModel xmi:version="2.0"
     xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
     xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" copyrightText="Copyright (C) 2012 Bertrand Florat"
-    modelDirectory="/org.m2ling.domain/src-gen" modelPluginID="org.m2ling.domain"
-    modelName="M2ling" modelPluginClass="" importerID="org.eclipse.emf.importer.ecore"
-    complianceLevel="6.0">
+    modelDirectory="/org.m2ling.domain/src/main/java" editDirectory="/org.m2ling.domain.edit/src"
+    modelPluginID="org.m2ling.domain" modelName="M2ling" modelPluginClass="" importerID="org.eclipse.emf.importer.ecore"
+    complianceLevel="6.0" interfaceNamePattern="">
   <foreignModel>m2ling.ecore</foreignModel>
   <genPackages prefix="M2ling" disposableProviderFactory="true" ecorePackage="m2ling.ecore#/">
     <nestedGenPackages prefix="Core" basePackage="org.m2ling.domain" disposableProviderFactory="true"
@@ -21,6 +21,16 @@
         <genEnumLiterals ecoreEnumLiteral="m2ling.ecore#//core/AutorizationType/WRITE"/>
         <genEnumLiterals ecoreEnumLiteral="m2ling.ecore#//core/AutorizationType/CREATE"/>
         <genEnumLiterals ecoreEnumLiteral="m2ling.ecore#//core/AutorizationType/DELETE"/>
+      </genEnums>
+      <genEnums typeSafeEnumCompatible="false" ecoreEnum="m2ling.ecore#//core/Type">
+        <genEnumLiterals ecoreEnumLiteral="m2ling.ecore#//core/Type/COMPONENT_TYPE"/>
+        <genEnumLiterals ecoreEnumLiteral="m2ling.ecore#//core/Type/LINK_TYPE"/>
+        <genEnumLiterals ecoreEnumLiteral="m2ling.ecore#//core/Type/COMPONENT"/>
+        <genEnumLiterals ecoreEnumLiteral="m2ling.ecore#//core/Type/LINK"/>
+        <genEnumLiterals ecoreEnumLiteral="m2ling.ecore#//core/Type/COMPONENT_NODE"/>
+        <genEnumLiterals ecoreEnumLiteral="m2ling.ecore#//core/Type/STREAM"/>
+        <genEnumLiterals ecoreEnumLiteral="m2ling.ecore#//core/Type/VIEWPOINT"/>
+        <genEnumLiterals ecoreEnumLiteral="m2ling.ecore#//core/Type/VIEW"/>
       </genEnums>
       <genClasses ecoreClass="m2ling.ecore#//core/ComponentType">
         <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference m2ling.ecore#//core/ComponentType/subTypes"/>
@@ -56,6 +66,7 @@
             ecoreFeature="ecore:EReference m2ling.ecore#//core/ViewPoint/activities"/>
         <genFeatures notify="false" createChild="false" propertySortChoices="true"
             ecoreFeature="ecore:EReference m2ling.ecore#//core/ViewPoint/baseViewpoint"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute m2ling.ecore#//core/ViewPoint/name"/>
       </genClasses>
       <genClasses ecoreClass="m2ling.ecore#//core/ComponentGroup">
         <genFeatures notify="false" createChild="false" propertySortChoices="true"
@@ -174,7 +185,7 @@
             ecoreFeature="ecore:EReference m2ling.ecore#//core/Authorization/stakeholders"/>
       </genClasses>
       <genClasses ecoreClass="m2ling.ecore#//core/Root">
-        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference m2ling.ecore#//core/Root/viewpoints"/>
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference m2ling.ecore#//core/Root/viewPoints"/>
         <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference m2ling.ecore#//core/Root/views"/>
       </genClasses>
     </nestedGenPackages>

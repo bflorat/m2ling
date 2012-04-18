@@ -11,6 +11,7 @@ import org.m2ling.domain.core.HasComment;
 import org.m2ling.domain.core.HasConstraints;
 import org.m2ling.domain.core.HasCustomProperties;
 import org.m2ling.domain.core.HasNameAndID;
+import org.m2ling.domain.parameters.*;
 import org.m2ling.domain.parameters.ParamDefOverrider;
 import org.m2ling.domain.parameters.ParameterDefinition;
 import org.m2ling.domain.parameters.ParameterValue;
