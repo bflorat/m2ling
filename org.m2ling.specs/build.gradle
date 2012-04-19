@@ -4,7 +4,7 @@
  Executable specifications build script 
 **/
 
-defaultTasks('clean', 'test', 'copyStaticFiles');
+defaultTasks('buildSpecs');
 
 dependencies() {
 	//main
@@ -34,9 +34,12 @@ test {
  systemProperties('concordion.output.dir': concordionOutputDir);
 }
 
-task copyStaticFiles(type:Copy){
+task copyStaticFiles(type:Copy, dependsOn:['clean','test']){
    description 'Copy static HTML along with fixtures generated HTML files...'
    from 'src/test/java'
    into concordionOutputDir
 	include '**/*_static.html'
+}
+
+task buildSpecs(dependsOn:'copyStaticFiles'){
 }

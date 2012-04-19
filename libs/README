@@ -1,0 +1,1 @@
+This directory contains m2ling libraries that are nto available from a Maven repository. You should not store here any jar available from Maven central or another official maven repository. In the future, we'll probably setup a m2ling Maven repository in this purpose and drop this directory all together.
