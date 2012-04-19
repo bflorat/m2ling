@@ -24,4 +24,5 @@ subprojects(){
  jar() {
   manifest.attributes(provider: 'm2ling');
  }
+
 }
