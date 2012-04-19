@@ -133,15 +133,6 @@ public class M2ling_glossaryPackageImpl extends EPackageImpl implements M2ling_g
 	 * @generated
 	 */
 	public EAttribute getterm_Internal_definition() {
-		return (EAttribute)termEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getterm_User_definition() {
 		return (EAttribute)termEClass.getEStructuralFeatures().get(1);
 	}
 
@@ -150,8 +141,17 @@ public class M2ling_glossaryPackageImpl extends EPackageImpl implements M2ling_g
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getterm_Name() {
+	public EAttribute getterm_User_definition() {
 		return (EAttribute)termEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getterm_Name() {
+		return (EAttribute)termEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -195,9 +195,9 @@ public class M2ling_glossaryPackageImpl extends EPackageImpl implements M2ling_g
 		createEReference(glossaryEClass, GLOSSARY__CONTENTS);
 
 		termEClass = createEClass(TERM);
+		createEAttribute(termEClass, TERM__NAME);
 		createEAttribute(termEClass, TERM__INTERNAL_DEFINITION);
 		createEAttribute(termEClass, TERM__USER_DEFINITION);
-		createEAttribute(termEClass, TERM__NAME);
 		createEAttribute(termEClass, TERM__COMMENT);
 	}
 
@@ -235,9 +235,9 @@ public class M2ling_glossaryPackageImpl extends EPackageImpl implements M2ling_g
 		initEReference(getglossary_Contents(), this.getterm(), null, "contents", null, 0, -1, glossary.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(termEClass, term.class, "term", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getterm_Name(), ecorePackage.getEString(), "name", null, 0, 1, term.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getterm_Internal_definition(), ecorePackage.getEString(), "internal_definition", null, 0, 1, term.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getterm_User_definition(), ecorePackage.getEString(), "user_definition", null, 0, 1, term.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getterm_Name(), ecorePackage.getEString(), "name", null, 0, 1, term.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getterm_Comment(), ecorePackage.getEString(), "comment", null, 0, 1, term.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Create resource

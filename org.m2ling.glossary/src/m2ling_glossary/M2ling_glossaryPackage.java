@@ -98,13 +98,22 @@ public interface M2ling_glossaryPackage extends EPackage {
 	int TERM = 1;
 
 	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TERM__NAME = 0;
+
+	/**
 	 * The feature id for the '<em><b>Internal definition</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int TERM__INTERNAL_DEFINITION = 0;
+	int TERM__INTERNAL_DEFINITION = 1;
 
 	/**
 	 * The feature id for the '<em><b>User definition</b></em>' attribute.
@@ -113,16 +122,7 @@ public interface M2ling_glossaryPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TERM__USER_DEFINITION = 1;
-
-	/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TERM__NAME = 2;
+	int TERM__USER_DEFINITION = 2;
 
 	/**
 	 * The feature id for the '<em><b>Comment</b></em>' attribute.

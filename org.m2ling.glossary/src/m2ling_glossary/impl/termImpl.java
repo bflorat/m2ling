@@ -23,9 +23,9 @@ import org.eclipse.emf.ecore.impl.EObjectImpl;
  * <p>
  * The following features are implemented:
  * <ul>
+ *   <li>{@link m2ling_glossary.impl.termImpl#getName <em>Name</em>}</li>
  *   <li>{@link m2ling_glossary.impl.termImpl#getInternal_definition <em>Internal definition</em>}</li>
  *   <li>{@link m2ling_glossary.impl.termImpl#getUser_definition <em>User definition</em>}</li>
- *   <li>{@link m2ling_glossary.impl.termImpl#getName <em>Name</em>}</li>
  *   <li>{@link m2ling_glossary.impl.termImpl#getComment <em>Comment</em>}</li>
  * </ul>
  * </p>
@@ -33,6 +33,26 @@ import org.eclipse.emf.ecore.impl.EObjectImpl;
  * @generated
  */
 public class termImpl extends EObjectImpl implements term {
+	/**
+	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getName()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String NAME_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getName()
+	 * @generated
+	 * @ordered
+	 */
+	protected String name = NAME_EDEFAULT;
+
 	/**
 	 * The default value of the '{@link #getInternal_definition() <em>Internal definition</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -72,26 +92,6 @@ public class termImpl extends EObjectImpl implements term {
 	 * @ordered
 	 */
 	protected String user_definition = USER_DEFINITION_EDEFAULT;
-
-	/**
-	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getName()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final String NAME_EDEFAULT = null;
-
-	/**
-	 * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getName()
-	 * @generated
-	 * @ordered
-	 */
-	protected String name = NAME_EDEFAULT;
 
 	/**
 	 * The default value of the '{@link #getComment() <em>Comment</em>}' attribute.
@@ -224,12 +224,12 @@ public class termImpl extends EObjectImpl implements term {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
+			case M2ling_glossaryPackage.TERM__NAME:
+				return getName();
 			case M2ling_glossaryPackage.TERM__INTERNAL_DEFINITION:
 				return getInternal_definition();
 			case M2ling_glossaryPackage.TERM__USER_DEFINITION:
 				return getUser_definition();
-			case M2ling_glossaryPackage.TERM__NAME:
-				return getName();
 			case M2ling_glossaryPackage.TERM__COMMENT:
 				return getComment();
 		}
@@ -244,14 +244,14 @@ public class termImpl extends EObjectImpl implements term {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
+			case M2ling_glossaryPackage.TERM__NAME:
+				setName((String)newValue);
+				return;
 			case M2ling_glossaryPackage.TERM__INTERNAL_DEFINITION:
 				setInternal_definition((String)newValue);
 				return;
 			case M2ling_glossaryPackage.TERM__USER_DEFINITION:
 				setUser_definition((String)newValue);
-				return;
-			case M2ling_glossaryPackage.TERM__NAME:
-				setName((String)newValue);
 				return;
 			case M2ling_glossaryPackage.TERM__COMMENT:
 				setComment((String)newValue);
@@ -268,14 +268,14 @@ public class termImpl extends EObjectImpl implements term {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
+			case M2ling_glossaryPackage.TERM__NAME:
+				setName(NAME_EDEFAULT);
+				return;
 			case M2ling_glossaryPackage.TERM__INTERNAL_DEFINITION:
 				setInternal_definition(INTERNAL_DEFINITION_EDEFAULT);
 				return;
 			case M2ling_glossaryPackage.TERM__USER_DEFINITION:
 				setUser_definition(USER_DEFINITION_EDEFAULT);
-				return;
-			case M2ling_glossaryPackage.TERM__NAME:
-				setName(NAME_EDEFAULT);
 				return;
 			case M2ling_glossaryPackage.TERM__COMMENT:
 				setComment(COMMENT_EDEFAULT);
@@ -292,12 +292,12 @@ public class termImpl extends EObjectImpl implements term {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
+			case M2ling_glossaryPackage.TERM__NAME:
+				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
 			case M2ling_glossaryPackage.TERM__INTERNAL_DEFINITION:
 				return INTERNAL_DEFINITION_EDEFAULT == null ? internal_definition != null : !INTERNAL_DEFINITION_EDEFAULT.equals(internal_definition);
 			case M2ling_glossaryPackage.TERM__USER_DEFINITION:
 				return USER_DEFINITION_EDEFAULT == null ? user_definition != null : !USER_DEFINITION_EDEFAULT.equals(user_definition);
-			case M2ling_glossaryPackage.TERM__NAME:
-				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
 			case M2ling_glossaryPackage.TERM__COMMENT:
 				return COMMENT_EDEFAULT == null ? comment != null : !COMMENT_EDEFAULT.equals(comment);
 		}
@@ -314,12 +314,12 @@ public class termImpl extends EObjectImpl implements term {
 		if (eIsProxy()) return super.toString();
 
 		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (internal_definition: ");
+		result.append(" (name: ");
+		result.append(name);
+		result.append(", internal_definition: ");
 		result.append(internal_definition);
 		result.append(", user_definition: ");
 		result.append(user_definition);
-		result.append(", name: ");
-		result.append(name);
 		result.append(", comment: ");
 		result.append(comment);
 		result.append(')');

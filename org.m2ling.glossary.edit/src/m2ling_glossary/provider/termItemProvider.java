@@ -64,9 +64,9 @@ public class termItemProvider
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
+			addNamePropertyDescriptor(object);
 			addInternal_definitionPropertyDescriptor(object);
 			addUser_definitionPropertyDescriptor(object);
-			addNamePropertyDescriptor(object);
 			addCommentPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
@@ -182,7 +182,7 @@ public class termItemProvider
 		String label = ((term)object).getName();
 		return label == null || label.length() == 0 ?
 			getString("_UI_term_type") :
-			getString("_UI_term_type") + " \"" + label +"\"";
+			getString("_UI_term_type") + " " + label;
 	}
 
 	/**
@@ -197,9 +197,9 @@ public class termItemProvider
 		updateChildren(notification);
 
 		switch (notification.getFeatureID(term.class)) {
+			case M2ling_glossaryPackage.TERM__NAME:
 			case M2ling_glossaryPackage.TERM__INTERNAL_DEFINITION:
 			case M2ling_glossaryPackage.TERM__USER_DEFINITION:
-			case M2ling_glossaryPackage.TERM__NAME:
 			case M2ling_glossaryPackage.TERM__COMMENT:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;

@@ -4,7 +4,7 @@
  **/
 import org.apache.tools.ant.filters.ReplaceTokens
 
-defaultTasks('replaceInternalDefinition');
+defaultTasks('buildSpecs');
 
 dependencies() {
 	//main
@@ -44,6 +44,7 @@ task buildSpecs(dependsOn:['clean', 'test'])<<{
 }
 
 Map internalDefinitionsAcronymMap = [:]
+Map internalDefinitionsNotesMap = [:]
 
 
 task loadGlossary<<{
@@ -52,6 +53,7 @@ task loadGlossary<<{
 		String name = it.attribute("name")
 		String internalDefinition = it.attribute("internal_definition")
 		internalDefinitionsAcronymMap.put(name,"<acronym title='"+internalDefinition+"'>"+name+"</acronym>" )
+		internalDefinitionsNotesMap.put(name,"<p class='commentary'><b>"+name+"</b><br/>"+internalDefinition+"</p>" )
 	}
 }
 
@@ -65,11 +67,18 @@ task loadGlossary<<{
  * ?entry? to a note
  */
 task replaceInternalDefinition(dependsOn:['buildSpecs', 'loadGlossary'])<<{
+	// Acronyms
+	replaceDefinition(internalDefinitionsAcronymMap,'~');
+	// Notes
+	replaceDefinition(internalDefinitionsAcronymMap,'?');
+}
+
+private void replaceDefinition(Map map,char token){
 	copy {
 		from concordionOutputDir
 		into "${concordionOutputDir}_tmp"
-		include '**/*.*'
-		filter(ReplaceTokens, beginToken:'~',endToken:'~', tokens:internalDefinitionsAcronymMap)
+		include '**/*.html'
+		filter(ReplaceTokens, beginToken:token,endToken:token, tokens:map)
 	}
 	// Gradle don't seem to support the in-place substitution, so we have to make
 	// all this boilerplate moves :

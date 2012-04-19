@@ -16,9 +16,9 @@ import org.eclipse.emf.ecore.EObject;
  * <p>
  * The following features are supported:
  * <ul>
+ *   <li>{@link m2ling_glossary.term#getName <em>Name</em>}</li>
  *   <li>{@link m2ling_glossary.term#getInternal_definition <em>Internal definition</em>}</li>
  *   <li>{@link m2ling_glossary.term#getUser_definition <em>User definition</em>}</li>
- *   <li>{@link m2ling_glossary.term#getName <em>Name</em>}</li>
  *   <li>{@link m2ling_glossary.term#getComment <em>Comment</em>}</li>
  * </ul>
  * </p>
