@@ -22,7 +22,7 @@ import org.eclipse.emf.common.util.EList;
  * @model
  * @generated
  */
-public interface View extends ArchitectureItem, ACResource {
+public interface View extends ArchitectureItem {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

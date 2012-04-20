@@ -41,7 +41,7 @@
     </children>
     <styles xmi:type="notation:ShapeStyle" xmi:id="_fnjh8XQHEeGC1LCO92mMCg" fontColor="4210752" fontName="Sans" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
     <element xmi:type="ecore:EClass" href="m2ling.ecore#//core/ConceptItem"/>
-    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_fnjh8nQHEeGC1LCO92mMCg" x="168" y="120"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_fnjh8nQHEeGC1LCO92mMCg" x="204" y="120" width="147"/>
   </children>
   <children xmi:type="notation:Node" xmi:id="_Wj4y4Hm2EeGEvMHZDOlGeA" type="1005">
     <children xmi:type="notation:Node" xmi:id="_Wj4y43m2EeGEvMHZDOlGeA" type="4010"/>

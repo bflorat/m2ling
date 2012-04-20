@@ -38,7 +38,7 @@
           eOpposite="#//core/ComponentNode/subNodes"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="engine" eType="#//core/ComponentNodeGroup"/>
     </eClassifiers>
-    <eClassifiers xsi:type="ecore:EClass" name="ViewPoint" eSuperTypes="#//core/ConceptItem #//core/ACResource">
+    <eClassifiers xsi:type="ecore:EClass" name="ViewPoint" eSuperTypes="#//core/ConceptItem">
       <eStructuralFeatures xsi:type="ecore:EReference" name="componentTypes" upperBound="-1"
           eType="#//core/ComponentType" containment="true"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="activities" upperBound="-1"
@@ -68,7 +68,7 @@
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="label" lowerBound="1"
           eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     </eClassifiers>
-    <eClassifiers xsi:type="ecore:EClass" name="View" eSuperTypes="#//core/ArchitectureItem #//core/ACResource">
+    <eClassifiers xsi:type="ecore:EClass" name="View" eSuperTypes="#//core/ArchitectureItem">
       <eStructuralFeatures xsi:type="ecore:EReference" name="componentsGroups" upperBound="-1"
           eType="#//core/ComponentGroup"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="components" upperBound="-1"
@@ -166,20 +166,6 @@
           iD="true"/>
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="admin" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="pwdHash" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    </eClassifiers>
-    <eClassifiers xsi:type="ecore:EClass" name="ACResource"/>
-    <eClassifiers xsi:type="ecore:EEnum" name="AutorizationType">
-      <eLiterals name="READ"/>
-      <eLiterals name="WRITE" value="1"/>
-      <eLiterals name="CREATE" value="2"/>
-      <eLiterals name="DELETE" value="3"/>
-    </eClassifiers>
-    <eClassifiers xsi:type="ecore:EClass" name="Authorization">
-      <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" eType="#//core/AutorizationType"/>
-      <eStructuralFeatures xsi:type="ecore:EReference" name="resource" lowerBound="1"
-          eType="#//core/ACResource"/>
-      <eStructuralFeatures xsi:type="ecore:EReference" name="stakeholders" upperBound="-1"
-          eType="#//core/Stakeholder"/>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="Root">
       <eStructuralFeatures xsi:type="ecore:EReference" name="viewPoints" upperBound="-1"

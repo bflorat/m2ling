@@ -282,24 +282,6 @@ public interface CoreFactory extends EFactory {
 	Actor createActor();
 
 	/**
-	 * Returns a new object of class '<em>AC Resource</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>AC Resource</em>'.
-	 * @generated
-	 */
-	ACResource createACResource();
-
-	/**
-	 * Returns a new object of class '<em>Authorization</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Authorization</em>'.
-	 * @generated
-	 */
-	Authorization createAuthorization();
-
-	/**
 	 * Returns a new object of class '<em>Root</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

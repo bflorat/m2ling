@@ -9,7 +9,6 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.impl.EFactoryImpl;
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
-import org.m2ling.domain.principles.*;
 import org.m2ling.domain.principles.PrinciplesFactory;
 import org.m2ling.domain.principles.PrinciplesPackage;
 import org.m2ling.domain.principles.Priority;

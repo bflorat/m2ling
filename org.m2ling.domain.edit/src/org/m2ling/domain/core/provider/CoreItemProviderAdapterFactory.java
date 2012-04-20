@@ -722,52 +722,6 @@ public class CoreItemProviderAdapterFactory extends CoreAdapterFactory implement
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link org.m2ling.domain.core.ACResource} instances.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected ACResourceItemProvider acResourceItemProvider;
-
-	/**
-	 * This creates an adapter for a {@link org.m2ling.domain.core.ACResource}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Adapter createACResourceAdapter() {
-		if (acResourceItemProvider == null) {
-			acResourceItemProvider = new ACResourceItemProvider(this);
-		}
-
-		return acResourceItemProvider;
-	}
-
-	/**
-	 * This keeps track of the one adapter used for all {@link org.m2ling.domain.core.Authorization} instances.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected AuthorizationItemProvider authorizationItemProvider;
-
-	/**
-	 * This creates an adapter for a {@link org.m2ling.domain.core.Authorization}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Adapter createAuthorizationAdapter() {
-		if (authorizationItemProvider == null) {
-			authorizationItemProvider = new AuthorizationItemProvider(this);
-		}
-
-		return authorizationItemProvider;
-	}
-
-	/**
 	 * This keeps track of the one adapter used for all {@link org.m2ling.domain.core.Root} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -917,8 +871,6 @@ public class CoreItemProviderAdapterFactory extends CoreAdapterFactory implement
 		if (activityTransitionItemProvider != null) activityTransitionItemProvider.dispose();
 		if (organisationalUnitItemProvider != null) organisationalUnitItemProvider.dispose();
 		if (actorItemProvider != null) actorItemProvider.dispose();
-		if (acResourceItemProvider != null) acResourceItemProvider.dispose();
-		if (authorizationItemProvider != null) authorizationItemProvider.dispose();
 		if (rootItemProvider != null) rootItemProvider.dispose();
 	}
 

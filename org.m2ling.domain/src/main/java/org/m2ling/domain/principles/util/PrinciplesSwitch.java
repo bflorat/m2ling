@@ -12,7 +12,6 @@ import org.m2ling.domain.core.HasConstraints;
 import org.m2ling.domain.core.HasCustomProperties;
 import org.m2ling.domain.core.HasParameterDefinitions;
 import org.m2ling.domain.core.HasTags;
-import org.m2ling.domain.principles.*;
 import org.m2ling.domain.principles.PrinciplesPackage;
 import org.m2ling.domain.principles.Rule;
 

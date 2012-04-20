@@ -24,7 +24,7 @@ import org.eclipse.emf.common.util.EList;
  * @model
  * @generated
  */
-public interface ViewPoint extends ConceptItem, ACResource {
+public interface ViewPoint extends ConceptItem {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

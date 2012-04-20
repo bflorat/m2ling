@@ -1777,71 +1777,6 @@ public interface CorePackage extends EPackage {
 	int ACTOR_FEATURE_COUNT = HAS_CUSTOM_PROPERTIES_FEATURE_COUNT + 6;
 
 	/**
-	 * The meta object id for the '{@link org.m2ling.domain.core.impl.ACResourceImpl <em>AC Resource</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.m2ling.domain.core.impl.ACResourceImpl
-	 * @see org.m2ling.domain.core.impl.CorePackageImpl#getACResource()
-	 * @generated
-	 */
-	int AC_RESOURCE = 38;
-
-	/**
-	 * The number of structural features of the '<em>AC Resource</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int AC_RESOURCE_FEATURE_COUNT = 0;
-
-	/**
-	 * The meta object id for the '{@link org.m2ling.domain.core.impl.AuthorizationImpl <em>Authorization</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.m2ling.domain.core.impl.AuthorizationImpl
-	 * @see org.m2ling.domain.core.impl.CorePackageImpl#getAuthorization()
-	 * @generated
-	 */
-	int AUTHORIZATION = 39;
-
-	/**
-	 * The feature id for the '<em><b>Type</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int AUTHORIZATION__TYPE = 0;
-
-	/**
-	 * The feature id for the '<em><b>Resource</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int AUTHORIZATION__RESOURCE = 1;
-
-	/**
-	 * The feature id for the '<em><b>Stakeholders</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int AUTHORIZATION__STAKEHOLDERS = 2;
-
-	/**
-	 * The number of structural features of the '<em>Authorization</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int AUTHORIZATION_FEATURE_COUNT = 3;
-
-	/**
 	 * The meta object id for the '{@link org.m2ling.domain.core.impl.RootImpl <em>Root</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1849,7 +1784,7 @@ public interface CorePackage extends EPackage {
 	 * @see org.m2ling.domain.core.impl.CorePackageImpl#getRoot()
 	 * @generated
 	 */
-	int ROOT = 40;
+	int ROOT = 38;
 
 	/**
 	 * The feature id for the '<em><b>View Points</b></em>' containment reference list.
@@ -1886,7 +1821,7 @@ public interface CorePackage extends EPackage {
 	 * @see org.m2ling.domain.core.impl.CorePackageImpl#getCustomPropertyType()
 	 * @generated
 	 */
-	int CUSTOM_PROPERTY_TYPE = 41;
+	int CUSTOM_PROPERTY_TYPE = 39;
 
 	/**
 	 * The meta object id for the '{@link org.m2ling.domain.core.ActivityStatus <em>Activity Status</em>}' enum.
@@ -1896,18 +1831,7 @@ public interface CorePackage extends EPackage {
 	 * @see org.m2ling.domain.core.impl.CorePackageImpl#getActivityStatus()
 	 * @generated
 	 */
-	int ACTIVITY_STATUS = 42;
-
-	/**
-	 * The meta object id for the '{@link org.m2ling.domain.core.AutorizationType <em>Autorization Type</em>}' enum.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.m2ling.domain.core.AutorizationType
-	 * @see org.m2ling.domain.core.impl.CorePackageImpl#getAutorizationType()
-	 * @generated
-	 */
-	int AUTORIZATION_TYPE = 43;
-
+	int ACTIVITY_STATUS = 40;
 
 	/**
 	 * The meta object id for the '{@link org.m2ling.domain.core.Type <em>Type</em>}' enum.
@@ -1917,7 +1841,7 @@ public interface CorePackage extends EPackage {
 	 * @see org.m2ling.domain.core.impl.CorePackageImpl#getType()
 	 * @generated
 	 */
-	int TYPE = 44;
+	int TYPE = 41;
 
 	/**
 	 * Returns the meta object for class '{@link org.m2ling.domain.core.ComponentType <em>Component Type</em>}'.
@@ -2883,59 +2807,6 @@ public interface CorePackage extends EPackage {
 	EAttribute getActor_PwdHash();
 
 	/**
-	 * Returns the meta object for class '{@link org.m2ling.domain.core.ACResource <em>AC Resource</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>AC Resource</em>'.
-	 * @see org.m2ling.domain.core.ACResource
-	 * @generated
-	 */
-	EClass getACResource();
-
-	/**
-	 * Returns the meta object for class '{@link org.m2ling.domain.core.Authorization <em>Authorization</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Authorization</em>'.
-	 * @see org.m2ling.domain.core.Authorization
-	 * @generated
-	 */
-	EClass getAuthorization();
-
-	/**
-	 * Returns the meta object for the attribute '{@link org.m2ling.domain.core.Authorization#getType <em>Type</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Type</em>'.
-	 * @see org.m2ling.domain.core.Authorization#getType()
-	 * @see #getAuthorization()
-	 * @generated
-	 */
-	EAttribute getAuthorization_Type();
-
-	/**
-	 * Returns the meta object for the reference '{@link org.m2ling.domain.core.Authorization#getResource <em>Resource</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Resource</em>'.
-	 * @see org.m2ling.domain.core.Authorization#getResource()
-	 * @see #getAuthorization()
-	 * @generated
-	 */
-	EReference getAuthorization_Resource();
-
-	/**
-	 * Returns the meta object for the reference list '{@link org.m2ling.domain.core.Authorization#getStakeholders <em>Stakeholders</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference list '<em>Stakeholders</em>'.
-	 * @see org.m2ling.domain.core.Authorization#getStakeholders()
-	 * @see #getAuthorization()
-	 * @generated
-	 */
-	EReference getAuthorization_Stakeholders();
-
-	/**
 	 * Returns the meta object for class '{@link org.m2ling.domain.core.Root <em>Root</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2986,16 +2857,6 @@ public interface CorePackage extends EPackage {
 	 * @generated
 	 */
 	EEnum getActivityStatus();
-
-	/**
-	 * Returns the meta object for enum '{@link org.m2ling.domain.core.AutorizationType <em>Autorization Type</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for enum '<em>Autorization Type</em>'.
-	 * @see org.m2ling.domain.core.AutorizationType
-	 * @generated
-	 */
-	EEnum getAutorizationType();
 
 	/**
 	 * Returns the meta object for enum '{@link org.m2ling.domain.core.Type <em>Type</em>}'.
@@ -3834,50 +3695,6 @@ public interface CorePackage extends EPackage {
 		EAttribute ACTOR__PWD_HASH = eINSTANCE.getActor_PwdHash();
 
 		/**
-		 * The meta object literal for the '{@link org.m2ling.domain.core.impl.ACResourceImpl <em>AC Resource</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see org.m2ling.domain.core.impl.ACResourceImpl
-		 * @see org.m2ling.domain.core.impl.CorePackageImpl#getACResource()
-		 * @generated
-		 */
-		EClass AC_RESOURCE = eINSTANCE.getACResource();
-
-		/**
-		 * The meta object literal for the '{@link org.m2ling.domain.core.impl.AuthorizationImpl <em>Authorization</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see org.m2ling.domain.core.impl.AuthorizationImpl
-		 * @see org.m2ling.domain.core.impl.CorePackageImpl#getAuthorization()
-		 * @generated
-		 */
-		EClass AUTHORIZATION = eINSTANCE.getAuthorization();
-
-		/**
-		 * The meta object literal for the '<em><b>Type</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute AUTHORIZATION__TYPE = eINSTANCE.getAuthorization_Type();
-
-		/**
-		 * The meta object literal for the '<em><b>Resource</b></em>' reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference AUTHORIZATION__RESOURCE = eINSTANCE.getAuthorization_Resource();
-
-		/**
-		 * The meta object literal for the '<em><b>Stakeholders</b></em>' reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference AUTHORIZATION__STAKEHOLDERS = eINSTANCE.getAuthorization_Stakeholders();
-
-		/**
 		 * The meta object literal for the '{@link org.m2ling.domain.core.impl.RootImpl <em>Root</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -3922,16 +3739,6 @@ public interface CorePackage extends EPackage {
 		 * @generated
 		 */
 		EEnum ACTIVITY_STATUS = eINSTANCE.getActivityStatus();
-
-		/**
-		 * The meta object literal for the '{@link org.m2ling.domain.core.AutorizationType <em>Autorization Type</em>}' enum.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see org.m2ling.domain.core.AutorizationType
-		 * @see org.m2ling.domain.core.impl.CorePackageImpl#getAutorizationType()
-		 * @generated
-		 */
-		EEnum AUTORIZATION_TYPE = eINSTANCE.getAutorizationType();
 
 		/**
 		 * The meta object literal for the '{@link org.m2ling.domain.core.Type <em>Type</em>}' enum.

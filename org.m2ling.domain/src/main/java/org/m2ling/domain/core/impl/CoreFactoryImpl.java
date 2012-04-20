@@ -9,14 +9,10 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.impl.EFactoryImpl;
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
-import org.m2ling.domain.core.*;
-import org.m2ling.domain.core.ACResource;
 import org.m2ling.domain.core.Activity;
 import org.m2ling.domain.core.ActivityStatus;
 import org.m2ling.domain.core.ActivityTransition;
 import org.m2ling.domain.core.Actor;
-import org.m2ling.domain.core.Authorization;
-import org.m2ling.domain.core.AutorizationType;
 import org.m2ling.domain.core.Component;
 import org.m2ling.domain.core.ComponentGroup;
 import org.m2ling.domain.core.ComponentNode;
@@ -127,8 +123,6 @@ public class CoreFactoryImpl extends EFactoryImpl implements CoreFactory {
 			case CorePackage.ACTIVITY_TRANSITION: return createActivityTransition();
 			case CorePackage.ORGANISATIONAL_UNIT: return createOrganisationalUnit();
 			case CorePackage.ACTOR: return createActor();
-			case CorePackage.AC_RESOURCE: return createACResource();
-			case CorePackage.AUTHORIZATION: return createAuthorization();
 			case CorePackage.ROOT: return createRoot();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
@@ -147,8 +141,6 @@ public class CoreFactoryImpl extends EFactoryImpl implements CoreFactory {
 				return createCustomPropertyTypeFromString(eDataType, initialValue);
 			case CorePackage.ACTIVITY_STATUS:
 				return createActivityStatusFromString(eDataType, initialValue);
-			case CorePackage.AUTORIZATION_TYPE:
-				return createAutorizationTypeFromString(eDataType, initialValue);
 			case CorePackage.TYPE:
 				return createTypeFromString(eDataType, initialValue);
 			default:
@@ -168,8 +160,6 @@ public class CoreFactoryImpl extends EFactoryImpl implements CoreFactory {
 				return convertCustomPropertyTypeToString(eDataType, instanceValue);
 			case CorePackage.ACTIVITY_STATUS:
 				return convertActivityStatusToString(eDataType, instanceValue);
-			case CorePackage.AUTORIZATION_TYPE:
-				return convertAutorizationTypeToString(eDataType, instanceValue);
 			case CorePackage.TYPE:
 				return convertTypeToString(eDataType, instanceValue);
 			default:
@@ -462,26 +452,6 @@ public class CoreFactoryImpl extends EFactoryImpl implements CoreFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public ACResource createACResource() {
-		ACResourceImpl acResource = new ACResourceImpl();
-		return acResource;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public Authorization createAuthorization() {
-		AuthorizationImpl authorization = new AuthorizationImpl();
-		return authorization;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public Root createRoot() {
 		RootImpl root = new RootImpl();
 		return root;
@@ -524,26 +494,6 @@ public class CoreFactoryImpl extends EFactoryImpl implements CoreFactory {
 	 * @generated
 	 */
 	public String convertActivityStatusToString(EDataType eDataType, Object instanceValue) {
-		return instanceValue == null ? null : instanceValue.toString();
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public AutorizationType createAutorizationTypeFromString(EDataType eDataType, String initialValue) {
-		AutorizationType result = AutorizationType.get(initialValue);
-		if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
-		return result;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public String convertAutorizationTypeToString(EDataType eDataType, Object instanceValue) {
 		return instanceValue == null ? null : instanceValue.toString();
 	}
 

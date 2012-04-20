@@ -7,13 +7,10 @@ import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
 import org.eclipse.emf.ecore.EObject;
-import org.m2ling.domain.core.*;
-import org.m2ling.domain.core.ACResource;
 import org.m2ling.domain.core.Activity;
 import org.m2ling.domain.core.ActivityTransition;
 import org.m2ling.domain.core.Actor;
 import org.m2ling.domain.core.ArchitectureItem;
-import org.m2ling.domain.core.Authorization;
 import org.m2ling.domain.core.BoundaryConstraint;
 import org.m2ling.domain.core.Component;
 import org.m2ling.domain.core.ComponentGroup;
@@ -265,14 +262,6 @@ public class CoreAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseActor(Actor object) {
 				return createActorAdapter();
-			}
-			@Override
-			public Adapter caseACResource(ACResource object) {
-				return createACResourceAdapter();
-			}
-			@Override
-			public Adapter caseAuthorization(Authorization object) {
-				return createAuthorizationAdapter();
 			}
 			@Override
 			public Adapter caseRoot(Root object) {
@@ -827,34 +816,6 @@ public class CoreAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createActorAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.m2ling.domain.core.ACResource <em>AC Resource</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.m2ling.domain.core.ACResource
-	 * @generated
-	 */
-	public Adapter createACResourceAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.m2ling.domain.core.Authorization <em>Authorization</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.m2ling.domain.core.Authorization
-	 * @generated
-	 */
-	public Adapter createAuthorizationAdapter() {
 		return null;
 	}
 

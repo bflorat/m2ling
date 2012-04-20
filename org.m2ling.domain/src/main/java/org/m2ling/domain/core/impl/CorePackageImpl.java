@@ -9,14 +9,11 @@ import org.eclipse.emf.ecore.EEnum;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.impl.EPackageImpl;
-import org.m2ling.domain.core.ACResource;
 import org.m2ling.domain.core.Activity;
 import org.m2ling.domain.core.ActivityStatus;
 import org.m2ling.domain.core.ActivityTransition;
 import org.m2ling.domain.core.Actor;
 import org.m2ling.domain.core.ArchitectureItem;
-import org.m2ling.domain.core.Authorization;
-import org.m2ling.domain.core.AutorizationType;
 import org.m2ling.domain.core.BoundaryConstraint;
 import org.m2ling.domain.core.Component;
 import org.m2ling.domain.core.ComponentGroup;
@@ -346,20 +343,6 @@ public class CorePackageImpl extends EPackageImpl implements CorePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass acResourceEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass authorizationEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	private EClass rootEClass = null;
 
 	/**
@@ -375,13 +358,6 @@ public class CorePackageImpl extends EPackageImpl implements CorePackage {
 	 * @generated
 	 */
 	private EEnum activityStatusEEnum = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EEnum autorizationTypeEEnum = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -1283,51 +1259,6 @@ public class CorePackageImpl extends EPackageImpl implements CorePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EClass getACResource() {
-		return acResourceEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EClass getAuthorization() {
-		return authorizationEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getAuthorization_Type() {
-		return (EAttribute)authorizationEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getAuthorization_Resource() {
-		return (EReference)authorizationEClass.getEStructuralFeatures().get(1);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getAuthorization_Stakeholders() {
-		return (EReference)authorizationEClass.getEStructuralFeatures().get(2);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EClass getRoot() {
 		return rootEClass;
 	}
@@ -1366,15 +1297,6 @@ public class CorePackageImpl extends EPackageImpl implements CorePackage {
 	 */
 	public EEnum getActivityStatus() {
 		return activityStatusEEnum;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EEnum getAutorizationType() {
-		return autorizationTypeEEnum;
 	}
 
 	/**
@@ -1543,13 +1465,6 @@ public class CorePackageImpl extends EPackageImpl implements CorePackage {
 		createEAttribute(actorEClass, ACTOR__ADMIN);
 		createEAttribute(actorEClass, ACTOR__PWD_HASH);
 
-		acResourceEClass = createEClass(AC_RESOURCE);
-
-		authorizationEClass = createEClass(AUTHORIZATION);
-		createEAttribute(authorizationEClass, AUTHORIZATION__TYPE);
-		createEReference(authorizationEClass, AUTHORIZATION__RESOURCE);
-		createEReference(authorizationEClass, AUTHORIZATION__STAKEHOLDERS);
-
 		rootEClass = createEClass(ROOT);
 		createEReference(rootEClass, ROOT__VIEW_POINTS);
 		createEReference(rootEClass, ROOT__VIEWS);
@@ -1557,7 +1472,6 @@ public class CorePackageImpl extends EPackageImpl implements CorePackage {
 		// Create enums
 		customPropertyTypeEEnum = createEEnum(CUSTOM_PROPERTY_TYPE);
 		activityStatusEEnum = createEEnum(ACTIVITY_STATUS);
-		autorizationTypeEEnum = createEEnum(AUTORIZATION_TYPE);
 		typeEEnum = createEEnum(TYPE);
 	}
 
@@ -1594,7 +1508,6 @@ public class CorePackageImpl extends EPackageImpl implements CorePackage {
 		componentEClass.getESuperTypes().add(this.getComponentGroup());
 		componentNodeEClass.getESuperTypes().add(this.getComponentNodeGroup());
 		viewPointEClass.getESuperTypes().add(this.getConceptItem());
-		viewPointEClass.getESuperTypes().add(this.getACResource());
 		componentGroupEClass.getESuperTypes().add(this.getArchitectureItem());
 		componentNodeGroupEClass.getESuperTypes().add(this.getRuntimeItem());
 		architectureItemEClass.getESuperTypes().add(this.getHasNameAndID());
@@ -1613,7 +1526,6 @@ public class CorePackageImpl extends EPackageImpl implements CorePackage {
 		runtimeItemEClass.getESuperTypes().add(this.getHasParameterValues());
 		runtimeItemEClass.getESuperTypes().add(this.getHasConstraints());
 		viewEClass.getESuperTypes().add(this.getArchitectureItem());
-		viewEClass.getESuperTypes().add(this.getACResource());
 		linkTypeEClass.getESuperTypes().add(this.getConceptItem());
 		linkTypeEClass.getESuperTypes().add(this.getHasNameAndID());
 		stakeholderEClass.getESuperTypes().add(this.getHasNameAndID());
@@ -1767,13 +1679,6 @@ public class CorePackageImpl extends EPackageImpl implements CorePackage {
 		initEAttribute(getActor_Admin(), ecorePackage.getEBoolean(), "admin", null, 0, 1, Actor.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getActor_PwdHash(), ecorePackage.getEString(), "pwdHash", null, 0, 1, Actor.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEClass(acResourceEClass, ACResource.class, "ACResource", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-
-		initEClass(authorizationEClass, Authorization.class, "Authorization", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getAuthorization_Type(), this.getAutorizationType(), "type", null, 0, 1, Authorization.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getAuthorization_Resource(), this.getACResource(), null, "resource", null, 1, 1, Authorization.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getAuthorization_Stakeholders(), this.getStakeholder(), null, "stakeholders", null, 0, -1, Authorization.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
 		initEClass(rootEClass, Root.class, "Root", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getRoot_ViewPoints(), this.getViewPoint(), null, "viewPoints", null, 0, -1, Root.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getRoot_Views(), this.getView(), null, "views", null, 0, -1, Root.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1786,12 +1691,6 @@ public class CorePackageImpl extends EPackageImpl implements CorePackage {
 		addEEnumLiteral(activityStatusEEnum, ActivityStatus.CANCELED);
 		addEEnumLiteral(activityStatusEEnum, ActivityStatus.VALIDATED);
 		addEEnumLiteral(activityStatusEEnum, ActivityStatus.WAITING_FOR_VALIDATION);
-
-		initEEnum(autorizationTypeEEnum, AutorizationType.class, "AutorizationType");
-		addEEnumLiteral(autorizationTypeEEnum, AutorizationType.READ);
-		addEEnumLiteral(autorizationTypeEEnum, AutorizationType.WRITE);
-		addEEnumLiteral(autorizationTypeEEnum, AutorizationType.CREATE);
-		addEEnumLiteral(autorizationTypeEEnum, AutorizationType.DELETE);
 
 		initEEnum(typeEEnum, Type.class, "Type");
 		addEEnumLiteral(typeEEnum, Type.COMPONENT_TYPE);

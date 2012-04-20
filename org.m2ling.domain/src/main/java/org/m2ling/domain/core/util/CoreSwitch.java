@@ -6,13 +6,10 @@ package org.m2ling.domain.core.util;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.util.Switch;
-import org.m2ling.domain.core.*;
-import org.m2ling.domain.core.ACResource;
 import org.m2ling.domain.core.Activity;
 import org.m2ling.domain.core.ActivityTransition;
 import org.m2ling.domain.core.Actor;
 import org.m2ling.domain.core.ArchitectureItem;
-import org.m2ling.domain.core.Authorization;
 import org.m2ling.domain.core.BoundaryConstraint;
 import org.m2ling.domain.core.Component;
 import org.m2ling.domain.core.ComponentGroup;
@@ -163,7 +160,6 @@ public class CoreSwitch<T> extends Switch<T> {
 				ViewPoint viewPoint = (ViewPoint)theEObject;
 				T result = caseViewPoint(viewPoint);
 				if (result == null) result = caseConceptItem(viewPoint);
-				if (result == null) result = caseACResource(viewPoint);
 				if (result == null) result = caseHasCustomProperties(viewPoint);
 				if (result == null) result = caseHasComment(viewPoint);
 				if (result == null) result = caseHasTags(viewPoint);
@@ -233,7 +229,6 @@ public class CoreSwitch<T> extends Switch<T> {
 				View view = (View)theEObject;
 				T result = caseView(view);
 				if (result == null) result = caseArchitectureItem(view);
-				if (result == null) result = caseACResource(view);
 				if (result == null) result = caseHasNameAndID(view);
 				if (result == null) result = caseHasComment(view);
 				if (result == null) result = caseHasTags(view);
@@ -430,18 +425,6 @@ public class CoreSwitch<T> extends Switch<T> {
 				T result = caseActor(actor);
 				if (result == null) result = caseHasCustomProperties(actor);
 				if (result == null) result = caseHasTags(actor);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case CorePackage.AC_RESOURCE: {
-				ACResource acResource = (ACResource)theEObject;
-				T result = caseACResource(acResource);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case CorePackage.AUTHORIZATION: {
-				Authorization authorization = (Authorization)theEObject;
-				T result = caseAuthorization(authorization);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -1022,36 +1005,6 @@ public class CoreSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseActor(Actor object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>AC Resource</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>AC Resource</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseACResource(ACResource object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Authorization</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Authorization</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseAuthorization(Authorization object) {
 		return null;
 	}
 
