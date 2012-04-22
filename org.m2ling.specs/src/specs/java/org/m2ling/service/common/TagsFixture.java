@@ -8,7 +8,9 @@ import org.m2ling.domain.core.Type;
 import org.m2ling.dto.core.ViewPointDTO;
 import org.m2ling.service.core.TagService;
 import org.m2ling.service.principles.ViewPointService;
+import org.m2ling.soa.Context;
 import org.m2ling.specs.BindedConcordionTestCase;
+import org.m2ling.utils.Mocked;
 import org.m2ling.utils.Utils;
 
 import atunit.AtUnit;
@@ -36,6 +38,10 @@ public class TagsFixture extends BindedConcordionTestCase {
 	@Unit
 	TagService serviceTag;
 
+	@Inject()
+	@Mocked
+	Context context;
+
 	private String createViewPoint(List<String> tags) {
 		// We check the tags behavior against a sample HasTags child class : ViewPoint.
 		String viewpointName = "" + System.currentTimeMillis();
@@ -51,8 +57,8 @@ public class TagsFixture extends BindedConcordionTestCase {
 	public String addTags(String previousTags, String newTags) {
 		String viewpointName = createViewPoint(Utils.tagsFromString(previousTags));
 		List<String> newTagsList = Utils.tagsFromString(newTags);
-		serviceTag.addTags(Type.VIEWPOINT, viewpointName, newTagsList);
-		List<String> result = serviceTag.getAllTags(Type.VIEWPOINT, viewpointName);
+		serviceTag.addTags(context, Type.VIEWPOINT, viewpointName, newTagsList);
+		List<String> result = serviceTag.getAllTags(context, Type.VIEWPOINT, viewpointName);
 		return Utils.tagsAsString(result);
 	}
 
@@ -63,8 +69,8 @@ public class TagsFixture extends BindedConcordionTestCase {
 	public String setTags(String previousTags, String newTags) {
 		String viewpointName = createViewPoint(Utils.tagsFromString(previousTags));
 		List<String> newTagsList = Utils.tagsFromString(newTags);
-		serviceTag.setTags(Type.VIEWPOINT, viewpointName, newTagsList);
-		List<String> result = serviceTag.getAllTags(Type.VIEWPOINT, viewpointName);
+		serviceTag.setTags(context, Type.VIEWPOINT, viewpointName, newTagsList);
+		List<String> result = serviceTag.getAllTags(context, Type.VIEWPOINT, viewpointName);
 		return Utils.tagsAsString(result);
 	}
 
@@ -73,8 +79,8 @@ public class TagsFixture extends BindedConcordionTestCase {
 		List<String> items = Arrays.asList(new String[] { "foo,bar" });
 		try {
 			// We expect an IllegalArgumentException
-			serviceTag.setTags(Type.VIEWPOINT, viewpointName, items);
-			List<String> result = serviceTag.getAllTags(Type.VIEWPOINT, viewpointName);
+			serviceTag.setTags(context, Type.VIEWPOINT, viewpointName, items);
+			List<String> result = serviceTag.getAllTags(context, Type.VIEWPOINT, viewpointName);
 			return Utils.tagsAsString(result);
 		} catch (IllegalArgumentException iae) {
 			return "IllegalArgumentException";
@@ -88,8 +94,8 @@ public class TagsFixture extends BindedConcordionTestCase {
 		List<String> items = Arrays.asList(new String[] { "" });
 		try {
 			// We expect an IllegalArgumentException
-			serviceTag.setTags(Type.VIEWPOINT, viewpointName, items);
-			List<String> result = serviceTag.getAllTags(Type.VIEWPOINT, viewpointName);
+			serviceTag.setTags(context, Type.VIEWPOINT, viewpointName, items);
+			List<String> result = serviceTag.getAllTags(context, Type.VIEWPOINT, viewpointName);
 			return Utils.tagsAsString(result);
 		} catch (IllegalArgumentException iae) {
 			return "IllegalArgumentException";
@@ -103,8 +109,8 @@ public class TagsFixture extends BindedConcordionTestCase {
 		List<String> items = Arrays.asList(new String[] { "foo", "bar", null });
 		try {
 			// We expect an IllegalArgumentException
-			serviceTag.setTags(Type.VIEWPOINT, viewpointName, items);
-			List<String> result = serviceTag.getAllTags(Type.VIEWPOINT, viewpointName);
+			serviceTag.setTags(context, Type.VIEWPOINT, viewpointName, items);
+			List<String> result = serviceTag.getAllTags(context, Type.VIEWPOINT, viewpointName);
 			return Utils.tagsAsString(result);
 		} catch (IllegalArgumentException iae) {
 			return "IllegalArgumentException";

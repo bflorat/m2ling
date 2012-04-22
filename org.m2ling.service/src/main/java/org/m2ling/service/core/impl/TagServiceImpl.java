@@ -10,8 +10,10 @@ import java.util.logging.Level;
 import org.m2ling.domain.core.HasTags;
 import org.m2ling.domain.core.Type;
 import org.m2ling.exceptions.NotFoundException;
+import org.m2ling.security.ACResource;
 import org.m2ling.service.core.TagService;
 import org.m2ling.service.util.CoreUtil;
+import org.m2ling.soa.Context;
 
 import com.google.inject.Inject;
 
@@ -22,7 +24,8 @@ import com.google.inject.Inject;
  * @author Bertrand Florat <bertrand@florat.net>
  * 
  */
-public final class TagServiceImpl implements TagService {
+@ACResource
+public class TagServiceImpl implements TagService {
 
 	@Inject
 	private java.util.logging.Logger logger;
@@ -50,11 +53,11 @@ public final class TagServiceImpl implements TagService {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.m2ling.service.core.TagService#addTags(org.m2ling.domain.core.Type, java.lang.String,
-	 * java.util.List)
+	 * @see org.m2ling.service.core.TagService#addTags(org.m2ling.service.common.CallContext,
+	 * org.m2ling.domain.core.Type, java.lang.String, java.util.List)
 	 */
 	@Override
-	public void addTags(Type type, String itemID, List<String> tags) {
+	public void addTags(Context context, Type type, String itemID, List<String> tags) {
 		{ // Controls
 			checkTypeAndID(type, itemID);
 			checkTagsList(tags);
@@ -66,11 +69,12 @@ public final class TagServiceImpl implements TagService {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.m2ling.service.core.TagService#setTags(org.m2ling.domain.core.Type, java.lang.String,
-	 * java.util.List)
+	 * @see org.m2ling.service.core.TagService#setTags(org.m2ling.service.common.CallContext,
+	 * org.m2ling.domain.core.Type, java.lang.String, java.util.List)
 	 */
 	@Override
-	public void setTags(Type type, String itemID, List<String> tags) {
+	@ACResource
+	public void setTags(Context context, Type type, String itemID, List<String> tags) {
 		{ // Controls
 			checkTypeAndID(type, itemID);
 			checkTagsList(tags);
@@ -84,11 +88,11 @@ public final class TagServiceImpl implements TagService {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.m2ling.service.core.TagService#removeTag(org.m2ling.domain.core.Type,
-	 * java.lang.String, java.lang.String)
+	 * @see org.m2ling.service.core.TagService#removeTag(org.m2ling.service.common.CallContext,
+	 * org.m2ling.domain.core.Type, java.lang.String, java.lang.String)
 	 */
 	@Override
-	public void removeTag(Type type, String itemID, String tag) {
+	public void removeTag(Context context, Type type, String itemID, String tag) {
 		List<String> tags = null;
 		{ // Controls
 			checkTypeAndID(type, itemID);
@@ -104,11 +108,11 @@ public final class TagServiceImpl implements TagService {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.m2ling.service.core.TagService#getAllTags(org.m2ling.domain.core.Type,
-	 * java.lang.String)
+	 * @see org.m2ling.service.core.TagService#getAllTags(org.m2ling.service.common.CallContext,
+	 * org.m2ling.domain.core.Type, java.lang.String)
 	 */
 	@Override
-	public List<String> getAllTags(Type type, String itemID) {
+	public List<String> getAllTags(Context context, Type type, String itemID) {
 		checkTypeAndID(type, itemID);
 		HasTags htags = CoreUtil.getHasTagsByTypeAndID(type, itemID);
 		List<String> tags = htags.getTags();

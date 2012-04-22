@@ -8,9 +8,14 @@ import java.util.List;
 
 import org.m2ling.domain.core.Type;
 import org.m2ling.exceptions.NotFoundException;
+import org.m2ling.soa.Context;
 
 /**
  * General contract for Tag services implementations.
+ * 
+ * <p>
+ * Every method takes a CallContext argument
+ * </p>
  * 
  * <p>
  * Every method can throw these runtime exceptions :
@@ -44,7 +49,7 @@ public interface TagService {
 	 * @throws IllegalArgumentException
 	 *            if a list element contains a comma or if the list is null or empty
 	 */
-	void addTags(Type type, String itemID, List<String> tags);
+	void addTags(Context context, Type type, String itemID, List<String> tags);
 
 	/**
 	 * Set one or tags to a HasTag item.
@@ -58,7 +63,7 @@ public interface TagService {
 	 * @throws IllegalArgumentException
 	 *            if a list element contains a comma or if the list is null
 	 */
-	void setTags(Type type, String itemID, List<String> tags);
+	void setTags(Context context, Type type, String itemID, List<String> tags);
 
 	/**
 	 * Remove a single from aHasTags item. If the tag doesn't exist, an
@@ -75,7 +80,7 @@ public interface TagService {
 	 * @throws NotFoundException
 	 *            if the tag didn't exist previously
 	 */
-	void removeTag(Type type, String itemID, String tag);
+	void removeTag(Context context, Type type, String itemID, String tag);
 
 	/**
 	 * Return a list of all the tags attached to the provided item.
@@ -85,8 +90,9 @@ public interface TagService {
 	 * @param itemID
 	 *           the item ID to get tags from
 	 * @return a list of all the tags attached to the provided item. If the item has none tags, a
-	 *         void list is returned. * 
-	 * @throws IllegalStateException if the tags list is null
+	 *         void list is returned. *
+	 * @throws IllegalStateException
+	 *            if the tags list is null
 	 */
-	List<String> getAllTags(Type type, String itemID);
+	List<String> getAllTags(Context context, Type type, String itemID);
 }
