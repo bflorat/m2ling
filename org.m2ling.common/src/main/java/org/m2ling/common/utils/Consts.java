@@ -1,7 +1,7 @@
 /**
  * Copyright (C) 2012 Bertrand Florat
  */
-package org.m2ling.utils;
+package org.m2ling.common.utils;
 
 /**
  * 

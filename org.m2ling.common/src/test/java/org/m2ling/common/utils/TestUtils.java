@@ -1,7 +1,7 @@
 /**
  * Copyright (C) 2012 Bertrand Florat
  */
-package org.m2ling.utils;
+package org.m2ling.common.utils;
 
 import static junit.framework.Assert.assertTrue;
 
@@ -10,6 +10,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import org.junit.Test;
+import org.m2ling.common.utils.Utils;
 
 /**
  * Various unit tests for Utils class.

@@ -1,7 +1,7 @@
 /**
  * Copyright (C) 2012 Bertrand Florat
  */
-package org.m2ling.dto.core;
+package org.m2ling.common.dto.core;
 
 import java.util.ArrayList;
 import java.util.List;

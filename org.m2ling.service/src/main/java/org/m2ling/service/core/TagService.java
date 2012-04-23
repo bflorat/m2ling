@@ -6,9 +6,9 @@ package org.m2ling.service.core;
 
 import java.util.List;
 
+import org.m2ling.common.exceptions.NotFoundException;
+import org.m2ling.common.soa.Context;
 import org.m2ling.domain.core.Type;
-import org.m2ling.exceptions.NotFoundException;
-import org.m2ling.soa.Context;
 
 /**
  * General contract for Tag services implementations.

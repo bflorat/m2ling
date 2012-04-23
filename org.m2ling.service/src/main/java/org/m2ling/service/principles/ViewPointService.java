@@ -2,7 +2,7 @@ package org.m2ling.service.principles;
 
 import java.util.List;
 
-import org.m2ling.dto.core.ViewPointDTO;
+import org.m2ling.common.dto.core.ViewPointDTO;
 
 /**
  * Copyright (C) 2012 Bertrand Florat General contract for viewpoints services

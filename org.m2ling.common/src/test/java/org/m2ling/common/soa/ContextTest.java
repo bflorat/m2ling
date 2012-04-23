@@ -3,9 +3,12 @@
  *
  * @author "Bertrand Florat <bertrand@florat.net>"
  */
-package org.m2ling.soa;
+package org.m2ling.common.soa;
 
 import org.junit.Test;
+import org.m2ling.common.soa.Context;
+import org.m2ling.common.soa.Context.Entry;
+
 import java.lang.IllegalArgumentException;
 
 /**

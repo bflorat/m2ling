@@ -3,9 +3,9 @@
  */
 package org.m2ling.service.util;
 
+import org.m2ling.common.dto.core.ViewPointDTO;
 import org.m2ling.domain.core.CoreFactory;
 import org.m2ling.domain.core.ViewPoint;
-import org.m2ling.dto.core.ViewPointDTO;
 
 import com.google.common.base.Strings;
 

@@ -1,7 +1,7 @@
 /**
  * Copyright (C) 2012 Bertrand Florat
  */
-package org.m2ling.soa;
+package org.m2ling.common.soa;
 
 import java.util.Properties;
 

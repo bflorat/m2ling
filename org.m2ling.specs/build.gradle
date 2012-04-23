@@ -7,14 +7,11 @@ import org.apache.tools.ant.filters.ReplaceTokens
 defaultTasks('replaceInternalDefinition');
 
 dependencies() {
-	//main
-	compile('org.concordion:concordion:1.4.2');
-	compile('com.google.inject:guice:3.0');
-	compile(project(':org.m2ling.service'));
 	//tests
 	testCompile('org.concordion:concordion:1.4.2');
-	testCompile('com.google.inject:guice:3.0');
+	testCompile(project(':org.m2ling.common'));
 	testCompile(project(':org.m2ling.service'));
+	testCompile(files("../org.m2ling.common/build/classes/test"));
 }
 
 File concordionOutputDir = file("${buildDir}/concordion-results");
@@ -31,7 +28,10 @@ sourceSets{
 
 test {
 	systemProperties('concordion.output.dir': concordionOutputDir);
+	// Exclude classes from org.m2ling.specs : concordion integration code, not actual tests
+	exclude 'org/m2ling/specs/*.*'
 }
+
 
 task buildSpecs(dependsOn:['clean', 'test'])<<{
 	copy{

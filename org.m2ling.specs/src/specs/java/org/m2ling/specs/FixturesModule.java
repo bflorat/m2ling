@@ -3,14 +3,15 @@
  */
 package org.m2ling.specs;
 
-import org.m2ling.security.ACResource;
+
+import org.m2ling.common.security.ACResource;
+import org.m2ling.common.soa.Context;
+import org.m2ling.common.utils.ACResourceInterceptorMockImpl;
+import org.m2ling.common.utils.Mocked;
 import org.m2ling.service.core.TagService;
 import org.m2ling.service.core.impl.TagServiceImpl;
 import org.m2ling.service.principles.ViewPointService;
 import org.m2ling.service.principles.impl.ViewPointServiceImpl;
-import org.m2ling.soa.Context;
-import org.m2ling.utils.ACResourceInterceptorMockImpl;
-import org.m2ling.utils.Mocked;
 
 import com.google.inject.AbstractModule;
 import com.google.inject.Singleton;

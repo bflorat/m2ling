@@ -781,12 +781,12 @@
     <styles xmi:type="notation:ConnectorStyle" xmi:id="_MVSdcWE3EeG3zp5LaGM6vA" routing="Rectilinear" lineColor="4210752"/>
     <styles xmi:type="notation:FontStyle" xmi:id="_MVSdcmE3EeG3zp5LaGM6vA" fontColor="4210752" fontName="Sans" fontHeight="10"/>
     <element xmi:type="ecore:EReference" href="m2ling.ecore#//core/Stream/source"/>
-    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_MVSdc2E3EeG3zp5LaGM6vA" points="[0, 0, -147, 60]$[147, -60, 0, 0]"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_MVSdc2E3EeG3zp5LaGM6vA" points="[-3, 21, 23, -173]$[-3, 88, 23, -106]$[10, 88, 36, -106]$[10, 153, 36, -41]"/>
     <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_Cm9FEGfIEeGsDNAUc-f6MQ" id="(0.16058394160583941,1.0)"/>
   </edges>
   <edges xmi:type="notation:Edge" xmi:id="_NzL-0GE3EeG3zp5LaGM6vA" type="3002" source="_KjAAcGE3EeG3zp5LaGM6vA" target="_OiS_oFl4EeGeoaZMFQdv5A">
     <children xmi:type="notation:Node" xmi:id="_NzMl4GE3EeG3zp5LaGM6vA" type="4011">
-      <layoutConstraint xmi:type="notation:Location" xmi:id="_NzMl4WE3EeG3zp5LaGM6vA" x="-20" y="-28"/>
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_NzMl4WE3EeG3zp5LaGM6vA" x="-47" y="36"/>
     </children>
     <children xmi:type="notation:Node" xmi:id="_NzMl4mE3EeG3zp5LaGM6vA" type="4012">
       <layoutConstraint xmi:type="notation:Location" xmi:id="_NzMl42E3EeG3zp5LaGM6vA" x="10" y="10"/>
@@ -794,7 +794,7 @@
     <styles xmi:type="notation:ConnectorStyle" xmi:id="_NzL-0WE3EeG3zp5LaGM6vA" routing="Rectilinear" lineColor="4210752"/>
     <styles xmi:type="notation:FontStyle" xmi:id="_NzL-0mE3EeG3zp5LaGM6vA" fontColor="4210752" fontName="Sans" fontHeight="10"/>
     <element xmi:type="ecore:EReference" href="m2ling.ecore#//core/Stream/destination"/>
-    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_NzL-02E3EeG3zp5LaGM6vA" points="[18, 41, 22, -181]$[18, 173, 22, -49]"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_NzL-02E3EeG3zp5LaGM6vA" points="[-66, 41, -42, -173]$[-66, 108, -42, -106]$[-54, 108, -30, -106]$[-54, 173, -30, -41]"/>
     <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_NzN0AGE3EeG3zp5LaGM6vA" id="(0.6666666666666666,0.0)"/>
     <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_NzN0AWE3EeG3zp5LaGM6vA" id="(0.3284671532846715,1.0)"/>
   </edges>

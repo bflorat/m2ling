@@ -3,10 +3,10 @@
  *
  * @author "Bertrand Florat <bertrand@florat.net>"
  */
-package org.m2ling.security.impl;
+package org.m2ling.common.security.impl;
 
 import org.aopalliance.intercept.MethodInvocation;
-import org.m2ling.security.ACResourceInterceptor;
+import org.m2ling.common.security.ACResourceInterceptor;
 
 /**
  * 

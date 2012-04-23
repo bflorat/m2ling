@@ -22,7 +22,7 @@
     </children>
     <styles xmi:type="notation:ShapeStyle" xmi:id="_XG0P8XQHEeGC1LCO92mMCg" fontColor="4210752" fontName="Sans" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
     <element xmi:type="ecore:EClass" href="m2ling.ecore#//principles/Rule"/>
-    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_XG0P8nQHEeGC1LCO92mMCg" x="192" y="240"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_XG0P8nQHEeGC1LCO92mMCg" x="216" y="240"/>
   </children>
   <children xmi:type="notation:Node" xmi:id="_fnjh8HQHEeGC1LCO92mMCg" type="1001">
     <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_fnkJAnQHEeGC1LCO92mMCg" source="Shortcut">

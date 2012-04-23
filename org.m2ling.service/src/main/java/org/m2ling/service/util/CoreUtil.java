@@ -8,11 +8,11 @@ import java.util.List;
 import java.util.StringTokenizer;
 import java.util.logging.Logger;
 
+import org.m2ling.common.exceptions.NotFoundException;
 import org.m2ling.domain.core.HasTags;
 import org.m2ling.domain.core.Root;
 import org.m2ling.domain.core.Type;
 import org.m2ling.domain.core.ViewPoint;
-import org.m2ling.exceptions.NotFoundException;
 import org.m2ling.persistence.ModelFactory;
 
 import com.google.inject.Inject;

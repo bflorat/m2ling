@@ -3,11 +3,11 @@
  *
  * @author "Bertrand Florat <bertrand@florat.net>"
  */
-package org.m2ling.utils;
+package org.m2ling.common.utils;
 
 import org.aopalliance.intercept.MethodInvocation;
-import org.m2ling.security.ACResourceInterceptor;
-import org.m2ling.soa.Context;
+import org.m2ling.common.security.ACResourceInterceptor;
+import org.m2ling.common.soa.Context;
 
 /**
  * Mocked implementation of access control, check in-memory credentials.

@@ -6,9 +6,9 @@ package org.m2ling.service.principles.impl;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.m2ling.common.dto.core.ViewPointDTO;
 import org.m2ling.domain.core.Root;
 import org.m2ling.domain.core.ViewPoint;
-import org.m2ling.dto.core.ViewPointDTO;
 import org.m2ling.persistence.ModelFactory;
 import org.m2ling.service.principles.ViewPointService;
 import org.m2ling.service.util.DTOConverter;

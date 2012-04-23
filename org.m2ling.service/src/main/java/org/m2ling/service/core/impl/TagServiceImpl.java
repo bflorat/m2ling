@@ -7,13 +7,13 @@ package org.m2ling.service.core.impl;
 import java.util.List;
 import java.util.logging.Level;
 
+import org.m2ling.common.exceptions.NotFoundException;
+import org.m2ling.common.security.ACResource;
+import org.m2ling.common.soa.Context;
 import org.m2ling.domain.core.HasTags;
 import org.m2ling.domain.core.Type;
-import org.m2ling.exceptions.NotFoundException;
-import org.m2ling.security.ACResource;
 import org.m2ling.service.core.TagService;
 import org.m2ling.service.util.CoreUtil;
-import org.m2ling.soa.Context;
 
 import com.google.inject.Inject;
 

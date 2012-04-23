@@ -56,14 +56,6 @@
       <styles xmi:type="notation:FilteringStyle" xmi:id="_Zc2otFl4EeGeoaZMFQdv5A"/>
     </children>
     <children xmi:type="notation:Node" xmi:id="_Zc2otVl4EeGeoaZMFQdv5A" type="5002">
-      <children xmi:type="notation:Node" xmi:id="_Zc3Pxll4EeGeoaZMFQdv5A" type="2002">
-        <element xmi:type="ecore:EOperation" href="m2ling.ecore#//parameters/ParameterDefinition/castParentAsComponent"/>
-        <layoutConstraint xmi:type="notation:Location" xmi:id="_Zc3Px1l4EeGeoaZMFQdv5A"/>
-      </children>
-      <children xmi:type="notation:Node" xmi:id="_Zc3PyFl4EeGeoaZMFQdv5A" type="2002">
-        <element xmi:type="ecore:EOperation" href="m2ling.ecore#//parameters/ParameterDefinition/castParentAsEngine"/>
-        <layoutConstraint xmi:type="notation:Location" xmi:id="_Zc3PyVl4EeGeoaZMFQdv5A"/>
-      </children>
       <styles xmi:type="notation:DrawerStyle" xmi:id="_Zc2otll4EeGeoaZMFQdv5A"/>
       <styles xmi:type="notation:SortingStyle" xmi:id="_Zc2ot1l4EeGeoaZMFQdv5A"/>
       <styles xmi:type="notation:FilteringStyle" xmi:id="_Zc2ouFl4EeGeoaZMFQdv5A"/>
@@ -181,7 +173,7 @@
     </children>
     <styles xmi:type="notation:ShapeStyle" xmi:id="_AHy43Ge5EeGsDNAUc-f6MQ" fontColor="4210752" fontName="Sans" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
     <element xmi:type="ecore:EClass" href="m2ling.ecore#//core/HasComment"/>
-    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_AHy43We5EeGsDNAUc-f6MQ" x="864" y="300"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_AHy43We5EeGsDNAUc-f6MQ" x="864" y="300" width="159"/>
   </children>
   <children xmi:type="notation:Node" xmi:id="_AH0G8me5EeGsDNAUc-f6MQ" type="1001">
     <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_AH0uAGe5EeGsDNAUc-f6MQ" source="Shortcut">

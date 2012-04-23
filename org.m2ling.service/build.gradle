@@ -8,8 +8,6 @@ dependencies(){
  compile(project(':org.m2ling.domain'));
  compile(project(':org.m2ling.common'));
  compile(project(':org.m2ling.persistence'));
- compile('com.google.inject:guice:3.0');
- compile(files('../libs/atunit-1.0.1.jar'));
 }
 
 

@@ -1,7 +1,7 @@
 /**
  * Copyright (C) 2012 Bertrand Florat
  */
-package org.m2ling.security;
+package org.m2ling.common.security;
 
 /**
  * Available authorization types against an item
