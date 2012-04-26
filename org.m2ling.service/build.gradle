@@ -7,7 +7,6 @@ Executable specifications build script
 dependencies(){
  compile(project(':org.m2ling.domain'));
  compile(project(':org.m2ling.common'));
- compile(project(':org.m2ling.persistence'));
 }
 
 

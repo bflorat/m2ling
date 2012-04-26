@@ -4,7 +4,7 @@
 package org.m2ling.service.common;
 
 import org.m2ling.common.security.ACResource;
-import org.m2ling.common.utils.ACResourceInterceptorMockImpl;
+import org.m2ling.common.security.impl.ACResourceInterceptorImpl;
 import org.m2ling.persistence.PersistenceManager;
 import org.m2ling.persistence.impl.PersistenceManagerTeneoImpl;
 import org.m2ling.service.util.CoreUtil;
@@ -39,9 +39,10 @@ public class CommonGuiceModule extends AbstractModule {
 
 		{// AOP bindings
 			// Bind every @ACResource method
-			bindInterceptor(Matchers.any(), Matchers.annotatedWith(ACResource.class), new ACResourceInterceptorMockImpl());
+			//TODO : implement a production intercepter
+			bindInterceptor(Matchers.any(), Matchers.annotatedWith(ACResource.class), new ACResourceInterceptorImpl());
 			// Bind every @ACResource class
-			bindInterceptor(Matchers.annotatedWith(ACResource.class), Matchers.any(), new ACResourceInterceptorMockImpl());
+			bindInterceptor(Matchers.annotatedWith(ACResource.class), Matchers.any(), new ACResourceInterceptorImpl());
 		}
 	}
 
