@@ -1,27 +1,17 @@
-package org.m2ling.service.principles;
+package org.m2ling.service.principles.impl;
 
-import org.junit.runner.RunWith;
 import org.m2ling.common.dto.core.ViewPointDTO;
+import org.m2ling.service.principles.ViewPointService;
 import org.m2ling.specs.BindedConcordionTestCase;
+import org.m2ling.specs.FixturesModule;
 
-import atunit.AtUnit;
-import atunit.Container;
-import atunit.Container.Option;
-import atunit.Unit;
-
-import com.google.inject.Inject;
-
-@RunWith(AtUnit.class)
-@Container(Option.GUICE)
 public class CreateViewPointFixture extends BindedConcordionTestCase {
+	ViewPointService service;
 
 	public CreateViewPointFixture() {
 		super();
+		service = new ViewPointServiceImpl(new FixturesModule());
 	}
-
-	@Inject
-	@Unit
-	ViewPointService service;
 
 	/**
 	 * Create a viewpoint and return its name

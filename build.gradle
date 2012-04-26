@@ -21,7 +21,6 @@ subprojects(){
   //tests
   testCompile('com.google.inject:guice:3.0');	
   testCompile('junit:junit:4.8.2');
-  testCompile(files('../libs/atunit-1.0.1.jar'));
  }
 
  version = '0.1';

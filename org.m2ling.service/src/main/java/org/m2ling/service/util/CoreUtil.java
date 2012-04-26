@@ -13,7 +13,7 @@ import org.m2ling.domain.core.HasTags;
 import org.m2ling.domain.core.Root;
 import org.m2ling.domain.core.Type;
 import org.m2ling.domain.core.ViewPoint;
-import org.m2ling.persistence.ModelFactory;
+import org.m2ling.persistence.PersistenceManager;
 
 import com.google.inject.Inject;
 
@@ -27,7 +27,10 @@ import com.google.inject.Inject;
 public class CoreUtil {
 
 	@Inject
-	private static Logger logger;
+	private Logger logger;
+
+	@Inject
+	private PersistenceManager pmanager;
 
 	/**
 	 * Return a viewpoint denoted by the given name or null if none matches.
@@ -36,9 +39,9 @@ public class CoreUtil {
 	 *           the searched viewpoint name
 	 * @return a viewpoint denoted by the given name or null if none matches
 	 */
-	public static ViewPoint getViewPointByName(String name) {
+	public ViewPoint getViewPointByName(String name) {
 		ViewPoint vp = null;
-		Root root = ModelFactory.getRoot();
+		Root root = pmanager.getRoot();
 		for (ViewPoint v : root.getViewPoints()) {
 			if (name.equals(v.getName())) {
 				vp = v;
@@ -60,7 +63,7 @@ public class CoreUtil {
 	 *           the item ID to set tag to.
 	 * @return any object matching provided type and ID or null if none found
 	 **/
-	public static Object getItemByTypeAndID(Type type, String itemID) {
+	public Object getItemByTypeAndID(Type type, String itemID) {
 		if (type == Type.VIEWPOINT) {
 			// For view points, the id is the name
 			return getViewPointByName(itemID);
@@ -80,8 +83,8 @@ public class CoreUtil {
 	 *           the item ID to set tag to.
 	 * @return any object matching provided type and ID or null if none found
 	 **/
-	public static HasTags getHasTagsByTypeAndID(Type type, String itemID) {
-		Object o = CoreUtil.getItemByTypeAndID(type, itemID);
+	public HasTags getHasTagsByTypeAndID(Type type, String itemID) {
+		Object o = getItemByTypeAndID(type, itemID);
 		if (o != null && o instanceof HasTags) {
 			return (HasTags) o;
 		} else {
@@ -98,7 +101,7 @@ public class CoreUtil {
 	 *           the comma-separated tags
 	 * @return a list of tags as an array
 	 */
-	public static String[] getTagsArray(String tags) {
+	public String[] getTagsArray(String tags) {
 		StringTokenizer st = new StringTokenizer(",");
 		List<String> result = new ArrayList<String>(5);
 		while (st.hasMoreTokens()) {

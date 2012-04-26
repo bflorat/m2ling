@@ -3,15 +3,17 @@
  */
 package org.m2ling.common.utils;
 
+import java.lang.reflect.Constructor;
 import java.util.ArrayList;
 import java.util.List;
 
 import com.google.common.base.Splitter;
 import com.google.common.base.Strings;
+import com.google.inject.Module;
 
 /**
  * 
- * Various low level and transverse helper methods .
+ * Various low level and transfers helper methods .
  * 
  * @author "Bertrand Florat <bertrand@florat.net>"
  * 
@@ -78,6 +80,37 @@ public class Utils {
 	public static List<String> tagsFromString(String tagsAsString) {
 		Iterable<String> it = Splitter.on(',').trimResults().split(tagsAsString);
 		return listFromIterable(it);
+	}
+
+	/**
+	 * Instantiate provided class using constructor. For tests only as it is a bad practice.
+	 * 
+	 * @param clazz
+	 *           the class to instantiate
+	 * @param module
+	 *           optional overidden module, null if no module overidden.
+	 * @return an instance of clazz
+	 * @throws IllegalArgumentException
+	 *            if an error occurred
+	 */
+	@SuppressWarnings("unchecked")
+	public static <T> T newInstance(Class<T> clazz, Module module) {
+		T result = null;
+		try {
+			Constructor<?> constructor;
+			if (module == null) {
+				constructor = clazz.getDeclaredConstructor();
+				constructor.setAccessible(true);
+				result = (T) constructor.newInstance();
+			} else {
+				constructor = clazz.getDeclaredConstructor(Module.class);
+				constructor.setAccessible(true);
+				result = (T) constructor.newInstance(module);
+			}
+		} catch (Exception e) {
+			throw new IllegalArgumentException(e);
+		}
+		return result;
 	}
 
 }

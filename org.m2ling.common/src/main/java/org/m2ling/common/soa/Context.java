@@ -30,10 +30,15 @@ public class Context {
 	 * 
 	 */
 	public enum Entry {
-		/** User name */
+		/** User name. */
 		USER,
-		// SHA1 hash of user password
-		PWD_HASH
+		/** SHA1 hash of user password. */
+		PWD_HASH,
+		/**
+		 * Resource type to load/store domain data, value should be one literal from
+		 * org.m2ling.persistence.PersistenceType.
+		 */
+		PERSISTENCE_TYPE
 	}
 
 	/**

@@ -8,6 +8,7 @@ import org.m2ling.domain.core.CoreFactory;
 import org.m2ling.domain.core.ViewPoint;
 
 import com.google.common.base.Strings;
+import com.google.inject.Inject;
 
 /**
  * 
@@ -29,6 +30,8 @@ public class DTOConverter {
 	 * 
 	 */
 	public static class ToDTO {
+		@Inject
+		CoreUtil util;
 
 		public static ViewPointDTO getViewPointDTO(ViewPoint vp) {
 			ViewPointDTO.Builder builder = new ViewPointDTO.Builder(vp.getName());
@@ -48,6 +51,9 @@ public class DTOConverter {
 	 */
 	public static class FromDTO {
 
+		@Inject
+		CoreUtil util;
+
 		/**
 		 * Return a new ViewPoint instance given a DTO.
 		 * 
@@ -55,11 +61,11 @@ public class DTOConverter {
 		 *           the dto
 		 * @return a new ViewPoint instance
 		 */
-		public static ViewPoint newViewPoint(ViewPointDTO dto) {
+		public ViewPoint newViewPoint(ViewPointDTO dto) {
 			ViewPoint vp = CoreFactory.eINSTANCE.createViewPoint();
 			vp.setName(dto.getName());
 			if (dto.getBaseVPName() != null) {
-				vp.setBaseViewpoint(CoreUtil.getViewPointByName(dto.getBaseVPName()));
+				vp.setBaseViewpoint(util.getViewPointByName(dto.getBaseVPName()));
 			}
 			if (dto.getTags() != null) {
 				for (String tag : dto.getTags()) {
@@ -81,8 +87,8 @@ public class DTOConverter {
 		 *           the dto
 		 * @return a new ViewPoint instance
 		 */
-		public static ViewPoint getViewPoint(ViewPointDTO dto) {
-			ViewPoint vp = CoreUtil.getViewPointByName(dto.getName());
+		public ViewPoint getViewPoint(ViewPointDTO dto) {
+			ViewPoint vp = util.getViewPointByName(dto.getName());
 			if (vp != null) {
 				return vp;
 			}

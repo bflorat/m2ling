@@ -1,46 +1,33 @@
-package org.m2ling.service.common;
+package org.m2ling.service.core.impl;
 
 import java.util.Arrays;
 import java.util.List;
 
-import org.junit.runner.RunWith;
 import org.m2ling.common.dto.core.ViewPointDTO;
-import org.m2ling.common.soa.Context;
-import org.m2ling.common.utils.Mocked;
 import org.m2ling.common.utils.Utils;
 import org.m2ling.domain.core.Type;
 import org.m2ling.service.core.TagService;
 import org.m2ling.service.principles.ViewPointService;
+import org.m2ling.service.principles.impl.ViewPointServiceImpl;
 import org.m2ling.specs.BindedConcordionTestCase;
+import org.m2ling.specs.FixturesModule;
 
-import atunit.AtUnit;
-import atunit.Container;
-import atunit.Container.Option;
-import atunit.Unit;
-
-import com.google.inject.Inject;
-
-@RunWith(AtUnit.class)
-@Container(Option.GUICE)
 public class TagsFixture extends BindedConcordionTestCase {
-
-	public TagsFixture() {
-		super();
-	}
 
 	/**
 	 * We need a viewpoint service to built a viewpoint, one of the HashTags implementations
 	 */
-	@Inject
 	ViewPointService serviceViewPoint;
 
-	@Inject
-	@Unit
+	// Note that the service implementation is explicit in purpose, we don't use DI (best practice
+	// for UT).
 	TagService serviceTag;
 
-	@Inject()
-	@Mocked
-	Context context;
+	public TagsFixture() {
+		super();
+		serviceViewPoint = Utils.newInstance(ViewPointServiceImpl.class,null);
+		serviceTag = new TagServiceImpl(new FixturesModule());
+	}
 
 	private String createViewPoint(List<String> tags) {
 		// We check the tags behavior against a sample HasTags child class : ViewPoint.
@@ -85,7 +72,7 @@ public class TagsFixture extends BindedConcordionTestCase {
 		} catch (IllegalArgumentException iae) {
 			return "IllegalArgumentException";
 		} catch (Exception e) {
-			return "<UNexpected IllegalArgumentException>";
+			return "<Unexpected IllegalArgumentException>";
 		}
 	}
 
@@ -100,7 +87,7 @@ public class TagsFixture extends BindedConcordionTestCase {
 		} catch (IllegalArgumentException iae) {
 			return "IllegalArgumentException";
 		} catch (Exception e) {
-			return "<UNexpected IllegalArgumentException>";
+			return "<Unexpected IllegalArgumentException>";
 		}
 	}
 
@@ -115,8 +102,7 @@ public class TagsFixture extends BindedConcordionTestCase {
 		} catch (IllegalArgumentException iae) {
 			return "IllegalArgumentException";
 		} catch (Exception e) {
-			return "<UNexpected IllegalArgumentException>";
+			return "<Unexpected IllegalArgumentException>";
 		}
 	}
-
 }

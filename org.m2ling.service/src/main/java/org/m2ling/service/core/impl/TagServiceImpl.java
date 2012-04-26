@@ -12,10 +12,11 @@ import org.m2ling.common.security.ACResource;
 import org.m2ling.common.soa.Context;
 import org.m2ling.domain.core.HasTags;
 import org.m2ling.domain.core.Type;
+import org.m2ling.service.common.ServiceImpl;
 import org.m2ling.service.core.TagService;
-import org.m2ling.service.util.CoreUtil;
 
 import com.google.inject.Inject;
+import com.google.inject.Module;
 
 /**
  * 
@@ -25,10 +26,24 @@ import com.google.inject.Inject;
  * 
  */
 @ACResource
-public class TagServiceImpl implements TagService {
+public class TagServiceImpl extends ServiceImpl implements TagService {
 
 	@Inject
 	private java.util.logging.Logger logger;
+
+	/**
+	 * Build a TagServiceImpl. Protected to avoid direct instantiation temptations.
+	 */
+	protected TagServiceImpl() {
+		super();
+	}
+
+	/**
+	 * @see ServiceImpl
+	 */
+	protected TagServiceImpl(Module additionalTestModule) {
+		super(additionalTestModule);
+	}
 
 	private void checkTypeAndID(Type type, String itemID) {
 		if (type == null) {
@@ -62,7 +77,7 @@ public class TagServiceImpl implements TagService {
 			checkTypeAndID(type, itemID);
 			checkTagsList(tags);
 		}
-		HasTags htags = CoreUtil.getHasTagsByTypeAndID(type, itemID);
+		HasTags htags = util.getHasTagsByTypeAndID(type, itemID);
 		htags.getTags().addAll(tags);
 	}
 
@@ -79,7 +94,7 @@ public class TagServiceImpl implements TagService {
 			checkTypeAndID(type, itemID);
 			checkTagsList(tags);
 		}
-		HasTags htags = CoreUtil.getHasTagsByTypeAndID(type, itemID);
+		HasTags htags = util.getHasTagsByTypeAndID(type, itemID);
 		// We clear and reuse the existing list to endorse defensive copy.
 		htags.getTags().clear();
 		htags.getTags().addAll(tags);
@@ -96,7 +111,7 @@ public class TagServiceImpl implements TagService {
 		List<String> tags = null;
 		{ // Controls
 			checkTypeAndID(type, itemID);
-			HasTags htags = CoreUtil.getHasTagsByTypeAndID(type, itemID);
+			HasTags htags = util.getHasTagsByTypeAndID(type, itemID);
 			tags = htags.getTags();
 			if (!tags.contains(tag)) {
 				throw new NotFoundException("Tag didn't exist previsously : " + tag + " for item : " + htags);
@@ -114,7 +129,7 @@ public class TagServiceImpl implements TagService {
 	@Override
 	public List<String> getAllTags(Context context, Type type, String itemID) {
 		checkTypeAndID(type, itemID);
-		HasTags htags = CoreUtil.getHasTagsByTypeAndID(type, itemID);
+		HasTags htags = util.getHasTagsByTypeAndID(type, itemID);
 		List<String> tags = htags.getTags();
 		if (tags == null) {
 			String msg = "The tags list is null for item : " + htags;
