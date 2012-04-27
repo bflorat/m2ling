@@ -6,10 +6,6 @@
 package org.m2ling.common.soa;
 
 import org.junit.Test;
-import org.m2ling.common.soa.Context;
-import org.m2ling.common.soa.Context.Entry;
-
-import java.lang.IllegalArgumentException;
 
 /**
  * Tests for Context

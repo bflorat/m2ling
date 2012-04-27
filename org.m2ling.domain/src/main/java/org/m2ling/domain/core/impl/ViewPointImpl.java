@@ -12,11 +12,12 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
-import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.m2ling.domain.core.Activity;
 import org.m2ling.domain.core.ComponentType;
 import org.m2ling.domain.core.CorePackage;
+import org.m2ling.domain.core.LinkType;
+import org.m2ling.domain.core.Rule;
 import org.m2ling.domain.core.ViewPoint;
 
 /**
@@ -30,6 +31,8 @@ import org.m2ling.domain.core.ViewPoint;
  *   <li>{@link org.m2ling.domain.core.impl.ViewPointImpl#getActivities <em>Activities</em>}</li>
  *   <li>{@link org.m2ling.domain.core.impl.ViewPointImpl#getBaseViewpoint <em>Base Viewpoint</em>}</li>
  *   <li>{@link org.m2ling.domain.core.impl.ViewPointImpl#getName <em>Name</em>}</li>
+ *   <li>{@link org.m2ling.domain.core.impl.ViewPointImpl#getLinkTypes <em>Link Types</em>}</li>
+ *   <li>{@link org.m2ling.domain.core.impl.ViewPointImpl#getRules <em>Rules</em>}</li>
  * </ul>
  * </p>
  *
@@ -54,7 +57,7 @@ public class ViewPointImpl extends ConceptItemImpl implements ViewPoint {
 	protected EList<ComponentType> componentTypes;
 
 	/**
-	 * The cached value of the '{@link #getActivities() <em>Activities</em>}' reference list.
+	 * The cached value of the '{@link #getActivities() <em>Activities</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getActivities()
@@ -94,6 +97,26 @@ public class ViewPointImpl extends ConceptItemImpl implements ViewPoint {
 	protected String name = NAME_EDEFAULT;
 
 	/**
+	 * The cached value of the '{@link #getLinkTypes() <em>Link Types</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getLinkTypes()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<LinkType> linkTypes;
+
+	/**
+	 * The cached value of the '{@link #getRules() <em>Rules</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getRules()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<Rule> rules;
+
+	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -131,7 +154,7 @@ public class ViewPointImpl extends ConceptItemImpl implements ViewPoint {
 	 */
 	public EList<Activity> getActivities() {
 		if (activities == null) {
-			activities = new EObjectResolvingEList<Activity>(Activity.class, this, CorePackage.VIEW_POINT__ACTIVITIES);
+			activities = new EObjectContainmentEList<Activity>(Activity.class, this, CorePackage.VIEW_POINT__ACTIVITIES);
 		}
 		return activities;
 	}
@@ -200,11 +223,41 @@ public class ViewPointImpl extends ConceptItemImpl implements ViewPoint {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EList<LinkType> getLinkTypes() {
+		if (linkTypes == null) {
+			linkTypes = new EObjectContainmentEList<LinkType>(LinkType.class, this, CorePackage.VIEW_POINT__LINK_TYPES);
+		}
+		return linkTypes;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList<Rule> getRules() {
+		if (rules == null) {
+			rules = new EObjectContainmentEList<Rule>(Rule.class, this, CorePackage.VIEW_POINT__RULES);
+		}
+		return rules;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
 			case CorePackage.VIEW_POINT__COMPONENT_TYPES:
 				return ((InternalEList<?>)getComponentTypes()).basicRemove(otherEnd, msgs);
+			case CorePackage.VIEW_POINT__ACTIVITIES:
+				return ((InternalEList<?>)getActivities()).basicRemove(otherEnd, msgs);
+			case CorePackage.VIEW_POINT__LINK_TYPES:
+				return ((InternalEList<?>)getLinkTypes()).basicRemove(otherEnd, msgs);
+			case CorePackage.VIEW_POINT__RULES:
+				return ((InternalEList<?>)getRules()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -226,6 +279,10 @@ public class ViewPointImpl extends ConceptItemImpl implements ViewPoint {
 				return basicGetBaseViewpoint();
 			case CorePackage.VIEW_POINT__NAME:
 				return getName();
+			case CorePackage.VIEW_POINT__LINK_TYPES:
+				return getLinkTypes();
+			case CorePackage.VIEW_POINT__RULES:
+				return getRules();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -253,6 +310,14 @@ public class ViewPointImpl extends ConceptItemImpl implements ViewPoint {
 			case CorePackage.VIEW_POINT__NAME:
 				setName((String)newValue);
 				return;
+			case CorePackage.VIEW_POINT__LINK_TYPES:
+				getLinkTypes().clear();
+				getLinkTypes().addAll((Collection<? extends LinkType>)newValue);
+				return;
+			case CorePackage.VIEW_POINT__RULES:
+				getRules().clear();
+				getRules().addAll((Collection<? extends Rule>)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -277,6 +342,12 @@ public class ViewPointImpl extends ConceptItemImpl implements ViewPoint {
 			case CorePackage.VIEW_POINT__NAME:
 				setName(NAME_EDEFAULT);
 				return;
+			case CorePackage.VIEW_POINT__LINK_TYPES:
+				getLinkTypes().clear();
+				return;
+			case CorePackage.VIEW_POINT__RULES:
+				getRules().clear();
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -297,6 +368,10 @@ public class ViewPointImpl extends ConceptItemImpl implements ViewPoint {
 				return baseViewpoint != null;
 			case CorePackage.VIEW_POINT__NAME:
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
+			case CorePackage.VIEW_POINT__LINK_TYPES:
+				return linkTypes != null && !linkTypes.isEmpty();
+			case CorePackage.VIEW_POINT__RULES:
+				return rules != null && !rules.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}

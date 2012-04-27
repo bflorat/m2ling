@@ -32,7 +32,7 @@ import org.m2ling.domain.core.HasParameterDefinitions;
  * </p>
  *
  * @see org.m2ling.domain.parameters.ParametersPackage#getParameterDefinition()
- * @model abstract="true"
+ * @model
  * @generated
  */
 public interface ParameterDefinition extends HasComment, HasCustomProperties, HasNameAndID, HasConstraints {
@@ -259,28 +259,5 @@ public interface ParameterDefinition extends HasComment, HasCustomProperties, Ha
 	 * @generated
 	 */
 	void setLongDescription(String value);
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * <!-- begin-model-doc -->
-	 * Helper method that allows to cast the parent as a component (to be used with component parameter descriptions)
-	 * 
-	 * <!-- end-model-doc -->
-	 * @model
-	 * @generated
-	 */
-	void castParentAsComponent();
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * <!-- begin-model-doc -->
-	 * Helper method that allows to cast the parent as a component (to be used with engine parameter descriptions)
-	 * <!-- end-model-doc -->
-	 * @model
-	 * @generated
-	 */
-	void castParentAsEngine();
 
 } // ParameterDefinition

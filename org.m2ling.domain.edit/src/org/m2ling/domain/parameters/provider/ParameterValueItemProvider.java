@@ -9,7 +9,9 @@ import java.util.List;
 
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
+
 import org.eclipse.emf.common.util.ResourceLocator;
+
 import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
 import org.eclipse.emf.edit.provider.IEditingDomainItemProvider;
 import org.eclipse.emf.edit.provider.IItemLabelProvider;
@@ -19,11 +21,15 @@ import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.ViewerNotification;
+
 import org.m2ling.domain.core.CorePackage;
+
 import org.m2ling.domain.core.provider.HasCommentItemProvider;
-import org.m2ling.domain.core.provider.M2lingEditPlugin;
+
 import org.m2ling.domain.parameters.ParameterValue;
 import org.m2ling.domain.parameters.ParametersPackage;
+
+import org.m2ling.domain.provider.M2lingEditPlugin;
 
 /**
  * This is the item provider adapter for a {@link org.m2ling.domain.parameters.ParameterValue} object.
@@ -182,7 +188,7 @@ public class ParameterValueItemProvider
 	 */
 	@Override
 	public String getText(Object object) {
-		String label = ((ParameterValue)object).getValue();
+		String label = ((ParameterValue)object).getComment();
 		return label == null || label.length() == 0 ?
 			getString("_UI_ParameterValue_type") :
 			getString("_UI_ParameterValue_type") + " " + label;

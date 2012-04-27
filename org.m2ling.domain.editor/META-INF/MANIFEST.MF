@@ -4,13 +4,13 @@ Bundle-Name: %pluginName
 Bundle-SymbolicName: org.m2ling.domain.editor;singleton:=true
 Bundle-Version: 1.0.0.qualifier
 Bundle-ClassPath: .
-Bundle-Activator: org.m2ling.domain.core.presentation.M2lingEditorPlugin$Implementation
+Bundle-Activator: org.m2ling.domain.presentation.M2lingEditorPlugin$Implementation
 Bundle-Vendor: %providerName
 Bundle-Localization: plugin
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Export-Package: org.m2ling.domain.core.presentation,
  org.m2ling.domain.parameters.presentation,
- org.m2ling.domain.principles.presentation
+ org.m2ling.domain.presentation
 Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.core.resources;visibility:=reexport,
  org.m2ling.domain.edit;visibility:=reexport,

@@ -17,6 +17,8 @@ import org.eclipse.emf.common.util.EList;
  *   <li>{@link org.m2ling.domain.core.ViewPoint#getActivities <em>Activities</em>}</li>
  *   <li>{@link org.m2ling.domain.core.ViewPoint#getBaseViewpoint <em>Base Viewpoint</em>}</li>
  *   <li>{@link org.m2ling.domain.core.ViewPoint#getName <em>Name</em>}</li>
+ *   <li>{@link org.m2ling.domain.core.ViewPoint#getLinkTypes <em>Link Types</em>}</li>
+ *   <li>{@link org.m2ling.domain.core.ViewPoint#getRules <em>Rules</em>}</li>
  * </ul>
  * </p>
  *
@@ -49,17 +51,17 @@ public interface ViewPoint extends ConceptItem {
 	EList<ComponentType> getComponentTypes();
 
 	/**
-	 * Returns the value of the '<em><b>Activities</b></em>' reference list.
+	 * Returns the value of the '<em><b>Activities</b></em>' containment reference list.
 	 * The list contents are of type {@link org.m2ling.domain.core.Activity}.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Activities</em>' reference list isn't clear,
+	 * If the meaning of the '<em>Activities</em>' containment reference list isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Activities</em>' reference list.
+	 * @return the value of the '<em>Activities</em>' containment reference list.
 	 * @see org.m2ling.domain.core.CorePackage#getViewPoint_Activities()
-	 * @model
+	 * @model containment="true" keys="iD"
 	 * @generated
 	 */
 	EList<Activity> getActivities();
@@ -115,5 +117,37 @@ public interface ViewPoint extends ConceptItem {
 	 * @generated
 	 */
 	void setName(String value);
+
+	/**
+	 * Returns the value of the '<em><b>Link Types</b></em>' containment reference list.
+	 * The list contents are of type {@link org.m2ling.domain.core.LinkType}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Link Types</em>' containment reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Link Types</em>' containment reference list.
+	 * @see org.m2ling.domain.core.CorePackage#getViewPoint_LinkTypes()
+	 * @model containment="true"
+	 * @generated
+	 */
+	EList<LinkType> getLinkTypes();
+
+	/**
+	 * Returns the value of the '<em><b>Rules</b></em>' containment reference list.
+	 * The list contents are of type {@link org.m2ling.domain.core.Rule}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Rules</em>' containment reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Rules</em>' containment reference list.
+	 * @see org.m2ling.domain.core.CorePackage#getViewPoint_Rules()
+	 * @model containment="true"
+	 * @generated
+	 */
+	EList<Rule> getRules();
 
 } // ViewPoint

@@ -15,6 +15,8 @@ import org.eclipse.emf.common.util.EList;
  * <ul>
  *   <li>{@link org.m2ling.domain.core.View#getComponentsGroups <em>Components Groups</em>}</li>
  *   <li>{@link org.m2ling.domain.core.View#getComponents <em>Components</em>}</li>
+ *   <li>{@link org.m2ling.domain.core.View#getViewPoint <em>View Point</em>}</li>
+ *   <li>{@link org.m2ling.domain.core.View#getLinks <em>Links</em>}</li>
  * </ul>
  * </p>
  *
@@ -31,35 +33,67 @@ public interface View extends ArchitectureItem {
 	String copyright = "Copyright (C) 2012 Bertrand Florat";
 
 	/**
-	 * Returns the value of the '<em><b>Components Groups</b></em>' reference list.
+	 * Returns the value of the '<em><b>Components Groups</b></em>' containment reference list.
 	 * The list contents are of type {@link org.m2ling.domain.core.ComponentGroup}.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Components Groups</em>' reference list isn't clear,
+	 * If the meaning of the '<em>Components Groups</em>' containment reference list isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Components Groups</em>' reference list.
+	 * @return the value of the '<em>Components Groups</em>' containment reference list.
 	 * @see org.m2ling.domain.core.CorePackage#getView_ComponentsGroups()
-	 * @model
+	 * @model containment="true"
 	 * @generated
 	 */
 	EList<ComponentGroup> getComponentsGroups();
 
 	/**
-	 * Returns the value of the '<em><b>Components</b></em>' reference list.
+	 * Returns the value of the '<em><b>Components</b></em>' containment reference list.
 	 * The list contents are of type {@link org.m2ling.domain.core.Component}.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Components</em>' reference list isn't clear,
+	 * If the meaning of the '<em>Components</em>' containment reference list isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Components</em>' reference list.
+	 * @return the value of the '<em>Components</em>' containment reference list.
 	 * @see org.m2ling.domain.core.CorePackage#getView_Components()
-	 * @model
+	 * @model containment="true" keys="iD"
 	 * @generated
 	 */
 	EList<Component> getComponents();
+
+	/**
+	 * Returns the value of the '<em><b>View Point</b></em>' reference list.
+	 * The list contents are of type {@link org.m2ling.domain.core.ViewPoint}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>View Point</em>' reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>View Point</em>' reference list.
+	 * @see org.m2ling.domain.core.CorePackage#getView_ViewPoint()
+	 * @model keys="name" required="true"
+	 * @generated
+	 */
+	EList<ViewPoint> getViewPoint();
+
+	/**
+	 * Returns the value of the '<em><b>Links</b></em>' containment reference list.
+	 * The list contents are of type {@link org.m2ling.domain.core.Link}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Links</em>' containment reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Links</em>' containment reference list.
+	 * @see org.m2ling.domain.core.CorePackage#getView_Links()
+	 * @model containment="true" keys="iD"
+	 * @generated
+	 */
+	EList<Link> getLinks();
 
 } // View

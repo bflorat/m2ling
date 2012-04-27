@@ -24,6 +24,7 @@ import org.m2ling.domain.core.HasTags;
  * <p>
  * The following features are implemented:
  * <ul>
+ *   <li>{@link org.m2ling.domain.core.impl.ArchitectureItemImpl#getComment <em>Comment</em>}</li>
  *   <li>{@link org.m2ling.domain.core.impl.ArchitectureItemImpl#getTags <em>Tags</em>}</li>
  *   <li>{@link org.m2ling.domain.core.impl.ArchitectureItemImpl#getLabel <em>Label</em>}</li>
  * </ul>
@@ -38,6 +39,26 @@ public abstract class ArchitectureItemImpl extends HasNameAndIDImpl implements A
 	 * @generated
 	 */
 	public static final String copyright = "Copyright (C) 2012 Bertrand Florat";
+
+	/**
+	 * The default value of the '{@link #getComment() <em>Comment</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getComment()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String COMMENT_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getComment() <em>Comment</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getComment()
+	 * @generated
+	 * @ordered
+	 */
+	protected String comment = COMMENT_EDEFAULT;
 
 	/**
 	 * The cached value of the '{@link #getTags() <em>Tags</em>}' attribute list.
@@ -93,6 +114,27 @@ public abstract class ArchitectureItemImpl extends HasNameAndIDImpl implements A
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public String getComment() {
+		return comment;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setComment(String newComment) {
+		String oldComment = comment;
+		comment = newComment;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, CorePackage.ARCHITECTURE_ITEM__COMMENT, oldComment, comment));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EList<String> getTags() {
 		if (tags == null) {
 			tags = new EDataTypeUniqueEList<String>(String.class, this, CorePackage.ARCHITECTURE_ITEM__TAGS);
@@ -129,6 +171,8 @@ public abstract class ArchitectureItemImpl extends HasNameAndIDImpl implements A
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
+			case CorePackage.ARCHITECTURE_ITEM__COMMENT:
+				return getComment();
 			case CorePackage.ARCHITECTURE_ITEM__TAGS:
 				return getTags();
 			case CorePackage.ARCHITECTURE_ITEM__LABEL:
@@ -146,6 +190,9 @@ public abstract class ArchitectureItemImpl extends HasNameAndIDImpl implements A
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
+			case CorePackage.ARCHITECTURE_ITEM__COMMENT:
+				setComment((String)newValue);
+				return;
 			case CorePackage.ARCHITECTURE_ITEM__TAGS:
 				getTags().clear();
 				getTags().addAll((Collection<? extends String>)newValue);
@@ -165,6 +212,9 @@ public abstract class ArchitectureItemImpl extends HasNameAndIDImpl implements A
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
+			case CorePackage.ARCHITECTURE_ITEM__COMMENT:
+				setComment(COMMENT_EDEFAULT);
+				return;
 			case CorePackage.ARCHITECTURE_ITEM__TAGS:
 				getTags().clear();
 				return;
@@ -183,6 +233,8 @@ public abstract class ArchitectureItemImpl extends HasNameAndIDImpl implements A
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
+			case CorePackage.ARCHITECTURE_ITEM__COMMENT:
+				return COMMENT_EDEFAULT == null ? comment != null : !COMMENT_EDEFAULT.equals(comment);
 			case CorePackage.ARCHITECTURE_ITEM__TAGS:
 				return tags != null && !tags.isEmpty();
 			case CorePackage.ARCHITECTURE_ITEM__LABEL:
@@ -200,6 +252,7 @@ public abstract class ArchitectureItemImpl extends HasNameAndIDImpl implements A
 	public int eBaseStructuralFeatureID(int derivedFeatureID, Class<?> baseClass) {
 		if (baseClass == HasComment.class) {
 			switch (derivedFeatureID) {
+				case CorePackage.ARCHITECTURE_ITEM__COMMENT: return CorePackage.HAS_COMMENT__COMMENT;
 				default: return -1;
 			}
 		}
@@ -231,6 +284,7 @@ public abstract class ArchitectureItemImpl extends HasNameAndIDImpl implements A
 	public int eDerivedStructuralFeatureID(int baseFeatureID, Class<?> baseClass) {
 		if (baseClass == HasComment.class) {
 			switch (baseFeatureID) {
+				case CorePackage.HAS_COMMENT__COMMENT: return CorePackage.ARCHITECTURE_ITEM__COMMENT;
 				default: return -1;
 			}
 		}
@@ -263,7 +317,9 @@ public abstract class ArchitectureItemImpl extends HasNameAndIDImpl implements A
 		if (eIsProxy()) return super.toString();
 
 		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (tags: ");
+		result.append(" (comment: ");
+		result.append(comment);
+		result.append(", tags: ");
 		result.append(tags);
 		result.append(", label: ");
 		result.append(label);

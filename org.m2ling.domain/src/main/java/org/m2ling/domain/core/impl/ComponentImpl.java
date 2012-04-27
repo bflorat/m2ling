@@ -11,8 +11,7 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
-import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.emf.ecore.util.EObjectWithInverseResolvingEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.m2ling.domain.core.Component;
 import org.m2ling.domain.core.ComponentType;
@@ -53,7 +52,7 @@ public class ComponentImpl extends ComponentGroupImpl implements Component {
 	protected ComponentType type;
 
 	/**
-	 * The cached value of the '{@link #getSubComponents() <em>Sub Components</em>}' containment reference list.
+	 * The cached value of the '{@link #getSubComponents() <em>Sub Components</em>}' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getSubComponents()
@@ -61,6 +60,16 @@ public class ComponentImpl extends ComponentGroupImpl implements Component {
 	 * @ordered
 	 */
 	protected EList<Component> subComponents;
+
+	/**
+	 * The cached value of the '{@link #getParent() <em>Parent</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getParent()
+	 * @generated
+	 * @ordered
+	 */
+	protected Component parent;
 
 	/**
 	 * The cached value of the '{@link #getEngine() <em>Engine</em>}' reference.
@@ -136,7 +145,7 @@ public class ComponentImpl extends ComponentGroupImpl implements Component {
 	 */
 	public EList<Component> getSubComponents() {
 		if (subComponents == null) {
-			subComponents = new EObjectContainmentWithInverseEList<Component>(Component.class, this, CorePackage.COMPONENT__SUB_COMPONENTS, CorePackage.COMPONENT__PARENT);
+			subComponents = new EObjectWithInverseResolvingEList<Component>(Component.class, this, CorePackage.COMPONENT__SUB_COMPONENTS, CorePackage.COMPONENT__PARENT);
 		}
 		return subComponents;
 	}
@@ -147,8 +156,24 @@ public class ComponentImpl extends ComponentGroupImpl implements Component {
 	 * @generated
 	 */
 	public Component getParent() {
-		if (eContainerFeatureID() != CorePackage.COMPONENT__PARENT) return null;
-		return (Component)eContainer();
+		if (parent != null && parent.eIsProxy()) {
+			InternalEObject oldParent = (InternalEObject)parent;
+			parent = (Component)eResolveProxy(oldParent);
+			if (parent != oldParent) {
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, CorePackage.COMPONENT__PARENT, oldParent, parent));
+			}
+		}
+		return parent;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Component basicGetParent() {
+		return parent;
 	}
 
 	/**
@@ -157,7 +182,12 @@ public class ComponentImpl extends ComponentGroupImpl implements Component {
 	 * @generated
 	 */
 	public NotificationChain basicSetParent(Component newParent, NotificationChain msgs) {
-		msgs = eBasicSetContainer((InternalEObject)newParent, CorePackage.COMPONENT__PARENT, msgs);
+		Component oldParent = parent;
+		parent = newParent;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, CorePackage.COMPONENT__PARENT, oldParent, newParent);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
 		return msgs;
 	}
 
@@ -167,12 +197,10 @@ public class ComponentImpl extends ComponentGroupImpl implements Component {
 	 * @generated
 	 */
 	public void setParent(Component newParent) {
-		if (newParent != eInternalContainer() || (eContainerFeatureID() != CorePackage.COMPONENT__PARENT && newParent != null)) {
-			if (EcoreUtil.isAncestor(this, newParent))
-				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
+		if (newParent != parent) {
 			NotificationChain msgs = null;
-			if (eInternalContainer() != null)
-				msgs = eBasicRemoveFromContainer(msgs);
+			if (parent != null)
+				msgs = ((InternalEObject)parent).eInverseRemove(this, CorePackage.COMPONENT__SUB_COMPONENTS, Component.class, msgs);
 			if (newParent != null)
 				msgs = ((InternalEObject)newParent).eInverseAdd(this, CorePackage.COMPONENT__SUB_COMPONENTS, Component.class, msgs);
 			msgs = basicSetParent(newParent, msgs);
@@ -232,8 +260,8 @@ public class ComponentImpl extends ComponentGroupImpl implements Component {
 			case CorePackage.COMPONENT__SUB_COMPONENTS:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getSubComponents()).basicAdd(otherEnd, msgs);
 			case CorePackage.COMPONENT__PARENT:
-				if (eInternalContainer() != null)
-					msgs = eBasicRemoveFromContainer(msgs);
+				if (parent != null)
+					msgs = ((InternalEObject)parent).eInverseRemove(this, CorePackage.COMPONENT__SUB_COMPONENTS, Component.class, msgs);
 				return basicSetParent((Component)otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
@@ -261,20 +289,6 @@ public class ComponentImpl extends ComponentGroupImpl implements Component {
 	 * @generated
 	 */
 	@Override
-	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
-		switch (eContainerFeatureID()) {
-			case CorePackage.COMPONENT__PARENT:
-				return eInternalContainer().eInverseRemove(this, CorePackage.COMPONENT__SUB_COMPONENTS, Component.class, msgs);
-		}
-		return super.eBasicRemoveFromContainerFeature(msgs);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case CorePackage.COMPONENT__TYPE:
@@ -283,7 +297,8 @@ public class ComponentImpl extends ComponentGroupImpl implements Component {
 			case CorePackage.COMPONENT__SUB_COMPONENTS:
 				return getSubComponents();
 			case CorePackage.COMPONENT__PARENT:
-				return getParent();
+				if (resolve) return getParent();
+				return basicGetParent();
 			case CorePackage.COMPONENT__ENGINE:
 				if (resolve) return getEngine();
 				return basicGetEngine();
@@ -354,7 +369,7 @@ public class ComponentImpl extends ComponentGroupImpl implements Component {
 			case CorePackage.COMPONENT__SUB_COMPONENTS:
 				return subComponents != null && !subComponents.isEmpty();
 			case CorePackage.COMPONENT__PARENT:
-				return getParent() != null;
+				return parent != null;
 			case CorePackage.COMPONENT__ENGINE:
 				return engine != null;
 		}

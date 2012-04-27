@@ -50,7 +50,7 @@ import org.m2ling.domain.parameters.ParametersPackage;
  *
  * @generated
  */
-public abstract class ParameterDefinitionImpl extends HasCommentImpl implements ParameterDefinition {
+public class ParameterDefinitionImpl extends HasCommentImpl implements ParameterDefinition {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -565,28 +565,6 @@ public abstract class ParameterDefinitionImpl extends HasCommentImpl implements 
 		longDescription = newLongDescription;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, ParametersPackage.PARAMETER_DEFINITION__LONG_DESCRIPTION, oldLongDescription, longDescription));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void castParentAsComponent() {
-		// TODO: implement this method
-		// Ensure that you remove @generated or mark it @generated NOT
-		throw new UnsupportedOperationException();
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void castParentAsEngine() {
-		// TODO: implement this method
-		// Ensure that you remove @generated or mark it @generated NOT
-		throw new UnsupportedOperationException();
 	}
 
 	/**

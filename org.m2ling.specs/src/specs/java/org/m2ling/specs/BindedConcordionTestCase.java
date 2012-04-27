@@ -9,12 +9,13 @@ import org.m2ling.common.soa.Context;
 
 /**
  * Parent class for all m2ling fixtures.
+ * 
  * @author Bertrand Florat <bertrand@florat.net>
  * 
  */
-public class BindedConcordionTestCase extends ConcordionTestCase  {
+public class BindedConcordionTestCase extends ConcordionTestCase {
 
-		protected Context context;
+	protected Context context;
 
 	public BindedConcordionTestCase() {
 		super();

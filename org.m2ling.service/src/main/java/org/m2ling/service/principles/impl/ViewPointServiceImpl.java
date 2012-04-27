@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.m2ling.common.dto.core.ViewPointDTO;
-import org.m2ling.domain.core.Root;
+import org.m2ling.domain.Root;
 import org.m2ling.domain.core.ViewPoint;
 import org.m2ling.service.common.ServiceImpl;
 import org.m2ling.service.principles.ViewPointService;

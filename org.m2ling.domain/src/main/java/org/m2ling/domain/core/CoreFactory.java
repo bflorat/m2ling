@@ -282,13 +282,13 @@ public interface CoreFactory extends EFactory {
 	Actor createActor();
 
 	/**
-	 * Returns a new object of class '<em>Root</em>'.
+	 * Returns a new object of class '<em>Rule</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Root</em>'.
+	 * @return a new object of class '<em>Rule</em>'.
 	 * @generated
 	 */
-	Root createRoot();
+	Rule createRule();
 
 	/**
 	 * Returns the package supported by this factory.

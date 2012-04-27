@@ -12,6 +12,32 @@
             id="org.eclipse.emf.ecore.Wizard.category.ID"
             name="%_UI_Wizard_category"/>
       <wizard
+            id="org.m2ling.domain.presentation.DomainModelWizardID"
+            name="%_UI_DomainModelWizard_label"
+            class="org.m2ling.domain.presentation.DomainModelWizard"
+            category="org.eclipse.emf.ecore.Wizard.category.ID"
+            icon="icons/full/obj16/DomainModelFile.gif">
+         <description>%_UI_DomainModelWizard_description</description>
+         <selection class="org.eclipse.core.resources.IResource"/>
+      </wizard>
+   </extension>
+
+   <extension point="org.eclipse.ui.editors">
+      <editor
+            id="org.m2ling.domain.presentation.DomainEditorID"
+            name="%_UI_DomainEditor_label"
+            icon="icons/full/obj16/DomainModelFile.gif"
+            extensions="m2ling"
+            class="org.m2ling.domain.presentation.DomainEditor"
+            contributorClass="org.m2ling.domain.presentation.DomainActionBarContributor">
+      </editor>
+   </extension>
+
+   <extension point="org.eclipse.ui.newWizards">
+      <category
+            id="org.eclipse.emf.ecore.Wizard.category.ID"
+            name="%_UI_Wizard_category"/>
+      <wizard
             id="org.m2ling.domain.core.presentation.CoreModelWizardID"
             name="%_UI_CoreModelWizard_label"
             class="org.m2ling.domain.core.presentation.CoreModelWizard"
@@ -56,32 +82,6 @@
             extensions="parameters"
             class="org.m2ling.domain.parameters.presentation.ParametersEditor"
             contributorClass="org.m2ling.domain.parameters.presentation.ParametersActionBarContributor">
-      </editor>
-   </extension>
-
-   <extension point="org.eclipse.ui.newWizards">
-      <category
-            id="org.eclipse.emf.ecore.Wizard.category.ID"
-            name="%_UI_Wizard_category"/>
-      <wizard
-            id="org.m2ling.domain.principles.presentation.PrinciplesModelWizardID"
-            name="%_UI_PrinciplesModelWizard_label"
-            class="org.m2ling.domain.principles.presentation.PrinciplesModelWizard"
-            category="org.eclipse.emf.ecore.Wizard.category.ID"
-            icon="icons/full/obj16/PrinciplesModelFile.gif">
-         <description>%_UI_PrinciplesModelWizard_description</description>
-         <selection class="org.eclipse.core.resources.IResource"/>
-      </wizard>
-   </extension>
-
-   <extension point="org.eclipse.ui.editors">
-      <editor
-            id="org.m2ling.domain.principles.presentation.PrinciplesEditorID"
-            name="%_UI_PrinciplesEditor_label"
-            icon="icons/full/obj16/PrinciplesModelFile.gif"
-            extensions="principles"
-            class="org.m2ling.domain.principles.presentation.PrinciplesEditor"
-            contributorClass="org.m2ling.domain.principles.presentation.PrinciplesActionBarContributor">
       </editor>
    </extension>
 

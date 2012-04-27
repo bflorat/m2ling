@@ -11,6 +11,7 @@ import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.impl.EFactoryImpl;
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
 import org.m2ling.domain.parameters.ParamDefOverrider;
+import org.m2ling.domain.parameters.ParameterDefinition;
 import org.m2ling.domain.parameters.ParameterType;
 import org.m2ling.domain.parameters.ParameterValue;
 import org.m2ling.domain.parameters.ParametersFactory;
@@ -38,7 +39,7 @@ public class ParametersFactoryImpl extends EFactoryImpl implements ParametersFac
 	 */
 	public static ParametersFactory init() {
 		try {
-			ParametersFactory theParametersFactory = (ParametersFactory)EPackage.Registry.INSTANCE.getEFactory("http://m2ling.org/parameters/1.0"); 
+			ParametersFactory theParametersFactory = (ParametersFactory)EPackage.Registry.INSTANCE.getEFactory("http://m2ling.org/parameters/0.1"); 
 			if (theParametersFactory != null) {
 				return theParametersFactory;
 			}
@@ -68,6 +69,7 @@ public class ParametersFactoryImpl extends EFactoryImpl implements ParametersFac
 	public EObject create(EClass eClass) {
 		switch (eClass.getClassifierID()) {
 			case ParametersPackage.PARAMETER_VALUE: return createParameterValue();
+			case ParametersPackage.PARAMETER_DEFINITION: return createParameterDefinition();
 			case ParametersPackage.PARAM_DEF_OVERRIDER: return createParamDefOverrider();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
@@ -116,6 +118,16 @@ public class ParametersFactoryImpl extends EFactoryImpl implements ParametersFac
 	public ParameterValue createParameterValue() {
 		ParameterValueImpl parameterValue = new ParameterValueImpl();
 		return parameterValue;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public ParameterDefinition createParameterDefinition() {
+		ParameterDefinitionImpl parameterDefinition = new ParameterDefinitionImpl();
+		return parameterDefinition;
 	}
 
 	/**

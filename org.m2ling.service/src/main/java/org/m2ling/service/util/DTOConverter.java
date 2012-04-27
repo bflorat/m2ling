@@ -9,6 +9,7 @@ import org.m2ling.domain.core.ViewPoint;
 
 import com.google.common.base.Strings;
 import com.google.inject.Inject;
+import com.google.inject.Singleton;
 
 /**
  * 
@@ -29,6 +30,7 @@ public class DTOConverter {
 	 * @author Bertrand Florat <bertrand@florat.net>
 	 * 
 	 */
+	@Singleton
 	public static class ToDTO {
 		@Inject
 		CoreUtil util;
@@ -49,6 +51,7 @@ public class DTOConverter {
 	 * @author Bertrand Florat <bertrand@florat.net>
 	 * 
 	 */
+	@Singleton
 	public static class FromDTO {
 
 		@Inject

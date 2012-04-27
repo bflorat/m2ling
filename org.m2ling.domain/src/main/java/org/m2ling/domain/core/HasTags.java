@@ -23,10 +23,6 @@ import org.eclipse.emf.ecore.EObject;
  * @generated
  */
 public interface HasTags extends EObject {
-	
-	
-	
-	
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -39,13 +35,13 @@ public interface HasTags extends EObject {
 	 * The list contents are of type {@link java.lang.String}.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Tags</em>' attribute isn't clear,
+	 * If the meaning of the '<em>Tags</em>' attribute list isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Tags</em>' attribute list.
 	 * @see org.m2ling.domain.core.CorePackage#getHasTags_Tags()
-	 * @model
+	 * @model default=""
 	 * @generated
 	 */
 	EList<String> getTags();

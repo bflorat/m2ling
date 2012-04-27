@@ -11,16 +11,16 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.impl.EPackageImpl;
+import org.m2ling.domain.DomainPackage;
 import org.m2ling.domain.core.CorePackage;
 import org.m2ling.domain.core.impl.CorePackageImpl;
+import org.m2ling.domain.impl.DomainPackageImpl;
 import org.m2ling.domain.parameters.ParamDefOverrider;
 import org.m2ling.domain.parameters.ParameterDefinition;
 import org.m2ling.domain.parameters.ParameterType;
 import org.m2ling.domain.parameters.ParameterValue;
 import org.m2ling.domain.parameters.ParametersFactory;
 import org.m2ling.domain.parameters.ParametersPackage;
-import org.m2ling.domain.principles.PrinciplesPackage;
-import org.m2ling.domain.principles.impl.PrinciplesPackageImpl;
 
 /**
  * <!-- begin-user-doc -->
@@ -118,18 +118,18 @@ public class ParametersPackageImpl extends EPackageImpl implements ParametersPac
 		isInited = true;
 
 		// Obtain or create and register interdependencies
+		DomainPackageImpl theDomainPackage = (DomainPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(DomainPackage.eNS_URI) instanceof DomainPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(DomainPackage.eNS_URI) : DomainPackage.eINSTANCE);
 		CorePackageImpl theCorePackage = (CorePackageImpl)(EPackage.Registry.INSTANCE.getEPackage(CorePackage.eNS_URI) instanceof CorePackageImpl ? EPackage.Registry.INSTANCE.getEPackage(CorePackage.eNS_URI) : CorePackage.eINSTANCE);
-		PrinciplesPackageImpl thePrinciplesPackage = (PrinciplesPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(PrinciplesPackage.eNS_URI) instanceof PrinciplesPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(PrinciplesPackage.eNS_URI) : PrinciplesPackage.eINSTANCE);
 
 		// Create package meta-data objects
 		theParametersPackage.createPackageContents();
+		theDomainPackage.createPackageContents();
 		theCorePackage.createPackageContents();
-		thePrinciplesPackage.createPackageContents();
 
 		// Initialize created meta-data
 		theParametersPackage.initializePackageContents();
+		theDomainPackage.initializePackageContents();
 		theCorePackage.initializePackageContents();
-		thePrinciplesPackage.initializePackageContents();
 
 		// Mark meta-data to indicate it can't be changed
 		theParametersPackage.freeze();
@@ -422,7 +422,7 @@ public class ParametersPackageImpl extends EPackageImpl implements ParametersPac
 
 		addEOperation(parameterValueEClass, null, "getFinalValue", 0, 1, IS_UNIQUE, IS_ORDERED);
 
-		initEClass(parameterDefinitionEClass, ParameterDefinition.class, "ParameterDefinition", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEClass(parameterDefinitionEClass, ParameterDefinition.class, "ParameterDefinition", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getParameterDefinition_Parent(), theCorePackage.getHasParameterDefinitions(), null, "parent", null, 1, 1, ParameterDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getParameterDefinition_Constraints(), theCorePackage.getConstraint(), null, "constraints", null, 0, -1, ParameterDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getParameterDefinition_Type(), this.getParameterType(), "type", null, 0, 1, ParameterDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -432,10 +432,6 @@ public class ParametersPackageImpl extends EPackageImpl implements ParametersPac
 		initEAttribute(getParameterDefinition_DerivationExpression(), ecorePackage.getEString(), "derivationExpression", null, 0, 1, ParameterDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getParameterDefinition_Overriders(), this.getParamDefOverrider(), null, "overriders", null, 0, -1, ParameterDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getParameterDefinition_LongDescription(), ecorePackage.getEString(), "longDescription", null, 0, 1, ParameterDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-		addEOperation(parameterDefinitionEClass, null, "castParentAsComponent", 0, 1, IS_UNIQUE, IS_ORDERED);
-
-		addEOperation(parameterDefinitionEClass, null, "castParentAsEngine", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		initEClass(paramDefOverriderEClass, ParamDefOverrider.class, "ParamDefOverrider", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getParamDefOverrider_OverridedFeature(), this.getEStructuralFeature(), "overridedFeature", null, 0, 1, ParamDefOverrider.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -452,9 +448,6 @@ public class ParametersPackageImpl extends EPackageImpl implements ParametersPac
 
 		// Initialize data types
 		initEDataType(eStructuralFeatureEDataType, EStructuralFeature.class, "EStructuralFeature", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
-
-		// Create resource
-		createResource(eNS_URI);
 	}
 
 } //ParametersPackageImpl

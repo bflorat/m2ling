@@ -1,9 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ecore:EPackage xmi:version="2.0"
     xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="m2ling"
-    nsURI="http://m2ling.org/1.0" nsPrefix="m2ling">
-  <eSubpackages name="core" nsURI="http://m2ling.org/core/1.0" nsPrefix="core">
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="domain"
+    nsURI="http://m2ling.org/0.1" nsPrefix="m2ling_domain">
+  <eClassifiers xsi:type="ecore:EClass" name="Root">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="viewPoints" upperBound="-1"
+        eType="#//core/ViewPoint" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="views" upperBound="-1"
+        eType="#//core/View" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="paramDefinitions" upperBound="-1"
+        eType="#//parameters/ParameterDefinition" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="paramValues" upperBound="-1"
+        eType="#//parameters/ParameterValue" containment="true"/>
+  </eClassifiers>
+  <eSubpackages name="core" nsURI="http://m2ling.org/core/0.1" nsPrefix="m2ling_core">
     <eClassifiers xsi:type="ecore:EClass" name="ComponentType" eSuperTypes="#//core/ConceptItem #//core/HasNameAndID">
       <eStructuralFeatures xsi:type="ecore:EReference" name="subTypes" upperBound="-1"
           eType="#//core/ComponentType" containment="true" eOpposite="#//core/ComponentType/parent"/>
@@ -17,10 +27,11 @@
       <eStructuralFeatures xsi:type="ecore:EReference" name="type" lowerBound="1"
           eType="#//core/ComponentType"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="subComponents" upperBound="-1"
-          eType="#//core/Component" containment="true" eOpposite="#//core/Component/parent"/>
+          eType="#//core/Component" eOpposite="#//core/Component/parent" eKeys="#//core/HasNameAndID/iD"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="parent" eType="#//core/Component"
-          eOpposite="#//core/Component/subComponents"/>
-      <eStructuralFeatures xsi:type="ecore:EReference" name="engine" eType="#//core/Component"/>
+          eOpposite="#//core/Component/subComponents" eKeys="#//core/HasNameAndID/iD"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="engine" eType="#//core/Component"
+          eKeys="#//core/HasNameAndID/iD"/>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="HasNameAndID" abstract="true">
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="iD" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
@@ -39,13 +50,17 @@
       <eStructuralFeatures xsi:type="ecore:EReference" name="engine" eType="#//core/ComponentNodeGroup"/>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="ViewPoint" eSuperTypes="#//core/ConceptItem">
-      <eStructuralFeatures xsi:type="ecore:EReference" name="componentTypes" upperBound="-1"
-          eType="#//core/ComponentType" containment="true"/>
-      <eStructuralFeatures xsi:type="ecore:EReference" name="activities" upperBound="-1"
-          eType="#//core/Activity"/>
-      <eStructuralFeatures xsi:type="ecore:EReference" name="baseViewpoint" eType="#//core/ViewPoint"/>
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
           iD="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="baseViewpoint" eType="#//core/ViewPoint"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="activities" upperBound="-1"
+          eType="#//core/Activity" containment="true" eKeys="#//core/HasNameAndID/iD"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="componentTypes" upperBound="-1"
+          eType="#//core/ComponentType" containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="linkTypes" upperBound="-1"
+          eType="#//core/LinkType" containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="rules" upperBound="-1"
+          eType="#//core/Rule" containment="true"/>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="ComponentGroup" eSuperTypes="#//core/ArchitectureItem">
       <eStructuralFeatures xsi:type="ecore:EReference" name="components" upperBound="-1"
@@ -70,15 +85,22 @@
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="View" eSuperTypes="#//core/ArchitectureItem">
       <eStructuralFeatures xsi:type="ecore:EReference" name="componentsGroups" upperBound="-1"
-          eType="#//core/ComponentGroup"/>
+          eType="#//core/ComponentGroup" containment="true"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="components" upperBound="-1"
-          eType="#//core/Component"/>
+          eType="#//core/Component" containment="true" eKeys="#//core/HasNameAndID/iD"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="viewPoint" lowerBound="1"
+          upperBound="-1" eType="#//core/ViewPoint" eKeys="#//core/ViewPoint/name"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="links" upperBound="-1"
+          eType="#//core/Link" containment="true" eKeys="#//core/HasNameAndID/iD"/>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="HasTags" abstract="true">
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="tags" upperBound="-1"
-          eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+          eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+          defaultValueLiteral=""/>
     </eClassifiers>
-    <eClassifiers xsi:type="ecore:EClass" name="HasComment"/>
+    <eClassifiers xsi:type="ecore:EClass" name="HasComment">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="comment" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="HasCustomProperties">
       <eStructuralFeatures xsi:type="ecore:EReference" name="customProperties" eType="#//core/CustomProperty"/>
     </eClassifiers>
@@ -90,7 +112,7 @@
       <eStructuralFeatures xsi:type="ecore:EReference" name="destinationType" lowerBound="1"
           eType="#//core/ConceptItem"/>
     </eClassifiers>
-    <eClassifiers xsi:type="ecore:EClass" name="Link">
+    <eClassifiers xsi:type="ecore:EClass" name="Link" eSuperTypes="#//core/HasComment #//core/HasConstraints #//core/HasCustomProperties #//core/HasNameAndID #//core/HasTags">
       <eStructuralFeatures xsi:type="ecore:EReference" name="type" lowerBound="1"
           eType="#//core/LinkType"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="source" lowerBound="1"
@@ -167,12 +189,6 @@
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="admin" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="pwdHash" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     </eClassifiers>
-    <eClassifiers xsi:type="ecore:EClass" name="Root">
-      <eStructuralFeatures xsi:type="ecore:EReference" name="viewPoints" upperBound="-1"
-          eType="#//core/ViewPoint" containment="true"/>
-      <eStructuralFeatures xsi:type="ecore:EReference" name="views" upperBound="-1"
-          eType="#//core/View" containment="true"/>
-    </eClassifiers>
     <eClassifiers xsi:type="ecore:EEnum" name="Type">
       <eLiterals name="COMPONENT_TYPE"/>
       <eLiterals name="LINK_TYPE" value="1"/>
@@ -183,8 +199,26 @@
       <eLiterals name="VIEWPOINT" value="6"/>
       <eLiterals name="VIEW" value="7"/>
     </eClassifiers>
+    <eClassifiers xsi:type="ecore:EEnum" name="RuleStatus">
+      <eLiterals name="TO_BE_STUDIED"/>
+      <eLiterals name="STUDIED" value="1"/>
+      <eLiterals name="VALIDATED" value="2"/>
+      <eLiterals name="REFUSED" value="3"/>
+      <eLiterals name="OBSOLETE" value="4"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EEnum" name="RulePriority">
+      <eLiterals name="VERY_LOW"/>
+      <eLiterals name="LOW" value="1"/>
+      <eLiterals name="MEDIUM" value="2"/>
+      <eLiterals name="HIGH" value="3"/>
+      <eLiterals name="VERY_HIGH" value="4"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Rule" eSuperTypes="#//core/ConceptItem">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="status" eType="#//core/RuleStatus"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="priority" eType="#//core/RulePriority"/>
+    </eClassifiers>
   </eSubpackages>
-  <eSubpackages name="parameters" nsURI="http://m2ling.org/parameters/1.0" nsPrefix="parameters">
+  <eSubpackages name="parameters" nsURI="http://m2ling.org/parameters/0.1" nsPrefix="m2ling_parameters">
     <eClassifiers xsi:type="ecore:EClass" name="ParameterValue" eSuperTypes="#//core/HasComment #//core/HasCustomProperties">
       <eOperations name="getFinalValue"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="parent" lowerBound="1"
@@ -193,8 +227,7 @@
           eType="#//parameters/ParameterDefinition"/>
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     </eClassifiers>
-    <eClassifiers xsi:type="ecore:EClass" name="ParameterDefinition" abstract="true"
-        eSuperTypes="#//core/HasComment #//core/HasCustomProperties #//core/HasNameAndID #//core/HasConstraints">
+    <eClassifiers xsi:type="ecore:EClass" name="ParameterDefinition" eSuperTypes="#//core/HasComment #//core/HasCustomProperties #//core/HasNameAndID #//core/HasConstraints">
       <eStructuralFeatures xsi:type="ecore:EReference" name="parent" lowerBound="1"
           eType="#//core/HasParameterDefinitions"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="constraints" upperBound="-1"
@@ -221,26 +254,6 @@
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="overridedFeature" eType="#//parameters/EStructuralFeature"/>
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="environment" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    </eClassifiers>
-  </eSubpackages>
-  <eSubpackages name="principles" nsURI="http://m2ling.org/principles/1.0" nsPrefix="principles">
-    <eClassifiers xsi:type="ecore:EClass" name="Rule" eSuperTypes="#//core/ConceptItem">
-      <eStructuralFeatures xsi:type="ecore:EAttribute" name="status" eType="#//principles/RuleStatus"/>
-      <eStructuralFeatures xsi:type="ecore:EAttribute" name="priority" eType="#//principles/Priority"/>
-    </eClassifiers>
-    <eClassifiers xsi:type="ecore:EEnum" name="RuleStatus">
-      <eLiterals name="TO_BE_STUDIED"/>
-      <eLiterals name="STUDIED" value="1"/>
-      <eLiterals name="VALIDATED" value="2"/>
-      <eLiterals name="REFUSED" value="3"/>
-      <eLiterals name="OBSOLETE" value="4"/>
-    </eClassifiers>
-    <eClassifiers xsi:type="ecore:EEnum" name="Priority">
-      <eLiterals name="VERY_LOW"/>
-      <eLiterals name="LOW" value="1"/>
-      <eLiterals name="MEDIUM" value="2"/>
-      <eLiterals name="HIGH" value="3"/>
-      <eLiterals name="VERY_HIGH" value="4"/>
     </eClassifiers>
   </eSubpackages>
 </ecore:EPackage>

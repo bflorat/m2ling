@@ -36,7 +36,9 @@ import org.m2ling.domain.core.NotNullConstraint;
 import org.m2ling.domain.core.OCLConstraint;
 import org.m2ling.domain.core.OrganisationalUnit;
 import org.m2ling.domain.core.RegexpConstraint;
-import org.m2ling.domain.core.Root;
+import org.m2ling.domain.core.Rule;
+import org.m2ling.domain.core.RulePriority;
+import org.m2ling.domain.core.RuleStatus;
 import org.m2ling.domain.core.Stakeholder;
 import org.m2ling.domain.core.Stream;
 import org.m2ling.domain.core.Type;
@@ -66,7 +68,7 @@ public class CoreFactoryImpl extends EFactoryImpl implements CoreFactory {
 	 */
 	public static CoreFactory init() {
 		try {
-			CoreFactory theCoreFactory = (CoreFactory)EPackage.Registry.INSTANCE.getEFactory("http://m2ling.org/core/1.0"); 
+			CoreFactory theCoreFactory = (CoreFactory)EPackage.Registry.INSTANCE.getEFactory("http://m2ling.org/core/0.1"); 
 			if (theCoreFactory != null) {
 				return theCoreFactory;
 			}
@@ -123,7 +125,7 @@ public class CoreFactoryImpl extends EFactoryImpl implements CoreFactory {
 			case CorePackage.ACTIVITY_TRANSITION: return createActivityTransition();
 			case CorePackage.ORGANISATIONAL_UNIT: return createOrganisationalUnit();
 			case CorePackage.ACTOR: return createActor();
-			case CorePackage.ROOT: return createRoot();
+			case CorePackage.RULE: return createRule();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -143,6 +145,10 @@ public class CoreFactoryImpl extends EFactoryImpl implements CoreFactory {
 				return createActivityStatusFromString(eDataType, initialValue);
 			case CorePackage.TYPE:
 				return createTypeFromString(eDataType, initialValue);
+			case CorePackage.RULE_STATUS:
+				return createRuleStatusFromString(eDataType, initialValue);
+			case CorePackage.RULE_PRIORITY:
+				return createRulePriorityFromString(eDataType, initialValue);
 			default:
 				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
 		}
@@ -162,6 +168,10 @@ public class CoreFactoryImpl extends EFactoryImpl implements CoreFactory {
 				return convertActivityStatusToString(eDataType, instanceValue);
 			case CorePackage.TYPE:
 				return convertTypeToString(eDataType, instanceValue);
+			case CorePackage.RULE_STATUS:
+				return convertRuleStatusToString(eDataType, instanceValue);
+			case CorePackage.RULE_PRIORITY:
+				return convertRulePriorityToString(eDataType, instanceValue);
 			default:
 				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
 		}
@@ -452,9 +462,9 @@ public class CoreFactoryImpl extends EFactoryImpl implements CoreFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Root createRoot() {
-		RootImpl root = new RootImpl();
-		return root;
+	public Rule createRule() {
+		RuleImpl rule = new RuleImpl();
+		return rule;
 	}
 
 	/**
@@ -514,6 +524,46 @@ public class CoreFactoryImpl extends EFactoryImpl implements CoreFactory {
 	 * @generated
 	 */
 	public String convertTypeToString(EDataType eDataType, Object instanceValue) {
+		return instanceValue == null ? null : instanceValue.toString();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public RuleStatus createRuleStatusFromString(EDataType eDataType, String initialValue) {
+		RuleStatus result = RuleStatus.get(initialValue);
+		if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
+		return result;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String convertRuleStatusToString(EDataType eDataType, Object instanceValue) {
+		return instanceValue == null ? null : instanceValue.toString();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public RulePriority createRulePriorityFromString(EDataType eDataType, String initialValue) {
+		RulePriority result = RulePriority.get(initialValue);
+		if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
+		return result;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String convertRulePriorityToString(EDataType eDataType, Object instanceValue) {
 		return instanceValue == null ? null : instanceValue.toString();
 	}
 

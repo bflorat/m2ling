@@ -9,7 +9,6 @@
 	<classpathentry kind="lib" path="/prog/api/concordion-1.4.2/lib/xom-1.2.5.jar"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/org.m2ling.service"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/org.m2ling.common"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/org.m2ling.persistence"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/org.m2ling.presentation"/>
 	<classpathentry kind="lib" path="/data/projects/m2ling/m2ling.git/libs/org.eclipse.emf.common_2.7.0.v20120127-1122.jar"/>
 	<classpathentry kind="lib" path="/data/projects/m2ling/m2ling.git/libs/org.eclipse.emf.ecore_2.7.0.v20120127-1122.jar"/>

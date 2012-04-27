@@ -9,6 +9,9 @@ import java.util.List;
 
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
+
+import org.eclipse.emf.ecore.EStructuralFeature;
+
 import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
 import org.eclipse.emf.edit.provider.IEditingDomainItemProvider;
 import org.eclipse.emf.edit.provider.IItemLabelProvider;
@@ -16,6 +19,9 @@ import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.IItemPropertySource;
 import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
+import org.eclipse.emf.edit.provider.ViewerNotification;
+
+import org.m2ling.domain.core.CoreFactory;
 import org.m2ling.domain.core.CorePackage;
 import org.m2ling.domain.core.View;
 
@@ -61,26 +67,25 @@ public class ViewItemProvider
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
-			addComponentsGroupsPropertyDescriptor(object);
-			addComponentsPropertyDescriptor(object);
+			addViewPointPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
 
 	/**
-	 * This adds a property descriptor for the Components Groups feature.
+	 * This adds a property descriptor for the View Point feature.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected void addComponentsGroupsPropertyDescriptor(Object object) {
+	protected void addViewPointPropertyDescriptor(Object object) {
 		itemPropertyDescriptors.add
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
-				 getString("_UI_View_componentsGroups_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_View_componentsGroups_feature", "_UI_View_type"),
-				 CorePackage.Literals.VIEW__COMPONENTS_GROUPS,
+				 getString("_UI_View_viewPoint_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_View_viewPoint_feature", "_UI_View_type"),
+				 CorePackage.Literals.VIEW__VIEW_POINT,
 				 true,
 				 false,
 				 true,
@@ -90,25 +95,35 @@ public class ViewItemProvider
 	}
 
 	/**
-	 * This adds a property descriptor for the Components feature.
+	 * This specifies how to implement {@link #getChildren} and is used to deduce an appropriate feature for an
+	 * {@link org.eclipse.emf.edit.command.AddCommand}, {@link org.eclipse.emf.edit.command.RemoveCommand} or
+	 * {@link org.eclipse.emf.edit.command.MoveCommand} in {@link #createCommand}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected void addComponentsPropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_View_components_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_View_components_feature", "_UI_View_type"),
-				 CorePackage.Literals.VIEW__COMPONENTS,
-				 true,
-				 false,
-				 true,
-				 null,
-				 null,
-				 null));
+	@Override
+	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
+		if (childrenFeatures == null) {
+			super.getChildrenFeatures(object);
+			childrenFeatures.add(CorePackage.Literals.VIEW__COMPONENTS_GROUPS);
+			childrenFeatures.add(CorePackage.Literals.VIEW__COMPONENTS);
+			childrenFeatures.add(CorePackage.Literals.VIEW__LINKS);
+		}
+		return childrenFeatures;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	protected EStructuralFeature getChildFeature(Object object, Object child) {
+		// Check the type of the specified child object and return the proper feature to use for
+		// adding (see {@link AddCommand}) it as a child.
+
+		return super.getChildFeature(object, child);
 	}
 
 	/**
@@ -146,6 +161,14 @@ public class ViewItemProvider
 	@Override
 	public void notifyChanged(Notification notification) {
 		updateChildren(notification);
+
+		switch (notification.getFeatureID(View.class)) {
+			case CorePackage.VIEW__COMPONENTS_GROUPS:
+			case CorePackage.VIEW__COMPONENTS:
+			case CorePackage.VIEW__LINKS:
+				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
+				return;
+		}
 		super.notifyChanged(notification);
 	}
 
@@ -159,6 +182,49 @@ public class ViewItemProvider
 	@Override
 	protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
 		super.collectNewChildDescriptors(newChildDescriptors, object);
+
+		newChildDescriptors.add
+			(createChildParameter
+				(CorePackage.Literals.VIEW__COMPONENTS_GROUPS,
+				 CoreFactory.eINSTANCE.createComponentGroup()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(CorePackage.Literals.VIEW__COMPONENTS_GROUPS,
+				 CoreFactory.eINSTANCE.createComponent()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(CorePackage.Literals.VIEW__COMPONENTS,
+				 CoreFactory.eINSTANCE.createComponent()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(CorePackage.Literals.VIEW__LINKS,
+				 CoreFactory.eINSTANCE.createLink()));
+	}
+
+	/**
+	 * This returns the label text for {@link org.eclipse.emf.edit.command.CreateChildCommand}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public String getCreateChildText(Object owner, Object feature, Object child, Collection<?> selection) {
+		Object childFeature = feature;
+		Object childObject = child;
+
+		boolean qualify =
+			childFeature == CorePackage.Literals.VIEW__COMPONENTS_GROUPS ||
+			childFeature == CorePackage.Literals.VIEW__COMPONENTS;
+
+		if (qualify) {
+			return getString
+				("_UI_CreateChild_text2",
+				 new Object[] { getTypeText(childObject), getFeatureText(childFeature), getTypeText(owner) });
+		}
+		return super.getCreateChildText(owner, feature, child, selection);
 	}
 
 }

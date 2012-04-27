@@ -9,6 +9,7 @@ import java.util.Collection;
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.Notifier;
+
 import org.eclipse.emf.edit.provider.ChangeNotifier;
 import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
 import org.eclipse.emf.edit.provider.ComposedAdapterFactory;
@@ -20,6 +21,7 @@ import org.eclipse.emf.edit.provider.IItemPropertySource;
 import org.eclipse.emf.edit.provider.INotifyChangedListener;
 import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
+
 import org.m2ling.domain.parameters.util.ParametersAdapterFactory;
 
 /**
@@ -98,6 +100,29 @@ public class ParametersItemProviderAdapterFactory extends ParametersAdapterFacto
 		}
 
 		return parameterValueItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link org.m2ling.domain.parameters.ParameterDefinition} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected ParameterDefinitionItemProvider parameterDefinitionItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link org.m2ling.domain.parameters.ParameterDefinition}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createParameterDefinitionAdapter() {
+		if (parameterDefinitionItemProvider == null) {
+			parameterDefinitionItemProvider = new ParameterDefinitionItemProvider(this);
+		}
+
+		return parameterDefinitionItemProvider;
 	}
 
 	/**
@@ -223,6 +248,7 @@ public class ParametersItemProviderAdapterFactory extends ParametersAdapterFacto
 	 */
 	public void dispose() {
 		if (parameterValueItemProvider != null) parameterValueItemProvider.dispose();
+		if (parameterDefinitionItemProvider != null) parameterDefinitionItemProvider.dispose();
 		if (paramDefOverriderItemProvider != null) paramDefOverriderItemProvider.dispose();
 	}
 

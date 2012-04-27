@@ -32,18 +32,17 @@ public class CommonGuiceModule extends AbstractModule {
 
 		{ // Bindings
 			bind(PersistenceManager.class).to(PersistenceManagerTeneoImpl.class).in(Singleton.class);
-			bind(CoreUtil.class).in(Singleton.class);
-			bind(DTOConverter.FromDTO.class).in(Singleton.class);
-			bind(DTOConverter.ToDTO.class).in(Singleton.class);
+			bind(CoreUtil.class);
+			bind(DTOConverter.FromDTO.class);
+			bind(DTOConverter.ToDTO.class);
 		}
 
 		{// AOP bindings
 			// Bind every @ACResource method
-			//TODO : implement a production intercepter
+			// TODO : implement a production intercepter
 			bindInterceptor(Matchers.any(), Matchers.annotatedWith(ACResource.class), new ACResourceInterceptorImpl());
 			// Bind every @ACResource class
 			bindInterceptor(Matchers.annotatedWith(ACResource.class), Matchers.any(), new ACResourceInterceptorImpl());
 		}
 	}
-
 }

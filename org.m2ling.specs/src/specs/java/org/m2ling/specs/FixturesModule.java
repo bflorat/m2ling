@@ -3,11 +3,15 @@
  */
 package org.m2ling.specs;
 
+import java.io.File;
+import java.io.IOException;
+
+import org.eclipse.emf.common.util.URI;
 import org.m2ling.persistence.PersistenceManager;
 import org.m2ling.persistence.impl.PersistenceManagerXMIImpl;
 
 import com.google.inject.AbstractModule;
-import com.google.inject.Singleton;
+import com.google.inject.name.Names;
 
 /**
  * 
@@ -18,6 +22,22 @@ import com.google.inject.Singleton;
  */
 public class FixturesModule extends AbstractModule {
 
+	/** Default sample model XMI file */
+	private String sampleURI = "samples/Bikes.m2ling";
+
+	public FixturesModule() {
+	}
+
+	/**
+	 * Build a fixture module
+	 * 
+	 * @param sampleURI
+	 *           sample m2ling model file
+	 */
+	public FixturesModule(String sampleURI) {
+		this.sampleURI = sampleURI;
+	}
+
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -26,7 +46,18 @@ public class FixturesModule extends AbstractModule {
 	@Override
 	protected void configure() {
 		{// Injection bindings
-			bind(PersistenceManager.class).to(PersistenceManagerXMIImpl.class).in(Singleton.class);
+			bind(PersistenceManager.class).to(PersistenceManagerXMIImpl.class);
+			if (sampleURI != null) {
+				File file = new File(sampleURI);
+				URI uri = null;
+				try {
+					uri = URI.createURI("file://"+file.getCanonicalPath());
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				bind(URI.class).annotatedWith(Names.named("XMI_FILE")).toInstance(uri);
+			}
 		}
 	}
 

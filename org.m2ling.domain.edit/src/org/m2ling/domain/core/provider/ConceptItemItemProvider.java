@@ -9,6 +9,7 @@ import java.util.List;
 
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
+
 import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
 import org.eclipse.emf.edit.provider.IEditingDomainItemProvider;
 import org.eclipse.emf.edit.provider.IItemLabelProvider;
@@ -18,6 +19,7 @@ import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.ViewerNotification;
+
 import org.m2ling.domain.core.ConceptItem;
 import org.m2ling.domain.core.CorePackage;
 
@@ -63,10 +65,33 @@ public class ConceptItemItemProvider
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
+			addCommentPropertyDescriptor(object);
 			addTagsPropertyDescriptor(object);
 			addLabelPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
+	}
+
+	/**
+	 * This adds a property descriptor for the Comment feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addCommentPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_HasComment_comment_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_HasComment_comment_feature", "_UI_HasComment_type"),
+				 CorePackage.Literals.HAS_COMMENT__COMMENT,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				 null,
+				 null));
 	}
 
 	/**
@@ -85,7 +110,7 @@ public class ConceptItemItemProvider
 				 CorePackage.Literals.HAS_TAGS__TAGS,
 				 true,
 				 false,
-				 true,
+				 false,
 				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
 				 null,
 				 null));
@@ -121,7 +146,7 @@ public class ConceptItemItemProvider
 	 */
 	@Override
 	public String getText(Object object) {
-		String label = ((ConceptItem)object).getLabel();
+		String label = ((ConceptItem)object).getComment();
 		return label == null || label.length() == 0 ?
 			getString("_UI_ConceptItem_type") :
 			getString("_UI_ConceptItem_type") + " " + label;
@@ -139,6 +164,8 @@ public class ConceptItemItemProvider
 		updateChildren(notification);
 
 		switch (notification.getFeatureID(ConceptItem.class)) {
+			case CorePackage.CONCEPT_ITEM__COMMENT:
+			case CorePackage.CONCEPT_ITEM__TAGS:
 			case CorePackage.CONCEPT_ITEM__LABEL:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;

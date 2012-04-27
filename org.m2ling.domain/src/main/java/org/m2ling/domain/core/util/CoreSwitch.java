@@ -39,7 +39,7 @@ import org.m2ling.domain.core.NotNullConstraint;
 import org.m2ling.domain.core.OCLConstraint;
 import org.m2ling.domain.core.OrganisationalUnit;
 import org.m2ling.domain.core.RegexpConstraint;
-import org.m2ling.domain.core.Root;
+import org.m2ling.domain.core.Rule;
 import org.m2ling.domain.core.RuntimeItem;
 import org.m2ling.domain.core.Stakeholder;
 import org.m2ling.domain.core.Stream;
@@ -277,6 +277,11 @@ public class CoreSwitch<T> extends Switch<T> {
 			case CorePackage.LINK: {
 				Link link = (Link)theEObject;
 				T result = caseLink(link);
+				if (result == null) result = caseHasComment(link);
+				if (result == null) result = caseHasConstraints(link);
+				if (result == null) result = caseHasCustomProperties(link);
+				if (result == null) result = caseHasNameAndID(link);
+				if (result == null) result = caseHasTags(link);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -428,9 +433,15 @@ public class CoreSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case CorePackage.ROOT: {
-				Root root = (Root)theEObject;
-				T result = caseRoot(root);
+			case CorePackage.RULE: {
+				Rule rule = (Rule)theEObject;
+				T result = caseRule(rule);
+				if (result == null) result = caseConceptItem(rule);
+				if (result == null) result = caseHasCustomProperties(rule);
+				if (result == null) result = caseHasComment(rule);
+				if (result == null) result = caseHasTags(rule);
+				if (result == null) result = caseHasParameterDefinitions(rule);
+				if (result == null) result = caseHasConstraints(rule);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -1009,17 +1020,17 @@ public class CoreSwitch<T> extends Switch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Root</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Rule</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Root</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Rule</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseRoot(Root object) {
+	public T caseRule(Rule object) {
 		return null;
 	}
 

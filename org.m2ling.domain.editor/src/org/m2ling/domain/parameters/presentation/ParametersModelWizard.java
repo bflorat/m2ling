@@ -72,7 +72,7 @@ import org.eclipse.ui.part.ISetSelectionTarget;
 
 import org.m2ling.domain.parameters.ParametersFactory;
 import org.m2ling.domain.parameters.ParametersPackage;
-import org.m2ling.domain.core.provider.M2lingEditPlugin;
+import org.m2ling.domain.provider.M2lingEditPlugin;
 
 
 import org.eclipse.core.runtime.Path;
@@ -85,7 +85,7 @@ import org.eclipse.ui.IWorkbenchPart;
 import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.PartInitException;
 
-import org.m2ling.domain.core.presentation.M2lingEditorPlugin;
+import org.m2ling.domain.presentation.M2lingEditorPlugin;
 
 
 /**

@@ -158,11 +158,11 @@ import org.m2ling.domain.parameters.provider.ParametersItemProviderAdapterFactor
 
 import org.eclipse.ui.actions.WorkspaceModifyOperation;
 
-import org.m2ling.domain.core.presentation.M2lingEditorPlugin;
-
 import org.m2ling.domain.core.provider.CoreItemProviderAdapterFactory;
 
-import org.m2ling.domain.principles.provider.PrinciplesItemProviderAdapterFactory;
+import org.m2ling.domain.presentation.M2lingEditorPlugin;
+
+import org.m2ling.domain.provider.DomainItemProviderAdapterFactory;
 
 
 /**
@@ -704,9 +704,9 @@ public class ParametersEditor
 		adapterFactory = new ComposedAdapterFactory(ComposedAdapterFactory.Descriptor.Registry.INSTANCE);
 
 		adapterFactory.addAdapterFactory(new ResourceItemProviderAdapterFactory());
+		adapterFactory.addAdapterFactory(new DomainItemProviderAdapterFactory());
 		adapterFactory.addAdapterFactory(new CoreItemProviderAdapterFactory());
 		adapterFactory.addAdapterFactory(new ParametersItemProviderAdapterFactory());
-		adapterFactory.addAdapterFactory(new PrinciplesItemProviderAdapterFactory());
 		adapterFactory.addAdapterFactory(new ReflectiveItemProviderAdapterFactory());
 
 		// Create the command stack that will notify this editor as commands are executed.

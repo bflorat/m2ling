@@ -77,7 +77,9 @@ public enum Type implements Enumerator {
 	 * @generated
 	 * @ordered
 	 */
-	STREAM(5, "STREAM", "STREAM"), /**
+	STREAM(5, "STREAM", "STREAM"),
+
+	/**
 	 * The '<em><b>VIEWPOINT</b></em>' literal object.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -85,7 +87,9 @@ public enum Type implements Enumerator {
 	 * @generated
 	 * @ordered
 	 */
-	VIEWPOINT(6, "VIEWPOINT", "VIEWPOINT"), /**
+	VIEWPOINT(6, "VIEWPOINT", "VIEWPOINT"),
+
+	/**
 	 * The '<em><b>VIEW</b></em>' literal object.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

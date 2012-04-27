@@ -9,7 +9,9 @@ import java.util.List;
 
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
+
 import org.eclipse.emf.ecore.EStructuralFeature;
+
 import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
 import org.eclipse.emf.edit.provider.IEditingDomainItemProvider;
 import org.eclipse.emf.edit.provider.IItemLabelProvider;
@@ -19,6 +21,7 @@ import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.ViewerNotification;
+
 import org.m2ling.domain.core.CoreFactory;
 import org.m2ling.domain.core.CorePackage;
 import org.m2ling.domain.core.ViewPoint;
@@ -65,33 +68,10 @@ public class ViewPointItemProvider
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
-			addActivitiesPropertyDescriptor(object);
 			addBaseViewpointPropertyDescriptor(object);
 			addNamePropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
-	}
-
-	/**
-	 * This adds a property descriptor for the Activities feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void addActivitiesPropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_ViewPoint_activities_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_ViewPoint_activities_feature", "_UI_ViewPoint_type"),
-				 CorePackage.Literals.VIEW_POINT__ACTIVITIES,
-				 true,
-				 false,
-				 true,
-				 null,
-				 null,
-				 null));
 	}
 
 	/**
@@ -151,6 +131,9 @@ public class ViewPointItemProvider
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
 			childrenFeatures.add(CorePackage.Literals.VIEW_POINT__COMPONENT_TYPES);
+			childrenFeatures.add(CorePackage.Literals.VIEW_POINT__ACTIVITIES);
+			childrenFeatures.add(CorePackage.Literals.VIEW_POINT__LINK_TYPES);
+			childrenFeatures.add(CorePackage.Literals.VIEW_POINT__RULES);
 		}
 		return childrenFeatures;
 	}
@@ -209,6 +192,9 @@ public class ViewPointItemProvider
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
 			case CorePackage.VIEW_POINT__COMPONENT_TYPES:
+			case CorePackage.VIEW_POINT__ACTIVITIES:
+			case CorePackage.VIEW_POINT__LINK_TYPES:
+			case CorePackage.VIEW_POINT__RULES:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
 		}
@@ -230,6 +216,21 @@ public class ViewPointItemProvider
 			(createChildParameter
 				(CorePackage.Literals.VIEW_POINT__COMPONENT_TYPES,
 				 CoreFactory.eINSTANCE.createComponentType()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(CorePackage.Literals.VIEW_POINT__ACTIVITIES,
+				 CoreFactory.eINSTANCE.createActivity()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(CorePackage.Literals.VIEW_POINT__LINK_TYPES,
+				 CoreFactory.eINSTANCE.createLinkType()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(CorePackage.Literals.VIEW_POINT__RULES,
+				 CoreFactory.eINSTANCE.createRule()));
 	}
 
 }

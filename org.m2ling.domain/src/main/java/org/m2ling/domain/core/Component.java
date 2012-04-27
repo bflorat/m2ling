@@ -59,46 +59,46 @@ public interface Component extends ComponentGroup {
 	void setType(ComponentType value);
 
 	/**
-	 * Returns the value of the '<em><b>Sub Components</b></em>' containment reference list.
+	 * Returns the value of the '<em><b>Sub Components</b></em>' reference list.
 	 * The list contents are of type {@link org.m2ling.domain.core.Component}.
 	 * It is bidirectional and its opposite is '{@link org.m2ling.domain.core.Component#getParent <em>Parent</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Sub Components</em>' containment reference list isn't clear,
+	 * If the meaning of the '<em>Sub Components</em>' reference list isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Sub Components</em>' containment reference list.
+	 * @return the value of the '<em>Sub Components</em>' reference list.
 	 * @see org.m2ling.domain.core.CorePackage#getComponent_SubComponents()
 	 * @see org.m2ling.domain.core.Component#getParent
-	 * @model opposite="parent" containment="true"
+	 * @model opposite="parent" keys="iD"
 	 * @generated
 	 */
 	EList<Component> getSubComponents();
 
 	/**
-	 * Returns the value of the '<em><b>Parent</b></em>' container reference.
+	 * Returns the value of the '<em><b>Parent</b></em>' reference.
 	 * It is bidirectional and its opposite is '{@link org.m2ling.domain.core.Component#getSubComponents <em>Sub Components</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Parent</em>' container reference isn't clear,
+	 * If the meaning of the '<em>Parent</em>' reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Parent</em>' container reference.
+	 * @return the value of the '<em>Parent</em>' reference.
 	 * @see #setParent(Component)
 	 * @see org.m2ling.domain.core.CorePackage#getComponent_Parent()
 	 * @see org.m2ling.domain.core.Component#getSubComponents
-	 * @model opposite="subComponents" transient="false"
+	 * @model opposite="subComponents" keys="iD"
 	 * @generated
 	 */
 	Component getParent();
 
 	/**
-	 * Sets the value of the '{@link org.m2ling.domain.core.Component#getParent <em>Parent</em>}' container reference.
+	 * Sets the value of the '{@link org.m2ling.domain.core.Component#getParent <em>Parent</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Parent</em>' container reference.
+	 * @param value the new value of the '<em>Parent</em>' reference.
 	 * @see #getParent()
 	 * @generated
 	 */
@@ -115,7 +115,7 @@ public interface Component extends ComponentGroup {
 	 * @return the value of the '<em>Engine</em>' reference.
 	 * @see #setEngine(Component)
 	 * @see org.m2ling.domain.core.CorePackage#getComponent_Engine()
-	 * @model
+	 * @model keys="iD"
 	 * @generated
 	 */
 	Component getEngine();

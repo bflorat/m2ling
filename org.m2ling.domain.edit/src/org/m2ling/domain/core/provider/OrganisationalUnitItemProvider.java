@@ -9,6 +9,7 @@ import java.util.List;
 
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
+
 import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
 import org.eclipse.emf.edit.provider.IEditingDomainItemProvider;
 import org.eclipse.emf.edit.provider.IItemLabelProvider;
@@ -18,6 +19,7 @@ import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.ViewerNotification;
+
 import org.m2ling.domain.core.CorePackage;
 import org.m2ling.domain.core.OrganisationalUnit;
 
@@ -153,7 +155,7 @@ public class OrganisationalUnitItemProvider
 				 CorePackage.Literals.HAS_TAGS__TAGS,
 				 true,
 				 false,
-				 true,
+				 false,
 				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
 				 null,
 				 null));
@@ -198,6 +200,7 @@ public class OrganisationalUnitItemProvider
 		switch (notification.getFeatureID(OrganisationalUnit.class)) {
 			case CorePackage.ORGANISATIONAL_UNIT__ID:
 			case CorePackage.ORGANISATIONAL_UNIT__NAME:
+			case CorePackage.ORGANISATIONAL_UNIT__TAGS:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
 		}

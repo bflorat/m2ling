@@ -15,6 +15,7 @@ import org.m2ling.domain.core.Type;
 import org.m2ling.service.common.ServiceImpl;
 import org.m2ling.service.core.TagService;
 
+import com.google.common.base.Strings;
 import com.google.inject.Inject;
 import com.google.inject.Module;
 
@@ -32,17 +33,10 @@ public class TagServiceImpl extends ServiceImpl implements TagService {
 	private java.util.logging.Logger logger;
 
 	/**
-	 * Build a TagServiceImpl. Protected to avoid direct instantiation temptations.
-	 */
-	protected TagServiceImpl() {
-		super();
-	}
-
-	/**
 	 * @see ServiceImpl
 	 */
-	protected TagServiceImpl(Module additionalTestModule) {
-		super(additionalTestModule);
+	protected TagServiceImpl(Module... additionalTestModules) {
+		super(additionalTestModules);
 	}
 
 	private void checkTypeAndID(Type type, String itemID) {
@@ -61,6 +55,9 @@ public class TagServiceImpl extends ServiceImpl implements TagService {
 		for (String tag : tags) {
 			if (tag.contains(",")) {
 				throw new IllegalArgumentException("A tag can't contain the separator value : " + tag);
+			}
+			if (Strings.isNullOrEmpty(tag)){
+				throw new IllegalArgumentException("A tag can't be null or void : " + tag);
 			}
 		}
 	}

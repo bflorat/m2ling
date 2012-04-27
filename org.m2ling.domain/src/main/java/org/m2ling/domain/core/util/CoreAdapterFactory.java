@@ -40,7 +40,7 @@ import org.m2ling.domain.core.NotNullConstraint;
 import org.m2ling.domain.core.OCLConstraint;
 import org.m2ling.domain.core.OrganisationalUnit;
 import org.m2ling.domain.core.RegexpConstraint;
-import org.m2ling.domain.core.Root;
+import org.m2ling.domain.core.Rule;
 import org.m2ling.domain.core.RuntimeItem;
 import org.m2ling.domain.core.Stakeholder;
 import org.m2ling.domain.core.Stream;
@@ -264,8 +264,8 @@ public class CoreAdapterFactory extends AdapterFactoryImpl {
 				return createActorAdapter();
 			}
 			@Override
-			public Adapter caseRoot(Root object) {
-				return createRootAdapter();
+			public Adapter caseRule(Rule object) {
+				return createRuleAdapter();
 			}
 			@Override
 			public Adapter defaultCase(EObject object) {
@@ -820,16 +820,16 @@ public class CoreAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.m2ling.domain.core.Root <em>Root</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.m2ling.domain.core.Rule <em>Rule</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.m2ling.domain.core.Root
+	 * @see org.m2ling.domain.core.Rule
 	 * @generated
 	 */
-	public Adapter createRootAdapter() {
+	public Adapter createRuleAdapter() {
 		return null;
 	}
 

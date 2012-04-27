@@ -39,6 +39,15 @@ public interface ParametersFactory extends EFactory {
 	ParameterValue createParameterValue();
 
 	/**
+	 * Returns a new object of class '<em>Parameter Definition</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Parameter Definition</em>'.
+	 * @generated
+	 */
+	ParameterDefinition createParameterDefinition();
+
+	/**
 	 * Returns a new object of class '<em>Param Def Overrider</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

@@ -9,6 +9,7 @@ import java.util.Collection;
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.Notifier;
+
 import org.eclipse.emf.edit.provider.ChangeNotifier;
 import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
 import org.eclipse.emf.edit.provider.ComposedAdapterFactory;
@@ -20,6 +21,7 @@ import org.eclipse.emf.edit.provider.IItemPropertySource;
 import org.eclipse.emf.edit.provider.INotifyChangedListener;
 import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
+
 import org.m2ling.domain.core.util.CoreAdapterFactory;
 
 /**
@@ -722,26 +724,26 @@ public class CoreItemProviderAdapterFactory extends CoreAdapterFactory implement
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link org.m2ling.domain.core.Root} instances.
+	 * This keeps track of the one adapter used for all {@link org.m2ling.domain.core.Rule} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected RootItemProvider rootItemProvider;
+	protected RuleItemProvider ruleItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link org.m2ling.domain.core.Root}.
+	 * This creates an adapter for a {@link org.m2ling.domain.core.Rule}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
-	public Adapter createRootAdapter() {
-		if (rootItemProvider == null) {
-			rootItemProvider = new RootItemProvider(this);
+	public Adapter createRuleAdapter() {
+		if (ruleItemProvider == null) {
+			ruleItemProvider = new RuleItemProvider(this);
 		}
 
-		return rootItemProvider;
+		return ruleItemProvider;
 	}
 
 	/**
@@ -871,7 +873,7 @@ public class CoreItemProviderAdapterFactory extends CoreAdapterFactory implement
 		if (activityTransitionItemProvider != null) activityTransitionItemProvider.dispose();
 		if (organisationalUnitItemProvider != null) organisationalUnitItemProvider.dispose();
 		if (actorItemProvider != null) actorItemProvider.dispose();
-		if (rootItemProvider != null) rootItemProvider.dispose();
+		if (ruleItemProvider != null) ruleItemProvider.dispose();
 	}
 
 }

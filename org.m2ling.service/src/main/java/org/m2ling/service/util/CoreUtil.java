@@ -9,13 +9,14 @@ import java.util.StringTokenizer;
 import java.util.logging.Logger;
 
 import org.m2ling.common.exceptions.NotFoundException;
+import org.m2ling.domain.Root;
 import org.m2ling.domain.core.HasTags;
-import org.m2ling.domain.core.Root;
 import org.m2ling.domain.core.Type;
 import org.m2ling.domain.core.ViewPoint;
 import org.m2ling.persistence.PersistenceManager;
 
 import com.google.inject.Inject;
+import com.google.inject.Singleton;
 
 /**
  * 
@@ -24,6 +25,7 @@ import com.google.inject.Inject;
  * @author Bertrand Florat <bertrand@florat.net>
  * 
  */
+@Singleton
 public class CoreUtil {
 
 	@Inject

@@ -48,7 +48,7 @@ public interface ParametersPackage extends EPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	String eNS_URI = "http://m2ling.org/parameters/1.0";
+	String eNS_URI = "http://m2ling.org/parameters/0.1";
 
 	/**
 	 * The package namespace name.
@@ -56,7 +56,7 @@ public interface ParametersPackage extends EPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	String eNS_PREFIX = "parameters";
+	String eNS_PREFIX = "m2ling_parameters";
 
 	/**
 	 * The singleton instance of the package.
@@ -75,6 +75,15 @@ public interface ParametersPackage extends EPackage {
 	 * @generated
 	 */
 	int PARAMETER_VALUE = 0;
+
+	/**
+	 * The feature id for the '<em><b>Comment</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PARAMETER_VALUE__COMMENT = CorePackage.HAS_COMMENT__COMMENT;
 
 	/**
 	 * The feature id for the '<em><b>Custom Properties</b></em>' reference.
@@ -130,6 +139,15 @@ public interface ParametersPackage extends EPackage {
 	 * @generated
 	 */
 	int PARAMETER_DEFINITION = 1;
+
+	/**
+	 * The feature id for the '<em><b>Comment</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PARAMETER_DEFINITION__COMMENT = CorePackage.HAS_COMMENT__COMMENT;
 
 	/**
 	 * The feature id for the '<em><b>Custom Properties</b></em>' reference.

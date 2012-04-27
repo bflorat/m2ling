@@ -3,7 +3,6 @@
  */
 package org.m2ling.domain.core;
 
-import org.eclipse.emf.ecore.EObject;
 
 /**
  * <!-- begin-user-doc -->
@@ -23,7 +22,7 @@ import org.eclipse.emf.ecore.EObject;
  * @model
  * @generated
  */
-public interface Link extends EObject {
+public interface Link extends HasComment, HasConstraints, HasCustomProperties, HasNameAndID, HasTags {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

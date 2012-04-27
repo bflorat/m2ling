@@ -9,6 +9,7 @@ import java.util.List;
 
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
+
 import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
 import org.eclipse.emf.edit.provider.IEditingDomainItemProvider;
 import org.eclipse.emf.edit.provider.IItemLabelProvider;
@@ -18,6 +19,7 @@ import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.ViewerNotification;
+
 import org.m2ling.domain.core.ActivityTransition;
 import org.m2ling.domain.core.CorePackage;
 
@@ -155,8 +157,10 @@ public class ActivityTransitionItemProvider
 	 */
 	@Override
 	public String getText(Object object) {
-		ActivityTransition activityTransition = (ActivityTransition)object;
-		return getString("_UI_ActivityTransition_type") + " " + activityTransition.getDate();
+		String label = ((ActivityTransition)object).getComment();
+		return label == null || label.length() == 0 ?
+			getString("_UI_ActivityTransition_type") :
+			getString("_UI_ActivityTransition_type") + " " + label;
 	}
 
 	/**

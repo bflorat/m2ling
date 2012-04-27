@@ -40,6 +40,8 @@ import org.eclipse.jface.viewers.Viewer;
 import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.PartInitException;
 
+import org.m2ling.domain.presentation.M2lingEditorPlugin;
+
 /**
  * This is the action bar contributor for the Core model editor.
  * <!-- begin-user-doc -->

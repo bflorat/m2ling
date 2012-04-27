@@ -80,30 +80,20 @@ public class ServiceImpl {
 	}
 
 	/**
-	 * Build a ServiceImpl, for testing purpose only.
+	 * Build a ServiceImpl with optional overridden modules
 	 * 
-	 * @param testModule
-	 *           : test-specific module configuration overriding production one
-	 * @param dependencies
-	 *           map of objects to be overridden by tests
+	 * @param additionalTestModules
+	 *           : test-specific modules configuration overriding production one
 	 */
-	protected ServiceImpl(Module additionalTestModule) {
+	protected ServiceImpl(Module... additionalTestModules) {
 		super();
 		// Override production bindings, create a new injector for the service layer and instantiate
 		// Required classes.
-		if (additionalTestModule != null) {
-			Module mergedModule = Modules.override(PRODUCTION_BINDINGS).with(additionalTestModule);
+		if (additionalTestModules != null) {
+			Module mergedModule = Modules.override(PRODUCTION_BINDINGS).with(additionalTestModules);
 			serviceLayerInjector = Guice.createInjector(mergedModule);
 		}
 		populateDependencies();
-	}
-
-	/**
-	 * Build a ServiceImpl, production usage, the persistence manager is instantiated from
-	 * serviceLayerInjector.
-	 */
-	protected ServiceImpl() {
-		this(null);
 	}
 
 	/**

@@ -13,8 +13,9 @@ import org.m2ling.domain.core.CorePackage;
 import org.m2ling.domain.core.HasTags;
 
 /**
- * <!-- begin-user-doc --> An implementation of the model object '<em><b>Has Tags</b></em>'. <!--
- * end-user-doc -->
+ * <!-- begin-user-doc -->
+ * An implementation of the model object '<em><b>Has Tags</b></em>'.
+ * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
@@ -26,7 +27,8 @@ import org.m2ling.domain.core.HasTags;
  */
 public abstract class HasTagsImpl extends EObjectImpl implements HasTags {
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	public static final String copyright = "Copyright (C) 2012 Bertrand Florat";
@@ -42,7 +44,8 @@ public abstract class HasTagsImpl extends EObjectImpl implements HasTags {
 	protected EList<String> tags;
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	protected HasTagsImpl() {
@@ -50,7 +53,8 @@ public abstract class HasTagsImpl extends EObjectImpl implements HasTags {
 	}
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
@@ -59,7 +63,8 @@ public abstract class HasTagsImpl extends EObjectImpl implements HasTags {
 	}
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	public EList<String> getTags() {
@@ -70,7 +75,8 @@ public abstract class HasTagsImpl extends EObjectImpl implements HasTags {
 	}
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
@@ -83,7 +89,8 @@ public abstract class HasTagsImpl extends EObjectImpl implements HasTags {
 	}
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@SuppressWarnings("unchecked")
@@ -99,7 +106,8 @@ public abstract class HasTagsImpl extends EObjectImpl implements HasTags {
 	}
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
@@ -113,7 +121,8 @@ public abstract class HasTagsImpl extends EObjectImpl implements HasTags {
 	}
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
@@ -126,7 +135,8 @@ public abstract class HasTagsImpl extends EObjectImpl implements HasTags {
 	}
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
@@ -140,4 +150,4 @@ public abstract class HasTagsImpl extends EObjectImpl implements HasTags {
 		return result.toString();
 	}
 
-} // HasTagsImpl
+} //HasTagsImpl

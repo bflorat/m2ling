@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<m2ling_domain:Root xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:m2ling_domain="http://m2ling.org/0.1">
+  <viewPoints label="" name="viewPointTag_">
+    <tags>DEV1</tags>
+  </viewPoints>
+  <viewPoints label="" name="viewPointTag_DEV1">
+    <tags>DEV1</tags>
+  </viewPoints>
+  <viewPoints label="" name="viewPointTag_DEV1_DEV2">
+    <tags>DEV1</tags>
+    <tags>DEV2</tags>
+  </viewPoints>
+</m2ling_domain:Root>
