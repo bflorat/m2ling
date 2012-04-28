@@ -12,5 +12,6 @@
 	<classpathentry combineaccessrules="false" kind="src" path="/org.m2ling.presentation"/>
 	<classpathentry kind="lib" path="/data/projects/m2ling/m2ling.git/libs/org.eclipse.emf.common_2.7.0.v20120127-1122.jar"/>
 	<classpathentry kind="lib" path="/data/projects/m2ling/m2ling.git/libs/org.eclipse.emf.ecore_2.7.0.v20120127-1122.jar"/>
+	<classpathentry kind="lib" path="/prog/api/org.hibernate_3.6.0.201107071603/hibernate3.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

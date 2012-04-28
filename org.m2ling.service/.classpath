@@ -10,5 +10,17 @@
 	<classpathentry kind="lib" path="/prog/eclipse-modeling-3.7/plugins/org.eclipse.emf.common_2.7.0.v20120127-1122.jar"/>
 	<classpathentry exported="true" kind="lib" path="/prog/api/guava-11.0.2.jar"/>
 	<classpathentry kind="lib" path="/data/projects/m2ling/m2ling.git/libs/org.eclipse.emf.ecore.xmi_2.7.0.v20120127-1122.jar"/>
+	<classpathentry kind="lib" path="/data/projects/m2ling/m2ling.git/libs/org.eclipse.emf.teneo.hibernate_1.1.2.v201006151458.jar"/>
+	<classpathentry kind="lib" path="/data/projects/m2ling/m2ling.git/libs/org.eclipse.emf.teneo_1.1.2.v201006151458.jar"/>
+	<classpathentry kind="lib" path="/prog/api/org.hibernate_3.6.0.201107071603/antlr-2.7.6.jar"/>
+	<classpathentry kind="lib" path="/prog/api/org.hibernate_3.6.0.201107071603/c3p0-0.9.1.jar"/>
+	<classpathentry kind="lib" path="/prog/api/org.hibernate_3.6.0.201107071603/commons-collections-3.1.jar"/>
+	<classpathentry kind="lib" path="/prog/api/org.hibernate_3.6.0.201107071603/ehcache-1.5.0.jar"/>
+	<classpathentry kind="lib" path="/prog/api/org.hibernate_3.6.0.201107071603/hibernate3.6-src.jar"/>
+	<classpathentry kind="lib" path="/prog/api/org.hibernate_3.6.0.201107071603/hibernate3.jar"/>
+	<classpathentry kind="lib" path="/prog/api/org.hibernate_3.6.0.201107071603/javassist-3.12.0.GA.jar"/>
+	<classpathentry kind="lib" path="/prog/api/org.hibernate_3.6.0.201107071603/jta-1.1.jar"/>
+	<classpathentry kind="lib" path="/prog/api/org.hibernate_3.6.0.201107071603/slf4j-api-1.6.1.jar"/>
+	<classpathentry kind="lib" path="/prog/api/org.hibernate_3.6.0.201107071603/slf4j-log4j12-1.6.1.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

@@ -68,7 +68,7 @@ public class ServiceImpl {
 	/** Utilities class */
 	@Inject
 	protected CoreUtil util;
-
+	
 	/**
 	 * Instantiate top level required dependencies using serviceLayerInjector injector.
 	 */

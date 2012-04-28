@@ -8,6 +8,7 @@ dependencies(){
  compile(project(':org.m2ling.domain'));
  compile(project(':org.m2ling.common'));
  compile(files("../libs/org.eclipse.emf.ecore.xmi_2.7.0.v20120127-1122.jar"));
+ compile('org.hibernate:hibernate-core:3.6.0.Final');
 }
 
 

@@ -88,7 +88,7 @@ public class Utils {
 	 * @param clazz
 	 *           the class to instantiate
 	 * @param module
-	 *           optional overidden module, null if no module overidden.
+	 *           optional overridden module, null if no module overridden.
 	 * @return an instance of clazz
 	 * @throws IllegalArgumentException
 	 *            if an error occurred

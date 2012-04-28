@@ -20,7 +20,7 @@ public class TagsFixture extends BindedConcordionTestCase {
 
 	public TagsFixture() {
 		super();
-		serviceTag = new TagServiceImpl(new FixturesModule("samples/tests.m2ling"));
+		serviceTag = new TagServiceImpl(new FixturesModule("src/specs/resources/mocks/tests.m2ling"));
 	}
 
 	/**

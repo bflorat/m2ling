@@ -11,8 +11,9 @@ subprojects(){
  defaultTasks('clean','build');
 
  repositories(){
-   mavenCentral();
+  mavenCentral name: 'additional maven repository', artifactUrls: ["https://repository.jboss.org/nexus/content/groups/public"]  
  }
+
 
  dependencies(){
   //main

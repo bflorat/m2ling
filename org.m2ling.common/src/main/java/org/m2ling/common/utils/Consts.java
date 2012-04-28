@@ -14,5 +14,8 @@ public class Consts {
 	
 	/** Tags separator **/
 	public static final char TAGS_SEPARATOR = ',';
-
+	
+	/** M2ling configuration home directory system variable name */
+	public static final String M2LING_HOME_VARIABLE_NAME = "M2LING_HOME";
+	
 }

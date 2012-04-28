@@ -9,13 +9,13 @@ defaultTasks('replaceInternalDefinition');
 dependencies() {
 	//tests
 	testCompile('org.concordion:concordion:1.4.2');
+	testCompile('org.hibernate:hibernate-core:3.6.0.Final');
 	testCompile(project(':org.m2ling.common'));
 	testCompile(project(':org.m2ling.service'));
 	testCompile(files("../org.m2ling.common/build/classes/test"));
 }
 
 File concordionOutputDir = file("${buildDir}/concordion-results");
-
 
 sourceSets{
 	test{
@@ -44,7 +44,6 @@ task buildSpecs(dependsOn:['clean', 'test'])<<{
 }
 
 Map internalDefinitionsAcronymMap = [:]
-
 
 task loadGlossary<<{
 	def glossary = new XmlParser().parse('glossary/m2ling.m2ling_glossary')

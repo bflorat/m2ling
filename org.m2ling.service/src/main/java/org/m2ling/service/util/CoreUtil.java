@@ -34,6 +34,8 @@ public class CoreUtil {
 	@Inject
 	private PersistenceManager pmanager;
 
+	
+
 	/**
 	 * Return a viewpoint denoted by the given name or null if none matches.
 	 * 
