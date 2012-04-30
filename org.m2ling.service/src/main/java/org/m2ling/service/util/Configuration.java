@@ -5,14 +5,17 @@ package org.m2ling.service.util;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import org.hibernate.cfg.Environment;
 import org.m2ling.common.utils.Consts;
 
 import com.google.common.base.Strings;
 import com.google.inject.Inject;
+import com.google.inject.Singleton;
 
 /**
  * 
@@ -21,9 +24,10 @@ import com.google.inject.Inject;
  * @author "Bertrand Florat <bertrand@florat.net>"
  * 
  */
+@Singleton
 public class Configuration {
 
-	private static final String CONF_FILENAME = "services_config.xml";
+	protected static final String CONF_FILENAME = "services_config.xml";
 
 	@Inject
 	private Logger logger;
@@ -34,14 +38,19 @@ public class Configuration {
 	/**
 	 * @param systemProperties
 	 *           a list of forced configuration entries
+	 * @param logger
+	 *           an associated logger (UT purpose only, the logger is field-injected otherwise)
 	 */
-	public Configuration(Properties systemProperties) {
+	public Configuration(Properties systemProperties, Logger logger) {
 		super();
 		this.systemProperties = systemProperties;
+		if (logger != null) {
+			this.logger = logger;
+		}
 	}
 
 	public Configuration() {
-		this(null);
+		this(null,null);
 	}
 
 	/**
@@ -67,6 +76,10 @@ public class Configuration {
 	 * If {@code M2LING_HOME} environment variable is set and configuration file exists and is
 	 * correct, we return its content.
 	 * </p>
+	 * <p>
+	 * If {@code M2LING_HOME} environment variable is set but the configuration file can't be found,
+	 * a default configuration file is written down and the default configuration is returned.
+	 * </p>
 	 * 
 	 * @throw IllegalStateException in all other cases
 	 * 
@@ -80,10 +93,21 @@ public class Configuration {
 			throw new IllegalStateException(Consts.M2LING_HOME_VARIABLE_NAME
 					+ " environement variable not set, configuration can't be loaded");
 		}
-		fileConf = new File(m2lingHome + File.pathSeparator + CONF_FILENAME);
+		fileConf = new File(m2lingHome + File.separator + CONF_FILENAME);
 		if (!fileConf.exists()) {
-			throw new IllegalStateException(Consts.M2LING_HOME_VARIABLE_NAME
-					+ " variable name defined but no corresponding " + fileConf.getAbsolutePath() + " file");
+			String msg = Consts.M2LING_HOME_VARIABLE_NAME + " variable name defined but no corresponding "
+					+ fileConf.getAbsolutePath() + " file";
+			Properties conf = null;
+			try {
+				conf = getDefaultConfiguration();
+				fileConf.getParentFile().mkdirs();
+				conf.storeToXML(new FileOutputStream(fileConf), "M2ling service layer configuration file.");
+				logger.info(msg + ". Default file created.");
+				return conf;
+			} catch (Exception e) {
+				logger.log(Level.SEVERE, fileConf.getAbsolutePath() + " file can't be written", e);
+				throw new IllegalStateException(msg);
+			}
 		} else {
 			try {
 				result = new Properties();
@@ -94,6 +118,22 @@ public class Configuration {
 				throw new IllegalStateException(msg, e);
 			}
 		}
+		return result;
+	}
+
+	/**
+	 * Return a set of default configuration values.
+	 * 
+	 * @return
+	 */
+	public Properties getDefaultConfiguration() {
+		String home = System.getProperty("user.home");
+		Properties result = new Properties();
+		result.put(Environment.DRIVER, "org.h2.Driver");
+		result.put(Environment.USER, "admin");
+		result.put(Environment.URL, "jdbc:h2:" + home + "/databases/m2ling");
+		result.put(Environment.PASS, "changeoninstall");
+		result.put(Environment.DIALECT, org.hibernate.dialect.H2Dialect.class.getName());
 		return result;
 	}
 

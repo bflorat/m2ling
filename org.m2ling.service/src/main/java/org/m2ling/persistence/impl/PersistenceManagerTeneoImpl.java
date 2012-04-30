@@ -17,7 +17,8 @@ import com.google.inject.Singleton;
 @Singleton
 public class PersistenceManagerTeneoImpl implements PersistenceManager {
 
-	private static Root root;
+	/**M2ling model root element */
+	private Root root;
 
 	/*
 	 * (non-Javadoc)

@@ -1,11 +1,11 @@
 package org.m2ling.service.principles.impl;
 
+import org.concordion.integration.junit3.ConcordionTestCase;
 import org.m2ling.common.dto.core.ViewPointDTO;
 import org.m2ling.service.principles.ViewPointService;
-import org.m2ling.specs.BindedConcordionTestCase;
 import org.m2ling.specs.FixturesModule;
 
-public class CreateViewPointFixture extends BindedConcordionTestCase {
+public class CreateViewPointFixture extends ConcordionTestCase {
 	ViewPointService service;
 
 	public CreateViewPointFixture() {

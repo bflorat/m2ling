@@ -19,7 +19,8 @@ import com.google.inject.Singleton;
 @Singleton
 public class PersistenceManagerInMemoryImpl implements PersistenceManager {
 
-	private static Root root = DomainFactory.eINSTANCE.createRoot();
+	/**M2ling model root element */
+	private Root root = DomainFactory.eINSTANCE.createRoot();
 
 	/*
 	 * (non-Javadoc)

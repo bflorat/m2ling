@@ -32,7 +32,9 @@ public class PersistenceManagerXMIImpl implements PersistenceManager {
 	/** Resource root element */
 	private Root root;
 
-	private final Logger logger;
+	/** A logger automatically injected by Guice */
+	@Inject
+	private Logger logger;
 
 	@Inject
 	protected PersistenceManagerXMIImpl(@Named("XMI_FILE") URI mainXMLfileURI, Logger logger) throws IOException {

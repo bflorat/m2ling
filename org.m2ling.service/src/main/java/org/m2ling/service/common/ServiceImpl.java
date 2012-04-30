@@ -4,6 +4,7 @@
 package org.m2ling.service.common;
 
 import org.m2ling.persistence.PersistenceManager;
+import org.m2ling.service.util.Configuration;
 import org.m2ling.service.util.CoreUtil;
 import org.m2ling.service.util.DTOConverter;
 
@@ -68,15 +69,20 @@ public class ServiceImpl {
 	/** Utilities class */
 	@Inject
 	protected CoreUtil util;
-	
+
+	/** Configuration */
+	@Inject
+	protected Configuration conf;
+
 	/**
-	 * Instantiate top level required dependencies using serviceLayerInjector injector.
+	 * Inject on-demand top level required dependencies using serviceLayerInjector injector.
 	 */
 	private void populateDependencies() {
 		pmanager = serviceLayerInjector.getInstance(PersistenceManager.class);
 		fromDTO = serviceLayerInjector.getInstance(DTOConverter.FromDTO.class);
 		toDTO = serviceLayerInjector.getInstance(DTOConverter.ToDTO.class);
 		util = serviceLayerInjector.getInstance(CoreUtil.class);
+		conf = serviceLayerInjector.getInstance(Configuration.class);
 	}
 
 	/**
