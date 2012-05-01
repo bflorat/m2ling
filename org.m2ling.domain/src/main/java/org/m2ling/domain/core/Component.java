@@ -71,7 +71,7 @@ public interface Component extends ComponentGroup {
 	 * @return the value of the '<em>Sub Components</em>' reference list.
 	 * @see org.m2ling.domain.core.CorePackage#getComponent_SubComponents()
 	 * @see org.m2ling.domain.core.Component#getParent
-	 * @model opposite="parent" keys="iD"
+	 * @model opposite="parent" keys="id"
 	 * @generated
 	 */
 	EList<Component> getSubComponents();
@@ -89,7 +89,7 @@ public interface Component extends ComponentGroup {
 	 * @see #setParent(Component)
 	 * @see org.m2ling.domain.core.CorePackage#getComponent_Parent()
 	 * @see org.m2ling.domain.core.Component#getSubComponents
-	 * @model opposite="subComponents" keys="iD"
+	 * @model opposite="subComponents" keys="id"
 	 * @generated
 	 */
 	Component getParent();
@@ -115,7 +115,7 @@ public interface Component extends ComponentGroup {
 	 * @return the value of the '<em>Engine</em>' reference.
 	 * @see #setEngine(Component)
 	 * @see org.m2ling.domain.core.CorePackage#getComponent_Engine()
-	 * @model keys="iD"
+	 * @model keys="id"
 	 * @generated
 	 */
 	Component getEngine();

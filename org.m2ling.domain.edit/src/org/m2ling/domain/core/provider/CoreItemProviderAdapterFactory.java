@@ -126,6 +126,29 @@ public class CoreItemProviderAdapterFactory extends CoreAdapterFactory implement
 	}
 
 	/**
+	 * This keeps track of the one adapter used for all {@link org.m2ling.domain.core.HasNameAndID} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected HasNameAndIDItemProvider hasNameAndIDItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link org.m2ling.domain.core.HasNameAndID}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createHasNameAndIDAdapter() {
+		if (hasNameAndIDItemProvider == null) {
+			hasNameAndIDItemProvider = new HasNameAndIDItemProvider(this);
+		}
+
+		return hasNameAndIDItemProvider;
+	}
+
+	/**
 	 * This keeps track of the one adapter used for all {@link org.m2ling.domain.core.ComponentNode} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -847,6 +870,7 @@ public class CoreItemProviderAdapterFactory extends CoreAdapterFactory implement
 	public void dispose() {
 		if (componentTypeItemProvider != null) componentTypeItemProvider.dispose();
 		if (componentItemProvider != null) componentItemProvider.dispose();
+		if (hasNameAndIDItemProvider != null) hasNameAndIDItemProvider.dispose();
 		if (componentNodeItemProvider != null) componentNodeItemProvider.dispose();
 		if (viewPointItemProvider != null) viewPointItemProvider.dispose();
 		if (componentGroupItemProvider != null) componentGroupItemProvider.dispose();

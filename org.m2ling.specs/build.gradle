@@ -28,8 +28,6 @@ sourceSets{
 
 test {
 	systemProperties('concordion.output.dir': concordionOutputDir);
-	// Exclude classes from org.m2ling.specs : concordion integration code, not actual tests
-	exclude 'org/m2ling/specs/*.*'
 }
 
 

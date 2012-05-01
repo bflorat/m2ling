@@ -31,16 +31,19 @@ public class ConfigurationTest {
 		assertEquals(conf.getSystemProperty(Environment.DRIVER), "foo");
 	}
 
-	@Test(expected = IllegalStateException.class)
+	@Test
 	public void envVariableUnset() {
-		new Configuration().getSystemProperty(Environment.DRIVER);
+		Configuration conf = new Configuration(null, Logger.getAnonymousLogger());
+		assertEquals(conf.getSystemProperty(Environment.DRIVER), "org.h2.Driver");
+		assertTrue(new File(TestHelper.getUTStorage().getAbsolutePath() + File.separator + Configuration.CONF_FILENAME)
+				.exists());
 	}
 
 	@Test
 	public void envVariableSetNoFile() {
 		Map<String, String> newenv = new HashMap<String, String>();
 		newenv.put(Consts.M2LING_HOME_VARIABLE_NAME, TestHelper.getUTStorage().getAbsolutePath());
-		TestHelper.set(newenv);
+		TestHelper.setEnv(newenv);
 		assertEquals(System.getenv(Consts.M2LING_HOME_VARIABLE_NAME), TestHelper.getUTStorage().getAbsolutePath());
 		Configuration conf = new Configuration(null, Logger.getAnonymousLogger());
 		assertEquals(conf.getSystemProperty(Environment.DRIVER), "org.h2.Driver");

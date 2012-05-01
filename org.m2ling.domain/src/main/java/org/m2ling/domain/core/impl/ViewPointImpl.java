@@ -27,10 +27,10 @@ import org.m2ling.domain.core.ViewPoint;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.m2ling.domain.core.impl.ViewPointImpl#getComponentTypes <em>Component Types</em>}</li>
- *   <li>{@link org.m2ling.domain.core.impl.ViewPointImpl#getActivities <em>Activities</em>}</li>
- *   <li>{@link org.m2ling.domain.core.impl.ViewPointImpl#getBaseViewpoint <em>Base Viewpoint</em>}</li>
  *   <li>{@link org.m2ling.domain.core.impl.ViewPointImpl#getName <em>Name</em>}</li>
+ *   <li>{@link org.m2ling.domain.core.impl.ViewPointImpl#getBaseViewpoint <em>Base Viewpoint</em>}</li>
+ *   <li>{@link org.m2ling.domain.core.impl.ViewPointImpl#getActivities <em>Activities</em>}</li>
+ *   <li>{@link org.m2ling.domain.core.impl.ViewPointImpl#getComponentTypes <em>Component Types</em>}</li>
  *   <li>{@link org.m2ling.domain.core.impl.ViewPointImpl#getLinkTypes <em>Link Types</em>}</li>
  *   <li>{@link org.m2ling.domain.core.impl.ViewPointImpl#getRules <em>Rules</em>}</li>
  * </ul>
@@ -45,36 +45,6 @@ public class ViewPointImpl extends ConceptItemImpl implements ViewPoint {
 	 * @generated
 	 */
 	public static final String copyright = "Copyright (C) 2012 Bertrand Florat";
-
-	/**
-	 * The cached value of the '{@link #getComponentTypes() <em>Component Types</em>}' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getComponentTypes()
-	 * @generated
-	 * @ordered
-	 */
-	protected EList<ComponentType> componentTypes;
-
-	/**
-	 * The cached value of the '{@link #getActivities() <em>Activities</em>}' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getActivities()
-	 * @generated
-	 * @ordered
-	 */
-	protected EList<Activity> activities;
-
-	/**
-	 * The cached value of the '{@link #getBaseViewpoint() <em>Base Viewpoint</em>}' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getBaseViewpoint()
-	 * @generated
-	 * @ordered
-	 */
-	protected ViewPoint baseViewpoint;
 
 	/**
 	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
@@ -95,6 +65,36 @@ public class ViewPointImpl extends ConceptItemImpl implements ViewPoint {
 	 * @ordered
 	 */
 	protected String name = NAME_EDEFAULT;
+
+	/**
+	 * The cached value of the '{@link #getBaseViewpoint() <em>Base Viewpoint</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getBaseViewpoint()
+	 * @generated
+	 * @ordered
+	 */
+	protected ViewPoint baseViewpoint;
+
+	/**
+	 * The cached value of the '{@link #getActivities() <em>Activities</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getActivities()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<Activity> activities;
+
+	/**
+	 * The cached value of the '{@link #getComponentTypes() <em>Component Types</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getComponentTypes()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<ComponentType> componentTypes;
 
 	/**
 	 * The cached value of the '{@link #getLinkTypes() <em>Link Types</em>}' containment reference list.
@@ -250,10 +250,10 @@ public class ViewPointImpl extends ConceptItemImpl implements ViewPoint {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case CorePackage.VIEW_POINT__COMPONENT_TYPES:
-				return ((InternalEList<?>)getComponentTypes()).basicRemove(otherEnd, msgs);
 			case CorePackage.VIEW_POINT__ACTIVITIES:
 				return ((InternalEList<?>)getActivities()).basicRemove(otherEnd, msgs);
+			case CorePackage.VIEW_POINT__COMPONENT_TYPES:
+				return ((InternalEList<?>)getComponentTypes()).basicRemove(otherEnd, msgs);
 			case CorePackage.VIEW_POINT__LINK_TYPES:
 				return ((InternalEList<?>)getLinkTypes()).basicRemove(otherEnd, msgs);
 			case CorePackage.VIEW_POINT__RULES:
@@ -270,15 +270,15 @@ public class ViewPointImpl extends ConceptItemImpl implements ViewPoint {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case CorePackage.VIEW_POINT__COMPONENT_TYPES:
-				return getComponentTypes();
-			case CorePackage.VIEW_POINT__ACTIVITIES:
-				return getActivities();
+			case CorePackage.VIEW_POINT__NAME:
+				return getName();
 			case CorePackage.VIEW_POINT__BASE_VIEWPOINT:
 				if (resolve) return getBaseViewpoint();
 				return basicGetBaseViewpoint();
-			case CorePackage.VIEW_POINT__NAME:
-				return getName();
+			case CorePackage.VIEW_POINT__ACTIVITIES:
+				return getActivities();
+			case CorePackage.VIEW_POINT__COMPONENT_TYPES:
+				return getComponentTypes();
 			case CorePackage.VIEW_POINT__LINK_TYPES:
 				return getLinkTypes();
 			case CorePackage.VIEW_POINT__RULES:
@@ -296,19 +296,19 @@ public class ViewPointImpl extends ConceptItemImpl implements ViewPoint {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case CorePackage.VIEW_POINT__COMPONENT_TYPES:
-				getComponentTypes().clear();
-				getComponentTypes().addAll((Collection<? extends ComponentType>)newValue);
+			case CorePackage.VIEW_POINT__NAME:
+				setName((String)newValue);
+				return;
+			case CorePackage.VIEW_POINT__BASE_VIEWPOINT:
+				setBaseViewpoint((ViewPoint)newValue);
 				return;
 			case CorePackage.VIEW_POINT__ACTIVITIES:
 				getActivities().clear();
 				getActivities().addAll((Collection<? extends Activity>)newValue);
 				return;
-			case CorePackage.VIEW_POINT__BASE_VIEWPOINT:
-				setBaseViewpoint((ViewPoint)newValue);
-				return;
-			case CorePackage.VIEW_POINT__NAME:
-				setName((String)newValue);
+			case CorePackage.VIEW_POINT__COMPONENT_TYPES:
+				getComponentTypes().clear();
+				getComponentTypes().addAll((Collection<? extends ComponentType>)newValue);
 				return;
 			case CorePackage.VIEW_POINT__LINK_TYPES:
 				getLinkTypes().clear();
@@ -330,17 +330,17 @@ public class ViewPointImpl extends ConceptItemImpl implements ViewPoint {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case CorePackage.VIEW_POINT__COMPONENT_TYPES:
-				getComponentTypes().clear();
-				return;
-			case CorePackage.VIEW_POINT__ACTIVITIES:
-				getActivities().clear();
+			case CorePackage.VIEW_POINT__NAME:
+				setName(NAME_EDEFAULT);
 				return;
 			case CorePackage.VIEW_POINT__BASE_VIEWPOINT:
 				setBaseViewpoint((ViewPoint)null);
 				return;
-			case CorePackage.VIEW_POINT__NAME:
-				setName(NAME_EDEFAULT);
+			case CorePackage.VIEW_POINT__ACTIVITIES:
+				getActivities().clear();
+				return;
+			case CorePackage.VIEW_POINT__COMPONENT_TYPES:
+				getComponentTypes().clear();
 				return;
 			case CorePackage.VIEW_POINT__LINK_TYPES:
 				getLinkTypes().clear();
@@ -360,14 +360,14 @@ public class ViewPointImpl extends ConceptItemImpl implements ViewPoint {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case CorePackage.VIEW_POINT__COMPONENT_TYPES:
-				return componentTypes != null && !componentTypes.isEmpty();
-			case CorePackage.VIEW_POINT__ACTIVITIES:
-				return activities != null && !activities.isEmpty();
-			case CorePackage.VIEW_POINT__BASE_VIEWPOINT:
-				return baseViewpoint != null;
 			case CorePackage.VIEW_POINT__NAME:
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
+			case CorePackage.VIEW_POINT__BASE_VIEWPOINT:
+				return baseViewpoint != null;
+			case CorePackage.VIEW_POINT__ACTIVITIES:
+				return activities != null && !activities.isEmpty();
+			case CorePackage.VIEW_POINT__COMPONENT_TYPES:
+				return componentTypes != null && !componentTypes.isEmpty();
 			case CorePackage.VIEW_POINT__LINK_TYPES:
 				return linkTypes != null && !linkTypes.isEmpty();
 			case CorePackage.VIEW_POINT__RULES:

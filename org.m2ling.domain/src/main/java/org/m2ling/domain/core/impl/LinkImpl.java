@@ -29,7 +29,7 @@ import org.m2ling.domain.core.LinkType;
  * The following features are implemented:
  * <ul>
  *   <li>{@link org.m2ling.domain.core.impl.LinkImpl#getCustomProperties <em>Custom Properties</em>}</li>
- *   <li>{@link org.m2ling.domain.core.impl.LinkImpl#getID <em>ID</em>}</li>
+ *   <li>{@link org.m2ling.domain.core.impl.LinkImpl#getId <em>Id</em>}</li>
  *   <li>{@link org.m2ling.domain.core.impl.LinkImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.m2ling.domain.core.impl.LinkImpl#getTags <em>Tags</em>}</li>
  *   <li>{@link org.m2ling.domain.core.impl.LinkImpl#getType <em>Type</em>}</li>
@@ -59,24 +59,24 @@ public class LinkImpl extends HasCommentImpl implements Link {
 	protected CustomProperty customProperties;
 
 	/**
-	 * The default value of the '{@link #getID() <em>ID</em>}' attribute.
+	 * The default value of the '{@link #getId() <em>Id</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getID()
+	 * @see #getId()
 	 * @generated
 	 * @ordered
 	 */
 	protected static final String ID_EDEFAULT = "";
 
 	/**
-	 * The cached value of the '{@link #getID() <em>ID</em>}' attribute.
+	 * The cached value of the '{@link #getId() <em>Id</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getID()
+	 * @see #getId()
 	 * @generated
 	 * @ordered
 	 */
-	protected String iD = ID_EDEFAULT;
+	protected String id = ID_EDEFAULT;
 
 	/**
 	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
@@ -209,8 +209,20 @@ public class LinkImpl extends HasCommentImpl implements Link {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public String getID() {
-		return iD;
+	public String getId() {
+		return id;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setId(String newId) {
+		String oldId = id;
+		id = newId;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, CorePackage.LINK__ID, oldId, id));
 	}
 
 	/**
@@ -397,7 +409,7 @@ public class LinkImpl extends HasCommentImpl implements Link {
 				if (resolve) return getCustomProperties();
 				return basicGetCustomProperties();
 			case CorePackage.LINK__ID:
-				return getID();
+				return getId();
 			case CorePackage.LINK__NAME:
 				return getName();
 			case CorePackage.LINK__TAGS:
@@ -426,6 +438,9 @@ public class LinkImpl extends HasCommentImpl implements Link {
 		switch (featureID) {
 			case CorePackage.LINK__CUSTOM_PROPERTIES:
 				setCustomProperties((CustomProperty)newValue);
+				return;
+			case CorePackage.LINK__ID:
+				setId((String)newValue);
 				return;
 			case CorePackage.LINK__NAME:
 				setName((String)newValue);
@@ -458,6 +473,9 @@ public class LinkImpl extends HasCommentImpl implements Link {
 			case CorePackage.LINK__CUSTOM_PROPERTIES:
 				setCustomProperties((CustomProperty)null);
 				return;
+			case CorePackage.LINK__ID:
+				setId(ID_EDEFAULT);
+				return;
 			case CorePackage.LINK__NAME:
 				unsetName();
 				return;
@@ -488,7 +506,7 @@ public class LinkImpl extends HasCommentImpl implements Link {
 			case CorePackage.LINK__CUSTOM_PROPERTIES:
 				return customProperties != null;
 			case CorePackage.LINK__ID:
-				return ID_EDEFAULT == null ? iD != null : !ID_EDEFAULT.equals(iD);
+				return ID_EDEFAULT == null ? id != null : !ID_EDEFAULT.equals(id);
 			case CorePackage.LINK__NAME:
 				return isSetName();
 			case CorePackage.LINK__TAGS:
@@ -581,8 +599,8 @@ public class LinkImpl extends HasCommentImpl implements Link {
 		if (eIsProxy()) return super.toString();
 
 		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (iD: ");
-		result.append(iD);
+		result.append(" (id: ");
+		result.append(id);
 		result.append(", name: ");
 		if (nameESet) result.append(name); else result.append("<unset>");
 		result.append(", tags: ");

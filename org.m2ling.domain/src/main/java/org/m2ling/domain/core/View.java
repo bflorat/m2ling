@@ -59,7 +59,7 @@ public interface View extends ArchitectureItem {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Components</em>' containment reference list.
 	 * @see org.m2ling.domain.core.CorePackage#getView_Components()
-	 * @model containment="true" keys="iD"
+	 * @model containment="true" keys="id"
 	 * @generated
 	 */
 	EList<Component> getComponents();
@@ -91,7 +91,7 @@ public interface View extends ArchitectureItem {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Links</em>' containment reference list.
 	 * @see org.m2ling.domain.core.CorePackage#getView_Links()
-	 * @model containment="true" keys="iD"
+	 * @model containment="true" keys="id"
 	 * @generated
 	 */
 	EList<Link> getLinks();

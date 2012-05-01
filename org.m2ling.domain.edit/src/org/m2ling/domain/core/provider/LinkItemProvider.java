@@ -66,7 +66,7 @@ public class LinkItemProvider
 			super.getPropertyDescriptors(object);
 
 			addCustomPropertiesPropertyDescriptor(object);
-			addIDPropertyDescriptor(object);
+			addIdPropertyDescriptor(object);
 			addNamePropertyDescriptor(object);
 			addTagsPropertyDescriptor(object);
 			addTypePropertyDescriptor(object);
@@ -99,20 +99,20 @@ public class LinkItemProvider
 	}
 
 	/**
-	 * This adds a property descriptor for the ID feature.
+	 * This adds a property descriptor for the Id feature.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected void addIDPropertyDescriptor(Object object) {
+	protected void addIdPropertyDescriptor(Object object) {
 		itemPropertyDescriptors.add
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
-				 getString("_UI_HasNameAndID_iD_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_HasNameAndID_iD_feature", "_UI_HasNameAndID_type"),
+				 getString("_UI_HasNameAndID_id_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_HasNameAndID_id_feature", "_UI_HasNameAndID_type"),
 				 CorePackage.Literals.HAS_NAME_AND_ID__ID,
-				 false,
+				 true,
 				 false,
 				 false,
 				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,

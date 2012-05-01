@@ -194,7 +194,7 @@ public interface CorePackage extends EPackage {
 	int COMPONENT_TYPE__LABEL = CONCEPT_ITEM__LABEL;
 
 	/**
-	 * The feature id for the '<em><b>ID</b></em>' attribute.
+	 * The feature id for the '<em><b>Id</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -267,7 +267,7 @@ public interface CorePackage extends EPackage {
 	int HAS_NAME_AND_ID = 2;
 
 	/**
-	 * The feature id for the '<em><b>ID</b></em>' attribute.
+	 * The feature id for the '<em><b>Id</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -304,7 +304,7 @@ public interface CorePackage extends EPackage {
 	int ARCHITECTURE_ITEM = 7;
 
 	/**
-	 * The feature id for the '<em><b>ID</b></em>' attribute.
+	 * The feature id for the '<em><b>Id</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -368,7 +368,7 @@ public interface CorePackage extends EPackage {
 	int COMPONENT_GROUP = 5;
 
 	/**
-	 * The feature id for the '<em><b>ID</b></em>' attribute.
+	 * The feature id for the '<em><b>Id</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -441,7 +441,7 @@ public interface CorePackage extends EPackage {
 	int COMPONENT = 1;
 
 	/**
-	 * The feature id for the '<em><b>ID</b></em>' attribute.
+	 * The feature id for the '<em><b>Id</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -550,7 +550,7 @@ public interface CorePackage extends EPackage {
 	int RUNTIME_ITEM = 9;
 
 	/**
-	 * The feature id for the '<em><b>ID</b></em>' attribute.
+	 * The feature id for the '<em><b>Id</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -614,7 +614,7 @@ public interface CorePackage extends EPackage {
 	int COMPONENT_NODE_GROUP = 6;
 
 	/**
-	 * The feature id for the '<em><b>ID</b></em>' attribute.
+	 * The feature id for the '<em><b>Id</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -687,7 +687,7 @@ public interface CorePackage extends EPackage {
 	int COMPONENT_NODE = 3;
 
 	/**
-	 * The feature id for the '<em><b>ID</b></em>' attribute.
+	 * The feature id for the '<em><b>Id</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -832,22 +832,13 @@ public interface CorePackage extends EPackage {
 	int VIEW_POINT__LABEL = CONCEPT_ITEM__LABEL;
 
 	/**
-	 * The feature id for the '<em><b>Component Types</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int VIEW_POINT__COMPONENT_TYPES = CONCEPT_ITEM_FEATURE_COUNT + 0;
-
-	/**
-	 * The feature id for the '<em><b>Activities</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int VIEW_POINT__ACTIVITIES = CONCEPT_ITEM_FEATURE_COUNT + 1;
+	int VIEW_POINT__NAME = CONCEPT_ITEM_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Base Viewpoint</b></em>' reference.
@@ -856,16 +847,25 @@ public interface CorePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int VIEW_POINT__BASE_VIEWPOINT = CONCEPT_ITEM_FEATURE_COUNT + 2;
+	int VIEW_POINT__BASE_VIEWPOINT = CONCEPT_ITEM_FEATURE_COUNT + 1;
 
 	/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * The feature id for the '<em><b>Activities</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int VIEW_POINT__NAME = CONCEPT_ITEM_FEATURE_COUNT + 3;
+	int VIEW_POINT__ACTIVITIES = CONCEPT_ITEM_FEATURE_COUNT + 2;
+
+	/**
+	 * The feature id for the '<em><b>Component Types</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VIEW_POINT__COMPONENT_TYPES = CONCEPT_ITEM_FEATURE_COUNT + 3;
 
 	/**
 	 * The feature id for the '<em><b>Link Types</b></em>' containment reference list.
@@ -905,7 +905,7 @@ public interface CorePackage extends EPackage {
 	int VIEW = 10;
 
 	/**
-	 * The feature id for the '<em><b>ID</b></em>' attribute.
+	 * The feature id for the '<em><b>Id</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -1116,7 +1116,7 @@ public interface CorePackage extends EPackage {
 	int LINK_TYPE__LABEL = CONCEPT_ITEM__LABEL;
 
 	/**
-	 * The feature id for the '<em><b>ID</b></em>' attribute.
+	 * The feature id for the '<em><b>Id</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -1189,7 +1189,7 @@ public interface CorePackage extends EPackage {
 	int LINK__CUSTOM_PROPERTIES = HAS_COMMENT_FEATURE_COUNT + 0;
 
 	/**
-	 * The feature id for the '<em><b>ID</b></em>' attribute.
+	 * The feature id for the '<em><b>Id</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -1346,7 +1346,7 @@ public interface CorePackage extends EPackage {
 	int STAKEHOLDER = 20;
 
 	/**
-	 * The feature id for the '<em><b>ID</b></em>' attribute.
+	 * The feature id for the '<em><b>Id</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -1729,7 +1729,7 @@ public interface CorePackage extends EPackage {
 	int ACTIVITY = 34;
 
 	/**
-	 * The feature id for the '<em><b>ID</b></em>' attribute.
+	 * The feature id for the '<em><b>Id</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -1866,7 +1866,7 @@ public interface CorePackage extends EPackage {
 	int ORGANISATIONAL_UNIT__CUSTOM_PROPERTIES = HAS_COMMENT_FEATURE_COUNT + 0;
 
 	/**
-	 * The feature id for the '<em><b>ID</b></em>' attribute.
+	 * The feature id for the '<em><b>Id</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -2226,15 +2226,15 @@ public interface CorePackage extends EPackage {
 	EClass getHasNameAndID();
 
 	/**
-	 * Returns the meta object for the attribute '{@link org.m2ling.domain.core.HasNameAndID#getID <em>ID</em>}'.
+	 * Returns the meta object for the attribute '{@link org.m2ling.domain.core.HasNameAndID#getId <em>Id</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>ID</em>'.
-	 * @see org.m2ling.domain.core.HasNameAndID#getID()
+	 * @return the meta object for the attribute '<em>Id</em>'.
+	 * @see org.m2ling.domain.core.HasNameAndID#getId()
 	 * @see #getHasNameAndID()
 	 * @generated
 	 */
-	EAttribute getHasNameAndID_ID();
+	EAttribute getHasNameAndID_Id();
 
 	/**
 	 * Returns the meta object for the attribute '{@link org.m2ling.domain.core.HasNameAndID#getName <em>Name</em>}'.
@@ -3324,12 +3324,12 @@ public interface CorePackage extends EPackage {
 		EClass HAS_NAME_AND_ID = eINSTANCE.getHasNameAndID();
 
 		/**
-		 * The meta object literal for the '<em><b>ID</b></em>' attribute feature.
+		 * The meta object literal for the '<em><b>Id</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute HAS_NAME_AND_ID__ID = eINSTANCE.getHasNameAndID_ID();
+		EAttribute HAS_NAME_AND_ID__ID = eINSTANCE.getHasNameAndID_Id();
 
 		/**
 		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.

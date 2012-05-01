@@ -26,7 +26,7 @@ import org.m2ling.domain.core.OrganisationalUnit;
  * The following features are implemented:
  * <ul>
  *   <li>{@link org.m2ling.domain.core.impl.OrganisationalUnitImpl#getCustomProperties <em>Custom Properties</em>}</li>
- *   <li>{@link org.m2ling.domain.core.impl.OrganisationalUnitImpl#getID <em>ID</em>}</li>
+ *   <li>{@link org.m2ling.domain.core.impl.OrganisationalUnitImpl#getId <em>Id</em>}</li>
  *   <li>{@link org.m2ling.domain.core.impl.OrganisationalUnitImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.m2ling.domain.core.impl.OrganisationalUnitImpl#getTags <em>Tags</em>}</li>
  * </ul>
@@ -53,24 +53,24 @@ public class OrganisationalUnitImpl extends HasCommentImpl implements Organisati
 	protected CustomProperty customProperties;
 
 	/**
-	 * The default value of the '{@link #getID() <em>ID</em>}' attribute.
+	 * The default value of the '{@link #getId() <em>Id</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getID()
+	 * @see #getId()
 	 * @generated
 	 * @ordered
 	 */
 	protected static final String ID_EDEFAULT = "";
 
 	/**
-	 * The cached value of the '{@link #getID() <em>ID</em>}' attribute.
+	 * The cached value of the '{@link #getId() <em>Id</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getID()
+	 * @see #getId()
 	 * @generated
 	 * @ordered
 	 */
-	protected String iD = ID_EDEFAULT;
+	protected String id = ID_EDEFAULT;
 
 	/**
 	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
@@ -173,8 +173,20 @@ public class OrganisationalUnitImpl extends HasCommentImpl implements Organisati
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public String getID() {
-		return iD;
+	public String getId() {
+		return id;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setId(String newId) {
+		String oldId = id;
+		id = newId;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, CorePackage.ORGANISATIONAL_UNIT__ID, oldId, id));
 	}
 
 	/**
@@ -247,7 +259,7 @@ public class OrganisationalUnitImpl extends HasCommentImpl implements Organisati
 				if (resolve) return getCustomProperties();
 				return basicGetCustomProperties();
 			case CorePackage.ORGANISATIONAL_UNIT__ID:
-				return getID();
+				return getId();
 			case CorePackage.ORGANISATIONAL_UNIT__NAME:
 				return getName();
 			case CorePackage.ORGANISATIONAL_UNIT__TAGS:
@@ -267,6 +279,9 @@ public class OrganisationalUnitImpl extends HasCommentImpl implements Organisati
 		switch (featureID) {
 			case CorePackage.ORGANISATIONAL_UNIT__CUSTOM_PROPERTIES:
 				setCustomProperties((CustomProperty)newValue);
+				return;
+			case CorePackage.ORGANISATIONAL_UNIT__ID:
+				setId((String)newValue);
 				return;
 			case CorePackage.ORGANISATIONAL_UNIT__NAME:
 				setName((String)newValue);
@@ -290,6 +305,9 @@ public class OrganisationalUnitImpl extends HasCommentImpl implements Organisati
 			case CorePackage.ORGANISATIONAL_UNIT__CUSTOM_PROPERTIES:
 				setCustomProperties((CustomProperty)null);
 				return;
+			case CorePackage.ORGANISATIONAL_UNIT__ID:
+				setId(ID_EDEFAULT);
+				return;
 			case CorePackage.ORGANISATIONAL_UNIT__NAME:
 				unsetName();
 				return;
@@ -311,7 +329,7 @@ public class OrganisationalUnitImpl extends HasCommentImpl implements Organisati
 			case CorePackage.ORGANISATIONAL_UNIT__CUSTOM_PROPERTIES:
 				return customProperties != null;
 			case CorePackage.ORGANISATIONAL_UNIT__ID:
-				return ID_EDEFAULT == null ? iD != null : !ID_EDEFAULT.equals(iD);
+				return ID_EDEFAULT == null ? id != null : !ID_EDEFAULT.equals(id);
 			case CorePackage.ORGANISATIONAL_UNIT__NAME:
 				return isSetName();
 			case CorePackage.ORGANISATIONAL_UNIT__TAGS:
@@ -388,8 +406,8 @@ public class OrganisationalUnitImpl extends HasCommentImpl implements Organisati
 		if (eIsProxy()) return super.toString();
 
 		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (iD: ");
-		result.append(iD);
+		result.append(" (id: ");
+		result.append(id);
 		result.append(", name: ");
 		if (nameESet) result.append(name); else result.append("<unset>");
 		result.append(", tags: ");

@@ -13,10 +13,10 @@ import org.eclipse.emf.common.util.EList;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link org.m2ling.domain.core.ViewPoint#getComponentTypes <em>Component Types</em>}</li>
- *   <li>{@link org.m2ling.domain.core.ViewPoint#getActivities <em>Activities</em>}</li>
- *   <li>{@link org.m2ling.domain.core.ViewPoint#getBaseViewpoint <em>Base Viewpoint</em>}</li>
  *   <li>{@link org.m2ling.domain.core.ViewPoint#getName <em>Name</em>}</li>
+ *   <li>{@link org.m2ling.domain.core.ViewPoint#getBaseViewpoint <em>Base Viewpoint</em>}</li>
+ *   <li>{@link org.m2ling.domain.core.ViewPoint#getActivities <em>Activities</em>}</li>
+ *   <li>{@link org.m2ling.domain.core.ViewPoint#getComponentTypes <em>Component Types</em>}</li>
  *   <li>{@link org.m2ling.domain.core.ViewPoint#getLinkTypes <em>Link Types</em>}</li>
  *   <li>{@link org.m2ling.domain.core.ViewPoint#getRules <em>Rules</em>}</li>
  * </ul>
@@ -61,7 +61,7 @@ public interface ViewPoint extends ConceptItem {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Activities</em>' containment reference list.
 	 * @see org.m2ling.domain.core.CorePackage#getViewPoint_Activities()
-	 * @model containment="true" keys="iD"
+	 * @model containment="true" keys="id"
 	 * @generated
 	 */
 	EList<Activity> getActivities();

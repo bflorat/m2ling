@@ -27,15 +27,15 @@
       <eStructuralFeatures xsi:type="ecore:EReference" name="type" lowerBound="1"
           eType="#//core/ComponentType"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="subComponents" upperBound="-1"
-          eType="#//core/Component" eOpposite="#//core/Component/parent" eKeys="#//core/HasNameAndID/iD"/>
+          eType="#//core/Component" eOpposite="#//core/Component/parent" eKeys="#//core/HasNameAndID/id"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="parent" eType="#//core/Component"
-          eOpposite="#//core/Component/subComponents" eKeys="#//core/HasNameAndID/iD"/>
+          eOpposite="#//core/Component/subComponents" eKeys="#//core/HasNameAndID/id"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="engine" eType="#//core/Component"
-          eKeys="#//core/HasNameAndID/iD"/>
+          eKeys="#//core/HasNameAndID/id"/>
     </eClassifiers>
-    <eClassifiers xsi:type="ecore:EClass" name="HasNameAndID" abstract="true">
-      <eStructuralFeatures xsi:type="ecore:EAttribute" name="iD" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
-          changeable="false" defaultValueLiteral="" iD="true"/>
+    <eClassifiers xsi:type="ecore:EClass" name="HasNameAndID">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="id" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+          defaultValueLiteral="" iD="true"/>
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1"
           eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
           unsettable="true"/>
@@ -54,7 +54,7 @@
           iD="true"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="baseViewpoint" eType="#//core/ViewPoint"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="activities" upperBound="-1"
-          eType="#//core/Activity" containment="true" eKeys="#//core/HasNameAndID/iD"/>
+          eType="#//core/Activity" containment="true" eKeys="#//core/HasNameAndID/id"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="componentTypes" upperBound="-1"
           eType="#//core/ComponentType" containment="true"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="linkTypes" upperBound="-1"
@@ -87,11 +87,11 @@
       <eStructuralFeatures xsi:type="ecore:EReference" name="componentsGroups" upperBound="-1"
           eType="#//core/ComponentGroup" containment="true"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="components" upperBound="-1"
-          eType="#//core/Component" containment="true" eKeys="#//core/HasNameAndID/iD"/>
+          eType="#//core/Component" containment="true" eKeys="#//core/HasNameAndID/id"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="viewPoint" lowerBound="1"
           upperBound="-1" eType="#//core/ViewPoint" eKeys="#//core/ViewPoint/name"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="links" upperBound="-1"
-          eType="#//core/Link" containment="true" eKeys="#//core/HasNameAndID/iD"/>
+          eType="#//core/Link" containment="true" eKeys="#//core/HasNameAndID/id"/>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="HasTags" abstract="true">
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="tags" upperBound="-1"

@@ -9,6 +9,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.impl.EFactoryImpl;
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
+import org.m2ling.domain.core.*;
 import org.m2ling.domain.core.Activity;
 import org.m2ling.domain.core.ActivityStatus;
 import org.m2ling.domain.core.ActivityTransition;
@@ -99,6 +100,7 @@ public class CoreFactoryImpl extends EFactoryImpl implements CoreFactory {
 		switch (eClass.getClassifierID()) {
 			case CorePackage.COMPONENT_TYPE: return createComponentType();
 			case CorePackage.COMPONENT: return createComponent();
+			case CorePackage.HAS_NAME_AND_ID: return createHasNameAndID();
 			case CorePackage.COMPONENT_NODE: return createComponentNode();
 			case CorePackage.VIEW_POINT: return createViewPoint();
 			case CorePackage.COMPONENT_GROUP: return createComponentGroup();
@@ -195,6 +197,16 @@ public class CoreFactoryImpl extends EFactoryImpl implements CoreFactory {
 	public Component createComponent() {
 		ComponentImpl component = new ComponentImpl();
 		return component;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public HasNameAndID createHasNameAndID() {
+		HasNameAndIDImpl hasNameAndID = new HasNameAndIDImpl();
+		return hasNameAndID;
 	}
 
 	/**

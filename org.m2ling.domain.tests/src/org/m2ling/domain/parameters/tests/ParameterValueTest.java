@@ -93,7 +93,6 @@ public class ParameterValueTest extends HasCommentTest {
 	public void testGetFinalValue() {
 		// TODO: implement this operation test method
 		// Ensure that you remove @generated or mark it @generated NOT
-		//fail();
 	}
 
 } //ParameterValueTest

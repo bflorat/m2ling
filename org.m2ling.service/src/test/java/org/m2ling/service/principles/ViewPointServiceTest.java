@@ -10,7 +10,7 @@ import org.m2ling.service.AbstractTestCase;
  * @author Bertrand Florat <bertrand@florat.net>
  * 
  */
-public class TestViewPointService extends AbstractTestCase {
+public class ViewPointServiceTest extends AbstractTestCase {
 
 	@Test
 	public void test(){

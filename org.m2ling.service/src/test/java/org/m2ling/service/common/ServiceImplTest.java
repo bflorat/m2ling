@@ -7,6 +7,7 @@ import static junit.framework.Assert.assertTrue;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.logging.Logger;
 
 import org.eclipse.emf.common.util.URI;
 import org.junit.Test;
@@ -24,11 +25,11 @@ import com.google.inject.name.Names;
  * @author "Bertrand Florat <bertrand@florat.net>"
  * 
  */
-public class TestServiceImpl {
+public class ServiceImplTest {
 
 	@Test
 	public void noSpecificBindingsInjection() {
-		ViewPointServiceImpl sampleServiceImpl = Utils.newInstance(ViewPointServiceImpl.class,null);
+		ViewPointServiceImpl sampleServiceImpl = Utils.newInstance(ViewPointServiceImpl.class, null);
 		assertTrue(sampleServiceImpl.getPersistenceManager() instanceof PersistenceManagerTeneoImpl);
 	}
 
@@ -39,7 +40,7 @@ public class TestServiceImpl {
 			@Override
 			protected void configure() {
 				bind(PersistenceManager.class).to(PersistenceManagerXMIImpl.class);
-			// Mock model URI
+				// Mock model URI
 				File file = new File("src/test/resources/mocks/tests.m2ling");
 				URI uri = null;
 				try {

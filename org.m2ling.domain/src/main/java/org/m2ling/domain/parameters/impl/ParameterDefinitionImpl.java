@@ -34,7 +34,7 @@ import org.m2ling.domain.parameters.ParametersPackage;
  * The following features are implemented:
  * <ul>
  *   <li>{@link org.m2ling.domain.parameters.impl.ParameterDefinitionImpl#getCustomProperties <em>Custom Properties</em>}</li>
- *   <li>{@link org.m2ling.domain.parameters.impl.ParameterDefinitionImpl#getID <em>ID</em>}</li>
+ *   <li>{@link org.m2ling.domain.parameters.impl.ParameterDefinitionImpl#getId <em>Id</em>}</li>
  *   <li>{@link org.m2ling.domain.parameters.impl.ParameterDefinitionImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.m2ling.domain.parameters.impl.ParameterDefinitionImpl#getParent <em>Parent</em>}</li>
  *   <li>{@link org.m2ling.domain.parameters.impl.ParameterDefinitionImpl#getConstraints <em>Constraints</em>}</li>
@@ -69,24 +69,24 @@ public class ParameterDefinitionImpl extends HasCommentImpl implements Parameter
 	protected CustomProperty customProperties;
 
 	/**
-	 * The default value of the '{@link #getID() <em>ID</em>}' attribute.
+	 * The default value of the '{@link #getId() <em>Id</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getID()
+	 * @see #getId()
 	 * @generated
 	 * @ordered
 	 */
 	protected static final String ID_EDEFAULT = "";
 
 	/**
-	 * The cached value of the '{@link #getID() <em>ID</em>}' attribute.
+	 * The cached value of the '{@link #getId() <em>Id</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getID()
+	 * @see #getId()
 	 * @generated
 	 * @ordered
 	 */
-	protected String iD = ID_EDEFAULT;
+	protected String id = ID_EDEFAULT;
 
 	/**
 	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
@@ -329,8 +329,20 @@ public class ParameterDefinitionImpl extends HasCommentImpl implements Parameter
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public String getID() {
-		return iD;
+	public String getId() {
+		return id;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setId(String newId) {
+		String oldId = id;
+		id = newId;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ParametersPackage.PARAMETER_DEFINITION__ID, oldId, id));
 	}
 
 	/**
@@ -595,7 +607,7 @@ public class ParameterDefinitionImpl extends HasCommentImpl implements Parameter
 				if (resolve) return getCustomProperties();
 				return basicGetCustomProperties();
 			case ParametersPackage.PARAMETER_DEFINITION__ID:
-				return getID();
+				return getId();
 			case ParametersPackage.PARAMETER_DEFINITION__NAME:
 				return getName();
 			case ParametersPackage.PARAMETER_DEFINITION__PARENT:
@@ -632,6 +644,9 @@ public class ParameterDefinitionImpl extends HasCommentImpl implements Parameter
 		switch (featureID) {
 			case ParametersPackage.PARAMETER_DEFINITION__CUSTOM_PROPERTIES:
 				setCustomProperties((CustomProperty)newValue);
+				return;
+			case ParametersPackage.PARAMETER_DEFINITION__ID:
+				setId((String)newValue);
 				return;
 			case ParametersPackage.PARAMETER_DEFINITION__NAME:
 				setName((String)newValue);
@@ -680,6 +695,9 @@ public class ParameterDefinitionImpl extends HasCommentImpl implements Parameter
 			case ParametersPackage.PARAMETER_DEFINITION__CUSTOM_PROPERTIES:
 				setCustomProperties((CustomProperty)null);
 				return;
+			case ParametersPackage.PARAMETER_DEFINITION__ID:
+				setId(ID_EDEFAULT);
+				return;
 			case ParametersPackage.PARAMETER_DEFINITION__NAME:
 				unsetName();
 				return;
@@ -725,7 +743,7 @@ public class ParameterDefinitionImpl extends HasCommentImpl implements Parameter
 			case ParametersPackage.PARAMETER_DEFINITION__CUSTOM_PROPERTIES:
 				return customProperties != null;
 			case ParametersPackage.PARAMETER_DEFINITION__ID:
-				return ID_EDEFAULT == null ? iD != null : !ID_EDEFAULT.equals(iD);
+				return ID_EDEFAULT == null ? id != null : !ID_EDEFAULT.equals(id);
 			case ParametersPackage.PARAMETER_DEFINITION__NAME:
 				return isSetName();
 			case ParametersPackage.PARAMETER_DEFINITION__PARENT:
@@ -816,8 +834,8 @@ public class ParameterDefinitionImpl extends HasCommentImpl implements Parameter
 		if (eIsProxy()) return super.toString();
 
 		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (iD: ");
-		result.append(iD);
+		result.append(" (id: ");
+		result.append(id);
 		result.append(", name: ");
 		if (nameESet) result.append(name); else result.append("<unset>");
 		result.append(", type: ");

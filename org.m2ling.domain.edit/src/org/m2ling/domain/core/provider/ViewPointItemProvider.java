@@ -68,8 +68,8 @@ public class ViewPointItemProvider
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
-			addBaseViewpointPropertyDescriptor(object);
 			addNamePropertyDescriptor(object);
+			addBaseViewpointPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -130,8 +130,8 @@ public class ViewPointItemProvider
 	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
-			childrenFeatures.add(CorePackage.Literals.VIEW_POINT__COMPONENT_TYPES);
 			childrenFeatures.add(CorePackage.Literals.VIEW_POINT__ACTIVITIES);
+			childrenFeatures.add(CorePackage.Literals.VIEW_POINT__COMPONENT_TYPES);
 			childrenFeatures.add(CorePackage.Literals.VIEW_POINT__LINK_TYPES);
 			childrenFeatures.add(CorePackage.Literals.VIEW_POINT__RULES);
 		}
@@ -191,8 +191,8 @@ public class ViewPointItemProvider
 			case CorePackage.VIEW_POINT__NAME:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
-			case CorePackage.VIEW_POINT__COMPONENT_TYPES:
 			case CorePackage.VIEW_POINT__ACTIVITIES:
+			case CorePackage.VIEW_POINT__COMPONENT_TYPES:
 			case CorePackage.VIEW_POINT__LINK_TYPES:
 			case CorePackage.VIEW_POINT__RULES:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
@@ -214,13 +214,13 @@ public class ViewPointItemProvider
 
 		newChildDescriptors.add
 			(createChildParameter
-				(CorePackage.Literals.VIEW_POINT__COMPONENT_TYPES,
-				 CoreFactory.eINSTANCE.createComponentType()));
+				(CorePackage.Literals.VIEW_POINT__ACTIVITIES,
+				 CoreFactory.eINSTANCE.createActivity()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(CorePackage.Literals.VIEW_POINT__ACTIVITIES,
-				 CoreFactory.eINSTANCE.createActivity()));
+				(CorePackage.Literals.VIEW_POINT__COMPONENT_TYPES,
+				 CoreFactory.eINSTANCE.createComponentType()));
 
 		newChildDescriptors.add
 			(createChildParameter

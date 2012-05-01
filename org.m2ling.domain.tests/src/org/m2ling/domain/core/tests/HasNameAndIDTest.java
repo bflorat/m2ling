@@ -5,6 +5,8 @@ package org.m2ling.domain.core.tests;
 
 import junit.framework.TestCase;
 
+import junit.textui.TestRunner;
+import org.m2ling.domain.core.CoreFactory;
 import org.m2ling.domain.core.HasNameAndID;
 
 /**
@@ -13,7 +15,7 @@ import org.m2ling.domain.core.HasNameAndID;
  * <!-- end-user-doc -->
  * @generated
  */
-public abstract class HasNameAndIDTest extends TestCase {
+public class HasNameAndIDTest extends TestCase {
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -29,6 +31,15 @@ public abstract class HasNameAndIDTest extends TestCase {
 	 * @generated
 	 */
 	protected HasNameAndID fixture = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public static void main(String[] args) {
+		TestRunner.run(HasNameAndIDTest.class);
+	}
 
 	/**
 	 * Constructs a new Has Name And ID test case with the given name.
@@ -58,6 +69,28 @@ public abstract class HasNameAndIDTest extends TestCase {
 	 */
 	protected HasNameAndID getFixture() {
 		return fixture;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see junit.framework.TestCase#setUp()
+	 * @generated
+	 */
+	@Override
+	protected void setUp() throws Exception {
+		setFixture(CoreFactory.eINSTANCE.createHasNameAndID());
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see junit.framework.TestCase#tearDown()
+	 * @generated
+	 */
+	@Override
+	protected void tearDown() throws Exception {
+		setFixture(null);
 	}
 
 } //HasNameAndIDTest

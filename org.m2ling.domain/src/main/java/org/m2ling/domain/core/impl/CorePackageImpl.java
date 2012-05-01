@@ -555,7 +555,7 @@ public class CorePackageImpl extends EPackageImpl implements CorePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getHasNameAndID_ID() {
+	public EAttribute getHasNameAndID_Id() {
 		return (EAttribute)hasNameAndIDEClass.getEStructuralFeatures().get(0);
 	}
 
@@ -628,7 +628,7 @@ public class CorePackageImpl extends EPackageImpl implements CorePackage {
 	 * @generated
 	 */
 	public EReference getViewPoint_ComponentTypes() {
-		return (EReference)viewPointEClass.getEStructuralFeatures().get(0);
+		return (EReference)viewPointEClass.getEStructuralFeatures().get(3);
 	}
 
 	/**
@@ -637,15 +637,6 @@ public class CorePackageImpl extends EPackageImpl implements CorePackage {
 	 * @generated
 	 */
 	public EReference getViewPoint_Activities() {
-		return (EReference)viewPointEClass.getEStructuralFeatures().get(1);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getViewPoint_BaseViewpoint() {
 		return (EReference)viewPointEClass.getEStructuralFeatures().get(2);
 	}
 
@@ -654,8 +645,17 @@ public class CorePackageImpl extends EPackageImpl implements CorePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EReference getViewPoint_BaseViewpoint() {
+		return (EReference)viewPointEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EAttribute getViewPoint_Name() {
-		return (EAttribute)viewPointEClass.getEStructuralFeatures().get(3);
+		return (EAttribute)viewPointEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -1438,10 +1438,10 @@ public class CorePackageImpl extends EPackageImpl implements CorePackage {
 		createEReference(componentNodeEClass, COMPONENT_NODE__ENGINE);
 
 		viewPointEClass = createEClass(VIEW_POINT);
-		createEReference(viewPointEClass, VIEW_POINT__COMPONENT_TYPES);
-		createEReference(viewPointEClass, VIEW_POINT__ACTIVITIES);
-		createEReference(viewPointEClass, VIEW_POINT__BASE_VIEWPOINT);
 		createEAttribute(viewPointEClass, VIEW_POINT__NAME);
+		createEReference(viewPointEClass, VIEW_POINT__BASE_VIEWPOINT);
+		createEReference(viewPointEClass, VIEW_POINT__ACTIVITIES);
+		createEReference(viewPointEClass, VIEW_POINT__COMPONENT_TYPES);
 		createEReference(viewPointEClass, VIEW_POINT__LINK_TYPES);
 		createEReference(viewPointEClass, VIEW_POINT__RULES);
 
@@ -1651,14 +1651,14 @@ public class CorePackageImpl extends EPackageImpl implements CorePackage {
 		initEClass(componentEClass, Component.class, "Component", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getComponent_Type(), this.getComponentType(), null, "type", null, 1, 1, Component.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getComponent_SubComponents(), this.getComponent(), this.getComponent_Parent(), "subComponents", null, 0, -1, Component.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		getComponent_SubComponents().getEKeys().add(this.getHasNameAndID_ID());
+		getComponent_SubComponents().getEKeys().add(this.getHasNameAndID_Id());
 		initEReference(getComponent_Parent(), this.getComponent(), this.getComponent_SubComponents(), "parent", null, 0, 1, Component.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		getComponent_Parent().getEKeys().add(this.getHasNameAndID_ID());
+		getComponent_Parent().getEKeys().add(this.getHasNameAndID_Id());
 		initEReference(getComponent_Engine(), this.getComponent(), null, "engine", null, 0, 1, Component.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		getComponent_Engine().getEKeys().add(this.getHasNameAndID_ID());
+		getComponent_Engine().getEKeys().add(this.getHasNameAndID_Id());
 
-		initEClass(hasNameAndIDEClass, HasNameAndID.class, "HasNameAndID", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getHasNameAndID_ID(), ecorePackage.getEString(), "iD", "", 1, 1, HasNameAndID.class, !IS_TRANSIENT, !IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEClass(hasNameAndIDEClass, HasNameAndID.class, "HasNameAndID", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getHasNameAndID_Id(), ecorePackage.getEString(), "id", "", 0, 1, HasNameAndID.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getHasNameAndID_Name(), ecorePackage.getEString(), "name", null, 1, 1, HasNameAndID.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(componentNodeEClass, ComponentNode.class, "ComponentNode", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -1668,11 +1668,11 @@ public class CorePackageImpl extends EPackageImpl implements CorePackage {
 		initEReference(getComponentNode_Engine(), this.getComponentNodeGroup(), null, "engine", null, 0, 1, ComponentNode.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(viewPointEClass, ViewPoint.class, "ViewPoint", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getViewPoint_ComponentTypes(), this.getComponentType(), null, "componentTypes", null, 0, -1, ViewPoint.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getViewPoint_Activities(), this.getActivity(), null, "activities", null, 0, -1, ViewPoint.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		getViewPoint_Activities().getEKeys().add(this.getHasNameAndID_ID());
-		initEReference(getViewPoint_BaseViewpoint(), this.getViewPoint(), null, "baseViewpoint", null, 0, 1, ViewPoint.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getViewPoint_Name(), ecorePackage.getEString(), "name", null, 0, 1, ViewPoint.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getViewPoint_BaseViewpoint(), this.getViewPoint(), null, "baseViewpoint", null, 0, 1, ViewPoint.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getViewPoint_Activities(), this.getActivity(), null, "activities", null, 0, -1, ViewPoint.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		getViewPoint_Activities().getEKeys().add(this.getHasNameAndID_Id());
+		initEReference(getViewPoint_ComponentTypes(), this.getComponentType(), null, "componentTypes", null, 0, -1, ViewPoint.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getViewPoint_LinkTypes(), this.getLinkType(), null, "linkTypes", null, 0, -1, ViewPoint.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getViewPoint_Rules(), this.getRule(), null, "rules", null, 0, -1, ViewPoint.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
@@ -1694,11 +1694,11 @@ public class CorePackageImpl extends EPackageImpl implements CorePackage {
 		initEClass(viewEClass, View.class, "View", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getView_ComponentsGroups(), this.getComponentGroup(), null, "componentsGroups", null, 0, -1, View.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getView_Components(), this.getComponent(), null, "components", null, 0, -1, View.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		getView_Components().getEKeys().add(this.getHasNameAndID_ID());
+		getView_Components().getEKeys().add(this.getHasNameAndID_Id());
 		initEReference(getView_ViewPoint(), this.getViewPoint(), null, "viewPoint", null, 1, -1, View.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		getView_ViewPoint().getEKeys().add(this.getViewPoint_Name());
 		initEReference(getView_Links(), this.getLink(), null, "links", null, 0, -1, View.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		getView_Links().getEKeys().add(this.getHasNameAndID_ID());
+		getView_Links().getEKeys().add(this.getHasNameAndID_Id());
 
 		initEClass(hasTagsEClass, HasTags.class, "HasTags", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getHasTags_Tags(), ecorePackage.getEString(), "tags", "", 0, -1, HasTags.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

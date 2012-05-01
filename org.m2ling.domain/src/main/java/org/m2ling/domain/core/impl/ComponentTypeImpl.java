@@ -25,7 +25,7 @@ import org.m2ling.domain.core.HasNameAndID;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.m2ling.domain.core.impl.ComponentTypeImpl#getID <em>ID</em>}</li>
+ *   <li>{@link org.m2ling.domain.core.impl.ComponentTypeImpl#getId <em>Id</em>}</li>
  *   <li>{@link org.m2ling.domain.core.impl.ComponentTypeImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.m2ling.domain.core.impl.ComponentTypeImpl#getSubTypes <em>Sub Types</em>}</li>
  *   <li>{@link org.m2ling.domain.core.impl.ComponentTypeImpl#getParent <em>Parent</em>}</li>
@@ -45,24 +45,24 @@ public class ComponentTypeImpl extends ConceptItemImpl implements ComponentType 
 	public static final String copyright = "Copyright (C) 2012 Bertrand Florat";
 
 	/**
-	 * The default value of the '{@link #getID() <em>ID</em>}' attribute.
+	 * The default value of the '{@link #getId() <em>Id</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getID()
+	 * @see #getId()
 	 * @generated
 	 * @ordered
 	 */
 	protected static final String ID_EDEFAULT = "";
 
 	/**
-	 * The cached value of the '{@link #getID() <em>ID</em>}' attribute.
+	 * The cached value of the '{@link #getId() <em>Id</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getID()
+	 * @see #getId()
 	 * @generated
 	 * @ordered
 	 */
-	protected String iD = ID_EDEFAULT;
+	protected String id = ID_EDEFAULT;
 
 	/**
 	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
@@ -147,8 +147,20 @@ public class ComponentTypeImpl extends ConceptItemImpl implements ComponentType 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public String getID() {
-		return iD;
+	public String getId() {
+		return id;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setId(String newId) {
+		String oldId = id;
+		id = newId;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, CorePackage.COMPONENT_TYPE__ID, oldId, id));
 	}
 
 	/**
@@ -384,7 +396,7 @@ public class ComponentTypeImpl extends ConceptItemImpl implements ComponentType 
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case CorePackage.COMPONENT_TYPE__ID:
-				return getID();
+				return getId();
 			case CorePackage.COMPONENT_TYPE__NAME:
 				return getName();
 			case CorePackage.COMPONENT_TYPE__SUB_TYPES:
@@ -410,6 +422,9 @@ public class ComponentTypeImpl extends ConceptItemImpl implements ComponentType 
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
+			case CorePackage.COMPONENT_TYPE__ID:
+				setId((String)newValue);
+				return;
 			case CorePackage.COMPONENT_TYPE__NAME:
 				setName((String)newValue);
 				return;
@@ -438,6 +453,9 @@ public class ComponentTypeImpl extends ConceptItemImpl implements ComponentType 
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
+			case CorePackage.COMPONENT_TYPE__ID:
+				setId(ID_EDEFAULT);
+				return;
 			case CorePackage.COMPONENT_TYPE__NAME:
 				unsetName();
 				return;
@@ -466,7 +484,7 @@ public class ComponentTypeImpl extends ConceptItemImpl implements ComponentType 
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
 			case CorePackage.COMPONENT_TYPE__ID:
-				return ID_EDEFAULT == null ? iD != null : !ID_EDEFAULT.equals(iD);
+				return ID_EDEFAULT == null ? id != null : !ID_EDEFAULT.equals(id);
 			case CorePackage.COMPONENT_TYPE__NAME:
 				return isSetName();
 			case CorePackage.COMPONENT_TYPE__SUB_TYPES:
@@ -525,8 +543,8 @@ public class ComponentTypeImpl extends ConceptItemImpl implements ComponentType 
 		if (eIsProxy()) return super.toString();
 
 		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (iD: ");
-		result.append(iD);
+		result.append(" (id: ");
+		result.append(id);
 		result.append(", name: ");
 		if (nameESet) result.append(name); else result.append("<unset>");
 		result.append(')');

@@ -11,46 +11,44 @@ import org.m2ling.domain.core.CorePackage;
 import org.m2ling.domain.core.HasNameAndID;
 
 /**
- * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Has Name And ID</b></em>'.
+ * <!-- begin-user-doc --> An implementation of the model object '<em><b>Has Name And ID</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.m2ling.domain.core.impl.HasNameAndIDImpl#getID <em>ID</em>}</li>
+ *   <li>{@link org.m2ling.domain.core.impl.HasNameAndIDImpl#getId <em>Id</em>}</li>
  *   <li>{@link org.m2ling.domain.core.impl.HasNameAndIDImpl#getName <em>Name</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public abstract class HasNameAndIDImpl extends EObjectImpl implements HasNameAndID {
+public class HasNameAndIDImpl extends EObjectImpl implements HasNameAndID {
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	public static final String copyright = "Copyright (C) 2012 Bertrand Florat";
 
 	/**
-	 * The default value of the '{@link #getID() <em>ID</em>}' attribute.
+	 * The default value of the '{@link #getId() <em>Id</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getID()
+	 * @see #getId()
 	 * @generated
 	 * @ordered
 	 */
 	protected static final String ID_EDEFAULT = "";
 
 	/**
-	 * The cached value of the '{@link #getID() <em>ID</em>}' attribute.
+	 * The cached value of the '{@link #getId() <em>Id</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getID()
+	 * @see #getId()
 	 * @generated
 	 * @ordered
 	 */
-	protected String iD = ID_EDEFAULT;
+	protected String id = ID_EDEFAULT;
 
 	/**
 	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
@@ -74,16 +72,14 @@ public abstract class HasNameAndIDImpl extends EObjectImpl implements HasNameAnd
 
 	/**
 	 * This is true if the Name attribute has been set.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
 	protected boolean nameESet;
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	protected HasNameAndIDImpl() {
@@ -91,8 +87,7 @@ public abstract class HasNameAndIDImpl extends EObjectImpl implements HasNameAnd
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
@@ -105,8 +100,8 @@ public abstract class HasNameAndIDImpl extends EObjectImpl implements HasNameAnd
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public String getID() {
-		return iD;
+	public String getId() {
+		return id;
 	}
 
 	/**
@@ -114,13 +109,23 @@ public abstract class HasNameAndIDImpl extends EObjectImpl implements HasNameAnd
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public void setId(String newId) {
+		String oldId = id;
+		id = newId;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, CorePackage.HAS_NAME_AND_ID__ID, oldId, id));
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
 	public String getName() {
 		return name;
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	public void setName(String newName) {
@@ -133,8 +138,7 @@ public abstract class HasNameAndIDImpl extends EObjectImpl implements HasNameAnd
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	public void unsetName() {
@@ -147,8 +151,7 @@ public abstract class HasNameAndIDImpl extends EObjectImpl implements HasNameAnd
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	public boolean isSetName() {
@@ -156,15 +159,14 @@ public abstract class HasNameAndIDImpl extends EObjectImpl implements HasNameAnd
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case CorePackage.HAS_NAME_AND_ID__ID:
-				return getID();
+				return getId();
 			case CorePackage.HAS_NAME_AND_ID__NAME:
 				return getName();
 		}
@@ -172,13 +174,15 @@ public abstract class HasNameAndIDImpl extends EObjectImpl implements HasNameAnd
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
+			case CorePackage.HAS_NAME_AND_ID__ID:
+				setId((String)newValue);
+				return;
 			case CorePackage.HAS_NAME_AND_ID__NAME:
 				setName((String)newValue);
 				return;
@@ -187,13 +191,15 @@ public abstract class HasNameAndIDImpl extends EObjectImpl implements HasNameAnd
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
+			case CorePackage.HAS_NAME_AND_ID__ID:
+				setId(ID_EDEFAULT);
+				return;
 			case CorePackage.HAS_NAME_AND_ID__NAME:
 				unsetName();
 				return;
@@ -202,15 +208,14 @@ public abstract class HasNameAndIDImpl extends EObjectImpl implements HasNameAnd
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
 			case CorePackage.HAS_NAME_AND_ID__ID:
-				return ID_EDEFAULT == null ? iD != null : !ID_EDEFAULT.equals(iD);
+				return ID_EDEFAULT == null ? id != null : !ID_EDEFAULT.equals(id);
 			case CorePackage.HAS_NAME_AND_ID__NAME:
 				return isSetName();
 		}
@@ -218,8 +223,7 @@ public abstract class HasNameAndIDImpl extends EObjectImpl implements HasNameAnd
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
@@ -227,12 +231,12 @@ public abstract class HasNameAndIDImpl extends EObjectImpl implements HasNameAnd
 		if (eIsProxy()) return super.toString();
 
 		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (iD: ");
-		result.append(iD);
+		result.append(" (id: ");
+		result.append(id);
 		result.append(", name: ");
 		if (nameESet) result.append(name); else result.append("<unset>");
 		result.append(')');
 		return result.toString();
 	}
 
-} //HasNameAndIDImpl
+} // HasNameAndIDImpl

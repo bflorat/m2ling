@@ -159,7 +159,7 @@ public interface ParametersPackage extends EPackage {
 	int PARAMETER_DEFINITION__CUSTOM_PROPERTIES = CorePackage.HAS_COMMENT_FEATURE_COUNT + 0;
 
 	/**
-	 * The feature id for the '<em><b>ID</b></em>' attribute.
+	 * The feature id for the '<em><b>Id</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated

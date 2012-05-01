@@ -10,6 +10,7 @@ import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import org.eclipse.emf.teneo.PersistenceOptions;
 import org.hibernate.cfg.Environment;
 import org.m2ling.common.utils.Consts;
 
@@ -50,7 +51,7 @@ public class Configuration {
 	}
 
 	public Configuration() {
-		this(null,null);
+		this(null, null);
 	}
 
 	/**
@@ -77,11 +78,15 @@ public class Configuration {
 	 * correct, we return its content.
 	 * </p>
 	 * <p>
+	 * If {@code M2LING_HOME} environment variable is not set, it is forced to
+	 * M2LING_HOME_DEFAULT_ABS_PATH
+	 * </p>
+	 * <p>
 	 * If {@code M2LING_HOME} environment variable is set but the configuration file can't be found,
 	 * a default configuration file is written down and the default configuration is returned.
 	 * </p>
 	 * 
-	 * @throw IllegalStateException in all other cases
+	 * @throw IllegalStateException if the configuration can't be neither read nor created
 	 * 
 	 * @return the service system properties
 	 */
@@ -90,8 +95,9 @@ public class Configuration {
 		File fileConf = null;
 		String m2lingHome = System.getenv(Consts.M2LING_HOME_VARIABLE_NAME);
 		if (Strings.isNullOrEmpty(m2lingHome)) {
-			throw new IllegalStateException(Consts.M2LING_HOME_VARIABLE_NAME
-					+ " environement variable not set, configuration can't be loaded");
+			m2lingHome = Consts.M2LING_HOME_DEFAULT_ABS_PATH;
+			logger.warning(Consts.M2LING_HOME_VARIABLE_NAME + " environement variable not set, default path is used : "
+					+ Consts.M2LING_HOME_DEFAULT_ABS_PATH);
 		}
 		fileConf = new File(m2lingHome + File.separator + CONF_FILENAME);
 		if (!fileConf.exists()) {
@@ -100,7 +106,9 @@ public class Configuration {
 			Properties conf = null;
 			try {
 				conf = getDefaultConfiguration();
+				// Make sure to create full directory structure
 				fileConf.getParentFile().mkdirs();
+				//Store the configuration in XML, not property to ensure best unicode support
 				conf.storeToXML(new FileOutputStream(fileConf), "M2ling service layer configuration file.");
 				logger.info(msg + ". Default file created.");
 				return conf;
@@ -127,13 +135,13 @@ public class Configuration {
 	 * @return
 	 */
 	public Properties getDefaultConfiguration() {
-		String home = System.getProperty("user.home");
 		Properties result = new Properties();
 		result.put(Environment.DRIVER, "org.h2.Driver");
 		result.put(Environment.USER, "admin");
-		result.put(Environment.URL, "jdbc:h2:" + home + "/databases/m2ling");
-		result.put(Environment.PASS, "changeoninstall");
+		result.put(Environment.URL, "jdbc:h2:" + Consts.M2LING_HOME_DEFAULT_ABS_PATH);
+		result.put(Environment.PASS, "");
 		result.put(Environment.DIALECT, org.hibernate.dialect.H2Dialect.class.getName());
+		result.put(PersistenceOptions.CASCADE_POLICY_ON_NON_CONTAINMENT, "REFRESH,PERSIST,MERGE");
 		return result;
 	}
 

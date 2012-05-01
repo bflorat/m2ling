@@ -48,6 +48,15 @@ public interface CoreFactory extends EFactory {
 	Component createComponent();
 
 	/**
+	 * Returns a new object of class '<em>Has Name And ID</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Has Name And ID</em>'.
+	 * @generated
+	 */
+	HasNameAndID createHasNameAndID();
+
+	/**
 	 * Returns a new object of class '<em>Component Node</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
