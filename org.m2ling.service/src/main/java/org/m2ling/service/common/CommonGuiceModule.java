@@ -32,7 +32,7 @@ public class CommonGuiceModule extends AbstractModule {
 	protected void configure() {
 
 		{ // Bindings
-			bind(PersistenceManager.class).to(PersistenceManagerTeneoImpl.class).in(Singleton.class);
+			bind(PersistenceManager.class).to(PersistenceManagerTeneoImpl.class);
 			bind(CoreUtil.class);
 			bind(DTOConverter.FromDTO.class);
 			bind(DTOConverter.ToDTO.class);

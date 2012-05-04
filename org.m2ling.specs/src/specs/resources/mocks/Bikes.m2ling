@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <m2ling_domain:Root xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:m2ling_domain="http://m2ling.org/0.1">
-  <viewPoints/>
+  <viewPoints label="foo" name="foo"/>
+  <viewPoints label="bar" name="bar"/>
+  <views id="_Dsjp0JU8EeGYsv1N6yGNQg" name="view1" label="" viewPoint="foo"/>
 </m2ling_domain:Root>

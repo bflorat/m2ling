@@ -968,7 +968,7 @@ public interface CorePackage extends EPackage {
 	int VIEW__COMPONENTS = ARCHITECTURE_ITEM_FEATURE_COUNT + 1;
 
 	/**
-	 * The feature id for the '<em><b>View Point</b></em>' reference list.
+	 * The feature id for the '<em><b>View Point</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -2515,10 +2515,10 @@ public interface CorePackage extends EPackage {
 	EReference getView_Components();
 
 	/**
-	 * Returns the meta object for the reference list '{@link org.m2ling.domain.core.View#getViewPoint <em>View Point</em>}'.
+	 * Returns the meta object for the reference '{@link org.m2ling.domain.core.View#getViewPoint <em>View Point</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference list '<em>View Point</em>'.
+	 * @return the meta object for the reference '<em>View Point</em>'.
 	 * @see org.m2ling.domain.core.View#getViewPoint()
 	 * @see #getView()
 	 * @generated
@@ -3556,7 +3556,7 @@ public interface CorePackage extends EPackage {
 		EReference VIEW__COMPONENTS = eINSTANCE.getView_Components();
 
 		/**
-		 * The meta object literal for the '<em><b>View Point</b></em>' reference list feature.
+		 * The meta object literal for the '<em><b>View Point</b></em>' reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated

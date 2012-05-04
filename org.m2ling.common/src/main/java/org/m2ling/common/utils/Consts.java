@@ -24,4 +24,10 @@ public class Consts {
 	public static final String M2LING_HOME_DEFAULT_ABS_PATH = System.getProperty("user.home") + File.separator
 			+ "m2ling";
 
+	/** Database name */
+	public static final String DATABASE_NAME = "m2ling";
+
+	/** Default XMI extension */
+	public static final String XMI_EXTENSION = "m2ling";
+
 }

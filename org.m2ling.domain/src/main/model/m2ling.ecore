@@ -89,7 +89,7 @@
       <eStructuralFeatures xsi:type="ecore:EReference" name="components" upperBound="-1"
           eType="#//core/Component" containment="true" eKeys="#//core/HasNameAndID/id"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="viewPoint" lowerBound="1"
-          upperBound="-1" eType="#//core/ViewPoint" eKeys="#//core/ViewPoint/name"/>
+          eType="#//core/ViewPoint" eKeys="#//core/ViewPoint/name"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="links" upperBound="-1"
           eType="#//core/Link" containment="true" eKeys="#//core/HasNameAndID/id"/>
     </eClassifiers>

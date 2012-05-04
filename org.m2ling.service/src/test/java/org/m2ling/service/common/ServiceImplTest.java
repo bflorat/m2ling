@@ -7,7 +7,6 @@ import static junit.framework.Assert.assertTrue;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.logging.Logger;
 
 import org.eclipse.emf.common.util.URI;
 import org.junit.Test;
@@ -15,6 +14,7 @@ import org.m2ling.common.utils.Utils;
 import org.m2ling.persistence.PersistenceManager;
 import org.m2ling.persistence.impl.PersistenceManagerTeneoImpl;
 import org.m2ling.persistence.impl.PersistenceManagerXMIImpl;
+import org.m2ling.service.AbstractTestCase;
 import org.m2ling.service.principles.impl.ViewPointServiceImpl;
 
 import com.google.inject.AbstractModule;
@@ -25,7 +25,7 @@ import com.google.inject.name.Names;
  * @author "Bertrand Florat <bertrand@florat.net>"
  * 
  */
-public class ServiceImplTest {
+public class ServiceImplTest extends AbstractTestCase {
 
 	@Test
 	public void noSpecificBindingsInjection() {
@@ -41,7 +41,7 @@ public class ServiceImplTest {
 			protected void configure() {
 				bind(PersistenceManager.class).to(PersistenceManagerXMIImpl.class);
 				// Mock model URI
-				File file = new File("src/test/resources/mocks/tests.m2ling");
+				File file = new File("../org.m2ling.specs/src/specs/resources/mocks/Technical.m2ling");
 				URI uri = null;
 				try {
 					uri = URI.createURI("file://" + file.getCanonicalPath());

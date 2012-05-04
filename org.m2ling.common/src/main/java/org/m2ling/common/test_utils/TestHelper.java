@@ -3,7 +3,7 @@
  *
  * @author "Bertrand Florat <bertrand@florat.net>"
  */
-package org.m2ling.common.utils;
+package org.m2ling.common.test_utils;
 
 import java.io.File;
 import java.lang.reflect.Field;

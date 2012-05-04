@@ -5,10 +5,12 @@ package org.m2ling.domain.core.impl;
 
 import java.util.Collection;
 
+import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
+import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 import org.eclipse.emf.ecore.util.InternalEList;
@@ -64,14 +66,14 @@ public class ViewImpl extends ArchitectureItemImpl implements View {
 	protected EList<Component> components;
 
 	/**
-	 * The cached value of the '{@link #getViewPoint() <em>View Point</em>}' reference list.
+	 * The cached value of the '{@link #getViewPoint() <em>View Point</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getViewPoint()
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<ViewPoint> viewPoint;
+	protected ViewPoint viewPoint;
 
 	/**
 	 * The cached value of the '{@link #getLinks() <em>Links</em>}' containment reference list.
@@ -131,11 +133,37 @@ public class ViewImpl extends ArchitectureItemImpl implements View {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<ViewPoint> getViewPoint() {
-		if (viewPoint == null) {
-			viewPoint = new EObjectResolvingEList<ViewPoint>(ViewPoint.class, this, CorePackage.VIEW__VIEW_POINT);
+	public ViewPoint getViewPoint() {
+		if (viewPoint != null && viewPoint.eIsProxy()) {
+			InternalEObject oldViewPoint = (InternalEObject)viewPoint;
+			viewPoint = (ViewPoint)eResolveProxy(oldViewPoint);
+			if (viewPoint != oldViewPoint) {
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, CorePackage.VIEW__VIEW_POINT, oldViewPoint, viewPoint));
+			}
 		}
 		return viewPoint;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public ViewPoint basicGetViewPoint() {
+		return viewPoint;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setViewPoint(ViewPoint newViewPoint) {
+		ViewPoint oldViewPoint = viewPoint;
+		viewPoint = newViewPoint;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, CorePackage.VIEW__VIEW_POINT, oldViewPoint, viewPoint));
 	}
 
 	/**
@@ -181,7 +209,8 @@ public class ViewImpl extends ArchitectureItemImpl implements View {
 			case CorePackage.VIEW__COMPONENTS:
 				return getComponents();
 			case CorePackage.VIEW__VIEW_POINT:
-				return getViewPoint();
+				if (resolve) return getViewPoint();
+				return basicGetViewPoint();
 			case CorePackage.VIEW__LINKS:
 				return getLinks();
 		}
@@ -206,8 +235,7 @@ public class ViewImpl extends ArchitectureItemImpl implements View {
 				getComponents().addAll((Collection<? extends Component>)newValue);
 				return;
 			case CorePackage.VIEW__VIEW_POINT:
-				getViewPoint().clear();
-				getViewPoint().addAll((Collection<? extends ViewPoint>)newValue);
+				setViewPoint((ViewPoint)newValue);
 				return;
 			case CorePackage.VIEW__LINKS:
 				getLinks().clear();
@@ -232,7 +260,7 @@ public class ViewImpl extends ArchitectureItemImpl implements View {
 				getComponents().clear();
 				return;
 			case CorePackage.VIEW__VIEW_POINT:
-				getViewPoint().clear();
+				setViewPoint((ViewPoint)null);
 				return;
 			case CorePackage.VIEW__LINKS:
 				getLinks().clear();
@@ -254,7 +282,7 @@ public class ViewImpl extends ArchitectureItemImpl implements View {
 			case CorePackage.VIEW__COMPONENTS:
 				return components != null && !components.isEmpty();
 			case CorePackage.VIEW__VIEW_POINT:
-				return viewPoint != null && !viewPoint.isEmpty();
+				return viewPoint != null;
 			case CorePackage.VIEW__LINKS:
 				return links != null && !links.isEmpty();
 		}

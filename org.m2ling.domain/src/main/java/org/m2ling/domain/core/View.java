@@ -65,20 +65,30 @@ public interface View extends ArchitectureItem {
 	EList<Component> getComponents();
 
 	/**
-	 * Returns the value of the '<em><b>View Point</b></em>' reference list.
-	 * The list contents are of type {@link org.m2ling.domain.core.ViewPoint}.
+	 * Returns the value of the '<em><b>View Point</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>View Point</em>' reference list isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>View Point</em>' reference list.
+	 * @return the value of the '<em>View Point</em>' reference.
+	 * @see #setViewPoint(ViewPoint)
 	 * @see org.m2ling.domain.core.CorePackage#getView_ViewPoint()
 	 * @model keys="name" required="true"
 	 * @generated
 	 */
-	EList<ViewPoint> getViewPoint();
+	ViewPoint getViewPoint();
+
+	/**
+	 * Sets the value of the '{@link org.m2ling.domain.core.View#getViewPoint <em>View Point</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>View Point</em>' reference.
+	 * @see #getViewPoint()
+	 * @generated
+	 */
+	void setViewPoint(ViewPoint value);
 
 	/**
 	 * Returns the value of the '<em><b>Links</b></em>' containment reference list.

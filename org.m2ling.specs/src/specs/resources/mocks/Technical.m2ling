@@ -10,4 +10,7 @@
     <tags>DEV1</tags>
     <tags>DEV2</tags>
   </viewPoints>
+  <viewPoints label="vp1 label" name="vp1">
+    <activities id="_Nnj8IJXFEeGfDY1tsvvkpQ" name="activity1"/>
+  </viewPoints>
 </m2ling_domain:Root>

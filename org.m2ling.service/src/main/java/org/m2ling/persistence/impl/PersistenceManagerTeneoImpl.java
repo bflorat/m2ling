@@ -3,13 +3,20 @@
  */
 package org.m2ling.persistence.impl;
 
+import java.util.HashMap;
 import java.util.logging.Logger;
 
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.emf.ecore.resource.impl.ResourceImpl;
+import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.teneo.hibernate.HbDataStore;
 import org.eclipse.emf.teneo.hibernate.HbHelper;
+import org.eclipse.emf.teneo.hibernate.resource.HibernateResource;
 import org.hibernate.Session;
-import org.hibernate.SessionFactory;
+import org.m2ling.common.utils.Consts;
 import org.m2ling.domain.DomainPackage;
 import org.m2ling.domain.Root;
 import org.m2ling.persistence.PersistenceManager;
@@ -34,7 +41,9 @@ public class PersistenceManagerTeneoImpl implements PersistenceManager {
 
 	private final Logger logger;
 
-	private final SessionFactory sessionFactory;
+	private final HbDataStore dataStore;
+
+	private static final String DATA_STORE_NAME = Consts.DATABASE_NAME + "_datastore";
 
 	/*
 	 * (non-Javadoc)
@@ -53,32 +62,45 @@ public class PersistenceManagerTeneoImpl implements PersistenceManager {
 		this.conf = conf;
 		this.logger = logger;
 		// the name of the session factory
-		String hbName = "m2ling";
+
 		// create the HbDataStore using the name
-		final HbDataStore hbds = HbHelper.INSTANCE.createRegisterDataStore(hbName);
+		dataStore = HbHelper.INSTANCE.createRegisterDataStore(DATA_STORE_NAME);
 
 		// set the properties
-		hbds.setProperties(conf.getSystemProperties());
+		dataStore.setDataStoreProperties(conf.getSystemProperties());
 
-		// sets its epackages stored in this datastore
-		hbds.setEPackages(new EPackage[] { DomainPackage.eINSTANCE });
+		// sets its epackages stored in this datastore (it also processes recursively sub-packages)
+		dataStore.setEPackages(new EPackage[] { DomainPackage.eINSTANCE });
 
 		// initialize, also creates the database tables
 		try {
-			hbds.initialize();
+			dataStore.initialize();
 		} finally {
-			// print the generated mapping
-			logger.finest(hbds.getMappingXML());
+			// print the generated mapping for debugging purpose
+			logger.finest(dataStore.getMappingXML());
 		}
-		sessionFactory = hbds.getSessionFactory();
 	}
 
 	/**
-	 * Return a new hinernate session
+	 * Return a new hibernate session
 	 * 
-	 * @return a new hinernate session
+	 * @return a new hibernate session
 	 */
 	public Session newHibernateSession() {
-		return sessionFactory.openSession();
+		return dataStore.getSessionFactory().openSession();
 	}
+
+	/**
+	 * Return an (unloaded) hibernate resource for the m2ling database.
+	 * @return an hibernate resource for the m2ling database
+	 */
+	public Resource getResource() {
+		String uriStr = "hibernate://?" + HibernateResource.DS_NAME_PARAM + "=" + DATA_STORE_NAME;
+		final URI uri = URI.createURI(uriStr);
+		ResourceSet resourceSet = new ResourceSetImpl();
+		Resource resource = resourceSet.createResource(uri);
+		((ResourceImpl)resource).setIntrinsicIDToEObjectMap(new HashMap());
+		return resource;
+	}
+
 }

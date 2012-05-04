@@ -37,21 +37,20 @@ public class Configuration {
 	private Properties systemProperties;
 
 	/**
+	 * Build a configuration with explicit properties (UT purpose only)
+	 * 
 	 * @param systemProperties
 	 *           a list of forced configuration entries
-	 * @param logger
-	 *           an associated logger (UT purpose only, the logger is field-injected otherwise)
 	 */
-	public Configuration(Properties systemProperties, Logger logger) {
+	public Configuration(Properties systemProperties) {
 		super();
 		this.systemProperties = systemProperties;
-		if (logger != null) {
-			this.logger = logger;
-		}
+		this.logger = Logger.getAnonymousLogger();
 	}
 
+	@Inject
 	public Configuration() {
-		this(null, null);
+		super();
 	}
 
 	/**
@@ -74,6 +73,9 @@ public class Configuration {
 	 * Return the service system properties.
 	 * 
 	 * <p>
+	 * If systemProperties have been forced using the constructor, it is simply returned.
+	 * </p>
+	 * <p>
 	 * If {@code M2LING_HOME} environment variable is set and configuration file exists and is
 	 * correct, we return its content.
 	 * </p>
@@ -91,15 +93,11 @@ public class Configuration {
 	 * @return the service system properties
 	 */
 	public Properties getSystemProperties() {
-		Properties result = null;
-		File fileConf = null;
-		String m2lingHome = System.getenv(Consts.M2LING_HOME_VARIABLE_NAME);
-		if (Strings.isNullOrEmpty(m2lingHome)) {
-			m2lingHome = Consts.M2LING_HOME_DEFAULT_ABS_PATH;
-			logger.warning(Consts.M2LING_HOME_VARIABLE_NAME + " environement variable not set, default path is used : "
-					+ Consts.M2LING_HOME_DEFAULT_ABS_PATH);
+		if (this.systemProperties != null) {
+			return this.systemProperties;
 		}
-		fileConf = new File(m2lingHome + File.separator + CONF_FILENAME);
+		Properties result = null;
+		File fileConf = getServiceConfFile();
 		if (!fileConf.exists()) {
 			String msg = Consts.M2LING_HOME_VARIABLE_NAME + " variable name defined but no corresponding "
 					+ fileConf.getAbsolutePath() + " file";
@@ -108,9 +106,13 @@ public class Configuration {
 				conf = getDefaultConfiguration();
 				// Make sure to create full directory structure
 				fileConf.getParentFile().mkdirs();
-				//Store the configuration in XML, not property to ensure best unicode support
+				// Store the configuration in XML, not property to ensure best unicode support
 				conf.storeToXML(new FileOutputStream(fileConf), "M2ling service layer configuration file.");
+				System.out.println("******* 3 " + logger);
+
 				logger.info(msg + ". Default file created.");
+				System.out.println("******* 4");
+
 				return conf;
 			} catch (Exception e) {
 				logger.log(Level.SEVERE, fileConf.getAbsolutePath() + " file can't be written", e);
@@ -130,18 +132,57 @@ public class Configuration {
 	}
 
 	/**
+	 * Return service configuration file (actual filesystem existence is not verified)
+	 * 
+	 * @return service configuration file
+	 */
+	public File getServiceConfFile() {
+		File fileConf = null;
+		String m2lingHome = System.getenv(Consts.M2LING_HOME_VARIABLE_NAME);
+		if (Strings.isNullOrEmpty(m2lingHome)) {
+			m2lingHome = Consts.M2LING_HOME_DEFAULT_ABS_PATH;
+			logger.warning(Consts.M2LING_HOME_VARIABLE_NAME + " environment variable not set, default path is used : "
+					+ Consts.M2LING_HOME_DEFAULT_ABS_PATH);
+		}
+		fileConf = new File(m2lingHome + File.separator + CONF_FILENAME);
+		return fileConf;
+	}
+
+	/**
 	 * Return a set of default configuration values.
 	 * 
-	 * @return
+	 * @return a set of default configuration values.
 	 */
-	public Properties getDefaultConfiguration() {
+	public static Properties getDefaultConfiguration() {
 		Properties result = new Properties();
 		result.put(Environment.DRIVER, "org.h2.Driver");
-		result.put(Environment.USER, "admin");
-		result.put(Environment.URL, "jdbc:h2:" + Consts.M2LING_HOME_DEFAULT_ABS_PATH);
+		result.put(Environment.USER, "sa");
+		result.put(Environment.URL, "jdbc:h2:" + Consts.M2LING_HOME_DEFAULT_ABS_PATH + File.separator
+				+ Consts.DATABASE_NAME);
 		result.put(Environment.PASS, "");
 		result.put(Environment.DIALECT, org.hibernate.dialect.H2Dialect.class.getName());
 		result.put(PersistenceOptions.CASCADE_POLICY_ON_NON_CONTAINMENT, "REFRESH,PERSIST,MERGE");
+		result.put(PersistenceOptions.EAV_MAPPING, "true");
+		return result;
+	}
+
+	/**
+	 * Return a set of default configuration values in test mode.
+	 * 
+	 * @return a set of default configuration values in test mode.
+	 */
+	public static Properties getDefaultTestConfiguration() {
+		Properties result = new Properties();
+		result.put(Environment.DRIVER, "org.h2.Driver");
+		result.put(Environment.USER, "sa");
+		result.put(Environment.URL, "jdbc:h2:" + Consts.M2LING_HOME_DEFAULT_ABS_PATH + File.separator
+				+ Consts.DATABASE_NAME + ";TRACE_LEVEL_FILE=3");
+		result.put(Environment.PASS, "");
+		result.put(Environment.DIALECT, org.hibernate.dialect.H2Dialect.class.getName());
+		result.put(PersistenceOptions.CASCADE_POLICY_ON_NON_CONTAINMENT, "REFRESH,PERSIST,MERGE");
+		// Force schema drop
+		result.put(Environment.HBM2DDL_AUTO, "create");
+		result.put(PersistenceOptions.EAV_MAPPING, "true");
 		return result;
 	}
 
