@@ -13,6 +13,7 @@ import org.eclipse.emf.ecore.util.EDataTypeUniqueEList;
 import org.m2ling.domain.core.CorePackage;
 import org.m2ling.domain.core.HasComment;
 import org.m2ling.domain.core.HasConstraints;
+import org.m2ling.domain.core.HasLabel;
 import org.m2ling.domain.core.HasParameterValues;
 import org.m2ling.domain.core.HasTags;
 import org.m2ling.domain.core.RuntimeItem;
@@ -272,6 +273,12 @@ public abstract class RuntimeItemImpl extends HasNameAndIDImpl implements Runtim
 				default: return -1;
 			}
 		}
+		if (baseClass == HasLabel.class) {
+			switch (derivedFeatureID) {
+				case CorePackage.RUNTIME_ITEM__LABEL: return CorePackage.HAS_LABEL__LABEL;
+				default: return -1;
+			}
+		}
 		return super.eBaseStructuralFeatureID(derivedFeatureID, baseClass);
 	}
 
@@ -301,6 +308,12 @@ public abstract class RuntimeItemImpl extends HasNameAndIDImpl implements Runtim
 		}
 		if (baseClass == HasConstraints.class) {
 			switch (baseFeatureID) {
+				default: return -1;
+			}
+		}
+		if (baseClass == HasLabel.class) {
+			switch (baseFeatureID) {
+				case CorePackage.HAS_LABEL__LABEL: return CorePackage.RUNTIME_ITEM__LABEL;
 				default: return -1;
 			}
 		}

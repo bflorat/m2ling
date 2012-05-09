@@ -33,6 +33,7 @@ import org.m2ling.domain.core.FormatConstraint;
 import org.m2ling.domain.core.HasComment;
 import org.m2ling.domain.core.HasConstraints;
 import org.m2ling.domain.core.HasCustomProperties;
+import org.m2ling.domain.core.HasLabel;
 import org.m2ling.domain.core.HasNameAndID;
 import org.m2ling.domain.core.HasParameterDefinitions;
 import org.m2ling.domain.core.HasParameterValues;
@@ -352,6 +353,13 @@ public class CorePackageImpl extends EPackageImpl implements CorePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	private EClass hasLabelEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	private EEnum customPropertyTypeEEnum = null;
 
 	/**
@@ -474,7 +482,7 @@ public class CorePackageImpl extends EPackageImpl implements CorePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getComponentType_Parent() {
+	public EReference getComponentType_BindedComponentType() {
 		return (EReference)componentTypeEClass.getEStructuralFeatures().get(1);
 	}
 
@@ -483,17 +491,8 @@ public class CorePackageImpl extends EPackageImpl implements CorePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getComponentType_BindedComponentType() {
-		return (EReference)componentTypeEClass.getEStructuralFeatures().get(2);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EReference getComponentType_EngineType() {
-		return (EReference)componentTypeEClass.getEStructuralFeatures().get(3);
+		return (EReference)componentTypeEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
@@ -528,17 +527,8 @@ public class CorePackageImpl extends EPackageImpl implements CorePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getComponent_Parent() {
-		return (EReference)componentEClass.getEStructuralFeatures().get(2);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EReference getComponent_Engine() {
-		return (EReference)componentEClass.getEStructuralFeatures().get(3);
+		return (EReference)componentEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
@@ -600,17 +590,8 @@ public class CorePackageImpl extends EPackageImpl implements CorePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getComponentNode_Parent() {
-		return (EReference)componentNodeEClass.getEStructuralFeatures().get(2);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EReference getComponentNode_Engine() {
-		return (EReference)componentNodeEClass.getEStructuralFeatures().get(3);
+		return (EReference)componentNodeEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
@@ -628,15 +609,6 @@ public class CorePackageImpl extends EPackageImpl implements CorePackage {
 	 * @generated
 	 */
 	public EReference getViewPoint_ComponentTypes() {
-		return (EReference)viewPointEClass.getEStructuralFeatures().get(3);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getViewPoint_Activities() {
 		return (EReference)viewPointEClass.getEStructuralFeatures().get(2);
 	}
 
@@ -645,7 +617,7 @@ public class CorePackageImpl extends EPackageImpl implements CorePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getViewPoint_BaseViewpoint() {
+	public EReference getViewPoint_Activities() {
 		return (EReference)viewPointEClass.getEStructuralFeatures().get(1);
 	}
 
@@ -654,8 +626,8 @@ public class CorePackageImpl extends EPackageImpl implements CorePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getViewPoint_Name() {
-		return (EAttribute)viewPointEClass.getEStructuralFeatures().get(0);
+	public EReference getViewPoint_BaseViewpoint() {
+		return (EReference)viewPointEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -664,7 +636,7 @@ public class CorePackageImpl extends EPackageImpl implements CorePackage {
 	 * @generated
 	 */
 	public EReference getViewPoint_LinkTypes() {
-		return (EReference)viewPointEClass.getEStructuralFeatures().get(4);
+		return (EReference)viewPointEClass.getEStructuralFeatures().get(3);
 	}
 
 	/**
@@ -673,7 +645,7 @@ public class CorePackageImpl extends EPackageImpl implements CorePackage {
 	 * @generated
 	 */
 	public EReference getViewPoint_Rules() {
-		return (EReference)viewPointEClass.getEStructuralFeatures().get(5);
+		return (EReference)viewPointEClass.getEStructuralFeatures().get(4);
 	}
 
 	/**
@@ -726,15 +698,6 @@ public class CorePackageImpl extends EPackageImpl implements CorePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getArchitectureItem_Label() {
-		return (EAttribute)architectureItemEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EClass getConceptItem() {
 		return conceptItemEClass;
 	}
@@ -744,26 +707,8 @@ public class CorePackageImpl extends EPackageImpl implements CorePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getConceptItem_Label() {
-		return (EAttribute)conceptItemEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EClass getRuntimeItem() {
 		return runtimeItemEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getRuntimeItem_Label() {
-		return (EAttribute)runtimeItemEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -1194,15 +1139,6 @@ public class CorePackageImpl extends EPackageImpl implements CorePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getActivity_Transitions() {
-		return (EReference)activityEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EReference getActivity_Responsibles() {
 		return (EReference)activityEClass.getEStructuralFeatures().get(1);
 	}
@@ -1213,7 +1149,7 @@ public class CorePackageImpl extends EPackageImpl implements CorePackage {
 	 * @generated
 	 */
 	public EReference getActivity_Accountables() {
-		return (EReference)activityEClass.getEStructuralFeatures().get(2);
+		return (EReference)activityEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -1250,6 +1186,24 @@ public class CorePackageImpl extends EPackageImpl implements CorePackage {
 	 */
 	public EAttribute getActivityTransition_ToStatus() {
 		return (EAttribute)activityTransitionEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getActivityTransition_Activity() {
+		return (EReference)activityTransitionEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getActivityTransition_Actor() {
+		return (EReference)activityTransitionEClass.getEStructuralFeatures().get(4);
 	}
 
 	/**
@@ -1320,6 +1274,24 @@ public class CorePackageImpl extends EPackageImpl implements CorePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getActor_FirstName() {
+		return (EAttribute)actorEClass.getEStructuralFeatures().get(5);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getActor_LastName() {
+		return (EAttribute)actorEClass.getEStructuralFeatures().get(6);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getRule() {
 		return ruleEClass;
 	}
@@ -1340,6 +1312,24 @@ public class CorePackageImpl extends EPackageImpl implements CorePackage {
 	 */
 	public EAttribute getRule_Priority() {
 		return (EAttribute)ruleEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getHasLabel() {
+		return hasLabelEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getHasLabel_Label() {
+		return (EAttribute)hasLabelEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -1417,14 +1407,12 @@ public class CorePackageImpl extends EPackageImpl implements CorePackage {
 		// Create classes and their features
 		componentTypeEClass = createEClass(COMPONENT_TYPE);
 		createEReference(componentTypeEClass, COMPONENT_TYPE__SUB_TYPES);
-		createEReference(componentTypeEClass, COMPONENT_TYPE__PARENT);
 		createEReference(componentTypeEClass, COMPONENT_TYPE__BINDED_COMPONENT_TYPE);
 		createEReference(componentTypeEClass, COMPONENT_TYPE__ENGINE_TYPE);
 
 		componentEClass = createEClass(COMPONENT);
 		createEReference(componentEClass, COMPONENT__TYPE);
 		createEReference(componentEClass, COMPONENT__SUB_COMPONENTS);
-		createEReference(componentEClass, COMPONENT__PARENT);
 		createEReference(componentEClass, COMPONENT__ENGINE);
 
 		hasNameAndIDEClass = createEClass(HAS_NAME_AND_ID);
@@ -1434,11 +1422,9 @@ public class CorePackageImpl extends EPackageImpl implements CorePackage {
 		componentNodeEClass = createEClass(COMPONENT_NODE);
 		createEReference(componentNodeEClass, COMPONENT_NODE__COMPONENT);
 		createEReference(componentNodeEClass, COMPONENT_NODE__SUB_NODES);
-		createEReference(componentNodeEClass, COMPONENT_NODE__PARENT);
 		createEReference(componentNodeEClass, COMPONENT_NODE__ENGINE);
 
 		viewPointEClass = createEClass(VIEW_POINT);
-		createEAttribute(viewPointEClass, VIEW_POINT__NAME);
 		createEReference(viewPointEClass, VIEW_POINT__BASE_VIEWPOINT);
 		createEReference(viewPointEClass, VIEW_POINT__ACTIVITIES);
 		createEReference(viewPointEClass, VIEW_POINT__COMPONENT_TYPES);
@@ -1452,13 +1438,10 @@ public class CorePackageImpl extends EPackageImpl implements CorePackage {
 		createEReference(componentNodeGroupEClass, COMPONENT_NODE_GROUP__COMPONENT_NODES);
 
 		architectureItemEClass = createEClass(ARCHITECTURE_ITEM);
-		createEAttribute(architectureItemEClass, ARCHITECTURE_ITEM__LABEL);
 
 		conceptItemEClass = createEClass(CONCEPT_ITEM);
-		createEAttribute(conceptItemEClass, CONCEPT_ITEM__LABEL);
 
 		runtimeItemEClass = createEClass(RUNTIME_ITEM);
-		createEAttribute(runtimeItemEClass, RUNTIME_ITEM__LABEL);
 
 		viewEClass = createEClass(VIEW);
 		createEReference(viewEClass, VIEW__COMPONENTS_GROUPS);
@@ -1531,14 +1514,15 @@ public class CorePackageImpl extends EPackageImpl implements CorePackage {
 		hasConstraintsEClass = createEClass(HAS_CONSTRAINTS);
 
 		activityEClass = createEClass(ACTIVITY);
-		createEReference(activityEClass, ACTIVITY__TRANSITIONS);
-		createEReference(activityEClass, ACTIVITY__RESPONSIBLES);
 		createEReference(activityEClass, ACTIVITY__ACCOUNTABLES);
+		createEReference(activityEClass, ACTIVITY__RESPONSIBLES);
 
 		activityTransitionEClass = createEClass(ACTIVITY_TRANSITION);
 		createEAttribute(activityTransitionEClass, ACTIVITY_TRANSITION__DATE);
 		createEAttribute(activityTransitionEClass, ACTIVITY_TRANSITION__FROM_STATUS);
 		createEAttribute(activityTransitionEClass, ACTIVITY_TRANSITION__TO_STATUS);
+		createEReference(activityTransitionEClass, ACTIVITY_TRANSITION__ACTIVITY);
+		createEReference(activityTransitionEClass, ACTIVITY_TRANSITION__ACTOR);
 
 		organisationalUnitEClass = createEClass(ORGANISATIONAL_UNIT);
 
@@ -1548,10 +1532,15 @@ public class CorePackageImpl extends EPackageImpl implements CorePackage {
 		createEAttribute(actorEClass, ACTOR__USERNAME);
 		createEAttribute(actorEClass, ACTOR__ADMIN);
 		createEAttribute(actorEClass, ACTOR__PWD_HASH);
+		createEAttribute(actorEClass, ACTOR__FIRST_NAME);
+		createEAttribute(actorEClass, ACTOR__LAST_NAME);
 
 		ruleEClass = createEClass(RULE);
 		createEAttribute(ruleEClass, RULE__STATUS);
 		createEAttribute(ruleEClass, RULE__PRIORITY);
+
+		hasLabelEClass = createEClass(HAS_LABEL);
+		createEAttribute(hasLabelEClass, HAS_LABEL__LABEL);
 
 		// Create enums
 		customPropertyTypeEEnum = createEEnum(CUSTOM_PROPERTY_TYPE);
@@ -1590,7 +1579,6 @@ public class CorePackageImpl extends EPackageImpl implements CorePackage {
 
 		// Add supertypes to classes
 		componentTypeEClass.getESuperTypes().add(this.getConceptItem());
-		componentTypeEClass.getESuperTypes().add(this.getHasNameAndID());
 		componentEClass.getESuperTypes().add(this.getComponentGroup());
 		componentNodeEClass.getESuperTypes().add(this.getComponentNodeGroup());
 		viewPointEClass.getESuperTypes().add(this.getConceptItem());
@@ -1601,25 +1589,29 @@ public class CorePackageImpl extends EPackageImpl implements CorePackage {
 		architectureItemEClass.getESuperTypes().add(this.getHasTags());
 		architectureItemEClass.getESuperTypes().add(this.getHasParameterDefinitions());
 		architectureItemEClass.getESuperTypes().add(this.getHasConstraints());
+		architectureItemEClass.getESuperTypes().add(this.getHasLabel());
+		conceptItemEClass.getESuperTypes().add(this.getHasNameAndID());
 		conceptItemEClass.getESuperTypes().add(this.getHasCustomProperties());
 		conceptItemEClass.getESuperTypes().add(this.getHasComment());
 		conceptItemEClass.getESuperTypes().add(this.getHasTags());
 		conceptItemEClass.getESuperTypes().add(this.getHasParameterDefinitions());
 		conceptItemEClass.getESuperTypes().add(this.getHasConstraints());
+		conceptItemEClass.getESuperTypes().add(this.getHasLabel());
 		runtimeItemEClass.getESuperTypes().add(this.getHasNameAndID());
 		runtimeItemEClass.getESuperTypes().add(this.getHasComment());
 		runtimeItemEClass.getESuperTypes().add(this.getHasTags());
 		runtimeItemEClass.getESuperTypes().add(this.getHasParameterValues());
 		runtimeItemEClass.getESuperTypes().add(this.getHasConstraints());
+		runtimeItemEClass.getESuperTypes().add(this.getHasLabel());
 		viewEClass.getESuperTypes().add(this.getArchitectureItem());
 		linkTypeEClass.getESuperTypes().add(this.getConceptItem());
-		linkTypeEClass.getESuperTypes().add(this.getHasNameAndID());
 		linkEClass.getESuperTypes().add(this.getHasComment());
 		linkEClass.getESuperTypes().add(this.getHasConstraints());
 		linkEClass.getESuperTypes().add(this.getHasCustomProperties());
 		linkEClass.getESuperTypes().add(this.getHasNameAndID());
 		linkEClass.getESuperTypes().add(this.getHasTags());
 		stakeholderEClass.getESuperTypes().add(this.getHasNameAndID());
+		stakeholderEClass.getESuperTypes().add(this.getHasLabel());
 		floatConstraintEClass.getESuperTypes().add(this.getConstraint());
 		minConstraintEClass.getESuperTypes().add(this.getBoundaryConstraint());
 		boundaryConstraintEClass.getESuperTypes().add(this.getConstraint());
@@ -1632,28 +1624,30 @@ public class CorePackageImpl extends EPackageImpl implements CorePackage {
 		eMailConstraintEClass.getESuperTypes().add(this.getConstraint());
 		formatConstraintEClass.getESuperTypes().add(this.getConstraint());
 		activityEClass.getESuperTypes().add(this.getHasNameAndID());
+		activityEClass.getESuperTypes().add(this.getHasTags());
+		activityEClass.getESuperTypes().add(this.getHasLabel());
 		activityTransitionEClass.getESuperTypes().add(this.getHasComment());
+		activityTransitionEClass.getESuperTypes().add(this.getHasLabel());
 		organisationalUnitEClass.getESuperTypes().add(this.getHasComment());
 		organisationalUnitEClass.getESuperTypes().add(this.getHasCustomProperties());
 		organisationalUnitEClass.getESuperTypes().add(this.getHasNameAndID());
 		organisationalUnitEClass.getESuperTypes().add(this.getHasTags());
+		organisationalUnitEClass.getESuperTypes().add(this.getHasLabel());
 		actorEClass.getESuperTypes().add(this.getHasCustomProperties());
 		actorEClass.getESuperTypes().add(this.getHasTags());
+		actorEClass.getESuperTypes().add(this.getHasLabel());
 		ruleEClass.getESuperTypes().add(this.getConceptItem());
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(componentTypeEClass, ComponentType.class, "ComponentType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getComponentType_SubTypes(), this.getComponentType(), this.getComponentType_Parent(), "subTypes", null, 0, -1, ComponentType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getComponentType_Parent(), this.getComponentType(), this.getComponentType_SubTypes(), "parent", null, 0, 1, ComponentType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getComponentType_SubTypes(), this.getComponentType(), null, "subTypes", null, 0, -1, ComponentType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getComponentType_BindedComponentType(), this.getComponentType(), null, "bindedComponentType", null, 0, 1, ComponentType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getComponentType_EngineType(), this.getComponentType(), null, "engineType", null, 0, 1, ComponentType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(componentEClass, Component.class, "Component", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getComponent_Type(), this.getComponentType(), null, "type", null, 1, 1, Component.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getComponent_SubComponents(), this.getComponent(), this.getComponent_Parent(), "subComponents", null, 0, -1, Component.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getComponent_SubComponents(), this.getComponent(), null, "subComponents", null, 0, -1, Component.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		getComponent_SubComponents().getEKeys().add(this.getHasNameAndID_Id());
-		initEReference(getComponent_Parent(), this.getComponent(), this.getComponent_SubComponents(), "parent", null, 0, 1, Component.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		getComponent_Parent().getEKeys().add(this.getHasNameAndID_Id());
 		initEReference(getComponent_Engine(), this.getComponent(), null, "engine", null, 0, 1, Component.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		getComponent_Engine().getEKeys().add(this.getHasNameAndID_Id());
 
@@ -1663,15 +1657,12 @@ public class CorePackageImpl extends EPackageImpl implements CorePackage {
 
 		initEClass(componentNodeEClass, ComponentNode.class, "ComponentNode", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getComponentNode_Component(), this.getComponent(), null, "component", null, 1, 1, ComponentNode.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getComponentNode_SubNodes(), this.getComponentNode(), this.getComponentNode_Parent(), "subNodes", null, 0, -1, ComponentNode.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getComponentNode_Parent(), this.getComponentNode(), this.getComponentNode_SubNodes(), "parent", null, 0, 1, ComponentNode.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getComponentNode_SubNodes(), this.getComponentNode(), null, "subNodes", null, 0, -1, ComponentNode.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getComponentNode_Engine(), this.getComponentNodeGroup(), null, "engine", null, 0, 1, ComponentNode.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(viewPointEClass, ViewPoint.class, "ViewPoint", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getViewPoint_Name(), ecorePackage.getEString(), "name", null, 0, 1, ViewPoint.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getViewPoint_BaseViewpoint(), this.getViewPoint(), null, "baseViewpoint", null, 0, 1, ViewPoint.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getViewPoint_Activities(), this.getActivity(), null, "activities", null, 0, -1, ViewPoint.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		getViewPoint_Activities().getEKeys().add(this.getHasNameAndID_Id());
 		initEReference(getViewPoint_ComponentTypes(), this.getComponentType(), null, "componentTypes", null, 0, -1, ViewPoint.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getViewPoint_LinkTypes(), this.getLinkType(), null, "linkTypes", null, 0, -1, ViewPoint.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getViewPoint_Rules(), this.getRule(), null, "rules", null, 0, -1, ViewPoint.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1683,20 +1674,16 @@ public class CorePackageImpl extends EPackageImpl implements CorePackage {
 		initEReference(getComponentNodeGroup_ComponentNodes(), this.getComponentNode(), null, "componentNodes", null, 0, -1, ComponentNodeGroup.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(architectureItemEClass, ArchitectureItem.class, "ArchitectureItem", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getArchitectureItem_Label(), ecorePackage.getEString(), "label", null, 1, 1, ArchitectureItem.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(conceptItemEClass, ConceptItem.class, "ConceptItem", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getConceptItem_Label(), ecorePackage.getEString(), "label", null, 1, 1, ConceptItem.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(runtimeItemEClass, RuntimeItem.class, "RuntimeItem", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getRuntimeItem_Label(), ecorePackage.getEString(), "label", null, 1, 1, RuntimeItem.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(viewEClass, View.class, "View", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getView_ComponentsGroups(), this.getComponentGroup(), null, "componentsGroups", null, 0, -1, View.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getView_Components(), this.getComponent(), null, "components", null, 0, -1, View.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		getView_Components().getEKeys().add(this.getHasNameAndID_Id());
 		initEReference(getView_ViewPoint(), this.getViewPoint(), null, "viewPoint", null, 1, 1, View.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		getView_ViewPoint().getEKeys().add(this.getViewPoint_Name());
 		initEReference(getView_Links(), this.getLink(), null, "links", null, 0, -1, View.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		getView_Links().getEKeys().add(this.getHasNameAndID_Id());
 
@@ -1765,14 +1752,15 @@ public class CorePackageImpl extends EPackageImpl implements CorePackage {
 		initEClass(hasConstraintsEClass, HasConstraints.class, "HasConstraints", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(activityEClass, Activity.class, "Activity", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getActivity_Transitions(), this.getActivityTransition(), null, "transitions", null, 0, -1, Activity.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getActivity_Responsibles(), this.getActor(), null, "responsibles", null, 0, -1, Activity.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getActivity_Accountables(), this.getActor(), null, "accountables", null, 0, -1, Activity.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getActivity_Accountables(), this.getStakeholder(), null, "accountables", null, 0, -1, Activity.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getActivity_Responsibles(), this.getStakeholder(), null, "responsibles", null, 0, -1, Activity.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(activityTransitionEClass, ActivityTransition.class, "ActivityTransition", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getActivityTransition_Date(), ecorePackage.getELong(), "date", null, 0, 1, ActivityTransition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getActivityTransition_FromStatus(), this.getActivityStatus(), "fromStatus", null, 0, 1, ActivityTransition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getActivityTransition_ToStatus(), this.getActivityStatus(), "toStatus", null, 0, 1, ActivityTransition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getActivityTransition_Activity(), this.getActivity(), null, "activity", null, 1, 1, ActivityTransition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getActivityTransition_Actor(), this.getActor(), null, "actor", null, 0, -1, ActivityTransition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(organisationalUnitEClass, OrganisationalUnit.class, "OrganisationalUnit", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
@@ -1782,10 +1770,15 @@ public class CorePackageImpl extends EPackageImpl implements CorePackage {
 		initEAttribute(getActor_Username(), ecorePackage.getEString(), "username", null, 0, 1, Actor.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getActor_Admin(), ecorePackage.getEBoolean(), "admin", null, 0, 1, Actor.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getActor_PwdHash(), ecorePackage.getEString(), "pwdHash", null, 0, 1, Actor.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getActor_FirstName(), ecorePackage.getEString(), "firstName", null, 0, 1, Actor.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getActor_LastName(), ecorePackage.getEString(), "lastName", null, 0, 1, Actor.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(ruleEClass, Rule.class, "Rule", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getRule_Status(), this.getRuleStatus(), "status", null, 0, 1, Rule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getRule_Priority(), this.getRulePriority(), "priority", null, 0, 1, Rule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(hasLabelEClass, HasLabel.class, "HasLabel", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getHasLabel_Label(), ecorePackage.getEString(), "label", null, 0, 1, HasLabel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Initialize enums and add enum literals
 		initEEnum(customPropertyTypeEEnum, CustomPropertyType.class, "CustomPropertyType");

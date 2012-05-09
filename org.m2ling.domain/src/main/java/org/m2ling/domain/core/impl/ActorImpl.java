@@ -17,6 +17,7 @@ import org.eclipse.emf.ecore.util.EObjectWithInverseResolvingEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.m2ling.domain.core.Actor;
 import org.m2ling.domain.core.CorePackage;
+import org.m2ling.domain.core.HasLabel;
 import org.m2ling.domain.core.HasTags;
 import org.m2ling.domain.core.OrganisationalUnit;
 import org.m2ling.domain.core.Stakeholder;
@@ -29,11 +30,14 @@ import org.m2ling.domain.core.Stakeholder;
  * The following features are implemented:
  * <ul>
  *   <li>{@link org.m2ling.domain.core.impl.ActorImpl#getTags <em>Tags</em>}</li>
+ *   <li>{@link org.m2ling.domain.core.impl.ActorImpl#getLabel <em>Label</em>}</li>
  *   <li>{@link org.m2ling.domain.core.impl.ActorImpl#getStakeholders <em>Stakeholders</em>}</li>
  *   <li>{@link org.m2ling.domain.core.impl.ActorImpl#getUnit <em>Unit</em>}</li>
  *   <li>{@link org.m2ling.domain.core.impl.ActorImpl#getUsername <em>Username</em>}</li>
  *   <li>{@link org.m2ling.domain.core.impl.ActorImpl#isAdmin <em>Admin</em>}</li>
  *   <li>{@link org.m2ling.domain.core.impl.ActorImpl#getPwdHash <em>Pwd Hash</em>}</li>
+ *   <li>{@link org.m2ling.domain.core.impl.ActorImpl#getFirstName <em>First Name</em>}</li>
+ *   <li>{@link org.m2ling.domain.core.impl.ActorImpl#getLastName <em>Last Name</em>}</li>
  * </ul>
  * </p>
  *
@@ -56,6 +60,26 @@ public class ActorImpl extends HasCustomPropertiesImpl implements Actor {
 	 * @ordered
 	 */
 	protected EList<String> tags;
+
+	/**
+	 * The default value of the '{@link #getLabel() <em>Label</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getLabel()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String LABEL_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getLabel() <em>Label</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getLabel()
+	 * @generated
+	 * @ordered
+	 */
+	protected String label = LABEL_EDEFAULT;
 
 	/**
 	 * The cached value of the '{@link #getStakeholders() <em>Stakeholders</em>}' reference list.
@@ -138,6 +162,46 @@ public class ActorImpl extends HasCustomPropertiesImpl implements Actor {
 	protected String pwdHash = PWD_HASH_EDEFAULT;
 
 	/**
+	 * The default value of the '{@link #getFirstName() <em>First Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getFirstName()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String FIRST_NAME_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getFirstName() <em>First Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getFirstName()
+	 * @generated
+	 * @ordered
+	 */
+	protected String firstName = FIRST_NAME_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getLastName() <em>Last Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getLastName()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String LAST_NAME_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getLastName() <em>Last Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getLastName()
+	 * @generated
+	 * @ordered
+	 */
+	protected String lastName = LAST_NAME_EDEFAULT;
+
+	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -166,6 +230,27 @@ public class ActorImpl extends HasCustomPropertiesImpl implements Actor {
 			tags = new EDataTypeUniqueEList<String>(String.class, this, CorePackage.ACTOR__TAGS);
 		}
 		return tags;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String getLabel() {
+		return label;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setLabel(String newLabel) {
+		String oldLabel = label;
+		label = newLabel;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, CorePackage.ACTOR__LABEL, oldLabel, label));
 	}
 
 	/**
@@ -260,6 +345,48 @@ public class ActorImpl extends HasCustomPropertiesImpl implements Actor {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public String getFirstName() {
+		return firstName;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setFirstName(String newFirstName) {
+		String oldFirstName = firstName;
+		firstName = newFirstName;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, CorePackage.ACTOR__FIRST_NAME, oldFirstName, firstName));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String getLastName() {
+		return lastName;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setLastName(String newLastName) {
+		String oldLastName = lastName;
+		lastName = newLastName;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, CorePackage.ACTOR__LAST_NAME, oldLastName, lastName));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@SuppressWarnings("unchecked")
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
@@ -294,6 +421,8 @@ public class ActorImpl extends HasCustomPropertiesImpl implements Actor {
 		switch (featureID) {
 			case CorePackage.ACTOR__TAGS:
 				return getTags();
+			case CorePackage.ACTOR__LABEL:
+				return getLabel();
 			case CorePackage.ACTOR__STAKEHOLDERS:
 				return getStakeholders();
 			case CorePackage.ACTOR__UNIT:
@@ -304,6 +433,10 @@ public class ActorImpl extends HasCustomPropertiesImpl implements Actor {
 				return isAdmin();
 			case CorePackage.ACTOR__PWD_HASH:
 				return getPwdHash();
+			case CorePackage.ACTOR__FIRST_NAME:
+				return getFirstName();
+			case CorePackage.ACTOR__LAST_NAME:
+				return getLastName();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -320,6 +453,9 @@ public class ActorImpl extends HasCustomPropertiesImpl implements Actor {
 			case CorePackage.ACTOR__TAGS:
 				getTags().clear();
 				getTags().addAll((Collection<? extends String>)newValue);
+				return;
+			case CorePackage.ACTOR__LABEL:
+				setLabel((String)newValue);
 				return;
 			case CorePackage.ACTOR__STAKEHOLDERS:
 				getStakeholders().clear();
@@ -338,6 +474,12 @@ public class ActorImpl extends HasCustomPropertiesImpl implements Actor {
 			case CorePackage.ACTOR__PWD_HASH:
 				setPwdHash((String)newValue);
 				return;
+			case CorePackage.ACTOR__FIRST_NAME:
+				setFirstName((String)newValue);
+				return;
+			case CorePackage.ACTOR__LAST_NAME:
+				setLastName((String)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -352,6 +494,9 @@ public class ActorImpl extends HasCustomPropertiesImpl implements Actor {
 		switch (featureID) {
 			case CorePackage.ACTOR__TAGS:
 				getTags().clear();
+				return;
+			case CorePackage.ACTOR__LABEL:
+				setLabel(LABEL_EDEFAULT);
 				return;
 			case CorePackage.ACTOR__STAKEHOLDERS:
 				getStakeholders().clear();
@@ -368,6 +513,12 @@ public class ActorImpl extends HasCustomPropertiesImpl implements Actor {
 			case CorePackage.ACTOR__PWD_HASH:
 				setPwdHash(PWD_HASH_EDEFAULT);
 				return;
+			case CorePackage.ACTOR__FIRST_NAME:
+				setFirstName(FIRST_NAME_EDEFAULT);
+				return;
+			case CorePackage.ACTOR__LAST_NAME:
+				setLastName(LAST_NAME_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -382,6 +533,8 @@ public class ActorImpl extends HasCustomPropertiesImpl implements Actor {
 		switch (featureID) {
 			case CorePackage.ACTOR__TAGS:
 				return tags != null && !tags.isEmpty();
+			case CorePackage.ACTOR__LABEL:
+				return LABEL_EDEFAULT == null ? label != null : !LABEL_EDEFAULT.equals(label);
 			case CorePackage.ACTOR__STAKEHOLDERS:
 				return stakeholders != null && !stakeholders.isEmpty();
 			case CorePackage.ACTOR__UNIT:
@@ -392,6 +545,10 @@ public class ActorImpl extends HasCustomPropertiesImpl implements Actor {
 				return admin != ADMIN_EDEFAULT;
 			case CorePackage.ACTOR__PWD_HASH:
 				return PWD_HASH_EDEFAULT == null ? pwdHash != null : !PWD_HASH_EDEFAULT.equals(pwdHash);
+			case CorePackage.ACTOR__FIRST_NAME:
+				return FIRST_NAME_EDEFAULT == null ? firstName != null : !FIRST_NAME_EDEFAULT.equals(firstName);
+			case CorePackage.ACTOR__LAST_NAME:
+				return LAST_NAME_EDEFAULT == null ? lastName != null : !LAST_NAME_EDEFAULT.equals(lastName);
 		}
 		return super.eIsSet(featureID);
 	}
@@ -406,6 +563,12 @@ public class ActorImpl extends HasCustomPropertiesImpl implements Actor {
 		if (baseClass == HasTags.class) {
 			switch (derivedFeatureID) {
 				case CorePackage.ACTOR__TAGS: return CorePackage.HAS_TAGS__TAGS;
+				default: return -1;
+			}
+		}
+		if (baseClass == HasLabel.class) {
+			switch (derivedFeatureID) {
+				case CorePackage.ACTOR__LABEL: return CorePackage.HAS_LABEL__LABEL;
 				default: return -1;
 			}
 		}
@@ -425,6 +588,12 @@ public class ActorImpl extends HasCustomPropertiesImpl implements Actor {
 				default: return -1;
 			}
 		}
+		if (baseClass == HasLabel.class) {
+			switch (baseFeatureID) {
+				case CorePackage.HAS_LABEL__LABEL: return CorePackage.ACTOR__LABEL;
+				default: return -1;
+			}
+		}
 		return super.eDerivedStructuralFeatureID(baseFeatureID, baseClass);
 	}
 
@@ -440,12 +609,18 @@ public class ActorImpl extends HasCustomPropertiesImpl implements Actor {
 		StringBuffer result = new StringBuffer(super.toString());
 		result.append(" (tags: ");
 		result.append(tags);
+		result.append(", label: ");
+		result.append(label);
 		result.append(", username: ");
 		result.append(username);
 		result.append(", admin: ");
 		result.append(admin);
 		result.append(", pwdHash: ");
 		result.append(pwdHash);
+		result.append(", firstName: ");
+		result.append(firstName);
+		result.append(", lastName: ");
+		result.append(lastName);
 		result.append(')');
 		return result.toString();
 	}

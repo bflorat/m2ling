@@ -3,12 +3,19 @@
  */
 package org.m2ling.domain.core.impl;
 
+import java.util.Collection;
 import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import org.eclipse.emf.ecore.util.EObjectResolvingEList;
+import org.m2ling.domain.core.Activity;
 import org.m2ling.domain.core.ActivityStatus;
 import org.m2ling.domain.core.ActivityTransition;
+import org.m2ling.domain.core.Actor;
 import org.m2ling.domain.core.CorePackage;
+import org.m2ling.domain.core.HasLabel;
 
 /**
  * <!-- begin-user-doc -->
@@ -17,9 +24,12 @@ import org.m2ling.domain.core.CorePackage;
  * <p>
  * The following features are implemented:
  * <ul>
+ *   <li>{@link org.m2ling.domain.core.impl.ActivityTransitionImpl#getLabel <em>Label</em>}</li>
  *   <li>{@link org.m2ling.domain.core.impl.ActivityTransitionImpl#getDate <em>Date</em>}</li>
  *   <li>{@link org.m2ling.domain.core.impl.ActivityTransitionImpl#getFromStatus <em>From Status</em>}</li>
  *   <li>{@link org.m2ling.domain.core.impl.ActivityTransitionImpl#getToStatus <em>To Status</em>}</li>
+ *   <li>{@link org.m2ling.domain.core.impl.ActivityTransitionImpl#getActivity <em>Activity</em>}</li>
+ *   <li>{@link org.m2ling.domain.core.impl.ActivityTransitionImpl#getActor <em>Actor</em>}</li>
  * </ul>
  * </p>
  *
@@ -32,6 +42,26 @@ public class ActivityTransitionImpl extends HasCommentImpl implements ActivityTr
 	 * @generated
 	 */
 	public static final String copyright = "Copyright (C) 2012 Bertrand Florat";
+
+	/**
+	 * The default value of the '{@link #getLabel() <em>Label</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getLabel()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String LABEL_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getLabel() <em>Label</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getLabel()
+	 * @generated
+	 * @ordered
+	 */
+	protected String label = LABEL_EDEFAULT;
 
 	/**
 	 * The default value of the '{@link #getDate() <em>Date</em>}' attribute.
@@ -94,6 +124,26 @@ public class ActivityTransitionImpl extends HasCommentImpl implements ActivityTr
 	protected ActivityStatus toStatus = TO_STATUS_EDEFAULT;
 
 	/**
+	 * The cached value of the '{@link #getActivity() <em>Activity</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getActivity()
+	 * @generated
+	 * @ordered
+	 */
+	protected Activity activity;
+
+	/**
+	 * The cached value of the '{@link #getActor() <em>Actor</em>}' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getActor()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<Actor> actor;
+
+	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -110,6 +160,27 @@ public class ActivityTransitionImpl extends HasCommentImpl implements ActivityTr
 	@Override
 	protected EClass eStaticClass() {
 		return CorePackage.Literals.ACTIVITY_TRANSITION;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String getLabel() {
+		return label;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setLabel(String newLabel) {
+		String oldLabel = label;
+		label = newLabel;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, CorePackage.ACTIVITY_TRANSITION__LABEL, oldLabel, label));
 	}
 
 	/**
@@ -180,15 +251,72 @@ public class ActivityTransitionImpl extends HasCommentImpl implements ActivityTr
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public Activity getActivity() {
+		if (activity != null && activity.eIsProxy()) {
+			InternalEObject oldActivity = (InternalEObject)activity;
+			activity = (Activity)eResolveProxy(oldActivity);
+			if (activity != oldActivity) {
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, CorePackage.ACTIVITY_TRANSITION__ACTIVITY, oldActivity, activity));
+			}
+		}
+		return activity;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Activity basicGetActivity() {
+		return activity;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setActivity(Activity newActivity) {
+		Activity oldActivity = activity;
+		activity = newActivity;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, CorePackage.ACTIVITY_TRANSITION__ACTIVITY, oldActivity, activity));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList<Actor> getActor() {
+		if (actor == null) {
+			actor = new EObjectResolvingEList<Actor>(Actor.class, this, CorePackage.ACTIVITY_TRANSITION__ACTOR);
+		}
+		return actor;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
+			case CorePackage.ACTIVITY_TRANSITION__LABEL:
+				return getLabel();
 			case CorePackage.ACTIVITY_TRANSITION__DATE:
 				return getDate();
 			case CorePackage.ACTIVITY_TRANSITION__FROM_STATUS:
 				return getFromStatus();
 			case CorePackage.ACTIVITY_TRANSITION__TO_STATUS:
 				return getToStatus();
+			case CorePackage.ACTIVITY_TRANSITION__ACTIVITY:
+				if (resolve) return getActivity();
+				return basicGetActivity();
+			case CorePackage.ACTIVITY_TRANSITION__ACTOR:
+				return getActor();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -198,9 +326,13 @@ public class ActivityTransitionImpl extends HasCommentImpl implements ActivityTr
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@SuppressWarnings("unchecked")
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
+			case CorePackage.ACTIVITY_TRANSITION__LABEL:
+				setLabel((String)newValue);
+				return;
 			case CorePackage.ACTIVITY_TRANSITION__DATE:
 				setDate((Long)newValue);
 				return;
@@ -209,6 +341,13 @@ public class ActivityTransitionImpl extends HasCommentImpl implements ActivityTr
 				return;
 			case CorePackage.ACTIVITY_TRANSITION__TO_STATUS:
 				setToStatus((ActivityStatus)newValue);
+				return;
+			case CorePackage.ACTIVITY_TRANSITION__ACTIVITY:
+				setActivity((Activity)newValue);
+				return;
+			case CorePackage.ACTIVITY_TRANSITION__ACTOR:
+				getActor().clear();
+				getActor().addAll((Collection<? extends Actor>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -222,6 +361,9 @@ public class ActivityTransitionImpl extends HasCommentImpl implements ActivityTr
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
+			case CorePackage.ACTIVITY_TRANSITION__LABEL:
+				setLabel(LABEL_EDEFAULT);
+				return;
 			case CorePackage.ACTIVITY_TRANSITION__DATE:
 				setDate(DATE_EDEFAULT);
 				return;
@@ -230,6 +372,12 @@ public class ActivityTransitionImpl extends HasCommentImpl implements ActivityTr
 				return;
 			case CorePackage.ACTIVITY_TRANSITION__TO_STATUS:
 				setToStatus(TO_STATUS_EDEFAULT);
+				return;
+			case CorePackage.ACTIVITY_TRANSITION__ACTIVITY:
+				setActivity((Activity)null);
+				return;
+			case CorePackage.ACTIVITY_TRANSITION__ACTOR:
+				getActor().clear();
 				return;
 		}
 		super.eUnset(featureID);
@@ -243,14 +391,52 @@ public class ActivityTransitionImpl extends HasCommentImpl implements ActivityTr
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
+			case CorePackage.ACTIVITY_TRANSITION__LABEL:
+				return LABEL_EDEFAULT == null ? label != null : !LABEL_EDEFAULT.equals(label);
 			case CorePackage.ACTIVITY_TRANSITION__DATE:
 				return date != DATE_EDEFAULT;
 			case CorePackage.ACTIVITY_TRANSITION__FROM_STATUS:
 				return fromStatus != FROM_STATUS_EDEFAULT;
 			case CorePackage.ACTIVITY_TRANSITION__TO_STATUS:
 				return toStatus != TO_STATUS_EDEFAULT;
+			case CorePackage.ACTIVITY_TRANSITION__ACTIVITY:
+				return activity != null;
+			case CorePackage.ACTIVITY_TRANSITION__ACTOR:
+				return actor != null && !actor.isEmpty();
 		}
 		return super.eIsSet(featureID);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public int eBaseStructuralFeatureID(int derivedFeatureID, Class<?> baseClass) {
+		if (baseClass == HasLabel.class) {
+			switch (derivedFeatureID) {
+				case CorePackage.ACTIVITY_TRANSITION__LABEL: return CorePackage.HAS_LABEL__LABEL;
+				default: return -1;
+			}
+		}
+		return super.eBaseStructuralFeatureID(derivedFeatureID, baseClass);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public int eDerivedStructuralFeatureID(int baseFeatureID, Class<?> baseClass) {
+		if (baseClass == HasLabel.class) {
+			switch (baseFeatureID) {
+				case CorePackage.HAS_LABEL__LABEL: return CorePackage.ACTIVITY_TRANSITION__LABEL;
+				default: return -1;
+			}
+		}
+		return super.eDerivedStructuralFeatureID(baseFeatureID, baseClass);
 	}
 
 	/**
@@ -263,7 +449,9 @@ public class ActivityTransitionImpl extends HasCommentImpl implements ActivityTr
 		if (eIsProxy()) return super.toString();
 
 		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (date: ");
+		result.append(" (label: ");
+		result.append(label);
+		result.append(", date: ");
 		result.append(date);
 		result.append(", fromStatus: ");
 		result.append(fromStatus);

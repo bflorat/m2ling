@@ -9,9 +9,7 @@ import java.util.List;
 
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
-
 import org.eclipse.emf.common.util.ResourceLocator;
-
 import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
 import org.eclipse.emf.edit.provider.IEditingDomainItemProvider;
 import org.eclipse.emf.edit.provider.IItemLabelProvider;
@@ -22,10 +20,8 @@ import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.ItemProviderAdapter;
 import org.eclipse.emf.edit.provider.ViewerNotification;
-
 import org.m2ling.domain.core.CorePackage;
 import org.m2ling.domain.core.HasNameAndID;
-
 import org.m2ling.domain.provider.M2lingEditPlugin;
 
 /**
@@ -124,14 +120,14 @@ public class HasNameAndIDItemProvider
 	 * This returns the label text for the adapted class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	@Override
 	public String getText(Object object) {
 		String label = ((HasNameAndID)object).getName();
 		return label == null || label.length() == 0 ?
 			getString("_UI_HasNameAndID_type") :
-			getString("_UI_HasNameAndID_type") + " " + label;
+			getString("_UI_HasNameAndID_type") + ": " + label;
 	}
 
 	/**

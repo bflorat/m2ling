@@ -75,24 +75,6 @@ public interface CorePackage extends EPackage {
 	int HAS_CUSTOM_PROPERTIES = 13;
 
 	/**
-	 * The feature id for the '<em><b>Custom Properties</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int HAS_CUSTOM_PROPERTIES__CUSTOM_PROPERTIES = 0;
-
-	/**
-	 * The number of structural features of the '<em>Has Custom Properties</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int HAS_CUSTOM_PROPERTIES_FEATURE_COUNT = 1;
-
-	/**
 	 * The meta object id for the '{@link org.m2ling.domain.core.impl.ConceptItemImpl <em>Concept Item</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -103,51 +85,6 @@ public interface CorePackage extends EPackage {
 	int CONCEPT_ITEM = 8;
 
 	/**
-	 * The feature id for the '<em><b>Custom Properties</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CONCEPT_ITEM__CUSTOM_PROPERTIES = HAS_CUSTOM_PROPERTIES__CUSTOM_PROPERTIES;
-
-	/**
-	 * The feature id for the '<em><b>Comment</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CONCEPT_ITEM__COMMENT = HAS_CUSTOM_PROPERTIES_FEATURE_COUNT + 0;
-
-	/**
-	 * The feature id for the '<em><b>Tags</b></em>' attribute list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CONCEPT_ITEM__TAGS = HAS_CUSTOM_PROPERTIES_FEATURE_COUNT + 1;
-
-	/**
-	 * The feature id for the '<em><b>Label</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CONCEPT_ITEM__LABEL = HAS_CUSTOM_PROPERTIES_FEATURE_COUNT + 2;
-
-	/**
-	 * The number of structural features of the '<em>Concept Item</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CONCEPT_ITEM_FEATURE_COUNT = HAS_CUSTOM_PROPERTIES_FEATURE_COUNT + 3;
-
-	/**
 	 * The meta object id for the '{@link org.m2ling.domain.core.impl.ComponentTypeImpl <em>Component Type</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -156,6 +93,124 @@ public interface CorePackage extends EPackage {
 	 * @generated
 	 */
 	int COMPONENT_TYPE = 0;
+
+	/**
+	 * The meta object id for the '{@link org.m2ling.domain.core.impl.HasNameAndIDImpl <em>Has Name And ID</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.m2ling.domain.core.impl.HasNameAndIDImpl
+	 * @see org.m2ling.domain.core.impl.CorePackageImpl#getHasNameAndID()
+	 * @generated
+	 */
+	int HAS_NAME_AND_ID = 2;
+
+	/**
+	 * The feature id for the '<em><b>Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int HAS_NAME_AND_ID__ID = 0;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int HAS_NAME_AND_ID__NAME = 1;
+
+	/**
+	 * The number of structural features of the '<em>Has Name And ID</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int HAS_NAME_AND_ID_FEATURE_COUNT = 2;
+
+	/**
+	 * The feature id for the '<em><b>Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONCEPT_ITEM__ID = HAS_NAME_AND_ID__ID;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONCEPT_ITEM__NAME = HAS_NAME_AND_ID__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Custom Properties</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONCEPT_ITEM__CUSTOM_PROPERTIES = HAS_NAME_AND_ID_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Comment</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONCEPT_ITEM__COMMENT = HAS_NAME_AND_ID_FEATURE_COUNT + 1;
+
+	/**
+	 * The feature id for the '<em><b>Tags</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONCEPT_ITEM__TAGS = HAS_NAME_AND_ID_FEATURE_COUNT + 2;
+
+	/**
+	 * The feature id for the '<em><b>Label</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONCEPT_ITEM__LABEL = HAS_NAME_AND_ID_FEATURE_COUNT + 3;
+
+	/**
+	 * The number of structural features of the '<em>Concept Item</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONCEPT_ITEM_FEATURE_COUNT = HAS_NAME_AND_ID_FEATURE_COUNT + 4;
+
+	/**
+	 * The feature id for the '<em><b>Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COMPONENT_TYPE__ID = CONCEPT_ITEM__ID;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COMPONENT_TYPE__NAME = CONCEPT_ITEM__NAME;
 
 	/**
 	 * The feature id for the '<em><b>Custom Properties</b></em>' reference.
@@ -194,40 +249,13 @@ public interface CorePackage extends EPackage {
 	int COMPONENT_TYPE__LABEL = CONCEPT_ITEM__LABEL;
 
 	/**
-	 * The feature id for the '<em><b>Id</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int COMPONENT_TYPE__ID = CONCEPT_ITEM_FEATURE_COUNT + 0;
-
-	/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int COMPONENT_TYPE__NAME = CONCEPT_ITEM_FEATURE_COUNT + 1;
-
-	/**
 	 * The feature id for the '<em><b>Sub Types</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int COMPONENT_TYPE__SUB_TYPES = CONCEPT_ITEM_FEATURE_COUNT + 2;
-
-	/**
-	 * The feature id for the '<em><b>Parent</b></em>' container reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int COMPONENT_TYPE__PARENT = CONCEPT_ITEM_FEATURE_COUNT + 3;
+	int COMPONENT_TYPE__SUB_TYPES = CONCEPT_ITEM_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Binded Component Type</b></em>' reference.
@@ -236,7 +264,7 @@ public interface CorePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int COMPONENT_TYPE__BINDED_COMPONENT_TYPE = CONCEPT_ITEM_FEATURE_COUNT + 4;
+	int COMPONENT_TYPE__BINDED_COMPONENT_TYPE = CONCEPT_ITEM_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Engine Type</b></em>' reference.
@@ -245,7 +273,7 @@ public interface CorePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int COMPONENT_TYPE__ENGINE_TYPE = CONCEPT_ITEM_FEATURE_COUNT + 5;
+	int COMPONENT_TYPE__ENGINE_TYPE = CONCEPT_ITEM_FEATURE_COUNT + 2;
 
 	/**
 	 * The number of structural features of the '<em>Component Type</em>' class.
@@ -254,44 +282,7 @@ public interface CorePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int COMPONENT_TYPE_FEATURE_COUNT = CONCEPT_ITEM_FEATURE_COUNT + 6;
-
-	/**
-	 * The meta object id for the '{@link org.m2ling.domain.core.impl.HasNameAndIDImpl <em>Has Name And ID</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.m2ling.domain.core.impl.HasNameAndIDImpl
-	 * @see org.m2ling.domain.core.impl.CorePackageImpl#getHasNameAndID()
-	 * @generated
-	 */
-	int HAS_NAME_AND_ID = 2;
-
-	/**
-	 * The feature id for the '<em><b>Id</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int HAS_NAME_AND_ID__ID = 0;
-
-	/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int HAS_NAME_AND_ID__NAME = 1;
-
-	/**
-	 * The number of structural features of the '<em>Has Name And ID</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int HAS_NAME_AND_ID_FEATURE_COUNT = 2;
+	int COMPONENT_TYPE_FEATURE_COUNT = CONCEPT_ITEM_FEATURE_COUNT + 3;
 
 	/**
 	 * The meta object id for the '{@link org.m2ling.domain.core.impl.ArchitectureItemImpl <em>Architecture Item</em>}' class.
@@ -504,7 +495,7 @@ public interface CorePackage extends EPackage {
 	int COMPONENT__TYPE = COMPONENT_GROUP_FEATURE_COUNT + 0;
 
 	/**
-	 * The feature id for the '<em><b>Sub Components</b></em>' reference list.
+	 * The feature id for the '<em><b>Sub Components</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -513,22 +504,13 @@ public interface CorePackage extends EPackage {
 	int COMPONENT__SUB_COMPONENTS = COMPONENT_GROUP_FEATURE_COUNT + 1;
 
 	/**
-	 * The feature id for the '<em><b>Parent</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int COMPONENT__PARENT = COMPONENT_GROUP_FEATURE_COUNT + 2;
-
-	/**
 	 * The feature id for the '<em><b>Engine</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int COMPONENT__ENGINE = COMPONENT_GROUP_FEATURE_COUNT + 3;
+	int COMPONENT__ENGINE = COMPONENT_GROUP_FEATURE_COUNT + 2;
 
 	/**
 	 * The number of structural features of the '<em>Component</em>' class.
@@ -537,7 +519,7 @@ public interface CorePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int COMPONENT_FEATURE_COUNT = COMPONENT_GROUP_FEATURE_COUNT + 4;
+	int COMPONENT_FEATURE_COUNT = COMPONENT_GROUP_FEATURE_COUNT + 3;
 
 	/**
 	 * The meta object id for the '{@link org.m2ling.domain.core.impl.RuntimeItemImpl <em>Runtime Item</em>}' class.
@@ -759,22 +741,13 @@ public interface CorePackage extends EPackage {
 	int COMPONENT_NODE__SUB_NODES = COMPONENT_NODE_GROUP_FEATURE_COUNT + 1;
 
 	/**
-	 * The feature id for the '<em><b>Parent</b></em>' container reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int COMPONENT_NODE__PARENT = COMPONENT_NODE_GROUP_FEATURE_COUNT + 2;
-
-	/**
 	 * The feature id for the '<em><b>Engine</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int COMPONENT_NODE__ENGINE = COMPONENT_NODE_GROUP_FEATURE_COUNT + 3;
+	int COMPONENT_NODE__ENGINE = COMPONENT_NODE_GROUP_FEATURE_COUNT + 2;
 
 	/**
 	 * The number of structural features of the '<em>Component Node</em>' class.
@@ -783,7 +756,7 @@ public interface CorePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int COMPONENT_NODE_FEATURE_COUNT = COMPONENT_NODE_GROUP_FEATURE_COUNT + 4;
+	int COMPONENT_NODE_FEATURE_COUNT = COMPONENT_NODE_GROUP_FEATURE_COUNT + 3;
 
 	/**
 	 * The meta object id for the '{@link org.m2ling.domain.core.impl.ViewPointImpl <em>View Point</em>}' class.
@@ -794,6 +767,24 @@ public interface CorePackage extends EPackage {
 	 * @generated
 	 */
 	int VIEW_POINT = 4;
+
+	/**
+	 * The feature id for the '<em><b>Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VIEW_POINT__ID = CONCEPT_ITEM__ID;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VIEW_POINT__NAME = CONCEPT_ITEM__NAME;
 
 	/**
 	 * The feature id for the '<em><b>Custom Properties</b></em>' reference.
@@ -832,22 +823,13 @@ public interface CorePackage extends EPackage {
 	int VIEW_POINT__LABEL = CONCEPT_ITEM__LABEL;
 
 	/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int VIEW_POINT__NAME = CONCEPT_ITEM_FEATURE_COUNT + 0;
-
-	/**
 	 * The feature id for the '<em><b>Base Viewpoint</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int VIEW_POINT__BASE_VIEWPOINT = CONCEPT_ITEM_FEATURE_COUNT + 1;
+	int VIEW_POINT__BASE_VIEWPOINT = CONCEPT_ITEM_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Activities</b></em>' containment reference list.
@@ -856,7 +838,7 @@ public interface CorePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int VIEW_POINT__ACTIVITIES = CONCEPT_ITEM_FEATURE_COUNT + 2;
+	int VIEW_POINT__ACTIVITIES = CONCEPT_ITEM_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Component Types</b></em>' containment reference list.
@@ -865,7 +847,7 @@ public interface CorePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int VIEW_POINT__COMPONENT_TYPES = CONCEPT_ITEM_FEATURE_COUNT + 3;
+	int VIEW_POINT__COMPONENT_TYPES = CONCEPT_ITEM_FEATURE_COUNT + 2;
 
 	/**
 	 * The feature id for the '<em><b>Link Types</b></em>' containment reference list.
@@ -874,7 +856,7 @@ public interface CorePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int VIEW_POINT__LINK_TYPES = CONCEPT_ITEM_FEATURE_COUNT + 4;
+	int VIEW_POINT__LINK_TYPES = CONCEPT_ITEM_FEATURE_COUNT + 3;
 
 	/**
 	 * The feature id for the '<em><b>Rules</b></em>' containment reference list.
@@ -883,7 +865,7 @@ public interface CorePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int VIEW_POINT__RULES = CONCEPT_ITEM_FEATURE_COUNT + 5;
+	int VIEW_POINT__RULES = CONCEPT_ITEM_FEATURE_COUNT + 4;
 
 	/**
 	 * The number of structural features of the '<em>View Point</em>' class.
@@ -892,7 +874,7 @@ public interface CorePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int VIEW_POINT_FEATURE_COUNT = CONCEPT_ITEM_FEATURE_COUNT + 6;
+	int VIEW_POINT_FEATURE_COUNT = CONCEPT_ITEM_FEATURE_COUNT + 5;
 
 	/**
 	 * The meta object id for the '{@link org.m2ling.domain.core.impl.ViewImpl <em>View</em>}' class.
@@ -1051,6 +1033,24 @@ public interface CorePackage extends EPackage {
 	int HAS_COMMENT_FEATURE_COUNT = 1;
 
 	/**
+	 * The feature id for the '<em><b>Custom Properties</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int HAS_CUSTOM_PROPERTIES__CUSTOM_PROPERTIES = 0;
+
+	/**
+	 * The number of structural features of the '<em>Has Custom Properties</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int HAS_CUSTOM_PROPERTIES_FEATURE_COUNT = 1;
+
+	/**
 	 * The meta object id for the '{@link org.m2ling.domain.core.impl.CustomPropertyImpl <em>Custom Property</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1078,6 +1078,24 @@ public interface CorePackage extends EPackage {
 	 * @generated
 	 */
 	int LINK_TYPE = 15;
+
+	/**
+	 * The feature id for the '<em><b>Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LINK_TYPE__ID = CONCEPT_ITEM__ID;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LINK_TYPE__NAME = CONCEPT_ITEM__NAME;
 
 	/**
 	 * The feature id for the '<em><b>Custom Properties</b></em>' reference.
@@ -1116,31 +1134,13 @@ public interface CorePackage extends EPackage {
 	int LINK_TYPE__LABEL = CONCEPT_ITEM__LABEL;
 
 	/**
-	 * The feature id for the '<em><b>Id</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int LINK_TYPE__ID = CONCEPT_ITEM_FEATURE_COUNT + 0;
-
-	/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int LINK_TYPE__NAME = CONCEPT_ITEM_FEATURE_COUNT + 1;
-
-	/**
 	 * The feature id for the '<em><b>Source Type</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int LINK_TYPE__SOURCE_TYPE = CONCEPT_ITEM_FEATURE_COUNT + 2;
+	int LINK_TYPE__SOURCE_TYPE = CONCEPT_ITEM_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Destination Type</b></em>' reference.
@@ -1149,7 +1149,7 @@ public interface CorePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int LINK_TYPE__DESTINATION_TYPE = CONCEPT_ITEM_FEATURE_COUNT + 3;
+	int LINK_TYPE__DESTINATION_TYPE = CONCEPT_ITEM_FEATURE_COUNT + 1;
 
 	/**
 	 * The number of structural features of the '<em>Link Type</em>' class.
@@ -1158,7 +1158,7 @@ public interface CorePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int LINK_TYPE_FEATURE_COUNT = CONCEPT_ITEM_FEATURE_COUNT + 4;
+	int LINK_TYPE_FEATURE_COUNT = CONCEPT_ITEM_FEATURE_COUNT + 2;
 
 	/**
 	 * The meta object id for the '{@link org.m2ling.domain.core.impl.LinkImpl <em>Link</em>}' class.
@@ -1364,13 +1364,22 @@ public interface CorePackage extends EPackage {
 	int STAKEHOLDER__NAME = HAS_NAME_AND_ID__NAME;
 
 	/**
+	 * The feature id for the '<em><b>Label</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STAKEHOLDER__LABEL = HAS_NAME_AND_ID_FEATURE_COUNT + 0;
+
+	/**
 	 * The feature id for the '<em><b>Views</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int STAKEHOLDER__VIEWS = HAS_NAME_AND_ID_FEATURE_COUNT + 0;
+	int STAKEHOLDER__VIEWS = HAS_NAME_AND_ID_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>View Points</b></em>' reference list.
@@ -1379,7 +1388,7 @@ public interface CorePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int STAKEHOLDER__VIEW_POINTS = HAS_NAME_AND_ID_FEATURE_COUNT + 1;
+	int STAKEHOLDER__VIEW_POINTS = HAS_NAME_AND_ID_FEATURE_COUNT + 2;
 
 	/**
 	 * The feature id for the '<em><b>Actors</b></em>' reference list.
@@ -1388,7 +1397,7 @@ public interface CorePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int STAKEHOLDER__ACTORS = HAS_NAME_AND_ID_FEATURE_COUNT + 2;
+	int STAKEHOLDER__ACTORS = HAS_NAME_AND_ID_FEATURE_COUNT + 3;
 
 	/**
 	 * The number of structural features of the '<em>Stakeholder</em>' class.
@@ -1397,7 +1406,7 @@ public interface CorePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int STAKEHOLDER_FEATURE_COUNT = HAS_NAME_AND_ID_FEATURE_COUNT + 3;
+	int STAKEHOLDER_FEATURE_COUNT = HAS_NAME_AND_ID_FEATURE_COUNT + 4;
 
 	/**
 	 * The meta object id for the '{@link org.m2ling.domain.core.impl.ConstraintImpl <em>Constraint</em>}' class.
@@ -1747,22 +1756,22 @@ public interface CorePackage extends EPackage {
 	int ACTIVITY__NAME = HAS_NAME_AND_ID__NAME;
 
 	/**
-	 * The feature id for the '<em><b>Transitions</b></em>' reference list.
+	 * The feature id for the '<em><b>Tags</b></em>' attribute list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ACTIVITY__TRANSITIONS = HAS_NAME_AND_ID_FEATURE_COUNT + 0;
+	int ACTIVITY__TAGS = HAS_NAME_AND_ID_FEATURE_COUNT + 0;
 
 	/**
-	 * The feature id for the '<em><b>Responsibles</b></em>' reference list.
+	 * The feature id for the '<em><b>Label</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ACTIVITY__RESPONSIBLES = HAS_NAME_AND_ID_FEATURE_COUNT + 1;
+	int ACTIVITY__LABEL = HAS_NAME_AND_ID_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Accountables</b></em>' reference list.
@@ -1774,13 +1783,22 @@ public interface CorePackage extends EPackage {
 	int ACTIVITY__ACCOUNTABLES = HAS_NAME_AND_ID_FEATURE_COUNT + 2;
 
 	/**
+	 * The feature id for the '<em><b>Responsibles</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ACTIVITY__RESPONSIBLES = HAS_NAME_AND_ID_FEATURE_COUNT + 3;
+
+	/**
 	 * The number of structural features of the '<em>Activity</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ACTIVITY_FEATURE_COUNT = HAS_NAME_AND_ID_FEATURE_COUNT + 3;
+	int ACTIVITY_FEATURE_COUNT = HAS_NAME_AND_ID_FEATURE_COUNT + 4;
 
 	/**
 	 * The meta object id for the '{@link org.m2ling.domain.core.impl.ActivityTransitionImpl <em>Activity Transition</em>}' class.
@@ -1802,13 +1820,22 @@ public interface CorePackage extends EPackage {
 	int ACTIVITY_TRANSITION__COMMENT = HAS_COMMENT__COMMENT;
 
 	/**
+	 * The feature id for the '<em><b>Label</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ACTIVITY_TRANSITION__LABEL = HAS_COMMENT_FEATURE_COUNT + 0;
+
+	/**
 	 * The feature id for the '<em><b>Date</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ACTIVITY_TRANSITION__DATE = HAS_COMMENT_FEATURE_COUNT + 0;
+	int ACTIVITY_TRANSITION__DATE = HAS_COMMENT_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>From Status</b></em>' attribute.
@@ -1817,7 +1844,7 @@ public interface CorePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ACTIVITY_TRANSITION__FROM_STATUS = HAS_COMMENT_FEATURE_COUNT + 1;
+	int ACTIVITY_TRANSITION__FROM_STATUS = HAS_COMMENT_FEATURE_COUNT + 2;
 
 	/**
 	 * The feature id for the '<em><b>To Status</b></em>' attribute.
@@ -1826,7 +1853,25 @@ public interface CorePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ACTIVITY_TRANSITION__TO_STATUS = HAS_COMMENT_FEATURE_COUNT + 2;
+	int ACTIVITY_TRANSITION__TO_STATUS = HAS_COMMENT_FEATURE_COUNT + 3;
+
+	/**
+	 * The feature id for the '<em><b>Activity</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ACTIVITY_TRANSITION__ACTIVITY = HAS_COMMENT_FEATURE_COUNT + 4;
+
+	/**
+	 * The feature id for the '<em><b>Actor</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ACTIVITY_TRANSITION__ACTOR = HAS_COMMENT_FEATURE_COUNT + 5;
 
 	/**
 	 * The number of structural features of the '<em>Activity Transition</em>' class.
@@ -1835,7 +1880,7 @@ public interface CorePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ACTIVITY_TRANSITION_FEATURE_COUNT = HAS_COMMENT_FEATURE_COUNT + 3;
+	int ACTIVITY_TRANSITION_FEATURE_COUNT = HAS_COMMENT_FEATURE_COUNT + 6;
 
 	/**
 	 * The meta object id for the '{@link org.m2ling.domain.core.impl.OrganisationalUnitImpl <em>Organisational Unit</em>}' class.
@@ -1893,13 +1938,22 @@ public interface CorePackage extends EPackage {
 	int ORGANISATIONAL_UNIT__TAGS = HAS_COMMENT_FEATURE_COUNT + 3;
 
 	/**
+	 * The feature id for the '<em><b>Label</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ORGANISATIONAL_UNIT__LABEL = HAS_COMMENT_FEATURE_COUNT + 4;
+
+	/**
 	 * The number of structural features of the '<em>Organisational Unit</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ORGANISATIONAL_UNIT_FEATURE_COUNT = HAS_COMMENT_FEATURE_COUNT + 4;
+	int ORGANISATIONAL_UNIT_FEATURE_COUNT = HAS_COMMENT_FEATURE_COUNT + 5;
 
 	/**
 	 * The meta object id for the '{@link org.m2ling.domain.core.impl.ActorImpl <em>Actor</em>}' class.
@@ -1930,13 +1984,22 @@ public interface CorePackage extends EPackage {
 	int ACTOR__TAGS = HAS_CUSTOM_PROPERTIES_FEATURE_COUNT + 0;
 
 	/**
+	 * The feature id for the '<em><b>Label</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ACTOR__LABEL = HAS_CUSTOM_PROPERTIES_FEATURE_COUNT + 1;
+
+	/**
 	 * The feature id for the '<em><b>Stakeholders</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ACTOR__STAKEHOLDERS = HAS_CUSTOM_PROPERTIES_FEATURE_COUNT + 1;
+	int ACTOR__STAKEHOLDERS = HAS_CUSTOM_PROPERTIES_FEATURE_COUNT + 2;
 
 	/**
 	 * The feature id for the '<em><b>Unit</b></em>' reference list.
@@ -1945,7 +2008,7 @@ public interface CorePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ACTOR__UNIT = HAS_CUSTOM_PROPERTIES_FEATURE_COUNT + 2;
+	int ACTOR__UNIT = HAS_CUSTOM_PROPERTIES_FEATURE_COUNT + 3;
 
 	/**
 	 * The feature id for the '<em><b>Username</b></em>' attribute.
@@ -1954,7 +2017,7 @@ public interface CorePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ACTOR__USERNAME = HAS_CUSTOM_PROPERTIES_FEATURE_COUNT + 3;
+	int ACTOR__USERNAME = HAS_CUSTOM_PROPERTIES_FEATURE_COUNT + 4;
 
 	/**
 	 * The feature id for the '<em><b>Admin</b></em>' attribute.
@@ -1963,7 +2026,7 @@ public interface CorePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ACTOR__ADMIN = HAS_CUSTOM_PROPERTIES_FEATURE_COUNT + 4;
+	int ACTOR__ADMIN = HAS_CUSTOM_PROPERTIES_FEATURE_COUNT + 5;
 
 	/**
 	 * The feature id for the '<em><b>Pwd Hash</b></em>' attribute.
@@ -1972,7 +2035,25 @@ public interface CorePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ACTOR__PWD_HASH = HAS_CUSTOM_PROPERTIES_FEATURE_COUNT + 5;
+	int ACTOR__PWD_HASH = HAS_CUSTOM_PROPERTIES_FEATURE_COUNT + 6;
+
+	/**
+	 * The feature id for the '<em><b>First Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ACTOR__FIRST_NAME = HAS_CUSTOM_PROPERTIES_FEATURE_COUNT + 7;
+
+	/**
+	 * The feature id for the '<em><b>Last Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ACTOR__LAST_NAME = HAS_CUSTOM_PROPERTIES_FEATURE_COUNT + 8;
 
 	/**
 	 * The number of structural features of the '<em>Actor</em>' class.
@@ -1981,7 +2062,7 @@ public interface CorePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ACTOR_FEATURE_COUNT = HAS_CUSTOM_PROPERTIES_FEATURE_COUNT + 6;
+	int ACTOR_FEATURE_COUNT = HAS_CUSTOM_PROPERTIES_FEATURE_COUNT + 9;
 
 	/**
 	 * The meta object id for the '{@link org.m2ling.domain.core.impl.RuleImpl <em>Rule</em>}' class.
@@ -1992,6 +2073,24 @@ public interface CorePackage extends EPackage {
 	 * @generated
 	 */
 	int RULE = 38;
+
+	/**
+	 * The feature id for the '<em><b>Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RULE__ID = CONCEPT_ITEM__ID;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RULE__NAME = CONCEPT_ITEM__NAME;
 
 	/**
 	 * The feature id for the '<em><b>Custom Properties</b></em>' reference.
@@ -2057,6 +2156,34 @@ public interface CorePackage extends EPackage {
 	int RULE_FEATURE_COUNT = CONCEPT_ITEM_FEATURE_COUNT + 2;
 
 	/**
+	 * The meta object id for the '{@link org.m2ling.domain.core.impl.HasLabelImpl <em>Has Label</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.m2ling.domain.core.impl.HasLabelImpl
+	 * @see org.m2ling.domain.core.impl.CorePackageImpl#getHasLabel()
+	 * @generated
+	 */
+	int HAS_LABEL = 39;
+
+	/**
+	 * The feature id for the '<em><b>Label</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int HAS_LABEL__LABEL = 0;
+
+	/**
+	 * The number of structural features of the '<em>Has Label</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int HAS_LABEL_FEATURE_COUNT = 1;
+
+	/**
 	 * The meta object id for the '{@link org.m2ling.domain.core.CustomPropertyType <em>Custom Property Type</em>}' enum.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2064,7 +2191,7 @@ public interface CorePackage extends EPackage {
 	 * @see org.m2ling.domain.core.impl.CorePackageImpl#getCustomPropertyType()
 	 * @generated
 	 */
-	int CUSTOM_PROPERTY_TYPE = 39;
+	int CUSTOM_PROPERTY_TYPE = 40;
 
 	/**
 	 * The meta object id for the '{@link org.m2ling.domain.core.ActivityStatus <em>Activity Status</em>}' enum.
@@ -2074,7 +2201,7 @@ public interface CorePackage extends EPackage {
 	 * @see org.m2ling.domain.core.impl.CorePackageImpl#getActivityStatus()
 	 * @generated
 	 */
-	int ACTIVITY_STATUS = 40;
+	int ACTIVITY_STATUS = 41;
 
 	/**
 	 * The meta object id for the '{@link org.m2ling.domain.core.Type <em>Type</em>}' enum.
@@ -2084,7 +2211,7 @@ public interface CorePackage extends EPackage {
 	 * @see org.m2ling.domain.core.impl.CorePackageImpl#getType()
 	 * @generated
 	 */
-	int TYPE = 41;
+	int TYPE = 42;
 
 	/**
 	 * The meta object id for the '{@link org.m2ling.domain.core.RuleStatus <em>Rule Status</em>}' enum.
@@ -2094,7 +2221,7 @@ public interface CorePackage extends EPackage {
 	 * @see org.m2ling.domain.core.impl.CorePackageImpl#getRuleStatus()
 	 * @generated
 	 */
-	int RULE_STATUS = 42;
+	int RULE_STATUS = 43;
 
 	/**
 	 * The meta object id for the '{@link org.m2ling.domain.core.RulePriority <em>Rule Priority</em>}' enum.
@@ -2104,7 +2231,7 @@ public interface CorePackage extends EPackage {
 	 * @see org.m2ling.domain.core.impl.CorePackageImpl#getRulePriority()
 	 * @generated
 	 */
-	int RULE_PRIORITY = 43;
+	int RULE_PRIORITY = 44;
 
 
 	/**
@@ -2127,17 +2254,6 @@ public interface CorePackage extends EPackage {
 	 * @generated
 	 */
 	EReference getComponentType_SubTypes();
-
-	/**
-	 * Returns the meta object for the container reference '{@link org.m2ling.domain.core.ComponentType#getParent <em>Parent</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the container reference '<em>Parent</em>'.
-	 * @see org.m2ling.domain.core.ComponentType#getParent()
-	 * @see #getComponentType()
-	 * @generated
-	 */
-	EReference getComponentType_Parent();
 
 	/**
 	 * Returns the meta object for the reference '{@link org.m2ling.domain.core.ComponentType#getBindedComponentType <em>Binded Component Type</em>}'.
@@ -2183,26 +2299,15 @@ public interface CorePackage extends EPackage {
 	EReference getComponent_Type();
 
 	/**
-	 * Returns the meta object for the reference list '{@link org.m2ling.domain.core.Component#getSubComponents <em>Sub Components</em>}'.
+	 * Returns the meta object for the containment reference list '{@link org.m2ling.domain.core.Component#getSubComponents <em>Sub Components</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference list '<em>Sub Components</em>'.
+	 * @return the meta object for the containment reference list '<em>Sub Components</em>'.
 	 * @see org.m2ling.domain.core.Component#getSubComponents()
 	 * @see #getComponent()
 	 * @generated
 	 */
 	EReference getComponent_SubComponents();
-
-	/**
-	 * Returns the meta object for the reference '{@link org.m2ling.domain.core.Component#getParent <em>Parent</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Parent</em>'.
-	 * @see org.m2ling.domain.core.Component#getParent()
-	 * @see #getComponent()
-	 * @generated
-	 */
-	EReference getComponent_Parent();
 
 	/**
 	 * Returns the meta object for the reference '{@link org.m2ling.domain.core.Component#getEngine <em>Engine</em>}'.
@@ -2280,17 +2385,6 @@ public interface CorePackage extends EPackage {
 	EReference getComponentNode_SubNodes();
 
 	/**
-	 * Returns the meta object for the container reference '{@link org.m2ling.domain.core.ComponentNode#getParent <em>Parent</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the container reference '<em>Parent</em>'.
-	 * @see org.m2ling.domain.core.ComponentNode#getParent()
-	 * @see #getComponentNode()
-	 * @generated
-	 */
-	EReference getComponentNode_Parent();
-
-	/**
 	 * Returns the meta object for the reference '{@link org.m2ling.domain.core.ComponentNode#getEngine <em>Engine</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2343,17 +2437,6 @@ public interface CorePackage extends EPackage {
 	 * @generated
 	 */
 	EReference getViewPoint_BaseViewpoint();
-
-	/**
-	 * Returns the meta object for the attribute '{@link org.m2ling.domain.core.ViewPoint#getName <em>Name</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Name</em>'.
-	 * @see org.m2ling.domain.core.ViewPoint#getName()
-	 * @see #getViewPoint()
-	 * @generated
-	 */
-	EAttribute getViewPoint_Name();
 
 	/**
 	 * Returns the meta object for the containment reference list '{@link org.m2ling.domain.core.ViewPoint#getLinkTypes <em>Link Types</em>}'.
@@ -2430,17 +2513,6 @@ public interface CorePackage extends EPackage {
 	EClass getArchitectureItem();
 
 	/**
-	 * Returns the meta object for the attribute '{@link org.m2ling.domain.core.ArchitectureItem#getLabel <em>Label</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Label</em>'.
-	 * @see org.m2ling.domain.core.ArchitectureItem#getLabel()
-	 * @see #getArchitectureItem()
-	 * @generated
-	 */
-	EAttribute getArchitectureItem_Label();
-
-	/**
 	 * Returns the meta object for class '{@link org.m2ling.domain.core.ConceptItem <em>Concept Item</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2451,17 +2523,6 @@ public interface CorePackage extends EPackage {
 	EClass getConceptItem();
 
 	/**
-	 * Returns the meta object for the attribute '{@link org.m2ling.domain.core.ConceptItem#getLabel <em>Label</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Label</em>'.
-	 * @see org.m2ling.domain.core.ConceptItem#getLabel()
-	 * @see #getConceptItem()
-	 * @generated
-	 */
-	EAttribute getConceptItem_Label();
-
-	/**
 	 * Returns the meta object for class '{@link org.m2ling.domain.core.RuntimeItem <em>Runtime Item</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2470,17 +2531,6 @@ public interface CorePackage extends EPackage {
 	 * @generated
 	 */
 	EClass getRuntimeItem();
-
-	/**
-	 * Returns the meta object for the attribute '{@link org.m2ling.domain.core.RuntimeItem#getLabel <em>Label</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Label</em>'.
-	 * @see org.m2ling.domain.core.RuntimeItem#getLabel()
-	 * @see #getRuntimeItem()
-	 * @generated
-	 */
-	EAttribute getRuntimeItem_Label();
 
 	/**
 	 * Returns the meta object for class '{@link org.m2ling.domain.core.View <em>View</em>}'.
@@ -2975,17 +3025,6 @@ public interface CorePackage extends EPackage {
 	EClass getActivity();
 
 	/**
-	 * Returns the meta object for the reference list '{@link org.m2ling.domain.core.Activity#getTransitions <em>Transitions</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference list '<em>Transitions</em>'.
-	 * @see org.m2ling.domain.core.Activity#getTransitions()
-	 * @see #getActivity()
-	 * @generated
-	 */
-	EReference getActivity_Transitions();
-
-	/**
 	 * Returns the meta object for the reference list '{@link org.m2ling.domain.core.Activity#getResponsibles <em>Responsibles</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3049,6 +3088,28 @@ public interface CorePackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getActivityTransition_ToStatus();
+
+	/**
+	 * Returns the meta object for the reference '{@link org.m2ling.domain.core.ActivityTransition#getActivity <em>Activity</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Activity</em>'.
+	 * @see org.m2ling.domain.core.ActivityTransition#getActivity()
+	 * @see #getActivityTransition()
+	 * @generated
+	 */
+	EReference getActivityTransition_Activity();
+
+	/**
+	 * Returns the meta object for the reference list '{@link org.m2ling.domain.core.ActivityTransition#getActor <em>Actor</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference list '<em>Actor</em>'.
+	 * @see org.m2ling.domain.core.ActivityTransition#getActor()
+	 * @see #getActivityTransition()
+	 * @generated
+	 */
+	EReference getActivityTransition_Actor();
 
 	/**
 	 * Returns the meta object for class '{@link org.m2ling.domain.core.OrganisationalUnit <em>Organisational Unit</em>}'.
@@ -3126,6 +3187,28 @@ public interface CorePackage extends EPackage {
 	EAttribute getActor_PwdHash();
 
 	/**
+	 * Returns the meta object for the attribute '{@link org.m2ling.domain.core.Actor#getFirstName <em>First Name</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>First Name</em>'.
+	 * @see org.m2ling.domain.core.Actor#getFirstName()
+	 * @see #getActor()
+	 * @generated
+	 */
+	EAttribute getActor_FirstName();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.m2ling.domain.core.Actor#getLastName <em>Last Name</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Last Name</em>'.
+	 * @see org.m2ling.domain.core.Actor#getLastName()
+	 * @see #getActor()
+	 * @generated
+	 */
+	EAttribute getActor_LastName();
+
+	/**
 	 * Returns the meta object for class '{@link org.m2ling.domain.core.Rule <em>Rule</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3156,6 +3239,27 @@ public interface CorePackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getRule_Priority();
+
+	/**
+	 * Returns the meta object for class '{@link org.m2ling.domain.core.HasLabel <em>Has Label</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Has Label</em>'.
+	 * @see org.m2ling.domain.core.HasLabel
+	 * @generated
+	 */
+	EClass getHasLabel();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.m2ling.domain.core.HasLabel#getLabel <em>Label</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Label</em>'.
+	 * @see org.m2ling.domain.core.HasLabel#getLabel()
+	 * @see #getHasLabel()
+	 * @generated
+	 */
+	EAttribute getHasLabel_Label();
 
 	/**
 	 * Returns the meta object for enum '{@link org.m2ling.domain.core.CustomPropertyType <em>Custom Property Type</em>}'.
@@ -3248,14 +3352,6 @@ public interface CorePackage extends EPackage {
 		EReference COMPONENT_TYPE__SUB_TYPES = eINSTANCE.getComponentType_SubTypes();
 
 		/**
-		 * The meta object literal for the '<em><b>Parent</b></em>' container reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference COMPONENT_TYPE__PARENT = eINSTANCE.getComponentType_Parent();
-
-		/**
 		 * The meta object literal for the '<em><b>Binded Component Type</b></em>' reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -3290,20 +3386,12 @@ public interface CorePackage extends EPackage {
 		EReference COMPONENT__TYPE = eINSTANCE.getComponent_Type();
 
 		/**
-		 * The meta object literal for the '<em><b>Sub Components</b></em>' reference list feature.
+		 * The meta object literal for the '<em><b>Sub Components</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
 		EReference COMPONENT__SUB_COMPONENTS = eINSTANCE.getComponent_SubComponents();
-
-		/**
-		 * The meta object literal for the '<em><b>Parent</b></em>' reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference COMPONENT__PARENT = eINSTANCE.getComponent_Parent();
 
 		/**
 		 * The meta object literal for the '<em><b>Engine</b></em>' reference feature.
@@ -3366,14 +3454,6 @@ public interface CorePackage extends EPackage {
 		EReference COMPONENT_NODE__SUB_NODES = eINSTANCE.getComponentNode_SubNodes();
 
 		/**
-		 * The meta object literal for the '<em><b>Parent</b></em>' container reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference COMPONENT_NODE__PARENT = eINSTANCE.getComponentNode_Parent();
-
-		/**
 		 * The meta object literal for the '<em><b>Engine</b></em>' reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -3414,14 +3494,6 @@ public interface CorePackage extends EPackage {
 		 * @generated
 		 */
 		EReference VIEW_POINT__BASE_VIEWPOINT = eINSTANCE.getViewPoint_BaseViewpoint();
-
-		/**
-		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute VIEW_POINT__NAME = eINSTANCE.getViewPoint_Name();
 
 		/**
 		 * The meta object literal for the '<em><b>Link Types</b></em>' containment reference list feature.
@@ -3486,14 +3558,6 @@ public interface CorePackage extends EPackage {
 		EClass ARCHITECTURE_ITEM = eINSTANCE.getArchitectureItem();
 
 		/**
-		 * The meta object literal for the '<em><b>Label</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute ARCHITECTURE_ITEM__LABEL = eINSTANCE.getArchitectureItem_Label();
-
-		/**
 		 * The meta object literal for the '{@link org.m2ling.domain.core.impl.ConceptItemImpl <em>Concept Item</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -3504,14 +3568,6 @@ public interface CorePackage extends EPackage {
 		EClass CONCEPT_ITEM = eINSTANCE.getConceptItem();
 
 		/**
-		 * The meta object literal for the '<em><b>Label</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute CONCEPT_ITEM__LABEL = eINSTANCE.getConceptItem_Label();
-
-		/**
 		 * The meta object literal for the '{@link org.m2ling.domain.core.impl.RuntimeItemImpl <em>Runtime Item</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -3520,14 +3576,6 @@ public interface CorePackage extends EPackage {
 		 * @generated
 		 */
 		EClass RUNTIME_ITEM = eINSTANCE.getRuntimeItem();
-
-		/**
-		 * The meta object literal for the '<em><b>Label</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute RUNTIME_ITEM__LABEL = eINSTANCE.getRuntimeItem_Label();
 
 		/**
 		 * The meta object literal for the '{@link org.m2ling.domain.core.impl.ViewImpl <em>View</em>}' class.
@@ -3956,14 +4004,6 @@ public interface CorePackage extends EPackage {
 		EClass ACTIVITY = eINSTANCE.getActivity();
 
 		/**
-		 * The meta object literal for the '<em><b>Transitions</b></em>' reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference ACTIVITY__TRANSITIONS = eINSTANCE.getActivity_Transitions();
-
-		/**
 		 * The meta object literal for the '<em><b>Responsibles</b></em>' reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -4012,6 +4052,22 @@ public interface CorePackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute ACTIVITY_TRANSITION__TO_STATUS = eINSTANCE.getActivityTransition_ToStatus();
+
+		/**
+		 * The meta object literal for the '<em><b>Activity</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference ACTIVITY_TRANSITION__ACTIVITY = eINSTANCE.getActivityTransition_Activity();
+
+		/**
+		 * The meta object literal for the '<em><b>Actor</b></em>' reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference ACTIVITY_TRANSITION__ACTOR = eINSTANCE.getActivityTransition_Actor();
 
 		/**
 		 * The meta object literal for the '{@link org.m2ling.domain.core.impl.OrganisationalUnitImpl <em>Organisational Unit</em>}' class.
@@ -4074,6 +4130,22 @@ public interface CorePackage extends EPackage {
 		EAttribute ACTOR__PWD_HASH = eINSTANCE.getActor_PwdHash();
 
 		/**
+		 * The meta object literal for the '<em><b>First Name</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute ACTOR__FIRST_NAME = eINSTANCE.getActor_FirstName();
+
+		/**
+		 * The meta object literal for the '<em><b>Last Name</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute ACTOR__LAST_NAME = eINSTANCE.getActor_LastName();
+
+		/**
 		 * The meta object literal for the '{@link org.m2ling.domain.core.impl.RuleImpl <em>Rule</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -4098,6 +4170,24 @@ public interface CorePackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute RULE__PRIORITY = eINSTANCE.getRule_Priority();
+
+		/**
+		 * The meta object literal for the '{@link org.m2ling.domain.core.impl.HasLabelImpl <em>Has Label</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.m2ling.domain.core.impl.HasLabelImpl
+		 * @see org.m2ling.domain.core.impl.CorePackageImpl#getHasLabel()
+		 * @generated
+		 */
+		EClass HAS_LABEL = eINSTANCE.getHasLabel();
+
+		/**
+		 * The meta object literal for the '<em><b>Label</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute HAS_LABEL__LABEL = eINSTANCE.getHasLabel_Label();
 
 		/**
 		 * The meta object literal for the '{@link org.m2ling.domain.core.CustomPropertyType <em>Custom Property Type</em>}' enum.

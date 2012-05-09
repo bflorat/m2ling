@@ -11,8 +11,7 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
-import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.m2ling.domain.core.Component;
 import org.m2ling.domain.core.ComponentNode;
@@ -28,7 +27,6 @@ import org.m2ling.domain.core.CorePackage;
  * <ul>
  *   <li>{@link org.m2ling.domain.core.impl.ComponentNodeImpl#getComponent <em>Component</em>}</li>
  *   <li>{@link org.m2ling.domain.core.impl.ComponentNodeImpl#getSubNodes <em>Sub Nodes</em>}</li>
- *   <li>{@link org.m2ling.domain.core.impl.ComponentNodeImpl#getParent <em>Parent</em>}</li>
  *   <li>{@link org.m2ling.domain.core.impl.ComponentNodeImpl#getEngine <em>Engine</em>}</li>
  * </ul>
  * </p>
@@ -137,50 +135,9 @@ public class ComponentNodeImpl extends ComponentNodeGroupImpl implements Compone
 	 */
 	public EList<ComponentNode> getSubNodes() {
 		if (subNodes == null) {
-			subNodes = new EObjectContainmentWithInverseEList<ComponentNode>(ComponentNode.class, this, CorePackage.COMPONENT_NODE__SUB_NODES, CorePackage.COMPONENT_NODE__PARENT);
+			subNodes = new EObjectContainmentEList<ComponentNode>(ComponentNode.class, this, CorePackage.COMPONENT_NODE__SUB_NODES);
 		}
 		return subNodes;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public ComponentNode getParent() {
-		if (eContainerFeatureID() != CorePackage.COMPONENT_NODE__PARENT) return null;
-		return (ComponentNode)eContainer();
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public NotificationChain basicSetParent(ComponentNode newParent, NotificationChain msgs) {
-		msgs = eBasicSetContainer((InternalEObject)newParent, CorePackage.COMPONENT_NODE__PARENT, msgs);
-		return msgs;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setParent(ComponentNode newParent) {
-		if (newParent != eInternalContainer() || (eContainerFeatureID() != CorePackage.COMPONENT_NODE__PARENT && newParent != null)) {
-			if (EcoreUtil.isAncestor(this, newParent))
-				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
-			NotificationChain msgs = null;
-			if (eInternalContainer() != null)
-				msgs = eBasicRemoveFromContainer(msgs);
-			if (newParent != null)
-				msgs = ((InternalEObject)newParent).eInverseAdd(this, CorePackage.COMPONENT_NODE__SUB_NODES, ComponentNode.class, msgs);
-			msgs = basicSetParent(newParent, msgs);
-			if (msgs != null) msgs.dispatch();
-		}
-		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, CorePackage.COMPONENT_NODE__PARENT, newParent, newParent));
 	}
 
 	/**
@@ -226,48 +183,13 @@ public class ComponentNodeImpl extends ComponentNodeGroupImpl implements Compone
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@SuppressWarnings("unchecked")
-	@Override
-	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
-		switch (featureID) {
-			case CorePackage.COMPONENT_NODE__SUB_NODES:
-				return ((InternalEList<InternalEObject>)(InternalEList<?>)getSubNodes()).basicAdd(otherEnd, msgs);
-			case CorePackage.COMPONENT_NODE__PARENT:
-				if (eInternalContainer() != null)
-					msgs = eBasicRemoveFromContainer(msgs);
-				return basicSetParent((ComponentNode)otherEnd, msgs);
-		}
-		return super.eInverseAdd(otherEnd, featureID, msgs);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
 			case CorePackage.COMPONENT_NODE__SUB_NODES:
 				return ((InternalEList<?>)getSubNodes()).basicRemove(otherEnd, msgs);
-			case CorePackage.COMPONENT_NODE__PARENT:
-				return basicSetParent(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
-		switch (eContainerFeatureID()) {
-			case CorePackage.COMPONENT_NODE__PARENT:
-				return eInternalContainer().eInverseRemove(this, CorePackage.COMPONENT_NODE__SUB_NODES, ComponentNode.class, msgs);
-		}
-		return super.eBasicRemoveFromContainerFeature(msgs);
 	}
 
 	/**
@@ -283,8 +205,6 @@ public class ComponentNodeImpl extends ComponentNodeGroupImpl implements Compone
 				return basicGetComponent();
 			case CorePackage.COMPONENT_NODE__SUB_NODES:
 				return getSubNodes();
-			case CorePackage.COMPONENT_NODE__PARENT:
-				return getParent();
 			case CorePackage.COMPONENT_NODE__ENGINE:
 				if (resolve) return getEngine();
 				return basicGetEngine();
@@ -308,9 +228,6 @@ public class ComponentNodeImpl extends ComponentNodeGroupImpl implements Compone
 				getSubNodes().clear();
 				getSubNodes().addAll((Collection<? extends ComponentNode>)newValue);
 				return;
-			case CorePackage.COMPONENT_NODE__PARENT:
-				setParent((ComponentNode)newValue);
-				return;
 			case CorePackage.COMPONENT_NODE__ENGINE:
 				setEngine((ComponentNodeGroup)newValue);
 				return;
@@ -332,9 +249,6 @@ public class ComponentNodeImpl extends ComponentNodeGroupImpl implements Compone
 			case CorePackage.COMPONENT_NODE__SUB_NODES:
 				getSubNodes().clear();
 				return;
-			case CorePackage.COMPONENT_NODE__PARENT:
-				setParent((ComponentNode)null);
-				return;
 			case CorePackage.COMPONENT_NODE__ENGINE:
 				setEngine((ComponentNodeGroup)null);
 				return;
@@ -354,8 +268,6 @@ public class ComponentNodeImpl extends ComponentNodeGroupImpl implements Compone
 				return component != null;
 			case CorePackage.COMPONENT_NODE__SUB_NODES:
 				return subNodes != null && !subNodes.isEmpty();
-			case CorePackage.COMPONENT_NODE__PARENT:
-				return getParent() != null;
 			case CorePackage.COMPONENT_NODE__ENGINE:
 				return engine != null;
 		}

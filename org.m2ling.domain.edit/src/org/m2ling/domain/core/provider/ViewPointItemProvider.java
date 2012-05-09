@@ -9,9 +9,7 @@ import java.util.List;
 
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
-
 import org.eclipse.emf.ecore.EStructuralFeature;
-
 import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
 import org.eclipse.emf.edit.provider.IEditingDomainItemProvider;
 import org.eclipse.emf.edit.provider.IItemLabelProvider;
@@ -19,9 +17,7 @@ import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.IItemPropertySource;
 import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
-import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.ViewerNotification;
-
 import org.m2ling.domain.core.CoreFactory;
 import org.m2ling.domain.core.CorePackage;
 import org.m2ling.domain.core.ViewPoint;
@@ -68,7 +64,6 @@ public class ViewPointItemProvider
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
-			addNamePropertyDescriptor(object);
 			addBaseViewpointPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
@@ -92,28 +87,6 @@ public class ViewPointItemProvider
 				 false,
 				 true,
 				 null,
-				 null,
-				 null));
-	}
-
-	/**
-	 * This adds a property descriptor for the Name feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void addNamePropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_ViewPoint_name_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_ViewPoint_name_feature", "_UI_ViewPoint_type"),
-				 CorePackage.Literals.VIEW_POINT__NAME,
-				 true,
-				 false,
-				 false,
-				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
 				 null,
 				 null));
 	}
@@ -166,14 +139,14 @@ public class ViewPointItemProvider
 	 * This returns the label text for the adapted class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	@Override
 	public String getText(Object object) {
 		String label = ((ViewPoint)object).getName();
 		return label == null || label.length() == 0 ?
 			getString("_UI_ViewPoint_type") :
-			getString("_UI_ViewPoint_type") + " " + label;
+			getString("_UI_ViewPoint_type") + ": " + label;
 	}
 
 	/**
@@ -188,9 +161,6 @@ public class ViewPointItemProvider
 		updateChildren(notification);
 
 		switch (notification.getFeatureID(ViewPoint.class)) {
-			case CorePackage.VIEW_POINT__NAME:
-				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
-				return;
 			case CorePackage.VIEW_POINT__ACTIVITIES:
 			case CorePackage.VIEW_POINT__COMPONENT_TYPES:
 			case CorePackage.VIEW_POINT__LINK_TYPES:

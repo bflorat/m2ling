@@ -14,14 +14,14 @@ import org.eclipse.emf.ecore.util.EDataTypeUniqueEList;
 import org.m2ling.domain.core.CorePackage;
 import org.m2ling.domain.core.CustomProperty;
 import org.m2ling.domain.core.HasCustomProperties;
+import org.m2ling.domain.core.HasLabel;
 import org.m2ling.domain.core.HasNameAndID;
 import org.m2ling.domain.core.HasTags;
 import org.m2ling.domain.core.OrganisationalUnit;
 
 /**
- * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Organisational Unit</b></em>'.
- * <!-- end-user-doc -->
+ * <!-- begin-user-doc --> An implementation of the model object '
+ * <em><b>Organisational Unit</b></em>'. <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
@@ -29,6 +29,7 @@ import org.m2ling.domain.core.OrganisationalUnit;
  *   <li>{@link org.m2ling.domain.core.impl.OrganisationalUnitImpl#getId <em>Id</em>}</li>
  *   <li>{@link org.m2ling.domain.core.impl.OrganisationalUnitImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.m2ling.domain.core.impl.OrganisationalUnitImpl#getTags <em>Tags</em>}</li>
+ *   <li>{@link org.m2ling.domain.core.impl.OrganisationalUnitImpl#getLabel <em>Label</em>}</li>
  * </ul>
  * </p>
  *
@@ -36,16 +37,14 @@ import org.m2ling.domain.core.OrganisationalUnit;
  */
 public class OrganisationalUnitImpl extends HasCommentImpl implements OrganisationalUnit {
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	public static final String copyright = "Copyright (C) 2012 Bertrand Florat";
 
 	/**
 	 * The cached value of the '{@link #getCustomProperties() <em>Custom Properties</em>}' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @see #getCustomProperties()
 	 * @generated
 	 * @ordered
@@ -64,8 +63,8 @@ public class OrganisationalUnitImpl extends HasCommentImpl implements Organisati
 
 	/**
 	 * The cached value of the '{@link #getId() <em>Id</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!--
+	 * end-user-doc -->
 	 * @see #getId()
 	 * @generated
 	 * @ordered
@@ -94,8 +93,7 @@ public class OrganisationalUnitImpl extends HasCommentImpl implements Organisati
 
 	/**
 	 * This is true if the Name attribute has been set.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
@@ -103,8 +101,8 @@ public class OrganisationalUnitImpl extends HasCommentImpl implements Organisati
 
 	/**
 	 * The cached value of the '{@link #getTags() <em>Tags</em>}' attribute list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc
+	 * --> <!-- end-user-doc -->
 	 * @see #getTags()
 	 * @generated
 	 * @ordered
@@ -112,8 +110,27 @@ public class OrganisationalUnitImpl extends HasCommentImpl implements Organisati
 	protected EList<String> tags;
 
 	/**
+	 * The default value of the '{@link #getLabel() <em>Label</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @see #getLabel()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String LABEL_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getLabel() <em>Label</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getLabel()
+	 * @generated
+	 * @ordered
+	 */
+	protected String label = LABEL_EDEFAULT;
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	protected OrganisationalUnitImpl() {
@@ -121,8 +138,7 @@ public class OrganisationalUnitImpl extends HasCommentImpl implements Organisati
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
@@ -131,8 +147,7 @@ public class OrganisationalUnitImpl extends HasCommentImpl implements Organisati
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	public CustomProperty getCustomProperties() {
@@ -148,8 +163,7 @@ public class OrganisationalUnitImpl extends HasCommentImpl implements Organisati
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	public CustomProperty basicGetCustomProperties() {
@@ -157,8 +171,7 @@ public class OrganisationalUnitImpl extends HasCommentImpl implements Organisati
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	public void setCustomProperties(CustomProperty newCustomProperties) {
@@ -169,8 +182,7 @@ public class OrganisationalUnitImpl extends HasCommentImpl implements Organisati
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	public String getId() {
@@ -178,8 +190,7 @@ public class OrganisationalUnitImpl extends HasCommentImpl implements Organisati
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	public void setId(String newId) {
@@ -190,8 +201,7 @@ public class OrganisationalUnitImpl extends HasCommentImpl implements Organisati
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	public String getName() {
@@ -199,8 +209,7 @@ public class OrganisationalUnitImpl extends HasCommentImpl implements Organisati
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	public void setName(String newName) {
@@ -213,8 +222,7 @@ public class OrganisationalUnitImpl extends HasCommentImpl implements Organisati
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	public void unsetName() {
@@ -227,8 +235,7 @@ public class OrganisationalUnitImpl extends HasCommentImpl implements Organisati
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	public boolean isSetName() {
@@ -236,8 +243,7 @@ public class OrganisationalUnitImpl extends HasCommentImpl implements Organisati
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	public EList<String> getTags() {
@@ -252,6 +258,26 @@ public class OrganisationalUnitImpl extends HasCommentImpl implements Organisati
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public String getLabel() {
+		return label;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setLabel(String newLabel) {
+		String oldLabel = label;
+		label = newLabel;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, CorePackage.ORGANISATIONAL_UNIT__LABEL, oldLabel, label));
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
@@ -264,13 +290,14 @@ public class OrganisationalUnitImpl extends HasCommentImpl implements Organisati
 				return getName();
 			case CorePackage.ORGANISATIONAL_UNIT__TAGS:
 				return getTags();
+			case CorePackage.ORGANISATIONAL_UNIT__LABEL:
+				return getLabel();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	@SuppressWarnings("unchecked")
@@ -290,13 +317,15 @@ public class OrganisationalUnitImpl extends HasCommentImpl implements Organisati
 				getTags().clear();
 				getTags().addAll((Collection<? extends String>)newValue);
 				return;
+			case CorePackage.ORGANISATIONAL_UNIT__LABEL:
+				setLabel((String)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
@@ -314,13 +343,15 @@ public class OrganisationalUnitImpl extends HasCommentImpl implements Organisati
 			case CorePackage.ORGANISATIONAL_UNIT__TAGS:
 				getTags().clear();
 				return;
+			case CorePackage.ORGANISATIONAL_UNIT__LABEL:
+				setLabel(LABEL_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
@@ -334,13 +365,14 @@ public class OrganisationalUnitImpl extends HasCommentImpl implements Organisati
 				return isSetName();
 			case CorePackage.ORGANISATIONAL_UNIT__TAGS:
 				return tags != null && !tags.isEmpty();
+			case CorePackage.ORGANISATIONAL_UNIT__LABEL:
+				return LABEL_EDEFAULT == null ? label != null : !LABEL_EDEFAULT.equals(label);
 		}
 		return super.eIsSet(featureID);
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
@@ -364,12 +396,17 @@ public class OrganisationalUnitImpl extends HasCommentImpl implements Organisati
 				default: return -1;
 			}
 		}
+		if (baseClass == HasLabel.class) {
+			switch (derivedFeatureID) {
+				case CorePackage.ORGANISATIONAL_UNIT__LABEL: return CorePackage.HAS_LABEL__LABEL;
+				default: return -1;
+			}
+		}
 		return super.eBaseStructuralFeatureID(derivedFeatureID, baseClass);
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
@@ -393,12 +430,17 @@ public class OrganisationalUnitImpl extends HasCommentImpl implements Organisati
 				default: return -1;
 			}
 		}
+		if (baseClass == HasLabel.class) {
+			switch (baseFeatureID) {
+				case CorePackage.HAS_LABEL__LABEL: return CorePackage.ORGANISATIONAL_UNIT__LABEL;
+				default: return -1;
+			}
+		}
 		return super.eDerivedStructuralFeatureID(baseFeatureID, baseClass);
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
@@ -412,8 +454,10 @@ public class OrganisationalUnitImpl extends HasCommentImpl implements Organisati
 		if (nameESet) result.append(name); else result.append("<unset>");
 		result.append(", tags: ");
 		result.append(tags);
+		result.append(", label: ");
+		result.append(label);
 		result.append(')');
 		return result.toString();
 	}
 
-} //OrganisationalUnitImpl
+} // OrganisationalUnitImpl

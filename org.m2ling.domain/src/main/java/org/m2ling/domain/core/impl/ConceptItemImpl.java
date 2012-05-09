@@ -8,12 +8,16 @@ import java.util.Collection;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EDataTypeUniqueEList;
 import org.m2ling.domain.core.ConceptItem;
 import org.m2ling.domain.core.CorePackage;
+import org.m2ling.domain.core.CustomProperty;
 import org.m2ling.domain.core.HasComment;
 import org.m2ling.domain.core.HasConstraints;
+import org.m2ling.domain.core.HasCustomProperties;
+import org.m2ling.domain.core.HasLabel;
 import org.m2ling.domain.core.HasParameterDefinitions;
 import org.m2ling.domain.core.HasTags;
 
@@ -24,6 +28,7 @@ import org.m2ling.domain.core.HasTags;
  * <p>
  * The following features are implemented:
  * <ul>
+ *   <li>{@link org.m2ling.domain.core.impl.ConceptItemImpl#getCustomProperties <em>Custom Properties</em>}</li>
  *   <li>{@link org.m2ling.domain.core.impl.ConceptItemImpl#getComment <em>Comment</em>}</li>
  *   <li>{@link org.m2ling.domain.core.impl.ConceptItemImpl#getTags <em>Tags</em>}</li>
  *   <li>{@link org.m2ling.domain.core.impl.ConceptItemImpl#getLabel <em>Label</em>}</li>
@@ -32,13 +37,23 @@ import org.m2ling.domain.core.HasTags;
  *
  * @generated
  */
-public abstract class ConceptItemImpl extends HasCustomPropertiesImpl implements ConceptItem {
+public abstract class ConceptItemImpl extends HasNameAndIDImpl implements ConceptItem {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	public static final String copyright = "Copyright (C) 2012 Bertrand Florat";
+
+	/**
+	 * The cached value of the '{@link #getCustomProperties() <em>Custom Properties</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getCustomProperties()
+	 * @generated
+	 * @ordered
+	 */
+	protected CustomProperty customProperties;
 
 	/**
 	 * The default value of the '{@link #getComment() <em>Comment</em>}' attribute.
@@ -93,7 +108,7 @@ public abstract class ConceptItemImpl extends HasCustomPropertiesImpl implements
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	protected ConceptItemImpl() {
 		super();
@@ -107,6 +122,44 @@ public abstract class ConceptItemImpl extends HasCustomPropertiesImpl implements
 	@Override
 	protected EClass eStaticClass() {
 		return CorePackage.Literals.CONCEPT_ITEM;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public CustomProperty getCustomProperties() {
+		if (customProperties != null && customProperties.eIsProxy()) {
+			InternalEObject oldCustomProperties = (InternalEObject)customProperties;
+			customProperties = (CustomProperty)eResolveProxy(oldCustomProperties);
+			if (customProperties != oldCustomProperties) {
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, CorePackage.CONCEPT_ITEM__CUSTOM_PROPERTIES, oldCustomProperties, customProperties));
+			}
+		}
+		return customProperties;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public CustomProperty basicGetCustomProperties() {
+		return customProperties;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setCustomProperties(CustomProperty newCustomProperties) {
+		CustomProperty oldCustomProperties = customProperties;
+		customProperties = newCustomProperties;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, CorePackage.CONCEPT_ITEM__CUSTOM_PROPERTIES, oldCustomProperties, customProperties));
 	}
 
 	/**
@@ -171,6 +224,9 @@ public abstract class ConceptItemImpl extends HasCustomPropertiesImpl implements
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
+			case CorePackage.CONCEPT_ITEM__CUSTOM_PROPERTIES:
+				if (resolve) return getCustomProperties();
+				return basicGetCustomProperties();
 			case CorePackage.CONCEPT_ITEM__COMMENT:
 				return getComment();
 			case CorePackage.CONCEPT_ITEM__TAGS:
@@ -190,6 +246,9 @@ public abstract class ConceptItemImpl extends HasCustomPropertiesImpl implements
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
+			case CorePackage.CONCEPT_ITEM__CUSTOM_PROPERTIES:
+				setCustomProperties((CustomProperty)newValue);
+				return;
 			case CorePackage.CONCEPT_ITEM__COMMENT:
 				setComment((String)newValue);
 				return;
@@ -212,6 +271,9 @@ public abstract class ConceptItemImpl extends HasCustomPropertiesImpl implements
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
+			case CorePackage.CONCEPT_ITEM__CUSTOM_PROPERTIES:
+				setCustomProperties((CustomProperty)null);
+				return;
 			case CorePackage.CONCEPT_ITEM__COMMENT:
 				setComment(COMMENT_EDEFAULT);
 				return;
@@ -233,6 +295,8 @@ public abstract class ConceptItemImpl extends HasCustomPropertiesImpl implements
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
+			case CorePackage.CONCEPT_ITEM__CUSTOM_PROPERTIES:
+				return customProperties != null;
 			case CorePackage.CONCEPT_ITEM__COMMENT:
 				return COMMENT_EDEFAULT == null ? comment != null : !COMMENT_EDEFAULT.equals(comment);
 			case CorePackage.CONCEPT_ITEM__TAGS:
@@ -250,6 +314,12 @@ public abstract class ConceptItemImpl extends HasCustomPropertiesImpl implements
 	 */
 	@Override
 	public int eBaseStructuralFeatureID(int derivedFeatureID, Class<?> baseClass) {
+		if (baseClass == HasCustomProperties.class) {
+			switch (derivedFeatureID) {
+				case CorePackage.CONCEPT_ITEM__CUSTOM_PROPERTIES: return CorePackage.HAS_CUSTOM_PROPERTIES__CUSTOM_PROPERTIES;
+				default: return -1;
+			}
+		}
 		if (baseClass == HasComment.class) {
 			switch (derivedFeatureID) {
 				case CorePackage.CONCEPT_ITEM__COMMENT: return CorePackage.HAS_COMMENT__COMMENT;
@@ -272,6 +342,12 @@ public abstract class ConceptItemImpl extends HasCustomPropertiesImpl implements
 				default: return -1;
 			}
 		}
+		if (baseClass == HasLabel.class) {
+			switch (derivedFeatureID) {
+				case CorePackage.CONCEPT_ITEM__LABEL: return CorePackage.HAS_LABEL__LABEL;
+				default: return -1;
+			}
+		}
 		return super.eBaseStructuralFeatureID(derivedFeatureID, baseClass);
 	}
 
@@ -282,6 +358,12 @@ public abstract class ConceptItemImpl extends HasCustomPropertiesImpl implements
 	 */
 	@Override
 	public int eDerivedStructuralFeatureID(int baseFeatureID, Class<?> baseClass) {
+		if (baseClass == HasCustomProperties.class) {
+			switch (baseFeatureID) {
+				case CorePackage.HAS_CUSTOM_PROPERTIES__CUSTOM_PROPERTIES: return CorePackage.CONCEPT_ITEM__CUSTOM_PROPERTIES;
+				default: return -1;
+			}
+		}
 		if (baseClass == HasComment.class) {
 			switch (baseFeatureID) {
 				case CorePackage.HAS_COMMENT__COMMENT: return CorePackage.CONCEPT_ITEM__COMMENT;
@@ -301,6 +383,12 @@ public abstract class ConceptItemImpl extends HasCustomPropertiesImpl implements
 		}
 		if (baseClass == HasConstraints.class) {
 			switch (baseFeatureID) {
+				default: return -1;
+			}
+		}
+		if (baseClass == HasLabel.class) {
+			switch (baseFeatureID) {
+				case CorePackage.HAS_LABEL__LABEL: return CorePackage.CONCEPT_ITEM__LABEL;
 				default: return -1;
 			}
 		}

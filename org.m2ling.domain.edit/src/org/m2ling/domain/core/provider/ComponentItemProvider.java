@@ -9,7 +9,6 @@ import java.util.List;
 
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
-
 import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
 import org.eclipse.emf.edit.provider.IEditingDomainItemProvider;
 import org.eclipse.emf.edit.provider.IItemLabelProvider;
@@ -17,7 +16,6 @@ import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.IItemPropertySource;
 import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
-
 import org.m2ling.domain.core.Component;
 import org.m2ling.domain.core.CorePackage;
 
@@ -65,7 +63,6 @@ public class ComponentItemProvider
 
 			addTypePropertyDescriptor(object);
 			addSubComponentsPropertyDescriptor(object);
-			addParentPropertyDescriptor(object);
 			addEnginePropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
@@ -116,28 +113,6 @@ public class ComponentItemProvider
 	}
 
 	/**
-	 * This adds a property descriptor for the Parent feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void addParentPropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_Component_parent_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_Component_parent_feature", "_UI_Component_type"),
-				 CorePackage.Literals.COMPONENT__PARENT,
-				 true,
-				 false,
-				 true,
-				 null,
-				 null,
-				 null));
-	}
-
-	/**
 	 * This adds a property descriptor for the Engine feature.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -174,14 +149,14 @@ public class ComponentItemProvider
 	 * This returns the label text for the adapted class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	@Override
 	public String getText(Object object) {
 		String label = ((Component)object).getName();
 		return label == null || label.length() == 0 ?
 			getString("_UI_Component_type") :
-			getString("_UI_Component_type") + " " + label;
+			getString("_UI_Component_type") + ": " + label;
 	}
 
 	/**

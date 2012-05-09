@@ -9,7 +9,6 @@ import java.util.List;
 
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
-
 import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
 import org.eclipse.emf.edit.provider.IEditingDomainItemProvider;
 import org.eclipse.emf.edit.provider.IItemLabelProvider;
@@ -19,7 +18,6 @@ import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.ViewerNotification;
-
 import org.m2ling.domain.core.ActivityTransition;
 import org.m2ling.domain.core.CorePackage;
 
@@ -65,11 +63,36 @@ public class ActivityTransitionItemProvider
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
+			addLabelPropertyDescriptor(object);
 			addDatePropertyDescriptor(object);
 			addFromStatusPropertyDescriptor(object);
 			addToStatusPropertyDescriptor(object);
+			addActivityPropertyDescriptor(object);
+			addActorPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
+	}
+
+	/**
+	 * This adds a property descriptor for the Label feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addLabelPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_HasLabel_label_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_HasLabel_label_feature", "_UI_HasLabel_type"),
+				 CorePackage.Literals.HAS_LABEL__LABEL,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				 null,
+				 null));
 	}
 
 	/**
@@ -139,6 +162,50 @@ public class ActivityTransitionItemProvider
 	}
 
 	/**
+	 * This adds a property descriptor for the Activity feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addActivityPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_ActivityTransition_activity_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_ActivityTransition_activity_feature", "_UI_ActivityTransition_type"),
+				 CorePackage.Literals.ACTIVITY_TRANSITION__ACTIVITY,
+				 true,
+				 false,
+				 true,
+				 null,
+				 null,
+				 null));
+	}
+
+	/**
+	 * This adds a property descriptor for the Actor feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addActorPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_ActivityTransition_actor_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_ActivityTransition_actor_feature", "_UI_ActivityTransition_type"),
+				 CorePackage.Literals.ACTIVITY_TRANSITION__ACTOR,
+				 true,
+				 false,
+				 true,
+				 null,
+				 null,
+				 null));
+	}
+
+	/**
 	 * This returns ActivityTransition.gif.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -153,14 +220,14 @@ public class ActivityTransitionItemProvider
 	 * This returns the label text for the adapted class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	@Override
 	public String getText(Object object) {
 		String label = ((ActivityTransition)object).getComment();
 		return label == null || label.length() == 0 ?
 			getString("_UI_ActivityTransition_type") :
-			getString("_UI_ActivityTransition_type") + " " + label;
+			getString("_UI_ActivityTransition_type") + ": " + label;
 	}
 
 	/**
@@ -175,6 +242,7 @@ public class ActivityTransitionItemProvider
 		updateChildren(notification);
 
 		switch (notification.getFeatureID(ActivityTransition.class)) {
+			case CorePackage.ACTIVITY_TRANSITION__LABEL:
 			case CorePackage.ACTIVITY_TRANSITION__DATE:
 			case CorePackage.ACTIVITY_TRANSITION__FROM_STATUS:
 			case CorePackage.ACTIVITY_TRANSITION__TO_STATUS:

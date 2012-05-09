@@ -11,7 +11,7 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.eclipse.emf.ecore.util.EObjectWithInverseResolvingEList;
+import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.m2ling.domain.core.Component;
 import org.m2ling.domain.core.ComponentType;
@@ -26,7 +26,6 @@ import org.m2ling.domain.core.CorePackage;
  * <ul>
  *   <li>{@link org.m2ling.domain.core.impl.ComponentImpl#getType <em>Type</em>}</li>
  *   <li>{@link org.m2ling.domain.core.impl.ComponentImpl#getSubComponents <em>Sub Components</em>}</li>
- *   <li>{@link org.m2ling.domain.core.impl.ComponentImpl#getParent <em>Parent</em>}</li>
  *   <li>{@link org.m2ling.domain.core.impl.ComponentImpl#getEngine <em>Engine</em>}</li>
  * </ul>
  * </p>
@@ -52,7 +51,7 @@ public class ComponentImpl extends ComponentGroupImpl implements Component {
 	protected ComponentType type;
 
 	/**
-	 * The cached value of the '{@link #getSubComponents() <em>Sub Components</em>}' reference list.
+	 * The cached value of the '{@link #getSubComponents() <em>Sub Components</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getSubComponents()
@@ -60,16 +59,6 @@ public class ComponentImpl extends ComponentGroupImpl implements Component {
 	 * @ordered
 	 */
 	protected EList<Component> subComponents;
-
-	/**
-	 * The cached value of the '{@link #getParent() <em>Parent</em>}' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getParent()
-	 * @generated
-	 * @ordered
-	 */
-	protected Component parent;
 
 	/**
 	 * The cached value of the '{@link #getEngine() <em>Engine</em>}' reference.
@@ -145,69 +134,9 @@ public class ComponentImpl extends ComponentGroupImpl implements Component {
 	 */
 	public EList<Component> getSubComponents() {
 		if (subComponents == null) {
-			subComponents = new EObjectWithInverseResolvingEList<Component>(Component.class, this, CorePackage.COMPONENT__SUB_COMPONENTS, CorePackage.COMPONENT__PARENT);
+			subComponents = new EObjectContainmentEList<Component>(Component.class, this, CorePackage.COMPONENT__SUB_COMPONENTS);
 		}
 		return subComponents;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public Component getParent() {
-		if (parent != null && parent.eIsProxy()) {
-			InternalEObject oldParent = (InternalEObject)parent;
-			parent = (Component)eResolveProxy(oldParent);
-			if (parent != oldParent) {
-				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, CorePackage.COMPONENT__PARENT, oldParent, parent));
-			}
-		}
-		return parent;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public Component basicGetParent() {
-		return parent;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public NotificationChain basicSetParent(Component newParent, NotificationChain msgs) {
-		Component oldParent = parent;
-		parent = newParent;
-		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, CorePackage.COMPONENT__PARENT, oldParent, newParent);
-			if (msgs == null) msgs = notification; else msgs.add(notification);
-		}
-		return msgs;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setParent(Component newParent) {
-		if (newParent != parent) {
-			NotificationChain msgs = null;
-			if (parent != null)
-				msgs = ((InternalEObject)parent).eInverseRemove(this, CorePackage.COMPONENT__SUB_COMPONENTS, Component.class, msgs);
-			if (newParent != null)
-				msgs = ((InternalEObject)newParent).eInverseAdd(this, CorePackage.COMPONENT__SUB_COMPONENTS, Component.class, msgs);
-			msgs = basicSetParent(newParent, msgs);
-			if (msgs != null) msgs.dispatch();
-		}
-		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, CorePackage.COMPONENT__PARENT, newParent, newParent));
 	}
 
 	/**
@@ -253,32 +182,11 @@ public class ComponentImpl extends ComponentGroupImpl implements Component {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@SuppressWarnings("unchecked")
-	@Override
-	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
-		switch (featureID) {
-			case CorePackage.COMPONENT__SUB_COMPONENTS:
-				return ((InternalEList<InternalEObject>)(InternalEList<?>)getSubComponents()).basicAdd(otherEnd, msgs);
-			case CorePackage.COMPONENT__PARENT:
-				if (parent != null)
-					msgs = ((InternalEObject)parent).eInverseRemove(this, CorePackage.COMPONENT__SUB_COMPONENTS, Component.class, msgs);
-				return basicSetParent((Component)otherEnd, msgs);
-		}
-		return super.eInverseAdd(otherEnd, featureID, msgs);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
 			case CorePackage.COMPONENT__SUB_COMPONENTS:
 				return ((InternalEList<?>)getSubComponents()).basicRemove(otherEnd, msgs);
-			case CorePackage.COMPONENT__PARENT:
-				return basicSetParent(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -296,9 +204,6 @@ public class ComponentImpl extends ComponentGroupImpl implements Component {
 				return basicGetType();
 			case CorePackage.COMPONENT__SUB_COMPONENTS:
 				return getSubComponents();
-			case CorePackage.COMPONENT__PARENT:
-				if (resolve) return getParent();
-				return basicGetParent();
 			case CorePackage.COMPONENT__ENGINE:
 				if (resolve) return getEngine();
 				return basicGetEngine();
@@ -322,9 +227,6 @@ public class ComponentImpl extends ComponentGroupImpl implements Component {
 				getSubComponents().clear();
 				getSubComponents().addAll((Collection<? extends Component>)newValue);
 				return;
-			case CorePackage.COMPONENT__PARENT:
-				setParent((Component)newValue);
-				return;
 			case CorePackage.COMPONENT__ENGINE:
 				setEngine((Component)newValue);
 				return;
@@ -346,9 +248,6 @@ public class ComponentImpl extends ComponentGroupImpl implements Component {
 			case CorePackage.COMPONENT__SUB_COMPONENTS:
 				getSubComponents().clear();
 				return;
-			case CorePackage.COMPONENT__PARENT:
-				setParent((Component)null);
-				return;
 			case CorePackage.COMPONENT__ENGINE:
 				setEngine((Component)null);
 				return;
@@ -368,8 +267,6 @@ public class ComponentImpl extends ComponentGroupImpl implements Component {
 				return type != null;
 			case CorePackage.COMPONENT__SUB_COMPONENTS:
 				return subComponents != null && !subComponents.isEmpty();
-			case CorePackage.COMPONENT__PARENT:
-				return parent != null;
 			case CorePackage.COMPONENT__ENGINE:
 				return engine != null;
 		}

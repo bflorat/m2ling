@@ -27,7 +27,6 @@ import org.m2ling.domain.core.ViewPoint;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.m2ling.domain.core.impl.ViewPointImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.m2ling.domain.core.impl.ViewPointImpl#getBaseViewpoint <em>Base Viewpoint</em>}</li>
  *   <li>{@link org.m2ling.domain.core.impl.ViewPointImpl#getActivities <em>Activities</em>}</li>
  *   <li>{@link org.m2ling.domain.core.impl.ViewPointImpl#getComponentTypes <em>Component Types</em>}</li>
@@ -45,26 +44,6 @@ public class ViewPointImpl extends ConceptItemImpl implements ViewPoint {
 	 * @generated
 	 */
 	public static final String copyright = "Copyright (C) 2012 Bertrand Florat";
-
-	/**
-	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getName()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final String NAME_EDEFAULT = null;
-
-	/**
-	 * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getName()
-	 * @generated
-	 * @ordered
-	 */
-	protected String name = NAME_EDEFAULT;
 
 	/**
 	 * The cached value of the '{@link #getBaseViewpoint() <em>Base Viewpoint</em>}' reference.
@@ -202,27 +181,6 @@ public class ViewPointImpl extends ConceptItemImpl implements ViewPoint {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public String getName() {
-		return name;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setName(String newName) {
-		String oldName = name;
-		name = newName;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, CorePackage.VIEW_POINT__NAME, oldName, name));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EList<LinkType> getLinkTypes() {
 		if (linkTypes == null) {
 			linkTypes = new EObjectContainmentEList<LinkType>(LinkType.class, this, CorePackage.VIEW_POINT__LINK_TYPES);
@@ -270,8 +228,6 @@ public class ViewPointImpl extends ConceptItemImpl implements ViewPoint {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case CorePackage.VIEW_POINT__NAME:
-				return getName();
 			case CorePackage.VIEW_POINT__BASE_VIEWPOINT:
 				if (resolve) return getBaseViewpoint();
 				return basicGetBaseViewpoint();
@@ -296,9 +252,6 @@ public class ViewPointImpl extends ConceptItemImpl implements ViewPoint {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case CorePackage.VIEW_POINT__NAME:
-				setName((String)newValue);
-				return;
 			case CorePackage.VIEW_POINT__BASE_VIEWPOINT:
 				setBaseViewpoint((ViewPoint)newValue);
 				return;
@@ -330,9 +283,6 @@ public class ViewPointImpl extends ConceptItemImpl implements ViewPoint {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case CorePackage.VIEW_POINT__NAME:
-				setName(NAME_EDEFAULT);
-				return;
 			case CorePackage.VIEW_POINT__BASE_VIEWPOINT:
 				setBaseViewpoint((ViewPoint)null);
 				return;
@@ -360,8 +310,6 @@ public class ViewPointImpl extends ConceptItemImpl implements ViewPoint {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case CorePackage.VIEW_POINT__NAME:
-				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
 			case CorePackage.VIEW_POINT__BASE_VIEWPOINT:
 				return baseViewpoint != null;
 			case CorePackage.VIEW_POINT__ACTIVITIES:
@@ -374,22 +322,6 @@ public class ViewPointImpl extends ConceptItemImpl implements ViewPoint {
 				return rules != null && !rules.isEmpty();
 		}
 		return super.eIsSet(featureID);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public String toString() {
-		if (eIsProxy()) return super.toString();
-
-		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (name: ");
-		result.append(name);
-		result.append(')');
-		return result.toString();
 	}
 
 } //ViewPointImpl

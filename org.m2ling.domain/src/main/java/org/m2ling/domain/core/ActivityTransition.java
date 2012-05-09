@@ -3,6 +3,8 @@
  */
 package org.m2ling.domain.core;
 
+import org.eclipse.emf.common.util.EList;
+
 
 /**
  * <!-- begin-user-doc -->
@@ -15,6 +17,8 @@ package org.m2ling.domain.core;
  *   <li>{@link org.m2ling.domain.core.ActivityTransition#getDate <em>Date</em>}</li>
  *   <li>{@link org.m2ling.domain.core.ActivityTransition#getFromStatus <em>From Status</em>}</li>
  *   <li>{@link org.m2ling.domain.core.ActivityTransition#getToStatus <em>To Status</em>}</li>
+ *   <li>{@link org.m2ling.domain.core.ActivityTransition#getActivity <em>Activity</em>}</li>
+ *   <li>{@link org.m2ling.domain.core.ActivityTransition#getActor <em>Actor</em>}</li>
  * </ul>
  * </p>
  *
@@ -22,7 +26,7 @@ package org.m2ling.domain.core;
  * @model
  * @generated
  */
-public interface ActivityTransition extends HasComment {
+public interface ActivityTransition extends HasComment, HasLabel {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -113,5 +117,47 @@ public interface ActivityTransition extends HasComment {
 	 * @generated
 	 */
 	void setToStatus(ActivityStatus value);
+
+	/**
+	 * Returns the value of the '<em><b>Activity</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Activity</em>' reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Activity</em>' reference.
+	 * @see #setActivity(Activity)
+	 * @see org.m2ling.domain.core.CorePackage#getActivityTransition_Activity()
+	 * @model required="true"
+	 * @generated
+	 */
+	Activity getActivity();
+
+	/**
+	 * Sets the value of the '{@link org.m2ling.domain.core.ActivityTransition#getActivity <em>Activity</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Activity</em>' reference.
+	 * @see #getActivity()
+	 * @generated
+	 */
+	void setActivity(Activity value);
+
+	/**
+	 * Returns the value of the '<em><b>Actor</b></em>' reference list.
+	 * The list contents are of type {@link org.m2ling.domain.core.Actor}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Actor</em>' reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Actor</em>' reference list.
+	 * @see org.m2ling.domain.core.CorePackage#getActivityTransition_Actor()
+	 * @model
+	 * @generated
+	 */
+	EList<Actor> getActor();
 
 } // ActivityTransition

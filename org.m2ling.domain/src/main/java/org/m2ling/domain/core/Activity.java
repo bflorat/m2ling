@@ -13,9 +13,8 @@ import org.eclipse.emf.common.util.EList;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link org.m2ling.domain.core.Activity#getTransitions <em>Transitions</em>}</li>
- *   <li>{@link org.m2ling.domain.core.Activity#getResponsibles <em>Responsibles</em>}</li>
  *   <li>{@link org.m2ling.domain.core.Activity#getAccountables <em>Accountables</em>}</li>
+ *   <li>{@link org.m2ling.domain.core.Activity#getResponsibles <em>Responsibles</em>}</li>
  * </ul>
  * </p>
  *
@@ -23,7 +22,7 @@ import org.eclipse.emf.common.util.EList;
  * @model
  * @generated
  */
-public interface Activity extends HasNameAndID {
+public interface Activity extends HasNameAndID, HasTags, HasLabel {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -32,24 +31,8 @@ public interface Activity extends HasNameAndID {
 	String copyright = "Copyright (C) 2012 Bertrand Florat";
 
 	/**
-	 * Returns the value of the '<em><b>Transitions</b></em>' reference list.
-	 * The list contents are of type {@link org.m2ling.domain.core.ActivityTransition}.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Transitions</em>' reference list isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Transitions</em>' reference list.
-	 * @see org.m2ling.domain.core.CorePackage#getActivity_Transitions()
-	 * @model
-	 * @generated
-	 */
-	EList<ActivityTransition> getTransitions();
-
-	/**
 	 * Returns the value of the '<em><b>Responsibles</b></em>' reference list.
-	 * The list contents are of type {@link org.m2ling.domain.core.Actor}.
+	 * The list contents are of type {@link org.m2ling.domain.core.Stakeholder}.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Responsibles</em>' reference list isn't clear,
@@ -61,11 +44,11 @@ public interface Activity extends HasNameAndID {
 	 * @model
 	 * @generated
 	 */
-	EList<Actor> getResponsibles();
+	EList<Stakeholder> getResponsibles();
 
 	/**
 	 * Returns the value of the '<em><b>Accountables</b></em>' reference list.
-	 * The list contents are of type {@link org.m2ling.domain.core.Actor}.
+	 * The list contents are of type {@link org.m2ling.domain.core.Stakeholder}.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Accountables</em>' reference list isn't clear,
@@ -77,6 +60,6 @@ public interface Activity extends HasNameAndID {
 	 * @model
 	 * @generated
 	 */
-	EList<Actor> getAccountables();
+	EList<Stakeholder> getAccountables();
 
 } // Activity

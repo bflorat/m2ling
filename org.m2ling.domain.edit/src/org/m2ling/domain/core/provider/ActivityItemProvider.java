@@ -9,7 +9,7 @@ import java.util.List;
 
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
-
+import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
 import org.eclipse.emf.edit.provider.IEditingDomainItemProvider;
 import org.eclipse.emf.edit.provider.IItemLabelProvider;
@@ -17,8 +17,10 @@ import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.IItemPropertySource;
 import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
-
+import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
+import org.eclipse.emf.edit.provider.ViewerNotification;
 import org.m2ling.domain.core.Activity;
+import org.m2ling.domain.core.CoreFactory;
 import org.m2ling.domain.core.CorePackage;
 
 /**
@@ -63,31 +65,54 @@ public class ActivityItemProvider
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
-			addTransitionsPropertyDescriptor(object);
-			addResponsiblesPropertyDescriptor(object);
+			addTagsPropertyDescriptor(object);
+			addLabelPropertyDescriptor(object);
 			addAccountablesPropertyDescriptor(object);
+			addResponsiblesPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
 
 	/**
-	 * This adds a property descriptor for the Transitions feature.
+	 * This adds a property descriptor for the Tags feature.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected void addTransitionsPropertyDescriptor(Object object) {
+	protected void addTagsPropertyDescriptor(Object object) {
 		itemPropertyDescriptors.add
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
-				 getString("_UI_Activity_transitions_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_Activity_transitions_feature", "_UI_Activity_type"),
-				 CorePackage.Literals.ACTIVITY__TRANSITIONS,
+				 getString("_UI_HasTags_tags_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_HasTags_tags_feature", "_UI_HasTags_type"),
+				 CorePackage.Literals.HAS_TAGS__TAGS,
 				 true,
 				 false,
-				 true,
+				 false,
+				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
 				 null,
+				 null));
+	}
+
+	/**
+	 * This adds a property descriptor for the Label feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addLabelPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_HasLabel_label_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_HasLabel_label_feature", "_UI_HasLabel_type"),
+				 CorePackage.Literals.HAS_LABEL__LABEL,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
 				 null,
 				 null));
 	}
@@ -151,14 +176,14 @@ public class ActivityItemProvider
 	 * This returns the label text for the adapted class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	@Override
 	public String getText(Object object) {
 		String label = ((Activity)object).getName();
 		return label == null || label.length() == 0 ?
 			getString("_UI_Activity_type") :
-			getString("_UI_Activity_type") + " " + label;
+			getString("_UI_Activity_type") + ": " + label;
 	}
 
 	/**
@@ -171,6 +196,13 @@ public class ActivityItemProvider
 	@Override
 	public void notifyChanged(Notification notification) {
 		updateChildren(notification);
+
+		switch (notification.getFeatureID(Activity.class)) {
+			case CorePackage.ACTIVITY__TAGS:
+			case CorePackage.ACTIVITY__LABEL:
+				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
+				return;
+		}
 		super.notifyChanged(notification);
 	}
 

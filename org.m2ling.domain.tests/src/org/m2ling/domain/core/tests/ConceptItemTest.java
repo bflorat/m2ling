@@ -11,7 +11,7 @@ import org.m2ling.domain.core.ConceptItem;
  * <!-- end-user-doc -->
  * @generated
  */
-public abstract class ConceptItemTest extends HasCustomPropertiesTest {
+public abstract class ConceptItemTest extends HasNameAndIDTest {
 
 	/**
 	 * <!-- begin-user-doc -->

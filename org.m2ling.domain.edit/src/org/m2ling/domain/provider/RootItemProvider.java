@@ -9,11 +9,8 @@ import java.util.List;
 
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
-
 import org.eclipse.emf.common.util.ResourceLocator;
-
 import org.eclipse.emf.ecore.EStructuralFeature;
-
 import org.eclipse.emf.edit.provider.IEditingDomainItemProvider;
 import org.eclipse.emf.edit.provider.IItemLabelProvider;
 import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
@@ -22,12 +19,9 @@ import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 import org.eclipse.emf.edit.provider.ItemProviderAdapter;
 import org.eclipse.emf.edit.provider.ViewerNotification;
-
 import org.m2ling.domain.DomainPackage;
 import org.m2ling.domain.Root;
-
 import org.m2ling.domain.core.CoreFactory;
-
 import org.m2ling.domain.parameters.ParametersFactory;
 
 /**
@@ -92,6 +86,9 @@ public class RootItemProvider
 			childrenFeatures.add(DomainPackage.Literals.ROOT__VIEWS);
 			childrenFeatures.add(DomainPackage.Literals.ROOT__PARAM_DEFINITIONS);
 			childrenFeatures.add(DomainPackage.Literals.ROOT__PARAM_VALUES);
+			childrenFeatures.add(DomainPackage.Literals.ROOT__STAKEHOLDERS);
+			childrenFeatures.add(DomainPackage.Literals.ROOT__UNITS);
+			childrenFeatures.add(DomainPackage.Literals.ROOT__ACTORS);
 		}
 		return childrenFeatures;
 	}
@@ -147,6 +144,9 @@ public class RootItemProvider
 			case DomainPackage.ROOT__VIEWS:
 			case DomainPackage.ROOT__PARAM_DEFINITIONS:
 			case DomainPackage.ROOT__PARAM_VALUES:
+			case DomainPackage.ROOT__STAKEHOLDERS:
+			case DomainPackage.ROOT__UNITS:
+			case DomainPackage.ROOT__ACTORS:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
 		}
@@ -183,6 +183,21 @@ public class RootItemProvider
 			(createChildParameter
 				(DomainPackage.Literals.ROOT__PARAM_VALUES,
 				 ParametersFactory.eINSTANCE.createParameterValue()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(DomainPackage.Literals.ROOT__STAKEHOLDERS,
+				 CoreFactory.eINSTANCE.createStakeholder()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(DomainPackage.Literals.ROOT__UNITS,
+				 CoreFactory.eINSTANCE.createOrganisationalUnit()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(DomainPackage.Literals.ROOT__ACTORS,
+				 CoreFactory.eINSTANCE.createActor()));
 	}
 
 	/**

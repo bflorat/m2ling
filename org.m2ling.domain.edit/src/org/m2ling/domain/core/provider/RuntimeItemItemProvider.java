@@ -9,7 +9,6 @@ import java.util.List;
 
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
-
 import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
 import org.eclipse.emf.edit.provider.IEditingDomainItemProvider;
 import org.eclipse.emf.edit.provider.IItemLabelProvider;
@@ -19,7 +18,6 @@ import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.ViewerNotification;
-
 import org.m2ling.domain.core.CorePackage;
 import org.m2ling.domain.core.RuntimeItem;
 
@@ -127,9 +125,9 @@ public class RuntimeItemItemProvider
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
-				 getString("_UI_RuntimeItem_label_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_RuntimeItem_label_feature", "_UI_RuntimeItem_type"),
-				 CorePackage.Literals.RUNTIME_ITEM__LABEL,
+				 getString("_UI_HasLabel_label_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_HasLabel_label_feature", "_UI_HasLabel_type"),
+				 CorePackage.Literals.HAS_LABEL__LABEL,
 				 true,
 				 false,
 				 false,
@@ -142,14 +140,14 @@ public class RuntimeItemItemProvider
 	 * This returns the label text for the adapted class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	@Override
 	public String getText(Object object) {
 		String label = ((RuntimeItem)object).getName();
 		return label == null || label.length() == 0 ?
 			getString("_UI_RuntimeItem_type") :
-			getString("_UI_RuntimeItem_type") + " " + label;
+			getString("_UI_RuntimeItem_type") + ": " + label;
 	}
 
 	/**

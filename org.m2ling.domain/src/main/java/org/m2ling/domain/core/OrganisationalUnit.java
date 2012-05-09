@@ -14,7 +14,7 @@ package org.m2ling.domain.core;
  * @model
  * @generated
  */
-public interface OrganisationalUnit extends HasComment, HasCustomProperties, HasNameAndID, HasTags {
+public interface OrganisationalUnit extends HasComment, HasCustomProperties, HasNameAndID, HasTags, HasLabel {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

@@ -75,7 +75,7 @@ public interface View extends ArchitectureItem {
 	 * @return the value of the '<em>View Point</em>' reference.
 	 * @see #setViewPoint(ViewPoint)
 	 * @see org.m2ling.domain.core.CorePackage#getView_ViewPoint()
-	 * @model keys="name" required="true"
+	 * @model required="true"
 	 * @generated
 	 */
 	ViewPoint getViewPoint();

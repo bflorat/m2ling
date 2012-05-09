@@ -21,7 +21,7 @@ package org.m2ling.domain.core;
  * @model
  * @generated
  */
-public interface LinkType extends ConceptItem, HasNameAndID {
+public interface LinkType extends ConceptItem {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

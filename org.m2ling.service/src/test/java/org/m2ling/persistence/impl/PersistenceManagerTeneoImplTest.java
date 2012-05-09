@@ -12,6 +12,7 @@ import java.io.IOException;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipselabs.emfpath.base.EObjects;
+import org.hibernate.Query;
 import org.junit.Test;
 import org.m2ling.domain.core.ViewPoint;
 import org.m2ling.service.AbstractTestCase;
@@ -43,7 +44,16 @@ public class PersistenceManagerTeneoImplTest extends AbstractTestCase {
 	public void testEClassMultiMap() throws IOException {
 		populateDatabase("Technical");
 		Multimap<EClass, EObject> decendantsByClass = Multimaps.index(resource.getAllContents(), EObjects.eClass);
-		assertTrue(decendantsByClass.keySet().size() == 3);
+		assertTrue(decendantsByClass.get(root.eClass()).size() == 1);
+	}
+
+	@Test
+	public void testHSQL() throws Exception {
+		populateDatabase("Technical");
+		Query query = pm.newHibernateSession().createQuery(
+				"FROM Activity activity WHERE activity.id = '_Nnj8IJXFEeGfDY1tsvvkpQ'");
+		java.util.List<?> list = query.list();
+		assertTrue(list.size() == 1);
 	}
 
 }

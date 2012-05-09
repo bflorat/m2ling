@@ -18,6 +18,8 @@ import org.eclipse.emf.common.util.EList;
  *   <li>{@link org.m2ling.domain.core.Actor#getUsername <em>Username</em>}</li>
  *   <li>{@link org.m2ling.domain.core.Actor#isAdmin <em>Admin</em>}</li>
  *   <li>{@link org.m2ling.domain.core.Actor#getPwdHash <em>Pwd Hash</em>}</li>
+ *   <li>{@link org.m2ling.domain.core.Actor#getFirstName <em>First Name</em>}</li>
+ *   <li>{@link org.m2ling.domain.core.Actor#getLastName <em>Last Name</em>}</li>
  * </ul>
  * </p>
  *
@@ -25,7 +27,7 @@ import org.eclipse.emf.common.util.EList;
  * @model
  * @generated
  */
-public interface Actor extends HasCustomProperties, HasTags {
+public interface Actor extends HasCustomProperties, HasTags, HasLabel {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -144,5 +146,57 @@ public interface Actor extends HasCustomProperties, HasTags {
 	 * @generated
 	 */
 	void setPwdHash(String value);
+
+	/**
+	 * Returns the value of the '<em><b>First Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>First Name</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>First Name</em>' attribute.
+	 * @see #setFirstName(String)
+	 * @see org.m2ling.domain.core.CorePackage#getActor_FirstName()
+	 * @model
+	 * @generated
+	 */
+	String getFirstName();
+
+	/**
+	 * Sets the value of the '{@link org.m2ling.domain.core.Actor#getFirstName <em>First Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>First Name</em>' attribute.
+	 * @see #getFirstName()
+	 * @generated
+	 */
+	void setFirstName(String value);
+
+	/**
+	 * Returns the value of the '<em><b>Last Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Last Name</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Last Name</em>' attribute.
+	 * @see #setLastName(String)
+	 * @see org.m2ling.domain.core.CorePackage#getActor_LastName()
+	 * @model
+	 * @generated
+	 */
+	String getLastName();
+
+	/**
+	 * Sets the value of the '{@link org.m2ling.domain.core.Actor#getLastName <em>Last Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Last Name</em>' attribute.
+	 * @see #getLastName()
+	 * @generated
+	 */
+	void setLastName(String value);
 
 } // Actor

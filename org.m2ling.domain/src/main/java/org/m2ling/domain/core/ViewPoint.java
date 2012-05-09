@@ -13,7 +13,6 @@ import org.eclipse.emf.common.util.EList;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link org.m2ling.domain.core.ViewPoint#getName <em>Name</em>}</li>
  *   <li>{@link org.m2ling.domain.core.ViewPoint#getBaseViewpoint <em>Base Viewpoint</em>}</li>
  *   <li>{@link org.m2ling.domain.core.ViewPoint#getActivities <em>Activities</em>}</li>
  *   <li>{@link org.m2ling.domain.core.ViewPoint#getComponentTypes <em>Component Types</em>}</li>
@@ -61,7 +60,7 @@ public interface ViewPoint extends ConceptItem {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Activities</em>' containment reference list.
 	 * @see org.m2ling.domain.core.CorePackage#getViewPoint_Activities()
-	 * @model containment="true" keys="id"
+	 * @model containment="true"
 	 * @generated
 	 */
 	EList<Activity> getActivities();
@@ -91,32 +90,6 @@ public interface ViewPoint extends ConceptItem {
 	 * @generated
 	 */
 	void setBaseViewpoint(ViewPoint value);
-
-	/**
-	 * Returns the value of the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Name</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Name</em>' attribute.
-	 * @see #setName(String)
-	 * @see org.m2ling.domain.core.CorePackage#getViewPoint_Name()
-	 * @model id="true"
-	 * @generated
-	 */
-	String getName();
-
-	/**
-	 * Sets the value of the '{@link org.m2ling.domain.core.ViewPoint#getName <em>Name</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Name</em>' attribute.
-	 * @see #getName()
-	 * @generated
-	 */
-	void setName(String value);
 
 	/**
 	 * Returns the value of the '<em><b>Link Types</b></em>' containment reference list.

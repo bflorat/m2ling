@@ -28,6 +28,7 @@ import org.m2ling.domain.core.FloatConstraint;
 import org.m2ling.domain.core.FormatConstraint;
 import org.m2ling.domain.core.HasComment;
 import org.m2ling.domain.core.HasCustomProperties;
+import org.m2ling.domain.core.HasNameAndID;
 import org.m2ling.domain.core.IntegerConstraint;
 import org.m2ling.domain.core.Link;
 import org.m2ling.domain.core.LinkType;

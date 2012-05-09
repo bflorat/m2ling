@@ -14,6 +14,9 @@ import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.m2ling.domain.DomainPackage;
 import org.m2ling.domain.Root;
+import org.m2ling.domain.core.Actor;
+import org.m2ling.domain.core.OrganisationalUnit;
+import org.m2ling.domain.core.Stakeholder;
 import org.m2ling.domain.core.View;
 import org.m2ling.domain.core.ViewPoint;
 import org.m2ling.domain.parameters.ParameterDefinition;
@@ -30,6 +33,9 @@ import org.m2ling.domain.parameters.ParameterValue;
  *   <li>{@link org.m2ling.domain.impl.RootImpl#getViews <em>Views</em>}</li>
  *   <li>{@link org.m2ling.domain.impl.RootImpl#getParamDefinitions <em>Param Definitions</em>}</li>
  *   <li>{@link org.m2ling.domain.impl.RootImpl#getParamValues <em>Param Values</em>}</li>
+ *   <li>{@link org.m2ling.domain.impl.RootImpl#getStakeholders <em>Stakeholders</em>}</li>
+ *   <li>{@link org.m2ling.domain.impl.RootImpl#getUnits <em>Units</em>}</li>
+ *   <li>{@link org.m2ling.domain.impl.RootImpl#getActors <em>Actors</em>}</li>
  * </ul>
  * </p>
  *
@@ -82,6 +88,36 @@ public class RootImpl extends EObjectImpl implements Root {
 	 * @ordered
 	 */
 	protected EList<ParameterValue> paramValues;
+
+	/**
+	 * The cached value of the '{@link #getStakeholders() <em>Stakeholders</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getStakeholders()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<Stakeholder> stakeholders;
+
+	/**
+	 * The cached value of the '{@link #getUnits() <em>Units</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getUnits()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<OrganisationalUnit> units;
+
+	/**
+	 * The cached value of the '{@link #getActors() <em>Actors</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getActors()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<Actor> actors;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -155,6 +191,42 @@ public class RootImpl extends EObjectImpl implements Root {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EList<Stakeholder> getStakeholders() {
+		if (stakeholders == null) {
+			stakeholders = new EObjectContainmentEList<Stakeholder>(Stakeholder.class, this, DomainPackage.ROOT__STAKEHOLDERS);
+		}
+		return stakeholders;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList<OrganisationalUnit> getUnits() {
+		if (units == null) {
+			units = new EObjectContainmentEList<OrganisationalUnit>(OrganisationalUnit.class, this, DomainPackage.ROOT__UNITS);
+		}
+		return units;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList<Actor> getActors() {
+		if (actors == null) {
+			actors = new EObjectContainmentEList<Actor>(Actor.class, this, DomainPackage.ROOT__ACTORS);
+		}
+		return actors;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
@@ -166,6 +238,12 @@ public class RootImpl extends EObjectImpl implements Root {
 				return ((InternalEList<?>)getParamDefinitions()).basicRemove(otherEnd, msgs);
 			case DomainPackage.ROOT__PARAM_VALUES:
 				return ((InternalEList<?>)getParamValues()).basicRemove(otherEnd, msgs);
+			case DomainPackage.ROOT__STAKEHOLDERS:
+				return ((InternalEList<?>)getStakeholders()).basicRemove(otherEnd, msgs);
+			case DomainPackage.ROOT__UNITS:
+				return ((InternalEList<?>)getUnits()).basicRemove(otherEnd, msgs);
+			case DomainPackage.ROOT__ACTORS:
+				return ((InternalEList<?>)getActors()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -186,6 +264,12 @@ public class RootImpl extends EObjectImpl implements Root {
 				return getParamDefinitions();
 			case DomainPackage.ROOT__PARAM_VALUES:
 				return getParamValues();
+			case DomainPackage.ROOT__STAKEHOLDERS:
+				return getStakeholders();
+			case DomainPackage.ROOT__UNITS:
+				return getUnits();
+			case DomainPackage.ROOT__ACTORS:
+				return getActors();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -215,6 +299,18 @@ public class RootImpl extends EObjectImpl implements Root {
 				getParamValues().clear();
 				getParamValues().addAll((Collection<? extends ParameterValue>)newValue);
 				return;
+			case DomainPackage.ROOT__STAKEHOLDERS:
+				getStakeholders().clear();
+				getStakeholders().addAll((Collection<? extends Stakeholder>)newValue);
+				return;
+			case DomainPackage.ROOT__UNITS:
+				getUnits().clear();
+				getUnits().addAll((Collection<? extends OrganisationalUnit>)newValue);
+				return;
+			case DomainPackage.ROOT__ACTORS:
+				getActors().clear();
+				getActors().addAll((Collection<? extends Actor>)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -239,6 +335,15 @@ public class RootImpl extends EObjectImpl implements Root {
 			case DomainPackage.ROOT__PARAM_VALUES:
 				getParamValues().clear();
 				return;
+			case DomainPackage.ROOT__STAKEHOLDERS:
+				getStakeholders().clear();
+				return;
+			case DomainPackage.ROOT__UNITS:
+				getUnits().clear();
+				return;
+			case DomainPackage.ROOT__ACTORS:
+				getActors().clear();
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -259,6 +364,12 @@ public class RootImpl extends EObjectImpl implements Root {
 				return paramDefinitions != null && !paramDefinitions.isEmpty();
 			case DomainPackage.ROOT__PARAM_VALUES:
 				return paramValues != null && !paramValues.isEmpty();
+			case DomainPackage.ROOT__STAKEHOLDERS:
+				return stakeholders != null && !stakeholders.isEmpty();
+			case DomainPackage.ROOT__UNITS:
+				return units != null && !units.isEmpty();
+			case DomainPackage.ROOT__ACTORS:
+				return actors != null && !actors.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}

@@ -9,7 +9,6 @@ import java.util.List;
 
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
-
 import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
 import org.eclipse.emf.edit.provider.IEditingDomainItemProvider;
 import org.eclipse.emf.edit.provider.IItemLabelProvider;
@@ -19,7 +18,6 @@ import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.ViewerNotification;
-
 import org.m2ling.domain.core.Actor;
 import org.m2ling.domain.core.CorePackage;
 
@@ -66,11 +64,14 @@ public class ActorItemProvider
 			super.getPropertyDescriptors(object);
 
 			addTagsPropertyDescriptor(object);
+			addLabelPropertyDescriptor(object);
 			addStakeholdersPropertyDescriptor(object);
 			addUnitPropertyDescriptor(object);
 			addUsernamePropertyDescriptor(object);
 			addAdminPropertyDescriptor(object);
 			addPwdHashPropertyDescriptor(object);
+			addFirstNamePropertyDescriptor(object);
+			addLastNamePropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -89,6 +90,28 @@ public class ActorItemProvider
 				 getString("_UI_HasTags_tags_feature"),
 				 getString("_UI_PropertyDescriptor_description", "_UI_HasTags_tags_feature", "_UI_HasTags_type"),
 				 CorePackage.Literals.HAS_TAGS__TAGS,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				 null,
+				 null));
+	}
+
+	/**
+	 * This adds a property descriptor for the Label feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addLabelPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_HasLabel_label_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_HasLabel_label_feature", "_UI_HasLabel_type"),
+				 CorePackage.Literals.HAS_LABEL__LABEL,
 				 true,
 				 false,
 				 false,
@@ -208,6 +231,50 @@ public class ActorItemProvider
 	}
 
 	/**
+	 * This adds a property descriptor for the First Name feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addFirstNamePropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_Actor_firstName_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_Actor_firstName_feature", "_UI_Actor_type"),
+				 CorePackage.Literals.ACTOR__FIRST_NAME,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				 null,
+				 null));
+	}
+
+	/**
+	 * This adds a property descriptor for the Last Name feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addLastNamePropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_Actor_lastName_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_Actor_lastName_feature", "_UI_Actor_type"),
+				 CorePackage.Literals.ACTOR__LAST_NAME,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				 null,
+				 null));
+	}
+
+	/**
 	 * This returns Actor.gif.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -222,14 +289,14 @@ public class ActorItemProvider
 	 * This returns the label text for the adapted class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	@Override
 	public String getText(Object object) {
 		String label = ((Actor)object).getUsername();
 		return label == null || label.length() == 0 ?
 			getString("_UI_Actor_type") :
-			getString("_UI_Actor_type") + " " + label;
+			getString("_UI_Actor_type") + ": " + label;
 	}
 
 	/**
@@ -245,9 +312,12 @@ public class ActorItemProvider
 
 		switch (notification.getFeatureID(Actor.class)) {
 			case CorePackage.ACTOR__TAGS:
+			case CorePackage.ACTOR__LABEL:
 			case CorePackage.ACTOR__USERNAME:
 			case CorePackage.ACTOR__ADMIN:
 			case CorePackage.ACTOR__PWD_HASH:
+			case CorePackage.ACTOR__FIRST_NAME:
+			case CorePackage.ACTOR__LAST_NAME:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
 		}

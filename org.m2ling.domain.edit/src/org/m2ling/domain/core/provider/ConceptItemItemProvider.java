@@ -9,7 +9,6 @@ import java.util.List;
 
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
-
 import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
 import org.eclipse.emf.edit.provider.IEditingDomainItemProvider;
 import org.eclipse.emf.edit.provider.IItemLabelProvider;
@@ -19,7 +18,6 @@ import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.ViewerNotification;
-
 import org.m2ling.domain.core.ConceptItem;
 import org.m2ling.domain.core.CorePackage;
 
@@ -30,7 +28,7 @@ import org.m2ling.domain.core.CorePackage;
  * @generated
  */
 public class ConceptItemItemProvider
-	extends HasCustomPropertiesItemProvider
+	extends HasNameAndIDItemProvider
 	implements
 		IEditingDomainItemProvider,
 		IStructuredItemContentProvider,
@@ -65,11 +63,34 @@ public class ConceptItemItemProvider
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
+			addCustomPropertiesPropertyDescriptor(object);
 			addCommentPropertyDescriptor(object);
 			addTagsPropertyDescriptor(object);
 			addLabelPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
+	}
+
+	/**
+	 * This adds a property descriptor for the Custom Properties feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addCustomPropertiesPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_HasCustomProperties_customProperties_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_HasCustomProperties_customProperties_feature", "_UI_HasCustomProperties_type"),
+				 CorePackage.Literals.HAS_CUSTOM_PROPERTIES__CUSTOM_PROPERTIES,
+				 true,
+				 false,
+				 true,
+				 null,
+				 null,
+				 null));
 	}
 
 	/**
@@ -127,9 +148,9 @@ public class ConceptItemItemProvider
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
-				 getString("_UI_ConceptItem_label_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_ConceptItem_label_feature", "_UI_ConceptItem_type"),
-				 CorePackage.Literals.CONCEPT_ITEM__LABEL,
+				 getString("_UI_HasLabel_label_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_HasLabel_label_feature", "_UI_HasLabel_type"),
+				 CorePackage.Literals.HAS_LABEL__LABEL,
 				 true,
 				 false,
 				 false,
@@ -142,14 +163,14 @@ public class ConceptItemItemProvider
 	 * This returns the label text for the adapted class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	@Override
 	public String getText(Object object) {
 		String label = ((ConceptItem)object).getComment();
 		return label == null || label.length() == 0 ?
 			getString("_UI_ConceptItem_type") :
-			getString("_UI_ConceptItem_type") + " " + label;
+			getString("_UI_ConceptItem_type") + ": " + label;
 	}
 
 	/**

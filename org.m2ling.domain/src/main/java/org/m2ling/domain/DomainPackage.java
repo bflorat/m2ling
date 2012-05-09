@@ -109,13 +109,40 @@ public interface DomainPackage extends EPackage {
 	int ROOT__PARAM_VALUES = 3;
 
 	/**
+	 * The feature id for the '<em><b>Stakeholders</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ROOT__STAKEHOLDERS = 4;
+
+	/**
+	 * The feature id for the '<em><b>Units</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ROOT__UNITS = 5;
+
+	/**
+	 * The feature id for the '<em><b>Actors</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ROOT__ACTORS = 6;
+
+	/**
 	 * The number of structural features of the '<em>Root</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ROOT_FEATURE_COUNT = 4;
+	int ROOT_FEATURE_COUNT = 7;
 
 
 	/**
@@ -171,6 +198,39 @@ public interface DomainPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getRoot_ParamValues();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link org.m2ling.domain.Root#getStakeholders <em>Stakeholders</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Stakeholders</em>'.
+	 * @see org.m2ling.domain.Root#getStakeholders()
+	 * @see #getRoot()
+	 * @generated
+	 */
+	EReference getRoot_Stakeholders();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link org.m2ling.domain.Root#getUnits <em>Units</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Units</em>'.
+	 * @see org.m2ling.domain.Root#getUnits()
+	 * @see #getRoot()
+	 * @generated
+	 */
+	EReference getRoot_Units();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link org.m2ling.domain.Root#getActors <em>Actors</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Actors</em>'.
+	 * @see org.m2ling.domain.Root#getActors()
+	 * @see #getRoot()
+	 * @generated
+	 */
+	EReference getRoot_Actors();
 
 	/**
 	 * Returns the factory that creates the instances of the model.
@@ -235,6 +295,30 @@ public interface DomainPackage extends EPackage {
 		 * @generated
 		 */
 		EReference ROOT__PARAM_VALUES = eINSTANCE.getRoot_ParamValues();
+
+		/**
+		 * The meta object literal for the '<em><b>Stakeholders</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference ROOT__STAKEHOLDERS = eINSTANCE.getRoot_Stakeholders();
+
+		/**
+		 * The meta object literal for the '<em><b>Units</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference ROOT__UNITS = eINSTANCE.getRoot_Units();
+
+		/**
+		 * The meta object literal for the '<em><b>Actors</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference ROOT__ACTORS = eINSTANCE.getRoot_Actors();
 
 	}
 

@@ -1,6 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <m2ling_domain:Root xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:m2ling_domain="http://m2ling.org/0.1">
-  <viewPoints label="foo" name="foo"/>
-  <viewPoints label="bar" name="bar"/>
-  <views id="_Dsjp0JU8EeGYsv1N6yGNQg" name="view1" label="" viewPoint="foo"/>
+  <viewPoints id="ertyuyreklbjnb,n" name="Applicative Architecture" comment="Note that this viewpoint maps few concepts of physical architecture viewpoint." label="Applicative Architecture provides projects structure as modules, provides each module technology. Deals with software factories and system capabilities. Provides minimal details about physical architecture (list of servers by environment for instance).">
+    <activities id="_ByQVkJn4EeGqFM2UF1dCGQ" name="Set up software factory" label="Set up developement, integration and build tools for each project." accountables="_skmNgZhhEeGGf-qGrGj3yA" responsibles="_skmNgZhhEeGGf-qGrGj3yA"/>
+    <componentTypes id="_E3EOwZoWEeG71vmJ5CR-iA" name="GuiModule" comment="" label="A GUI module serves Web pages destinated to end users." engineType="_fKtsQZoXEeG71vmJ5CR-iA"/>
+    <componentTypes id="_1y2zQZoWEeG71vmJ5CR-iA" name="ServiceModule" comment="" label="A service module provides business services to batch or GUI modules and is repsonsible for enterprise data."/>
+    <componentTypes id="__w-CMZoWEeG71vmJ5CR-iA" name="JBossAS" label="A Jboss JEE container"/>
+    <componentTypes id="_YbdmAZoXEeG71vmJ5CR-iA" name="PostgresQL" comment="" label="PostgresQL database"/>
+    <componentTypes id="_fKtsQZoXEeG71vmJ5CR-iA" name="Tomcat" label="Tomcat servlet/JSP container"/>
+  </viewPoints>
+  <viewPoints id="fsdfhjksdhfkjhsdkfj" name="Physical Architecture" comment="" label="Physical Architecture viewpoint provides all rules and concepts dealing with hardware, network aspects of a project."/>
+  <viewPoints id="_uP3gkZniEeGeqKlv68ECYA" name="Enterprise Architecture" label="Enterprise Architecture deals with set of projects or the IS as a whole."/>
+  <views id="_6MLzgJngEeGCNbiGBiffzQ" name="BikesOnline" comment="" label="BikesOnline is a online house-built e-commerce solution to sell bikes." viewPoint="ertyuyreklbjnb,n"/>
+  <stakeholders id="_skmNgZhhEeGGf-qGrGj3yA" name="Applicative Architect" actors="eaarchitecterich"/>
+  <stakeholders id="_aB_ysZnaEeGRRqNqlyFgFw" name="Entreprise Architect" actors="pearchitect"/>
+  <stakeholders id="_skmNgZhhEeGGf-qGrGj3yA" name="Applicative Architect"/>
+  <stakeholders id="_dX1QoZnbEeGRRqNqlyFgFw" name="Technical Architect" actors="ktarchitect"/>
+  <stakeholders id="_te1CAZneEeGiWdDszZQI0g" name="Support" label="This service provides backup/administration services for the Deisgn office." actors="bsupport"/>
+  <stakeholders id="_Tig0gZnfEeGiWdDszZQI0g" name="Operations Architect" label="The operation architect is an operations expert responsible for building SLA/OLA along with the Applicative Architect of each project and to ensure these agrements are followed." actors="aoarchitect"/>
+  <units id="_mWgzQJhkEeGxRNCeID_vlg" name="Design Office" label="This It department produces functional specifications, urbanisation, application architecture and developement."/>
+  <units id="_eegzQJhkEiixRNCeID_vlg" name="Operations Office" label="This IT department contains numerous ITIL-complient services dedicated to business services. It must ensure SLA and OLA respect."/>
+  <actors stakeholders="_skmNgZhhEeGGf-qGrGj3yA" unit="_mWgzQJhkEeGxRNCeID_vlg" username="eaarchitecterich" pwdHash="9141ac8757be95f9a0b9ef881e3381849d4118dd" firstName="Erich" lastName="Aarchitect"/>
+  <actors stakeholders="_aB_ysZnaEeGRRqNqlyFgFw" unit="_mWgzQJhkEeGxRNCeID_vlg" username="pearchitect" pwdHash="f7582bf873b823e2a9309e361feec592e8fa2e9c" firstName="Paul " lastName="Earchitect"/>
+  <actors stakeholders="_dX1QoZnbEeGRRqNqlyFgFw" unit="_mWgzQJhkEeGxRNCeID_vlg" username="ktarchitect" pwdHash="71bfd9fe9682734bdcaf741d1ffa8fe4c60b9b51" firstName="Kelly" lastName="Tarchitect"/>
+  <actors stakeholders="_te1CAZneEeGiWdDszZQI0g" unit="_eegzQJhkEiixRNCeID_vlg" username="bsupport" admin="true" pwdHash="13f1f28ac1eedf46c94b1e4318ad07874167a01b" firstName="Bob" lastName="Support"/>
+  <actors stakeholders="_Tig0gZnfEeGiWdDszZQI0g" unit="_eegzQJhkEiixRNCeID_vlg" username="aoarchitect" pwdHash="3670ceb10cb54b972d3fb52dd5cb30536eda0338" firstName="Amy " lastName="Oarchitect"/>
 </m2ling_domain:Root>

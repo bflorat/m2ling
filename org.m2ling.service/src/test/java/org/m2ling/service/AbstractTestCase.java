@@ -57,6 +57,8 @@ public abstract class AbstractTestCase extends AbstractModule {
 
 	/** final database resource. Populated by a populateDatabase() call. */
 	protected Resource resource;
+	
+	protected PersistenceManagerTeneoImpl pm;
 
 	/**
 	 * Populate the XMI mock in memory to store it back into the database
@@ -86,7 +88,7 @@ public abstract class AbstractTestCase extends AbstractModule {
 	 */
 	public void populateDatabase(String mockName) throws IOException {
 		Configuration conf = new Configuration(Configuration.getDefaultTestConfiguration());
-		PersistenceManagerTeneoImpl pm = new PersistenceManagerTeneoImpl(conf, Logger.getAnonymousLogger());
+		pm = new PersistenceManagerTeneoImpl(conf, Logger.getAnonymousLogger());
 		// Load the resource
 		populateMock(mockName);
 		resource = pm.getResource();

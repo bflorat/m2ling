@@ -162,7 +162,7 @@ public class Configuration {
 		result.put(Environment.PASS, "");
 		result.put(Environment.DIALECT, org.hibernate.dialect.H2Dialect.class.getName());
 		result.put(PersistenceOptions.CASCADE_POLICY_ON_NON_CONTAINMENT, "REFRESH,PERSIST,MERGE");
-		result.put(PersistenceOptions.EAV_MAPPING, "true");
+		result.put(PersistenceOptions.EAV_MAPPING, "false");
 		return result;
 	}
 
@@ -182,7 +182,7 @@ public class Configuration {
 		result.put(PersistenceOptions.CASCADE_POLICY_ON_NON_CONTAINMENT, "REFRESH,PERSIST,MERGE");
 		// Force schema drop
 		result.put(Environment.HBM2DDL_AUTO, "create");
-		result.put(PersistenceOptions.EAV_MAPPING, "true");
+		result.put(PersistenceOptions.EAV_MAPPING, "false");
 		return result;
 	}
 

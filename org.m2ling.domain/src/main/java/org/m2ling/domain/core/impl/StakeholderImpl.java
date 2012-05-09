@@ -5,15 +5,18 @@ package org.m2ling.domain.core.impl;
 
 import java.util.Collection;
 
+import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
+import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 import org.eclipse.emf.ecore.util.EObjectWithInverseResolvingEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.m2ling.domain.core.Actor;
 import org.m2ling.domain.core.CorePackage;
+import org.m2ling.domain.core.HasLabel;
 import org.m2ling.domain.core.Stakeholder;
 import org.m2ling.domain.core.View;
 import org.m2ling.domain.core.ViewPoint;
@@ -25,6 +28,7 @@ import org.m2ling.domain.core.ViewPoint;
  * <p>
  * The following features are implemented:
  * <ul>
+ *   <li>{@link org.m2ling.domain.core.impl.StakeholderImpl#getLabel <em>Label</em>}</li>
  *   <li>{@link org.m2ling.domain.core.impl.StakeholderImpl#getViews <em>Views</em>}</li>
  *   <li>{@link org.m2ling.domain.core.impl.StakeholderImpl#getViewPoints <em>View Points</em>}</li>
  *   <li>{@link org.m2ling.domain.core.impl.StakeholderImpl#getActors <em>Actors</em>}</li>
@@ -40,6 +44,26 @@ public class StakeholderImpl extends HasNameAndIDImpl implements Stakeholder {
 	 * @generated
 	 */
 	public static final String copyright = "Copyright (C) 2012 Bertrand Florat";
+
+	/**
+	 * The default value of the '{@link #getLabel() <em>Label</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getLabel()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String LABEL_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getLabel() <em>Label</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getLabel()
+	 * @generated
+	 * @ordered
+	 */
+	protected String label = LABEL_EDEFAULT;
 
 	/**
 	 * The cached value of the '{@link #getViews() <em>Views</em>}' reference list.
@@ -88,6 +112,27 @@ public class StakeholderImpl extends HasNameAndIDImpl implements Stakeholder {
 	@Override
 	protected EClass eStaticClass() {
 		return CorePackage.Literals.STAKEHOLDER;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String getLabel() {
+		return label;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setLabel(String newLabel) {
+		String oldLabel = label;
+		label = newLabel;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, CorePackage.STAKEHOLDER__LABEL, oldLabel, label));
 	}
 
 	/**
@@ -163,6 +208,8 @@ public class StakeholderImpl extends HasNameAndIDImpl implements Stakeholder {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
+			case CorePackage.STAKEHOLDER__LABEL:
+				return getLabel();
 			case CorePackage.STAKEHOLDER__VIEWS:
 				return getViews();
 			case CorePackage.STAKEHOLDER__VIEW_POINTS:
@@ -182,6 +229,9 @@ public class StakeholderImpl extends HasNameAndIDImpl implements Stakeholder {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
+			case CorePackage.STAKEHOLDER__LABEL:
+				setLabel((String)newValue);
+				return;
 			case CorePackage.STAKEHOLDER__VIEWS:
 				getViews().clear();
 				getViews().addAll((Collection<? extends View>)newValue);
@@ -206,6 +256,9 @@ public class StakeholderImpl extends HasNameAndIDImpl implements Stakeholder {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
+			case CorePackage.STAKEHOLDER__LABEL:
+				setLabel(LABEL_EDEFAULT);
+				return;
 			case CorePackage.STAKEHOLDER__VIEWS:
 				getViews().clear();
 				return;
@@ -227,6 +280,8 @@ public class StakeholderImpl extends HasNameAndIDImpl implements Stakeholder {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
+			case CorePackage.STAKEHOLDER__LABEL:
+				return LABEL_EDEFAULT == null ? label != null : !LABEL_EDEFAULT.equals(label);
 			case CorePackage.STAKEHOLDER__VIEWS:
 				return views != null && !views.isEmpty();
 			case CorePackage.STAKEHOLDER__VIEW_POINTS:
@@ -235,6 +290,54 @@ public class StakeholderImpl extends HasNameAndIDImpl implements Stakeholder {
 				return actors != null && !actors.isEmpty();
 		}
 		return super.eIsSet(featureID);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public int eBaseStructuralFeatureID(int derivedFeatureID, Class<?> baseClass) {
+		if (baseClass == HasLabel.class) {
+			switch (derivedFeatureID) {
+				case CorePackage.STAKEHOLDER__LABEL: return CorePackage.HAS_LABEL__LABEL;
+				default: return -1;
+			}
+		}
+		return super.eBaseStructuralFeatureID(derivedFeatureID, baseClass);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public int eDerivedStructuralFeatureID(int baseFeatureID, Class<?> baseClass) {
+		if (baseClass == HasLabel.class) {
+			switch (baseFeatureID) {
+				case CorePackage.HAS_LABEL__LABEL: return CorePackage.STAKEHOLDER__LABEL;
+				default: return -1;
+			}
+		}
+		return super.eDerivedStructuralFeatureID(baseFeatureID, baseClass);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public String toString() {
+		if (eIsProxy()) return super.toString();
+
+		StringBuffer result = new StringBuffer(super.toString());
+		result.append(" (label: ");
+		result.append(label);
+		result.append(')');
+		return result.toString();
 	}
 
 } //StakeholderImpl
