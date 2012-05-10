@@ -156,8 +156,10 @@ public class ComponentItemProvider
 		String label = ((Component)object).getName();
 		return label == null || label.length() == 0 ?
 			getString("_UI_Component_type") :
-			getString("_UI_Component_type") + ": " + label;
+			getString("_UI_Component_type") + ": " +  label;
 	}
+	
+	
 
 	/**
 	 * This handles model notifications by calling {@link #updateChildren} to update any cached

@@ -3,9 +3,17 @@
  */
 package org.m2ling.domain.core.impl;
 
+import java.util.Collection;
+import org.eclipse.emf.common.notify.NotificationChain;
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.util.EObjectResolvingEList;
+import org.eclipse.emf.ecore.util.InternalEList;
+import org.m2ling.domain.core.ComponentType;
+import org.m2ling.domain.core.Constraint;
 import org.eclipse.emf.ecore.InternalEObject;
+import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.m2ling.domain.core.ConceptItem;
 import org.m2ling.domain.core.CorePackage;
@@ -18,8 +26,8 @@ import org.m2ling.domain.core.LinkType;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.m2ling.domain.core.impl.LinkTypeImpl#getSourceType <em>Source Type</em>}</li>
- *   <li>{@link org.m2ling.domain.core.impl.LinkTypeImpl#getDestinationType <em>Destination Type</em>}</li>
+ *   <li>{@link org.m2ling.domain.core.impl.LinkTypeImpl#getSourceTypes <em>Source Types</em>}</li>
+ *   <li>{@link org.m2ling.domain.core.impl.LinkTypeImpl#getDestinationTypes <em>Destination Types</em>}</li>
  * </ul>
  * </p>
  *
@@ -34,24 +42,24 @@ public class LinkTypeImpl extends ConceptItemImpl implements LinkType {
 	public static final String copyright = "Copyright (C) 2012 Bertrand Florat";
 
 	/**
-	 * The cached value of the '{@link #getSourceType() <em>Source Type</em>}' reference.
+	 * The cached value of the '{@link #getSourceTypes() <em>Source Types</em>}' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getSourceType()
+	 * @see #getSourceTypes()
 	 * @generated
 	 * @ordered
 	 */
-	protected ConceptItem sourceType;
+	protected EList<ComponentType> sourceTypes;
 
 	/**
-	 * The cached value of the '{@link #getDestinationType() <em>Destination Type</em>}' reference.
+	 * The cached value of the '{@link #getDestinationTypes() <em>Destination Types</em>}' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getDestinationType()
+	 * @see #getDestinationTypes()
 	 * @generated
 	 * @ordered
 	 */
-	protected ConceptItem destinationType;
+	protected EList<ComponentType> destinationTypes;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -77,16 +85,11 @@ public class LinkTypeImpl extends ConceptItemImpl implements LinkType {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public ConceptItem getSourceType() {
-		if (sourceType != null && sourceType.eIsProxy()) {
-			InternalEObject oldSourceType = (InternalEObject)sourceType;
-			sourceType = (ConceptItem)eResolveProxy(oldSourceType);
-			if (sourceType != oldSourceType) {
-				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, CorePackage.LINK_TYPE__SOURCE_TYPE, oldSourceType, sourceType));
-			}
+	public EList<ComponentType> getSourceTypes() {
+		if (sourceTypes == null) {
+			sourceTypes = new EObjectResolvingEList<ComponentType>(ComponentType.class, this, CorePackage.LINK_TYPE__SOURCE_TYPES);
 		}
-		return sourceType;
+		return sourceTypes;
 	}
 
 	/**
@@ -94,58 +97,11 @@ public class LinkTypeImpl extends ConceptItemImpl implements LinkType {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public ConceptItem basicGetSourceType() {
-		return sourceType;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setSourceType(ConceptItem newSourceType) {
-		ConceptItem oldSourceType = sourceType;
-		sourceType = newSourceType;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, CorePackage.LINK_TYPE__SOURCE_TYPE, oldSourceType, sourceType));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public ConceptItem getDestinationType() {
-		if (destinationType != null && destinationType.eIsProxy()) {
-			InternalEObject oldDestinationType = (InternalEObject)destinationType;
-			destinationType = (ConceptItem)eResolveProxy(oldDestinationType);
-			if (destinationType != oldDestinationType) {
-				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, CorePackage.LINK_TYPE__DESTINATION_TYPE, oldDestinationType, destinationType));
-			}
+	public EList<ComponentType> getDestinationTypes() {
+		if (destinationTypes == null) {
+			destinationTypes = new EObjectResolvingEList<ComponentType>(ComponentType.class, this, CorePackage.LINK_TYPE__DESTINATION_TYPES);
 		}
-		return destinationType;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public ConceptItem basicGetDestinationType() {
-		return destinationType;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setDestinationType(ConceptItem newDestinationType) {
-		ConceptItem oldDestinationType = destinationType;
-		destinationType = newDestinationType;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, CorePackage.LINK_TYPE__DESTINATION_TYPE, oldDestinationType, destinationType));
+		return destinationTypes;
 	}
 
 	/**
@@ -156,12 +112,10 @@ public class LinkTypeImpl extends ConceptItemImpl implements LinkType {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case CorePackage.LINK_TYPE__SOURCE_TYPE:
-				if (resolve) return getSourceType();
-				return basicGetSourceType();
-			case CorePackage.LINK_TYPE__DESTINATION_TYPE:
-				if (resolve) return getDestinationType();
-				return basicGetDestinationType();
+			case CorePackage.LINK_TYPE__SOURCE_TYPES:
+				return getSourceTypes();
+			case CorePackage.LINK_TYPE__DESTINATION_TYPES:
+				return getDestinationTypes();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -171,14 +125,17 @@ public class LinkTypeImpl extends ConceptItemImpl implements LinkType {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@SuppressWarnings("unchecked")
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case CorePackage.LINK_TYPE__SOURCE_TYPE:
-				setSourceType((ConceptItem)newValue);
+			case CorePackage.LINK_TYPE__SOURCE_TYPES:
+				getSourceTypes().clear();
+				getSourceTypes().addAll((Collection<? extends ComponentType>)newValue);
 				return;
-			case CorePackage.LINK_TYPE__DESTINATION_TYPE:
-				setDestinationType((ConceptItem)newValue);
+			case CorePackage.LINK_TYPE__DESTINATION_TYPES:
+				getDestinationTypes().clear();
+				getDestinationTypes().addAll((Collection<? extends ComponentType>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -192,11 +149,11 @@ public class LinkTypeImpl extends ConceptItemImpl implements LinkType {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case CorePackage.LINK_TYPE__SOURCE_TYPE:
-				setSourceType((ConceptItem)null);
+			case CorePackage.LINK_TYPE__SOURCE_TYPES:
+				getSourceTypes().clear();
 				return;
-			case CorePackage.LINK_TYPE__DESTINATION_TYPE:
-				setDestinationType((ConceptItem)null);
+			case CorePackage.LINK_TYPE__DESTINATION_TYPES:
+				getDestinationTypes().clear();
 				return;
 		}
 		super.eUnset(featureID);
@@ -210,10 +167,10 @@ public class LinkTypeImpl extends ConceptItemImpl implements LinkType {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case CorePackage.LINK_TYPE__SOURCE_TYPE:
-				return sourceType != null;
-			case CorePackage.LINK_TYPE__DESTINATION_TYPE:
-				return destinationType != null;
+			case CorePackage.LINK_TYPE__SOURCE_TYPES:
+				return sourceTypes != null && !sourceTypes.isEmpty();
+			case CorePackage.LINK_TYPE__DESTINATION_TYPES:
+				return destinationTypes != null && !destinationTypes.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}

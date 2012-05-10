@@ -3,6 +3,8 @@
  */
 package org.m2ling.domain.core;
 
+import org.eclipse.emf.common.util.EList;
+
 
 /**
  * <!-- begin-user-doc -->
@@ -12,8 +14,8 @@ package org.m2ling.domain.core;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link org.m2ling.domain.core.LinkType#getSourceType <em>Source Type</em>}</li>
- *   <li>{@link org.m2ling.domain.core.LinkType#getDestinationType <em>Destination Type</em>}</li>
+ *   <li>{@link org.m2ling.domain.core.LinkType#getSourceTypes <em>Source Types</em>}</li>
+ *   <li>{@link org.m2ling.domain.core.LinkType#getDestinationTypes <em>Destination Types</em>}</li>
  * </ul>
  * </p>
  *
@@ -30,55 +32,35 @@ public interface LinkType extends ConceptItem {
 	String copyright = "Copyright (C) 2012 Bertrand Florat";
 
 	/**
-	 * Returns the value of the '<em><b>Source Type</b></em>' reference.
+	 * Returns the value of the '<em><b>Source Types</b></em>' reference list.
+	 * The list contents are of type {@link org.m2ling.domain.core.ComponentType}.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Source Type</em>' reference isn't clear,
+	 * If the meaning of the '<em>Source Types</em>' reference list isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Source Type</em>' reference.
-	 * @see #setSourceType(ConceptItem)
-	 * @see org.m2ling.domain.core.CorePackage#getLinkType_SourceType()
+	 * @return the value of the '<em>Source Types</em>' reference list.
+	 * @see org.m2ling.domain.core.CorePackage#getLinkType_SourceTypes()
 	 * @model required="true"
 	 * @generated
 	 */
-	ConceptItem getSourceType();
+	EList<ComponentType> getSourceTypes();
 
 	/**
-	 * Sets the value of the '{@link org.m2ling.domain.core.LinkType#getSourceType <em>Source Type</em>}' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Source Type</em>' reference.
-	 * @see #getSourceType()
-	 * @generated
-	 */
-	void setSourceType(ConceptItem value);
-
-	/**
-	 * Returns the value of the '<em><b>Destination Type</b></em>' reference.
+	 * Returns the value of the '<em><b>Destination Types</b></em>' reference list.
+	 * The list contents are of type {@link org.m2ling.domain.core.ComponentType}.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Destination Type</em>' reference isn't clear,
+	 * If the meaning of the '<em>Destination Types</em>' reference list isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Destination Type</em>' reference.
-	 * @see #setDestinationType(ConceptItem)
-	 * @see org.m2ling.domain.core.CorePackage#getLinkType_DestinationType()
+	 * @return the value of the '<em>Destination Types</em>' reference list.
+	 * @see org.m2ling.domain.core.CorePackage#getLinkType_DestinationTypes()
 	 * @model required="true"
 	 * @generated
 	 */
-	ConceptItem getDestinationType();
-
-	/**
-	 * Sets the value of the '{@link org.m2ling.domain.core.LinkType#getDestinationType <em>Destination Type</em>}' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Destination Type</em>' reference.
-	 * @see #getDestinationType()
-	 * @generated
-	 */
-	void setDestinationType(ConceptItem value);
+	EList<ComponentType> getDestinationTypes();
 
 } // LinkType

@@ -3,12 +3,12 @@
  */
 package org.m2ling.domain.core.provider;
 
-
 import java.util.Collection;
 import java.util.List;
 
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
 import org.eclipse.emf.edit.provider.IEditingDomainItemProvider;
@@ -21,32 +21,28 @@ import org.eclipse.emf.edit.provider.ViewerNotification;
 import org.m2ling.domain.core.ComponentType;
 import org.m2ling.domain.core.CoreFactory;
 import org.m2ling.domain.core.CorePackage;
+import org.m2ling.domain.core.ViewPoint;
+import org.m2ling.domain.core.impl.ComponentTypeImpl;
 
 /**
- * This is the item provider adapter for a {@link org.m2ling.domain.core.ComponentType} object.
- * <!-- begin-user-doc -->
- * <!-- end-user-doc -->
+ * This is the item provider adapter for a {@link org.m2ling.domain.core.ComponentType} object. <!--
+ * begin-user-doc --> <!-- end-user-doc -->
+ * 
  * @generated
  */
-public class ComponentTypeItemProvider
-	extends ConceptItemItemProvider
-	implements
-		IEditingDomainItemProvider,
-		IStructuredItemContentProvider,
-		ITreeItemContentProvider,
-		IItemLabelProvider,
-		IItemPropertySource {
+public class ComponentTypeItemProvider extends ConceptItemItemProvider implements IEditingDomainItemProvider,
+		IStructuredItemContentProvider, ITreeItemContentProvider, IItemLabelProvider, IItemPropertySource {
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public static final String copyright = "Copyright (C) 2012 Bertrand Florat";
 
 	/**
-	 * This constructs an instance from a factory and a notifier.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * This constructs an instance from a factory and a notifier. <!-- begin-user-doc --> <!--
+	 * end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public ComponentTypeItemProvider(AdapterFactory adapterFactory) {
@@ -54,9 +50,9 @@ public class ComponentTypeItemProvider
 	}
 
 	/**
-	 * This returns the property descriptors for the adapted class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * This returns the property descriptors for the adapted class. <!-- begin-user-doc --> <!--
+	 * end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -71,55 +67,44 @@ public class ComponentTypeItemProvider
 	}
 
 	/**
-	 * This adds a property descriptor for the Binded Component Type feature.
-	 * <!-- begin-user-doc -->
+	 * This adds a property descriptor for the Binded Component Type feature. <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	protected void addBindedComponentTypePropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_ComponentType_bindedComponentType_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_ComponentType_bindedComponentType_feature", "_UI_ComponentType_type"),
-				 CorePackage.Literals.COMPONENT_TYPE__BINDED_COMPONENT_TYPE,
-				 true,
-				 false,
-				 true,
-				 null,
-				 null,
-				 null));
+		itemPropertyDescriptors.add(createItemPropertyDescriptor(
+				((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
+				getResourceLocator(),
+				getString("_UI_ComponentType_bindedComponentType_feature"),
+				getString("_UI_PropertyDescriptor_description", "_UI_ComponentType_bindedComponentType_feature",
+						"_UI_ComponentType_type"), CorePackage.Literals.COMPONENT_TYPE__BINDED_COMPONENT_TYPE, true, false,
+				true, null, null, null));
 	}
 
 	/**
-	 * This adds a property descriptor for the Engine Type feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * This adds a property descriptor for the Engine Type feature. <!-- begin-user-doc --> <!--
+	 * end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	protected void addEngineTypePropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_ComponentType_engineType_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_ComponentType_engineType_feature", "_UI_ComponentType_type"),
-				 CorePackage.Literals.COMPONENT_TYPE__ENGINE_TYPE,
-				 true,
-				 false,
-				 true,
-				 null,
-				 null,
-				 null));
+		itemPropertyDescriptors.add(createItemPropertyDescriptor(
+				((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
+				getResourceLocator(),
+				getString("_UI_ComponentType_engineType_feature"),
+				getString("_UI_PropertyDescriptor_description", "_UI_ComponentType_engineType_feature",
+						"_UI_ComponentType_type"), CorePackage.Literals.COMPONENT_TYPE__ENGINE_TYPE, true, false, true, null,
+				null, null));
 	}
 
 	/**
-	 * This specifies how to implement {@link #getChildren} and is used to deduce an appropriate feature for an
-	 * {@link org.eclipse.emf.edit.command.AddCommand}, {@link org.eclipse.emf.edit.command.RemoveCommand} or
-	 * {@link org.eclipse.emf.edit.command.MoveCommand} in {@link #createCommand}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * This specifies how to implement {@link #getChildren} and is used to deduce an appropriate
+	 * feature for an {@link org.eclipse.emf.edit.command.AddCommand},
+	 * {@link org.eclipse.emf.edit.command.RemoveCommand} or
+	 * {@link org.eclipse.emf.edit.command.MoveCommand} in {@link #createCommand}. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -132,8 +117,8 @@ public class ComponentTypeItemProvider
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -145,9 +130,8 @@ public class ComponentTypeItemProvider
 	}
 
 	/**
-	 * This returns ComponentType.gif.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * This returns ComponentType.gif. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -156,24 +140,30 @@ public class ComponentTypeItemProvider
 	}
 
 	/**
-	 * This returns the label text for the adapted class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * This returns the label text for the adapted class. <!-- begin-user-doc --> <!-- end-user-doc
+	 * -->
+	 * 
 	 * @generated NOT
 	 */
 	@Override
 	public String getText(Object object) {
-		String label = ((ComponentType)object).getName();
-		return label == null || label.length() == 0 ?
-			getString("_UI_ComponentType_type") :
-			getString("_UI_ComponentType_type") + ": " + label;
+		String label = ((ComponentType) object).getName();
+		ComponentTypeImpl ct = (ComponentTypeImpl) object;
+		ViewPoint vp = null;
+		EObject parent = ct.eContainer();
+		while (!(parent instanceof ViewPoint)) {
+			parent = parent.eContainer();
+		}
+		vp = (ViewPoint) parent;
+		return label == null || label.length() == 0 ? getString("_UI_ComponentType_type")
+				: getString("_UI_ComponentType_type") + ": " + vp.getName() + '#' + label;
 	}
 
 	/**
 	 * This handles model notifications by calling {@link #updateChildren} to update any cached
 	 * children and by creating a viewer notification, which it passes to {@link #fireNotifyChanged}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -181,28 +171,25 @@ public class ComponentTypeItemProvider
 		updateChildren(notification);
 
 		switch (notification.getFeatureID(ComponentType.class)) {
-			case CorePackage.COMPONENT_TYPE__SUB_TYPES:
-				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
-				return;
+		case CorePackage.COMPONENT_TYPE__SUB_TYPES:
+			fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
+			return;
 		}
 		super.notifyChanged(notification);
 	}
 
 	/**
-	 * This adds {@link org.eclipse.emf.edit.command.CommandParameter}s describing the children
-	 * that can be created under this object.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * This adds {@link org.eclipse.emf.edit.command.CommandParameter}s describing the children that
+	 * can be created under this object. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
 	protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
 		super.collectNewChildDescriptors(newChildDescriptors, object);
 
-		newChildDescriptors.add
-			(createChildParameter
-				(CorePackage.Literals.COMPONENT_TYPE__SUB_TYPES,
-				 CoreFactory.eINSTANCE.createComponentType()));
+		newChildDescriptors.add(createChildParameter(CorePackage.Literals.COMPONENT_TYPE__SUB_TYPES,
+				CoreFactory.eINSTANCE.createComponentType()));
 	}
 
 }

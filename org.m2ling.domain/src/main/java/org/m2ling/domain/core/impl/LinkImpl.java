@@ -6,12 +6,16 @@ package org.m2ling.domain.core.impl;
 import java.util.Collection;
 
 import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EDataTypeUniqueEList;
+import org.eclipse.emf.ecore.util.EObjectContainmentEList;
+import org.eclipse.emf.ecore.util.InternalEList;
 import org.m2ling.domain.core.ArchitectureItem;
+import org.m2ling.domain.core.Constraint;
 import org.m2ling.domain.core.CorePackage;
 import org.m2ling.domain.core.CustomProperty;
 import org.m2ling.domain.core.HasConstraints;
@@ -33,7 +37,7 @@ import org.m2ling.domain.core.LinkType;
  *   <li>{@link org.m2ling.domain.core.impl.LinkImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.m2ling.domain.core.impl.LinkImpl#getTags <em>Tags</em>}</li>
  *   <li>{@link org.m2ling.domain.core.impl.LinkImpl#getType <em>Type</em>}</li>
- *   <li>{@link org.m2ling.domain.core.impl.LinkImpl#getSource <em>Source</em>}</li>
+ *   <li>{@link org.m2ling.domain.core.impl.LinkImpl#getOrigin <em>Origin</em>}</li>
  *   <li>{@link org.m2ling.domain.core.impl.LinkImpl#getDestination <em>Destination</em>}</li>
  * </ul>
  * </p>
@@ -128,14 +132,14 @@ public class LinkImpl extends HasCommentImpl implements Link {
 	protected LinkType type;
 
 	/**
-	 * The cached value of the '{@link #getSource() <em>Source</em>}' reference.
+	 * The cached value of the '{@link #getOrigin() <em>Origin</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getSource()
+	 * @see #getOrigin()
 	 * @generated
 	 * @ordered
 	 */
-	protected ArchitectureItem source;
+	protected ArchitectureItem origin;
 
 	/**
 	 * The cached value of the '{@link #getDestination() <em>Destination</em>}' reference.
@@ -326,16 +330,16 @@ public class LinkImpl extends HasCommentImpl implements Link {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public ArchitectureItem getSource() {
-		if (source != null && source.eIsProxy()) {
-			InternalEObject oldSource = (InternalEObject)source;
-			source = (ArchitectureItem)eResolveProxy(oldSource);
-			if (source != oldSource) {
+	public ArchitectureItem getOrigin() {
+		if (origin != null && origin.eIsProxy()) {
+			InternalEObject oldOrigin = (InternalEObject)origin;
+			origin = (ArchitectureItem)eResolveProxy(oldOrigin);
+			if (origin != oldOrigin) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, CorePackage.LINK__SOURCE, oldSource, source));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, CorePackage.LINK__ORIGIN, oldOrigin, origin));
 			}
 		}
-		return source;
+		return origin;
 	}
 
 	/**
@@ -343,8 +347,8 @@ public class LinkImpl extends HasCommentImpl implements Link {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public ArchitectureItem basicGetSource() {
-		return source;
+	public ArchitectureItem basicGetOrigin() {
+		return origin;
 	}
 
 	/**
@@ -352,11 +356,11 @@ public class LinkImpl extends HasCommentImpl implements Link {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setSource(ArchitectureItem newSource) {
-		ArchitectureItem oldSource = source;
-		source = newSource;
+	public void setOrigin(ArchitectureItem newOrigin) {
+		ArchitectureItem oldOrigin = origin;
+		origin = newOrigin;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, CorePackage.LINK__SOURCE, oldSource, source));
+			eNotify(new ENotificationImpl(this, Notification.SET, CorePackage.LINK__ORIGIN, oldOrigin, origin));
 	}
 
 	/**
@@ -417,9 +421,9 @@ public class LinkImpl extends HasCommentImpl implements Link {
 			case CorePackage.LINK__TYPE:
 				if (resolve) return getType();
 				return basicGetType();
-			case CorePackage.LINK__SOURCE:
-				if (resolve) return getSource();
-				return basicGetSource();
+			case CorePackage.LINK__ORIGIN:
+				if (resolve) return getOrigin();
+				return basicGetOrigin();
 			case CorePackage.LINK__DESTINATION:
 				if (resolve) return getDestination();
 				return basicGetDestination();
@@ -452,8 +456,8 @@ public class LinkImpl extends HasCommentImpl implements Link {
 			case CorePackage.LINK__TYPE:
 				setType((LinkType)newValue);
 				return;
-			case CorePackage.LINK__SOURCE:
-				setSource((ArchitectureItem)newValue);
+			case CorePackage.LINK__ORIGIN:
+				setOrigin((ArchitectureItem)newValue);
 				return;
 			case CorePackage.LINK__DESTINATION:
 				setDestination((ArchitectureItem)newValue);
@@ -485,8 +489,8 @@ public class LinkImpl extends HasCommentImpl implements Link {
 			case CorePackage.LINK__TYPE:
 				setType((LinkType)null);
 				return;
-			case CorePackage.LINK__SOURCE:
-				setSource((ArchitectureItem)null);
+			case CorePackage.LINK__ORIGIN:
+				setOrigin((ArchitectureItem)null);
 				return;
 			case CorePackage.LINK__DESTINATION:
 				setDestination((ArchitectureItem)null);
@@ -513,8 +517,8 @@ public class LinkImpl extends HasCommentImpl implements Link {
 				return tags != null && !tags.isEmpty();
 			case CorePackage.LINK__TYPE:
 				return type != null;
-			case CorePackage.LINK__SOURCE:
-				return source != null;
+			case CorePackage.LINK__ORIGIN:
+				return origin != null;
 			case CorePackage.LINK__DESTINATION:
 				return destination != null;
 		}

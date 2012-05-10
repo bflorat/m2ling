@@ -3,6 +3,8 @@
  */
 package org.m2ling.domain.core;
 
+import org.eclipse.emf.common.util.EList;
+
 
 /**
  * <!-- begin-user-doc -->
@@ -13,7 +15,7 @@ package org.m2ling.domain.core;
  * The following features are supported:
  * <ul>
  *   <li>{@link org.m2ling.domain.core.Link#getType <em>Type</em>}</li>
- *   <li>{@link org.m2ling.domain.core.Link#getSource <em>Source</em>}</li>
+ *   <li>{@link org.m2ling.domain.core.Link#getOrigin <em>Origin</em>}</li>
  *   <li>{@link org.m2ling.domain.core.Link#getDestination <em>Destination</em>}</li>
  * </ul>
  * </p>
@@ -57,30 +59,30 @@ public interface Link extends HasComment, HasConstraints, HasCustomProperties, H
 	void setType(LinkType value);
 
 	/**
-	 * Returns the value of the '<em><b>Source</b></em>' reference.
+	 * Returns the value of the '<em><b>Origin</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Source</em>' reference isn't clear,
+	 * If the meaning of the '<em>Origin</em>' reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Source</em>' reference.
-	 * @see #setSource(ArchitectureItem)
-	 * @see org.m2ling.domain.core.CorePackage#getLink_Source()
+	 * @return the value of the '<em>Origin</em>' reference.
+	 * @see #setOrigin(ArchitectureItem)
+	 * @see org.m2ling.domain.core.CorePackage#getLink_Origin()
 	 * @model required="true"
 	 * @generated
 	 */
-	ArchitectureItem getSource();
+	ArchitectureItem getOrigin();
 
 	/**
-	 * Sets the value of the '{@link org.m2ling.domain.core.Link#getSource <em>Source</em>}' reference.
+	 * Sets the value of the '{@link org.m2ling.domain.core.Link#getOrigin <em>Origin</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Source</em>' reference.
-	 * @see #getSource()
+	 * @param value the new value of the '<em>Origin</em>' reference.
+	 * @see #getOrigin()
 	 * @generated
 	 */
-	void setSource(ArchitectureItem value);
+	void setOrigin(ArchitectureItem value);
 
 	/**
 	 * Returns the value of the '<em><b>Destination</b></em>' reference.

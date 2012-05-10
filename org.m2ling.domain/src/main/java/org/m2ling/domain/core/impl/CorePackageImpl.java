@@ -833,7 +833,7 @@ public class CorePackageImpl extends EPackageImpl implements CorePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getLinkType_SourceType() {
+	public EReference getLinkType_SourceTypes() {
 		return (EReference)linkTypeEClass.getEStructuralFeatures().get(0);
 	}
 
@@ -842,7 +842,7 @@ public class CorePackageImpl extends EPackageImpl implements CorePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getLinkType_DestinationType() {
+	public EReference getLinkType_DestinationTypes() {
 		return (EReference)linkTypeEClass.getEStructuralFeatures().get(1);
 	}
 
@@ -869,7 +869,7 @@ public class CorePackageImpl extends EPackageImpl implements CorePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getLink_Source() {
+	public EReference getLink_Origin() {
 		return (EReference)linkEClass.getEStructuralFeatures().get(1);
 	}
 
@@ -1461,12 +1461,12 @@ public class CorePackageImpl extends EPackageImpl implements CorePackage {
 		customPropertyEClass = createEClass(CUSTOM_PROPERTY);
 
 		linkTypeEClass = createEClass(LINK_TYPE);
-		createEReference(linkTypeEClass, LINK_TYPE__SOURCE_TYPE);
-		createEReference(linkTypeEClass, LINK_TYPE__DESTINATION_TYPE);
+		createEReference(linkTypeEClass, LINK_TYPE__SOURCE_TYPES);
+		createEReference(linkTypeEClass, LINK_TYPE__DESTINATION_TYPES);
 
 		linkEClass = createEClass(LINK);
 		createEReference(linkEClass, LINK__TYPE);
-		createEReference(linkEClass, LINK__SOURCE);
+		createEReference(linkEClass, LINK__ORIGIN);
 		createEReference(linkEClass, LINK__DESTINATION);
 
 		streamEClass = createEClass(STREAM);
@@ -1699,12 +1699,12 @@ public class CorePackageImpl extends EPackageImpl implements CorePackage {
 		initEClass(customPropertyEClass, CustomProperty.class, "CustomProperty", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(linkTypeEClass, LinkType.class, "LinkType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getLinkType_SourceType(), this.getConceptItem(), null, "sourceType", null, 1, 1, LinkType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getLinkType_DestinationType(), this.getConceptItem(), null, "destinationType", null, 1, 1, LinkType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getLinkType_SourceTypes(), this.getComponentType(), null, "sourceTypes", null, 1, -1, LinkType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getLinkType_DestinationTypes(), this.getComponentType(), null, "destinationTypes", null, 1, -1, LinkType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(linkEClass, Link.class, "Link", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getLink_Type(), this.getLinkType(), null, "type", null, 1, 1, Link.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getLink_Source(), this.getArchitectureItem(), null, "source", null, 1, 1, Link.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getLink_Origin(), this.getArchitectureItem(), null, "origin", null, 1, 1, Link.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getLink_Destination(), this.getArchitectureItem(), null, "destination", null, 1, 1, Link.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(streamEClass, Stream.class, "Stream", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);

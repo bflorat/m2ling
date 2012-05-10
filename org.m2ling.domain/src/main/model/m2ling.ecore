@@ -96,15 +96,15 @@
     <eClassifiers xsi:type="ecore:EClass" name="CustomProperty"/>
     <eClassifiers xsi:type="ecore:EEnum" name="CustomPropertyType"/>
     <eClassifiers xsi:type="ecore:EClass" name="LinkType" eSuperTypes="#//core/ConceptItem">
-      <eStructuralFeatures xsi:type="ecore:EReference" name="sourceType" lowerBound="1"
-          eType="#//core/ConceptItem"/>
-      <eStructuralFeatures xsi:type="ecore:EReference" name="destinationType" lowerBound="1"
-          eType="#//core/ConceptItem"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="sourceTypes" lowerBound="1"
+          upperBound="-1" eType="#//core/ComponentType"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="destinationTypes" lowerBound="1"
+          upperBound="-1" eType="#//core/ComponentType"/>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="Link" eSuperTypes="#//core/HasComment #//core/HasConstraints #//core/HasCustomProperties #//core/HasNameAndID #//core/HasTags">
       <eStructuralFeatures xsi:type="ecore:EReference" name="type" lowerBound="1"
           eType="#//core/LinkType"/>
-      <eStructuralFeatures xsi:type="ecore:EReference" name="source" lowerBound="1"
+      <eStructuralFeatures xsi:type="ecore:EReference" name="origin" lowerBound="1"
           eType="#//core/ArchitectureItem"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="destination" lowerBound="1"
           eType="#//core/ArchitectureItem"/>

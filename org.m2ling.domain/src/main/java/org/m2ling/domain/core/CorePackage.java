@@ -1134,22 +1134,22 @@ public interface CorePackage extends EPackage {
 	int LINK_TYPE__LABEL = CONCEPT_ITEM__LABEL;
 
 	/**
-	 * The feature id for the '<em><b>Source Type</b></em>' reference.
+	 * The feature id for the '<em><b>Source Types</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int LINK_TYPE__SOURCE_TYPE = CONCEPT_ITEM_FEATURE_COUNT + 0;
+	int LINK_TYPE__SOURCE_TYPES = CONCEPT_ITEM_FEATURE_COUNT + 0;
 
 	/**
-	 * The feature id for the '<em><b>Destination Type</b></em>' reference.
+	 * The feature id for the '<em><b>Destination Types</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int LINK_TYPE__DESTINATION_TYPE = CONCEPT_ITEM_FEATURE_COUNT + 1;
+	int LINK_TYPE__DESTINATION_TYPES = CONCEPT_ITEM_FEATURE_COUNT + 1;
 
 	/**
 	 * The number of structural features of the '<em>Link Type</em>' class.
@@ -1225,13 +1225,13 @@ public interface CorePackage extends EPackage {
 	int LINK__TYPE = HAS_COMMENT_FEATURE_COUNT + 4;
 
 	/**
-	 * The feature id for the '<em><b>Source</b></em>' reference.
+	 * The feature id for the '<em><b>Origin</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int LINK__SOURCE = HAS_COMMENT_FEATURE_COUNT + 5;
+	int LINK__ORIGIN = HAS_COMMENT_FEATURE_COUNT + 5;
 
 	/**
 	 * The feature id for the '<em><b>Destination</b></em>' reference.
@@ -2670,26 +2670,26 @@ public interface CorePackage extends EPackage {
 	EClass getLinkType();
 
 	/**
-	 * Returns the meta object for the reference '{@link org.m2ling.domain.core.LinkType#getSourceType <em>Source Type</em>}'.
+	 * Returns the meta object for the reference list '{@link org.m2ling.domain.core.LinkType#getSourceTypes <em>Source Types</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Source Type</em>'.
-	 * @see org.m2ling.domain.core.LinkType#getSourceType()
+	 * @return the meta object for the reference list '<em>Source Types</em>'.
+	 * @see org.m2ling.domain.core.LinkType#getSourceTypes()
 	 * @see #getLinkType()
 	 * @generated
 	 */
-	EReference getLinkType_SourceType();
+	EReference getLinkType_SourceTypes();
 
 	/**
-	 * Returns the meta object for the reference '{@link org.m2ling.domain.core.LinkType#getDestinationType <em>Destination Type</em>}'.
+	 * Returns the meta object for the reference list '{@link org.m2ling.domain.core.LinkType#getDestinationTypes <em>Destination Types</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Destination Type</em>'.
-	 * @see org.m2ling.domain.core.LinkType#getDestinationType()
+	 * @return the meta object for the reference list '<em>Destination Types</em>'.
+	 * @see org.m2ling.domain.core.LinkType#getDestinationTypes()
 	 * @see #getLinkType()
 	 * @generated
 	 */
-	EReference getLinkType_DestinationType();
+	EReference getLinkType_DestinationTypes();
 
 	/**
 	 * Returns the meta object for class '{@link org.m2ling.domain.core.Link <em>Link</em>}'.
@@ -2713,15 +2713,15 @@ public interface CorePackage extends EPackage {
 	EReference getLink_Type();
 
 	/**
-	 * Returns the meta object for the reference '{@link org.m2ling.domain.core.Link#getSource <em>Source</em>}'.
+	 * Returns the meta object for the reference '{@link org.m2ling.domain.core.Link#getOrigin <em>Origin</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Source</em>'.
-	 * @see org.m2ling.domain.core.Link#getSource()
+	 * @return the meta object for the reference '<em>Origin</em>'.
+	 * @see org.m2ling.domain.core.Link#getOrigin()
 	 * @see #getLink()
 	 * @generated
 	 */
-	EReference getLink_Source();
+	EReference getLink_Origin();
 
 	/**
 	 * Returns the meta object for the reference '{@link org.m2ling.domain.core.Link#getDestination <em>Destination</em>}'.
@@ -3694,20 +3694,20 @@ public interface CorePackage extends EPackage {
 		EClass LINK_TYPE = eINSTANCE.getLinkType();
 
 		/**
-		 * The meta object literal for the '<em><b>Source Type</b></em>' reference feature.
+		 * The meta object literal for the '<em><b>Source Types</b></em>' reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference LINK_TYPE__SOURCE_TYPE = eINSTANCE.getLinkType_SourceType();
+		EReference LINK_TYPE__SOURCE_TYPES = eINSTANCE.getLinkType_SourceTypes();
 
 		/**
-		 * The meta object literal for the '<em><b>Destination Type</b></em>' reference feature.
+		 * The meta object literal for the '<em><b>Destination Types</b></em>' reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference LINK_TYPE__DESTINATION_TYPE = eINSTANCE.getLinkType_DestinationType();
+		EReference LINK_TYPE__DESTINATION_TYPES = eINSTANCE.getLinkType_DestinationTypes();
 
 		/**
 		 * The meta object literal for the '{@link org.m2ling.domain.core.impl.LinkImpl <em>Link</em>}' class.
@@ -3728,12 +3728,12 @@ public interface CorePackage extends EPackage {
 		EReference LINK__TYPE = eINSTANCE.getLink_Type();
 
 		/**
-		 * The meta object literal for the '<em><b>Source</b></em>' reference feature.
+		 * The meta object literal for the '<em><b>Origin</b></em>' reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference LINK__SOURCE = eINSTANCE.getLink_Source();
+		EReference LINK__ORIGIN = eINSTANCE.getLink_Origin();
 
 		/**
 		 * The meta object literal for the '<em><b>Destination</b></em>' reference feature.

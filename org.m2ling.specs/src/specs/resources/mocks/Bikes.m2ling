@@ -1,16 +1,36 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <m2ling_domain:Root xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:m2ling_domain="http://m2ling.org/0.1">
-  <viewPoints id="ertyuyreklbjnb,n" name="Applicative Architecture" comment="Note that this viewpoint maps few concepts of physical architecture viewpoint." label="Applicative Architecture provides projects structure as modules, provides each module technology. Deals with software factories and system capabilities. Provides minimal details about physical architecture (list of servers by environment for instance).">
+  <viewPoints id="ertyuyreklbjnb,n" name="Logical Architecture" comment="Note that this viewpoint maps few concepts of physical architecture viewpoint." label="Applicative Architecture provides projects structure as modules, provides each module technology. Deals with software factories and system capabilities. Provides minimal details about physical architecture (list of servers by environment for instance).">
     <activities id="_ByQVkJn4EeGqFM2UF1dCGQ" name="Set up software factory" label="Set up developement, integration and build tools for each project." accountables="_skmNgZhhEeGGf-qGrGj3yA" responsibles="_skmNgZhhEeGGf-qGrGj3yA"/>
-    <componentTypes id="_E3EOwZoWEeG71vmJ5CR-iA" name="GuiModule" comment="" label="A GUI module serves Web pages destinated to end users." engineType="_fKtsQZoXEeG71vmJ5CR-iA"/>
-    <componentTypes id="_1y2zQZoWEeG71vmJ5CR-iA" name="ServiceModule" comment="" label="A service module provides business services to batch or GUI modules and is repsonsible for enterprise data."/>
-    <componentTypes id="__w-CMZoWEeG71vmJ5CR-iA" name="JBossAS" label="A Jboss JEE container"/>
-    <componentTypes id="_YbdmAZoXEeG71vmJ5CR-iA" name="PostgresQL" comment="" label="PostgresQL database"/>
-    <componentTypes id="_fKtsQZoXEeG71vmJ5CR-iA" name="Tomcat" label="Tomcat servlet/JSP container"/>
+    <componentTypes id="__w-CMZoWEeG71vmJ5CR-iA" name="JEE6AS" label="A full JEE 6 container"/>
+    <componentTypes id="_fKtsQZoXEeG71vmJ5CR-iA" name="WebContainer" comment="" label="A servlet/JSP container"/>
+    <componentTypes id="_8_BugZqkEeGbI4NH3iicSg" name="InternetWebClient" label="Internet end user web browser."/>
+    <componentTypes id="_8_BugZqkEeGbI4NH3iicSg" name="IntranetWebClient" comment="" label="IntranetWebClient corporate end user web browser."/>
+    <componentTypes id="_UI9CAZqmEeGbI4NH3iicSg" name="Application" comment="" label="An application implements a coherent set of information systems business services. It is built out of one or more applicatives modules." bindedComponentType="_c1vGwJq4EeGVMag01qc4bw">
+      <subTypes id="_E3EOwZoWEeG71vmJ5CR-iA" name="GUIModule" comment="" label="A GUI module serves Web pages destinated to end users." engineType="_fKtsQZoXEeG71vmJ5CR-iA"/>
+      <subTypes id="_1y2zQZoWEeG71vmJ5CR-iA" name="ServiceModule" comment="" label="A service module provides business services to batch or GUI modules and is repsonsible for enterprise data." engineType="__w-CMZoWEeG71vmJ5CR-iA"/>
+      <subTypes id="_YbdmAZoXEeG71vmJ5CR-iA" name="PostgreSQL database" comment="" label="PostgresQL database contains an application data (this data may or not be replicated among several clusters)" engineType="_DAPYIZqnEeGbI4NH3iicSg"/>
+    </componentTypes>
+    <componentTypes id="_DAPYIZqnEeGbI4NH3iicSg" name="PostgreSQLInstance" comment="" label="A PostgreSQL instance provides a network access to queries and manages one or more postgreSQL databases."/>
+    <componentTypes id="_ha8mEZqyEeGVMag01qc4bw" name="OpenLDAP" label="Open LDAP Directory"/>
+    <linkTypes id="_SA6SgpoZEeG71vmJ5CR-iA" name="HTTP_REST" label="Synchronous REST call over HTTP. Default port : 80. Over TCP only." sourceTypes="_E3EOwZoWEeG71vmJ5CR-iA" destinationTypes="_1y2zQZoWEeG71vmJ5CR-iA"/>
+    <linkTypes id="_4Rfd0pqjEeGQsK1VSbibvw" name="NET_POSTGRES" label="Synchronous Network protocol to access remote Postgres database. Default port : 5432. Can be used over TCP or UDP." sourceTypes="_1y2zQZoWEeG71vmJ5CR-iA" destinationTypes="_YbdmAZoXEeG71vmJ5CR-iA"/>
+    <linkTypes id="_oHllkpqkEeGbI4NH3iicSg" name="HTTP_GUI" comment="" label="Synchronous HTTP access from end users to the GUI services. Default port : 80. Over TCP only. KEEP_ALIVE option enabled." sourceTypes="_8_BugZqkEeGbI4NH3iicSg _8_BugZqkEeGbI4NH3iicSg" destinationTypes="_fKtsQZoXEeG71vmJ5CR-iA"/>
+    <linkTypes id="_2LrDApqyEeGVMag01qc4bw" name="OPEN_LDAP" comment="" label="Synchonous access to a OpenLDAP directory. Over TCP-IP." sourceTypes="_E3EOwZoWEeG71vmJ5CR-iA" destinationTypes="_ha8mEZqyEeGVMag01qc4bw"/>
   </viewPoints>
   <viewPoints id="fsdfhjksdhfkjhsdkfj" name="Physical Architecture" comment="" label="Physical Architecture viewpoint provides all rules and concepts dealing with hardware, network aspects of a project."/>
-  <viewPoints id="_uP3gkZniEeGeqKlv68ECYA" name="Enterprise Architecture" label="Enterprise Architecture deals with set of projects or the IS as a whole."/>
-  <views id="_6MLzgJngEeGCNbiGBiffzQ" name="BikesOnline" comment="" label="BikesOnline is a online house-built e-commerce solution to sell bikes." viewPoint="ertyuyreklbjnb,n"/>
+  <viewPoints id="_uP3gkZniEeGeqKlv68ECYA" name="Enterprise Architecture" label="Enterprise Architecture deals with set of projects or the IS as a whole.">
+    <componentTypes id="_REbGwZq2EeGVMag01qc4bw" name="Domain" comment="" label="A domain is the highest subdivision of en enterprise IS. Example : HR domain.">
+      <subTypes id="_KEFloJq4EeGVMag01qc4bw" name="SubDomain" label="A sub-domain is a functional subdivision of a domain. Example : Payroll management.">
+        <subTypes id="_c1vGwJq4EeGVMag01qc4bw" name="Application" label="An application is a technologically and project coherent set of functionalities."/>
+      </subTypes>
+    </componentTypes>
+  </viewPoints>
+  <views id="_6MLzgJngEeGCNbiGBiffzQ" name="BikesOnline" comment="" label="BikesOnline is a online house-built e-commerce solution to sell bikes." viewPoint="ertyuyreklbjnb,n">
+    <components id="_4-yHMprbEeGE7MG94I-e3A" name="Client" label="" type="_8_BugZqkEeGbI4NH3iicSg"/>
+    <components id="_lKUW0preEeGE7MG94I-e3A" name="Tomcat 6" label="Tomcat 6 Web container" type="_fKtsQZoXEeG71vmJ5CR-iA"/>
+    <links name="Stream1" type="_oHllkpqkEeGbI4NH3iicSg" origin="_4-yHMprbEeGE7MG94I-e3A" destination="_lKUW0preEeGE7MG94I-e3A"/>
+  </views>
   <stakeholders id="_skmNgZhhEeGGf-qGrGj3yA" name="Applicative Architect" actors="eaarchitecterich"/>
   <stakeholders id="_aB_ysZnaEeGRRqNqlyFgFw" name="Entreprise Architect" actors="pearchitect"/>
   <stakeholders id="_skmNgZhhEeGGf-qGrGj3yA" name="Applicative Architect"/>

@@ -15,6 +15,7 @@ import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.m2ling.domain.core.Component;
 import org.m2ling.domain.core.ComponentType;
+import org.m2ling.domain.core.Constraint;
 import org.m2ling.domain.core.CorePackage;
 
 /**

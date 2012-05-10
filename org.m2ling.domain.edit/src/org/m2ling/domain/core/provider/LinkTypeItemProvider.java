@@ -9,6 +9,7 @@ import java.util.List;
 
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
 import org.eclipse.emf.edit.provider.IEditingDomainItemProvider;
 import org.eclipse.emf.edit.provider.IItemLabelProvider;
@@ -16,6 +17,8 @@ import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.IItemPropertySource;
 import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
+import org.eclipse.emf.edit.provider.ViewerNotification;
+import org.m2ling.domain.core.CoreFactory;
 import org.m2ling.domain.core.CorePackage;
 import org.m2ling.domain.core.LinkType;
 
@@ -61,26 +64,26 @@ public class LinkTypeItemProvider
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
-			addSourceTypePropertyDescriptor(object);
-			addDestinationTypePropertyDescriptor(object);
+			addSourceTypesPropertyDescriptor(object);
+			addDestinationTypesPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
 
 	/**
-	 * This adds a property descriptor for the Source Type feature.
+	 * This adds a property descriptor for the Source Types feature.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected void addSourceTypePropertyDescriptor(Object object) {
+	protected void addSourceTypesPropertyDescriptor(Object object) {
 		itemPropertyDescriptors.add
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
-				 getString("_UI_LinkType_sourceType_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_LinkType_sourceType_feature", "_UI_LinkType_type"),
-				 CorePackage.Literals.LINK_TYPE__SOURCE_TYPE,
+				 getString("_UI_LinkType_sourceTypes_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_LinkType_sourceTypes_feature", "_UI_LinkType_type"),
+				 CorePackage.Literals.LINK_TYPE__SOURCE_TYPES,
 				 true,
 				 false,
 				 true,
@@ -90,19 +93,19 @@ public class LinkTypeItemProvider
 	}
 
 	/**
-	 * This adds a property descriptor for the Destination Type feature.
+	 * This adds a property descriptor for the Destination Types feature.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected void addDestinationTypePropertyDescriptor(Object object) {
+	protected void addDestinationTypesPropertyDescriptor(Object object) {
 		itemPropertyDescriptors.add
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
-				 getString("_UI_LinkType_destinationType_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_LinkType_destinationType_feature", "_UI_LinkType_type"),
-				 CorePackage.Literals.LINK_TYPE__DESTINATION_TYPE,
+				 getString("_UI_LinkType_destinationTypes_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_LinkType_destinationTypes_feature", "_UI_LinkType_type"),
+				 CorePackage.Literals.LINK_TYPE__DESTINATION_TYPES,
 				 true,
 				 false,
 				 true,
