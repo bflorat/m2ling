@@ -21,7 +21,7 @@ import org.eclipse.emf.common.util.EList;
  * @model
  * @generated
  */
-public interface ComponentGroup extends ArchitectureItem {
+public interface ComponentGroup extends ArchitectureItem, HasParameterDefinitions {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

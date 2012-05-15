@@ -9,8 +9,6 @@ import java.util.List;
 
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
-import org.eclipse.emf.common.util.ResourceLocator;
-import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
 import org.eclipse.emf.edit.provider.IEditingDomainItemProvider;
 import org.eclipse.emf.edit.provider.IItemLabelProvider;
@@ -18,12 +16,8 @@ import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.IItemPropertySource;
 import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
-import org.eclipse.emf.edit.provider.ItemProviderAdapter;
-import org.eclipse.emf.edit.provider.ViewerNotification;
-import org.m2ling.domain.core.CoreFactory;
 import org.m2ling.domain.core.CorePackage;
 import org.m2ling.domain.core.Stream;
-import org.m2ling.domain.provider.M2lingEditPlugin;
 
 /**
  * This is the item provider adapter for a {@link org.m2ling.domain.core.Stream} object.
@@ -32,7 +26,7 @@ import org.m2ling.domain.provider.M2lingEditPlugin;
  * @generated
  */
 public class StreamItemProvider
-	extends ItemProviderAdapter
+	extends RuntimeItemItemProvider
 	implements
 		IEditingDomainItemProvider,
 		IStructuredItemContentProvider,
@@ -159,7 +153,10 @@ public class StreamItemProvider
 	 */
 	@Override
 	public String getText(Object object) {
-		return getString("_UI_Stream_type");
+		String label = ((Stream)object).getName();
+		return label == null || label.length() == 0 ?
+			getString("_UI_Stream_type") :
+			getString("_UI_Stream_type") + " " + label;
 	}
 
 	/**
@@ -185,17 +182,6 @@ public class StreamItemProvider
 	@Override
 	protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
 		super.collectNewChildDescriptors(newChildDescriptors, object);
-	}
-
-	/**
-	 * Return the resource locator for this item provider's resources.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public ResourceLocator getResourceLocator() {
-		return M2lingEditPlugin.INSTANCE;
 	}
 
 }

@@ -16,7 +16,7 @@ import org.m2ling.domain.core.Stream;
  * <!-- end-user-doc -->
  * @generated
  */
-public class StreamTest extends TestCase {
+public class StreamTest extends RuntimeItemTest {
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -24,14 +24,6 @@ public class StreamTest extends TestCase {
 	 * @generated
 	 */
 	public static final String copyright = "Copyright (C) 2012 Bertrand Florat";
-
-	/**
-	 * The fixture for this Stream test case.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected Stream fixture = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -53,23 +45,14 @@ public class StreamTest extends TestCase {
 	}
 
 	/**
-	 * Sets the fixture for this Stream test case.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void setFixture(Stream fixture) {
-		this.fixture = fixture;
-	}
-
-	/**
 	 * Returns the fixture for this Stream test case.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	protected Stream getFixture() {
-		return fixture;
+		return (Stream)fixture;
 	}
 
 	/**

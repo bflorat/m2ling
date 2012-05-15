@@ -1,24 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<m2ling_domain:Root xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:m2ling_domain="http://m2ling.org/0.1">
+<m2ling_domain:Root xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:m2ling_core="http://m2ling.org/core/0.1" xmlns:m2ling_domain="http://m2ling.org/0.1">
   <viewPoints id="ertyuyreklbjnb,n" name="Logical Architecture" comment="Note that this viewpoint maps few concepts of physical architecture viewpoint." label="Applicative Architecture provides projects structure as modules, provides each module technology. Deals with software factories and system capabilities. Provides minimal details about physical architecture (list of servers by environment for instance).">
     <activities id="_ByQVkJn4EeGqFM2UF1dCGQ" name="Set up software factory" label="Set up developement, integration and build tools for each project." accountables="_skmNgZhhEeGGf-qGrGj3yA" responsibles="_skmNgZhhEeGGf-qGrGj3yA"/>
-    <componentTypes id="__w-CMZoWEeG71vmJ5CR-iA" name="JEE6AS" label="A full JEE 6 container"/>
-    <componentTypes id="_fKtsQZoXEeG71vmJ5CR-iA" name="WebContainer" comment="" label="A servlet/JSP container"/>
+    <componentTypes id="__w-CMZoWEeG71vmJ5CR-iA" name="ServicesContainer" label="Runs services (RMI, REST, SOAP...)" boundType="_kHJh8ZxEEeGi7NYPtEuJdA" enumeration="_BYD3EJ6REeGyndJ1yNTLVw"/>
+    <componentTypes id="_fKtsQZoXEeG71vmJ5CR-iA" name="WebContainer" comment="" label="A servlet/JSP container" boundType="_kHJh8ZxEEeGi7NYPtEuJdA" enumeration="_0GnPIJ6QEeGyndJ1yNTLVw"/>
     <componentTypes id="_8_BugZqkEeGbI4NH3iicSg" name="InternetWebClient" label="Internet end user web browser."/>
-    <componentTypes id="_8_BugZqkEeGbI4NH3iicSg" name="IntranetWebClient" comment="" label="IntranetWebClient corporate end user web browser."/>
-    <componentTypes id="_UI9CAZqmEeGbI4NH3iicSg" name="Application" comment="" label="An application implements a coherent set of information systems business services. It is built out of one or more applicatives modules." bindedComponentType="_c1vGwJq4EeGVMag01qc4bw">
-      <subTypes id="_E3EOwZoWEeG71vmJ5CR-iA" name="GUIModule" comment="" label="A GUI module serves Web pages destinated to end users." engineType="_fKtsQZoXEeG71vmJ5CR-iA"/>
-      <subTypes id="_1y2zQZoWEeG71vmJ5CR-iA" name="ServiceModule" comment="" label="A service module provides business services to batch or GUI modules and is repsonsible for enterprise data." engineType="__w-CMZoWEeG71vmJ5CR-iA"/>
-      <subTypes id="_YbdmAZoXEeG71vmJ5CR-iA" name="PostgreSQL database" comment="" label="PostgresQL database contains an application data (this data may or not be replicated among several clusters)" engineType="_DAPYIZqnEeGbI4NH3iicSg"/>
+    <componentTypes id="_8_BugZqkEeGbI4N" name="IntranetWebClient" comment="" label="IntranetWebClient corporate end user web browser."/>
+    <componentTypes id="_UI9CAZqmEeGbI4NH3iicSg" name="Application" comment="" label="An application implements a coherent set of information systems business services. It is built out of one or more applicatives modules." boundType="_c1vGwJq4EeGVMag01qc4bw">
+      <subTypes id="_E3EOwZoWEeG71vmJ5CR-iA" name="GUIModule" comment="" label="A GUI module serves Web pages destinated to end users." engineType="_fKtsQZoXEeG71vmJ5CR-iA" boundType="_E3EOwZoWEeG71vmJ5CR-iAe"/>
+      <subTypes id="_1y2zQZoWEeG71vmJ5CR-iA" name="ServiceModule" comment="" label="A service module provides business services to batch or GUI modules and is repsonsible for enterprise data." engineType="__w-CMZoWEeG71vmJ5CR-iA" boundType="_1y2zQZoWEeG71vmJ5CR-iAe"/>
+      <subTypes id="_YbdmAZoXEeG71vmJ5CR-iA" name="Database" comment="" label="A database contains an application data (this data may or not be replicated among several clusters)" engineType="_DAPYIZqnEeGbI4NH3iicSg"/>
     </componentTypes>
-    <componentTypes id="_DAPYIZqnEeGbI4NH3iicSg" name="PostgreSQLInstance" comment="" label="A PostgreSQL instance provides a network access to queries and manages one or more postgreSQL databases."/>
-    <componentTypes id="_ha8mEZqyEeGVMag01qc4bw" name="OpenLDAP" label="Open LDAP Directory"/>
+    <componentTypes id="_DAPYIZqnEeGbI4NH3iicSg" name="RDBMS" comment="" label="A RDBMS" boundType="_LyWEoZ6REeGyndJ1yNTLVw" enumeration="_JzpRYJ6TEeGyndJ1yNTLVw"/>
+    <componentTypes id="_ha8mEZqyEeGVMag01qc4bw" name="LDAP directory" label="" boundType="_LyWEoZ6REeGyndJ1yNTLVw" enumeration="_cjliUJ6TEeGyndJ1yNTLVw"/>
     <linkTypes id="_SA6SgpoZEeG71vmJ5CR-iA" name="HTTP_REST" label="Synchronous REST call over HTTP. Default port : 80. Over TCP only." sourceTypes="_E3EOwZoWEeG71vmJ5CR-iA" destinationTypes="_1y2zQZoWEeG71vmJ5CR-iA"/>
-    <linkTypes id="_4Rfd0pqjEeGQsK1VSbibvw" name="NET_POSTGRES" label="Synchronous Network protocol to access remote Postgres database. Default port : 5432. Can be used over TCP or UDP." sourceTypes="_1y2zQZoWEeG71vmJ5CR-iA" destinationTypes="_YbdmAZoXEeG71vmJ5CR-iA"/>
+    <linkTypes id="_4Rfd0pqjEeGQsK1VSbibvw" name="NET_DATABASE" label="Synchronous Network protocol to access remote Postgres database. Default port : 5432. Can be used over TCP or UDP." sourceTypes="_1y2zQZoWEeG71vmJ5CR-iA" destinationTypes="_YbdmAZoXEeG71vmJ5CR-iA"/>
     <linkTypes id="_oHllkpqkEeGbI4NH3iicSg" name="HTTP_GUI" comment="" label="Synchronous HTTP access from end users to the GUI services. Default port : 80. Over TCP only. KEEP_ALIVE option enabled." sourceTypes="_8_BugZqkEeGbI4NH3iicSg _8_BugZqkEeGbI4NH3iicSg" destinationTypes="_fKtsQZoXEeG71vmJ5CR-iA"/>
-    <linkTypes id="_2LrDApqyEeGVMag01qc4bw" name="OPEN_LDAP" comment="" label="Synchonous access to a OpenLDAP directory. Over TCP-IP." sourceTypes="_E3EOwZoWEeG71vmJ5CR-iA" destinationTypes="_ha8mEZqyEeGVMag01qc4bw"/>
+    <linkTypes id="_2LrDApqyEeGVMag01qc4bw" name="LDAP" comment="" label="Synchonous access to a LDAP directory. Over TCP-IP." sourceTypes="_E3EOwZoWEeG71vmJ5CR-iA" destinationTypes="_ha8mEZqyEeGVMag01qc4bw"/>
   </viewPoints>
-  <viewPoints id="fsdfhjksdhfkjhsdkfj" name="Physical Architecture" comment="" label="Physical Architecture viewpoint provides all rules and concepts dealing with hardware, network aspects of a project."/>
+  <viewPoints id="fsdfhjksdhfkjhsdkfj" name="Physical Architecture" comment="" label="Physical Architecture viewpoint provides all rules and concepts dealing with hardware, network aspects of a project.">
+    <componentTypes id="_-aItkZxEEeGi7NYPtEuJdA" name="Server" label=""/>
+  </viewPoints>
   <viewPoints id="_uP3gkZniEeGeqKlv68ECYA" name="Enterprise Architecture" label="Enterprise Architecture deals with set of projects or the IS as a whole.">
     <componentTypes id="_REbGwZq2EeGVMag01qc4bw" name="Domain" comment="" label="A domain is the highest subdivision of en enterprise IS. Example : HR domain.">
       <subTypes id="_KEFloJq4EeGVMag01qc4bw" name="SubDomain" label="A sub-domain is a functional subdivision of a domain. Example : Payroll management.">
@@ -26,15 +28,61 @@
       </subTypes>
     </componentTypes>
   </viewPoints>
-  <views id="_6MLzgJngEeGCNbiGBiffzQ" name="BikesOnline" comment="" label="BikesOnline is a online house-built e-commerce solution to sell bikes." viewPoint="ertyuyreklbjnb,n">
-    <components id="_4-yHMprbEeGE7MG94I-e3A" name="Client" label="" type="_8_BugZqkEeGbI4NH3iicSg"/>
-    <components id="_lKUW0preEeGE7MG94I-e3A" name="Tomcat 6" label="Tomcat 6 Web container" type="_fKtsQZoXEeG71vmJ5CR-iA"/>
-    <links name="Stream1" type="_oHllkpqkEeGbI4NH3iicSg" origin="_4-yHMprbEeGE7MG94I-e3A" destination="_lKUW0preEeGE7MG94I-e3A"/>
+  <viewPoints id="_ZrEkoJxEEeGi7NYPtEuJdA" name="Technical Architecture" comment="" label="Technlogy components and links between them">
+    <componentTypes id="_kHJh8ZxEEeGi7NYPtEuJdA" name="ApplicationServer" comment="" label="Runs services (SOAP,RMI,REST...) or execute dynamic Web pages" engineType="_wf5AQZxEEeGi7NYPtEuJdA"/>
+    <componentTypes id="_wf5AQZxEEeGi7NYPtEuJdA" name="OS" label="Operating system" engineType="_-aItkZxEEeGi7NYPtEuJdA _wf5AQZxEEeGi7NYPtEuJdA"/>
+    <componentTypes id="_LyWEoZ6REeGyndJ1yNTLVw" name="Persistence" comment="" label="RDBMS, others databases types, directories, MOM" engineType="_wf5AQZxEEeGi7NYPtEuJdA"/>
+  </viewPoints>
+  <viewPoints id="_FtwQsJ6sEeGsQqqxr3JCNw" name="Applicative architecture" label="Show applicatives component from one or more applications and applicative links between them. Middleware are not modelized.">
+    <componentTypes id="_U2MPcZ6sEeGsQqqxr3JCNw" name="Client"/>
+    <componentTypes id="_UI9CAZqmEeGbI4NH3iicSge" name="Application" comment="" label="An application implements a coherent set of information systems business services. It is built out of one or more applicatives modules." boundType="_c1vGwJq4EeGVMag01qc4bw">
+      <subTypes id="_E3EOwZoWEeG71vmJ5CR-iAe" name="GUIModule" comment="" label="A GUI module serves Web pages destinated to end users." engineType="_fKtsQZoXEeG71vmJ5CR-iA"/>
+      <subTypes id="_1y2zQZoWEeG71vmJ5CR-iAe" name="ServiceModule" comment="" label="A service module provides business services to batch or GUI modules and is repsonsible for enterprise data." engineType="__w-CMZoWEeG71vmJ5CR-iA"/>
+    </componentTypes>
+  </viewPoints>
+  <views id="_6MLzgJngEeGCNbiGBiffzQ" name="Logical_BikesOnline" comment="" label="BikesOnline is a online house-built e-commerce solution to sell bikes." viewPoint="ertyuyreklbjnb,n">
+    <components id="_4-yHMprbEeGE7MG94I-e3A" name="BikesOnlineClient" comment="" label="" type="_8_BugZqkEeGbI4NH3iicSg"/>
+    <components id="_lKUW0preEeGE7MG94I-e3A" name="WebContainer" comment="" label="Web Container" type="_fKtsQZoXEeG71vmJ5CR-iA"/>
+    <components id="_OJwP0pw_EeGE7MG94I-e3A" name="AuthenticationLDAP" label="" type="_ha8mEZqyEeGVMag01qc4bw"/>
+    <components id="_GHLjspxDEeGi7NYPtEuJdA" name="JBoss5 Solaris" comment="" label="" type="__w-CMZoWEeG71vmJ5CR-iA" boundComponent="_sSQCUp6NEeGeZJhcjVrcWg"/>
+    <components id="_SJP_gp6VEeGbbcMFSNIrnA" name="PostgreSQL" type="_DAPYIZqnEeGbI4NH3iicSg" boundComponent="_G9AtYp6REeG"/>
+    <components id="_LQeUYp6WEeGbbcMFSNIrnA" name="JBoss5 Solaris" label="" type="__w-CMZoWEeG71vmJ5CR-iA" boundComponent="_sSQCUp6NEeGeZJhcjVrcWg"/>
+    <components id="_GzYqwp6mEeGYNoiyFvHuCg" name="BikesOnline" type="_UI9CAZqmEeGbI4NH3iicSg" boundComponent="_qUgd4p56EeGAFeVyyYKoXg">
+      <subComponents id="_8fvV4p6TEeGyndJ1yNTLVw" name="Administration GUI module" comment="" type="_E3EOwZoWEeG71vmJ5CR-iA"/>
+      <subComponents id="_2aMpEp6VEeGbbcMFSNIrnA" name="Administration services" type="_1y2zQZoWEeG71vmJ5CR-iA" engines="_GHLjspxDEeGi7NYPtEuJdA"/>
+      <subComponents id="_qODuQp6TEeGyndJ1yNTLVw" name="End-users GUI module" comment="" type="_E3EOwZoWEeG71vmJ5CR-iA"/>
+      <subComponents id="_xjupYp6VEeGbbcMFSNIrnA" name="Paiement services" type="_1y2zQZoWEeG71vmJ5CR-iA" engines="_GHLjspxDEeGi7NYPtEuJdA"/>
+      <subComponents id="_gmFcgp6VEeGbbcMFSNIrnA" name="Products Catalog services" comment="" type="_1y2zQZoWEeG71vmJ5CR-iA" engines="_LQeUYp6WEeGbbcMFSNIrnA"/>
+    </components>
+    <links id="fdfdsfsfsddsewv" name="Stream1" label="" type="_oHllkpqkEeGbI4NH3iicSg" origin="_4-yHMprbEeGE7MG94I-e3A" destination="_lKUW0preEeGE7MG94I-e3A"/>
+    <links id="vn,khghjghj" name="Stream2" type="_2LrDApqyEeGVMag01qc4bw" origin="_lKUW0preEeGE7MG94I-e3A" destination="_OJwP0pw_EeGE7MG94I-e3A"/>
+    <links id="_aCyWg5xDEeGi7NYPtEuJdA" name="Stream3" type="_SA6SgpoZEeG71vmJ5CR-iA" origin="_lKUW0preEeGE7MG94I-e3A" destination="_GHLjspxDEeGi7NYPtEuJdA"/>
+    <links id="_NpfsI56UEeGyndJ1yNTLVw" name="Stream4" type="_4Rfd0pqjEeGQsK1VSbibvw" origin="_GHLjspxDEeGi7NYPtEuJdA" destination="_SJP_gp6VEeGbbcMFSNIrnA"/>
+    <links id="_5ol2s56gEeGbbcMFSNIrnA" name="Stream5" label="" type="_SA6SgpoZEeG71vmJ5CR-iA" origin="_lKUW0preEeGE7MG94I-e3A" destination="_LQeUYp6WEeGbbcMFSNIrnA"/>
   </views>
-  <stakeholders id="_skmNgZhhEeGGf-qGrGj3yA" name="Applicative Architect" actors="eaarchitecterich"/>
+  <views id="_0oVTkZ55EeGAFeVyyYKoXg" name="Bikes Core business applicative view" label="" viewPoint="_uP3gkZniEeGeqKlv68ECYA">
+    <componentsGroups xsi:type="m2ling_core:Component" id="_Uf_Bop56EeGAFeVyyYKoXg" name="eBusiness" comment="" type="_KEFloJq4EeGVMag01qc4bw"/>
+    <components id="_Gxhtkp56EeGAFeVyyYKoXg" name="Sales" type="_REbGwZq2EeGVMag01qc4bw"/>
+    <components id="_qUgd4p56EeGAFeVyyYKoXg" name="BikesOnline" comment="" type="_c1vGwJq4EeGVMag01qc4bw"/>
+  </views>
+  <views id="_QXV2oZ6NEeGeZJhcjVrcWg" name="Technical catalog" comment="" label="Describes technical components available in Bikes IS" viewPoint="_ZrEkoJxEEeGi7NYPtEuJdA">
+    <componentsGroups xsi:type="m2ling_core:Component" id="_a-g0Mp6OEeGeZJhcjVrcWg" name="Linux3" comment="" type="_wf5AQZxEEeGi7NYPtEuJdA"/>
+    <componentsGroups xsi:type="m2ling_core:Component" id="_a-g0Mp6" name="Solaris" comment="" type="_wf5AQZxEEeGi7NYPtEuJdA"/>
+    <componentsGroups xsi:type="m2ling_core:Component" id="_sSQCUp6NEeGeZJhcjVrcWg" name="JBoss5 Solaris" comment="" type="_kHJh8ZxEEeGi7NYPtEuJdA" engines="_a-g0Mp6OEeGeZJhcjVrcWg"/>
+    <componentsGroups xsi:type="m2ling_core:Component" id="_BM4XQp6QEeGyndJ1yNTLVw" name="Jetty Solaris" comment="" type="_kHJh8ZxEEeGi7NYPtEuJdA" engines="_a-g0Mp6"/>
+    <componentsGroups xsi:type="m2ling_core:Component" id="_BM4XQp6QEdJ1yNTLVw" name="Tomcat6" comment="" label="" type="_kHJh8ZxEEeGi7NYPtEuJdA" engines="_a-g0Mp6"/>
+    <componentsGroups id="_0GnPIJ6QEeGyndJ1yNTLVw" name="Web containers" comment="" components="_BM4XQp6QEeGyndJ1yNTLVw _lKUW0preEeGE7MG94I-e3A"/>
+    <componentsGroups xsi:type="m2ling_core:Component" id="_G9AtYp6REeGyndJ1yNTLVw" name="OpenLDAP" type="_LyWEoZ6REeGyndJ1yNTLVw" engines="_a-g0Mp6OEeGeZJhcjVrcWg"/>
+    <componentsGroups id="_BYD3EJ6REeGyndJ1yNTLVw" name="Services container" comment="" components="_sSQCUp6NEeGeZJhcjVrcWg"/>
+    <componentsGroups id="_JzpRYJ6TEeGyndJ1yNTLVw" name="RDBMS" label="" components="_BIxBYp6SEeGyndJ1yNTLVw _G9AtYp6REeG"/>
+    <componentsGroups id="_cjliUJ6TEeGyndJ1yNTLVw" name="Directories" components="_G9AtYp6REeGyndJ1yNTLVw"/>
+    <components id="_G9AtYp6REeG" name="PostgreSQL" comment="" type="_LyWEoZ6REeGyndJ1yNTLVw" engines="_a-g0Mp6OEeGeZJhcjVrcWg"/>
+    <components id="_BIxBYp6SEeGyndJ1yNTLVw" name="MySQL" type="_LyWEoZ6REeGyndJ1yNTLVw" engines="_a-g0Mp6OEeGeZJhcjVrcWg"/>
+    <components id="_CIvLcp6kEeGbbcMFSNIrnA" name="JBoss5 Linux" comment="" type="_kHJh8ZxEEeGi7NYPtEuJdA" engines="_a-g0Mp6OEeGeZJhcjVrcWg"/>
+  </views>
+  <stakeholders id="_skmNgZhhEeGGf-qGrGj3yA" name="Applicative Architect" viewPoints="_FtwQsJ6sEeGsQqqxr3JCNw ertyuyreklbjnb,n" actors="eaarchitecterich"/>
   <stakeholders id="_aB_ysZnaEeGRRqNqlyFgFw" name="Entreprise Architect" actors="pearchitect"/>
-  <stakeholders id="_skmNgZhhEeGGf-qGrGj3yA" name="Applicative Architect"/>
-  <stakeholders id="_dX1QoZnbEeGRRqNqlyFgFw" name="Technical Architect" actors="ktarchitect"/>
+  <stakeholders id="_dX1QoZnbEeGRRqNqlyFgFw" name="Technical Architect" viewPoints="_ZrEkoJxEEeGi7NYPtEuJdA" actors="ktarchitect"/>
   <stakeholders id="_te1CAZneEeGiWdDszZQI0g" name="Support" label="This service provides backup/administration services for the Deisgn office." actors="bsupport"/>
   <stakeholders id="_Tig0gZnfEeGiWdDszZQI0g" name="Operations Architect" label="The operation architect is an operations expert responsible for building SLA/OLA along with the Applicative Architect of each project and to ensure these agrements are followed." actors="aoarchitect"/>
   <units id="_mWgzQJhkEeGxRNCeID_vlg" name="Design Office" label="This It department produces functional specifications, urbanisation, application architecture and developement."/>

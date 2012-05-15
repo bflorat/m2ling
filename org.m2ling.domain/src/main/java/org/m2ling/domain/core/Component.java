@@ -15,7 +15,8 @@ import org.eclipse.emf.common.util.EList;
  * <ul>
  *   <li>{@link org.m2ling.domain.core.Component#getType <em>Type</em>}</li>
  *   <li>{@link org.m2ling.domain.core.Component#getSubComponents <em>Sub Components</em>}</li>
- *   <li>{@link org.m2ling.domain.core.Component#getEngine <em>Engine</em>}</li>
+ *   <li>{@link org.m2ling.domain.core.Component#getEngines <em>Engines</em>}</li>
+ *   <li>{@link org.m2ling.domain.core.Component#getBoundComponent <em>Bound Component</em>}</li>
  * </ul>
  * </p>
  *
@@ -74,29 +75,45 @@ public interface Component extends ComponentGroup {
 	EList<Component> getSubComponents();
 
 	/**
-	 * Returns the value of the '<em><b>Engine</b></em>' reference.
+	 * Returns the value of the '<em><b>Engines</b></em>' reference list.
+	 * The list contents are of type {@link org.m2ling.domain.core.Component}.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Engine</em>' reference isn't clear,
+	 * If the meaning of the '<em>Engines</em>' reference list isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Engine</em>' reference.
-	 * @see #setEngine(Component)
-	 * @see org.m2ling.domain.core.CorePackage#getComponent_Engine()
+	 * @return the value of the '<em>Engines</em>' reference list.
+	 * @see org.m2ling.domain.core.CorePackage#getComponent_Engines()
 	 * @model keys="id"
 	 * @generated
 	 */
-	Component getEngine();
+	EList<Component> getEngines();
 
 	/**
-	 * Sets the value of the '{@link org.m2ling.domain.core.Component#getEngine <em>Engine</em>}' reference.
+	 * Returns the value of the '<em><b>Bound Component</b></em>' reference.
 	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Bound Component</em>' reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Engine</em>' reference.
-	 * @see #getEngine()
+	 * @return the value of the '<em>Bound Component</em>' reference.
+	 * @see #setBoundComponent(Component)
+	 * @see org.m2ling.domain.core.CorePackage#getComponent_BoundComponent()
+	 * @model
 	 * @generated
 	 */
-	void setEngine(Component value);
+	Component getBoundComponent();
+
+	/**
+	 * Sets the value of the '{@link org.m2ling.domain.core.Component#getBoundComponent <em>Bound Component</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Bound Component</em>' reference.
+	 * @see #getBoundComponent()
+	 * @generated
+	 */
+	void setBoundComponent(Component value);
 
 } // Component

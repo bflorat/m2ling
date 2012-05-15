@@ -12,9 +12,10 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
+import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 import org.eclipse.emf.ecore.util.InternalEList;
+import org.m2ling.domain.core.ComponentGroup;
 import org.m2ling.domain.core.ComponentType;
-import org.m2ling.domain.core.Constraint;
 import org.m2ling.domain.core.CorePackage;
 
 /**
@@ -25,8 +26,9 @@ import org.m2ling.domain.core.CorePackage;
  * The following features are implemented:
  * <ul>
  *   <li>{@link org.m2ling.domain.core.impl.ComponentTypeImpl#getSubTypes <em>Sub Types</em>}</li>
- *   <li>{@link org.m2ling.domain.core.impl.ComponentTypeImpl#getBindedComponentType <em>Binded Component Type</em>}</li>
  *   <li>{@link org.m2ling.domain.core.impl.ComponentTypeImpl#getEngineType <em>Engine Type</em>}</li>
+ *   <li>{@link org.m2ling.domain.core.impl.ComponentTypeImpl#getBoundType <em>Bound Type</em>}</li>
+ *   <li>{@link org.m2ling.domain.core.impl.ComponentTypeImpl#getEnumeration <em>Enumeration</em>}</li>
  * </ul>
  * </p>
  *
@@ -51,24 +53,34 @@ public class ComponentTypeImpl extends ConceptItemImpl implements ComponentType 
 	protected EList<ComponentType> subTypes;
 
 	/**
-	 * The cached value of the '{@link #getBindedComponentType() <em>Binded Component Type</em>}' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getBindedComponentType()
-	 * @generated
-	 * @ordered
-	 */
-	protected ComponentType bindedComponentType;
-
-	/**
-	 * The cached value of the '{@link #getEngineType() <em>Engine Type</em>}' reference.
+	 * The cached value of the '{@link #getEngineType() <em>Engine Type</em>}' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getEngineType()
 	 * @generated
 	 * @ordered
 	 */
-	protected ComponentType engineType;
+	protected EList<ComponentType> engineType;
+
+	/**
+	 * The cached value of the '{@link #getBoundType() <em>Bound Type</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getBoundType()
+	 * @generated
+	 * @ordered
+	 */
+	protected ComponentType boundType;
+
+	/**
+	 * The cached value of the '{@link #getEnumeration() <em>Enumeration</em>}' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getEnumeration()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<ComponentGroup> enumeration;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -106,52 +118,9 @@ public class ComponentTypeImpl extends ConceptItemImpl implements ComponentType 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public ComponentType getBindedComponentType() {
-		if (bindedComponentType != null && bindedComponentType.eIsProxy()) {
-			InternalEObject oldBindedComponentType = (InternalEObject)bindedComponentType;
-			bindedComponentType = (ComponentType)eResolveProxy(oldBindedComponentType);
-			if (bindedComponentType != oldBindedComponentType) {
-				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, CorePackage.COMPONENT_TYPE__BINDED_COMPONENT_TYPE, oldBindedComponentType, bindedComponentType));
-			}
-		}
-		return bindedComponentType;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public ComponentType basicGetBindedComponentType() {
-		return bindedComponentType;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setBindedComponentType(ComponentType newBindedComponentType) {
-		ComponentType oldBindedComponentType = bindedComponentType;
-		bindedComponentType = newBindedComponentType;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, CorePackage.COMPONENT_TYPE__BINDED_COMPONENT_TYPE, oldBindedComponentType, bindedComponentType));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public ComponentType getEngineType() {
-		if (engineType != null && engineType.eIsProxy()) {
-			InternalEObject oldEngineType = (InternalEObject)engineType;
-			engineType = (ComponentType)eResolveProxy(oldEngineType);
-			if (engineType != oldEngineType) {
-				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, CorePackage.COMPONENT_TYPE__ENGINE_TYPE, oldEngineType, engineType));
-			}
+	public EList<ComponentType> getEngineType() {
+		if (engineType == null) {
+			engineType = new EObjectResolvingEList<ComponentType>(ComponentType.class, this, CorePackage.COMPONENT_TYPE__ENGINE_TYPE);
 		}
 		return engineType;
 	}
@@ -161,8 +130,11 @@ public class ComponentTypeImpl extends ConceptItemImpl implements ComponentType 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public ComponentType basicGetEngineType() {
-		return engineType;
+	public EList<ComponentGroup> getEnumeration() {
+		if (enumeration == null) {
+			enumeration = new EObjectResolvingEList<ComponentGroup>(ComponentGroup.class, this, CorePackage.COMPONENT_TYPE__ENUMERATION);
+		}
+		return enumeration;
 	}
 
 	/**
@@ -170,11 +142,37 @@ public class ComponentTypeImpl extends ConceptItemImpl implements ComponentType 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setEngineType(ComponentType newEngineType) {
-		ComponentType oldEngineType = engineType;
-		engineType = newEngineType;
+	public ComponentType getBoundType() {
+		if (boundType != null && boundType.eIsProxy()) {
+			InternalEObject oldBoundType = (InternalEObject)boundType;
+			boundType = (ComponentType)eResolveProxy(oldBoundType);
+			if (boundType != oldBoundType) {
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, CorePackage.COMPONENT_TYPE__BOUND_TYPE, oldBoundType, boundType));
+			}
+		}
+		return boundType;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public ComponentType basicGetBoundType() {
+		return boundType;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setBoundType(ComponentType newBoundType) {
+		ComponentType oldBoundType = boundType;
+		boundType = newBoundType;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, CorePackage.COMPONENT_TYPE__ENGINE_TYPE, oldEngineType, engineType));
+			eNotify(new ENotificationImpl(this, Notification.SET, CorePackage.COMPONENT_TYPE__BOUND_TYPE, oldBoundType, boundType));
 	}
 
 	/**
@@ -201,12 +199,13 @@ public class ComponentTypeImpl extends ConceptItemImpl implements ComponentType 
 		switch (featureID) {
 			case CorePackage.COMPONENT_TYPE__SUB_TYPES:
 				return getSubTypes();
-			case CorePackage.COMPONENT_TYPE__BINDED_COMPONENT_TYPE:
-				if (resolve) return getBindedComponentType();
-				return basicGetBindedComponentType();
 			case CorePackage.COMPONENT_TYPE__ENGINE_TYPE:
-				if (resolve) return getEngineType();
-				return basicGetEngineType();
+				return getEngineType();
+			case CorePackage.COMPONENT_TYPE__BOUND_TYPE:
+				if (resolve) return getBoundType();
+				return basicGetBoundType();
+			case CorePackage.COMPONENT_TYPE__ENUMERATION:
+				return getEnumeration();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -224,11 +223,16 @@ public class ComponentTypeImpl extends ConceptItemImpl implements ComponentType 
 				getSubTypes().clear();
 				getSubTypes().addAll((Collection<? extends ComponentType>)newValue);
 				return;
-			case CorePackage.COMPONENT_TYPE__BINDED_COMPONENT_TYPE:
-				setBindedComponentType((ComponentType)newValue);
-				return;
 			case CorePackage.COMPONENT_TYPE__ENGINE_TYPE:
-				setEngineType((ComponentType)newValue);
+				getEngineType().clear();
+				getEngineType().addAll((Collection<? extends ComponentType>)newValue);
+				return;
+			case CorePackage.COMPONENT_TYPE__BOUND_TYPE:
+				setBoundType((ComponentType)newValue);
+				return;
+			case CorePackage.COMPONENT_TYPE__ENUMERATION:
+				getEnumeration().clear();
+				getEnumeration().addAll((Collection<? extends ComponentGroup>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -245,11 +249,14 @@ public class ComponentTypeImpl extends ConceptItemImpl implements ComponentType 
 			case CorePackage.COMPONENT_TYPE__SUB_TYPES:
 				getSubTypes().clear();
 				return;
-			case CorePackage.COMPONENT_TYPE__BINDED_COMPONENT_TYPE:
-				setBindedComponentType((ComponentType)null);
-				return;
 			case CorePackage.COMPONENT_TYPE__ENGINE_TYPE:
-				setEngineType((ComponentType)null);
+				getEngineType().clear();
+				return;
+			case CorePackage.COMPONENT_TYPE__BOUND_TYPE:
+				setBoundType((ComponentType)null);
+				return;
+			case CorePackage.COMPONENT_TYPE__ENUMERATION:
+				getEnumeration().clear();
 				return;
 		}
 		super.eUnset(featureID);
@@ -265,10 +272,12 @@ public class ComponentTypeImpl extends ConceptItemImpl implements ComponentType 
 		switch (featureID) {
 			case CorePackage.COMPONENT_TYPE__SUB_TYPES:
 				return subTypes != null && !subTypes.isEmpty();
-			case CorePackage.COMPONENT_TYPE__BINDED_COMPONENT_TYPE:
-				return bindedComponentType != null;
 			case CorePackage.COMPONENT_TYPE__ENGINE_TYPE:
-				return engineType != null;
+				return engineType != null && !engineType.isEmpty();
+			case CorePackage.COMPONENT_TYPE__BOUND_TYPE:
+				return boundType != null;
+			case CorePackage.COMPONENT_TYPE__ENUMERATION:
+				return enumeration != null && !enumeration.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}

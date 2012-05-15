@@ -23,7 +23,7 @@ import org.eclipse.emf.common.util.EList;
  * @model
  * @generated
  */
-public interface ComponentNode extends ComponentNodeGroup {
+public interface ComponentNode extends ComponentNodeGroup, HasParameterValues {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

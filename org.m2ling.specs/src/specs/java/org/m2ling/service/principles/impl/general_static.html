@@ -3,8 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<link href="../../../../concordion.css" rel="stylesheet"
-	type="text/css" />
+<link href="../../../../concordion.css" rel="stylesheet" type="text/css" />
 
 <title>m2principles</title>
 </head>
@@ -13,11 +12,43 @@
 	<a href='./index.html'>m2principles</a>
 	<h1>Notes</h1>
 	<ul>
-	    <li>Views may or not have a project-grain. They can represent only a project sub-system or on the contrary shows a set of projects.</li>
+		<li>Views may or not have a project-grain. They can represent
+			only a project sub-system or on the contrary shows a set of projects.</li>
 		<li>A concept item namespace is equal to the viewpoint name.</li>
-		<li>a viewpoint can be built from another viewpoint, it can
-			extend it read-only (principles for a project for instance)
+		<li>A viewpoint can content component groups from others VP or
+			the same VP (read only). The bound type is given by the "boundType"
+			reference. If a component is used in another VP, it can't be removed.
+			If enumeration maps a component-type group, values are those of its
+			immediate sub-component. If a bound type is given but none
+			enumeration, the possible values are all component of given bound
+			type in every view of the bound VP. If a component is binded, it get
+			the bound component name.</li>
+		<li>Bound type : none, component type without components as enum,
+			component type with component group(s) as enum,</li>
+		<li>The abstraction level is relative and is selected by the
+			end-user according to its needs in its viewpoint. For instance, it is
+			possible to declare :
+			<ul>
+				<li>Component type (M2) : JEE application Server</li>
+				<li>Component (M1) : JBoss</li>
+				<li>Component node (M0) : a running JBoss 5 instance</li>
+			</ul>
+			<ul>
+				<li>Component type (M2) : Application Server</li>
+				<li>Component (M1) : JEE AS</li>
+				<li>Component node (M0) : a running JEE AS</li>
+			</ul>
+			<ul>
+				<li>Component type (M2) : JBoss 5 application Server</li>
+				<li>Component (M1) : Any JBoss 5.0.3 instance</li>
+				<li>Component node (M0) : a running JBoss 5.0.3 instance</li>
+			</ul>
+			<ul>
+				<li>Component type (M2) : JBoss 5 application Server</li>
+				<li>Component (M1) : Any JBoss 5.0.3 instance</li>
+			</ul>
+		</li>
 	</ul>
-	
+
 </body>
 </html>

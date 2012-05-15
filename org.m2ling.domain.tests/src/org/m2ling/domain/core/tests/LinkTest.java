@@ -14,7 +14,7 @@ import org.m2ling.domain.core.Link;
  * <!-- end-user-doc -->
  * @generated
  */
-public class LinkTest extends HasCommentTest {
+public class LinkTest extends ArchitectureItemTest {
 
 	/**
 	 * <!-- begin-user-doc -->

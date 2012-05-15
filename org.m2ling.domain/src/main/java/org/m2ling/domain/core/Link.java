@@ -3,7 +3,6 @@
  */
 package org.m2ling.domain.core;
 
-import org.eclipse.emf.common.util.EList;
 
 
 /**
@@ -24,7 +23,7 @@ import org.eclipse.emf.common.util.EList;
  * @model
  * @generated
  */
-public interface Link extends HasComment, HasConstraints, HasCustomProperties, HasNameAndID, HasTags {
+public interface Link extends ArchitectureItem {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -67,12 +66,12 @@ public interface Link extends HasComment, HasConstraints, HasCustomProperties, H
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Origin</em>' reference.
-	 * @see #setOrigin(ArchitectureItem)
+	 * @see #setOrigin(Component)
 	 * @see org.m2ling.domain.core.CorePackage#getLink_Origin()
 	 * @model required="true"
 	 * @generated
 	 */
-	ArchitectureItem getOrigin();
+	Component getOrigin();
 
 	/**
 	 * Sets the value of the '{@link org.m2ling.domain.core.Link#getOrigin <em>Origin</em>}' reference.
@@ -82,7 +81,7 @@ public interface Link extends HasComment, HasConstraints, HasCustomProperties, H
 	 * @see #getOrigin()
 	 * @generated
 	 */
-	void setOrigin(ArchitectureItem value);
+	void setOrigin(Component value);
 
 	/**
 	 * Returns the value of the '<em><b>Destination</b></em>' reference.
@@ -93,12 +92,12 @@ public interface Link extends HasComment, HasConstraints, HasCustomProperties, H
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Destination</em>' reference.
-	 * @see #setDestination(ArchitectureItem)
+	 * @see #setDestination(Component)
 	 * @see org.m2ling.domain.core.CorePackage#getLink_Destination()
 	 * @model required="true"
 	 * @generated
 	 */
-	ArchitectureItem getDestination();
+	Component getDestination();
 
 	/**
 	 * Sets the value of the '{@link org.m2ling.domain.core.Link#getDestination <em>Destination</em>}' reference.
@@ -108,6 +107,6 @@ public interface Link extends HasComment, HasConstraints, HasCustomProperties, H
 	 * @see #getDestination()
 	 * @generated
 	 */
-	void setDestination(ArchitectureItem value);
+	void setDestination(Component value);
 
 } // Link

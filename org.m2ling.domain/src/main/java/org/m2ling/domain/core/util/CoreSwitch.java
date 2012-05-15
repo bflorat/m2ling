@@ -292,17 +292,26 @@ public class CoreSwitch<T> extends Switch<T> {
 			case CorePackage.LINK: {
 				Link link = (Link)theEObject;
 				T result = caseLink(link);
-				if (result == null) result = caseHasComment(link);
-				if (result == null) result = caseHasConstraints(link);
-				if (result == null) result = caseHasCustomProperties(link);
+				if (result == null) result = caseArchitectureItem(link);
 				if (result == null) result = caseHasNameAndID(link);
+				if (result == null) result = caseHasComment(link);
 				if (result == null) result = caseHasTags(link);
+				if (result == null) result = caseHasParameterDefinitions(link);
+				if (result == null) result = caseHasConstraints(link);
+				if (result == null) result = caseHasLabel(link);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
 			case CorePackage.STREAM: {
 				Stream stream = (Stream)theEObject;
 				T result = caseStream(stream);
+				if (result == null) result = caseRuntimeItem(stream);
+				if (result == null) result = caseHasNameAndID(stream);
+				if (result == null) result = caseHasComment(stream);
+				if (result == null) result = caseHasTags(stream);
+				if (result == null) result = caseHasParameterValues(stream);
+				if (result == null) result = caseHasConstraints(stream);
+				if (result == null) result = caseHasLabel(stream);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}

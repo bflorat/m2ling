@@ -482,7 +482,7 @@ public class CorePackageImpl extends EPackageImpl implements CorePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getComponentType_BindedComponentType() {
+	public EReference getComponentType_EngineType() {
 		return (EReference)componentTypeEClass.getEStructuralFeatures().get(1);
 	}
 
@@ -491,7 +491,16 @@ public class CorePackageImpl extends EPackageImpl implements CorePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getComponentType_EngineType() {
+	public EReference getComponentType_Enumeration() {
+		return (EReference)componentTypeEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getComponentType_BoundType() {
 		return (EReference)componentTypeEClass.getEStructuralFeatures().get(2);
 	}
 
@@ -527,8 +536,17 @@ public class CorePackageImpl extends EPackageImpl implements CorePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getComponent_Engine() {
+	public EReference getComponent_Engines() {
 		return (EReference)componentEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getComponent_BoundComponent() {
+		return (EReference)componentEClass.getEStructuralFeatures().get(3);
 	}
 
 	/**
@@ -1407,13 +1425,15 @@ public class CorePackageImpl extends EPackageImpl implements CorePackage {
 		// Create classes and their features
 		componentTypeEClass = createEClass(COMPONENT_TYPE);
 		createEReference(componentTypeEClass, COMPONENT_TYPE__SUB_TYPES);
-		createEReference(componentTypeEClass, COMPONENT_TYPE__BINDED_COMPONENT_TYPE);
 		createEReference(componentTypeEClass, COMPONENT_TYPE__ENGINE_TYPE);
+		createEReference(componentTypeEClass, COMPONENT_TYPE__BOUND_TYPE);
+		createEReference(componentTypeEClass, COMPONENT_TYPE__ENUMERATION);
 
 		componentEClass = createEClass(COMPONENT);
 		createEReference(componentEClass, COMPONENT__TYPE);
 		createEReference(componentEClass, COMPONENT__SUB_COMPONENTS);
-		createEReference(componentEClass, COMPONENT__ENGINE);
+		createEReference(componentEClass, COMPONENT__ENGINES);
+		createEReference(componentEClass, COMPONENT__BOUND_COMPONENT);
 
 		hasNameAndIDEClass = createEClass(HAS_NAME_AND_ID);
 		createEAttribute(hasNameAndIDEClass, HAS_NAME_AND_ID__ID);
@@ -1579,10 +1599,13 @@ public class CorePackageImpl extends EPackageImpl implements CorePackage {
 
 		// Add supertypes to classes
 		componentTypeEClass.getESuperTypes().add(this.getConceptItem());
+		componentTypeEClass.getESuperTypes().add(this.getHasParameterDefinitions());
 		componentEClass.getESuperTypes().add(this.getComponentGroup());
 		componentNodeEClass.getESuperTypes().add(this.getComponentNodeGroup());
+		componentNodeEClass.getESuperTypes().add(this.getHasParameterValues());
 		viewPointEClass.getESuperTypes().add(this.getConceptItem());
 		componentGroupEClass.getESuperTypes().add(this.getArchitectureItem());
+		componentGroupEClass.getESuperTypes().add(this.getHasParameterDefinitions());
 		componentNodeGroupEClass.getESuperTypes().add(this.getRuntimeItem());
 		architectureItemEClass.getESuperTypes().add(this.getHasNameAndID());
 		architectureItemEClass.getESuperTypes().add(this.getHasComment());
@@ -1605,11 +1628,8 @@ public class CorePackageImpl extends EPackageImpl implements CorePackage {
 		runtimeItemEClass.getESuperTypes().add(this.getHasLabel());
 		viewEClass.getESuperTypes().add(this.getArchitectureItem());
 		linkTypeEClass.getESuperTypes().add(this.getConceptItem());
-		linkEClass.getESuperTypes().add(this.getHasComment());
-		linkEClass.getESuperTypes().add(this.getHasConstraints());
-		linkEClass.getESuperTypes().add(this.getHasCustomProperties());
-		linkEClass.getESuperTypes().add(this.getHasNameAndID());
-		linkEClass.getESuperTypes().add(this.getHasTags());
+		linkEClass.getESuperTypes().add(this.getArchitectureItem());
+		streamEClass.getESuperTypes().add(this.getRuntimeItem());
 		stakeholderEClass.getESuperTypes().add(this.getHasNameAndID());
 		stakeholderEClass.getESuperTypes().add(this.getHasLabel());
 		floatConstraintEClass.getESuperTypes().add(this.getConstraint());
@@ -1641,15 +1661,17 @@ public class CorePackageImpl extends EPackageImpl implements CorePackage {
 		// Initialize classes and features; add operations and parameters
 		initEClass(componentTypeEClass, ComponentType.class, "ComponentType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getComponentType_SubTypes(), this.getComponentType(), null, "subTypes", null, 0, -1, ComponentType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getComponentType_BindedComponentType(), this.getComponentType(), null, "bindedComponentType", null, 0, 1, ComponentType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getComponentType_EngineType(), this.getComponentType(), null, "engineType", null, 0, 1, ComponentType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getComponentType_EngineType(), this.getComponentType(), null, "engineType", null, 0, -1, ComponentType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getComponentType_BoundType(), this.getComponentType(), null, "boundType", null, 0, 1, ComponentType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getComponentType_Enumeration(), this.getComponentGroup(), null, "enumeration", null, 0, -1, ComponentType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(componentEClass, Component.class, "Component", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getComponent_Type(), this.getComponentType(), null, "type", null, 1, 1, Component.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getComponent_SubComponents(), this.getComponent(), null, "subComponents", null, 0, -1, Component.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		getComponent_SubComponents().getEKeys().add(this.getHasNameAndID_Id());
-		initEReference(getComponent_Engine(), this.getComponent(), null, "engine", null, 0, 1, Component.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		getComponent_Engine().getEKeys().add(this.getHasNameAndID_Id());
+		initEReference(getComponent_Engines(), this.getComponent(), null, "engines", null, 0, -1, Component.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		getComponent_Engines().getEKeys().add(this.getHasNameAndID_Id());
+		initEReference(getComponent_BoundComponent(), this.getComponent(), null, "boundComponent", null, 0, 1, Component.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(hasNameAndIDEClass, HasNameAndID.class, "HasNameAndID", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getHasNameAndID_Id(), ecorePackage.getEString(), "id", "", 0, 1, HasNameAndID.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1704,8 +1726,8 @@ public class CorePackageImpl extends EPackageImpl implements CorePackage {
 
 		initEClass(linkEClass, Link.class, "Link", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getLink_Type(), this.getLinkType(), null, "type", null, 1, 1, Link.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getLink_Origin(), this.getArchitectureItem(), null, "origin", null, 1, 1, Link.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getLink_Destination(), this.getArchitectureItem(), null, "destination", null, 1, 1, Link.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getLink_Origin(), this.getComponent(), null, "origin", null, 1, 1, Link.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getLink_Destination(), this.getComponent(), null, "destination", null, 1, 1, Link.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(streamEClass, Stream.class, "Stream", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getStream_Source(), this.getRuntimeItem(), null, "source", null, 1, 1, Stream.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

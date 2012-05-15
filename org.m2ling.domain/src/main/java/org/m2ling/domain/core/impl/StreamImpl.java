@@ -3,17 +3,10 @@
  */
 package org.m2ling.domain.core.impl;
 
-import java.util.Collection;
 import org.eclipse.emf.common.notify.Notification;
-import org.eclipse.emf.common.notify.NotificationChain;
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.eclipse.emf.ecore.impl.EObjectImpl;
-import org.eclipse.emf.ecore.util.EObjectContainmentEList;
-import org.eclipse.emf.ecore.util.InternalEList;
-import org.m2ling.domain.core.Constraint;
 import org.m2ling.domain.core.CorePackage;
 import org.m2ling.domain.core.Link;
 import org.m2ling.domain.core.RuntimeItem;
@@ -34,7 +27,7 @@ import org.m2ling.domain.core.Stream;
  *
  * @generated
  */
-public class StreamImpl extends EObjectImpl implements Stream {
+public class StreamImpl extends RuntimeItemImpl implements Stream {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -231,7 +224,6 @@ public class StreamImpl extends EObjectImpl implements Stream {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@SuppressWarnings("unchecked")
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {

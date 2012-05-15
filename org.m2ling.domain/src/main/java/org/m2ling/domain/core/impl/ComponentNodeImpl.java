@@ -16,7 +16,6 @@ import org.eclipse.emf.ecore.util.InternalEList;
 import org.m2ling.domain.core.Component;
 import org.m2ling.domain.core.ComponentNode;
 import org.m2ling.domain.core.ComponentNodeGroup;
-import org.m2ling.domain.core.Constraint;
 import org.m2ling.domain.core.CorePackage;
 
 /**

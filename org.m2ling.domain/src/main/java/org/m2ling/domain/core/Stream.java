@@ -3,8 +3,6 @@
  */
 package org.m2ling.domain.core;
 
-import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.ecore.EObject;
 
 /**
  * <!-- begin-user-doc -->
@@ -24,7 +22,7 @@ import org.eclipse.emf.ecore.EObject;
  * @model
  * @generated
  */
-public interface Stream extends EObject {
+public interface Stream extends RuntimeItem {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
