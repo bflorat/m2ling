@@ -14,6 +14,9 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference m2ling.ecore#//Root/views"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference m2ling.ecore#//Root/paramDefinitions"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference m2ling.ecore#//Root/paramValues"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference m2ling.ecore#//Root/stakeholders"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference m2ling.ecore#//Root/units"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference m2ling.ecore#//Root/actors"/>
     </genClasses>
     <nestedGenPackages prefix="Core" basePackage="org.m2ling.domain" disposableProviderFactory="true"
         ecorePackage="m2ling.ecore#//core">
@@ -49,41 +52,33 @@
         <genEnumLiterals ecoreEnumLiteral="m2ling.ecore#//core/RulePriority/VERY_HIGH"/>
       </genEnums>
       <genClasses ecoreClass="m2ling.ecore#//core/ComponentType">
-        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference m2ling.ecore#//core/ComponentType/subTypes"/>
-        <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference m2ling.ecore#//core/ComponentType/parent"/>
-        <genFeatures notify="false" createChild="false" propertySortChoices="true"
-            ecoreFeature="ecore:EReference m2ling.ecore#//core/ComponentType/bindedComponentType"/>
         <genFeatures notify="false" createChild="false" propertySortChoices="true"
             ecoreFeature="ecore:EReference m2ling.ecore#//core/ComponentType/engineType"/>
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference m2ling.ecore#//core/ComponentType/subTypes"/>
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference m2ling.ecore#//core/ComponentType/boundType"/>
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference m2ling.ecore#//core/ComponentType/enumeration"/>
       </genClasses>
       <genClasses ecoreClass="m2ling.ecore#//core/Component">
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference m2ling.ecore#//core/Component/subComponents"/>
         <genFeatures notify="false" createChild="false" propertySortChoices="true"
             ecoreFeature="ecore:EReference m2ling.ecore#//core/Component/type"/>
         <genFeatures notify="false" createChild="false" propertySortChoices="true"
-            ecoreFeature="ecore:EReference m2ling.ecore#//core/Component/subComponents"/>
+            ecoreFeature="ecore:EReference m2ling.ecore#//core/Component/engines"/>
         <genFeatures notify="false" createChild="false" propertySortChoices="true"
-            ecoreFeature="ecore:EReference m2ling.ecore#//core/Component/parent"/>
-        <genFeatures notify="false" createChild="false" propertySortChoices="true"
-            ecoreFeature="ecore:EReference m2ling.ecore#//core/Component/engine"/>
-      </genClasses>
-      <genClasses image="false" ecoreClass="m2ling.ecore#//core/HasNameAndID">
-        <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute m2ling.ecore#//core/HasNameAndID/iD"/>
-        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute m2ling.ecore#//core/HasNameAndID/name"/>
+            ecoreFeature="ecore:EReference m2ling.ecore#//core/Component/boundComponent"/>
       </genClasses>
       <genClasses ecoreClass="m2ling.ecore#//core/ComponentNode">
         <genFeatures notify="false" createChild="false" propertySortChoices="true"
             ecoreFeature="ecore:EReference m2ling.ecore#//core/ComponentNode/component"/>
         <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference m2ling.ecore#//core/ComponentNode/subNodes"/>
-        <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference m2ling.ecore#//core/ComponentNode/parent"/>
         <genFeatures notify="false" createChild="false" propertySortChoices="true"
             ecoreFeature="ecore:EReference m2ling.ecore#//core/ComponentNode/engine"/>
       </genClasses>
       <genClasses ecoreClass="m2ling.ecore#//core/ViewPoint">
-        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference m2ling.ecore#//core/ViewPoint/componentTypes"/>
         <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference m2ling.ecore#//core/ViewPoint/activities"/>
-        <genFeatures notify="false" createChild="false" propertySortChoices="true"
-            ecoreFeature="ecore:EReference m2ling.ecore#//core/ViewPoint/baseViewpoint"/>
-        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute m2ling.ecore#//core/ViewPoint/name"/>
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference m2ling.ecore#//core/ViewPoint/componentTypes"/>
         <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference m2ling.ecore#//core/ViewPoint/linkTypes"/>
         <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference m2ling.ecore#//core/ViewPoint/rules"/>
       </genClasses>
@@ -95,15 +90,9 @@
         <genFeatures notify="false" createChild="false" propertySortChoices="true"
             ecoreFeature="ecore:EReference m2ling.ecore#//core/ComponentNodeGroup/componentNodes"/>
       </genClasses>
-      <genClasses image="false" ecoreClass="m2ling.ecore#//core/ArchitectureItem">
-        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute m2ling.ecore#//core/ArchitectureItem/label"/>
-      </genClasses>
-      <genClasses image="false" ecoreClass="m2ling.ecore#//core/ConceptItem">
-        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute m2ling.ecore#//core/ConceptItem/label"/>
-      </genClasses>
-      <genClasses image="false" ecoreClass="m2ling.ecore#//core/RuntimeItem">
-        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute m2ling.ecore#//core/RuntimeItem/label"/>
-      </genClasses>
+      <genClasses image="false" ecoreClass="m2ling.ecore#//core/ArchitectureItem"/>
+      <genClasses image="false" ecoreClass="m2ling.ecore#//core/ConceptItem"/>
+      <genClasses image="false" ecoreClass="m2ling.ecore#//core/RuntimeItem"/>
       <genClasses ecoreClass="m2ling.ecore#//core/View">
         <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference m2ling.ecore#//core/View/componentsGroups"/>
         <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference m2ling.ecore#//core/View/components"/>
@@ -111,10 +100,16 @@
             ecoreFeature="ecore:EReference m2ling.ecore#//core/View/viewPoint"/>
         <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference m2ling.ecore#//core/View/links"/>
       </genClasses>
+      <genClasses image="false" ecoreClass="m2ling.ecore#//core/HasNameAndID">
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute m2ling.ecore#//core/HasNameAndID/id"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute m2ling.ecore#//core/HasNameAndID/name"/>
+      </genClasses>
       <genClasses image="false" ecoreClass="m2ling.ecore#//core/HasTags">
         <genFeatures createChild="false" ecoreFeature="ecore:EAttribute m2ling.ecore#//core/HasTags/tags"/>
       </genClasses>
-      <genClasses ecoreClass="m2ling.ecore#//core/HasComment"/>
+      <genClasses ecoreClass="m2ling.ecore#//core/HasComment">
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute m2ling.ecore#//core/HasComment/comment"/>
+      </genClasses>
       <genClasses ecoreClass="m2ling.ecore#//core/HasCustomProperties">
         <genFeatures notify="false" createChild="false" propertySortChoices="true"
             ecoreFeature="ecore:EReference m2ling.ecore#//core/HasCustomProperties/customProperties"/>
@@ -122,15 +117,15 @@
       <genClasses ecoreClass="m2ling.ecore#//core/CustomProperty"/>
       <genClasses ecoreClass="m2ling.ecore#//core/LinkType">
         <genFeatures notify="false" createChild="false" propertySortChoices="true"
-            ecoreFeature="ecore:EReference m2ling.ecore#//core/LinkType/sourceType"/>
+            ecoreFeature="ecore:EReference m2ling.ecore#//core/LinkType/sourceTypes"/>
         <genFeatures notify="false" createChild="false" propertySortChoices="true"
-            ecoreFeature="ecore:EReference m2ling.ecore#//core/LinkType/destinationType"/>
+            ecoreFeature="ecore:EReference m2ling.ecore#//core/LinkType/destinationTypes"/>
       </genClasses>
       <genClasses ecoreClass="m2ling.ecore#//core/Link">
         <genFeatures notify="false" createChild="false" propertySortChoices="true"
             ecoreFeature="ecore:EReference m2ling.ecore#//core/Link/type"/>
         <genFeatures notify="false" createChild="false" propertySortChoices="true"
-            ecoreFeature="ecore:EReference m2ling.ecore#//core/Link/source"/>
+            ecoreFeature="ecore:EReference m2ling.ecore#//core/Link/origin"/>
         <genFeatures notify="false" createChild="false" propertySortChoices="true"
             ecoreFeature="ecore:EReference m2ling.ecore#//core/Link/destination"/>
       </genClasses>
@@ -144,6 +139,9 @@
       </genClasses>
       <genClasses image="false" ecoreClass="m2ling.ecore#//core/HasParameterDefinitions"/>
       <genClasses image="false" ecoreClass="m2ling.ecore#//core/HasParameterValues"/>
+      <genClasses image="false" ecoreClass="m2ling.ecore#//core/HasLabel">
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute m2ling.ecore#//core/HasLabel/label"/>
+      </genClasses>
       <genClasses ecoreClass="m2ling.ecore#//core/Stakeholder">
         <genFeatures notify="false" createChild="false" propertySortChoices="true"
             ecoreFeature="ecore:EReference m2ling.ecore#//core/Stakeholder/views"/>
@@ -174,16 +172,18 @@
       <genClasses image="false" ecoreClass="m2ling.ecore#//core/HasConstraints"/>
       <genClasses ecoreClass="m2ling.ecore#//core/Activity">
         <genFeatures notify="false" createChild="false" propertySortChoices="true"
-            ecoreFeature="ecore:EReference m2ling.ecore#//core/Activity/transitions"/>
+            ecoreFeature="ecore:EReference m2ling.ecore#//core/Activity/accountables"/>
         <genFeatures notify="false" createChild="false" propertySortChoices="true"
             ecoreFeature="ecore:EReference m2ling.ecore#//core/Activity/responsibles"/>
-        <genFeatures notify="false" createChild="false" propertySortChoices="true"
-            ecoreFeature="ecore:EReference m2ling.ecore#//core/Activity/accountables"/>
       </genClasses>
       <genClasses ecoreClass="m2ling.ecore#//core/ActivityTransition">
         <genFeatures createChild="false" ecoreFeature="ecore:EAttribute m2ling.ecore#//core/ActivityTransition/date"/>
         <genFeatures createChild="false" ecoreFeature="ecore:EAttribute m2ling.ecore#//core/ActivityTransition/fromStatus"/>
         <genFeatures createChild="false" ecoreFeature="ecore:EAttribute m2ling.ecore#//core/ActivityTransition/toStatus"/>
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference m2ling.ecore#//core/ActivityTransition/activity"/>
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference m2ling.ecore#//core/ActivityTransition/actor"/>
       </genClasses>
       <genClasses ecoreClass="m2ling.ecore#//core/OrganisationalUnit"/>
       <genClasses ecoreClass="m2ling.ecore#//core/Actor">
@@ -194,6 +194,8 @@
         <genFeatures createChild="false" ecoreFeature="ecore:EAttribute m2ling.ecore#//core/Actor/username"/>
         <genFeatures createChild="false" ecoreFeature="ecore:EAttribute m2ling.ecore#//core/Actor/admin"/>
         <genFeatures createChild="false" ecoreFeature="ecore:EAttribute m2ling.ecore#//core/Actor/pwdHash"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute m2ling.ecore#//core/Actor/firstName"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute m2ling.ecore#//core/Actor/lastName"/>
       </genClasses>
       <genClasses ecoreClass="m2ling.ecore#//core/Rule">
         <genFeatures createChild="false" ecoreFeature="ecore:EAttribute m2ling.ecore#//core/Rule/status"/>

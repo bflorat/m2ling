@@ -106,6 +106,9 @@ public class ViewItemProvider
 			childrenFeatures.add(CorePackage.Literals.VIEW__COMPONENTS_GROUPS);
 			childrenFeatures.add(CorePackage.Literals.VIEW__COMPONENTS);
 			childrenFeatures.add(CorePackage.Literals.VIEW__LINKS);
+			childrenFeatures.add(CorePackage.Literals.VIEW__NODES);
+			childrenFeatures.add(CorePackage.Literals.VIEW__NODES_GROUPS);
+			childrenFeatures.add(CorePackage.Literals.VIEW__STREAMS);
 		}
 		return childrenFeatures;
 	}
@@ -163,6 +166,9 @@ public class ViewItemProvider
 			case CorePackage.VIEW__COMPONENTS_GROUPS:
 			case CorePackage.VIEW__COMPONENTS:
 			case CorePackage.VIEW__LINKS:
+			case CorePackage.VIEW__NODES:
+			case CorePackage.VIEW__NODES_GROUPS:
+			case CorePackage.VIEW__STREAMS:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
 		}
@@ -199,6 +205,26 @@ public class ViewItemProvider
 			(createChildParameter
 				(CorePackage.Literals.VIEW__LINKS,
 				 CoreFactory.eINSTANCE.createLink()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(CorePackage.Literals.VIEW__NODES,
+				 CoreFactory.eINSTANCE.createComponentNode()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(CorePackage.Literals.VIEW__NODES_GROUPS,
+				 CoreFactory.eINSTANCE.createComponentNodeGroup()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(CorePackage.Literals.VIEW__NODES_GROUPS,
+				 CoreFactory.eINSTANCE.createComponentNode()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(CorePackage.Literals.VIEW__STREAMS,
+				 CoreFactory.eINSTANCE.createNodesLink()));
 	}
 
 	/**
@@ -214,7 +240,9 @@ public class ViewItemProvider
 
 		boolean qualify =
 			childFeature == CorePackage.Literals.VIEW__COMPONENTS_GROUPS ||
-			childFeature == CorePackage.Literals.VIEW__COMPONENTS;
+			childFeature == CorePackage.Literals.VIEW__COMPONENTS ||
+			childFeature == CorePackage.Literals.VIEW__NODES ||
+			childFeature == CorePackage.Literals.VIEW__NODES_GROUPS;
 
 		if (qualify) {
 			return getString

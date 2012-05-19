@@ -17,15 +17,15 @@ import org.eclipse.emf.edit.provider.IItemPropertySource;
 import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 import org.m2ling.domain.core.CorePackage;
-import org.m2ling.domain.core.Stream;
+import org.m2ling.domain.core.NodesLink;
 
 /**
- * This is the item provider adapter for a {@link org.m2ling.domain.core.Stream} object.
+ * This is the item provider adapter for a {@link org.m2ling.domain.core.NodesLink} object.
  * <!-- begin-user-doc -->
  * <!-- end-user-doc -->
  * @generated
  */
-public class StreamItemProvider
+public class NodesLinkItemProvider
 	extends RuntimeItemItemProvider
 	implements
 		IEditingDomainItemProvider,
@@ -46,7 +46,7 @@ public class StreamItemProvider
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public StreamItemProvider(AdapterFactory adapterFactory) {
+	public NodesLinkItemProvider(AdapterFactory adapterFactory) {
 		super(adapterFactory);
 	}
 
@@ -63,7 +63,7 @@ public class StreamItemProvider
 
 			addSourcePropertyDescriptor(object);
 			addDestinationPropertyDescriptor(object);
-			addTypePropertyDescriptor(object);
+			addLinkPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -79,9 +79,9 @@ public class StreamItemProvider
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
-				 getString("_UI_Stream_source_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_Stream_source_feature", "_UI_Stream_type"),
-				 CorePackage.Literals.STREAM__SOURCE,
+				 getString("_UI_NodesLink_source_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_NodesLink_source_feature", "_UI_NodesLink_type"),
+				 CorePackage.Literals.NODES_LINK__SOURCE,
 				 true,
 				 false,
 				 true,
@@ -101,9 +101,9 @@ public class StreamItemProvider
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
-				 getString("_UI_Stream_destination_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_Stream_destination_feature", "_UI_Stream_type"),
-				 CorePackage.Literals.STREAM__DESTINATION,
+				 getString("_UI_NodesLink_destination_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_NodesLink_destination_feature", "_UI_NodesLink_type"),
+				 CorePackage.Literals.NODES_LINK__DESTINATION,
 				 true,
 				 false,
 				 true,
@@ -113,19 +113,19 @@ public class StreamItemProvider
 	}
 
 	/**
-	 * This adds a property descriptor for the Type feature.
+	 * This adds a property descriptor for the Link feature.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected void addTypePropertyDescriptor(Object object) {
+	protected void addLinkPropertyDescriptor(Object object) {
 		itemPropertyDescriptors.add
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
-				 getString("_UI_Stream_type_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_Stream_type_feature", "_UI_Stream_type"),
-				 CorePackage.Literals.STREAM__TYPE,
+				 getString("_UI_NodesLink_link_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_NodesLink_link_feature", "_UI_NodesLink_type"),
+				 CorePackage.Literals.NODES_LINK__LINK,
 				 true,
 				 false,
 				 true,
@@ -135,28 +135,28 @@ public class StreamItemProvider
 	}
 
 	/**
-	 * This returns Stream.gif.
+	 * This returns NodesLink.gif.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
 	public Object getImage(Object object) {
-		return overlayImage(object, getResourceLocator().getImage("full/obj16/Stream"));
+		return overlayImage(object, getResourceLocator().getImage("full/obj16/NodesLink"));
 	}
 
 	/**
 	 * This returns the label text for the adapted class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	@Override
 	public String getText(Object object) {
-		String label = ((Stream)object).getName();
+		String label = ((NodesLink)object).getName();
 		return label == null || label.length() == 0 ?
-			getString("_UI_Stream_type") :
-			getString("_UI_Stream_type") + " " + label;
+			getString("_UI_NodesLink_type") :
+			getString("_UI_NodesLink_type") + ": " + label;
 	}
 
 	/**

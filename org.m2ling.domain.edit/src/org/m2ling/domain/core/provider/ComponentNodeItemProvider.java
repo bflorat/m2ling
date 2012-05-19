@@ -66,6 +66,7 @@ public class ComponentNodeItemProvider
 
 			addComponentPropertyDescriptor(object);
 			addEnginePropertyDescriptor(object);
+			addBoundComponentNodePropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -115,6 +116,28 @@ public class ComponentNodeItemProvider
 	}
 
 	/**
+	 * This adds a property descriptor for the Bound Component Node feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addBoundComponentNodePropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_ComponentNode_boundComponentNode_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_ComponentNode_boundComponentNode_feature", "_UI_ComponentNode_type"),
+				 CorePackage.Literals.COMPONENT_NODE__BOUND_COMPONENT_NODE,
+				 true,
+				 false,
+				 true,
+				 null,
+				 null,
+				 null));
+	}
+
+	/**
 	 * This specifies how to implement {@link #getChildren} and is used to deduce an appropriate feature for an
 	 * {@link org.eclipse.emf.edit.command.AddCommand}, {@link org.eclipse.emf.edit.command.RemoveCommand} or
 	 * {@link org.eclipse.emf.edit.command.MoveCommand} in {@link #createCommand}.
@@ -127,6 +150,9 @@ public class ComponentNodeItemProvider
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
 			childrenFeatures.add(CorePackage.Literals.COMPONENT_NODE__SUB_NODES);
+			childrenFeatures.add(CorePackage.Literals.COMPONENT_NODE__NODES);
+			childrenFeatures.add(CorePackage.Literals.COMPONENT_NODE__STREAMS);
+			childrenFeatures.add(CorePackage.Literals.COMPONENT_NODE__NODES_GROUPS);
 		}
 		return childrenFeatures;
 	}
@@ -182,6 +208,9 @@ public class ComponentNodeItemProvider
 
 		switch (notification.getFeatureID(ComponentNode.class)) {
 			case CorePackage.COMPONENT_NODE__SUB_NODES:
+			case CorePackage.COMPONENT_NODE__NODES:
+			case CorePackage.COMPONENT_NODE__STREAMS:
+			case CorePackage.COMPONENT_NODE__NODES_GROUPS:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
 		}
@@ -203,6 +232,50 @@ public class ComponentNodeItemProvider
 			(createChildParameter
 				(CorePackage.Literals.COMPONENT_NODE__SUB_NODES,
 				 CoreFactory.eINSTANCE.createComponentNode()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(CorePackage.Literals.COMPONENT_NODE__NODES,
+				 CoreFactory.eINSTANCE.createComponentNode()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(CorePackage.Literals.COMPONENT_NODE__STREAMS,
+				 CoreFactory.eINSTANCE.createNodesLink()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(CorePackage.Literals.COMPONENT_NODE__NODES_GROUPS,
+				 CoreFactory.eINSTANCE.createComponentNodeGroup()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(CorePackage.Literals.COMPONENT_NODE__NODES_GROUPS,
+				 CoreFactory.eINSTANCE.createComponentNode()));
+	}
+
+	/**
+	 * This returns the label text for {@link org.eclipse.emf.edit.command.CreateChildCommand}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public String getCreateChildText(Object owner, Object feature, Object child, Collection<?> selection) {
+		Object childFeature = feature;
+		Object childObject = child;
+
+		boolean qualify =
+			childFeature == CorePackage.Literals.COMPONENT_NODE__SUB_NODES ||
+			childFeature == CorePackage.Literals.COMPONENT_NODE__NODES ||
+			childFeature == CorePackage.Literals.COMPONENT_NODE__NODES_GROUPS;
+
+		if (qualify) {
+			return getString
+				("_UI_CreateChild_text2",
+				 new Object[] { getTypeText(childObject), getFeatureText(childFeature), getTypeText(owner) });
+		}
+		return super.getCreateChildText(owner, feature, child, selection);
 	}
 
 }

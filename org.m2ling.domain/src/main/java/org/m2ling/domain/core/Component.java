@@ -13,8 +13,8 @@ import org.eclipse.emf.common.util.EList;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link org.m2ling.domain.core.Component#getType <em>Type</em>}</li>
  *   <li>{@link org.m2ling.domain.core.Component#getSubComponents <em>Sub Components</em>}</li>
+ *   <li>{@link org.m2ling.domain.core.Component#getType <em>Type</em>}</li>
  *   <li>{@link org.m2ling.domain.core.Component#getEngines <em>Engines</em>}</li>
  *   <li>{@link org.m2ling.domain.core.Component#getBoundComponent <em>Bound Component</em>}</li>
  * </ul>
@@ -59,22 +59,6 @@ public interface Component extends ComponentGroup {
 	void setType(ComponentType value);
 
 	/**
-	 * Returns the value of the '<em><b>Sub Components</b></em>' containment reference list.
-	 * The list contents are of type {@link org.m2ling.domain.core.Component}.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Sub Components</em>' reference list isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Sub Components</em>' containment reference list.
-	 * @see org.m2ling.domain.core.CorePackage#getComponent_SubComponents()
-	 * @model containment="true" keys="id"
-	 * @generated
-	 */
-	EList<Component> getSubComponents();
-
-	/**
 	 * Returns the value of the '<em><b>Engines</b></em>' reference list.
 	 * The list contents are of type {@link org.m2ling.domain.core.Component}.
 	 * <!-- begin-user-doc -->
@@ -89,6 +73,22 @@ public interface Component extends ComponentGroup {
 	 * @generated
 	 */
 	EList<Component> getEngines();
+
+	/**
+	 * Returns the value of the '<em><b>Sub Components</b></em>' containment reference list.
+	 * The list contents are of type {@link org.m2ling.domain.core.Component}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Sub Components</em>' reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Sub Components</em>' containment reference list.
+	 * @see org.m2ling.domain.core.CorePackage#getComponent_SubComponents()
+	 * @model containment="true"
+	 * @generated
+	 */
+	EList<Component> getSubComponents();
 
 	/**
 	 * Returns the value of the '<em><b>Bound Component</b></em>' reference.

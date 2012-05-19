@@ -16,6 +16,10 @@ import org.eclipse.emf.common.util.EList;
  *   <li>{@link org.m2ling.domain.core.ComponentNode#getComponent <em>Component</em>}</li>
  *   <li>{@link org.m2ling.domain.core.ComponentNode#getSubNodes <em>Sub Nodes</em>}</li>
  *   <li>{@link org.m2ling.domain.core.ComponentNode#getEngine <em>Engine</em>}</li>
+ *   <li>{@link org.m2ling.domain.core.ComponentNode#getNodes <em>Nodes</em>}</li>
+ *   <li>{@link org.m2ling.domain.core.ComponentNode#getStreams <em>Streams</em>}</li>
+ *   <li>{@link org.m2ling.domain.core.ComponentNode#getNodesGroups <em>Nodes Groups</em>}</li>
+ *   <li>{@link org.m2ling.domain.core.ComponentNode#getBoundComponentNode <em>Bound Component Node</em>}</li>
  * </ul>
  * </p>
  *
@@ -82,12 +86,12 @@ public interface ComponentNode extends ComponentNodeGroup, HasParameterValues {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Engine</em>' reference.
-	 * @see #setEngine(ComponentNodeGroup)
+	 * @see #setEngine(ComponentNode)
 	 * @see org.m2ling.domain.core.CorePackage#getComponentNode_Engine()
 	 * @model
 	 * @generated
 	 */
-	ComponentNodeGroup getEngine();
+	ComponentNode getEngine();
 
 	/**
 	 * Sets the value of the '{@link org.m2ling.domain.core.ComponentNode#getEngine <em>Engine</em>}' reference.
@@ -97,6 +101,80 @@ public interface ComponentNode extends ComponentNodeGroup, HasParameterValues {
 	 * @see #getEngine()
 	 * @generated
 	 */
-	void setEngine(ComponentNodeGroup value);
+	void setEngine(ComponentNode value);
+
+	/**
+	 * Returns the value of the '<em><b>Nodes</b></em>' containment reference list.
+	 * The list contents are of type {@link org.m2ling.domain.core.ComponentNode}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Nodes</em>' containment reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Nodes</em>' containment reference list.
+	 * @see org.m2ling.domain.core.CorePackage#getComponentNode_Nodes()
+	 * @model containment="true"
+	 * @generated
+	 */
+	EList<ComponentNode> getNodes();
+
+	/**
+	 * Returns the value of the '<em><b>Streams</b></em>' containment reference list.
+	 * The list contents are of type {@link org.m2ling.domain.core.NodesLink}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Streams</em>' containment reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Streams</em>' containment reference list.
+	 * @see org.m2ling.domain.core.CorePackage#getComponentNode_Streams()
+	 * @model containment="true"
+	 * @generated
+	 */
+	EList<NodesLink> getStreams();
+
+	/**
+	 * Returns the value of the '<em><b>Nodes Groups</b></em>' containment reference list.
+	 * The list contents are of type {@link org.m2ling.domain.core.ComponentNodeGroup}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Nodes Groups</em>' containment reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Nodes Groups</em>' containment reference list.
+	 * @see org.m2ling.domain.core.CorePackage#getComponentNode_NodesGroups()
+	 * @model containment="true"
+	 * @generated
+	 */
+	EList<ComponentNodeGroup> getNodesGroups();
+
+	/**
+	 * Returns the value of the '<em><b>Bound Component Node</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Bound Component Node</em>' reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Bound Component Node</em>' reference.
+	 * @see #setBoundComponentNode(ComponentNode)
+	 * @see org.m2ling.domain.core.CorePackage#getComponentNode_BoundComponentNode()
+	 * @model
+	 * @generated
+	 */
+	ComponentNode getBoundComponentNode();
+
+	/**
+	 * Sets the value of the '{@link org.m2ling.domain.core.ComponentNode#getBoundComponentNode <em>Bound Component Node</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Bound Component Node</em>' reference.
+	 * @see #getBoundComponentNode()
+	 * @generated
+	 */
+	void setBoundComponentNode(ComponentNode value);
 
 } // ComponentNode

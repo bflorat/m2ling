@@ -147,13 +147,13 @@ public interface CoreFactory extends EFactory {
 	Link createLink();
 
 	/**
-	 * Returns a new object of class '<em>Stream</em>'.
+	 * Returns a new object of class '<em>Nodes Link</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Stream</em>'.
+	 * @return a new object of class '<em>Nodes Link</em>'.
 	 * @generated
 	 */
-	Stream createStream();
+	NodesLink createNodesLink();
 
 	/**
 	 * Returns a new object of class '<em>Stakeholder</em>'.

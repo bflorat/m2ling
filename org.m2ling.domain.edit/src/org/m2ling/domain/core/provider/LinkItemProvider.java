@@ -62,8 +62,8 @@ public class LinkItemProvider
 			super.getPropertyDescriptors(object);
 
 			addTypePropertyDescriptor(object);
-			addOriginPropertyDescriptor(object);
-			addDestinationPropertyDescriptor(object);
+			addOriginsPropertyDescriptor(object);
+			addDestinationsPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -91,19 +91,19 @@ public class LinkItemProvider
 	}
 
 	/**
-	 * This adds a property descriptor for the Origin feature.
+	 * This adds a property descriptor for the Origins feature.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected void addOriginPropertyDescriptor(Object object) {
+	protected void addOriginsPropertyDescriptor(Object object) {
 		itemPropertyDescriptors.add
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
-				 getString("_UI_Link_origin_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_Link_origin_feature", "_UI_Link_type"),
-				 CorePackage.Literals.LINK__ORIGIN,
+				 getString("_UI_Link_origins_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_Link_origins_feature", "_UI_Link_type"),
+				 CorePackage.Literals.LINK__ORIGINS,
 				 true,
 				 false,
 				 true,
@@ -113,19 +113,19 @@ public class LinkItemProvider
 	}
 
 	/**
-	 * This adds a property descriptor for the Destination feature.
+	 * This adds a property descriptor for the Destinations feature.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected void addDestinationPropertyDescriptor(Object object) {
+	protected void addDestinationsPropertyDescriptor(Object object) {
 		itemPropertyDescriptors.add
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
-				 getString("_UI_Link_destination_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_Link_destination_feature", "_UI_Link_type"),
-				 CorePackage.Literals.LINK__DESTINATION,
+				 getString("_UI_Link_destinations_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_Link_destinations_feature", "_UI_Link_type"),
+				 CorePackage.Literals.LINK__DESTINATIONS,
 				 true,
 				 false,
 				 true,

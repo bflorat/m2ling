@@ -17,6 +17,7 @@ import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.IItemPropertySource;
 import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
+import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.ViewerNotification;
 import org.m2ling.domain.core.ComponentType;
 import org.m2ling.domain.core.CoreFactory;
@@ -59,27 +60,29 @@ public class ComponentTypeItemProvider extends ConceptItemItemProvider implement
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
-			addEngineTypePropertyDescriptor(object);
+			addEngineTypesPropertyDescriptor(object);
 			addBoundTypePropertyDescriptor(object);
 			addEnumerationPropertyDescriptor(object);
+			addInstantiationFactorPropertyDescriptor(object);
+			addReifiablePropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
 
 	/**
-	 * This adds a property descriptor for the Engine Type feature.
-	 * <!-- begin-user-doc --> <!--
-	 * end-user-doc -->
+	 * This adds a property descriptor for the Engine Types feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected void addEngineTypePropertyDescriptor(Object object) {
+	protected void addEngineTypesPropertyDescriptor(Object object) {
 		itemPropertyDescriptors.add
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
-				 getString("_UI_ComponentType_engineType_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_ComponentType_engineType_feature", "_UI_ComponentType_type"),
-				 CorePackage.Literals.COMPONENT_TYPE__ENGINE_TYPE,
+				 getString("_UI_ComponentType_engineTypes_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_ComponentType_engineTypes_feature", "_UI_ComponentType_type"),
+				 CorePackage.Literals.COMPONENT_TYPE__ENGINE_TYPES,
 				 true,
 				 false,
 				 true,
@@ -106,6 +109,50 @@ public class ComponentTypeItemProvider extends ConceptItemItemProvider implement
 				 false,
 				 true,
 				 null,
+				 null,
+				 null));
+	}
+
+	/**
+	 * This adds a property descriptor for the Instantiation Factor feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addInstantiationFactorPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_ComponentType_instantiationFactor_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_ComponentType_instantiationFactor_feature", "_UI_ComponentType_type"),
+				 CorePackage.Literals.COMPONENT_TYPE__INSTANTIATION_FACTOR,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.INTEGRAL_VALUE_IMAGE,
+				 null,
+				 null));
+	}
+
+	/**
+	 * This adds a property descriptor for the Reifiable feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addReifiablePropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_ComponentType_reifiable_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_ComponentType_reifiable_feature", "_UI_ComponentType_type"),
+				 CorePackage.Literals.COMPONENT_TYPE__REIFIABLE,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.BOOLEAN_VALUE_IMAGE,
 				 null,
 				 null));
 	}
@@ -203,6 +250,10 @@ public class ComponentTypeItemProvider extends ConceptItemItemProvider implement
 		updateChildren(notification);
 
 		switch (notification.getFeatureID(ComponentType.class)) {
+			case CorePackage.COMPONENT_TYPE__INSTANTIATION_FACTOR:
+			case CorePackage.COMPONENT_TYPE__REIFIABLE:
+				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
+				return;
 			case CorePackage.COMPONENT_TYPE__SUB_TYPES:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;

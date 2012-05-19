@@ -25,10 +25,12 @@ import org.m2ling.domain.core.CorePackage;
  * <p>
  * The following features are implemented:
  * <ul>
+ *   <li>{@link org.m2ling.domain.core.impl.ComponentTypeImpl#getEngineTypes <em>Engine Types</em>}</li>
  *   <li>{@link org.m2ling.domain.core.impl.ComponentTypeImpl#getSubTypes <em>Sub Types</em>}</li>
- *   <li>{@link org.m2ling.domain.core.impl.ComponentTypeImpl#getEngineType <em>Engine Type</em>}</li>
  *   <li>{@link org.m2ling.domain.core.impl.ComponentTypeImpl#getBoundType <em>Bound Type</em>}</li>
  *   <li>{@link org.m2ling.domain.core.impl.ComponentTypeImpl#getEnumeration <em>Enumeration</em>}</li>
+ *   <li>{@link org.m2ling.domain.core.impl.ComponentTypeImpl#getInstantiationFactor <em>Instantiation Factor</em>}</li>
+ *   <li>{@link org.m2ling.domain.core.impl.ComponentTypeImpl#isReifiable <em>Reifiable</em>}</li>
  * </ul>
  * </p>
  *
@@ -43,6 +45,16 @@ public class ComponentTypeImpl extends ConceptItemImpl implements ComponentType 
 	public static final String copyright = "Copyright (C) 2012 Bertrand Florat";
 
 	/**
+	 * The cached value of the '{@link #getEngineTypes() <em>Engine Types</em>}' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getEngineTypes()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<ComponentType> engineTypes;
+
+	/**
 	 * The cached value of the '{@link #getSubTypes() <em>Sub Types</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -51,16 +63,6 @@ public class ComponentTypeImpl extends ConceptItemImpl implements ComponentType 
 	 * @ordered
 	 */
 	protected EList<ComponentType> subTypes;
-
-	/**
-	 * The cached value of the '{@link #getEngineType() <em>Engine Type</em>}' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getEngineType()
-	 * @generated
-	 * @ordered
-	 */
-	protected EList<ComponentType> engineType;
 
 	/**
 	 * The cached value of the '{@link #getBoundType() <em>Bound Type</em>}' reference.
@@ -81,6 +83,46 @@ public class ComponentTypeImpl extends ConceptItemImpl implements ComponentType 
 	 * @ordered
 	 */
 	protected EList<ComponentGroup> enumeration;
+
+	/**
+	 * The default value of the '{@link #getInstantiationFactor() <em>Instantiation Factor</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getInstantiationFactor()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final int INSTANTIATION_FACTOR_EDEFAULT = 0;
+
+	/**
+	 * The cached value of the '{@link #getInstantiationFactor() <em>Instantiation Factor</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getInstantiationFactor()
+	 * @generated
+	 * @ordered
+	 */
+	protected int instantiationFactor = INSTANTIATION_FACTOR_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #isReifiable() <em>Reifiable</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isReifiable()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final boolean REIFIABLE_EDEFAULT = false;
+
+	/**
+	 * The cached value of the '{@link #isReifiable() <em>Reifiable</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isReifiable()
+	 * @generated
+	 * @ordered
+	 */
+	protected boolean reifiable = REIFIABLE_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -106,6 +148,18 @@ public class ComponentTypeImpl extends ConceptItemImpl implements ComponentType 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EList<ComponentType> getEngineTypes() {
+		if (engineTypes == null) {
+			engineTypes = new EObjectResolvingEList<ComponentType>(ComponentType.class, this, CorePackage.COMPONENT_TYPE__ENGINE_TYPES);
+		}
+		return engineTypes;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EList<ComponentType> getSubTypes() {
 		if (subTypes == null) {
 			subTypes = new EObjectContainmentEList<ComponentType>(ComponentType.class, this, CorePackage.COMPONENT_TYPE__SUB_TYPES);
@@ -118,11 +172,11 @@ public class ComponentTypeImpl extends ConceptItemImpl implements ComponentType 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<ComponentType> getEngineType() {
-		if (engineType == null) {
-			engineType = new EObjectResolvingEList<ComponentType>(ComponentType.class, this, CorePackage.COMPONENT_TYPE__ENGINE_TYPE);
+	public EList<ComponentGroup> getEnumeration() {
+		if (enumeration == null) {
+			enumeration = new EObjectResolvingEList<ComponentGroup>(ComponentGroup.class, this, CorePackage.COMPONENT_TYPE__ENUMERATION);
 		}
-		return engineType;
+		return enumeration;
 	}
 
 	/**
@@ -130,11 +184,41 @@ public class ComponentTypeImpl extends ConceptItemImpl implements ComponentType 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<ComponentGroup> getEnumeration() {
-		if (enumeration == null) {
-			enumeration = new EObjectResolvingEList<ComponentGroup>(ComponentGroup.class, this, CorePackage.COMPONENT_TYPE__ENUMERATION);
-		}
-		return enumeration;
+	public int getInstantiationFactor() {
+		return instantiationFactor;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setInstantiationFactor(int newInstantiationFactor) {
+		int oldInstantiationFactor = instantiationFactor;
+		instantiationFactor = newInstantiationFactor;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, CorePackage.COMPONENT_TYPE__INSTANTIATION_FACTOR, oldInstantiationFactor, instantiationFactor));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean isReifiable() {
+		return reifiable;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setReifiable(boolean newReifiable) {
+		boolean oldReifiable = reifiable;
+		reifiable = newReifiable;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, CorePackage.COMPONENT_TYPE__REIFIABLE, oldReifiable, reifiable));
 	}
 
 	/**
@@ -197,15 +281,19 @@ public class ComponentTypeImpl extends ConceptItemImpl implements ComponentType 
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
+			case CorePackage.COMPONENT_TYPE__ENGINE_TYPES:
+				return getEngineTypes();
 			case CorePackage.COMPONENT_TYPE__SUB_TYPES:
 				return getSubTypes();
-			case CorePackage.COMPONENT_TYPE__ENGINE_TYPE:
-				return getEngineType();
 			case CorePackage.COMPONENT_TYPE__BOUND_TYPE:
 				if (resolve) return getBoundType();
 				return basicGetBoundType();
 			case CorePackage.COMPONENT_TYPE__ENUMERATION:
 				return getEnumeration();
+			case CorePackage.COMPONENT_TYPE__INSTANTIATION_FACTOR:
+				return getInstantiationFactor();
+			case CorePackage.COMPONENT_TYPE__REIFIABLE:
+				return isReifiable();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -219,13 +307,13 @@ public class ComponentTypeImpl extends ConceptItemImpl implements ComponentType 
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
+			case CorePackage.COMPONENT_TYPE__ENGINE_TYPES:
+				getEngineTypes().clear();
+				getEngineTypes().addAll((Collection<? extends ComponentType>)newValue);
+				return;
 			case CorePackage.COMPONENT_TYPE__SUB_TYPES:
 				getSubTypes().clear();
 				getSubTypes().addAll((Collection<? extends ComponentType>)newValue);
-				return;
-			case CorePackage.COMPONENT_TYPE__ENGINE_TYPE:
-				getEngineType().clear();
-				getEngineType().addAll((Collection<? extends ComponentType>)newValue);
 				return;
 			case CorePackage.COMPONENT_TYPE__BOUND_TYPE:
 				setBoundType((ComponentType)newValue);
@@ -233,6 +321,12 @@ public class ComponentTypeImpl extends ConceptItemImpl implements ComponentType 
 			case CorePackage.COMPONENT_TYPE__ENUMERATION:
 				getEnumeration().clear();
 				getEnumeration().addAll((Collection<? extends ComponentGroup>)newValue);
+				return;
+			case CorePackage.COMPONENT_TYPE__INSTANTIATION_FACTOR:
+				setInstantiationFactor((Integer)newValue);
+				return;
+			case CorePackage.COMPONENT_TYPE__REIFIABLE:
+				setReifiable((Boolean)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -246,17 +340,23 @@ public class ComponentTypeImpl extends ConceptItemImpl implements ComponentType 
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
+			case CorePackage.COMPONENT_TYPE__ENGINE_TYPES:
+				getEngineTypes().clear();
+				return;
 			case CorePackage.COMPONENT_TYPE__SUB_TYPES:
 				getSubTypes().clear();
-				return;
-			case CorePackage.COMPONENT_TYPE__ENGINE_TYPE:
-				getEngineType().clear();
 				return;
 			case CorePackage.COMPONENT_TYPE__BOUND_TYPE:
 				setBoundType((ComponentType)null);
 				return;
 			case CorePackage.COMPONENT_TYPE__ENUMERATION:
 				getEnumeration().clear();
+				return;
+			case CorePackage.COMPONENT_TYPE__INSTANTIATION_FACTOR:
+				setInstantiationFactor(INSTANTIATION_FACTOR_EDEFAULT);
+				return;
+			case CorePackage.COMPONENT_TYPE__REIFIABLE:
+				setReifiable(REIFIABLE_EDEFAULT);
 				return;
 		}
 		super.eUnset(featureID);
@@ -270,16 +370,38 @@ public class ComponentTypeImpl extends ConceptItemImpl implements ComponentType 
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
+			case CorePackage.COMPONENT_TYPE__ENGINE_TYPES:
+				return engineTypes != null && !engineTypes.isEmpty();
 			case CorePackage.COMPONENT_TYPE__SUB_TYPES:
 				return subTypes != null && !subTypes.isEmpty();
-			case CorePackage.COMPONENT_TYPE__ENGINE_TYPE:
-				return engineType != null && !engineType.isEmpty();
 			case CorePackage.COMPONENT_TYPE__BOUND_TYPE:
 				return boundType != null;
 			case CorePackage.COMPONENT_TYPE__ENUMERATION:
 				return enumeration != null && !enumeration.isEmpty();
+			case CorePackage.COMPONENT_TYPE__INSTANTIATION_FACTOR:
+				return instantiationFactor != INSTANTIATION_FACTOR_EDEFAULT;
+			case CorePackage.COMPONENT_TYPE__REIFIABLE:
+				return reifiable != REIFIABLE_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public String toString() {
+		if (eIsProxy()) return super.toString();
+
+		StringBuffer result = new StringBuffer(super.toString());
+		result.append(" (instantiationFactor: ");
+		result.append(instantiationFactor);
+		result.append(", reifiable: ");
+		result.append(reifiable);
+		result.append(')');
+		return result.toString();
 	}
 
 } //ComponentTypeImpl

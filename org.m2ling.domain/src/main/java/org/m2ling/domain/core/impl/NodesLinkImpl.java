@@ -7,27 +7,27 @@ import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import org.m2ling.domain.core.ComponentNode;
 import org.m2ling.domain.core.CorePackage;
 import org.m2ling.domain.core.Link;
-import org.m2ling.domain.core.RuntimeItem;
-import org.m2ling.domain.core.Stream;
+import org.m2ling.domain.core.NodesLink;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Stream</b></em>'.
+ * An implementation of the model object '<em><b>Nodes Link</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.m2ling.domain.core.impl.StreamImpl#getSource <em>Source</em>}</li>
- *   <li>{@link org.m2ling.domain.core.impl.StreamImpl#getDestination <em>Destination</em>}</li>
- *   <li>{@link org.m2ling.domain.core.impl.StreamImpl#getType <em>Type</em>}</li>
+ *   <li>{@link org.m2ling.domain.core.impl.NodesLinkImpl#getSource <em>Source</em>}</li>
+ *   <li>{@link org.m2ling.domain.core.impl.NodesLinkImpl#getDestination <em>Destination</em>}</li>
+ *   <li>{@link org.m2ling.domain.core.impl.NodesLinkImpl#getLink <em>Link</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public class StreamImpl extends RuntimeItemImpl implements Stream {
+public class NodesLinkImpl extends RuntimeItemImpl implements NodesLink {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -43,7 +43,7 @@ public class StreamImpl extends RuntimeItemImpl implements Stream {
 	 * @generated
 	 * @ordered
 	 */
-	protected RuntimeItem source;
+	protected ComponentNode source;
 
 	/**
 	 * The cached value of the '{@link #getDestination() <em>Destination</em>}' reference.
@@ -53,24 +53,24 @@ public class StreamImpl extends RuntimeItemImpl implements Stream {
 	 * @generated
 	 * @ordered
 	 */
-	protected RuntimeItem destination;
+	protected ComponentNode destination;
 
 	/**
-	 * The cached value of the '{@link #getType() <em>Type</em>}' reference.
+	 * The cached value of the '{@link #getLink() <em>Link</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getType()
+	 * @see #getLink()
 	 * @generated
 	 * @ordered
 	 */
-	protected Link type;
+	protected Link link;
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected StreamImpl() {
+	protected NodesLinkImpl() {
 		super();
 	}
 
@@ -81,7 +81,7 @@ public class StreamImpl extends RuntimeItemImpl implements Stream {
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return CorePackage.Literals.STREAM;
+		return CorePackage.Literals.NODES_LINK;
 	}
 
 	/**
@@ -89,13 +89,13 @@ public class StreamImpl extends RuntimeItemImpl implements Stream {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public RuntimeItem getSource() {
+	public ComponentNode getSource() {
 		if (source != null && source.eIsProxy()) {
 			InternalEObject oldSource = (InternalEObject)source;
-			source = (RuntimeItem)eResolveProxy(oldSource);
+			source = (ComponentNode)eResolveProxy(oldSource);
 			if (source != oldSource) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, CorePackage.STREAM__SOURCE, oldSource, source));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, CorePackage.NODES_LINK__SOURCE, oldSource, source));
 			}
 		}
 		return source;
@@ -106,7 +106,7 @@ public class StreamImpl extends RuntimeItemImpl implements Stream {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public RuntimeItem basicGetSource() {
+	public ComponentNode basicGetSource() {
 		return source;
 	}
 
@@ -115,11 +115,11 @@ public class StreamImpl extends RuntimeItemImpl implements Stream {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setSource(RuntimeItem newSource) {
-		RuntimeItem oldSource = source;
+	public void setSource(ComponentNode newSource) {
+		ComponentNode oldSource = source;
 		source = newSource;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, CorePackage.STREAM__SOURCE, oldSource, source));
+			eNotify(new ENotificationImpl(this, Notification.SET, CorePackage.NODES_LINK__SOURCE, oldSource, source));
 	}
 
 	/**
@@ -127,13 +127,13 @@ public class StreamImpl extends RuntimeItemImpl implements Stream {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public RuntimeItem getDestination() {
+	public ComponentNode getDestination() {
 		if (destination != null && destination.eIsProxy()) {
 			InternalEObject oldDestination = (InternalEObject)destination;
-			destination = (RuntimeItem)eResolveProxy(oldDestination);
+			destination = (ComponentNode)eResolveProxy(oldDestination);
 			if (destination != oldDestination) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, CorePackage.STREAM__DESTINATION, oldDestination, destination));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, CorePackage.NODES_LINK__DESTINATION, oldDestination, destination));
 			}
 		}
 		return destination;
@@ -144,7 +144,7 @@ public class StreamImpl extends RuntimeItemImpl implements Stream {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public RuntimeItem basicGetDestination() {
+	public ComponentNode basicGetDestination() {
 		return destination;
 	}
 
@@ -153,11 +153,11 @@ public class StreamImpl extends RuntimeItemImpl implements Stream {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setDestination(RuntimeItem newDestination) {
-		RuntimeItem oldDestination = destination;
+	public void setDestination(ComponentNode newDestination) {
+		ComponentNode oldDestination = destination;
 		destination = newDestination;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, CorePackage.STREAM__DESTINATION, oldDestination, destination));
+			eNotify(new ENotificationImpl(this, Notification.SET, CorePackage.NODES_LINK__DESTINATION, oldDestination, destination));
 	}
 
 	/**
@@ -165,16 +165,16 @@ public class StreamImpl extends RuntimeItemImpl implements Stream {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Link getType() {
-		if (type != null && type.eIsProxy()) {
-			InternalEObject oldType = (InternalEObject)type;
-			type = (Link)eResolveProxy(oldType);
-			if (type != oldType) {
+	public Link getLink() {
+		if (link != null && link.eIsProxy()) {
+			InternalEObject oldLink = (InternalEObject)link;
+			link = (Link)eResolveProxy(oldLink);
+			if (link != oldLink) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, CorePackage.STREAM__TYPE, oldType, type));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, CorePackage.NODES_LINK__LINK, oldLink, link));
 			}
 		}
-		return type;
+		return link;
 	}
 
 	/**
@@ -182,8 +182,8 @@ public class StreamImpl extends RuntimeItemImpl implements Stream {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Link basicGetType() {
-		return type;
+	public Link basicGetLink() {
+		return link;
 	}
 
 	/**
@@ -191,11 +191,11 @@ public class StreamImpl extends RuntimeItemImpl implements Stream {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setType(Link newType) {
-		Link oldType = type;
-		type = newType;
+	public void setLink(Link newLink) {
+		Link oldLink = link;
+		link = newLink;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, CorePackage.STREAM__TYPE, oldType, type));
+			eNotify(new ENotificationImpl(this, Notification.SET, CorePackage.NODES_LINK__LINK, oldLink, link));
 	}
 
 	/**
@@ -206,15 +206,15 @@ public class StreamImpl extends RuntimeItemImpl implements Stream {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case CorePackage.STREAM__SOURCE:
+			case CorePackage.NODES_LINK__SOURCE:
 				if (resolve) return getSource();
 				return basicGetSource();
-			case CorePackage.STREAM__DESTINATION:
+			case CorePackage.NODES_LINK__DESTINATION:
 				if (resolve) return getDestination();
 				return basicGetDestination();
-			case CorePackage.STREAM__TYPE:
-				if (resolve) return getType();
-				return basicGetType();
+			case CorePackage.NODES_LINK__LINK:
+				if (resolve) return getLink();
+				return basicGetLink();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -227,14 +227,14 @@ public class StreamImpl extends RuntimeItemImpl implements Stream {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case CorePackage.STREAM__SOURCE:
-				setSource((RuntimeItem)newValue);
+			case CorePackage.NODES_LINK__SOURCE:
+				setSource((ComponentNode)newValue);
 				return;
-			case CorePackage.STREAM__DESTINATION:
-				setDestination((RuntimeItem)newValue);
+			case CorePackage.NODES_LINK__DESTINATION:
+				setDestination((ComponentNode)newValue);
 				return;
-			case CorePackage.STREAM__TYPE:
-				setType((Link)newValue);
+			case CorePackage.NODES_LINK__LINK:
+				setLink((Link)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -248,14 +248,14 @@ public class StreamImpl extends RuntimeItemImpl implements Stream {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case CorePackage.STREAM__SOURCE:
-				setSource((RuntimeItem)null);
+			case CorePackage.NODES_LINK__SOURCE:
+				setSource((ComponentNode)null);
 				return;
-			case CorePackage.STREAM__DESTINATION:
-				setDestination((RuntimeItem)null);
+			case CorePackage.NODES_LINK__DESTINATION:
+				setDestination((ComponentNode)null);
 				return;
-			case CorePackage.STREAM__TYPE:
-				setType((Link)null);
+			case CorePackage.NODES_LINK__LINK:
+				setLink((Link)null);
 				return;
 		}
 		super.eUnset(featureID);
@@ -269,14 +269,14 @@ public class StreamImpl extends RuntimeItemImpl implements Stream {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case CorePackage.STREAM__SOURCE:
+			case CorePackage.NODES_LINK__SOURCE:
 				return source != null;
-			case CorePackage.STREAM__DESTINATION:
+			case CorePackage.NODES_LINK__DESTINATION:
 				return destination != null;
-			case CorePackage.STREAM__TYPE:
-				return type != null;
+			case CorePackage.NODES_LINK__LINK:
+				return link != null;
 		}
 		return super.eIsSet(featureID);
 	}
 
-} //StreamImpl
+} //NodesLinkImpl

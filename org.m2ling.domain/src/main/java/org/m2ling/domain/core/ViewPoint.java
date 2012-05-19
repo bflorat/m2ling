@@ -13,7 +13,6 @@ import org.eclipse.emf.common.util.EList;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link org.m2ling.domain.core.ViewPoint#getBaseViewpoint <em>Base Viewpoint</em>}</li>
  *   <li>{@link org.m2ling.domain.core.ViewPoint#getActivities <em>Activities</em>}</li>
  *   <li>{@link org.m2ling.domain.core.ViewPoint#getComponentTypes <em>Component Types</em>}</li>
  *   <li>{@link org.m2ling.domain.core.ViewPoint#getLinkTypes <em>Link Types</em>}</li>
@@ -64,32 +63,6 @@ public interface ViewPoint extends ConceptItem {
 	 * @generated
 	 */
 	EList<Activity> getActivities();
-
-	/**
-	 * Returns the value of the '<em><b>Base Viewpoint</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Base Viewpoint</em>' reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Base Viewpoint</em>' reference.
-	 * @see #setBaseViewpoint(ViewPoint)
-	 * @see org.m2ling.domain.core.CorePackage#getViewPoint_BaseViewpoint()
-	 * @model
-	 * @generated
-	 */
-	ViewPoint getBaseViewpoint();
-
-	/**
-	 * Sets the value of the '{@link org.m2ling.domain.core.ViewPoint#getBaseViewpoint <em>Base Viewpoint</em>}' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Base Viewpoint</em>' reference.
-	 * @see #getBaseViewpoint()
-	 * @generated
-	 */
-	void setBaseViewpoint(ViewPoint value);
 
 	/**
 	 * Returns the value of the '<em><b>Link Types</b></em>' containment reference list.

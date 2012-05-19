@@ -3,6 +3,8 @@
  */
 package org.m2ling.domain.core;
 
+import org.eclipse.emf.common.util.EList;
+
 
 
 /**
@@ -14,8 +16,8 @@ package org.m2ling.domain.core;
  * The following features are supported:
  * <ul>
  *   <li>{@link org.m2ling.domain.core.Link#getType <em>Type</em>}</li>
- *   <li>{@link org.m2ling.domain.core.Link#getOrigin <em>Origin</em>}</li>
- *   <li>{@link org.m2ling.domain.core.Link#getDestination <em>Destination</em>}</li>
+ *   <li>{@link org.m2ling.domain.core.Link#getOrigins <em>Origins</em>}</li>
+ *   <li>{@link org.m2ling.domain.core.Link#getDestinations <em>Destinations</em>}</li>
  * </ul>
  * </p>
  *
@@ -58,55 +60,35 @@ public interface Link extends ArchitectureItem {
 	void setType(LinkType value);
 
 	/**
-	 * Returns the value of the '<em><b>Origin</b></em>' reference.
+	 * Returns the value of the '<em><b>Origins</b></em>' reference list.
+	 * The list contents are of type {@link org.m2ling.domain.core.Component}.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Origin</em>' reference isn't clear,
+	 * If the meaning of the '<em>Origins</em>' reference list isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Origin</em>' reference.
-	 * @see #setOrigin(Component)
-	 * @see org.m2ling.domain.core.CorePackage#getLink_Origin()
+	 * @return the value of the '<em>Origins</em>' reference list.
+	 * @see org.m2ling.domain.core.CorePackage#getLink_Origins()
 	 * @model required="true"
 	 * @generated
 	 */
-	Component getOrigin();
+	EList<Component> getOrigins();
 
 	/**
-	 * Sets the value of the '{@link org.m2ling.domain.core.Link#getOrigin <em>Origin</em>}' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Origin</em>' reference.
-	 * @see #getOrigin()
-	 * @generated
-	 */
-	void setOrigin(Component value);
-
-	/**
-	 * Returns the value of the '<em><b>Destination</b></em>' reference.
+	 * Returns the value of the '<em><b>Destinations</b></em>' reference list.
+	 * The list contents are of type {@link org.m2ling.domain.core.Component}.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Destination</em>' reference isn't clear,
+	 * If the meaning of the '<em>Destinations</em>' reference list isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Destination</em>' reference.
-	 * @see #setDestination(Component)
-	 * @see org.m2ling.domain.core.CorePackage#getLink_Destination()
+	 * @return the value of the '<em>Destinations</em>' reference list.
+	 * @see org.m2ling.domain.core.CorePackage#getLink_Destinations()
 	 * @model required="true"
 	 * @generated
 	 */
-	Component getDestination();
-
-	/**
-	 * Sets the value of the '{@link org.m2ling.domain.core.Link#getDestination <em>Destination</em>}' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Destination</em>' reference.
-	 * @see #getDestination()
-	 * @generated
-	 */
-	void setDestination(Component value);
+	EList<Component> getDestinations();
 
 } // Link

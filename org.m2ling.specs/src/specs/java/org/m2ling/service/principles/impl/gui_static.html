@@ -17,6 +17,7 @@
   + ArchiApp [Delete] (VP label + [based on] value if any)
    + Components types [New] (table with all component types) [1] 
     * Application [delete] (@see #1)
+     * GUIModule [delete]
    + Link types (@see component types)
     * WS_Sync [Delete] (see #2)
    + Rules (@see component types)
@@ -29,15 +30,15 @@
 Name: [] Tags: [tag1,tag2] 
 Label : []
 Run by : ?[]
-parent : ?[] (void by default)
-Link (list) : ?[link type choice] with ?[component choice] [1]
 Restricted classes [[Jboss 5.0.1, JBoss 6]] 
 Custom properties [[]]
 [] isReifiable 
+Instantiation factor : []
 
 #2 (Link form) :
 Name: [] Tags: [tag1,tag2] 
 Label : []
+Between : ?[component type 1] with ?[component type 2] [1]
 (No more attributes like sync/async : we want to stay generic)
 
 #3 (Rules form) :

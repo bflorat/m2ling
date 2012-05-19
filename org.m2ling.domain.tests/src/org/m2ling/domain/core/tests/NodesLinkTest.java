@@ -3,20 +3,18 @@
  */
 package org.m2ling.domain.core.tests;
 
-import junit.framework.TestCase;
-
 import junit.textui.TestRunner;
 
 import org.m2ling.domain.core.CoreFactory;
-import org.m2ling.domain.core.Stream;
+import org.m2ling.domain.core.NodesLink;
 
 /**
  * <!-- begin-user-doc -->
- * A test case for the model object '<em><b>Stream</b></em>'.
+ * A test case for the model object '<em><b>Nodes Link</b></em>'.
  * <!-- end-user-doc -->
  * @generated
  */
-public class StreamTest extends RuntimeItemTest {
+public class NodesLinkTest extends RuntimeItemTest {
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -31,28 +29,28 @@ public class StreamTest extends RuntimeItemTest {
 	 * @generated
 	 */
 	public static void main(String[] args) {
-		TestRunner.run(StreamTest.class);
+		TestRunner.run(NodesLinkTest.class);
 	}
 
 	/**
-	 * Constructs a new Stream test case with the given name.
+	 * Constructs a new Nodes Link test case with the given name.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public StreamTest(String name) {
+	public NodesLinkTest(String name) {
 		super(name);
 	}
 
 	/**
-	 * Returns the fixture for this Stream test case.
+	 * Returns the fixture for this Nodes Link test case.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
-	protected Stream getFixture() {
-		return (Stream)fixture;
+	protected NodesLink getFixture() {
+		return (NodesLink)fixture;
 	}
 
 	/**
@@ -63,7 +61,7 @@ public class StreamTest extends RuntimeItemTest {
 	 */
 	@Override
 	protected void setUp() throws Exception {
-		setFixture(CoreFactory.eINSTANCE.createStream());
+		setFixture(CoreFactory.eINSTANCE.createNodesLink());
 	}
 
 	/**
@@ -77,4 +75,4 @@ public class StreamTest extends RuntimeItemTest {
 		setFixture(null);
 	}
 
-} //StreamTest
+} //NodesLinkTest

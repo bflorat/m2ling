@@ -7,7 +7,6 @@ import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
 import org.eclipse.emf.ecore.EObject;
-import org.m2ling.domain.core.*;
 import org.m2ling.domain.core.Activity;
 import org.m2ling.domain.core.ActivityTransition;
 import org.m2ling.domain.core.Actor;
@@ -38,6 +37,7 @@ import org.m2ling.domain.core.Link;
 import org.m2ling.domain.core.LinkType;
 import org.m2ling.domain.core.MaxConstraint;
 import org.m2ling.domain.core.MinConstraint;
+import org.m2ling.domain.core.NodesLink;
 import org.m2ling.domain.core.NotNullConstraint;
 import org.m2ling.domain.core.OCLConstraint;
 import org.m2ling.domain.core.OrganisationalUnit;
@@ -45,7 +45,6 @@ import org.m2ling.domain.core.RegexpConstraint;
 import org.m2ling.domain.core.Rule;
 import org.m2ling.domain.core.RuntimeItem;
 import org.m2ling.domain.core.Stakeholder;
-import org.m2ling.domain.core.Stream;
 import org.m2ling.domain.core.URLConstraint;
 import org.m2ling.domain.core.View;
 import org.m2ling.domain.core.ViewPoint;
@@ -122,10 +121,6 @@ public class CoreAdapterFactory extends AdapterFactoryImpl {
 				return createComponentAdapter();
 			}
 			@Override
-			public Adapter caseHasNameAndID(HasNameAndID object) {
-				return createHasNameAndIDAdapter();
-			}
-			@Override
 			public Adapter caseComponentNode(ComponentNode object) {
 				return createComponentNodeAdapter();
 			}
@@ -158,6 +153,10 @@ public class CoreAdapterFactory extends AdapterFactoryImpl {
 				return createViewAdapter();
 			}
 			@Override
+			public Adapter caseHasNameAndID(HasNameAndID object) {
+				return createHasNameAndIDAdapter();
+			}
+			@Override
 			public Adapter caseHasTags(HasTags object) {
 				return createHasTagsAdapter();
 			}
@@ -182,8 +181,8 @@ public class CoreAdapterFactory extends AdapterFactoryImpl {
 				return createLinkAdapter();
 			}
 			@Override
-			public Adapter caseStream(Stream object) {
-				return createStreamAdapter();
+			public Adapter caseNodesLink(NodesLink object) {
+				return createNodesLinkAdapter();
 			}
 			@Override
 			public Adapter caseHasParameterDefinitions(HasParameterDefinitions object) {
@@ -192,6 +191,10 @@ public class CoreAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseHasParameterValues(HasParameterValues object) {
 				return createHasParameterValuesAdapter();
+			}
+			@Override
+			public Adapter caseHasLabel(HasLabel object) {
+				return createHasLabelAdapter();
 			}
 			@Override
 			public Adapter caseStakeholder(Stakeholder object) {
@@ -268,10 +271,6 @@ public class CoreAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseRule(Rule object) {
 				return createRuleAdapter();
-			}
-			@Override
-			public Adapter caseHasLabel(HasLabel object) {
-				return createHasLabelAdapter();
 			}
 			@Override
 			public Adapter defaultCase(EObject object) {
@@ -532,16 +531,16 @@ public class CoreAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.m2ling.domain.core.Stream <em>Stream</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.m2ling.domain.core.NodesLink <em>Nodes Link</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.m2ling.domain.core.Stream
+	 * @see org.m2ling.domain.core.NodesLink
 	 * @generated
 	 */
-	public Adapter createStreamAdapter() {
+	public Adapter createNodesLinkAdapter() {
 		return null;
 	}
 

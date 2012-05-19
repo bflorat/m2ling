@@ -9,7 +9,6 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.impl.EFactoryImpl;
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
-import org.m2ling.domain.core.*;
 import org.m2ling.domain.core.Activity;
 import org.m2ling.domain.core.ActivityStatus;
 import org.m2ling.domain.core.ActivityTransition;
@@ -34,6 +33,7 @@ import org.m2ling.domain.core.Link;
 import org.m2ling.domain.core.LinkType;
 import org.m2ling.domain.core.MaxConstraint;
 import org.m2ling.domain.core.MinConstraint;
+import org.m2ling.domain.core.NodesLink;
 import org.m2ling.domain.core.NotNullConstraint;
 import org.m2ling.domain.core.OCLConstraint;
 import org.m2ling.domain.core.OrganisationalUnit;
@@ -42,7 +42,6 @@ import org.m2ling.domain.core.Rule;
 import org.m2ling.domain.core.RulePriority;
 import org.m2ling.domain.core.RuleStatus;
 import org.m2ling.domain.core.Stakeholder;
-import org.m2ling.domain.core.Stream;
 import org.m2ling.domain.core.Type;
 import org.m2ling.domain.core.URLConstraint;
 import org.m2ling.domain.core.View;
@@ -101,18 +100,18 @@ public class CoreFactoryImpl extends EFactoryImpl implements CoreFactory {
 		switch (eClass.getClassifierID()) {
 			case CorePackage.COMPONENT_TYPE: return createComponentType();
 			case CorePackage.COMPONENT: return createComponent();
-			case CorePackage.HAS_NAME_AND_ID: return createHasNameAndID();
 			case CorePackage.COMPONENT_NODE: return createComponentNode();
 			case CorePackage.VIEW_POINT: return createViewPoint();
 			case CorePackage.COMPONENT_GROUP: return createComponentGroup();
 			case CorePackage.COMPONENT_NODE_GROUP: return createComponentNodeGroup();
 			case CorePackage.VIEW: return createView();
+			case CorePackage.HAS_NAME_AND_ID: return createHasNameAndID();
 			case CorePackage.HAS_COMMENT: return createHasComment();
 			case CorePackage.HAS_CUSTOM_PROPERTIES: return createHasCustomProperties();
 			case CorePackage.CUSTOM_PROPERTY: return createCustomProperty();
 			case CorePackage.LINK_TYPE: return createLinkType();
 			case CorePackage.LINK: return createLink();
-			case CorePackage.STREAM: return createStream();
+			case CorePackage.NODES_LINK: return createNodesLink();
 			case CorePackage.STAKEHOLDER: return createStakeholder();
 			case CorePackage.FLOAT_CONSTRAINT: return createFloatConstraint();
 			case CorePackage.MIN_CONSTRAINT: return createMinConstraint();
@@ -315,9 +314,9 @@ public class CoreFactoryImpl extends EFactoryImpl implements CoreFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Stream createStream() {
-		StreamImpl stream = new StreamImpl();
-		return stream;
+	public NodesLink createNodesLink() {
+		NodesLinkImpl nodesLink = new NodesLinkImpl();
+		return nodesLink;
 	}
 
 	/**

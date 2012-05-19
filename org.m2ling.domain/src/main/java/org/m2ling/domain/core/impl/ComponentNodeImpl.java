@@ -17,6 +17,7 @@ import org.m2ling.domain.core.Component;
 import org.m2ling.domain.core.ComponentNode;
 import org.m2ling.domain.core.ComponentNodeGroup;
 import org.m2ling.domain.core.CorePackage;
+import org.m2ling.domain.core.NodesLink;
 
 /**
  * <!-- begin-user-doc -->
@@ -28,6 +29,10 @@ import org.m2ling.domain.core.CorePackage;
  *   <li>{@link org.m2ling.domain.core.impl.ComponentNodeImpl#getComponent <em>Component</em>}</li>
  *   <li>{@link org.m2ling.domain.core.impl.ComponentNodeImpl#getSubNodes <em>Sub Nodes</em>}</li>
  *   <li>{@link org.m2ling.domain.core.impl.ComponentNodeImpl#getEngine <em>Engine</em>}</li>
+ *   <li>{@link org.m2ling.domain.core.impl.ComponentNodeImpl#getNodes <em>Nodes</em>}</li>
+ *   <li>{@link org.m2ling.domain.core.impl.ComponentNodeImpl#getStreams <em>Streams</em>}</li>
+ *   <li>{@link org.m2ling.domain.core.impl.ComponentNodeImpl#getNodesGroups <em>Nodes Groups</em>}</li>
+ *   <li>{@link org.m2ling.domain.core.impl.ComponentNodeImpl#getBoundComponentNode <em>Bound Component Node</em>}</li>
  * </ul>
  * </p>
  *
@@ -69,7 +74,47 @@ public class ComponentNodeImpl extends ComponentNodeGroupImpl implements Compone
 	 * @generated
 	 * @ordered
 	 */
-	protected ComponentNodeGroup engine;
+	protected ComponentNode engine;
+
+	/**
+	 * The cached value of the '{@link #getNodes() <em>Nodes</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getNodes()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<ComponentNode> nodes;
+
+	/**
+	 * The cached value of the '{@link #getStreams() <em>Streams</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getStreams()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<NodesLink> streams;
+
+	/**
+	 * The cached value of the '{@link #getNodesGroups() <em>Nodes Groups</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getNodesGroups()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<ComponentNodeGroup> nodesGroups;
+
+	/**
+	 * The cached value of the '{@link #getBoundComponentNode() <em>Bound Component Node</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getBoundComponentNode()
+	 * @generated
+	 * @ordered
+	 */
+	protected ComponentNode boundComponentNode;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -145,10 +190,10 @@ public class ComponentNodeImpl extends ComponentNodeGroupImpl implements Compone
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public ComponentNodeGroup getEngine() {
+	public ComponentNode getEngine() {
 		if (engine != null && engine.eIsProxy()) {
 			InternalEObject oldEngine = (InternalEObject)engine;
-			engine = (ComponentNodeGroup)eResolveProxy(oldEngine);
+			engine = (ComponentNode)eResolveProxy(oldEngine);
 			if (engine != oldEngine) {
 				if (eNotificationRequired())
 					eNotify(new ENotificationImpl(this, Notification.RESOLVE, CorePackage.COMPONENT_NODE__ENGINE, oldEngine, engine));
@@ -162,7 +207,7 @@ public class ComponentNodeImpl extends ComponentNodeGroupImpl implements Compone
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public ComponentNodeGroup basicGetEngine() {
+	public ComponentNode basicGetEngine() {
 		return engine;
 	}
 
@@ -171,11 +216,85 @@ public class ComponentNodeImpl extends ComponentNodeGroupImpl implements Compone
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setEngine(ComponentNodeGroup newEngine) {
-		ComponentNodeGroup oldEngine = engine;
+	public void setEngine(ComponentNode newEngine) {
+		ComponentNode oldEngine = engine;
 		engine = newEngine;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, CorePackage.COMPONENT_NODE__ENGINE, oldEngine, engine));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList<ComponentNode> getNodes() {
+		if (nodes == null) {
+			nodes = new EObjectContainmentEList<ComponentNode>(ComponentNode.class, this, CorePackage.COMPONENT_NODE__NODES);
+		}
+		return nodes;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList<NodesLink> getStreams() {
+		if (streams == null) {
+			streams = new EObjectContainmentEList<NodesLink>(NodesLink.class, this, CorePackage.COMPONENT_NODE__STREAMS);
+		}
+		return streams;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList<ComponentNodeGroup> getNodesGroups() {
+		if (nodesGroups == null) {
+			nodesGroups = new EObjectContainmentEList<ComponentNodeGroup>(ComponentNodeGroup.class, this, CorePackage.COMPONENT_NODE__NODES_GROUPS);
+		}
+		return nodesGroups;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public ComponentNode getBoundComponentNode() {
+		if (boundComponentNode != null && boundComponentNode.eIsProxy()) {
+			InternalEObject oldBoundComponentNode = (InternalEObject)boundComponentNode;
+			boundComponentNode = (ComponentNode)eResolveProxy(oldBoundComponentNode);
+			if (boundComponentNode != oldBoundComponentNode) {
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, CorePackage.COMPONENT_NODE__BOUND_COMPONENT_NODE, oldBoundComponentNode, boundComponentNode));
+			}
+		}
+		return boundComponentNode;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public ComponentNode basicGetBoundComponentNode() {
+		return boundComponentNode;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setBoundComponentNode(ComponentNode newBoundComponentNode) {
+		ComponentNode oldBoundComponentNode = boundComponentNode;
+		boundComponentNode = newBoundComponentNode;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, CorePackage.COMPONENT_NODE__BOUND_COMPONENT_NODE, oldBoundComponentNode, boundComponentNode));
 	}
 
 	/**
@@ -188,6 +307,12 @@ public class ComponentNodeImpl extends ComponentNodeGroupImpl implements Compone
 		switch (featureID) {
 			case CorePackage.COMPONENT_NODE__SUB_NODES:
 				return ((InternalEList<?>)getSubNodes()).basicRemove(otherEnd, msgs);
+			case CorePackage.COMPONENT_NODE__NODES:
+				return ((InternalEList<?>)getNodes()).basicRemove(otherEnd, msgs);
+			case CorePackage.COMPONENT_NODE__STREAMS:
+				return ((InternalEList<?>)getStreams()).basicRemove(otherEnd, msgs);
+			case CorePackage.COMPONENT_NODE__NODES_GROUPS:
+				return ((InternalEList<?>)getNodesGroups()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -208,6 +333,15 @@ public class ComponentNodeImpl extends ComponentNodeGroupImpl implements Compone
 			case CorePackage.COMPONENT_NODE__ENGINE:
 				if (resolve) return getEngine();
 				return basicGetEngine();
+			case CorePackage.COMPONENT_NODE__NODES:
+				return getNodes();
+			case CorePackage.COMPONENT_NODE__STREAMS:
+				return getStreams();
+			case CorePackage.COMPONENT_NODE__NODES_GROUPS:
+				return getNodesGroups();
+			case CorePackage.COMPONENT_NODE__BOUND_COMPONENT_NODE:
+				if (resolve) return getBoundComponentNode();
+				return basicGetBoundComponentNode();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -229,7 +363,22 @@ public class ComponentNodeImpl extends ComponentNodeGroupImpl implements Compone
 				getSubNodes().addAll((Collection<? extends ComponentNode>)newValue);
 				return;
 			case CorePackage.COMPONENT_NODE__ENGINE:
-				setEngine((ComponentNodeGroup)newValue);
+				setEngine((ComponentNode)newValue);
+				return;
+			case CorePackage.COMPONENT_NODE__NODES:
+				getNodes().clear();
+				getNodes().addAll((Collection<? extends ComponentNode>)newValue);
+				return;
+			case CorePackage.COMPONENT_NODE__STREAMS:
+				getStreams().clear();
+				getStreams().addAll((Collection<? extends NodesLink>)newValue);
+				return;
+			case CorePackage.COMPONENT_NODE__NODES_GROUPS:
+				getNodesGroups().clear();
+				getNodesGroups().addAll((Collection<? extends ComponentNodeGroup>)newValue);
+				return;
+			case CorePackage.COMPONENT_NODE__BOUND_COMPONENT_NODE:
+				setBoundComponentNode((ComponentNode)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -250,7 +399,19 @@ public class ComponentNodeImpl extends ComponentNodeGroupImpl implements Compone
 				getSubNodes().clear();
 				return;
 			case CorePackage.COMPONENT_NODE__ENGINE:
-				setEngine((ComponentNodeGroup)null);
+				setEngine((ComponentNode)null);
+				return;
+			case CorePackage.COMPONENT_NODE__NODES:
+				getNodes().clear();
+				return;
+			case CorePackage.COMPONENT_NODE__STREAMS:
+				getStreams().clear();
+				return;
+			case CorePackage.COMPONENT_NODE__NODES_GROUPS:
+				getNodesGroups().clear();
+				return;
+			case CorePackage.COMPONENT_NODE__BOUND_COMPONENT_NODE:
+				setBoundComponentNode((ComponentNode)null);
 				return;
 		}
 		super.eUnset(featureID);
@@ -270,6 +431,14 @@ public class ComponentNodeImpl extends ComponentNodeGroupImpl implements Compone
 				return subNodes != null && !subNodes.isEmpty();
 			case CorePackage.COMPONENT_NODE__ENGINE:
 				return engine != null;
+			case CorePackage.COMPONENT_NODE__NODES:
+				return nodes != null && !nodes.isEmpty();
+			case CorePackage.COMPONENT_NODE__STREAMS:
+				return streams != null && !streams.isEmpty();
+			case CorePackage.COMPONENT_NODE__NODES_GROUPS:
+				return nodesGroups != null && !nodesGroups.isEmpty();
+			case CorePackage.COMPONENT_NODE__BOUND_COMPONENT_NODE:
+				return boundComponentNode != null;
 		}
 		return super.eIsSet(featureID);
 	}

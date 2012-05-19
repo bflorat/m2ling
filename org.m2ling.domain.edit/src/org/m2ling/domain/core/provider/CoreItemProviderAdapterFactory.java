@@ -377,26 +377,26 @@ public class CoreItemProviderAdapterFactory extends CoreAdapterFactory implement
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link org.m2ling.domain.core.Stream} instances.
+	 * This keeps track of the one adapter used for all {@link org.m2ling.domain.core.NodesLink} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected StreamItemProvider streamItemProvider;
+	protected NodesLinkItemProvider nodesLinkItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link org.m2ling.domain.core.Stream}.
+	 * This creates an adapter for a {@link org.m2ling.domain.core.NodesLink}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
-	public Adapter createStreamAdapter() {
-		if (streamItemProvider == null) {
-			streamItemProvider = new StreamItemProvider(this);
+	public Adapter createNodesLinkAdapter() {
+		if (nodesLinkItemProvider == null) {
+			nodesLinkItemProvider = new NodesLinkItemProvider(this);
 		}
 
-		return streamItemProvider;
+		return nodesLinkItemProvider;
 	}
 
 	/**
@@ -868,18 +868,18 @@ public class CoreItemProviderAdapterFactory extends CoreAdapterFactory implement
 	public void dispose() {
 		if (componentTypeItemProvider != null) componentTypeItemProvider.dispose();
 		if (componentItemProvider != null) componentItemProvider.dispose();
-		if (hasNameAndIDItemProvider != null) hasNameAndIDItemProvider.dispose();
 		if (componentNodeItemProvider != null) componentNodeItemProvider.dispose();
 		if (viewPointItemProvider != null) viewPointItemProvider.dispose();
 		if (componentGroupItemProvider != null) componentGroupItemProvider.dispose();
 		if (componentNodeGroupItemProvider != null) componentNodeGroupItemProvider.dispose();
 		if (viewItemProvider != null) viewItemProvider.dispose();
+		if (hasNameAndIDItemProvider != null) hasNameAndIDItemProvider.dispose();
 		if (hasCommentItemProvider != null) hasCommentItemProvider.dispose();
 		if (hasCustomPropertiesItemProvider != null) hasCustomPropertiesItemProvider.dispose();
 		if (customPropertyItemProvider != null) customPropertyItemProvider.dispose();
 		if (linkTypeItemProvider != null) linkTypeItemProvider.dispose();
 		if (linkItemProvider != null) linkItemProvider.dispose();
-		if (streamItemProvider != null) streamItemProvider.dispose();
+		if (nodesLinkItemProvider != null) nodesLinkItemProvider.dispose();
 		if (stakeholderItemProvider != null) stakeholderItemProvider.dispose();
 		if (floatConstraintItemProvider != null) floatConstraintItemProvider.dispose();
 		if (minConstraintItemProvider != null) minConstraintItemProvider.dispose();

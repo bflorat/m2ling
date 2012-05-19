@@ -3,12 +3,15 @@
  */
 package org.m2ling.domain.core.impl;
 
+import java.util.Collection;
+
 import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 import org.m2ling.domain.core.Component;
-import org.m2ling.domain.core.ArchitectureItem;
 import org.m2ling.domain.core.CorePackage;
 import org.m2ling.domain.core.Link;
 import org.m2ling.domain.core.LinkType;
@@ -21,8 +24,8 @@ import org.m2ling.domain.core.LinkType;
  * The following features are implemented:
  * <ul>
  *   <li>{@link org.m2ling.domain.core.impl.LinkImpl#getType <em>Type</em>}</li>
- *   <li>{@link org.m2ling.domain.core.impl.LinkImpl#getOrigin <em>Origin</em>}</li>
- *   <li>{@link org.m2ling.domain.core.impl.LinkImpl#getDestination <em>Destination</em>}</li>
+ *   <li>{@link org.m2ling.domain.core.impl.LinkImpl#getOrigins <em>Origins</em>}</li>
+ *   <li>{@link org.m2ling.domain.core.impl.LinkImpl#getDestinations <em>Destinations</em>}</li>
  * </ul>
  * </p>
  *
@@ -47,24 +50,24 @@ public class LinkImpl extends ArchitectureItemImpl implements Link {
 	protected LinkType type;
 
 	/**
-	 * The cached value of the '{@link #getOrigin() <em>Origin</em>}' reference.
+	 * The cached value of the '{@link #getOrigins() <em>Origins</em>}' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getOrigin()
+	 * @see #getOrigins()
 	 * @generated
 	 * @ordered
 	 */
-	protected Component origin;
+	protected EList<Component> origins;
 
 	/**
-	 * The cached value of the '{@link #getDestination() <em>Destination</em>}' reference.
+	 * The cached value of the '{@link #getDestinations() <em>Destinations</em>}' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getDestination()
+	 * @see #getDestinations()
 	 * @generated
 	 * @ordered
 	 */
-	protected Component destination;
+	protected EList<Component> destinations;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -128,16 +131,11 @@ public class LinkImpl extends ArchitectureItemImpl implements Link {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Component getOrigin() {
-		if (origin != null && origin.eIsProxy()) {
-			InternalEObject oldOrigin = (InternalEObject)origin;
-			origin = (Component)eResolveProxy(oldOrigin);
-			if (origin != oldOrigin) {
-				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, CorePackage.LINK__ORIGIN, oldOrigin, origin));
-			}
+	public EList<Component> getOrigins() {
+		if (origins == null) {
+			origins = new EObjectResolvingEList<Component>(Component.class, this, CorePackage.LINK__ORIGINS);
 		}
-		return origin;
+		return origins;
 	}
 
 	/**
@@ -145,58 +143,11 @@ public class LinkImpl extends ArchitectureItemImpl implements Link {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Component basicGetOrigin() {
-		return origin;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setOrigin(Component newOrigin) {
-		Component oldOrigin = origin;
-		origin = newOrigin;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, CorePackage.LINK__ORIGIN, oldOrigin, origin));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public Component getDestination() {
-		if (destination != null && destination.eIsProxy()) {
-			InternalEObject oldDestination = (InternalEObject)destination;
-			destination = (Component)eResolveProxy(oldDestination);
-			if (destination != oldDestination) {
-				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, CorePackage.LINK__DESTINATION, oldDestination, destination));
-			}
+	public EList<Component> getDestinations() {
+		if (destinations == null) {
+			destinations = new EObjectResolvingEList<Component>(Component.class, this, CorePackage.LINK__DESTINATIONS);
 		}
-		return destination;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public Component basicGetDestination() {
-		return destination;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setDestination(Component newDestination) {
-		Component oldDestination = destination;
-		destination = newDestination;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, CorePackage.LINK__DESTINATION, oldDestination, destination));
+		return destinations;
 	}
 
 	/**
@@ -210,12 +161,10 @@ public class LinkImpl extends ArchitectureItemImpl implements Link {
 			case CorePackage.LINK__TYPE:
 				if (resolve) return getType();
 				return basicGetType();
-			case CorePackage.LINK__ORIGIN:
-				if (resolve) return getOrigin();
-				return basicGetOrigin();
-			case CorePackage.LINK__DESTINATION:
-				if (resolve) return getDestination();
-				return basicGetDestination();
+			case CorePackage.LINK__ORIGINS:
+				return getOrigins();
+			case CorePackage.LINK__DESTINATIONS:
+				return getDestinations();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -225,17 +174,20 @@ public class LinkImpl extends ArchitectureItemImpl implements Link {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@SuppressWarnings("unchecked")
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case CorePackage.LINK__TYPE:
 				setType((LinkType)newValue);
 				return;
-			case CorePackage.LINK__ORIGIN:
-				setOrigin((Component)newValue);
+			case CorePackage.LINK__ORIGINS:
+				getOrigins().clear();
+				getOrigins().addAll((Collection<? extends Component>)newValue);
 				return;
-			case CorePackage.LINK__DESTINATION:
-				setDestination((Component)newValue);
+			case CorePackage.LINK__DESTINATIONS:
+				getDestinations().clear();
+				getDestinations().addAll((Collection<? extends Component>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -252,11 +204,11 @@ public class LinkImpl extends ArchitectureItemImpl implements Link {
 			case CorePackage.LINK__TYPE:
 				setType((LinkType)null);
 				return;
-			case CorePackage.LINK__ORIGIN:
-				setOrigin((Component)null);
+			case CorePackage.LINK__ORIGINS:
+				getOrigins().clear();
 				return;
-			case CorePackage.LINK__DESTINATION:
-				setDestination((Component)null);
+			case CorePackage.LINK__DESTINATIONS:
+				getDestinations().clear();
 				return;
 		}
 		super.eUnset(featureID);
@@ -272,10 +224,10 @@ public class LinkImpl extends ArchitectureItemImpl implements Link {
 		switch (featureID) {
 			case CorePackage.LINK__TYPE:
 				return type != null;
-			case CorePackage.LINK__ORIGIN:
-				return origin != null;
-			case CorePackage.LINK__DESTINATION:
-				return destination != null;
+			case CorePackage.LINK__ORIGINS:
+				return origins != null && !origins.isEmpty();
+			case CorePackage.LINK__DESTINATIONS:
+				return destinations != null && !destinations.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}
