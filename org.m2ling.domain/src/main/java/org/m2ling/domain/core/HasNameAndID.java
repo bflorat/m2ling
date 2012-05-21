@@ -70,7 +70,7 @@ public interface HasNameAndID extends EObject {
 	 * @see #unsetName()
 	 * @see #setName(String)
 	 * @see org.m2ling.domain.core.CorePackage#getHasNameAndID_Name()
-	 * @model unsettable="true" required="true"
+	 * @model unsettable="true"
 	 * @generated
 	 */
 	String getName();

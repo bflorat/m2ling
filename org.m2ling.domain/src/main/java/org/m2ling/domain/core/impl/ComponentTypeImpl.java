@@ -92,7 +92,7 @@ public class ComponentTypeImpl extends ConceptItemImpl implements ComponentType 
 	 * @generated
 	 * @ordered
 	 */
-	protected static final int INSTANTIATION_FACTOR_EDEFAULT = 0;
+	protected static final int INSTANTIATION_FACTOR_EDEFAULT = 1;
 
 	/**
 	 * The cached value of the '{@link #getInstantiationFactor() <em>Instantiation Factor</em>}' attribute.

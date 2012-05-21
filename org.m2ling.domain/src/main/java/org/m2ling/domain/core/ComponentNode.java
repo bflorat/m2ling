@@ -15,7 +15,7 @@ import org.eclipse.emf.common.util.EList;
  * <ul>
  *   <li>{@link org.m2ling.domain.core.ComponentNode#getComponent <em>Component</em>}</li>
  *   <li>{@link org.m2ling.domain.core.ComponentNode#getSubNodes <em>Sub Nodes</em>}</li>
- *   <li>{@link org.m2ling.domain.core.ComponentNode#getEngine <em>Engine</em>}</li>
+ *   <li>{@link org.m2ling.domain.core.ComponentNode#getEngineNode <em>Engine Node</em>}</li>
  *   <li>{@link org.m2ling.domain.core.ComponentNode#getNodes <em>Nodes</em>}</li>
  *   <li>{@link org.m2ling.domain.core.ComponentNode#getStreams <em>Streams</em>}</li>
  *   <li>{@link org.m2ling.domain.core.ComponentNode#getNodesGroups <em>Nodes Groups</em>}</li>
@@ -78,30 +78,30 @@ public interface ComponentNode extends ComponentNodeGroup, HasParameterValues {
 	EList<ComponentNode> getSubNodes();
 
 	/**
-	 * Returns the value of the '<em><b>Engine</b></em>' reference.
+	 * Returns the value of the '<em><b>Engine Node</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Engine</em>' reference isn't clear,
+	 * If the meaning of the '<em>Engine Node</em>' reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Engine</em>' reference.
-	 * @see #setEngine(ComponentNode)
-	 * @see org.m2ling.domain.core.CorePackage#getComponentNode_Engine()
+	 * @return the value of the '<em>Engine Node</em>' reference.
+	 * @see #setEngineNode(ComponentNode)
+	 * @see org.m2ling.domain.core.CorePackage#getComponentNode_EngineNode()
 	 * @model
 	 * @generated
 	 */
-	ComponentNode getEngine();
+	ComponentNode getEngineNode();
 
 	/**
-	 * Sets the value of the '{@link org.m2ling.domain.core.ComponentNode#getEngine <em>Engine</em>}' reference.
+	 * Sets the value of the '{@link org.m2ling.domain.core.ComponentNode#getEngineNode <em>Engine Node</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Engine</em>' reference.
-	 * @see #getEngine()
+	 * @param value the new value of the '<em>Engine Node</em>' reference.
+	 * @see #getEngineNode()
 	 * @generated
 	 */
-	void setEngine(ComponentNode value);
+	void setEngineNode(ComponentNode value);
 
 	/**
 	 * Returns the value of the '<em><b>Nodes</b></em>' containment reference list.

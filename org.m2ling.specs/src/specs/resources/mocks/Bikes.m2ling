@@ -17,14 +17,14 @@
     <linkTypes id="_2LrDApqyEeGVMag01qc4bw" name="LDAP" comment="" label="Synchonous access to a LDAP directory. Over TCP-IP." sourceTypes="_E3EOwZoWEeG71vmJ5CR-iA" destinationTypes="_ha8mEZqyEeGVMag01qc4bw"/>
   </viewPoints>
   <viewPoints id="fsdfhjksdhfkjhsdkfj" name="Physical Architecture" comment="" label="Physical Architecture viewpoint provides all rules and concepts dealing with hardware, network aspects of a project.">
-    <componentTypes id="_-aItkZxEEeGi7NYPtEuJdA" name="X86 Server" label="Intel-based server. Mostly 64 bits." enumeration="_gfgfdeG3fPi34vn9KQ _JBJgUp_6EeG3fPi34vn9KQ"/>
-    <componentTypes id="_kOyogZ9ZEeGNFtlcQfUFgw" name="Router" label="Link networks between them." enumeration="_JlK98p_7EeG3fPi34vn9KQ _Jlytjhmp"/>
-    <componentTypes id="_W3UboZ9aEeGNFtlcQfUFgw" name="LoadBalancer" label="Appliance load balancer. Dispatch a network request to a virtual IP mapping several devices." enumeration="_41zdop_6EeG3fPi34vn9KQ"/>
-    <componentTypes id="_hQrcIZ9aEeGNFtlcQfUFgw" name="PC" label="PC type micro-computer"/>
-    <componentTypes id="_0pkjcZ9aEeGNFtlcQfUFgw" name="SPARC Server" label="SPARC RISC-based CPU server" enumeration="_Y6hMwp_6EeG3fPi34vn9KQ"/>
-    <componentTypes id="_McFWYZ9bEeGNFtlcQfUFgw" name="Firewall" label="Manages ports authorizations netween several devices or networks." enumeration="_nKCmgp_6EeG3fPi34vn9KQ"/>
-    <componentTypes id="_VIxZsZ9bEeGNFtlcQfUFgw" name="SAN" label="Massive storage device with Fiber chanel access" enumeration="_jUElEp_7EeG3fPi34vn9KQ"/>
-    <linkTypes id="_FFDecp9bEeGNFtlcQfUFgw" name="GigaBit Ethernet" label="1000Mbps type ethernet link" sourceTypes="_McFWYZ9bEeGNFtlcQfUFgw _W3UboZ9aEeGNFtlcQfUFgw _hQrcIZ9aEeGNFtlcQfUFgw _kOyogZ9ZEeGNFtlcQfUFgw _0pkjcZ9aEeGNFtlcQfUFgw _-aItkZxEEeGi7NYPtEuJdA" destinationTypes="_McFWYZ9bEeGNFtlcQfUFgw _W3UboZ9aEeGNFtlcQfUFgw _hQrcIZ9aEeGNFtlcQfUFgw _kOyogZ9ZEeGNFtlcQfUFgw _0pkjcZ9aEeGNFtlcQfUFgw _-aItkZxEEeGi7NYPtEuJdA"/>
+    <componentTypes id="_-aItkZxEEeGi7NYPtEuJdA" name="X86 Server" label="Intel-based server. Mostly 64 bits." enumeration="_gfgfdeG3fPi34vn9KQ _JBJgUp_6EeG3fPi34vn9KQ" reifiable="true"/>
+    <componentTypes id="_kOyogZ9ZEeGNFtlcQfUFgw" name="Router" label="Link networks between them." enumeration="_JlK98p_7EeG3fPi34vn9KQ _Jlytjhmp" reifiable="true"/>
+    <componentTypes id="_W3UboZ9aEeGNFtlcQfUFgw" name="LoadBalancer" label="Appliance load balancer. Dispatch a network request to a virtual IP mapping several devices." enumeration="_41zdop_6EeG3fPi34vn9KQ" reifiable="true"/>
+    <componentTypes id="_hQrcIZ9aEeGNFtlcQfUFgw" name="PC" label="PC type micro-computer" reifiable="true"/>
+    <componentTypes id="_0pkjcZ9aEeGNFtlcQfUFgw" name="SPARC Server" label="SPARC RISC-based CPU server" enumeration="_Y6hMwp_6EeG3fPi34vn9KQ" reifiable="true"/>
+    <componentTypes id="_McFWYZ9bEeGNFtlcQfUFgw" name="Firewall" label="Manages ports authorizations netween several devices or networks." enumeration="_nKCmgp_6EeG3fPi34vn9KQ" reifiable="true"/>
+    <componentTypes id="_VIxZsZ9bEeGNFtlcQfUFgw" name="SAN" label="Massive storage device with Fiber chanel access" enumeration="_jUElEp_7EeG3fPi34vn9KQ" reifiable="true"/>
+    <linkTypes id="_FFDecp9bEeGNFtlcQfUFgw" name="GigaBit Ethernet" label="1000Mbps type ethernet link" sourceTypes="_McFWYZ9bEeGNFtlcQfUFgw _W3UboZ9aEeGNFtlcQfUFgw _hQrcIZ9aEeGNFtlcQfUFgw _kOyogZ9ZEeGNFtlcQfUFgw _0pkjcZ9aEeGNFtlcQfUFgw _-aItkZxEEeGi7NYPtEuJdA" destinationTypes="_McFWYZ9bEeGNFtlcQfUFgw _W3UboZ9aEeGNFtlcQfUFgw _hQrcIZ9aEeGNFtlcQfUFgw _kOyogZ9ZEeGNFtlcQfUFgw _0pkjcZ9aEeGNFtlcQfUFgw _-aItkZxEEeGi7NYPtEuJdA" reifiable="true"/>
   </viewPoints>
   <viewPoints id="_uP3gkZniEeGeqKlv68ECYA" name="Enterprise Architecture" label="Enterprise Architecture deals with set of projects or the IS as a whole.">
     <componentTypes id="_REbGwZq2EeGVMag01qc4bw" name="Domain" comment="" label="A domain is the highest subdivision of en enterprise IS. Example : HR domain.">
@@ -35,8 +35,9 @@
   </viewPoints>
   <viewPoints id="_ZrEkoJxEEeGi7NYPtEuJdA" name="Technical Architecture" comment="" label="Technlogy components and links between them">
     <componentTypes id="_kHJh8ZxEEeGi7NYPtEuJdA" name="ApplicationServer" comment="" label="Runs services (SOAP,RMI,REST...) or execute dynamic Web pages" engineTypes="_wf5AQZxEEeGi7NYPtEuJdA"/>
-    <componentTypes id="_wf5AQZxEEeGi7NYPtEuJdA" name="OS" label="Operating system" engineTypes="_-aItkZxEEeGi7NYPtEuJdA _wf5AQZxEEeGi7NYPtEuJdA"/>
+    <componentTypes id="_wf5AQZxEEeGi7NYPtEuJdA" name="OS" label="Operating system" engineTypes="_wf5AQZxEEeGi7NYPtEuJdA _-aItkZxEEeGi7gfgr"/>
     <componentTypes id="_LyWEoZ6REeGyndJ1yNTLVw" name="Persistence" comment="" label="RDBMS, others databases types, directories, MOM" engineTypes="_wf5AQZxEEeGi7NYPtEuJdA"/>
+    <componentTypes id="_-aItkZxEEeGi7gfgr" name="X86 Server" label="Intel-based server. Mostly 64 bits." enumeration="_gfgfdeG3fPi34vn9KQ _JBJgUp_6EeG3fPi34vn9KQ" reifiable="true"/>
   </viewPoints>
   <viewPoints id="_FtwQsJ6sEeGsQqqxr3JCNw" name="Applicative architecture" label="Show applicatives component from one or more applications and applicative links between them. Middleware are not modelized.">
     <componentTypes id="_UI9CAZqmEeGbI4NH3iicSge" name="Application" comment="" label="An application implements a coherent set of information systems business services. It is built out of one or more applicatives modules." boundType="_c1vGwJq4EeGVMag01qc4bw">
@@ -47,6 +48,18 @@
     <linkTypes id="_psOW0p8zEeGYS-4UJ-FpAA" name="SERVICE_SYNC_READ" label="Synchonous call to read-only services" sourceTypes="_E3EOwZoWEeG71vmJ5CR-iAe" destinationTypes="_1y2zQZoWEeG71vmJ5CR-iAe"/>
     <linkTypes id="_psOW0p8zEeGYS-4UJ-FpAArr" name="SERVICE_SYNC_RW" label="Synchonous call to Read and write services" sourceTypes="_E3EOwZoWEeG71vmJ5CR-iAe" destinationTypes="_1y2zQZoWEeG71vmJ5CR-iAe"/>
     <linkTypes id="_psOW0p8zEeGYS-4UJ-FpAAdgfgf" name="SERVICE_ASYNC_READ" label="Asynchonous call to read-only services used to retreive large amount of data." sourceTypes="_E3EOwZoWEeG71vmJ5CR-iAe" destinationTypes="_1y2zQZoWEeG71vmJ5CR-iAe"/>
+  </viewPoints>
+  <viewPoints id="_mHf5sKKSEeGOsOUMPsTb_w" name="Deployment" label="Contains all concepts used to deploy an application like : module, server, middleware">
+    <componentTypes id="_aazazaza" name="GUIModule" comment="" label="A GUI module serves Web pages destinated to end users." engineTypes="_fKt222vmJ5CR-iA" boundType="_E3EOwZoWEeG71vmJ5CR-iAe" instantiationFactor="-1" reifiable="true"/>
+    <componentTypes id="_1y2zQZohnnnmJ5CR-iA" name="ServiceModule" comment="" label="A service module provides business services to batch or GUI modules and is responsible for enterprise data." engineTypes="__111CR-iA" boundType="_1y2zQZoWEeG71vmJ5CR-iAe" instantiationFactor="-1" reifiable="true"/>
+    <componentTypes id="_Ybdmtd456" name="RDBMS" comment="" label="Runs one or more databases. Database initial propulating is out of the deployment scope itself, done by scripts." engineTypes="_wf5AQZ111YPtEuJdA" enumeration="_BIxBYp6SEeGyndJ1yNTLVw _G9AtYp6REeG" reifiable="true"/>
+    <componentTypes id="_wf5AQZ111YPtEuJdA" name="OS" label="Operating system" engineTypes="_wf5AQZxEEeGi7NYPtEuJdA _-a222Gi7NYPtEuJdA" boundType="_wf5AQZxEEeGi7NYPtEuJdA" instantiationFactor="-1" reifiable="true"/>
+    <componentTypes id="_-a222Gi7NYPtEuJdA" name="X86 Server" label="Intel-based server. Mostly 64 bits." enumeration="_gfgfdeG3fPi34vn9KQ _JBJgUp_6EeG3fPi34vn9KQ" reifiable="true"/>
+    <componentTypes id="_0pkjcZ9aEeGNFtlcQfU333" name="SPARC Server" label="SPARC RISC-based CPU server" enumeration="_Y6hMwp_6EeG3fPi34vn9KQ" instantiationFactor="-1" reifiable="true"/>
+    <componentTypes id="__111CR-iA" name="ServicesContainer" label="Runs services (RMI, REST, SOAP...)" engineTypes="_wf5AQZ111YPtEuJdA" boundType="_kHJh8ZxEEeGi7NYPtEuJdA" enumeration="_BYD3EJ6REeGyndJ1yNTLVw" instantiationFactor="-1"/>
+    <componentTypes id="_fKt222vmJ5CR-iA" name="WebContainer" comment="" label="A servlet/JSP container" engineTypes="_wf5AQZ111YPtEuJdA" boundType="_kHJh8ZxEEeGi7NYPtEuJdA" enumeration="_0GnPIJ6QEeGyndJ1yNTLVw" instantiationFactor="-1"/>
+    <componentTypes id="_ha8mE333Mag01qc4bw" name="LDAP directory" comment="" label="" engineTypes="_wf5AQZ111YPtEuJdA" boundType="_LyWEoZ6REeGyndJ1yNTLVw" enumeration="_cjliUJ6TEeGyndJ1yNTLVw"/>
+    <componentTypes id="_aazazazaerer" name="BatchModule" comment="" label="Standalone Java batchs calling services modules" engineTypes="_wf5AQZ111YPtEuJdA" boundType="_aazazazaerer" reifiable="true"/>
   </viewPoints>
   <views id="_6MLzgJngEeGCNbiGBiffzQ" name="Logical_BikesOnline" comment="" label="BikesOnline is a online house-built e-commerce solution to sell bikes." viewPoint="ertyuyreklbjnb,n">
     <componentsGroups xsi:type="m2ling_core:Component" id="_8fvV4p6TEeGyndJ1yNTLVw" name="AdminGUI" comment="" type="_E3EOwZoWEeG71vmJ5CR-iA" engines="_BM4XQp6QEeGyndJ1yNTLVw" boundComponent="_hGsf4J89EeGNFtlcQfUFgw"/>
@@ -71,17 +84,16 @@
   <views id="_QXV2oZ6NEeGeZJhcjVrcWg" name="Technical catalog" comment="" label="Describes technical components available in Bikes IS" viewPoint="_ZrEkoJxEEeGi7NYPtEuJdA">
     <componentsGroups xsi:type="m2ling_core:Component" id="_a-g0Mp6OEeGeZJhcjVrcWg" name="Linux3" comment="" type="_wf5AQZxEEeGi7NYPtEuJdA"/>
     <componentsGroups xsi:type="m2ling_core:Component" id="_a-g0Mp6" name="Solaris" comment="" type="_wf5AQZxEEeGi7NYPtEuJdA"/>
-    <componentsGroups xsi:type="m2ling_core:Component" id="_sSQCUp6NEeGeZJhcjVrcWg" name="JBoss5 Solaris" comment="" type="_kHJh8ZxEEeGi7NYPtEuJdA" engines="_a-g0Mp6OEeGeZJhcjVrcWg"/>
     <componentsGroups xsi:type="m2ling_core:Component" id="_BM4XQp6QEeGyndJ1yNTLVw" name="Jetty" comment="" type="_kHJh8ZxEEeGi7NYPtEuJdA" engines="_a-g0Mp6OEeGeZJhcjVrcWg"/>
     <componentsGroups xsi:type="m2ling_core:Component" id="_BM4XQp6QEdJ1yNTLVw" name="Tomcat6" comment="" label="" type="_kHJh8ZxEEeGi7NYPtEuJdA" engines="_a-g0Mp6OEeGeZJhcjVrcWg"/>
     <componentsGroups xsi:type="m2ling_core:Component" id="_G9AtYp6REeGyndJ1yNTLVw" name="OpenLDAP" label="" type="_LyWEoZ6REeGyndJ1yNTLVw" engines="_a-g0Mp6"/>
-    <componentsGroups id="_BYD3EJ6REeGyndJ1yNTLVw" name="Services container" comment="" components="_sSQCUp6NEeGeZJhcjVrcWg"/>
+    <componentsGroups id="_BYD3EJ6REeGyndJ1yNTLVw" name="Services container" comment=""/>
     <componentsGroups id="_JzpRYJ6TEeGyndJ1yNTLVw" name="RDBMS" label="" components="_BIxBYp6SEeGyndJ1yNTLVw _G9AtYp6REeG"/>
     <componentsGroups id="_cjliUJ6TEeGyndJ1yNTLVw" name="Directories" components="_G9AtYp6REeGyndJ1yNTLVw"/>
     <componentsGroups id="_0GnPIJ6QEeGyndJ1yNTLVw" name="Web containers" comment="" components="_BM4XQp6QEeGyndJ1yNTLVw"/>
     <componentsGroups xsi:type="m2ling_core:Component" id="_G9AtYp6REeG" name="PostgreSQL" comment="" type="_LyWEoZ6REeGyndJ1yNTLVw" engines="_a-g0Mp6"/>
     <componentsGroups xsi:type="m2ling_core:Component" id="_BIxBYp6SEeGyndJ1yNTLVw" name="MySQL" label="" type="_LyWEoZ6REeGyndJ1yNTLVw" engines="_a-g0Mp6"/>
-    <componentsGroups xsi:type="m2ling_core:Component" id="_CIvLcp6kEeGbbcMFSNIrnA" name="JBoss5 Linux" comment="" type="_kHJh8ZxEEeGi7NYPtEuJdA" engines="_a-g0Mp6OEeGeZJhcjVrcWg"/>
+    <componentsGroups xsi:type="m2ling_core:Component" id="_CIvLcp6kEeGbbcMFSNIrnA" name="JBoss5" comment="" label="" type="_kHJh8ZxEEeGi7NYPtEuJdA" engines="_a-g0Mp6OEeGeZJhcjVrcWg _a-g0Mp6"/>
   </views>
   <views id="_QMVcEZ8zEeGYS-4UJ-FpAA" name="Sales applicative view" comment="" label="Contains all Sales applications and there modules" viewPoint="_FtwQsJ6sEeGsQqqxr3JCNw">
     <components id="_O1ehYp80EeGYS-4UJ-FpAA" name="BikesOnline" comment="" label="The main eCommerce Bikes Inc. application." type="_UI9CAZqmEeGbI4NH3iicSge">
@@ -132,9 +144,48 @@
     <nodes id="_AIVt1KHBEeGIx4XXpoKVSg" name="Cisco 2900_1" component="_Jlytjhmp"/>
     <nodes id="_DzMO9KHBEeGIx4XXpoKVSg" name="ASA_1" component="_nKCmgp_6EeG3fPi34vn9KQ"/>
   </views>
+  <views id="_7-nzcaKREeGOsOUMPsTb_w" name="Deployment_BikesOnline" viewPoint="ertyuyreklbjnb,n">
+    <componentsGroups xsi:type="m2ling_core:Component" id="_itGiQqNJEefdfd_4Kgezezez" comment="" type="_1y2zQZohnnnmJ5CR-iA" engines="_eoxQUqMsEeG9sM0bZ_WFcA" boundComponent="_zPeqMJ89EeGNFtlcQfUFgw"/>
+    <componentsGroups xsi:type="m2ling_core:Component" id="_itGiQqNJEeff4Kg" type="_1y2zQZohnnnmJ5CR-iA" engines="_eoxQUqMsEeG9sM0bZ_WFcA" boundComponent="_VsqREp8zEeGYS-4UJ-FpAA"/>
+    <componentsGroups xsi:type="m2ling_core:Component" id="_0VP9IqMnEeGkggwQ" label="" type="_fKt222vmJ5CR-iA" engines="_LhezMqMoEeGkWPVFom68rerwQ" boundComponent="_BM4XQp6QEeGyndJ1yNTLVw"/>
+    <components id="_bTKAYqMhEeGTqOb8fWOx0Q" type="_aazazaza" engines="_0VP9IqMnEeGkWPVFom68wQ" boundComponent="_osKccJ89EeGNFtlcQfUFgw"/>
+    <components id="_0VP9IqMnEeGkWPVFom68wQ" type="_fKt222vmJ5CR-iA" engines="_LhezMqMoEeGkWPVFom68rerwQ" boundComponent="_BM4XQp6QEdJ1yNTLVw"/>
+    <components id="_Fe3JcqMoEeGkWPVFom68wQ" type="_-a222Gi7NYPtEuJdA" boundComponent="_gfgfdeG3fPi34vn9KQ"/>
+    <components id="_LhezMqMoEeGkWPVFom68rerwQ" name="Linux3_web_profile" label="" type="_wf5AQZ111YPtEuJdA" boundComponent="_a-g0Mp6OEeGeZJhcjVrcWg"/>
+    <components id="_xi1DYqMoEeGkWPVFom68wQ" type="_-a222Gi7NYPtEuJdA" boundComponent="_JBJgUp_6EeG3fPi34vn9KQ"/>
+    <components id="_5S34QqMoEeGkWPVFom68wQ" type="_0pkjcZ9aEeGNFtlcQfU333" boundComponent="_Y6hMwp_6EeG3fPi34vn9KQ"/>
+    <components id="_eoxQUqMsEeG9sM0bZ_WFcA" name="Linux3_services_profile" type="_wf5AQZ111YPtEuJdA" engines="_xi1DYqMoEeGkWPVFom68wQ"/>
+    <components id="_TmWPQqMtEeG9sM0bZ_WFcA" name="Solaris_bikesonline" label="" type="_wf5AQZ111YPtEuJdA" engines="_5S34QqMoEeGkWPVFom68wQ" boundComponent="_a-g0Mp6"/>
+    <components id="_0dlLAqMtEeG9sM0bZ_WFcA" name="OpenLDAP" type="_ha8mE333Mag01qc4bw" engines="_5S34QqMoEeGkWPVFom68wQ" boundComponent="_G9AtYp6REeGyndJ1yNTLVw"/>
+    <components id="_6b6KoqMtEeG9sM0bZ_WFcA" name="JBoss5" label="" type="__111CR-iA" engines="_eoxQUqMsEeG9sM0bZ_WFcA" boundComponent="_CIvLcp6kEeGbbcMFSNIrnA"/>
+    <components id="_itGiQqNJEeGULe7xIq_4Kg" type="_1y2zQZohnnnmJ5CR-iA" engines="_eoxQUqMsEeG9sM0bZ_WFcA" boundComponent="_9xnzQJ89EeGNFtlcQfUFgw"/>
+    <components id="_C2pRkqNKEeGULe7xIq_4Kg" comment="" label="" type="_aazazaza" engines="_0VP9IqMnEeGkggwQ" boundComponent="_hGsf4J89EeGNFtlcQfUFgw"/>
+    <components id="_ZKfHEqNKEeGULe7xIq_4Kg" type="_Ybdmtd456" engines="_TmWPQqMtEeG9sM0bZ_WFcA" boundComponent="_G9AtYp6REeG"/>
+    <components id="_N13tUqNMEeGULe7xIq_4Kg" type="_aazazazaerer" engines="_eoxQUqMsEeG9sM0bZ_WFcA" boundComponent="_bJoEgJ89EeGNFtlcQfUFgw"/>
+    <nodes id="_Yv4RtKMpEeGkWPVFom68wQ" name="HS21_1" component="_Fe3JcqMoEeGkWPVFom68wQ" boundComponentNode="_Hk3"/>
+    <nodes id="_JUg6dKMqEeGnUvsnwHUYsw" component="_xi1DYqMoEeGkWPVFom68wQ" boundComponentNode="_HkPKsKA2AGg"/>
+    <nodes id="_jCLyhKMqEeG9sM0bZ_WFcA" name="HS22_1" label="" component="_xi1DYqMoEeGkWPVFom68wQ" boundComponentNode="_HkPKsKAsEeGQjY87lm4AGg"/>
+    <nodes id="_pQiyNKMqEeG9sM0bZ_WFcA" name="OS_HS21_1" component="_LhezMqMoEeGkWPVFom68rerwQ" engineNode="_Yv4RtKMpEeGkWPVFom68wQ"/>
+    <nodes id="_E8hKBKMrEeG9sM0bZ_WFcA" name="web_bikesonline" component="_0VP9IqMnEeGkWPVFom68wQ" engineNode="_pQiyNKMqEeG9sM0bZ_WFcA"/>
+    <nodes id="_Ste_hKMrEeG9sM0bZ_WFcA" name="gui_end_user_1" component="_bTKAYqMhEeGTqOb8fWOx0Q" engineNode="_E8hKBKMrEeG9sM0bZ_WFcA"/>
+    <nodes id="_dDF2hKMtEeG9sM0bZ_WFcA" name="Solaris_ME3000_1" component="_TmWPQqMtEeG9sM0bZ_WFcA" engineNode="_iC1uBKMtEeG9sM0bZ_WFcA"/>
+    <nodes id="_iC1uBKMtEeG9sM0bZ_WFcA" component="_5S34QqMoEeGkWPVFom68wQ" boundComponentNode="_sTQ3ZKAsEeGQjY87lm4AGg"/>
+    <nodes id="_UmUCBKMuEeG9sM0bZ_WFcA" name="jboss_bikesonline_1" comment="" component="_6b6KoqMtEeG9sM0bZ_WFcA" engineNode="_pQiyNKMqEeG9sM0bZ_Wrff"/>
+    <nodes id="_pQiyNKMqEeG9sM0bZ_Wrff" name="OS_HS22_1" comment="" component="_eoxQUqMsEeG9sM0bZ_WFcA" engineNode="_jCLyhKMqEeG9sM0bZ_WFcA"/>
+    <nodes id="_pQiyNKMqEeG9sM0bZ_Wsdsds" name="OS_HS22_2" comment="" component="_eoxQUqMsEeG9sM0bZ_WFcA" engineNode="_JUg6dKMqEeGnUvsnwHUYsw"/>
+    <nodes id="_UmUCBKMuEeG9sM0bZrzereA" name="jboss_bikesonline_2" comment="" component="_6b6KoqMtEeG9sM0bZ_WFcA" engineNode="_pQiyNKMqEeG9sM0bZ_Wsdsds"/>
+    <nodes id="_Y4t3FKNJEeGULe7xIq_4Kg" name="jetty_admin_1" comment="" component="_0VP9IqMnEeGkggwQ" engineNode="_dDF2hKMtEeG9sM0bZ_WFcA"/>
+    <nodes id="_ytg1ZKNKEeGULe7xIq_4Kg" name="postgresql_bikesonline_1" component="_ZKfHEqNKEeGULe7xIq_4Kg" engineNode="_dDF2hKMtEeG9sM0bZ_WFcA"/>
+    <nodes id="_LG40BKNLEeGULe7xIq_4Kg" name="gui_admin_bikesonline_1" component="_C2pRkqNKEeGULe7xIq_4Kg" engineNode="_Y4t3FKNJEeGULe7xIq_4Kg"/>
+    <nodes id="_LG40BKNLEedsdsLe7xIq_4Kg" name="services_admin_bikesonline_1" comment="" component="_C2pRkqNKEeGULe7xIq_4Kg" engineNode="_UmUCBKMuEeG9sM0bZrzereA"/>
+    <nodes id="_LG40BKNLEeGUrere_4Kg" name="services_paiement_bikesonline_1" component="_itGiQqNJEeGULe7xIq_4Kg" engineNode="_UmUCBKMuEeG9sM0bZ_WFcA"/>
+    <nodes id="_LG40BKNLEeGULe7xIq_4gg" name="services_paiement_bikesonline_2" label="" component="_9xnzQJ89EeGNFtlcQfUFgw" engineNode="_UmUCBKMuEeG9sM0bZrzereA"/>
+    <nodes id="_6dSvFKNLEeGULe7xIq_4Kg" name="ldap_bikesonline_1" comment="" component="_0dlLAqMtEeG9sM0bZ_WFcA" engineNode="_iC1uBKMtEeG9sM0bZ_WFcA"/>
+    <nodes id="_rctPVKNMEeGULe7xIq_4Kg" name="batch_bikeonline_1" component="_N13tUqNMEeGULe7xIq_4Kg" engineNode="_UmUCBKMuEeG9sM0bZ_WFcA"/>
+  </views>
   <stakeholders id="_skmNgZhhEeGGf-qGrGj3yA" name="Applicative Architect" views="_6MLzgJngEeGCNbiGBiffzQ _QMVcEZ8zEeGYS-4UJ-FpAA" viewPoints="_FtwQsJ6sEeGsQqqxr3JCNw ertyuyreklbjnb,n" actors="eaarchitecterich"/>
   <stakeholders id="_aB_ysZnaEeGRRqNqlyFgFw" name="Entreprise Architect" views="_0oVTkZ55EeGAFeVyyYKoXg" viewPoints="_uP3gkZniEeGeqKlv68ECYA" actors="pearchitect"/>
-  <stakeholders id="_dX1QoZnbEeGRRqNqlyFgFw" name="Technical Architect" views="_QXV2oZ6NEeGeZJhcjVrcWg" viewPoints="_ZrEkoJxEEeGi7NYPtEuJdA" actors="ktarchitect"/>
+  <stakeholders id="_dX1QoZnbEeGRRqNqlyFgFw" name="Technical Architect" views="_QXV2oZ6NEeGeZJhcjVrcWg _7-nzcaKREeGOsOUMPsTb_w" viewPoints="_ZrEkoJxEEeGi7NYPtEuJdA" actors="ktarchitect"/>
   <stakeholders id="_te1CAZneEeGiWdDszZQI0g" name="Support" label="This service provides backup/administration services for the Deisgn office." actors="bsupport"/>
   <stakeholders id="_Tig0gZnfEeGiWdDszZQI0g" name="Operations Architect" label="The operation architect is an operations expert responsible for building SLA/OLA along with the Applicative Architect of each project and to ensure these agrements are followed." viewPoints="fsdfhjksdhfkjhsdkfj" actors="aoarchitect"/>
   <units id="_mWgzQJhkEeGxRNCeID_vlg" name="Design Office" label="This It department produces functional specifications, urbanisation, application architecture and developement."/>

@@ -777,13 +777,13 @@ public interface CorePackage extends EPackage {
 	int COMPONENT_NODE__SUB_NODES = COMPONENT_NODE_GROUP_FEATURE_COUNT + 1;
 
 	/**
-	 * The feature id for the '<em><b>Engine</b></em>' reference.
+	 * The feature id for the '<em><b>Engine Node</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int COMPONENT_NODE__ENGINE = COMPONENT_NODE_GROUP_FEATURE_COUNT + 2;
+	int COMPONENT_NODE__ENGINE_NODE = COMPONENT_NODE_GROUP_FEATURE_COUNT + 2;
 
 	/**
 	 * The feature id for the '<em><b>Nodes</b></em>' containment reference list.
@@ -1242,13 +1242,22 @@ public interface CorePackage extends EPackage {
 	int LINK_TYPE__DESTINATION_TYPES = CONCEPT_ITEM_FEATURE_COUNT + 1;
 
 	/**
+	 * The feature id for the '<em><b>Reifiable</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LINK_TYPE__REIFIABLE = CONCEPT_ITEM_FEATURE_COUNT + 2;
+
+	/**
 	 * The number of structural features of the '<em>Link Type</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int LINK_TYPE_FEATURE_COUNT = CONCEPT_ITEM_FEATURE_COUNT + 2;
+	int LINK_TYPE_FEATURE_COUNT = CONCEPT_ITEM_FEATURE_COUNT + 3;
 
 	/**
 	 * The meta object id for the '{@link org.m2ling.domain.core.impl.LinkImpl <em>Link</em>}' class.
@@ -2564,15 +2573,15 @@ public interface CorePackage extends EPackage {
 	EReference getComponentNode_SubNodes();
 
 	/**
-	 * Returns the meta object for the reference '{@link org.m2ling.domain.core.ComponentNode#getEngine <em>Engine</em>}'.
+	 * Returns the meta object for the reference '{@link org.m2ling.domain.core.ComponentNode#getEngineNode <em>Engine Node</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Engine</em>'.
-	 * @see org.m2ling.domain.core.ComponentNode#getEngine()
+	 * @return the meta object for the reference '<em>Engine Node</em>'.
+	 * @see org.m2ling.domain.core.ComponentNode#getEngineNode()
 	 * @see #getComponentNode()
 	 * @generated
 	 */
-	EReference getComponentNode_Engine();
+	EReference getComponentNode_EngineNode();
 
 	/**
 	 * Returns the meta object for the containment reference list '{@link org.m2ling.domain.core.ComponentNode#getNodes <em>Nodes</em>}'.
@@ -2935,6 +2944,17 @@ public interface CorePackage extends EPackage {
 	 * @generated
 	 */
 	EReference getLinkType_DestinationTypes();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.m2ling.domain.core.LinkType#isReifiable <em>Reifiable</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Reifiable</em>'.
+	 * @see org.m2ling.domain.core.LinkType#isReifiable()
+	 * @see #getLinkType()
+	 * @generated
+	 */
+	EAttribute getLinkType_Reifiable();
 
 	/**
 	 * Returns the meta object for class '{@link org.m2ling.domain.core.Link <em>Link</em>}'.
@@ -3731,12 +3751,12 @@ public interface CorePackage extends EPackage {
 		EReference COMPONENT_NODE__SUB_NODES = eINSTANCE.getComponentNode_SubNodes();
 
 		/**
-		 * The meta object literal for the '<em><b>Engine</b></em>' reference feature.
+		 * The meta object literal for the '<em><b>Engine Node</b></em>' reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference COMPONENT_NODE__ENGINE = eINSTANCE.getComponentNode_Engine();
+		EReference COMPONENT_NODE__ENGINE_NODE = eINSTANCE.getComponentNode_EngineNode();
 
 		/**
 		 * The meta object literal for the '<em><b>Nodes</b></em>' containment reference list feature.
@@ -4033,6 +4053,14 @@ public interface CorePackage extends EPackage {
 		 * @generated
 		 */
 		EReference LINK_TYPE__DESTINATION_TYPES = eINSTANCE.getLinkType_DestinationTypes();
+
+		/**
+		 * The meta object literal for the '<em><b>Reifiable</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute LINK_TYPE__REIFIABLE = eINSTANCE.getLinkType_Reifiable();
 
 		/**
 		 * The meta object literal for the '{@link org.m2ling.domain.core.impl.LinkImpl <em>Link</em>}' class.

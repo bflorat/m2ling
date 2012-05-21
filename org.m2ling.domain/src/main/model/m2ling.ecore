@@ -29,7 +29,7 @@
       <eStructuralFeatures xsi:type="ecore:EReference" name="enumeration" upperBound="-1"
           eType="#//core/ComponentGroup"/>
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="instantiationFactor"
-          eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+          eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt" defaultValueLiteral="1"/>
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="reifiable" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
           defaultValueLiteral="false"/>
     </eClassifiers>
@@ -47,7 +47,7 @@
           eType="#//core/Component"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="subNodes" upperBound="-1"
           eType="#//core/ComponentNode" containment="true"/>
-      <eStructuralFeatures xsi:type="ecore:EReference" name="engine" eType="#//core/ComponentNode"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="engineNode" eType="#//core/ComponentNode"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="nodes" upperBound="-1"
           eType="#//core/ComponentNode" containment="true"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="streams" upperBound="-1"
@@ -97,8 +97,7 @@
     <eClassifiers xsi:type="ecore:EClass" name="HasNameAndID">
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="id" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
           defaultValueLiteral="" iD="true"/>
-      <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1"
-          eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
           unsettable="true"/>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="HasTags" abstract="true">
@@ -119,6 +118,8 @@
           upperBound="-1" eType="#//core/ComponentType"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="destinationTypes" lowerBound="1"
           upperBound="-1" eType="#//core/ComponentType"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="reifiable" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
+          defaultValueLiteral="false"/>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="Link" eSuperTypes="#//core/ArchitectureItem">
       <eStructuralFeatures xsi:type="ecore:EReference" name="type" lowerBound="1"

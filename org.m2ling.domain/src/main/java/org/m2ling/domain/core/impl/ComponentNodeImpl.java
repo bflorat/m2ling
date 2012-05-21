@@ -20,15 +20,14 @@ import org.m2ling.domain.core.CorePackage;
 import org.m2ling.domain.core.NodesLink;
 
 /**
- * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Component Node</b></em>'.
+ * <!-- begin-user-doc --> An implementation of the model object '<em><b>Component Node</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
  *   <li>{@link org.m2ling.domain.core.impl.ComponentNodeImpl#getComponent <em>Component</em>}</li>
  *   <li>{@link org.m2ling.domain.core.impl.ComponentNodeImpl#getSubNodes <em>Sub Nodes</em>}</li>
- *   <li>{@link org.m2ling.domain.core.impl.ComponentNodeImpl#getEngine <em>Engine</em>}</li>
+ *   <li>{@link org.m2ling.domain.core.impl.ComponentNodeImpl#getEngineNode <em>Engine Node</em>}</li>
  *   <li>{@link org.m2ling.domain.core.impl.ComponentNodeImpl#getNodes <em>Nodes</em>}</li>
  *   <li>{@link org.m2ling.domain.core.impl.ComponentNodeImpl#getStreams <em>Streams</em>}</li>
  *   <li>{@link org.m2ling.domain.core.impl.ComponentNodeImpl#getNodesGroups <em>Nodes Groups</em>}</li>
@@ -40,16 +39,15 @@ import org.m2ling.domain.core.NodesLink;
  */
 public class ComponentNodeImpl extends ComponentNodeGroupImpl implements ComponentNode {
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	public static final String copyright = "Copyright (C) 2012 Bertrand Florat";
 
 	/**
-	 * The cached value of the '{@link #getComponent() <em>Component</em>}' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * The cached value of the '{@link #getComponent() <em>Component</em>}' reference. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @see #getComponent()
 	 * @generated
 	 * @ordered
@@ -58,8 +56,7 @@ public class ComponentNodeImpl extends ComponentNodeGroupImpl implements Compone
 
 	/**
 	 * The cached value of the '{@link #getSubNodes() <em>Sub Nodes</em>}' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @see #getSubNodes()
 	 * @generated
 	 * @ordered
@@ -67,19 +64,19 @@ public class ComponentNodeImpl extends ComponentNodeGroupImpl implements Compone
 	protected EList<ComponentNode> subNodes;
 
 	/**
-	 * The cached value of the '{@link #getEngine() <em>Engine</em>}' reference.
+	 * The cached value of the '{@link #getEngineNode() <em>Engine Node</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getEngine()
+	 * @see #getEngineNode()
 	 * @generated
 	 * @ordered
 	 */
-	protected ComponentNode engine;
+	protected ComponentNode engineNode;
 
 	/**
-	 * The cached value of the '{@link #getNodes() <em>Nodes</em>}' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * The cached value of the '{@link #getNodes() <em>Nodes</em>}' containment reference list. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @see #getNodes()
 	 * @generated
 	 * @ordered
@@ -88,8 +85,7 @@ public class ComponentNodeImpl extends ComponentNodeGroupImpl implements Compone
 
 	/**
 	 * The cached value of the '{@link #getStreams() <em>Streams</em>}' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @see #getStreams()
 	 * @generated
 	 * @ordered
@@ -98,8 +94,7 @@ public class ComponentNodeImpl extends ComponentNodeGroupImpl implements Compone
 
 	/**
 	 * The cached value of the '{@link #getNodesGroups() <em>Nodes Groups</em>}' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @see #getNodesGroups()
 	 * @generated
 	 * @ordered
@@ -108,8 +103,7 @@ public class ComponentNodeImpl extends ComponentNodeGroupImpl implements Compone
 
 	/**
 	 * The cached value of the '{@link #getBoundComponentNode() <em>Bound Component Node</em>}' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @see #getBoundComponentNode()
 	 * @generated
 	 * @ordered
@@ -117,8 +111,7 @@ public class ComponentNodeImpl extends ComponentNodeGroupImpl implements Compone
 	protected ComponentNode boundComponentNode;
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	protected ComponentNodeImpl() {
@@ -126,8 +119,7 @@ public class ComponentNodeImpl extends ComponentNodeGroupImpl implements Compone
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
@@ -136,8 +128,7 @@ public class ComponentNodeImpl extends ComponentNodeGroupImpl implements Compone
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	public Component getComponent() {
@@ -153,8 +144,7 @@ public class ComponentNodeImpl extends ComponentNodeGroupImpl implements Compone
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	public Component basicGetComponent() {
@@ -162,8 +152,7 @@ public class ComponentNodeImpl extends ComponentNodeGroupImpl implements Compone
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	public void setComponent(Component newComponent) {
@@ -174,8 +163,7 @@ public class ComponentNodeImpl extends ComponentNodeGroupImpl implements Compone
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	public EList<ComponentNode> getSubNodes() {
@@ -190,16 +178,16 @@ public class ComponentNodeImpl extends ComponentNodeGroupImpl implements Compone
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public ComponentNode getEngine() {
-		if (engine != null && engine.eIsProxy()) {
-			InternalEObject oldEngine = (InternalEObject)engine;
-			engine = (ComponentNode)eResolveProxy(oldEngine);
-			if (engine != oldEngine) {
+	public ComponentNode getEngineNode() {
+		if (engineNode != null && engineNode.eIsProxy()) {
+			InternalEObject oldEngineNode = (InternalEObject)engineNode;
+			engineNode = (ComponentNode)eResolveProxy(oldEngineNode);
+			if (engineNode != oldEngineNode) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, CorePackage.COMPONENT_NODE__ENGINE, oldEngine, engine));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, CorePackage.COMPONENT_NODE__ENGINE_NODE, oldEngineNode, engineNode));
 			}
 		}
-		return engine;
+		return engineNode;
 	}
 
 	/**
@@ -207,8 +195,8 @@ public class ComponentNodeImpl extends ComponentNodeGroupImpl implements Compone
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public ComponentNode basicGetEngine() {
-		return engine;
+	public ComponentNode basicGetEngineNode() {
+		return engineNode;
 	}
 
 	/**
@@ -216,16 +204,15 @@ public class ComponentNodeImpl extends ComponentNodeGroupImpl implements Compone
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setEngine(ComponentNode newEngine) {
-		ComponentNode oldEngine = engine;
-		engine = newEngine;
+	public void setEngineNode(ComponentNode newEngineNode) {
+		ComponentNode oldEngineNode = engineNode;
+		engineNode = newEngineNode;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, CorePackage.COMPONENT_NODE__ENGINE, oldEngine, engine));
+			eNotify(new ENotificationImpl(this, Notification.SET, CorePackage.COMPONENT_NODE__ENGINE_NODE, oldEngineNode, engineNode));
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	public EList<ComponentNode> getNodes() {
@@ -236,8 +223,7 @@ public class ComponentNodeImpl extends ComponentNodeGroupImpl implements Compone
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	public EList<NodesLink> getStreams() {
@@ -248,8 +234,7 @@ public class ComponentNodeImpl extends ComponentNodeGroupImpl implements Compone
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	public EList<ComponentNodeGroup> getNodesGroups() {
@@ -260,8 +245,7 @@ public class ComponentNodeImpl extends ComponentNodeGroupImpl implements Compone
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	public ComponentNode getBoundComponentNode() {
@@ -277,8 +261,7 @@ public class ComponentNodeImpl extends ComponentNodeGroupImpl implements Compone
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	public ComponentNode basicGetBoundComponentNode() {
@@ -286,8 +269,7 @@ public class ComponentNodeImpl extends ComponentNodeGroupImpl implements Compone
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	public void setBoundComponentNode(ComponentNode newBoundComponentNode) {
@@ -298,8 +280,7 @@ public class ComponentNodeImpl extends ComponentNodeGroupImpl implements Compone
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
@@ -318,8 +299,7 @@ public class ComponentNodeImpl extends ComponentNodeGroupImpl implements Compone
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
@@ -330,9 +310,9 @@ public class ComponentNodeImpl extends ComponentNodeGroupImpl implements Compone
 				return basicGetComponent();
 			case CorePackage.COMPONENT_NODE__SUB_NODES:
 				return getSubNodes();
-			case CorePackage.COMPONENT_NODE__ENGINE:
-				if (resolve) return getEngine();
-				return basicGetEngine();
+			case CorePackage.COMPONENT_NODE__ENGINE_NODE:
+				if (resolve) return getEngineNode();
+				return basicGetEngineNode();
 			case CorePackage.COMPONENT_NODE__NODES:
 				return getNodes();
 			case CorePackage.COMPONENT_NODE__STREAMS:
@@ -347,8 +327,7 @@ public class ComponentNodeImpl extends ComponentNodeGroupImpl implements Compone
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	@SuppressWarnings("unchecked")
@@ -362,8 +341,8 @@ public class ComponentNodeImpl extends ComponentNodeGroupImpl implements Compone
 				getSubNodes().clear();
 				getSubNodes().addAll((Collection<? extends ComponentNode>)newValue);
 				return;
-			case CorePackage.COMPONENT_NODE__ENGINE:
-				setEngine((ComponentNode)newValue);
+			case CorePackage.COMPONENT_NODE__ENGINE_NODE:
+				setEngineNode((ComponentNode)newValue);
 				return;
 			case CorePackage.COMPONENT_NODE__NODES:
 				getNodes().clear();
@@ -385,8 +364,7 @@ public class ComponentNodeImpl extends ComponentNodeGroupImpl implements Compone
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
@@ -398,8 +376,8 @@ public class ComponentNodeImpl extends ComponentNodeGroupImpl implements Compone
 			case CorePackage.COMPONENT_NODE__SUB_NODES:
 				getSubNodes().clear();
 				return;
-			case CorePackage.COMPONENT_NODE__ENGINE:
-				setEngine((ComponentNode)null);
+			case CorePackage.COMPONENT_NODE__ENGINE_NODE:
+				setEngineNode((ComponentNode)null);
 				return;
 			case CorePackage.COMPONENT_NODE__NODES:
 				getNodes().clear();
@@ -418,8 +396,7 @@ public class ComponentNodeImpl extends ComponentNodeGroupImpl implements Compone
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
@@ -429,8 +406,8 @@ public class ComponentNodeImpl extends ComponentNodeGroupImpl implements Compone
 				return component != null;
 			case CorePackage.COMPONENT_NODE__SUB_NODES:
 				return subNodes != null && !subNodes.isEmpty();
-			case CorePackage.COMPONENT_NODE__ENGINE:
-				return engine != null;
+			case CorePackage.COMPONENT_NODE__ENGINE_NODE:
+				return engineNode != null;
 			case CorePackage.COMPONENT_NODE__NODES:
 				return nodes != null && !nodes.isEmpty();
 			case CorePackage.COMPONENT_NODE__STREAMS:
@@ -443,4 +420,20 @@ public class ComponentNodeImpl extends ComponentNodeGroupImpl implements Compone
 		return super.eIsSet(featureID);
 	}
 
-} //ComponentNodeImpl
+	/**
+	 * <!-- begin-user-doc --> If the component node is bound to another component node in the same
+	 * or another viewpoint, we use the bound component node name if the current component node name
+	 * is void and if the bound component node name is not void itself.<!-- end-user-doc -->
+	 * 
+	 * @generated NOT
+	 */
+	public String getName() {
+		if ((name == null || "".equals(name)) && boundComponentNode != null && boundComponentNode.getName() != null
+				&& !"".equals(boundComponentNode)) {
+			return boundComponentNode.getName();
+		} else {
+			return name;
+		}
+	}
+
+} // ComponentNodeImpl

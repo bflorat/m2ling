@@ -16,6 +16,7 @@ import org.eclipse.emf.common.util.EList;
  * <ul>
  *   <li>{@link org.m2ling.domain.core.LinkType#getSourceTypes <em>Source Types</em>}</li>
  *   <li>{@link org.m2ling.domain.core.LinkType#getDestinationTypes <em>Destination Types</em>}</li>
+ *   <li>{@link org.m2ling.domain.core.LinkType#isReifiable <em>Reifiable</em>}</li>
  * </ul>
  * </p>
  *
@@ -62,5 +63,32 @@ public interface LinkType extends ConceptItem {
 	 * @generated
 	 */
 	EList<ComponentType> getDestinationTypes();
+
+	/**
+	 * Returns the value of the '<em><b>Reifiable</b></em>' attribute.
+	 * The default value is <code>"false"</code>.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Reifiable</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Reifiable</em>' attribute.
+	 * @see #setReifiable(boolean)
+	 * @see org.m2ling.domain.core.CorePackage#getLinkType_Reifiable()
+	 * @model default="false"
+	 * @generated
+	 */
+	boolean isReifiable();
+
+	/**
+	 * Sets the value of the '{@link org.m2ling.domain.core.LinkType#isReifiable <em>Reifiable</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Reifiable</em>' attribute.
+	 * @see #isReifiable()
+	 * @generated
+	 */
+	void setReifiable(boolean value);
 
 } // LinkType

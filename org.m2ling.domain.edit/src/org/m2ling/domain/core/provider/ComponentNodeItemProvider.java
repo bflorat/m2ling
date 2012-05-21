@@ -3,12 +3,12 @@
  */
 package org.m2ling.domain.core.provider;
 
-
 import java.util.Collection;
 import java.util.List;
 
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
 import org.eclipse.emf.edit.provider.IEditingDomainItemProvider;
@@ -21,32 +21,27 @@ import org.eclipse.emf.edit.provider.ViewerNotification;
 import org.m2ling.domain.core.ComponentNode;
 import org.m2ling.domain.core.CoreFactory;
 import org.m2ling.domain.core.CorePackage;
+import org.m2ling.domain.core.View;
+import org.m2ling.domain.core.impl.ComponentNodeImpl;
 
 /**
- * This is the item provider adapter for a {@link org.m2ling.domain.core.ComponentNode} object.
- * <!-- begin-user-doc -->
- * <!-- end-user-doc -->
+ * This is the item provider adapter for a {@link org.m2ling.domain.core.ComponentNode} object. <!--
+ * begin-user-doc --> <!-- end-user-doc -->
+ * 
  * @generated
  */
-public class ComponentNodeItemProvider
-	extends ComponentNodeGroupItemProvider
-	implements
-		IEditingDomainItemProvider,
-		IStructuredItemContentProvider,
-		ITreeItemContentProvider,
-		IItemLabelProvider,
-		IItemPropertySource {
+public class ComponentNodeItemProvider extends ComponentNodeGroupItemProvider implements IEditingDomainItemProvider,
+		IStructuredItemContentProvider, ITreeItemContentProvider, IItemLabelProvider, IItemPropertySource {
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	public static final String copyright = "Copyright (C) 2012 Bertrand Florat";
 
 	/**
 	 * This constructs an instance from a factory and a notifier.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!--
+	 * end-user-doc -->
 	 * @generated
 	 */
 	public ComponentNodeItemProvider(AdapterFactory adapterFactory) {
@@ -55,8 +50,8 @@ public class ComponentNodeItemProvider
 
 	/**
 	 * This returns the property descriptors for the adapted class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!--
+	 * end-user-doc -->
 	 * @generated
 	 */
 	@Override
@@ -65,7 +60,7 @@ public class ComponentNodeItemProvider
 			super.getPropertyDescriptors(object);
 
 			addComponentPropertyDescriptor(object);
-			addEnginePropertyDescriptor(object);
+			addEngineNodePropertyDescriptor(object);
 			addBoundComponentNodePropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
@@ -73,8 +68,8 @@ public class ComponentNodeItemProvider
 
 	/**
 	 * This adds a property descriptor for the Component feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!--
+	 * end-user-doc -->
 	 * @generated
 	 */
 	protected void addComponentPropertyDescriptor(Object object) {
@@ -94,19 +89,19 @@ public class ComponentNodeItemProvider
 	}
 
 	/**
-	 * This adds a property descriptor for the Engine feature.
+	 * This adds a property descriptor for the Engine Node feature.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected void addEnginePropertyDescriptor(Object object) {
+	protected void addEngineNodePropertyDescriptor(Object object) {
 		itemPropertyDescriptors.add
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
-				 getString("_UI_ComponentNode_engine_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_ComponentNode_engine_feature", "_UI_ComponentNode_type"),
-				 CorePackage.Literals.COMPONENT_NODE__ENGINE,
+				 getString("_UI_ComponentNode_engineNode_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_ComponentNode_engineNode_feature", "_UI_ComponentNode_type"),
+				 CorePackage.Literals.COMPONENT_NODE__ENGINE_NODE,
 				 true,
 				 false,
 				 true,
@@ -138,11 +133,12 @@ public class ComponentNodeItemProvider
 	}
 
 	/**
-	 * This specifies how to implement {@link #getChildren} and is used to deduce an appropriate feature for an
-	 * {@link org.eclipse.emf.edit.command.AddCommand}, {@link org.eclipse.emf.edit.command.RemoveCommand} or
-	 * {@link org.eclipse.emf.edit.command.MoveCommand} in {@link #createCommand}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * This specifies how to implement {@link #getChildren} and is used to deduce an appropriate
+	 * feature for an {@link org.eclipse.emf.edit.command.AddCommand},
+	 * {@link org.eclipse.emf.edit.command.RemoveCommand} or
+	 * {@link org.eclipse.emf.edit.command.MoveCommand} in {@link #createCommand}. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -158,8 +154,7 @@ public class ComponentNodeItemProvider
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
@@ -172,8 +167,7 @@ public class ComponentNodeItemProvider
 
 	/**
 	 * This returns ComponentNode.gif.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
@@ -182,24 +176,29 @@ public class ComponentNodeItemProvider
 	}
 
 	/**
-	 * This returns the label text for the adapted class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * This returns the label text for the adapted class. <!-- begin-user-doc --> <!-- end-user-doc
+	 * -->
+	 * 
 	 * @generated NOT
 	 */
 	@Override
 	public String getText(Object object) {
-		String label = ((ComponentNode)object).getName();
-		return label == null || label.length() == 0 ?
-			getString("_UI_ComponentNode_type") :
-			getString("_UI_ComponentNode_type") + ": " + label;
+		String label = ((ComponentNode) object).getName();
+		ComponentNodeImpl comp = (ComponentNodeImpl) object;
+		View view = null;
+		EObject parent = comp.eContainer();
+		while (!(parent instanceof View)) {
+			parent = parent.eContainer();
+		}
+		view = (View) parent;
+		return label == null || label.length() == 0 ? getString("_UI_ComponentNode_type")
+				: getString("_UI_ComponentNode_type") + ": " + view.getName() + '#' + label;
 	}
 
 	/**
 	 * This handles model notifications by calling {@link #updateChildren} to update any cached
 	 * children and by creating a viewer notification, which it passes to {@link #fireNotifyChanged}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
@@ -220,8 +219,7 @@ public class ComponentNodeItemProvider
 	/**
 	 * This adds {@link org.eclipse.emf.edit.command.CommandParameter}s describing the children
 	 * that can be created under this object.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
@@ -255,9 +253,9 @@ public class ComponentNodeItemProvider
 	}
 
 	/**
-	 * This returns the label text for {@link org.eclipse.emf.edit.command.CreateChildCommand}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * This returns the label text for {@link org.eclipse.emf.edit.command.CreateChildCommand}. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override

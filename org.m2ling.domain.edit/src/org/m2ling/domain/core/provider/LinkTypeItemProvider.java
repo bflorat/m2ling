@@ -16,6 +16,8 @@ import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.IItemPropertySource;
 import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
+import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
+import org.eclipse.emf.edit.provider.ViewerNotification;
 import org.m2ling.domain.core.CorePackage;
 import org.m2ling.domain.core.LinkType;
 
@@ -63,6 +65,7 @@ public class LinkTypeItemProvider
 
 			addSourceTypesPropertyDescriptor(object);
 			addDestinationTypesPropertyDescriptor(object);
+			addReifiablePropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -112,6 +115,28 @@ public class LinkTypeItemProvider
 	}
 
 	/**
+	 * This adds a property descriptor for the Reifiable feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addReifiablePropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_LinkType_reifiable_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_LinkType_reifiable_feature", "_UI_LinkType_type"),
+				 CorePackage.Literals.LINK_TYPE__REIFIABLE,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.BOOLEAN_VALUE_IMAGE,
+				 null,
+				 null));
+	}
+
+	/**
 	 * This returns LinkType.gif.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -146,6 +171,12 @@ public class LinkTypeItemProvider
 	@Override
 	public void notifyChanged(Notification notification) {
 		updateChildren(notification);
+
+		switch (notification.getFeatureID(LinkType.class)) {
+			case CorePackage.LINK_TYPE__REIFIABLE:
+				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
+				return;
+		}
 		super.notifyChanged(notification);
 	}
 
