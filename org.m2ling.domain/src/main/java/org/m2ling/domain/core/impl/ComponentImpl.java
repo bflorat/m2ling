@@ -15,6 +15,7 @@ import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.m2ling.domain.core.Component;
+import org.m2ling.domain.core.ComponentNode;
 import org.m2ling.domain.core.ComponentType;
 import org.m2ling.domain.core.CorePackage;
 
@@ -28,6 +29,7 @@ import org.m2ling.domain.core.CorePackage;
  *   <li>{@link org.m2ling.domain.core.impl.ComponentImpl#getType <em>Type</em>}</li>
  *   <li>{@link org.m2ling.domain.core.impl.ComponentImpl#getEngines <em>Engines</em>}</li>
  *   <li>{@link org.m2ling.domain.core.impl.ComponentImpl#getBoundComponent <em>Bound Component</em>}</li>
+ *   <li>{@link org.m2ling.domain.core.impl.ComponentImpl#getNodes <em>Nodes</em>}</li>
  * </ul>
  * </p>
  *
@@ -77,6 +79,16 @@ public class ComponentImpl extends ComponentGroupImpl implements Component {
 	 * @ordered
 	 */
 	protected Component boundComponent;
+
+	/**
+	 * The cached value of the '{@link #getNodes() <em>Nodes</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getNodes()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<ComponentNode> nodes;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -205,6 +217,18 @@ public class ComponentImpl extends ComponentGroupImpl implements Component {
 	}
 
 	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList<ComponentNode> getNodes() {
+		if (nodes == null) {
+			nodes = new EObjectContainmentEList<ComponentNode>(ComponentNode.class, this, CorePackage.COMPONENT__NODES);
+		}
+		return nodes;
+	}
+
+	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
@@ -213,6 +237,8 @@ public class ComponentImpl extends ComponentGroupImpl implements Component {
 		switch (featureID) {
 			case CorePackage.COMPONENT__SUB_COMPONENTS:
 				return ((InternalEList<?>)getSubComponents()).basicRemove(otherEnd, msgs);
+			case CorePackage.COMPONENT__NODES:
+				return ((InternalEList<?>)getNodes()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -234,6 +260,8 @@ public class ComponentImpl extends ComponentGroupImpl implements Component {
 			case CorePackage.COMPONENT__BOUND_COMPONENT:
 				if (resolve) return getBoundComponent();
 				return basicGetBoundComponent();
+			case CorePackage.COMPONENT__NODES:
+				return getNodes();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -260,6 +288,10 @@ public class ComponentImpl extends ComponentGroupImpl implements Component {
 			case CorePackage.COMPONENT__BOUND_COMPONENT:
 				setBoundComponent((Component)newValue);
 				return;
+			case CorePackage.COMPONENT__NODES:
+				getNodes().clear();
+				getNodes().addAll((Collection<? extends ComponentNode>)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -283,6 +315,9 @@ public class ComponentImpl extends ComponentGroupImpl implements Component {
 			case CorePackage.COMPONENT__BOUND_COMPONENT:
 				setBoundComponent((Component)null);
 				return;
+			case CorePackage.COMPONENT__NODES:
+				getNodes().clear();
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -302,6 +337,8 @@ public class ComponentImpl extends ComponentGroupImpl implements Component {
 				return engines != null && !engines.isEmpty();
 			case CorePackage.COMPONENT__BOUND_COMPONENT:
 				return boundComponent != null;
+			case CorePackage.COMPONENT__NODES:
+				return nodes != null && !nodes.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}

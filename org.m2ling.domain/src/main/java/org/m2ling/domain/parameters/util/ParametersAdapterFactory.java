@@ -93,6 +93,10 @@ public class ParametersAdapterFactory extends AdapterFactoryImpl {
 				return createParamDefOverriderAdapter();
 			}
 			@Override
+			public Adapter caseRootParameters(RootParameters object) {
+				return createRootParametersAdapter();
+			}
+			@Override
 			public Adapter caseHasComment(HasComment object) {
 				return createHasCommentAdapter();
 			}
@@ -167,6 +171,20 @@ public class ParametersAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createParamDefOverriderAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.m2ling.domain.parameters.RootParameters <em>Root Parameters</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.m2ling.domain.parameters.RootParameters
+	 * @generated
+	 */
+	public Adapter createRootParametersAdapter() {
 		return null;
 	}
 

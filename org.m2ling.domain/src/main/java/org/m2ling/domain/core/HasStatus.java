@@ -3,24 +3,25 @@
  */
 package org.m2ling.domain.core;
 
+import org.eclipse.emf.ecore.EObject;
 
 /**
  * <!-- begin-user-doc -->
- * A representation of the model object '<em><b>Runtime Item</b></em>'.
+ * A representation of the model object '<em><b>Has Status</b></em>'.
  * <!-- end-user-doc -->
  *
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link org.m2ling.domain.core.RuntimeItem#getStatus <em>Status</em>}</li>
+ *   <li>{@link org.m2ling.domain.core.HasStatus#getStatus <em>Status</em>}</li>
  * </ul>
  * </p>
  *
- * @see org.m2ling.domain.core.CorePackage#getRuntimeItem()
+ * @see org.m2ling.domain.core.CorePackage#getHasStatus()
  * @model abstract="true"
  * @generated
  */
-public interface RuntimeItem extends HasNameAndID, HasComment, HasTags, HasParameterValues, HasConstraints, HasLabel {
+public interface HasStatus extends EObject {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -38,14 +39,14 @@ public interface RuntimeItem extends HasNameAndID, HasComment, HasTags, HasParam
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Status</em>' attribute.
 	 * @see #setStatus(String)
-	 * @see org.m2ling.domain.core.CorePackage#getRuntimeItem_Status()
+	 * @see org.m2ling.domain.core.CorePackage#getHasStatus_Status()
 	 * @model
 	 * @generated
 	 */
 	String getStatus();
 
 	/**
-	 * Sets the value of the '{@link org.m2ling.domain.core.RuntimeItem#getStatus <em>Status</em>}' attribute.
+	 * Sets the value of the '{@link org.m2ling.domain.core.HasStatus#getStatus <em>Status</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Status</em>' attribute.
@@ -54,4 +55,4 @@ public interface RuntimeItem extends HasNameAndID, HasComment, HasTags, HasParam
 	 */
 	void setStatus(String value);
 
-} // RuntimeItem
+} // HasStatus

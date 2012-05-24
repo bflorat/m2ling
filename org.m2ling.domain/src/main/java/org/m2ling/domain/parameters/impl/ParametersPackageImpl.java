@@ -21,6 +21,7 @@ import org.m2ling.domain.parameters.ParameterType;
 import org.m2ling.domain.parameters.ParameterValue;
 import org.m2ling.domain.parameters.ParametersFactory;
 import org.m2ling.domain.parameters.ParametersPackage;
+import org.m2ling.domain.parameters.RootParameters;
 
 /**
  * <!-- begin-user-doc -->
@@ -56,6 +57,13 @@ public class ParametersPackageImpl extends EPackageImpl implements ParametersPac
 	 * @generated
 	 */
 	private EClass paramDefOverriderEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass rootParametersEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -190,7 +198,7 @@ public class ParametersPackageImpl extends EPackageImpl implements ParametersPac
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getParameterDefinition_Parent() {
+	public EReference getParameterDefinition_Target() {
 		return (EReference)parameterDefinitionEClass.getEStructuralFeatures().get(0);
 	}
 
@@ -244,7 +252,7 @@ public class ParametersPackageImpl extends EPackageImpl implements ParametersPac
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getParameterDefinition_DerivationExpression() {
+	public EAttribute getParameterDefinition_Expression() {
 		return (EAttribute)parameterDefinitionEClass.getEStructuralFeatures().get(6);
 	}
 
@@ -264,6 +272,15 @@ public class ParametersPackageImpl extends EPackageImpl implements ParametersPac
 	 */
 	public EAttribute getParameterDefinition_LongDescription() {
 		return (EAttribute)parameterDefinitionEClass.getEStructuralFeatures().get(8);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getParameterDefinition_TargetType() {
+		return (EReference)parameterDefinitionEClass.getEStructuralFeatures().get(9);
 	}
 
 	/**
@@ -300,6 +317,33 @@ public class ParametersPackageImpl extends EPackageImpl implements ParametersPac
 	 */
 	public EAttribute getParamDefOverrider_Value() {
 		return (EAttribute)paramDefOverriderEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getRootParameters() {
+		return rootParametersEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getRootParameters_Definitions() {
+		return (EReference)rootParametersEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getRootParameters_Values() {
+		return (EReference)rootParametersEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -354,20 +398,25 @@ public class ParametersPackageImpl extends EPackageImpl implements ParametersPac
 		createEAttribute(parameterValueEClass, PARAMETER_VALUE__VALUE);
 
 		parameterDefinitionEClass = createEClass(PARAMETER_DEFINITION);
-		createEReference(parameterDefinitionEClass, PARAMETER_DEFINITION__PARENT);
+		createEReference(parameterDefinitionEClass, PARAMETER_DEFINITION__TARGET);
 		createEReference(parameterDefinitionEClass, PARAMETER_DEFINITION__CONSTRAINTS);
 		createEAttribute(parameterDefinitionEClass, PARAMETER_DEFINITION__TYPE);
 		createEAttribute(parameterDefinitionEClass, PARAMETER_DEFINITION__DESCRIPTION);
 		createEAttribute(parameterDefinitionEClass, PARAMETER_DEFINITION__DEFAULT_VALUE);
 		createEAttribute(parameterDefinitionEClass, PARAMETER_DEFINITION__EXAMPLE_VALUE);
-		createEAttribute(parameterDefinitionEClass, PARAMETER_DEFINITION__DERIVATION_EXPRESSION);
+		createEAttribute(parameterDefinitionEClass, PARAMETER_DEFINITION__EXPRESSION);
 		createEReference(parameterDefinitionEClass, PARAMETER_DEFINITION__OVERRIDERS);
 		createEAttribute(parameterDefinitionEClass, PARAMETER_DEFINITION__LONG_DESCRIPTION);
+		createEReference(parameterDefinitionEClass, PARAMETER_DEFINITION__TARGET_TYPE);
 
 		paramDefOverriderEClass = createEClass(PARAM_DEF_OVERRIDER);
 		createEAttribute(paramDefOverriderEClass, PARAM_DEF_OVERRIDER__OVERRIDED_FEATURE);
 		createEAttribute(paramDefOverriderEClass, PARAM_DEF_OVERRIDER__ENVIRONMENT);
 		createEAttribute(paramDefOverriderEClass, PARAM_DEF_OVERRIDER__VALUE);
+
+		rootParametersEClass = createEClass(ROOT_PARAMETERS);
+		createEReference(rootParametersEClass, ROOT_PARAMETERS__DEFINITIONS);
+		createEReference(rootParametersEClass, ROOT_PARAMETERS__VALUES);
 
 		// Create enums
 		parameterTypeEEnum = createEEnum(PARAMETER_TYPE);
@@ -423,20 +472,25 @@ public class ParametersPackageImpl extends EPackageImpl implements ParametersPac
 		addEOperation(parameterValueEClass, null, "getFinalValue", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		initEClass(parameterDefinitionEClass, ParameterDefinition.class, "ParameterDefinition", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getParameterDefinition_Parent(), theCorePackage.getHasParameterDefinitions(), null, "parent", null, 1, 1, ParameterDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getParameterDefinition_Target(), theCorePackage.getHasParameterDefinitions(), null, "target", null, 1, 1, ParameterDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getParameterDefinition_Constraints(), theCorePackage.getConstraint(), null, "constraints", null, 0, -1, ParameterDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getParameterDefinition_Type(), this.getParameterType(), "type", null, 0, 1, ParameterDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getParameterDefinition_Description(), ecorePackage.getEString(), "description", null, 0, 1, ParameterDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getParameterDefinition_DefaultValue(), ecorePackage.getEString(), "defaultValue", null, 0, 1, ParameterDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getParameterDefinition_ExampleValue(), ecorePackage.getEString(), "exampleValue", null, 0, 1, ParameterDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getParameterDefinition_DerivationExpression(), ecorePackage.getEString(), "derivationExpression", null, 0, 1, ParameterDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getParameterDefinition_Expression(), ecorePackage.getEString(), "expression", null, 0, 1, ParameterDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getParameterDefinition_Overriders(), this.getParamDefOverrider(), null, "overriders", null, 0, -1, ParameterDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getParameterDefinition_LongDescription(), ecorePackage.getEString(), "longDescription", null, 0, 1, ParameterDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getParameterDefinition_TargetType(), theCorePackage.getComponentType(), null, "targetType", null, 0, 1, ParameterDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(paramDefOverriderEClass, ParamDefOverrider.class, "ParamDefOverrider", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getParamDefOverrider_OverridedFeature(), this.getEStructuralFeature(), "overridedFeature", null, 0, 1, ParamDefOverrider.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getParamDefOverrider_Environment(), ecorePackage.getEString(), "environment", null, 0, 1, ParamDefOverrider.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getParamDefOverrider_Value(), ecorePackage.getEString(), "value", null, 0, 1, ParamDefOverrider.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(rootParametersEClass, RootParameters.class, "RootParameters", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getRootParameters_Definitions(), this.getParameterDefinition(), null, "definitions", null, 0, -1, RootParameters.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getRootParameters_Values(), this.getParameterValue(), null, "values", null, 0, -1, RootParameters.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Initialize enums and add enum literals
 		initEEnum(parameterTypeEEnum, ParameterType.class, "ParameterType");

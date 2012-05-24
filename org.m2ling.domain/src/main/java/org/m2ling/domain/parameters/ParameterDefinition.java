@@ -4,6 +4,7 @@
 package org.m2ling.domain.parameters;
 
 import org.eclipse.emf.common.util.EList;
+import org.m2ling.domain.core.ComponentType;
 import org.m2ling.domain.core.Constraint;
 import org.m2ling.domain.core.HasComment;
 import org.m2ling.domain.core.HasConstraints;
@@ -19,15 +20,16 @@ import org.m2ling.domain.core.HasParameterDefinitions;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link org.m2ling.domain.parameters.ParameterDefinition#getParent <em>Parent</em>}</li>
+ *   <li>{@link org.m2ling.domain.parameters.ParameterDefinition#getTarget <em>Target</em>}</li>
  *   <li>{@link org.m2ling.domain.parameters.ParameterDefinition#getConstraints <em>Constraints</em>}</li>
  *   <li>{@link org.m2ling.domain.parameters.ParameterDefinition#getType <em>Type</em>}</li>
  *   <li>{@link org.m2ling.domain.parameters.ParameterDefinition#getDescription <em>Description</em>}</li>
  *   <li>{@link org.m2ling.domain.parameters.ParameterDefinition#getDefaultValue <em>Default Value</em>}</li>
  *   <li>{@link org.m2ling.domain.parameters.ParameterDefinition#getExampleValue <em>Example Value</em>}</li>
- *   <li>{@link org.m2ling.domain.parameters.ParameterDefinition#getDerivationExpression <em>Derivation Expression</em>}</li>
+ *   <li>{@link org.m2ling.domain.parameters.ParameterDefinition#getExpression <em>Expression</em>}</li>
  *   <li>{@link org.m2ling.domain.parameters.ParameterDefinition#getOverriders <em>Overriders</em>}</li>
  *   <li>{@link org.m2ling.domain.parameters.ParameterDefinition#getLongDescription <em>Long Description</em>}</li>
+ *   <li>{@link org.m2ling.domain.parameters.ParameterDefinition#getTargetType <em>Target Type</em>}</li>
  * </ul>
  * </p>
  *
@@ -44,30 +46,30 @@ public interface ParameterDefinition extends HasComment, HasCustomProperties, Ha
 	String copyright = "Copyright (C) 2012 Bertrand Florat";
 
 	/**
-	 * Returns the value of the '<em><b>Parent</b></em>' reference.
+	 * Returns the value of the '<em><b>Target</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Parent</em>' reference isn't clear,
+	 * If the meaning of the '<em>Target</em>' reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Parent</em>' reference.
-	 * @see #setParent(HasParameterDefinitions)
-	 * @see org.m2ling.domain.parameters.ParametersPackage#getParameterDefinition_Parent()
+	 * @return the value of the '<em>Target</em>' reference.
+	 * @see #setTarget(HasParameterDefinitions)
+	 * @see org.m2ling.domain.parameters.ParametersPackage#getParameterDefinition_Target()
 	 * @model required="true"
 	 * @generated
 	 */
-	HasParameterDefinitions getParent();
+	HasParameterDefinitions getTarget();
 
 	/**
-	 * Sets the value of the '{@link org.m2ling.domain.parameters.ParameterDefinition#getParent <em>Parent</em>}' reference.
+	 * Sets the value of the '{@link org.m2ling.domain.parameters.ParameterDefinition#getTarget <em>Target</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Parent</em>' reference.
-	 * @see #getParent()
+	 * @param value the new value of the '<em>Target</em>' reference.
+	 * @see #getTarget()
 	 * @generated
 	 */
-	void setParent(HasParameterDefinitions value);
+	void setTarget(HasParameterDefinitions value);
 
 	/**
 	 * Returns the value of the '<em><b>Constraints</b></em>' containment reference list.
@@ -193,30 +195,30 @@ public interface ParameterDefinition extends HasComment, HasCustomProperties, Ha
 	void setExampleValue(String value);
 
 	/**
-	 * Returns the value of the '<em><b>Derivation Expression</b></em>' attribute.
+	 * Returns the value of the '<em><b>Expression</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Derivation Expression</em>' attribute isn't clear,
+	 * If the meaning of the '<em>Expression</em>' attribute isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Derivation Expression</em>' attribute.
-	 * @see #setDerivationExpression(String)
-	 * @see org.m2ling.domain.parameters.ParametersPackage#getParameterDefinition_DerivationExpression()
+	 * @return the value of the '<em>Expression</em>' attribute.
+	 * @see #setExpression(String)
+	 * @see org.m2ling.domain.parameters.ParametersPackage#getParameterDefinition_Expression()
 	 * @model
 	 * @generated
 	 */
-	String getDerivationExpression();
+	String getExpression();
 
 	/**
-	 * Sets the value of the '{@link org.m2ling.domain.parameters.ParameterDefinition#getDerivationExpression <em>Derivation Expression</em>}' attribute.
+	 * Sets the value of the '{@link org.m2ling.domain.parameters.ParameterDefinition#getExpression <em>Expression</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Derivation Expression</em>' attribute.
-	 * @see #getDerivationExpression()
+	 * @param value the new value of the '<em>Expression</em>' attribute.
+	 * @see #getExpression()
 	 * @generated
 	 */
-	void setDerivationExpression(String value);
+	void setExpression(String value);
 
 	/**
 	 * Returns the value of the '<em><b>Overriders</b></em>' containment reference list.
@@ -259,5 +261,31 @@ public interface ParameterDefinition extends HasComment, HasCustomProperties, Ha
 	 * @generated
 	 */
 	void setLongDescription(String value);
+
+	/**
+	 * Returns the value of the '<em><b>Target Type</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Target Type</em>' reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Target Type</em>' reference.
+	 * @see #setTargetType(ComponentType)
+	 * @see org.m2ling.domain.parameters.ParametersPackage#getParameterDefinition_TargetType()
+	 * @model
+	 * @generated
+	 */
+	ComponentType getTargetType();
+
+	/**
+	 * Sets the value of the '{@link org.m2ling.domain.parameters.ParameterDefinition#getTargetType <em>Target Type</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Target Type</em>' reference.
+	 * @see #getTargetType()
+	 * @generated
+	 */
+	void setTargetType(ComponentType value);
 
 } // ParameterDefinition

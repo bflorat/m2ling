@@ -245,6 +245,12 @@ public class CoreSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case CorePackage.HAS_STATUS: {
+				HasStatus hasStatus = (HasStatus)theEObject;
+				T result = caseHasStatus(hasStatus);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			case CorePackage.HAS_NAME_AND_ID: {
 				HasNameAndID hasNameAndID = (HasNameAndID)theEObject;
 				T result = caseHasNameAndID(hasNameAndID);
@@ -266,6 +272,18 @@ public class CoreSwitch<T> extends Switch<T> {
 			case CorePackage.HAS_CUSTOM_PROPERTIES: {
 				HasCustomProperties hasCustomProperties = (HasCustomProperties)theEObject;
 				T result = caseHasCustomProperties(hasCustomProperties);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case CorePackage.HAS_PARAMETER_DEFINITIONS: {
+				HasParameterDefinitions hasParameterDefinitions = (HasParameterDefinitions)theEObject;
+				T result = caseHasParameterDefinitions(hasParameterDefinitions);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case CorePackage.HAS_PARAMETER_VALUES: {
+				HasParameterValues hasParameterValues = (HasParameterValues)theEObject;
+				T result = caseHasParameterValues(hasParameterValues);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -312,18 +330,6 @@ public class CoreSwitch<T> extends Switch<T> {
 				if (result == null) result = caseHasParameterValues(nodesLink);
 				if (result == null) result = caseHasConstraints(nodesLink);
 				if (result == null) result = caseHasLabel(nodesLink);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case CorePackage.HAS_PARAMETER_DEFINITIONS: {
-				HasParameterDefinitions hasParameterDefinitions = (HasParameterDefinitions)theEObject;
-				T result = caseHasParameterDefinitions(hasParameterDefinitions);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case CorePackage.HAS_PARAMETER_VALUES: {
-				HasParameterValues hasParameterValues = (HasParameterValues)theEObject;
-				T result = caseHasParameterValues(hasParameterValues);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -472,13 +478,10 @@ public class CoreSwitch<T> extends Switch<T> {
 			case CorePackage.RULE: {
 				Rule rule = (Rule)theEObject;
 				T result = caseRule(rule);
-				if (result == null) result = caseConceptItem(rule);
 				if (result == null) result = caseHasNameAndID(rule);
 				if (result == null) result = caseHasCustomProperties(rule);
 				if (result == null) result = caseHasComment(rule);
 				if (result == null) result = caseHasTags(rule);
-				if (result == null) result = caseHasParameterDefinitions(rule);
-				if (result == null) result = caseHasConstraints(rule);
 				if (result == null) result = caseHasLabel(rule);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
@@ -649,6 +652,21 @@ public class CoreSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseView(View object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Has Status</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Has Status</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseHasStatus(HasStatus object) {
 		return null;
 	}
 

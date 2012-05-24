@@ -57,6 +57,15 @@ public interface ParametersFactory extends EFactory {
 	ParamDefOverrider createParamDefOverrider();
 
 	/**
+	 * Returns a new object of class '<em>Root Parameters</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Root Parameters</em>'.
+	 * @generated
+	 */
+	RootParameters createRootParameters();
+
+	/**
 	 * Returns the package supported by this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

@@ -37,6 +37,7 @@ import org.m2ling.domain.core.HasLabel;
 import org.m2ling.domain.core.HasNameAndID;
 import org.m2ling.domain.core.HasParameterDefinitions;
 import org.m2ling.domain.core.HasParameterValues;
+import org.m2ling.domain.core.HasStatus;
 import org.m2ling.domain.core.HasTags;
 import org.m2ling.domain.core.IntegerConstraint;
 import org.m2ling.domain.core.Link;
@@ -151,6 +152,13 @@ public class CorePackageImpl extends EPackageImpl implements CorePackage {
 	 * @generated
 	 */
 	private EClass viewEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass hasStatusEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -572,6 +580,15 @@ public class CorePackageImpl extends EPackageImpl implements CorePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EReference getComponent_Nodes() {
+		return (EReference)componentEClass.getEStructuralFeatures().get(4);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getHasNameAndID() {
 		return hasNameAndIDEClass;
 	}
@@ -770,8 +787,26 @@ public class CorePackageImpl extends EPackageImpl implements CorePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getConceptItem_Status_literals() {
+		return (EAttribute)conceptItemEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getRuntimeItem() {
 		return runtimeItemEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getRuntimeItem_Status() {
+		return (EAttribute)runtimeItemEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -844,6 +879,24 @@ public class CorePackageImpl extends EPackageImpl implements CorePackage {
 	 */
 	public EReference getView_Streams() {
 		return (EReference)viewEClass.getEStructuralFeatures().get(6);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getHasStatus() {
+		return hasStatusEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getHasStatus_Status() {
+		return (EAttribute)hasStatusEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -1517,6 +1570,7 @@ public class CorePackageImpl extends EPackageImpl implements CorePackage {
 		createEReference(componentEClass, COMPONENT__TYPE);
 		createEReference(componentEClass, COMPONENT__ENGINES);
 		createEReference(componentEClass, COMPONENT__BOUND_COMPONENT);
+		createEReference(componentEClass, COMPONENT__NODES);
 
 		componentNodeEClass = createEClass(COMPONENT_NODE);
 		createEReference(componentNodeEClass, COMPONENT_NODE__COMPONENT);
@@ -1542,8 +1596,10 @@ public class CorePackageImpl extends EPackageImpl implements CorePackage {
 		architectureItemEClass = createEClass(ARCHITECTURE_ITEM);
 
 		conceptItemEClass = createEClass(CONCEPT_ITEM);
+		createEAttribute(conceptItemEClass, CONCEPT_ITEM__STATUS_LITERALS);
 
 		runtimeItemEClass = createEClass(RUNTIME_ITEM);
+		createEAttribute(runtimeItemEClass, RUNTIME_ITEM__STATUS);
 
 		viewEClass = createEClass(VIEW);
 		createEReference(viewEClass, VIEW__COMPONENTS_GROUPS);
@@ -1553,6 +1609,9 @@ public class CorePackageImpl extends EPackageImpl implements CorePackage {
 		createEReference(viewEClass, VIEW__NODES);
 		createEReference(viewEClass, VIEW__NODES_GROUPS);
 		createEReference(viewEClass, VIEW__STREAMS);
+
+		hasStatusEClass = createEClass(HAS_STATUS);
+		createEAttribute(hasStatusEClass, HAS_STATUS__STATUS);
 
 		hasNameAndIDEClass = createEClass(HAS_NAME_AND_ID);
 		createEAttribute(hasNameAndIDEClass, HAS_NAME_AND_ID__ID);
@@ -1566,6 +1625,10 @@ public class CorePackageImpl extends EPackageImpl implements CorePackage {
 
 		hasCustomPropertiesEClass = createEClass(HAS_CUSTOM_PROPERTIES);
 		createEReference(hasCustomPropertiesEClass, HAS_CUSTOM_PROPERTIES__CUSTOM_PROPERTIES);
+
+		hasParameterDefinitionsEClass = createEClass(HAS_PARAMETER_DEFINITIONS);
+
+		hasParameterValuesEClass = createEClass(HAS_PARAMETER_VALUES);
 
 		customPropertyEClass = createEClass(CUSTOM_PROPERTY);
 
@@ -1583,10 +1646,6 @@ public class CorePackageImpl extends EPackageImpl implements CorePackage {
 		createEReference(nodesLinkEClass, NODES_LINK__SOURCE);
 		createEReference(nodesLinkEClass, NODES_LINK__DESTINATION);
 		createEReference(nodesLinkEClass, NODES_LINK__LINK);
-
-		hasParameterDefinitionsEClass = createEClass(HAS_PARAMETER_DEFINITIONS);
-
-		hasParameterValuesEClass = createEClass(HAS_PARAMETER_VALUES);
 
 		hasLabelEClass = createEClass(HAS_LABEL);
 		createEAttribute(hasLabelEClass, HAS_LABEL__LABEL);
@@ -1746,7 +1805,11 @@ public class CorePackageImpl extends EPackageImpl implements CorePackage {
 		actorEClass.getESuperTypes().add(this.getHasCustomProperties());
 		actorEClass.getESuperTypes().add(this.getHasTags());
 		actorEClass.getESuperTypes().add(this.getHasLabel());
-		ruleEClass.getESuperTypes().add(this.getConceptItem());
+		ruleEClass.getESuperTypes().add(this.getHasNameAndID());
+		ruleEClass.getESuperTypes().add(this.getHasCustomProperties());
+		ruleEClass.getESuperTypes().add(this.getHasComment());
+		ruleEClass.getESuperTypes().add(this.getHasTags());
+		ruleEClass.getESuperTypes().add(this.getHasLabel());
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(componentTypeEClass, ComponentType.class, "ComponentType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -1763,6 +1826,7 @@ public class CorePackageImpl extends EPackageImpl implements CorePackage {
 		initEReference(getComponent_Engines(), this.getComponent(), null, "engines", null, 0, -1, Component.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		getComponent_Engines().getEKeys().add(this.getHasNameAndID_Id());
 		initEReference(getComponent_BoundComponent(), this.getComponent(), null, "boundComponent", null, 0, 1, Component.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getComponent_Nodes(), this.getComponentNode(), null, "nodes", null, 0, -1, Component.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(componentNodeEClass, ComponentNode.class, "ComponentNode", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getComponentNode_Component(), this.getComponent(), null, "component", null, 1, 1, ComponentNode.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1788,8 +1852,10 @@ public class CorePackageImpl extends EPackageImpl implements CorePackage {
 		initEClass(architectureItemEClass, ArchitectureItem.class, "ArchitectureItem", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(conceptItemEClass, ConceptItem.class, "ConceptItem", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getConceptItem_Status_literals(), ecorePackage.getEString(), "status_literals", null, 1, 1, ConceptItem.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(runtimeItemEClass, RuntimeItem.class, "RuntimeItem", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getRuntimeItem_Status(), ecorePackage.getEString(), "status", null, 0, 1, RuntimeItem.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(viewEClass, View.class, "View", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getView_ComponentsGroups(), this.getComponentGroup(), null, "componentsGroups", null, 0, -1, View.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1801,6 +1867,9 @@ public class CorePackageImpl extends EPackageImpl implements CorePackage {
 		initEReference(getView_Nodes(), this.getComponentNode(), null, "nodes", null, 0, -1, View.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getView_NodesGroups(), this.getComponentNodeGroup(), null, "nodesGroups", null, 0, -1, View.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getView_Streams(), this.getNodesLink(), null, "streams", null, 0, -1, View.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(hasStatusEClass, HasStatus.class, "HasStatus", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getHasStatus_Status(), ecorePackage.getEString(), "status", null, 0, 1, HasStatus.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(hasNameAndIDEClass, HasNameAndID.class, "HasNameAndID", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getHasNameAndID_Id(), ecorePackage.getEString(), "id", "", 0, 1, HasNameAndID.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1814,6 +1883,10 @@ public class CorePackageImpl extends EPackageImpl implements CorePackage {
 
 		initEClass(hasCustomPropertiesEClass, HasCustomProperties.class, "HasCustomProperties", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getHasCustomProperties_CustomProperties(), this.getCustomProperty(), null, "customProperties", null, 0, 1, HasCustomProperties.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(hasParameterDefinitionsEClass, HasParameterDefinitions.class, "HasParameterDefinitions", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(hasParameterValuesEClass, HasParameterValues.class, "HasParameterValues", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(customPropertyEClass, CustomProperty.class, "CustomProperty", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
@@ -1831,10 +1904,6 @@ public class CorePackageImpl extends EPackageImpl implements CorePackage {
 		initEReference(getNodesLink_Source(), this.getComponentNode(), null, "source", null, 1, 1, NodesLink.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getNodesLink_Destination(), this.getComponentNode(), null, "destination", null, 1, 1, NodesLink.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getNodesLink_Link(), this.getLink(), null, "link", null, 1, 1, NodesLink.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-		initEClass(hasParameterDefinitionsEClass, HasParameterDefinitions.class, "HasParameterDefinitions", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-
-		initEClass(hasParameterValuesEClass, HasParameterValues.class, "HasParameterValues", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(hasLabelEClass, HasLabel.class, "HasLabel", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getHasLabel_Label(), ecorePackage.getEString(), "label", null, 0, 1, HasLabel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

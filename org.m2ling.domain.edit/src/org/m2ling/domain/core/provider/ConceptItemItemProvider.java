@@ -67,6 +67,7 @@ public class ConceptItemItemProvider
 			addCommentPropertyDescriptor(object);
 			addTagsPropertyDescriptor(object);
 			addLabelPropertyDescriptor(object);
+			addStatus_literalsPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -160,6 +161,28 @@ public class ConceptItemItemProvider
 	}
 
 	/**
+	 * This adds a property descriptor for the Status literals feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addStatus_literalsPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_ConceptItem_status_literals_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_ConceptItem_status_literals_feature", "_UI_ConceptItem_type"),
+				 CorePackage.Literals.CONCEPT_ITEM__STATUS_LITERALS,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				 null,
+				 null));
+	}
+
+	/**
 	 * This returns the label text for the adapted class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -188,6 +211,7 @@ public class ConceptItemItemProvider
 			case CorePackage.CONCEPT_ITEM__COMMENT:
 			case CorePackage.CONCEPT_ITEM__TAGS:
 			case CorePackage.CONCEPT_ITEM__LABEL:
+			case CorePackage.CONCEPT_ITEM__STATUS_LITERALS:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
 		}

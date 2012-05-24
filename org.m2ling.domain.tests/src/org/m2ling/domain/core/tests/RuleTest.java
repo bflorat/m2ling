@@ -14,7 +14,7 @@ import org.m2ling.domain.core.Rule;
  * <!-- end-user-doc -->
  * @generated
  */
-public class RuleTest extends ConceptItemTest {
+public class RuleTest extends HasNameAndIDTest {
 
 	/**
 	 * <!-- begin-user-doc -->

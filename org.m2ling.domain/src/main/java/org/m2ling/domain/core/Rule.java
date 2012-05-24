@@ -21,7 +21,7 @@ package org.m2ling.domain.core;
  * @model
  * @generated
  */
-public interface Rule extends ConceptItem {
+public interface Rule extends HasNameAndID, HasCustomProperties, HasComment, HasTags, HasLabel {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

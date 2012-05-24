@@ -72,6 +72,7 @@ public class ParametersFactoryImpl extends EFactoryImpl implements ParametersFac
 			case ParametersPackage.PARAMETER_VALUE: return createParameterValue();
 			case ParametersPackage.PARAMETER_DEFINITION: return createParameterDefinition();
 			case ParametersPackage.PARAM_DEF_OVERRIDER: return createParamDefOverrider();
+			case ParametersPackage.ROOT_PARAMETERS: return createRootParameters();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -139,6 +140,16 @@ public class ParametersFactoryImpl extends EFactoryImpl implements ParametersFac
 	public ParamDefOverrider createParamDefOverrider() {
 		ParamDefOverriderImpl paramDefOverrider = new ParamDefOverriderImpl();
 		return paramDefOverrider;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public RootParameters createRootParameters() {
+		RootParametersImpl rootParameters = new RootParametersImpl();
+		return rootParameters;
 	}
 
 	/**

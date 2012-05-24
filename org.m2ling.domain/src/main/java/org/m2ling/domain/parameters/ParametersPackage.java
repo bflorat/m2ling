@@ -177,13 +177,13 @@ public interface ParametersPackage extends EPackage {
 	int PARAMETER_DEFINITION__NAME = CorePackage.HAS_COMMENT_FEATURE_COUNT + 2;
 
 	/**
-	 * The feature id for the '<em><b>Parent</b></em>' reference.
+	 * The feature id for the '<em><b>Target</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int PARAMETER_DEFINITION__PARENT = CorePackage.HAS_COMMENT_FEATURE_COUNT + 3;
+	int PARAMETER_DEFINITION__TARGET = CorePackage.HAS_COMMENT_FEATURE_COUNT + 3;
 
 	/**
 	 * The feature id for the '<em><b>Constraints</b></em>' containment reference list.
@@ -231,13 +231,13 @@ public interface ParametersPackage extends EPackage {
 	int PARAMETER_DEFINITION__EXAMPLE_VALUE = CorePackage.HAS_COMMENT_FEATURE_COUNT + 8;
 
 	/**
-	 * The feature id for the '<em><b>Derivation Expression</b></em>' attribute.
+	 * The feature id for the '<em><b>Expression</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int PARAMETER_DEFINITION__DERIVATION_EXPRESSION = CorePackage.HAS_COMMENT_FEATURE_COUNT + 9;
+	int PARAMETER_DEFINITION__EXPRESSION = CorePackage.HAS_COMMENT_FEATURE_COUNT + 9;
 
 	/**
 	 * The feature id for the '<em><b>Overriders</b></em>' containment reference list.
@@ -258,13 +258,22 @@ public interface ParametersPackage extends EPackage {
 	int PARAMETER_DEFINITION__LONG_DESCRIPTION = CorePackage.HAS_COMMENT_FEATURE_COUNT + 11;
 
 	/**
+	 * The feature id for the '<em><b>Target Type</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PARAMETER_DEFINITION__TARGET_TYPE = CorePackage.HAS_COMMENT_FEATURE_COUNT + 12;
+
+	/**
 	 * The number of structural features of the '<em>Parameter Definition</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int PARAMETER_DEFINITION_FEATURE_COUNT = CorePackage.HAS_COMMENT_FEATURE_COUNT + 12;
+	int PARAMETER_DEFINITION_FEATURE_COUNT = CorePackage.HAS_COMMENT_FEATURE_COUNT + 13;
 
 	/**
 	 * The meta object id for the '{@link org.m2ling.domain.parameters.impl.ParamDefOverriderImpl <em>Param Def Overrider</em>}' class.
@@ -313,6 +322,43 @@ public interface ParametersPackage extends EPackage {
 	int PARAM_DEF_OVERRIDER_FEATURE_COUNT = 3;
 
 	/**
+	 * The meta object id for the '{@link org.m2ling.domain.parameters.impl.RootParametersImpl <em>Root Parameters</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.m2ling.domain.parameters.impl.RootParametersImpl
+	 * @see org.m2ling.domain.parameters.impl.ParametersPackageImpl#getRootParameters()
+	 * @generated
+	 */
+	int ROOT_PARAMETERS = 3;
+
+	/**
+	 * The feature id for the '<em><b>Definitions</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ROOT_PARAMETERS__DEFINITIONS = 0;
+
+	/**
+	 * The feature id for the '<em><b>Values</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ROOT_PARAMETERS__VALUES = 1;
+
+	/**
+	 * The number of structural features of the '<em>Root Parameters</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ROOT_PARAMETERS_FEATURE_COUNT = 2;
+
+	/**
 	 * The meta object id for the '{@link org.m2ling.domain.parameters.ParameterType <em>Parameter Type</em>}' enum.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -320,7 +366,7 @@ public interface ParametersPackage extends EPackage {
 	 * @see org.m2ling.domain.parameters.impl.ParametersPackageImpl#getParameterType()
 	 * @generated
 	 */
-	int PARAMETER_TYPE = 3;
+	int PARAMETER_TYPE = 4;
 
 	/**
 	 * The meta object id for the '<em>EStructural Feature</em>' data type.
@@ -330,7 +376,7 @@ public interface ParametersPackage extends EPackage {
 	 * @see org.m2ling.domain.parameters.impl.ParametersPackageImpl#getEStructuralFeature()
 	 * @generated
 	 */
-	int ESTRUCTURAL_FEATURE = 4;
+	int ESTRUCTURAL_FEATURE = 5;
 
 
 	/**
@@ -387,15 +433,15 @@ public interface ParametersPackage extends EPackage {
 	EClass getParameterDefinition();
 
 	/**
-	 * Returns the meta object for the reference '{@link org.m2ling.domain.parameters.ParameterDefinition#getParent <em>Parent</em>}'.
+	 * Returns the meta object for the reference '{@link org.m2ling.domain.parameters.ParameterDefinition#getTarget <em>Target</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Parent</em>'.
-	 * @see org.m2ling.domain.parameters.ParameterDefinition#getParent()
+	 * @return the meta object for the reference '<em>Target</em>'.
+	 * @see org.m2ling.domain.parameters.ParameterDefinition#getTarget()
 	 * @see #getParameterDefinition()
 	 * @generated
 	 */
-	EReference getParameterDefinition_Parent();
+	EReference getParameterDefinition_Target();
 
 	/**
 	 * Returns the meta object for the containment reference list '{@link org.m2ling.domain.parameters.ParameterDefinition#getConstraints <em>Constraints</em>}'.
@@ -453,15 +499,15 @@ public interface ParametersPackage extends EPackage {
 	EAttribute getParameterDefinition_ExampleValue();
 
 	/**
-	 * Returns the meta object for the attribute '{@link org.m2ling.domain.parameters.ParameterDefinition#getDerivationExpression <em>Derivation Expression</em>}'.
+	 * Returns the meta object for the attribute '{@link org.m2ling.domain.parameters.ParameterDefinition#getExpression <em>Expression</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Derivation Expression</em>'.
-	 * @see org.m2ling.domain.parameters.ParameterDefinition#getDerivationExpression()
+	 * @return the meta object for the attribute '<em>Expression</em>'.
+	 * @see org.m2ling.domain.parameters.ParameterDefinition#getExpression()
 	 * @see #getParameterDefinition()
 	 * @generated
 	 */
-	EAttribute getParameterDefinition_DerivationExpression();
+	EAttribute getParameterDefinition_Expression();
 
 	/**
 	 * Returns the meta object for the containment reference list '{@link org.m2ling.domain.parameters.ParameterDefinition#getOverriders <em>Overriders</em>}'.
@@ -484,6 +530,17 @@ public interface ParametersPackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getParameterDefinition_LongDescription();
+
+	/**
+	 * Returns the meta object for the reference '{@link org.m2ling.domain.parameters.ParameterDefinition#getTargetType <em>Target Type</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Target Type</em>'.
+	 * @see org.m2ling.domain.parameters.ParameterDefinition#getTargetType()
+	 * @see #getParameterDefinition()
+	 * @generated
+	 */
+	EReference getParameterDefinition_TargetType();
 
 	/**
 	 * Returns the meta object for class '{@link org.m2ling.domain.parameters.ParamDefOverrider <em>Param Def Overrider</em>}'.
@@ -527,6 +584,38 @@ public interface ParametersPackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getParamDefOverrider_Value();
+
+	/**
+	 * Returns the meta object for class '{@link org.m2ling.domain.parameters.RootParameters <em>Root Parameters</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Root Parameters</em>'.
+	 * @see org.m2ling.domain.parameters.RootParameters
+	 * @generated
+	 */
+	EClass getRootParameters();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link org.m2ling.domain.parameters.RootParameters#getDefinitions <em>Definitions</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Definitions</em>'.
+	 * @see org.m2ling.domain.parameters.RootParameters#getDefinitions()
+	 * @see #getRootParameters()
+	 * @generated
+	 */
+	EReference getRootParameters_Definitions();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link org.m2ling.domain.parameters.RootParameters#getValues <em>Values</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Values</em>'.
+	 * @see org.m2ling.domain.parameters.RootParameters#getValues()
+	 * @see #getRootParameters()
+	 * @generated
+	 */
+	EReference getRootParameters_Values();
 
 	/**
 	 * Returns the meta object for enum '{@link org.m2ling.domain.parameters.ParameterType <em>Parameter Type</em>}'.
@@ -616,12 +705,12 @@ public interface ParametersPackage extends EPackage {
 		EClass PARAMETER_DEFINITION = eINSTANCE.getParameterDefinition();
 
 		/**
-		 * The meta object literal for the '<em><b>Parent</b></em>' reference feature.
+		 * The meta object literal for the '<em><b>Target</b></em>' reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference PARAMETER_DEFINITION__PARENT = eINSTANCE.getParameterDefinition_Parent();
+		EReference PARAMETER_DEFINITION__TARGET = eINSTANCE.getParameterDefinition_Target();
 
 		/**
 		 * The meta object literal for the '<em><b>Constraints</b></em>' containment reference list feature.
@@ -664,12 +753,12 @@ public interface ParametersPackage extends EPackage {
 		EAttribute PARAMETER_DEFINITION__EXAMPLE_VALUE = eINSTANCE.getParameterDefinition_ExampleValue();
 
 		/**
-		 * The meta object literal for the '<em><b>Derivation Expression</b></em>' attribute feature.
+		 * The meta object literal for the '<em><b>Expression</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute PARAMETER_DEFINITION__DERIVATION_EXPRESSION = eINSTANCE.getParameterDefinition_DerivationExpression();
+		EAttribute PARAMETER_DEFINITION__EXPRESSION = eINSTANCE.getParameterDefinition_Expression();
 
 		/**
 		 * The meta object literal for the '<em><b>Overriders</b></em>' containment reference list feature.
@@ -686,6 +775,14 @@ public interface ParametersPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute PARAMETER_DEFINITION__LONG_DESCRIPTION = eINSTANCE.getParameterDefinition_LongDescription();
+
+		/**
+		 * The meta object literal for the '<em><b>Target Type</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference PARAMETER_DEFINITION__TARGET_TYPE = eINSTANCE.getParameterDefinition_TargetType();
 
 		/**
 		 * The meta object literal for the '{@link org.m2ling.domain.parameters.impl.ParamDefOverriderImpl <em>Param Def Overrider</em>}' class.
@@ -720,6 +817,32 @@ public interface ParametersPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute PARAM_DEF_OVERRIDER__VALUE = eINSTANCE.getParamDefOverrider_Value();
+
+		/**
+		 * The meta object literal for the '{@link org.m2ling.domain.parameters.impl.RootParametersImpl <em>Root Parameters</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.m2ling.domain.parameters.impl.RootParametersImpl
+		 * @see org.m2ling.domain.parameters.impl.ParametersPackageImpl#getRootParameters()
+		 * @generated
+		 */
+		EClass ROOT_PARAMETERS = eINSTANCE.getRootParameters();
+
+		/**
+		 * The meta object literal for the '<em><b>Definitions</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference ROOT_PARAMETERS__DEFINITIONS = eINSTANCE.getRootParameters_Definitions();
+
+		/**
+		 * The meta object literal for the '<em><b>Values</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference ROOT_PARAMETERS__VALUES = eINSTANCE.getRootParameters_Values();
 
 		/**
 		 * The meta object literal for the '{@link org.m2ling.domain.parameters.ParameterType <em>Parameter Type</em>}' enum.

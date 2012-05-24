@@ -91,31 +91,13 @@ public interface DomainPackage extends EPackage {
 	int ROOT__VIEWS = 1;
 
 	/**
-	 * The feature id for the '<em><b>Param Definitions</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ROOT__PARAM_DEFINITIONS = 2;
-
-	/**
-	 * The feature id for the '<em><b>Param Values</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ROOT__PARAM_VALUES = 3;
-
-	/**
 	 * The feature id for the '<em><b>Stakeholders</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ROOT__STAKEHOLDERS = 4;
+	int ROOT__STAKEHOLDERS = 2;
 
 	/**
 	 * The feature id for the '<em><b>Units</b></em>' containment reference list.
@@ -124,7 +106,7 @@ public interface DomainPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ROOT__UNITS = 5;
+	int ROOT__UNITS = 3;
 
 	/**
 	 * The feature id for the '<em><b>Actors</b></em>' containment reference list.
@@ -133,7 +115,16 @@ public interface DomainPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ROOT__ACTORS = 6;
+	int ROOT__ACTORS = 4;
+
+	/**
+	 * The feature id for the '<em><b>Parameters</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ROOT__PARAMETERS = 5;
 
 	/**
 	 * The number of structural features of the '<em>Root</em>' class.
@@ -142,7 +133,7 @@ public interface DomainPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ROOT_FEATURE_COUNT = 7;
+	int ROOT_FEATURE_COUNT = 6;
 
 
 	/**
@@ -178,28 +169,6 @@ public interface DomainPackage extends EPackage {
 	EReference getRoot_Views();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link org.m2ling.domain.Root#getParamDefinitions <em>Param Definitions</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Param Definitions</em>'.
-	 * @see org.m2ling.domain.Root#getParamDefinitions()
-	 * @see #getRoot()
-	 * @generated
-	 */
-	EReference getRoot_ParamDefinitions();
-
-	/**
-	 * Returns the meta object for the containment reference list '{@link org.m2ling.domain.Root#getParamValues <em>Param Values</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Param Values</em>'.
-	 * @see org.m2ling.domain.Root#getParamValues()
-	 * @see #getRoot()
-	 * @generated
-	 */
-	EReference getRoot_ParamValues();
-
-	/**
 	 * Returns the meta object for the containment reference list '{@link org.m2ling.domain.Root#getStakeholders <em>Stakeholders</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -231,6 +200,17 @@ public interface DomainPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getRoot_Actors();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link org.m2ling.domain.Root#getParameters <em>Parameters</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Parameters</em>'.
+	 * @see org.m2ling.domain.Root#getParameters()
+	 * @see #getRoot()
+	 * @generated
+	 */
+	EReference getRoot_Parameters();
 
 	/**
 	 * Returns the factory that creates the instances of the model.
@@ -281,22 +261,6 @@ public interface DomainPackage extends EPackage {
 		EReference ROOT__VIEWS = eINSTANCE.getRoot_Views();
 
 		/**
-		 * The meta object literal for the '<em><b>Param Definitions</b></em>' containment reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference ROOT__PARAM_DEFINITIONS = eINSTANCE.getRoot_ParamDefinitions();
-
-		/**
-		 * The meta object literal for the '<em><b>Param Values</b></em>' containment reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference ROOT__PARAM_VALUES = eINSTANCE.getRoot_ParamValues();
-
-		/**
 		 * The meta object literal for the '<em><b>Stakeholders</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -319,6 +283,14 @@ public interface DomainPackage extends EPackage {
 		 * @generated
 		 */
 		EReference ROOT__ACTORS = eINSTANCE.getRoot_Actors();
+
+		/**
+		 * The meta object literal for the '<em><b>Parameters</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference ROOT__PARAMETERS = eINSTANCE.getRoot_Parameters();
 
 	}
 

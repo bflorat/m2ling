@@ -13,6 +13,7 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
+import org.m2ling.domain.core.ComponentType;
 import org.m2ling.domain.core.Constraint;
 import org.m2ling.domain.core.CorePackage;
 import org.m2ling.domain.core.CustomProperty;
@@ -36,15 +37,16 @@ import org.m2ling.domain.parameters.ParametersPackage;
  *   <li>{@link org.m2ling.domain.parameters.impl.ParameterDefinitionImpl#getCustomProperties <em>Custom Properties</em>}</li>
  *   <li>{@link org.m2ling.domain.parameters.impl.ParameterDefinitionImpl#getId <em>Id</em>}</li>
  *   <li>{@link org.m2ling.domain.parameters.impl.ParameterDefinitionImpl#getName <em>Name</em>}</li>
- *   <li>{@link org.m2ling.domain.parameters.impl.ParameterDefinitionImpl#getParent <em>Parent</em>}</li>
+ *   <li>{@link org.m2ling.domain.parameters.impl.ParameterDefinitionImpl#getTarget <em>Target</em>}</li>
  *   <li>{@link org.m2ling.domain.parameters.impl.ParameterDefinitionImpl#getConstraints <em>Constraints</em>}</li>
  *   <li>{@link org.m2ling.domain.parameters.impl.ParameterDefinitionImpl#getType <em>Type</em>}</li>
  *   <li>{@link org.m2ling.domain.parameters.impl.ParameterDefinitionImpl#getDescription <em>Description</em>}</li>
  *   <li>{@link org.m2ling.domain.parameters.impl.ParameterDefinitionImpl#getDefaultValue <em>Default Value</em>}</li>
  *   <li>{@link org.m2ling.domain.parameters.impl.ParameterDefinitionImpl#getExampleValue <em>Example Value</em>}</li>
- *   <li>{@link org.m2ling.domain.parameters.impl.ParameterDefinitionImpl#getDerivationExpression <em>Derivation Expression</em>}</li>
+ *   <li>{@link org.m2ling.domain.parameters.impl.ParameterDefinitionImpl#getExpression <em>Expression</em>}</li>
  *   <li>{@link org.m2ling.domain.parameters.impl.ParameterDefinitionImpl#getOverriders <em>Overriders</em>}</li>
  *   <li>{@link org.m2ling.domain.parameters.impl.ParameterDefinitionImpl#getLongDescription <em>Long Description</em>}</li>
+ *   <li>{@link org.m2ling.domain.parameters.impl.ParameterDefinitionImpl#getTargetType <em>Target Type</em>}</li>
  * </ul>
  * </p>
  *
@@ -118,14 +120,14 @@ public class ParameterDefinitionImpl extends HasCommentImpl implements Parameter
 	protected boolean nameESet;
 
 	/**
-	 * The cached value of the '{@link #getParent() <em>Parent</em>}' reference.
+	 * The cached value of the '{@link #getTarget() <em>Target</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getParent()
+	 * @see #getTarget()
 	 * @generated
 	 * @ordered
 	 */
-	protected HasParameterDefinitions parent;
+	protected HasParameterDefinitions target;
 
 	/**
 	 * The cached value of the '{@link #getConstraints() <em>Constraints</em>}' containment reference list.
@@ -218,24 +220,24 @@ public class ParameterDefinitionImpl extends HasCommentImpl implements Parameter
 	protected String exampleValue = EXAMPLE_VALUE_EDEFAULT;
 
 	/**
-	 * The default value of the '{@link #getDerivationExpression() <em>Derivation Expression</em>}' attribute.
+	 * The default value of the '{@link #getExpression() <em>Expression</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getDerivationExpression()
+	 * @see #getExpression()
 	 * @generated
 	 * @ordered
 	 */
-	protected static final String DERIVATION_EXPRESSION_EDEFAULT = null;
+	protected static final String EXPRESSION_EDEFAULT = null;
 
 	/**
-	 * The cached value of the '{@link #getDerivationExpression() <em>Derivation Expression</em>}' attribute.
+	 * The cached value of the '{@link #getExpression() <em>Expression</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getDerivationExpression()
+	 * @see #getExpression()
 	 * @generated
 	 * @ordered
 	 */
-	protected String derivationExpression = DERIVATION_EXPRESSION_EDEFAULT;
+	protected String expression = EXPRESSION_EDEFAULT;
 
 	/**
 	 * The cached value of the '{@link #getOverriders() <em>Overriders</em>}' containment reference list.
@@ -266,6 +268,16 @@ public class ParameterDefinitionImpl extends HasCommentImpl implements Parameter
 	 * @ordered
 	 */
 	protected String longDescription = LONG_DESCRIPTION_EDEFAULT;
+
+	/**
+	 * The cached value of the '{@link #getTargetType() <em>Target Type</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getTargetType()
+	 * @generated
+	 * @ordered
+	 */
+	protected ComponentType targetType;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -396,16 +408,16 @@ public class ParameterDefinitionImpl extends HasCommentImpl implements Parameter
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public HasParameterDefinitions getParent() {
-		if (parent != null && parent.eIsProxy()) {
-			InternalEObject oldParent = (InternalEObject)parent;
-			parent = (HasParameterDefinitions)eResolveProxy(oldParent);
-			if (parent != oldParent) {
+	public HasParameterDefinitions getTarget() {
+		if (target != null && target.eIsProxy()) {
+			InternalEObject oldTarget = (InternalEObject)target;
+			target = (HasParameterDefinitions)eResolveProxy(oldTarget);
+			if (target != oldTarget) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ParametersPackage.PARAMETER_DEFINITION__PARENT, oldParent, parent));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ParametersPackage.PARAMETER_DEFINITION__TARGET, oldTarget, target));
 			}
 		}
-		return parent;
+		return target;
 	}
 
 	/**
@@ -413,8 +425,8 @@ public class ParameterDefinitionImpl extends HasCommentImpl implements Parameter
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public HasParameterDefinitions basicGetParent() {
-		return parent;
+	public HasParameterDefinitions basicGetTarget() {
+		return target;
 	}
 
 	/**
@@ -422,11 +434,11 @@ public class ParameterDefinitionImpl extends HasCommentImpl implements Parameter
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setParent(HasParameterDefinitions newParent) {
-		HasParameterDefinitions oldParent = parent;
-		parent = newParent;
+	public void setTarget(HasParameterDefinitions newTarget) {
+		HasParameterDefinitions oldTarget = target;
+		target = newTarget;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ParametersPackage.PARAMETER_DEFINITION__PARENT, oldParent, parent));
+			eNotify(new ENotificationImpl(this, Notification.SET, ParametersPackage.PARAMETER_DEFINITION__TARGET, oldTarget, target));
 	}
 
 	/**
@@ -530,8 +542,8 @@ public class ParameterDefinitionImpl extends HasCommentImpl implements Parameter
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public String getDerivationExpression() {
-		return derivationExpression;
+	public String getExpression() {
+		return expression;
 	}
 
 	/**
@@ -539,11 +551,11 @@ public class ParameterDefinitionImpl extends HasCommentImpl implements Parameter
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setDerivationExpression(String newDerivationExpression) {
-		String oldDerivationExpression = derivationExpression;
-		derivationExpression = newDerivationExpression;
+	public void setExpression(String newExpression) {
+		String oldExpression = expression;
+		expression = newExpression;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ParametersPackage.PARAMETER_DEFINITION__DERIVATION_EXPRESSION, oldDerivationExpression, derivationExpression));
+			eNotify(new ENotificationImpl(this, Notification.SET, ParametersPackage.PARAMETER_DEFINITION__EXPRESSION, oldExpression, expression));
 	}
 
 	/**
@@ -584,6 +596,44 @@ public class ParameterDefinitionImpl extends HasCommentImpl implements Parameter
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public ComponentType getTargetType() {
+		if (targetType != null && targetType.eIsProxy()) {
+			InternalEObject oldTargetType = (InternalEObject)targetType;
+			targetType = (ComponentType)eResolveProxy(oldTargetType);
+			if (targetType != oldTargetType) {
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ParametersPackage.PARAMETER_DEFINITION__TARGET_TYPE, oldTargetType, targetType));
+			}
+		}
+		return targetType;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public ComponentType basicGetTargetType() {
+		return targetType;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setTargetType(ComponentType newTargetType) {
+		ComponentType oldTargetType = targetType;
+		targetType = newTargetType;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ParametersPackage.PARAMETER_DEFINITION__TARGET_TYPE, oldTargetType, targetType));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
@@ -610,9 +660,9 @@ public class ParameterDefinitionImpl extends HasCommentImpl implements Parameter
 				return getId();
 			case ParametersPackage.PARAMETER_DEFINITION__NAME:
 				return getName();
-			case ParametersPackage.PARAMETER_DEFINITION__PARENT:
-				if (resolve) return getParent();
-				return basicGetParent();
+			case ParametersPackage.PARAMETER_DEFINITION__TARGET:
+				if (resolve) return getTarget();
+				return basicGetTarget();
 			case ParametersPackage.PARAMETER_DEFINITION__CONSTRAINTS:
 				return getConstraints();
 			case ParametersPackage.PARAMETER_DEFINITION__TYPE:
@@ -623,12 +673,15 @@ public class ParameterDefinitionImpl extends HasCommentImpl implements Parameter
 				return getDefaultValue();
 			case ParametersPackage.PARAMETER_DEFINITION__EXAMPLE_VALUE:
 				return getExampleValue();
-			case ParametersPackage.PARAMETER_DEFINITION__DERIVATION_EXPRESSION:
-				return getDerivationExpression();
+			case ParametersPackage.PARAMETER_DEFINITION__EXPRESSION:
+				return getExpression();
 			case ParametersPackage.PARAMETER_DEFINITION__OVERRIDERS:
 				return getOverriders();
 			case ParametersPackage.PARAMETER_DEFINITION__LONG_DESCRIPTION:
 				return getLongDescription();
+			case ParametersPackage.PARAMETER_DEFINITION__TARGET_TYPE:
+				if (resolve) return getTargetType();
+				return basicGetTargetType();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -651,8 +704,8 @@ public class ParameterDefinitionImpl extends HasCommentImpl implements Parameter
 			case ParametersPackage.PARAMETER_DEFINITION__NAME:
 				setName((String)newValue);
 				return;
-			case ParametersPackage.PARAMETER_DEFINITION__PARENT:
-				setParent((HasParameterDefinitions)newValue);
+			case ParametersPackage.PARAMETER_DEFINITION__TARGET:
+				setTarget((HasParameterDefinitions)newValue);
 				return;
 			case ParametersPackage.PARAMETER_DEFINITION__CONSTRAINTS:
 				getConstraints().clear();
@@ -670,8 +723,8 @@ public class ParameterDefinitionImpl extends HasCommentImpl implements Parameter
 			case ParametersPackage.PARAMETER_DEFINITION__EXAMPLE_VALUE:
 				setExampleValue((String)newValue);
 				return;
-			case ParametersPackage.PARAMETER_DEFINITION__DERIVATION_EXPRESSION:
-				setDerivationExpression((String)newValue);
+			case ParametersPackage.PARAMETER_DEFINITION__EXPRESSION:
+				setExpression((String)newValue);
 				return;
 			case ParametersPackage.PARAMETER_DEFINITION__OVERRIDERS:
 				getOverriders().clear();
@@ -679,6 +732,9 @@ public class ParameterDefinitionImpl extends HasCommentImpl implements Parameter
 				return;
 			case ParametersPackage.PARAMETER_DEFINITION__LONG_DESCRIPTION:
 				setLongDescription((String)newValue);
+				return;
+			case ParametersPackage.PARAMETER_DEFINITION__TARGET_TYPE:
+				setTargetType((ComponentType)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -701,8 +757,8 @@ public class ParameterDefinitionImpl extends HasCommentImpl implements Parameter
 			case ParametersPackage.PARAMETER_DEFINITION__NAME:
 				unsetName();
 				return;
-			case ParametersPackage.PARAMETER_DEFINITION__PARENT:
-				setParent((HasParameterDefinitions)null);
+			case ParametersPackage.PARAMETER_DEFINITION__TARGET:
+				setTarget((HasParameterDefinitions)null);
 				return;
 			case ParametersPackage.PARAMETER_DEFINITION__CONSTRAINTS:
 				getConstraints().clear();
@@ -719,14 +775,17 @@ public class ParameterDefinitionImpl extends HasCommentImpl implements Parameter
 			case ParametersPackage.PARAMETER_DEFINITION__EXAMPLE_VALUE:
 				setExampleValue(EXAMPLE_VALUE_EDEFAULT);
 				return;
-			case ParametersPackage.PARAMETER_DEFINITION__DERIVATION_EXPRESSION:
-				setDerivationExpression(DERIVATION_EXPRESSION_EDEFAULT);
+			case ParametersPackage.PARAMETER_DEFINITION__EXPRESSION:
+				setExpression(EXPRESSION_EDEFAULT);
 				return;
 			case ParametersPackage.PARAMETER_DEFINITION__OVERRIDERS:
 				getOverriders().clear();
 				return;
 			case ParametersPackage.PARAMETER_DEFINITION__LONG_DESCRIPTION:
 				setLongDescription(LONG_DESCRIPTION_EDEFAULT);
+				return;
+			case ParametersPackage.PARAMETER_DEFINITION__TARGET_TYPE:
+				setTargetType((ComponentType)null);
 				return;
 		}
 		super.eUnset(featureID);
@@ -746,8 +805,8 @@ public class ParameterDefinitionImpl extends HasCommentImpl implements Parameter
 				return ID_EDEFAULT == null ? id != null : !ID_EDEFAULT.equals(id);
 			case ParametersPackage.PARAMETER_DEFINITION__NAME:
 				return isSetName();
-			case ParametersPackage.PARAMETER_DEFINITION__PARENT:
-				return parent != null;
+			case ParametersPackage.PARAMETER_DEFINITION__TARGET:
+				return target != null;
 			case ParametersPackage.PARAMETER_DEFINITION__CONSTRAINTS:
 				return constraints != null && !constraints.isEmpty();
 			case ParametersPackage.PARAMETER_DEFINITION__TYPE:
@@ -758,12 +817,14 @@ public class ParameterDefinitionImpl extends HasCommentImpl implements Parameter
 				return DEFAULT_VALUE_EDEFAULT == null ? defaultValue != null : !DEFAULT_VALUE_EDEFAULT.equals(defaultValue);
 			case ParametersPackage.PARAMETER_DEFINITION__EXAMPLE_VALUE:
 				return EXAMPLE_VALUE_EDEFAULT == null ? exampleValue != null : !EXAMPLE_VALUE_EDEFAULT.equals(exampleValue);
-			case ParametersPackage.PARAMETER_DEFINITION__DERIVATION_EXPRESSION:
-				return DERIVATION_EXPRESSION_EDEFAULT == null ? derivationExpression != null : !DERIVATION_EXPRESSION_EDEFAULT.equals(derivationExpression);
+			case ParametersPackage.PARAMETER_DEFINITION__EXPRESSION:
+				return EXPRESSION_EDEFAULT == null ? expression != null : !EXPRESSION_EDEFAULT.equals(expression);
 			case ParametersPackage.PARAMETER_DEFINITION__OVERRIDERS:
 				return overriders != null && !overriders.isEmpty();
 			case ParametersPackage.PARAMETER_DEFINITION__LONG_DESCRIPTION:
 				return LONG_DESCRIPTION_EDEFAULT == null ? longDescription != null : !LONG_DESCRIPTION_EDEFAULT.equals(longDescription);
+			case ParametersPackage.PARAMETER_DEFINITION__TARGET_TYPE:
+				return targetType != null;
 		}
 		return super.eIsSet(featureID);
 	}
@@ -846,8 +907,8 @@ public class ParameterDefinitionImpl extends HasCommentImpl implements Parameter
 		result.append(defaultValue);
 		result.append(", exampleValue: ");
 		result.append(exampleValue);
-		result.append(", derivationExpression: ");
-		result.append(derivationExpression);
+		result.append(", expression: ");
+		result.append(expression);
 		result.append(", longDescription: ");
 		result.append(longDescription);
 		result.append(')');

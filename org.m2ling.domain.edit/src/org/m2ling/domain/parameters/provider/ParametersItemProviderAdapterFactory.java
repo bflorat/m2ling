@@ -147,6 +147,29 @@ public class ParametersItemProviderAdapterFactory extends ParametersAdapterFacto
 	}
 
 	/**
+	 * This keeps track of the one adapter used for all {@link org.m2ling.domain.parameters.RootParameters} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected RootParametersItemProvider rootParametersItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link org.m2ling.domain.parameters.RootParameters}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createRootParametersAdapter() {
+		if (rootParametersItemProvider == null) {
+			rootParametersItemProvider = new RootParametersItemProvider(this);
+		}
+
+		return rootParametersItemProvider;
+	}
+
+	/**
 	 * This returns the root adapter factory that contains this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -248,6 +271,7 @@ public class ParametersItemProviderAdapterFactory extends ParametersAdapterFacto
 		if (parameterValueItemProvider != null) parameterValueItemProvider.dispose();
 		if (parameterDefinitionItemProvider != null) parameterDefinitionItemProvider.dispose();
 		if (paramDefOverriderItemProvider != null) paramDefOverriderItemProvider.dispose();
+		if (rootParametersItemProvider != null) rootParametersItemProvider.dispose();
 	}
 
 }

@@ -73,13 +73,14 @@ public class ParameterDefinitionItemProvider
 			addCustomPropertiesPropertyDescriptor(object);
 			addIdPropertyDescriptor(object);
 			addNamePropertyDescriptor(object);
-			addParentPropertyDescriptor(object);
+			addTargetPropertyDescriptor(object);
 			addTypePropertyDescriptor(object);
 			addDescriptionPropertyDescriptor(object);
 			addDefaultValuePropertyDescriptor(object);
 			addExampleValuePropertyDescriptor(object);
-			addDerivationExpressionPropertyDescriptor(object);
+			addExpressionPropertyDescriptor(object);
 			addLongDescriptionPropertyDescriptor(object);
+			addTargetTypePropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -151,19 +152,19 @@ public class ParameterDefinitionItemProvider
 	}
 
 	/**
-	 * This adds a property descriptor for the Parent feature.
+	 * This adds a property descriptor for the Target feature.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected void addParentPropertyDescriptor(Object object) {
+	protected void addTargetPropertyDescriptor(Object object) {
 		itemPropertyDescriptors.add
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
-				 getString("_UI_ParameterDefinition_parent_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_ParameterDefinition_parent_feature", "_UI_ParameterDefinition_type"),
-				 ParametersPackage.Literals.PARAMETER_DEFINITION__PARENT,
+				 getString("_UI_ParameterDefinition_target_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_ParameterDefinition_target_feature", "_UI_ParameterDefinition_type"),
+				 ParametersPackage.Literals.PARAMETER_DEFINITION__TARGET,
 				 true,
 				 false,
 				 true,
@@ -261,19 +262,19 @@ public class ParameterDefinitionItemProvider
 	}
 
 	/**
-	 * This adds a property descriptor for the Derivation Expression feature.
+	 * This adds a property descriptor for the Expression feature.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected void addDerivationExpressionPropertyDescriptor(Object object) {
+	protected void addExpressionPropertyDescriptor(Object object) {
 		itemPropertyDescriptors.add
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
-				 getString("_UI_ParameterDefinition_derivationExpression_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_ParameterDefinition_derivationExpression_feature", "_UI_ParameterDefinition_type"),
-				 ParametersPackage.Literals.PARAMETER_DEFINITION__DERIVATION_EXPRESSION,
+				 getString("_UI_ParameterDefinition_expression_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_ParameterDefinition_expression_feature", "_UI_ParameterDefinition_type"),
+				 ParametersPackage.Literals.PARAMETER_DEFINITION__EXPRESSION,
 				 true,
 				 false,
 				 false,
@@ -300,6 +301,28 @@ public class ParameterDefinitionItemProvider
 				 false,
 				 false,
 				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				 null,
+				 null));
+	}
+
+	/**
+	 * This adds a property descriptor for the Target Type feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addTargetTypePropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_ParameterDefinition_targetType_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_ParameterDefinition_targetType_feature", "_UI_ParameterDefinition_type"),
+				 ParametersPackage.Literals.PARAMETER_DEFINITION__TARGET_TYPE,
+				 true,
+				 false,
+				 true,
+				 null,
 				 null,
 				 null));
 	}
@@ -367,7 +390,7 @@ public class ParameterDefinitionItemProvider
 			case ParametersPackage.PARAMETER_DEFINITION__DESCRIPTION:
 			case ParametersPackage.PARAMETER_DEFINITION__DEFAULT_VALUE:
 			case ParametersPackage.PARAMETER_DEFINITION__EXAMPLE_VALUE:
-			case ParametersPackage.PARAMETER_DEFINITION__DERIVATION_EXPRESSION:
+			case ParametersPackage.PARAMETER_DEFINITION__EXPRESSION:
 			case ParametersPackage.PARAMETER_DEFINITION__LONG_DESCRIPTION:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;

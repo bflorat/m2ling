@@ -154,6 +154,10 @@ public class CoreAdapterFactory extends AdapterFactoryImpl {
 				return createViewAdapter();
 			}
 			@Override
+			public Adapter caseHasStatus(HasStatus object) {
+				return createHasStatusAdapter();
+			}
+			@Override
 			public Adapter caseHasNameAndID(HasNameAndID object) {
 				return createHasNameAndIDAdapter();
 			}
@@ -170,6 +174,14 @@ public class CoreAdapterFactory extends AdapterFactoryImpl {
 				return createHasCustomPropertiesAdapter();
 			}
 			@Override
+			public Adapter caseHasParameterDefinitions(HasParameterDefinitions object) {
+				return createHasParameterDefinitionsAdapter();
+			}
+			@Override
+			public Adapter caseHasParameterValues(HasParameterValues object) {
+				return createHasParameterValuesAdapter();
+			}
+			@Override
 			public Adapter caseCustomProperty(CustomProperty object) {
 				return createCustomPropertyAdapter();
 			}
@@ -184,14 +196,6 @@ public class CoreAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseNodesLink(NodesLink object) {
 				return createNodesLinkAdapter();
-			}
-			@Override
-			public Adapter caseHasParameterDefinitions(HasParameterDefinitions object) {
-				return createHasParameterDefinitionsAdapter();
-			}
-			@Override
-			public Adapter caseHasParameterValues(HasParameterValues object) {
-				return createHasParameterValuesAdapter();
 			}
 			@Override
 			public Adapter caseHasLabel(HasLabel object) {
@@ -444,6 +448,20 @@ public class CoreAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createViewAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.m2ling.domain.core.HasStatus <em>Has Status</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.m2ling.domain.core.HasStatus
+	 * @generated
+	 */
+	public Adapter createHasStatusAdapter() {
 		return null;
 	}
 

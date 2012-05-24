@@ -28,6 +28,7 @@ import org.m2ling.domain.core.RuntimeItem;
  *   <li>{@link org.m2ling.domain.core.impl.RuntimeItemImpl#getComment <em>Comment</em>}</li>
  *   <li>{@link org.m2ling.domain.core.impl.RuntimeItemImpl#getTags <em>Tags</em>}</li>
  *   <li>{@link org.m2ling.domain.core.impl.RuntimeItemImpl#getLabel <em>Label</em>}</li>
+ *   <li>{@link org.m2ling.domain.core.impl.RuntimeItemImpl#getStatus <em>Status</em>}</li>
  * </ul>
  * </p>
  *
@@ -90,6 +91,26 @@ public abstract class RuntimeItemImpl extends HasNameAndIDImpl implements Runtim
 	 * @ordered
 	 */
 	protected String label = LABEL_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getStatus() <em>Status</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getStatus()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String STATUS_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getStatus() <em>Status</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getStatus()
+	 * @generated
+	 * @ordered
+	 */
+	protected String status = STATUS_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -169,6 +190,27 @@ public abstract class RuntimeItemImpl extends HasNameAndIDImpl implements Runtim
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public String getStatus() {
+		return status;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setStatus(String newStatus) {
+		String oldStatus = status;
+		status = newStatus;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, CorePackage.RUNTIME_ITEM__STATUS, oldStatus, status));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
@@ -178,6 +220,8 @@ public abstract class RuntimeItemImpl extends HasNameAndIDImpl implements Runtim
 				return getTags();
 			case CorePackage.RUNTIME_ITEM__LABEL:
 				return getLabel();
+			case CorePackage.RUNTIME_ITEM__STATUS:
+				return getStatus();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -201,6 +245,9 @@ public abstract class RuntimeItemImpl extends HasNameAndIDImpl implements Runtim
 			case CorePackage.RUNTIME_ITEM__LABEL:
 				setLabel((String)newValue);
 				return;
+			case CorePackage.RUNTIME_ITEM__STATUS:
+				setStatus((String)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -222,6 +269,9 @@ public abstract class RuntimeItemImpl extends HasNameAndIDImpl implements Runtim
 			case CorePackage.RUNTIME_ITEM__LABEL:
 				setLabel(LABEL_EDEFAULT);
 				return;
+			case CorePackage.RUNTIME_ITEM__STATUS:
+				setStatus(STATUS_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -240,6 +290,8 @@ public abstract class RuntimeItemImpl extends HasNameAndIDImpl implements Runtim
 				return tags != null && !tags.isEmpty();
 			case CorePackage.RUNTIME_ITEM__LABEL:
 				return LABEL_EDEFAULT == null ? label != null : !LABEL_EDEFAULT.equals(label);
+			case CorePackage.RUNTIME_ITEM__STATUS:
+				return STATUS_EDEFAULT == null ? status != null : !STATUS_EDEFAULT.equals(status);
 		}
 		return super.eIsSet(featureID);
 	}
@@ -336,6 +388,8 @@ public abstract class RuntimeItemImpl extends HasNameAndIDImpl implements Runtim
 		result.append(tags);
 		result.append(", label: ");
 		result.append(label);
+		result.append(", status: ");
+		result.append(status);
 		result.append(')');
 		return result.toString();
 	}
