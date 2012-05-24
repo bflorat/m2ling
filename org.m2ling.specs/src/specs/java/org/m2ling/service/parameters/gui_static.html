@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link href="../../../../concordion.css" rel="stylesheet" type="text/css" />
+
+<title>m2parameters GUI specification</title>
+</head>
+<body>
+	<a href='../../../../index.html'>m2ling</a>&#160;/&#160;
+	<a href='./index.html'>m2parameters</a>
+	<h1>Main screen</h1>
+	<ul>
+		<li>All views are displayed (invisible if the actor has not the
+			right access level)</li>
+	</ul>
+	<pre>
+	
++Projet BTRS -> PARAM_TOTO_1
+ +server x86
+  + Linux socle 2007
+   + jboss_ferme_v5 -> PARAM_TAILLE_POOL
+   + jboss_cluster_v5
+  + AIX -> CONF_NFS
+   + jboss_hasingleton
+
+3.2) def des components
+(structure en read-only)
++projet BTRS
+ + (compgroup) REGMAN -> APD_GLOBAL_1 (toutes les nodes de premier niveau inferieur doivent avoir la meme valeur, un compnode sera créé pour cela)
+  + (comp) REGMAN_NL_routage 
+  + (comp) REGMAN_NL_traitement 
+ + (compgroup) TIERSMAPI
+  + (comp) TIERSMAPI_NL_TI 
+ + BTRS_LDAP [REGMAPI_NL1, TIERSMAPI_NL1] -> APD_LDAP 
+
+4) valo des params (pre-requis : etape 1, 2 et 3)
+
++DEV
++projet -> BTRS PARAM_TOTO_1 = 3
+ +server1
+  + Linux_1
+   + jboss_ferme_1 
+    +  REGMAN_NL_routage_node1
+   + jboss_ferme_2 
+    +  REGMAN_NL_routage_node2
+   * GRP_fermes_REGMAN [jboss_ferme_1,jboss_ferme_2] -> PARAM_TAILLE_POOL = 4
+   + jboss_ferme_3 -> PARAM_TAILLE_POOL = 4
+    +  TIERSMAPI_NL_TI_node2
+   + jboss_cluster_1
+    + REGMAN_NL_traitement_node1
+----
+liste des groupes de comp nodes automatiques comme décrits dans la stucure des composants)
+ + (group comp node) REGMAN [nex*] -> APD_GLOBAL_1 = 4
+BTRS_LDAP -> APD_LDAP = ldap://foo
+
+clic sur une node : on voit toutes les valeurs y compris les valeur de params definis dans les groupes de comp node et les groupes de nodes manuels mais en grisé. Un clic (ou?) permet de selectionner le groupe à modifier.
+
+* structure en RO
+* si une valeur est affecté à un groupe de nodes, il n'est plus editable de la node simple (grisé).
+* si on créé un groupe alors qu'une ou plusieurs nodes contenaient deja une valeur, on initialise avec la premiere valeur trouvée.
+	</pre>
+</body>
+</html>
+
+
