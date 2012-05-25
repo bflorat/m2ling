@@ -21,8 +21,8 @@ import org.eclipse.emf.edit.provider.ItemProviderAdapter;
 import org.eclipse.emf.edit.provider.ViewerNotification;
 import org.m2ling.domain.DomainPackage;
 import org.m2ling.domain.Root;
-import org.m2ling.domain.core.CoreFactory;
 import org.m2ling.domain.configuration.ConfigurationFactory;
+import org.m2ling.domain.core.CoreFactory;
 
 /**
  * This is the item provider adapter for a {@link org.m2ling.domain.Root} object.

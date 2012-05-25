@@ -39,22 +39,23 @@
       <eStructuralFeatures xsi:type="ecore:EReference" name="engines" upperBound="-1"
           eType="#//core/Component" eKeys="#//core/HasNameAndID/id"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="boundComponent" eType="#//core/Component"/>
-      <eStructuralFeatures xsi:type="ecore:EReference" name="nodes" upperBound="-1"
-          eType="#//core/ComponentNode" containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="instances" upperBound="-1"
+          eType="#//core/ComponentInstance" containment="true"/>
     </eClassifiers>
-    <eClassifiers xsi:type="ecore:EClass" name="ComponentNode" eSuperTypes="#//core/ComponentNodeGroup #//core/HasParameterValues">
+    <eClassifiers xsi:type="ecore:EClass" name="ComponentInstance" eSuperTypes="#//core/ComponentInstanceGroup #//core/HasParameterValues">
       <eStructuralFeatures xsi:type="ecore:EReference" name="component" lowerBound="1"
           eType="#//core/Component"/>
-      <eStructuralFeatures xsi:type="ecore:EReference" name="subNodes" upperBound="-1"
-          eType="#//core/ComponentNode" containment="true"/>
-      <eStructuralFeatures xsi:type="ecore:EReference" name="engineNode" eType="#//core/ComponentNode"/>
-      <eStructuralFeatures xsi:type="ecore:EReference" name="nodes" upperBound="-1"
-          eType="#//core/ComponentNode" containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="subInstances" upperBound="-1"
+          eType="#//core/ComponentInstance" containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="engineInstance" eType="#//core/ComponentInstance"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="instances" upperBound="-1"
+          eType="#//core/ComponentInstance" containment="true"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="streams" upperBound="-1"
-          eType="#//core/NodesLink" containment="true"/>
-      <eStructuralFeatures xsi:type="ecore:EReference" name="nodesGroups" upperBound="-1"
-          eType="#//core/ComponentNodeGroup" containment="true"/>
-      <eStructuralFeatures xsi:type="ecore:EReference" name="boundComponentNode" eType="#//core/ComponentNode"/>
+          eType="#//core/InstancesLink" containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="instancesGroups" upperBound="-1"
+          eType="#//core/ComponentInstanceGroup" containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="boundComponentInstance"
+          eType="#//core/ComponentInstance"/>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="ViewPoint" eSuperTypes="#//core/ConceptItem">
       <eStructuralFeatures xsi:type="ecore:EReference" name="activities" upperBound="-1"
@@ -70,9 +71,9 @@
       <eStructuralFeatures xsi:type="ecore:EReference" name="components" upperBound="-1"
           eType="#//core/Component"/>
     </eClassifiers>
-    <eClassifiers xsi:type="ecore:EClass" name="ComponentNodeGroup" eSuperTypes="#//core/RuntimeItem">
-      <eStructuralFeatures xsi:type="ecore:EReference" name="componentNodes" upperBound="-1"
-          eType="#//core/ComponentNode"/>
+    <eClassifiers xsi:type="ecore:EClass" name="ComponentInstanceGroup" eSuperTypes="#//core/RuntimeItem">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="componentInstances" upperBound="-1"
+          eType="#//core/ComponentInstance"/>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="ArchitectureItem" abstract="true"
         eSuperTypes="#//core/HasNameAndID #//core/HasComment #//core/HasTags #//core/HasParameterDefinitions #//core/HasConstraints #//core/HasLabel"/>
@@ -92,12 +93,12 @@
           eType="#//core/ViewPoint"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="links" upperBound="-1"
           eType="#//core/Link" containment="true" eKeys="#//core/HasNameAndID/id"/>
-      <eStructuralFeatures xsi:type="ecore:EReference" name="nodes" upperBound="-1"
-          eType="#//core/ComponentNode" containment="true"/>
-      <eStructuralFeatures xsi:type="ecore:EReference" name="nodesGroups" upperBound="-1"
-          eType="#//core/ComponentNodeGroup" containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="instances" upperBound="-1"
+          eType="#//core/ComponentInstance" containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="instancesGroups" upperBound="-1"
+          eType="#//core/ComponentInstanceGroup" containment="true"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="streams" upperBound="-1"
-          eType="#//core/NodesLink" containment="true"/>
+          eType="#//core/InstancesLink" containment="true"/>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="HasStatus" abstract="true">
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="status" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
@@ -139,11 +140,11 @@
       <eStructuralFeatures xsi:type="ecore:EReference" name="destinations" lowerBound="1"
           upperBound="-1" eType="#//core/Component"/>
     </eClassifiers>
-    <eClassifiers xsi:type="ecore:EClass" name="NodesLink" eSuperTypes="#//core/RuntimeItem">
+    <eClassifiers xsi:type="ecore:EClass" name="InstancesLink" eSuperTypes="#//core/RuntimeItem">
       <eStructuralFeatures xsi:type="ecore:EReference" name="source" lowerBound="1"
-          eType="#//core/ComponentNode"/>
+          eType="#//core/ComponentInstance"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="destination" lowerBound="1"
-          eType="#//core/ComponentNode"/>
+          eType="#//core/ComponentInstance"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="link" lowerBound="1"
           eType="#//core/Link"/>
     </eClassifiers>

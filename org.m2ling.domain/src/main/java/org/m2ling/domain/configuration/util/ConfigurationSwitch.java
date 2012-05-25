@@ -6,15 +6,15 @@ package org.m2ling.domain.configuration.util;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.util.Switch;
+import org.m2ling.domain.configuration.ConfigurationPackage;
+import org.m2ling.domain.configuration.ParamDefOverrider;
+import org.m2ling.domain.configuration.ParameterDefinition;
+import org.m2ling.domain.configuration.ParameterValue;
+import org.m2ling.domain.configuration.RootConfiguration;
 import org.m2ling.domain.core.HasComment;
 import org.m2ling.domain.core.HasConstraints;
 import org.m2ling.domain.core.HasCustomProperties;
 import org.m2ling.domain.core.HasNameAndID;
-import org.m2ling.domain.configuration.*;
-import org.m2ling.domain.configuration.ParamDefOverrider;
-import org.m2ling.domain.configuration.ParameterDefinition;
-import org.m2ling.domain.configuration.ParameterValue;
-import org.m2ling.domain.configuration.ConfigurationPackage;
 
 /**
  * <!-- begin-user-doc -->

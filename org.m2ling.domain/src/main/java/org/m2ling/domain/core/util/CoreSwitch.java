@@ -6,7 +6,6 @@ package org.m2ling.domain.core.util;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.util.Switch;
-import org.m2ling.domain.core.*;
 import org.m2ling.domain.core.Activity;
 import org.m2ling.domain.core.ActivityTransition;
 import org.m2ling.domain.core.Actor;
@@ -14,8 +13,8 @@ import org.m2ling.domain.core.ArchitectureItem;
 import org.m2ling.domain.core.BoundaryConstraint;
 import org.m2ling.domain.core.Component;
 import org.m2ling.domain.core.ComponentGroup;
-import org.m2ling.domain.core.ComponentNode;
-import org.m2ling.domain.core.ComponentNodeGroup;
+import org.m2ling.domain.core.ComponentInstance;
+import org.m2ling.domain.core.ComponentInstanceGroup;
 import org.m2ling.domain.core.ComponentType;
 import org.m2ling.domain.core.ConceptItem;
 import org.m2ling.domain.core.Constraint;
@@ -31,13 +30,14 @@ import org.m2ling.domain.core.HasLabel;
 import org.m2ling.domain.core.HasNameAndID;
 import org.m2ling.domain.core.HasParameterDefinitions;
 import org.m2ling.domain.core.HasParameterValues;
+import org.m2ling.domain.core.HasStatus;
 import org.m2ling.domain.core.HasTags;
+import org.m2ling.domain.core.InstancesLink;
 import org.m2ling.domain.core.IntegerConstraint;
 import org.m2ling.domain.core.Link;
 import org.m2ling.domain.core.LinkType;
 import org.m2ling.domain.core.MaxConstraint;
 import org.m2ling.domain.core.MinConstraint;
-import org.m2ling.domain.core.NodesLink;
 import org.m2ling.domain.core.NotNullConstraint;
 import org.m2ling.domain.core.OCLConstraint;
 import org.m2ling.domain.core.OrganisationalUnit;
@@ -141,17 +141,17 @@ public class CoreSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case CorePackage.COMPONENT_NODE: {
-				ComponentNode componentNode = (ComponentNode)theEObject;
-				T result = caseComponentNode(componentNode);
-				if (result == null) result = caseComponentNodeGroup(componentNode);
-				if (result == null) result = caseRuntimeItem(componentNode);
-				if (result == null) result = caseHasNameAndID(componentNode);
-				if (result == null) result = caseHasComment(componentNode);
-				if (result == null) result = caseHasTags(componentNode);
-				if (result == null) result = caseHasParameterValues(componentNode);
-				if (result == null) result = caseHasConstraints(componentNode);
-				if (result == null) result = caseHasLabel(componentNode);
+			case CorePackage.COMPONENT_INSTANCE: {
+				ComponentInstance componentInstance = (ComponentInstance)theEObject;
+				T result = caseComponentInstance(componentInstance);
+				if (result == null) result = caseComponentInstanceGroup(componentInstance);
+				if (result == null) result = caseRuntimeItem(componentInstance);
+				if (result == null) result = caseHasNameAndID(componentInstance);
+				if (result == null) result = caseHasComment(componentInstance);
+				if (result == null) result = caseHasTags(componentInstance);
+				if (result == null) result = caseHasParameterValues(componentInstance);
+				if (result == null) result = caseHasConstraints(componentInstance);
+				if (result == null) result = caseHasLabel(componentInstance);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -182,16 +182,16 @@ public class CoreSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case CorePackage.COMPONENT_NODE_GROUP: {
-				ComponentNodeGroup componentNodeGroup = (ComponentNodeGroup)theEObject;
-				T result = caseComponentNodeGroup(componentNodeGroup);
-				if (result == null) result = caseRuntimeItem(componentNodeGroup);
-				if (result == null) result = caseHasNameAndID(componentNodeGroup);
-				if (result == null) result = caseHasComment(componentNodeGroup);
-				if (result == null) result = caseHasTags(componentNodeGroup);
-				if (result == null) result = caseHasParameterValues(componentNodeGroup);
-				if (result == null) result = caseHasConstraints(componentNodeGroup);
-				if (result == null) result = caseHasLabel(componentNodeGroup);
+			case CorePackage.COMPONENT_INSTANCE_GROUP: {
+				ComponentInstanceGroup componentInstanceGroup = (ComponentInstanceGroup)theEObject;
+				T result = caseComponentInstanceGroup(componentInstanceGroup);
+				if (result == null) result = caseRuntimeItem(componentInstanceGroup);
+				if (result == null) result = caseHasNameAndID(componentInstanceGroup);
+				if (result == null) result = caseHasComment(componentInstanceGroup);
+				if (result == null) result = caseHasTags(componentInstanceGroup);
+				if (result == null) result = caseHasParameterValues(componentInstanceGroup);
+				if (result == null) result = caseHasConstraints(componentInstanceGroup);
+				if (result == null) result = caseHasLabel(componentInstanceGroup);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -320,16 +320,16 @@ public class CoreSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case CorePackage.NODES_LINK: {
-				NodesLink nodesLink = (NodesLink)theEObject;
-				T result = caseNodesLink(nodesLink);
-				if (result == null) result = caseRuntimeItem(nodesLink);
-				if (result == null) result = caseHasNameAndID(nodesLink);
-				if (result == null) result = caseHasComment(nodesLink);
-				if (result == null) result = caseHasTags(nodesLink);
-				if (result == null) result = caseHasParameterValues(nodesLink);
-				if (result == null) result = caseHasConstraints(nodesLink);
-				if (result == null) result = caseHasLabel(nodesLink);
+			case CorePackage.INSTANCES_LINK: {
+				InstancesLink instancesLink = (InstancesLink)theEObject;
+				T result = caseInstancesLink(instancesLink);
+				if (result == null) result = caseRuntimeItem(instancesLink);
+				if (result == null) result = caseHasNameAndID(instancesLink);
+				if (result == null) result = caseHasComment(instancesLink);
+				if (result == null) result = caseHasTags(instancesLink);
+				if (result == null) result = caseHasParameterValues(instancesLink);
+				if (result == null) result = caseHasConstraints(instancesLink);
+				if (result == null) result = caseHasLabel(instancesLink);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -521,6 +521,21 @@ public class CoreSwitch<T> extends Switch<T> {
 	}
 
 	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Component Instance</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Component Instance</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseComponentInstance(ComponentInstance object) {
+		return null;
+	}
+
+	/**
 	 * Returns the result of interpreting the object as an instance of '<em>Has Name And ID</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
@@ -532,21 +547,6 @@ public class CoreSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseHasNameAndID(HasNameAndID object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Component Node</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Component Node</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseComponentNode(ComponentNode object) {
 		return null;
 	}
 
@@ -581,17 +581,17 @@ public class CoreSwitch<T> extends Switch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Component Node Group</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Component Instance Group</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Component Node Group</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Component Instance Group</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseComponentNodeGroup(ComponentNodeGroup object) {
+	public T caseComponentInstanceGroup(ComponentInstanceGroup object) {
 		return null;
 	}
 
@@ -761,17 +761,17 @@ public class CoreSwitch<T> extends Switch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Nodes Link</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Instances Link</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Nodes Link</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Instances Link</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseNodesLink(NodesLink object) {
+	public T caseInstancesLink(InstancesLink object) {
 		return null;
 	}
 

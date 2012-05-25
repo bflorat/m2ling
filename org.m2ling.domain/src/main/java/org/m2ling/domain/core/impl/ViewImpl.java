@@ -15,11 +15,11 @@ import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.m2ling.domain.core.Component;
 import org.m2ling.domain.core.ComponentGroup;
-import org.m2ling.domain.core.ComponentNode;
-import org.m2ling.domain.core.ComponentNodeGroup;
+import org.m2ling.domain.core.ComponentInstance;
+import org.m2ling.domain.core.ComponentInstanceGroup;
 import org.m2ling.domain.core.CorePackage;
+import org.m2ling.domain.core.InstancesLink;
 import org.m2ling.domain.core.Link;
-import org.m2ling.domain.core.NodesLink;
 import org.m2ling.domain.core.View;
 import org.m2ling.domain.core.ViewPoint;
 
@@ -34,8 +34,8 @@ import org.m2ling.domain.core.ViewPoint;
  *   <li>{@link org.m2ling.domain.core.impl.ViewImpl#getComponents <em>Components</em>}</li>
  *   <li>{@link org.m2ling.domain.core.impl.ViewImpl#getViewPoint <em>View Point</em>}</li>
  *   <li>{@link org.m2ling.domain.core.impl.ViewImpl#getLinks <em>Links</em>}</li>
- *   <li>{@link org.m2ling.domain.core.impl.ViewImpl#getNodes <em>Nodes</em>}</li>
- *   <li>{@link org.m2ling.domain.core.impl.ViewImpl#getNodesGroups <em>Nodes Groups</em>}</li>
+ *   <li>{@link org.m2ling.domain.core.impl.ViewImpl#getInstances <em>Instances</em>}</li>
+ *   <li>{@link org.m2ling.domain.core.impl.ViewImpl#getInstancesGroups <em>Instances Groups</em>}</li>
  *   <li>{@link org.m2ling.domain.core.impl.ViewImpl#getStreams <em>Streams</em>}</li>
  * </ul>
  * </p>
@@ -91,24 +91,24 @@ public class ViewImpl extends ArchitectureItemImpl implements View {
 	protected EList<Link> links;
 
 	/**
-	 * The cached value of the '{@link #getNodes() <em>Nodes</em>}' containment reference list.
+	 * The cached value of the '{@link #getInstances() <em>Instances</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getNodes()
+	 * @see #getInstances()
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<ComponentNode> nodes;
+	protected EList<ComponentInstance> instances;
 
 	/**
-	 * The cached value of the '{@link #getNodesGroups() <em>Nodes Groups</em>}' containment reference list.
+	 * The cached value of the '{@link #getInstancesGroups() <em>Instances Groups</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getNodesGroups()
+	 * @see #getInstancesGroups()
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<ComponentNodeGroup> nodesGroups;
+	protected EList<ComponentInstanceGroup> instancesGroups;
 
 	/**
 	 * The cached value of the '{@link #getStreams() <em>Streams</em>}' containment reference list.
@@ -118,7 +118,7 @@ public class ViewImpl extends ArchitectureItemImpl implements View {
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<NodesLink> streams;
+	protected EList<InstancesLink> streams;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -218,11 +218,11 @@ public class ViewImpl extends ArchitectureItemImpl implements View {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<ComponentNode> getNodes() {
-		if (nodes == null) {
-			nodes = new EObjectContainmentEList<ComponentNode>(ComponentNode.class, this, CorePackage.VIEW__NODES);
+	public EList<ComponentInstance> getInstances() {
+		if (instances == null) {
+			instances = new EObjectContainmentEList<ComponentInstance>(ComponentInstance.class, this, CorePackage.VIEW__INSTANCES);
 		}
-		return nodes;
+		return instances;
 	}
 
 	/**
@@ -230,11 +230,11 @@ public class ViewImpl extends ArchitectureItemImpl implements View {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<ComponentNodeGroup> getNodesGroups() {
-		if (nodesGroups == null) {
-			nodesGroups = new EObjectContainmentEList<ComponentNodeGroup>(ComponentNodeGroup.class, this, CorePackage.VIEW__NODES_GROUPS);
+	public EList<ComponentInstanceGroup> getInstancesGroups() {
+		if (instancesGroups == null) {
+			instancesGroups = new EObjectContainmentEList<ComponentInstanceGroup>(ComponentInstanceGroup.class, this, CorePackage.VIEW__INSTANCES_GROUPS);
 		}
-		return nodesGroups;
+		return instancesGroups;
 	}
 
 	/**
@@ -242,9 +242,9 @@ public class ViewImpl extends ArchitectureItemImpl implements View {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<NodesLink> getStreams() {
+	public EList<InstancesLink> getStreams() {
 		if (streams == null) {
-			streams = new EObjectContainmentEList<NodesLink>(NodesLink.class, this, CorePackage.VIEW__STREAMS);
+			streams = new EObjectContainmentEList<InstancesLink>(InstancesLink.class, this, CorePackage.VIEW__STREAMS);
 		}
 		return streams;
 	}
@@ -263,10 +263,10 @@ public class ViewImpl extends ArchitectureItemImpl implements View {
 				return ((InternalEList<?>)getComponents()).basicRemove(otherEnd, msgs);
 			case CorePackage.VIEW__LINKS:
 				return ((InternalEList<?>)getLinks()).basicRemove(otherEnd, msgs);
-			case CorePackage.VIEW__NODES:
-				return ((InternalEList<?>)getNodes()).basicRemove(otherEnd, msgs);
-			case CorePackage.VIEW__NODES_GROUPS:
-				return ((InternalEList<?>)getNodesGroups()).basicRemove(otherEnd, msgs);
+			case CorePackage.VIEW__INSTANCES:
+				return ((InternalEList<?>)getInstances()).basicRemove(otherEnd, msgs);
+			case CorePackage.VIEW__INSTANCES_GROUPS:
+				return ((InternalEList<?>)getInstancesGroups()).basicRemove(otherEnd, msgs);
 			case CorePackage.VIEW__STREAMS:
 				return ((InternalEList<?>)getStreams()).basicRemove(otherEnd, msgs);
 		}
@@ -290,10 +290,10 @@ public class ViewImpl extends ArchitectureItemImpl implements View {
 				return basicGetViewPoint();
 			case CorePackage.VIEW__LINKS:
 				return getLinks();
-			case CorePackage.VIEW__NODES:
-				return getNodes();
-			case CorePackage.VIEW__NODES_GROUPS:
-				return getNodesGroups();
+			case CorePackage.VIEW__INSTANCES:
+				return getInstances();
+			case CorePackage.VIEW__INSTANCES_GROUPS:
+				return getInstancesGroups();
 			case CorePackage.VIEW__STREAMS:
 				return getStreams();
 		}
@@ -324,17 +324,17 @@ public class ViewImpl extends ArchitectureItemImpl implements View {
 				getLinks().clear();
 				getLinks().addAll((Collection<? extends Link>)newValue);
 				return;
-			case CorePackage.VIEW__NODES:
-				getNodes().clear();
-				getNodes().addAll((Collection<? extends ComponentNode>)newValue);
+			case CorePackage.VIEW__INSTANCES:
+				getInstances().clear();
+				getInstances().addAll((Collection<? extends ComponentInstance>)newValue);
 				return;
-			case CorePackage.VIEW__NODES_GROUPS:
-				getNodesGroups().clear();
-				getNodesGroups().addAll((Collection<? extends ComponentNodeGroup>)newValue);
+			case CorePackage.VIEW__INSTANCES_GROUPS:
+				getInstancesGroups().clear();
+				getInstancesGroups().addAll((Collection<? extends ComponentInstanceGroup>)newValue);
 				return;
 			case CorePackage.VIEW__STREAMS:
 				getStreams().clear();
-				getStreams().addAll((Collection<? extends NodesLink>)newValue);
+				getStreams().addAll((Collection<? extends InstancesLink>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -360,11 +360,11 @@ public class ViewImpl extends ArchitectureItemImpl implements View {
 			case CorePackage.VIEW__LINKS:
 				getLinks().clear();
 				return;
-			case CorePackage.VIEW__NODES:
-				getNodes().clear();
+			case CorePackage.VIEW__INSTANCES:
+				getInstances().clear();
 				return;
-			case CorePackage.VIEW__NODES_GROUPS:
-				getNodesGroups().clear();
+			case CorePackage.VIEW__INSTANCES_GROUPS:
+				getInstancesGroups().clear();
 				return;
 			case CorePackage.VIEW__STREAMS:
 				getStreams().clear();
@@ -389,10 +389,10 @@ public class ViewImpl extends ArchitectureItemImpl implements View {
 				return viewPoint != null;
 			case CorePackage.VIEW__LINKS:
 				return links != null && !links.isEmpty();
-			case CorePackage.VIEW__NODES:
-				return nodes != null && !nodes.isEmpty();
-			case CorePackage.VIEW__NODES_GROUPS:
-				return nodesGroups != null && !nodesGroups.isEmpty();
+			case CorePackage.VIEW__INSTANCES:
+				return instances != null && !instances.isEmpty();
+			case CorePackage.VIEW__INSTANCES_GROUPS:
+				return instancesGroups != null && !instancesGroups.isEmpty();
 			case CorePackage.VIEW__STREAMS:
 				return streams != null && !streams.isEmpty();
 		}

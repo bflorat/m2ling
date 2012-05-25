@@ -97,7 +97,7 @@
       <styles xmi:type="notation:FilteringStyle" xmi:id="_OiOuP1l4EeGeoaZMFQdv5A"/>
     </children>
     <styles xmi:type="notation:ShapeStyle" xmi:id="_OiOuNVl4EeGeoaZMFQdv5A" fontColor="4210752" fontName="Sans" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
-    <element xmi:type="ecore:EClass" href="m2ling.ecore#//core/ComponentNode"/>
+    <element xmi:type="ecore:EClass" href="m2ling.ecore#//core/ComponentInstance"/>
     <layoutConstraint xmi:type="notation:Bounds" xmi:id="_OiOuNll4EeGeoaZMFQdv5A" x="912" y="372"/>
   </children>
   <children xmi:type="notation:Node" xmi:id="_OiPVS1l4EeGeoaZMFQdv5A" type="1001">
@@ -145,7 +145,7 @@
       <styles xmi:type="notation:FilteringStyle" xmi:id="_OiRKhFl4EeGeoaZMFQdv5A"/>
     </children>
     <styles xmi:type="notation:ShapeStyle" xmi:id="_OiRKell4EeGeoaZMFQdv5A" fontColor="4210752" fontName="Sans" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
-    <element xmi:type="ecore:EClass" href="m2ling.ecore#//core/ComponentNodeGroup"/>
+    <element xmi:type="ecore:EClass" href="m2ling.ecore#//core/ComponentInstanceGroup"/>
     <layoutConstraint xmi:type="notation:Bounds" xmi:id="_OiRKe1l4EeGeoaZMFQdv5A" x="1032" y="432"/>
   </children>
   <children xmi:type="notation:Node" xmi:id="_OiRxgFl4EeGeoaZMFQdv5A" type="1001">
@@ -212,7 +212,7 @@
     <element xmi:type="ecore:EClass" href="m2ling.ecore#//core/View"/>
     <layoutConstraint xmi:type="notation:Bounds" xmi:id="_OiTmtFl4EeGeoaZMFQdv5A" x="588" y="684"/>
   </children>
-  <children xmi:type="notation:Shape" xmi:id="_Qpy3uFl4EeGeoaZMFQdv5A" type="Note" fontName="Sans" description="Examples:&#xD;&#xA;- EngineType : JEE Application server, Jboss AS, SGBD...&#xD;&#xA;- ComponentType : MA, NA, UA...&#xD;&#xA;- Engine : Jboss 4.3, JVM, bash, Linux...&#xD;&#xA;- Component : MA, NL, application, module&#xD;&#xA;- EngineNode : a jboss instance&#xD;&#xA;- ComponentNode : a running ear" fillColor="13369343" transparency="0" lineColor="6737151" lineWidth="1">
+  <children xmi:type="notation:Shape" xmi:id="_Qpy3uFl4EeGeoaZMFQdv5A" type="Note" fontName="Sans" description="Examples:&#xD;&#xA;- EngineType : JEE Application server, Jboss AS, SGBD...&#xD;&#xA;- ComponentType : MA, NA, UA...&#xD;&#xA;- Engine : Jboss 4.3, JVM, bash, Linux...&#xD;&#xA;- Component : MA, NL, application, module&#xD;&#xA;- ComponentInstance : a running ear" fillColor="13369343" transparency="0" lineColor="6737151" lineWidth="1">
     <children xmi:type="notation:BasicDecorationNode" xmi:id="_Qpy3uVl4EeGeoaZMFQdv5A" type="DiagramName">
       <element xsi:nil="true"/>
     </children>
@@ -635,7 +635,7 @@
     </children>
     <styles xmi:type="notation:ConnectorStyle" xmi:id="_OiZtX1l4EeGeoaZMFQdv5A" routing="Rectilinear" lineColor="4210752"/>
     <styles xmi:type="notation:FontStyle" xmi:id="_OiZtYFl4EeGeoaZMFQdv5A" fontColor="4210752" fontName="Sans" fontHeight="10"/>
-    <element xmi:type="ecore:EReference" href="m2ling.ecore#//core/ComponentNode/component"/>
+    <element xmi:type="ecore:EReference" href="m2ling.ecore#//core/ComponentInstance/component"/>
     <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_OiZtYVl4EeGeoaZMFQdv5A" points="[-19, 41, 352, 19]$[-19, 72, 352, 50]$[-396, 72, -25, 50]$[-396, 22, -25, 0]"/>
     <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_OmEsYVl4EeGeoaZMFQdv5A" id="(0.24615384615384617,0.0)"/>
     <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_OmEsYll4EeGeoaZMFQdv5A" id="(0.8545454545454545,1.0)"/>
@@ -649,7 +649,7 @@
     </children>
     <styles xmi:type="notation:ConnectorStyle" xmi:id="_OibihVl4EeGeoaZMFQdv5A" routing="Rectilinear" lineColor="4210752"/>
     <styles xmi:type="notation:FontStyle" xmi:id="_Oibihll4EeGeoaZMFQdv5A" fontColor="4210752" fontName="Sans" fontHeight="10"/>
-    <element xmi:type="ecore:EReference" href="m2ling.ecore#//core/ComponentNode/subNodes"/>
+    <element xmi:type="ecore:EReference" href="m2ling.ecore#//core/ComponentInstance/subInstances"/>
     <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_Oibih1l4EeGeoaZMFQdv5A" points="[20, 21, 71, 6]$[20, 52, 71, 37]$[-4, 52, 47, 37]$[-4, 21, 47, 6]"/>
     <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_RT2SgFl-EeGeoaZMFQdv5A" id="(0.5,0.5)"/>
     <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_RT2SgVl-EeGeoaZMFQdv5A" id="(0.1076923076923077,0.8604651162790697)"/>
@@ -685,7 +685,7 @@
     </children>
     <styles xmi:type="notation:ConnectorStyle" xmi:id="_Oid-1Vl4EeGeoaZMFQdv5A" routing="Rectilinear" lineColor="4210752"/>
     <styles xmi:type="notation:FontStyle" xmi:id="_Oid-1ll4EeGeoaZMFQdv5A" fontColor="4210752" fontName="Sans" fontHeight="10"/>
-    <element xmi:type="ecore:EReference" href="m2ling.ecore#//core/ComponentNodeGroup/componentNodes"/>
+    <element xmi:type="ecore:EReference" href="m2ling.ecore#//core/ComponentInstanceGroup/componentInstances"/>
     <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_Oid-11l4EeGeoaZMFQdv5A" points="[65, 0, 224, 41]$[65, 19, 224, 60]$[-103, 19, 56, 60]$[-103, 0, 56, 41]"/>
     <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_OmIWwll4EeGeoaZMFQdv5A" id="(0.11834319526627218,1.0)"/>
     <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_OmIWw1l4EeGeoaZMFQdv5A" id="(0.5,0.0)"/>
@@ -895,7 +895,7 @@
     </children>
     <styles xmi:type="notation:ConnectorStyle" xmi:id="_wxtx9aAnEeG3fPi34vn9KQ" routing="Rectilinear" lineColor="4210752"/>
     <styles xmi:type="notation:FontStyle" xmi:id="_wxtx9qAnEeG3fPi34vn9KQ" fontColor="4210752" fontName="Sans" fontHeight="10"/>
-    <element xmi:type="ecore:EReference" href="m2ling.ecore#//core/ComponentNode/streams"/>
+    <element xmi:type="ecore:EReference" href="m2ling.ecore#//core/ComponentInstance/streams"/>
     <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_wxtx96AnEeG3fPi34vn9KQ" points="[-64, -20, 10, 285]$[-100, -20, -26, 285]$[-100, -173, -26, 132]$[-124, -173, -50, 132]$[-124, -264, -50, 41]"/>
     <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_wyGzgqAnEeG3fPi34vn9KQ" id="(0.5,1.0)"/>
     <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_wyGzg6AnEeG3fPi34vn9KQ" id="(0.5,0.0)"/>

@@ -28,7 +28,7 @@
 3.2) def des components
 (structure en read-only)
 +projet BTRS
- + (compgroup) REGMAN -> APD_GLOBAL_1 (toutes les nodes de premier niveau inferieur doivent avoir la meme valeur, un compnode sera créé pour cela)
+ + (compgroup) REGMAN -> APD_GLOBAL_1 (toutes les instances de premier niveau inferieur doivent avoir la meme valeur, un compnode sera créé pour cela)
   + (comp) REGMAN_NL_routage 
   + (comp) REGMAN_NL_traitement 
  + (compgroup) TIERSMAPI
@@ -51,15 +51,15 @@
    + jboss_cluster_1
     + REGMAN_NL_traitement_node1
 ----
-liste des groupes de comp nodes automatiques comme décrits dans la stucure des composants)
- + (group comp node) REGMAN [nex*] -> APD_GLOBAL_1 = 4
+liste des groupes de comp instances automatiques comme décrits dans la stucure des composants)
+ + (group comp instances) REGMAN [nex*] -> APD_GLOBAL_1 = 4
 BTRS_LDAP -> APD_LDAP = ldap://foo
 
-clic sur une node : on voit toutes les valeurs y compris les valeur de params definis dans les groupes de comp node et les groupes de nodes manuels mais en grisé. Un clic (ou?) permet de selectionner le groupe à modifier.
+clic sur une instance : on voit toutes les valeurs y compris les valeur de params definis dans les groupes de comp node et les groupes de nodes manuels mais en grisé. Un clic (ou?) permet de selectionner le groupe à modifier.
 
 * structure en RO
-* si une valeur est affecté à un groupe de nodes, il n'est plus editable de la node simple (grisé).
-* si on créé un groupe alors qu'une ou plusieurs nodes contenaient deja une valeur, on initialise avec la premiere valeur trouvée.
+* si une valeur est affecté à un groupe d'instances, il n'est plus editable de la node simple (grisé).
+* si on créé un groupe alors qu'une ou plusieurs instances contenaient deja une valeur, on initialise avec la premiere valeur trouvée.
 	</pre>
 </body>
 </html>

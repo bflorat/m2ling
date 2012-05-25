@@ -12,16 +12,16 @@ import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 import org.m2ling.domain.DomainPackage;
-import org.m2ling.domain.core.CorePackage;
-import org.m2ling.domain.core.impl.CorePackageImpl;
-import org.m2ling.domain.impl.DomainPackageImpl;
+import org.m2ling.domain.configuration.ConfigurationFactory;
+import org.m2ling.domain.configuration.ConfigurationPackage;
 import org.m2ling.domain.configuration.ParamDefOverrider;
 import org.m2ling.domain.configuration.ParameterDefinition;
 import org.m2ling.domain.configuration.ParameterType;
 import org.m2ling.domain.configuration.ParameterValue;
-import org.m2ling.domain.configuration.ConfigurationFactory;
-import org.m2ling.domain.configuration.ConfigurationPackage;
 import org.m2ling.domain.configuration.RootConfiguration;
+import org.m2ling.domain.core.CorePackage;
+import org.m2ling.domain.core.impl.CorePackageImpl;
+import org.m2ling.domain.impl.DomainPackageImpl;
 
 /**
  * <!-- begin-user-doc -->

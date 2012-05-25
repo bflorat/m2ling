@@ -9,15 +9,14 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.impl.EFactoryImpl;
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
-import org.m2ling.domain.core.*;
 import org.m2ling.domain.core.Activity;
 import org.m2ling.domain.core.ActivityStatus;
 import org.m2ling.domain.core.ActivityTransition;
 import org.m2ling.domain.core.Actor;
 import org.m2ling.domain.core.Component;
 import org.m2ling.domain.core.ComponentGroup;
-import org.m2ling.domain.core.ComponentNode;
-import org.m2ling.domain.core.ComponentNodeGroup;
+import org.m2ling.domain.core.ComponentInstance;
+import org.m2ling.domain.core.ComponentInstanceGroup;
 import org.m2ling.domain.core.ComponentType;
 import org.m2ling.domain.core.CoreFactory;
 import org.m2ling.domain.core.CorePackage;
@@ -29,12 +28,12 @@ import org.m2ling.domain.core.FormatConstraint;
 import org.m2ling.domain.core.HasComment;
 import org.m2ling.domain.core.HasCustomProperties;
 import org.m2ling.domain.core.HasNameAndID;
+import org.m2ling.domain.core.InstancesLink;
 import org.m2ling.domain.core.IntegerConstraint;
 import org.m2ling.domain.core.Link;
 import org.m2ling.domain.core.LinkType;
 import org.m2ling.domain.core.MaxConstraint;
 import org.m2ling.domain.core.MinConstraint;
-import org.m2ling.domain.core.NodesLink;
 import org.m2ling.domain.core.NotNullConstraint;
 import org.m2ling.domain.core.OCLConstraint;
 import org.m2ling.domain.core.OrganisationalUnit;
@@ -101,10 +100,10 @@ public class CoreFactoryImpl extends EFactoryImpl implements CoreFactory {
 		switch (eClass.getClassifierID()) {
 			case CorePackage.COMPONENT_TYPE: return createComponentType();
 			case CorePackage.COMPONENT: return createComponent();
-			case CorePackage.COMPONENT_NODE: return createComponentNode();
+			case CorePackage.COMPONENT_INSTANCE: return createComponentInstance();
 			case CorePackage.VIEW_POINT: return createViewPoint();
 			case CorePackage.COMPONENT_GROUP: return createComponentGroup();
-			case CorePackage.COMPONENT_NODE_GROUP: return createComponentNodeGroup();
+			case CorePackage.COMPONENT_INSTANCE_GROUP: return createComponentInstanceGroup();
 			case CorePackage.VIEW: return createView();
 			case CorePackage.HAS_NAME_AND_ID: return createHasNameAndID();
 			case CorePackage.HAS_COMMENT: return createHasComment();
@@ -112,7 +111,7 @@ public class CoreFactoryImpl extends EFactoryImpl implements CoreFactory {
 			case CorePackage.CUSTOM_PROPERTY: return createCustomProperty();
 			case CorePackage.LINK_TYPE: return createLinkType();
 			case CorePackage.LINK: return createLink();
-			case CorePackage.NODES_LINK: return createNodesLink();
+			case CorePackage.INSTANCES_LINK: return createInstancesLink();
 			case CorePackage.STAKEHOLDER: return createStakeholder();
 			case CorePackage.FLOAT_CONSTRAINT: return createFloatConstraint();
 			case CorePackage.MIN_CONSTRAINT: return createMinConstraint();
@@ -205,9 +204,9 @@ public class CoreFactoryImpl extends EFactoryImpl implements CoreFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public HasNameAndID createHasNameAndID() {
-		HasNameAndIDImpl hasNameAndID = new HasNameAndIDImpl();
-		return hasNameAndID;
+	public ComponentInstance createComponentInstance() {
+		ComponentInstanceImpl componentInstance = new ComponentInstanceImpl();
+		return componentInstance;
 	}
 
 	/**
@@ -215,9 +214,9 @@ public class CoreFactoryImpl extends EFactoryImpl implements CoreFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public ComponentNode createComponentNode() {
-		ComponentNodeImpl componentNode = new ComponentNodeImpl();
-		return componentNode;
+	public HasNameAndID createHasNameAndID() {
+		HasNameAndIDImpl hasNameAndID = new HasNameAndIDImpl();
+		return hasNameAndID;
 	}
 
 	/**
@@ -245,9 +244,9 @@ public class CoreFactoryImpl extends EFactoryImpl implements CoreFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public ComponentNodeGroup createComponentNodeGroup() {
-		ComponentNodeGroupImpl componentNodeGroup = new ComponentNodeGroupImpl();
-		return componentNodeGroup;
+	public ComponentInstanceGroup createComponentInstanceGroup() {
+		ComponentInstanceGroupImpl componentInstanceGroup = new ComponentInstanceGroupImpl();
+		return componentInstanceGroup;
 	}
 
 	/**
@@ -315,9 +314,9 @@ public class CoreFactoryImpl extends EFactoryImpl implements CoreFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NodesLink createNodesLink() {
-		NodesLinkImpl nodesLink = new NodesLinkImpl();
-		return nodesLink;
+	public InstancesLink createInstancesLink() {
+		InstancesLinkImpl instancesLink = new InstancesLinkImpl();
+		return instancesLink;
 	}
 
 	/**

@@ -10,6 +10,8 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 import org.m2ling.domain.DomainPackage;
+import org.m2ling.domain.configuration.ConfigurationPackage;
+import org.m2ling.domain.configuration.impl.ConfigurationPackageImpl;
 import org.m2ling.domain.core.Activity;
 import org.m2ling.domain.core.ActivityStatus;
 import org.m2ling.domain.core.ActivityTransition;
@@ -18,8 +20,8 @@ import org.m2ling.domain.core.ArchitectureItem;
 import org.m2ling.domain.core.BoundaryConstraint;
 import org.m2ling.domain.core.Component;
 import org.m2ling.domain.core.ComponentGroup;
-import org.m2ling.domain.core.ComponentNode;
-import org.m2ling.domain.core.ComponentNodeGroup;
+import org.m2ling.domain.core.ComponentInstance;
+import org.m2ling.domain.core.ComponentInstanceGroup;
 import org.m2ling.domain.core.ComponentType;
 import org.m2ling.domain.core.ConceptItem;
 import org.m2ling.domain.core.Constraint;
@@ -39,12 +41,12 @@ import org.m2ling.domain.core.HasParameterDefinitions;
 import org.m2ling.domain.core.HasParameterValues;
 import org.m2ling.domain.core.HasStatus;
 import org.m2ling.domain.core.HasTags;
+import org.m2ling.domain.core.InstancesLink;
 import org.m2ling.domain.core.IntegerConstraint;
 import org.m2ling.domain.core.Link;
 import org.m2ling.domain.core.LinkType;
 import org.m2ling.domain.core.MaxConstraint;
 import org.m2ling.domain.core.MinConstraint;
-import org.m2ling.domain.core.NodesLink;
 import org.m2ling.domain.core.NotNullConstraint;
 import org.m2ling.domain.core.OCLConstraint;
 import org.m2ling.domain.core.OrganisationalUnit;
@@ -59,8 +61,6 @@ import org.m2ling.domain.core.URLConstraint;
 import org.m2ling.domain.core.View;
 import org.m2ling.domain.core.ViewPoint;
 import org.m2ling.domain.impl.DomainPackageImpl;
-import org.m2ling.domain.configuration.ConfigurationPackage;
-import org.m2ling.domain.configuration.impl.ConfigurationPackageImpl;
 
 /**
  * <!-- begin-user-doc -->
@@ -95,14 +95,14 @@ public class CorePackageImpl extends EPackageImpl implements CorePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass hasNameAndIDEClass = null;
+	private EClass componentInstanceEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass componentNodeEClass = null;
+	private EClass hasNameAndIDEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -123,7 +123,7 @@ public class CorePackageImpl extends EPackageImpl implements CorePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass componentNodeGroupEClass = null;
+	private EClass componentInstanceGroupEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -207,7 +207,7 @@ public class CorePackageImpl extends EPackageImpl implements CorePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass nodesLinkEClass = null;
+	private EClass instancesLinkEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -580,8 +580,80 @@ public class CorePackageImpl extends EPackageImpl implements CorePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getComponent_Nodes() {
+	public EReference getComponent_Instances() {
 		return (EReference)componentEClass.getEStructuralFeatures().get(4);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getComponentInstance() {
+		return componentInstanceEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getComponentInstance_Component() {
+		return (EReference)componentInstanceEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getComponentInstance_SubInstances() {
+		return (EReference)componentInstanceEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getComponentInstance_EngineInstance() {
+		return (EReference)componentInstanceEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getComponentInstance_Instances() {
+		return (EReference)componentInstanceEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getComponentInstance_Streams() {
+		return (EReference)componentInstanceEClass.getEStructuralFeatures().get(4);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getComponentInstance_InstancesGroups() {
+		return (EReference)componentInstanceEClass.getEStructuralFeatures().get(5);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getComponentInstance_BoundComponentInstance() {
+		return (EReference)componentInstanceEClass.getEStructuralFeatures().get(6);
 	}
 
 	/**
@@ -609,78 +681,6 @@ public class CorePackageImpl extends EPackageImpl implements CorePackage {
 	 */
 	public EAttribute getHasNameAndID_Name() {
 		return (EAttribute)hasNameAndIDEClass.getEStructuralFeatures().get(1);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EClass getComponentNode() {
-		return componentNodeEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getComponentNode_Component() {
-		return (EReference)componentNodeEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getComponentNode_SubNodes() {
-		return (EReference)componentNodeEClass.getEStructuralFeatures().get(1);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getComponentNode_EngineNode() {
-		return (EReference)componentNodeEClass.getEStructuralFeatures().get(2);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getComponentNode_Nodes() {
-		return (EReference)componentNodeEClass.getEStructuralFeatures().get(3);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getComponentNode_Streams() {
-		return (EReference)componentNodeEClass.getEStructuralFeatures().get(4);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getComponentNode_NodesGroups() {
-		return (EReference)componentNodeEClass.getEStructuralFeatures().get(5);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getComponentNode_BoundComponentNode() {
-		return (EReference)componentNodeEClass.getEStructuralFeatures().get(6);
 	}
 
 	/**
@@ -751,8 +751,8 @@ public class CorePackageImpl extends EPackageImpl implements CorePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EClass getComponentNodeGroup() {
-		return componentNodeGroupEClass;
+	public EClass getComponentInstanceGroup() {
+		return componentInstanceGroupEClass;
 	}
 
 	/**
@@ -760,8 +760,8 @@ public class CorePackageImpl extends EPackageImpl implements CorePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getComponentNodeGroup_ComponentNodes() {
-		return (EReference)componentNodeGroupEClass.getEStructuralFeatures().get(0);
+	public EReference getComponentInstanceGroup_ComponentInstances() {
+		return (EReference)componentInstanceGroupEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -859,7 +859,7 @@ public class CorePackageImpl extends EPackageImpl implements CorePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getView_Nodes() {
+	public EReference getView_Instances() {
 		return (EReference)viewEClass.getEStructuralFeatures().get(4);
 	}
 
@@ -868,7 +868,7 @@ public class CorePackageImpl extends EPackageImpl implements CorePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getView_NodesGroups() {
+	public EReference getView_InstancesGroups() {
 		return (EReference)viewEClass.getEStructuralFeatures().get(5);
 	}
 
@@ -1039,8 +1039,8 @@ public class CorePackageImpl extends EPackageImpl implements CorePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EClass getNodesLink() {
-		return nodesLinkEClass;
+	public EClass getInstancesLink() {
+		return instancesLinkEClass;
 	}
 
 	/**
@@ -1048,8 +1048,8 @@ public class CorePackageImpl extends EPackageImpl implements CorePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getNodesLink_Source() {
-		return (EReference)nodesLinkEClass.getEStructuralFeatures().get(0);
+	public EReference getInstancesLink_Source() {
+		return (EReference)instancesLinkEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -1057,8 +1057,8 @@ public class CorePackageImpl extends EPackageImpl implements CorePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getNodesLink_Destination() {
-		return (EReference)nodesLinkEClass.getEStructuralFeatures().get(1);
+	public EReference getInstancesLink_Destination() {
+		return (EReference)instancesLinkEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -1066,8 +1066,8 @@ public class CorePackageImpl extends EPackageImpl implements CorePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getNodesLink_Link() {
-		return (EReference)nodesLinkEClass.getEStructuralFeatures().get(2);
+	public EReference getInstancesLink_Link() {
+		return (EReference)instancesLinkEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
@@ -1570,16 +1570,16 @@ public class CorePackageImpl extends EPackageImpl implements CorePackage {
 		createEReference(componentEClass, COMPONENT__TYPE);
 		createEReference(componentEClass, COMPONENT__ENGINES);
 		createEReference(componentEClass, COMPONENT__BOUND_COMPONENT);
-		createEReference(componentEClass, COMPONENT__NODES);
+		createEReference(componentEClass, COMPONENT__INSTANCES);
 
-		componentNodeEClass = createEClass(COMPONENT_NODE);
-		createEReference(componentNodeEClass, COMPONENT_NODE__COMPONENT);
-		createEReference(componentNodeEClass, COMPONENT_NODE__SUB_NODES);
-		createEReference(componentNodeEClass, COMPONENT_NODE__ENGINE_NODE);
-		createEReference(componentNodeEClass, COMPONENT_NODE__NODES);
-		createEReference(componentNodeEClass, COMPONENT_NODE__STREAMS);
-		createEReference(componentNodeEClass, COMPONENT_NODE__NODES_GROUPS);
-		createEReference(componentNodeEClass, COMPONENT_NODE__BOUND_COMPONENT_NODE);
+		componentInstanceEClass = createEClass(COMPONENT_INSTANCE);
+		createEReference(componentInstanceEClass, COMPONENT_INSTANCE__COMPONENT);
+		createEReference(componentInstanceEClass, COMPONENT_INSTANCE__SUB_INSTANCES);
+		createEReference(componentInstanceEClass, COMPONENT_INSTANCE__ENGINE_INSTANCE);
+		createEReference(componentInstanceEClass, COMPONENT_INSTANCE__INSTANCES);
+		createEReference(componentInstanceEClass, COMPONENT_INSTANCE__STREAMS);
+		createEReference(componentInstanceEClass, COMPONENT_INSTANCE__INSTANCES_GROUPS);
+		createEReference(componentInstanceEClass, COMPONENT_INSTANCE__BOUND_COMPONENT_INSTANCE);
 
 		viewPointEClass = createEClass(VIEW_POINT);
 		createEReference(viewPointEClass, VIEW_POINT__ACTIVITIES);
@@ -1590,8 +1590,8 @@ public class CorePackageImpl extends EPackageImpl implements CorePackage {
 		componentGroupEClass = createEClass(COMPONENT_GROUP);
 		createEReference(componentGroupEClass, COMPONENT_GROUP__COMPONENTS);
 
-		componentNodeGroupEClass = createEClass(COMPONENT_NODE_GROUP);
-		createEReference(componentNodeGroupEClass, COMPONENT_NODE_GROUP__COMPONENT_NODES);
+		componentInstanceGroupEClass = createEClass(COMPONENT_INSTANCE_GROUP);
+		createEReference(componentInstanceGroupEClass, COMPONENT_INSTANCE_GROUP__COMPONENT_INSTANCES);
 
 		architectureItemEClass = createEClass(ARCHITECTURE_ITEM);
 
@@ -1606,8 +1606,8 @@ public class CorePackageImpl extends EPackageImpl implements CorePackage {
 		createEReference(viewEClass, VIEW__COMPONENTS);
 		createEReference(viewEClass, VIEW__VIEW_POINT);
 		createEReference(viewEClass, VIEW__LINKS);
-		createEReference(viewEClass, VIEW__NODES);
-		createEReference(viewEClass, VIEW__NODES_GROUPS);
+		createEReference(viewEClass, VIEW__INSTANCES);
+		createEReference(viewEClass, VIEW__INSTANCES_GROUPS);
 		createEReference(viewEClass, VIEW__STREAMS);
 
 		hasStatusEClass = createEClass(HAS_STATUS);
@@ -1642,10 +1642,10 @@ public class CorePackageImpl extends EPackageImpl implements CorePackage {
 		createEReference(linkEClass, LINK__ORIGINS);
 		createEReference(linkEClass, LINK__DESTINATIONS);
 
-		nodesLinkEClass = createEClass(NODES_LINK);
-		createEReference(nodesLinkEClass, NODES_LINK__SOURCE);
-		createEReference(nodesLinkEClass, NODES_LINK__DESTINATION);
-		createEReference(nodesLinkEClass, NODES_LINK__LINK);
+		instancesLinkEClass = createEClass(INSTANCES_LINK);
+		createEReference(instancesLinkEClass, INSTANCES_LINK__SOURCE);
+		createEReference(instancesLinkEClass, INSTANCES_LINK__DESTINATION);
+		createEReference(instancesLinkEClass, INSTANCES_LINK__LINK);
 
 		hasLabelEClass = createEClass(HAS_LABEL);
 		createEAttribute(hasLabelEClass, HAS_LABEL__LABEL);
@@ -1750,12 +1750,12 @@ public class CorePackageImpl extends EPackageImpl implements CorePackage {
 		componentTypeEClass.getESuperTypes().add(this.getConceptItem());
 		componentTypeEClass.getESuperTypes().add(this.getHasParameterDefinitions());
 		componentEClass.getESuperTypes().add(this.getComponentGroup());
-		componentNodeEClass.getESuperTypes().add(this.getComponentNodeGroup());
-		componentNodeEClass.getESuperTypes().add(this.getHasParameterValues());
+		componentInstanceEClass.getESuperTypes().add(this.getComponentInstanceGroup());
+		componentInstanceEClass.getESuperTypes().add(this.getHasParameterValues());
 		viewPointEClass.getESuperTypes().add(this.getConceptItem());
 		componentGroupEClass.getESuperTypes().add(this.getArchitectureItem());
 		componentGroupEClass.getESuperTypes().add(this.getHasParameterDefinitions());
-		componentNodeGroupEClass.getESuperTypes().add(this.getRuntimeItem());
+		componentInstanceGroupEClass.getESuperTypes().add(this.getRuntimeItem());
 		architectureItemEClass.getESuperTypes().add(this.getHasNameAndID());
 		architectureItemEClass.getESuperTypes().add(this.getHasComment());
 		architectureItemEClass.getESuperTypes().add(this.getHasTags());
@@ -1778,7 +1778,7 @@ public class CorePackageImpl extends EPackageImpl implements CorePackage {
 		viewEClass.getESuperTypes().add(this.getArchitectureItem());
 		linkTypeEClass.getESuperTypes().add(this.getConceptItem());
 		linkEClass.getESuperTypes().add(this.getArchitectureItem());
-		nodesLinkEClass.getESuperTypes().add(this.getRuntimeItem());
+		instancesLinkEClass.getESuperTypes().add(this.getRuntimeItem());
 		stakeholderEClass.getESuperTypes().add(this.getHasNameAndID());
 		stakeholderEClass.getESuperTypes().add(this.getHasLabel());
 		floatConstraintEClass.getESuperTypes().add(this.getConstraint());
@@ -1826,16 +1826,16 @@ public class CorePackageImpl extends EPackageImpl implements CorePackage {
 		initEReference(getComponent_Engines(), this.getComponent(), null, "engines", null, 0, -1, Component.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		getComponent_Engines().getEKeys().add(this.getHasNameAndID_Id());
 		initEReference(getComponent_BoundComponent(), this.getComponent(), null, "boundComponent", null, 0, 1, Component.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getComponent_Nodes(), this.getComponentNode(), null, "nodes", null, 0, -1, Component.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getComponent_Instances(), this.getComponentInstance(), null, "instances", null, 0, -1, Component.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEClass(componentNodeEClass, ComponentNode.class, "ComponentNode", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getComponentNode_Component(), this.getComponent(), null, "component", null, 1, 1, ComponentNode.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getComponentNode_SubNodes(), this.getComponentNode(), null, "subNodes", null, 0, -1, ComponentNode.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getComponentNode_EngineNode(), this.getComponentNode(), null, "engineNode", null, 0, 1, ComponentNode.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getComponentNode_Nodes(), this.getComponentNode(), null, "nodes", null, 0, -1, ComponentNode.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getComponentNode_Streams(), this.getNodesLink(), null, "streams", null, 0, -1, ComponentNode.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getComponentNode_NodesGroups(), this.getComponentNodeGroup(), null, "nodesGroups", null, 0, -1, ComponentNode.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getComponentNode_BoundComponentNode(), this.getComponentNode(), null, "boundComponentNode", null, 0, 1, ComponentNode.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEClass(componentInstanceEClass, ComponentInstance.class, "ComponentInstance", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getComponentInstance_Component(), this.getComponent(), null, "component", null, 1, 1, ComponentInstance.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getComponentInstance_SubInstances(), this.getComponentInstance(), null, "subInstances", null, 0, -1, ComponentInstance.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getComponentInstance_EngineInstance(), this.getComponentInstance(), null, "engineInstance", null, 0, 1, ComponentInstance.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getComponentInstance_Instances(), this.getComponentInstance(), null, "instances", null, 0, -1, ComponentInstance.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getComponentInstance_Streams(), this.getInstancesLink(), null, "streams", null, 0, -1, ComponentInstance.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getComponentInstance_InstancesGroups(), this.getComponentInstanceGroup(), null, "instancesGroups", null, 0, -1, ComponentInstance.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getComponentInstance_BoundComponentInstance(), this.getComponentInstance(), null, "boundComponentInstance", null, 0, 1, ComponentInstance.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(viewPointEClass, ViewPoint.class, "ViewPoint", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getViewPoint_Activities(), this.getActivity(), null, "activities", null, 0, -1, ViewPoint.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1846,8 +1846,8 @@ public class CorePackageImpl extends EPackageImpl implements CorePackage {
 		initEClass(componentGroupEClass, ComponentGroup.class, "ComponentGroup", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getComponentGroup_Components(), this.getComponent(), null, "components", null, 0, -1, ComponentGroup.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEClass(componentNodeGroupEClass, ComponentNodeGroup.class, "ComponentNodeGroup", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getComponentNodeGroup_ComponentNodes(), this.getComponentNode(), null, "componentNodes", null, 0, -1, ComponentNodeGroup.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEClass(componentInstanceGroupEClass, ComponentInstanceGroup.class, "ComponentInstanceGroup", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getComponentInstanceGroup_ComponentInstances(), this.getComponentInstance(), null, "componentInstances", null, 0, -1, ComponentInstanceGroup.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(architectureItemEClass, ArchitectureItem.class, "ArchitectureItem", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
@@ -1864,9 +1864,9 @@ public class CorePackageImpl extends EPackageImpl implements CorePackage {
 		initEReference(getView_ViewPoint(), this.getViewPoint(), null, "viewPoint", null, 1, 1, View.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getView_Links(), this.getLink(), null, "links", null, 0, -1, View.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		getView_Links().getEKeys().add(this.getHasNameAndID_Id());
-		initEReference(getView_Nodes(), this.getComponentNode(), null, "nodes", null, 0, -1, View.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getView_NodesGroups(), this.getComponentNodeGroup(), null, "nodesGroups", null, 0, -1, View.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getView_Streams(), this.getNodesLink(), null, "streams", null, 0, -1, View.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getView_Instances(), this.getComponentInstance(), null, "instances", null, 0, -1, View.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getView_InstancesGroups(), this.getComponentInstanceGroup(), null, "instancesGroups", null, 0, -1, View.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getView_Streams(), this.getInstancesLink(), null, "streams", null, 0, -1, View.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(hasStatusEClass, HasStatus.class, "HasStatus", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getHasStatus_Status(), ecorePackage.getEString(), "status", null, 0, 1, HasStatus.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1900,10 +1900,10 @@ public class CorePackageImpl extends EPackageImpl implements CorePackage {
 		initEReference(getLink_Origins(), this.getComponent(), null, "origins", null, 1, -1, Link.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getLink_Destinations(), this.getComponent(), null, "destinations", null, 1, -1, Link.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEClass(nodesLinkEClass, NodesLink.class, "NodesLink", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getNodesLink_Source(), this.getComponentNode(), null, "source", null, 1, 1, NodesLink.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getNodesLink_Destination(), this.getComponentNode(), null, "destination", null, 1, 1, NodesLink.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getNodesLink_Link(), this.getLink(), null, "link", null, 1, 1, NodesLink.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEClass(instancesLinkEClass, InstancesLink.class, "InstancesLink", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getInstancesLink_Source(), this.getComponentInstance(), null, "source", null, 1, 1, InstancesLink.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getInstancesLink_Destination(), this.getComponentInstance(), null, "destination", null, 1, 1, InstancesLink.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getInstancesLink_Link(), this.getLink(), null, "link", null, 1, 1, InstancesLink.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(hasLabelEClass, HasLabel.class, "HasLabel", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getHasLabel_Label(), ecorePackage.getEString(), "label", null, 0, 1, HasLabel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

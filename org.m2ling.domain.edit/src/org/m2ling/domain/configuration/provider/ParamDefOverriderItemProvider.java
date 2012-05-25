@@ -21,8 +21,8 @@ import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.ItemProviderAdapter;
 import org.eclipse.emf.edit.provider.ViewerNotification;
-import org.m2ling.domain.configuration.ParamDefOverrider;
 import org.m2ling.domain.configuration.ConfigurationPackage;
+import org.m2ling.domain.configuration.ParamDefOverrider;
 import org.m2ling.domain.provider.M2lingEditPlugin;
 
 /**

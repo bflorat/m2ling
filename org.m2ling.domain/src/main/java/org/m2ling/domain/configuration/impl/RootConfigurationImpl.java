@@ -6,20 +6,15 @@ package org.m2ling.domain.configuration.impl;
 import java.util.Collection;
 
 import org.eclipse.emf.common.notify.NotificationChain;
-
 import org.eclipse.emf.common.util.EList;
-
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
-
 import org.eclipse.emf.ecore.impl.EObjectImpl;
-
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
-
+import org.m2ling.domain.configuration.ConfigurationPackage;
 import org.m2ling.domain.configuration.ParameterDefinition;
 import org.m2ling.domain.configuration.ParameterValue;
-import org.m2ling.domain.configuration.ConfigurationPackage;
 import org.m2ling.domain.configuration.RootConfiguration;
 
 /**

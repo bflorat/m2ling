@@ -48,6 +48,15 @@ public interface CoreFactory extends EFactory {
 	Component createComponent();
 
 	/**
+	 * Returns a new object of class '<em>Component Instance</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Component Instance</em>'.
+	 * @generated
+	 */
+	ComponentInstance createComponentInstance();
+
+	/**
 	 * Returns a new object of class '<em>Has Name And ID</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -55,15 +64,6 @@ public interface CoreFactory extends EFactory {
 	 * @generated
 	 */
 	HasNameAndID createHasNameAndID();
-
-	/**
-	 * Returns a new object of class '<em>Component Node</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Component Node</em>'.
-	 * @generated
-	 */
-	ComponentNode createComponentNode();
 
 	/**
 	 * Returns a new object of class '<em>View Point</em>'.
@@ -84,13 +84,13 @@ public interface CoreFactory extends EFactory {
 	ComponentGroup createComponentGroup();
 
 	/**
-	 * Returns a new object of class '<em>Component Node Group</em>'.
+	 * Returns a new object of class '<em>Component Instance Group</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Component Node Group</em>'.
+	 * @return a new object of class '<em>Component Instance Group</em>'.
 	 * @generated
 	 */
-	ComponentNodeGroup createComponentNodeGroup();
+	ComponentInstanceGroup createComponentInstanceGroup();
 
 	/**
 	 * Returns a new object of class '<em>View</em>'.
@@ -147,13 +147,13 @@ public interface CoreFactory extends EFactory {
 	Link createLink();
 
 	/**
-	 * Returns a new object of class '<em>Nodes Link</em>'.
+	 * Returns a new object of class '<em>Instances Link</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Nodes Link</em>'.
+	 * @return a new object of class '<em>Instances Link</em>'.
 	 * @generated
 	 */
-	NodesLink createNodesLink();
+	InstancesLink createInstancesLink();
 
 	/**
 	 * Returns a new object of class '<em>Stakeholder</em>'.

@@ -10,10 +10,10 @@ import org.eclipse.emf.ecore.impl.EPackageImpl;
 import org.m2ling.domain.DomainFactory;
 import org.m2ling.domain.DomainPackage;
 import org.m2ling.domain.Root;
-import org.m2ling.domain.core.CorePackage;
-import org.m2ling.domain.core.impl.CorePackageImpl;
 import org.m2ling.domain.configuration.ConfigurationPackage;
 import org.m2ling.domain.configuration.impl.ConfigurationPackageImpl;
+import org.m2ling.domain.core.CorePackage;
+import org.m2ling.domain.core.impl.CorePackageImpl;
 
 /**
  * <!-- begin-user-doc -->

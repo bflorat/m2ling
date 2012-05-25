@@ -19,10 +19,10 @@ import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.ViewerNotification;
+import org.m2ling.domain.configuration.ConfigurationPackage;
+import org.m2ling.domain.configuration.ParameterValue;
 import org.m2ling.domain.core.CorePackage;
 import org.m2ling.domain.core.provider.HasCommentItemProvider;
-import org.m2ling.domain.configuration.ParameterValue;
-import org.m2ling.domain.configuration.ConfigurationPackage;
 import org.m2ling.domain.provider.M2lingEditPlugin;
 
 /**

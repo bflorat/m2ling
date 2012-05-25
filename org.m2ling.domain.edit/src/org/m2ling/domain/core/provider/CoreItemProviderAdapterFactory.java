@@ -124,6 +124,29 @@ public class CoreItemProviderAdapterFactory extends CoreAdapterFactory implement
 	}
 
 	/**
+	 * This keeps track of the one adapter used for all {@link org.m2ling.domain.core.ComponentInstance} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected ComponentInstanceItemProvider componentInstanceItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link org.m2ling.domain.core.ComponentInstance}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createComponentInstanceAdapter() {
+		if (componentInstanceItemProvider == null) {
+			componentInstanceItemProvider = new ComponentInstanceItemProvider(this);
+		}
+
+		return componentInstanceItemProvider;
+	}
+
+	/**
 	 * This keeps track of the one adapter used for all {@link org.m2ling.domain.core.HasNameAndID} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -144,29 +167,6 @@ public class CoreItemProviderAdapterFactory extends CoreAdapterFactory implement
 		}
 
 		return hasNameAndIDItemProvider;
-	}
-
-	/**
-	 * This keeps track of the one adapter used for all {@link org.m2ling.domain.core.ComponentNode} instances.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected ComponentNodeItemProvider componentNodeItemProvider;
-
-	/**
-	 * This creates an adapter for a {@link org.m2ling.domain.core.ComponentNode}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Adapter createComponentNodeAdapter() {
-		if (componentNodeItemProvider == null) {
-			componentNodeItemProvider = new ComponentNodeItemProvider(this);
-		}
-
-		return componentNodeItemProvider;
 	}
 
 	/**
@@ -216,26 +216,26 @@ public class CoreItemProviderAdapterFactory extends CoreAdapterFactory implement
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link org.m2ling.domain.core.ComponentNodeGroup} instances.
+	 * This keeps track of the one adapter used for all {@link org.m2ling.domain.core.ComponentInstanceGroup} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected ComponentNodeGroupItemProvider componentNodeGroupItemProvider;
+	protected ComponentInstanceGroupItemProvider componentInstanceGroupItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link org.m2ling.domain.core.ComponentNodeGroup}.
+	 * This creates an adapter for a {@link org.m2ling.domain.core.ComponentInstanceGroup}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
-	public Adapter createComponentNodeGroupAdapter() {
-		if (componentNodeGroupItemProvider == null) {
-			componentNodeGroupItemProvider = new ComponentNodeGroupItemProvider(this);
+	public Adapter createComponentInstanceGroupAdapter() {
+		if (componentInstanceGroupItemProvider == null) {
+			componentInstanceGroupItemProvider = new ComponentInstanceGroupItemProvider(this);
 		}
 
-		return componentNodeGroupItemProvider;
+		return componentInstanceGroupItemProvider;
 	}
 
 	/**
@@ -377,26 +377,26 @@ public class CoreItemProviderAdapterFactory extends CoreAdapterFactory implement
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link org.m2ling.domain.core.NodesLink} instances.
+	 * This keeps track of the one adapter used for all {@link org.m2ling.domain.core.InstancesLink} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected NodesLinkItemProvider nodesLinkItemProvider;
+	protected InstancesLinkItemProvider instancesLinkItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link org.m2ling.domain.core.NodesLink}.
+	 * This creates an adapter for a {@link org.m2ling.domain.core.InstancesLink}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
-	public Adapter createNodesLinkAdapter() {
-		if (nodesLinkItemProvider == null) {
-			nodesLinkItemProvider = new NodesLinkItemProvider(this);
+	public Adapter createInstancesLinkAdapter() {
+		if (instancesLinkItemProvider == null) {
+			instancesLinkItemProvider = new InstancesLinkItemProvider(this);
 		}
 
-		return nodesLinkItemProvider;
+		return instancesLinkItemProvider;
 	}
 
 	/**
@@ -868,10 +868,10 @@ public class CoreItemProviderAdapterFactory extends CoreAdapterFactory implement
 	public void dispose() {
 		if (componentTypeItemProvider != null) componentTypeItemProvider.dispose();
 		if (componentItemProvider != null) componentItemProvider.dispose();
-		if (componentNodeItemProvider != null) componentNodeItemProvider.dispose();
+		if (componentInstanceItemProvider != null) componentInstanceItemProvider.dispose();
 		if (viewPointItemProvider != null) viewPointItemProvider.dispose();
 		if (componentGroupItemProvider != null) componentGroupItemProvider.dispose();
-		if (componentNodeGroupItemProvider != null) componentNodeGroupItemProvider.dispose();
+		if (componentInstanceGroupItemProvider != null) componentInstanceGroupItemProvider.dispose();
 		if (viewItemProvider != null) viewItemProvider.dispose();
 		if (hasNameAndIDItemProvider != null) hasNameAndIDItemProvider.dispose();
 		if (hasCommentItemProvider != null) hasCommentItemProvider.dispose();
@@ -879,7 +879,7 @@ public class CoreItemProviderAdapterFactory extends CoreAdapterFactory implement
 		if (customPropertyItemProvider != null) customPropertyItemProvider.dispose();
 		if (linkTypeItemProvider != null) linkTypeItemProvider.dispose();
 		if (linkItemProvider != null) linkItemProvider.dispose();
-		if (nodesLinkItemProvider != null) nodesLinkItemProvider.dispose();
+		if (instancesLinkItemProvider != null) instancesLinkItemProvider.dispose();
 		if (stakeholderItemProvider != null) stakeholderItemProvider.dispose();
 		if (floatConstraintItemProvider != null) floatConstraintItemProvider.dispose();
 		if (minConstraintItemProvider != null) minConstraintItemProvider.dispose();

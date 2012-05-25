@@ -7,7 +7,6 @@ import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
 import org.eclipse.emf.ecore.EObject;
-import org.m2ling.domain.core.*;
 import org.m2ling.domain.core.Activity;
 import org.m2ling.domain.core.ActivityTransition;
 import org.m2ling.domain.core.Actor;
@@ -15,8 +14,8 @@ import org.m2ling.domain.core.ArchitectureItem;
 import org.m2ling.domain.core.BoundaryConstraint;
 import org.m2ling.domain.core.Component;
 import org.m2ling.domain.core.ComponentGroup;
-import org.m2ling.domain.core.ComponentNode;
-import org.m2ling.domain.core.ComponentNodeGroup;
+import org.m2ling.domain.core.ComponentInstance;
+import org.m2ling.domain.core.ComponentInstanceGroup;
 import org.m2ling.domain.core.ComponentType;
 import org.m2ling.domain.core.ConceptItem;
 import org.m2ling.domain.core.Constraint;
@@ -32,13 +31,14 @@ import org.m2ling.domain.core.HasLabel;
 import org.m2ling.domain.core.HasNameAndID;
 import org.m2ling.domain.core.HasParameterDefinitions;
 import org.m2ling.domain.core.HasParameterValues;
+import org.m2ling.domain.core.HasStatus;
 import org.m2ling.domain.core.HasTags;
+import org.m2ling.domain.core.InstancesLink;
 import org.m2ling.domain.core.IntegerConstraint;
 import org.m2ling.domain.core.Link;
 import org.m2ling.domain.core.LinkType;
 import org.m2ling.domain.core.MaxConstraint;
 import org.m2ling.domain.core.MinConstraint;
-import org.m2ling.domain.core.NodesLink;
 import org.m2ling.domain.core.NotNullConstraint;
 import org.m2ling.domain.core.OCLConstraint;
 import org.m2ling.domain.core.OrganisationalUnit;
@@ -122,8 +122,8 @@ public class CoreAdapterFactory extends AdapterFactoryImpl {
 				return createComponentAdapter();
 			}
 			@Override
-			public Adapter caseComponentNode(ComponentNode object) {
-				return createComponentNodeAdapter();
+			public Adapter caseComponentInstance(ComponentInstance object) {
+				return createComponentInstanceAdapter();
 			}
 			@Override
 			public Adapter caseViewPoint(ViewPoint object) {
@@ -134,8 +134,8 @@ public class CoreAdapterFactory extends AdapterFactoryImpl {
 				return createComponentGroupAdapter();
 			}
 			@Override
-			public Adapter caseComponentNodeGroup(ComponentNodeGroup object) {
-				return createComponentNodeGroupAdapter();
+			public Adapter caseComponentInstanceGroup(ComponentInstanceGroup object) {
+				return createComponentInstanceGroupAdapter();
 			}
 			@Override
 			public Adapter caseArchitectureItem(ArchitectureItem object) {
@@ -194,8 +194,8 @@ public class CoreAdapterFactory extends AdapterFactoryImpl {
 				return createLinkAdapter();
 			}
 			@Override
-			public Adapter caseNodesLink(NodesLink object) {
-				return createNodesLinkAdapter();
+			public Adapter caseInstancesLink(InstancesLink object) {
+				return createInstancesLinkAdapter();
 			}
 			@Override
 			public Adapter caseHasLabel(HasLabel object) {
@@ -326,6 +326,20 @@ public class CoreAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
+	 * Creates a new adapter for an object of class '{@link org.m2ling.domain.core.ComponentInstance <em>Component Instance</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.m2ling.domain.core.ComponentInstance
+	 * @generated
+	 */
+	public Adapter createComponentInstanceAdapter() {
+		return null;
+	}
+
+	/**
 	 * Creates a new adapter for an object of class '{@link org.m2ling.domain.core.HasNameAndID <em>Has Name And ID</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
@@ -336,20 +350,6 @@ public class CoreAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createHasNameAndIDAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.m2ling.domain.core.ComponentNode <em>Component Node</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.m2ling.domain.core.ComponentNode
-	 * @generated
-	 */
-	public Adapter createComponentNodeAdapter() {
 		return null;
 	}
 
@@ -382,16 +382,16 @@ public class CoreAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.m2ling.domain.core.ComponentNodeGroup <em>Component Node Group</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.m2ling.domain.core.ComponentInstanceGroup <em>Component Instance Group</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.m2ling.domain.core.ComponentNodeGroup
+	 * @see org.m2ling.domain.core.ComponentInstanceGroup
 	 * @generated
 	 */
-	public Adapter createComponentNodeGroupAdapter() {
+	public Adapter createComponentInstanceGroupAdapter() {
 		return null;
 	}
 
@@ -550,16 +550,16 @@ public class CoreAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.m2ling.domain.core.NodesLink <em>Nodes Link</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.m2ling.domain.core.InstancesLink <em>Instances Link</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.m2ling.domain.core.NodesLink
+	 * @see org.m2ling.domain.core.InstancesLink
 	 * @generated
 	 */
-	public Adapter createNodesLinkAdapter() {
+	public Adapter createInstancesLinkAdapter() {
 		return null;
 	}
 

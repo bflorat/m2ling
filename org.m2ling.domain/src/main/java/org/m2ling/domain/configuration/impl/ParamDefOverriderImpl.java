@@ -8,8 +8,8 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
-import org.m2ling.domain.configuration.ParamDefOverrider;
 import org.m2ling.domain.configuration.ConfigurationPackage;
+import org.m2ling.domain.configuration.ParamDefOverrider;
 
 /**
  * <!-- begin-user-doc -->

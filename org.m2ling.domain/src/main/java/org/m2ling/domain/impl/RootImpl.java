@@ -16,14 +16,12 @@ import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.m2ling.domain.DomainPackage;
 import org.m2ling.domain.Root;
+import org.m2ling.domain.configuration.RootConfiguration;
 import org.m2ling.domain.core.Actor;
 import org.m2ling.domain.core.OrganisationalUnit;
 import org.m2ling.domain.core.Stakeholder;
 import org.m2ling.domain.core.View;
 import org.m2ling.domain.core.ViewPoint;
-import org.m2ling.domain.configuration.RootConfiguration;
-import org.m2ling.domain.configuration.ParameterDefinition;
-import org.m2ling.domain.configuration.ParameterValue;
 
 /**
  * <!-- begin-user-doc -->

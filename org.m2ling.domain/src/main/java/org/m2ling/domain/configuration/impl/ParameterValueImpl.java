@@ -7,14 +7,14 @@ import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import org.m2ling.domain.configuration.ConfigurationPackage;
+import org.m2ling.domain.configuration.ParameterDefinition;
+import org.m2ling.domain.configuration.ParameterValue;
 import org.m2ling.domain.core.CorePackage;
 import org.m2ling.domain.core.CustomProperty;
 import org.m2ling.domain.core.HasCustomProperties;
 import org.m2ling.domain.core.HasParameterValues;
 import org.m2ling.domain.core.impl.HasCommentImpl;
-import org.m2ling.domain.configuration.ParameterDefinition;
-import org.m2ling.domain.configuration.ParameterValue;
-import org.m2ling.domain.configuration.ConfigurationPackage;
 
 /**
  * <!-- begin-user-doc -->
