@@ -9,7 +9,7 @@ Bundle-Vendor: %providerName
 Bundle-Localization: plugin
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Export-Package: org.m2ling.domain.core.presentation,
- org.m2ling.domain.parameters.presentation,
+ org.m2ling.domain.configuration.presentation,
  org.m2ling.domain.presentation
 Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.core.resources;visibility:=reexport,

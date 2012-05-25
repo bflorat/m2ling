@@ -119,7 +119,7 @@ import org.eclipse.ui.views.properties.IPropertySheetPage;
 import org.eclipse.ui.views.properties.PropertySheet;
 import org.eclipse.ui.views.properties.PropertySheetPage;
 import org.m2ling.domain.core.provider.CoreItemProviderAdapterFactory;
-import org.m2ling.domain.parameters.provider.ParametersItemProviderAdapterFactory;
+import org.m2ling.domain.configuration.provider.ConfigurationItemProviderAdapterFactory;
 import org.m2ling.domain.presentation.M2lingEditorPlugin;
 import org.m2ling.domain.provider.DomainItemProviderAdapterFactory;
 
@@ -665,7 +665,7 @@ public class CoreEditor
 		adapterFactory.addAdapterFactory(new ResourceItemProviderAdapterFactory());
 		adapterFactory.addAdapterFactory(new DomainItemProviderAdapterFactory());
 		adapterFactory.addAdapterFactory(new CoreItemProviderAdapterFactory());
-		adapterFactory.addAdapterFactory(new ParametersItemProviderAdapterFactory());
+		adapterFactory.addAdapterFactory(new ConfigurationItemProviderAdapterFactory());
 		adapterFactory.addAdapterFactory(new ReflectiveItemProviderAdapterFactory());
 
 		// Create the command stack that will notify this editor as commands are executed.

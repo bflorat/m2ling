@@ -20,7 +20,7 @@ import com.google.inject.Singleton;
 
 /**
  * 
- * Load, store and manages m2ling configuration and parameters.
+ * Load, store and manages m2ling configuration and configuration.
  * 
  * @author "Bertrand Florat <bertrand@florat.net>"
  * 

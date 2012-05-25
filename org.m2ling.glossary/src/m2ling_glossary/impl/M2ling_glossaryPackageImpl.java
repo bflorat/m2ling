@@ -224,13 +224,13 @@ public class M2ling_glossaryPackageImpl extends EPackageImpl implements M2ling_g
 		setNsPrefix(eNS_PREFIX);
 		setNsURI(eNS_URI);
 
-		// Create type parameters
+		// Create type configuration
 
-		// Set bounds for type parameters
+		// Set bounds for type configuration
 
 		// Add supertypes to classes
 
-		// Initialize classes and features; add operations and parameters
+		// Initialize classes and features; add operations and configuration
 		initEClass(glossaryEClass, glossary.class, "glossary", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getglossary_Contents(), this.getterm(), null, "contents", null, 0, -1, glossary.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 

@@ -8,7 +8,7 @@ import junit.framework.TestSuite;
 
 import junit.textui.TestRunner;
 
-import org.m2ling.domain.parameters.tests.ParametersTests;
+import org.m2ling.domain.configuration.tests.ConfigurationTests;
 
 /**
  * <!-- begin-user-doc -->
@@ -41,7 +41,7 @@ public class M2lingAllTests extends TestSuite {
 	 */
 	public static Test suite() {
 		TestSuite suite = new M2lingAllTests("M2ling Tests");
-		suite.addTest(ParametersTests.suite());
+		suite.addTest(ConfigurationTests.suite());
 		return suite;
 	}
 

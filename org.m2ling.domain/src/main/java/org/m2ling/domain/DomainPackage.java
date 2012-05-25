@@ -118,13 +118,13 @@ public interface DomainPackage extends EPackage {
 	int ROOT__ACTORS = 4;
 
 	/**
-	 * The feature id for the '<em><b>Parameters</b></em>' containment reference.
+	 * The feature id for the '<em><b>Configuration</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ROOT__PARAMETERS = 5;
+	int ROOT__CONFIGURATION = 5;
 
 	/**
 	 * The number of structural features of the '<em>Root</em>' class.
@@ -202,15 +202,15 @@ public interface DomainPackage extends EPackage {
 	EReference getRoot_Actors();
 
 	/**
-	 * Returns the meta object for the containment reference '{@link org.m2ling.domain.Root#getParameters <em>Parameters</em>}'.
+	 * Returns the meta object for the containment reference '{@link org.m2ling.domain.Root#getConfiguration <em>Configuration</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference '<em>Parameters</em>'.
-	 * @see org.m2ling.domain.Root#getParameters()
+	 * @return the meta object for the containment reference '<em>Configuration</em>'.
+	 * @see org.m2ling.domain.Root#getConfiguration()
 	 * @see #getRoot()
 	 * @generated
 	 */
-	EReference getRoot_Parameters();
+	EReference getRoot_Configuration();
 
 	/**
 	 * Returns the factory that creates the instances of the model.
@@ -285,12 +285,12 @@ public interface DomainPackage extends EPackage {
 		EReference ROOT__ACTORS = eINSTANCE.getRoot_Actors();
 
 		/**
-		 * The meta object literal for the '<em><b>Parameters</b></em>' containment reference feature.
+		 * The meta object literal for the '<em><b>Configuration</b></em>' containment reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference ROOT__PARAMETERS = eINSTANCE.getRoot_Parameters();
+		EReference ROOT__CONFIGURATION = eINSTANCE.getRoot_Configuration();
 
 	}
 

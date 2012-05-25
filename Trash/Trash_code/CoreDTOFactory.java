@@ -13,7 +13,7 @@ package org.m2ling.dto.core;
 public class CoreDTOFactory {
 
 	/**
-	 * Create a new viewpoint DTO from given parameters.
+	 * Create a new viewpoint DTO from given configuration.
 	 * 
 	 * @param name
 	 *            the VP name

@@ -7,8 +7,8 @@ Bundle-ClassPath: .
 Bundle-Vendor: %providerName
 Bundle-Localization: plugin
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
-Export-Package: org.m2ling.domain.core.tests,
- org.m2ling.domain.parameters.tests,
+Export-Package: org.m2ling.domain.configuration.tests,
+ org.m2ling.domain.core.tests,
  org.m2ling.domain.tests
 Require-Bundle: org.eclipse.core.runtime,
  org.m2ling.domain;visibility:=reexport,

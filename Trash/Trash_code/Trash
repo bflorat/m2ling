@@ -22,7 +22,7 @@
 	****************
 	
 	/**
-	 * Create a new tag DTO from given parameters.
+	 * Create a new tag DTO from given configuration.
 	 * @param text the tag text (can contain 
 	 * @return a VP DTO containing all useful VP data.
 	 */

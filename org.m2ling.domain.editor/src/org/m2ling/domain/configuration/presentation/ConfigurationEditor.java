@@ -1,7 +1,8 @@
 /**
  * Copyright (C) 2012 Bertrand Florat
  */
-package org.m2ling.domain.presentation;
+package org.m2ling.domain.configuration.presentation;
+
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -34,6 +35,7 @@ import org.eclipse.emf.common.command.CommandStackListener;
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.ui.MarkerHelper;
+import org.eclipse.emf.common.ui.ViewerPane;
 import org.eclipse.emf.common.ui.editor.ProblemEditorPart;
 import org.eclipse.emf.common.ui.viewer.IViewerProvider;
 import org.eclipse.emf.common.util.BasicDiagnostic;
@@ -71,13 +73,17 @@ import org.eclipse.jface.action.MenuManager;
 import org.eclipse.jface.action.Separator;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.dialogs.ProgressMonitorDialog;
+import org.eclipse.jface.viewers.ColumnWeightData;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.ISelectionChangedListener;
 import org.eclipse.jface.viewers.ISelectionProvider;
 import org.eclipse.jface.viewers.IStructuredSelection;
+import org.eclipse.jface.viewers.ListViewer;
 import org.eclipse.jface.viewers.SelectionChangedEvent;
 import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.jface.viewers.StructuredViewer;
+import org.eclipse.jface.viewers.TableLayout;
+import org.eclipse.jface.viewers.TableViewer;
 import org.eclipse.jface.viewers.TreeViewer;
 import org.eclipse.jface.viewers.Viewer;
 import org.eclipse.swt.SWT;
@@ -87,9 +93,13 @@ import org.eclipse.swt.dnd.Transfer;
 import org.eclipse.swt.events.ControlAdapter;
 import org.eclipse.swt.events.ControlEvent;
 import org.eclipse.swt.graphics.Point;
+import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Menu;
+import org.eclipse.swt.widgets.Table;
+import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.swt.widgets.Tree;
+import org.eclipse.swt.widgets.TreeColumn;
 import org.eclipse.ui.IActionBars;
 import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.IEditorPart;
@@ -105,32 +115,35 @@ import org.eclipse.ui.part.MultiPageEditorPart;
 import org.eclipse.ui.views.contentoutline.ContentOutline;
 import org.eclipse.ui.views.contentoutline.ContentOutlinePage;
 import org.eclipse.ui.views.contentoutline.IContentOutlinePage;
-import org.eclipse.ui.views.properties.IPropertySheetEntry;
 import org.eclipse.ui.views.properties.IPropertySheetPage;
 import org.eclipse.ui.views.properties.PropertySheet;
 import org.eclipse.ui.views.properties.PropertySheetPage;
-import org.eclipse.ui.views.properties.PropertySheetSorter;
 import org.m2ling.domain.core.provider.CoreItemProviderAdapterFactory;
 import org.m2ling.domain.configuration.provider.ConfigurationItemProviderAdapterFactory;
+import org.m2ling.domain.presentation.M2lingEditorPlugin;
 import org.m2ling.domain.provider.DomainItemProviderAdapterFactory;
 
+
 /**
- * This is an example of a Domain model editor.
- * <!-- begin-user-doc --> <!-- end-user-doc -->
+ * This is an example of a Configuration model editor.
+ * <!-- begin-user-doc -->
+ * <!-- end-user-doc -->
  * @generated
  */
-public class DomainEditor extends MultiPageEditorPart implements IEditingDomainProvider, ISelectionProvider,
-		IMenuListener, IViewerProvider, IGotoMarker {
+public class ConfigurationEditor
+	extends MultiPageEditorPart
+	implements IEditingDomainProvider, ISelectionProvider, IMenuListener, IViewerProvider, IGotoMarker {
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	public static final String copyright = "Copyright (C) 2012 Bertrand Florat";
 
 	/**
-	 * This keeps track of the editing domain that is used to track all changes to the model. <!--
-	 * begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * This keeps track of the editing domain that is used to track all changes to the model.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	protected AdapterFactoryEditingDomain editingDomain;
@@ -145,28 +158,32 @@ public class DomainEditor extends MultiPageEditorPart implements IEditingDomainP
 
 	/**
 	 * This is the content outline page.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	protected IContentOutlinePage contentOutlinePage;
 
 	/**
 	 * This is a kludge...
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	protected IStatusLineManager contentOutlineStatusLineManager;
 
 	/**
 	 * This is the content outline page's viewer.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	protected TreeViewer contentOutlineViewer;
 
 	/**
 	 * This is the property sheet page.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	protected PropertySheetPage propertySheetPage;
@@ -174,36 +191,90 @@ public class DomainEditor extends MultiPageEditorPart implements IEditingDomainP
 	/**
 	 * This is the viewer that shadows the selection in the content outline.
 	 * The parent relation must be correctly defined for this to work.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	protected TreeViewer selectionViewer;
 
 	/**
+	 * This inverts the roll of parent and child in the content provider and show parents as a tree.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected TreeViewer parentViewer;
+
+	/**
+	 * This shows how a tree view works.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected TreeViewer treeViewer;
+
+	/**
+	 * This shows how a list view works.
+	 * A list viewer doesn't support icons.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected ListViewer listViewer;
+
+	/**
+	 * This shows how a table view works.
+	 * A table can be used as a list with icons.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected TableViewer tableViewer;
+
+	/**
+	 * This shows how a tree view with columns works.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected TreeViewer treeViewerWithColumns;
+
+	/**
+	 * This keeps track of the active viewer pane, in the book.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected ViewerPane currentViewerPane;
+
+	/**
 	 * This keeps track of the active content viewer, which may be either one of the viewers in the pages or the content outline viewer.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	protected Viewer currentViewer;
 
 	/**
 	 * This listens to which ever viewer is active.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	protected ISelectionChangedListener selectionChangedListener;
 
 	/**
 	 * This keeps track of all the {@link org.eclipse.jface.viewers.ISelectionChangedListener}s that are listening to this editor.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	protected Collection<ISelectionChangedListener> selectionChangedListeners = new ArrayList<ISelectionChangedListener>();
 
 	/**
 	 * This keeps track of the selection of the editor as a whole.
-	 * <!-- begin-user-doc --> <!--
-	 * end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	protected ISelection editorSelection = StructuredSelection.EMPTY;
@@ -211,32 +282,35 @@ public class DomainEditor extends MultiPageEditorPart implements IEditingDomainP
 	/**
 	 * The MarkerHelper is responsible for creating workspace resource markers presented
 	 * in Eclipse's Problems View.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	protected MarkerHelper markerHelper = new EditUIMarkerHelper();
 
 	/**
 	 * This listens for when the outline becomes active
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected IPartListener partListener = new IPartListener() {
+	protected IPartListener partListener =
+		new IPartListener() {
 			public void partActivated(IWorkbenchPart p) {
 				if (p instanceof ContentOutline) {
 					if (((ContentOutline)p).getCurrentPage() == contentOutlinePage) {
-						getActionBarContributor().setActiveEditor(DomainEditor.this);
+						getActionBarContributor().setActiveEditor(ConfigurationEditor.this);
 
 						setCurrentViewer(contentOutlineViewer);
 					}
 				}
 				else if (p instanceof PropertySheet) {
 					if (((PropertySheet)p).getCurrentPage() == propertySheetPage) {
-						getActionBarContributor().setActiveEditor(DomainEditor.this);
+						getActionBarContributor().setActiveEditor(ConfigurationEditor.this);
 						handleActivate();
 					}
 				}
-				else if (p == DomainEditor.this) {
+				else if (p == ConfigurationEditor.this) {
 					handleActivate();
 				}
 			}
@@ -256,50 +330,52 @@ public class DomainEditor extends MultiPageEditorPart implements IEditingDomainP
 
 	/**
 	 * Resources that have been removed since last activation.
-	 * <!-- begin-user-doc --> <!--
-	 * end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	protected Collection<Resource> removedResources = new ArrayList<Resource>();
 
 	/**
 	 * Resources that have been changed since last activation.
-	 * <!-- begin-user-doc --> <!--
-	 * end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	protected Collection<Resource> changedResources = new ArrayList<Resource>();
 
 	/**
 	 * Resources that have been saved.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	protected Collection<Resource> savedResources = new ArrayList<Resource>();
 
 	/**
 	 * Map to store the diagnostic associated with a resource.
-	 * <!-- begin-user-doc --> <!--
-	 * end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	protected Map<Resource, Diagnostic> resourceToDiagnosticMap = new LinkedHashMap<Resource, Diagnostic>();
 
 	/**
 	 * Controls whether the problem indication should be updated.
-	 * <!-- begin-user-doc --> <!--
-	 * end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	protected boolean updateProblemIndication = true;
 
 	/**
-	 * Adapter used to update the problem indication when resources are demanded loaded. <!--
-	 * begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * Adapter used to update the problem indication when resources are demanded loaded.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected EContentAdapter problemIndicationAdapter = new EContentAdapter() {
+	protected EContentAdapter problemIndicationAdapter = 
+		new EContentAdapter() {
 			@Override
 			public void notifyChanged(Notification notification) {
 				if (notification.getNotifier() instanceof Resource) {
@@ -346,10 +422,12 @@ public class DomainEditor extends MultiPageEditorPart implements IEditingDomainP
 
 	/**
 	 * This listens for workspace changes.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected IResourceChangeListener resourceChangeListener = new IResourceChangeListener() {
+	protected IResourceChangeListener resourceChangeListener =
+		new IResourceChangeListener() {
 			public void resourceChanged(IResourceChangeEvent event) {
 				IResourceDelta delta = event.getDelta();
 				try {
@@ -395,7 +473,7 @@ public class DomainEditor extends MultiPageEditorPart implements IEditingDomainP
 								 public void run() {
 									 removedResources.addAll(visitor.getRemovedResources());
 									 if (!isDirty()) {
-										 getSite().getPage().closeEditor(DomainEditor.this, false);
+										 getSite().getPage().closeEditor(ConfigurationEditor.this, false);
 									 }
 								 }
 							 });
@@ -406,7 +484,7 @@ public class DomainEditor extends MultiPageEditorPart implements IEditingDomainP
 							(new Runnable() {
 								 public void run() {
 									 changedResources.addAll(visitor.getChangedResources());
-									 if (getSite().getPage().getActiveEditor() == DomainEditor.this) {
+									 if (getSite().getPage().getActiveEditor() == ConfigurationEditor.this) {
 										 handleActivate();
 									 }
 								 }
@@ -421,8 +499,8 @@ public class DomainEditor extends MultiPageEditorPart implements IEditingDomainP
 
 	/**
 	 * Handles activation of the editor or it's associated views.
-	 * <!-- begin-user-doc --> <!--
-	 * end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	protected void handleActivate() {
@@ -438,7 +516,7 @@ public class DomainEditor extends MultiPageEditorPart implements IEditingDomainP
 
 		if (!removedResources.isEmpty()) {
 			if (handleDirtyConflict()) {
-				getSite().getPage().closeEditor(DomainEditor.this, false);
+				getSite().getPage().closeEditor(ConfigurationEditor.this, false);
 			}
 			else {
 				removedResources.clear();
@@ -456,8 +534,8 @@ public class DomainEditor extends MultiPageEditorPart implements IEditingDomainP
 
 	/**
 	 * Handles what to do with changed resources on activation.
-	 * <!-- begin-user-doc --> <!--
-	 * end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	protected void handleChangedResources() {
@@ -490,10 +568,11 @@ public class DomainEditor extends MultiPageEditorPart implements IEditingDomainP
 			updateProblemIndication();
 		}
 	}
-
+  
 	/**
 	 * Updates the problems indication with the information described in the specified diagnostic.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	protected void updateProblemIndication() {
@@ -563,18 +642,19 @@ public class DomainEditor extends MultiPageEditorPart implements IEditingDomainP
 
 	/**
 	 * This creates a model editor.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public DomainEditor() {
+	public ConfigurationEditor() {
 		super();
 		initializeEditingDomain();
 	}
 
 	/**
 	 * This sets up the editing domain for the model editor.
-	 * <!-- begin-user-doc --> <!--
-	 * end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	protected void initializeEditingDomain() {
@@ -622,20 +702,20 @@ public class DomainEditor extends MultiPageEditorPart implements IEditingDomainP
 	}
 
 	/**
-	 * This is here for the listener to be able to call it. <!-- begin-user-doc --> <!-- end-user-doc
-	 * -->
-	 * 
+	 * This is here for the listener to be able to call it.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
+			@Override
 	protected void firePropertyChange(int action) {
 		super.firePropertyChange(action);
 	}
 
 	/**
 	 * This sets the selection into whichever viewer is active.
-	 * <!-- begin-user-doc --> <!--
-	 * end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	public void setSelectionToViewer(Collection<?> collection) {
@@ -661,8 +741,8 @@ public class DomainEditor extends MultiPageEditorPart implements IEditingDomainP
 	 * This returns the editing domain as required by the {@link IEditingDomainProvider} interface.
 	 * This is important for implementing the static methods of {@link AdapterFactoryEditingDomain}
 	 * and for supporting {@link org.eclipse.emf.edit.ui.action.CommandAction}.
-	 * <!-- begin-user-doc
-	 * --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	public EditingDomain getEditingDomain() {
@@ -670,12 +750,14 @@ public class DomainEditor extends MultiPageEditorPart implements IEditingDomainP
 	}
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	public class ReverseAdapterFactoryContentProvider extends AdapterFactoryContentProvider {
 		/**
-		 * <!-- begin-user-doc --> <!-- end-user-doc -->
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
 		 * @generated
 		 */
 		public ReverseAdapterFactoryContentProvider(AdapterFactory adapterFactory) {
@@ -683,7 +765,8 @@ public class DomainEditor extends MultiPageEditorPart implements IEditingDomainP
 		}
 
 		/**
-		 * <!-- begin-user-doc --> <!-- end-user-doc -->
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
 		 * @generated
 		 */
 		@Override
@@ -693,7 +776,8 @@ public class DomainEditor extends MultiPageEditorPart implements IEditingDomainP
 		}
 
 		/**
-		 * <!-- begin-user-doc --> <!-- end-user-doc -->
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
 		 * @generated
 		 */
 		@Override
@@ -703,7 +787,8 @@ public class DomainEditor extends MultiPageEditorPart implements IEditingDomainP
 		}
 
 		/**
-		 * <!-- begin-user-doc --> <!-- end-user-doc -->
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
 		 * @generated
 		 */
 		@Override
@@ -713,7 +798,8 @@ public class DomainEditor extends MultiPageEditorPart implements IEditingDomainP
 		}
 
 		/**
-		 * <!-- begin-user-doc --> <!-- end-user-doc -->
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
 		 * @generated
 		 */
 		@Override
@@ -723,9 +809,25 @@ public class DomainEditor extends MultiPageEditorPart implements IEditingDomainP
 	}
 
 	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setCurrentViewerPane(ViewerPane viewerPane) {
+		if (currentViewerPane != viewerPane) {
+			if (currentViewerPane != null) {
+				currentViewerPane.showFocus(false);
+			}
+			currentViewerPane = viewerPane;
+		}
+		setCurrentViewer(currentViewerPane.getViewer());
+	}
+
+	/**
 	 * This makes sure that one content viewer, either for the current page or the outline view, if it has focus,
 	 * is the current one.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	public void setCurrentViewer(Viewer viewer) {
@@ -768,9 +870,9 @@ public class DomainEditor extends MultiPageEditorPart implements IEditingDomainP
 	}
 
 	/**
-	 * This returns the viewer as required by the {@link IViewerProvider} interface. <!--
-	 * begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * This returns the viewer as required by the {@link IViewerProvider} interface.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	public Viewer getViewer() {
@@ -779,7 +881,8 @@ public class DomainEditor extends MultiPageEditorPart implements IEditingDomainP
 
 	/**
 	 * This creates a context menu for the viewer and adds a listener as well registering the menu for extension.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	protected void createContextMenuFor(StructuredViewer viewer) {
@@ -799,7 +902,8 @@ public class DomainEditor extends MultiPageEditorPart implements IEditingDomainP
 
 	/**
 	 * This is the method called to load a resource into the editing domain's resource set based on the editor's input.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	public void createModel() {
@@ -826,7 +930,8 @@ public class DomainEditor extends MultiPageEditorPart implements IEditingDomainP
 	/**
 	 * Returns a diagnostic describing the errors and warnings listed in the resource
 	 * and the specified exception (if any).
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	public Diagnostic analyzeResourceProblems(Resource resource, Exception exception) {
@@ -872,20 +977,204 @@ public class DomainEditor extends MultiPageEditorPart implements IEditingDomainP
 		if (!getEditingDomain().getResourceSet().getResources().isEmpty()) {
 			// Create a page for the selection tree view.
 			//
-			Tree tree = new Tree(getContainer(), SWT.MULTI);
-			selectionViewer = new TreeViewer(tree);
-			setCurrentViewer(selectionViewer);
+			{
+				ViewerPane viewerPane =
+					new ViewerPane(getSite().getPage(), ConfigurationEditor.this) {
+						@Override
+						public Viewer createViewer(Composite composite) {
+							Tree tree = new Tree(composite, SWT.MULTI);
+							TreeViewer newTreeViewer = new TreeViewer(tree);
+							return newTreeViewer;
+						}
+						@Override
+						public void requestActivation() {
+							super.requestActivation();
+							setCurrentViewerPane(this);
+						}
+					};
+				viewerPane.createControl(getContainer());
 
-			selectionViewer.setContentProvider(new AdapterFactoryContentProvider(adapterFactory));
-			selectionViewer.setLabelProvider(new AdapterFactoryLabelProvider(adapterFactory));
-			selectionViewer.setInput(editingDomain.getResourceSet());
-			selectionViewer.setSelection(new StructuredSelection(editingDomain.getResourceSet().getResources().get(0)), true);
+				selectionViewer = (TreeViewer)viewerPane.getViewer();
+				selectionViewer.setContentProvider(new AdapterFactoryContentProvider(adapterFactory));
 
-			new AdapterFactoryTreeEditor(selectionViewer.getTree(), adapterFactory);
+				selectionViewer.setLabelProvider(new AdapterFactoryLabelProvider(adapterFactory));
+				selectionViewer.setInput(editingDomain.getResourceSet());
+				selectionViewer.setSelection(new StructuredSelection(editingDomain.getResourceSet().getResources().get(0)), true);
+				viewerPane.setTitle(editingDomain.getResourceSet());
 
-			createContextMenuFor(selectionViewer);
-			int pageIndex = addPage(tree);
-			setPageText(pageIndex, getString("_UI_SelectionPage_label"));
+				new AdapterFactoryTreeEditor(selectionViewer.getTree(), adapterFactory);
+
+				createContextMenuFor(selectionViewer);
+				int pageIndex = addPage(viewerPane.getControl());
+				setPageText(pageIndex, getString("_UI_SelectionPage_label"));
+			}
+
+			// Create a page for the parent tree view.
+			//
+			{
+				ViewerPane viewerPane =
+					new ViewerPane(getSite().getPage(), ConfigurationEditor.this) {
+						@Override
+						public Viewer createViewer(Composite composite) {
+							Tree tree = new Tree(composite, SWT.MULTI);
+							TreeViewer newTreeViewer = new TreeViewer(tree);
+							return newTreeViewer;
+						}
+						@Override
+						public void requestActivation() {
+							super.requestActivation();
+							setCurrentViewerPane(this);
+						}
+					};
+				viewerPane.createControl(getContainer());
+
+				parentViewer = (TreeViewer)viewerPane.getViewer();
+				parentViewer.setAutoExpandLevel(30);
+				parentViewer.setContentProvider(new ReverseAdapterFactoryContentProvider(adapterFactory));
+				parentViewer.setLabelProvider(new AdapterFactoryLabelProvider(adapterFactory));
+
+				createContextMenuFor(parentViewer);
+				int pageIndex = addPage(viewerPane.getControl());
+				setPageText(pageIndex, getString("_UI_ParentPage_label"));
+			}
+
+			// This is the page for the list viewer
+			//
+			{
+				ViewerPane viewerPane =
+					new ViewerPane(getSite().getPage(), ConfigurationEditor.this) {
+						@Override
+						public Viewer createViewer(Composite composite) {
+							return new ListViewer(composite);
+						}
+						@Override
+						public void requestActivation() {
+							super.requestActivation();
+							setCurrentViewerPane(this);
+						}
+					};
+				viewerPane.createControl(getContainer());
+				listViewer = (ListViewer)viewerPane.getViewer();
+				listViewer.setContentProvider(new AdapterFactoryContentProvider(adapterFactory));
+				listViewer.setLabelProvider(new AdapterFactoryLabelProvider(adapterFactory));
+
+				createContextMenuFor(listViewer);
+				int pageIndex = addPage(viewerPane.getControl());
+				setPageText(pageIndex, getString("_UI_ListPage_label"));
+			}
+
+			// This is the page for the tree viewer
+			//
+			{
+				ViewerPane viewerPane =
+					new ViewerPane(getSite().getPage(), ConfigurationEditor.this) {
+						@Override
+						public Viewer createViewer(Composite composite) {
+							return new TreeViewer(composite);
+						}
+						@Override
+						public void requestActivation() {
+							super.requestActivation();
+							setCurrentViewerPane(this);
+						}
+					};
+				viewerPane.createControl(getContainer());
+				treeViewer = (TreeViewer)viewerPane.getViewer();
+				treeViewer.setContentProvider(new AdapterFactoryContentProvider(adapterFactory));
+				treeViewer.setLabelProvider(new AdapterFactoryLabelProvider(adapterFactory));
+
+				new AdapterFactoryTreeEditor(treeViewer.getTree(), adapterFactory);
+
+				createContextMenuFor(treeViewer);
+				int pageIndex = addPage(viewerPane.getControl());
+				setPageText(pageIndex, getString("_UI_TreePage_label"));
+			}
+
+			// This is the page for the table viewer.
+			//
+			{
+				ViewerPane viewerPane =
+					new ViewerPane(getSite().getPage(), ConfigurationEditor.this) {
+						@Override
+						public Viewer createViewer(Composite composite) {
+							return new TableViewer(composite);
+						}
+						@Override
+						public void requestActivation() {
+							super.requestActivation();
+							setCurrentViewerPane(this);
+						}
+					};
+				viewerPane.createControl(getContainer());
+				tableViewer = (TableViewer)viewerPane.getViewer();
+
+				Table table = tableViewer.getTable();
+				TableLayout layout = new TableLayout();
+				table.setLayout(layout);
+				table.setHeaderVisible(true);
+				table.setLinesVisible(true);
+
+				TableColumn objectColumn = new TableColumn(table, SWT.NONE);
+				layout.addColumnData(new ColumnWeightData(3, 100, true));
+				objectColumn.setText(getString("_UI_ObjectColumn_label"));
+				objectColumn.setResizable(true);
+
+				TableColumn selfColumn = new TableColumn(table, SWT.NONE);
+				layout.addColumnData(new ColumnWeightData(2, 100, true));
+				selfColumn.setText(getString("_UI_SelfColumn_label"));
+				selfColumn.setResizable(true);
+
+				tableViewer.setColumnProperties(new String [] {"a", "b"});
+				tableViewer.setContentProvider(new AdapterFactoryContentProvider(adapterFactory));
+				tableViewer.setLabelProvider(new AdapterFactoryLabelProvider(adapterFactory));
+
+				createContextMenuFor(tableViewer);
+				int pageIndex = addPage(viewerPane.getControl());
+				setPageText(pageIndex, getString("_UI_TablePage_label"));
+			}
+
+			// This is the page for the table tree viewer.
+			//
+			{
+				ViewerPane viewerPane =
+					new ViewerPane(getSite().getPage(), ConfigurationEditor.this) {
+						@Override
+						public Viewer createViewer(Composite composite) {
+							return new TreeViewer(composite);
+						}
+						@Override
+						public void requestActivation() {
+							super.requestActivation();
+							setCurrentViewerPane(this);
+						}
+					};
+				viewerPane.createControl(getContainer());
+
+				treeViewerWithColumns = (TreeViewer)viewerPane.getViewer();
+
+				Tree tree = treeViewerWithColumns.getTree();
+				tree.setLayoutData(new FillLayout());
+				tree.setHeaderVisible(true);
+				tree.setLinesVisible(true);
+
+				TreeColumn objectColumn = new TreeColumn(tree, SWT.NONE);
+				objectColumn.setText(getString("_UI_ObjectColumn_label"));
+				objectColumn.setResizable(true);
+				objectColumn.setWidth(250);
+
+				TreeColumn selfColumn = new TreeColumn(tree, SWT.NONE);
+				selfColumn.setText(getString("_UI_SelfColumn_label"));
+				selfColumn.setResizable(true);
+				selfColumn.setWidth(200);
+
+				treeViewerWithColumns.setColumnProperties(new String [] {"a", "b"});
+				treeViewerWithColumns.setContentProvider(new AdapterFactoryContentProvider(adapterFactory));
+				treeViewerWithColumns.setLabelProvider(new AdapterFactoryLabelProvider(adapterFactory));
+
+				createContextMenuFor(treeViewerWithColumns);
+				int pageIndex = addPage(viewerPane.getControl());
+				setPageText(pageIndex, getString("_UI_TreeWithColumnsPage_label"));
+			}
 
 			getSite().getShell().getDisplay().asyncExec
 				(new Runnable() {
@@ -922,7 +1211,8 @@ public class DomainEditor extends MultiPageEditorPart implements IEditingDomainP
 	/**
 	 * If there is just one page in the multi-page editor part,
 	 * this hides the single tab at the bottom.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	protected void hideTabs() {
@@ -939,7 +1229,8 @@ public class DomainEditor extends MultiPageEditorPart implements IEditingDomainP
 	/**
 	 * If there is more than one page in the multi-page editor part,
 	 * this shows the tabs at the bottom.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	protected void showTabs() {
@@ -955,7 +1246,8 @@ public class DomainEditor extends MultiPageEditorPart implements IEditingDomainP
 
 	/**
 	 * This is used to track the active viewer.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
@@ -992,8 +1284,8 @@ public class DomainEditor extends MultiPageEditorPart implements IEditingDomainP
 
 	/**
 	 * This accesses a cached version of the content outliner.
-	 * <!-- begin-user-doc --> <!--
-	 * end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	public IContentOutlinePage getContentOutlinePage() {
@@ -1054,53 +1346,28 @@ public class DomainEditor extends MultiPageEditorPart implements IEditingDomainP
 		return contentOutlinePage;
 	}
 
-	private class MyExtendedPropertySheetPage extends ExtendedPropertySheetPage {
-
-		private class MyPropertySheetSorter extends PropertySheetSorter {
-
-			@Override
-			public void sort(IPropertySheetEntry[] entries) {
-				// do nothing;
-			}
-
-		}
-
-		public MyExtendedPropertySheetPage(AdapterFactoryEditingDomain editingDomain) {
-			super(editingDomain);
-			setSorter(new MyPropertySheetSorter());
-		}
-
-		@Override
-		public void setSelectionToViewer(List<?> selection) {
-			DomainEditor.this.setSelectionToViewer(selection);
-			DomainEditor.this.setFocus();
-		}
-
-		@Override
-		public void setActionBars(IActionBars actionBars) {
-			super.setActionBars(actionBars);
-			getActionBarContributor().shareGlobalActions(this, actionBars);
-		}
-
-		@Override
-		protected void setSorter(PropertySheetSorter sorter) {
-			if (!(sorter instanceof MyPropertySheetSorter))
-				sorter = new MyPropertySheetSorter();
-
-			super.setSorter(sorter);
-		}
-
-	}
-
 	/**
-	 * This accesses a cached version of the property sheet. <!-- begin-user-doc --> <!--
-	 * end-user-doc -->
-	 * 
-	 * @generated NOT
+	 * This accesses a cached version of the property sheet.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
 	 */
 	public IPropertySheetPage getPropertySheetPage() {
 		if (propertySheetPage == null) {
-			propertySheetPage = new MyExtendedPropertySheetPage(editingDomain);
+			propertySheetPage =
+				new ExtendedPropertySheetPage(editingDomain) {
+					@Override
+					public void setSelectionToViewer(List<?> selection) {
+						ConfigurationEditor.this.setSelectionToViewer(selection);
+						ConfigurationEditor.this.setFocus();
+					}
+
+					@Override
+					public void setActionBars(IActionBars actionBars) {
+						super.setActionBars(actionBars);
+						getActionBarContributor().shareGlobalActions(this, actionBars);
+					}
+				};
 			propertySheetPage.setPropertySourceProvider(new AdapterFactoryContentProvider(adapterFactory));
 		}
 
@@ -1108,36 +1375,48 @@ public class DomainEditor extends MultiPageEditorPart implements IEditingDomainP
 	}
 
 	/**
-	 * This deals with how we want selection in the outliner to affect the other views. <!--
-	 * begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * This deals with how we want selection in the outliner to affect the other views.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	public void handleContentOutlineSelection(ISelection selection) {
-		if (selectionViewer != null && !selection.isEmpty() && selection instanceof IStructuredSelection) {
+		if (currentViewerPane != null && !selection.isEmpty() && selection instanceof IStructuredSelection) {
 			Iterator<?> selectedElements = ((IStructuredSelection)selection).iterator();
 			if (selectedElements.hasNext()) {
 				// Get the first selected element.
 				//
 				Object selectedElement = selectedElements.next();
 
-				ArrayList<Object> selectionList = new ArrayList<Object>();
-				selectionList.add(selectedElement);
-				while (selectedElements.hasNext()) {
-					selectionList.add(selectedElements.next());
-				}
-
-				// Set the selection to the widget.
+				// If it's the selection viewer, then we want it to select the same selection as this selection.
 				//
-				selectionViewer.setSelection(new StructuredSelection(selectionList));
+				if (currentViewerPane.getViewer() == selectionViewer) {
+					ArrayList<Object> selectionList = new ArrayList<Object>();
+					selectionList.add(selectedElement);
+					while (selectedElements.hasNext()) {
+						selectionList.add(selectedElements.next());
+					}
+
+					// Set the selection to the widget.
+					//
+					selectionViewer.setSelection(new StructuredSelection(selectionList));
+				}
+				else {
+					// Set the input to the widget.
+					//
+					if (currentViewerPane.getViewer().getInput() != selectedElement) {
+						currentViewerPane.getViewer().setInput(selectedElement);
+						currentViewerPane.setTitle(selectedElement);
+					}
+				}
 			}
 		}
 	}
 
 	/**
-	 * This is for implementing {@link IEditorPart} and simply tests the command stack. <!--
-	 * begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * This is for implementing {@link IEditorPart} and simply tests the command stack.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
@@ -1146,9 +1425,9 @@ public class DomainEditor extends MultiPageEditorPart implements IEditingDomainP
 	}
 
 	/**
-	 * This is for implementing {@link IEditorPart} and simply saves the model file. <!--
-	 * begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * This is for implementing {@link IEditorPart} and simply saves the model file.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
@@ -1210,7 +1489,8 @@ public class DomainEditor extends MultiPageEditorPart implements IEditingDomainP
 	/**
 	 * This returns whether something has been persisted to the URI of the specified resource.
 	 * The implementation uses the URI converter from the editor's resource set to try to open an input stream. 
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	protected boolean isPersisted(Resource resource) {
@@ -1230,8 +1510,8 @@ public class DomainEditor extends MultiPageEditorPart implements IEditingDomainP
 
 	/**
 	 * This always returns true because it is not currently supported.
-	 * <!-- begin-user-doc --> <!--
-	 * end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
@@ -1241,7 +1521,8 @@ public class DomainEditor extends MultiPageEditorPart implements IEditingDomainP
 
 	/**
 	 * This also changes the editor's input.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
@@ -1258,7 +1539,8 @@ public class DomainEditor extends MultiPageEditorPart implements IEditingDomainP
 	}
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	protected void doSaveAs(URI uri, IEditorInput editorInput) {
@@ -1273,7 +1555,8 @@ public class DomainEditor extends MultiPageEditorPart implements IEditingDomainP
 	}
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	public void gotoMarker(IMarker marker) {
@@ -1296,7 +1579,8 @@ public class DomainEditor extends MultiPageEditorPart implements IEditingDomainP
 
 	/**
 	 * This is called during startup.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
@@ -1310,12 +1594,18 @@ public class DomainEditor extends MultiPageEditorPart implements IEditingDomainP
 	}
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
 	public void setFocus() {
-		getControl(getActivePage()).setFocus();
+		if (currentViewerPane != null) {
+			currentViewerPane.setFocus();
+		}
+		else {
+			getControl(getActivePage()).setFocus();
+		}
 	}
 
 	/**
@@ -1340,7 +1630,8 @@ public class DomainEditor extends MultiPageEditorPart implements IEditingDomainP
 
 	/**
 	 * This implements {@link org.eclipse.jface.viewers.ISelectionProvider} to return this editor's overall selection.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	public ISelection getSelection() {
@@ -1350,8 +1641,8 @@ public class DomainEditor extends MultiPageEditorPart implements IEditingDomainP
 	/**
 	 * This implements {@link org.eclipse.jface.viewers.ISelectionProvider} to set this editor's overall selection.
 	 * Calling this result will notify the listeners.
-	 * <!-- begin-user-doc --> <!--
-	 * end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	public void setSelection(ISelection selection) {
@@ -1364,7 +1655,8 @@ public class DomainEditor extends MultiPageEditorPart implements IEditingDomainP
 	}
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	public void setStatusLineManager(ISelection selection) {
@@ -1398,8 +1690,8 @@ public class DomainEditor extends MultiPageEditorPart implements IEditingDomainP
 
 	/**
 	 * This looks up a string in the plugin's plugin.properties file.
-	 * <!-- begin-user-doc --> <!--
-	 * end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	private static String getString(String key) {
@@ -1418,7 +1710,8 @@ public class DomainEditor extends MultiPageEditorPart implements IEditingDomainP
 
 	/**
 	 * This implements {@link org.eclipse.jface.action.IMenuListener} to help fill the context menus with contributions from the Edit menu.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	public void menuAboutToShow(IMenuManager menuManager) {
@@ -1426,7 +1719,8 @@ public class DomainEditor extends MultiPageEditorPart implements IEditingDomainP
 	}
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	public EditingDomainActionBarContributor getActionBarContributor() {
@@ -1434,7 +1728,8 @@ public class DomainEditor extends MultiPageEditorPart implements IEditingDomainP
 	}
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	public IActionBars getActionBars() {
@@ -1442,7 +1737,8 @@ public class DomainEditor extends MultiPageEditorPart implements IEditingDomainP
 	}
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	public AdapterFactory getAdapterFactory() {
@@ -1450,7 +1746,8 @@ public class DomainEditor extends MultiPageEditorPart implements IEditingDomainP
 	}
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
@@ -1480,11 +1777,11 @@ public class DomainEditor extends MultiPageEditorPart implements IEditingDomainP
 
 	/**
 	 * Returns whether the outline view should be presented to the user.
-	 * <!-- begin-user-doc --> <!--
-	 * end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	protected boolean showOutlineView() {
-		return false;
+		return true;
 	}
 }

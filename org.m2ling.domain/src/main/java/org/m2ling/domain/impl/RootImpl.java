@@ -21,9 +21,9 @@ import org.m2ling.domain.core.OrganisationalUnit;
 import org.m2ling.domain.core.Stakeholder;
 import org.m2ling.domain.core.View;
 import org.m2ling.domain.core.ViewPoint;
-import org.m2ling.domain.parameters.RootParameters;
-import org.m2ling.domain.parameters.ParameterDefinition;
-import org.m2ling.domain.parameters.ParameterValue;
+import org.m2ling.domain.configuration.RootConfiguration;
+import org.m2ling.domain.configuration.ParameterDefinition;
+import org.m2ling.domain.configuration.ParameterValue;
 
 /**
  * <!-- begin-user-doc -->
@@ -37,7 +37,7 @@ import org.m2ling.domain.parameters.ParameterValue;
  *   <li>{@link org.m2ling.domain.impl.RootImpl#getStakeholders <em>Stakeholders</em>}</li>
  *   <li>{@link org.m2ling.domain.impl.RootImpl#getUnits <em>Units</em>}</li>
  *   <li>{@link org.m2ling.domain.impl.RootImpl#getActors <em>Actors</em>}</li>
- *   <li>{@link org.m2ling.domain.impl.RootImpl#getParameters <em>Parameters</em>}</li>
+ *   <li>{@link org.m2ling.domain.impl.RootImpl#getConfiguration <em>Configuration</em>}</li>
  * </ul>
  * </p>
  *
@@ -102,14 +102,14 @@ public class RootImpl extends EObjectImpl implements Root {
 	protected EList<Actor> actors;
 
 	/**
-	 * The cached value of the '{@link #getParameters() <em>Parameters</em>}' containment reference.
+	 * The cached value of the '{@link #getConfiguration() <em>Configuration</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getParameters()
+	 * @see #getConfiguration()
 	 * @generated
 	 * @ordered
 	 */
-	protected RootParameters parameters;
+	protected RootConfiguration configuration;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -195,8 +195,8 @@ public class RootImpl extends EObjectImpl implements Root {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public RootParameters getParameters() {
-		return parameters;
+	public RootConfiguration getConfiguration() {
+		return configuration;
 	}
 
 	/**
@@ -204,11 +204,11 @@ public class RootImpl extends EObjectImpl implements Root {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetParameters(RootParameters newParameters, NotificationChain msgs) {
-		RootParameters oldParameters = parameters;
-		parameters = newParameters;
+	public NotificationChain basicSetConfiguration(RootConfiguration newConfiguration, NotificationChain msgs) {
+		RootConfiguration oldConfiguration = configuration;
+		configuration = newConfiguration;
 		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, DomainPackage.ROOT__PARAMETERS, oldParameters, newParameters);
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, DomainPackage.ROOT__CONFIGURATION, oldConfiguration, newConfiguration);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
@@ -219,18 +219,18 @@ public class RootImpl extends EObjectImpl implements Root {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setParameters(RootParameters newParameters) {
-		if (newParameters != parameters) {
+	public void setConfiguration(RootConfiguration newConfiguration) {
+		if (newConfiguration != configuration) {
 			NotificationChain msgs = null;
-			if (parameters != null)
-				msgs = ((InternalEObject)parameters).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - DomainPackage.ROOT__PARAMETERS, null, msgs);
-			if (newParameters != null)
-				msgs = ((InternalEObject)newParameters).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - DomainPackage.ROOT__PARAMETERS, null, msgs);
-			msgs = basicSetParameters(newParameters, msgs);
+			if (configuration != null)
+				msgs = ((InternalEObject)configuration).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - DomainPackage.ROOT__CONFIGURATION, null, msgs);
+			if (newConfiguration != null)
+				msgs = ((InternalEObject)newConfiguration).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - DomainPackage.ROOT__CONFIGURATION, null, msgs);
+			msgs = basicSetConfiguration(newConfiguration, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, DomainPackage.ROOT__PARAMETERS, newParameters, newParameters));
+			eNotify(new ENotificationImpl(this, Notification.SET, DomainPackage.ROOT__CONFIGURATION, newConfiguration, newConfiguration));
 	}
 
 	/**
@@ -251,8 +251,8 @@ public class RootImpl extends EObjectImpl implements Root {
 				return ((InternalEList<?>)getUnits()).basicRemove(otherEnd, msgs);
 			case DomainPackage.ROOT__ACTORS:
 				return ((InternalEList<?>)getActors()).basicRemove(otherEnd, msgs);
-			case DomainPackage.ROOT__PARAMETERS:
-				return basicSetParameters(null, msgs);
+			case DomainPackage.ROOT__CONFIGURATION:
+				return basicSetConfiguration(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -275,8 +275,8 @@ public class RootImpl extends EObjectImpl implements Root {
 				return getUnits();
 			case DomainPackage.ROOT__ACTORS:
 				return getActors();
-			case DomainPackage.ROOT__PARAMETERS:
-				return getParameters();
+			case DomainPackage.ROOT__CONFIGURATION:
+				return getConfiguration();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -310,8 +310,8 @@ public class RootImpl extends EObjectImpl implements Root {
 				getActors().clear();
 				getActors().addAll((Collection<? extends Actor>)newValue);
 				return;
-			case DomainPackage.ROOT__PARAMETERS:
-				setParameters((RootParameters)newValue);
+			case DomainPackage.ROOT__CONFIGURATION:
+				setConfiguration((RootConfiguration)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -340,8 +340,8 @@ public class RootImpl extends EObjectImpl implements Root {
 			case DomainPackage.ROOT__ACTORS:
 				getActors().clear();
 				return;
-			case DomainPackage.ROOT__PARAMETERS:
-				setParameters((RootParameters)null);
+			case DomainPackage.ROOT__CONFIGURATION:
+				setConfiguration((RootConfiguration)null);
 				return;
 		}
 		super.eUnset(featureID);
@@ -365,8 +365,8 @@ public class RootImpl extends EObjectImpl implements Root {
 				return units != null && !units.isEmpty();
 			case DomainPackage.ROOT__ACTORS:
 				return actors != null && !actors.isEmpty();
-			case DomainPackage.ROOT__PARAMETERS:
-				return parameters != null;
+			case DomainPackage.ROOT__CONFIGURATION:
+				return configuration != null;
 		}
 		return super.eIsSet(featureID);
 	}

@@ -1,7 +1,7 @@
 /**
  * Copyright (C) 2012 Bertrand Florat
  */
-package org.m2ling.domain.provider;
+package org.m2ling.domain.configuration.provider;
 
 
 import java.util.Collection;
@@ -9,8 +9,11 @@ import java.util.List;
 
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
+
 import org.eclipse.emf.common.util.ResourceLocator;
+
 import org.eclipse.emf.ecore.EStructuralFeature;
+
 import org.eclipse.emf.edit.provider.IEditingDomainItemProvider;
 import org.eclipse.emf.edit.provider.IItemLabelProvider;
 import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
@@ -19,18 +22,20 @@ import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 import org.eclipse.emf.edit.provider.ItemProviderAdapter;
 import org.eclipse.emf.edit.provider.ViewerNotification;
-import org.m2ling.domain.DomainPackage;
-import org.m2ling.domain.Root;
-import org.m2ling.domain.core.CoreFactory;
+
 import org.m2ling.domain.configuration.ConfigurationFactory;
+import org.m2ling.domain.configuration.ConfigurationPackage;
+import org.m2ling.domain.configuration.RootConfiguration;
+
+import org.m2ling.domain.provider.M2lingEditPlugin;
 
 /**
- * This is the item provider adapter for a {@link org.m2ling.domain.Root} object.
+ * This is the item provider adapter for a {@link org.m2ling.domain.configuration.RootConfiguration} object.
  * <!-- begin-user-doc -->
  * <!-- end-user-doc -->
  * @generated
  */
-public class RootItemProvider
+public class RootConfigurationItemProvider
 	extends ItemProviderAdapter
 	implements
 		IEditingDomainItemProvider,
@@ -51,7 +56,7 @@ public class RootItemProvider
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public RootItemProvider(AdapterFactory adapterFactory) {
+	public RootConfigurationItemProvider(AdapterFactory adapterFactory) {
 		super(adapterFactory);
 	}
 
@@ -82,12 +87,8 @@ public class RootItemProvider
 	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
-			childrenFeatures.add(DomainPackage.Literals.ROOT__VIEW_POINTS);
-			childrenFeatures.add(DomainPackage.Literals.ROOT__VIEWS);
-			childrenFeatures.add(DomainPackage.Literals.ROOT__STAKEHOLDERS);
-			childrenFeatures.add(DomainPackage.Literals.ROOT__UNITS);
-			childrenFeatures.add(DomainPackage.Literals.ROOT__ACTORS);
-			childrenFeatures.add(DomainPackage.Literals.ROOT__CONFIGURATION);
+			childrenFeatures.add(ConfigurationPackage.Literals.ROOT_CONFIGURATION__DEFINITIONS);
+			childrenFeatures.add(ConfigurationPackage.Literals.ROOT_CONFIGURATION__VALUES);
 		}
 		return childrenFeatures;
 	}
@@ -106,14 +107,14 @@ public class RootItemProvider
 	}
 
 	/**
-	 * This returns Root.gif.
+	 * This returns RootConfiguration.gif.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
 	public Object getImage(Object object) {
-		return overlayImage(object, getResourceLocator().getImage("full/obj16/Root"));
+		return overlayImage(object, getResourceLocator().getImage("full/obj16/RootConfiguration"));
 	}
 
 	/**
@@ -124,7 +125,7 @@ public class RootItemProvider
 	 */
 	@Override
 	public String getText(Object object) {
-		return getString("_UI_Root_type");
+		return getString("_UI_RootConfiguration_type");
 	}
 
 	/**
@@ -138,13 +139,9 @@ public class RootItemProvider
 	public void notifyChanged(Notification notification) {
 		updateChildren(notification);
 
-		switch (notification.getFeatureID(Root.class)) {
-			case DomainPackage.ROOT__VIEW_POINTS:
-			case DomainPackage.ROOT__VIEWS:
-			case DomainPackage.ROOT__STAKEHOLDERS:
-			case DomainPackage.ROOT__UNITS:
-			case DomainPackage.ROOT__ACTORS:
-			case DomainPackage.ROOT__CONFIGURATION:
+		switch (notification.getFeatureID(RootConfiguration.class)) {
+			case ConfigurationPackage.ROOT_CONFIGURATION__DEFINITIONS:
+			case ConfigurationPackage.ROOT_CONFIGURATION__VALUES:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
 		}
@@ -164,33 +161,13 @@ public class RootItemProvider
 
 		newChildDescriptors.add
 			(createChildParameter
-				(DomainPackage.Literals.ROOT__VIEW_POINTS,
-				 CoreFactory.eINSTANCE.createViewPoint()));
+				(ConfigurationPackage.Literals.ROOT_CONFIGURATION__DEFINITIONS,
+				 ConfigurationFactory.eINSTANCE.createParameterDefinition()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(DomainPackage.Literals.ROOT__VIEWS,
-				 CoreFactory.eINSTANCE.createView()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(DomainPackage.Literals.ROOT__STAKEHOLDERS,
-				 CoreFactory.eINSTANCE.createStakeholder()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(DomainPackage.Literals.ROOT__UNITS,
-				 CoreFactory.eINSTANCE.createOrganisationalUnit()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(DomainPackage.Literals.ROOT__ACTORS,
-				 CoreFactory.eINSTANCE.createActor()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(DomainPackage.Literals.ROOT__CONFIGURATION,
-				 ConfigurationFactory.eINSTANCE.createRootConfiguration()));
+				(ConfigurationPackage.Literals.ROOT_CONFIGURATION__VALUES,
+				 ConfigurationFactory.eINSTANCE.createParameterValue()));
 	}
 
 	/**

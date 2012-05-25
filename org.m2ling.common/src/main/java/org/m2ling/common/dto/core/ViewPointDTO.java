@@ -20,10 +20,10 @@ public class ViewPointDTO {
 
 	public static class Builder {
 
-		// Required parameters
+		// Required configuration
 		private final String name;
 
-		// Optional parameters
+		// Optional configuration
 		private List<String> tags = null;
 		private String baseVPName = null;
 		private String label = null;

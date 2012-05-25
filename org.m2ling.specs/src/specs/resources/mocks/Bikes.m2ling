@@ -212,8 +212,8 @@
   <actors stakeholders="_dX1QoZnbEeGRRqNqlyFgFw" unit="_mWgzQJhkEeGxRNCeID_vlg" username="ktarchitect" pwdHash="71bfd9fe9682734bdcaf741d1ffa8fe4c60b9b51" firstName="Kelly" lastName="Tarchitect"/>
   <actors stakeholders="_te1CAZneEeGiWdDszZQI0g" unit="_eegzQJhkEiixRNCeID_vlg" username="bsupport" admin="true" pwdHash="13f1f28ac1eedf46c94b1e4318ad07874167a01b" firstName="Bob" lastName="Support"/>
   <actors stakeholders="_Tig0gZnfEeGiWdDszZQI0g" unit="_eegzQJhkEiixRNCeID_vlg" username="aoarchitect" pwdHash="3670ceb10cb54b972d3fb52dd5cb30536eda0338" firstName="Amy " lastName="Oarchitect"/>
-  <parameters>
+  <configuration>
     <definitions comment="Concept level (Component type) parameter definition, applies to any component of this type." id="hfkjdhfkjsdf" name="WEB_PORT_HTTP" target="_fKt222vmJ5CR-iA" type="INTEGER" description="HTTP port for web containers." defaultValue="80" exampleValue="8080" expression="" longDescription=""/>
     <definitions comment="See also http://tomcat.apache.org/tomcat-5.5-doc/config/context.html#Common_Attributes" id="_p_Q0MKWtEeGh9OUjQ8dRYw" name="reloadable" target="_0VP9IqMnEeGkWPVFom68wQ" description="Whether the tomcat hot reload web applications." defaultValue="false" exampleValue="" expression="" longDescription="If true, Tomcat classloader reloads wars when added or overridden in the webapps directory."/>
-  </parameters>
+  </configuration>
 </m2ling_domain:Root>

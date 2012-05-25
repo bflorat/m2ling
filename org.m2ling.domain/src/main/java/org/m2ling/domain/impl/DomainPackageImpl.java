@@ -12,8 +12,8 @@ import org.m2ling.domain.DomainPackage;
 import org.m2ling.domain.Root;
 import org.m2ling.domain.core.CorePackage;
 import org.m2ling.domain.core.impl.CorePackageImpl;
-import org.m2ling.domain.parameters.ParametersPackage;
-import org.m2ling.domain.parameters.impl.ParametersPackageImpl;
+import org.m2ling.domain.configuration.ConfigurationPackage;
+import org.m2ling.domain.configuration.impl.ConfigurationPackageImpl;
 
 /**
  * <!-- begin-user-doc -->
@@ -84,17 +84,17 @@ public class DomainPackageImpl extends EPackageImpl implements DomainPackage {
 
 		// Obtain or create and register interdependencies
 		CorePackageImpl theCorePackage = (CorePackageImpl)(EPackage.Registry.INSTANCE.getEPackage(CorePackage.eNS_URI) instanceof CorePackageImpl ? EPackage.Registry.INSTANCE.getEPackage(CorePackage.eNS_URI) : CorePackage.eINSTANCE);
-		ParametersPackageImpl theParametersPackage = (ParametersPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(ParametersPackage.eNS_URI) instanceof ParametersPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(ParametersPackage.eNS_URI) : ParametersPackage.eINSTANCE);
+		ConfigurationPackageImpl theConfigurationPackage = (ConfigurationPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(ConfigurationPackage.eNS_URI) instanceof ConfigurationPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(ConfigurationPackage.eNS_URI) : ConfigurationPackage.eINSTANCE);
 
 		// Create package meta-data objects
 		theDomainPackage.createPackageContents();
 		theCorePackage.createPackageContents();
-		theParametersPackage.createPackageContents();
+		theConfigurationPackage.createPackageContents();
 
 		// Initialize created meta-data
 		theDomainPackage.initializePackageContents();
 		theCorePackage.initializePackageContents();
-		theParametersPackage.initializePackageContents();
+		theConfigurationPackage.initializePackageContents();
 
 		// Mark meta-data to indicate it can't be changed
 		theDomainPackage.freeze();
@@ -164,7 +164,7 @@ public class DomainPackageImpl extends EPackageImpl implements DomainPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getRoot_Parameters() {
+	public EReference getRoot_Configuration() {
 		return (EReference)rootEClass.getEStructuralFeatures().get(5);
 	}
 
@@ -202,7 +202,7 @@ public class DomainPackageImpl extends EPackageImpl implements DomainPackage {
 		createEReference(rootEClass, ROOT__STAKEHOLDERS);
 		createEReference(rootEClass, ROOT__UNITS);
 		createEReference(rootEClass, ROOT__ACTORS);
-		createEReference(rootEClass, ROOT__PARAMETERS);
+		createEReference(rootEClass, ROOT__CONFIGURATION);
 	}
 
 	/**
@@ -230,11 +230,11 @@ public class DomainPackageImpl extends EPackageImpl implements DomainPackage {
 
 		// Obtain other dependent packages
 		CorePackage theCorePackage = (CorePackage)EPackage.Registry.INSTANCE.getEPackage(CorePackage.eNS_URI);
-		ParametersPackage theParametersPackage = (ParametersPackage)EPackage.Registry.INSTANCE.getEPackage(ParametersPackage.eNS_URI);
+		ConfigurationPackage theConfigurationPackage = (ConfigurationPackage)EPackage.Registry.INSTANCE.getEPackage(ConfigurationPackage.eNS_URI);
 
 		// Add subpackages
 		getESubpackages().add(theCorePackage);
-		getESubpackages().add(theParametersPackage);
+		getESubpackages().add(theConfigurationPackage);
 
 		// Create type parameters
 
@@ -249,7 +249,7 @@ public class DomainPackageImpl extends EPackageImpl implements DomainPackage {
 		initEReference(getRoot_Stakeholders(), theCorePackage.getStakeholder(), null, "stakeholders", null, 0, -1, Root.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getRoot_Units(), theCorePackage.getOrganisationalUnit(), null, "units", null, 0, -1, Root.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getRoot_Actors(), theCorePackage.getActor(), null, "actors", null, 0, -1, Root.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getRoot_Parameters(), theParametersPackage.getRootParameters(), null, "parameters", null, 0, 1, Root.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getRoot_Configuration(), theConfigurationPackage.getRootConfiguration(), null, "configuration", null, 0, 1, Root.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Create resource
 		createResource(eNS_URI);

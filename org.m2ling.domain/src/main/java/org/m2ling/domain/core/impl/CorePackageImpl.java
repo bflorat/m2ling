@@ -59,8 +59,8 @@ import org.m2ling.domain.core.URLConstraint;
 import org.m2ling.domain.core.View;
 import org.m2ling.domain.core.ViewPoint;
 import org.m2ling.domain.impl.DomainPackageImpl;
-import org.m2ling.domain.parameters.ParametersPackage;
-import org.m2ling.domain.parameters.impl.ParametersPackageImpl;
+import org.m2ling.domain.configuration.ConfigurationPackage;
+import org.m2ling.domain.configuration.impl.ConfigurationPackageImpl;
 
 /**
  * <!-- begin-user-doc -->
@@ -446,17 +446,17 @@ public class CorePackageImpl extends EPackageImpl implements CorePackage {
 
 		// Obtain or create and register interdependencies
 		DomainPackageImpl theDomainPackage = (DomainPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(DomainPackage.eNS_URI) instanceof DomainPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(DomainPackage.eNS_URI) : DomainPackage.eINSTANCE);
-		ParametersPackageImpl theParametersPackage = (ParametersPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(ParametersPackage.eNS_URI) instanceof ParametersPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(ParametersPackage.eNS_URI) : ParametersPackage.eINSTANCE);
+		ConfigurationPackageImpl theConfigurationPackage = (ConfigurationPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(ConfigurationPackage.eNS_URI) instanceof ConfigurationPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(ConfigurationPackage.eNS_URI) : ConfigurationPackage.eINSTANCE);
 
 		// Create package meta-data objects
 		theCorePackage.createPackageContents();
 		theDomainPackage.createPackageContents();
-		theParametersPackage.createPackageContents();
+		theConfigurationPackage.createPackageContents();
 
 		// Initialize created meta-data
 		theCorePackage.initializePackageContents();
 		theDomainPackage.initializePackageContents();
-		theParametersPackage.initializePackageContents();
+		theConfigurationPackage.initializePackageContents();
 
 		// Mark meta-data to indicate it can't be changed
 		theCorePackage.freeze();
