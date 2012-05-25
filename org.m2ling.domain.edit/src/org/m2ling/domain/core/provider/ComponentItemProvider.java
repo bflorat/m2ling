@@ -146,6 +146,7 @@ public class ComponentItemProvider extends ComponentGroupItemProvider implements
 			super.getChildrenFeatures(object);
 			childrenFeatures.add(CorePackage.Literals.COMPONENT__SUB_COMPONENTS);
 			childrenFeatures.add(CorePackage.Literals.COMPONENT__INSTANCES);
+			childrenFeatures.add(CorePackage.Literals.COMPONENT__REFERENCES);
 		}
 		return childrenFeatures;
 	}
@@ -206,6 +207,7 @@ public class ComponentItemProvider extends ComponentGroupItemProvider implements
 		switch (notification.getFeatureID(Component.class)) {
 			case CorePackage.COMPONENT__SUB_COMPONENTS:
 			case CorePackage.COMPONENT__INSTANCES:
+			case CorePackage.COMPONENT__REFERENCES:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
 		}
@@ -232,6 +234,26 @@ public class ComponentItemProvider extends ComponentGroupItemProvider implements
 			(createChildParameter
 				(CorePackage.Literals.COMPONENT__INSTANCES,
 				 CoreFactory.eINSTANCE.createComponentInstance()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(CorePackage.Literals.COMPONENT__REFERENCES,
+				 CoreFactory.eINSTANCE.createContainsReference()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(CorePackage.Literals.COMPONENT__REFERENCES,
+				 CoreFactory.eINSTANCE.createRunsReference()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(CorePackage.Literals.COMPONENT__REFERENCES,
+				 CoreFactory.eINSTANCE.createDependsOnReference()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(CorePackage.Literals.COMPONENT__REFERENCES,
+				 CoreFactory.eINSTANCE.createAdminsReference()));
 	}
 
 

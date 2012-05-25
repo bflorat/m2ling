@@ -10,6 +10,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.m2ling.domain.core.Activity;
 import org.m2ling.domain.core.ActivityTransition;
 import org.m2ling.domain.core.Actor;
+import org.m2ling.domain.core.AdminsReference;
 import org.m2ling.domain.core.ArchitectureItem;
 import org.m2ling.domain.core.BoundaryConstraint;
 import org.m2ling.domain.core.Component;
@@ -19,8 +20,10 @@ import org.m2ling.domain.core.ComponentInstanceGroup;
 import org.m2ling.domain.core.ComponentType;
 import org.m2ling.domain.core.ConceptItem;
 import org.m2ling.domain.core.Constraint;
+import org.m2ling.domain.core.ContainsReference;
 import org.m2ling.domain.core.CorePackage;
 import org.m2ling.domain.core.CustomProperty;
+import org.m2ling.domain.core.DependsOnReference;
 import org.m2ling.domain.core.EMailConstraint;
 import org.m2ling.domain.core.FloatConstraint;
 import org.m2ling.domain.core.FormatConstraint;
@@ -42,8 +45,10 @@ import org.m2ling.domain.core.MinConstraint;
 import org.m2ling.domain.core.NotNullConstraint;
 import org.m2ling.domain.core.OCLConstraint;
 import org.m2ling.domain.core.OrganisationalUnit;
+import org.m2ling.domain.core.Reference;
 import org.m2ling.domain.core.RegexpConstraint;
 import org.m2ling.domain.core.Rule;
+import org.m2ling.domain.core.RunsReference;
 import org.m2ling.domain.core.RuntimeItem;
 import org.m2ling.domain.core.Stakeholder;
 import org.m2ling.domain.core.URLConstraint;
@@ -276,6 +281,26 @@ public class CoreAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseRule(Rule object) {
 				return createRuleAdapter();
+			}
+			@Override
+			public <T extends ComponentType & ComponentInstance & Component> Adapter caseReference(Reference<T> object) {
+				return createReferenceAdapter();
+			}
+			@Override
+			public <T extends Component & ComponentInstance & ComponentType> Adapter caseContainsReference(ContainsReference<T> object) {
+				return createContainsReferenceAdapter();
+			}
+			@Override
+			public <T extends Component & ComponentInstance & ComponentType> Adapter caseRunsReference(RunsReference<T> object) {
+				return createRunsReferenceAdapter();
+			}
+			@Override
+			public <T extends Component & ComponentInstance & ComponentType> Adapter caseDependsOnReference(DependsOnReference<T> object) {
+				return createDependsOnReferenceAdapter();
+			}
+			@Override
+			public <T extends Component & ComponentInstance & ComponentType> Adapter caseAdminsReference(AdminsReference<T> object) {
+				return createAdminsReferenceAdapter();
 			}
 			@Override
 			public Adapter defaultCase(EObject object) {
@@ -854,6 +879,76 @@ public class CoreAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createRuleAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.m2ling.domain.core.Reference <em>Reference</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.m2ling.domain.core.Reference
+	 * @generated
+	 */
+	public Adapter createReferenceAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.m2ling.domain.core.ContainsReference <em>Contains Reference</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.m2ling.domain.core.ContainsReference
+	 * @generated
+	 */
+	public Adapter createContainsReferenceAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.m2ling.domain.core.RunsReference <em>Runs Reference</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.m2ling.domain.core.RunsReference
+	 * @generated
+	 */
+	public Adapter createRunsReferenceAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.m2ling.domain.core.DependsOnReference <em>Depends On Reference</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.m2ling.domain.core.DependsOnReference
+	 * @generated
+	 */
+	public Adapter createDependsOnReferenceAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.m2ling.domain.core.AdminsReference <em>Admins Reference</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.m2ling.domain.core.AdminsReference
+	 * @generated
+	 */
+	public Adapter createAdminsReferenceAdapter() {
 		return null;
 	}
 

@@ -300,6 +300,42 @@ public interface CoreFactory extends EFactory {
 	Rule createRule();
 
 	/**
+	 * Returns a new object of class '<em>Contains Reference</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Contains Reference</em>'.
+	 * @generated
+	 */
+	<T extends Component & ComponentInstance & ComponentType> ContainsReference<T> createContainsReference();
+
+	/**
+	 * Returns a new object of class '<em>Runs Reference</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Runs Reference</em>'.
+	 * @generated
+	 */
+	<T extends Component & ComponentInstance & ComponentType> RunsReference<T> createRunsReference();
+
+	/**
+	 * Returns a new object of class '<em>Depends On Reference</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Depends On Reference</em>'.
+	 * @generated
+	 */
+	<T extends Component & ComponentInstance & ComponentType> DependsOnReference<T> createDependsOnReference();
+
+	/**
+	 * Returns a new object of class '<em>Admins Reference</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Admins Reference</em>'.
+	 * @generated
+	 */
+	<T extends Component & ComponentInstance & ComponentType> AdminsReference<T> createAdminsReference();
+
+	/**
 	 * Returns the package supported by this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

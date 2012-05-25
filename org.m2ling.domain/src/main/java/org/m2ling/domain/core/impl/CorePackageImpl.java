@@ -6,8 +6,10 @@ package org.m2ling.domain.core.impl;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EEnum;
+import org.eclipse.emf.ecore.EGenericType;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
+import org.eclipse.emf.ecore.ETypeParameter;
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 import org.m2ling.domain.DomainPackage;
 import org.m2ling.domain.configuration.ConfigurationPackage;
@@ -16,6 +18,7 @@ import org.m2ling.domain.core.Activity;
 import org.m2ling.domain.core.ActivityStatus;
 import org.m2ling.domain.core.ActivityTransition;
 import org.m2ling.domain.core.Actor;
+import org.m2ling.domain.core.AdminsReference;
 import org.m2ling.domain.core.ArchitectureItem;
 import org.m2ling.domain.core.BoundaryConstraint;
 import org.m2ling.domain.core.Component;
@@ -25,10 +28,12 @@ import org.m2ling.domain.core.ComponentInstanceGroup;
 import org.m2ling.domain.core.ComponentType;
 import org.m2ling.domain.core.ConceptItem;
 import org.m2ling.domain.core.Constraint;
+import org.m2ling.domain.core.ContainsReference;
 import org.m2ling.domain.core.CoreFactory;
 import org.m2ling.domain.core.CorePackage;
 import org.m2ling.domain.core.CustomProperty;
 import org.m2ling.domain.core.CustomPropertyType;
+import org.m2ling.domain.core.DependsOnReference;
 import org.m2ling.domain.core.EMailConstraint;
 import org.m2ling.domain.core.FloatConstraint;
 import org.m2ling.domain.core.FormatConstraint;
@@ -50,10 +55,12 @@ import org.m2ling.domain.core.MinConstraint;
 import org.m2ling.domain.core.NotNullConstraint;
 import org.m2ling.domain.core.OCLConstraint;
 import org.m2ling.domain.core.OrganisationalUnit;
+import org.m2ling.domain.core.Reference;
 import org.m2ling.domain.core.RegexpConstraint;
 import org.m2ling.domain.core.Rule;
 import org.m2ling.domain.core.RulePriority;
 import org.m2ling.domain.core.RuleStatus;
+import org.m2ling.domain.core.RunsReference;
 import org.m2ling.domain.core.RuntimeItem;
 import org.m2ling.domain.core.Stakeholder;
 import org.m2ling.domain.core.Type;
@@ -361,6 +368,41 @@ public class CorePackageImpl extends EPackageImpl implements CorePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	private EClass referenceEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass containsReferenceEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass runsReferenceEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass dependsOnReferenceEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass adminsReferenceEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	private EClass hasLabelEClass = null;
 
 	/**
@@ -526,6 +568,15 @@ public class CorePackageImpl extends EPackageImpl implements CorePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EReference getComponentType_References() {
+		return (EReference)componentTypeEClass.getEStructuralFeatures().get(6);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EReference getComponentType_BoundType() {
 		return (EReference)componentTypeEClass.getEStructuralFeatures().get(2);
 	}
@@ -582,6 +633,15 @@ public class CorePackageImpl extends EPackageImpl implements CorePackage {
 	 */
 	public EReference getComponent_Instances() {
 		return (EReference)componentEClass.getEStructuralFeatures().get(4);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getComponent_References() {
+		return (EReference)componentEClass.getEStructuralFeatures().get(5);
 	}
 
 	/**
@@ -654,6 +714,15 @@ public class CorePackageImpl extends EPackageImpl implements CorePackage {
 	 */
 	public EReference getComponentInstance_BoundComponentInstance() {
 		return (EReference)componentInstanceEClass.getEStructuralFeatures().get(6);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getComponentInstance_References() {
+		return (EReference)componentInstanceEClass.getEStructuralFeatures().get(7);
 	}
 
 	/**
@@ -1471,6 +1540,60 @@ public class CorePackageImpl extends EPackageImpl implements CorePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getReference() {
+		return referenceEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getReference_Target() {
+		return (EReference)referenceEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getContainsReference() {
+		return containsReferenceEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getRunsReference() {
+		return runsReferenceEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getDependsOnReference() {
+		return dependsOnReferenceEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getAdminsReference() {
+		return adminsReferenceEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getHasLabel() {
 		return hasLabelEClass;
 	}
@@ -1564,6 +1687,7 @@ public class CorePackageImpl extends EPackageImpl implements CorePackage {
 		createEReference(componentTypeEClass, COMPONENT_TYPE__ENUMERATION);
 		createEAttribute(componentTypeEClass, COMPONENT_TYPE__INSTANTIATION_FACTOR);
 		createEAttribute(componentTypeEClass, COMPONENT_TYPE__REIFIABLE);
+		createEReference(componentTypeEClass, COMPONENT_TYPE__REFERENCES);
 
 		componentEClass = createEClass(COMPONENT);
 		createEReference(componentEClass, COMPONENT__SUB_COMPONENTS);
@@ -1571,6 +1695,7 @@ public class CorePackageImpl extends EPackageImpl implements CorePackage {
 		createEReference(componentEClass, COMPONENT__ENGINES);
 		createEReference(componentEClass, COMPONENT__BOUND_COMPONENT);
 		createEReference(componentEClass, COMPONENT__INSTANCES);
+		createEReference(componentEClass, COMPONENT__REFERENCES);
 
 		componentInstanceEClass = createEClass(COMPONENT_INSTANCE);
 		createEReference(componentInstanceEClass, COMPONENT_INSTANCE__COMPONENT);
@@ -1580,6 +1705,7 @@ public class CorePackageImpl extends EPackageImpl implements CorePackage {
 		createEReference(componentInstanceEClass, COMPONENT_INSTANCE__STREAMS);
 		createEReference(componentInstanceEClass, COMPONENT_INSTANCE__INSTANCES_GROUPS);
 		createEReference(componentInstanceEClass, COMPONENT_INSTANCE__BOUND_COMPONENT_INSTANCE);
+		createEReference(componentInstanceEClass, COMPONENT_INSTANCE__REFERENCES);
 
 		viewPointEClass = createEClass(VIEW_POINT);
 		createEReference(viewPointEClass, VIEW_POINT__ACTIVITIES);
@@ -1711,6 +1837,17 @@ public class CorePackageImpl extends EPackageImpl implements CorePackage {
 		createEAttribute(ruleEClass, RULE__STATUS);
 		createEAttribute(ruleEClass, RULE__PRIORITY);
 
+		referenceEClass = createEClass(REFERENCE);
+		createEReference(referenceEClass, REFERENCE__TARGET);
+
+		containsReferenceEClass = createEClass(CONTAINS_REFERENCE);
+
+		runsReferenceEClass = createEClass(RUNS_REFERENCE);
+
+		dependsOnReferenceEClass = createEClass(DEPENDS_ON_REFERENCE);
+
+		adminsReferenceEClass = createEClass(ADMINS_REFERENCE);
+
 		// Create enums
 		customPropertyTypeEEnum = createEEnum(CUSTOM_PROPERTY_TYPE);
 		activityStatusEEnum = createEEnum(ACTIVITY_STATUS);
@@ -1743,8 +1880,43 @@ public class CorePackageImpl extends EPackageImpl implements CorePackage {
 		setNsURI(eNS_URI);
 
 		// Create type parameters
+		ETypeParameter referenceEClass_T = addETypeParameter(referenceEClass, "T");
+		ETypeParameter containsReferenceEClass_T = addETypeParameter(containsReferenceEClass, "T");
+		ETypeParameter runsReferenceEClass_T = addETypeParameter(runsReferenceEClass, "T");
+		ETypeParameter dependsOnReferenceEClass_T = addETypeParameter(dependsOnReferenceEClass, "T");
+		ETypeParameter adminsReferenceEClass_T = addETypeParameter(adminsReferenceEClass, "T");
 
 		// Set bounds for type parameters
+		EGenericType g1 = createEGenericType(this.getComponentType());
+		referenceEClass_T.getEBounds().add(g1);
+		g1 = createEGenericType(this.getComponentInstance());
+		referenceEClass_T.getEBounds().add(g1);
+		g1 = createEGenericType(this.getComponent());
+		referenceEClass_T.getEBounds().add(g1);
+		g1 = createEGenericType(this.getComponent());
+		containsReferenceEClass_T.getEBounds().add(g1);
+		g1 = createEGenericType(this.getComponentInstance());
+		containsReferenceEClass_T.getEBounds().add(g1);
+		g1 = createEGenericType(this.getComponentType());
+		containsReferenceEClass_T.getEBounds().add(g1);
+		g1 = createEGenericType(this.getComponent());
+		runsReferenceEClass_T.getEBounds().add(g1);
+		g1 = createEGenericType(this.getComponentInstance());
+		runsReferenceEClass_T.getEBounds().add(g1);
+		g1 = createEGenericType(this.getComponentType());
+		runsReferenceEClass_T.getEBounds().add(g1);
+		g1 = createEGenericType(this.getComponent());
+		dependsOnReferenceEClass_T.getEBounds().add(g1);
+		g1 = createEGenericType(this.getComponentInstance());
+		dependsOnReferenceEClass_T.getEBounds().add(g1);
+		g1 = createEGenericType(this.getComponentType());
+		dependsOnReferenceEClass_T.getEBounds().add(g1);
+		g1 = createEGenericType(this.getComponent());
+		adminsReferenceEClass_T.getEBounds().add(g1);
+		g1 = createEGenericType(this.getComponentInstance());
+		adminsReferenceEClass_T.getEBounds().add(g1);
+		g1 = createEGenericType(this.getComponentType());
+		adminsReferenceEClass_T.getEBounds().add(g1);
 
 		// Add supertypes to classes
 		componentTypeEClass.getESuperTypes().add(this.getConceptItem());
@@ -1810,6 +1982,22 @@ public class CorePackageImpl extends EPackageImpl implements CorePackage {
 		ruleEClass.getESuperTypes().add(this.getHasComment());
 		ruleEClass.getESuperTypes().add(this.getHasTags());
 		ruleEClass.getESuperTypes().add(this.getHasLabel());
+		g1 = createEGenericType(this.getReference());
+		EGenericType g2 = createEGenericType(containsReferenceEClass_T);
+		g1.getETypeArguments().add(g2);
+		containsReferenceEClass.getEGenericSuperTypes().add(g1);
+		g1 = createEGenericType(this.getReference());
+		g2 = createEGenericType(runsReferenceEClass_T);
+		g1.getETypeArguments().add(g2);
+		runsReferenceEClass.getEGenericSuperTypes().add(g1);
+		g1 = createEGenericType(this.getReference());
+		g2 = createEGenericType(dependsOnReferenceEClass_T);
+		g1.getETypeArguments().add(g2);
+		dependsOnReferenceEClass.getEGenericSuperTypes().add(g1);
+		g1 = createEGenericType(this.getReference());
+		g2 = createEGenericType(adminsReferenceEClass_T);
+		g1.getETypeArguments().add(g2);
+		adminsReferenceEClass.getEGenericSuperTypes().add(g1);
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(componentTypeEClass, ComponentType.class, "ComponentType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -1819,6 +2007,10 @@ public class CorePackageImpl extends EPackageImpl implements CorePackage {
 		initEReference(getComponentType_Enumeration(), this.getComponentGroup(), null, "enumeration", null, 0, -1, ComponentType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getComponentType_InstantiationFactor(), ecorePackage.getEInt(), "instantiationFactor", "1", 0, 1, ComponentType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getComponentType_Reifiable(), ecorePackage.getEBoolean(), "reifiable", "false", 0, 1, ComponentType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		g1 = createEGenericType(this.getReference());
+		g2 = createEGenericType();
+		g1.getETypeArguments().add(g2);
+		initEReference(getComponentType_References(), g1, null, "references", null, 0, -1, ComponentType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(componentEClass, Component.class, "Component", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getComponent_SubComponents(), this.getComponent(), null, "subComponents", null, 0, -1, Component.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1827,6 +2019,10 @@ public class CorePackageImpl extends EPackageImpl implements CorePackage {
 		getComponent_Engines().getEKeys().add(this.getHasNameAndID_Id());
 		initEReference(getComponent_BoundComponent(), this.getComponent(), null, "boundComponent", null, 0, 1, Component.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getComponent_Instances(), this.getComponentInstance(), null, "instances", null, 0, -1, Component.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		g1 = createEGenericType(this.getReference());
+		g2 = createEGenericType();
+		g1.getETypeArguments().add(g2);
+		initEReference(getComponent_References(), g1, null, "references", null, 0, -1, Component.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(componentInstanceEClass, ComponentInstance.class, "ComponentInstance", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getComponentInstance_Component(), this.getComponent(), null, "component", null, 1, 1, ComponentInstance.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1836,6 +2032,10 @@ public class CorePackageImpl extends EPackageImpl implements CorePackage {
 		initEReference(getComponentInstance_Streams(), this.getInstancesLink(), null, "streams", null, 0, -1, ComponentInstance.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getComponentInstance_InstancesGroups(), this.getComponentInstanceGroup(), null, "instancesGroups", null, 0, -1, ComponentInstance.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getComponentInstance_BoundComponentInstance(), this.getComponentInstance(), null, "boundComponentInstance", null, 0, 1, ComponentInstance.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		g1 = createEGenericType(this.getReference());
+		g2 = createEGenericType();
+		g1.getETypeArguments().add(g2);
+		initEReference(getComponentInstance_References(), g1, null, "references", null, 0, -1, ComponentInstance.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(viewPointEClass, ViewPoint.class, "ViewPoint", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getViewPoint_Activities(), this.getActivity(), null, "activities", null, 0, -1, ViewPoint.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1968,6 +2168,18 @@ public class CorePackageImpl extends EPackageImpl implements CorePackage {
 		initEClass(ruleEClass, Rule.class, "Rule", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getRule_Status(), this.getRuleStatus(), "status", null, 0, 1, Rule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getRule_Priority(), this.getRulePriority(), "priority", null, 0, 1, Rule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(referenceEClass, Reference.class, "Reference", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		g1 = createEGenericType(referenceEClass_T);
+		initEReference(getReference_Target(), g1, null, "target", null, 0, -1, Reference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(containsReferenceEClass, ContainsReference.class, "ContainsReference", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(runsReferenceEClass, RunsReference.class, "RunsReference", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(dependsOnReferenceEClass, DependsOnReference.class, "DependsOnReference", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(adminsReferenceEClass, AdminsReference.class, "AdminsReference", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		// Initialize enums and add enum literals
 		initEEnum(customPropertyTypeEEnum, CustomPropertyType.class, "CustomPropertyType");

@@ -18,6 +18,7 @@ import org.m2ling.domain.core.Component;
 import org.m2ling.domain.core.ComponentInstance;
 import org.m2ling.domain.core.ComponentType;
 import org.m2ling.domain.core.CorePackage;
+import org.m2ling.domain.core.Reference;
 
 /**
  * <!-- begin-user-doc --> An implementation of the model object '<em><b>Component</b></em>'. <!--
@@ -30,6 +31,7 @@ import org.m2ling.domain.core.CorePackage;
  *   <li>{@link org.m2ling.domain.core.impl.ComponentImpl#getEngines <em>Engines</em>}</li>
  *   <li>{@link org.m2ling.domain.core.impl.ComponentImpl#getBoundComponent <em>Bound Component</em>}</li>
  *   <li>{@link org.m2ling.domain.core.impl.ComponentImpl#getInstances <em>Instances</em>}</li>
+ *   <li>{@link org.m2ling.domain.core.impl.ComponentImpl#getReferences <em>References</em>}</li>
  * </ul>
  * </p>
  *
@@ -89,6 +91,16 @@ public class ComponentImpl extends ComponentGroupImpl implements Component {
 	 * @ordered
 	 */
 	protected EList<ComponentInstance> instances;
+
+	/**
+	 * The cached value of the '{@link #getReferences() <em>References</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getReferences()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<Reference<?>> references;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -229,6 +241,18 @@ public class ComponentImpl extends ComponentGroupImpl implements Component {
 	}
 
 	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList<Reference<?>> getReferences() {
+		if (references == null) {
+			references = new EObjectContainmentEList<Reference<?>>(Reference.class, this, CorePackage.COMPONENT__REFERENCES);
+		}
+		return references;
+	}
+
+	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
@@ -239,6 +263,8 @@ public class ComponentImpl extends ComponentGroupImpl implements Component {
 				return ((InternalEList<?>)getSubComponents()).basicRemove(otherEnd, msgs);
 			case CorePackage.COMPONENT__INSTANCES:
 				return ((InternalEList<?>)getInstances()).basicRemove(otherEnd, msgs);
+			case CorePackage.COMPONENT__REFERENCES:
+				return ((InternalEList<?>)getReferences()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -262,6 +288,8 @@ public class ComponentImpl extends ComponentGroupImpl implements Component {
 				return basicGetBoundComponent();
 			case CorePackage.COMPONENT__INSTANCES:
 				return getInstances();
+			case CorePackage.COMPONENT__REFERENCES:
+				return getReferences();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -292,6 +320,10 @@ public class ComponentImpl extends ComponentGroupImpl implements Component {
 				getInstances().clear();
 				getInstances().addAll((Collection<? extends ComponentInstance>)newValue);
 				return;
+			case CorePackage.COMPONENT__REFERENCES:
+				getReferences().clear();
+				getReferences().addAll((Collection<? extends Reference<?>>)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -318,6 +350,9 @@ public class ComponentImpl extends ComponentGroupImpl implements Component {
 			case CorePackage.COMPONENT__INSTANCES:
 				getInstances().clear();
 				return;
+			case CorePackage.COMPONENT__REFERENCES:
+				getReferences().clear();
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -339,6 +374,8 @@ public class ComponentImpl extends ComponentGroupImpl implements Component {
 				return boundComponent != null;
 			case CorePackage.COMPONENT__INSTANCES:
 				return instances != null && !instances.isEmpty();
+			case CorePackage.COMPONENT__REFERENCES:
+				return references != null && !references.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}

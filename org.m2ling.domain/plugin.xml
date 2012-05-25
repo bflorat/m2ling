@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+
+<!--
+ Copyright (C) 2012 Bertrand Florat
+-->
+
+<plugin>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <package
+            uri="http://m2ling.org/0.1"
+            class="org.m2ling.domain.DomainPackage"
+            genModel="src/main/model/m2ling.genmodel"/>
+   </extension>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <package
+            uri="http://m2ling.org/core/0.1"
+            class="org.m2ling.domain.core.CorePackage"
+            genModel="src/main/model/m2ling.genmodel"/>
+   </extension>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <package
+            uri="http://m2ling.org/configuration/0.1"
+            class="org.m2ling.domain.configuration.ConfigurationPackage"
+            genModel="src/main/model/m2ling.genmodel"/>
+   </extension>
+
+</plugin>

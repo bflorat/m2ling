@@ -19,6 +19,7 @@ import org.eclipse.emf.common.util.EList;
  *   <li>{@link org.m2ling.domain.core.ComponentType#getEnumeration <em>Enumeration</em>}</li>
  *   <li>{@link org.m2ling.domain.core.ComponentType#getInstantiationFactor <em>Instantiation Factor</em>}</li>
  *   <li>{@link org.m2ling.domain.core.ComponentType#isReifiable <em>Reifiable</em>}</li>
+ *   <li>{@link org.m2ling.domain.core.ComponentType#getReferences <em>References</em>}</li>
  * </ul>
  * </p>
  *
@@ -135,6 +136,22 @@ public interface ComponentType extends ConceptItem, HasParameterDefinitions {
 	 * @generated
 	 */
 	void setReifiable(boolean value);
+
+	/**
+	 * Returns the value of the '<em><b>References</b></em>' containment reference list.
+	 * The list contents are of type {@link org.m2ling.domain.core.Reference}&lt;?>.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>References</em>' containment reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>References</em>' containment reference list.
+	 * @see org.m2ling.domain.core.CorePackage#getComponentType_References()
+	 * @model containment="true"
+	 * @generated
+	 */
+	EList<Reference<?>> getReferences();
 
 	/**
 	 * Returns the value of the '<em><b>Bound Type</b></em>' reference.

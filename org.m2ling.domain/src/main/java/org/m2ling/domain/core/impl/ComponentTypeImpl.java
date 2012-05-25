@@ -17,6 +17,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
 import org.m2ling.domain.core.ComponentGroup;
 import org.m2ling.domain.core.ComponentType;
 import org.m2ling.domain.core.CorePackage;
+import org.m2ling.domain.core.Reference;
 
 /**
  * <!-- begin-user-doc -->
@@ -31,6 +32,7 @@ import org.m2ling.domain.core.CorePackage;
  *   <li>{@link org.m2ling.domain.core.impl.ComponentTypeImpl#getEnumeration <em>Enumeration</em>}</li>
  *   <li>{@link org.m2ling.domain.core.impl.ComponentTypeImpl#getInstantiationFactor <em>Instantiation Factor</em>}</li>
  *   <li>{@link org.m2ling.domain.core.impl.ComponentTypeImpl#isReifiable <em>Reifiable</em>}</li>
+ *   <li>{@link org.m2ling.domain.core.impl.ComponentTypeImpl#getReferences <em>References</em>}</li>
  * </ul>
  * </p>
  *
@@ -123,6 +125,16 @@ public class ComponentTypeImpl extends ConceptItemImpl implements ComponentType 
 	 * @ordered
 	 */
 	protected boolean reifiable = REIFIABLE_EDEFAULT;
+
+	/**
+	 * The cached value of the '{@link #getReferences() <em>References</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getReferences()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<Reference<?>> references;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -226,6 +238,18 @@ public class ComponentTypeImpl extends ConceptItemImpl implements ComponentType 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EList<Reference<?>> getReferences() {
+		if (references == null) {
+			references = new EObjectContainmentEList<Reference<?>>(Reference.class, this, CorePackage.COMPONENT_TYPE__REFERENCES);
+		}
+		return references;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public ComponentType getBoundType() {
 		if (boundType != null && boundType.eIsProxy()) {
 			InternalEObject oldBoundType = (InternalEObject)boundType;
@@ -269,6 +293,8 @@ public class ComponentTypeImpl extends ConceptItemImpl implements ComponentType 
 		switch (featureID) {
 			case CorePackage.COMPONENT_TYPE__SUB_TYPES:
 				return ((InternalEList<?>)getSubTypes()).basicRemove(otherEnd, msgs);
+			case CorePackage.COMPONENT_TYPE__REFERENCES:
+				return ((InternalEList<?>)getReferences()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -294,6 +320,8 @@ public class ComponentTypeImpl extends ConceptItemImpl implements ComponentType 
 				return getInstantiationFactor();
 			case CorePackage.COMPONENT_TYPE__REIFIABLE:
 				return isReifiable();
+			case CorePackage.COMPONENT_TYPE__REFERENCES:
+				return getReferences();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -328,6 +356,10 @@ public class ComponentTypeImpl extends ConceptItemImpl implements ComponentType 
 			case CorePackage.COMPONENT_TYPE__REIFIABLE:
 				setReifiable((Boolean)newValue);
 				return;
+			case CorePackage.COMPONENT_TYPE__REFERENCES:
+				getReferences().clear();
+				getReferences().addAll((Collection<? extends Reference<?>>)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -358,6 +390,9 @@ public class ComponentTypeImpl extends ConceptItemImpl implements ComponentType 
 			case CorePackage.COMPONENT_TYPE__REIFIABLE:
 				setReifiable(REIFIABLE_EDEFAULT);
 				return;
+			case CorePackage.COMPONENT_TYPE__REFERENCES:
+				getReferences().clear();
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -382,6 +417,8 @@ public class ComponentTypeImpl extends ConceptItemImpl implements ComponentType 
 				return instantiationFactor != INSTANTIATION_FACTOR_EDEFAULT;
 			case CorePackage.COMPONENT_TYPE__REIFIABLE:
 				return reifiable != REIFIABLE_EDEFAULT;
+			case CorePackage.COMPONENT_TYPE__REFERENCES:
+				return references != null && !references.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}
