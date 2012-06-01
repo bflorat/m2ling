@@ -14,7 +14,7 @@ import org.m2ling.domain.core.CoreFactory;
  * <!-- end-user-doc -->
  * @generated
  */
-public class ComponentTest extends ComponentGroupTest {
+public class ComponentTest extends ArchitectureItemTest {
 
 	/**
 	 * <!-- begin-user-doc -->

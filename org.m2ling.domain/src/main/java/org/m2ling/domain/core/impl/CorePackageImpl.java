@@ -595,6 +595,15 @@ public class CorePackageImpl extends EPackageImpl implements CorePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EReference getComponent_References() {
+		return (EReference)componentEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getComponentInstance() {
 		return componentInstanceEClass;
 	}
@@ -633,6 +642,15 @@ public class CorePackageImpl extends EPackageImpl implements CorePackage {
 	 */
 	public EReference getComponentInstance_BoundComponentInstance() {
 		return (EReference)componentInstanceEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getComponentInstance_References() {
+		return (EReference)componentInstanceEClass.getEStructuralFeatures().get(4);
 	}
 
 	/**
@@ -730,15 +748,6 @@ public class CorePackageImpl extends EPackageImpl implements CorePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getComponentGroup_References() {
-		return (EReference)componentGroupEClass.getEStructuralFeatures().get(1);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EClass getComponentInstanceGroup() {
 		return componentInstanceGroupEClass;
 	}
@@ -750,15 +759,6 @@ public class CorePackageImpl extends EPackageImpl implements CorePackage {
 	 */
 	public EReference getComponentInstanceGroup_ComponentInstances() {
 		return (EReference)componentInstanceGroupEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getComponentInstanceGroup_References() {
-		return (EReference)componentInstanceGroupEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -1611,12 +1611,14 @@ public class CorePackageImpl extends EPackageImpl implements CorePackage {
 		createEReference(componentEClass, COMPONENT__TYPE);
 		createEReference(componentEClass, COMPONENT__BOUND_COMPONENT);
 		createEReference(componentEClass, COMPONENT__INSTANCES);
+		createEReference(componentEClass, COMPONENT__REFERENCES);
 
 		componentInstanceEClass = createEClass(COMPONENT_INSTANCE);
 		createEReference(componentInstanceEClass, COMPONENT_INSTANCE__COMPONENT);
 		createEReference(componentInstanceEClass, COMPONENT_INSTANCE__INSTANCES);
 		createEReference(componentInstanceEClass, COMPONENT_INSTANCE__INSTANCES_GROUPS);
 		createEReference(componentInstanceEClass, COMPONENT_INSTANCE__BOUND_COMPONENT_INSTANCE);
+		createEReference(componentInstanceEClass, COMPONENT_INSTANCE__REFERENCES);
 
 		viewPointEClass = createEClass(VIEW_POINT);
 		createEReference(viewPointEClass, VIEW_POINT__ACTIVITIES);
@@ -1626,11 +1628,9 @@ public class CorePackageImpl extends EPackageImpl implements CorePackage {
 
 		componentGroupEClass = createEClass(COMPONENT_GROUP);
 		createEReference(componentGroupEClass, COMPONENT_GROUP__COMPONENTS);
-		createEReference(componentGroupEClass, COMPONENT_GROUP__REFERENCES);
 
 		componentInstanceGroupEClass = createEClass(COMPONENT_INSTANCE_GROUP);
 		createEReference(componentInstanceGroupEClass, COMPONENT_INSTANCE_GROUP__COMPONENT_INSTANCES);
-		createEReference(componentInstanceGroupEClass, COMPONENT_INSTANCE_GROUP__REFERENCES);
 
 		architectureItemEClass = createEClass(ARCHITECTURE_ITEM);
 
@@ -1796,15 +1796,17 @@ public class CorePackageImpl extends EPackageImpl implements CorePackage {
 		componentTypeEClass.getESuperTypes().add(this.getConceptItem());
 		componentTypeEClass.getESuperTypes().add(this.getHasParameterDefinitions());
 		componentTypeEClass.getESuperTypes().add(this.getHasReferences());
-		componentEClass.getESuperTypes().add(this.getComponentGroup());
-		componentInstanceEClass.getESuperTypes().add(this.getComponentInstanceGroup());
+		componentEClass.getESuperTypes().add(this.getArchitectureItem());
+		componentEClass.getESuperTypes().add(this.getHasParameterDefinitions());
+		componentEClass.getESuperTypes().add(this.getHasReferences());
 		componentInstanceEClass.getESuperTypes().add(this.getHasParameterValues());
+		componentInstanceEClass.getESuperTypes().add(this.getRuntimeItem());
+		componentInstanceEClass.getESuperTypes().add(this.getHasReferences());
 		viewPointEClass.getESuperTypes().add(this.getConceptItem());
 		componentGroupEClass.getESuperTypes().add(this.getArchitectureItem());
 		componentGroupEClass.getESuperTypes().add(this.getHasParameterDefinitions());
-		componentGroupEClass.getESuperTypes().add(this.getHasReferences());
 		componentInstanceGroupEClass.getESuperTypes().add(this.getRuntimeItem());
-		componentInstanceGroupEClass.getESuperTypes().add(this.getHasReferences());
+		componentInstanceGroupEClass.getESuperTypes().add(this.getHasParameterValues());
 		architectureItemEClass.getESuperTypes().add(this.getHasNameAndID());
 		architectureItemEClass.getESuperTypes().add(this.getHasComment());
 		architectureItemEClass.getESuperTypes().add(this.getHasTags());
@@ -1873,12 +1875,14 @@ public class CorePackageImpl extends EPackageImpl implements CorePackage {
 		initEReference(getComponent_Type(), this.getComponentType(), null, "type", null, 1, 1, Component.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getComponent_BoundComponent(), this.getComponent(), null, "boundComponent", null, 0, 1, Component.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getComponent_Instances(), this.getComponentInstance(), null, "instances", null, 0, -1, Component.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getComponent_References(), this.getReference(), null, "references", null, 0, -1, Component.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(componentInstanceEClass, ComponentInstance.class, "ComponentInstance", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getComponentInstance_Component(), this.getComponent(), null, "component", null, 1, 1, ComponentInstance.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getComponentInstance_Instances(), this.getComponentInstance(), null, "instances", null, 0, -1, ComponentInstance.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getComponentInstance_InstancesGroups(), this.getComponentInstanceGroup(), null, "instancesGroups", null, 0, -1, ComponentInstance.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getComponentInstance_BoundComponentInstance(), this.getComponentInstance(), null, "boundComponentInstance", null, 0, 1, ComponentInstance.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getComponentInstance_References(), this.getReference(), null, "references", null, 0, -1, ComponentInstance.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(viewPointEClass, ViewPoint.class, "ViewPoint", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getViewPoint_Activities(), this.getActivity(), null, "activities", null, 0, -1, ViewPoint.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1888,11 +1892,9 @@ public class CorePackageImpl extends EPackageImpl implements CorePackage {
 
 		initEClass(componentGroupEClass, ComponentGroup.class, "ComponentGroup", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getComponentGroup_Components(), this.getComponent(), null, "components", null, 0, -1, ComponentGroup.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getComponentGroup_References(), this.getReference(), null, "references", null, 0, -1, ComponentGroup.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(componentInstanceGroupEClass, ComponentInstanceGroup.class, "ComponentInstanceGroup", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getComponentInstanceGroup_ComponentInstances(), this.getComponentInstance(), null, "componentInstances", null, 0, -1, ComponentInstanceGroup.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getComponentInstanceGroup_References(), this.getReference(), null, "references", null, 0, -1, ComponentInstanceGroup.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(architectureItemEClass, ArchitectureItem.class, "ArchitectureItem", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 

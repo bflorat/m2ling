@@ -14,7 +14,6 @@ import org.eclipse.emf.common.util.EList;
  * The following features are supported:
  * <ul>
  *   <li>{@link org.m2ling.domain.core.ComponentInstanceGroup#getComponentInstances <em>Component Instances</em>}</li>
- *   <li>{@link org.m2ling.domain.core.ComponentInstanceGroup#getReferences <em>References</em>}</li>
  * </ul>
  * </p>
  *
@@ -22,7 +21,7 @@ import org.eclipse.emf.common.util.EList;
  * @model
  * @generated
  */
-public interface ComponentInstanceGroup extends RuntimeItem, HasReferences {
+public interface ComponentInstanceGroup extends RuntimeItem, HasParameterValues {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -45,21 +44,5 @@ public interface ComponentInstanceGroup extends RuntimeItem, HasReferences {
 	 * @generated
 	 */
 	EList<ComponentInstance> getComponentInstances();
-
-	/**
-	 * Returns the value of the '<em><b>References</b></em>' containment reference list.
-	 * The list contents are of type {@link org.m2ling.domain.core.Reference}.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>References</em>' containment reference list isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>References</em>' containment reference list.
-	 * @see org.m2ling.domain.core.CorePackage#getComponentInstanceGroup_References()
-	 * @model containment="true"
-	 * @generated
-	 */
-	EList<Reference> getReferences();
 
 } // ComponentInstanceGroup

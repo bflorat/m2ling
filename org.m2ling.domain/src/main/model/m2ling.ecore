@@ -31,14 +31,16 @@
       <eStructuralFeatures xsi:type="ecore:EReference" name="references" upperBound="-1"
           eType="#//core/Reference" containment="true"/>
     </eClassifiers>
-    <eClassifiers xsi:type="ecore:EClass" name="Component" eSuperTypes="#//core/ComponentGroup">
+    <eClassifiers xsi:type="ecore:EClass" name="Component" eSuperTypes="#//core/ArchitectureItem #//core/HasParameterDefinitions #//core/HasReferences">
       <eStructuralFeatures xsi:type="ecore:EReference" name="type" lowerBound="1"
           eType="#//core/ComponentType"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="boundComponent" eType="#//core/Component"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="instances" upperBound="-1"
           eType="#//core/ComponentInstance" containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="references" upperBound="-1"
+          eType="#//core/Reference" containment="true"/>
     </eClassifiers>
-    <eClassifiers xsi:type="ecore:EClass" name="ComponentInstance" eSuperTypes="#//core/ComponentInstanceGroup #//core/HasParameterValues">
+    <eClassifiers xsi:type="ecore:EClass" name="ComponentInstance" eSuperTypes="#//core/HasParameterValues #//core/RuntimeItem #//core/HasReferences">
       <eStructuralFeatures xsi:type="ecore:EReference" name="component" lowerBound="1"
           eType="#//core/Component"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="instances" upperBound="-1"
@@ -47,6 +49,8 @@
           eType="#//core/ComponentInstanceGroup" containment="true"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="boundComponentInstance"
           eType="#//core/ComponentInstance"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="references" upperBound="-1"
+          eType="#//core/Reference" containment="true"/>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="ViewPoint" eSuperTypes="#//core/ConceptItem">
       <eStructuralFeatures xsi:type="ecore:EReference" name="activities" upperBound="-1"
@@ -58,17 +62,13 @@
       <eStructuralFeatures xsi:type="ecore:EReference" name="rules" upperBound="-1"
           eType="#//core/Rule" containment="true"/>
     </eClassifiers>
-    <eClassifiers xsi:type="ecore:EClass" name="ComponentGroup" eSuperTypes="#//core/ArchitectureItem #//core/HasParameterDefinitions #//core/HasReferences">
+    <eClassifiers xsi:type="ecore:EClass" name="ComponentGroup" eSuperTypes="#//core/ArchitectureItem #//core/HasParameterDefinitions">
       <eStructuralFeatures xsi:type="ecore:EReference" name="components" upperBound="-1"
           eType="#//core/Component"/>
-      <eStructuralFeatures xsi:type="ecore:EReference" name="references" upperBound="-1"
-          eType="#//core/Reference" containment="true"/>
     </eClassifiers>
-    <eClassifiers xsi:type="ecore:EClass" name="ComponentInstanceGroup" eSuperTypes="#//core/RuntimeItem #//core/HasReferences">
+    <eClassifiers xsi:type="ecore:EClass" name="ComponentInstanceGroup" eSuperTypes="#//core/RuntimeItem #//core/HasParameterValues">
       <eStructuralFeatures xsi:type="ecore:EReference" name="componentInstances" upperBound="-1"
           eType="#//core/ComponentInstance"/>
-      <eStructuralFeatures xsi:type="ecore:EReference" name="references" upperBound="-1"
-          eType="#//core/Reference" containment="true"/>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="ArchitectureItem" abstract="true"
         eSuperTypes="#//core/HasNameAndID #//core/HasComment #//core/HasTags #//core/HasParameterDefinitions #//core/HasConstraints #//core/HasLabel"/>

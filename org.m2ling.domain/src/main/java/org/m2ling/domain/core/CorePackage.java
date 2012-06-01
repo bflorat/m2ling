@@ -404,78 +404,6 @@ public interface CorePackage extends EPackage {
 	int COMPONENT_GROUP = 4;
 
 	/**
-	 * The feature id for the '<em><b>Id</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int COMPONENT_GROUP__ID = ARCHITECTURE_ITEM__ID;
-
-	/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int COMPONENT_GROUP__NAME = ARCHITECTURE_ITEM__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Comment</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int COMPONENT_GROUP__COMMENT = ARCHITECTURE_ITEM__COMMENT;
-
-	/**
-	 * The feature id for the '<em><b>Tags</b></em>' attribute list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int COMPONENT_GROUP__TAGS = ARCHITECTURE_ITEM__TAGS;
-
-	/**
-	 * The feature id for the '<em><b>Label</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int COMPONENT_GROUP__LABEL = ARCHITECTURE_ITEM__LABEL;
-
-	/**
-	 * The feature id for the '<em><b>Components</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int COMPONENT_GROUP__COMPONENTS = ARCHITECTURE_ITEM_FEATURE_COUNT + 0;
-
-	/**
-	 * The feature id for the '<em><b>References</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int COMPONENT_GROUP__REFERENCES = ARCHITECTURE_ITEM_FEATURE_COUNT + 1;
-
-	/**
-	 * The number of structural features of the '<em>Component Group</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int COMPONENT_GROUP_FEATURE_COUNT = ARCHITECTURE_ITEM_FEATURE_COUNT + 2;
-
-	/**
 	 * The meta object id for the '{@link org.m2ling.domain.core.impl.ComponentImpl <em>Component</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -492,7 +420,7 @@ public interface CorePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int COMPONENT__ID = COMPONENT_GROUP__ID;
+	int COMPONENT__ID = ARCHITECTURE_ITEM__ID;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -501,7 +429,7 @@ public interface CorePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int COMPONENT__NAME = COMPONENT_GROUP__NAME;
+	int COMPONENT__NAME = ARCHITECTURE_ITEM__NAME;
 
 	/**
 	 * The feature id for the '<em><b>Comment</b></em>' attribute.
@@ -510,7 +438,7 @@ public interface CorePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int COMPONENT__COMMENT = COMPONENT_GROUP__COMMENT;
+	int COMPONENT__COMMENT = ARCHITECTURE_ITEM__COMMENT;
 
 	/**
 	 * The feature id for the '<em><b>Tags</b></em>' attribute list.
@@ -519,7 +447,7 @@ public interface CorePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int COMPONENT__TAGS = COMPONENT_GROUP__TAGS;
+	int COMPONENT__TAGS = ARCHITECTURE_ITEM__TAGS;
 
 	/**
 	 * The feature id for the '<em><b>Label</b></em>' attribute.
@@ -528,25 +456,7 @@ public interface CorePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int COMPONENT__LABEL = COMPONENT_GROUP__LABEL;
-
-	/**
-	 * The feature id for the '<em><b>Components</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int COMPONENT__COMPONENTS = COMPONENT_GROUP__COMPONENTS;
-
-	/**
-	 * The feature id for the '<em><b>References</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int COMPONENT__REFERENCES = COMPONENT_GROUP__REFERENCES;
+	int COMPONENT__LABEL = ARCHITECTURE_ITEM__LABEL;
 
 	/**
 	 * The feature id for the '<em><b>Type</b></em>' reference.
@@ -555,7 +465,7 @@ public interface CorePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int COMPONENT__TYPE = COMPONENT_GROUP_FEATURE_COUNT + 0;
+	int COMPONENT__TYPE = ARCHITECTURE_ITEM_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Bound Component</b></em>' reference.
@@ -564,7 +474,7 @@ public interface CorePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int COMPONENT__BOUND_COMPONENT = COMPONENT_GROUP_FEATURE_COUNT + 1;
+	int COMPONENT__BOUND_COMPONENT = ARCHITECTURE_ITEM_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Instances</b></em>' containment reference list.
@@ -573,7 +483,16 @@ public interface CorePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int COMPONENT__INSTANCES = COMPONENT_GROUP_FEATURE_COUNT + 2;
+	int COMPONENT__INSTANCES = ARCHITECTURE_ITEM_FEATURE_COUNT + 2;
+
+	/**
+	 * The feature id for the '<em><b>References</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COMPONENT__REFERENCES = ARCHITECTURE_ITEM_FEATURE_COUNT + 3;
 
 	/**
 	 * The number of structural features of the '<em>Component</em>' class.
@@ -582,7 +501,7 @@ public interface CorePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int COMPONENT_FEATURE_COUNT = COMPONENT_GROUP_FEATURE_COUNT + 3;
+	int COMPONENT_FEATURE_COUNT = ARCHITECTURE_ITEM_FEATURE_COUNT + 4;
 
 	/**
 	 * The meta object id for the '{@link org.m2ling.domain.core.impl.RuntimeItemImpl <em>Runtime Item</em>}' class.
@@ -595,69 +514,6 @@ public interface CorePackage extends EPackage {
 	int RUNTIME_ITEM = 8;
 
 	/**
-	 * The feature id for the '<em><b>Id</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int RUNTIME_ITEM__ID = HAS_NAME_AND_ID__ID;
-
-	/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int RUNTIME_ITEM__NAME = HAS_NAME_AND_ID__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Comment</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int RUNTIME_ITEM__COMMENT = HAS_NAME_AND_ID_FEATURE_COUNT + 0;
-
-	/**
-	 * The feature id for the '<em><b>Tags</b></em>' attribute list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int RUNTIME_ITEM__TAGS = HAS_NAME_AND_ID_FEATURE_COUNT + 1;
-
-	/**
-	 * The feature id for the '<em><b>Label</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int RUNTIME_ITEM__LABEL = HAS_NAME_AND_ID_FEATURE_COUNT + 2;
-
-	/**
-	 * The feature id for the '<em><b>Status</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int RUNTIME_ITEM__STATUS = HAS_NAME_AND_ID_FEATURE_COUNT + 3;
-
-	/**
-	 * The number of structural features of the '<em>Runtime Item</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int RUNTIME_ITEM_FEATURE_COUNT = HAS_NAME_AND_ID_FEATURE_COUNT + 4;
-
-	/**
 	 * The meta object id for the '{@link org.m2ling.domain.core.impl.ComponentInstanceGroupImpl <em>Component Instance Group</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -666,87 +522,6 @@ public interface CorePackage extends EPackage {
 	 * @generated
 	 */
 	int COMPONENT_INSTANCE_GROUP = 5;
-
-	/**
-	 * The feature id for the '<em><b>Id</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int COMPONENT_INSTANCE_GROUP__ID = RUNTIME_ITEM__ID;
-
-	/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int COMPONENT_INSTANCE_GROUP__NAME = RUNTIME_ITEM__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Comment</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int COMPONENT_INSTANCE_GROUP__COMMENT = RUNTIME_ITEM__COMMENT;
-
-	/**
-	 * The feature id for the '<em><b>Tags</b></em>' attribute list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int COMPONENT_INSTANCE_GROUP__TAGS = RUNTIME_ITEM__TAGS;
-
-	/**
-	 * The feature id for the '<em><b>Label</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int COMPONENT_INSTANCE_GROUP__LABEL = RUNTIME_ITEM__LABEL;
-
-	/**
-	 * The feature id for the '<em><b>Status</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int COMPONENT_INSTANCE_GROUP__STATUS = RUNTIME_ITEM__STATUS;
-
-	/**
-	 * The feature id for the '<em><b>Component Instances</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int COMPONENT_INSTANCE_GROUP__COMPONENT_INSTANCES = RUNTIME_ITEM_FEATURE_COUNT + 0;
-
-	/**
-	 * The feature id for the '<em><b>References</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int COMPONENT_INSTANCE_GROUP__REFERENCES = RUNTIME_ITEM_FEATURE_COUNT + 1;
-
-	/**
-	 * The number of structural features of the '<em>Component Instance Group</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int COMPONENT_INSTANCE_GROUP_FEATURE_COUNT = RUNTIME_ITEM_FEATURE_COUNT + 2;
 
 	/**
 	 * The meta object id for the '{@link org.m2ling.domain.core.impl.ComponentInstanceImpl <em>Component Instance</em>}' class.
@@ -759,123 +534,6 @@ public interface CorePackage extends EPackage {
 	int COMPONENT_INSTANCE = 2;
 
 	/**
-	 * The feature id for the '<em><b>Id</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int COMPONENT_INSTANCE__ID = COMPONENT_INSTANCE_GROUP__ID;
-
-	/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int COMPONENT_INSTANCE__NAME = COMPONENT_INSTANCE_GROUP__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Comment</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int COMPONENT_INSTANCE__COMMENT = COMPONENT_INSTANCE_GROUP__COMMENT;
-
-	/**
-	 * The feature id for the '<em><b>Tags</b></em>' attribute list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int COMPONENT_INSTANCE__TAGS = COMPONENT_INSTANCE_GROUP__TAGS;
-
-	/**
-	 * The feature id for the '<em><b>Label</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int COMPONENT_INSTANCE__LABEL = COMPONENT_INSTANCE_GROUP__LABEL;
-
-	/**
-	 * The feature id for the '<em><b>Status</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int COMPONENT_INSTANCE__STATUS = COMPONENT_INSTANCE_GROUP__STATUS;
-
-	/**
-	 * The feature id for the '<em><b>Component Instances</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int COMPONENT_INSTANCE__COMPONENT_INSTANCES = COMPONENT_INSTANCE_GROUP__COMPONENT_INSTANCES;
-
-	/**
-	 * The feature id for the '<em><b>References</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int COMPONENT_INSTANCE__REFERENCES = COMPONENT_INSTANCE_GROUP__REFERENCES;
-
-	/**
-	 * The feature id for the '<em><b>Component</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int COMPONENT_INSTANCE__COMPONENT = COMPONENT_INSTANCE_GROUP_FEATURE_COUNT + 0;
-
-	/**
-	 * The feature id for the '<em><b>Instances</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int COMPONENT_INSTANCE__INSTANCES = COMPONENT_INSTANCE_GROUP_FEATURE_COUNT + 1;
-
-	/**
-	 * The feature id for the '<em><b>Instances Groups</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int COMPONENT_INSTANCE__INSTANCES_GROUPS = COMPONENT_INSTANCE_GROUP_FEATURE_COUNT + 2;
-
-	/**
-	 * The feature id for the '<em><b>Bound Component Instance</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int COMPONENT_INSTANCE__BOUND_COMPONENT_INSTANCE = COMPONENT_INSTANCE_GROUP_FEATURE_COUNT + 3;
-
-	/**
-	 * The number of structural features of the '<em>Component Instance</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int COMPONENT_INSTANCE_FEATURE_COUNT = COMPONENT_INSTANCE_GROUP_FEATURE_COUNT + 4;
-
-	/**
 	 * The meta object id for the '{@link org.m2ling.domain.core.impl.ViewPointImpl <em>View Point</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -884,6 +542,213 @@ public interface CorePackage extends EPackage {
 	 * @generated
 	 */
 	int VIEW_POINT = 3;
+
+	/**
+	 * The meta object id for the '{@link org.m2ling.domain.core.impl.ViewImpl <em>View</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.m2ling.domain.core.impl.ViewImpl
+	 * @see org.m2ling.domain.core.impl.CorePackageImpl#getView()
+	 * @generated
+	 */
+	int VIEW = 9;
+
+	/**
+	 * The meta object id for the '{@link org.m2ling.domain.core.impl.HasStatusImpl <em>Has Status</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.m2ling.domain.core.impl.HasStatusImpl
+	 * @see org.m2ling.domain.core.impl.CorePackageImpl#getHasStatus()
+	 * @generated
+	 */
+	int HAS_STATUS = 10;
+
+	/**
+	 * The meta object id for the '{@link org.m2ling.domain.core.impl.HasTagsImpl <em>Has Tags</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.m2ling.domain.core.impl.HasTagsImpl
+	 * @see org.m2ling.domain.core.impl.CorePackageImpl#getHasTags()
+	 * @generated
+	 */
+	int HAS_TAGS = 12;
+
+	/**
+	 * The meta object id for the '{@link org.m2ling.domain.core.impl.HasCommentImpl <em>Has Comment</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.m2ling.domain.core.impl.HasCommentImpl
+	 * @see org.m2ling.domain.core.impl.CorePackageImpl#getHasComment()
+	 * @generated
+	 */
+	int HAS_COMMENT = 13;
+
+	/**
+	 * The meta object id for the '{@link org.m2ling.domain.core.impl.CustomPropertyImpl <em>Custom Property</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.m2ling.domain.core.impl.CustomPropertyImpl
+	 * @see org.m2ling.domain.core.impl.CorePackageImpl#getCustomProperty()
+	 * @generated
+	 */
+	int CUSTOM_PROPERTY = 17;
+
+	/**
+	 * The meta object id for the '{@link org.m2ling.domain.core.impl.LinkTypeImpl <em>Link Type</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.m2ling.domain.core.impl.LinkTypeImpl
+	 * @see org.m2ling.domain.core.impl.CorePackageImpl#getLinkType()
+	 * @generated
+	 */
+	int LINK_TYPE = 18;
+
+	/**
+	 * The meta object id for the '{@link org.m2ling.domain.core.impl.LinkImpl <em>Link</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.m2ling.domain.core.impl.LinkImpl
+	 * @see org.m2ling.domain.core.impl.CorePackageImpl#getLink()
+	 * @generated
+	 */
+	int LINK = 19;
+
+	/**
+	 * The meta object id for the '{@link org.m2ling.domain.core.impl.HasParameterDefinitionsImpl <em>Has Parameter Definitions</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.m2ling.domain.core.impl.HasParameterDefinitionsImpl
+	 * @see org.m2ling.domain.core.impl.CorePackageImpl#getHasParameterDefinitions()
+	 * @generated
+	 */
+	int HAS_PARAMETER_DEFINITIONS = 15;
+
+	/**
+	 * The meta object id for the '{@link org.m2ling.domain.core.impl.HasParameterValuesImpl <em>Has Parameter Values</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.m2ling.domain.core.impl.HasParameterValuesImpl
+	 * @see org.m2ling.domain.core.impl.CorePackageImpl#getHasParameterValues()
+	 * @generated
+	 */
+	int HAS_PARAMETER_VALUES = 16;
+
+	/**
+	 * The number of structural features of the '<em>Has Parameter Values</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int HAS_PARAMETER_VALUES_FEATURE_COUNT = 0;
+
+	/**
+	 * The feature id for the '<em><b>Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COMPONENT_INSTANCE__ID = HAS_PARAMETER_VALUES_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COMPONENT_INSTANCE__NAME = HAS_PARAMETER_VALUES_FEATURE_COUNT + 1;
+
+	/**
+	 * The feature id for the '<em><b>Comment</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COMPONENT_INSTANCE__COMMENT = HAS_PARAMETER_VALUES_FEATURE_COUNT + 2;
+
+	/**
+	 * The feature id for the '<em><b>Tags</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COMPONENT_INSTANCE__TAGS = HAS_PARAMETER_VALUES_FEATURE_COUNT + 3;
+
+	/**
+	 * The feature id for the '<em><b>Label</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COMPONENT_INSTANCE__LABEL = HAS_PARAMETER_VALUES_FEATURE_COUNT + 4;
+
+	/**
+	 * The feature id for the '<em><b>Status</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COMPONENT_INSTANCE__STATUS = HAS_PARAMETER_VALUES_FEATURE_COUNT + 5;
+
+	/**
+	 * The feature id for the '<em><b>Component</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COMPONENT_INSTANCE__COMPONENT = HAS_PARAMETER_VALUES_FEATURE_COUNT + 6;
+
+	/**
+	 * The feature id for the '<em><b>Instances</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COMPONENT_INSTANCE__INSTANCES = HAS_PARAMETER_VALUES_FEATURE_COUNT + 7;
+
+	/**
+	 * The feature id for the '<em><b>Instances Groups</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COMPONENT_INSTANCE__INSTANCES_GROUPS = HAS_PARAMETER_VALUES_FEATURE_COUNT + 8;
+
+	/**
+	 * The feature id for the '<em><b>Bound Component Instance</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COMPONENT_INSTANCE__BOUND_COMPONENT_INSTANCE = HAS_PARAMETER_VALUES_FEATURE_COUNT + 9;
+
+	/**
+	 * The feature id for the '<em><b>References</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COMPONENT_INSTANCE__REFERENCES = HAS_PARAMETER_VALUES_FEATURE_COUNT + 10;
+
+	/**
+	 * The number of structural features of the '<em>Component Instance</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COMPONENT_INSTANCE_FEATURE_COUNT = HAS_PARAMETER_VALUES_FEATURE_COUNT + 11;
 
 	/**
 	 * The feature id for the '<em><b>Id</b></em>' attribute.
@@ -994,14 +859,202 @@ public interface CorePackage extends EPackage {
 	int VIEW_POINT_FEATURE_COUNT = CONCEPT_ITEM_FEATURE_COUNT + 4;
 
 	/**
-	 * The meta object id for the '{@link org.m2ling.domain.core.impl.ViewImpl <em>View</em>}' class.
+	 * The feature id for the '<em><b>Id</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see org.m2ling.domain.core.impl.ViewImpl
-	 * @see org.m2ling.domain.core.impl.CorePackageImpl#getView()
 	 * @generated
+	 * @ordered
 	 */
-	int VIEW = 9;
+	int COMPONENT_GROUP__ID = ARCHITECTURE_ITEM__ID;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COMPONENT_GROUP__NAME = ARCHITECTURE_ITEM__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Comment</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COMPONENT_GROUP__COMMENT = ARCHITECTURE_ITEM__COMMENT;
+
+	/**
+	 * The feature id for the '<em><b>Tags</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COMPONENT_GROUP__TAGS = ARCHITECTURE_ITEM__TAGS;
+
+	/**
+	 * The feature id for the '<em><b>Label</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COMPONENT_GROUP__LABEL = ARCHITECTURE_ITEM__LABEL;
+
+	/**
+	 * The feature id for the '<em><b>Components</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COMPONENT_GROUP__COMPONENTS = ARCHITECTURE_ITEM_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Component Group</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COMPONENT_GROUP_FEATURE_COUNT = ARCHITECTURE_ITEM_FEATURE_COUNT + 1;
+
+	/**
+	 * The feature id for the '<em><b>Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RUNTIME_ITEM__ID = HAS_NAME_AND_ID__ID;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RUNTIME_ITEM__NAME = HAS_NAME_AND_ID__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Comment</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RUNTIME_ITEM__COMMENT = HAS_NAME_AND_ID_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Tags</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RUNTIME_ITEM__TAGS = HAS_NAME_AND_ID_FEATURE_COUNT + 1;
+
+	/**
+	 * The feature id for the '<em><b>Label</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RUNTIME_ITEM__LABEL = HAS_NAME_AND_ID_FEATURE_COUNT + 2;
+
+	/**
+	 * The feature id for the '<em><b>Status</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RUNTIME_ITEM__STATUS = HAS_NAME_AND_ID_FEATURE_COUNT + 3;
+
+	/**
+	 * The number of structural features of the '<em>Runtime Item</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RUNTIME_ITEM_FEATURE_COUNT = HAS_NAME_AND_ID_FEATURE_COUNT + 4;
+
+	/**
+	 * The feature id for the '<em><b>Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COMPONENT_INSTANCE_GROUP__ID = RUNTIME_ITEM__ID;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COMPONENT_INSTANCE_GROUP__NAME = RUNTIME_ITEM__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Comment</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COMPONENT_INSTANCE_GROUP__COMMENT = RUNTIME_ITEM__COMMENT;
+
+	/**
+	 * The feature id for the '<em><b>Tags</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COMPONENT_INSTANCE_GROUP__TAGS = RUNTIME_ITEM__TAGS;
+
+	/**
+	 * The feature id for the '<em><b>Label</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COMPONENT_INSTANCE_GROUP__LABEL = RUNTIME_ITEM__LABEL;
+
+	/**
+	 * The feature id for the '<em><b>Status</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COMPONENT_INSTANCE_GROUP__STATUS = RUNTIME_ITEM__STATUS;
+
+	/**
+	 * The feature id for the '<em><b>Component Instances</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COMPONENT_INSTANCE_GROUP__COMPONENT_INSTANCES = RUNTIME_ITEM_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Component Instance Group</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COMPONENT_INSTANCE_GROUP_FEATURE_COUNT = RUNTIME_ITEM_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Id</b></em>' attribute.
@@ -1121,16 +1174,6 @@ public interface CorePackage extends EPackage {
 	int VIEW_FEATURE_COUNT = ARCHITECTURE_ITEM_FEATURE_COUNT + 7;
 
 	/**
-	 * The meta object id for the '{@link org.m2ling.domain.core.impl.HasStatusImpl <em>Has Status</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.m2ling.domain.core.impl.HasStatusImpl
-	 * @see org.m2ling.domain.core.impl.CorePackageImpl#getHasStatus()
-	 * @generated
-	 */
-	int HAS_STATUS = 10;
-
-	/**
 	 * The feature id for the '<em><b>Status</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1149,16 +1192,6 @@ public interface CorePackage extends EPackage {
 	int HAS_STATUS_FEATURE_COUNT = 1;
 
 	/**
-	 * The meta object id for the '{@link org.m2ling.domain.core.impl.HasTagsImpl <em>Has Tags</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.m2ling.domain.core.impl.HasTagsImpl
-	 * @see org.m2ling.domain.core.impl.CorePackageImpl#getHasTags()
-	 * @generated
-	 */
-	int HAS_TAGS = 12;
-
-	/**
 	 * The feature id for the '<em><b>Tags</b></em>' attribute list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1175,16 +1208,6 @@ public interface CorePackage extends EPackage {
 	 * @ordered
 	 */
 	int HAS_TAGS_FEATURE_COUNT = 1;
-
-	/**
-	 * The meta object id for the '{@link org.m2ling.domain.core.impl.HasCommentImpl <em>Has Comment</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.m2ling.domain.core.impl.HasCommentImpl
-	 * @see org.m2ling.domain.core.impl.CorePackageImpl#getHasComment()
-	 * @generated
-	 */
-	int HAS_COMMENT = 13;
 
 	/**
 	 * The feature id for the '<em><b>Comment</b></em>' attribute.
@@ -1223,46 +1246,6 @@ public interface CorePackage extends EPackage {
 	int HAS_CUSTOM_PROPERTIES_FEATURE_COUNT = 1;
 
 	/**
-	 * The meta object id for the '{@link org.m2ling.domain.core.impl.CustomPropertyImpl <em>Custom Property</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.m2ling.domain.core.impl.CustomPropertyImpl
-	 * @see org.m2ling.domain.core.impl.CorePackageImpl#getCustomProperty()
-	 * @generated
-	 */
-	int CUSTOM_PROPERTY = 17;
-
-	/**
-	 * The meta object id for the '{@link org.m2ling.domain.core.impl.LinkTypeImpl <em>Link Type</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.m2ling.domain.core.impl.LinkTypeImpl
-	 * @see org.m2ling.domain.core.impl.CorePackageImpl#getLinkType()
-	 * @generated
-	 */
-	int LINK_TYPE = 18;
-
-	/**
-	 * The meta object id for the '{@link org.m2ling.domain.core.impl.LinkImpl <em>Link</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.m2ling.domain.core.impl.LinkImpl
-	 * @see org.m2ling.domain.core.impl.CorePackageImpl#getLink()
-	 * @generated
-	 */
-	int LINK = 19;
-
-	/**
-	 * The meta object id for the '{@link org.m2ling.domain.core.impl.HasParameterDefinitionsImpl <em>Has Parameter Definitions</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.m2ling.domain.core.impl.HasParameterDefinitionsImpl
-	 * @see org.m2ling.domain.core.impl.CorePackageImpl#getHasParameterDefinitions()
-	 * @generated
-	 */
-	int HAS_PARAMETER_DEFINITIONS = 15;
-
-	/**
 	 * The number of structural features of the '<em>Has Parameter Definitions</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1270,25 +1253,6 @@ public interface CorePackage extends EPackage {
 	 * @ordered
 	 */
 	int HAS_PARAMETER_DEFINITIONS_FEATURE_COUNT = 0;
-
-	/**
-	 * The meta object id for the '{@link org.m2ling.domain.core.impl.HasParameterValuesImpl <em>Has Parameter Values</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.m2ling.domain.core.impl.HasParameterValuesImpl
-	 * @see org.m2ling.domain.core.impl.CorePackageImpl#getHasParameterValues()
-	 * @generated
-	 */
-	int HAS_PARAMETER_VALUES = 16;
-
-	/**
-	 * The number of structural features of the '<em>Has Parameter Values</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int HAS_PARAMETER_VALUES_FEATURE_COUNT = 0;
 
 	/**
 	 * The number of structural features of the '<em>Custom Property</em>' class.
@@ -2665,6 +2629,17 @@ public interface CorePackage extends EPackage {
 	EReference getComponent_Instances();
 
 	/**
+	 * Returns the meta object for the containment reference list '{@link org.m2ling.domain.core.Component#getReferences <em>References</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>References</em>'.
+	 * @see org.m2ling.domain.core.Component#getReferences()
+	 * @see #getComponent()
+	 * @generated
+	 */
+	EReference getComponent_References();
+
+	/**
 	 * Returns the meta object for class '{@link org.m2ling.domain.core.ComponentInstance <em>Component Instance</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2717,6 +2692,17 @@ public interface CorePackage extends EPackage {
 	 * @generated
 	 */
 	EReference getComponentInstance_BoundComponentInstance();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link org.m2ling.domain.core.ComponentInstance#getReferences <em>References</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>References</em>'.
+	 * @see org.m2ling.domain.core.ComponentInstance#getReferences()
+	 * @see #getComponentInstance()
+	 * @generated
+	 */
+	EReference getComponentInstance_References();
 
 	/**
 	 * Returns the meta object for class '{@link org.m2ling.domain.core.HasNameAndID <em>Has Name And ID</em>}'.
@@ -2826,17 +2812,6 @@ public interface CorePackage extends EPackage {
 	EReference getComponentGroup_Components();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link org.m2ling.domain.core.ComponentGroup#getReferences <em>References</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>References</em>'.
-	 * @see org.m2ling.domain.core.ComponentGroup#getReferences()
-	 * @see #getComponentGroup()
-	 * @generated
-	 */
-	EReference getComponentGroup_References();
-
-	/**
 	 * Returns the meta object for class '{@link org.m2ling.domain.core.ComponentInstanceGroup <em>Component Instance Group</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2856,17 +2831,6 @@ public interface CorePackage extends EPackage {
 	 * @generated
 	 */
 	EReference getComponentInstanceGroup_ComponentInstances();
-
-	/**
-	 * Returns the meta object for the containment reference list '{@link org.m2ling.domain.core.ComponentInstanceGroup#getReferences <em>References</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>References</em>'.
-	 * @see org.m2ling.domain.core.ComponentInstanceGroup#getReferences()
-	 * @see #getComponentInstanceGroup()
-	 * @generated
-	 */
-	EReference getComponentInstanceGroup_References();
 
 	/**
 	 * Returns the meta object for class '{@link org.m2ling.domain.core.ArchitectureItem <em>Architecture Item</em>}'.
@@ -3931,6 +3895,14 @@ public interface CorePackage extends EPackage {
 		EReference COMPONENT__INSTANCES = eINSTANCE.getComponent_Instances();
 
 		/**
+		 * The meta object literal for the '<em><b>References</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference COMPONENT__REFERENCES = eINSTANCE.getComponent_References();
+
+		/**
 		 * The meta object literal for the '{@link org.m2ling.domain.core.impl.ComponentInstanceImpl <em>Component Instance</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -3971,6 +3943,14 @@ public interface CorePackage extends EPackage {
 		 * @generated
 		 */
 		EReference COMPONENT_INSTANCE__BOUND_COMPONENT_INSTANCE = eINSTANCE.getComponentInstance_BoundComponentInstance();
+
+		/**
+		 * The meta object literal for the '<em><b>References</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference COMPONENT_INSTANCE__REFERENCES = eINSTANCE.getComponentInstance_References();
 
 		/**
 		 * The meta object literal for the '{@link org.m2ling.domain.core.impl.HasNameAndIDImpl <em>Has Name And ID</em>}' class.
@@ -4059,14 +4039,6 @@ public interface CorePackage extends EPackage {
 		EReference COMPONENT_GROUP__COMPONENTS = eINSTANCE.getComponentGroup_Components();
 
 		/**
-		 * The meta object literal for the '<em><b>References</b></em>' containment reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference COMPONENT_GROUP__REFERENCES = eINSTANCE.getComponentGroup_References();
-
-		/**
 		 * The meta object literal for the '{@link org.m2ling.domain.core.impl.ComponentInstanceGroupImpl <em>Component Instance Group</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -4083,14 +4055,6 @@ public interface CorePackage extends EPackage {
 		 * @generated
 		 */
 		EReference COMPONENT_INSTANCE_GROUP__COMPONENT_INSTANCES = eINSTANCE.getComponentInstanceGroup_ComponentInstances();
-
-		/**
-		 * The meta object literal for the '<em><b>References</b></em>' containment reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference COMPONENT_INSTANCE_GROUP__REFERENCES = eINSTANCE.getComponentInstanceGroup_References();
 
 		/**
 		 * The meta object literal for the '{@link org.m2ling.domain.core.impl.ArchitectureItemImpl <em>Architecture Item</em>}' class.

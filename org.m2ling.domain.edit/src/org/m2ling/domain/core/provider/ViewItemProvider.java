@@ -193,11 +193,6 @@ public class ViewItemProvider
 
 		newChildDescriptors.add
 			(createChildParameter
-				(CorePackage.Literals.VIEW__COMPONENTS_GROUPS,
-				 CoreFactory.eINSTANCE.createComponent()));
-
-		newChildDescriptors.add
-			(createChildParameter
 				(CorePackage.Literals.VIEW__COMPONENTS,
 				 CoreFactory.eINSTANCE.createComponent()));
 
@@ -218,38 +213,8 @@ public class ViewItemProvider
 
 		newChildDescriptors.add
 			(createChildParameter
-				(CorePackage.Literals.VIEW__INSTANCES_GROUPS,
-				 CoreFactory.eINSTANCE.createComponentInstance()));
-
-		newChildDescriptors.add
-			(createChildParameter
 				(CorePackage.Literals.VIEW__STREAMS,
 				 CoreFactory.eINSTANCE.createInstancesLink()));
-	}
-
-	/**
-	 * This returns the label text for {@link org.eclipse.emf.edit.command.CreateChildCommand}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public String getCreateChildText(Object owner, Object feature, Object child, Collection<?> selection) {
-		Object childFeature = feature;
-		Object childObject = child;
-
-		boolean qualify =
-			childFeature == CorePackage.Literals.VIEW__COMPONENTS_GROUPS ||
-			childFeature == CorePackage.Literals.VIEW__COMPONENTS ||
-			childFeature == CorePackage.Literals.VIEW__INSTANCES ||
-			childFeature == CorePackage.Literals.VIEW__INSTANCES_GROUPS;
-
-		if (qualify) {
-			return getString
-				("_UI_CreateChild_text2",
-				 new Object[] { getTypeText(childObject), getFeatureText(childFeature), getTypeText(owner) });
-		}
-		return super.getCreateChildText(owner, feature, child, selection);
 	}
 
 }

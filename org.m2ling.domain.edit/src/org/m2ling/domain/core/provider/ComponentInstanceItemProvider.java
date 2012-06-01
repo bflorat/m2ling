@@ -18,6 +18,7 @@ import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.IItemPropertySource;
 import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
+import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.ViewerNotification;
 import org.m2ling.domain.core.ComponentInstance;
 import org.m2ling.domain.core.CoreFactory;
@@ -32,7 +33,7 @@ import org.m2ling.domain.core.impl.ComponentInstanceImpl;
  * @generated
  */
 public class ComponentInstanceItemProvider
-	extends ComponentInstanceGroupItemProvider
+	extends HasParameterValuesItemProvider
 	implements
 		IEditingDomainItemProvider,
 		IStructuredItemContentProvider,
@@ -67,10 +68,148 @@ public class ComponentInstanceItemProvider
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
+			addIdPropertyDescriptor(object);
+			addNamePropertyDescriptor(object);
+			addCommentPropertyDescriptor(object);
+			addTagsPropertyDescriptor(object);
+			addLabelPropertyDescriptor(object);
+			addStatusPropertyDescriptor(object);
 			addComponentPropertyDescriptor(object);
 			addBoundComponentInstancePropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
+	}
+
+	/**
+	 * This adds a property descriptor for the Id feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addIdPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_HasNameAndID_id_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_HasNameAndID_id_feature", "_UI_HasNameAndID_type"),
+				 CorePackage.Literals.HAS_NAME_AND_ID__ID,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				 null,
+				 null));
+	}
+
+	/**
+	 * This adds a property descriptor for the Name feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addNamePropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_HasNameAndID_name_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_HasNameAndID_name_feature", "_UI_HasNameAndID_type"),
+				 CorePackage.Literals.HAS_NAME_AND_ID__NAME,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				 null,
+				 null));
+	}
+
+	/**
+	 * This adds a property descriptor for the Comment feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addCommentPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_HasComment_comment_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_HasComment_comment_feature", "_UI_HasComment_type"),
+				 CorePackage.Literals.HAS_COMMENT__COMMENT,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				 null,
+				 null));
+	}
+
+	/**
+	 * This adds a property descriptor for the Tags feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addTagsPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_HasTags_tags_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_HasTags_tags_feature", "_UI_HasTags_type"),
+				 CorePackage.Literals.HAS_TAGS__TAGS,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				 null,
+				 null));
+	}
+
+	/**
+	 * This adds a property descriptor for the Label feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addLabelPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_HasLabel_label_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_HasLabel_label_feature", "_UI_HasLabel_type"),
+				 CorePackage.Literals.HAS_LABEL__LABEL,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				 null,
+				 null));
+	}
+
+	/**
+	 * This adds a property descriptor for the Status feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addStatusPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_RuntimeItem_status_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_RuntimeItem_status_feature", "_UI_RuntimeItem_type"),
+				 CorePackage.Literals.RUNTIME_ITEM__STATUS,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				 null,
+				 null));
 	}
 
 	/**
@@ -131,6 +270,7 @@ public class ComponentInstanceItemProvider
 			super.getChildrenFeatures(object);
 			childrenFeatures.add(CorePackage.Literals.COMPONENT_INSTANCE__INSTANCES);
 			childrenFeatures.add(CorePackage.Literals.COMPONENT_INSTANCE__INSTANCES_GROUPS);
+			childrenFeatures.add(CorePackage.Literals.COMPONENT_INSTANCE__REFERENCES);
 		}
 		return childrenFeatures;
 	}
@@ -191,8 +331,17 @@ public class ComponentInstanceItemProvider
 		updateChildren(notification);
 
 		switch (notification.getFeatureID(ComponentInstance.class)) {
+			case CorePackage.COMPONENT_INSTANCE__ID:
+			case CorePackage.COMPONENT_INSTANCE__NAME:
+			case CorePackage.COMPONENT_INSTANCE__COMMENT:
+			case CorePackage.COMPONENT_INSTANCE__TAGS:
+			case CorePackage.COMPONENT_INSTANCE__LABEL:
+			case CorePackage.COMPONENT_INSTANCE__STATUS:
+				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
+				return;
 			case CorePackage.COMPONENT_INSTANCE__INSTANCES:
 			case CorePackage.COMPONENT_INSTANCE__INSTANCES_GROUPS:
+			case CorePackage.COMPONENT_INSTANCE__REFERENCES:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
 		}
@@ -222,31 +371,8 @@ public class ComponentInstanceItemProvider
 
 		newChildDescriptors.add
 			(createChildParameter
-				(CorePackage.Literals.COMPONENT_INSTANCE__INSTANCES_GROUPS,
-				 CoreFactory.eINSTANCE.createComponentInstance()));
-	}
-
-	/**
-	 * This returns the label text for {@link org.eclipse.emf.edit.command.CreateChildCommand}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public String getCreateChildText(Object owner, Object feature, Object child, Collection<?> selection) {
-		Object childFeature = feature;
-		Object childObject = child;
-
-		boolean qualify =
-			childFeature == CorePackage.Literals.COMPONENT_INSTANCE__INSTANCES ||
-			childFeature == CorePackage.Literals.COMPONENT_INSTANCE__INSTANCES_GROUPS;
-
-		if (qualify) {
-			return getString
-				("_UI_CreateChild_text2",
-				 new Object[] { getTypeText(childObject), getFeatureText(childFeature), getTypeText(owner) });
-		}
-		return super.getCreateChildText(owner, feature, child, selection);
+				(CorePackage.Literals.COMPONENT_INSTANCE__REFERENCES,
+				 CoreFactory.eINSTANCE.createReference()));
 	}
 
 }

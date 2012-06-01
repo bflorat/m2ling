@@ -25,7 +25,6 @@ import org.m2ling.domain.core.Reference;
  * The following features are implemented:
  * <ul>
  *   <li>{@link org.m2ling.domain.core.impl.ComponentInstanceGroupImpl#getComponentInstances <em>Component Instances</em>}</li>
- *   <li>{@link org.m2ling.domain.core.impl.ComponentInstanceGroupImpl#getReferences <em>References</em>}</li>
  * </ul>
  * </p>
  *
@@ -48,16 +47,6 @@ public class ComponentInstanceGroupImpl extends RuntimeItemImpl implements Compo
 	 * @ordered
 	 */
 	protected EList<ComponentInstance> componentInstances;
-
-	/**
-	 * The cached value of the '{@link #getReferences() <em>References</em>}' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getReferences()
-	 * @generated
-	 * @ordered
-	 */
-	protected EList<Reference> references;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -95,39 +84,11 @@ public class ComponentInstanceGroupImpl extends RuntimeItemImpl implements Compo
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<Reference> getReferences() {
-		if (references == null) {
-			references = new EObjectContainmentEList<Reference>(Reference.class, this, CorePackage.COMPONENT_INSTANCE_GROUP__REFERENCES);
-		}
-		return references;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
-		switch (featureID) {
-			case CorePackage.COMPONENT_INSTANCE_GROUP__REFERENCES:
-				return ((InternalEList<?>)getReferences()).basicRemove(otherEnd, msgs);
-		}
-		return super.eInverseRemove(otherEnd, featureID, msgs);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case CorePackage.COMPONENT_INSTANCE_GROUP__COMPONENT_INSTANCES:
 				return getComponentInstances();
-			case CorePackage.COMPONENT_INSTANCE_GROUP__REFERENCES:
-				return getReferences();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -145,10 +106,6 @@ public class ComponentInstanceGroupImpl extends RuntimeItemImpl implements Compo
 				getComponentInstances().clear();
 				getComponentInstances().addAll((Collection<? extends ComponentInstance>)newValue);
 				return;
-			case CorePackage.COMPONENT_INSTANCE_GROUP__REFERENCES:
-				getReferences().clear();
-				getReferences().addAll((Collection<? extends Reference>)newValue);
-				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -164,9 +121,6 @@ public class ComponentInstanceGroupImpl extends RuntimeItemImpl implements Compo
 			case CorePackage.COMPONENT_INSTANCE_GROUP__COMPONENT_INSTANCES:
 				getComponentInstances().clear();
 				return;
-			case CorePackage.COMPONENT_INSTANCE_GROUP__REFERENCES:
-				getReferences().clear();
-				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -181,8 +135,6 @@ public class ComponentInstanceGroupImpl extends RuntimeItemImpl implements Compo
 		switch (featureID) {
 			case CorePackage.COMPONENT_INSTANCE_GROUP__COMPONENT_INSTANCES:
 				return componentInstances != null && !componentInstances.isEmpty();
-			case CorePackage.COMPONENT_INSTANCE_GROUP__REFERENCES:
-				return references != null && !references.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}

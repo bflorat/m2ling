@@ -11,13 +11,21 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import org.eclipse.emf.ecore.util.EDataTypeUniqueEList;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.m2ling.domain.core.Component;
 import org.m2ling.domain.core.ComponentInstance;
 import org.m2ling.domain.core.ComponentInstanceGroup;
 import org.m2ling.domain.core.CorePackage;
+import org.m2ling.domain.core.HasComment;
+import org.m2ling.domain.core.HasConstraints;
+import org.m2ling.domain.core.HasLabel;
+import org.m2ling.domain.core.HasNameAndID;
+import org.m2ling.domain.core.HasReferences;
+import org.m2ling.domain.core.HasTags;
 import org.m2ling.domain.core.Reference;
+import org.m2ling.domain.core.RuntimeItem;
 
 /**
  * <!-- begin-user-doc -->
@@ -26,22 +34,148 @@ import org.m2ling.domain.core.Reference;
  * <p>
  * The following features are implemented:
  * <ul>
+ *   <li>{@link org.m2ling.domain.core.impl.ComponentInstanceImpl#getId <em>Id</em>}</li>
+ *   <li>{@link org.m2ling.domain.core.impl.ComponentInstanceImpl#getName <em>Name</em>}</li>
+ *   <li>{@link org.m2ling.domain.core.impl.ComponentInstanceImpl#getComment <em>Comment</em>}</li>
+ *   <li>{@link org.m2ling.domain.core.impl.ComponentInstanceImpl#getTags <em>Tags</em>}</li>
+ *   <li>{@link org.m2ling.domain.core.impl.ComponentInstanceImpl#getLabel <em>Label</em>}</li>
+ *   <li>{@link org.m2ling.domain.core.impl.ComponentInstanceImpl#getStatus <em>Status</em>}</li>
  *   <li>{@link org.m2ling.domain.core.impl.ComponentInstanceImpl#getComponent <em>Component</em>}</li>
  *   <li>{@link org.m2ling.domain.core.impl.ComponentInstanceImpl#getInstances <em>Instances</em>}</li>
  *   <li>{@link org.m2ling.domain.core.impl.ComponentInstanceImpl#getInstancesGroups <em>Instances Groups</em>}</li>
  *   <li>{@link org.m2ling.domain.core.impl.ComponentInstanceImpl#getBoundComponentInstance <em>Bound Component Instance</em>}</li>
+ *   <li>{@link org.m2ling.domain.core.impl.ComponentInstanceImpl#getReferences <em>References</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public class ComponentInstanceImpl extends ComponentInstanceGroupImpl implements ComponentInstance {
+public class ComponentInstanceImpl extends HasParameterValuesImpl implements ComponentInstance {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	public static final String copyright = "Copyright (C) 2012 Bertrand Florat";
+
+	/**
+	 * The default value of the '{@link #getId() <em>Id</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getId()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String ID_EDEFAULT = "";
+
+	/**
+	 * The cached value of the '{@link #getId() <em>Id</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getId()
+	 * @generated
+	 * @ordered
+	 */
+	protected String id = ID_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getName()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String NAME_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getName()
+	 * @generated
+	 * @ordered
+	 */
+	protected String name = NAME_EDEFAULT;
+
+	/**
+	 * This is true if the Name attribute has been set.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	protected boolean nameESet;
+
+	/**
+	 * The default value of the '{@link #getComment() <em>Comment</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getComment()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String COMMENT_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getComment() <em>Comment</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getComment()
+	 * @generated
+	 * @ordered
+	 */
+	protected String comment = COMMENT_EDEFAULT;
+
+	/**
+	 * The cached value of the '{@link #getTags() <em>Tags</em>}' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getTags()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<String> tags;
+
+	/**
+	 * The default value of the '{@link #getLabel() <em>Label</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getLabel()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String LABEL_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getLabel() <em>Label</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getLabel()
+	 * @generated
+	 * @ordered
+	 */
+	protected String label = LABEL_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getStatus() <em>Status</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getStatus()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String STATUS_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getStatus() <em>Status</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getStatus()
+	 * @generated
+	 * @ordered
+	 */
+	protected String status = STATUS_EDEFAULT;
 
 	/**
 	 * The cached value of the '{@link #getComponent() <em>Component</em>}' reference.
@@ -84,6 +218,16 @@ public class ComponentInstanceImpl extends ComponentInstanceGroupImpl implements
 	protected ComponentInstance boundComponentInstance;
 
 	/**
+	 * The cached value of the '{@link #getReferences() <em>References</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getReferences()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<Reference> references;
+
+	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -100,6 +244,27 @@ public class ComponentInstanceImpl extends ComponentInstanceGroupImpl implements
 	@Override
 	protected EClass eStaticClass() {
 		return CorePackage.Literals.COMPONENT_INSTANCE;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String getId() {
+		return id;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setId(String newId) {
+		String oldId = id;
+		id = newId;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, CorePackage.COMPONENT_INSTANCE__ID, oldId, id));
 	}
 
 	/**
@@ -207,6 +372,18 @@ public class ComponentInstanceImpl extends ComponentInstanceGroupImpl implements
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EList<Reference> getReferences() {
+		if (references == null) {
+			references = new EObjectContainmentEList<Reference>(Reference.class, this, CorePackage.COMPONENT_INSTANCE__REFERENCES);
+		}
+		return references;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
@@ -214,6 +391,8 @@ public class ComponentInstanceImpl extends ComponentInstanceGroupImpl implements
 				return ((InternalEList<?>)getInstances()).basicRemove(otherEnd, msgs);
 			case CorePackage.COMPONENT_INSTANCE__INSTANCES_GROUPS:
 				return ((InternalEList<?>)getInstancesGroups()).basicRemove(otherEnd, msgs);
+			case CorePackage.COMPONENT_INSTANCE__REFERENCES:
+				return ((InternalEList<?>)getReferences()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -226,6 +405,18 @@ public class ComponentInstanceImpl extends ComponentInstanceGroupImpl implements
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
+			case CorePackage.COMPONENT_INSTANCE__ID:
+				return getId();
+			case CorePackage.COMPONENT_INSTANCE__NAME:
+				return getName();
+			case CorePackage.COMPONENT_INSTANCE__COMMENT:
+				return getComment();
+			case CorePackage.COMPONENT_INSTANCE__TAGS:
+				return getTags();
+			case CorePackage.COMPONENT_INSTANCE__LABEL:
+				return getLabel();
+			case CorePackage.COMPONENT_INSTANCE__STATUS:
+				return getStatus();
 			case CorePackage.COMPONENT_INSTANCE__COMPONENT:
 				if (resolve) return getComponent();
 				return basicGetComponent();
@@ -236,6 +427,8 @@ public class ComponentInstanceImpl extends ComponentInstanceGroupImpl implements
 			case CorePackage.COMPONENT_INSTANCE__BOUND_COMPONENT_INSTANCE:
 				if (resolve) return getBoundComponentInstance();
 				return basicGetBoundComponentInstance();
+			case CorePackage.COMPONENT_INSTANCE__REFERENCES:
+				return getReferences();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -249,6 +442,25 @@ public class ComponentInstanceImpl extends ComponentInstanceGroupImpl implements
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
+			case CorePackage.COMPONENT_INSTANCE__ID:
+				setId((String)newValue);
+				return;
+			case CorePackage.COMPONENT_INSTANCE__NAME:
+				setName((String)newValue);
+				return;
+			case CorePackage.COMPONENT_INSTANCE__COMMENT:
+				setComment((String)newValue);
+				return;
+			case CorePackage.COMPONENT_INSTANCE__TAGS:
+				getTags().clear();
+				getTags().addAll((Collection<? extends String>)newValue);
+				return;
+			case CorePackage.COMPONENT_INSTANCE__LABEL:
+				setLabel((String)newValue);
+				return;
+			case CorePackage.COMPONENT_INSTANCE__STATUS:
+				setStatus((String)newValue);
+				return;
 			case CorePackage.COMPONENT_INSTANCE__COMPONENT:
 				setComponent((Component)newValue);
 				return;
@@ -263,6 +475,10 @@ public class ComponentInstanceImpl extends ComponentInstanceGroupImpl implements
 			case CorePackage.COMPONENT_INSTANCE__BOUND_COMPONENT_INSTANCE:
 				setBoundComponentInstance((ComponentInstance)newValue);
 				return;
+			case CorePackage.COMPONENT_INSTANCE__REFERENCES:
+				getReferences().clear();
+				getReferences().addAll((Collection<? extends Reference>)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -275,6 +491,24 @@ public class ComponentInstanceImpl extends ComponentInstanceGroupImpl implements
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
+			case CorePackage.COMPONENT_INSTANCE__ID:
+				setId(ID_EDEFAULT);
+				return;
+			case CorePackage.COMPONENT_INSTANCE__NAME:
+				unsetName();
+				return;
+			case CorePackage.COMPONENT_INSTANCE__COMMENT:
+				setComment(COMMENT_EDEFAULT);
+				return;
+			case CorePackage.COMPONENT_INSTANCE__TAGS:
+				getTags().clear();
+				return;
+			case CorePackage.COMPONENT_INSTANCE__LABEL:
+				setLabel(LABEL_EDEFAULT);
+				return;
+			case CorePackage.COMPONENT_INSTANCE__STATUS:
+				setStatus(STATUS_EDEFAULT);
+				return;
 			case CorePackage.COMPONENT_INSTANCE__COMPONENT:
 				setComponent((Component)null);
 				return;
@@ -286,6 +520,9 @@ public class ComponentInstanceImpl extends ComponentInstanceGroupImpl implements
 				return;
 			case CorePackage.COMPONENT_INSTANCE__BOUND_COMPONENT_INSTANCE:
 				setBoundComponentInstance((ComponentInstance)null);
+				return;
+			case CorePackage.COMPONENT_INSTANCE__REFERENCES:
+				getReferences().clear();
 				return;
 		}
 		super.eUnset(featureID);
@@ -299,6 +536,18 @@ public class ComponentInstanceImpl extends ComponentInstanceGroupImpl implements
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
+			case CorePackage.COMPONENT_INSTANCE__ID:
+				return ID_EDEFAULT == null ? id != null : !ID_EDEFAULT.equals(id);
+			case CorePackage.COMPONENT_INSTANCE__NAME:
+				return isSetName();
+			case CorePackage.COMPONENT_INSTANCE__COMMENT:
+				return COMMENT_EDEFAULT == null ? comment != null : !COMMENT_EDEFAULT.equals(comment);
+			case CorePackage.COMPONENT_INSTANCE__TAGS:
+				return tags != null && !tags.isEmpty();
+			case CorePackage.COMPONENT_INSTANCE__LABEL:
+				return LABEL_EDEFAULT == null ? label != null : !LABEL_EDEFAULT.equals(label);
+			case CorePackage.COMPONENT_INSTANCE__STATUS:
+				return STATUS_EDEFAULT == null ? status != null : !STATUS_EDEFAULT.equals(status);
 			case CorePackage.COMPONENT_INSTANCE__COMPONENT:
 				return component != null;
 			case CorePackage.COMPONENT_INSTANCE__INSTANCES:
@@ -307,10 +556,140 @@ public class ComponentInstanceImpl extends ComponentInstanceGroupImpl implements
 				return instancesGroups != null && !instancesGroups.isEmpty();
 			case CorePackage.COMPONENT_INSTANCE__BOUND_COMPONENT_INSTANCE:
 				return boundComponentInstance != null;
+			case CorePackage.COMPONENT_INSTANCE__REFERENCES:
+				return references != null && !references.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}
 	
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public int eBaseStructuralFeatureID(int derivedFeatureID, Class<?> baseClass) {
+		if (baseClass == HasNameAndID.class) {
+			switch (derivedFeatureID) {
+				case CorePackage.COMPONENT_INSTANCE__ID: return CorePackage.HAS_NAME_AND_ID__ID;
+				case CorePackage.COMPONENT_INSTANCE__NAME: return CorePackage.HAS_NAME_AND_ID__NAME;
+				default: return -1;
+			}
+		}
+		if (baseClass == HasComment.class) {
+			switch (derivedFeatureID) {
+				case CorePackage.COMPONENT_INSTANCE__COMMENT: return CorePackage.HAS_COMMENT__COMMENT;
+				default: return -1;
+			}
+		}
+		if (baseClass == HasTags.class) {
+			switch (derivedFeatureID) {
+				case CorePackage.COMPONENT_INSTANCE__TAGS: return CorePackage.HAS_TAGS__TAGS;
+				default: return -1;
+			}
+		}
+		if (baseClass == HasConstraints.class) {
+			switch (derivedFeatureID) {
+				default: return -1;
+			}
+		}
+		if (baseClass == HasLabel.class) {
+			switch (derivedFeatureID) {
+				case CorePackage.COMPONENT_INSTANCE__LABEL: return CorePackage.HAS_LABEL__LABEL;
+				default: return -1;
+			}
+		}
+		if (baseClass == RuntimeItem.class) {
+			switch (derivedFeatureID) {
+				case CorePackage.COMPONENT_INSTANCE__STATUS: return CorePackage.RUNTIME_ITEM__STATUS;
+				default: return -1;
+			}
+		}
+		if (baseClass == HasReferences.class) {
+			switch (derivedFeatureID) {
+				default: return -1;
+			}
+		}
+		return super.eBaseStructuralFeatureID(derivedFeatureID, baseClass);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public int eDerivedStructuralFeatureID(int baseFeatureID, Class<?> baseClass) {
+		if (baseClass == HasNameAndID.class) {
+			switch (baseFeatureID) {
+				case CorePackage.HAS_NAME_AND_ID__ID: return CorePackage.COMPONENT_INSTANCE__ID;
+				case CorePackage.HAS_NAME_AND_ID__NAME: return CorePackage.COMPONENT_INSTANCE__NAME;
+				default: return -1;
+			}
+		}
+		if (baseClass == HasComment.class) {
+			switch (baseFeatureID) {
+				case CorePackage.HAS_COMMENT__COMMENT: return CorePackage.COMPONENT_INSTANCE__COMMENT;
+				default: return -1;
+			}
+		}
+		if (baseClass == HasTags.class) {
+			switch (baseFeatureID) {
+				case CorePackage.HAS_TAGS__TAGS: return CorePackage.COMPONENT_INSTANCE__TAGS;
+				default: return -1;
+			}
+		}
+		if (baseClass == HasConstraints.class) {
+			switch (baseFeatureID) {
+				default: return -1;
+			}
+		}
+		if (baseClass == HasLabel.class) {
+			switch (baseFeatureID) {
+				case CorePackage.HAS_LABEL__LABEL: return CorePackage.COMPONENT_INSTANCE__LABEL;
+				default: return -1;
+			}
+		}
+		if (baseClass == RuntimeItem.class) {
+			switch (baseFeatureID) {
+				case CorePackage.RUNTIME_ITEM__STATUS: return CorePackage.COMPONENT_INSTANCE__STATUS;
+				default: return -1;
+			}
+		}
+		if (baseClass == HasReferences.class) {
+			switch (baseFeatureID) {
+				default: return -1;
+			}
+		}
+		return super.eDerivedStructuralFeatureID(baseFeatureID, baseClass);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public String toString() {
+		if (eIsProxy()) return super.toString();
+
+		StringBuffer result = new StringBuffer(super.toString());
+		result.append(" (id: ");
+		result.append(id);
+		result.append(", name: ");
+		if (nameESet) result.append(name); else result.append("<unset>");
+		result.append(", comment: ");
+		result.append(comment);
+		result.append(", tags: ");
+		result.append(tags);
+		result.append(", label: ");
+		result.append(label);
+		result.append(", status: ");
+		result.append(status);
+		result.append(')');
+		return result.toString();
+	}
+
 	/**
 	 * <!-- begin-user-doc --> If the component node is bound to another component node in the same
 	 * or another viewpoint, we use the bound component node name if the current component node name
@@ -325,6 +704,118 @@ public class ComponentInstanceImpl extends ComponentInstanceGroupImpl implements
 		} else {
 			return name;
 		}
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setName(String newName) {
+		String oldName = name;
+		name = newName;
+		boolean oldNameESet = nameESet;
+		nameESet = true;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, CorePackage.COMPONENT_INSTANCE__NAME, oldName, name, !oldNameESet));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void unsetName() {
+		String oldName = name;
+		boolean oldNameESet = nameESet;
+		name = NAME_EDEFAULT;
+		nameESet = false;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.UNSET, CorePackage.COMPONENT_INSTANCE__NAME, oldName, NAME_EDEFAULT, oldNameESet));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean isSetName() {
+		return nameESet;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String getComment() {
+		return comment;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setComment(String newComment) {
+		String oldComment = comment;
+		comment = newComment;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, CorePackage.COMPONENT_INSTANCE__COMMENT, oldComment, comment));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList<String> getTags() {
+		if (tags == null) {
+			tags = new EDataTypeUniqueEList<String>(String.class, this, CorePackage.COMPONENT_INSTANCE__TAGS);
+		}
+		return tags;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String getLabel() {
+		return label;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setLabel(String newLabel) {
+		String oldLabel = label;
+		label = newLabel;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, CorePackage.COMPONENT_INSTANCE__LABEL, oldLabel, label));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String getStatus() {
+		return status;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setStatus(String newStatus) {
+		String oldStatus = status;
+		status = newStatus;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, CorePackage.COMPONENT_INSTANCE__STATUS, oldStatus, status));
 	}
 
 } //ComponentInstanceImpl

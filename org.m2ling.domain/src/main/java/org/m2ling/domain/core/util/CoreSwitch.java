@@ -134,7 +134,6 @@ public class CoreSwitch<T> extends Switch<T> {
 			case CorePackage.COMPONENT: {
 				Component component = (Component)theEObject;
 				T result = caseComponent(component);
-				if (result == null) result = caseComponentGroup(component);
 				if (result == null) result = caseArchitectureItem(component);
 				if (result == null) result = caseHasReferences(component);
 				if (result == null) result = caseHasNameAndID(component);
@@ -149,13 +148,12 @@ public class CoreSwitch<T> extends Switch<T> {
 			case CorePackage.COMPONENT_INSTANCE: {
 				ComponentInstance componentInstance = (ComponentInstance)theEObject;
 				T result = caseComponentInstance(componentInstance);
-				if (result == null) result = caseComponentInstanceGroup(componentInstance);
 				if (result == null) result = caseRuntimeItem(componentInstance);
 				if (result == null) result = caseHasReferences(componentInstance);
+				if (result == null) result = caseHasParameterValues(componentInstance);
 				if (result == null) result = caseHasNameAndID(componentInstance);
 				if (result == null) result = caseHasComment(componentInstance);
 				if (result == null) result = caseHasTags(componentInstance);
-				if (result == null) result = caseHasParameterValues(componentInstance);
 				if (result == null) result = caseHasConstraints(componentInstance);
 				if (result == null) result = caseHasLabel(componentInstance);
 				if (result == null) result = defaultCase(theEObject);
@@ -179,7 +177,6 @@ public class CoreSwitch<T> extends Switch<T> {
 				ComponentGroup componentGroup = (ComponentGroup)theEObject;
 				T result = caseComponentGroup(componentGroup);
 				if (result == null) result = caseArchitectureItem(componentGroup);
-				if (result == null) result = caseHasReferences(componentGroup);
 				if (result == null) result = caseHasNameAndID(componentGroup);
 				if (result == null) result = caseHasComment(componentGroup);
 				if (result == null) result = caseHasTags(componentGroup);
@@ -193,7 +190,6 @@ public class CoreSwitch<T> extends Switch<T> {
 				ComponentInstanceGroup componentInstanceGroup = (ComponentInstanceGroup)theEObject;
 				T result = caseComponentInstanceGroup(componentInstanceGroup);
 				if (result == null) result = caseRuntimeItem(componentInstanceGroup);
-				if (result == null) result = caseHasReferences(componentInstanceGroup);
 				if (result == null) result = caseHasNameAndID(componentInstanceGroup);
 				if (result == null) result = caseHasComment(componentInstanceGroup);
 				if (result == null) result = caseHasTags(componentInstanceGroup);
