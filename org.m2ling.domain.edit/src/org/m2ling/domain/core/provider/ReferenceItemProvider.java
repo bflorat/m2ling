@@ -9,9 +9,7 @@ import java.util.List;
 
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
-
 import org.eclipse.emf.common.util.ResourceLocator;
-
 import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
 import org.eclipse.emf.edit.provider.IEditingDomainItemProvider;
 import org.eclipse.emf.edit.provider.IItemLabelProvider;
@@ -21,10 +19,10 @@ import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.ItemProviderAdapter;
-
 import org.eclipse.emf.edit.provider.ViewerNotification;
 import org.m2ling.domain.core.CorePackage;
 import org.m2ling.domain.core.Reference;
+import org.m2ling.domain.core.ReferenceType;
 import org.m2ling.domain.provider.M2lingEditPlugin;
 
 /**
@@ -69,25 +67,48 @@ public class ReferenceItemProvider
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
-			addTargetPropertyDescriptor(object);
+			addTypePropertyDescriptor(object);
+			addTargetsPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
 
 	/**
-	 * This adds a property descriptor for the Target feature.
+	 * This adds a property descriptor for the Type feature.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected void addTargetPropertyDescriptor(Object object) {
+	protected void addTypePropertyDescriptor(Object object) {
 		itemPropertyDescriptors.add
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
-				 getString("_UI_Reference_target_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_Reference_target_feature", "_UI_Reference_type"),
-				 CorePackage.Literals.REFERENCE__TARGET,
+				 getString("_UI_Reference_type_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_Reference_type_feature", "_UI_Reference_type"),
+				 CorePackage.Literals.REFERENCE__TYPE,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				 null,
+				 null));
+	}
+
+	/**
+	 * This adds a property descriptor for the Targets feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addTargetsPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_Reference_targets_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_Reference_targets_feature", "_UI_Reference_type"),
+				 CorePackage.Literals.REFERENCE__TARGETS,
 				 true,
 				 false,
 				 true,
@@ -104,7 +125,11 @@ public class ReferenceItemProvider
 	 */
 	@Override
 	public String getText(Object object) {
-		return getString("_UI_Reference_type");
+		ReferenceType labelValue = ((Reference)object).getType();
+		String label = labelValue == null ? null : labelValue.toString();
+		return label == null || label.length() == 0 ?
+			getString("_UI_Reference_type") :
+			getString("_UI_Reference_type") + " " + label;
 	}
 
 	/**
@@ -117,6 +142,12 @@ public class ReferenceItemProvider
 	@Override
 	public void notifyChanged(Notification notification) {
 		updateChildren(notification);
+
+		switch (notification.getFeatureID(Reference.class)) {
+			case CorePackage.REFERENCE__TYPE:
+				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
+				return;
+		}
 		super.notifyChanged(notification);
 	}
 

@@ -7,7 +7,6 @@ import junit.textui.TestRunner;
 
 import org.m2ling.domain.configuration.ConfigurationFactory;
 import org.m2ling.domain.configuration.ParameterValue;
-
 import org.m2ling.domain.core.tests.HasCommentTest;
 
 /**

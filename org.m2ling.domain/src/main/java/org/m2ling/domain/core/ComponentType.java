@@ -14,7 +14,6 @@ import org.eclipse.emf.common.util.EList;
  * The following features are supported:
  * <ul>
  *   <li>{@link org.m2ling.domain.core.ComponentType#getEngineTypes <em>Engine Types</em>}</li>
- *   <li>{@link org.m2ling.domain.core.ComponentType#getSubTypes <em>Sub Types</em>}</li>
  *   <li>{@link org.m2ling.domain.core.ComponentType#getBoundType <em>Bound Type</em>}</li>
  *   <li>{@link org.m2ling.domain.core.ComponentType#getEnumeration <em>Enumeration</em>}</li>
  *   <li>{@link org.m2ling.domain.core.ComponentType#getInstantiationFactor <em>Instantiation Factor</em>}</li>
@@ -27,7 +26,7 @@ import org.eclipse.emf.common.util.EList;
  * @model
  * @generated
  */
-public interface ComponentType extends ConceptItem, HasParameterDefinitions {
+public interface ComponentType extends ConceptItem, HasParameterDefinitions, HasReferences {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -50,22 +49,6 @@ public interface ComponentType extends ConceptItem, HasParameterDefinitions {
 	 * @generated
 	 */
 	EList<ComponentType> getEngineTypes();
-
-	/**
-	 * Returns the value of the '<em><b>Sub Types</b></em>' containment reference list.
-	 * The list contents are of type {@link org.m2ling.domain.core.ComponentType}.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Sub Types</em>' containment reference list isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Sub Types</em>' containment reference list.
-	 * @see org.m2ling.domain.core.CorePackage#getComponentType_SubTypes()
-	 * @model containment="true"
-	 * @generated
-	 */
-	EList<ComponentType> getSubTypes();
 
 	/**
 	 * Returns the value of the '<em><b>Enumeration</b></em>' reference list.
@@ -139,7 +122,7 @@ public interface ComponentType extends ConceptItem, HasParameterDefinitions {
 
 	/**
 	 * Returns the value of the '<em><b>References</b></em>' containment reference list.
-	 * The list contents are of type {@link org.m2ling.domain.core.Reference}&lt;?>.
+	 * The list contents are of type {@link org.m2ling.domain.core.Reference}.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>References</em>' containment reference list isn't clear,
@@ -151,7 +134,7 @@ public interface ComponentType extends ConceptItem, HasParameterDefinitions {
 	 * @model containment="true"
 	 * @generated
 	 */
-	EList<Reference<?>> getReferences();
+	EList<Reference> getReferences();
 
 	/**
 	 * Returns the value of the '<em><b>Bound Type</b></em>' reference.

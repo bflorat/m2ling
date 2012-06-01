@@ -192,7 +192,6 @@ public class ComponentTypeItemProvider extends ConceptItemItemProvider implement
 	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
-			childrenFeatures.add(CorePackage.Literals.COMPONENT_TYPE__SUB_TYPES);
 			childrenFeatures.add(CorePackage.Literals.COMPONENT_TYPE__REFERENCES);
 		}
 		return childrenFeatures;
@@ -255,7 +254,6 @@ public class ComponentTypeItemProvider extends ConceptItemItemProvider implement
 			case CorePackage.COMPONENT_TYPE__REIFIABLE:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
-			case CorePackage.COMPONENT_TYPE__SUB_TYPES:
 			case CorePackage.COMPONENT_TYPE__REFERENCES:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
@@ -275,28 +273,8 @@ public class ComponentTypeItemProvider extends ConceptItemItemProvider implement
 
 		newChildDescriptors.add
 			(createChildParameter
-				(CorePackage.Literals.COMPONENT_TYPE__SUB_TYPES,
-				 CoreFactory.eINSTANCE.createComponentType()));
-
-		newChildDescriptors.add
-			(createChildParameter
 				(CorePackage.Literals.COMPONENT_TYPE__REFERENCES,
-				 CoreFactory.eINSTANCE.createContainsReference()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(CorePackage.Literals.COMPONENT_TYPE__REFERENCES,
-				 CoreFactory.eINSTANCE.createRunsReference()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(CorePackage.Literals.COMPONENT_TYPE__REFERENCES,
-				 CoreFactory.eINSTANCE.createDependsOnReference()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(CorePackage.Literals.COMPONENT_TYPE__REFERENCES,
-				 CoreFactory.eINSTANCE.createAdminsReference()));
+				 CoreFactory.eINSTANCE.createReference()));
 	}
 
 }

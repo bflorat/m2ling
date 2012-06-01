@@ -60,7 +60,6 @@ public class ComponentItemProvider extends ComponentGroupItemProvider implements
 			super.getPropertyDescriptors(object);
 
 			addTypePropertyDescriptor(object);
-			addEnginesPropertyDescriptor(object);
 			addBoundComponentPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
@@ -80,28 +79,6 @@ public class ComponentItemProvider extends ComponentGroupItemProvider implements
 				 getString("_UI_Component_type_feature"),
 				 getString("_UI_PropertyDescriptor_description", "_UI_Component_type_feature", "_UI_Component_type"),
 				 CorePackage.Literals.COMPONENT__TYPE,
-				 true,
-				 false,
-				 true,
-				 null,
-				 null,
-				 null));
-	}
-
-	/**
-	 * This adds a property descriptor for the Engines feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void addEnginesPropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_Component_engines_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_Component_engines_feature", "_UI_Component_type"),
-				 CorePackage.Literals.COMPONENT__ENGINES,
 				 true,
 				 false,
 				 true,
@@ -144,9 +121,7 @@ public class ComponentItemProvider extends ComponentGroupItemProvider implements
 	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
-			childrenFeatures.add(CorePackage.Literals.COMPONENT__SUB_COMPONENTS);
 			childrenFeatures.add(CorePackage.Literals.COMPONENT__INSTANCES);
-			childrenFeatures.add(CorePackage.Literals.COMPONENT__REFERENCES);
 		}
 		return childrenFeatures;
 	}
@@ -205,9 +180,7 @@ public class ComponentItemProvider extends ComponentGroupItemProvider implements
 		updateChildren(notification);
 
 		switch (notification.getFeatureID(Component.class)) {
-			case CorePackage.COMPONENT__SUB_COMPONENTS:
 			case CorePackage.COMPONENT__INSTANCES:
-			case CorePackage.COMPONENT__REFERENCES:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
 		}
@@ -227,33 +200,8 @@ public class ComponentItemProvider extends ComponentGroupItemProvider implements
 
 		newChildDescriptors.add
 			(createChildParameter
-				(CorePackage.Literals.COMPONENT__SUB_COMPONENTS,
-				 CoreFactory.eINSTANCE.createComponent()));
-
-		newChildDescriptors.add
-			(createChildParameter
 				(CorePackage.Literals.COMPONENT__INSTANCES,
 				 CoreFactory.eINSTANCE.createComponentInstance()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(CorePackage.Literals.COMPONENT__REFERENCES,
-				 CoreFactory.eINSTANCE.createContainsReference()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(CorePackage.Literals.COMPONENT__REFERENCES,
-				 CoreFactory.eINSTANCE.createRunsReference()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(CorePackage.Literals.COMPONENT__REFERENCES,
-				 CoreFactory.eINSTANCE.createDependsOnReference()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(CorePackage.Literals.COMPONENT__REFERENCES,
-				 CoreFactory.eINSTANCE.createAdminsReference()));
 	}
 
 

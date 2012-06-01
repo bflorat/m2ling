@@ -68,7 +68,6 @@ public class ComponentInstanceItemProvider
 			super.getPropertyDescriptors(object);
 
 			addComponentPropertyDescriptor(object);
-			addEngineInstancePropertyDescriptor(object);
 			addBoundComponentInstancePropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
@@ -88,28 +87,6 @@ public class ComponentInstanceItemProvider
 				 getString("_UI_ComponentInstance_component_feature"),
 				 getString("_UI_PropertyDescriptor_description", "_UI_ComponentInstance_component_feature", "_UI_ComponentInstance_type"),
 				 CorePackage.Literals.COMPONENT_INSTANCE__COMPONENT,
-				 true,
-				 false,
-				 true,
-				 null,
-				 null,
-				 null));
-	}
-
-	/**
-	 * This adds a property descriptor for the Engine Instance feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void addEngineInstancePropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_ComponentInstance_engineInstance_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_ComponentInstance_engineInstance_feature", "_UI_ComponentInstance_type"),
-				 CorePackage.Literals.COMPONENT_INSTANCE__ENGINE_INSTANCE,
 				 true,
 				 false,
 				 true,
@@ -152,11 +129,8 @@ public class ComponentInstanceItemProvider
 	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
-			childrenFeatures.add(CorePackage.Literals.COMPONENT_INSTANCE__SUB_INSTANCES);
 			childrenFeatures.add(CorePackage.Literals.COMPONENT_INSTANCE__INSTANCES);
-			childrenFeatures.add(CorePackage.Literals.COMPONENT_INSTANCE__STREAMS);
 			childrenFeatures.add(CorePackage.Literals.COMPONENT_INSTANCE__INSTANCES_GROUPS);
-			childrenFeatures.add(CorePackage.Literals.COMPONENT_INSTANCE__REFERENCES);
 		}
 		return childrenFeatures;
 	}
@@ -217,11 +191,8 @@ public class ComponentInstanceItemProvider
 		updateChildren(notification);
 
 		switch (notification.getFeatureID(ComponentInstance.class)) {
-			case CorePackage.COMPONENT_INSTANCE__SUB_INSTANCES:
 			case CorePackage.COMPONENT_INSTANCE__INSTANCES:
-			case CorePackage.COMPONENT_INSTANCE__STREAMS:
 			case CorePackage.COMPONENT_INSTANCE__INSTANCES_GROUPS:
-			case CorePackage.COMPONENT_INSTANCE__REFERENCES:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
 		}
@@ -241,18 +212,8 @@ public class ComponentInstanceItemProvider
 
 		newChildDescriptors.add
 			(createChildParameter
-				(CorePackage.Literals.COMPONENT_INSTANCE__SUB_INSTANCES,
-				 CoreFactory.eINSTANCE.createComponentInstance()));
-
-		newChildDescriptors.add
-			(createChildParameter
 				(CorePackage.Literals.COMPONENT_INSTANCE__INSTANCES,
 				 CoreFactory.eINSTANCE.createComponentInstance()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(CorePackage.Literals.COMPONENT_INSTANCE__STREAMS,
-				 CoreFactory.eINSTANCE.createInstancesLink()));
 
 		newChildDescriptors.add
 			(createChildParameter
@@ -263,26 +224,6 @@ public class ComponentInstanceItemProvider
 			(createChildParameter
 				(CorePackage.Literals.COMPONENT_INSTANCE__INSTANCES_GROUPS,
 				 CoreFactory.eINSTANCE.createComponentInstance()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(CorePackage.Literals.COMPONENT_INSTANCE__REFERENCES,
-				 CoreFactory.eINSTANCE.createContainsReference()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(CorePackage.Literals.COMPONENT_INSTANCE__REFERENCES,
-				 CoreFactory.eINSTANCE.createRunsReference()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(CorePackage.Literals.COMPONENT_INSTANCE__REFERENCES,
-				 CoreFactory.eINSTANCE.createDependsOnReference()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(CorePackage.Literals.COMPONENT_INSTANCE__REFERENCES,
-				 CoreFactory.eINSTANCE.createAdminsReference()));
 	}
 
 	/**
@@ -297,7 +238,6 @@ public class ComponentInstanceItemProvider
 		Object childObject = child;
 
 		boolean qualify =
-			childFeature == CorePackage.Literals.COMPONENT_INSTANCE__SUB_INSTANCES ||
 			childFeature == CorePackage.Literals.COMPONENT_INSTANCE__INSTANCES ||
 			childFeature == CorePackage.Literals.COMPONENT_INSTANCE__INSTANCES_GROUPS;
 

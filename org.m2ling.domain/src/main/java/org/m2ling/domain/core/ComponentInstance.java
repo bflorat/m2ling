@@ -14,13 +14,9 @@ import org.eclipse.emf.common.util.EList;
  * The following features are supported:
  * <ul>
  *   <li>{@link org.m2ling.domain.core.ComponentInstance#getComponent <em>Component</em>}</li>
- *   <li>{@link org.m2ling.domain.core.ComponentInstance#getSubInstances <em>Sub Instances</em>}</li>
- *   <li>{@link org.m2ling.domain.core.ComponentInstance#getEngineInstance <em>Engine Instance</em>}</li>
  *   <li>{@link org.m2ling.domain.core.ComponentInstance#getInstances <em>Instances</em>}</li>
- *   <li>{@link org.m2ling.domain.core.ComponentInstance#getStreams <em>Streams</em>}</li>
  *   <li>{@link org.m2ling.domain.core.ComponentInstance#getInstancesGroups <em>Instances Groups</em>}</li>
  *   <li>{@link org.m2ling.domain.core.ComponentInstance#getBoundComponentInstance <em>Bound Component Instance</em>}</li>
- *   <li>{@link org.m2ling.domain.core.ComponentInstance#getReferences <em>References</em>}</li>
  * </ul>
  * </p>
  *
@@ -63,48 +59,6 @@ public interface ComponentInstance extends ComponentInstanceGroup, HasParameterV
 	void setComponent(Component value);
 
 	/**
-	 * Returns the value of the '<em><b>Sub Instances</b></em>' containment reference list.
-	 * The list contents are of type {@link org.m2ling.domain.core.ComponentInstance}.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Sub Instances</em>' containment reference list isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Sub Instances</em>' containment reference list.
-	 * @see org.m2ling.domain.core.CorePackage#getComponentInstance_SubInstances()
-	 * @model containment="true"
-	 * @generated
-	 */
-	EList<ComponentInstance> getSubInstances();
-
-	/**
-	 * Returns the value of the '<em><b>Engine Instance</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Engine Instance</em>' reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Engine Instance</em>' reference.
-	 * @see #setEngineInstance(ComponentInstance)
-	 * @see org.m2ling.domain.core.CorePackage#getComponentInstance_EngineInstance()
-	 * @model
-	 * @generated
-	 */
-	ComponentInstance getEngineInstance();
-
-	/**
-	 * Sets the value of the '{@link org.m2ling.domain.core.ComponentInstance#getEngineInstance <em>Engine Instance</em>}' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Engine Instance</em>' reference.
-	 * @see #getEngineInstance()
-	 * @generated
-	 */
-	void setEngineInstance(ComponentInstance value);
-
-	/**
 	 * Returns the value of the '<em><b>Instances</b></em>' containment reference list.
 	 * The list contents are of type {@link org.m2ling.domain.core.ComponentInstance}.
 	 * <!-- begin-user-doc -->
@@ -119,22 +73,6 @@ public interface ComponentInstance extends ComponentInstanceGroup, HasParameterV
 	 * @generated
 	 */
 	EList<ComponentInstance> getInstances();
-
-	/**
-	 * Returns the value of the '<em><b>Streams</b></em>' containment reference list.
-	 * The list contents are of type {@link org.m2ling.domain.core.InstancesLink}.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Streams</em>' containment reference list isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Streams</em>' containment reference list.
-	 * @see org.m2ling.domain.core.CorePackage#getComponentInstance_Streams()
-	 * @model containment="true"
-	 * @generated
-	 */
-	EList<InstancesLink> getStreams();
 
 	/**
 	 * Returns the value of the '<em><b>Instances Groups</b></em>' containment reference list.
@@ -177,21 +115,5 @@ public interface ComponentInstance extends ComponentInstanceGroup, HasParameterV
 	 * @generated
 	 */
 	void setBoundComponentInstance(ComponentInstance value);
-
-	/**
-	 * Returns the value of the '<em><b>References</b></em>' containment reference list.
-	 * The list contents are of type {@link org.m2ling.domain.core.Reference}&lt;?>.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>References</em>' containment reference list isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>References</em>' containment reference list.
-	 * @see org.m2ling.domain.core.CorePackage#getComponentInstance_References()
-	 * @model containment="true"
-	 * @generated
-	 */
-	EList<Reference<?>> getReferences();
 
 } // ComponentInstance

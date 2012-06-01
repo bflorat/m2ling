@@ -4,7 +4,9 @@
 package org.m2ling.domain.core.tests;
 
 import junit.framework.TestCase;
+import junit.textui.TestRunner;
 
+import org.m2ling.domain.core.CoreFactory;
 import org.m2ling.domain.core.Reference;
 
 /**
@@ -13,7 +15,7 @@ import org.m2ling.domain.core.Reference;
  * <!-- end-user-doc -->
  * @generated
  */
-public abstract class ReferenceTest extends TestCase {
+public class ReferenceTest extends TestCase {
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -28,7 +30,16 @@ public abstract class ReferenceTest extends TestCase {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected Reference<?> fixture = null;
+	protected Reference fixture = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public static void main(String[] args) {
+		TestRunner.run(ReferenceTest.class);
+	}
 
 	/**
 	 * Constructs a new Reference test case with the given name.
@@ -46,7 +57,7 @@ public abstract class ReferenceTest extends TestCase {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected void setFixture(Reference<?> fixture) {
+	protected void setFixture(Reference fixture) {
 		this.fixture = fixture;
 	}
 
@@ -56,8 +67,30 @@ public abstract class ReferenceTest extends TestCase {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected Reference<?> getFixture() {
+	protected Reference getFixture() {
 		return fixture;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see junit.framework.TestCase#setUp()
+	 * @generated
+	 */
+	@Override
+	protected void setUp() throws Exception {
+		setFixture(CoreFactory.eINSTANCE.createReference());
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see junit.framework.TestCase#tearDown()
+	 * @generated
+	 */
+	@Override
+	protected void tearDown() throws Exception {
+		setFixture(null);
 	}
 
 } //ReferenceTest

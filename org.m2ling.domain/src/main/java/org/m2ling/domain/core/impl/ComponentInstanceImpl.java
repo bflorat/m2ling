@@ -17,7 +17,6 @@ import org.m2ling.domain.core.Component;
 import org.m2ling.domain.core.ComponentInstance;
 import org.m2ling.domain.core.ComponentInstanceGroup;
 import org.m2ling.domain.core.CorePackage;
-import org.m2ling.domain.core.InstancesLink;
 import org.m2ling.domain.core.Reference;
 
 /**
@@ -28,13 +27,9 @@ import org.m2ling.domain.core.Reference;
  * The following features are implemented:
  * <ul>
  *   <li>{@link org.m2ling.domain.core.impl.ComponentInstanceImpl#getComponent <em>Component</em>}</li>
- *   <li>{@link org.m2ling.domain.core.impl.ComponentInstanceImpl#getSubInstances <em>Sub Instances</em>}</li>
- *   <li>{@link org.m2ling.domain.core.impl.ComponentInstanceImpl#getEngineInstance <em>Engine Instance</em>}</li>
  *   <li>{@link org.m2ling.domain.core.impl.ComponentInstanceImpl#getInstances <em>Instances</em>}</li>
- *   <li>{@link org.m2ling.domain.core.impl.ComponentInstanceImpl#getStreams <em>Streams</em>}</li>
  *   <li>{@link org.m2ling.domain.core.impl.ComponentInstanceImpl#getInstancesGroups <em>Instances Groups</em>}</li>
  *   <li>{@link org.m2ling.domain.core.impl.ComponentInstanceImpl#getBoundComponentInstance <em>Bound Component Instance</em>}</li>
- *   <li>{@link org.m2ling.domain.core.impl.ComponentInstanceImpl#getReferences <em>References</em>}</li>
  * </ul>
  * </p>
  *
@@ -59,26 +54,6 @@ public class ComponentInstanceImpl extends ComponentInstanceGroupImpl implements
 	protected Component component;
 
 	/**
-	 * The cached value of the '{@link #getSubInstances() <em>Sub Instances</em>}' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getSubInstances()
-	 * @generated
-	 * @ordered
-	 */
-	protected EList<ComponentInstance> subInstances;
-
-	/**
-	 * The cached value of the '{@link #getEngineInstance() <em>Engine Instance</em>}' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getEngineInstance()
-	 * @generated
-	 * @ordered
-	 */
-	protected ComponentInstance engineInstance;
-
-	/**
 	 * The cached value of the '{@link #getInstances() <em>Instances</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -87,16 +62,6 @@ public class ComponentInstanceImpl extends ComponentInstanceGroupImpl implements
 	 * @ordered
 	 */
 	protected EList<ComponentInstance> instances;
-
-	/**
-	 * The cached value of the '{@link #getStreams() <em>Streams</em>}' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getStreams()
-	 * @generated
-	 * @ordered
-	 */
-	protected EList<InstancesLink> streams;
 
 	/**
 	 * The cached value of the '{@link #getInstancesGroups() <em>Instances Groups</em>}' containment reference list.
@@ -117,16 +82,6 @@ public class ComponentInstanceImpl extends ComponentInstanceGroupImpl implements
 	 * @ordered
 	 */
 	protected ComponentInstance boundComponentInstance;
-
-	/**
-	 * The cached value of the '{@link #getReferences() <em>References</em>}' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getReferences()
-	 * @generated
-	 * @ordered
-	 */
-	protected EList<Reference<?>> references;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -190,73 +145,11 @@ public class ComponentInstanceImpl extends ComponentInstanceGroupImpl implements
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<ComponentInstance> getSubInstances() {
-		if (subInstances == null) {
-			subInstances = new EObjectContainmentEList<ComponentInstance>(ComponentInstance.class, this, CorePackage.COMPONENT_INSTANCE__SUB_INSTANCES);
-		}
-		return subInstances;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public ComponentInstance getEngineInstance() {
-		if (engineInstance != null && engineInstance.eIsProxy()) {
-			InternalEObject oldEngineInstance = (InternalEObject)engineInstance;
-			engineInstance = (ComponentInstance)eResolveProxy(oldEngineInstance);
-			if (engineInstance != oldEngineInstance) {
-				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, CorePackage.COMPONENT_INSTANCE__ENGINE_INSTANCE, oldEngineInstance, engineInstance));
-			}
-		}
-		return engineInstance;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public ComponentInstance basicGetEngineInstance() {
-		return engineInstance;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setEngineInstance(ComponentInstance newEngineInstance) {
-		ComponentInstance oldEngineInstance = engineInstance;
-		engineInstance = newEngineInstance;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, CorePackage.COMPONENT_INSTANCE__ENGINE_INSTANCE, oldEngineInstance, engineInstance));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EList<ComponentInstance> getInstances() {
 		if (instances == null) {
 			instances = new EObjectContainmentEList<ComponentInstance>(ComponentInstance.class, this, CorePackage.COMPONENT_INSTANCE__INSTANCES);
 		}
 		return instances;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EList<InstancesLink> getStreams() {
-		if (streams == null) {
-			streams = new EObjectContainmentEList<InstancesLink>(InstancesLink.class, this, CorePackage.COMPONENT_INSTANCE__STREAMS);
-		}
-		return streams;
 	}
 
 	/**
@@ -314,31 +207,13 @@ public class ComponentInstanceImpl extends ComponentInstanceGroupImpl implements
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<Reference<?>> getReferences() {
-		if (references == null) {
-			references = new EObjectContainmentEList<Reference<?>>(Reference.class, this, CorePackage.COMPONENT_INSTANCE__REFERENCES);
-		}
-		return references;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case CorePackage.COMPONENT_INSTANCE__SUB_INSTANCES:
-				return ((InternalEList<?>)getSubInstances()).basicRemove(otherEnd, msgs);
 			case CorePackage.COMPONENT_INSTANCE__INSTANCES:
 				return ((InternalEList<?>)getInstances()).basicRemove(otherEnd, msgs);
-			case CorePackage.COMPONENT_INSTANCE__STREAMS:
-				return ((InternalEList<?>)getStreams()).basicRemove(otherEnd, msgs);
 			case CorePackage.COMPONENT_INSTANCE__INSTANCES_GROUPS:
 				return ((InternalEList<?>)getInstancesGroups()).basicRemove(otherEnd, msgs);
-			case CorePackage.COMPONENT_INSTANCE__REFERENCES:
-				return ((InternalEList<?>)getReferences()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -354,22 +229,13 @@ public class ComponentInstanceImpl extends ComponentInstanceGroupImpl implements
 			case CorePackage.COMPONENT_INSTANCE__COMPONENT:
 				if (resolve) return getComponent();
 				return basicGetComponent();
-			case CorePackage.COMPONENT_INSTANCE__SUB_INSTANCES:
-				return getSubInstances();
-			case CorePackage.COMPONENT_INSTANCE__ENGINE_INSTANCE:
-				if (resolve) return getEngineInstance();
-				return basicGetEngineInstance();
 			case CorePackage.COMPONENT_INSTANCE__INSTANCES:
 				return getInstances();
-			case CorePackage.COMPONENT_INSTANCE__STREAMS:
-				return getStreams();
 			case CorePackage.COMPONENT_INSTANCE__INSTANCES_GROUPS:
 				return getInstancesGroups();
 			case CorePackage.COMPONENT_INSTANCE__BOUND_COMPONENT_INSTANCE:
 				if (resolve) return getBoundComponentInstance();
 				return basicGetBoundComponentInstance();
-			case CorePackage.COMPONENT_INSTANCE__REFERENCES:
-				return getReferences();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -386,20 +252,9 @@ public class ComponentInstanceImpl extends ComponentInstanceGroupImpl implements
 			case CorePackage.COMPONENT_INSTANCE__COMPONENT:
 				setComponent((Component)newValue);
 				return;
-			case CorePackage.COMPONENT_INSTANCE__SUB_INSTANCES:
-				getSubInstances().clear();
-				getSubInstances().addAll((Collection<? extends ComponentInstance>)newValue);
-				return;
-			case CorePackage.COMPONENT_INSTANCE__ENGINE_INSTANCE:
-				setEngineInstance((ComponentInstance)newValue);
-				return;
 			case CorePackage.COMPONENT_INSTANCE__INSTANCES:
 				getInstances().clear();
 				getInstances().addAll((Collection<? extends ComponentInstance>)newValue);
-				return;
-			case CorePackage.COMPONENT_INSTANCE__STREAMS:
-				getStreams().clear();
-				getStreams().addAll((Collection<? extends InstancesLink>)newValue);
 				return;
 			case CorePackage.COMPONENT_INSTANCE__INSTANCES_GROUPS:
 				getInstancesGroups().clear();
@@ -407,10 +262,6 @@ public class ComponentInstanceImpl extends ComponentInstanceGroupImpl implements
 				return;
 			case CorePackage.COMPONENT_INSTANCE__BOUND_COMPONENT_INSTANCE:
 				setBoundComponentInstance((ComponentInstance)newValue);
-				return;
-			case CorePackage.COMPONENT_INSTANCE__REFERENCES:
-				getReferences().clear();
-				getReferences().addAll((Collection<? extends Reference<?>>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -427,26 +278,14 @@ public class ComponentInstanceImpl extends ComponentInstanceGroupImpl implements
 			case CorePackage.COMPONENT_INSTANCE__COMPONENT:
 				setComponent((Component)null);
 				return;
-			case CorePackage.COMPONENT_INSTANCE__SUB_INSTANCES:
-				getSubInstances().clear();
-				return;
-			case CorePackage.COMPONENT_INSTANCE__ENGINE_INSTANCE:
-				setEngineInstance((ComponentInstance)null);
-				return;
 			case CorePackage.COMPONENT_INSTANCE__INSTANCES:
 				getInstances().clear();
-				return;
-			case CorePackage.COMPONENT_INSTANCE__STREAMS:
-				getStreams().clear();
 				return;
 			case CorePackage.COMPONENT_INSTANCE__INSTANCES_GROUPS:
 				getInstancesGroups().clear();
 				return;
 			case CorePackage.COMPONENT_INSTANCE__BOUND_COMPONENT_INSTANCE:
 				setBoundComponentInstance((ComponentInstance)null);
-				return;
-			case CorePackage.COMPONENT_INSTANCE__REFERENCES:
-				getReferences().clear();
 				return;
 		}
 		super.eUnset(featureID);
@@ -462,20 +301,12 @@ public class ComponentInstanceImpl extends ComponentInstanceGroupImpl implements
 		switch (featureID) {
 			case CorePackage.COMPONENT_INSTANCE__COMPONENT:
 				return component != null;
-			case CorePackage.COMPONENT_INSTANCE__SUB_INSTANCES:
-				return subInstances != null && !subInstances.isEmpty();
-			case CorePackage.COMPONENT_INSTANCE__ENGINE_INSTANCE:
-				return engineInstance != null;
 			case CorePackage.COMPONENT_INSTANCE__INSTANCES:
 				return instances != null && !instances.isEmpty();
-			case CorePackage.COMPONENT_INSTANCE__STREAMS:
-				return streams != null && !streams.isEmpty();
 			case CorePackage.COMPONENT_INSTANCE__INSTANCES_GROUPS:
 				return instancesGroups != null && !instancesGroups.isEmpty();
 			case CorePackage.COMPONENT_INSTANCE__BOUND_COMPONENT_INSTANCE:
 				return boundComponentInstance != null;
-			case CorePackage.COMPONENT_INSTANCE__REFERENCES:
-				return references != null && !references.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}

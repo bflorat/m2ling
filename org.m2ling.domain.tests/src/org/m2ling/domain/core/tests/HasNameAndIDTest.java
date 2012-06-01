@@ -4,7 +4,6 @@
 package org.m2ling.domain.core.tests;
 
 import junit.framework.TestCase;
-
 import junit.textui.TestRunner;
 
 import org.m2ling.domain.core.CoreFactory;

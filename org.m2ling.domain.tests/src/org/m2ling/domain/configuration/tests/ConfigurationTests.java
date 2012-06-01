@@ -5,7 +5,6 @@ package org.m2ling.domain.configuration.tests;
 
 import junit.framework.Test;
 import junit.framework.TestSuite;
-
 import junit.textui.TestRunner;
 
 /**

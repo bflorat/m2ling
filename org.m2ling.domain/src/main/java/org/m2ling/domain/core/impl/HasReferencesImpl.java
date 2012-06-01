@@ -4,22 +4,20 @@
 package org.m2ling.domain.core.impl;
 
 import org.eclipse.emf.ecore.EClass;
-import org.m2ling.domain.core.Component;
-import org.m2ling.domain.core.ComponentInstance;
-import org.m2ling.domain.core.ComponentType;
+import org.eclipse.emf.ecore.impl.EObjectImpl;
 import org.m2ling.domain.core.CorePackage;
-import org.m2ling.domain.core.DependsOnReference;
+import org.m2ling.domain.core.HasReferences;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Depends On Reference</b></em>'.
+ * An implementation of the model object '<em><b>Has References</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * </p>
  *
  * @generated
  */
-public class DependsOnReferenceImpl<T extends Component & ComponentInstance & ComponentType> extends ReferenceImpl<T> implements DependsOnReference<T> {
+public abstract class HasReferencesImpl extends EObjectImpl implements HasReferences {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -32,7 +30,7 @@ public class DependsOnReferenceImpl<T extends Component & ComponentInstance & Co
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected DependsOnReferenceImpl() {
+	protected HasReferencesImpl() {
 		super();
 	}
 
@@ -43,7 +41,7 @@ public class DependsOnReferenceImpl<T extends Component & ComponentInstance & Co
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return CorePackage.Literals.DEPENDS_ON_REFERENCE;
+		return CorePackage.Literals.HAS_REFERENCES;
 	}
 
-} //DependsOnReferenceImpl
+} //HasReferencesImpl

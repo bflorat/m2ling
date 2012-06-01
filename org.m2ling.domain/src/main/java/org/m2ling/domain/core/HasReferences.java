@@ -3,18 +3,19 @@
  */
 package org.m2ling.domain.core;
 
+import org.eclipse.emf.ecore.EObject;
 
 /**
  * <!-- begin-user-doc -->
- * A representation of the model object '<em><b>Runs Reference</b></em>'.
+ * A representation of the model object '<em><b>Has References</b></em>'.
  * <!-- end-user-doc -->
  *
  *
- * @see org.m2ling.domain.core.CorePackage#getRunsReference()
- * @model
+ * @see org.m2ling.domain.core.CorePackage#getHasReferences()
+ * @model abstract="true"
  * @generated
  */
-public interface RunsReference<T extends Component & ComponentInstance & ComponentType> extends Reference<T> {
+public interface HasReferences extends EObject {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -22,4 +23,4 @@ public interface RunsReference<T extends Component & ComponentInstance & Compone
 	 */
 	String copyright = "Copyright (C) 2012 Bertrand Florat";
 
-} // RunsReference
+} // HasReferences

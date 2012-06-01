@@ -9,22 +9,20 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.impl.EFactoryImpl;
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
+import org.m2ling.domain.core.*;
 import org.m2ling.domain.core.Activity;
 import org.m2ling.domain.core.ActivityStatus;
 import org.m2ling.domain.core.ActivityTransition;
 import org.m2ling.domain.core.Actor;
-import org.m2ling.domain.core.AdminsReference;
 import org.m2ling.domain.core.Component;
 import org.m2ling.domain.core.ComponentGroup;
 import org.m2ling.domain.core.ComponentInstance;
 import org.m2ling.domain.core.ComponentInstanceGroup;
 import org.m2ling.domain.core.ComponentType;
-import org.m2ling.domain.core.ContainsReference;
 import org.m2ling.domain.core.CoreFactory;
 import org.m2ling.domain.core.CorePackage;
 import org.m2ling.domain.core.CustomProperty;
 import org.m2ling.domain.core.CustomPropertyType;
-import org.m2ling.domain.core.DependsOnReference;
 import org.m2ling.domain.core.EMailConstraint;
 import org.m2ling.domain.core.FloatConstraint;
 import org.m2ling.domain.core.FormatConstraint;
@@ -40,11 +38,12 @@ import org.m2ling.domain.core.MinConstraint;
 import org.m2ling.domain.core.NotNullConstraint;
 import org.m2ling.domain.core.OCLConstraint;
 import org.m2ling.domain.core.OrganisationalUnit;
+import org.m2ling.domain.core.Reference;
+import org.m2ling.domain.core.ReferenceType;
 import org.m2ling.domain.core.RegexpConstraint;
 import org.m2ling.domain.core.Rule;
 import org.m2ling.domain.core.RulePriority;
 import org.m2ling.domain.core.RuleStatus;
-import org.m2ling.domain.core.RunsReference;
 import org.m2ling.domain.core.Stakeholder;
 import org.m2ling.domain.core.Type;
 import org.m2ling.domain.core.URLConstraint;
@@ -132,10 +131,7 @@ public class CoreFactoryImpl extends EFactoryImpl implements CoreFactory {
 			case CorePackage.ORGANISATIONAL_UNIT: return createOrganisationalUnit();
 			case CorePackage.ACTOR: return createActor();
 			case CorePackage.RULE: return createRule();
-			case CorePackage.CONTAINS_REFERENCE: return createContainsReference();
-			case CorePackage.RUNS_REFERENCE: return createRunsReference();
-			case CorePackage.DEPENDS_ON_REFERENCE: return createDependsOnReference();
-			case CorePackage.ADMINS_REFERENCE: return createAdminsReference();
+			case CorePackage.REFERENCE: return createReference();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -159,6 +155,8 @@ public class CoreFactoryImpl extends EFactoryImpl implements CoreFactory {
 				return createRuleStatusFromString(eDataType, initialValue);
 			case CorePackage.RULE_PRIORITY:
 				return createRulePriorityFromString(eDataType, initialValue);
+			case CorePackage.REFERENCE_TYPE:
+				return createReferenceTypeFromString(eDataType, initialValue);
 			default:
 				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
 		}
@@ -182,6 +180,8 @@ public class CoreFactoryImpl extends EFactoryImpl implements CoreFactory {
 				return convertRuleStatusToString(eDataType, instanceValue);
 			case CorePackage.RULE_PRIORITY:
 				return convertRulePriorityToString(eDataType, instanceValue);
+			case CorePackage.REFERENCE_TYPE:
+				return convertReferenceTypeToString(eDataType, instanceValue);
 			default:
 				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
 		}
@@ -492,39 +492,9 @@ public class CoreFactoryImpl extends EFactoryImpl implements CoreFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public <T extends Component & ComponentInstance & ComponentType> ContainsReference<T> createContainsReference() {
-		ContainsReferenceImpl<T> containsReference = new ContainsReferenceImpl<T>();
-		return containsReference;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public <T extends Component & ComponentInstance & ComponentType> RunsReference<T> createRunsReference() {
-		RunsReferenceImpl<T> runsReference = new RunsReferenceImpl<T>();
-		return runsReference;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public <T extends Component & ComponentInstance & ComponentType> DependsOnReference<T> createDependsOnReference() {
-		DependsOnReferenceImpl<T> dependsOnReference = new DependsOnReferenceImpl<T>();
-		return dependsOnReference;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public <T extends Component & ComponentInstance & ComponentType> AdminsReference<T> createAdminsReference() {
-		AdminsReferenceImpl<T> adminsReference = new AdminsReferenceImpl<T>();
-		return adminsReference;
+	public Reference createReference() {
+		ReferenceImpl reference = new ReferenceImpl();
+		return reference;
 	}
 
 	/**
@@ -624,6 +594,26 @@ public class CoreFactoryImpl extends EFactoryImpl implements CoreFactory {
 	 * @generated
 	 */
 	public String convertRulePriorityToString(EDataType eDataType, Object instanceValue) {
+		return instanceValue == null ? null : instanceValue.toString();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public ReferenceType createReferenceTypeFromString(EDataType eDataType, String initialValue) {
+		ReferenceType result = ReferenceType.get(initialValue);
+		if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
+		return result;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String convertReferenceTypeToString(EDataType eDataType, Object instanceValue) {
 		return instanceValue == null ? null : instanceValue.toString();
 	}
 

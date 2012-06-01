@@ -27,7 +27,6 @@ import org.m2ling.domain.core.Reference;
  * The following features are implemented:
  * <ul>
  *   <li>{@link org.m2ling.domain.core.impl.ComponentTypeImpl#getEngineTypes <em>Engine Types</em>}</li>
- *   <li>{@link org.m2ling.domain.core.impl.ComponentTypeImpl#getSubTypes <em>Sub Types</em>}</li>
  *   <li>{@link org.m2ling.domain.core.impl.ComponentTypeImpl#getBoundType <em>Bound Type</em>}</li>
  *   <li>{@link org.m2ling.domain.core.impl.ComponentTypeImpl#getEnumeration <em>Enumeration</em>}</li>
  *   <li>{@link org.m2ling.domain.core.impl.ComponentTypeImpl#getInstantiationFactor <em>Instantiation Factor</em>}</li>
@@ -55,16 +54,6 @@ public class ComponentTypeImpl extends ConceptItemImpl implements ComponentType 
 	 * @ordered
 	 */
 	protected EList<ComponentType> engineTypes;
-
-	/**
-	 * The cached value of the '{@link #getSubTypes() <em>Sub Types</em>}' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getSubTypes()
-	 * @generated
-	 * @ordered
-	 */
-	protected EList<ComponentType> subTypes;
 
 	/**
 	 * The cached value of the '{@link #getBoundType() <em>Bound Type</em>}' reference.
@@ -134,7 +123,7 @@ public class ComponentTypeImpl extends ConceptItemImpl implements ComponentType 
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<Reference<?>> references;
+	protected EList<Reference> references;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -165,18 +154,6 @@ public class ComponentTypeImpl extends ConceptItemImpl implements ComponentType 
 			engineTypes = new EObjectResolvingEList<ComponentType>(ComponentType.class, this, CorePackage.COMPONENT_TYPE__ENGINE_TYPES);
 		}
 		return engineTypes;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EList<ComponentType> getSubTypes() {
-		if (subTypes == null) {
-			subTypes = new EObjectContainmentEList<ComponentType>(ComponentType.class, this, CorePackage.COMPONENT_TYPE__SUB_TYPES);
-		}
-		return subTypes;
 	}
 
 	/**
@@ -238,9 +215,9 @@ public class ComponentTypeImpl extends ConceptItemImpl implements ComponentType 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<Reference<?>> getReferences() {
+	public EList<Reference> getReferences() {
 		if (references == null) {
-			references = new EObjectContainmentEList<Reference<?>>(Reference.class, this, CorePackage.COMPONENT_TYPE__REFERENCES);
+			references = new EObjectContainmentEList<Reference>(Reference.class, this, CorePackage.COMPONENT_TYPE__REFERENCES);
 		}
 		return references;
 	}
@@ -291,8 +268,6 @@ public class ComponentTypeImpl extends ConceptItemImpl implements ComponentType 
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case CorePackage.COMPONENT_TYPE__SUB_TYPES:
-				return ((InternalEList<?>)getSubTypes()).basicRemove(otherEnd, msgs);
 			case CorePackage.COMPONENT_TYPE__REFERENCES:
 				return ((InternalEList<?>)getReferences()).basicRemove(otherEnd, msgs);
 		}
@@ -309,8 +284,6 @@ public class ComponentTypeImpl extends ConceptItemImpl implements ComponentType 
 		switch (featureID) {
 			case CorePackage.COMPONENT_TYPE__ENGINE_TYPES:
 				return getEngineTypes();
-			case CorePackage.COMPONENT_TYPE__SUB_TYPES:
-				return getSubTypes();
 			case CorePackage.COMPONENT_TYPE__BOUND_TYPE:
 				if (resolve) return getBoundType();
 				return basicGetBoundType();
@@ -339,10 +312,6 @@ public class ComponentTypeImpl extends ConceptItemImpl implements ComponentType 
 				getEngineTypes().clear();
 				getEngineTypes().addAll((Collection<? extends ComponentType>)newValue);
 				return;
-			case CorePackage.COMPONENT_TYPE__SUB_TYPES:
-				getSubTypes().clear();
-				getSubTypes().addAll((Collection<? extends ComponentType>)newValue);
-				return;
 			case CorePackage.COMPONENT_TYPE__BOUND_TYPE:
 				setBoundType((ComponentType)newValue);
 				return;
@@ -358,7 +327,7 @@ public class ComponentTypeImpl extends ConceptItemImpl implements ComponentType 
 				return;
 			case CorePackage.COMPONENT_TYPE__REFERENCES:
 				getReferences().clear();
-				getReferences().addAll((Collection<? extends Reference<?>>)newValue);
+				getReferences().addAll((Collection<? extends Reference>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -374,9 +343,6 @@ public class ComponentTypeImpl extends ConceptItemImpl implements ComponentType 
 		switch (featureID) {
 			case CorePackage.COMPONENT_TYPE__ENGINE_TYPES:
 				getEngineTypes().clear();
-				return;
-			case CorePackage.COMPONENT_TYPE__SUB_TYPES:
-				getSubTypes().clear();
 				return;
 			case CorePackage.COMPONENT_TYPE__BOUND_TYPE:
 				setBoundType((ComponentType)null);
@@ -407,8 +373,6 @@ public class ComponentTypeImpl extends ConceptItemImpl implements ComponentType 
 		switch (featureID) {
 			case CorePackage.COMPONENT_TYPE__ENGINE_TYPES:
 				return engineTypes != null && !engineTypes.isEmpty();
-			case CorePackage.COMPONENT_TYPE__SUB_TYPES:
-				return subTypes != null && !subTypes.isEmpty();
 			case CorePackage.COMPONENT_TYPE__BOUND_TYPE:
 				return boundType != null;
 			case CorePackage.COMPONENT_TYPE__ENUMERATION:

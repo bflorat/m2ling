@@ -768,95 +768,26 @@ public class CoreItemProviderAdapterFactory extends CoreAdapterFactory implement
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link org.m2ling.domain.core.ContainsReference} instances.
+	 * This keeps track of the one adapter used for all {@link org.m2ling.domain.core.Reference} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected ContainsReferenceItemProvider containsReferenceItemProvider;
+	protected ReferenceItemProvider referenceItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link org.m2ling.domain.core.ContainsReference}.
+	 * This creates an adapter for a {@link org.m2ling.domain.core.Reference}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
-	public Adapter createContainsReferenceAdapter() {
-		if (containsReferenceItemProvider == null) {
-			containsReferenceItemProvider = new ContainsReferenceItemProvider(this);
+	public Adapter createReferenceAdapter() {
+		if (referenceItemProvider == null) {
+			referenceItemProvider = new ReferenceItemProvider(this);
 		}
 
-		return containsReferenceItemProvider;
-	}
-
-	/**
-	 * This keeps track of the one adapter used for all {@link org.m2ling.domain.core.RunsReference} instances.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected RunsReferenceItemProvider runsReferenceItemProvider;
-
-	/**
-	 * This creates an adapter for a {@link org.m2ling.domain.core.RunsReference}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Adapter createRunsReferenceAdapter() {
-		if (runsReferenceItemProvider == null) {
-			runsReferenceItemProvider = new RunsReferenceItemProvider(this);
-		}
-
-		return runsReferenceItemProvider;
-	}
-
-	/**
-	 * This keeps track of the one adapter used for all {@link org.m2ling.domain.core.DependsOnReference} instances.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected DependsOnReferenceItemProvider dependsOnReferenceItemProvider;
-
-	/**
-	 * This creates an adapter for a {@link org.m2ling.domain.core.DependsOnReference}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Adapter createDependsOnReferenceAdapter() {
-		if (dependsOnReferenceItemProvider == null) {
-			dependsOnReferenceItemProvider = new DependsOnReferenceItemProvider(this);
-		}
-
-		return dependsOnReferenceItemProvider;
-	}
-
-	/**
-	 * This keeps track of the one adapter used for all {@link org.m2ling.domain.core.AdminsReference} instances.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected AdminsReferenceItemProvider adminsReferenceItemProvider;
-
-	/**
-	 * This creates an adapter for a {@link org.m2ling.domain.core.AdminsReference}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Adapter createAdminsReferenceAdapter() {
-		if (adminsReferenceItemProvider == null) {
-			adminsReferenceItemProvider = new AdminsReferenceItemProvider(this);
-		}
-
-		return adminsReferenceItemProvider;
+		return referenceItemProvider;
 	}
 
 	/**
@@ -988,10 +919,7 @@ public class CoreItemProviderAdapterFactory extends CoreAdapterFactory implement
 		if (organisationalUnitItemProvider != null) organisationalUnitItemProvider.dispose();
 		if (actorItemProvider != null) actorItemProvider.dispose();
 		if (ruleItemProvider != null) ruleItemProvider.dispose();
-		if (containsReferenceItemProvider != null) containsReferenceItemProvider.dispose();
-		if (runsReferenceItemProvider != null) runsReferenceItemProvider.dispose();
-		if (dependsOnReferenceItemProvider != null) dependsOnReferenceItemProvider.dispose();
-		if (adminsReferenceItemProvider != null) adminsReferenceItemProvider.dispose();
+		if (referenceItemProvider != null) referenceItemProvider.dispose();
 	}
 
 }
