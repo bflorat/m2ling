@@ -157,6 +157,10 @@ public class CoreFactoryImpl extends EFactoryImpl implements CoreFactory {
 				return createRulePriorityFromString(eDataType, initialValue);
 			case CorePackage.REFERENCE_TYPE:
 				return createReferenceTypeFromString(eDataType, initialValue);
+			case CorePackage.LINK_TEMPORALITY:
+				return createLinkTemporalityFromString(eDataType, initialValue);
+			case CorePackage.LINK_ACCESS_TYPE:
+				return createLinkAccessTypeFromString(eDataType, initialValue);
 			default:
 				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
 		}
@@ -182,6 +186,10 @@ public class CoreFactoryImpl extends EFactoryImpl implements CoreFactory {
 				return convertRulePriorityToString(eDataType, instanceValue);
 			case CorePackage.REFERENCE_TYPE:
 				return convertReferenceTypeToString(eDataType, instanceValue);
+			case CorePackage.LINK_TEMPORALITY:
+				return convertLinkTemporalityToString(eDataType, instanceValue);
+			case CorePackage.LINK_ACCESS_TYPE:
+				return convertLinkAccessTypeToString(eDataType, instanceValue);
 			default:
 				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
 		}
@@ -614,6 +622,46 @@ public class CoreFactoryImpl extends EFactoryImpl implements CoreFactory {
 	 * @generated
 	 */
 	public String convertReferenceTypeToString(EDataType eDataType, Object instanceValue) {
+		return instanceValue == null ? null : instanceValue.toString();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public LinkTemporality createLinkTemporalityFromString(EDataType eDataType, String initialValue) {
+		LinkTemporality result = LinkTemporality.get(initialValue);
+		if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
+		return result;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String convertLinkTemporalityToString(EDataType eDataType, Object instanceValue) {
+		return instanceValue == null ? null : instanceValue.toString();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public LinkAccessType createLinkAccessTypeFromString(EDataType eDataType, String initialValue) {
+		LinkAccessType result = LinkAccessType.get(initialValue);
+		if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
+		return result;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String convertLinkAccessTypeToString(EDataType eDataType, Object instanceValue) {
 		return instanceValue == null ? null : instanceValue.toString();
 	}
 

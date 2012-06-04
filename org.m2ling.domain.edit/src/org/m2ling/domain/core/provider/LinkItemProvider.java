@@ -16,6 +16,8 @@ import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.IItemPropertySource;
 import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
+import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
+import org.eclipse.emf.edit.provider.ViewerNotification;
 import org.m2ling.domain.core.CorePackage;
 import org.m2ling.domain.core.Link;
 
@@ -64,6 +66,7 @@ public class LinkItemProvider
 			addTypePropertyDescriptor(object);
 			addOriginsPropertyDescriptor(object);
 			addDestinationsPropertyDescriptor(object);
+			addTimeoutMillisPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -135,6 +138,28 @@ public class LinkItemProvider
 	}
 
 	/**
+	 * This adds a property descriptor for the Timeout Millis feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addTimeoutMillisPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_Link_timeoutMillis_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_Link_timeoutMillis_feature", "_UI_Link_type"),
+				 CorePackage.Literals.LINK__TIMEOUT_MILLIS,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.INTEGRAL_VALUE_IMAGE,
+				 null,
+				 null));
+	}
+
+	/**
 	 * This returns Link.gif.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -169,6 +194,12 @@ public class LinkItemProvider
 	@Override
 	public void notifyChanged(Notification notification) {
 		updateChildren(notification);
+
+		switch (notification.getFeatureID(Link.class)) {
+			case CorePackage.LINK__TIMEOUT_MILLIS:
+				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
+				return;
+		}
 		super.notifyChanged(notification);
 	}
 

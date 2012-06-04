@@ -1354,13 +1354,31 @@ public interface CorePackage extends EPackage {
 	int LINK_TYPE__REIFIABLE = CONCEPT_ITEM_FEATURE_COUNT + 2;
 
 	/**
+	 * The feature id for the '<em><b>Access Type</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LINK_TYPE__ACCESS_TYPE = CONCEPT_ITEM_FEATURE_COUNT + 3;
+
+	/**
+	 * The feature id for the '<em><b>Temporality</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LINK_TYPE__TEMPORALITY = CONCEPT_ITEM_FEATURE_COUNT + 4;
+
+	/**
 	 * The number of structural features of the '<em>Link Type</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int LINK_TYPE_FEATURE_COUNT = CONCEPT_ITEM_FEATURE_COUNT + 3;
+	int LINK_TYPE_FEATURE_COUNT = CONCEPT_ITEM_FEATURE_COUNT + 5;
 
 	/**
 	 * The feature id for the '<em><b>Id</b></em>' attribute.
@@ -1435,13 +1453,22 @@ public interface CorePackage extends EPackage {
 	int LINK__DESTINATIONS = ARCHITECTURE_ITEM_FEATURE_COUNT + 2;
 
 	/**
+	 * The feature id for the '<em><b>Timeout Millis</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LINK__TIMEOUT_MILLIS = ARCHITECTURE_ITEM_FEATURE_COUNT + 3;
+
+	/**
 	 * The number of structural features of the '<em>Link</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int LINK_FEATURE_COUNT = ARCHITECTURE_ITEM_FEATURE_COUNT + 3;
+	int LINK_FEATURE_COUNT = ARCHITECTURE_ITEM_FEATURE_COUNT + 4;
 
 	/**
 	 * The meta object id for the '{@link org.m2ling.domain.core.impl.InstancesLinkImpl <em>Instances Link</em>}' class.
@@ -2510,6 +2537,27 @@ public interface CorePackage extends EPackage {
 
 
 	/**
+	 * The meta object id for the '{@link org.m2ling.domain.core.LinkTemporality <em>Link Temporality</em>}' enum.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.m2ling.domain.core.LinkTemporality
+	 * @see org.m2ling.domain.core.impl.CorePackageImpl#getLinkTemporality()
+	 * @generated
+	 */
+	int LINK_TEMPORALITY = 49;
+
+	/**
+	 * The meta object id for the '{@link org.m2ling.domain.core.LinkAccessType <em>Link Access Type</em>}' enum.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.m2ling.domain.core.LinkAccessType
+	 * @see org.m2ling.domain.core.impl.CorePackageImpl#getLinkAccessType()
+	 * @generated
+	 */
+	int LINK_ACCESS_TYPE = 50;
+
+
+	/**
 	 * Returns the meta object for class '{@link org.m2ling.domain.core.ComponentType <em>Component Type</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3109,6 +3157,28 @@ public interface CorePackage extends EPackage {
 	EAttribute getLinkType_Reifiable();
 
 	/**
+	 * Returns the meta object for the attribute '{@link org.m2ling.domain.core.LinkType#getAccessType <em>Access Type</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Access Type</em>'.
+	 * @see org.m2ling.domain.core.LinkType#getAccessType()
+	 * @see #getLinkType()
+	 * @generated
+	 */
+	EAttribute getLinkType_AccessType();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.m2ling.domain.core.LinkType#getTemporality <em>Temporality</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Temporality</em>'.
+	 * @see org.m2ling.domain.core.LinkType#getTemporality()
+	 * @see #getLinkType()
+	 * @generated
+	 */
+	EAttribute getLinkType_Temporality();
+
+	/**
 	 * Returns the meta object for class '{@link org.m2ling.domain.core.Link <em>Link</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3150,6 +3220,17 @@ public interface CorePackage extends EPackage {
 	 * @generated
 	 */
 	EReference getLink_Destinations();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.m2ling.domain.core.Link#getTimeoutMillis <em>Timeout Millis</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Timeout Millis</em>'.
+	 * @see org.m2ling.domain.core.Link#getTimeoutMillis()
+	 * @see #getLink()
+	 * @generated
+	 */
+	EAttribute getLink_TimeoutMillis();
 
 	/**
 	 * Returns the meta object for class '{@link org.m2ling.domain.core.InstancesLink <em>Instances Link</em>}'.
@@ -3781,6 +3862,26 @@ public interface CorePackage extends EPackage {
 	EEnum getReferenceType();
 
 	/**
+	 * Returns the meta object for enum '{@link org.m2ling.domain.core.LinkTemporality <em>Link Temporality</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for enum '<em>Link Temporality</em>'.
+	 * @see org.m2ling.domain.core.LinkTemporality
+	 * @generated
+	 */
+	EEnum getLinkTemporality();
+
+	/**
+	 * Returns the meta object for enum '{@link org.m2ling.domain.core.LinkAccessType <em>Link Access Type</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for enum '<em>Link Access Type</em>'.
+	 * @see org.m2ling.domain.core.LinkAccessType
+	 * @generated
+	 */
+	EEnum getLinkAccessType();
+
+	/**
 	 * Returns the factory that creates the instances of the model.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -4285,6 +4386,22 @@ public interface CorePackage extends EPackage {
 		EAttribute LINK_TYPE__REIFIABLE = eINSTANCE.getLinkType_Reifiable();
 
 		/**
+		 * The meta object literal for the '<em><b>Access Type</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute LINK_TYPE__ACCESS_TYPE = eINSTANCE.getLinkType_AccessType();
+
+		/**
+		 * The meta object literal for the '<em><b>Temporality</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute LINK_TYPE__TEMPORALITY = eINSTANCE.getLinkType_Temporality();
+
+		/**
 		 * The meta object literal for the '{@link org.m2ling.domain.core.impl.LinkImpl <em>Link</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -4317,6 +4434,14 @@ public interface CorePackage extends EPackage {
 		 * @generated
 		 */
 		EReference LINK__DESTINATIONS = eINSTANCE.getLink_Destinations();
+
+		/**
+		 * The meta object literal for the '<em><b>Timeout Millis</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute LINK__TIMEOUT_MILLIS = eINSTANCE.getLink_TimeoutMillis();
 
 		/**
 		 * The meta object literal for the '{@link org.m2ling.domain.core.impl.InstancesLinkImpl <em>Instances Link</em>}' class.
@@ -4859,6 +4984,26 @@ public interface CorePackage extends EPackage {
 		 * @generated
 		 */
 		EEnum REFERENCE_TYPE = eINSTANCE.getReferenceType();
+
+		/**
+		 * The meta object literal for the '{@link org.m2ling.domain.core.LinkTemporality <em>Link Temporality</em>}' enum.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.m2ling.domain.core.LinkTemporality
+		 * @see org.m2ling.domain.core.impl.CorePackageImpl#getLinkTemporality()
+		 * @generated
+		 */
+		EEnum LINK_TEMPORALITY = eINSTANCE.getLinkTemporality();
+
+		/**
+		 * The meta object literal for the '{@link org.m2ling.domain.core.LinkAccessType <em>Link Access Type</em>}' enum.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.m2ling.domain.core.LinkAccessType
+		 * @see org.m2ling.domain.core.impl.CorePackageImpl#getLinkAccessType()
+		 * @generated
+		 */
+		EEnum LINK_ACCESS_TYPE = eINSTANCE.getLinkAccessType();
 
 	}
 

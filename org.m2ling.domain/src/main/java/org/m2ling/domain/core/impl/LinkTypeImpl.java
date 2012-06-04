@@ -12,6 +12,8 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 import org.m2ling.domain.core.ComponentType;
 import org.m2ling.domain.core.CorePackage;
+import org.m2ling.domain.core.LinkAccessType;
+import org.m2ling.domain.core.LinkTemporality;
 import org.m2ling.domain.core.LinkType;
 
 /**
@@ -24,6 +26,8 @@ import org.m2ling.domain.core.LinkType;
  *   <li>{@link org.m2ling.domain.core.impl.LinkTypeImpl#getSourceTypes <em>Source Types</em>}</li>
  *   <li>{@link org.m2ling.domain.core.impl.LinkTypeImpl#getDestinationTypes <em>Destination Types</em>}</li>
  *   <li>{@link org.m2ling.domain.core.impl.LinkTypeImpl#isReifiable <em>Reifiable</em>}</li>
+ *   <li>{@link org.m2ling.domain.core.impl.LinkTypeImpl#getAccessType <em>Access Type</em>}</li>
+ *   <li>{@link org.m2ling.domain.core.impl.LinkTypeImpl#getTemporality <em>Temporality</em>}</li>
  * </ul>
  * </p>
  *
@@ -76,6 +80,46 @@ public class LinkTypeImpl extends ConceptItemImpl implements LinkType {
 	 * @ordered
 	 */
 	protected boolean reifiable = REIFIABLE_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getAccessType() <em>Access Type</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getAccessType()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final LinkAccessType ACCESS_TYPE_EDEFAULT = LinkAccessType.CREATE;
+
+	/**
+	 * The cached value of the '{@link #getAccessType() <em>Access Type</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getAccessType()
+	 * @generated
+	 * @ordered
+	 */
+	protected LinkAccessType accessType = ACCESS_TYPE_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getTemporality() <em>Temporality</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getTemporality()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final LinkTemporality TEMPORALITY_EDEFAULT = LinkTemporality.SYNC;
+
+	/**
+	 * The cached value of the '{@link #getTemporality() <em>Temporality</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getTemporality()
+	 * @generated
+	 * @ordered
+	 */
+	protected LinkTemporality temporality = TEMPORALITY_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -146,6 +190,48 @@ public class LinkTypeImpl extends ConceptItemImpl implements LinkType {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public LinkAccessType getAccessType() {
+		return accessType;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setAccessType(LinkAccessType newAccessType) {
+		LinkAccessType oldAccessType = accessType;
+		accessType = newAccessType == null ? ACCESS_TYPE_EDEFAULT : newAccessType;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, CorePackage.LINK_TYPE__ACCESS_TYPE, oldAccessType, accessType));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public LinkTemporality getTemporality() {
+		return temporality;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setTemporality(LinkTemporality newTemporality) {
+		LinkTemporality oldTemporality = temporality;
+		temporality = newTemporality == null ? TEMPORALITY_EDEFAULT : newTemporality;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, CorePackage.LINK_TYPE__TEMPORALITY, oldTemporality, temporality));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
@@ -155,6 +241,10 @@ public class LinkTypeImpl extends ConceptItemImpl implements LinkType {
 				return getDestinationTypes();
 			case CorePackage.LINK_TYPE__REIFIABLE:
 				return isReifiable();
+			case CorePackage.LINK_TYPE__ACCESS_TYPE:
+				return getAccessType();
+			case CorePackage.LINK_TYPE__TEMPORALITY:
+				return getTemporality();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -179,6 +269,12 @@ public class LinkTypeImpl extends ConceptItemImpl implements LinkType {
 			case CorePackage.LINK_TYPE__REIFIABLE:
 				setReifiable((Boolean)newValue);
 				return;
+			case CorePackage.LINK_TYPE__ACCESS_TYPE:
+				setAccessType((LinkAccessType)newValue);
+				return;
+			case CorePackage.LINK_TYPE__TEMPORALITY:
+				setTemporality((LinkTemporality)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -200,6 +296,12 @@ public class LinkTypeImpl extends ConceptItemImpl implements LinkType {
 			case CorePackage.LINK_TYPE__REIFIABLE:
 				setReifiable(REIFIABLE_EDEFAULT);
 				return;
+			case CorePackage.LINK_TYPE__ACCESS_TYPE:
+				setAccessType(ACCESS_TYPE_EDEFAULT);
+				return;
+			case CorePackage.LINK_TYPE__TEMPORALITY:
+				setTemporality(TEMPORALITY_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -218,6 +320,10 @@ public class LinkTypeImpl extends ConceptItemImpl implements LinkType {
 				return destinationTypes != null && !destinationTypes.isEmpty();
 			case CorePackage.LINK_TYPE__REIFIABLE:
 				return reifiable != REIFIABLE_EDEFAULT;
+			case CorePackage.LINK_TYPE__ACCESS_TYPE:
+				return accessType != ACCESS_TYPE_EDEFAULT;
+			case CorePackage.LINK_TYPE__TEMPORALITY:
+				return temporality != TEMPORALITY_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
 	}
@@ -234,6 +340,10 @@ public class LinkTypeImpl extends ConceptItemImpl implements LinkType {
 		StringBuffer result = new StringBuffer(super.toString());
 		result.append(" (reifiable: ");
 		result.append(reifiable);
+		result.append(", accessType: ");
+		result.append(accessType);
+		result.append(", temporality: ");
+		result.append(temporality);
 		result.append(')');
 		return result.toString();
 	}

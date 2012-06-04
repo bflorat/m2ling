@@ -126,6 +126,8 @@
           upperBound="-1" eType="#//core/ComponentType"/>
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="reifiable" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
           defaultValueLiteral="false"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="accessType" eType="#//core/LinkAccessType"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="temporality" eType="#//core/LinkTemporality"/>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="Link" eSuperTypes="#//core/ArchitectureItem">
       <eStructuralFeatures xsi:type="ecore:EReference" name="type" lowerBound="1"
@@ -134,6 +136,7 @@
           upperBound="-1" eType="#//core/Component"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="destinations" lowerBound="1"
           upperBound="-1" eType="#//core/Component"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="timeoutMillis" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//ELong"/>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="InstancesLink" eSuperTypes="#//core/RuntimeItem">
       <eStructuralFeatures xsi:type="ecore:EReference" name="source" lowerBound="1"
@@ -248,6 +251,22 @@
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" eType="#//core/ReferenceType"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="targets" upperBound="-1"
           eType="#//core/HasReferences"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EEnum" name="LinkTemporality">
+      <eLiterals name="SYNC"/>
+      <eLiterals name="ASYNC_PULL" value="1"/>
+      <eLiterals name="ASYNC_PUSH" value="2"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EEnum" name="LinkAccessType">
+      <eLiterals name="CREATE"/>
+      <eLiterals name="READ" value="1"/>
+      <eLiterals name="UPDATE" value="2"/>
+      <eLiterals name="DELETE" value="3"/>
+      <eLiterals name="RW" value="3"/>
+      <eLiterals name="RO" value="4"/>
+      <eLiterals name="SEARCH" value="5"/>
+      <eLiterals name="SEARCH_INDEX_OUTPUT" value="6"/>
+      <eLiterals name="EVENT" value="7"/>
     </eClassifiers>
   </eSubpackages>
   <eSubpackages name="configuration" nsURI="http://m2ling.org/configuration/0.1" nsPrefix="m2ling_configuration">

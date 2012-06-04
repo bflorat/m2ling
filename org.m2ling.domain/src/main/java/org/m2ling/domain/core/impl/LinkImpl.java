@@ -26,6 +26,7 @@ import org.m2ling.domain.core.LinkType;
  *   <li>{@link org.m2ling.domain.core.impl.LinkImpl#getType <em>Type</em>}</li>
  *   <li>{@link org.m2ling.domain.core.impl.LinkImpl#getOrigins <em>Origins</em>}</li>
  *   <li>{@link org.m2ling.domain.core.impl.LinkImpl#getDestinations <em>Destinations</em>}</li>
+ *   <li>{@link org.m2ling.domain.core.impl.LinkImpl#getTimeoutMillis <em>Timeout Millis</em>}</li>
  * </ul>
  * </p>
  *
@@ -68,6 +69,26 @@ public class LinkImpl extends ArchitectureItemImpl implements Link {
 	 * @ordered
 	 */
 	protected EList<Component> destinations;
+
+	/**
+	 * The default value of the '{@link #getTimeoutMillis() <em>Timeout Millis</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getTimeoutMillis()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final long TIMEOUT_MILLIS_EDEFAULT = 0L;
+
+	/**
+	 * The cached value of the '{@link #getTimeoutMillis() <em>Timeout Millis</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getTimeoutMillis()
+	 * @generated
+	 * @ordered
+	 */
+	protected long timeoutMillis = TIMEOUT_MILLIS_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -155,6 +176,27 @@ public class LinkImpl extends ArchitectureItemImpl implements Link {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public long getTimeoutMillis() {
+		return timeoutMillis;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setTimeoutMillis(long newTimeoutMillis) {
+		long oldTimeoutMillis = timeoutMillis;
+		timeoutMillis = newTimeoutMillis;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, CorePackage.LINK__TIMEOUT_MILLIS, oldTimeoutMillis, timeoutMillis));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
@@ -165,6 +207,8 @@ public class LinkImpl extends ArchitectureItemImpl implements Link {
 				return getOrigins();
 			case CorePackage.LINK__DESTINATIONS:
 				return getDestinations();
+			case CorePackage.LINK__TIMEOUT_MILLIS:
+				return getTimeoutMillis();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -189,6 +233,9 @@ public class LinkImpl extends ArchitectureItemImpl implements Link {
 				getDestinations().clear();
 				getDestinations().addAll((Collection<? extends Component>)newValue);
 				return;
+			case CorePackage.LINK__TIMEOUT_MILLIS:
+				setTimeoutMillis((Long)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -210,6 +257,9 @@ public class LinkImpl extends ArchitectureItemImpl implements Link {
 			case CorePackage.LINK__DESTINATIONS:
 				getDestinations().clear();
 				return;
+			case CorePackage.LINK__TIMEOUT_MILLIS:
+				setTimeoutMillis(TIMEOUT_MILLIS_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -228,8 +278,26 @@ public class LinkImpl extends ArchitectureItemImpl implements Link {
 				return origins != null && !origins.isEmpty();
 			case CorePackage.LINK__DESTINATIONS:
 				return destinations != null && !destinations.isEmpty();
+			case CorePackage.LINK__TIMEOUT_MILLIS:
+				return timeoutMillis != TIMEOUT_MILLIS_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public String toString() {
+		if (eIsProxy()) return super.toString();
+
+		StringBuffer result = new StringBuffer(super.toString());
+		result.append(" (timeoutMillis: ");
+		result.append(timeoutMillis);
+		result.append(')');
+		return result.toString();
 	}
 
 } //LinkImpl

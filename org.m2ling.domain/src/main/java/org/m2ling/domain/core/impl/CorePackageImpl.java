@@ -45,6 +45,8 @@ import org.m2ling.domain.core.HasTags;
 import org.m2ling.domain.core.InstancesLink;
 import org.m2ling.domain.core.IntegerConstraint;
 import org.m2ling.domain.core.Link;
+import org.m2ling.domain.core.LinkAccessType;
+import org.m2ling.domain.core.LinkTemporality;
 import org.m2ling.domain.core.LinkType;
 import org.m2ling.domain.core.MaxConstraint;
 import org.m2ling.domain.core.MinConstraint;
@@ -421,6 +423,20 @@ public class CorePackageImpl extends EPackageImpl implements CorePackage {
 	 * @generated
 	 */
 	private EEnum referenceTypeEEnum = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EEnum linkTemporalityEEnum = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EEnum linkAccessTypeEEnum = null;
 
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
@@ -1000,6 +1016,24 @@ public class CorePackageImpl extends EPackageImpl implements CorePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getLinkType_AccessType() {
+		return (EAttribute)linkTypeEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getLinkType_Temporality() {
+		return (EAttribute)linkTypeEClass.getEStructuralFeatures().get(4);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getLink() {
 		return linkEClass;
 	}
@@ -1029,6 +1063,15 @@ public class CorePackageImpl extends EPackageImpl implements CorePackage {
 	 */
 	public EReference getLink_Destinations() {
 		return (EReference)linkEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getLink_TimeoutMillis() {
+		return (EAttribute)linkEClass.getEStructuralFeatures().get(3);
 	}
 
 	/**
@@ -1576,6 +1619,24 @@ public class CorePackageImpl extends EPackageImpl implements CorePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EEnum getLinkTemporality() {
+		return linkTemporalityEEnum;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EEnum getLinkAccessType() {
+		return linkAccessTypeEEnum;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public CoreFactory getCoreFactory() {
 		return (CoreFactory)getEFactoryInstance();
 	}
@@ -1675,11 +1736,14 @@ public class CorePackageImpl extends EPackageImpl implements CorePackage {
 		createEReference(linkTypeEClass, LINK_TYPE__SOURCE_TYPES);
 		createEReference(linkTypeEClass, LINK_TYPE__DESTINATION_TYPES);
 		createEAttribute(linkTypeEClass, LINK_TYPE__REIFIABLE);
+		createEAttribute(linkTypeEClass, LINK_TYPE__ACCESS_TYPE);
+		createEAttribute(linkTypeEClass, LINK_TYPE__TEMPORALITY);
 
 		linkEClass = createEClass(LINK);
 		createEReference(linkEClass, LINK__TYPE);
 		createEReference(linkEClass, LINK__ORIGINS);
 		createEReference(linkEClass, LINK__DESTINATIONS);
+		createEAttribute(linkEClass, LINK__TIMEOUT_MILLIS);
 
 		instancesLinkEClass = createEClass(INSTANCES_LINK);
 		createEReference(instancesLinkEClass, INSTANCES_LINK__SOURCE);
@@ -1763,6 +1827,8 @@ public class CorePackageImpl extends EPackageImpl implements CorePackage {
 		ruleStatusEEnum = createEEnum(RULE_STATUS);
 		rulePriorityEEnum = createEEnum(RULE_PRIORITY);
 		referenceTypeEEnum = createEEnum(REFERENCE_TYPE);
+		linkTemporalityEEnum = createEEnum(LINK_TEMPORALITY);
+		linkAccessTypeEEnum = createEEnum(LINK_ACCESS_TYPE);
 	}
 
 	/**
@@ -1941,11 +2007,14 @@ public class CorePackageImpl extends EPackageImpl implements CorePackage {
 		initEReference(getLinkType_SourceTypes(), this.getComponentType(), null, "sourceTypes", null, 1, -1, LinkType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getLinkType_DestinationTypes(), this.getComponentType(), null, "destinationTypes", null, 1, -1, LinkType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getLinkType_Reifiable(), ecorePackage.getEBoolean(), "reifiable", "false", 0, 1, LinkType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getLinkType_AccessType(), this.getLinkAccessType(), "accessType", null, 0, 1, LinkType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getLinkType_Temporality(), this.getLinkTemporality(), "temporality", null, 0, 1, LinkType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(linkEClass, Link.class, "Link", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getLink_Type(), this.getLinkType(), null, "type", null, 1, 1, Link.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getLink_Origins(), this.getComponent(), null, "origins", null, 1, -1, Link.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getLink_Destinations(), this.getComponent(), null, "destinations", null, 1, -1, Link.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getLink_TimeoutMillis(), ecorePackage.getELong(), "timeoutMillis", null, 0, 1, Link.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(instancesLinkEClass, InstancesLink.class, "InstancesLink", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getInstancesLink_Source(), this.getComponentInstance(), null, "source", null, 1, 1, InstancesLink.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -2060,6 +2129,22 @@ public class CorePackageImpl extends EPackageImpl implements CorePackage {
 		addEEnumLiteral(referenceTypeEEnum, ReferenceType.RUNS);
 		addEEnumLiteral(referenceTypeEEnum, ReferenceType.DEPENDS_ON);
 		addEEnumLiteral(referenceTypeEEnum, ReferenceType.ADMINS);
+
+		initEEnum(linkTemporalityEEnum, LinkTemporality.class, "LinkTemporality");
+		addEEnumLiteral(linkTemporalityEEnum, LinkTemporality.SYNC);
+		addEEnumLiteral(linkTemporalityEEnum, LinkTemporality.ASYNC_PULL);
+		addEEnumLiteral(linkTemporalityEEnum, LinkTemporality.ASYNC_PUSH);
+
+		initEEnum(linkAccessTypeEEnum, LinkAccessType.class, "LinkAccessType");
+		addEEnumLiteral(linkAccessTypeEEnum, LinkAccessType.CREATE);
+		addEEnumLiteral(linkAccessTypeEEnum, LinkAccessType.READ);
+		addEEnumLiteral(linkAccessTypeEEnum, LinkAccessType.UPDATE);
+		addEEnumLiteral(linkAccessTypeEEnum, LinkAccessType.DELETE);
+		addEEnumLiteral(linkAccessTypeEEnum, LinkAccessType.RW);
+		addEEnumLiteral(linkAccessTypeEEnum, LinkAccessType.RO);
+		addEEnumLiteral(linkAccessTypeEEnum, LinkAccessType.SEARCH);
+		addEEnumLiteral(linkAccessTypeEEnum, LinkAccessType.SEARCH_INDEX_OUTPUT);
+		addEEnumLiteral(linkAccessTypeEEnum, LinkAccessType.EVENT);
 	}
 
 } //CorePackageImpl

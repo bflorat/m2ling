@@ -18,6 +18,7 @@ import org.eclipse.emf.common.util.EList;
  *   <li>{@link org.m2ling.domain.core.Link#getType <em>Type</em>}</li>
  *   <li>{@link org.m2ling.domain.core.Link#getOrigins <em>Origins</em>}</li>
  *   <li>{@link org.m2ling.domain.core.Link#getDestinations <em>Destinations</em>}</li>
+ *   <li>{@link org.m2ling.domain.core.Link#getTimeoutMillis <em>Timeout Millis</em>}</li>
  * </ul>
  * </p>
  *
@@ -90,5 +91,31 @@ public interface Link extends ArchitectureItem {
 	 * @generated
 	 */
 	EList<Component> getDestinations();
+
+	/**
+	 * Returns the value of the '<em><b>Timeout Millis</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Timeout Millis</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Timeout Millis</em>' attribute.
+	 * @see #setTimeoutMillis(long)
+	 * @see org.m2ling.domain.core.CorePackage#getLink_TimeoutMillis()
+	 * @model
+	 * @generated
+	 */
+	long getTimeoutMillis();
+
+	/**
+	 * Sets the value of the '{@link org.m2ling.domain.core.Link#getTimeoutMillis <em>Timeout Millis</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Timeout Millis</em>' attribute.
+	 * @see #getTimeoutMillis()
+	 * @generated
+	 */
+	void setTimeoutMillis(long value);
 
 } // Link
