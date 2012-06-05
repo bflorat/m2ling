@@ -7,6 +7,7 @@ defaultTasks('clean','build');
 
 subprojects(){
  apply(plugin: 'java');
+ apply(plugin: 'eclipse');
  
  defaultTasks('clean','build');
 
@@ -18,10 +19,12 @@ subprojects(){
  dependencies(){
   //main
   compile('com.google.inject:guice:3.0');
+  compile('com.google.guava:guava:11.0');
 
   //tests
   testCompile('com.google.inject:guice:3.0');	
   testCompile('junit:junit:4.8.2');
+  testCompile('com.google.guava:guava:11.0');
  }
 
  version = '0.1';

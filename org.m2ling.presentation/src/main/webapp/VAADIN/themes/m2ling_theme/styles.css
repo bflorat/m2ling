@@ -1,15 +1,13 @@
-.v-theme-version:after {content:"6_7_9";}
-.v-theme-version-1_0 {display: none;}
-/* Automatically compiled css file from subdirectories. */
-
 @import "../reindeer/styles.css";
 
-.v-tabsheet-tabitemcell-logo .v-captiontext {
-	
-}
+.v-theme-version:after {content:"6_7_9";}
+.v-theme-version-1_0 {display: none;}
 
-.v-tabsheet-tabitemcell-app .v-captiontext {
+/*.v-menubar-menuitem-caption{
+	font-weight:bold;
+}*/
+
+
+.app {
 	font-weight: bold;
-	background: black;
-	color: white;
 }

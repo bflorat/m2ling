@@ -5,7 +5,6 @@ Executable specifications build script
 **/
 
 dependencies(){
-	compile('com.google.guava:guava:11.0');
 }
 
 
