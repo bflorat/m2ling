@@ -32,7 +32,7 @@ import org.m2ling.domain.provider.M2lingEditPlugin;
  * @generated
  */
 public class ReferenceItemProvider
-	extends ItemProviderAdapter
+	extends HasCommentItemProvider
 	implements
 		IEditingDomainItemProvider,
 		IStructuredItemContentProvider,
@@ -67,10 +67,102 @@ public class ReferenceItemProvider
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
+			addCustomPropertiesPropertyDescriptor(object);
+			addLabelPropertyDescriptor(object);
+			addStatusPropertyDescriptor(object);
+			addTagsPropertyDescriptor(object);
 			addTypePropertyDescriptor(object);
 			addTargetsPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
+	}
+
+	/**
+	 * This adds a property descriptor for the Custom Properties feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addCustomPropertiesPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_HasCustomProperties_customProperties_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_HasCustomProperties_customProperties_feature", "_UI_HasCustomProperties_type"),
+				 CorePackage.Literals.HAS_CUSTOM_PROPERTIES__CUSTOM_PROPERTIES,
+				 true,
+				 false,
+				 true,
+				 null,
+				 null,
+				 null));
+	}
+
+	/**
+	 * This adds a property descriptor for the Label feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addLabelPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_HasLabel_label_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_HasLabel_label_feature", "_UI_HasLabel_type"),
+				 CorePackage.Literals.HAS_LABEL__LABEL,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				 null,
+				 null));
+	}
+
+	/**
+	 * This adds a property descriptor for the Status feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addStatusPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_HasStatus_status_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_HasStatus_status_feature", "_UI_HasStatus_type"),
+				 CorePackage.Literals.HAS_STATUS__STATUS,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				 null,
+				 null));
+	}
+
+	/**
+	 * This adds a property descriptor for the Tags feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addTagsPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_HasTags_tags_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_HasTags_tags_feature", "_UI_HasTags_type"),
+				 CorePackage.Literals.HAS_TAGS__TAGS,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				 null,
+				 null));
 	}
 
 	/**
@@ -125,8 +217,7 @@ public class ReferenceItemProvider
 	 */
 	@Override
 	public String getText(Object object) {
-		ReferenceType labelValue = ((Reference)object).getType();
-		String label = labelValue == null ? null : labelValue.toString();
+		String label = ((Reference)object).getComment();
 		return label == null || label.length() == 0 ?
 			getString("_UI_Reference_type") :
 			getString("_UI_Reference_type") + " " + label;
@@ -144,6 +235,9 @@ public class ReferenceItemProvider
 		updateChildren(notification);
 
 		switch (notification.getFeatureID(Reference.class)) {
+			case CorePackage.REFERENCE__LABEL:
+			case CorePackage.REFERENCE__STATUS:
+			case CorePackage.REFERENCE__TAGS:
 			case CorePackage.REFERENCE__TYPE:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
@@ -161,17 +255,6 @@ public class ReferenceItemProvider
 	@Override
 	protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
 		super.collectNewChildDescriptors(newChildDescriptors, object);
-	}
-
-	/**
-	 * Return the resource locator for this item provider's resources.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public ResourceLocator getResourceLocator() {
-		return M2lingEditPlugin.INSTANCE;
 	}
 
 }

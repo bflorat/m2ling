@@ -223,13 +223,6 @@
       <eLiterals name="VIEWPOINT" value="6"/>
       <eLiterals name="VIEW" value="7"/>
     </eClassifiers>
-    <eClassifiers xsi:type="ecore:EEnum" name="RuleStatus">
-      <eLiterals name="TO_BE_STUDIED"/>
-      <eLiterals name="STUDIED" value="1"/>
-      <eLiterals name="VALIDATED" value="2"/>
-      <eLiterals name="REFUSED" value="3"/>
-      <eLiterals name="OBSOLETE" value="4"/>
-    </eClassifiers>
     <eClassifiers xsi:type="ecore:EEnum" name="RulePriority">
       <eLiterals name="VERY_LOW"/>
       <eLiterals name="LOW" value="1"/>
@@ -237,8 +230,7 @@
       <eLiterals name="HIGH" value="3"/>
       <eLiterals name="VERY_HIGH" value="4"/>
     </eClassifiers>
-    <eClassifiers xsi:type="ecore:EClass" name="Rule" eSuperTypes="#//core/HasNameAndID #//core/HasCustomProperties #//core/HasComment #//core/HasTags #//core/HasLabel">
-      <eStructuralFeatures xsi:type="ecore:EAttribute" name="status" eType="#//core/RuleStatus"/>
+    <eClassifiers xsi:type="ecore:EClass" name="Rule" eSuperTypes="#//core/HasNameAndID #//core/HasCustomProperties #//core/HasComment #//core/HasTags #//core/HasLabel #//core/HasStatus">
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="priority" eType="#//core/RulePriority"/>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EEnum" name="ReferenceType">
@@ -247,7 +239,7 @@
       <eLiterals name="DEPENDS_ON" value="1" literal="DEPENDS_ON"/>
       <eLiterals name="ADMINS" literal="ADMINS"/>
     </eClassifiers>
-    <eClassifiers xsi:type="ecore:EClass" name="Reference">
+    <eClassifiers xsi:type="ecore:EClass" name="Reference" eSuperTypes="#//core/HasComment #//core/HasConstraints #//core/HasCustomProperties #//core/HasLabel #//core/HasStatus #//core/HasTags">
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" eType="#//core/ReferenceType"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="targets" upperBound="-1"
           eType="#//core/HasReferences"/>

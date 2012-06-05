@@ -15,7 +15,7 @@ import org.m2ling.domain.core.Reference;
  * <!-- end-user-doc -->
  * @generated
  */
-public class ReferenceTest extends TestCase {
+public class ReferenceTest extends HasCommentTest {
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -23,14 +23,6 @@ public class ReferenceTest extends TestCase {
 	 * @generated
 	 */
 	public static final String copyright = "Copyright (C) 2012 Bertrand Florat";
-
-	/**
-	 * The fixture for this Reference test case.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected Reference fixture = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -52,23 +44,14 @@ public class ReferenceTest extends TestCase {
 	}
 
 	/**
-	 * Sets the fixture for this Reference test case.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void setFixture(Reference fixture) {
-		this.fixture = fixture;
-	}
-
-	/**
 	 * Returns the fixture for this Reference test case.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	protected Reference getFixture() {
-		return fixture;
+		return (Reference)fixture;
 	}
 
 	/**

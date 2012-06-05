@@ -14,13 +14,15 @@
 	<h1>Main screen</h1>
 	<pre>
 + View points [New] [New from existing] (one create viewpoint button + some explanations + Tags : [] )
-  + ArchiApp [Delete] (VP label + [based on] value if any)
+  + ArchiApp [Delete] (VP label + status literals)
+      Default values for status literals : VALIDATED, PRODUCTION, RUNNING, CURRENTLY_DESIGNED, DEVELOPMENT, OBSOLETE, RETIRED, REFUSED 
    + Components types [New] (table with all component types) [1] 
     * Application [delete] (@see #1)
      * GUIModule [delete]
    + Link types (@see component types)
     * WS_Sync [Delete] (see #2)
-   + Rules (@see component types)
+   + Rules (@see component types), rules status literals. 
+      Default values for status literals : TO_BE_STUDIED, BEING_STUDIED, VALIDATED, OBSOLETE, REFUSED 
     * R1 [Delete] (see #3)
    + Activities (@see component types)
     * param_defs [Delete] (see #4)
@@ -40,6 +42,8 @@ Name: [] Tags: [tag1,tag2]
 Label : []
 Between : ?[component type 1] with ?[component type 2] [1]
 (No more attributes like sync/async : we want to stay generic)
+Temporality : ?[]
+Access type : ?[]
 
 #3 (Rules form) :
 Name: [] Tags: [tag1,tag2] 

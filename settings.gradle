@@ -4,4 +4,4 @@
  
 **/
 
-include 'org.m2ling.common','org.m2ling.domain','org.m2ling.service','org.m2ling.specs'
+include 'org.m2ling.common','org.m2ling.domain','org.m2ling.service','org.m2ling.specs','org.m2ling.presentation'

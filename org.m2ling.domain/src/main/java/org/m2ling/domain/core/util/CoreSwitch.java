@@ -493,12 +493,19 @@ public class CoreSwitch<T> extends Switch<T> {
 				if (result == null) result = caseHasComment(rule);
 				if (result == null) result = caseHasTags(rule);
 				if (result == null) result = caseHasLabel(rule);
+				if (result == null) result = caseHasStatus(rule);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
 			case CorePackage.REFERENCE: {
 				Reference reference = (Reference)theEObject;
 				T result = caseReference(reference);
+				if (result == null) result = caseHasComment(reference);
+				if (result == null) result = caseHasConstraints(reference);
+				if (result == null) result = caseHasCustomProperties(reference);
+				if (result == null) result = caseHasLabel(reference);
+				if (result == null) result = caseHasStatus(reference);
+				if (result == null) result = caseHasTags(reference);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}

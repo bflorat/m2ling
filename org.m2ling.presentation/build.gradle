@@ -1,0 +1,18 @@
+/**
+Copyright 2012 Bertrand Florat
+
+Executable specifications build script
+**/
+
+apply plugin : 'war'
+
+dependencies{
+	compile group:'com.vaadin', name:'vaadin', version:'6.7.9'
+	compile(project(':org.m2ling.common'));
+	compile(project(':org.m2ling.service'));
+}
+
+
+
+
+

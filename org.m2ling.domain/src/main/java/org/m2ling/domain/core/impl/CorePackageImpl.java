@@ -408,13 +408,6 @@ public class CorePackageImpl extends EPackageImpl implements CorePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EEnum ruleStatusEEnum = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	private EEnum rulePriorityEEnum = null;
 
 	/**
@@ -1502,17 +1495,8 @@ public class CorePackageImpl extends EPackageImpl implements CorePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getRule_Status() {
-		return (EAttribute)ruleEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EAttribute getRule_Priority() {
-		return (EAttribute)ruleEClass.getEStructuralFeatures().get(1);
+		return (EAttribute)ruleEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -1585,15 +1569,6 @@ public class CorePackageImpl extends EPackageImpl implements CorePackage {
 	 */
 	public EEnum getType() {
 		return typeEEnum;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EEnum getRuleStatus() {
-		return ruleStatusEEnum;
 	}
 
 	/**
@@ -1813,7 +1788,6 @@ public class CorePackageImpl extends EPackageImpl implements CorePackage {
 		createEAttribute(actorEClass, ACTOR__LAST_NAME);
 
 		ruleEClass = createEClass(RULE);
-		createEAttribute(ruleEClass, RULE__STATUS);
 		createEAttribute(ruleEClass, RULE__PRIORITY);
 
 		referenceEClass = createEClass(REFERENCE);
@@ -1824,7 +1798,6 @@ public class CorePackageImpl extends EPackageImpl implements CorePackage {
 		customPropertyTypeEEnum = createEEnum(CUSTOM_PROPERTY_TYPE);
 		activityStatusEEnum = createEEnum(ACTIVITY_STATUS);
 		typeEEnum = createEEnum(TYPE);
-		ruleStatusEEnum = createEEnum(RULE_STATUS);
 		rulePriorityEEnum = createEEnum(RULE_PRIORITY);
 		referenceTypeEEnum = createEEnum(REFERENCE_TYPE);
 		linkTemporalityEEnum = createEEnum(LINK_TEMPORALITY);
@@ -1927,6 +1900,13 @@ public class CorePackageImpl extends EPackageImpl implements CorePackage {
 		ruleEClass.getESuperTypes().add(this.getHasComment());
 		ruleEClass.getESuperTypes().add(this.getHasTags());
 		ruleEClass.getESuperTypes().add(this.getHasLabel());
+		ruleEClass.getESuperTypes().add(this.getHasStatus());
+		referenceEClass.getESuperTypes().add(this.getHasComment());
+		referenceEClass.getESuperTypes().add(this.getHasConstraints());
+		referenceEClass.getESuperTypes().add(this.getHasCustomProperties());
+		referenceEClass.getESuperTypes().add(this.getHasLabel());
+		referenceEClass.getESuperTypes().add(this.getHasStatus());
+		referenceEClass.getESuperTypes().add(this.getHasTags());
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(componentTypeEClass, ComponentType.class, "ComponentType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -2084,7 +2064,6 @@ public class CorePackageImpl extends EPackageImpl implements CorePackage {
 		initEAttribute(getActor_LastName(), ecorePackage.getEString(), "lastName", null, 0, 1, Actor.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(ruleEClass, Rule.class, "Rule", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getRule_Status(), this.getRuleStatus(), "status", null, 0, 1, Rule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getRule_Priority(), this.getRulePriority(), "priority", null, 0, 1, Rule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(referenceEClass, Reference.class, "Reference", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -2109,13 +2088,6 @@ public class CorePackageImpl extends EPackageImpl implements CorePackage {
 		addEEnumLiteral(typeEEnum, Type.STREAM);
 		addEEnumLiteral(typeEEnum, Type.VIEWPOINT);
 		addEEnumLiteral(typeEEnum, Type.VIEW);
-
-		initEEnum(ruleStatusEEnum, RuleStatus.class, "RuleStatus");
-		addEEnumLiteral(ruleStatusEEnum, RuleStatus.TO_BE_STUDIED);
-		addEEnumLiteral(ruleStatusEEnum, RuleStatus.STUDIED);
-		addEEnumLiteral(ruleStatusEEnum, RuleStatus.VALIDATED);
-		addEEnumLiteral(ruleStatusEEnum, RuleStatus.REFUSED);
-		addEEnumLiteral(ruleStatusEEnum, RuleStatus.OBSOLETE);
 
 		initEEnum(rulePriorityEEnum, RulePriority.class, "RulePriority");
 		addEEnumLiteral(rulePriorityEEnum, RulePriority.VERY_LOW);

@@ -151,8 +151,6 @@ public class CoreFactoryImpl extends EFactoryImpl implements CoreFactory {
 				return createActivityStatusFromString(eDataType, initialValue);
 			case CorePackage.TYPE:
 				return createTypeFromString(eDataType, initialValue);
-			case CorePackage.RULE_STATUS:
-				return createRuleStatusFromString(eDataType, initialValue);
 			case CorePackage.RULE_PRIORITY:
 				return createRulePriorityFromString(eDataType, initialValue);
 			case CorePackage.REFERENCE_TYPE:
@@ -180,8 +178,6 @@ public class CoreFactoryImpl extends EFactoryImpl implements CoreFactory {
 				return convertActivityStatusToString(eDataType, instanceValue);
 			case CorePackage.TYPE:
 				return convertTypeToString(eDataType, instanceValue);
-			case CorePackage.RULE_STATUS:
-				return convertRuleStatusToString(eDataType, instanceValue);
 			case CorePackage.RULE_PRIORITY:
 				return convertRulePriorityToString(eDataType, instanceValue);
 			case CorePackage.REFERENCE_TYPE:
@@ -562,26 +558,6 @@ public class CoreFactoryImpl extends EFactoryImpl implements CoreFactory {
 	 * @generated
 	 */
 	public String convertTypeToString(EDataType eDataType, Object instanceValue) {
-		return instanceValue == null ? null : instanceValue.toString();
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public RuleStatus createRuleStatusFromString(EDataType eDataType, String initialValue) {
-		RuleStatus result = RuleStatus.get(initialValue);
-		if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
-		return result;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public String convertRuleStatusToString(EDataType eDataType, Object instanceValue) {
 		return instanceValue == null ? null : instanceValue.toString();
 	}
 

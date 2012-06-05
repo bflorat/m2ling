@@ -23,7 +23,7 @@ import org.eclipse.emf.ecore.EObject;
  * @model
  * @generated
  */
-public interface Reference extends EObject {
+public interface Reference extends HasComment, HasConstraints, HasCustomProperties, HasLabel, HasStatus, HasTags {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

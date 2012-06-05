@@ -16,6 +16,7 @@ import org.m2ling.domain.core.CustomProperty;
 import org.m2ling.domain.core.HasComment;
 import org.m2ling.domain.core.HasCustomProperties;
 import org.m2ling.domain.core.HasLabel;
+import org.m2ling.domain.core.HasStatus;
 import org.m2ling.domain.core.HasTags;
 import org.m2ling.domain.core.Rule;
 import org.m2ling.domain.core.RulePriority;
@@ -115,7 +116,7 @@ public class RuleImpl extends HasNameAndIDImpl implements Rule {
 	 * @generated
 	 * @ordered
 	 */
-	protected static final RuleStatus STATUS_EDEFAULT = RuleStatus.TO_BE_STUDIED;
+	protected static final String STATUS_EDEFAULT = null;
 
 	/**
 	 * The cached value of the '{@link #getStatus() <em>Status</em>}' attribute.
@@ -125,7 +126,7 @@ public class RuleImpl extends HasNameAndIDImpl implements Rule {
 	 * @generated
 	 * @ordered
 	 */
-	protected RuleStatus status = STATUS_EDEFAULT;
+	protected String status = STATUS_EDEFAULT;
 
 	/**
 	 * The default value of the '{@link #getPriority() <em>Priority</em>}' attribute.
@@ -263,7 +264,7 @@ public class RuleImpl extends HasNameAndIDImpl implements Rule {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public RuleStatus getStatus() {
+	public String getStatus() {
 		return status;
 	}
 
@@ -272,9 +273,9 @@ public class RuleImpl extends HasNameAndIDImpl implements Rule {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setStatus(RuleStatus newStatus) {
-		RuleStatus oldStatus = status;
-		status = newStatus == null ? STATUS_EDEFAULT : newStatus;
+	public void setStatus(String newStatus) {
+		String oldStatus = status;
+		status = newStatus;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, CorePackage.RULE__STATUS, oldStatus, status));
 	}
@@ -348,7 +349,7 @@ public class RuleImpl extends HasNameAndIDImpl implements Rule {
 				setLabel((String)newValue);
 				return;
 			case CorePackage.RULE__STATUS:
-				setStatus((RuleStatus)newValue);
+				setStatus((String)newValue);
 				return;
 			case CorePackage.RULE__PRIORITY:
 				setPriority((RulePriority)newValue);
@@ -404,7 +405,7 @@ public class RuleImpl extends HasNameAndIDImpl implements Rule {
 			case CorePackage.RULE__LABEL:
 				return LABEL_EDEFAULT == null ? label != null : !LABEL_EDEFAULT.equals(label);
 			case CorePackage.RULE__STATUS:
-				return status != STATUS_EDEFAULT;
+				return STATUS_EDEFAULT == null ? status != null : !STATUS_EDEFAULT.equals(status);
 			case CorePackage.RULE__PRIORITY:
 				return priority != PRIORITY_EDEFAULT;
 		}
@@ -442,6 +443,12 @@ public class RuleImpl extends HasNameAndIDImpl implements Rule {
 				default: return -1;
 			}
 		}
+		if (baseClass == HasStatus.class) {
+			switch (derivedFeatureID) {
+				case CorePackage.RULE__STATUS: return CorePackage.HAS_STATUS__STATUS;
+				default: return -1;
+			}
+		}
 		return super.eBaseStructuralFeatureID(derivedFeatureID, baseClass);
 	}
 
@@ -473,6 +480,12 @@ public class RuleImpl extends HasNameAndIDImpl implements Rule {
 		if (baseClass == HasLabel.class) {
 			switch (baseFeatureID) {
 				case CorePackage.HAS_LABEL__LABEL: return CorePackage.RULE__LABEL;
+				default: return -1;
+			}
+		}
+		if (baseClass == HasStatus.class) {
+			switch (baseFeatureID) {
+				case CorePackage.HAS_STATUS__STATUS: return CorePackage.RULE__STATUS;
 				default: return -1;
 			}
 		}
