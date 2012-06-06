@@ -14,7 +14,7 @@ import com.google.inject.Singleton;
 /**
  * Guice bindings for m2principles features of presentation tiers
  */
-public class PrincipleGuiceModule extends AbstractModule {
+public class PresentationPrincipleGuiceModule extends AbstractModule {
 
 	/*
 	 * (non-Javadoc)
@@ -24,7 +24,8 @@ public class PrincipleGuiceModule extends AbstractModule {
 	@Override
 	protected void configure() {
 		{// Injection bindings
-			bind(ViewPointService.class).to(ViewPointServiceImpl.class).in(Singleton.class);
+			bind(ViewPointService.class).to(ViewPointServiceImpl.class);
+			bind(PrinciplesMainFrame.class);
 		}
 	}
 

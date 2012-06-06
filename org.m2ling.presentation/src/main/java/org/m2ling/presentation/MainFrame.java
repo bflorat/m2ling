@@ -9,10 +9,10 @@ import com.vaadin.terminal.ThemeResource;
 import com.vaadin.ui.Accordion;
 import com.vaadin.ui.CustomComponent;
 import com.vaadin.ui.Embedded;
-import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.HorizontalSplitPanel;
 import com.vaadin.ui.Label;
 import com.vaadin.ui.Panel;
+import com.vaadin.ui.RichTextArea;
 import com.vaadin.ui.TextField;
 import com.vaadin.ui.VerticalLayout;
 
@@ -39,6 +39,8 @@ public class MainFrame extends CustomComponent {
 	private HorizontalSplitPanel splitSidebar;
 
 	private TextField search;
+
+	private RichTextArea comments;
 
 	/**
 	 * @return the appPanel
@@ -79,28 +81,32 @@ public class MainFrame extends CustomComponent {
 		accordion.setSizeFull();
 
 		// Search box
-		search = new TextField();
+		search = new TextField("Search");
 
+		// Comments area
+		comments = new RichTextArea("Comments");
+		comments.setEnabled(false);
+		comments.setWidth("100%");
+		comments.setHeight("30px");
 	}
 
 	/**
 	 * Place the components
 	 */
 	private void buildMenuLayout() {
-		// Search
-		HorizontalLayout hlSearch = new HorizontalLayout();
-		hlSearch.setSpacing(true);
-		hlSearch.addComponent(new Embedded(null, new ThemeResource("img/search_16x16.png")));
-		hlSearch.addComponent(search);
-
+		// Accordion
+		accordion.addTab(comments);
+		
 		// Sidebar
 		VerticalLayout sidebar = new VerticalLayout();
 		sidebar.setSpacing(true);
 		sidebar.setSizeFull();
 		sidebar.addComponent(logo);
-		sidebar.addComponent(hlSearch);
+		sidebar.addComponent(search);
 		sidebar.addComponent(accordion);
 		sidebar.setExpandRatio(accordion, 100);
+		sidebar.setMargin(true);
+		sidebar.setStyleName("sidebar");
 
 		// Sidebar | application
 		splitSidebar = new HorizontalSplitPanel();

@@ -17,7 +17,6 @@ import org.m2ling.service.core.TagService;
 
 import com.google.common.base.Strings;
 import com.google.inject.Inject;
-import com.google.inject.Module;
 
 /**
  * 
@@ -35,8 +34,8 @@ public class TagServiceImpl extends ServiceImpl implements TagService {
 	/**
 	 * @see ServiceImpl
 	 */
-	protected TagServiceImpl(Module... additionalTestModules) {
-		super(additionalTestModules);
+	protected TagServiceImpl() {
+		super();
 	}
 
 	private void checkTypeAndID(Type type, String itemID) {

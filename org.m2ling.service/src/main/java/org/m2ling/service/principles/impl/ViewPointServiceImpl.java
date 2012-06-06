@@ -13,12 +13,13 @@ import org.m2ling.service.common.ServiceImpl;
 import org.m2ling.service.principles.ViewPointService;
 import org.m2ling.service.util.DTOConverter;
 
-import com.google.inject.Module;
+import com.google.inject.Singleton;
 
 /**
  * @author "Bertrand Florat <bertrand@florat.net>"
  * 
  */
+@Singleton
 public final class ViewPointServiceImpl extends ServiceImpl implements ViewPointService {
 	
 	/**
@@ -26,13 +27,6 @@ public final class ViewPointServiceImpl extends ServiceImpl implements ViewPoint
 	 */
 	protected ViewPointServiceImpl() {
 		super();
-	}
-
-	/**
-	 * @see ServiceImpl
-	 */
-	protected ViewPointServiceImpl(Module additionalTestModule) {
-		super(additionalTestModule);
 	}
 
 	public List<ViewPointDTO> getAllViewPoints() {

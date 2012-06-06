@@ -12,7 +12,6 @@ import org.m2ling.service.util.CoreUtil;
 import org.m2ling.service.util.DTOConverter;
 
 import com.google.inject.AbstractModule;
-import com.google.inject.Singleton;
 import com.google.inject.matcher.Matchers;
 
 /**
@@ -21,7 +20,7 @@ import com.google.inject.matcher.Matchers;
  * @author "Bertrand Florat <bertrand@florat.net>"
  * 
  */
-public class CommonGuiceModule extends AbstractModule {
+public class ServicesCommonGuiceModule extends AbstractModule {
 
 	/*
 	 * (non-Javadoc)

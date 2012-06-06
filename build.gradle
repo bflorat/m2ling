@@ -7,7 +7,7 @@ defaultTasks('clean','build');
 
 subprojects(){
  apply(plugin: 'java');
- apply(plugin: 'eclipse');
+ apply(plugin: 'eclipse-wtp');
  
  defaultTasks('clean','build');
 

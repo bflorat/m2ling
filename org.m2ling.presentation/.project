@@ -5,6 +5,7 @@
 	<projects>
 		<project>org.m2ling.service</project>
 		<project>org.m2ling.common</project>
+		<project>org.m2ling.domain</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>

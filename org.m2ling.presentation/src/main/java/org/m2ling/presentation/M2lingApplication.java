@@ -1,8 +1,8 @@
 package org.m2ling.presentation;
 
-import java.util.List;
+import org.m2ling.presentation.principles.PrinciplesMainFrame;
 
-import com.google.common.collect.Lists;
+import com.google.inject.Inject;
 import com.vaadin.Application;
 import com.vaadin.ui.MenuBar;
 import com.vaadin.ui.VerticalLayout;
@@ -18,11 +18,8 @@ public class M2lingApplication extends Application {
 
 	private MenuBar menu;
 
-	/**
-	 * List of available applications. TODO : call a service to get available applications for
-	 * currently logged-in user.
-	 **/
-	private List<String> availableApps = Lists.newArrayList("Principles", "Configuration");
+	@Inject
+	private PrinciplesMainFrame principlesFrame;
 
 	@Override
 	public void init() {
@@ -40,14 +37,19 @@ public class M2lingApplication extends Application {
 		rootLayout.setExpandRatio(mframe, 100);
 	}
 
+	@SuppressWarnings("serial")
 	private void initMenu() {
 		menu = new MenuBar();
 		menu.setWidth("100%");
 		menu.setHeight("30px");
-		for (String app : availableApps) {
-			menu.addItem(app, null, null);
-		}
 		menu.setStyleName("app");
+
+		// m2principles
+		menu.addItem("m2principles", null, new MenuBar.Command() {
+			public void menuSelected(MenuBar.MenuItem selectedItem) {
+				mframe.getAppPanel().setContent(principlesFrame);
+			}
+		});
 	}
 
 }

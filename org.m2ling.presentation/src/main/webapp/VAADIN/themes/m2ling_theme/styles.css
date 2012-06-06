@@ -1,13 +1,23 @@
 @import "../reindeer/styles.css";
 
-.v-theme-version:after {content:"6_7_9";}
-.v-theme-version-1_0 {display: none;}
+.v-theme-version:after {
+	content: "6_7_9";
+}
+
+.v-theme-version-1_0 {
+	display: none;
+}
 
 /*.v-menubar-menuitem-caption{
 	font-weight:bold;
 }*/
-
-
 .app {
 	font-weight: bold;
+}
+
+.sidebar {
+	margin-top: 0px;
+	margin-bottom: 0px;
+	margin-right: 5px;
+	margin-left: 0px;
 }
