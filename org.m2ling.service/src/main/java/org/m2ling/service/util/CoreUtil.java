@@ -34,16 +34,18 @@ public class CoreUtil {
 	@Inject
 	private PersistenceManager pmanager;
 
-	
-
 	/**
 	 * Return a viewpoint denoted by the given name or null if none matches.
 	 * 
 	 * @param name
 	 *           the searched viewpoint name
+	 * @param throwError
+	 *           throw an exception if the viewpoint doesn't exist
 	 * @return a viewpoint denoted by the given name or null if none matches
+	 * @throws IllegalArgumentException
+	 *            if the viewpoint doesn't exist
 	 */
-	public ViewPoint getViewPointByName(String name) {
+	public ViewPoint getViewPointByName(String name, boolean throwError) {
 		ViewPoint vp = null;
 		Root root = pmanager.getRoot();
 		for (ViewPoint v : root.getViewPoints()) {
@@ -59,21 +61,26 @@ public class CoreUtil {
 
 	/**
 	 * Return any object matching provided type and ID. Note that the item ID is not necessary a "iD"
-	 * attribute.
+	 * attribute. This method can return null of the throwError value is false.
 	 * 
 	 * @param type
 	 *           the HasTags item type
 	 * @param itemID
-	 *           the item ID to set tag to.
+	 *           the item ID to set tag to. * @param throwError throw an exception if the item
+	 *           doesn't exist
 	 * @return any object matching provided type and ID or null if none found
 	 **/
-	public Object getItemByTypeAndID(Type type, String itemID) {
+	public Object getItemByTypeAndID(Type type, String itemID, boolean throwError) {
 		if (type == Type.VIEWPOINT) {
 			// For view points, the id is the name
-			return getViewPointByName(itemID);
+			return getViewPointByName(itemID, throwError);
 		} else {
-			// TODO
-			throw new UnsupportedOperationException("Not yet implemented");
+			if (throwError) {
+				// TODO
+				throw new UnsupportedOperationException("Not yet implemented");
+			} else {
+				return null;
+			}
 		}
 	}
 
@@ -88,7 +95,7 @@ public class CoreUtil {
 	 * @return any object matching provided type and ID or null if none found
 	 **/
 	public HasTags getHasTagsByTypeAndID(Type type, String itemID) {
-		Object o = getItemByTypeAndID(type, itemID);
+		Object o = getItemByTypeAndID(type, itemID, true);
 		if (o != null && o instanceof HasTags) {
 			return (HasTags) o;
 		} else {

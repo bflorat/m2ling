@@ -1,13 +1,18 @@
 package org.m2ling.presentation;
 
+import java.util.logging.Logger;
+
 import org.m2ling.presentation.principles.PrinciplesMainFrame;
 
 import com.google.inject.Inject;
+import com.google.inject.servlet.SessionScoped;
 import com.vaadin.Application;
+import com.vaadin.ui.Layout;
 import com.vaadin.ui.MenuBar;
 import com.vaadin.ui.VerticalLayout;
 import com.vaadin.ui.Window;
 
+@SessionScoped
 public class M2lingApplication extends Application {
 
 	private static final long serialVersionUID = 912752897192337109L;
@@ -19,7 +24,12 @@ public class M2lingApplication extends Application {
 	private MenuBar menu;
 
 	@Inject
+	private Logger logger;
+
+	@Inject
 	private PrinciplesMainFrame principlesFrame;
+
+	private Layout currentApp;
 
 	@Override
 	public void init() {
@@ -35,6 +45,8 @@ public class M2lingApplication extends Application {
 		mainWindow.addComponent(mframe);
 		rootLayout.setSpacing(true);
 		rootLayout.setExpandRatio(mframe, 100);
+		// set m2principles app by default
+		setApp(principlesFrame);
 	}
 
 	@SuppressWarnings("serial")
@@ -47,9 +59,19 @@ public class M2lingApplication extends Application {
 		// m2principles
 		menu.addItem("m2principles", null, new MenuBar.Command() {
 			public void menuSelected(MenuBar.MenuItem selectedItem) {
-				mframe.getAppPanel().setContent(principlesFrame);
+				setApp(principlesFrame);
 			}
 		});
+	}
+
+	private void setApp(Layout app) {
+		if (app != this.currentApp) {
+			mframe.resetAccordion();
+			mframe.getAppPanel().setContent(app);
+			this.currentApp = app;
+		} else {
+			logger.warning("Tried to apply existing application : " + app);
+		}
 	}
 
 }

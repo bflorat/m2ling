@@ -7,12 +7,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.m2ling.common.dto.core.ViewPointDTO;
+import org.m2ling.common.security.ACResource;
 import org.m2ling.domain.Root;
 import org.m2ling.domain.core.ViewPoint;
 import org.m2ling.service.common.ServiceImpl;
 import org.m2ling.service.principles.ViewPointService;
+import org.m2ling.service.util.CoreUtil;
 import org.m2ling.service.util.DTOConverter;
 
+import com.google.inject.Inject;
 import com.google.inject.Singleton;
 
 /**
@@ -20,7 +23,11 @@ import com.google.inject.Singleton;
  * 
  */
 @Singleton
+@ACResource
 public final class ViewPointServiceImpl extends ServiceImpl implements ViewPointService {
+	
+	@Inject
+	CoreUtil util;
 	
 	/**
 	 * Protected constructor to prevent direct instantiation
@@ -60,7 +67,24 @@ public final class ViewPointServiceImpl extends ServiceImpl implements ViewPoint
 	public void createViewPoint(ViewPointDTO vpDTO) {
 		ViewPoint vp = fromDTO.newViewPoint(vpDTO);
 		Root root = getPersistenceManager().getRoot();
+		if (root.getViewPoints().contains(vp)){
+			throw new IllegalStateException("View point already exist");
+		}
 		root.getViewPoints().add(vp);
+	}
+
+	/* (non-Javadoc)
+	 * @see org.m2ling.service.principles.ViewPointService#updateViewPoint(org.m2ling.common.dto.core.ViewPointDTO)
+	 */
+	@Override
+	public void updateViewPoint(ViewPointDTO vpDTO) {
+		ViewPoint vp = util.getViewPointByName(vpDTO.getName(), false);
+		if (vp == null){
+			throw new IllegalStateException("View point doesn't exists : "+vpDTO.getName());
+		}
+		vp.setName(vpDTO.getName());
+		vp.setLabel(vpDTO.getLabel());
+		//TODO : manque tags, pourquoi custom properties ? ajouter comments dans l'IHM et les status literals 
 	}
 
 }

@@ -9,7 +9,6 @@ import org.m2ling.service.principles.ViewPointService;
 import org.m2ling.service.principles.impl.ViewPointServiceImpl;
 
 import com.google.inject.AbstractModule;
-import com.google.inject.Singleton;
 
 /**
  * Guice bindings for m2principles features of presentation tiers

@@ -17,6 +17,7 @@ import org.m2ling.service.core.TagService;
 
 import com.google.common.base.Strings;
 import com.google.inject.Inject;
+import com.google.inject.Singleton;
 
 /**
  * 
@@ -26,6 +27,7 @@ import com.google.inject.Inject;
  * 
  */
 @ACResource
+@Singleton
 public class TagServiceImpl extends ServiceImpl implements TagService {
 
 	@Inject

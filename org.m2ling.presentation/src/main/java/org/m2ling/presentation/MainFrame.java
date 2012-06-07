@@ -73,8 +73,7 @@ public class MainFrame extends CustomComponent {
 		// App panel
 		appPanel = new Panel();
 		appPanel.setSizeFull();
-		appPanel.addComponent(new Label("m2ling app here !"));
-
+		
 		// Accordion
 		accordion = new Accordion();
 		accordion.addComponent(new Label("Item1"));
@@ -114,7 +113,11 @@ public class MainFrame extends CustomComponent {
 		splitSidebar.setSizeFull();
 		splitSidebar.addComponent(sidebar);
 		splitSidebar.addComponent(appPanel);
-
+	}
+	
+	void resetAccordion(){
+		accordion.removeAllComponents();
+		accordion.addComponent(comments);
 	}
 
 }

@@ -85,7 +85,7 @@ public class DTOConverter {
 		 * @return a new ViewPoint instance
 		 */
 		public ViewPoint getViewPoint(ViewPointDTO dto) {
-			ViewPoint vp = util.getViewPointByName(dto.getName());
+			ViewPoint vp = util.getViewPointByName(dto.getName(), false);
 			if (vp != null) {
 				return vp;
 			}

@@ -14,7 +14,6 @@ import java.util.List;
 public class ViewPointDTO {
 
 	private final String name;
-	private final String baseVPName;
 	private final List<String> tags;
 	private final String label;
 
@@ -25,7 +24,6 @@ public class ViewPointDTO {
 
 		// Optional configuration
 		private List<String> tags = null;
-		private String baseVPName = null;
 		private String label = null;
 
 		public Builder(String name) {
@@ -34,11 +32,6 @@ public class ViewPointDTO {
 
 		public Builder tags(List<String> tags) {
 			this.tags = tags;
-			return this;
-		}
-
-		public Builder base(String baseVPName) {
-			this.baseVPName = baseVPName;
 			return this;
 		}
 
@@ -60,7 +53,6 @@ public class ViewPointDTO {
 		} else {
 			tags = null;
 		}
-		baseVPName = builder.baseVPName;
 		label = builder.label;
 	}
 
@@ -69,13 +61,6 @@ public class ViewPointDTO {
 	 */
 	public String getName() {
 		return name;
-	}
-
-	/**
-	 * @return the baseVPName
-	 */
-	public String getBaseVPName() {
-		return baseVPName;
 	}
 
 	/**
