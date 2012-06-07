@@ -73,8 +73,8 @@
     <eClassifiers xsi:type="ecore:EClass" name="ArchitectureItem" abstract="true"
         eSuperTypes="#//core/HasNameAndID #//core/HasComment #//core/HasTags #//core/HasParameterDefinitions #//core/HasConstraints #//core/HasLabel"/>
     <eClassifiers xsi:type="ecore:EClass" name="ConceptItem" abstract="true" eSuperTypes="#//core/HasNameAndID #//core/HasCustomProperties #//core/HasComment #//core/HasTags #//core/HasParameterDefinitions #//core/HasConstraints #//core/HasLabel">
-      <eStructuralFeatures xsi:type="ecore:EAttribute" name="status_literals" lowerBound="1"
-          eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="statusLiterals" lowerBound="1"
+          upperBound="-1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="RuntimeItem" abstract="true" eSuperTypes="#//core/HasNameAndID #//core/HasComment #//core/HasTags #//core/HasParameterValues #//core/HasConstraints #//core/HasLabel">
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="status" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>

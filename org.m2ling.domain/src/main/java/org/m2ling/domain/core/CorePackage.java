@@ -186,7 +186,7 @@ public interface CorePackage extends EPackage {
 	int CONCEPT_ITEM__LABEL = HAS_NAME_AND_ID_FEATURE_COUNT + 3;
 
 	/**
-	 * The feature id for the '<em><b>Status literals</b></em>' attribute.
+	 * The feature id for the '<em><b>Status Literals</b></em>' attribute list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -258,7 +258,7 @@ public interface CorePackage extends EPackage {
 	int COMPONENT_TYPE__LABEL = CONCEPT_ITEM__LABEL;
 
 	/**
-	 * The feature id for the '<em><b>Status literals</b></em>' attribute.
+	 * The feature id for the '<em><b>Status Literals</b></em>' attribute list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -805,7 +805,7 @@ public interface CorePackage extends EPackage {
 	int VIEW_POINT__LABEL = CONCEPT_ITEM__LABEL;
 
 	/**
-	 * The feature id for the '<em><b>Status literals</b></em>' attribute.
+	 * The feature id for the '<em><b>Status Literals</b></em>' attribute list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -1318,7 +1318,7 @@ public interface CorePackage extends EPackage {
 	int LINK_TYPE__LABEL = CONCEPT_ITEM__LABEL;
 
 	/**
-	 * The feature id for the '<em><b>Status literals</b></em>' attribute.
+	 * The feature id for the '<em><b>Status Literals</b></em>' attribute list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -2936,15 +2936,15 @@ public interface CorePackage extends EPackage {
 	EClass getConceptItem();
 
 	/**
-	 * Returns the meta object for the attribute '{@link org.m2ling.domain.core.ConceptItem#getStatus_literals <em>Status literals</em>}'.
+	 * Returns the meta object for the attribute list '{@link org.m2ling.domain.core.ConceptItem#getStatusLiterals <em>Status Literals</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Status literals</em>'.
-	 * @see org.m2ling.domain.core.ConceptItem#getStatus_literals()
+	 * @return the meta object for the attribute list '<em>Status Literals</em>'.
+	 * @see org.m2ling.domain.core.ConceptItem#getStatusLiterals()
 	 * @see #getConceptItem()
 	 * @generated
 	 */
-	EAttribute getConceptItem_Status_literals();
+	EAttribute getConceptItem_StatusLiterals();
 
 	/**
 	 * Returns the meta object for class '{@link org.m2ling.domain.core.RuntimeItem <em>Runtime Item</em>}'.
@@ -4192,12 +4192,12 @@ public interface CorePackage extends EPackage {
 		EClass CONCEPT_ITEM = eINSTANCE.getConceptItem();
 
 		/**
-		 * The meta object literal for the '<em><b>Status literals</b></em>' attribute feature.
+		 * The meta object literal for the '<em><b>Status Literals</b></em>' attribute list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute CONCEPT_ITEM__STATUS_LITERALS = eINSTANCE.getConceptItem_Status_literals();
+		EAttribute CONCEPT_ITEM__STATUS_LITERALS = eINSTANCE.getConceptItem_StatusLiterals();
 
 		/**
 		 * The meta object literal for the '{@link org.m2ling.domain.core.impl.RuntimeItemImpl <em>Runtime Item</em>}' class.

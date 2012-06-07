@@ -5,17 +5,12 @@ package org.m2ling.domain.core.impl;
 
 import java.util.Collection;
 
-import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.InternalEObject;
-import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.EObjectResolvingEList;
-import org.eclipse.emf.ecore.util.InternalEList;
 import org.m2ling.domain.core.ComponentInstance;
 import org.m2ling.domain.core.ComponentInstanceGroup;
 import org.m2ling.domain.core.CorePackage;
-import org.m2ling.domain.core.Reference;
 
 /**
  * <!-- begin-user-doc -->

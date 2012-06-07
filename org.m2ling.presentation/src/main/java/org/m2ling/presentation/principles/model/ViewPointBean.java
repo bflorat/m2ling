@@ -20,6 +20,36 @@ public class ViewPointBean implements Serializable {
 	 */
 	private String tags = "";
 	private String label = "";
+	private String comment = "";
+	/**
+	 * @return the comment
+	 */
+	public String getComment() {
+		return comment;
+	}
+
+	/**
+	 * @param comment the comment to set
+	 */
+	public void setComment(String comment) {
+		this.comment = comment;
+	}
+
+	private String statusLiterals = "";
+
+	/**
+	 * @return the statusLiterals
+	 */
+	public String getStatusLiterals() {
+		return statusLiterals;
+	}
+
+	/**
+	 * @param statusLiterals the statusLiterals to set
+	 */
+	public void setStatusLiterals(String statusLiterals) {
+		this.statusLiterals = statusLiterals;
+	}
 
 	/**
 	 * @param name

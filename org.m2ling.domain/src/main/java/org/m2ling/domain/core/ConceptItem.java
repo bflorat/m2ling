@@ -3,6 +3,8 @@
  */
 package org.m2ling.domain.core;
 
+import org.eclipse.emf.common.util.EList;
+
 
 /**
  * <!-- begin-user-doc -->
@@ -12,7 +14,7 @@ package org.m2ling.domain.core;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link org.m2ling.domain.core.ConceptItem#getStatus_literals <em>Status literals</em>}</li>
+ *   <li>{@link org.m2ling.domain.core.ConceptItem#getStatusLiterals <em>Status Literals</em>}</li>
  * </ul>
  * </p>
  *
@@ -29,29 +31,19 @@ public interface ConceptItem extends HasNameAndID, HasCustomProperties, HasComme
 	String copyright = "Copyright (C) 2012 Bertrand Florat";
 
 	/**
-	 * Returns the value of the '<em><b>Status literals</b></em>' attribute.
+	 * Returns the value of the '<em><b>Status Literals</b></em>' attribute list.
+	 * The list contents are of type {@link java.lang.String}.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Status literals</em>' attribute isn't clear,
+	 * If the meaning of the '<em>Status Literals</em>' attribute isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Status literals</em>' attribute.
-	 * @see #setStatus_literals(String)
-	 * @see org.m2ling.domain.core.CorePackage#getConceptItem_Status_literals()
+	 * @return the value of the '<em>Status Literals</em>' attribute list.
+	 * @see org.m2ling.domain.core.CorePackage#getConceptItem_StatusLiterals()
 	 * @model required="true"
 	 * @generated
 	 */
-	String getStatus_literals();
-
-	/**
-	 * Sets the value of the '{@link org.m2ling.domain.core.ConceptItem#getStatus_literals <em>Status literals</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Status literals</em>' attribute.
-	 * @see #getStatus_literals()
-	 * @generated
-	 */
-	void setStatus_literals(String value);
+	EList<String> getStatusLiterals();
 
 } // ConceptItem

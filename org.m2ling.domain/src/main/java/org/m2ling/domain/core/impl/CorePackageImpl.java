@@ -58,7 +58,6 @@ import org.m2ling.domain.core.ReferenceType;
 import org.m2ling.domain.core.RegexpConstraint;
 import org.m2ling.domain.core.Rule;
 import org.m2ling.domain.core.RulePriority;
-import org.m2ling.domain.core.RuleStatus;
 import org.m2ling.domain.core.RuntimeItem;
 import org.m2ling.domain.core.Stakeholder;
 import org.m2ling.domain.core.Type;
@@ -793,7 +792,7 @@ public class CorePackageImpl extends EPackageImpl implements CorePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getConceptItem_Status_literals() {
+	public EAttribute getConceptItem_StatusLiterals() {
 		return (EAttribute)conceptItemEClass.getEStructuralFeatures().get(0);
 	}
 
@@ -1945,7 +1944,7 @@ public class CorePackageImpl extends EPackageImpl implements CorePackage {
 		initEClass(architectureItemEClass, ArchitectureItem.class, "ArchitectureItem", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(conceptItemEClass, ConceptItem.class, "ConceptItem", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getConceptItem_Status_literals(), ecorePackage.getEString(), "status_literals", null, 1, 1, ConceptItem.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getConceptItem_StatusLiterals(), ecorePackage.getEString(), "statusLiterals", null, 1, -1, ConceptItem.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(runtimeItemEClass, RuntimeItem.class, "RuntimeItem", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getRuntimeItem_Status(), ecorePackage.getEString(), "status", null, 0, 1, RuntimeItem.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

@@ -18,8 +18,6 @@ import org.m2ling.domain.core.LinkType;
 import org.m2ling.domain.core.Rule;
 import org.m2ling.domain.core.ViewPoint;
 
-import com.google.inject.Singleton;
-
 /**
  * <!-- begin-user-doc -->
  * An implementation of the model object '<em><b>View Point</b></em>'.

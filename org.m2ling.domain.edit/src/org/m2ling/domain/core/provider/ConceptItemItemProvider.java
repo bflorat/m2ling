@@ -67,7 +67,7 @@ public class ConceptItemItemProvider
 			addCommentPropertyDescriptor(object);
 			addTagsPropertyDescriptor(object);
 			addLabelPropertyDescriptor(object);
-			addStatus_literalsPropertyDescriptor(object);
+			addStatusLiteralsPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -161,18 +161,18 @@ public class ConceptItemItemProvider
 	}
 
 	/**
-	 * This adds a property descriptor for the Status literals feature.
+	 * This adds a property descriptor for the Status Literals feature.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected void addStatus_literalsPropertyDescriptor(Object object) {
+	protected void addStatusLiteralsPropertyDescriptor(Object object) {
 		itemPropertyDescriptors.add
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
-				 getString("_UI_ConceptItem_status_literals_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_ConceptItem_status_literals_feature", "_UI_ConceptItem_type"),
+				 getString("_UI_ConceptItem_statusLiterals_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_ConceptItem_statusLiterals_feature", "_UI_ConceptItem_type"),
 				 CorePackage.Literals.CONCEPT_ITEM__STATUS_LITERALS,
 				 true,
 				 false,

@@ -32,7 +32,7 @@ import org.m2ling.domain.core.HasTags;
  *   <li>{@link org.m2ling.domain.core.impl.ConceptItemImpl#getComment <em>Comment</em>}</li>
  *   <li>{@link org.m2ling.domain.core.impl.ConceptItemImpl#getTags <em>Tags</em>}</li>
  *   <li>{@link org.m2ling.domain.core.impl.ConceptItemImpl#getLabel <em>Label</em>}</li>
- *   <li>{@link org.m2ling.domain.core.impl.ConceptItemImpl#getStatus_literals <em>Status literals</em>}</li>
+ *   <li>{@link org.m2ling.domain.core.impl.ConceptItemImpl#getStatusLiterals <em>Status Literals</em>}</li>
  * </ul>
  * </p>
  *
@@ -107,24 +107,14 @@ public abstract class ConceptItemImpl extends HasNameAndIDImpl implements Concep
 	protected String label = LABEL_EDEFAULT;
 
 	/**
-	 * The default value of the '{@link #getStatus_literals() <em>Status literals</em>}' attribute.
+	 * The cached value of the '{@link #getStatusLiterals() <em>Status Literals</em>}' attribute list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getStatus_literals()
+	 * @see #getStatusLiterals()
 	 * @generated
 	 * @ordered
 	 */
-	protected static final String STATUS_LITERALS_EDEFAULT = null;
-
-	/**
-	 * The cached value of the '{@link #getStatus_literals() <em>Status literals</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getStatus_literals()
-	 * @generated
-	 * @ordered
-	 */
-	protected String status_literals = STATUS_LITERALS_EDEFAULT;
+	protected EList<String> statusLiterals;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -242,20 +232,11 @@ public abstract class ConceptItemImpl extends HasNameAndIDImpl implements Concep
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public String getStatus_literals() {
-		return status_literals;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setStatus_literals(String newStatus_literals) {
-		String oldStatus_literals = status_literals;
-		status_literals = newStatus_literals;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, CorePackage.CONCEPT_ITEM__STATUS_LITERALS, oldStatus_literals, status_literals));
+	public EList<String> getStatusLiterals() {
+		if (statusLiterals == null) {
+			statusLiterals = new EDataTypeUniqueEList<String>(String.class, this, CorePackage.CONCEPT_ITEM__STATUS_LITERALS);
+		}
+		return statusLiterals;
 	}
 
 	/**
@@ -276,7 +257,7 @@ public abstract class ConceptItemImpl extends HasNameAndIDImpl implements Concep
 			case CorePackage.CONCEPT_ITEM__LABEL:
 				return getLabel();
 			case CorePackage.CONCEPT_ITEM__STATUS_LITERALS:
-				return getStatus_literals();
+				return getStatusLiterals();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -304,7 +285,8 @@ public abstract class ConceptItemImpl extends HasNameAndIDImpl implements Concep
 				setLabel((String)newValue);
 				return;
 			case CorePackage.CONCEPT_ITEM__STATUS_LITERALS:
-				setStatus_literals((String)newValue);
+				getStatusLiterals().clear();
+				getStatusLiterals().addAll((Collection<? extends String>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -331,7 +313,7 @@ public abstract class ConceptItemImpl extends HasNameAndIDImpl implements Concep
 				setLabel(LABEL_EDEFAULT);
 				return;
 			case CorePackage.CONCEPT_ITEM__STATUS_LITERALS:
-				setStatus_literals(STATUS_LITERALS_EDEFAULT);
+				getStatusLiterals().clear();
 				return;
 		}
 		super.eUnset(featureID);
@@ -354,7 +336,7 @@ public abstract class ConceptItemImpl extends HasNameAndIDImpl implements Concep
 			case CorePackage.CONCEPT_ITEM__LABEL:
 				return LABEL_EDEFAULT == null ? label != null : !LABEL_EDEFAULT.equals(label);
 			case CorePackage.CONCEPT_ITEM__STATUS_LITERALS:
-				return STATUS_LITERALS_EDEFAULT == null ? status_literals != null : !STATUS_LITERALS_EDEFAULT.equals(status_literals);
+				return statusLiterals != null && !statusLiterals.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}
@@ -463,8 +445,8 @@ public abstract class ConceptItemImpl extends HasNameAndIDImpl implements Concep
 		result.append(tags);
 		result.append(", label: ");
 		result.append(label);
-		result.append(", status_literals: ");
-		result.append(status_literals);
+		result.append(", statusLiterals: ");
+		result.append(statusLiterals);
 		result.append(')');
 		return result.toString();
 	}

@@ -20,7 +20,6 @@ import org.m2ling.domain.core.HasStatus;
 import org.m2ling.domain.core.HasTags;
 import org.m2ling.domain.core.Rule;
 import org.m2ling.domain.core.RulePriority;
-import org.m2ling.domain.core.RuleStatus;
 
 /**
  * <!-- begin-user-doc -->

@@ -23,7 +23,11 @@
     <linkTypes id="_2LrDApqyEeGVMag01qc4bw" name="LDAP" comment="" label="Synchronous access to a LDAP directory. Over TCP-IP." sourceTypes="_E3EOwZoWEeG71vmJ5CR-iA" destinationTypes="_ha8mEZqyEeGVMag01qc4bw"/>
   </viewPoints>
   <viewPoints id="fsdfhjksdhfkjhsdkfj" name="Physical Architecture" comment="" label="Physical Architecture viewpoint provides all rules and concepts dealing with hardware, network aspects of a project.">
-    <componentTypes id="_-aItkZxEEeGi7NYPtEuJdA" name="X86 Server" label="Intel-based server. Mostly 64 bits." reifiable="true"/>
+    <componentTypes id="_-aItkZxEEeGi7NYPtEuJdA" name="X86 Server" label="Intel-based server. Mostly 64 bits." reifiable="true">
+      <statusLiterals>AVAILABLE</statusLiterals>
+      <statusLiterals>REMOVED</statusLiterals>
+      <statusLiterals>FULL</statusLiterals>
+    </componentTypes>
     <componentTypes id="_kOyogZ9ZEeGNFtlcQfUFgw" name="Router" label="Link networks between them." reifiable="true"/>
     <componentTypes id="_W3UboZ9aEeGNFtlcQfUFgw" name="LoadBalancer" label="Appliance load balancer. Dispatch a network request to a virtual IP mapping several devices." reifiable="true"/>
     <componentTypes id="_hQrcIZ9aEeGNFtlcQfUFgw" name="PC" label="PC type micro-computer" reifiable="true"/>
@@ -66,7 +70,7 @@
     <componentTypes id="_sgTcYaTjEeGhbskxmOc77w" name="Environment">
       <references targets="_-a222Gi7NYPtEuJdA _0pkjcZ9aEeGNFtlcQfU333 _aazazaza _1y2zQZohnnnmJ5CR-iA _Ybdmtd456 _wf5AQZ111YPtEuJdA __111CR-iA _fKt222vmJ5CR-iA _ha8mE333Mag01qc4bw _aazazazaerer"/>
     </componentTypes>
-    <componentTypes id="_-a222Gi7NYPtEuJdA" name="X86 Server" label="Intel-based server. Mostly 64 bits." status_literals="AVAILABLE,REMOVED,FULL" instantiationFactor="-1" reifiable="true">
+    <componentTypes id="_-a222Gi7NYPtEuJdA" name="X86 Server" label="Intel-based server. Mostly 64 bits." instantiationFactor="-1" reifiable="true">
       <references type="RUNS" targets="_wf5AQZ111YPtEuJdA"/>
     </componentTypes>
     <componentTypes id="_0pkjcZ9aEeGNFtlcQfU333" name="SPARC Server" label="SPARC RISC-based CPU server" instantiationFactor="-1" reifiable="true">
@@ -159,7 +163,7 @@
     <links id="_tUQzg58-dscgfgx" name="ADMINISTRATION" comment="" label="Access from BikesOnline administrative GUI to BikesOnline administrative services" type="_psOW0p8zEeGYS-4UJ-FpAArr" origins="_8fvV4p6TEeGyndJ1yNTLVw" destinations="_zPeqMJ89EeGNFtlcQfUFgw"/>
   </views>
   <views id="_o6dP8Z9lEeGNFtlcQfUFgw" name="Physical_BikesOnline" comment="" label="BikesOnline physical architecture" viewPoint="fsdfhjksdhfkjhsdkfj">
-    <instances id="_av1GdKGYEeGWHchb0LRqvg" name="WebServer_1" comment="" component="_gfgfdeG3fPi34vn9KQ" boundComponentInstance="_Hk3"/>
+    <instances id="_av1GdKGYEeGWHchb0LRqvg" name="WebServer_1" comment="" status="AVAILABLE" component="_gfgfdeG3fPi34vn9KQ" boundComponentInstance="_Hk3"/>
     <instances id="_thEX5KGYEeGWHchb0LRqvg" name="AS_1" component="_JBJgUp_6EeG3fPi34vn9KQ" boundComponentInstance="_Hk3"/>
     <instances id="_xZASxKGYEeGWHchb0LRqvg" name="AS_2" component="_JBJgUp_6EeG3fPi34vn9KQ" boundComponentInstance="_HkPKsKA2AGg"/>
     <instances id="_6aYMpKGYEeGWHchb0LRqvg" name="Internet_Router_1" comment="" component="_Jlytjhmp" boundComponentInstance="_AIVt1KHBEeGIx4XXpoKVSg"/>

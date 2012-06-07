@@ -6,7 +6,6 @@ package org.m2ling.domain.core.util;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.util.Switch;
-import org.m2ling.domain.core.*;
 import org.m2ling.domain.core.Activity;
 import org.m2ling.domain.core.ActivityTransition;
 import org.m2ling.domain.core.Actor;
