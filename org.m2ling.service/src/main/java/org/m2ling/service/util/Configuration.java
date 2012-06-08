@@ -10,9 +10,9 @@ import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import org.eclipse.emf.teneo.PersistenceOptions;
-import org.hibernate.cfg.Environment;
 import org.m2ling.common.utils.Consts;
+import org.m2ling.persistence.impl.PersistenceManagerTeneoImpl;
+import org.m2ling.persistence.impl.PersistenceManagerXMIImpl;
 
 import com.google.common.base.Strings;
 import com.google.inject.Inject;
@@ -108,11 +108,7 @@ public class Configuration {
 				fileConf.getParentFile().mkdirs();
 				// Store the configuration in XML, not property to ensure best unicode support
 				conf.storeToXML(new FileOutputStream(fileConf), "M2ling service layer configuration file.");
-				System.out.println("******* 3 " + logger);
-
 				logger.info(msg + ". Default file created.");
-				System.out.println("******* 4");
-
 				return conf;
 			} catch (Exception e) {
 				logger.log(Level.SEVERE, fileConf.getAbsolutePath() + " file can't be written", e);
@@ -128,6 +124,7 @@ public class Configuration {
 				throw new IllegalStateException(msg, e);
 			}
 		}
+		logger.info("Services configuration file location : " + fileConf.getAbsolutePath());
 		return result;
 	}
 
@@ -155,34 +152,14 @@ public class Configuration {
 	 */
 	public static Properties getDefaultConfiguration() {
 		Properties result = new Properties();
-		result.put(Environment.DRIVER, "org.h2.Driver");
-		result.put(Environment.USER, "sa");
-		result.put(Environment.URL, "jdbc:h2:" + Consts.M2LING_HOME_DEFAULT_ABS_PATH + File.separator
-				+ Consts.DATABASE_NAME);
-		result.put(Environment.PASS, "");
-		result.put(Environment.DIALECT, org.hibernate.dialect.H2Dialect.class.getName());
-		result.put(PersistenceOptions.CASCADE_POLICY_ON_NON_CONTAINMENT, "REFRESH,PERSIST,MERGE");
-		result.put(PersistenceOptions.EAV_MAPPING, "false");
-		return result;
-	}
-
-	/**
-	 * Return a set of default configuration values in test mode.
-	 * 
-	 * @return a set of default configuration values in test mode.
-	 */
-	public static Properties getDefaultTestConfiguration() {
-		Properties result = new Properties();
-		result.put(Environment.DRIVER, "org.h2.Driver");
-		result.put(Environment.USER, "sa");
-		result.put(Environment.URL, "jdbc:h2:" + Consts.M2LING_HOME_DEFAULT_ABS_PATH + File.separator
-				+ Consts.DATABASE_NAME + ";TRACE_LEVEL_FILE=3");
-		result.put(Environment.PASS, "");
-		result.put(Environment.DIALECT, org.hibernate.dialect.H2Dialect.class.getName());
-		result.put(PersistenceOptions.CASCADE_POLICY_ON_NON_CONTAINMENT, "REFRESH,PERSIST,MERGE");
-		// Force schema drop
-		result.put(Environment.HBM2DDL_AUTO, "create");
-		result.put(PersistenceOptions.EAV_MAPPING, "false");
+		String dev = System.getenv(Consts.M2LING_DEBUG_VARIABLE_NAME);
+		if (!Strings.isNullOrEmpty(dev) && "true".equals(dev)) {
+			// Add Teneo persistence default configuration
+			result.putAll(new PersistenceManagerTeneoImpl.SpecificConfiguration().getDefaultConfiguration());
+		} else {
+			// In debug mode, set debug properties of XMI implementation
+			result.putAll(new PersistenceManagerXMIImpl.SpecificConfiguration().getDefaultTestConfiguration());
+		}
 		return result;
 	}
 

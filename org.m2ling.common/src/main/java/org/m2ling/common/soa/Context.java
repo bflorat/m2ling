@@ -34,11 +34,6 @@ public class Context {
 		USER,
 		/** SHA1 hash of user password. */
 		PWD_HASH,
-		/**
-		 * Resource type to load/store domain data, value should be one literal from
-		 * org.m2ling.persistence.PersistenceType.
-		 */
-		PERSISTENCE_TYPE
 	}
 
 	/**

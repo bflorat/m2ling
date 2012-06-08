@@ -20,6 +20,9 @@ public class Consts {
 	/** M2ling configuration home directory system variable name */
 	public static final String M2LING_HOME_VARIABLE_NAME = "M2LING_HOME";
 
+	/** M2ling debug  mode system variable name */
+	public static final String M2LING_DEBUG_VARIABLE_NAME = "M2LING_DEBUG";
+
 	/** M2LING_HOME_VARIABLE_NAME default value */
 	public static final String M2LING_HOME_DEFAULT_ABS_PATH = System.getProperty("user.home") + File.separator
 			+ "m2ling";

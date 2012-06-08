@@ -7,7 +7,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.m2ling.common.dto.core.ViewPointDTO;
-import org.m2ling.common.security.ACResource;
 import org.m2ling.domain.Root;
 import org.m2ling.domain.core.ViewPoint;
 import org.m2ling.service.common.ServiceImpl;
@@ -23,7 +22,6 @@ import com.google.inject.Singleton;
  * 
  */
 @Singleton
-@ACResource
 public class ViewPointServiceImpl extends ServiceImpl implements ViewPointService {
 
 	@Inject

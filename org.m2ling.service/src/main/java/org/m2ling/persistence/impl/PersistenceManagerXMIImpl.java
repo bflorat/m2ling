@@ -3,7 +3,9 @@
  */
 package org.m2ling.persistence.impl;
 
+import java.io.File;
 import java.io.IOException;
+import java.util.Properties;
 import java.util.logging.Logger;
 
 import org.eclipse.emf.common.util.URI;
@@ -15,10 +17,10 @@ import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import org.m2ling.domain.DomainPackage;
 import org.m2ling.domain.Root;
 import org.m2ling.persistence.PersistenceManager;
+import org.m2ling.service.util.Configuration;
 
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
-import com.google.inject.name.Named;
 
 /**
  * Persistence Manager bringing XMI implementation (load/store from a XMI XML file on filesystem).
@@ -29,16 +31,47 @@ import com.google.inject.name.Named;
 @Singleton
 public class PersistenceManagerXMIImpl implements PersistenceManager {
 
+	/**
+	 * List of available properties for this implementation and default connfiguration
+	 * 
+	 * @author "Bertrand Florat <bertrand@florat.net>"
+	 * 
+	 */
+	public static class SpecificConfiguration  {
+		public static final String CONF_XMI_PATH = "org.m2ling.persistence.xmi.path";
+
+		
+		/* (non-Javadoc)
+		 * @see org.m2ling.service.util.Configuration#getDefaultConfiguration()
+		 */
+		public Properties getDefaultConfiguration() {
+			Properties result = new Properties();
+			return result;
+		}
+		
+		
+		/* (non-Javadoc)
+		 * @see org.m2ling.service.util.Configuration#getDefaultTestConfiguration()
+		 */
+		public Properties getDefaultTestConfiguration() {
+			Properties result = new Properties();
+			result.setProperty(CONF_XMI_PATH, "../org.m2ling.specs/src/specs/resources/mocks/Technical.m2ling");
+			return result;
+		}
+	}
+
 	/** Resource root element */
 	private Root root;
 
-	/** A logger automatically injected by Guice */
-	@Inject
 	private Logger logger;
 
+	private Configuration configuration;
+
 	@Inject
-	protected PersistenceManagerXMIImpl(@Named("XMI_FILE") URI mainXMLfileURI, Logger logger) throws IOException {
+	protected PersistenceManagerXMIImpl(Configuration conf, Logger logger) throws IOException {
 		this.logger = logger;
+		this.configuration = conf;
+		URI mainXMLfileURI = getFileURI();
 		ResourceSet rset = new ResourceSetImpl();
 		// Init the top ecore package (will load transitively sub packages)
 		@SuppressWarnings("unused")
@@ -50,6 +83,24 @@ public class PersistenceManagerXMIImpl implements PersistenceManager {
 		this.logger.info("Loaded successfuly resource : " + mainXMLfileURI);
 		// Root is always the first element in the resource
 		root = (Root) resource.getContents().get(0);
+	}
+
+	/**
+	 * Build XMI target file from configuration
+	 * 
+	 * @return XMI target file from configuration
+	 * @throw IllegalArgumentException if XMI file path is malformed
+	 * @thow IllegalStateException if XMI file path is not set in configuration
+	 */
+	private URI getFileURI() {
+		URI out = null;
+		String filePath = configuration.getSystemProperty(SpecificConfiguration.CONF_XMI_PATH);
+		if (configuration == null) {
+			throw new IllegalStateException("None XMI file path set in configuration");
+		}
+		// Can throw a IllegalArgumentException if URI build fails
+		out = URI.createFileURI(filePath);
+		return out;
 	}
 
 	/*

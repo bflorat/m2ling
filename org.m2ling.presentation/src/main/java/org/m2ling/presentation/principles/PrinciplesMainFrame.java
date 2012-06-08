@@ -7,6 +7,7 @@ package org.m2ling.presentation.principles;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Logger;
 
 import org.m2ling.common.dto.core.ViewPointDTO;
 import org.m2ling.service.principles.ViewPointService;
@@ -43,14 +44,14 @@ public class PrinciplesMainFrame extends VerticalLayout {
 	 * Populate the panel with actual viewpoints. Can take a while as it calls services.
 	 */
 	public void populate() {
-		// vps = vpService.getAllViewPoints();
-		vps = new ArrayList<ViewPointDTO>();
+		vps = vpService.getAllViewPoints();
 		if (vps.size() == 0) {
 			VerticalLayout vert = getNoneVPPanel();
 			addComponent(vert);
 			setComponentAlignment(vert, Alignment.MIDDLE_CENTER);
+		} else {
+			addComponent(new Label(vps.toString()));
 		}
-
 	}
 
 	private VerticalLayout getNoneVPPanel() {

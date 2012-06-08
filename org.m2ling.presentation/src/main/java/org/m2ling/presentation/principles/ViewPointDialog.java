@@ -73,15 +73,17 @@ public class ViewPointDialog extends Window {
 		// account
 		form.setFormFieldFactory(new ViewPointDialogFieldFactory());
 		form.setItemDataSource(new BeanItem<ViewPointBean>(bean));
-		form.setVisibleItemProperties(Arrays
-				.asList(new String[] { "name", "statusLiterals", "tags", "description", "comment" }));
+		form.setVisibleItemProperties(Arrays.asList(new String[] { "name", "statusLiterals", "tags", "description",
+				"comment" }));
 		form.setValidationVisibleOnCommit(true);
 		addComponent(form);
 		Command ok = new Command() {
 			public void execute() {
 				form.commit();
 				List<String> tags = Utils.tagsFromString(bean.getTags());
-				ViewPointDTO vpDTO = new ViewPointDTO.Builder(bean.getName()).description(bean.getDescription()).tags(tags).build();
+				List<String> status = Utils.tagsFromString(bean.getStatusLiterals());
+				ViewPointDTO vpDTO = new ViewPointDTO.Builder(bean.getName()).description(bean.getDescription()).tags(tags)
+						.comment(bean.getComment()).statusLiterals(status).build();
 				if (newVP) {
 					service.createViewPoint(vpDTO);
 				} else {

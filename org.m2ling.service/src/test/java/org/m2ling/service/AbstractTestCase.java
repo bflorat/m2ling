@@ -57,7 +57,7 @@ public abstract class AbstractTestCase extends AbstractModule {
 
 	/** final database resource. Populated by a populateDatabase() call. */
 	protected Resource resource;
-	
+
 	protected PersistenceManagerTeneoImpl pm;
 
 	/**
@@ -87,7 +87,7 @@ public abstract class AbstractTestCase extends AbstractModule {
 	 * @throws IOException
 	 */
 	public void populateDatabase(String mockName) throws IOException {
-		Configuration conf = new Configuration(Configuration.getDefaultTestConfiguration());
+		Configuration conf = new Configuration(Configuration.getDefaultConfiguration());
 		pm = new PersistenceManagerTeneoImpl(conf, Logger.getAnonymousLogger());
 		// Load the resource
 		populateMock(mockName);

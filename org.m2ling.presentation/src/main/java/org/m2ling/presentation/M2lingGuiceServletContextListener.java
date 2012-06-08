@@ -3,15 +3,19 @@
 
 package org.m2ling.presentation;
 
+import org.m2ling.common.utils.Consts;
 import org.m2ling.presentation.principles.PresentationCommonGuiceModule;
 import org.m2ling.presentation.principles.PresentationPrincipleGuiceModule;
 import org.m2ling.service.common.ServicesCommonGuiceModule;
 
+import com.google.common.base.Strings;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
+import com.google.inject.Module;
 import com.google.inject.Stage;
 import com.google.inject.servlet.GuiceServletContextListener;
 import com.google.inject.servlet.ServletModule;
+import com.google.inject.util.Modules;
 import com.vaadin.Application;
 
 /**
@@ -39,8 +43,13 @@ public class M2lingGuiceServletContextListener extends GuiceServletContextListen
 				install(new ServicesCommonGuiceModule());
 			}
 		};
-		// TODO : set PRODUCTION stage before releasing
-		injector = Guice.createInjector(Stage.DEVELOPMENT, module);
+		String dev = System.getenv(Consts.M2LING_DEBUG_VARIABLE_NAME);
+		if (!Strings.isNullOrEmpty(dev) && "true".equals(dev)) {
+			Module finalModule = Modules.override(module).with(new DebugGuiceModule());
+			injector = Guice.createInjector(Stage.DEVELOPMENT, finalModule);
+		} else {
+			injector = Guice.createInjector(Stage.PRODUCTION, module);
+		}
 		return injector;
 	}
 
