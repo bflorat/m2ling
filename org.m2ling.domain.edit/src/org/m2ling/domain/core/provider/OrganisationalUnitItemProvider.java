@@ -67,7 +67,7 @@ public class OrganisationalUnitItemProvider
 			addIdPropertyDescriptor(object);
 			addNamePropertyDescriptor(object);
 			addTagsPropertyDescriptor(object);
-			addLabelPropertyDescriptor(object);
+			addDescriptionPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -161,19 +161,19 @@ public class OrganisationalUnitItemProvider
 	}
 
 	/**
-	 * This adds a property descriptor for the Label feature.
+	 * This adds a property descriptor for the Description feature.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected void addLabelPropertyDescriptor(Object object) {
+	protected void addDescriptionPropertyDescriptor(Object object) {
 		itemPropertyDescriptors.add
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
-				 getString("_UI_HasLabel_label_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_HasLabel_label_feature", "_UI_HasLabel_type"),
-				 CorePackage.Literals.HAS_LABEL__LABEL,
+				 getString("_UI_HasDescription_description_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_HasDescription_description_feature", "_UI_HasDescription_type"),
+				 CorePackage.Literals.HAS_DESCRIPTION__DESCRIPTION,
 				 true,
 				 false,
 				 false,
@@ -222,7 +222,7 @@ public class OrganisationalUnitItemProvider
 			case CorePackage.ORGANISATIONAL_UNIT__ID:
 			case CorePackage.ORGANISATIONAL_UNIT__NAME:
 			case CorePackage.ORGANISATIONAL_UNIT__TAGS:
-			case CorePackage.ORGANISATIONAL_UNIT__LABEL:
+			case CorePackage.ORGANISATIONAL_UNIT__DESCRIPTION:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
 		}

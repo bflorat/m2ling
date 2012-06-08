@@ -18,7 +18,7 @@ import com.vaadin.ui.Button;
 import com.vaadin.ui.Button.ClickEvent;
 import com.vaadin.ui.Label;
 import com.vaadin.ui.VerticalLayout;
-import com.vaadin.ui.Window;
+import com.vaadin.ui.themes.BaseTheme;
 
 /**
  * Main m2principles panel
@@ -28,44 +28,52 @@ public class PrinciplesMainFrame extends VerticalLayout {
 	private static final long serialVersionUID = -3580103313824507265L;
 
 	private List<ViewPointDTO> vps;
-	
+
 	private ViewPointService vpService;
-	
+
 	@Inject
-	public PrinciplesMainFrame(ViewPointService vpService){
+	public PrinciplesMainFrame(ViewPointService vpService) {
 		this.vpService = vpService;
 		setSizeFull();
 		setSpacing(false);
 		populate();
 	}
-	
+
 	/**
-	 * Populate the panel with actual viewpoints. 
-	 * Can take a while as it calls services.
+	 * Populate the panel with actual viewpoints. Can take a while as it calls services.
 	 */
-	public void populate(){
-		//vps = vpService.getAllViewPoints();
+	public void populate() {
+		// vps = vpService.getAllViewPoints();
 		vps = new ArrayList<ViewPointDTO>();
-		if (vps.size() == 0){
-			Label noneVPLabel = new Label("");
-			noneVPLabel.setSizeUndefined();
-			noneVPLabel.setIcon(new ThemeResource("img/16/information.png"));
-			// Use caption to set text to keep icon and label on the same line
-			noneVPLabel.setCaption("None view point found.");
-			Button create = new Button("Create a view point",new Button.ClickListener() {
-				
-				public void buttonClick(ClickEvent event) {
-					Window vpDialog = new ViewPointDialog(null);
-					vpDialog.setModal(true);
-					getWindow().addWindow(vpDialog);
-					
-				}
-			});
-			addComponent(noneVPLabel);
-			setComponentAlignment(noneVPLabel, Alignment.MIDDLE_CENTER);
-			addComponent(create);
-			setComponentAlignment(create, Alignment.MIDDLE_CENTER);
+		if (vps.size() == 0) {
+			VerticalLayout vert = getNoneVPPanel();
+			addComponent(vert);
+			setComponentAlignment(vert, Alignment.MIDDLE_CENTER);
 		}
+
 	}
-	
+
+	private VerticalLayout getNoneVPPanel() {
+		VerticalLayout vert = new VerticalLayout();
+		vert.setSizeUndefined();
+		vert.setSpacing(true);
+		Label noneVPLabel = new Label("");
+		noneVPLabel.setSizeUndefined();
+		noneVPLabel.setIcon(new ThemeResource("img/16/information.png"));
+		// Use caption to set text to keep icon and label on the same line
+		noneVPLabel.setCaption("None view point found");
+		Button create = new Button("Create a view point", new Button.ClickListener() {
+
+			public void buttonClick(ClickEvent event) {
+				ViewPointDialog vpDialog = new ViewPointDialog(null);
+				vpDialog.setModal(true);
+				getWindow().addWindow(vpDialog);
+			}
+		});
+		create.setStyleName(BaseTheme.BUTTON_LINK);
+
+		vert.addComponent(noneVPLabel);
+		vert.addComponent(create);
+		return vert;
+	}
 }

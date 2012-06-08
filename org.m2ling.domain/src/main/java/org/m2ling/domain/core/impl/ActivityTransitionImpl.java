@@ -16,7 +16,7 @@ import org.m2ling.domain.core.ActivityStatus;
 import org.m2ling.domain.core.ActivityTransition;
 import org.m2ling.domain.core.Actor;
 import org.m2ling.domain.core.CorePackage;
-import org.m2ling.domain.core.HasLabel;
+import org.m2ling.domain.core.HasDescription;
 
 /**
  * <!-- begin-user-doc -->
@@ -25,7 +25,7 @@ import org.m2ling.domain.core.HasLabel;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.m2ling.domain.core.impl.ActivityTransitionImpl#getLabel <em>Label</em>}</li>
+ *   <li>{@link org.m2ling.domain.core.impl.ActivityTransitionImpl#getDescription <em>Description</em>}</li>
  *   <li>{@link org.m2ling.domain.core.impl.ActivityTransitionImpl#getDate <em>Date</em>}</li>
  *   <li>{@link org.m2ling.domain.core.impl.ActivityTransitionImpl#getFromStatus <em>From Status</em>}</li>
  *   <li>{@link org.m2ling.domain.core.impl.ActivityTransitionImpl#getToStatus <em>To Status</em>}</li>
@@ -45,24 +45,24 @@ public class ActivityTransitionImpl extends HasCommentImpl implements ActivityTr
 	public static final String copyright = "Copyright (C) 2012 Bertrand Florat";
 
 	/**
-	 * The default value of the '{@link #getLabel() <em>Label</em>}' attribute.
+	 * The default value of the '{@link #getDescription() <em>Description</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getLabel()
+	 * @see #getDescription()
 	 * @generated
 	 * @ordered
 	 */
-	protected static final String LABEL_EDEFAULT = null;
+	protected static final String DESCRIPTION_EDEFAULT = null;
 
 	/**
-	 * The cached value of the '{@link #getLabel() <em>Label</em>}' attribute.
+	 * The cached value of the '{@link #getDescription() <em>Description</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getLabel()
+	 * @see #getDescription()
 	 * @generated
 	 * @ordered
 	 */
-	protected String label = LABEL_EDEFAULT;
+	protected String description = DESCRIPTION_EDEFAULT;
 
 	/**
 	 * The default value of the '{@link #getDate() <em>Date</em>}' attribute.
@@ -168,8 +168,8 @@ public class ActivityTransitionImpl extends HasCommentImpl implements ActivityTr
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public String getLabel() {
-		return label;
+	public String getDescription() {
+		return description;
 	}
 
 	/**
@@ -177,11 +177,11 @@ public class ActivityTransitionImpl extends HasCommentImpl implements ActivityTr
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setLabel(String newLabel) {
-		String oldLabel = label;
-		label = newLabel;
+	public void setDescription(String newDescription) {
+		String oldDescription = description;
+		description = newDescription;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, CorePackage.ACTIVITY_TRANSITION__LABEL, oldLabel, label));
+			eNotify(new ENotificationImpl(this, Notification.SET, CorePackage.ACTIVITY_TRANSITION__DESCRIPTION, oldDescription, description));
 	}
 
 	/**
@@ -305,8 +305,8 @@ public class ActivityTransitionImpl extends HasCommentImpl implements ActivityTr
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case CorePackage.ACTIVITY_TRANSITION__LABEL:
-				return getLabel();
+			case CorePackage.ACTIVITY_TRANSITION__DESCRIPTION:
+				return getDescription();
 			case CorePackage.ACTIVITY_TRANSITION__DATE:
 				return getDate();
 			case CorePackage.ACTIVITY_TRANSITION__FROM_STATUS:
@@ -331,8 +331,8 @@ public class ActivityTransitionImpl extends HasCommentImpl implements ActivityTr
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case CorePackage.ACTIVITY_TRANSITION__LABEL:
-				setLabel((String)newValue);
+			case CorePackage.ACTIVITY_TRANSITION__DESCRIPTION:
+				setDescription((String)newValue);
 				return;
 			case CorePackage.ACTIVITY_TRANSITION__DATE:
 				setDate((Long)newValue);
@@ -362,8 +362,8 @@ public class ActivityTransitionImpl extends HasCommentImpl implements ActivityTr
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case CorePackage.ACTIVITY_TRANSITION__LABEL:
-				setLabel(LABEL_EDEFAULT);
+			case CorePackage.ACTIVITY_TRANSITION__DESCRIPTION:
+				setDescription(DESCRIPTION_EDEFAULT);
 				return;
 			case CorePackage.ACTIVITY_TRANSITION__DATE:
 				setDate(DATE_EDEFAULT);
@@ -392,8 +392,8 @@ public class ActivityTransitionImpl extends HasCommentImpl implements ActivityTr
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case CorePackage.ACTIVITY_TRANSITION__LABEL:
-				return LABEL_EDEFAULT == null ? label != null : !LABEL_EDEFAULT.equals(label);
+			case CorePackage.ACTIVITY_TRANSITION__DESCRIPTION:
+				return DESCRIPTION_EDEFAULT == null ? description != null : !DESCRIPTION_EDEFAULT.equals(description);
 			case CorePackage.ACTIVITY_TRANSITION__DATE:
 				return date != DATE_EDEFAULT;
 			case CorePackage.ACTIVITY_TRANSITION__FROM_STATUS:
@@ -415,9 +415,9 @@ public class ActivityTransitionImpl extends HasCommentImpl implements ActivityTr
 	 */
 	@Override
 	public int eBaseStructuralFeatureID(int derivedFeatureID, Class<?> baseClass) {
-		if (baseClass == HasLabel.class) {
+		if (baseClass == HasDescription.class) {
 			switch (derivedFeatureID) {
-				case CorePackage.ACTIVITY_TRANSITION__LABEL: return CorePackage.HAS_LABEL__LABEL;
+				case CorePackage.ACTIVITY_TRANSITION__DESCRIPTION: return CorePackage.HAS_DESCRIPTION__DESCRIPTION;
 				default: return -1;
 			}
 		}
@@ -431,9 +431,9 @@ public class ActivityTransitionImpl extends HasCommentImpl implements ActivityTr
 	 */
 	@Override
 	public int eDerivedStructuralFeatureID(int baseFeatureID, Class<?> baseClass) {
-		if (baseClass == HasLabel.class) {
+		if (baseClass == HasDescription.class) {
 			switch (baseFeatureID) {
-				case CorePackage.HAS_LABEL__LABEL: return CorePackage.ACTIVITY_TRANSITION__LABEL;
+				case CorePackage.HAS_DESCRIPTION__DESCRIPTION: return CorePackage.ACTIVITY_TRANSITION__DESCRIPTION;
 				default: return -1;
 			}
 		}
@@ -450,8 +450,8 @@ public class ActivityTransitionImpl extends HasCommentImpl implements ActivityTr
 		if (eIsProxy()) return super.toString();
 
 		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (label: ");
-		result.append(label);
+		result.append(" (description: ");
+		result.append(description);
 		result.append(", date: ");
 		result.append(date);
 		result.append(", fromStatus: ");

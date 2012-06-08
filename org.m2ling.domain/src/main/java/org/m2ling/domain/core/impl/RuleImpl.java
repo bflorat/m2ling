@@ -15,7 +15,7 @@ import org.m2ling.domain.core.CorePackage;
 import org.m2ling.domain.core.CustomProperty;
 import org.m2ling.domain.core.HasComment;
 import org.m2ling.domain.core.HasCustomProperties;
-import org.m2ling.domain.core.HasLabel;
+import org.m2ling.domain.core.HasDescription;
 import org.m2ling.domain.core.HasStatus;
 import org.m2ling.domain.core.HasTags;
 import org.m2ling.domain.core.Rule;
@@ -31,7 +31,7 @@ import org.m2ling.domain.core.RulePriority;
  *   <li>{@link org.m2ling.domain.core.impl.RuleImpl#getCustomProperties <em>Custom Properties</em>}</li>
  *   <li>{@link org.m2ling.domain.core.impl.RuleImpl#getComment <em>Comment</em>}</li>
  *   <li>{@link org.m2ling.domain.core.impl.RuleImpl#getTags <em>Tags</em>}</li>
- *   <li>{@link org.m2ling.domain.core.impl.RuleImpl#getLabel <em>Label</em>}</li>
+ *   <li>{@link org.m2ling.domain.core.impl.RuleImpl#getDescription <em>Description</em>}</li>
  *   <li>{@link org.m2ling.domain.core.impl.RuleImpl#getStatus <em>Status</em>}</li>
  *   <li>{@link org.m2ling.domain.core.impl.RuleImpl#getPriority <em>Priority</em>}</li>
  * </ul>
@@ -88,24 +88,24 @@ public class RuleImpl extends HasNameAndIDImpl implements Rule {
 	protected EList<String> tags;
 
 	/**
-	 * The default value of the '{@link #getLabel() <em>Label</em>}' attribute.
+	 * The default value of the '{@link #getDescription() <em>Description</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getLabel()
+	 * @see #getDescription()
 	 * @generated
 	 * @ordered
 	 */
-	protected static final String LABEL_EDEFAULT = null;
+	protected static final String DESCRIPTION_EDEFAULT = null;
 
 	/**
-	 * The cached value of the '{@link #getLabel() <em>Label</em>}' attribute.
+	 * The cached value of the '{@link #getDescription() <em>Description</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getLabel()
+	 * @see #getDescription()
 	 * @generated
 	 * @ordered
 	 */
-	protected String label = LABEL_EDEFAULT;
+	protected String description = DESCRIPTION_EDEFAULT;
 
 	/**
 	 * The default value of the '{@link #getStatus() <em>Status</em>}' attribute.
@@ -242,8 +242,8 @@ public class RuleImpl extends HasNameAndIDImpl implements Rule {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public String getLabel() {
-		return label;
+	public String getDescription() {
+		return description;
 	}
 
 	/**
@@ -251,11 +251,11 @@ public class RuleImpl extends HasNameAndIDImpl implements Rule {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setLabel(String newLabel) {
-		String oldLabel = label;
-		label = newLabel;
+	public void setDescription(String newDescription) {
+		String oldDescription = description;
+		description = newDescription;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, CorePackage.RULE__LABEL, oldLabel, label));
+			eNotify(new ENotificationImpl(this, Notification.SET, CorePackage.RULE__DESCRIPTION, oldDescription, description));
 	}
 
 	/**
@@ -315,8 +315,8 @@ public class RuleImpl extends HasNameAndIDImpl implements Rule {
 				return getComment();
 			case CorePackage.RULE__TAGS:
 				return getTags();
-			case CorePackage.RULE__LABEL:
-				return getLabel();
+			case CorePackage.RULE__DESCRIPTION:
+				return getDescription();
 			case CorePackage.RULE__STATUS:
 				return getStatus();
 			case CorePackage.RULE__PRIORITY:
@@ -344,8 +344,8 @@ public class RuleImpl extends HasNameAndIDImpl implements Rule {
 				getTags().clear();
 				getTags().addAll((Collection<? extends String>)newValue);
 				return;
-			case CorePackage.RULE__LABEL:
-				setLabel((String)newValue);
+			case CorePackage.RULE__DESCRIPTION:
+				setDescription((String)newValue);
 				return;
 			case CorePackage.RULE__STATUS:
 				setStatus((String)newValue);
@@ -374,8 +374,8 @@ public class RuleImpl extends HasNameAndIDImpl implements Rule {
 			case CorePackage.RULE__TAGS:
 				getTags().clear();
 				return;
-			case CorePackage.RULE__LABEL:
-				setLabel(LABEL_EDEFAULT);
+			case CorePackage.RULE__DESCRIPTION:
+				setDescription(DESCRIPTION_EDEFAULT);
 				return;
 			case CorePackage.RULE__STATUS:
 				setStatus(STATUS_EDEFAULT);
@@ -401,8 +401,8 @@ public class RuleImpl extends HasNameAndIDImpl implements Rule {
 				return COMMENT_EDEFAULT == null ? comment != null : !COMMENT_EDEFAULT.equals(comment);
 			case CorePackage.RULE__TAGS:
 				return tags != null && !tags.isEmpty();
-			case CorePackage.RULE__LABEL:
-				return LABEL_EDEFAULT == null ? label != null : !LABEL_EDEFAULT.equals(label);
+			case CorePackage.RULE__DESCRIPTION:
+				return DESCRIPTION_EDEFAULT == null ? description != null : !DESCRIPTION_EDEFAULT.equals(description);
 			case CorePackage.RULE__STATUS:
 				return STATUS_EDEFAULT == null ? status != null : !STATUS_EDEFAULT.equals(status);
 			case CorePackage.RULE__PRIORITY:
@@ -436,9 +436,9 @@ public class RuleImpl extends HasNameAndIDImpl implements Rule {
 				default: return -1;
 			}
 		}
-		if (baseClass == HasLabel.class) {
+		if (baseClass == HasDescription.class) {
 			switch (derivedFeatureID) {
-				case CorePackage.RULE__LABEL: return CorePackage.HAS_LABEL__LABEL;
+				case CorePackage.RULE__DESCRIPTION: return CorePackage.HAS_DESCRIPTION__DESCRIPTION;
 				default: return -1;
 			}
 		}
@@ -476,9 +476,9 @@ public class RuleImpl extends HasNameAndIDImpl implements Rule {
 				default: return -1;
 			}
 		}
-		if (baseClass == HasLabel.class) {
+		if (baseClass == HasDescription.class) {
 			switch (baseFeatureID) {
-				case CorePackage.HAS_LABEL__LABEL: return CorePackage.RULE__LABEL;
+				case CorePackage.HAS_DESCRIPTION__DESCRIPTION: return CorePackage.RULE__DESCRIPTION;
 				default: return -1;
 			}
 		}
@@ -505,8 +505,8 @@ public class RuleImpl extends HasNameAndIDImpl implements Rule {
 		result.append(comment);
 		result.append(", tags: ");
 		result.append(tags);
-		result.append(", label: ");
-		result.append(label);
+		result.append(", description: ");
+		result.append(description);
 		result.append(", status: ");
 		result.append(status);
 		result.append(", priority: ");

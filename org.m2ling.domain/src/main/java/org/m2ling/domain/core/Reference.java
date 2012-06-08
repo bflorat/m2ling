@@ -22,7 +22,7 @@ import org.eclipse.emf.common.util.EList;
  * @model
  * @generated
  */
-public interface Reference extends HasComment, HasConstraints, HasCustomProperties, HasLabel, HasStatus, HasTags {
+public interface Reference extends HasComment, HasConstraints, HasCustomProperties, HasDescription, HasStatus, HasTags {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

@@ -5,14 +5,12 @@ import java.util.logging.Logger;
 import org.m2ling.presentation.principles.PrinciplesMainFrame;
 
 import com.google.inject.Inject;
-import com.google.inject.servlet.SessionScoped;
 import com.vaadin.Application;
 import com.vaadin.ui.Layout;
 import com.vaadin.ui.MenuBar;
 import com.vaadin.ui.VerticalLayout;
 import com.vaadin.ui.Window;
 
-@SessionScoped
 public class M2lingApplication extends Application {
 
 	private static final long serialVersionUID = 912752897192337109L;

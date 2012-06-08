@@ -177,13 +177,13 @@ public interface CorePackage extends EPackage {
 	int CONCEPT_ITEM__TAGS = HAS_NAME_AND_ID_FEATURE_COUNT + 2;
 
 	/**
-	 * The feature id for the '<em><b>Label</b></em>' attribute.
+	 * The feature id for the '<em><b>Description</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CONCEPT_ITEM__LABEL = HAS_NAME_AND_ID_FEATURE_COUNT + 3;
+	int CONCEPT_ITEM__DESCRIPTION = HAS_NAME_AND_ID_FEATURE_COUNT + 3;
 
 	/**
 	 * The feature id for the '<em><b>Status Literals</b></em>' attribute list.
@@ -249,13 +249,13 @@ public interface CorePackage extends EPackage {
 	int COMPONENT_TYPE__TAGS = CONCEPT_ITEM__TAGS;
 
 	/**
-	 * The feature id for the '<em><b>Label</b></em>' attribute.
+	 * The feature id for the '<em><b>Description</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int COMPONENT_TYPE__LABEL = CONCEPT_ITEM__LABEL;
+	int COMPONENT_TYPE__DESCRIPTION = CONCEPT_ITEM__DESCRIPTION;
 
 	/**
 	 * The feature id for the '<em><b>Status Literals</b></em>' attribute list.
@@ -376,13 +376,13 @@ public interface CorePackage extends EPackage {
 	int ARCHITECTURE_ITEM__TAGS = HAS_NAME_AND_ID_FEATURE_COUNT + 1;
 
 	/**
-	 * The feature id for the '<em><b>Label</b></em>' attribute.
+	 * The feature id for the '<em><b>Description</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ARCHITECTURE_ITEM__LABEL = HAS_NAME_AND_ID_FEATURE_COUNT + 2;
+	int ARCHITECTURE_ITEM__DESCRIPTION = HAS_NAME_AND_ID_FEATURE_COUNT + 2;
 
 	/**
 	 * The number of structural features of the '<em>Architecture Item</em>' class.
@@ -450,13 +450,13 @@ public interface CorePackage extends EPackage {
 	int COMPONENT__TAGS = ARCHITECTURE_ITEM__TAGS;
 
 	/**
-	 * The feature id for the '<em><b>Label</b></em>' attribute.
+	 * The feature id for the '<em><b>Description</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int COMPONENT__LABEL = ARCHITECTURE_ITEM__LABEL;
+	int COMPONENT__DESCRIPTION = ARCHITECTURE_ITEM__DESCRIPTION;
 
 	/**
 	 * The feature id for the '<em><b>Type</b></em>' reference.
@@ -591,7 +591,7 @@ public interface CorePackage extends EPackage {
 	 * @see org.m2ling.domain.core.impl.CorePackageImpl#getCustomProperty()
 	 * @generated
 	 */
-	int CUSTOM_PROPERTY = 17;
+	int CUSTOM_PROPERTY = 18;
 
 	/**
 	 * The meta object id for the '{@link org.m2ling.domain.core.impl.LinkTypeImpl <em>Link Type</em>}' class.
@@ -601,7 +601,7 @@ public interface CorePackage extends EPackage {
 	 * @see org.m2ling.domain.core.impl.CorePackageImpl#getLinkType()
 	 * @generated
 	 */
-	int LINK_TYPE = 18;
+	int LINK_TYPE = 19;
 
 	/**
 	 * The meta object id for the '{@link org.m2ling.domain.core.impl.LinkImpl <em>Link</em>}' class.
@@ -611,7 +611,7 @@ public interface CorePackage extends EPackage {
 	 * @see org.m2ling.domain.core.impl.CorePackageImpl#getLink()
 	 * @generated
 	 */
-	int LINK = 19;
+	int LINK = 20;
 
 	/**
 	 * The meta object id for the '{@link org.m2ling.domain.core.impl.HasParameterDefinitionsImpl <em>Has Parameter Definitions</em>}' class.
@@ -679,13 +679,13 @@ public interface CorePackage extends EPackage {
 	int COMPONENT_INSTANCE__TAGS = HAS_PARAMETER_VALUES_FEATURE_COUNT + 3;
 
 	/**
-	 * The feature id for the '<em><b>Label</b></em>' attribute.
+	 * The feature id for the '<em><b>Description</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int COMPONENT_INSTANCE__LABEL = HAS_PARAMETER_VALUES_FEATURE_COUNT + 4;
+	int COMPONENT_INSTANCE__DESCRIPTION = HAS_PARAMETER_VALUES_FEATURE_COUNT + 4;
 
 	/**
 	 * The feature id for the '<em><b>Status</b></em>' attribute.
@@ -796,13 +796,13 @@ public interface CorePackage extends EPackage {
 	int VIEW_POINT__TAGS = CONCEPT_ITEM__TAGS;
 
 	/**
-	 * The feature id for the '<em><b>Label</b></em>' attribute.
+	 * The feature id for the '<em><b>Description</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int VIEW_POINT__LABEL = CONCEPT_ITEM__LABEL;
+	int VIEW_POINT__DESCRIPTION = CONCEPT_ITEM__DESCRIPTION;
 
 	/**
 	 * The feature id for the '<em><b>Status Literals</b></em>' attribute list.
@@ -895,13 +895,13 @@ public interface CorePackage extends EPackage {
 	int COMPONENT_GROUP__TAGS = ARCHITECTURE_ITEM__TAGS;
 
 	/**
-	 * The feature id for the '<em><b>Label</b></em>' attribute.
+	 * The feature id for the '<em><b>Description</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int COMPONENT_GROUP__LABEL = ARCHITECTURE_ITEM__LABEL;
+	int COMPONENT_GROUP__DESCRIPTION = ARCHITECTURE_ITEM__DESCRIPTION;
 
 	/**
 	 * The feature id for the '<em><b>Components</b></em>' reference list.
@@ -958,13 +958,13 @@ public interface CorePackage extends EPackage {
 	int RUNTIME_ITEM__TAGS = HAS_NAME_AND_ID_FEATURE_COUNT + 1;
 
 	/**
-	 * The feature id for the '<em><b>Label</b></em>' attribute.
+	 * The feature id for the '<em><b>Description</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int RUNTIME_ITEM__LABEL = HAS_NAME_AND_ID_FEATURE_COUNT + 2;
+	int RUNTIME_ITEM__DESCRIPTION = HAS_NAME_AND_ID_FEATURE_COUNT + 2;
 
 	/**
 	 * The feature id for the '<em><b>Status</b></em>' attribute.
@@ -1021,13 +1021,13 @@ public interface CorePackage extends EPackage {
 	int COMPONENT_INSTANCE_GROUP__TAGS = RUNTIME_ITEM__TAGS;
 
 	/**
-	 * The feature id for the '<em><b>Label</b></em>' attribute.
+	 * The feature id for the '<em><b>Description</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int COMPONENT_INSTANCE_GROUP__LABEL = RUNTIME_ITEM__LABEL;
+	int COMPONENT_INSTANCE_GROUP__DESCRIPTION = RUNTIME_ITEM__DESCRIPTION;
 
 	/**
 	 * The feature id for the '<em><b>Status</b></em>' attribute.
@@ -1093,13 +1093,13 @@ public interface CorePackage extends EPackage {
 	int VIEW__TAGS = ARCHITECTURE_ITEM__TAGS;
 
 	/**
-	 * The feature id for the '<em><b>Label</b></em>' attribute.
+	 * The feature id for the '<em><b>Description</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int VIEW__LABEL = ARCHITECTURE_ITEM__LABEL;
+	int VIEW__DESCRIPTION = ARCHITECTURE_ITEM__DESCRIPTION;
 
 	/**
 	 * The feature id for the '<em><b>Components Groups</b></em>' containment reference list.
@@ -1255,6 +1255,34 @@ public interface CorePackage extends EPackage {
 	int HAS_PARAMETER_DEFINITIONS_FEATURE_COUNT = 0;
 
 	/**
+	 * The meta object id for the '{@link org.m2ling.domain.core.impl.HasDescriptionImpl <em>Has Description</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.m2ling.domain.core.impl.HasDescriptionImpl
+	 * @see org.m2ling.domain.core.impl.CorePackageImpl#getHasDescription()
+	 * @generated
+	 */
+	int HAS_DESCRIPTION = 17;
+
+	/**
+	 * The feature id for the '<em><b>Description</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int HAS_DESCRIPTION__DESCRIPTION = 0;
+
+	/**
+	 * The number of structural features of the '<em>Has Description</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int HAS_DESCRIPTION_FEATURE_COUNT = 1;
+
+	/**
 	 * The number of structural features of the '<em>Custom Property</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1309,13 +1337,13 @@ public interface CorePackage extends EPackage {
 	int LINK_TYPE__TAGS = CONCEPT_ITEM__TAGS;
 
 	/**
-	 * The feature id for the '<em><b>Label</b></em>' attribute.
+	 * The feature id for the '<em><b>Description</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int LINK_TYPE__LABEL = CONCEPT_ITEM__LABEL;
+	int LINK_TYPE__DESCRIPTION = CONCEPT_ITEM__DESCRIPTION;
 
 	/**
 	 * The feature id for the '<em><b>Status Literals</b></em>' attribute list.
@@ -1417,13 +1445,13 @@ public interface CorePackage extends EPackage {
 	int LINK__TAGS = ARCHITECTURE_ITEM__TAGS;
 
 	/**
-	 * The feature id for the '<em><b>Label</b></em>' attribute.
+	 * The feature id for the '<em><b>Description</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int LINK__LABEL = ARCHITECTURE_ITEM__LABEL;
+	int LINK__DESCRIPTION = ARCHITECTURE_ITEM__DESCRIPTION;
 
 	/**
 	 * The feature id for the '<em><b>Type</b></em>' reference.
@@ -1478,7 +1506,7 @@ public interface CorePackage extends EPackage {
 	 * @see org.m2ling.domain.core.impl.CorePackageImpl#getInstancesLink()
 	 * @generated
 	 */
-	int INSTANCES_LINK = 20;
+	int INSTANCES_LINK = 21;
 
 	/**
 	 * The feature id for the '<em><b>Id</b></em>' attribute.
@@ -1517,13 +1545,13 @@ public interface CorePackage extends EPackage {
 	int INSTANCES_LINK__TAGS = RUNTIME_ITEM__TAGS;
 
 	/**
-	 * The feature id for the '<em><b>Label</b></em>' attribute.
+	 * The feature id for the '<em><b>Description</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int INSTANCES_LINK__LABEL = RUNTIME_ITEM__LABEL;
+	int INSTANCES_LINK__DESCRIPTION = RUNTIME_ITEM__DESCRIPTION;
 
 	/**
 	 * The feature id for the '<em><b>Status</b></em>' attribute.
@@ -1761,34 +1789,6 @@ public interface CorePackage extends EPackage {
 	int RULE = 41;
 
 	/**
-	 * The meta object id for the '{@link org.m2ling.domain.core.impl.HasLabelImpl <em>Has Label</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.m2ling.domain.core.impl.HasLabelImpl
-	 * @see org.m2ling.domain.core.impl.CorePackageImpl#getHasLabel()
-	 * @generated
-	 */
-	int HAS_LABEL = 21;
-
-	/**
-	 * The feature id for the '<em><b>Label</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int HAS_LABEL__LABEL = 0;
-
-	/**
-	 * The number of structural features of the '<em>Has Label</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int HAS_LABEL_FEATURE_COUNT = 1;
-
-	/**
 	 * The feature id for the '<em><b>Id</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1807,13 +1807,13 @@ public interface CorePackage extends EPackage {
 	int STAKEHOLDER__NAME = HAS_NAME_AND_ID__NAME;
 
 	/**
-	 * The feature id for the '<em><b>Label</b></em>' attribute.
+	 * The feature id for the '<em><b>Description</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int STAKEHOLDER__LABEL = HAS_NAME_AND_ID_FEATURE_COUNT + 0;
+	int STAKEHOLDER__DESCRIPTION = HAS_NAME_AND_ID_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Views</b></em>' reference list.
@@ -2087,13 +2087,13 @@ public interface CorePackage extends EPackage {
 	int ACTIVITY__TAGS = HAS_NAME_AND_ID_FEATURE_COUNT + 0;
 
 	/**
-	 * The feature id for the '<em><b>Label</b></em>' attribute.
+	 * The feature id for the '<em><b>Description</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ACTIVITY__LABEL = HAS_NAME_AND_ID_FEATURE_COUNT + 1;
+	int ACTIVITY__DESCRIPTION = HAS_NAME_AND_ID_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Accountables</b></em>' reference list.
@@ -2132,13 +2132,13 @@ public interface CorePackage extends EPackage {
 	int ACTIVITY_TRANSITION__COMMENT = HAS_COMMENT__COMMENT;
 
 	/**
-	 * The feature id for the '<em><b>Label</b></em>' attribute.
+	 * The feature id for the '<em><b>Description</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ACTIVITY_TRANSITION__LABEL = HAS_COMMENT_FEATURE_COUNT + 0;
+	int ACTIVITY_TRANSITION__DESCRIPTION = HAS_COMMENT_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Date</b></em>' attribute.
@@ -2240,13 +2240,13 @@ public interface CorePackage extends EPackage {
 	int ORGANISATIONAL_UNIT__TAGS = HAS_COMMENT_FEATURE_COUNT + 3;
 
 	/**
-	 * The feature id for the '<em><b>Label</b></em>' attribute.
+	 * The feature id for the '<em><b>Description</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ORGANISATIONAL_UNIT__LABEL = HAS_COMMENT_FEATURE_COUNT + 4;
+	int ORGANISATIONAL_UNIT__DESCRIPTION = HAS_COMMENT_FEATURE_COUNT + 4;
 
 	/**
 	 * The number of structural features of the '<em>Organisational Unit</em>' class.
@@ -2276,13 +2276,13 @@ public interface CorePackage extends EPackage {
 	int ACTOR__TAGS = HAS_CUSTOM_PROPERTIES_FEATURE_COUNT + 0;
 
 	/**
-	 * The feature id for the '<em><b>Label</b></em>' attribute.
+	 * The feature id for the '<em><b>Description</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ACTOR__LABEL = HAS_CUSTOM_PROPERTIES_FEATURE_COUNT + 1;
+	int ACTOR__DESCRIPTION = HAS_CUSTOM_PROPERTIES_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Stakeholders</b></em>' reference list.
@@ -2402,13 +2402,13 @@ public interface CorePackage extends EPackage {
 	int RULE__TAGS = HAS_NAME_AND_ID_FEATURE_COUNT + 2;
 
 	/**
-	 * The feature id for the '<em><b>Label</b></em>' attribute.
+	 * The feature id for the '<em><b>Description</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int RULE__LABEL = HAS_NAME_AND_ID_FEATURE_COUNT + 3;
+	int RULE__DESCRIPTION = HAS_NAME_AND_ID_FEATURE_COUNT + 3;
 
 	/**
 	 * The feature id for the '<em><b>Status</b></em>' attribute.
@@ -2466,13 +2466,13 @@ public interface CorePackage extends EPackage {
 	int REFERENCE__CUSTOM_PROPERTIES = HAS_COMMENT_FEATURE_COUNT + 0;
 
 	/**
-	 * The feature id for the '<em><b>Label</b></em>' attribute.
+	 * The feature id for the '<em><b>Description</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int REFERENCE__LABEL = HAS_COMMENT_FEATURE_COUNT + 1;
+	int REFERENCE__DESCRIPTION = HAS_COMMENT_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Status</b></em>' attribute.
@@ -3331,6 +3331,27 @@ public interface CorePackage extends EPackage {
 	EClass getHasParameterValues();
 
 	/**
+	 * Returns the meta object for class '{@link org.m2ling.domain.core.HasDescription <em>Has Description</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Has Description</em>'.
+	 * @see org.m2ling.domain.core.HasDescription
+	 * @generated
+	 */
+	EClass getHasDescription();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.m2ling.domain.core.HasDescription#getDescription <em>Description</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Description</em>'.
+	 * @see org.m2ling.domain.core.HasDescription#getDescription()
+	 * @see #getHasDescription()
+	 * @generated
+	 */
+	EAttribute getHasDescription_Description();
+
+	/**
 	 * Returns the meta object for class '{@link org.m2ling.domain.core.Stakeholder <em>Stakeholder</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3803,27 +3824,6 @@ public interface CorePackage extends EPackage {
 	 * @generated
 	 */
 	EReference getReference_Targets();
-
-	/**
-	 * Returns the meta object for class '{@link org.m2ling.domain.core.HasLabel <em>Has Label</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Has Label</em>'.
-	 * @see org.m2ling.domain.core.HasLabel
-	 * @generated
-	 */
-	EClass getHasLabel();
-
-	/**
-	 * Returns the meta object for the attribute '{@link org.m2ling.domain.core.HasLabel#getLabel <em>Label</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Label</em>'.
-	 * @see org.m2ling.domain.core.HasLabel#getLabel()
-	 * @see #getHasLabel()
-	 * @generated
-	 */
-	EAttribute getHasLabel_Label();
 
 	/**
 	 * Returns the meta object for enum '{@link org.m2ling.domain.core.CustomPropertyType <em>Custom Property Type</em>}'.
@@ -4512,6 +4512,24 @@ public interface CorePackage extends EPackage {
 		EClass HAS_PARAMETER_VALUES = eINSTANCE.getHasParameterValues();
 
 		/**
+		 * The meta object literal for the '{@link org.m2ling.domain.core.impl.HasDescriptionImpl <em>Has Description</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.m2ling.domain.core.impl.HasDescriptionImpl
+		 * @see org.m2ling.domain.core.impl.CorePackageImpl#getHasDescription()
+		 * @generated
+		 */
+		EClass HAS_DESCRIPTION = eINSTANCE.getHasDescription();
+
+		/**
+		 * The meta object literal for the '<em><b>Description</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute HAS_DESCRIPTION__DESCRIPTION = eINSTANCE.getHasDescription_Description();
+
+		/**
 		 * The meta object literal for the '{@link org.m2ling.domain.core.impl.StakeholderImpl <em>Stakeholder</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -4912,24 +4930,6 @@ public interface CorePackage extends EPackage {
 		 * @generated
 		 */
 		EReference REFERENCE__TARGETS = eINSTANCE.getReference_Targets();
-
-		/**
-		 * The meta object literal for the '{@link org.m2ling.domain.core.impl.HasLabelImpl <em>Has Label</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see org.m2ling.domain.core.impl.HasLabelImpl
-		 * @see org.m2ling.domain.core.impl.CorePackageImpl#getHasLabel()
-		 * @generated
-		 */
-		EClass HAS_LABEL = eINSTANCE.getHasLabel();
-
-		/**
-		 * The meta object literal for the '<em><b>Label</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute HAS_LABEL__LABEL = eINSTANCE.getHasLabel_Label();
 
 		/**
 		 * The meta object literal for the '{@link org.m2ling.domain.core.CustomPropertyType <em>Custom Property Type</em>}' enum.

@@ -20,7 +20,7 @@ import org.m2ling.domain.core.ComponentInstanceGroup;
 import org.m2ling.domain.core.CorePackage;
 import org.m2ling.domain.core.HasComment;
 import org.m2ling.domain.core.HasConstraints;
-import org.m2ling.domain.core.HasLabel;
+import org.m2ling.domain.core.HasDescription;
 import org.m2ling.domain.core.HasNameAndID;
 import org.m2ling.domain.core.HasReferences;
 import org.m2ling.domain.core.HasTags;
@@ -38,7 +38,7 @@ import org.m2ling.domain.core.RuntimeItem;
  *   <li>{@link org.m2ling.domain.core.impl.ComponentInstanceImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.m2ling.domain.core.impl.ComponentInstanceImpl#getComment <em>Comment</em>}</li>
  *   <li>{@link org.m2ling.domain.core.impl.ComponentInstanceImpl#getTags <em>Tags</em>}</li>
- *   <li>{@link org.m2ling.domain.core.impl.ComponentInstanceImpl#getLabel <em>Label</em>}</li>
+ *   <li>{@link org.m2ling.domain.core.impl.ComponentInstanceImpl#getDescription <em>Description</em>}</li>
  *   <li>{@link org.m2ling.domain.core.impl.ComponentInstanceImpl#getStatus <em>Status</em>}</li>
  *   <li>{@link org.m2ling.domain.core.impl.ComponentInstanceImpl#getComponent <em>Component</em>}</li>
  *   <li>{@link org.m2ling.domain.core.impl.ComponentInstanceImpl#getInstances <em>Instances</em>}</li>
@@ -138,24 +138,24 @@ public class ComponentInstanceImpl extends HasParameterValuesImpl implements Com
 	protected EList<String> tags;
 
 	/**
-	 * The default value of the '{@link #getLabel() <em>Label</em>}' attribute.
+	 * The default value of the '{@link #getDescription() <em>Description</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getLabel()
+	 * @see #getDescription()
 	 * @generated
 	 * @ordered
 	 */
-	protected static final String LABEL_EDEFAULT = null;
+	protected static final String DESCRIPTION_EDEFAULT = null;
 
 	/**
-	 * The cached value of the '{@link #getLabel() <em>Label</em>}' attribute.
+	 * The cached value of the '{@link #getDescription() <em>Description</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getLabel()
+	 * @see #getDescription()
 	 * @generated
 	 * @ordered
 	 */
-	protected String label = LABEL_EDEFAULT;
+	protected String description = DESCRIPTION_EDEFAULT;
 
 	/**
 	 * The default value of the '{@link #getStatus() <em>Status</em>}' attribute.
@@ -413,8 +413,8 @@ public class ComponentInstanceImpl extends HasParameterValuesImpl implements Com
 				return getComment();
 			case CorePackage.COMPONENT_INSTANCE__TAGS:
 				return getTags();
-			case CorePackage.COMPONENT_INSTANCE__LABEL:
-				return getLabel();
+			case CorePackage.COMPONENT_INSTANCE__DESCRIPTION:
+				return getDescription();
 			case CorePackage.COMPONENT_INSTANCE__STATUS:
 				return getStatus();
 			case CorePackage.COMPONENT_INSTANCE__COMPONENT:
@@ -455,8 +455,8 @@ public class ComponentInstanceImpl extends HasParameterValuesImpl implements Com
 				getTags().clear();
 				getTags().addAll((Collection<? extends String>)newValue);
 				return;
-			case CorePackage.COMPONENT_INSTANCE__LABEL:
-				setLabel((String)newValue);
+			case CorePackage.COMPONENT_INSTANCE__DESCRIPTION:
+				setDescription((String)newValue);
 				return;
 			case CorePackage.COMPONENT_INSTANCE__STATUS:
 				setStatus((String)newValue);
@@ -503,8 +503,8 @@ public class ComponentInstanceImpl extends HasParameterValuesImpl implements Com
 			case CorePackage.COMPONENT_INSTANCE__TAGS:
 				getTags().clear();
 				return;
-			case CorePackage.COMPONENT_INSTANCE__LABEL:
-				setLabel(LABEL_EDEFAULT);
+			case CorePackage.COMPONENT_INSTANCE__DESCRIPTION:
+				setDescription(DESCRIPTION_EDEFAULT);
 				return;
 			case CorePackage.COMPONENT_INSTANCE__STATUS:
 				setStatus(STATUS_EDEFAULT);
@@ -544,8 +544,8 @@ public class ComponentInstanceImpl extends HasParameterValuesImpl implements Com
 				return COMMENT_EDEFAULT == null ? comment != null : !COMMENT_EDEFAULT.equals(comment);
 			case CorePackage.COMPONENT_INSTANCE__TAGS:
 				return tags != null && !tags.isEmpty();
-			case CorePackage.COMPONENT_INSTANCE__LABEL:
-				return LABEL_EDEFAULT == null ? label != null : !LABEL_EDEFAULT.equals(label);
+			case CorePackage.COMPONENT_INSTANCE__DESCRIPTION:
+				return DESCRIPTION_EDEFAULT == null ? description != null : !DESCRIPTION_EDEFAULT.equals(description);
 			case CorePackage.COMPONENT_INSTANCE__STATUS:
 				return STATUS_EDEFAULT == null ? status != null : !STATUS_EDEFAULT.equals(status);
 			case CorePackage.COMPONENT_INSTANCE__COMPONENT:
@@ -593,9 +593,9 @@ public class ComponentInstanceImpl extends HasParameterValuesImpl implements Com
 				default: return -1;
 			}
 		}
-		if (baseClass == HasLabel.class) {
+		if (baseClass == HasDescription.class) {
 			switch (derivedFeatureID) {
-				case CorePackage.COMPONENT_INSTANCE__LABEL: return CorePackage.HAS_LABEL__LABEL;
+				case CorePackage.COMPONENT_INSTANCE__DESCRIPTION: return CorePackage.HAS_DESCRIPTION__DESCRIPTION;
 				default: return -1;
 			}
 		}
@@ -644,9 +644,9 @@ public class ComponentInstanceImpl extends HasParameterValuesImpl implements Com
 				default: return -1;
 			}
 		}
-		if (baseClass == HasLabel.class) {
+		if (baseClass == HasDescription.class) {
 			switch (baseFeatureID) {
-				case CorePackage.HAS_LABEL__LABEL: return CorePackage.COMPONENT_INSTANCE__LABEL;
+				case CorePackage.HAS_DESCRIPTION__DESCRIPTION: return CorePackage.COMPONENT_INSTANCE__DESCRIPTION;
 				default: return -1;
 			}
 		}
@@ -682,8 +682,8 @@ public class ComponentInstanceImpl extends HasParameterValuesImpl implements Com
 		result.append(comment);
 		result.append(", tags: ");
 		result.append(tags);
-		result.append(", label: ");
-		result.append(label);
+		result.append(", description: ");
+		result.append(description);
 		result.append(", status: ");
 		result.append(status);
 		result.append(')');
@@ -781,8 +781,8 @@ public class ComponentInstanceImpl extends HasParameterValuesImpl implements Com
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public String getLabel() {
-		return label;
+	public String getDescription() {
+		return description;
 	}
 
 	/**
@@ -790,11 +790,11 @@ public class ComponentInstanceImpl extends HasParameterValuesImpl implements Com
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setLabel(String newLabel) {
-		String oldLabel = label;
-		label = newLabel;
+	public void setDescription(String newDescription) {
+		String oldDescription = description;
+		description = newDescription;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, CorePackage.COMPONENT_INSTANCE__LABEL, oldLabel, label));
+			eNotify(new ENotificationImpl(this, Notification.SET, CorePackage.COMPONENT_INSTANCE__DESCRIPTION, oldDescription, description));
 	}
 
 	/**

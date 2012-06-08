@@ -16,7 +16,7 @@ import org.m2ling.domain.core.CorePackage;
 import org.m2ling.domain.core.CustomProperty;
 import org.m2ling.domain.core.HasConstraints;
 import org.m2ling.domain.core.HasCustomProperties;
-import org.m2ling.domain.core.HasLabel;
+import org.m2ling.domain.core.HasDescription;
 import org.m2ling.domain.core.HasReferences;
 import org.m2ling.domain.core.HasStatus;
 import org.m2ling.domain.core.HasTags;
@@ -31,7 +31,7 @@ import org.m2ling.domain.core.ReferenceType;
  * The following features are implemented:
  * <ul>
  *   <li>{@link org.m2ling.domain.core.impl.ReferenceImpl#getCustomProperties <em>Custom Properties</em>}</li>
- *   <li>{@link org.m2ling.domain.core.impl.ReferenceImpl#getLabel <em>Label</em>}</li>
+ *   <li>{@link org.m2ling.domain.core.impl.ReferenceImpl#getDescription <em>Description</em>}</li>
  *   <li>{@link org.m2ling.domain.core.impl.ReferenceImpl#getStatus <em>Status</em>}</li>
  *   <li>{@link org.m2ling.domain.core.impl.ReferenceImpl#getTags <em>Tags</em>}</li>
  *   <li>{@link org.m2ling.domain.core.impl.ReferenceImpl#getType <em>Type</em>}</li>
@@ -60,24 +60,24 @@ public class ReferenceImpl extends HasCommentImpl implements Reference {
 	protected CustomProperty customProperties;
 
 	/**
-	 * The default value of the '{@link #getLabel() <em>Label</em>}' attribute.
+	 * The default value of the '{@link #getDescription() <em>Description</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getLabel()
+	 * @see #getDescription()
 	 * @generated
 	 * @ordered
 	 */
-	protected static final String LABEL_EDEFAULT = null;
+	protected static final String DESCRIPTION_EDEFAULT = null;
 
 	/**
-	 * The cached value of the '{@link #getLabel() <em>Label</em>}' attribute.
+	 * The cached value of the '{@link #getDescription() <em>Description</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getLabel()
+	 * @see #getDescription()
 	 * @generated
 	 * @ordered
 	 */
-	protected String label = LABEL_EDEFAULT;
+	protected String description = DESCRIPTION_EDEFAULT;
 
 	/**
 	 * The default value of the '{@link #getStatus() <em>Status</em>}' attribute.
@@ -201,8 +201,8 @@ public class ReferenceImpl extends HasCommentImpl implements Reference {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public String getLabel() {
-		return label;
+	public String getDescription() {
+		return description;
 	}
 
 	/**
@@ -210,11 +210,11 @@ public class ReferenceImpl extends HasCommentImpl implements Reference {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setLabel(String newLabel) {
-		String oldLabel = label;
-		label = newLabel;
+	public void setDescription(String newDescription) {
+		String oldDescription = description;
+		description = newDescription;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, CorePackage.REFERENCE__LABEL, oldLabel, label));
+			eNotify(new ENotificationImpl(this, Notification.SET, CorePackage.REFERENCE__DESCRIPTION, oldDescription, description));
 	}
 
 	/**
@@ -294,8 +294,8 @@ public class ReferenceImpl extends HasCommentImpl implements Reference {
 			case CorePackage.REFERENCE__CUSTOM_PROPERTIES:
 				if (resolve) return getCustomProperties();
 				return basicGetCustomProperties();
-			case CorePackage.REFERENCE__LABEL:
-				return getLabel();
+			case CorePackage.REFERENCE__DESCRIPTION:
+				return getDescription();
 			case CorePackage.REFERENCE__STATUS:
 				return getStatus();
 			case CorePackage.REFERENCE__TAGS:
@@ -320,8 +320,8 @@ public class ReferenceImpl extends HasCommentImpl implements Reference {
 			case CorePackage.REFERENCE__CUSTOM_PROPERTIES:
 				setCustomProperties((CustomProperty)newValue);
 				return;
-			case CorePackage.REFERENCE__LABEL:
-				setLabel((String)newValue);
+			case CorePackage.REFERENCE__DESCRIPTION:
+				setDescription((String)newValue);
 				return;
 			case CorePackage.REFERENCE__STATUS:
 				setStatus((String)newValue);
@@ -352,8 +352,8 @@ public class ReferenceImpl extends HasCommentImpl implements Reference {
 			case CorePackage.REFERENCE__CUSTOM_PROPERTIES:
 				setCustomProperties((CustomProperty)null);
 				return;
-			case CorePackage.REFERENCE__LABEL:
-				setLabel(LABEL_EDEFAULT);
+			case CorePackage.REFERENCE__DESCRIPTION:
+				setDescription(DESCRIPTION_EDEFAULT);
 				return;
 			case CorePackage.REFERENCE__STATUS:
 				setStatus(STATUS_EDEFAULT);
@@ -381,8 +381,8 @@ public class ReferenceImpl extends HasCommentImpl implements Reference {
 		switch (featureID) {
 			case CorePackage.REFERENCE__CUSTOM_PROPERTIES:
 				return customProperties != null;
-			case CorePackage.REFERENCE__LABEL:
-				return LABEL_EDEFAULT == null ? label != null : !LABEL_EDEFAULT.equals(label);
+			case CorePackage.REFERENCE__DESCRIPTION:
+				return DESCRIPTION_EDEFAULT == null ? description != null : !DESCRIPTION_EDEFAULT.equals(description);
 			case CorePackage.REFERENCE__STATUS:
 				return STATUS_EDEFAULT == null ? status != null : !STATUS_EDEFAULT.equals(status);
 			case CorePackage.REFERENCE__TAGS:
@@ -413,9 +413,9 @@ public class ReferenceImpl extends HasCommentImpl implements Reference {
 				default: return -1;
 			}
 		}
-		if (baseClass == HasLabel.class) {
+		if (baseClass == HasDescription.class) {
 			switch (derivedFeatureID) {
-				case CorePackage.REFERENCE__LABEL: return CorePackage.HAS_LABEL__LABEL;
+				case CorePackage.REFERENCE__DESCRIPTION: return CorePackage.HAS_DESCRIPTION__DESCRIPTION;
 				default: return -1;
 			}
 		}
@@ -452,9 +452,9 @@ public class ReferenceImpl extends HasCommentImpl implements Reference {
 				default: return -1;
 			}
 		}
-		if (baseClass == HasLabel.class) {
+		if (baseClass == HasDescription.class) {
 			switch (baseFeatureID) {
-				case CorePackage.HAS_LABEL__LABEL: return CorePackage.REFERENCE__LABEL;
+				case CorePackage.HAS_DESCRIPTION__DESCRIPTION: return CorePackage.REFERENCE__DESCRIPTION;
 				default: return -1;
 			}
 		}
@@ -483,8 +483,8 @@ public class ReferenceImpl extends HasCommentImpl implements Reference {
 		if (eIsProxy()) return super.toString();
 
 		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (label: ");
-		result.append(label);
+		result.append(" (description: ");
+		result.append(description);
 		result.append(", status: ");
 		result.append(status);
 		result.append(", tags: ");

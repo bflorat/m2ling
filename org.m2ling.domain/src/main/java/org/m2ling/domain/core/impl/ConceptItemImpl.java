@@ -17,7 +17,7 @@ import org.m2ling.domain.core.CustomProperty;
 import org.m2ling.domain.core.HasComment;
 import org.m2ling.domain.core.HasConstraints;
 import org.m2ling.domain.core.HasCustomProperties;
-import org.m2ling.domain.core.HasLabel;
+import org.m2ling.domain.core.HasDescription;
 import org.m2ling.domain.core.HasParameterDefinitions;
 import org.m2ling.domain.core.HasTags;
 
@@ -31,7 +31,7 @@ import org.m2ling.domain.core.HasTags;
  *   <li>{@link org.m2ling.domain.core.impl.ConceptItemImpl#getCustomProperties <em>Custom Properties</em>}</li>
  *   <li>{@link org.m2ling.domain.core.impl.ConceptItemImpl#getComment <em>Comment</em>}</li>
  *   <li>{@link org.m2ling.domain.core.impl.ConceptItemImpl#getTags <em>Tags</em>}</li>
- *   <li>{@link org.m2ling.domain.core.impl.ConceptItemImpl#getLabel <em>Label</em>}</li>
+ *   <li>{@link org.m2ling.domain.core.impl.ConceptItemImpl#getDescription <em>Description</em>}</li>
  *   <li>{@link org.m2ling.domain.core.impl.ConceptItemImpl#getStatusLiterals <em>Status Literals</em>}</li>
  * </ul>
  * </p>
@@ -87,24 +87,24 @@ public abstract class ConceptItemImpl extends HasNameAndIDImpl implements Concep
 	protected EList<String> tags;
 
 	/**
-	 * The default value of the '{@link #getLabel() <em>Label</em>}' attribute.
+	 * The default value of the '{@link #getDescription() <em>Description</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getLabel()
+	 * @see #getDescription()
 	 * @generated
 	 * @ordered
 	 */
-	protected static final String LABEL_EDEFAULT = null;
+	protected static final String DESCRIPTION_EDEFAULT = null;
 
 	/**
-	 * The cached value of the '{@link #getLabel() <em>Label</em>}' attribute.
+	 * The cached value of the '{@link #getDescription() <em>Description</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getLabel()
+	 * @see #getDescription()
 	 * @generated
 	 * @ordered
 	 */
-	protected String label = LABEL_EDEFAULT;
+	protected String description = DESCRIPTION_EDEFAULT;
 
 	/**
 	 * The cached value of the '{@link #getStatusLiterals() <em>Status Literals</em>}' attribute list.
@@ -211,8 +211,8 @@ public abstract class ConceptItemImpl extends HasNameAndIDImpl implements Concep
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public String getLabel() {
-		return label;
+	public String getDescription() {
+		return description;
 	}
 
 	/**
@@ -220,11 +220,11 @@ public abstract class ConceptItemImpl extends HasNameAndIDImpl implements Concep
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setLabel(String newLabel) {
-		String oldLabel = label;
-		label = newLabel;
+	public void setDescription(String newDescription) {
+		String oldDescription = description;
+		description = newDescription;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, CorePackage.CONCEPT_ITEM__LABEL, oldLabel, label));
+			eNotify(new ENotificationImpl(this, Notification.SET, CorePackage.CONCEPT_ITEM__DESCRIPTION, oldDescription, description));
 	}
 
 	/**
@@ -254,8 +254,8 @@ public abstract class ConceptItemImpl extends HasNameAndIDImpl implements Concep
 				return getComment();
 			case CorePackage.CONCEPT_ITEM__TAGS:
 				return getTags();
-			case CorePackage.CONCEPT_ITEM__LABEL:
-				return getLabel();
+			case CorePackage.CONCEPT_ITEM__DESCRIPTION:
+				return getDescription();
 			case CorePackage.CONCEPT_ITEM__STATUS_LITERALS:
 				return getStatusLiterals();
 		}
@@ -281,8 +281,8 @@ public abstract class ConceptItemImpl extends HasNameAndIDImpl implements Concep
 				getTags().clear();
 				getTags().addAll((Collection<? extends String>)newValue);
 				return;
-			case CorePackage.CONCEPT_ITEM__LABEL:
-				setLabel((String)newValue);
+			case CorePackage.CONCEPT_ITEM__DESCRIPTION:
+				setDescription((String)newValue);
 				return;
 			case CorePackage.CONCEPT_ITEM__STATUS_LITERALS:
 				getStatusLiterals().clear();
@@ -309,8 +309,8 @@ public abstract class ConceptItemImpl extends HasNameAndIDImpl implements Concep
 			case CorePackage.CONCEPT_ITEM__TAGS:
 				getTags().clear();
 				return;
-			case CorePackage.CONCEPT_ITEM__LABEL:
-				setLabel(LABEL_EDEFAULT);
+			case CorePackage.CONCEPT_ITEM__DESCRIPTION:
+				setDescription(DESCRIPTION_EDEFAULT);
 				return;
 			case CorePackage.CONCEPT_ITEM__STATUS_LITERALS:
 				getStatusLiterals().clear();
@@ -333,8 +333,8 @@ public abstract class ConceptItemImpl extends HasNameAndIDImpl implements Concep
 				return COMMENT_EDEFAULT == null ? comment != null : !COMMENT_EDEFAULT.equals(comment);
 			case CorePackage.CONCEPT_ITEM__TAGS:
 				return tags != null && !tags.isEmpty();
-			case CorePackage.CONCEPT_ITEM__LABEL:
-				return LABEL_EDEFAULT == null ? label != null : !LABEL_EDEFAULT.equals(label);
+			case CorePackage.CONCEPT_ITEM__DESCRIPTION:
+				return DESCRIPTION_EDEFAULT == null ? description != null : !DESCRIPTION_EDEFAULT.equals(description);
 			case CorePackage.CONCEPT_ITEM__STATUS_LITERALS:
 				return statusLiterals != null && !statusLiterals.isEmpty();
 		}
@@ -376,9 +376,9 @@ public abstract class ConceptItemImpl extends HasNameAndIDImpl implements Concep
 				default: return -1;
 			}
 		}
-		if (baseClass == HasLabel.class) {
+		if (baseClass == HasDescription.class) {
 			switch (derivedFeatureID) {
-				case CorePackage.CONCEPT_ITEM__LABEL: return CorePackage.HAS_LABEL__LABEL;
+				case CorePackage.CONCEPT_ITEM__DESCRIPTION: return CorePackage.HAS_DESCRIPTION__DESCRIPTION;
 				default: return -1;
 			}
 		}
@@ -420,9 +420,9 @@ public abstract class ConceptItemImpl extends HasNameAndIDImpl implements Concep
 				default: return -1;
 			}
 		}
-		if (baseClass == HasLabel.class) {
+		if (baseClass == HasDescription.class) {
 			switch (baseFeatureID) {
-				case CorePackage.HAS_LABEL__LABEL: return CorePackage.CONCEPT_ITEM__LABEL;
+				case CorePackage.HAS_DESCRIPTION__DESCRIPTION: return CorePackage.CONCEPT_ITEM__DESCRIPTION;
 				default: return -1;
 			}
 		}
@@ -443,8 +443,8 @@ public abstract class ConceptItemImpl extends HasNameAndIDImpl implements Concep
 		result.append(comment);
 		result.append(", tags: ");
 		result.append(tags);
-		result.append(", label: ");
-		result.append(label);
+		result.append(", description: ");
+		result.append(description);
 		result.append(", statusLiterals: ");
 		result.append(statusLiterals);
 		result.append(')');

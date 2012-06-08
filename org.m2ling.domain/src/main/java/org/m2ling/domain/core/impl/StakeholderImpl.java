@@ -16,7 +16,7 @@ import org.eclipse.emf.ecore.util.EObjectWithInverseResolvingEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.m2ling.domain.core.Actor;
 import org.m2ling.domain.core.CorePackage;
-import org.m2ling.domain.core.HasLabel;
+import org.m2ling.domain.core.HasDescription;
 import org.m2ling.domain.core.Stakeholder;
 import org.m2ling.domain.core.View;
 import org.m2ling.domain.core.ViewPoint;
@@ -28,7 +28,7 @@ import org.m2ling.domain.core.ViewPoint;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.m2ling.domain.core.impl.StakeholderImpl#getLabel <em>Label</em>}</li>
+ *   <li>{@link org.m2ling.domain.core.impl.StakeholderImpl#getDescription <em>Description</em>}</li>
  *   <li>{@link org.m2ling.domain.core.impl.StakeholderImpl#getViews <em>Views</em>}</li>
  *   <li>{@link org.m2ling.domain.core.impl.StakeholderImpl#getViewPoints <em>View Points</em>}</li>
  *   <li>{@link org.m2ling.domain.core.impl.StakeholderImpl#getActors <em>Actors</em>}</li>
@@ -46,24 +46,24 @@ public class StakeholderImpl extends HasNameAndIDImpl implements Stakeholder {
 	public static final String copyright = "Copyright (C) 2012 Bertrand Florat";
 
 	/**
-	 * The default value of the '{@link #getLabel() <em>Label</em>}' attribute.
+	 * The default value of the '{@link #getDescription() <em>Description</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getLabel()
+	 * @see #getDescription()
 	 * @generated
 	 * @ordered
 	 */
-	protected static final String LABEL_EDEFAULT = null;
+	protected static final String DESCRIPTION_EDEFAULT = null;
 
 	/**
-	 * The cached value of the '{@link #getLabel() <em>Label</em>}' attribute.
+	 * The cached value of the '{@link #getDescription() <em>Description</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getLabel()
+	 * @see #getDescription()
 	 * @generated
 	 * @ordered
 	 */
-	protected String label = LABEL_EDEFAULT;
+	protected String description = DESCRIPTION_EDEFAULT;
 
 	/**
 	 * The cached value of the '{@link #getViews() <em>Views</em>}' reference list.
@@ -119,8 +119,8 @@ public class StakeholderImpl extends HasNameAndIDImpl implements Stakeholder {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public String getLabel() {
-		return label;
+	public String getDescription() {
+		return description;
 	}
 
 	/**
@@ -128,11 +128,11 @@ public class StakeholderImpl extends HasNameAndIDImpl implements Stakeholder {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setLabel(String newLabel) {
-		String oldLabel = label;
-		label = newLabel;
+	public void setDescription(String newDescription) {
+		String oldDescription = description;
+		description = newDescription;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, CorePackage.STAKEHOLDER__LABEL, oldLabel, label));
+			eNotify(new ENotificationImpl(this, Notification.SET, CorePackage.STAKEHOLDER__DESCRIPTION, oldDescription, description));
 	}
 
 	/**
@@ -208,8 +208,8 @@ public class StakeholderImpl extends HasNameAndIDImpl implements Stakeholder {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case CorePackage.STAKEHOLDER__LABEL:
-				return getLabel();
+			case CorePackage.STAKEHOLDER__DESCRIPTION:
+				return getDescription();
 			case CorePackage.STAKEHOLDER__VIEWS:
 				return getViews();
 			case CorePackage.STAKEHOLDER__VIEW_POINTS:
@@ -229,8 +229,8 @@ public class StakeholderImpl extends HasNameAndIDImpl implements Stakeholder {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case CorePackage.STAKEHOLDER__LABEL:
-				setLabel((String)newValue);
+			case CorePackage.STAKEHOLDER__DESCRIPTION:
+				setDescription((String)newValue);
 				return;
 			case CorePackage.STAKEHOLDER__VIEWS:
 				getViews().clear();
@@ -256,8 +256,8 @@ public class StakeholderImpl extends HasNameAndIDImpl implements Stakeholder {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case CorePackage.STAKEHOLDER__LABEL:
-				setLabel(LABEL_EDEFAULT);
+			case CorePackage.STAKEHOLDER__DESCRIPTION:
+				setDescription(DESCRIPTION_EDEFAULT);
 				return;
 			case CorePackage.STAKEHOLDER__VIEWS:
 				getViews().clear();
@@ -280,8 +280,8 @@ public class StakeholderImpl extends HasNameAndIDImpl implements Stakeholder {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case CorePackage.STAKEHOLDER__LABEL:
-				return LABEL_EDEFAULT == null ? label != null : !LABEL_EDEFAULT.equals(label);
+			case CorePackage.STAKEHOLDER__DESCRIPTION:
+				return DESCRIPTION_EDEFAULT == null ? description != null : !DESCRIPTION_EDEFAULT.equals(description);
 			case CorePackage.STAKEHOLDER__VIEWS:
 				return views != null && !views.isEmpty();
 			case CorePackage.STAKEHOLDER__VIEW_POINTS:
@@ -299,9 +299,9 @@ public class StakeholderImpl extends HasNameAndIDImpl implements Stakeholder {
 	 */
 	@Override
 	public int eBaseStructuralFeatureID(int derivedFeatureID, Class<?> baseClass) {
-		if (baseClass == HasLabel.class) {
+		if (baseClass == HasDescription.class) {
 			switch (derivedFeatureID) {
-				case CorePackage.STAKEHOLDER__LABEL: return CorePackage.HAS_LABEL__LABEL;
+				case CorePackage.STAKEHOLDER__DESCRIPTION: return CorePackage.HAS_DESCRIPTION__DESCRIPTION;
 				default: return -1;
 			}
 		}
@@ -315,9 +315,9 @@ public class StakeholderImpl extends HasNameAndIDImpl implements Stakeholder {
 	 */
 	@Override
 	public int eDerivedStructuralFeatureID(int baseFeatureID, Class<?> baseClass) {
-		if (baseClass == HasLabel.class) {
+		if (baseClass == HasDescription.class) {
 			switch (baseFeatureID) {
-				case CorePackage.HAS_LABEL__LABEL: return CorePackage.STAKEHOLDER__LABEL;
+				case CorePackage.HAS_DESCRIPTION__DESCRIPTION: return CorePackage.STAKEHOLDER__DESCRIPTION;
 				default: return -1;
 			}
 		}
@@ -334,8 +334,8 @@ public class StakeholderImpl extends HasNameAndIDImpl implements Stakeholder {
 		if (eIsProxy()) return super.toString();
 
 		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (label: ");
-		result.append(label);
+		result.append(" (description: ");
+		result.append(description);
 		result.append(')');
 		return result.toString();
 	}

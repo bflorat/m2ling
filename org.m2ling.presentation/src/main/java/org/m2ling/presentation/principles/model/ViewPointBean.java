@@ -19,8 +19,12 @@ public class ViewPointBean implements Serializable {
 	 * Comma-separated tags
 	 */
 	private String tags = "";
-	private String label = "";
+	private String description = "";
 	private String comment = "";
+	private String statusLiterals = "";
+
+	
+
 	/**
 	 * @return the comment
 	 */
@@ -35,8 +39,7 @@ public class ViewPointBean implements Serializable {
 		this.comment = comment;
 	}
 
-	private String statusLiterals = "";
-
+	
 	/**
 	 * @return the statusLiterals
 	 */
@@ -68,11 +71,11 @@ public class ViewPointBean implements Serializable {
 	}
 
 	/**
-	 * @param label
-	 *           the label to set
+	 * @param description
+	 *           the description to set
 	 */
-	public void setLabel(String label) {
-		this.label = label;
+	public void setDescription(String description) {
+		this.description = description;
 	}
 
 	public ViewPointBean() {
@@ -95,10 +98,10 @@ public class ViewPointBean implements Serializable {
 	}
 
 	/**
-	 * @return the label
+	 * @return the description
 	 */
-	public String getLabel() {
-		return label;
+	public String getDescription() {
+		return description;
 	}
 
 }

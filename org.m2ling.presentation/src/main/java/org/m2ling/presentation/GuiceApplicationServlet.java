@@ -32,6 +32,9 @@ public class GuiceApplicationServlet extends AbstractApplicationServlet {
 		return Application.class;
 	}
 
+	/**
+	 * Called when using ?restartApplication argument in URL
+	 */
 	@Override
 	protected Application getNewApplication(HttpServletRequest request) throws ServletException {
 		return applicationProvider.get();

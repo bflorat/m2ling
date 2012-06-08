@@ -27,7 +27,7 @@ import org.m2ling.domain.core.FormatConstraint;
 import org.m2ling.domain.core.HasComment;
 import org.m2ling.domain.core.HasConstraints;
 import org.m2ling.domain.core.HasCustomProperties;
-import org.m2ling.domain.core.HasLabel;
+import org.m2ling.domain.core.HasDescription;
 import org.m2ling.domain.core.HasNameAndID;
 import org.m2ling.domain.core.HasParameterDefinitions;
 import org.m2ling.domain.core.HasParameterValues;
@@ -184,6 +184,10 @@ public class CoreAdapterFactory extends AdapterFactoryImpl {
 				return createHasParameterValuesAdapter();
 			}
 			@Override
+			public Adapter caseHasDescription(HasDescription object) {
+				return createHasDescriptionAdapter();
+			}
+			@Override
 			public Adapter caseCustomProperty(CustomProperty object) {
 				return createCustomPropertyAdapter();
 			}
@@ -198,10 +202,6 @@ public class CoreAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseInstancesLink(InstancesLink object) {
 				return createInstancesLinkAdapter();
-			}
-			@Override
-			public Adapter caseHasLabel(HasLabel object) {
-				return createHasLabelAdapter();
 			}
 			@Override
 			public Adapter caseStakeholder(Stakeholder object) {
@@ -602,6 +602,20 @@ public class CoreAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
+	 * Creates a new adapter for an object of class '{@link org.m2ling.domain.core.HasDescription <em>Has Description</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.m2ling.domain.core.HasDescription
+	 * @generated
+	 */
+	public Adapter createHasDescriptionAdapter() {
+		return null;
+	}
+
+	/**
 	 * Creates a new adapter for an object of class '{@link org.m2ling.domain.core.Stakeholder <em>Stakeholder</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
@@ -892,20 +906,6 @@ public class CoreAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createReferenceAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.m2ling.domain.core.HasLabel <em>Has Label</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.m2ling.domain.core.HasLabel
-	 * @generated
-	 */
-	public Adapter createHasLabelAdapter() {
 		return null;
 	}
 

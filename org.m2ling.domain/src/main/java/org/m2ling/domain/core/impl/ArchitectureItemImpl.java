@@ -14,7 +14,7 @@ import org.m2ling.domain.core.ArchitectureItem;
 import org.m2ling.domain.core.CorePackage;
 import org.m2ling.domain.core.HasComment;
 import org.m2ling.domain.core.HasConstraints;
-import org.m2ling.domain.core.HasLabel;
+import org.m2ling.domain.core.HasDescription;
 import org.m2ling.domain.core.HasParameterDefinitions;
 import org.m2ling.domain.core.HasTags;
 
@@ -27,7 +27,7 @@ import org.m2ling.domain.core.HasTags;
  * <ul>
  *   <li>{@link org.m2ling.domain.core.impl.ArchitectureItemImpl#getComment <em>Comment</em>}</li>
  *   <li>{@link org.m2ling.domain.core.impl.ArchitectureItemImpl#getTags <em>Tags</em>}</li>
- *   <li>{@link org.m2ling.domain.core.impl.ArchitectureItemImpl#getLabel <em>Label</em>}</li>
+ *   <li>{@link org.m2ling.domain.core.impl.ArchitectureItemImpl#getDescription <em>Description</em>}</li>
  * </ul>
  * </p>
  *
@@ -72,24 +72,24 @@ public abstract class ArchitectureItemImpl extends HasNameAndIDImpl implements A
 	protected EList<String> tags;
 
 	/**
-	 * The default value of the '{@link #getLabel() <em>Label</em>}' attribute.
+	 * The default value of the '{@link #getDescription() <em>Description</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getLabel()
+	 * @see #getDescription()
 	 * @generated
 	 * @ordered
 	 */
-	protected static final String LABEL_EDEFAULT = null;
+	protected static final String DESCRIPTION_EDEFAULT = null;
 
 	/**
-	 * The cached value of the '{@link #getLabel() <em>Label</em>}' attribute.
+	 * The cached value of the '{@link #getDescription() <em>Description</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getLabel()
+	 * @see #getDescription()
 	 * @generated
 	 * @ordered
 	 */
-	protected String label = LABEL_EDEFAULT;
+	protected String description = DESCRIPTION_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -148,8 +148,8 @@ public abstract class ArchitectureItemImpl extends HasNameAndIDImpl implements A
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public String getLabel() {
-		return label;
+	public String getDescription() {
+		return description;
 	}
 
 	/**
@@ -157,11 +157,11 @@ public abstract class ArchitectureItemImpl extends HasNameAndIDImpl implements A
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setLabel(String newLabel) {
-		String oldLabel = label;
-		label = newLabel;
+	public void setDescription(String newDescription) {
+		String oldDescription = description;
+		description = newDescription;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, CorePackage.ARCHITECTURE_ITEM__LABEL, oldLabel, label));
+			eNotify(new ENotificationImpl(this, Notification.SET, CorePackage.ARCHITECTURE_ITEM__DESCRIPTION, oldDescription, description));
 	}
 
 	/**
@@ -176,8 +176,8 @@ public abstract class ArchitectureItemImpl extends HasNameAndIDImpl implements A
 				return getComment();
 			case CorePackage.ARCHITECTURE_ITEM__TAGS:
 				return getTags();
-			case CorePackage.ARCHITECTURE_ITEM__LABEL:
-				return getLabel();
+			case CorePackage.ARCHITECTURE_ITEM__DESCRIPTION:
+				return getDescription();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -198,8 +198,8 @@ public abstract class ArchitectureItemImpl extends HasNameAndIDImpl implements A
 				getTags().clear();
 				getTags().addAll((Collection<? extends String>)newValue);
 				return;
-			case CorePackage.ARCHITECTURE_ITEM__LABEL:
-				setLabel((String)newValue);
+			case CorePackage.ARCHITECTURE_ITEM__DESCRIPTION:
+				setDescription((String)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -219,8 +219,8 @@ public abstract class ArchitectureItemImpl extends HasNameAndIDImpl implements A
 			case CorePackage.ARCHITECTURE_ITEM__TAGS:
 				getTags().clear();
 				return;
-			case CorePackage.ARCHITECTURE_ITEM__LABEL:
-				setLabel(LABEL_EDEFAULT);
+			case CorePackage.ARCHITECTURE_ITEM__DESCRIPTION:
+				setDescription(DESCRIPTION_EDEFAULT);
 				return;
 		}
 		super.eUnset(featureID);
@@ -238,8 +238,8 @@ public abstract class ArchitectureItemImpl extends HasNameAndIDImpl implements A
 				return COMMENT_EDEFAULT == null ? comment != null : !COMMENT_EDEFAULT.equals(comment);
 			case CorePackage.ARCHITECTURE_ITEM__TAGS:
 				return tags != null && !tags.isEmpty();
-			case CorePackage.ARCHITECTURE_ITEM__LABEL:
-				return LABEL_EDEFAULT == null ? label != null : !LABEL_EDEFAULT.equals(label);
+			case CorePackage.ARCHITECTURE_ITEM__DESCRIPTION:
+				return DESCRIPTION_EDEFAULT == null ? description != null : !DESCRIPTION_EDEFAULT.equals(description);
 		}
 		return super.eIsSet(featureID);
 	}
@@ -273,9 +273,9 @@ public abstract class ArchitectureItemImpl extends HasNameAndIDImpl implements A
 				default: return -1;
 			}
 		}
-		if (baseClass == HasLabel.class) {
+		if (baseClass == HasDescription.class) {
 			switch (derivedFeatureID) {
-				case CorePackage.ARCHITECTURE_ITEM__LABEL: return CorePackage.HAS_LABEL__LABEL;
+				case CorePackage.ARCHITECTURE_ITEM__DESCRIPTION: return CorePackage.HAS_DESCRIPTION__DESCRIPTION;
 				default: return -1;
 			}
 		}
@@ -311,9 +311,9 @@ public abstract class ArchitectureItemImpl extends HasNameAndIDImpl implements A
 				default: return -1;
 			}
 		}
-		if (baseClass == HasLabel.class) {
+		if (baseClass == HasDescription.class) {
 			switch (baseFeatureID) {
-				case CorePackage.HAS_LABEL__LABEL: return CorePackage.ARCHITECTURE_ITEM__LABEL;
+				case CorePackage.HAS_DESCRIPTION__DESCRIPTION: return CorePackage.ARCHITECTURE_ITEM__DESCRIPTION;
 				default: return -1;
 			}
 		}
@@ -334,8 +334,8 @@ public abstract class ArchitectureItemImpl extends HasNameAndIDImpl implements A
 		result.append(comment);
 		result.append(", tags: ");
 		result.append(tags);
-		result.append(", label: ");
-		result.append(label);
+		result.append(", description: ");
+		result.append(description);
 		result.append(')');
 		return result.toString();
 	}

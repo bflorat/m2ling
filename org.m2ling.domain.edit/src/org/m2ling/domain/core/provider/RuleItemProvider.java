@@ -66,7 +66,7 @@ public class RuleItemProvider
 			addCustomPropertiesPropertyDescriptor(object);
 			addCommentPropertyDescriptor(object);
 			addTagsPropertyDescriptor(object);
-			addLabelPropertyDescriptor(object);
+			addDescriptionPropertyDescriptor(object);
 			addStatusPropertyDescriptor(object);
 			addPriorityPropertyDescriptor(object);
 		}
@@ -140,19 +140,19 @@ public class RuleItemProvider
 	}
 
 	/**
-	 * This adds a property descriptor for the Label feature.
+	 * This adds a property descriptor for the Description feature.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected void addLabelPropertyDescriptor(Object object) {
+	protected void addDescriptionPropertyDescriptor(Object object) {
 		itemPropertyDescriptors.add
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
-				 getString("_UI_HasLabel_label_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_HasLabel_label_feature", "_UI_HasLabel_type"),
-				 CorePackage.Literals.HAS_LABEL__LABEL,
+				 getString("_UI_HasDescription_description_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_HasDescription_description_feature", "_UI_HasDescription_type"),
+				 CorePackage.Literals.HAS_DESCRIPTION__DESCRIPTION,
 				 true,
 				 false,
 				 false,
@@ -244,7 +244,7 @@ public class RuleItemProvider
 		switch (notification.getFeatureID(Rule.class)) {
 			case CorePackage.RULE__COMMENT:
 			case CorePackage.RULE__TAGS:
-			case CorePackage.RULE__LABEL:
+			case CorePackage.RULE__DESCRIPTION:
 			case CorePackage.RULE__STATUS:
 			case CorePackage.RULE__PRIORITY:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));

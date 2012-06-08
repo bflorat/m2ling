@@ -20,7 +20,7 @@ package org.m2ling.domain.core;
  * @model
  * @generated
  */
-public interface Rule extends HasNameAndID, HasCustomProperties, HasComment, HasTags, HasLabel, HasStatus {
+public interface Rule extends HasNameAndID, HasCustomProperties, HasComment, HasTags, HasDescription, HasStatus {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

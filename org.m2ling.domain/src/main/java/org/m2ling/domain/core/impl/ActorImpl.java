@@ -17,7 +17,7 @@ import org.eclipse.emf.ecore.util.EObjectWithInverseResolvingEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.m2ling.domain.core.Actor;
 import org.m2ling.domain.core.CorePackage;
-import org.m2ling.domain.core.HasLabel;
+import org.m2ling.domain.core.HasDescription;
 import org.m2ling.domain.core.HasTags;
 import org.m2ling.domain.core.OrganisationalUnit;
 import org.m2ling.domain.core.Stakeholder;
@@ -30,7 +30,7 @@ import org.m2ling.domain.core.Stakeholder;
  * The following features are implemented:
  * <ul>
  *   <li>{@link org.m2ling.domain.core.impl.ActorImpl#getTags <em>Tags</em>}</li>
- *   <li>{@link org.m2ling.domain.core.impl.ActorImpl#getLabel <em>Label</em>}</li>
+ *   <li>{@link org.m2ling.domain.core.impl.ActorImpl#getDescription <em>Description</em>}</li>
  *   <li>{@link org.m2ling.domain.core.impl.ActorImpl#getStakeholders <em>Stakeholders</em>}</li>
  *   <li>{@link org.m2ling.domain.core.impl.ActorImpl#getUnit <em>Unit</em>}</li>
  *   <li>{@link org.m2ling.domain.core.impl.ActorImpl#getUsername <em>Username</em>}</li>
@@ -62,24 +62,24 @@ public class ActorImpl extends HasCustomPropertiesImpl implements Actor {
 	protected EList<String> tags;
 
 	/**
-	 * The default value of the '{@link #getLabel() <em>Label</em>}' attribute.
+	 * The default value of the '{@link #getDescription() <em>Description</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getLabel()
+	 * @see #getDescription()
 	 * @generated
 	 * @ordered
 	 */
-	protected static final String LABEL_EDEFAULT = null;
+	protected static final String DESCRIPTION_EDEFAULT = null;
 
 	/**
-	 * The cached value of the '{@link #getLabel() <em>Label</em>}' attribute.
+	 * The cached value of the '{@link #getDescription() <em>Description</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getLabel()
+	 * @see #getDescription()
 	 * @generated
 	 * @ordered
 	 */
-	protected String label = LABEL_EDEFAULT;
+	protected String description = DESCRIPTION_EDEFAULT;
 
 	/**
 	 * The cached value of the '{@link #getStakeholders() <em>Stakeholders</em>}' reference list.
@@ -237,8 +237,8 @@ public class ActorImpl extends HasCustomPropertiesImpl implements Actor {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public String getLabel() {
-		return label;
+	public String getDescription() {
+		return description;
 	}
 
 	/**
@@ -246,11 +246,11 @@ public class ActorImpl extends HasCustomPropertiesImpl implements Actor {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setLabel(String newLabel) {
-		String oldLabel = label;
-		label = newLabel;
+	public void setDescription(String newDescription) {
+		String oldDescription = description;
+		description = newDescription;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, CorePackage.ACTOR__LABEL, oldLabel, label));
+			eNotify(new ENotificationImpl(this, Notification.SET, CorePackage.ACTOR__DESCRIPTION, oldDescription, description));
 	}
 
 	/**
@@ -421,8 +421,8 @@ public class ActorImpl extends HasCustomPropertiesImpl implements Actor {
 		switch (featureID) {
 			case CorePackage.ACTOR__TAGS:
 				return getTags();
-			case CorePackage.ACTOR__LABEL:
-				return getLabel();
+			case CorePackage.ACTOR__DESCRIPTION:
+				return getDescription();
 			case CorePackage.ACTOR__STAKEHOLDERS:
 				return getStakeholders();
 			case CorePackage.ACTOR__UNIT:
@@ -454,8 +454,8 @@ public class ActorImpl extends HasCustomPropertiesImpl implements Actor {
 				getTags().clear();
 				getTags().addAll((Collection<? extends String>)newValue);
 				return;
-			case CorePackage.ACTOR__LABEL:
-				setLabel((String)newValue);
+			case CorePackage.ACTOR__DESCRIPTION:
+				setDescription((String)newValue);
 				return;
 			case CorePackage.ACTOR__STAKEHOLDERS:
 				getStakeholders().clear();
@@ -495,8 +495,8 @@ public class ActorImpl extends HasCustomPropertiesImpl implements Actor {
 			case CorePackage.ACTOR__TAGS:
 				getTags().clear();
 				return;
-			case CorePackage.ACTOR__LABEL:
-				setLabel(LABEL_EDEFAULT);
+			case CorePackage.ACTOR__DESCRIPTION:
+				setDescription(DESCRIPTION_EDEFAULT);
 				return;
 			case CorePackage.ACTOR__STAKEHOLDERS:
 				getStakeholders().clear();
@@ -533,8 +533,8 @@ public class ActorImpl extends HasCustomPropertiesImpl implements Actor {
 		switch (featureID) {
 			case CorePackage.ACTOR__TAGS:
 				return tags != null && !tags.isEmpty();
-			case CorePackage.ACTOR__LABEL:
-				return LABEL_EDEFAULT == null ? label != null : !LABEL_EDEFAULT.equals(label);
+			case CorePackage.ACTOR__DESCRIPTION:
+				return DESCRIPTION_EDEFAULT == null ? description != null : !DESCRIPTION_EDEFAULT.equals(description);
 			case CorePackage.ACTOR__STAKEHOLDERS:
 				return stakeholders != null && !stakeholders.isEmpty();
 			case CorePackage.ACTOR__UNIT:
@@ -566,9 +566,9 @@ public class ActorImpl extends HasCustomPropertiesImpl implements Actor {
 				default: return -1;
 			}
 		}
-		if (baseClass == HasLabel.class) {
+		if (baseClass == HasDescription.class) {
 			switch (derivedFeatureID) {
-				case CorePackage.ACTOR__LABEL: return CorePackage.HAS_LABEL__LABEL;
+				case CorePackage.ACTOR__DESCRIPTION: return CorePackage.HAS_DESCRIPTION__DESCRIPTION;
 				default: return -1;
 			}
 		}
@@ -588,9 +588,9 @@ public class ActorImpl extends HasCustomPropertiesImpl implements Actor {
 				default: return -1;
 			}
 		}
-		if (baseClass == HasLabel.class) {
+		if (baseClass == HasDescription.class) {
 			switch (baseFeatureID) {
-				case CorePackage.HAS_LABEL__LABEL: return CorePackage.ACTOR__LABEL;
+				case CorePackage.HAS_DESCRIPTION__DESCRIPTION: return CorePackage.ACTOR__DESCRIPTION;
 				default: return -1;
 			}
 		}
@@ -609,8 +609,8 @@ public class ActorImpl extends HasCustomPropertiesImpl implements Actor {
 		StringBuffer result = new StringBuffer(super.toString());
 		result.append(" (tags: ");
 		result.append(tags);
-		result.append(", label: ");
-		result.append(label);
+		result.append(", description: ");
+		result.append(description);
 		result.append(", username: ");
 		result.append(username);
 		result.append(", admin: ");

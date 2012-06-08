@@ -63,7 +63,7 @@ public class ActivityTransitionItemProvider
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
-			addLabelPropertyDescriptor(object);
+			addDescriptionPropertyDescriptor(object);
 			addDatePropertyDescriptor(object);
 			addFromStatusPropertyDescriptor(object);
 			addToStatusPropertyDescriptor(object);
@@ -74,19 +74,19 @@ public class ActivityTransitionItemProvider
 	}
 
 	/**
-	 * This adds a property descriptor for the Label feature.
+	 * This adds a property descriptor for the Description feature.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected void addLabelPropertyDescriptor(Object object) {
+	protected void addDescriptionPropertyDescriptor(Object object) {
 		itemPropertyDescriptors.add
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
-				 getString("_UI_HasLabel_label_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_HasLabel_label_feature", "_UI_HasLabel_type"),
-				 CorePackage.Literals.HAS_LABEL__LABEL,
+				 getString("_UI_HasDescription_description_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_HasDescription_description_feature", "_UI_HasDescription_type"),
+				 CorePackage.Literals.HAS_DESCRIPTION__DESCRIPTION,
 				 true,
 				 false,
 				 false,
@@ -242,7 +242,7 @@ public class ActivityTransitionItemProvider
 		updateChildren(notification);
 
 		switch (notification.getFeatureID(ActivityTransition.class)) {
-			case CorePackage.ACTIVITY_TRANSITION__LABEL:
+			case CorePackage.ACTIVITY_TRANSITION__DESCRIPTION:
 			case CorePackage.ACTIVITY_TRANSITION__DATE:
 			case CorePackage.ACTIVITY_TRANSITION__FROM_STATUS:
 			case CorePackage.ACTIVITY_TRANSITION__TO_STATUS:

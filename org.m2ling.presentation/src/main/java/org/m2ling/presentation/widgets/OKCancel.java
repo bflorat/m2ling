@@ -6,15 +6,15 @@
 package org.m2ling.presentation.widgets;
 
 import com.vaadin.terminal.ThemeResource;
-import com.vaadin.ui.Alignment;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Button.ClickEvent;
+import com.vaadin.ui.CustomComponent;
 import com.vaadin.ui.HorizontalLayout;
 
 /**
  * OK Cancel panel
  */
-public class OKCancel extends HorizontalLayout {
+public class OKCancel extends CustomComponent {
 
 	private static final long serialVersionUID = -5102018433538734852L;
 	private Button okButton;
@@ -30,8 +30,9 @@ public class OKCancel extends HorizontalLayout {
 	 */
 	@SuppressWarnings("serial")
 	public OKCancel(final Command ok, final Command cancel) {
-		setSpacing(true);
-		setMargin(true);
+		HorizontalLayout hz = new HorizontalLayout();
+		hz.setSpacing(true);
+		hz.setMargin(true);
 		okButton = new Button("OK", new Button.ClickListener() {
 			public void buttonClick(ClickEvent event) {
 				ok.execute();
@@ -45,10 +46,11 @@ public class OKCancel extends HorizontalLayout {
 			}
 		});
 		cancelButton.setIcon(new ThemeResource("img/16/cancel.png"));
-		addComponent(okButton);
-		setComponentAlignment(okButton, Alignment.MIDDLE_CENTER);
-		addComponent(cancelButton);
-		setComponentAlignment(cancelButton, Alignment.MIDDLE_CENTER);
+		hz.addComponent(okButton);
+		hz.addComponent(cancelButton);
+		hz.setSizeUndefined();
+		setSizeUndefined();
+		setCompositionRoot(hz);
 	}
 
 }

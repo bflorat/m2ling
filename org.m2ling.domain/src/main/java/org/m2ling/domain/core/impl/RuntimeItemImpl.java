@@ -13,7 +13,7 @@ import org.eclipse.emf.ecore.util.EDataTypeUniqueEList;
 import org.m2ling.domain.core.CorePackage;
 import org.m2ling.domain.core.HasComment;
 import org.m2ling.domain.core.HasConstraints;
-import org.m2ling.domain.core.HasLabel;
+import org.m2ling.domain.core.HasDescription;
 import org.m2ling.domain.core.HasParameterValues;
 import org.m2ling.domain.core.HasTags;
 import org.m2ling.domain.core.RuntimeItem;
@@ -27,7 +27,7 @@ import org.m2ling.domain.core.RuntimeItem;
  * <ul>
  *   <li>{@link org.m2ling.domain.core.impl.RuntimeItemImpl#getComment <em>Comment</em>}</li>
  *   <li>{@link org.m2ling.domain.core.impl.RuntimeItemImpl#getTags <em>Tags</em>}</li>
- *   <li>{@link org.m2ling.domain.core.impl.RuntimeItemImpl#getLabel <em>Label</em>}</li>
+ *   <li>{@link org.m2ling.domain.core.impl.RuntimeItemImpl#getDescription <em>Description</em>}</li>
  *   <li>{@link org.m2ling.domain.core.impl.RuntimeItemImpl#getStatus <em>Status</em>}</li>
  * </ul>
  * </p>
@@ -73,24 +73,24 @@ public abstract class RuntimeItemImpl extends HasNameAndIDImpl implements Runtim
 	protected EList<String> tags;
 
 	/**
-	 * The default value of the '{@link #getLabel() <em>Label</em>}' attribute.
+	 * The default value of the '{@link #getDescription() <em>Description</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getLabel()
+	 * @see #getDescription()
 	 * @generated
 	 * @ordered
 	 */
-	protected static final String LABEL_EDEFAULT = null;
+	protected static final String DESCRIPTION_EDEFAULT = null;
 
 	/**
-	 * The cached value of the '{@link #getLabel() <em>Label</em>}' attribute.
+	 * The cached value of the '{@link #getDescription() <em>Description</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getLabel()
+	 * @see #getDescription()
 	 * @generated
 	 * @ordered
 	 */
-	protected String label = LABEL_EDEFAULT;
+	protected String description = DESCRIPTION_EDEFAULT;
 
 	/**
 	 * The default value of the '{@link #getStatus() <em>Status</em>}' attribute.
@@ -169,8 +169,8 @@ public abstract class RuntimeItemImpl extends HasNameAndIDImpl implements Runtim
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public String getLabel() {
-		return label;
+	public String getDescription() {
+		return description;
 	}
 
 	/**
@@ -178,11 +178,11 @@ public abstract class RuntimeItemImpl extends HasNameAndIDImpl implements Runtim
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setLabel(String newLabel) {
-		String oldLabel = label;
-		label = newLabel;
+	public void setDescription(String newDescription) {
+		String oldDescription = description;
+		description = newDescription;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, CorePackage.RUNTIME_ITEM__LABEL, oldLabel, label));
+			eNotify(new ENotificationImpl(this, Notification.SET, CorePackage.RUNTIME_ITEM__DESCRIPTION, oldDescription, description));
 	}
 
 	/**
@@ -218,8 +218,8 @@ public abstract class RuntimeItemImpl extends HasNameAndIDImpl implements Runtim
 				return getComment();
 			case CorePackage.RUNTIME_ITEM__TAGS:
 				return getTags();
-			case CorePackage.RUNTIME_ITEM__LABEL:
-				return getLabel();
+			case CorePackage.RUNTIME_ITEM__DESCRIPTION:
+				return getDescription();
 			case CorePackage.RUNTIME_ITEM__STATUS:
 				return getStatus();
 		}
@@ -242,8 +242,8 @@ public abstract class RuntimeItemImpl extends HasNameAndIDImpl implements Runtim
 				getTags().clear();
 				getTags().addAll((Collection<? extends String>)newValue);
 				return;
-			case CorePackage.RUNTIME_ITEM__LABEL:
-				setLabel((String)newValue);
+			case CorePackage.RUNTIME_ITEM__DESCRIPTION:
+				setDescription((String)newValue);
 				return;
 			case CorePackage.RUNTIME_ITEM__STATUS:
 				setStatus((String)newValue);
@@ -266,8 +266,8 @@ public abstract class RuntimeItemImpl extends HasNameAndIDImpl implements Runtim
 			case CorePackage.RUNTIME_ITEM__TAGS:
 				getTags().clear();
 				return;
-			case CorePackage.RUNTIME_ITEM__LABEL:
-				setLabel(LABEL_EDEFAULT);
+			case CorePackage.RUNTIME_ITEM__DESCRIPTION:
+				setDescription(DESCRIPTION_EDEFAULT);
 				return;
 			case CorePackage.RUNTIME_ITEM__STATUS:
 				setStatus(STATUS_EDEFAULT);
@@ -288,8 +288,8 @@ public abstract class RuntimeItemImpl extends HasNameAndIDImpl implements Runtim
 				return COMMENT_EDEFAULT == null ? comment != null : !COMMENT_EDEFAULT.equals(comment);
 			case CorePackage.RUNTIME_ITEM__TAGS:
 				return tags != null && !tags.isEmpty();
-			case CorePackage.RUNTIME_ITEM__LABEL:
-				return LABEL_EDEFAULT == null ? label != null : !LABEL_EDEFAULT.equals(label);
+			case CorePackage.RUNTIME_ITEM__DESCRIPTION:
+				return DESCRIPTION_EDEFAULT == null ? description != null : !DESCRIPTION_EDEFAULT.equals(description);
 			case CorePackage.RUNTIME_ITEM__STATUS:
 				return STATUS_EDEFAULT == null ? status != null : !STATUS_EDEFAULT.equals(status);
 		}
@@ -325,9 +325,9 @@ public abstract class RuntimeItemImpl extends HasNameAndIDImpl implements Runtim
 				default: return -1;
 			}
 		}
-		if (baseClass == HasLabel.class) {
+		if (baseClass == HasDescription.class) {
 			switch (derivedFeatureID) {
-				case CorePackage.RUNTIME_ITEM__LABEL: return CorePackage.HAS_LABEL__LABEL;
+				case CorePackage.RUNTIME_ITEM__DESCRIPTION: return CorePackage.HAS_DESCRIPTION__DESCRIPTION;
 				default: return -1;
 			}
 		}
@@ -363,9 +363,9 @@ public abstract class RuntimeItemImpl extends HasNameAndIDImpl implements Runtim
 				default: return -1;
 			}
 		}
-		if (baseClass == HasLabel.class) {
+		if (baseClass == HasDescription.class) {
 			switch (baseFeatureID) {
-				case CorePackage.HAS_LABEL__LABEL: return CorePackage.RUNTIME_ITEM__LABEL;
+				case CorePackage.HAS_DESCRIPTION__DESCRIPTION: return CorePackage.RUNTIME_ITEM__DESCRIPTION;
 				default: return -1;
 			}
 		}
@@ -386,8 +386,8 @@ public abstract class RuntimeItemImpl extends HasNameAndIDImpl implements Runtim
 		result.append(comment);
 		result.append(", tags: ");
 		result.append(tags);
-		result.append(", label: ");
-		result.append(label);
+		result.append(", description: ");
+		result.append(description);
 		result.append(", status: ");
 		result.append(status);
 		result.append(')');

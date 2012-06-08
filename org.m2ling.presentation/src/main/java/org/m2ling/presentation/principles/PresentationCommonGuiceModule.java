@@ -26,7 +26,7 @@ public class PresentationCommonGuiceModule extends AbstractModule {
 	@Override
 	protected void configure() {
 		{// Injection bindings
-			bind(TagService.class).to(TagServiceImpl.class).in(Singleton.class);
+			bind(TagService.class).to(TagServiceImpl.class);
 		}
 	}
 

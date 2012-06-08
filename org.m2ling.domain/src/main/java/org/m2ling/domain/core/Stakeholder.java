@@ -23,7 +23,7 @@ import org.eclipse.emf.common.util.EList;
  * @model
  * @generated
  */
-public interface Stakeholder extends HasNameAndID, HasLabel {
+public interface Stakeholder extends HasNameAndID, HasDescription {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

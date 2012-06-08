@@ -27,7 +27,7 @@ import org.eclipse.emf.common.util.EList;
  * @model
  * @generated
  */
-public interface Actor extends HasCustomProperties, HasTags, HasLabel {
+public interface Actor extends HasCustomProperties, HasTags, HasDescription {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

@@ -13,7 +13,7 @@ import org.eclipse.emf.ecore.util.EDataTypeUniqueEList;
 import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 import org.m2ling.domain.core.Activity;
 import org.m2ling.domain.core.CorePackage;
-import org.m2ling.domain.core.HasLabel;
+import org.m2ling.domain.core.HasDescription;
 import org.m2ling.domain.core.HasTags;
 import org.m2ling.domain.core.Stakeholder;
 
@@ -25,7 +25,7 @@ import org.m2ling.domain.core.Stakeholder;
  * The following features are implemented:
  * <ul>
  *   <li>{@link org.m2ling.domain.core.impl.ActivityImpl#getTags <em>Tags</em>}</li>
- *   <li>{@link org.m2ling.domain.core.impl.ActivityImpl#getLabel <em>Label</em>}</li>
+ *   <li>{@link org.m2ling.domain.core.impl.ActivityImpl#getDescription <em>Description</em>}</li>
  *   <li>{@link org.m2ling.domain.core.impl.ActivityImpl#getAccountables <em>Accountables</em>}</li>
  *   <li>{@link org.m2ling.domain.core.impl.ActivityImpl#getResponsibles <em>Responsibles</em>}</li>
  * </ul>
@@ -52,24 +52,24 @@ public class ActivityImpl extends HasNameAndIDImpl implements Activity {
 	protected EList<String> tags;
 
 	/**
-	 * The default value of the '{@link #getLabel() <em>Label</em>}' attribute.
+	 * The default value of the '{@link #getDescription() <em>Description</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getLabel()
+	 * @see #getDescription()
 	 * @generated
 	 * @ordered
 	 */
-	protected static final String LABEL_EDEFAULT = null;
+	protected static final String DESCRIPTION_EDEFAULT = null;
 
 	/**
-	 * The cached value of the '{@link #getLabel() <em>Label</em>}' attribute.
+	 * The cached value of the '{@link #getDescription() <em>Description</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getLabel()
+	 * @see #getDescription()
 	 * @generated
 	 * @ordered
 	 */
-	protected String label = LABEL_EDEFAULT;
+	protected String description = DESCRIPTION_EDEFAULT;
 
 	/**
 	 * The cached value of the '{@link #getAccountables() <em>Accountables</em>}' reference list.
@@ -127,8 +127,8 @@ public class ActivityImpl extends HasNameAndIDImpl implements Activity {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public String getLabel() {
-		return label;
+	public String getDescription() {
+		return description;
 	}
 
 	/**
@@ -136,11 +136,11 @@ public class ActivityImpl extends HasNameAndIDImpl implements Activity {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setLabel(String newLabel) {
-		String oldLabel = label;
-		label = newLabel;
+	public void setDescription(String newDescription) {
+		String oldDescription = description;
+		description = newDescription;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, CorePackage.ACTIVITY__LABEL, oldLabel, label));
+			eNotify(new ENotificationImpl(this, Notification.SET, CorePackage.ACTIVITY__DESCRIPTION, oldDescription, description));
 	}
 
 	/**
@@ -177,8 +177,8 @@ public class ActivityImpl extends HasNameAndIDImpl implements Activity {
 		switch (featureID) {
 			case CorePackage.ACTIVITY__TAGS:
 				return getTags();
-			case CorePackage.ACTIVITY__LABEL:
-				return getLabel();
+			case CorePackage.ACTIVITY__DESCRIPTION:
+				return getDescription();
 			case CorePackage.ACTIVITY__ACCOUNTABLES:
 				return getAccountables();
 			case CorePackage.ACTIVITY__RESPONSIBLES:
@@ -200,8 +200,8 @@ public class ActivityImpl extends HasNameAndIDImpl implements Activity {
 				getTags().clear();
 				getTags().addAll((Collection<? extends String>)newValue);
 				return;
-			case CorePackage.ACTIVITY__LABEL:
-				setLabel((String)newValue);
+			case CorePackage.ACTIVITY__DESCRIPTION:
+				setDescription((String)newValue);
 				return;
 			case CorePackage.ACTIVITY__ACCOUNTABLES:
 				getAccountables().clear();
@@ -226,8 +226,8 @@ public class ActivityImpl extends HasNameAndIDImpl implements Activity {
 			case CorePackage.ACTIVITY__TAGS:
 				getTags().clear();
 				return;
-			case CorePackage.ACTIVITY__LABEL:
-				setLabel(LABEL_EDEFAULT);
+			case CorePackage.ACTIVITY__DESCRIPTION:
+				setDescription(DESCRIPTION_EDEFAULT);
 				return;
 			case CorePackage.ACTIVITY__ACCOUNTABLES:
 				getAccountables().clear();
@@ -249,8 +249,8 @@ public class ActivityImpl extends HasNameAndIDImpl implements Activity {
 		switch (featureID) {
 			case CorePackage.ACTIVITY__TAGS:
 				return tags != null && !tags.isEmpty();
-			case CorePackage.ACTIVITY__LABEL:
-				return LABEL_EDEFAULT == null ? label != null : !LABEL_EDEFAULT.equals(label);
+			case CorePackage.ACTIVITY__DESCRIPTION:
+				return DESCRIPTION_EDEFAULT == null ? description != null : !DESCRIPTION_EDEFAULT.equals(description);
 			case CorePackage.ACTIVITY__ACCOUNTABLES:
 				return accountables != null && !accountables.isEmpty();
 			case CorePackage.ACTIVITY__RESPONSIBLES:
@@ -272,9 +272,9 @@ public class ActivityImpl extends HasNameAndIDImpl implements Activity {
 				default: return -1;
 			}
 		}
-		if (baseClass == HasLabel.class) {
+		if (baseClass == HasDescription.class) {
 			switch (derivedFeatureID) {
-				case CorePackage.ACTIVITY__LABEL: return CorePackage.HAS_LABEL__LABEL;
+				case CorePackage.ACTIVITY__DESCRIPTION: return CorePackage.HAS_DESCRIPTION__DESCRIPTION;
 				default: return -1;
 			}
 		}
@@ -294,9 +294,9 @@ public class ActivityImpl extends HasNameAndIDImpl implements Activity {
 				default: return -1;
 			}
 		}
-		if (baseClass == HasLabel.class) {
+		if (baseClass == HasDescription.class) {
 			switch (baseFeatureID) {
-				case CorePackage.HAS_LABEL__LABEL: return CorePackage.ACTIVITY__LABEL;
+				case CorePackage.HAS_DESCRIPTION__DESCRIPTION: return CorePackage.ACTIVITY__DESCRIPTION;
 				default: return -1;
 			}
 		}
@@ -315,8 +315,8 @@ public class ActivityImpl extends HasNameAndIDImpl implements Activity {
 		StringBuffer result = new StringBuffer(super.toString());
 		result.append(" (tags: ");
 		result.append(tags);
-		result.append(", label: ");
-		result.append(label);
+		result.append(", description: ");
+		result.append(description);
 		result.append(')');
 		return result.toString();
 	}

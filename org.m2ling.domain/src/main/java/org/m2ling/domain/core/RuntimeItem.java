@@ -20,7 +20,7 @@ package org.m2ling.domain.core;
  * @model abstract="true"
  * @generated
  */
-public interface RuntimeItem extends HasNameAndID, HasComment, HasTags, HasParameterValues, HasConstraints, HasLabel {
+public interface RuntimeItem extends HasNameAndID, HasComment, HasTags, HasParameterValues, HasConstraints, HasDescription {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

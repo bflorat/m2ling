@@ -9,15 +9,17 @@ import org.m2ling.service.common.ServicesCommonGuiceModule;
 
 import com.google.inject.Guice;
 import com.google.inject.Injector;
+import com.google.inject.Stage;
 import com.google.inject.servlet.GuiceServletContextListener;
 import com.google.inject.servlet.ServletModule;
-import com.google.inject.servlet.ServletScopes;
 import com.vaadin.Application;
 
 /**
  * Listener creating the guice injector
  */
 public class M2lingGuiceServletContextListener extends GuiceServletContextListener {
+
+	private static Injector injector;
 
 	@Override
 	protected Injector getInjector() {
@@ -27,7 +29,7 @@ public class M2lingGuiceServletContextListener extends GuiceServletContextListen
 			protected void configureServlets() {
 				// Servlet specific bindings
 				serve("/*").with(GuiceApplicationServlet.class);
-				bind(Application.class).to(M2lingApplication.class).in(ServletScopes.SESSION);
+				bind(Application.class).to(M2lingApplication.class);
 
 				// Presentation layer bindings
 				install(new PresentationCommonGuiceModule());
@@ -37,8 +39,18 @@ public class M2lingGuiceServletContextListener extends GuiceServletContextListen
 				install(new ServicesCommonGuiceModule());
 			}
 		};
+		// TODO : set PRODUCTION stage before releasing
+		injector = Guice.createInjector(Stage.DEVELOPMENT, module);
+		return injector;
+	}
 
-		Injector injector = Guice.createInjector(module);
+	/**
+	 * Return the cached injector. Use it only for rare on-demand injection cases !
+	 * 
+	 * @return the cached injector
+	 */
+
+	public static Injector getCachedInjector() {
 		return injector;
 	}
 }

@@ -71,8 +71,8 @@ public class DTOConverter {
 					}
 				}
 			}
-			if (dto.getLabel() != null) {
-				vp.setLabel(dto.getLabel());
+			if (dto.getDescription() != null) {
+				vp.setDescription(dto.getDescription());
 			}
 			return vp;
 		}

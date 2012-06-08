@@ -26,7 +26,7 @@ import org.m2ling.domain.core.FormatConstraint;
 import org.m2ling.domain.core.HasComment;
 import org.m2ling.domain.core.HasConstraints;
 import org.m2ling.domain.core.HasCustomProperties;
-import org.m2ling.domain.core.HasLabel;
+import org.m2ling.domain.core.HasDescription;
 import org.m2ling.domain.core.HasNameAndID;
 import org.m2ling.domain.core.HasParameterDefinitions;
 import org.m2ling.domain.core.HasParameterValues;
@@ -126,7 +126,7 @@ public class CoreSwitch<T> extends Switch<T> {
 				if (result == null) result = caseHasTags(componentType);
 				if (result == null) result = caseHasParameterDefinitions(componentType);
 				if (result == null) result = caseHasConstraints(componentType);
-				if (result == null) result = caseHasLabel(componentType);
+				if (result == null) result = caseHasDescription(componentType);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -140,7 +140,7 @@ public class CoreSwitch<T> extends Switch<T> {
 				if (result == null) result = caseHasTags(component);
 				if (result == null) result = caseHasParameterDefinitions(component);
 				if (result == null) result = caseHasConstraints(component);
-				if (result == null) result = caseHasLabel(component);
+				if (result == null) result = caseHasDescription(component);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -154,7 +154,7 @@ public class CoreSwitch<T> extends Switch<T> {
 				if (result == null) result = caseHasComment(componentInstance);
 				if (result == null) result = caseHasTags(componentInstance);
 				if (result == null) result = caseHasConstraints(componentInstance);
-				if (result == null) result = caseHasLabel(componentInstance);
+				if (result == null) result = caseHasDescription(componentInstance);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -168,7 +168,7 @@ public class CoreSwitch<T> extends Switch<T> {
 				if (result == null) result = caseHasTags(viewPoint);
 				if (result == null) result = caseHasParameterDefinitions(viewPoint);
 				if (result == null) result = caseHasConstraints(viewPoint);
-				if (result == null) result = caseHasLabel(viewPoint);
+				if (result == null) result = caseHasDescription(viewPoint);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -181,7 +181,7 @@ public class CoreSwitch<T> extends Switch<T> {
 				if (result == null) result = caseHasTags(componentGroup);
 				if (result == null) result = caseHasParameterDefinitions(componentGroup);
 				if (result == null) result = caseHasConstraints(componentGroup);
-				if (result == null) result = caseHasLabel(componentGroup);
+				if (result == null) result = caseHasDescription(componentGroup);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -194,7 +194,7 @@ public class CoreSwitch<T> extends Switch<T> {
 				if (result == null) result = caseHasTags(componentInstanceGroup);
 				if (result == null) result = caseHasParameterValues(componentInstanceGroup);
 				if (result == null) result = caseHasConstraints(componentInstanceGroup);
-				if (result == null) result = caseHasLabel(componentInstanceGroup);
+				if (result == null) result = caseHasDescription(componentInstanceGroup);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -206,7 +206,7 @@ public class CoreSwitch<T> extends Switch<T> {
 				if (result == null) result = caseHasTags(architectureItem);
 				if (result == null) result = caseHasParameterDefinitions(architectureItem);
 				if (result == null) result = caseHasConstraints(architectureItem);
-				if (result == null) result = caseHasLabel(architectureItem);
+				if (result == null) result = caseHasDescription(architectureItem);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -219,7 +219,7 @@ public class CoreSwitch<T> extends Switch<T> {
 				if (result == null) result = caseHasTags(conceptItem);
 				if (result == null) result = caseHasParameterDefinitions(conceptItem);
 				if (result == null) result = caseHasConstraints(conceptItem);
-				if (result == null) result = caseHasLabel(conceptItem);
+				if (result == null) result = caseHasDescription(conceptItem);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -231,7 +231,7 @@ public class CoreSwitch<T> extends Switch<T> {
 				if (result == null) result = caseHasTags(runtimeItem);
 				if (result == null) result = caseHasParameterValues(runtimeItem);
 				if (result == null) result = caseHasConstraints(runtimeItem);
-				if (result == null) result = caseHasLabel(runtimeItem);
+				if (result == null) result = caseHasDescription(runtimeItem);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -244,7 +244,7 @@ public class CoreSwitch<T> extends Switch<T> {
 				if (result == null) result = caseHasTags(view);
 				if (result == null) result = caseHasParameterDefinitions(view);
 				if (result == null) result = caseHasConstraints(view);
-				if (result == null) result = caseHasLabel(view);
+				if (result == null) result = caseHasDescription(view);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -290,6 +290,12 @@ public class CoreSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case CorePackage.HAS_DESCRIPTION: {
+				HasDescription hasDescription = (HasDescription)theEObject;
+				T result = caseHasDescription(hasDescription);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			case CorePackage.CUSTOM_PROPERTY: {
 				CustomProperty customProperty = (CustomProperty)theEObject;
 				T result = caseCustomProperty(customProperty);
@@ -306,7 +312,7 @@ public class CoreSwitch<T> extends Switch<T> {
 				if (result == null) result = caseHasTags(linkType);
 				if (result == null) result = caseHasParameterDefinitions(linkType);
 				if (result == null) result = caseHasConstraints(linkType);
-				if (result == null) result = caseHasLabel(linkType);
+				if (result == null) result = caseHasDescription(linkType);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -319,7 +325,7 @@ public class CoreSwitch<T> extends Switch<T> {
 				if (result == null) result = caseHasTags(link);
 				if (result == null) result = caseHasParameterDefinitions(link);
 				if (result == null) result = caseHasConstraints(link);
-				if (result == null) result = caseHasLabel(link);
+				if (result == null) result = caseHasDescription(link);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -332,13 +338,7 @@ public class CoreSwitch<T> extends Switch<T> {
 				if (result == null) result = caseHasTags(instancesLink);
 				if (result == null) result = caseHasParameterValues(instancesLink);
 				if (result == null) result = caseHasConstraints(instancesLink);
-				if (result == null) result = caseHasLabel(instancesLink);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case CorePackage.HAS_LABEL: {
-				HasLabel hasLabel = (HasLabel)theEObject;
-				T result = caseHasLabel(hasLabel);
+				if (result == null) result = caseHasDescription(instancesLink);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -346,7 +346,7 @@ public class CoreSwitch<T> extends Switch<T> {
 				Stakeholder stakeholder = (Stakeholder)theEObject;
 				T result = caseStakeholder(stakeholder);
 				if (result == null) result = caseHasNameAndID(stakeholder);
-				if (result == null) result = caseHasLabel(stakeholder);
+				if (result == null) result = caseHasDescription(stakeholder);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -452,7 +452,7 @@ public class CoreSwitch<T> extends Switch<T> {
 				T result = caseActivity(activity);
 				if (result == null) result = caseHasNameAndID(activity);
 				if (result == null) result = caseHasTags(activity);
-				if (result == null) result = caseHasLabel(activity);
+				if (result == null) result = caseHasDescription(activity);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -460,7 +460,7 @@ public class CoreSwitch<T> extends Switch<T> {
 				ActivityTransition activityTransition = (ActivityTransition)theEObject;
 				T result = caseActivityTransition(activityTransition);
 				if (result == null) result = caseHasComment(activityTransition);
-				if (result == null) result = caseHasLabel(activityTransition);
+				if (result == null) result = caseHasDescription(activityTransition);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -471,7 +471,7 @@ public class CoreSwitch<T> extends Switch<T> {
 				if (result == null) result = caseHasCustomProperties(organisationalUnit);
 				if (result == null) result = caseHasNameAndID(organisationalUnit);
 				if (result == null) result = caseHasTags(organisationalUnit);
-				if (result == null) result = caseHasLabel(organisationalUnit);
+				if (result == null) result = caseHasDescription(organisationalUnit);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -480,7 +480,7 @@ public class CoreSwitch<T> extends Switch<T> {
 				T result = caseActor(actor);
 				if (result == null) result = caseHasCustomProperties(actor);
 				if (result == null) result = caseHasTags(actor);
-				if (result == null) result = caseHasLabel(actor);
+				if (result == null) result = caseHasDescription(actor);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -491,7 +491,7 @@ public class CoreSwitch<T> extends Switch<T> {
 				if (result == null) result = caseHasCustomProperties(rule);
 				if (result == null) result = caseHasComment(rule);
 				if (result == null) result = caseHasTags(rule);
-				if (result == null) result = caseHasLabel(rule);
+				if (result == null) result = caseHasDescription(rule);
 				if (result == null) result = caseHasStatus(rule);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
@@ -502,7 +502,7 @@ public class CoreSwitch<T> extends Switch<T> {
 				if (result == null) result = caseHasComment(reference);
 				if (result == null) result = caseHasConstraints(reference);
 				if (result == null) result = caseHasCustomProperties(reference);
-				if (result == null) result = caseHasLabel(reference);
+				if (result == null) result = caseHasDescription(reference);
 				if (result == null) result = caseHasStatus(reference);
 				if (result == null) result = caseHasTags(reference);
 				if (result == null) result = defaultCase(theEObject);
@@ -828,6 +828,21 @@ public class CoreSwitch<T> extends Switch<T> {
 	}
 
 	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Has Description</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Has Description</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseHasDescription(HasDescription object) {
+		return null;
+	}
+
+	/**
 	 * Returns the result of interpreting the object as an instance of '<em>Stakeholder</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
@@ -1139,21 +1154,6 @@ public class CoreSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseReference(Reference object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Has Label</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Has Label</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseHasLabel(HasLabel object) {
 		return null;
 	}
 

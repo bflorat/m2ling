@@ -14,7 +14,7 @@ import org.eclipse.emf.ecore.util.EDataTypeUniqueEList;
 import org.m2ling.domain.core.CorePackage;
 import org.m2ling.domain.core.CustomProperty;
 import org.m2ling.domain.core.HasCustomProperties;
-import org.m2ling.domain.core.HasLabel;
+import org.m2ling.domain.core.HasDescription;
 import org.m2ling.domain.core.HasNameAndID;
 import org.m2ling.domain.core.HasTags;
 import org.m2ling.domain.core.OrganisationalUnit;
@@ -29,7 +29,7 @@ import org.m2ling.domain.core.OrganisationalUnit;
  *   <li>{@link org.m2ling.domain.core.impl.OrganisationalUnitImpl#getId <em>Id</em>}</li>
  *   <li>{@link org.m2ling.domain.core.impl.OrganisationalUnitImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.m2ling.domain.core.impl.OrganisationalUnitImpl#getTags <em>Tags</em>}</li>
- *   <li>{@link org.m2ling.domain.core.impl.OrganisationalUnitImpl#getLabel <em>Label</em>}</li>
+ *   <li>{@link org.m2ling.domain.core.impl.OrganisationalUnitImpl#getDescription <em>Description</em>}</li>
  * </ul>
  * </p>
  *
@@ -110,24 +110,24 @@ public class OrganisationalUnitImpl extends HasCommentImpl implements Organisati
 	protected EList<String> tags;
 
 	/**
-	 * The default value of the '{@link #getLabel() <em>Label</em>}' attribute.
+	 * The default value of the '{@link #getDescription() <em>Description</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getLabel()
+	 * @see #getDescription()
 	 * @generated
 	 * @ordered
 	 */
-	protected static final String LABEL_EDEFAULT = null;
+	protected static final String DESCRIPTION_EDEFAULT = null;
 
 	/**
-	 * The cached value of the '{@link #getLabel() <em>Label</em>}' attribute.
+	 * The cached value of the '{@link #getDescription() <em>Description</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getLabel()
+	 * @see #getDescription()
 	 * @generated
 	 * @ordered
 	 */
-	protected String label = LABEL_EDEFAULT;
+	protected String description = DESCRIPTION_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -258,8 +258,8 @@ public class OrganisationalUnitImpl extends HasCommentImpl implements Organisati
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public String getLabel() {
-		return label;
+	public String getDescription() {
+		return description;
 	}
 
 	/**
@@ -267,11 +267,11 @@ public class OrganisationalUnitImpl extends HasCommentImpl implements Organisati
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setLabel(String newLabel) {
-		String oldLabel = label;
-		label = newLabel;
+	public void setDescription(String newDescription) {
+		String oldDescription = description;
+		description = newDescription;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, CorePackage.ORGANISATIONAL_UNIT__LABEL, oldLabel, label));
+			eNotify(new ENotificationImpl(this, Notification.SET, CorePackage.ORGANISATIONAL_UNIT__DESCRIPTION, oldDescription, description));
 	}
 
 	/**
@@ -290,8 +290,8 @@ public class OrganisationalUnitImpl extends HasCommentImpl implements Organisati
 				return getName();
 			case CorePackage.ORGANISATIONAL_UNIT__TAGS:
 				return getTags();
-			case CorePackage.ORGANISATIONAL_UNIT__LABEL:
-				return getLabel();
+			case CorePackage.ORGANISATIONAL_UNIT__DESCRIPTION:
+				return getDescription();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -317,8 +317,8 @@ public class OrganisationalUnitImpl extends HasCommentImpl implements Organisati
 				getTags().clear();
 				getTags().addAll((Collection<? extends String>)newValue);
 				return;
-			case CorePackage.ORGANISATIONAL_UNIT__LABEL:
-				setLabel((String)newValue);
+			case CorePackage.ORGANISATIONAL_UNIT__DESCRIPTION:
+				setDescription((String)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -343,8 +343,8 @@ public class OrganisationalUnitImpl extends HasCommentImpl implements Organisati
 			case CorePackage.ORGANISATIONAL_UNIT__TAGS:
 				getTags().clear();
 				return;
-			case CorePackage.ORGANISATIONAL_UNIT__LABEL:
-				setLabel(LABEL_EDEFAULT);
+			case CorePackage.ORGANISATIONAL_UNIT__DESCRIPTION:
+				setDescription(DESCRIPTION_EDEFAULT);
 				return;
 		}
 		super.eUnset(featureID);
@@ -365,8 +365,8 @@ public class OrganisationalUnitImpl extends HasCommentImpl implements Organisati
 				return isSetName();
 			case CorePackage.ORGANISATIONAL_UNIT__TAGS:
 				return tags != null && !tags.isEmpty();
-			case CorePackage.ORGANISATIONAL_UNIT__LABEL:
-				return LABEL_EDEFAULT == null ? label != null : !LABEL_EDEFAULT.equals(label);
+			case CorePackage.ORGANISATIONAL_UNIT__DESCRIPTION:
+				return DESCRIPTION_EDEFAULT == null ? description != null : !DESCRIPTION_EDEFAULT.equals(description);
 		}
 		return super.eIsSet(featureID);
 	}
@@ -396,9 +396,9 @@ public class OrganisationalUnitImpl extends HasCommentImpl implements Organisati
 				default: return -1;
 			}
 		}
-		if (baseClass == HasLabel.class) {
+		if (baseClass == HasDescription.class) {
 			switch (derivedFeatureID) {
-				case CorePackage.ORGANISATIONAL_UNIT__LABEL: return CorePackage.HAS_LABEL__LABEL;
+				case CorePackage.ORGANISATIONAL_UNIT__DESCRIPTION: return CorePackage.HAS_DESCRIPTION__DESCRIPTION;
 				default: return -1;
 			}
 		}
@@ -430,9 +430,9 @@ public class OrganisationalUnitImpl extends HasCommentImpl implements Organisati
 				default: return -1;
 			}
 		}
-		if (baseClass == HasLabel.class) {
+		if (baseClass == HasDescription.class) {
 			switch (baseFeatureID) {
-				case CorePackage.HAS_LABEL__LABEL: return CorePackage.ORGANISATIONAL_UNIT__LABEL;
+				case CorePackage.HAS_DESCRIPTION__DESCRIPTION: return CorePackage.ORGANISATIONAL_UNIT__DESCRIPTION;
 				default: return -1;
 			}
 		}
@@ -454,8 +454,8 @@ public class OrganisationalUnitImpl extends HasCommentImpl implements Organisati
 		if (nameESet) result.append(name); else result.append("<unset>");
 		result.append(", tags: ");
 		result.append(tags);
-		result.append(", label: ");
-		result.append(label);
+		result.append(", description: ");
+		result.append(description);
 		result.append(')');
 		return result.toString();
 	}

@@ -22,7 +22,7 @@ import org.eclipse.emf.common.util.EList;
  * @model abstract="true"
  * @generated
  */
-public interface ConceptItem extends HasNameAndID, HasCustomProperties, HasComment, HasTags, HasParameterDefinitions, HasConstraints, HasLabel {
+public interface ConceptItem extends HasNameAndID, HasCustomProperties, HasComment, HasTags, HasParameterDefinitions, HasConstraints, HasDescription {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

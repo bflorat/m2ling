@@ -24,7 +24,7 @@ import com.google.inject.Singleton;
  */
 @Singleton
 @ACResource
-public final class ViewPointServiceImpl extends ServiceImpl implements ViewPointService {
+public class ViewPointServiceImpl extends ServiceImpl implements ViewPointService {
 
 	@Inject
 	CoreUtil util;
@@ -87,7 +87,7 @@ public final class ViewPointServiceImpl extends ServiceImpl implements ViewPoint
 			throw new IllegalStateException("View point doesn't exists : " + vpDTO.getName());
 		}
 		vp.setName(vpDTO.getName());
-		vp.setLabel(vpDTO.getLabel());
+		vp.setDescription(vpDTO.getDescription());
 		List<String> status = vp.getStatusLiterals();
 		status.clear();
 		status.addAll(vpDTO.getStatusLiterals());

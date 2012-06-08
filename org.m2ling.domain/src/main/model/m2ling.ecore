@@ -71,12 +71,12 @@
           eType="#//core/ComponentInstance"/>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="ArchitectureItem" abstract="true"
-        eSuperTypes="#//core/HasNameAndID #//core/HasComment #//core/HasTags #//core/HasParameterDefinitions #//core/HasConstraints #//core/HasLabel"/>
-    <eClassifiers xsi:type="ecore:EClass" name="ConceptItem" abstract="true" eSuperTypes="#//core/HasNameAndID #//core/HasCustomProperties #//core/HasComment #//core/HasTags #//core/HasParameterDefinitions #//core/HasConstraints #//core/HasLabel">
+        eSuperTypes="#//core/HasNameAndID #//core/HasComment #//core/HasTags #//core/HasParameterDefinitions #//core/HasConstraints #//core/HasDescription"/>
+    <eClassifiers xsi:type="ecore:EClass" name="ConceptItem" abstract="true" eSuperTypes="#//core/HasNameAndID #//core/HasCustomProperties #//core/HasComment #//core/HasTags #//core/HasParameterDefinitions #//core/HasConstraints #//core/HasDescription">
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="statusLiterals" lowerBound="1"
           upperBound="-1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     </eClassifiers>
-    <eClassifiers xsi:type="ecore:EClass" name="RuntimeItem" abstract="true" eSuperTypes="#//core/HasNameAndID #//core/HasComment #//core/HasTags #//core/HasParameterValues #//core/HasConstraints #//core/HasLabel">
+    <eClassifiers xsi:type="ecore:EClass" name="RuntimeItem" abstract="true" eSuperTypes="#//core/HasNameAndID #//core/HasComment #//core/HasTags #//core/HasParameterValues #//core/HasConstraints #//core/HasDescription">
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="status" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="View" eSuperTypes="#//core/ArchitectureItem">
@@ -117,6 +117,9 @@
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="HasParameterDefinitions" abstract="true"/>
     <eClassifiers xsi:type="ecore:EClass" name="HasParameterValues" abstract="true"/>
+    <eClassifiers xsi:type="ecore:EClass" name="HasDescription" abstract="true">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="description" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="CustomProperty"/>
     <eClassifiers xsi:type="ecore:EEnum" name="CustomPropertyType"/>
     <eClassifiers xsi:type="ecore:EClass" name="LinkType" eSuperTypes="#//core/ConceptItem">
@@ -146,10 +149,7 @@
       <eStructuralFeatures xsi:type="ecore:EReference" name="link" lowerBound="1"
           eType="#//core/Link"/>
     </eClassifiers>
-    <eClassifiers xsi:type="ecore:EClass" name="HasLabel" abstract="true">
-      <eStructuralFeatures xsi:type="ecore:EAttribute" name="label" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    </eClassifiers>
-    <eClassifiers xsi:type="ecore:EClass" name="Stakeholder" eSuperTypes="#//core/HasNameAndID #//core/HasLabel">
+    <eClassifiers xsi:type="ecore:EClass" name="Stakeholder" eSuperTypes="#//core/HasNameAndID #//core/HasDescription">
       <eStructuralFeatures xsi:type="ecore:EReference" name="views" upperBound="-1"
           eType="#//core/View"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="viewPoints" upperBound="-1"
@@ -179,7 +179,7 @@
     <eClassifiers xsi:type="ecore:EClass" name="FormatConstraint" eSuperTypes="#//core/Constraint"/>
     <eClassifiers xsi:type="ecore:EClass" name="HasConstraints" abstract="true"/>
     <eClassifiers xsi:type="ecore:EClass" name="HasReferences" abstract="true"/>
-    <eClassifiers xsi:type="ecore:EClass" name="Activity" eSuperTypes="#//core/HasNameAndID #//core/HasTags #//core/HasLabel">
+    <eClassifiers xsi:type="ecore:EClass" name="Activity" eSuperTypes="#//core/HasNameAndID #//core/HasTags #//core/HasDescription">
       <eStructuralFeatures xsi:type="ecore:EReference" name="accountables" upperBound="-1"
           eType="#//core/Stakeholder"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="responsibles" upperBound="-1"
@@ -191,7 +191,7 @@
       <eLiterals name="VALIDATED" value="2"/>
       <eLiterals name="WAITING_FOR_VALIDATION" value="3"/>
     </eClassifiers>
-    <eClassifiers xsi:type="ecore:EClass" name="ActivityTransition" eSuperTypes="#//core/HasComment #//core/HasLabel">
+    <eClassifiers xsi:type="ecore:EClass" name="ActivityTransition" eSuperTypes="#//core/HasComment #//core/HasDescription">
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="date" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//ELong"/>
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="fromStatus" eType="#//core/ActivityStatus"/>
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="toStatus" eType="#//core/ActivityStatus"/>
@@ -200,8 +200,8 @@
       <eStructuralFeatures xsi:type="ecore:EReference" name="actor" upperBound="-1"
           eType="#//core/Actor"/>
     </eClassifiers>
-    <eClassifiers xsi:type="ecore:EClass" name="OrganisationalUnit" eSuperTypes="#//core/HasComment #//core/HasCustomProperties #//core/HasNameAndID #//core/HasTags #//core/HasLabel"/>
-    <eClassifiers xsi:type="ecore:EClass" name="Actor" eSuperTypes="#//core/HasCustomProperties #//core/HasTags #//core/HasLabel">
+    <eClassifiers xsi:type="ecore:EClass" name="OrganisationalUnit" eSuperTypes="#//core/HasComment #//core/HasCustomProperties #//core/HasNameAndID #//core/HasTags #//core/HasDescription"/>
+    <eClassifiers xsi:type="ecore:EClass" name="Actor" eSuperTypes="#//core/HasCustomProperties #//core/HasTags #//core/HasDescription">
       <eStructuralFeatures xsi:type="ecore:EReference" name="stakeholders" upperBound="-1"
           eType="#//core/Stakeholder" eOpposite="#//core/Stakeholder/actors"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="unit" lowerBound="1"
@@ -230,7 +230,7 @@
       <eLiterals name="HIGH" value="3"/>
       <eLiterals name="VERY_HIGH" value="4"/>
     </eClassifiers>
-    <eClassifiers xsi:type="ecore:EClass" name="Rule" eSuperTypes="#//core/HasNameAndID #//core/HasCustomProperties #//core/HasComment #//core/HasTags #//core/HasLabel #//core/HasStatus">
+    <eClassifiers xsi:type="ecore:EClass" name="Rule" eSuperTypes="#//core/HasNameAndID #//core/HasCustomProperties #//core/HasComment #//core/HasTags #//core/HasDescription #//core/HasStatus">
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="priority" eType="#//core/RulePriority"/>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EEnum" name="ReferenceType">
@@ -239,7 +239,7 @@
       <eLiterals name="DEPENDS_ON" value="1" literal="DEPENDS_ON"/>
       <eLiterals name="ADMINS" literal="ADMINS"/>
     </eClassifiers>
-    <eClassifiers xsi:type="ecore:EClass" name="Reference" eSuperTypes="#//core/HasComment #//core/HasConstraints #//core/HasCustomProperties #//core/HasLabel #//core/HasStatus #//core/HasTags">
+    <eClassifiers xsi:type="ecore:EClass" name="Reference" eSuperTypes="#//core/HasComment #//core/HasConstraints #//core/HasCustomProperties #//core/HasDescription #//core/HasStatus #//core/HasTags">
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" eType="#//core/ReferenceType"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="targets" upperBound="-1"
           eType="#//core/HasReferences"/>

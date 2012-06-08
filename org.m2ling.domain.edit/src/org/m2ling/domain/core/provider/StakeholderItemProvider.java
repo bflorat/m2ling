@@ -63,7 +63,7 @@ public class StakeholderItemProvider
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
-			addLabelPropertyDescriptor(object);
+			addDescriptionPropertyDescriptor(object);
 			addViewsPropertyDescriptor(object);
 			addViewPointsPropertyDescriptor(object);
 			addActorsPropertyDescriptor(object);
@@ -72,19 +72,19 @@ public class StakeholderItemProvider
 	}
 
 	/**
-	 * This adds a property descriptor for the Label feature.
+	 * This adds a property descriptor for the Description feature.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected void addLabelPropertyDescriptor(Object object) {
+	protected void addDescriptionPropertyDescriptor(Object object) {
 		itemPropertyDescriptors.add
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
-				 getString("_UI_HasLabel_label_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_HasLabel_label_feature", "_UI_HasLabel_type"),
-				 CorePackage.Literals.HAS_LABEL__LABEL,
+				 getString("_UI_HasDescription_description_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_HasDescription_description_feature", "_UI_HasDescription_type"),
+				 CorePackage.Literals.HAS_DESCRIPTION__DESCRIPTION,
 				 true,
 				 false,
 				 false,
@@ -196,7 +196,7 @@ public class StakeholderItemProvider
 		updateChildren(notification);
 
 		switch (notification.getFeatureID(Stakeholder.class)) {
-			case CorePackage.STAKEHOLDER__LABEL:
+			case CorePackage.STAKEHOLDER__DESCRIPTION:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
 		}

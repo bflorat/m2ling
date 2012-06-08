@@ -35,7 +35,7 @@ import org.m2ling.domain.core.FormatConstraint;
 import org.m2ling.domain.core.HasComment;
 import org.m2ling.domain.core.HasConstraints;
 import org.m2ling.domain.core.HasCustomProperties;
-import org.m2ling.domain.core.HasLabel;
+import org.m2ling.domain.core.HasDescription;
 import org.m2ling.domain.core.HasNameAndID;
 import org.m2ling.domain.core.HasParameterDefinitions;
 import org.m2ling.domain.core.HasParameterValues;
@@ -232,6 +232,13 @@ public class CorePackageImpl extends EPackageImpl implements CorePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	private EClass hasDescriptionEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	private EClass stakeholderEClass = null;
 
 	/**
@@ -373,13 +380,6 @@ public class CorePackageImpl extends EPackageImpl implements CorePackage {
 	 * @generated
 	 */
 	private EClass referenceEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass hasLabelEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -1125,6 +1125,24 @@ public class CorePackageImpl extends EPackageImpl implements CorePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getHasDescription() {
+		return hasDescriptionEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getHasDescription_Description() {
+		return (EAttribute)hasDescriptionEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getStakeholder() {
 		return stakeholderEClass;
 	}
@@ -1530,24 +1548,6 @@ public class CorePackageImpl extends EPackageImpl implements CorePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EClass getHasLabel() {
-		return hasLabelEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getHasLabel_Label() {
-		return (EAttribute)hasLabelEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EEnum getCustomPropertyType() {
 		return customPropertyTypeEEnum;
 	}
@@ -1704,6 +1704,9 @@ public class CorePackageImpl extends EPackageImpl implements CorePackage {
 
 		hasParameterValuesEClass = createEClass(HAS_PARAMETER_VALUES);
 
+		hasDescriptionEClass = createEClass(HAS_DESCRIPTION);
+		createEAttribute(hasDescriptionEClass, HAS_DESCRIPTION__DESCRIPTION);
+
 		customPropertyEClass = createEClass(CUSTOM_PROPERTY);
 
 		linkTypeEClass = createEClass(LINK_TYPE);
@@ -1723,9 +1726,6 @@ public class CorePackageImpl extends EPackageImpl implements CorePackage {
 		createEReference(instancesLinkEClass, INSTANCES_LINK__SOURCE);
 		createEReference(instancesLinkEClass, INSTANCES_LINK__DESTINATION);
 		createEReference(instancesLinkEClass, INSTANCES_LINK__LINK);
-
-		hasLabelEClass = createEClass(HAS_LABEL);
-		createEAttribute(hasLabelEClass, HAS_LABEL__LABEL);
 
 		stakeholderEClass = createEClass(STAKEHOLDER);
 		createEReference(stakeholderEClass, STAKEHOLDER__VIEWS);
@@ -1850,26 +1850,26 @@ public class CorePackageImpl extends EPackageImpl implements CorePackage {
 		architectureItemEClass.getESuperTypes().add(this.getHasTags());
 		architectureItemEClass.getESuperTypes().add(this.getHasParameterDefinitions());
 		architectureItemEClass.getESuperTypes().add(this.getHasConstraints());
-		architectureItemEClass.getESuperTypes().add(this.getHasLabel());
+		architectureItemEClass.getESuperTypes().add(this.getHasDescription());
 		conceptItemEClass.getESuperTypes().add(this.getHasNameAndID());
 		conceptItemEClass.getESuperTypes().add(this.getHasCustomProperties());
 		conceptItemEClass.getESuperTypes().add(this.getHasComment());
 		conceptItemEClass.getESuperTypes().add(this.getHasTags());
 		conceptItemEClass.getESuperTypes().add(this.getHasParameterDefinitions());
 		conceptItemEClass.getESuperTypes().add(this.getHasConstraints());
-		conceptItemEClass.getESuperTypes().add(this.getHasLabel());
+		conceptItemEClass.getESuperTypes().add(this.getHasDescription());
 		runtimeItemEClass.getESuperTypes().add(this.getHasNameAndID());
 		runtimeItemEClass.getESuperTypes().add(this.getHasComment());
 		runtimeItemEClass.getESuperTypes().add(this.getHasTags());
 		runtimeItemEClass.getESuperTypes().add(this.getHasParameterValues());
 		runtimeItemEClass.getESuperTypes().add(this.getHasConstraints());
-		runtimeItemEClass.getESuperTypes().add(this.getHasLabel());
+		runtimeItemEClass.getESuperTypes().add(this.getHasDescription());
 		viewEClass.getESuperTypes().add(this.getArchitectureItem());
 		linkTypeEClass.getESuperTypes().add(this.getConceptItem());
 		linkEClass.getESuperTypes().add(this.getArchitectureItem());
 		instancesLinkEClass.getESuperTypes().add(this.getRuntimeItem());
 		stakeholderEClass.getESuperTypes().add(this.getHasNameAndID());
-		stakeholderEClass.getESuperTypes().add(this.getHasLabel());
+		stakeholderEClass.getESuperTypes().add(this.getHasDescription());
 		floatConstraintEClass.getESuperTypes().add(this.getConstraint());
 		minConstraintEClass.getESuperTypes().add(this.getBoundaryConstraint());
 		boundaryConstraintEClass.getESuperTypes().add(this.getConstraint());
@@ -1883,27 +1883,27 @@ public class CorePackageImpl extends EPackageImpl implements CorePackage {
 		formatConstraintEClass.getESuperTypes().add(this.getConstraint());
 		activityEClass.getESuperTypes().add(this.getHasNameAndID());
 		activityEClass.getESuperTypes().add(this.getHasTags());
-		activityEClass.getESuperTypes().add(this.getHasLabel());
+		activityEClass.getESuperTypes().add(this.getHasDescription());
 		activityTransitionEClass.getESuperTypes().add(this.getHasComment());
-		activityTransitionEClass.getESuperTypes().add(this.getHasLabel());
+		activityTransitionEClass.getESuperTypes().add(this.getHasDescription());
 		organisationalUnitEClass.getESuperTypes().add(this.getHasComment());
 		organisationalUnitEClass.getESuperTypes().add(this.getHasCustomProperties());
 		organisationalUnitEClass.getESuperTypes().add(this.getHasNameAndID());
 		organisationalUnitEClass.getESuperTypes().add(this.getHasTags());
-		organisationalUnitEClass.getESuperTypes().add(this.getHasLabel());
+		organisationalUnitEClass.getESuperTypes().add(this.getHasDescription());
 		actorEClass.getESuperTypes().add(this.getHasCustomProperties());
 		actorEClass.getESuperTypes().add(this.getHasTags());
-		actorEClass.getESuperTypes().add(this.getHasLabel());
+		actorEClass.getESuperTypes().add(this.getHasDescription());
 		ruleEClass.getESuperTypes().add(this.getHasNameAndID());
 		ruleEClass.getESuperTypes().add(this.getHasCustomProperties());
 		ruleEClass.getESuperTypes().add(this.getHasComment());
 		ruleEClass.getESuperTypes().add(this.getHasTags());
-		ruleEClass.getESuperTypes().add(this.getHasLabel());
+		ruleEClass.getESuperTypes().add(this.getHasDescription());
 		ruleEClass.getESuperTypes().add(this.getHasStatus());
 		referenceEClass.getESuperTypes().add(this.getHasComment());
 		referenceEClass.getESuperTypes().add(this.getHasConstraints());
 		referenceEClass.getESuperTypes().add(this.getHasCustomProperties());
-		referenceEClass.getESuperTypes().add(this.getHasLabel());
+		referenceEClass.getESuperTypes().add(this.getHasDescription());
 		referenceEClass.getESuperTypes().add(this.getHasStatus());
 		referenceEClass.getESuperTypes().add(this.getHasTags());
 
@@ -1980,6 +1980,9 @@ public class CorePackageImpl extends EPackageImpl implements CorePackage {
 
 		initEClass(hasParameterValuesEClass, HasParameterValues.class, "HasParameterValues", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
+		initEClass(hasDescriptionEClass, HasDescription.class, "HasDescription", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getHasDescription_Description(), ecorePackage.getEString(), "description", null, 0, 1, HasDescription.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
 		initEClass(customPropertyEClass, CustomProperty.class, "CustomProperty", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(linkTypeEClass, LinkType.class, "LinkType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -1999,9 +2002,6 @@ public class CorePackageImpl extends EPackageImpl implements CorePackage {
 		initEReference(getInstancesLink_Source(), this.getComponentInstance(), null, "source", null, 1, 1, InstancesLink.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getInstancesLink_Destination(), this.getComponentInstance(), null, "destination", null, 1, 1, InstancesLink.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getInstancesLink_Link(), this.getLink(), null, "link", null, 1, 1, InstancesLink.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-		initEClass(hasLabelEClass, HasLabel.class, "HasLabel", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getHasLabel_Label(), ecorePackage.getEString(), "label", null, 0, 1, HasLabel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(stakeholderEClass, Stakeholder.class, "Stakeholder", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getStakeholder_Views(), this.getView(), null, "views", null, 0, -1, Stakeholder.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

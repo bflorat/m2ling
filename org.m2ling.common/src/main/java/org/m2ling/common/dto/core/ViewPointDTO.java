@@ -15,7 +15,7 @@ public class ViewPointDTO {
 
 	private final String name;
 	private final List<String> tags;
-	private final String label;
+	private final String description;
 	private final String comment;
 	private final List<String> statusLiterals;
 
@@ -26,7 +26,7 @@ public class ViewPointDTO {
 
 		// Optional configuration
 		private List<String> tags = null;
-		private String label = null;
+		private String description = null;
 		private String comment = null;
 		private List<String> statusLiterals;
 
@@ -39,8 +39,8 @@ public class ViewPointDTO {
 			return this;
 		}
 
-		public Builder label(String label) {
-			this.label = label;
+		public Builder description(String description) {
+			this.description = description;
 			return this;
 		}
 		
@@ -67,7 +67,7 @@ public class ViewPointDTO {
 		} else {
 			tags = null;
 		}
-		label = builder.label;
+		description = builder.description;
 		comment = builder.comment;
 		if (builder.statusLiterals != null && builder.statusLiterals.size() > 0) {
 			statusLiterals = new ArrayList<String>(builder.statusLiterals); // defensive copy
@@ -108,10 +108,10 @@ public class ViewPointDTO {
 	}
 
 	/**
-	 * @return the label
+	 * @return the description
 	 */
-	public String getLabel() {
-		return label;
+	public String getDescription() {
+		return description;
 	}
 	
 	/**
