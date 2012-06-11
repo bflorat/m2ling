@@ -3,8 +3,9 @@
  *
  * @author "Bertrand Florat <bertrand@florat.net>"
  */
-package org.m2ling.presentation.principles;
+package org.m2ling.presentation.binding;
 
+import org.m2ling.presentation.principles.PrinciplesMainFrame;
 import org.m2ling.service.principles.ViewPointService;
 import org.m2ling.service.principles.impl.ViewPointServiceImpl;
 

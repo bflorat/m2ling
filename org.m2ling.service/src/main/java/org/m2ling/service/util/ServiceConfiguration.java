@@ -20,41 +20,43 @@ import com.google.inject.Singleton;
 
 /**
  * 
- * Load, store and manages m2ling configuration and configuration.
+ * Load, store and manages m2ling services configuration and configuration.
+ * 
  * 
  * @author "Bertrand Florat <bertrand@florat.net>"
  * 
  */
 @Singleton
-public class Configuration {
+public class ServiceConfiguration {
 
 	protected static final String CONF_FILENAME = "services_config.xml";
 
-	@Inject
 	private Logger logger;
 
 	/** System properties for services */
 	private Properties systemProperties;
 
-	/**
-	 * Build a configuration with explicit properties (UT purpose only)
-	 * 
-	 * @param systemProperties
-	 *           a list of forced configuration entries
-	 */
-	public Configuration(Properties systemProperties) {
+	@Inject
+	public ServiceConfiguration(Logger logger) {
 		super();
-		this.systemProperties = systemProperties;
-		this.logger = Logger.getAnonymousLogger();
+		this.logger = logger;
 	}
 
-	@Inject
-	public Configuration() {
+	public ServiceConfiguration() {
 		super();
+		this.logger = Logger.getAnonymousLogger();
 	}
 
 	/**
 	 * Return the system property value for given key. If the key is unknown, null is returned.
+	 * <p>
+	 * Search in this order:
+	 * <ul>
+	 * <li>Configuration file</li>
+	 * <li>Guice binding</li>
+	 * <li>Default configuration</li>
+	 * </ul>
+	 * </p>
 	 * 
 	 * @param key
 	 *           the property name
@@ -67,6 +69,19 @@ public class Configuration {
 		}
 		// Note that at this point, systemProperties should not be null (maybe void however)
 		return systemProperties.getProperty(key);
+	}
+
+	/**
+	 * Return a sub-set of properties for provided keys
+	 * 
+	 * @param keys
+	 */
+	public Properties getSystemProperties(String... keys) {
+		Properties out = new Properties();
+		for (String key : keys) {
+			out.setProperty(key, getSystemProperty(key));
+		}
+		return out;
 	}
 
 	/**
@@ -92,7 +107,7 @@ public class Configuration {
 	 * 
 	 * @return the service system properties
 	 */
-	public Properties getSystemProperties() {
+	private Properties getSystemProperties() {
 		if (this.systemProperties != null) {
 			return this.systemProperties;
 		}

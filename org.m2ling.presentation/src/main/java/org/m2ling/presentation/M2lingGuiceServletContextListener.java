@@ -4,8 +4,9 @@
 package org.m2ling.presentation;
 
 import org.m2ling.common.utils.Consts;
-import org.m2ling.presentation.principles.PresentationCommonGuiceModule;
-import org.m2ling.presentation.principles.PresentationPrincipleGuiceModule;
+import org.m2ling.presentation.binding.DebugGuiceModule;
+import org.m2ling.presentation.binding.PresentationCommonGuiceModule;
+import org.m2ling.presentation.binding.PresentationPrincipleGuiceModule;
 import org.m2ling.service.common.ServicesCommonGuiceModule;
 
 import com.google.common.base.Strings;

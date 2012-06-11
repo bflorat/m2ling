@@ -17,7 +17,7 @@ import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import org.m2ling.domain.DomainPackage;
 import org.m2ling.domain.Root;
 import org.m2ling.persistence.PersistenceManager;
-import org.m2ling.service.util.Configuration;
+import org.m2ling.service.util.ServiceConfiguration;
 
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
@@ -65,10 +65,10 @@ public class PersistenceManagerXMIImpl implements PersistenceManager {
 
 	private Logger logger;
 
-	private Configuration configuration;
+	private ServiceConfiguration configuration;
 
 	@Inject
-	protected PersistenceManagerXMIImpl(Configuration conf, Logger logger) throws IOException {
+	protected PersistenceManagerXMIImpl(ServiceConfiguration conf, Logger logger) throws IOException {
 		this.logger = logger;
 		this.configuration = conf;
 		URI mainXMLfileURI = getFileURI();

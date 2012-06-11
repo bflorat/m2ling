@@ -24,7 +24,7 @@ import org.m2ling.domain.DomainFactory;
 import org.m2ling.domain.DomainPackage;
 import org.m2ling.domain.Root;
 import org.m2ling.persistence.impl.PersistenceManagerTeneoImpl;
-import org.m2ling.service.util.Configuration;
+import org.m2ling.service.util.ServiceConfiguration;
 
 import com.google.inject.AbstractModule;
 
@@ -87,7 +87,7 @@ public abstract class AbstractTestCase extends AbstractModule {
 	 * @throws IOException
 	 */
 	public void populateDatabase(String mockName) throws IOException {
-		Configuration conf = new Configuration(Configuration.getDefaultConfiguration());
+		ServiceConfiguration conf = new ServiceConfiguration(Logger.getAnonymousLogger());
 		pm = new PersistenceManagerTeneoImpl(conf, Logger.getAnonymousLogger());
 		// Load the resource
 		populateMock(mockName);
@@ -124,7 +124,7 @@ public abstract class AbstractTestCase extends AbstractModule {
 		newenv.put(Consts.M2LING_HOME_VARIABLE_NAME, TestHelper.getUTStorage().getAbsolutePath());
 		TestHelper.setEnv(newenv);
 		// Drop the configuration files
-		new Configuration().getServiceConfFile().delete();
+		new ServiceConfiguration().getServiceConfFile().delete();
 	}
 
 	/**

@@ -4,7 +4,7 @@
 package org.m2ling.service.common;
 
 import org.m2ling.persistence.PersistenceManager;
-import org.m2ling.service.util.Configuration;
+import org.m2ling.service.util.ServiceConfiguration;
 import org.m2ling.service.util.CoreUtil;
 import org.m2ling.service.util.DTOConverter;
 
@@ -55,7 +55,7 @@ public class ServiceImpl {
 
 	/** Configuration */
 	@Inject
-	protected Configuration conf;
+	protected ServiceConfiguration conf;
 
 	
 	/**

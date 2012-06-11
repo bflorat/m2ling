@@ -3,7 +3,7 @@
  *
  * @author "Bertrand Florat <bertrand@florat.net>"
  */
-package org.m2ling.presentation.principles;
+package org.m2ling.presentation.binding;
 
 import org.m2ling.service.core.TagService;
 import org.m2ling.service.core.impl.TagServiceImpl;

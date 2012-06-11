@@ -7,7 +7,7 @@ import org.m2ling.common.security.ACResource;
 import org.m2ling.common.security.impl.ACResourceInterceptorImpl;
 import org.m2ling.persistence.PersistenceManager;
 import org.m2ling.persistence.impl.PersistenceManagerTeneoImpl;
-import org.m2ling.service.util.Configuration;
+import org.m2ling.service.util.ServiceConfiguration;
 import org.m2ling.service.util.CoreUtil;
 import org.m2ling.service.util.DTOConverter;
 
@@ -35,7 +35,7 @@ public class ServicesCommonGuiceModule extends AbstractModule {
 			bind(CoreUtil.class);
 			bind(DTOConverter.FromDTO.class);
 			bind(DTOConverter.ToDTO.class);
-			bind(Configuration.class);
+			bind(ServiceConfiguration.class);
 		}
 
 		{// AOP bindings
