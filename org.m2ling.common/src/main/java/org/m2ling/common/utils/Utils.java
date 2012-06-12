@@ -88,7 +88,6 @@ public class Utils {
 					Object obj = field.get(env);
 					@SuppressWarnings("unchecked")
 					Map<String, String> map = (Map<String, String>) obj;
-					map.clear();
 					map.putAll(newenv);
 				}
 			}

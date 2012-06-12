@@ -20,7 +20,6 @@ import org.m2ling.service.util.ServiceConfiguration;
 
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
-import com.google.inject.name.Named;
 
 /**
  * Persistence Manager bringing XMI implementation (load/store from a XMI XML file on filesystem).
@@ -41,9 +40,6 @@ public class PersistenceManagerXMIImpl implements PersistenceManager {
 	public static class SpecificConfiguration implements ServiceConfiguration.SpecificConfiguration {
 
 		public static final String CONF_XMI_PATH = "org.m2ling.persistence.xmi.path";
-		@Inject(optional = true)
-		@Named(CONF_XMI_PATH)
-		public String CONF_XMI_PATH_VALUE;
 
 		/*
 		 * (non-Javadoc)
@@ -68,9 +64,7 @@ public class PersistenceManagerXMIImpl implements PersistenceManager {
 		 */
 		public Properties getDefaultDebugConfiguration() {
 			Properties result = new Properties();
-			String value = CONF_XMI_PATH_VALUE;
-			result.setProperty(CONF_XMI_PATH,
-					(value == null) ? "../org.m2ling.specs/src/specs/resources/mocks/Technical.m2ling" : value);
+			result.setProperty(CONF_XMI_PATH, "../org.m2ling.specs/src/specs/resources/mocks/Technical.m2ling");
 			return result;
 		}
 	}
@@ -78,19 +72,15 @@ public class PersistenceManagerXMIImpl implements PersistenceManager {
 	/** Resource root element */
 	private Root root;
 
-	@Inject
 	private Logger logger;
-	
-	@Inject
+
 	private ServiceConfiguration configuration;
 
 	@Inject
-	private SpecificConfiguration specific;
-
-
-	@Inject
-	protected PersistenceManagerXMIImpl() throws IOException {
-		configuration.register(specific);
+	public PersistenceManagerXMIImpl(Logger logger, ServiceConfiguration configuration) throws IOException {
+		this.configuration = configuration;
+		// Add this specific configuration to the global service configuration
+		configuration.register(new SpecificConfiguration());
 		URI mainXMLfileURI = getFileURI();
 		ResourceSet rset = new ResourceSetImpl();
 		// Init the top ecore package (will load transitively sub packages)

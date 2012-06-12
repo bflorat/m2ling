@@ -4,19 +4,18 @@
 package org.m2ling.service.util;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Properties;
 
-import org.hibernate.cfg.Environment;
 import org.junit.Test;
-import org.m2ling.common.dto.binding.M2lingGuiceModule;
 import org.m2ling.common.test_utils.TestHelper;
 import org.m2ling.common.utils.Consts;
 import org.m2ling.common.utils.Utils;
-import org.m2ling.persistence.PersistenceManager;
 import org.m2ling.persistence.impl.PersistenceManagerTeneoImpl;
 import org.m2ling.service.AbstractTestCase;
 
@@ -27,40 +26,39 @@ import org.m2ling.service.AbstractTestCase;
 public class ServiceConfigurationTest extends AbstractTestCase {
 
 	@Test
-	public void confInjected() {
-		M2lingGuiceModule module = new M2lingGuiceModule() {
-			@Override
-			protected void configure() {
-				bind(PersistenceManager.class).to(PersistenceManagerTeneoImpl.class);
-				bind(PersistenceManagerTeneoImpl.SpecificConfiguration.class);
-				bindConst(PersistenceManagerTeneoImpl.SpecificConfiguration.CONF_TENEO_CASCADE_POLICY, "foo");
-			}
-		};
-		
-		PersistenceManager pm = getInstanceWithModule(PersistenceManager.class, module);
-		//ServiceConfiguration conf = getInstanceWithModule(ServiceConfiguration.class, module);
-	//	assertEquals("foo",
-	//			conf.getSystemProperty(PersistenceManagerTeneoImpl.SpecificConfiguration.CONF_TENEO_CASCADE_POLICY));
+	public void confOverriden() {
+		Properties confOverriden = new Properties();
+		confOverriden.put(PersistenceManagerTeneoImpl.SpecificConfiguration.CONF_TENEO_DRIVER, "foo");
+		ServiceConfiguration conf = new ServiceConfiguration(confOverriden, logger);
+		assertEquals(conf.getSystemProperty(PersistenceManagerTeneoImpl.SpecificConfiguration.CONF_TENEO_DRIVER), "foo");
 	}
 
 	@Test
-	public void regularMode() {
+	public void debugUnset() {
+		// unset debug mode (activated by default by parent class)
 		Map<String, String> newenv = new HashMap<String, String>();
 		newenv.put(Consts.M2LING_DEBUG_VARIABLE_NAME, "false");
 		Utils.setEnv(newenv);
-		ServiceConfiguration conf = new ServiceConfiguration();
-		assertEquals("org.h2.Driver", conf.getSystemProperty(Environment.DRIVER));
+		ServiceConfiguration conf = new ServiceConfiguration(null, logger);
+		conf.register(new PersistenceManagerTeneoImpl.SpecificConfiguration());
+		assertEquals(conf.getSystemProperty(PersistenceManagerTeneoImpl.SpecificConfiguration.CONF_TENEO_DRIVER),
+				"org.h2.Driver");
+		// check that service conf file has been created
 		assertTrue(new File(TestHelper.getUTStorage().getAbsolutePath() + File.separator + Consts.CONF_SERVICE_FILENAME)
 				.exists());
 	}
 
 	@Test
-	public void debugMode() {
-		// debug mode is by default in AbstractTestCase
+	public void debugSet() {
+		Map<String, String> newenv = new HashMap<String, String>();
+		newenv.put(Consts.M2LING_HOME_VARIABLE_NAME, TestHelper.getUTStorage().getAbsolutePath());
+		Utils.setEnv(newenv);
 		assertEquals(System.getenv(Consts.M2LING_HOME_VARIABLE_NAME), TestHelper.getUTStorage().getAbsolutePath());
-		ServiceConfiguration conf = new ServiceConfiguration();
-		assertEquals("org.h2.Driver", conf.getSystemProperty(Environment.DRIVER));
-		assertTrue(new File(TestHelper.getUTStorage().getAbsolutePath() + File.separator + Consts.CONF_SERVICE_FILENAME)
+		ServiceConfiguration conf = new ServiceConfiguration(null, logger);
+		conf.register(new PersistenceManagerTeneoImpl.SpecificConfiguration());
+		assertEquals(conf.getSystemProperty(PersistenceManagerTeneoImpl.SpecificConfiguration.CONF_TENEO_HBM2DDL_AUTO),
+				"create");
+		assertFalse(new File(TestHelper.getUTStorage().getAbsolutePath() + File.separator + Consts.CONF_SERVICE_FILENAME)
 				.exists());
 	}
 }

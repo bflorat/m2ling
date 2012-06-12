@@ -11,7 +11,11 @@ import org.m2ling.persistence.PersistenceManager;
 import org.m2ling.persistence.impl.PersistenceManagerXMIImpl;
 
 import com.google.inject.AbstractModule;
+import com.google.inject.Guice;
+import com.google.inject.Injector;
+import com.google.inject.Module;
 import com.google.inject.name.Names;
+import com.google.inject.util.Modules;
 
 /**
  * 
@@ -36,6 +40,31 @@ public class FixturesModule extends AbstractModule{
 	 */
 	public FixturesModule(String sampleURI) {
 		this.sampleURI = sampleURI;
+	}
+	
+	/**
+	 * Return an injected instance of T using default test bindings
+	 * 
+	 * @param clazz
+	 * @return an injected instance of T using default test bindings
+	 */
+	protected <T> T getInstance(Class<T> clazz) {
+		Module finalModule = Modules.override(this).with(this);
+		Injector inj = Guice.createInjector(finalModule);
+		return inj.getInstance(clazz);
+	}
+
+	/**
+	 * Return an injected instance of T using default test bindings
+	 * 
+	 * @param clazz
+	 * @param overridingModule
+	 * @return an injected instance of T using default test bindings
+	 */
+	protected <T> T getInstanceWithModule(Class<T> clazz, Module overridingModule) {
+		Module finalModule = Modules.override(this).with(overridingModule);
+		Injector inj = Guice.createInjector(finalModule);
+		return inj.getInstance(clazz);
 	}
 
 	/*

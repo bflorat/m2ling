@@ -53,14 +53,24 @@ public class ServiceConfiguration {
 		specificConfs.add(specific);
 	}
 
-	@Inject
 	private Logger logger;
 
-	/** System properties for services */
+	/** System properties */
 	private Properties systemProperties;
 
-	public ServiceConfiguration() {
+	/** Overriding properties */
+	private Properties override;
+
+	/**
+	 * Build a global configuration for services
+	 * @param override overriding properties or null of none
+	 * @param logger
+	 */
+	@Inject
+	public ServiceConfiguration(Properties override, Logger logger) {
 		super();
+		this.logger = logger;
+		this.override = override;
 	}
 
 	/**
@@ -68,8 +78,8 @@ public class ServiceConfiguration {
 	 * <p>
 	 * Search in this order:
 	 * <ul>
-	 * <li>Configuration file</li>
-	 * <li>Guice binding</li>
+	 * <li>Overriding property if any</li>
+	 * <li>Configuration file if any</li>
 	 * <li>Default configuration</li>
 	 * </ul>
 	 * </p>
@@ -80,6 +90,9 @@ public class ServiceConfiguration {
 	 * @return the system property value for given key
 	 */
 	public String getSystemProperty(String key) {
+		if (override != null && override.containsKey(key)) {
+			return override.getProperty(key);
+		}
 		return getSystemProperties().getProperty(key);
 	}
 
@@ -119,8 +132,7 @@ public class ServiceConfiguration {
 		if (Utils.isDebugMode()) {
 			return getDefaultConfiguration();
 		}
-		// Load default values, then override by file loading
-		Properties result = getDefaultConfiguration();
+		Properties result;
 		File fileConf = getServiceConfFile();
 		try {
 			result = new Properties();
@@ -148,18 +160,20 @@ public class ServiceConfiguration {
 					+ Consts.M2LING_HOME_DEFAULT_ABS_PATH);
 		}
 		fileConf = new File(m2lingHome + File.separator + Consts.CONF_SERVICE_FILENAME);
-		String msg = Consts.M2LING_HOME_VARIABLE_NAME + " variable name defined but no corresponding "
-				+ fileConf.getAbsolutePath() + " file";
-		try {
-			// Make sure to create full directory structure
-			fileConf.getParentFile().mkdirs();
-			Properties conf = getDefaultConfiguration();
-			// Store the configuration in XML, not property to ensure best unicode support
-			conf.storeToXML(new FileOutputStream(fileConf), "M2ling service layer configuration file.");
-			logger.info("Services configuration file location : " + fileConf.getAbsolutePath());
-		} catch (Exception e) {
-			logger.log(Level.SEVERE, fileConf.getAbsolutePath() + " file can't be written", e);
-			throw new IllegalStateException(msg);
+		if (!fileConf.exists()) {
+			logger.warning(Consts.M2LING_HOME_VARIABLE_NAME + " variable name defined but no corresponding "
+					+ fileConf.getAbsolutePath() + " file");
+			try {
+				// Make sure to create full directory structure
+				fileConf.getParentFile().mkdirs();
+				Properties conf = getDefaultConfiguration();
+				// Store the configuration in XML, not property to ensure best unicode support
+				conf.storeToXML(new FileOutputStream(fileConf), "M2ling service layer configuration file.");
+				logger.info("Services configuration file created at : " + fileConf.getAbsolutePath());
+			} catch (Exception e) {
+				logger.log(Level.SEVERE, fileConf.getAbsolutePath() + " file can't be written", e);
+				throw new IllegalStateException("Can't create configuration file at : " + fileConf.getAbsolutePath());
+			}
 		}
 		return fileConf;
 	}
