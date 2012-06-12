@@ -43,8 +43,7 @@ public class PrinciplesMainFrame extends VerticalLayout {
 	 * Populate the panel with actual viewpoints. Can take a while as it calls services.
 	 */
 	public void populate() {
-		vps = new ArrayList<ViewPointDTO>();
-		//vps = vpService.getAllViewPoints();
+		vps = vpService.getAllViewPoints();
 		if (vps.size() == 0) {
 			VerticalLayout vert = getNoneVPPanel();
 			addComponent(vert);

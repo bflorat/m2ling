@@ -3,6 +3,7 @@
  */
 package org.m2ling.persistence.impl;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.Properties;
 import java.util.logging.Logger;
@@ -64,7 +65,11 @@ public class PersistenceManagerXMIImpl implements PersistenceManager {
 		 */
 		public Properties getDefaultDebugConfiguration() {
 			Properties result = new Properties();
-			result.setProperty(CONF_XMI_PATH, "../org.m2ling.specs/src/specs/resources/mocks/Technical.m2ling");
+			// Search by default from current running war in a tomcat server from eclipse workspace,
+			// adapt if required.
+			File currentPath = new File(getClass().getProtectionDomain().getCodeSource().getLocation().getPath());
+			result.setProperty(CONF_XMI_PATH, currentPath.getParentFile().getAbsolutePath()
+					+ "/../../../../../../../../org.m2ling.specs/src/specs/resources/mocks/Bikes.m2ling");
 			return result;
 		}
 	}
@@ -79,6 +84,7 @@ public class PersistenceManagerXMIImpl implements PersistenceManager {
 	@Inject
 	public PersistenceManagerXMIImpl(Logger logger, ServiceConfiguration configuration) throws IOException {
 		this.configuration = configuration;
+		this.logger = logger;
 		// Add this specific configuration to the global service configuration
 		configuration.register(new SpecificConfiguration());
 		URI mainXMLfileURI = getFileURI();
@@ -90,7 +96,7 @@ public class PersistenceManagerXMIImpl implements PersistenceManager {
 		rset.getResourceFactoryRegistry().getExtensionToFactoryMap().put("m2ling", resourceFactory);
 		Resource resource = rset.createResource(mainXMLfileURI);
 		resource.load(null);
-		this.logger.info("Loaded successfuly resource : " + mainXMLfileURI);
+		logger.info("Loaded successfuly resource : " + mainXMLfileURI);
 		// Root is always the first element in the resource
 		root = (Root) resource.getContents().get(0);
 	}

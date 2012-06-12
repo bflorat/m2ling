@@ -4,15 +4,18 @@
 package org.m2ling.presentation;
 
 import org.m2ling.common.utils.Utils;
+import org.m2ling.presentation.binding.DebugGuiceModule;
 import org.m2ling.presentation.binding.PresentationCommonGuiceModule;
 import org.m2ling.presentation.binding.PresentationPrincipleGuiceModule;
 import org.m2ling.service.common.ServicesCommonGuiceModule;
 
 import com.google.inject.Guice;
 import com.google.inject.Injector;
+import com.google.inject.Module;
 import com.google.inject.Stage;
 import com.google.inject.servlet.GuiceServletContextListener;
 import com.google.inject.servlet.ServletModule;
+import com.google.inject.util.Modules;
 import com.vaadin.Application;
 
 /**
@@ -41,7 +44,9 @@ public class M2lingGuiceServletContextListener extends GuiceServletContextListen
 			}
 		};
 		if (Utils.isDebugMode()) {
-			injector = Guice.createInjector(Stage.DEVELOPMENT, module);
+			// Add any debug level bindings
+			Module finalModule = Modules.override(module).with(new DebugGuiceModule());
+			injector = Guice.createInjector(Stage.DEVELOPMENT, finalModule);
 		} else {
 			injector = Guice.createInjector(Stage.PRODUCTION, module);
 		}

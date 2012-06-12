@@ -124,6 +124,7 @@ public class PersistenceManagerTeneoImpl implements PersistenceManager {
 	@Inject
 	// This is a just in time injection used to inject fields and SpecificConfiugration nested class
 	public PersistenceManagerTeneoImpl(ServiceConfiguration configuration, Logger logger) {
+		this.logger = logger;
 		// Add this specific configuration to the global service configuration
 		configuration.register(new SpecificConfiguration());
 		// create the HbDataStore using the name
