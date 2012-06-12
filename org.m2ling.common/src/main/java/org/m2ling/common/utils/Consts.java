@@ -32,5 +32,8 @@ public class Consts {
 
 	/** Default XMI extension */
 	public static final String XMI_EXTENSION = "m2ling";
+	
+	/** Service configuration file name*/
+	public static final String CONF_SERVICE_FILENAME = "services_config.xml";
 
 }

@@ -3,20 +3,16 @@
 
 package org.m2ling.presentation;
 
-import org.m2ling.common.utils.Consts;
-import org.m2ling.presentation.binding.DebugGuiceModule;
+import org.m2ling.common.utils.Utils;
 import org.m2ling.presentation.binding.PresentationCommonGuiceModule;
 import org.m2ling.presentation.binding.PresentationPrincipleGuiceModule;
 import org.m2ling.service.common.ServicesCommonGuiceModule;
 
-import com.google.common.base.Strings;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
-import com.google.inject.Module;
 import com.google.inject.Stage;
 import com.google.inject.servlet.GuiceServletContextListener;
 import com.google.inject.servlet.ServletModule;
-import com.google.inject.util.Modules;
 import com.vaadin.Application;
 
 /**
@@ -44,10 +40,8 @@ public class M2lingGuiceServletContextListener extends GuiceServletContextListen
 				install(new ServicesCommonGuiceModule());
 			}
 		};
-		String dev = System.getenv(Consts.M2LING_DEBUG_VARIABLE_NAME);
-		if (!Strings.isNullOrEmpty(dev) && "true".equals(dev)) {
-			Module finalModule = Modules.override(module).with(new DebugGuiceModule());
-			injector = Guice.createInjector(Stage.DEVELOPMENT, finalModule);
+		if (Utils.isDebugMode()) {
+			injector = Guice.createInjector(Stage.DEVELOPMENT, module);
 		} else {
 			injector = Guice.createInjector(Stage.PRODUCTION, module);
 		}
@@ -55,7 +49,7 @@ public class M2lingGuiceServletContextListener extends GuiceServletContextListen
 	}
 
 	/**
-	 * Return the cached injector. Use it only for rare on-demand injection cases !
+	 * Return the cached injector. Use it only for the rare on-demand injection cases !
 	 * 
 	 * @return the cached injector
 	 */

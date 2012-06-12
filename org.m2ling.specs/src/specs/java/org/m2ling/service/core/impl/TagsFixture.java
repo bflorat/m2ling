@@ -9,7 +9,6 @@ import org.m2ling.common.soa.Context;
 import org.m2ling.common.utils.Utils;
 import org.m2ling.domain.core.Type;
 import org.m2ling.service.core.TagService;
-import org.m2ling.specs.FixturesModule;
 
 public class TagsFixture extends ConcordionTestCase {
 
@@ -25,7 +24,7 @@ public class TagsFixture extends ConcordionTestCase {
 
 	public TagsFixture() {
 		super();
-		serviceTag = new TagServiceImpl(new FixturesModule("src/specs/resources/mocks/Technical.m2ling"));
+		serviceTag = new TagServiceImpl();
 	}
 
 	/**

@@ -4,8 +4,11 @@
 package org.m2ling.common.utils;
 
 import java.lang.reflect.Constructor;
+import java.lang.reflect.Field;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 
 import com.google.common.base.Splitter;
 import com.google.common.base.Strings;
@@ -68,6 +71,39 @@ public class Utils {
 		// Drop last trailing comma
 		sb.deleteCharAt(sb.length() - 1);
 		return sb.toString();
+	}
+
+	/**
+	 * Set environment variable (into JVM memory only) Credit :
+	 * http://stackoverflow.com/questions/318239/how-do-i-set-environment-variables-from-java
+	 */
+	public static void setEnv(Map<String, String> newenv) throws RuntimeException {
+		try {
+			Class<?>[] classes = Collections.class.getDeclaredClasses();
+			Map<String, String> env = System.getenv();
+			for (Class<?> cl : classes) {
+				if ("java.util.Collections$UnmodifiableMap".equals(cl.getName())) {
+					Field field = cl.getDeclaredField("m");
+					field.setAccessible(true);
+					Object obj = field.get(env);
+					@SuppressWarnings("unchecked")
+					Map<String, String> map = (Map<String, String>) obj;
+					map.clear();
+					map.putAll(newenv);
+				}
+			}
+		} catch (Exception e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+	/**
+	 * Return whether we are running in debug mode.
+	 * @return whether we are running in debug mode
+	 */
+	public static boolean isDebugMode() {
+		String dev = System.getenv(Consts.M2LING_DEBUG_VARIABLE_NAME);
+		return (!Strings.isNullOrEmpty(dev) && "true".equals(dev));
 	}
 
 	/**

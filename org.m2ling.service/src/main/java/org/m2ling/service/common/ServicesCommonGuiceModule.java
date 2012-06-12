@@ -3,15 +3,16 @@
  */
 package org.m2ling.service.common;
 
+import org.m2ling.common.dto.binding.M2lingGuiceModule;
 import org.m2ling.common.security.ACResource;
 import org.m2ling.common.security.impl.ACResourceInterceptorImpl;
 import org.m2ling.persistence.PersistenceManager;
 import org.m2ling.persistence.impl.PersistenceManagerTeneoImpl;
-import org.m2ling.service.util.ServiceConfiguration;
+import org.m2ling.persistence.impl.PersistenceManagerXMIImpl;
 import org.m2ling.service.util.CoreUtil;
 import org.m2ling.service.util.DTOConverter;
+import org.m2ling.service.util.ServiceConfiguration;
 
-import com.google.inject.AbstractModule;
 import com.google.inject.matcher.Matchers;
 
 /**
@@ -20,7 +21,7 @@ import com.google.inject.matcher.Matchers;
  * @author "Bertrand Florat <bertrand@florat.net>"
  * 
  */
-public class ServicesCommonGuiceModule extends AbstractModule {
+public class ServicesCommonGuiceModule extends M2lingGuiceModule {
 
 	/*
 	 * (non-Javadoc)
@@ -29,7 +30,6 @@ public class ServicesCommonGuiceModule extends AbstractModule {
 	 */
 	@Override
 	protected void configure() {
-
 		{ // Bindings
 			bind(PersistenceManager.class).to(PersistenceManagerTeneoImpl.class);
 			bind(CoreUtil.class);

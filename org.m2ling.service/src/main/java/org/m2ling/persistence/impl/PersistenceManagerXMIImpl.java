@@ -3,7 +3,6 @@
  */
 package org.m2ling.persistence.impl;
 
-import java.io.File;
 import java.io.IOException;
 import java.util.Properties;
 import java.util.logging.Logger;
@@ -21,6 +20,7 @@ import org.m2ling.service.util.ServiceConfiguration;
 
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
+import com.google.inject.name.Named;
 
 /**
  * Persistence Manager bringing XMI implementation (load/store from a XMI XML file on filesystem).
@@ -37,25 +37,40 @@ public class PersistenceManagerXMIImpl implements PersistenceManager {
 	 * @author "Bertrand Florat <bertrand@florat.net>"
 	 * 
 	 */
-	public static class SpecificConfiguration  {
-		public static final String CONF_XMI_PATH = "org.m2ling.persistence.xmi.path";
+	@Singleton
+	public static class SpecificConfiguration implements ServiceConfiguration.SpecificConfiguration {
 
-		
-		/* (non-Javadoc)
-		 * @see org.m2ling.service.util.Configuration#getDefaultConfiguration()
+		public static final String CONF_XMI_PATH = "org.m2ling.persistence.xmi.path";
+		@Inject(optional = true)
+		@Named(CONF_XMI_PATH)
+		public String CONF_XMI_PATH_VALUE;
+
+		/*
+		 * (non-Javadoc)
+		 * 
+		 * @see
+		 * org.m2ling.service.util.ServiceConfiguration.SpecificConfiguration#getDefaultConfiguration
+		 * ()
 		 */
 		public Properties getDefaultConfiguration() {
 			Properties result = new Properties();
+			// Currently no property default as this persistence implementation is only used in test
+			// mode.
 			return result;
 		}
-		
-		
-		/* (non-Javadoc)
-		 * @see org.m2ling.service.util.Configuration#getDefaultTestConfiguration()
+
+		/*
+		 * (non-Javadoc)
+		 * 
+		 * @see
+		 * org.m2ling.service.util.ServiceConfiguration.SpecificConfiguration#getDefaultTestConfiguration
+		 * ()
 		 */
-		public Properties getDefaultTestConfiguration() {
+		public Properties getDefaultDebugConfiguration() {
 			Properties result = new Properties();
-			result.setProperty(CONF_XMI_PATH, "../org.m2ling.specs/src/specs/resources/mocks/Technical.m2ling");
+			String value = CONF_XMI_PATH_VALUE;
+			result.setProperty(CONF_XMI_PATH,
+					(value == null) ? "../org.m2ling.specs/src/specs/resources/mocks/Technical.m2ling" : value);
 			return result;
 		}
 	}
@@ -63,14 +78,19 @@ public class PersistenceManagerXMIImpl implements PersistenceManager {
 	/** Resource root element */
 	private Root root;
 
+	@Inject
 	private Logger logger;
-
+	
+	@Inject
 	private ServiceConfiguration configuration;
 
 	@Inject
-	protected PersistenceManagerXMIImpl(ServiceConfiguration conf, Logger logger) throws IOException {
-		this.logger = logger;
-		this.configuration = conf;
+	private SpecificConfiguration specific;
+
+
+	@Inject
+	protected PersistenceManagerXMIImpl() throws IOException {
+		configuration.register(specific);
 		URI mainXMLfileURI = getFileURI();
 		ResourceSet rset = new ResourceSetImpl();
 		// Init the top ecore package (will load transitively sub packages)

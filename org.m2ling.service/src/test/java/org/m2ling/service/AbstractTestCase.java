@@ -18,15 +18,28 @@ import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import org.junit.After;
 import org.junit.Before;
+import org.m2ling.common.dto.binding.M2lingGuiceModule;
 import org.m2ling.common.test_utils.TestHelper;
 import org.m2ling.common.utils.Consts;
+import org.m2ling.common.utils.Utils;
 import org.m2ling.domain.DomainFactory;
 import org.m2ling.domain.DomainPackage;
 import org.m2ling.domain.Root;
+import org.m2ling.persistence.PersistenceManager;
 import org.m2ling.persistence.impl.PersistenceManagerTeneoImpl;
+import org.m2ling.persistence.impl.PersistenceManagerXMIImpl;
+import org.m2ling.service.core.TagService;
+import org.m2ling.service.core.impl.TagServiceImpl;
+import org.m2ling.service.principles.ViewPointService;
+import org.m2ling.service.principles.impl.ViewPointServiceImpl;
+import org.m2ling.service.util.CoreUtil;
+import org.m2ling.service.util.DTOConverter;
 import org.m2ling.service.util.ServiceConfiguration;
 
-import com.google.inject.AbstractModule;
+import com.google.inject.Guice;
+import com.google.inject.Injector;
+import com.google.inject.Module;
+import com.google.inject.util.Modules;
 
 /**
  * Parent class for all unit tests.
@@ -39,7 +52,7 @@ import com.google.inject.AbstractModule;
  * @author Bertrand Florat <bertrand@florat.net>
  * 
  */
-public abstract class AbstractTestCase extends AbstractModule {
+public abstract class AbstractTestCase extends M2lingGuiceModule {
 
 	protected Logger logger = Logger.getAnonymousLogger();
 
@@ -80,6 +93,31 @@ public abstract class AbstractTestCase extends AbstractModule {
 	}
 
 	/**
+	 * Return an injected instance of T using default test bindings
+	 * 
+	 * @param clazz
+	 * @return an injected instance of T using default test bindings
+	 */
+	protected <T> T getInstance(Class<T> clazz) {
+		Module finalModule = Modules.override(this).with(this);
+		Injector inj = Guice.createInjector(finalModule);
+		return inj.getInstance(clazz);
+	}
+
+	/**
+	 * Return an injected instance of T using default test bindings
+	 * 
+	 * @param clazz
+	 * @param overridingModule
+	 * @return an injected instance of T using default test bindings
+	 */
+	protected <T> T getInstanceWithModule(Class<T> clazz, Module overridingModule) {
+		Module finalModule = Modules.override(this).with(overridingModule);
+		Injector inj = Guice.createInjector(finalModule);
+		return inj.getInstance(clazz);
+	}
+
+	/**
 	 * Populate the database with content from provided mock. Don't commit content, keeps the session
 	 * opened.
 	 * 
@@ -87,8 +125,7 @@ public abstract class AbstractTestCase extends AbstractModule {
 	 * @throws IOException
 	 */
 	public void populateDatabase(String mockName) throws IOException {
-		ServiceConfiguration conf = new ServiceConfiguration(Logger.getAnonymousLogger());
-		pm = new PersistenceManagerTeneoImpl(conf, Logger.getAnonymousLogger());
+		pm = new PersistenceManagerTeneoImpl();
 		// Load the resource
 		populateMock(mockName);
 		resource = pm.getResource();
@@ -112,6 +149,15 @@ public abstract class AbstractTestCase extends AbstractModule {
 	 **/
 	@Override
 	protected void configure() {
+		bind(PersistenceManager.class).to(PersistenceManagerXMIImpl.class);
+		// bind(PersistenceManagerTeneoImpl.SpecificConfiguration.class);
+		// bind(PersistenceManagerXMIImpl.SpecificConfiguration.class);
+		bind(CoreUtil.class);
+		bind(DTOConverter.FromDTO.class);
+		bind(DTOConverter.ToDTO.class);
+		bind(ServiceConfiguration.class);
+		bind(TagService.class).to(TagServiceImpl.class);
+		bind(ViewPointService.class).to(ViewPointServiceImpl.class);
 	}
 
 	/**
@@ -122,9 +168,11 @@ public abstract class AbstractTestCase extends AbstractModule {
 		// Set M2LING_HOME variable for test mode
 		Map<String, String> newenv = new HashMap<String, String>();
 		newenv.put(Consts.M2LING_HOME_VARIABLE_NAME, TestHelper.getUTStorage().getAbsolutePath());
-		TestHelper.setEnv(newenv);
+		newenv.put(Consts.M2LING_DEBUG_VARIABLE_NAME, "true");
+		Utils.setEnv(newenv);
 		// Drop the configuration files
-		new ServiceConfiguration().getServiceConfFile().delete();
+		ServiceConfiguration conf = getInstance(ServiceConfiguration.class);
+		conf.getServiceConfFile().delete();
 	}
 
 	/**

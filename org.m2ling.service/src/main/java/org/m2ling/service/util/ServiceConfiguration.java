@@ -6,13 +6,14 @@ package org.m2ling.service.util;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.util.HashSet;
 import java.util.Properties;
+import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import org.m2ling.common.utils.Consts;
-import org.m2ling.persistence.impl.PersistenceManagerTeneoImpl;
-import org.m2ling.persistence.impl.PersistenceManagerXMIImpl;
+import org.m2ling.common.utils.Utils;
 
 import com.google.common.base.Strings;
 import com.google.inject.Inject;
@@ -29,22 +30,37 @@ import com.google.inject.Singleton;
 @Singleton
 public class ServiceConfiguration {
 
-	protected static final String CONF_FILENAME = "services_config.xml";
+	Set<SpecificConfiguration> specificConfs = new HashSet<ServiceConfiguration.SpecificConfiguration>(10);
 
+	public interface SpecificConfiguration {
+		/**
+		 * Return default configuration values. Can be overridden by constants injection.
+		 * 
+		 * @return default configuration values
+		 */
+		Properties getDefaultConfiguration();
+
+		/**
+		 * Return default configuration values in debug mode. Can be overridden by constants
+		 * injection.
+		 * 
+		 * @return default configuration values in debug mode
+		 */
+		Properties getDefaultDebugConfiguration();
+	}
+
+	public void register(SpecificConfiguration specific) {
+		specificConfs.add(specific);
+	}
+
+	@Inject
 	private Logger logger;
 
 	/** System properties for services */
 	private Properties systemProperties;
 
-	@Inject
-	public ServiceConfiguration(Logger logger) {
-		super();
-		this.logger = logger;
-	}
-
 	public ServiceConfiguration() {
 		super();
-		this.logger = Logger.getAnonymousLogger();
 	}
 
 	/**
@@ -64,11 +80,7 @@ public class ServiceConfiguration {
 	 * @return the system property value for given key
 	 */
 	public String getSystemProperty(String key) {
-		if (systemProperties == null) {
-			systemProperties = getSystemProperties();
-		}
-		// Note that at this point, systemProperties should not be null (maybe void however)
-		return systemProperties.getProperty(key);
+		return getSystemProperties().getProperty(key);
 	}
 
 	/**
@@ -88,22 +100,14 @@ public class ServiceConfiguration {
 	 * Return the service system properties.
 	 * 
 	 * <p>
-	 * If systemProperties have been forced using the constructor, it is simply returned.
+	 * In debug mode, we return default configuration.
 	 * </p>
 	 * <p>
-	 * If {@code M2LING_HOME} environment variable is set and configuration file exists and is
-	 * correct, we return its content.
-	 * </p>
-	 * <p>
-	 * If {@code M2LING_HOME} environment variable is not set, it is forced to
-	 * M2LING_HOME_DEFAULT_ABS_PATH
-	 * </p>
-	 * <p>
-	 * If {@code M2LING_HOME} environment variable is set but the configuration file can't be found,
-	 * a default configuration file is written down and the default configuration is returned.
+	 * In regular mode, we read the configuration file (created in the {@code getServiceConfFile()}
+	 * method if it doesn't yet exist).
 	 * </p>
 	 * 
-	 * @throw IllegalStateException if the configuration can't be neither read nor created
+	 * @throw IllegalStateException if the configuration can't be read
 	 * 
 	 * @return the service system properties
 	 */
@@ -111,42 +115,29 @@ public class ServiceConfiguration {
 		if (this.systemProperties != null) {
 			return this.systemProperties;
 		}
-		Properties result = null;
-		File fileConf = getServiceConfFile();
-		if (!fileConf.exists()) {
-			String msg = Consts.M2LING_HOME_VARIABLE_NAME + " variable name defined but no corresponding "
-					+ fileConf.getAbsolutePath() + " file";
-			Properties conf = null;
-			try {
-				conf = getDefaultConfiguration();
-				// Make sure to create full directory structure
-				fileConf.getParentFile().mkdirs();
-				// Store the configuration in XML, not property to ensure best unicode support
-				conf.storeToXML(new FileOutputStream(fileConf), "M2ling service layer configuration file.");
-				logger.info(msg + ". Default file created.");
-				return conf;
-			} catch (Exception e) {
-				logger.log(Level.SEVERE, fileConf.getAbsolutePath() + " file can't be written", e);
-				throw new IllegalStateException(msg);
-			}
-		} else {
-			try {
-				result = new Properties();
-				result.loadFromXML(new FileInputStream(fileConf));
-			} catch (Exception e) {
-				String msg = "Corrupted configuration file : " + fileConf.getAbsolutePath();
-				logger.log(Level.SEVERE, msg, e);
-				throw new IllegalStateException(msg, e);
-			}
+		// In debug mode, do not read the conf file
+		if (Utils.isDebugMode()) {
+			return getDefaultConfiguration();
 		}
-		logger.info("Services configuration file location : " + fileConf.getAbsolutePath());
+		// Load default values, then override by file loading
+		Properties result = getDefaultConfiguration();
+		File fileConf = getServiceConfFile();
+		try {
+			result = new Properties();
+			result.loadFromXML(new FileInputStream(fileConf));
+		} catch (Exception e) {
+			String msg = "Corrupted configuration file : " + fileConf.getAbsolutePath();
+			logger.log(Level.SEVERE, msg, e);
+			throw new IllegalStateException(msg, e);
+		}
 		return result;
 	}
 
 	/**
-	 * Return service configuration file (actual filesystem existence is not verified)
+	 * Return service configuration file and create it if it doesn't exist.
 	 * 
 	 * @return service configuration file
+	 * @throw IllegalStateException if configuration file can't be created
 	 */
 	public File getServiceConfFile() {
 		File fileConf = null;
@@ -156,7 +147,20 @@ public class ServiceConfiguration {
 			logger.warning(Consts.M2LING_HOME_VARIABLE_NAME + " environment variable not set, default path is used : "
 					+ Consts.M2LING_HOME_DEFAULT_ABS_PATH);
 		}
-		fileConf = new File(m2lingHome + File.separator + CONF_FILENAME);
+		fileConf = new File(m2lingHome + File.separator + Consts.CONF_SERVICE_FILENAME);
+		String msg = Consts.M2LING_HOME_VARIABLE_NAME + " variable name defined but no corresponding "
+				+ fileConf.getAbsolutePath() + " file";
+		try {
+			// Make sure to create full directory structure
+			fileConf.getParentFile().mkdirs();
+			Properties conf = getDefaultConfiguration();
+			// Store the configuration in XML, not property to ensure best unicode support
+			conf.storeToXML(new FileOutputStream(fileConf), "M2ling service layer configuration file.");
+			logger.info("Services configuration file location : " + fileConf.getAbsolutePath());
+		} catch (Exception e) {
+			logger.log(Level.SEVERE, fileConf.getAbsolutePath() + " file can't be written", e);
+			throw new IllegalStateException(msg);
+		}
 		return fileConf;
 	}
 
@@ -165,17 +169,19 @@ public class ServiceConfiguration {
 	 * 
 	 * @return a set of default configuration values.
 	 */
-	public static Properties getDefaultConfiguration() {
+	private Properties getDefaultConfiguration() {
 		Properties result = new Properties();
-		String dev = System.getenv(Consts.M2LING_DEBUG_VARIABLE_NAME);
-		if (!Strings.isNullOrEmpty(dev) && "true".equals(dev)) {
-			// Add Teneo persistence default configuration
-			result.putAll(new PersistenceManagerTeneoImpl.SpecificConfiguration().getDefaultConfiguration());
+		if (Utils.isDebugMode()) {
+			// Add debug configurations
+			for (SpecificConfiguration specific : specificConfs) {
+				result.putAll(specific.getDefaultDebugConfiguration());
+			}
 		} else {
-			// In debug mode, set debug properties of XMI implementation
-			result.putAll(new PersistenceManagerXMIImpl.SpecificConfiguration().getDefaultTestConfiguration());
+			// Add regular configurations
+			for (SpecificConfiguration specific : specificConfs) {
+				result.putAll(specific.getDefaultConfiguration());
+			}
 		}
 		return result;
 	}
-
 }

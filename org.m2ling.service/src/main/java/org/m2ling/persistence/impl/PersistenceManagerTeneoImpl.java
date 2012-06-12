@@ -46,46 +46,49 @@ public class PersistenceManagerTeneoImpl implements PersistenceManager {
 	 * @author "Bertrand Florat <bertrand@florat.net>"
 	 * 
 	 */
-	public static class SpecificConfiguration {
+	@Singleton
+	public static class SpecificConfiguration implements ServiceConfiguration.SpecificConfiguration {
 		public static final String CONF_TENEO_DRIVER = Environment.DRIVER;
-		@Inject
+		@Inject(optional = true)
 		@Named(CONF_TENEO_DRIVER)
-		public static String CONF_TENEO_DRIVER_VALUE;
+		public String CONF_TENEO_DRIVER_VALUE;
 
 		public static final String CONF_TENEO_USER = Environment.USER;
-		@Inject
+		@Inject(optional = true)
 		@Named(CONF_TENEO_USER)
-		public static String CONF_TENEO_USER_VALUE;
+		public String CONF_TENEO_USER_VALUE;
 
 		public static final String CONF_TENEO_URL = Environment.URL;
-		@Inject
+		@Inject(optional = true)
 		@Named(CONF_TENEO_URL)
-		public static String CONF_TENEO_URL_VALUE = Environment.URL;
+		public String CONF_TENEO_URL_VALUE;
 
 		public static final String CONF_TENEO_PASS = Environment.PASS;
-		@Inject
+		@Inject(optional = true)
 		@Named(CONF_TENEO_PASS)
-		public static String CONF_TENEO_PASS_VALUE = Environment.PASS;
+		public String CONF_TENEO_PASS_VALUE;
 
 		public static final String CONF_TENEO_DIALECT = Environment.DIALECT;
-		@Inject
+		@Inject(optional = true)
 		@Named(CONF_TENEO_DIALECT)
-		public static String CONF_TENEO_DIALECT_VALUE;
+		public String CONF_TENEO_DIALECT_VALUE;
 
 		public static final String CONF_TENEO_CASCADE_POLICY = PersistenceOptions.CASCADE_POLICY_ON_NON_CONTAINMENT;
-		@Inject
+		@Inject(optional = true)
 		@Named(CONF_TENEO_CASCADE_POLICY)
-		public static String CONF_TENEO_CASCADE_POLICY_VALUE;
+		public String CONF_TENEO_CASCADE_POLICY_VALUE;
 
 		public static final String CONF_TENEO_HBM2DDL_AUTO = Environment.HBM2DDL_AUTO;
-		@Inject
+		@Inject(optional = true)
 		@Named(CONF_TENEO_HBM2DDL_AUTO)
-		public static String CONF_TENEO_HBM2DDL_AUTO_VALUE;
+		public String CONF_TENEO_HBM2DDL_AUTO_VALUE;
 
 		/*
 		 * (non-Javadoc)
 		 * 
-		 * @see org.m2ling.service.util.Configuration#getDefaultConfiguration()
+		 * @see
+		 * org.m2ling.service.util.ServiceConfiguration.SpecificConfiguration#getDefaultConfiguration
+		 * ()
 		 */
 		public Properties getDefaultConfiguration() {
 			Properties result = new Properties();
@@ -108,15 +111,20 @@ public class PersistenceManagerTeneoImpl implements PersistenceManager {
 			value = CONF_TENEO_CASCADE_POLICY_VALUE;
 			result.put(CONF_TENEO_CASCADE_POLICY, (value == null) ? "REFRESH,PERSIST,MERGE" : value);
 
+			value = CONF_TENEO_HBM2DDL_AUTO_VALUE;
+			result.put(CONF_TENEO_HBM2DDL_AUTO, (value == null) ? "" : value);
+
 			return result;
 		}
 
 		/*
 		 * (non-Javadoc)
 		 * 
-		 * @see org.m2ling.service.util.Configuration#getDefaultTestConfiguration()
+		 * @see
+		 * org.m2ling.service.util.ServiceConfiguration.SpecificConfiguration#getDefaultTestConfiguration
+		 * ()
 		 */
-		public Properties getDefaultTestConfiguration() {
+		public Properties getDefaultDebugConfiguration() {
 			Properties result = new Properties();
 
 			String value = CONF_TENEO_DRIVER_VALUE;
@@ -150,9 +158,14 @@ public class PersistenceManagerTeneoImpl implements PersistenceManager {
 	/** M2ling model root element */
 	private Root root;
 
-	private final ServiceConfiguration conf;
+	@Inject
+	private ServiceConfiguration configuration;
 
-	private final Logger logger;
+	@Inject
+	private SpecificConfiguration specific;
+
+	@Inject
+	private Logger logger;
 
 	private final HbDataStore dataStore;
 
@@ -171,19 +184,18 @@ public class PersistenceManagerTeneoImpl implements PersistenceManager {
 	 * Build a Teneo-based persistence manager.
 	 */
 	@Inject
-	public PersistenceManagerTeneoImpl(ServiceConfiguration conf, Logger logger) {
-		this.conf = conf;
-		this.logger = logger;
-		// the name of the session factory
-
+	// This is a just in time injection used to inject fields and SpecificConfiugration nested class
+	public PersistenceManagerTeneoImpl() {
+		// configuration.register(specific);
+		System.out.println(configuration);
 		// create the HbDataStore using the name
 		dataStore = HbHelper.INSTANCE.createRegisterDataStore(DATA_STORE_NAME);
 
 		// set the properties
-		Properties databaseConf = conf.getSystemProperties(SpecificConfiguration.CONF_TENEO_DRIVER,
+		Properties databaseConf = configuration.getSystemProperties(SpecificConfiguration.CONF_TENEO_DRIVER,
 				SpecificConfiguration.CONF_TENEO_USER, SpecificConfiguration.CONF_TENEO_URL,
-				SpecificConfiguration.CONF_TENEO_PASS, SpecificConfiguration.CONF_TENEO_CASCADE_POLICY,
-				SpecificConfiguration.CONF_TENEO_HBM2DDL_AUTO);
+				SpecificConfiguration.CONF_TENEO_PASS, SpecificConfiguration.CONF_TENEO_DIALECT,
+				SpecificConfiguration.CONF_TENEO_CASCADE_POLICY, SpecificConfiguration.CONF_TENEO_HBM2DDL_AUTO);
 		dataStore.setDataStoreProperties(databaseConf);
 
 		// sets its epackages stored in this datastore (it also processes recursively sub-packages)
