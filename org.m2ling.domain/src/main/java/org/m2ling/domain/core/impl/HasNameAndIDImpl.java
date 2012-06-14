@@ -7,7 +7,6 @@ import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
-import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.m2ling.domain.core.CorePackage;
 import org.m2ling.domain.core.HasNameAndID;
 
@@ -86,7 +85,6 @@ public class HasNameAndIDImpl extends EObjectImpl implements HasNameAndID {
 	 */
 	protected HasNameAndIDImpl() {
 		super();
-		this.id = EcoreUtil.generateUUID();
 	}
 
 	/**

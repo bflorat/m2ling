@@ -36,7 +36,7 @@ public class DTOConverter {
 		CoreUtil util;
 
 		public static ViewPointDTO getViewPointDTO(ViewPoint vp) {
-			ViewPointDTO.Builder builder = new ViewPointDTO.Builder(vp.getName());
+			ViewPointDTO.Builder builder = new ViewPointDTO.Builder(vp.getId(), vp.getName());
 			builder.tags(vp.getTags());
 			return builder.build();
 		}
@@ -63,6 +63,7 @@ public class DTOConverter {
 		 */
 		public ViewPoint newViewPoint(ViewPointDTO dto) {
 			ViewPoint vp = CoreFactory.eINSTANCE.createViewPoint();
+			vp.setId(dto.getId());
 			vp.setName(dto.getName());
 			if (dto.getTags() != null) {
 				for (String tag : dto.getTags()) {
@@ -74,6 +75,8 @@ public class DTOConverter {
 			if (dto.getDescription() != null) {
 				vp.setDescription(dto.getDescription());
 			}
+			// TODO add missing setters
+
 			return vp;
 		}
 

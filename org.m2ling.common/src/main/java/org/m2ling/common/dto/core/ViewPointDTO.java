@@ -13,6 +13,7 @@ import java.util.List;
  */
 public class ViewPointDTO {
 
+	private final String id;
 	private final String name;
 	private final List<String> tags;
 	private final String description;
@@ -23,6 +24,7 @@ public class ViewPointDTO {
 
 		// Required configuration
 		private final String name;
+		private final String id;
 
 		// Optional configuration
 		private List<String> tags = null;
@@ -30,7 +32,8 @@ public class ViewPointDTO {
 		private String comment = null;
 		private List<String> statusLiterals;
 
-		public Builder(String name) {
+		public Builder(String id, String name) {
+			this.id = id;
 			this.name = name;
 		}
 
@@ -43,12 +46,12 @@ public class ViewPointDTO {
 			this.description = description;
 			return this;
 		}
-		
+
 		public Builder comment(String comment) {
 			this.comment = comment;
 			return this;
 		}
-		
+
 		public Builder statusLiterals(List<String> statusLiterals) {
 			this.statusLiterals = statusLiterals;
 			return this;
@@ -61,6 +64,7 @@ public class ViewPointDTO {
 	}
 
 	private ViewPointDTO(Builder builder) {
+		id = builder.id;
 		name = builder.name;
 		if (builder.tags != null && builder.tags.size() > 0) {
 			tags = new ArrayList<String>(builder.tags); // defensive copy
@@ -82,6 +86,13 @@ public class ViewPointDTO {
 	public String getName() {
 		return name;
 	}
+	
+	/**
+	 * @return the id
+	 */
+	public String getId() {
+		return id;
+	}
 
 	/**
 	 * Return a defensive copy of the tags.
@@ -94,7 +105,7 @@ public class ViewPointDTO {
 		}
 		return new ArrayList<String>(tags);
 	}
-	
+
 	/**
 	 * Return a defensive copy of the status literals.
 	 * 
@@ -113,7 +124,7 @@ public class ViewPointDTO {
 	public String getDescription() {
 		return description;
 	}
-	
+
 	/**
 	 * @return the comment
 	 */

@@ -3,15 +3,14 @@
  */
 package org.m2ling.service.common;
 
+import org.m2ling.common.configuration.Configuration;
 import org.m2ling.common.dto.binding.M2lingGuiceModule;
 import org.m2ling.common.security.ACResource;
 import org.m2ling.common.security.impl.ACResourceInterceptorImpl;
 import org.m2ling.persistence.PersistenceManager;
 import org.m2ling.persistence.impl.PersistenceManagerTeneoImpl;
-import org.m2ling.persistence.impl.PersistenceManagerXMIImpl;
 import org.m2ling.service.util.CoreUtil;
 import org.m2ling.service.util.DTOConverter;
-import org.m2ling.service.util.ServiceConfiguration;
 
 import com.google.inject.matcher.Matchers;
 
@@ -35,7 +34,7 @@ public class ServicesCommonGuiceModule extends M2lingGuiceModule {
 			bind(CoreUtil.class);
 			bind(DTOConverter.FromDTO.class);
 			bind(DTOConverter.ToDTO.class);
-			bind(ServiceConfiguration.class);
+			bind(Configuration.class);
 		}
 
 		{// AOP bindings

@@ -9,8 +9,6 @@ import org.m2ling.common.dto.binding.M2lingGuiceModule;
 import org.m2ling.service.core.TagService;
 import org.m2ling.service.core.impl.TagServiceImpl;
 
-import com.google.inject.AbstractModule;
-
 /**
  * Guice bindings for common features of presentation tiers
  */

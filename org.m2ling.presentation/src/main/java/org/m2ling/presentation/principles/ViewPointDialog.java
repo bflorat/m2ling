@@ -7,6 +7,8 @@ package org.m2ling.presentation.principles;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.UUID;
+import java.util.logging.Logger;
 
 import org.m2ling.common.dto.core.ViewPointDTO;
 import org.m2ling.common.utils.Utils;
@@ -42,6 +44,9 @@ public class ViewPointDialog extends Window {
 	@Inject
 	ViewPointService service;
 
+	@Inject
+	Logger logger;
+
 	/**
 	 * Build a view point dialog
 	 * 
@@ -57,6 +62,7 @@ public class ViewPointDialog extends Window {
 		// We need a bean to attach data to
 		if (vp == null) {
 			bean = new ViewPointBean();
+			bean.setId(UUID.randomUUID().toString());
 			newVP = true;
 		} else {
 			this.bean = vp;
@@ -82,8 +88,9 @@ public class ViewPointDialog extends Window {
 				form.commit();
 				List<String> tags = Utils.tagsFromString(bean.getTags());
 				List<String> status = Utils.tagsFromString(bean.getStatusLiterals());
-				ViewPointDTO vpDTO = new ViewPointDTO.Builder(bean.getName()).description(bean.getDescription()).tags(tags)
-						.comment(bean.getComment()).statusLiterals(status).build();
+				ViewPointDTO vpDTO = new ViewPointDTO.Builder(bean.getId(), bean.getName())
+						.description(bean.getDescription()).tags(tags).comment(bean.getComment()).statusLiterals(status)
+						.build();
 				if (newVP) {
 					service.createViewPoint(vpDTO);
 				} else {
@@ -96,7 +103,9 @@ public class ViewPointDialog extends Window {
 				close();
 			}
 		};
+		ViewPointIconUploader uploader = new ViewPointIconUploader(bean, logger);
 		OKCancel okc = new OKCancel(ok, cancel);
+		addComponent(uploader);
 		addComponent(okc);
 		((VerticalLayout) getContent()).setComponentAlignment(okc, Alignment.MIDDLE_CENTER);
 	}

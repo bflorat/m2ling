@@ -3,7 +3,6 @@
  */
 package org.m2ling.persistence.impl;
 
-import java.io.File;
 import java.io.IOException;
 import java.util.Properties;
 import java.util.logging.Logger;
@@ -14,10 +13,10 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceFactoryImpl;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
+import org.m2ling.common.configuration.Configuration;
 import org.m2ling.domain.DomainPackage;
 import org.m2ling.domain.Root;
 import org.m2ling.persistence.PersistenceManager;
-import org.m2ling.service.util.ServiceConfiguration;
 
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
@@ -38,7 +37,7 @@ public class PersistenceManagerXMIImpl implements PersistenceManager {
 	 * 
 	 */
 	@Singleton
-	public static class SpecificConfiguration implements ServiceConfiguration.SpecificConfiguration {
+	public static class SpecificConfiguration implements Configuration.SpecificConfiguration {
 
 		public static final String CONF_XMI_PATH = "org.m2ling.persistence.xmi.path";
 
@@ -65,11 +64,8 @@ public class PersistenceManagerXMIImpl implements PersistenceManager {
 		 */
 		public Properties getDefaultDebugConfiguration() {
 			Properties result = new Properties();
-			// Search by default from current running war in a tomcat server from eclipse workspace,
-			// adapt if required.
-			File currentPath = new File(getClass().getProtectionDomain().getCodeSource().getLocation().getPath());
-			result.setProperty(CONF_XMI_PATH, currentPath.getParentFile().getAbsolutePath()
-					+ "/../../../../../../../../org.m2ling.specs/src/specs/resources/mocks/Bikes.m2ling");
+			// Search by default a mock file located at /tmp/sample.m2ling
+			result.setProperty(CONF_XMI_PATH, System.getProperty("java.io.tmpdir") + "/sample.m2ling");
 			return result;
 		}
 	}
@@ -79,10 +75,10 @@ public class PersistenceManagerXMIImpl implements PersistenceManager {
 
 	private Logger logger;
 
-	private ServiceConfiguration configuration;
+	private Configuration configuration;
 
 	@Inject
-	public PersistenceManagerXMIImpl(Logger logger, ServiceConfiguration configuration) throws IOException {
+	public PersistenceManagerXMIImpl(Logger logger, Configuration configuration) throws IOException {
 		this.configuration = configuration;
 		this.logger = logger;
 		// Add this specific configuration to the global service configuration

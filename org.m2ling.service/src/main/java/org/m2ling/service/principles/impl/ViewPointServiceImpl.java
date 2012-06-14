@@ -68,6 +68,12 @@ public class ViewPointServiceImpl extends ServiceImpl implements ViewPointServic
 		if (root.getViewPoints().contains(vp)) {
 			throw new IllegalStateException("View point already exist");
 		}
+		// Check for view point with the same name
+		for (ViewPoint vpChecked : root.getViewPoints()) {
+			if (vpChecked.getName().equals(vpDTO.getName())) {
+				throw new IllegalStateException("View point already exist with name : " + vpDTO.getName());
+			}
+		}
 		root.getViewPoints().add(vp);
 	}
 

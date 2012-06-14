@@ -20,7 +20,7 @@ public class Consts {
 	/** M2ling configuration home directory system variable name */
 	public static final String M2LING_HOME_VARIABLE_NAME = "M2LING_HOME";
 
-	/** M2ling debug  mode system variable name */
+	/** M2ling debug mode system variable name */
 	public static final String M2LING_DEBUG_VARIABLE_NAME = "M2LING_DEBUG";
 
 	/** M2LING_HOME_VARIABLE_NAME default value */
@@ -32,8 +32,14 @@ public class Consts {
 
 	/** Default XMI extension */
 	public static final String XMI_EXTENSION = "m2ling";
-	
-	/** Service configuration file name*/
-	public static final String CONF_SERVICE_FILENAME = "services_config.xml";
+
+	/** Configuration file name */
+	public static final String CONF_FILENAME = "m2ling_config.xml";
+
+	/** view points Icons storage location relative to M2LING_DEBUG_VARIABLE_NAME */
+	public static final String CONF_VP_ICONS_LOCATION = "icons" + File.separatorChar + "viewpoints";
+
+	/** Max icon size in bytes */
+	public static final long CONF_ICONS_MAX_SIZE_BYTES = 5000000l;
 
 }

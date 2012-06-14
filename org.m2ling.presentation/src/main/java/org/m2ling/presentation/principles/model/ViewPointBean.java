@@ -10,10 +10,10 @@ import java.io.Serializable;
 /**
  * Mutable View point bean
  */
+@SuppressWarnings("serial")
 public class ViewPointBean implements Serializable {
 
-	private static final long serialVersionUID = -6166933742017493086L;
-
+	private String id = "";
 	private String name = "";
 	/**
 	 * Comma-separated tags
@@ -22,8 +22,36 @@ public class ViewPointBean implements Serializable {
 	private String description = "";
 	private String comment = "";
 	private String statusLiterals = "";
+	private String iconPath = "";
 
-	
+	/**
+	 * @return the iconPath
+	 */
+	public String getIconPath() {
+		return iconPath;
+	}
+
+	/**
+	 * @param iconPath the iconPath to set
+	 */
+	public void setIconPath(String iconPath) {
+		this.iconPath = iconPath;
+	}
+
+	/**
+	 * @return the id
+	 */
+	public String getId() {
+		return id;
+	}
+
+	/**
+	 * @param id
+	 *           the id to set
+	 */
+	public void setId(String id) {
+		this.id = id;
+	}
 
 	/**
 	 * @return the comment
@@ -33,13 +61,13 @@ public class ViewPointBean implements Serializable {
 	}
 
 	/**
-	 * @param comment the comment to set
+	 * @param comment
+	 *           the comment to set
 	 */
 	public void setComment(String comment) {
 		this.comment = comment;
 	}
 
-	
 	/**
 	 * @return the statusLiterals
 	 */
@@ -48,7 +76,8 @@ public class ViewPointBean implements Serializable {
 	}
 
 	/**
-	 * @param statusLiterals the statusLiterals to set
+	 * @param statusLiterals
+	 *           the statusLiterals to set
 	 */
 	public void setStatusLiterals(String statusLiterals) {
 		this.statusLiterals = statusLiterals;

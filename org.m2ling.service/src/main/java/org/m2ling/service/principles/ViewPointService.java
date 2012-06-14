@@ -31,7 +31,8 @@ public interface ViewPointService {
 	 * @param vpDTO
 	 *           the view point DTO
 	 * @throws IllegalStateException
-	 *            if the viewpoint already exist.
+	 *            if the viewpoint already exist
+	 *            if a viewpoint already exist with the provided name
 	 * @throws IllegalAccessException
 	 *            if the caller has not required authorization to call this method.
 	 */

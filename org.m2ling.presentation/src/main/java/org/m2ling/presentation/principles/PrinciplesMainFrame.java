@@ -5,7 +5,6 @@
  */
 package org.m2ling.presentation.principles;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.m2ling.common.dto.core.ViewPointDTO;
@@ -30,6 +29,8 @@ public class PrinciplesMainFrame extends VerticalLayout {
 	private List<ViewPointDTO> vps;
 
 	private ViewPointService vpService;
+	
+	private Button create;
 
 	@Inject
 	public PrinciplesMainFrame(ViewPointService vpService) {
@@ -44,12 +45,22 @@ public class PrinciplesMainFrame extends VerticalLayout {
 	 */
 	public void populate() {
 		vps = vpService.getAllViewPoints();
+		create = new Button("Create a view point", new Button.ClickListener() {
+
+			public void buttonClick(ClickEvent event) {
+				ViewPointDialog vpDialog = new ViewPointDialog(null);
+				vpDialog.setModal(true);
+				getWindow().addWindow(vpDialog);
+			}
+		});
+		create.setStyleName(BaseTheme.BUTTON_LINK);
 		if (vps.size() == 0) {
 			VerticalLayout vert = getNoneVPPanel();
 			addComponent(vert);
 			setComponentAlignment(vert, Alignment.MIDDLE_CENTER);
 		} else {
 			addComponent(new Label(vps.toString()));
+			addComponent(create);
 		}
 	}
 
@@ -62,16 +73,6 @@ public class PrinciplesMainFrame extends VerticalLayout {
 		noneVPLabel.setIcon(new ThemeResource("img/16/information.png"));
 		// Use caption to set text to keep icon and label on the same line
 		noneVPLabel.setCaption("None view point found");
-		Button create = new Button("Create a view point", new Button.ClickListener() {
-
-			public void buttonClick(ClickEvent event) {
-				ViewPointDialog vpDialog = new ViewPointDialog(null);
-				vpDialog.setModal(true);
-				getWindow().addWindow(vpDialog);
-			}
-		});
-		create.setStyleName(BaseTheme.BUTTON_LINK);
-
 		vert.addComponent(noneVPLabel);
 		vert.addComponent(create);
 		return vert;

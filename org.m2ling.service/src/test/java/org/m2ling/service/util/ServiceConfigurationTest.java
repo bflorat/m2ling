@@ -13,6 +13,7 @@ import java.util.Map;
 import java.util.Properties;
 
 import org.junit.Test;
+import org.m2ling.common.configuration.Configuration;
 import org.m2ling.common.test_utils.TestHelper;
 import org.m2ling.common.utils.Consts;
 import org.m2ling.common.utils.Utils;
@@ -29,7 +30,7 @@ public class ServiceConfigurationTest extends AbstractTestCase {
 	public void confOverriden() {
 		Properties confOverriden = new Properties();
 		confOverriden.put(PersistenceManagerTeneoImpl.SpecificConfiguration.CONF_TENEO_DRIVER, "foo");
-		ServiceConfiguration conf = new ServiceConfiguration(confOverriden, logger);
+		Configuration conf = new Configuration(confOverriden, logger);
 		assertEquals(conf.getSystemProperty(PersistenceManagerTeneoImpl.SpecificConfiguration.CONF_TENEO_DRIVER), "foo");
 	}
 
@@ -39,12 +40,12 @@ public class ServiceConfigurationTest extends AbstractTestCase {
 		Map<String, String> newenv = new HashMap<String, String>();
 		newenv.put(Consts.M2LING_DEBUG_VARIABLE_NAME, "false");
 		Utils.setEnv(newenv);
-		ServiceConfiguration conf = new ServiceConfiguration(null, logger);
+		Configuration conf = new Configuration(null, logger);
 		conf.register(new PersistenceManagerTeneoImpl.SpecificConfiguration());
 		assertEquals(conf.getSystemProperty(PersistenceManagerTeneoImpl.SpecificConfiguration.CONF_TENEO_DRIVER),
 				"org.h2.Driver");
 		// check that service conf file has been created
-		assertTrue(new File(TestHelper.getUTStorage().getAbsolutePath() + File.separator + Consts.CONF_SERVICE_FILENAME)
+		assertTrue(new File(TestHelper.getUTStorage().getAbsolutePath() + File.separator + Consts.CONF_FILENAME)
 				.exists());
 	}
 
@@ -54,11 +55,11 @@ public class ServiceConfigurationTest extends AbstractTestCase {
 		newenv.put(Consts.M2LING_HOME_VARIABLE_NAME, TestHelper.getUTStorage().getAbsolutePath());
 		Utils.setEnv(newenv);
 		assertEquals(System.getenv(Consts.M2LING_HOME_VARIABLE_NAME), TestHelper.getUTStorage().getAbsolutePath());
-		ServiceConfiguration conf = new ServiceConfiguration(null, logger);
+		Configuration conf = new Configuration(null, logger);
 		conf.register(new PersistenceManagerTeneoImpl.SpecificConfiguration());
 		assertEquals(conf.getSystemProperty(PersistenceManagerTeneoImpl.SpecificConfiguration.CONF_TENEO_HBM2DDL_AUTO),
 				"create");
-		assertFalse(new File(TestHelper.getUTStorage().getAbsolutePath() + File.separator + Consts.CONF_SERVICE_FILENAME)
+		assertFalse(new File(TestHelper.getUTStorage().getAbsolutePath() + File.separator + Consts.CONF_FILENAME)
 				.exists());
 	}
 }

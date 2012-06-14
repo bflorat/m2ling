@@ -18,6 +18,7 @@ import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import org.junit.After;
 import org.junit.Before;
+import org.m2ling.common.configuration.Configuration;
 import org.m2ling.common.test_utils.TestHelper;
 import org.m2ling.common.utils.Consts;
 import org.m2ling.common.utils.Utils;
@@ -25,7 +26,6 @@ import org.m2ling.domain.DomainFactory;
 import org.m2ling.domain.DomainPackage;
 import org.m2ling.domain.Root;
 import org.m2ling.persistence.impl.PersistenceManagerTeneoImpl;
-import org.m2ling.service.util.ServiceConfiguration;
 
 /**
  * Parent class for all unit tests.
@@ -86,7 +86,7 @@ public class AbstractTestCase {
 	 * @throws IOException
 	 */
 	public void populateDatabase(String mockName) throws IOException {
-		ServiceConfiguration conf = new ServiceConfiguration(null, logger);
+		Configuration conf = new Configuration(null, logger);
 		pm = new PersistenceManagerTeneoImpl(conf, logger);
 		// Load the resource
 		populateMock(mockName);
@@ -113,7 +113,7 @@ public class AbstractTestCase {
 		newenv.put(Consts.M2LING_DEBUG_VARIABLE_NAME, "true");
 		Utils.setEnv(newenv);
 		// Drop the configuration files
-		ServiceConfiguration conf = new ServiceConfiguration(null, logger);
+		Configuration conf = new Configuration(null, logger);
 		conf.getServiceConfFile().delete();
 	}
 
