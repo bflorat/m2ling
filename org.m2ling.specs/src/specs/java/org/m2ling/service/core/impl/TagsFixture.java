@@ -33,10 +33,10 @@ public class TagsFixture extends ConcordionTestCase {
 	 */
 	@Test
 	public String addTags(String previousTags, String newTags) {
-		List<String> newTagsList = Utils.tagsFromString(newTags);
+		List<String> newTagsList = Utils.stringListFromString(newTags);
 		serviceTag.addTags(MOCK_CONTEXT, Type.VIEWPOINT, getVPName(previousTags), newTagsList);
 		List<String> result = serviceTag.getAllTags(MOCK_CONTEXT, Type.VIEWPOINT, getVPName(previousTags));
-		return Utils.tagsAsString(result);
+		return Utils.stringListAsString(result);
 	}
 
 	/**
@@ -44,10 +44,10 @@ public class TagsFixture extends ConcordionTestCase {
 	 * against a new instance of HasTags at each call.
 	 */
 	public String setTags(String previousTags, String newTags) {
-		List<String> newTagsList = Utils.tagsFromString(newTags);
+		List<String> newTagsList = Utils.stringListFromString(newTags);
 		serviceTag.setTags(MOCK_CONTEXT, Type.VIEWPOINT, getVPName(previousTags), newTagsList);
 		List<String> result = serviceTag.getAllTags(MOCK_CONTEXT, Type.VIEWPOINT, getVPName(previousTags));
-		return Utils.tagsAsString(result);
+		return Utils.stringListAsString(result);
 	}
 
 	private String getVPName(String previousTags) {
@@ -61,7 +61,7 @@ public class TagsFixture extends ConcordionTestCase {
 			// We expect an IllegalArgumentException
 			serviceTag.setTags(MOCK_CONTEXT, Type.VIEWPOINT, SAMPLE_VIEWPOINT_PREFIX, items);
 			List<String> result = serviceTag.getAllTags(MOCK_CONTEXT, Type.VIEWPOINT, SAMPLE_VIEWPOINT_PREFIX);
-			return Utils.tagsAsString(result);
+			return Utils.stringListAsString(result);
 		} catch (IllegalArgumentException iae) {
 			return "IllegalArgumentException";
 		} catch (Exception e) {
@@ -75,7 +75,7 @@ public class TagsFixture extends ConcordionTestCase {
 			// We expect an IllegalArgumentException
 			serviceTag.setTags(MOCK_CONTEXT, Type.VIEWPOINT, SAMPLE_VIEWPOINT_PREFIX, items);
 			List<String> result = serviceTag.getAllTags(MOCK_CONTEXT, Type.VIEWPOINT, SAMPLE_VIEWPOINT_PREFIX);
-			return Utils.tagsAsString(result);
+			return Utils.stringListAsString(result);
 		} catch (IllegalArgumentException iae) {
 			return "IllegalArgumentException";
 		} catch (Exception e) {
@@ -89,7 +89,7 @@ public class TagsFixture extends ConcordionTestCase {
 			// We expect an IllegalArgumentException
 			serviceTag.setTags(MOCK_CONTEXT, Type.VIEWPOINT, SAMPLE_VIEWPOINT_PREFIX, items);
 			List<String> result = serviceTag.getAllTags(MOCK_CONTEXT, Type.VIEWPOINT, SAMPLE_VIEWPOINT_PREFIX);
-			return Utils.tagsAsString(result);
+			return Utils.stringListAsString(result);
 		} catch (IllegalArgumentException iae) {
 			return "IllegalArgumentException";
 		} catch (Exception e) {

@@ -3,13 +3,16 @@ package org.m2ling.presentation;
 import java.util.logging.Logger;
 
 import org.m2ling.presentation.principles.PrinciplesMainFrame;
+import org.m2ling.presentation.widgets.MainFrame;
 
 import com.google.inject.Inject;
 import com.vaadin.Application;
-import com.vaadin.ui.Layout;
+import com.vaadin.terminal.Terminal;
 import com.vaadin.ui.MenuBar;
+import com.vaadin.ui.Panel;
 import com.vaadin.ui.VerticalLayout;
 import com.vaadin.ui.Window;
+import com.vaadin.ui.Window.Notification;
 
 public class M2lingApplication extends Application {
 
@@ -27,7 +30,7 @@ public class M2lingApplication extends Application {
 	@Inject
 	private PrinciplesMainFrame principlesFrame;
 
-	private Layout currentApp;
+	private Panel currentApp;
 
 	@Override
 	public void init() {
@@ -62,13 +65,24 @@ public class M2lingApplication extends Application {
 		});
 	}
 
-	private void setApp(Layout app) {
+	private void setApp(Panel app) {
 		if (app != this.currentApp) {
 			mframe.resetAccordion();
 			mframe.getAppPanel().setContent(app);
 			this.currentApp = app;
 		} else {
 			logger.warning("Tried to apply existing application : " + app);
+		}
+	}
+
+	@Override
+	public void terminalError(Terminal.ErrorEvent event) {
+		// Call the default implementation.
+		super.terminalError(event);
+		// Some custom behaviour.
+		if (getMainWindow() != null) {
+			getMainWindow().showNotification("An unchecked exception occured!", event.getThrowable().toString(),
+					Notification.TYPE_ERROR_MESSAGE);
 		}
 	}
 

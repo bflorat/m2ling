@@ -6,14 +6,14 @@
 package org.m2ling.presentation.principles;
 
 import java.util.Arrays;
-import java.util.List;
 import java.util.UUID;
 import java.util.logging.Logger;
 
 import org.m2ling.common.dto.core.ViewPointDTO;
-import org.m2ling.common.utils.Utils;
 import org.m2ling.presentation.M2lingGuiceServletContextListener;
 import org.m2ling.presentation.principles.model.ViewPointBean;
+import org.m2ling.presentation.principles.utils.Converter;
+import org.m2ling.presentation.principles.widgets.ViewPointIconUploader;
 import org.m2ling.presentation.widgets.Command;
 import org.m2ling.presentation.widgets.OKCancel;
 import org.m2ling.service.principles.ViewPointService;
@@ -28,6 +28,7 @@ import com.vaadin.ui.DefaultFieldFactory;
 import com.vaadin.ui.Field;
 import com.vaadin.ui.Form;
 import com.vaadin.ui.RichTextArea;
+import com.vaadin.ui.TextArea;
 import com.vaadin.ui.VerticalLayout;
 import com.vaadin.ui.Window;
 
@@ -53,7 +54,7 @@ public class ViewPointDialog extends Window {
 	 * @param vp
 	 *           an optional pre-filling view point (null when creating a new vp)
 	 */
-	ViewPointDialog(ViewPointBean vp) {
+	public ViewPointDialog(ViewPointBean vp) {
 		super(vp == null ? "New View Point" : vp.getName());
 		// Perform a on-demand injection of fields. We can't perform regular injection of this class
 		// because the bean is built on the fly and we need it in the constructor.
@@ -69,10 +70,11 @@ public class ViewPointDialog extends Window {
 		}
 		setWidth("650px");
 		setClosable(false);
-		populate();
 	}
 
-	private void populate() {
+	@Override
+	public void attach() {
+		((VerticalLayout) getContent()).setSizeFull();
 		final Form form = new Form();
 		form.setCaption("Set view point settings");
 		// setFormFieldFactory() must be called before setting the datasource or it is token into
@@ -82,15 +84,10 @@ public class ViewPointDialog extends Window {
 		form.setVisibleItemProperties(Arrays.asList(new String[] { "name", "statusLiterals", "tags", "description",
 				"comment" }));
 		form.setValidationVisibleOnCommit(true);
-		addComponent(form);
 		Command ok = new Command() {
 			public void execute() {
 				form.commit();
-				List<String> tags = Utils.tagsFromString(bean.getTags());
-				List<String> status = Utils.tagsFromString(bean.getStatusLiterals());
-				ViewPointDTO vpDTO = new ViewPointDTO.Builder(bean.getId(), bean.getName())
-						.description(bean.getDescription()).tags(tags).comment(bean.getComment()).statusLiterals(status)
-						.build();
+				ViewPointDTO vpDTO = Converter.ViewPointConverter.convertToDTO(bean);
 				if (newVP) {
 					service.createViewPoint(vpDTO);
 				} else {
@@ -105,9 +102,11 @@ public class ViewPointDialog extends Window {
 		};
 		ViewPointIconUploader uploader = new ViewPointIconUploader(bean, logger);
 		OKCancel okc = new OKCancel(ok, cancel);
+		addComponent(form);
 		addComponent(uploader);
 		addComponent(okc);
-		((VerticalLayout) getContent()).setComponentAlignment(okc, Alignment.MIDDLE_CENTER);
+		((VerticalLayout) getContent()).setComponentAlignment(okc, Alignment.MIDDLE_LEFT);
+		((VerticalLayout) getContent()).setComponentAlignment(uploader, Alignment.MIDDLE_CENTER);
 	}
 
 	private class ViewPointDialogFieldFactory extends DefaultFieldFactory {
@@ -122,10 +121,14 @@ public class ViewPointDialog extends Window {
 			} else if ("description".equals(propertyId)) {
 				RichTextArea description = new RichTextArea();
 				description.setCaption("Description");
+				description.setHeight(20,UNITS_EX);
+				description.setWidth("100%");
 				description.setDescription("Additional information describing the view point");
 				return description;
 			} else if ("comment".equals(propertyId)) {
-				RichTextArea comment = new RichTextArea();
+				TextArea comment = new TextArea();
+				comment.setHeight(12,UNITS_EX);
+				comment.setWidth("100%");
 				comment.setCaption("Comments");
 				comment
 						.setDescription("Any comment about the view point, can be used a as reminder.<br/>Example : 'Work in progress, some component types missing.'");

@@ -22,19 +22,19 @@ public class TestUtils {
 	@Test
 	public void tagsAsStringEmptyList() {
 		ArrayList<String> tags = new ArrayList<String>();
-		assertTrue(Utils.tagsAsString(tags).equals(""));
+		assertTrue(Utils.stringListAsString(tags).equals(""));
 	}
 	
 	@Test(expected = IllegalArgumentException.class)
 	public void tagsAsStringNullList() {
-		Utils.tagsAsString(null);
+		Utils.stringListAsString(null);
 	}
 	
 	@Test(expected = IllegalArgumentException.class)
 	public void tagsAsStringOneNullItem() {
 		ArrayList<String> tags = new ArrayList<String>();
 		tags.add(null);
-		Utils.tagsAsString(null);
+		Utils.stringListAsString(null);
 	}
 
 	@Test(expected = IllegalArgumentException.class)

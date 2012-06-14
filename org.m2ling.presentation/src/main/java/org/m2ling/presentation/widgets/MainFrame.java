@@ -3,7 +3,7 @@
  *
  * @author "Bertrand Florat <bertrand@florat.net>"
  */
-package org.m2ling.presentation;
+package org.m2ling.presentation.widgets;
 
 import com.vaadin.terminal.ThemeResource;
 import com.vaadin.ui.Accordion;
@@ -12,7 +12,7 @@ import com.vaadin.ui.Embedded;
 import com.vaadin.ui.HorizontalSplitPanel;
 import com.vaadin.ui.Label;
 import com.vaadin.ui.Panel;
-import com.vaadin.ui.RichTextArea;
+import com.vaadin.ui.TextArea;
 import com.vaadin.ui.TextField;
 import com.vaadin.ui.VerticalLayout;
 
@@ -40,8 +40,12 @@ public class MainFrame extends CustomComponent {
 
 	private TextField search;
 
-	private RichTextArea comments;
+	private TextArea comments;
 
+	public void setAppPanel(Panel panel) {
+		this.appPanel = panel;
+	}
+	
 	/**
 	 * @return the appPanel
 	 */
@@ -73,7 +77,7 @@ public class MainFrame extends CustomComponent {
 		// App panel
 		appPanel = new Panel();
 		appPanel.setSizeFull();
-		
+
 		// Accordion
 		accordion = new Accordion();
 		accordion.addComponent(new Label("Item1"));
@@ -83,7 +87,7 @@ public class MainFrame extends CustomComponent {
 		search = new TextField("Search");
 
 		// Comments area
-		comments = new RichTextArea("Comments");
+		comments = new TextArea("Comments");
 		comments.setEnabled(false);
 		comments.setWidth("100%");
 		comments.setHeight("30px");
@@ -95,7 +99,7 @@ public class MainFrame extends CustomComponent {
 	private void buildMenuLayout() {
 		// Accordion
 		accordion.addTab(comments);
-		
+
 		// Sidebar
 		VerticalLayout sidebar = new VerticalLayout();
 		sidebar.setSpacing(true);
@@ -114,8 +118,8 @@ public class MainFrame extends CustomComponent {
 		splitSidebar.addComponent(sidebar);
 		splitSidebar.addComponent(appPanel);
 	}
-	
-	void resetAccordion(){
+
+	public void resetAccordion() {
 		accordion.removeAllComponents();
 		accordion.addComponent(comments);
 	}

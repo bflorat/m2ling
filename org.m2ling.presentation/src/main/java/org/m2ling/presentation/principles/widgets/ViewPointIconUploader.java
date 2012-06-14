@@ -3,7 +3,7 @@
  *
  * @author "Bertrand Florat <bertrand@florat.net>"
  */
-package org.m2ling.presentation.principles;
+package org.m2ling.presentation.principles.widgets;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -16,11 +16,8 @@ import org.m2ling.common.utils.Consts;
 import org.m2ling.presentation.principles.model.ViewPointBean;
 
 import com.google.common.io.Files;
-import com.vaadin.terminal.FileResource;
 import com.vaadin.ui.CustomComponent;
-import com.vaadin.ui.Embedded;
-import com.vaadin.ui.Label;
-import com.vaadin.ui.Panel;
+import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.Upload;
 import com.vaadin.ui.Window.Notification;
 
@@ -28,10 +25,7 @@ import com.vaadin.ui.Window.Notification;
  * View point image uploader
  */
 @SuppressWarnings("serial")
-public class ViewPointIconUploader extends CustomComponent implements Upload.SucceededListener,
-		Upload.ProgressListener, Upload.FailedListener, Upload.Receiver {
-	private Panel root;
-	private Panel imagePanel;
+public class ViewPointIconUploader extends CustomComponent implements Upload.ProgressListener, Upload.Receiver {
 	private File target;
 	private ViewPointBean bean;
 	private Logger logger;
@@ -45,23 +39,20 @@ public class ViewPointIconUploader extends CustomComponent implements Upload.Suc
 	 * @throws IllegalArgumentException
 	 *            if vp is null
 	 */
-	ViewPointIconUploader(ViewPointBean bean, Logger logger) {
+	public ViewPointIconUploader(ViewPointBean bean, Logger logger) {
 		this.logger = logger;
 		if (bean == null) {
 			throw new IllegalArgumentException("Null viewpoint");
 		}
 		this.bean = bean;
-		root = new Panel();
-		setCompositionRoot(root);
+		HorizontalLayout hl = new HorizontalLayout();
+		hl.setSpacing(true);
+		setSizeUndefined();
+		setCompositionRoot(hl);
 		upload = new Upload("Upload an icon for this view point", this);
+		upload.setImmediate(true);
 		upload.setButtonCaption("Upload icon");
-		upload.addListener((Upload.SucceededListener) this);
-		upload.addListener((Upload.FailedListener) this);
-		root.addComponent(upload);
-		// Create a panel for displaying the uploaded image.
-		imagePanel = new Panel("Current icon");
-		imagePanel.addComponent(new Label("No icon uploaded yet"));
-		root.addComponent(imagePanel);
+		hl.addComponent(upload);
 	}
 
 	public OutputStream receiveUpload(String filename, String MIMEType) {
@@ -82,20 +73,6 @@ public class ViewPointIconUploader extends CustomComponent implements Upload.Suc
 			return null;
 		}
 		return fos; // Return the output stream to write to
-	}
-
-	// This is called if the upload is finished.
-	public void uploadSucceeded(Upload.SucceededEvent event) {
-		// Display the uploaded file in the image panel.
-		final FileResource imageResource = new FileResource(target, getApplication());
-		imagePanel.removeAllComponents();
-		imagePanel.addComponent(new Embedded("", imageResource));
-	}
-
-	// This is called if the upload fails.
-	public void uploadFailed(Upload.FailedEvent event) {
-		// Log the failure on screen.
-		root.addComponent(new Label("Uploading " + event.getFilename() + " of type '" + event.getMIMEType() + "' failed."));
 	}
 
 	/*

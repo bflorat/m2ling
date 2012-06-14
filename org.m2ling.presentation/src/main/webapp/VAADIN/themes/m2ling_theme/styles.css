@@ -13,6 +13,7 @@
 }*/
 .app {
 	font-weight: bold;
+	font-size: 160%
 }
 
 .sidebar {
@@ -21,3 +22,21 @@
 	margin-right: 5px;
 	margin-left: 0px;
 }
+
+.principles_vp-panel {
+	margin-top: 5px;
+	margin-bottom: 5px;
+}
+
+.principles_vp-panel-name {
+	font-weight: bold;
+	font-size: 150%;
+	margin-bottom: 3px;
+}
+
+.principles_vp-panel-features a:link span {
+	color: #1b699f;
+	font-weight: bold;
+	font-size: 150%;
+}
+

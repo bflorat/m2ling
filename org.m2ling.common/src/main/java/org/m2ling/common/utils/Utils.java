@@ -45,14 +45,14 @@ public class Utils {
 	}
 
 	/**
-	 * Return a list of tags as a String.
+	 * Return a string list as a comma-separated string.
 	 * 
 	 * @param list
-	 * @return a list of tags as a String. If list is empty, "" is returned.
+	 * @return a comma-separated string. If list is empty, "" is returned.
 	 * @throws IllegalArgumentException
 	 *            if the list is null or if one of its element is null or empty
 	 */
-	public static String tagsAsString(List<String> list) {
+	public static String stringListAsString(List<String> list) {
 		{// Controls
 			if (list == null) {
 				throw new IllegalArgumentException("Null list");
@@ -106,14 +106,14 @@ public class Utils {
 	}
 
 	/**
-	 * Return a tag list from a string representation.
+	 * Return a list from a string representation.
 	 * 
-	 * @param tagsAsString
-	 *           the string representation
-	 * @return a tag list from a string representation
+	 * @param string
+	 *           the comma-separated string representation
+	 * @return a list from a string representation
 	 */
-	public static List<String> tagsFromString(String tagsAsString) {
-		Iterable<String> it = Splitter.on(',').trimResults().split(tagsAsString);
+	public static List<String> stringListFromString(String string) {
+		Iterable<String> it = Splitter.on(',').trimResults().split(string);
 		return listFromIterable(it);
 	}
 
