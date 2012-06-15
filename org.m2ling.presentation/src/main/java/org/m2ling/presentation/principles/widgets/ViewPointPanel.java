@@ -75,6 +75,7 @@ public class ViewPointPanel extends Panel {
 		icon = new Embedded("", res);
 		icon.setWidth("50px");
 		icon.setHeight("50px");
+		icon.requestRepaint();
 		
 		// Name
 		Label name = new Label(bean.getName());

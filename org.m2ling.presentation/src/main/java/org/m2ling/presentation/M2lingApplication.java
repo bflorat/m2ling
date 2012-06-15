@@ -1,8 +1,10 @@
 package org.m2ling.presentation;
 
+import java.util.List;
 import java.util.logging.Logger;
 
-import org.m2ling.presentation.principles.PrinciplesMainFrame;
+import org.m2ling.presentation.principles.PrinciplesModule;
+import org.m2ling.presentation.principles.widgets.AccordionEntry;
 import org.m2ling.presentation.widgets.MainFrame;
 
 import com.google.inject.Inject;
@@ -28,9 +30,9 @@ public class M2lingApplication extends Application {
 	private Logger logger;
 
 	@Inject
-	private PrinciplesMainFrame principlesFrame;
+	private PrinciplesModule principlesFrame;
 
-	private Panel currentApp;
+	private GuiModule currentApp;
 
 	@Override
 	public void init() {
@@ -65,10 +67,18 @@ public class M2lingApplication extends Application {
 		});
 	}
 
-	private void setApp(Panel app) {
+	private void setApp(GuiModule app) {
 		if (app != this.currentApp) {
 			mframe.resetAccordion();
 			mframe.getAppPanel().setContent(app);
+			List<AccordionEntry> entries = app.getAccordionEntries();
+			for (AccordionEntry entry : entries) {
+				Panel accordionPanel = entry.getPanel();
+				mframe.getAccordion().addTab(accordionPanel, entry.getCaption(), null, 0);
+				if (entry.isDefaultEntry()) {
+					mframe.getAccordion().setSelectedTab(accordionPanel);
+				}
+			}
 			this.currentApp = app;
 		} else {
 			logger.warning("Tried to apply existing application : " + app);

@@ -6,7 +6,7 @@
 package org.m2ling.presentation.binding;
 
 import org.m2ling.common.dto.binding.M2lingGuiceModule;
-import org.m2ling.presentation.principles.PrinciplesMainFrame;
+import org.m2ling.presentation.principles.PrinciplesModule;
 import org.m2ling.service.principles.ViewPointService;
 import org.m2ling.service.principles.impl.ViewPointServiceImpl;
 
@@ -24,7 +24,7 @@ public class PresentationPrincipleGuiceModule extends M2lingGuiceModule {
 	protected void configure() {
 		{// Injection bindings
 			bind(ViewPointService.class).to(ViewPointServiceImpl.class);
-			bind(PrinciplesMainFrame.class);
+			bind(PrinciplesModule.class);
 		}
 	}
 
