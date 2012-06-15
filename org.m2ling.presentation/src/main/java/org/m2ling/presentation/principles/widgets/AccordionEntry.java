@@ -10,9 +10,9 @@ import com.vaadin.ui.Panel;
 /**
  * Encapsulate information we need to build an entry of the sidebar accordion.
  */
-public class AccordionEntry {
-	private String caption;
-	private Panel panel;
+@SuppressWarnings("serial")
+public abstract class AccordionEntry extends Panel {
+
 	/** Should this entry be shown at startup ? */
 	private boolean defaultEntry = false;
 
@@ -32,33 +32,18 @@ public class AccordionEntry {
 	}
 
 	/**
-	 * @return the caption
+	 * @return the caption used in the accordion
 	 */
-	public String getCaption() {
-		return caption;
+	public abstract String getLabel();
+
+	public AccordionEntry() {
+		super();
 	}
 
-	/**
-	 * @return the panel
-	 */
-	public Panel getPanel() {
-		return panel;
-	}
-
-	public AccordionEntry(String caption, Panel panel) {
-		this.caption = caption;
-		this.panel = panel;
-	}
-
-	public boolean equals(Object other) {
-		AccordionEntry otherEntry = (AccordionEntry) other;
-		if (otherEntry == null || otherEntry.getCaption() == null || otherEntry.getPanel() == null) {
-			return false;
-		}
-		return otherEntry.getCaption().equals(getCaption()) && otherEntry.getPanel().equals(getPanel());
-	}
+	@Override
+	public abstract void attach();
 
 	public String toString() {
-		return this.caption + " / " + this.panel.getDebugId();
+		return getLabel() + " / " + this.getDebugId();
 	}
 }

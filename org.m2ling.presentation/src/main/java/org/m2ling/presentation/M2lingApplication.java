@@ -3,7 +3,7 @@ package org.m2ling.presentation;
 import java.util.List;
 import java.util.logging.Logger;
 
-import org.m2ling.presentation.principles.PrinciplesModule;
+import org.m2ling.presentation.principles.PrinciplesGuiModule;
 import org.m2ling.presentation.principles.widgets.AccordionEntry;
 import org.m2ling.presentation.widgets.MainFrame;
 
@@ -11,14 +11,12 @@ import com.google.inject.Inject;
 import com.vaadin.Application;
 import com.vaadin.terminal.Terminal;
 import com.vaadin.ui.MenuBar;
-import com.vaadin.ui.Panel;
 import com.vaadin.ui.VerticalLayout;
 import com.vaadin.ui.Window;
 import com.vaadin.ui.Window.Notification;
 
+@SuppressWarnings("serial")
 public class M2lingApplication extends Application {
-
-	private static final long serialVersionUID = 912752897192337109L;
 
 	private Window mainWindow;
 
@@ -26,13 +24,18 @@ public class M2lingApplication extends Application {
 
 	private MenuBar menu;
 
-	@Inject
 	private Logger logger;
 
-	@Inject
-	private PrinciplesModule principlesFrame;
+	private PrinciplesGuiModule principlesFrame;
 
 	private GuiModule currentApp;
+
+	@Inject
+	public M2lingApplication(Logger logger, PrinciplesGuiModule principles) {
+		super();
+		this.logger = logger;
+		this.principlesFrame = principles;
+	}
 
 	@Override
 	public void init() {
@@ -52,7 +55,6 @@ public class M2lingApplication extends Application {
 		setApp(principlesFrame);
 	}
 
-	@SuppressWarnings("serial")
 	private void initMenu() {
 		menu = new MenuBar();
 		menu.setWidth("100%");
@@ -73,10 +75,9 @@ public class M2lingApplication extends Application {
 			mframe.getAppPanel().setContent(app);
 			List<AccordionEntry> entries = app.getAccordionEntries();
 			for (AccordionEntry entry : entries) {
-				Panel accordionPanel = entry.getPanel();
-				mframe.getAccordion().addTab(accordionPanel, entry.getCaption(), null, 0);
+				mframe.getAccordion().addTab(entry, entry.getLabel(), null, 0);
 				if (entry.isDefaultEntry()) {
-					mframe.getAccordion().setSelectedTab(accordionPanel);
+					mframe.getAccordion().setSelectedTab(entry);
 				}
 			}
 			this.currentApp = app;
@@ -89,7 +90,7 @@ public class M2lingApplication extends Application {
 	public void terminalError(Terminal.ErrorEvent event) {
 		// Call the default implementation.
 		super.terminalError(event);
-		// Some custom behaviour.
+		// Some custom behavior.
 		if (getMainWindow() != null) {
 			getMainWindow().showNotification("An unchecked exception occured!", event.getThrowable().toString(),
 					Notification.TYPE_ERROR_MESSAGE);

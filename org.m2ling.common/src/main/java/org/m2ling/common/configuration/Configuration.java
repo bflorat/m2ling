@@ -129,7 +129,7 @@ public class Configuration {
 	 * In debug mode, we return default configuration.
 	 * </p>
 	 * <p>
-	 * In regular mode, we read the configuration file (created in the {@code getServiceConfFile()}
+	 * In regular mode, we read the configuration file (created in the {@code getConfigurationFile()}
 	 * method if it doesn't yet exist).
 	 * </p>
 	 * 
@@ -146,7 +146,7 @@ public class Configuration {
 			return getDefaultConfiguration();
 		}
 		Properties result;
-		File fileConf = getServiceConfFile();
+		File fileConf = getConfigurationFile();
 		try {
 			result = new Properties();
 			result.loadFromXML(new FileInputStream(fileConf));
@@ -177,7 +177,7 @@ public class Configuration {
 	 * @return configuration file
 	 * @throw IllegalStateException if configuration file can't be created
 	 */
-	public File getServiceConfFile() {
+	public File getConfigurationFile() {
 		File fileConf = null;
 		String m2lingHome = getHomeDirectoryPath();
 		fileConf = new File(m2lingHome + File.separator + Consts.CONF_FILENAME);
@@ -190,7 +190,7 @@ public class Configuration {
 				Properties conf = getDefaultConfiguration();
 				// Store the configuration in XML, not property to ensure best unicode support
 				conf.storeToXML(new FileOutputStream(fileConf), "M2ling configuration file.");
-				logger.info("Services configuration file created at : " + fileConf.getAbsolutePath());
+				logger.info("Configuration file created at : " + fileConf.getAbsolutePath());
 			} catch (Exception e) {
 				logger.log(Level.SEVERE, fileConf.getAbsolutePath() + " file can't be written", e);
 				throw new IllegalStateException("Can't create configuration file at : " + fileConf.getAbsolutePath());

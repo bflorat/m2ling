@@ -31,8 +31,9 @@ public class M2lingGuiceServletContextListener extends GuiceServletContextListen
 		ServletModule module = new ServletModule() {
 			@Override
 			protected void configureServlets() {
-				// Servlet specific bindings
-				serve("/*").with(GuiceApplicationServlet.class);
+				// Servlet specific bindings, we serve '*', not only /* to also handle url without
+				// trailing '/'
+				serve("*").with(GuiceApplicationServlet.class);
 				bind(Application.class).to(M2lingApplication.class);
 
 				// Presentation layer bindings

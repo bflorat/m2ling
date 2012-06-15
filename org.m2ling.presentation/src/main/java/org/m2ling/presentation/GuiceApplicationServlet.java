@@ -37,13 +37,6 @@ public class GuiceApplicationServlet extends AbstractApplicationServlet {
 	 */
 	@Override
 	protected Application getNewApplication(HttpServletRequest request) throws ServletException {
-	/*	// If the URL contains the debug string, set debug mode as environment variable (read in
-		// module)
-		if (request.getParameterMap().containsKey(Consts.M2LING_DEBUG_VARIABLE_NAME)) {
-			Map<String, String> newenv = new HashMap<String, String>();
-			newenv.put(Consts.M2LING_DEBUG_VARIABLE_NAME, "true");
-			Utils.setEnv(newenv);
-		}*/
 		return applicationProvider.get();
 	}
 }

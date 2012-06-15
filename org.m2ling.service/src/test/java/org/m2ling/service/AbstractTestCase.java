@@ -114,7 +114,7 @@ public class AbstractTestCase {
 		Utils.setEnv(newenv);
 		// Drop the configuration files
 		Configuration conf = new Configuration(null, logger);
-		conf.getServiceConfFile().delete();
+		conf.getConfigurationFile().delete();
 	}
 
 	/**

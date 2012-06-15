@@ -23,14 +23,13 @@ import com.vaadin.ui.Alignment;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Button.ClickEvent;
 import com.vaadin.ui.Label;
-import com.vaadin.ui.Panel;
 import com.vaadin.ui.VerticalLayout;
 import com.vaadin.ui.themes.BaseTheme;
 
 /**
  * Main m2principles panel
  */
-public class PrinciplesModule extends GuiModule {
+public class PrinciplesGuiModule extends GuiModule {
 
 	private static final long serialVersionUID = -3580103313824507265L;
 
@@ -43,7 +42,7 @@ public class PrinciplesModule extends GuiModule {
 	private Logger logger;
 
 	@Inject
-	public PrinciplesModule(ViewPointService vpService, Logger logger) {
+	public PrinciplesGuiModule(ViewPointService vpService, Logger logger) {
 		super();
 		setSizeFull();
 		this.vpService = vpService;
@@ -71,6 +70,7 @@ public class PrinciplesModule extends GuiModule {
 		}
 	}
 
+	@SuppressWarnings("serial")
 	private Button getCreateButton() {
 		create = new Button("Create a view point", new Button.ClickListener() {
 			public void buttonClick(ClickEvent event) {
@@ -107,14 +107,10 @@ public class PrinciplesModule extends GuiModule {
 		List<AccordionEntry> out = new ArrayList<AccordionEntry>(5);
 
 		// Features entry
-		Panel features = new Panel();
-		Button create = getCreateButton();
-		features.setSizeFull();
-		features.addComponent(create);
-		AccordionEntry featuresEntry = new AccordionEntry("Features", features);
-		featuresEntry.setDefaultEntry(true);
+		FeaturesEntry features = new FeaturesEntry();
+		features.setDefaultEntry(true);
 		
-		out.add(featuresEntry);
+		out.add(features);
 		return out;
 	}
 
