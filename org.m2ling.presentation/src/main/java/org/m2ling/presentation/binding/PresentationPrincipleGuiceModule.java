@@ -5,15 +5,16 @@
  */
 package org.m2ling.presentation.binding;
 
-import org.m2ling.common.dto.binding.M2lingGuiceModule;
 import org.m2ling.presentation.principles.PrinciplesGuiModule;
 import org.m2ling.service.principles.ViewPointService;
 import org.m2ling.service.principles.impl.ViewPointServiceImpl;
 
+import com.google.inject.AbstractModule;
+
 /**
  * Guice bindings for m2principles features of presentation tiers
  */
-public class PresentationPrincipleGuiceModule extends M2lingGuiceModule {
+public class PresentationPrincipleGuiceModule extends AbstractModule {
 
 	/*
 	 * (non-Javadoc)
