@@ -31,8 +31,7 @@ public interface ViewPointService {
 	 * @param vpDTO
 	 *           the view point DTO
 	 * @throws IllegalStateException
-	 *            if the viewpoint already exist
-	 *            if a viewpoint already exist with the provided name
+	 *            if the viewpoint already exist if a viewpoint already exist with the provided name
 	 * @throws IllegalAccessException
 	 *            if the caller has not required authorization to call this method.
 	 */
@@ -53,5 +52,14 @@ public interface ViewPointService {
 	 *            if current user has not the authorization to access the viewpoint.
 	 */
 	ViewPointDTO getViewPointByName(String name);
+
+	/**
+	 * Drop the given viewpoint if it exists. 
+	 * @param vpDTO the view point DTO
+	 * 
+	 * @throws IllegalArgumentException
+	 *            if viewpoint doesn't exist.
+	 */
+	void deleteViewPoint(ViewPointDTO vpDTO);
 
 }

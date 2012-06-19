@@ -6,19 +6,19 @@
 package org.m2ling.presentation.principles;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.logging.Logger;
 
 import org.m2ling.common.dto.core.ViewPointDTO;
 import org.m2ling.presentation.GuiModule;
-import org.m2ling.presentation.principles.FeaturesEntry;
-import org.m2ling.presentation.principles.ViewPointDialog;
-import org.m2ling.presentation.principles.ViewPointDialogFactory;
-import org.m2ling.presentation.principles.ViewPointPanelFactory;
+import org.m2ling.presentation.events.Events;
+import org.m2ling.presentation.events.ObservationManager;
+import org.m2ling.presentation.events.Observer;
 import org.m2ling.presentation.principles.model.ViewPointBean;
 import org.m2ling.presentation.principles.utils.Converter;
 import org.m2ling.presentation.principles.widgets.AccordionEntry;
-import org.m2ling.presentation.principles.widgets.ViewPointPanel;
 import org.m2ling.service.principles.ViewPointService;
 
 import com.google.inject.Inject;
@@ -33,7 +33,8 @@ import com.vaadin.ui.themes.BaseTheme;
 /**
  * Main m2principles panel
  */
-public class PrinciplesGuiModule extends GuiModule {
+@SuppressWarnings("serial")
+public class PrinciplesGuiModule extends GuiModule implements Observer {
 
 	private static final long serialVersionUID = -3580103313824507265L;
 
@@ -51,9 +52,11 @@ public class PrinciplesGuiModule extends GuiModule {
 
 	private ViewPointPanelFactory panelFactory;
 
+	private ObservationManager obs;
+
 	@Inject
 	public PrinciplesGuiModule(ViewPointService vpService, Logger logger, FeaturesEntry features,
-			ViewPointDialogFactory dialogFactory, ViewPointPanelFactory panelFactory) {
+			ViewPointDialogFactory dialogFactory, ViewPointPanelFactory panelFactory, ObservationManager obs) {
 		super();
 		setSizeFull();
 		this.vpService = vpService;
@@ -61,7 +64,9 @@ public class PrinciplesGuiModule extends GuiModule {
 		this.features = features;
 		this.dialogFactory = dialogFactory;
 		this.panelFactory = panelFactory;
+		this.obs = obs;
 		((VerticalLayout) getContent()).setSpacing(false);
+		obs.register(this);
 	}
 
 	/**
@@ -120,6 +125,29 @@ public class PrinciplesGuiModule extends GuiModule {
 
 		out.add(features);
 		return out;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.m2ling.presentation.events.Observer#update(org.m2ling.presentation.events.Event)
+	 */
+	@Override
+	public void update(org.m2ling.presentation.events.Event event) {
+		removeAllComponents();
+		attach();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.m2ling.presentation.events.Observer#getRegistrationKeys()
+	 */
+	@Override
+	public Set<Events> getRegistrationKeys() {
+		Set<Events> events = new HashSet<Events>();
+		events.add(Events.VP_CHANGE);
+		return events;
 	}
 
 }

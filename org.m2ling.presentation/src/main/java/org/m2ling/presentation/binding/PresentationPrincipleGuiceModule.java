@@ -8,8 +8,8 @@ package org.m2ling.presentation.binding;
 import org.m2ling.presentation.principles.PrinciplesGuiModule;
 import org.m2ling.presentation.principles.ViewPointDialog;
 import org.m2ling.presentation.principles.ViewPointDialogFactory;
+import org.m2ling.presentation.principles.ViewPointPanel;
 import org.m2ling.presentation.principles.ViewPointPanelFactory;
-import org.m2ling.presentation.principles.widgets.ViewPointPanel;
 import org.m2ling.service.principles.ViewPointService;
 import org.m2ling.service.principles.impl.ViewPointServiceImpl;
 

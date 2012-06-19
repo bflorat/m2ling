@@ -101,4 +101,20 @@ public class ViewPointServiceImpl extends ServiceImpl implements ViewPointServic
 		tags.addAll(vpDTO.getTags());
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * org.m2ling.service.principles.ViewPointService#deleteViewPoint(org.m2ling.common.dto
+	 * .core.ViewPointDTO)
+	 */
+	@Override
+	public void deleteViewPoint(ViewPointDTO vpDTO) {
+		ViewPoint vp = util.getViewPointByName(vpDTO.getName(), false);
+		if (vp == null) {
+			throw new IllegalStateException("View point doesn't exists : " + vpDTO.getName());
+		}
+		pmanager.getRoot().getViewPoints().remove(vp);
+	}
+
 }

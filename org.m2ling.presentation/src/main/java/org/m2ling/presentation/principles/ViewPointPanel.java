@@ -3,15 +3,18 @@
  *
  * @author "Bertrand Florat <bertrand@florat.net>"
  */
-package org.m2ling.presentation.principles.widgets;
+package org.m2ling.presentation.principles;
 
 import java.io.File;
 import java.util.logging.Logger;
 
-import org.m2ling.presentation.principles.ViewPointDialog;
-import org.m2ling.presentation.principles.ViewPointDialogFactory;
+import org.m2ling.common.dto.core.ViewPointDTO;
+import org.m2ling.presentation.events.Events;
+import org.m2ling.presentation.events.ObservationManager;
 import org.m2ling.presentation.principles.model.ViewPointBean;
+import org.m2ling.presentation.principles.utils.Converter;
 import org.m2ling.presentation.principles.utils.IconManager;
+import org.m2ling.service.principles.ViewPointService;
 
 import com.google.inject.Inject;
 import com.google.inject.assistedinject.Assisted;
@@ -42,6 +45,10 @@ public class ViewPointPanel extends Panel {
 
 	private ViewPointDialogFactory factory;
 
+	private ViewPointService service;
+
+	private ObservationManager obs;
+
 	/**
 	 * Build an VP panel
 	 * 
@@ -51,11 +58,14 @@ public class ViewPointPanel extends Panel {
 	 *            if bean is null
 	 */
 	@Inject
-	public ViewPointPanel(@Assisted ViewPointBean bean, Logger logger, ViewPointDialogFactory factory) {
+	public ViewPointPanel(@Assisted ViewPointBean bean, Logger logger, ViewPointDialogFactory factory,
+			ViewPointService service, ObservationManager obs) {
 		super();
 		this.logger = logger;
 		this.bean = bean;
 		this.factory = factory;
+		this.service = service;
+		this.obs = obs;
 		if (bean == null) {
 			throw new IllegalArgumentException("Null viewpoint");
 		}
@@ -102,7 +112,9 @@ public class ViewPointPanel extends Panel {
 		delete.setStyleName(BaseTheme.BUTTON_LINK);
 		delete.addListener(new Button.ClickListener() {
 			public void buttonClick(ClickEvent event) {
-				// TODO
+				ViewPointDTO vpDTO = Converter.ViewPointConverter.convertToDTO(bean);
+				service.deleteViewPoint(vpDTO);
+				obs.notifySync(new org.m2ling.presentation.events.Event(Events.VP_CHANGE));
 			}
 		});
 
@@ -157,5 +169,4 @@ public class ViewPointPanel extends Panel {
 		addComponent(hl1);
 		addComponent(hl2);
 	}
-
 }
