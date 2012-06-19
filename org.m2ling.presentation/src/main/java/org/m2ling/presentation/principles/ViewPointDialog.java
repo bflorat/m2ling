@@ -9,8 +9,9 @@ import java.util.Arrays;
 import java.util.UUID;
 import java.util.logging.Logger;
 
+import javax.annotation.Nullable;
+
 import org.m2ling.common.dto.core.ViewPointDTO;
-import org.m2ling.presentation.M2lingGuiceServletContextListener;
 import org.m2ling.presentation.principles.model.ViewPointBean;
 import org.m2ling.presentation.principles.utils.Converter;
 import org.m2ling.presentation.principles.widgets.ViewPointIconUploader;
@@ -19,7 +20,7 @@ import org.m2ling.presentation.widgets.OKCancel;
 import org.m2ling.service.principles.ViewPointService;
 
 import com.google.inject.Inject;
-import com.google.inject.Injector;
+import com.google.inject.assistedinject.Assisted;
 import com.vaadin.data.Item;
 import com.vaadin.data.util.BeanItem;
 import com.vaadin.ui.Alignment;
@@ -37,16 +38,15 @@ import com.vaadin.ui.Window;
  */
 @SuppressWarnings("serial")
 public class ViewPointDialog extends Window {
+
 	/** Is it a new view point ? */
 	private boolean newVP = true;
 
 	private ViewPointBean bean;
 
-	@Inject
-	ViewPointService service;
+	private ViewPointService service;
 
-	@Inject
-	Logger logger;
+	private Logger logger;
 
 	/**
 	 * Build a view point dialog
@@ -54,12 +54,12 @@ public class ViewPointDialog extends Window {
 	 * @param vp
 	 *           an optional pre-filling view point (null when creating a new vp)
 	 */
-	public ViewPointDialog(ViewPointBean vp) {
+	@Inject
+	public ViewPointDialog(Logger logger, @Assisted @Nullable ViewPointBean vp, ViewPointService service) {
 		super(vp == null ? "New View Point" : vp.getName());
-		// Perform a on-demand injection of fields. We can't perform regular injection of this class
-		// because the bean is built on the fly and we need it in the constructor.
-		Injector inj = M2lingGuiceServletContextListener.getCachedInjector();
-		inj.injectMembers(this);
+		this.bean = vp;
+		this.service = service;
+		this.logger = logger;
 		// We need a bean to attach data to
 		if (vp == null) {
 			bean = new ViewPointBean();
@@ -121,13 +121,13 @@ public class ViewPointDialog extends Window {
 			} else if ("description".equals(propertyId)) {
 				RichTextArea description = new RichTextArea();
 				description.setCaption("Description");
-				description.setHeight(20,UNITS_EX);
+				description.setHeight(20, UNITS_EX);
 				description.setWidth("100%");
 				description.setDescription("Additional information describing the view point");
 				return description;
 			} else if ("comment".equals(propertyId)) {
 				TextArea comment = new TextArea();
-				comment.setHeight(12,UNITS_EX);
+				comment.setHeight(12, UNITS_EX);
 				comment.setWidth("100%");
 				comment.setCaption("Comments");
 				comment

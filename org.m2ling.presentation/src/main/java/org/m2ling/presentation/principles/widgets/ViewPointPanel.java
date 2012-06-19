@@ -9,9 +9,12 @@ import java.io.File;
 import java.util.logging.Logger;
 
 import org.m2ling.presentation.principles.ViewPointDialog;
+import org.m2ling.presentation.principles.ViewPointDialogFactory;
 import org.m2ling.presentation.principles.model.ViewPointBean;
 import org.m2ling.presentation.principles.utils.IconManager;
 
+import com.google.inject.Inject;
+import com.google.inject.assistedinject.Assisted;
 import com.vaadin.terminal.FileResource;
 import com.vaadin.terminal.Resource;
 import com.vaadin.terminal.ThemeResource;
@@ -37,6 +40,8 @@ public class ViewPointPanel extends Panel {
 
 	private final ViewPointBean bean;
 
+	private ViewPointDialogFactory factory;
+
 	/**
 	 * Build an VP panel
 	 * 
@@ -45,10 +50,12 @@ public class ViewPointPanel extends Panel {
 	 * @throws IllegalArgumentException
 	 *            if bean is null
 	 */
-	public ViewPointPanel(ViewPointBean bean, Logger logger) {
+	@Inject
+	public ViewPointPanel(@Assisted ViewPointBean bean, Logger logger, ViewPointDialogFactory factory) {
 		super();
 		this.logger = logger;
 		this.bean = bean;
+		this.factory = factory;
 		if (bean == null) {
 			throw new IllegalArgumentException("Null viewpoint");
 		}
@@ -76,7 +83,7 @@ public class ViewPointPanel extends Panel {
 		icon.setWidth("50px");
 		icon.setHeight("50px");
 		icon.requestRepaint();
-		
+
 		// Name
 		Label name = new Label(bean.getName());
 		name.setStyleName("principles_vp-panel-name");
@@ -85,7 +92,7 @@ public class ViewPointPanel extends Panel {
 		edit.setStyleName(BaseTheme.BUTTON_LINK);
 		edit.addListener(new Button.ClickListener() {
 			public void buttonClick(ClickEvent event) {
-				ViewPointDialog vpDialog = new ViewPointDialog(bean);
+				ViewPointDialog vpDialog = factory.getViewPointDialogFor(bean);
 				vpDialog.setModal(true);
 				getWindow().addWindow(vpDialog);
 			}
@@ -140,7 +147,7 @@ public class ViewPointPanel extends Panel {
 		hl1.setComponentAlignment(name, Alignment.MIDDLE_RIGHT);
 		hl1.addComponent(edit);
 		hl1.addComponent(delete);
-	
+
 		HorizontalLayout hl2 = new HorizontalLayout();
 		hl2.setSpacing(true);
 		hl2.addComponent(componentTypes);

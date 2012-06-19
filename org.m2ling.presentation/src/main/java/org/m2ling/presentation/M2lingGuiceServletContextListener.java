@@ -23,11 +23,9 @@ import com.vaadin.Application;
  */
 public class M2lingGuiceServletContextListener extends GuiceServletContextListener {
 
-	private static Injector injector;
-
 	@Override
 	protected Injector getInjector() {
-
+		Injector injector = null;
 		ServletModule module = new ServletModule() {
 			@Override
 			protected void configureServlets() {
@@ -54,13 +52,4 @@ public class M2lingGuiceServletContextListener extends GuiceServletContextListen
 		return injector;
 	}
 
-	/**
-	 * Return the cached injector. Use it only for the rare on-demand injection cases !
-	 * 
-	 * @return the cached injector
-	 */
-
-	public static Injector getCachedInjector() {
-		return injector;
-	}
 }

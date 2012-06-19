@@ -11,6 +11,10 @@ import java.util.logging.Logger;
 
 import org.m2ling.common.dto.core.ViewPointDTO;
 import org.m2ling.presentation.GuiModule;
+import org.m2ling.presentation.principles.FeaturesEntry;
+import org.m2ling.presentation.principles.ViewPointDialog;
+import org.m2ling.presentation.principles.ViewPointDialogFactory;
+import org.m2ling.presentation.principles.ViewPointPanelFactory;
 import org.m2ling.presentation.principles.model.ViewPointBean;
 import org.m2ling.presentation.principles.utils.Converter;
 import org.m2ling.presentation.principles.widgets.AccordionEntry;
@@ -41,12 +45,22 @@ public class PrinciplesGuiModule extends GuiModule {
 
 	private Logger logger;
 
+	private FeaturesEntry features;
+
+	private ViewPointDialogFactory dialogFactory;
+
+	private ViewPointPanelFactory panelFactory;
+
 	@Inject
-	public PrinciplesGuiModule(ViewPointService vpService, Logger logger) {
+	public PrinciplesGuiModule(ViewPointService vpService, Logger logger, FeaturesEntry features,
+			ViewPointDialogFactory dialogFactory, ViewPointPanelFactory panelFactory) {
 		super();
 		setSizeFull();
 		this.vpService = vpService;
 		this.logger = logger;
+		this.features = features;
+		this.dialogFactory = dialogFactory;
+		this.panelFactory = panelFactory;
 		((VerticalLayout) getContent()).setSpacing(false);
 	}
 
@@ -56,7 +70,14 @@ public class PrinciplesGuiModule extends GuiModule {
 	@Override
 	public void attach() {
 		vpsDTO = vpService.getAllViewPoints();
-		create = getCreateButton();
+		create = new Button("Create a view point", new Button.ClickListener() {
+			public void buttonClick(ClickEvent event) {
+				ViewPointDialog vpDialog = dialogFactory.getViewPointDialogFor(null);
+				vpDialog.setModal(true);
+				getWindow().addWindow(vpDialog);
+			}
+		});
+		create.setStyleName(BaseTheme.BUTTON_LINK);
 		if (vpsDTO.size() == 0) {
 			VerticalLayout vert = getNoneVPPanel();
 			addComponent(vert);
@@ -65,22 +86,10 @@ public class PrinciplesGuiModule extends GuiModule {
 		} else {
 			for (ViewPointDTO dto : vpsDTO) {
 				ViewPointBean bean = Converter.ViewPointConverter.convertFromDTO(dto);
-				addComponent(new ViewPointPanel(bean, logger));
+				ViewPointPanel panel = panelFactory.getViewPointPanelFor(bean);
+				addComponent(panel);
 			}
 		}
-	}
-
-	@SuppressWarnings("serial")
-	private Button getCreateButton() {
-		create = new Button("Create a view point", new Button.ClickListener() {
-			public void buttonClick(ClickEvent event) {
-				ViewPointDialog vpDialog = new ViewPointDialog(null);
-				vpDialog.setModal(true);
-				getWindow().addWindow(vpDialog);
-			}
-		});
-		create.setStyleName(BaseTheme.BUTTON_LINK);
-		return create;
 	}
 
 	private VerticalLayout getNoneVPPanel() {
@@ -107,9 +116,8 @@ public class PrinciplesGuiModule extends GuiModule {
 		List<AccordionEntry> out = new ArrayList<AccordionEntry>(5);
 
 		// Features entry
-		FeaturesEntry features = new FeaturesEntry();
 		features.setDefaultEntry(true);
-		
+
 		out.add(features);
 		return out;
 	}

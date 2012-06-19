@@ -20,12 +20,14 @@ subprojects(){
   //main
   compile('com.google.inject:guice:3.0');
   compile('com.google.guava:guava:11.0');
+  compile('com.google.inject.extensions:guice-assistedinject:3.0');
 
   //tests
   testCompile('com.google.inject:guice:3.0');	
   testCompile('junit:junit:4.8.2');
   testCompile('com.google.guava:guava:11.0');
- }
+  testCompile('com.google.inject.extensions:guice-assistedinject:3.0');
+}
 
  version = '0.1';
  sourceCompatibility = 1.6;
