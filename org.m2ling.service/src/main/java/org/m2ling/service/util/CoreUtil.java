@@ -40,7 +40,7 @@ public class CoreUtil {
 	 * @param name
 	 *           the searched viewpoint name
 	 * @param throwError
-	 *           throw an exception if the viewpoint doesn't exist
+	 *           whether we throw an exception if the viewpoint doesn't exist
 	 * @return a viewpoint denoted by the given name or null if none matches
 	 * @throws IllegalArgumentException
 	 *            if the viewpoint doesn't exist
@@ -55,6 +55,24 @@ public class CoreUtil {
 		}
 		if (vp == null) {
 			throw new IllegalArgumentException("Viewpoint doesn't exist : " + name);
+		}
+		return vp;
+	}
+
+	/**
+	 * Return a viewpoint denoted by the given id or null if none matches.
+	 * 
+	 * @param id
+	 *           the searched viewpoint id
+	 * @return a viewpoint denoted by the given name or null if none matches
+	 */
+	public ViewPoint getViewPointByID(String id) {
+		ViewPoint vp = null;
+		Root root = pmanager.getRoot();
+		for (ViewPoint v : root.getViewPoints()) {
+			if (id.equals(v.getId())) {
+				vp = v;
+			}
 		}
 		return vp;
 	}

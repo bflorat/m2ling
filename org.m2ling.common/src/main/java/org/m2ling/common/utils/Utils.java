@@ -7,8 +7,10 @@ import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import com.google.common.base.Splitter;
 import com.google.common.base.Strings;
@@ -98,6 +100,7 @@ public class Utils {
 
 	/**
 	 * Return whether we are running in debug mode.
+	 * 
 	 * @return whether we are running in debug mode
 	 */
 	public static boolean isDebugMode() {
@@ -113,8 +116,22 @@ public class Utils {
 	 * @return a list from a string representation
 	 */
 	public static List<String> stringListFromString(String string) {
+		if ("".equals(string)) {
+			return new ArrayList<String>(0);
+		}
 		Iterable<String> it = Splitter.on(',').trimResults().split(string);
 		return listFromIterable(it);
+	}
+
+	/**
+	 * Test in a list contains duplicate entries
+	 * 
+	 * @param list
+	 * @return whether the list contains duplicates
+	 */
+	public static boolean containsDup(List<String> list) {
+		Set<String> set = new HashSet<String>(list);
+		return set.size() < list.size();
 	}
 
 	/**

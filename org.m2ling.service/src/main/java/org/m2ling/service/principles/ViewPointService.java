@@ -17,9 +17,11 @@ public interface ViewPointService {
 	 * @param vpDTO
 	 *           the view point DTO
 	 * @throws IllegalStateException
-	 *            if the viewpoint doesn't exist.
+	 *            if the viewpoint doesn't exist
+	 * @throws IllegalArgumentException
+	 *            if one of the DTO entry is faulty
 	 * @throws IllegalAccessException
-	 *            if the caller has not required authorization to call this method.
+	 *            if the caller has not required authorization to call this method
 	 */
 	void updateViewPoint(ViewPointDTO vpDTO);
 
@@ -32,6 +34,8 @@ public interface ViewPointService {
 	 *           the view point DTO
 	 * @throws IllegalStateException
 	 *            if the viewpoint already exist if a viewpoint already exist with the provided name
+	 * @throws IllegalArgumentException
+	 *            if one of the DTO entry is faulty
 	 * @throws IllegalAccessException
 	 *            if the caller has not required authorization to call this method.
 	 */

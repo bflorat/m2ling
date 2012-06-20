@@ -12,6 +12,8 @@ import java.util.logging.Logger;
 import javax.annotation.Nullable;
 
 import org.m2ling.common.dto.core.ViewPointDTO;
+import org.m2ling.presentation.events.Events;
+import org.m2ling.presentation.events.ObservationManager;
 import org.m2ling.presentation.principles.model.ViewPointBean;
 import org.m2ling.presentation.principles.utils.Converter;
 import org.m2ling.presentation.principles.widgets.ViewPointIconUploader;
@@ -48,6 +50,8 @@ public class ViewPointDialog extends Window {
 
 	private Logger logger;
 
+	private ObservationManager obs;
+
 	/**
 	 * Build a view point dialog
 	 * 
@@ -55,11 +59,13 @@ public class ViewPointDialog extends Window {
 	 *           an optional pre-filling view point (null when creating a new vp)
 	 */
 	@Inject
-	public ViewPointDialog(Logger logger, @Assisted @Nullable ViewPointBean vp, ViewPointService service) {
+	public ViewPointDialog(Logger logger, @Assisted @Nullable ViewPointBean vp, ViewPointService service,
+			ObservationManager obs) {
 		super(vp == null ? "New View Point" : vp.getName());
 		this.bean = vp;
 		this.service = service;
 		this.logger = logger;
+		this.obs = obs;
 		// We need a bean to attach data to
 		if (vp == null) {
 			bean = new ViewPointBean();
@@ -67,6 +73,7 @@ public class ViewPointDialog extends Window {
 			newVP = true;
 		} else {
 			this.bean = vp;
+			newVP = false;
 		}
 		setWidth("650px");
 		setClosable(false);
@@ -87,12 +94,14 @@ public class ViewPointDialog extends Window {
 		Command ok = new Command() {
 			public void execute() {
 				form.commit();
+				close();
 				ViewPointDTO vpDTO = Converter.ViewPointConverter.convertToDTO(bean);
 				if (newVP) {
 					service.createViewPoint(vpDTO);
 				} else {
 					service.updateViewPoint(vpDTO);
 				}
+				obs.notifySync(new org.m2ling.presentation.events.Event(Events.VP_CHANGE));
 			}
 		};
 		Command cancel = new Command() {

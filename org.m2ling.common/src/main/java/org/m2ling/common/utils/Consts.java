@@ -40,6 +40,15 @@ public class Consts {
 	public static final String CONF_VP_ICONS_LOCATION = "icons" + File.separatorChar + "viewpoints";
 
 	/** Max icon size in bytes */
-	public static final long CONF_ICONS_MAX_SIZE_BYTES = 5000000l;
+	public static final long ICONS_MAX_SIZE_BYTES = 5000000l;
+	
+	/** Single line text size */
+	public static final int MAX_LABEL_SIZE = 200;
+	
+	/** Tag max size */
+	public static final int MAX_TAG_SIZE = 100;
+	
+	/** Max text area size */
+	public static final int MAX_TEXT_SIZE = 2000;
 
 }

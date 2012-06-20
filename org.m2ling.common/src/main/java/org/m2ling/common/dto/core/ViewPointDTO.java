@@ -66,14 +66,14 @@ public class ViewPointDTO {
 	private ViewPointDTO(Builder builder) {
 		id = builder.id;
 		name = builder.name;
-		if (builder.tags != null && builder.tags.size() > 0) {
+		if (builder.tags != null ) {
 			tags = new ArrayList<String>(builder.tags); // defensive copy
 		} else {
 			tags = null;
 		}
 		description = builder.description;
 		comment = builder.comment;
-		if (builder.statusLiterals != null && builder.statusLiterals.size() > 0) {
+		if (builder.statusLiterals != null ) {
 			statusLiterals = new ArrayList<String>(builder.statusLiterals); // defensive copy
 		} else {
 			statusLiterals = null;

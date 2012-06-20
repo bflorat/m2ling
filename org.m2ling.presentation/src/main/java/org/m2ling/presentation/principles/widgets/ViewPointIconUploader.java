@@ -81,7 +81,7 @@ public class ViewPointIconUploader extends CustomComponent implements Upload.Pro
 	 * @see com.vaadin.ui.Upload.ProgressListener#updateProgress(long, long)
 	 */
 	public void updateProgress(long readBytes, long contentLength) {
-		if (contentLength > Consts.CONF_ICONS_MAX_SIZE_BYTES) {
+		if (contentLength > Consts.ICONS_MAX_SIZE_BYTES) {
 			upload.interruptUpload();
 			getWindow().showNotification("File too large", contentLength + " B", Notification.TYPE_ERROR_MESSAGE);
 		}
