@@ -27,14 +27,20 @@ import com.google.inject.Singleton;
 @Singleton
 public class ViewPointServiceImpl extends ServiceImpl implements ViewPointService {
 
-	@Inject
 	CoreUtil util;
+
+	DTOConverter.FromDTO fromDTO;
+
+	DTOConverter.ToDTO toDTO;
 
 	/**
 	 * Protected constructor to prevent direct instantiation
 	 */
-	protected ViewPointServiceImpl() {
+	@Inject
+	protected ViewPointServiceImpl(CoreUtil util, DTOConverter.FromDTO fromDTO, DTOConverter.ToDTO toDTO) {
 		super();
+		this.util = util;
+		this.toDTO = toDTO;
 	}
 
 	private void checkDTO(ViewPointDTO vpDTO) throws FunctionalException {
@@ -56,7 +62,7 @@ public class ViewPointServiceImpl extends ServiceImpl implements ViewPointServic
 					null);
 		}
 		// Description
-		if (vpDTO.getDescription().length() > Consts.MAX_LABEL_SIZE) {
+		if (vpDTO.getDescription().length() > Consts.MAX_TEXT_SIZE) {
 			throw new FunctionalException(FunctionalException.Code.SIZE_EXCEEDED, "Description too long", null, null);
 		}
 		// Comment
@@ -81,7 +87,7 @@ public class ViewPointServiceImpl extends ServiceImpl implements ViewPointServic
 		List<ViewPointDTO> vpDTOs = new ArrayList<ViewPointDTO>(10);
 		Root root = getPersistenceManager().getRoot();
 		for (ViewPoint vp : root.getViewPoints()) {
-			ViewPointDTO dto = DTOConverter.ToDTO.getViewPointDTO(vp);
+			ViewPointDTO dto = toDTO.getViewPointDTO(vp);
 			vpDTOs.add(dto);
 		}
 		return vpDTOs;
@@ -92,7 +98,7 @@ public class ViewPointServiceImpl extends ServiceImpl implements ViewPointServic
 		Root root = getPersistenceManager().getRoot();
 		for (ViewPoint vp : root.getViewPoints()) {
 			if (name.equals(vp.getName())) {
-				return DTOConverter.ToDTO.getViewPointDTO(vp);
+				return toDTO.getViewPointDTO(vp);
 			}
 		}
 		return null;

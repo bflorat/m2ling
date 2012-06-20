@@ -32,12 +32,21 @@ public class DTOConverter {
 	 */
 	@Singleton
 	public static class ToDTO {
-		@Inject
+
 		CoreUtil util;
 
-		public static ViewPointDTO getViewPointDTO(ViewPoint vp) {
+		@Inject
+		public ToDTO(CoreUtil util) {
+			super();
+			this.util = util;
+		}
+
+		public ViewPointDTO getViewPointDTO(ViewPoint vp) {
 			ViewPointDTO.Builder builder = new ViewPointDTO.Builder(vp.getId(), vp.getName());
 			builder.tags(vp.getTags());
+			builder.comment(vp.getComment());
+			builder.statusLiterals(vp.getStatusLiterals());
+			builder.description(vp.getDescription());
 			return builder.build();
 		}
 	}
@@ -51,8 +60,13 @@ public class DTOConverter {
 	@Singleton
 	public static class FromDTO {
 
-		@Inject
 		CoreUtil util;
+
+		@Inject
+		public FromDTO(CoreUtil util) {
+			super();
+			this.util = util;
+		}
 
 		/**
 		 * Return a new ViewPoint instance given a DTO.
@@ -65,18 +79,20 @@ public class DTOConverter {
 			ViewPoint vp = CoreFactory.eINSTANCE.createViewPoint();
 			vp.setId(dto.getId());
 			vp.setName(dto.getName());
-			if (dto.getTags() != null) {
-				for (String tag : dto.getTags()) {
-					if (!Strings.isNullOrEmpty(tag)) {
-						vp.getTags().add(tag);
-					}
+			for (String tag : dto.getTags()) {
+				if (!Strings.isNullOrEmpty(tag)) {
+					vp.getTags().add(tag);
+				}
+			}
+			for (String status : dto.getStatusLiterals()) {
+				if (!Strings.isNullOrEmpty(status)) {
+					vp.getStatusLiterals().add(status);
 				}
 			}
 			if (dto.getDescription() != null) {
 				vp.setDescription(dto.getDescription());
 			}
-			// TODO add missing setters
-
+			vp.setComment(dto.getComment());
 			return vp;
 		}
 

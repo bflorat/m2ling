@@ -42,8 +42,6 @@ public class PrinciplesGuiModule extends GuiModule implements Observer {
 
 	private ViewPointService vpService;
 
-	private Button create;
-
 	private Logger logger;
 
 	private FeaturesEntry features;
@@ -75,19 +73,10 @@ public class PrinciplesGuiModule extends GuiModule implements Observer {
 	@Override
 	public void attach() {
 		vpsDTO = vpService.getAllViewPoints();
-		create = new Button("Create a view point", new Button.ClickListener() {
-			public void buttonClick(ClickEvent event) {
-				ViewPointDialog vpDialog = dialogFactory.getViewPointDialogFor(null);
-				vpDialog.setModal(true);
-				getWindow().addWindow(vpDialog);
-			}
-		});
-		create.setStyleName(BaseTheme.BUTTON_LINK);
 		if (vpsDTO.size() == 0) {
 			VerticalLayout vert = getNoneVPPanel();
 			addComponent(vert);
 			((VerticalLayout) getContent()).setComponentAlignment(vert, Alignment.MIDDLE_CENTER);
-			addComponent(create);
 		} else {
 			for (ViewPointDTO dto : vpsDTO) {
 				ViewPointBean bean = Converter.ViewPointConverter.convertFromDTO(dto);
@@ -106,6 +95,14 @@ public class PrinciplesGuiModule extends GuiModule implements Observer {
 		noneVPLabel.setIcon(new ThemeResource("img/16/information.png"));
 		// Use caption to set text to keep icon and label on the same line
 		noneVPLabel.setCaption("None view point found");
+		Button create = new Button("Create a view point", new Button.ClickListener() {
+			public void buttonClick(ClickEvent event) {
+				ViewPointDialog vpDialog = dialogFactory.getViewPointDialogFor(null);
+				vpDialog.setModal(true);
+				getWindow().addWindow(vpDialog);
+			}
+		});
+		create.setStyleName(BaseTheme.BUTTON_LINK);
 		vert.addComponent(noneVPLabel);
 		vert.addComponent(create);
 		return vert;
