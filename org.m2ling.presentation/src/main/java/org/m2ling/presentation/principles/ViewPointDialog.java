@@ -7,11 +7,13 @@ package org.m2ling.presentation.principles;
 
 import java.util.Arrays;
 import java.util.UUID;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import javax.annotation.Nullable;
 
 import org.m2ling.common.dto.core.ViewPointDTO;
+import org.m2ling.common.exceptions.FunctionalException;
 import org.m2ling.presentation.events.Events;
 import org.m2ling.presentation.events.ObservationManager;
 import org.m2ling.presentation.principles.model.ViewPointBean;
@@ -84,7 +86,7 @@ public class ViewPointDialog extends Window {
 		((VerticalLayout) getContent()).setSizeFull();
 		final Form form = new Form();
 		form.setCaption("Set view point settings");
-		// setFormFieldFactory() must be called before setting the datasource or it is token into
+		// setFormFieldFactory() must be called before setting the data source or it is token into
 		// account
 		form.setFormFieldFactory(new ViewPointDialogFieldFactory());
 		form.setItemDataSource(new BeanItem<ViewPointBean>(bean));
@@ -94,14 +96,20 @@ public class ViewPointDialog extends Window {
 		Command ok = new Command() {
 			public void execute() {
 				form.commit();
-				close();
 				ViewPointDTO vpDTO = Converter.ViewPointConverter.convertToDTO(bean);
-				if (newVP) {
-					service.createViewPoint(vpDTO);
-				} else {
-					service.updateViewPoint(vpDTO);
+				try {
+					if (newVP) {
+						service.createViewPoint(vpDTO);
+					} else {
+						service.updateViewPoint(vpDTO);
+					}
+					close();
+					obs.notifySync(new org.m2ling.presentation.events.Event(Events.VP_CHANGE));
+				} catch (FunctionalException e) {
+					logger.log(Level.SEVERE, e.getDetailedMessage(), e.getCause());
+					getWindow().showNotification("Operation failed : " + e.getDetailedMessage(),
+							Notification.TYPE_ERROR_MESSAGE);
 				}
-				obs.notifySync(new org.m2ling.presentation.events.Event(Events.VP_CHANGE));
 			}
 		};
 		Command cancel = new Command() {

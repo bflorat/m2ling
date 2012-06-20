@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.StringTokenizer;
 import java.util.logging.Logger;
 
-import org.m2ling.common.exceptions.NotFoundException;
+import org.m2ling.common.exceptions.FunctionalException;
 import org.m2ling.domain.Root;
 import org.m2ling.domain.core.HasTags;
 import org.m2ling.domain.core.Type;
@@ -112,14 +112,15 @@ public class CoreUtil {
 	 *           the item ID to set tag to.
 	 * @return any object matching provided type and ID or null if none found
 	 **/
-	public HasTags getHasTagsByTypeAndID(Type type, String itemID) {
+	public HasTags getHasTagsByTypeAndID(Type type, String itemID) throws FunctionalException {
 		Object o = getItemByTypeAndID(type, itemID, true);
 		if (o != null && o instanceof HasTags) {
 			return (HasTags) o;
 		} else {
 			String msg = "Item found but is does not support Tags: " + o;
 			logger.warning(msg);
-			throw new NotFoundException(msg);
+			throw new FunctionalException(FunctionalException.Code.TARGET_NOT_FOUND,
+					"Item found but is does not support Tags", null, "Item : " + o);
 		}
 	}
 

@@ -1,11 +1,22 @@
+/**
+ * Copyright (C) 2012 Bertrand Florat 
+ */
 package org.m2ling.service.principles;
 
 import java.util.List;
 
 import org.m2ling.common.dto.core.ViewPointDTO;
+import org.m2ling.common.exceptions.FunctionalException;
 
 /**
- * Copyright (C) 2012 Bertrand Florat General contract for viewpoints services implementations
+ * General contract for viewpoints services implementations.
+ * <p>
+ * All the methods can throw a TechnicalException in case of technical issue.
+ * </p>
+ * <p>
+ * All the methods cab throw an IllegalAccessException if current user has not the authorization to
+ * access the viewpoint.
+ * </p>
  */
 
 public interface ViewPointService {
@@ -16,14 +27,10 @@ public interface ViewPointService {
 	 * 
 	 * @param vpDTO
 	 *           the view point DTO
-	 * @throws IllegalStateException
-	 *            if the viewpoint doesn't exist
-	 * @throws IllegalArgumentException
-	 *            if one of the DTO entry is faulty
-	 * @throws IllegalAccessException
-	 *            if the caller has not required authorization to call this method
+	 * @throws FunctionalException
+	 *            if the viewpoint doesn't exist or if one of the DTO entry is faulty
 	 */
-	void updateViewPoint(ViewPointDTO vpDTO);
+	void updateViewPoint(ViewPointDTO vpDTO) throws FunctionalException;
 
 	/**
 	 * Create a new view point given a viewpoint DTO. Note that some uncatched exceptions can occur
@@ -32,14 +39,11 @@ public interface ViewPointService {
 	 * 
 	 * @param vpDTO
 	 *           the view point DTO
-	 * @throws IllegalStateException
-	 *            if the viewpoint already exist if a viewpoint already exist with the provided name
-	 * @throws IllegalArgumentException
-	 *            if one of the DTO entry is faulty
-	 * @throws IllegalAccessException
-	 *            if the caller has not required authorization to call this method.
+	 * @throws FunctionalException
+	 *            if a viewpoint already exist with the provided name or if one of the DTO entry is
+	 *            faulty
 	 */
-	void createViewPoint(ViewPointDTO vpDTO);
+	void createViewPoint(ViewPointDTO vpDTO) throws FunctionalException;
 
 	/**
 	 * Return all available viewpoints given user authorization and realm. If none viewpoints are
@@ -52,18 +56,17 @@ public interface ViewPointService {
 	/**
 	 * Return the viewpoint DTO given a VP name (unique) if it exist, null otherwise.
 	 * 
-	 * @throws IllegalAccessException
-	 *            if current user has not the authorization to access the viewpoint.
 	 */
 	ViewPointDTO getViewPointByName(String name);
 
 	/**
-	 * Drop the given viewpoint if it exists. 
-	 * @param vpDTO the view point DTO
+	 * Drop the given viewpoint if it exists.
 	 * 
-	 * @throws IllegalArgumentException
+	 * @param vpDTO
+	 *           the view point DTO
+	 * @throws FunctionalException
 	 *            if viewpoint doesn't exist.
 	 */
-	void deleteViewPoint(ViewPointDTO vpDTO);
+	void deleteViewPoint(ViewPointDTO vpDTO) throws FunctionalException;
 
 }

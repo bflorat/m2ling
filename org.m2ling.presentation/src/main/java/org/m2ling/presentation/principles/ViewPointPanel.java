@@ -6,9 +6,11 @@
 package org.m2ling.presentation.principles;
 
 import java.io.File;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import org.m2ling.common.dto.core.ViewPointDTO;
+import org.m2ling.common.exceptions.FunctionalException;
 import org.m2ling.presentation.events.Events;
 import org.m2ling.presentation.events.ObservationManager;
 import org.m2ling.presentation.principles.model.ViewPointBean;
@@ -24,6 +26,7 @@ import com.vaadin.terminal.ThemeResource;
 import com.vaadin.ui.Alignment;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Button.ClickEvent;
+import com.vaadin.ui.Window.Notification;
 import com.vaadin.ui.Embedded;
 import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.Label;
@@ -112,9 +115,15 @@ public class ViewPointPanel extends Panel {
 		delete.setStyleName(BaseTheme.BUTTON_LINK);
 		delete.addListener(new Button.ClickListener() {
 			public void buttonClick(ClickEvent event) {
-				ViewPointDTO vpDTO = Converter.ViewPointConverter.convertToDTO(bean);
-				service.deleteViewPoint(vpDTO);
-				obs.notifySync(new org.m2ling.presentation.events.Event(Events.VP_CHANGE));
+				try {
+					ViewPointDTO vpDTO = Converter.ViewPointConverter.convertToDTO(bean);
+					service.deleteViewPoint(vpDTO);
+					obs.notifySync(new org.m2ling.presentation.events.Event(Events.VP_CHANGE));
+				} catch (FunctionalException e) {
+					logger.log(Level.SEVERE, e.getDetailedMessage(), e.getCause());
+					getWindow().showNotification("Operation failed : " + e.getDetailedMessage(),
+							Notification.TYPE_ERROR_MESSAGE);
+				}
 			}
 		});
 

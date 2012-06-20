@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.m2ling.common.dto.core.ViewPointDTO;
+import org.m2ling.common.exceptions.FunctionalException;
 import org.m2ling.common.utils.Consts;
 import org.m2ling.common.utils.Utils;
 import org.m2ling.domain.Root;
@@ -34,6 +35,46 @@ public class ViewPointServiceImpl extends ServiceImpl implements ViewPointServic
 	 */
 	protected ViewPointServiceImpl() {
 		super();
+	}
+
+	private void checkDTO(ViewPointDTO vpDTO) throws FunctionalException {
+		// Name
+		if (vpDTO.getName().length() > Consts.MAX_LABEL_SIZE) {
+			throw new FunctionalException(FunctionalException.Code.SIZE_EXCEEDED, "Name too long", null, null);
+		}
+		// Status literals
+		int index = 1;
+		for (String literal : vpDTO.getStatusLiterals()) {
+			if (literal.length() > Consts.MAX_LABEL_SIZE) {
+				throw new FunctionalException(FunctionalException.Code.SIZE_EXCEEDED, "Status literal name is too long",
+						null, "status #" + index);
+			}
+			index++;
+		}
+		if (Utils.containsDup(vpDTO.getStatusLiterals())) {
+			throw new FunctionalException(FunctionalException.Code.DUPLICATES, "Status literal contains duplicates", null,
+					null);
+		}
+		// Description
+		if (vpDTO.getDescription().length() > Consts.MAX_LABEL_SIZE) {
+			throw new FunctionalException(FunctionalException.Code.SIZE_EXCEEDED, "Description too long", null, null);
+		}
+		// Comment
+		if (vpDTO.getComment().length() > Consts.MAX_TEXT_SIZE) {
+			throw new FunctionalException(FunctionalException.Code.SIZE_EXCEEDED, "Comment too long", null, null);
+		}
+		// Tags
+		index = 1;
+		for (String tag : vpDTO.getTags()) {
+			if (tag.length() > Consts.MAX_LABEL_SIZE) {
+				throw new FunctionalException(FunctionalException.Code.SIZE_EXCEEDED, "Tag is too long", null, "tag #"
+						+ index);
+			}
+			index++;
+		}
+		if (Utils.containsDup(vpDTO.getTags())) {
+			throw new FunctionalException(FunctionalException.Code.DUPLICATES, "Tags contains duplicates", null, null);
+		}
 	}
 
 	public List<ViewPointDTO> getAllViewPoints() {
@@ -64,7 +105,7 @@ public class ViewPointServiceImpl extends ServiceImpl implements ViewPointServic
 	 * .dto.core.ViewPointDTO)
 	 */
 	@Override
-	public void createViewPoint(ViewPointDTO vpDTO) {
+	public void createViewPoint(ViewPointDTO vpDTO) throws FunctionalException {
 		// test DTO
 		checkDTO(vpDTO);
 
@@ -90,7 +131,7 @@ public class ViewPointServiceImpl extends ServiceImpl implements ViewPointServic
 	 * ViewPointDTO)
 	 */
 	@Override
-	public void updateViewPoint(ViewPointDTO vpDTO) {
+	public void updateViewPoint(ViewPointDTO vpDTO) throws FunctionalException {
 		// tests
 		ViewPoint vp = util.getViewPointByID(vpDTO.getId());
 		if (vp == null) {
@@ -109,43 +150,6 @@ public class ViewPointServiceImpl extends ServiceImpl implements ViewPointServic
 		tags.addAll(vpDTO.getTags());
 	}
 
-	private void checkDTO(ViewPointDTO vpDTO) {
-		// Name
-		if (vpDTO.getName().length() > Consts.MAX_LABEL_SIZE) {
-			throw new IllegalArgumentException("Name too long");
-		}
-		// Status literals
-		int index = 1;
-		for (String literal : vpDTO.getStatusLiterals()) {
-			if (literal.length() > Consts.MAX_LABEL_SIZE) {
-				throw new IllegalArgumentException("Status literal name is too long : status #" + index);
-			}
-			index++;
-		}
-		if (Utils.containsDup(vpDTO.getStatusLiterals())) {
-			throw new IllegalArgumentException("Status literal contains duplicates");
-		}
-		// Description
-		if (vpDTO.getDescription().length() > Consts.MAX_LABEL_SIZE) {
-			throw new IllegalArgumentException("Description too long");
-		}
-		// Comment
-		if (vpDTO.getComment().length() > Consts.MAX_TEXT_SIZE) {
-			throw new IllegalArgumentException("Comment too long");
-		}
-		// Tags
-		index = 1;
-		for (String tag : vpDTO.getTags()) {
-			if (tag.length() > Consts.MAX_LABEL_SIZE) {
-				throw new IllegalArgumentException("Tag is too long : status #" + index);
-			}
-			index++;
-		}
-		if (Utils.containsDup(vpDTO.getTags())) {
-			throw new IllegalArgumentException("Tags contains duplicates");
-		}
-	}
-
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -153,10 +157,11 @@ public class ViewPointServiceImpl extends ServiceImpl implements ViewPointServic
 	 * .core.ViewPointDTO)
 	 */
 	@Override
-	public void deleteViewPoint(ViewPointDTO vpDTO) {
-		ViewPoint vp = util.getViewPointByName(vpDTO.getName(), false);
+	public void deleteViewPoint(ViewPointDTO vpDTO) throws FunctionalException {
+		ViewPoint vp = util.getViewPointByID(vpDTO.getId());
 		if (vp == null) {
-			throw new IllegalStateException("View point doesn't exists : " + vpDTO.getName());
+			throw new FunctionalException(FunctionalException.Code.TARGET_NOT_FOUND, "View point doesn't exists", null,
+					vpDTO.getId());
 		}
 		pmanager.getRoot().getViewPoints().remove(vp);
 	}

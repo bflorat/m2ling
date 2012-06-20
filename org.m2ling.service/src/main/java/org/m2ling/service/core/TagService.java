@@ -6,7 +6,7 @@ package org.m2ling.service.core;
 
 import java.util.List;
 
-import org.m2ling.common.exceptions.NotFoundException;
+import org.m2ling.common.exceptions.FunctionalException;
 import org.m2ling.common.soa.Context;
 import org.m2ling.domain.core.Type;
 
@@ -23,11 +23,8 @@ import org.m2ling.domain.core.Type;
  * 
  * <li>IllegalAccessException if the caller has not required authorization to call this method</li>
  * 
- * <li>NotFoundException if the item can't be found</li>
+ * <li>TechnicalException in case of technical issue.</li>
  * 
- * <li>UnsupportedOperationException if the item doesn't support tags</li>
- * 
- * <li>IllegalArgumentException if provided arguments are null are invalid</li>
  * 
  * <br>
  * 
@@ -46,10 +43,10 @@ public interface TagService {
 	 *           the item ID to add tag to
 	 * @param tags
 	 *           the tags values to add.
-	 * @throws IllegalArgumentException
+	 * @throws FunctionalException
 	 *            if a list element contains a comma or if the list is null or empty
 	 */
-	void addTags(Context context, Type type, String itemID, List<String> tags);
+	void addTags(Context context, Type type, String itemID, List<String> tags) throws FunctionalException;
 
 	/**
 	 * Set one or tags to a HasTag item.
@@ -60,10 +57,10 @@ public interface TagService {
 	 *           the item ID to set tag to. Note that the item ID is not necessary a "iD" attribute.
 	 * @param tags
 	 *           the tags values to set. If the list is empty, all pre-existing tags are cleared.
-	 * @throws IllegalArgumentException
+	 * @throws FunctionalException
 	 *            if a list element contains a comma or if the list is null
 	 */
-	void setTags(Context context, Type type, String itemID, List<String> tags);
+	void setTags(Context context, Type type, String itemID, List<String> tags) throws FunctionalException;
 
 	/**
 	 * Remove a single from aHasTags item. If the tag doesn't exist, an
@@ -75,12 +72,10 @@ public interface TagService {
 	 *           the item ID to remove tag from
 	 * @param tag
 	 *           the tag to remove
-	 * @throws IllegalArgumentException
-	 *            if tag is null
-	 * @throws NotFoundException
-	 *            if the tag didn't exist previously
+	 * @throws FunctionalException
+	 *            if tag is null or if the tag didn't exist previously
 	 */
-	void removeTag(Context context, Type type, String itemID, String tag);
+	void removeTag(Context context, Type type, String itemID, String tag) throws FunctionalException;
 
 	/**
 	 * Return a list of all the tags attached to the provided item.
@@ -90,9 +85,9 @@ public interface TagService {
 	 * @param itemID
 	 *           the item ID to get tags from
 	 * @return a list of all the tags attached to the provided item. If the item has none tags, a
-	 *         void list is returned. *
-	 * @throws IllegalStateException
+	 *         void list is returned.
+	 * @throws FunctionalException
 	 *            if the tags list is null
 	 */
-	List<String> getAllTags(Context context, Type type, String itemID);
+	List<String> getAllTags(Context context, Type type, String itemID) throws FunctionalException;
 }

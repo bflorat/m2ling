@@ -7,7 +7,7 @@ package org.m2ling.service.core.impl;
 import java.util.List;
 import java.util.logging.Level;
 
-import org.m2ling.common.exceptions.NotFoundException;
+import org.m2ling.common.exceptions.FunctionalException;
 import org.m2ling.common.security.ACResource;
 import org.m2ling.common.soa.Context;
 import org.m2ling.domain.core.HasTags;
@@ -57,7 +57,7 @@ public class TagServiceImpl extends ServiceImpl implements TagService {
 			if (tag.contains(",")) {
 				throw new IllegalArgumentException("A tag can't contain the separator value : " + tag);
 			}
-			if (Strings.isNullOrEmpty(tag)){
+			if (Strings.isNullOrEmpty(tag)) {
 				throw new IllegalArgumentException("A tag can't be null or void : " + tag);
 			}
 		}
@@ -70,7 +70,7 @@ public class TagServiceImpl extends ServiceImpl implements TagService {
 	 * org.m2ling.domain.core.Type, java.lang.String, java.util.List)
 	 */
 	@Override
-	public void addTags(Context context, Type type, String itemID, List<String> tags) {
+	public void addTags(Context context, Type type, String itemID, List<String> tags) throws FunctionalException {
 		{ // Controls
 			checkTypeAndID(type, itemID);
 			checkTagsList(tags);
@@ -87,7 +87,7 @@ public class TagServiceImpl extends ServiceImpl implements TagService {
 	 */
 	@Override
 	@ACResource
-	public void setTags(Context context, Type type, String itemID, List<String> tags) {
+	public void setTags(Context context, Type type, String itemID, List<String> tags) throws FunctionalException {
 		{ // Controls
 			checkTypeAndID(type, itemID);
 			checkTagsList(tags);
@@ -105,14 +105,15 @@ public class TagServiceImpl extends ServiceImpl implements TagService {
 	 * org.m2ling.domain.core.Type, java.lang.String, java.lang.String)
 	 */
 	@Override
-	public void removeTag(Context context, Type type, String itemID, String tag) {
+	public void removeTag(Context context, Type type, String itemID, String tag) throws FunctionalException {
 		List<String> tags = null;
 		{ // Controls
 			checkTypeAndID(type, itemID);
 			HasTags htags = util.getHasTagsByTypeAndID(type, itemID);
 			tags = htags.getTags();
 			if (!tags.contains(tag)) {
-				throw new NotFoundException("Tag didn't exist previsously : " + tag + " for item : " + htags);
+				throw new FunctionalException(FunctionalException.Code.TARGET_NOT_FOUND, "Tag didn't exist previsously",
+						null, " tag=" + tag + " for item : " + htags);
 			}
 		}
 		tags.remove(tag);
@@ -125,7 +126,7 @@ public class TagServiceImpl extends ServiceImpl implements TagService {
 	 * org.m2ling.domain.core.Type, java.lang.String)
 	 */
 	@Override
-	public List<String> getAllTags(Context context, Type type, String itemID) {
+	public List<String> getAllTags(Context context, Type type, String itemID) throws FunctionalException {
 		checkTypeAndID(type, itemID);
 		HasTags htags = util.getHasTagsByTypeAndID(type, itemID);
 		List<String> tags = htags.getTags();
