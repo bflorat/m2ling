@@ -224,7 +224,7 @@ public class RuleItemProvider
 	 */
 	@Override
 	public String getText(Object object) {
-		String label = ((Rule)object).getComment();
+		String label = ((Rule)object).getName();
 		return label == null || label.length() == 0 ?
 			getString("_UI_Rule_type") :
 			getString("_UI_Rule_type") + ": " + label;
