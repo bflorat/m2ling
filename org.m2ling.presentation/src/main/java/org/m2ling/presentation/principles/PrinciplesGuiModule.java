@@ -18,7 +18,7 @@ import org.m2ling.presentation.events.ObservationManager;
 import org.m2ling.presentation.events.Observer;
 import org.m2ling.presentation.principles.model.ViewPointBean;
 import org.m2ling.presentation.principles.utils.Converter;
-import org.m2ling.presentation.principles.widgets.AccordionEntry;
+import org.m2ling.presentation.widgets.SidebarEntry;
 import org.m2ling.service.principles.ViewPointService;
 
 import com.google.inject.Inject;
@@ -114,8 +114,8 @@ public class PrinciplesGuiModule extends GuiModule implements Observer {
 	 * @see org.m2ling.presentation.GuiModule#getAccordionEntries()
 	 */
 	@Override
-	public List<AccordionEntry> getAccordionEntries() {
-		List<AccordionEntry> out = new ArrayList<AccordionEntry>(5);
+	public List<SidebarEntry> getAccordionEntries() {
+		List<SidebarEntry> out = new ArrayList<SidebarEntry>(5);
 
 		// Features entry
 		features.setDefaultEntry(true);

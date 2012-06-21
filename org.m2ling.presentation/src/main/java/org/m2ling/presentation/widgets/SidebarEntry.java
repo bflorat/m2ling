@@ -3,7 +3,7 @@
  *
  * @author "Bertrand Florat <bertrand@florat.net>"
  */
-package org.m2ling.presentation.principles.widgets;
+package org.m2ling.presentation.widgets;
 
 import com.vaadin.ui.Panel;
 
@@ -11,7 +11,7 @@ import com.vaadin.ui.Panel;
  * Encapsulate information we need to build an entry of the sidebar accordion.
  */
 @SuppressWarnings("serial")
-public abstract class AccordionEntry extends Panel {
+public abstract class SidebarEntry extends Panel {
 
 	/** Should this entry be shown at startup ? */
 	private boolean defaultEntry = false;
@@ -36,7 +36,7 @@ public abstract class AccordionEntry extends Panel {
 	 */
 	public abstract String getLabel();
 
-	public AccordionEntry() {
+	public SidebarEntry() {
 		super();
 	}
 

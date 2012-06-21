@@ -4,8 +4,7 @@ import java.util.List;
 import java.util.logging.Logger;
 
 import org.m2ling.presentation.principles.PrinciplesGuiModule;
-import org.m2ling.presentation.principles.widgets.AccordionEntry;
-import org.m2ling.presentation.widgets.MainFrame;
+import org.m2ling.presentation.widgets.SidebarEntry;
 
 import com.google.inject.Inject;
 import com.vaadin.Application;
@@ -73,8 +72,8 @@ public class M2lingApplication extends Application {
 		if (app != this.currentApp) {
 			mframe.resetAccordion();
 			mframe.getAppPanel().setContent(app);
-			List<AccordionEntry> entries = app.getAccordionEntries();
-			for (AccordionEntry entry : entries) {
+			List<SidebarEntry> entries = app.getAccordionEntries();
+			for (SidebarEntry entry : entries) {
 				mframe.getAccordion().addTab(entry, entry.getLabel(), null, 0);
 				if (entry.isDefaultEntry()) {
 					mframe.getAccordion().setSelectedTab(entry);

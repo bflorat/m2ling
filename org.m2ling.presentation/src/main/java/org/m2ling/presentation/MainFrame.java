@@ -3,7 +3,7 @@
  *
  * @author "Bertrand Florat <bertrand@florat.net>"
  */
-package org.m2ling.presentation.widgets;
+package org.m2ling.presentation;
 
 import com.vaadin.terminal.ThemeResource;
 import com.vaadin.ui.Accordion;
@@ -85,6 +85,7 @@ public class MainFrame extends CustomComponent {
 
 		// Search box
 		search = new TextField("Search");
+		search.setWidth("100%");
 
 		// Comments area
 		comments = new TextArea("Comments");

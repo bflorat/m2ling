@@ -7,7 +7,7 @@ package org.m2ling.presentation;
 
 import java.util.List;
 
-import org.m2ling.presentation.principles.widgets.AccordionEntry;
+import org.m2ling.presentation.widgets.SidebarEntry;
 
 import com.vaadin.ui.Panel;
 
@@ -21,6 +21,6 @@ public abstract class GuiModule extends Panel {
 	abstract public void attach();
 
 	/** Order list of accordion entries **/
-	abstract public List<AccordionEntry> getAccordionEntries();
+	abstract public List<SidebarEntry> getAccordionEntries();
 
 }

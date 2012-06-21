@@ -18,7 +18,6 @@ import org.m2ling.presentation.events.Events;
 import org.m2ling.presentation.events.ObservationManager;
 import org.m2ling.presentation.principles.model.ViewPointBean;
 import org.m2ling.presentation.principles.utils.Converter;
-import org.m2ling.presentation.principles.widgets.ViewPointIconUploader;
 import org.m2ling.presentation.widgets.Command;
 import org.m2ling.presentation.widgets.OKCancel;
 import org.m2ling.service.principles.ViewPointService;
