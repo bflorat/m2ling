@@ -56,6 +56,10 @@
     </componentTypes>
   </viewPoints>
   <viewPoints id="_FtwQsJ6sEeGsQqqxr3JCNw" name="Applicative architecture" description="Show applicative component from one or more applications and applicative links between them. Middleware are not modelised.">
+    <statusLiterals>VALIDATED</statusLiterals>
+    <statusLiterals>STUDIED</statusLiterals>
+    <statusLiterals>REFUSED</statusLiterals>
+    <statusLiterals>OBSOLETE</statusLiterals>
     <componentTypes id="_UI9CAZqmEeGbI4NH3iicSge" name="Application" comment="" description="An application implements a coherent set of information systems business services. It is built out of one or more applicative modules." boundType="_c1vGwJq4EeGVMag01qc4bw">
       <references targets="_E3EOwZoWEeG71vmJ5CR-iAe _E3EOwZoWEeG71vkjfdhbfb _1y2zQZoWEeG71vmJ5CR-iAe"/>
     </componentTypes>
@@ -65,6 +69,12 @@
     <linkTypes id="_psOW0p8zEeGYS-4UJ-FpAA" name="SERVICE_SYNC_READ" description="Synchronous call to read-only services" sourceTypes="_E3EOwZoWEeG71vmJ5CR-iAe" destinationTypes="_1y2zQZoWEeG71vmJ5CR-iAe"/>
     <linkTypes id="_psOW0p8zEeGYS-4UJ-FpAArr" name="SERVICE_SYNC_RW" description="Synchronous call to Read and write services" sourceTypes="_E3EOwZoWEeG71vmJ5CR-iAe" destinationTypes="_1y2zQZoWEeG71vmJ5CR-iAe"/>
     <linkTypes id="_psOW0p8zEeGYS-4UJ-FpAAdgfgf" name="SERVICE_ASYNC_READ" description="Asynchronous call to read-only services used to retrieve large amount of data." sourceTypes="_E3EOwZoWEeG71vmJ5CR-iAe" destinationTypes="_1y2zQZoWEeG71vmJ5CR-iAe"/>
+    <rules id="dfsdhfkjehzlkm343" name="R1" comment="This rule emphases the rule of a portal." description="Direct call between GUI modules are forbitten." status="VALIDATED" priority="VERY_HIGH">
+      <tags>modules</tags>
+    </rules>
+    <rules id="bndbfndb" name="R2" comment="" description="Direct call between Services module are forbitten." status="VALIDATED" priority="VERY_HIGH">
+      <tags>modules</tags>
+    </rules>
   </viewPoints>
   <viewPoints id="_mHf5sKKSEeGOsOUMPsTb_w" name="Deployment architecture" description="Contains all concepts used to deploy an application like : module, server, middleware">
     <componentTypes id="_sgTcYaTjEeGhbskxmOc77w" name="Environment">

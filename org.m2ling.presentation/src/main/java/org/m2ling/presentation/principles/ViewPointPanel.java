@@ -47,12 +47,14 @@ public class ViewPointPanel extends Panel {
 
 	private final ViewPointBean bean;
 
-	private ViewPointDialogFactory factory;
+	private ViewPointDialogFactory vpDialogFactory;
+
+	private RulesPanelFactory rulesPanelFactory;
 
 	private ViewPointService service;
 
 	private ObservationManager obs;
-	
+
 	private DTOConverter.ToDTO toDTO;
 
 	/**
@@ -65,14 +67,15 @@ public class ViewPointPanel extends Panel {
 	 */
 	@Inject
 	public ViewPointPanel(@Assisted ViewPointBean bean, Logger logger, ViewPointDialogFactory factory,
-			ViewPointService service, ObservationManager obs,DTOConverter.ToDTO toDTO) {
+			ViewPointService service, ObservationManager obs, DTOConverter.ToDTO toDTO, RulesPanelFactory rulesPanelFactory) {
 		super();
 		this.logger = logger;
 		this.bean = bean;
-		this.factory = factory;
+		this.vpDialogFactory = factory;
 		this.service = service;
 		this.obs = obs;
 		this.toDTO = toDTO;
+		this.rulesPanelFactory = rulesPanelFactory;
 		if (bean == null) {
 			throw new IllegalArgumentException("Null viewpoint");
 		}
@@ -110,7 +113,7 @@ public class ViewPointPanel extends Panel {
 		edit.setStyleName(BaseTheme.BUTTON_LINK);
 		edit.addListener(new Button.ClickListener() {
 			public void buttonClick(ClickEvent event) {
-				ViewPointDialog vpDialog = factory.getViewPointDialogFor(bean);
+				ViewPointDialog vpDialog = vpDialogFactory.getViewPointDialogFor(bean);
 				vpDialog.setModal(true);
 				getWindow().addWindow(vpDialog);
 			}
@@ -132,11 +135,15 @@ public class ViewPointPanel extends Panel {
 			}
 		});
 
+		final VerticalLayout rulesHiddenPane = new VerticalLayout();
+		rulesHiddenPane.setVisible(false);
+		RulesPanel rulesPanel = rulesPanelFactory.getRulesPanelFor(bean);
+		rulesHiddenPane.addComponent(rulesPanel);
 		Button rules = new Button("Rules");
 		rules.setStyleName(BaseTheme.BUTTON_LINK);
 		rules.addListener(new Button.ClickListener() {
 			public void buttonClick(ClickEvent event) {
-				// TODO
+				rulesHiddenPane.setVisible(!rulesHiddenPane.isVisible());
 			}
 		});
 
@@ -200,6 +207,6 @@ public class ViewPointPanel extends Panel {
 		addComponent(componentTypes);
 		addComponent(linkTypes);
 		addComponent(rules);
-
+		addComponent(rulesHiddenPane);
 	}
 }

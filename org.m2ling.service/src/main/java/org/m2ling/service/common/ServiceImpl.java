@@ -8,8 +8,6 @@ import org.m2ling.persistence.PersistenceManager;
 import org.m2ling.service.util.CoreUtil;
 import org.m2ling.service.util.DTOConverter;
 
-import com.google.inject.Inject;
-
 /**
  * @author "Bertrand Florat <bertrand@florat.net>"
  * 
@@ -35,47 +33,21 @@ import com.google.inject.Inject;
  * }
  * </pre>
  */
-public class ServiceImpl {
+abstract public class ServiceImpl {
 
 	/** The persistence manager bringing persistence features to the services */
-	@Inject
 	protected PersistenceManager pmanager;
 
 	/** DTO to domain object converter */
-	@Inject
 	protected DTOConverter.FromDTO fromDTO;
 
 	/** Domain object to DTO converter */
-	@Inject
 	protected DTOConverter.ToDTO toDTO;
 
 	/** Utilities class */
-	@Inject
 	protected CoreUtil util;
 
 	/** Configuration */
-	@Inject
 	protected Configuration conf;
-
-	
-	/**
-	 * Build a ServiceImpl with optional overridden modules
-	 * 
-	 * @param additionalTestModules
-	 *           : test-specific modules configuration overriding production one
-	 */
-	protected ServiceImpl() {
-		super();
-	}
-
-	/**
-	 * Return the persistence manager. We assume that pmanager has already been initiated in static
-	 * blocs or services constructor.
-	 * 
-	 * @return the pmanager
-	 */
-	public PersistenceManager getPersistenceManager() {
-		return pmanager;
-	}
 
 }

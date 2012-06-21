@@ -28,11 +28,16 @@ import com.google.inject.Singleton;
 @Singleton
 public class CoreUtil {
 
-	@Inject
 	private Logger logger;
 
-	@Inject
 	private PersistenceManager pmanager;
+
+	@Inject
+	public CoreUtil(Logger logger, PersistenceManager pm) {
+		super();
+		this.logger = logger;
+		this.pmanager = pm;
+	}
 
 	/**
 	 * Return a viewpoint denoted by the given name or null if none matches.

@@ -5,6 +5,7 @@ package org.m2ling.service.principles;
 
 import java.util.List;
 
+import org.m2ling.common.dto.core.RuleDTO;
 import org.m2ling.common.dto.core.ViewPointDTO;
 import org.m2ling.common.exceptions.FunctionalException;
 
@@ -21,52 +22,53 @@ import org.m2ling.common.exceptions.FunctionalException;
 
 public interface RuleService {
 	/**
-	 * Update an existing view point given a view point given a viewpoint DTO. Note that some
-	 * uncatched exceptions can occur for example if the viewpoint cannot be persisted. The method
-	 * require the associated authorization to be called.
+	 * Update an existing rule.
 	 * 
-	 * @param vpDTO
+	 * @param rule
+	 *           the rule
+	 * @throws FunctionalException
+	 *            if the rule doesn't exist or if one of the rule DTO entry is faulty
+	 */
+	void updateRule(RuleDTO rule) throws FunctionalException;
+
+	/**
+	 * Create a new rule for provided viewpoint.
+	 * 
+	 * @param vp
+	 *           the view point DTO
+	 * @param rule
+	 *           the rule
+	 * @throws FunctionalException
+	 *            if the viewpoint doesn't exist
+	 * @throws FunctionalException
+	 *            if a rule already exist with id or name or if one of the DTO entry is faulty
+	 */
+	void createRule(ViewPointDTO vp, RuleDTO rule) throws FunctionalException;
+
+	/**
+	 * Return all available rules given a viewpoint. If none rules is available, a void list is
+	 * returned.
+	 * 
+	 * <p>
+	 * Rules are sorted by name.
+	 * </p>
+	 * 
+	 * 
+	 * @param viewpoint
+	 * @throws FunctionalException
+	 *            if the viewpoint doesn't exist
+	 * @return all available rules for given viewpoint
+	 */
+	List<RuleDTO> getAllRules(ViewPointDTO vp) throws FunctionalException;
+
+	/**
+	 * Drop the given rule if it exists.
+	 * 
+	 * @param rule
 	 *           the view point DTO
 	 * @throws FunctionalException
-	 *            if the viewpoint doesn't exist or if one of the DTO entry is faulty
+	 *            if the rule doesn't exist.
 	 */
-	void updateRule(ViewPointDTO vpDTO) throws FunctionalException;
-
-	/**
-	 * Create a new view point given a viewpoint DTO. Note that some uncatched exceptions can occur
-	 * for example if the viewpoint cannot be persisted. The method require the associated
-	 * authorization to be called.
-	 * 
-	 * @param vpDTO
-	 *           the view point DTO
-	 * @throws FunctionalException
-	 *            if a viewpoint already exist with the provided name or if one of the DTO entry is
-	 *            faulty
-	 */
-	void createViewPoint(ViewPointDTO vpDTO) throws FunctionalException;
-
-	/**
-	 * Return all available viewpoints given user authorization and realm. If none viewpoints are
-	 * available, a void list is returned.
-	 * 
-	 * @return all available viewpoints DTO for current user.
-	 */
-	List<ViewPointDTO> getAllViewPoints();
-
-	/**
-	 * Return the viewpoint DTO given a VP name (unique) if it exist, null otherwise.
-	 * 
-	 */
-	ViewPointDTO getViewPointByName(String name);
-
-	/**
-	 * Drop the given viewpoint if it exists.
-	 * 
-	 * @param vpDTO
-	 *           the view point DTO
-	 * @throws FunctionalException
-	 *            if viewpoint doesn't exist.
-	 */
-	void deleteViewPoint(ViewPointDTO vpDTO) throws FunctionalException;
+	void deleteRule(RuleDTO rule) throws FunctionalException;
 
 }

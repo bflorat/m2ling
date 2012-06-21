@@ -21,9 +21,7 @@ import org.m2ling.common.exceptions.FunctionalException;
 
 public interface ViewPointService {
 	/**
-	 * Update an existing view point given a view point given a viewpoint DTO. Note that some
-	 * uncatched exceptions can occur for example if the viewpoint cannot be persisted. The method
-	 * require the associated authorization to be called.
+	 * Update an existing view point given a view point given a viewpoint DTO. 
 	 * 
 	 * @param vpDTO
 	 *           the view point DTO
@@ -33,9 +31,7 @@ public interface ViewPointService {
 	void updateViewPoint(ViewPointDTO vpDTO) throws FunctionalException;
 
 	/**
-	 * Create a new view point given a viewpoint DTO. Note that some uncatched exceptions can occur
-	 * for example if the viewpoint cannot be persisted. The method require the associated
-	 * authorization to be called.
+	 * Create a new view point given a viewpoint DTO. 
 	 * 
 	 * @param vpDTO
 	 *           the view point DTO
@@ -48,6 +44,7 @@ public interface ViewPointService {
 	/**
 	 * Return all available viewpoints given user authorization and realm. If none viewpoints are
 	 * available, a void list is returned.
+	 * <p>Viewpoints are sorted by name.</p>
 	 * 
 	 * @return all available viewpoints DTO for current user.
 	 */

@@ -7,12 +7,16 @@ import static junit.framework.Assert.assertTrue;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.logging.Logger;
 
 import org.junit.Test;
 import org.m2ling.common.dto.core.ViewPointDTO;
 import org.m2ling.common.utils.Utils;
 import org.m2ling.domain.core.CoreFactory;
 import org.m2ling.domain.core.ViewPoint;
+import org.m2ling.persistence.PersistenceManager;
+import org.m2ling.persistence.impl.PersistenceManagerInMemoryImpl;
+import org.m2ling.persistence.impl.PersistenceManagerXMIImpl;
 
 /**
  * @author "Bertrand Florat <bertrand@florat.net>"
@@ -26,7 +30,9 @@ public class DTOConverterTest {
 		List<String> tags = Arrays.asList(new String[] { "tag1", "tag2" });
 		ViewPointDTO dto = new ViewPointDTO.Builder("123", "foo").comment("comment1").description("desc1")
 				.statusLiterals(literals).tags(tags).build();
-		DTOConverter.FromDTO converter = new DTOConverter.FromDTO(new CoreUtil());
+		PersistenceManager pm = new PersistenceManagerInMemoryImpl();
+		CoreUtil util = new CoreUtil(Logger.getAnonymousLogger(), pm);
+		DTOConverter.FromDTO converter = new DTOConverter.FromDTO(util);
 		ViewPoint vp = converter.newViewPoint(dto);
 		assertTrue(vp.getId().equals("123"));
 		assertTrue(vp.getComment().equals("comment1"));
@@ -40,7 +46,9 @@ public class DTOConverterTest {
 
 	@Test
 	public void viewpointToDTONominal() {
-		DTOConverter.ToDTO toDTO = new DTOConverter.ToDTO(new CoreUtil());
+		PersistenceManager pm = new PersistenceManagerInMemoryImpl();
+		CoreUtil util = new CoreUtil(Logger.getAnonymousLogger(), pm);
+		DTOConverter.ToDTO toDTO = new DTOConverter.ToDTO(util);
 		ViewPoint vp = CoreFactory.eINSTANCE.createViewPoint();
 		vp.setId("123");
 		vp.setComment("comment1");
@@ -60,5 +68,4 @@ public class DTOConverterTest {
 		List<String> tags2 = dto.getTags();
 		assertTrue(tags2.size() == 2 && tags2.get(0).equals("tag1"));
 	}
-
 }

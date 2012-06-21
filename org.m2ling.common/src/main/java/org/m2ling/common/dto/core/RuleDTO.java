@@ -11,7 +11,7 @@ import java.util.List;
  * 
  * @author Bertrand Florat <bertrand@florat.net>
  */
-public class RuleDTO {
+public class RuleDTO implements Comparable<RuleDTO> {
 
 	private final String id;
 	private final String name;
@@ -138,6 +138,29 @@ public class RuleDTO {
 	 */
 	public String getPriority() {
 		return priority;
+	}
+
+	public String toString() {
+		return getId() + "/" + getName();
+	}
+
+	public boolean equals(Object o) {
+		if (o == null || !(o instanceof RuleDTO)) {
+			return false;
+		}
+		RuleDTO other = (RuleDTO) o;
+		return other.getId().equals(getId());
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.lang.Comparable#compareTo(java.lang.Object)
+	 */
+	@Override
+	public int compareTo(RuleDTO o) {
+		return o.getName().compareTo(o.getName());
+
 	}
 
 }

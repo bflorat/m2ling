@@ -11,7 +11,7 @@ import java.util.List;
  * 
  * @author Bertrand Florat <bertrand@florat.net>
  */
-public class ViewPointDTO {
+public class ViewPointDTO implements Comparable<ViewPointDTO> {
 
 	private final String id;
 	private final String name;
@@ -66,14 +66,14 @@ public class ViewPointDTO {
 	private ViewPointDTO(Builder builder) {
 		id = builder.id;
 		name = builder.name;
-		if (builder.tags != null ) {
+		if (builder.tags != null) {
 			tags = new ArrayList<String>(builder.tags); // defensive copy
 		} else {
 			tags = null;
 		}
 		description = builder.description;
 		comment = builder.comment;
-		if (builder.statusLiterals != null ) {
+		if (builder.statusLiterals != null) {
 			statusLiterals = new ArrayList<String>(builder.statusLiterals); // defensive copy
 		} else {
 			statusLiterals = null;
@@ -86,7 +86,7 @@ public class ViewPointDTO {
 	public String getName() {
 		return name;
 	}
-	
+
 	/**
 	 * @return the id
 	 */
@@ -130,6 +130,29 @@ public class ViewPointDTO {
 	 */
 	public String getComment() {
 		return comment;
+	}
+
+	public String toString() {
+		return getId() + "/" + getName();
+	}
+
+	public boolean equals(Object o) {
+		if (o == null || !(o instanceof ViewPointDTO)) {
+			return false;
+		}
+		ViewPointDTO other = (ViewPointDTO) o;
+		return other.getId().equals(getId());
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.lang.Comparable#compareTo(java.lang.Object)
+	 */
+	@Override
+	public int compareTo(ViewPointDTO o) {
+		return o.getName().compareTo(o.getName());
+
 	}
 
 }
