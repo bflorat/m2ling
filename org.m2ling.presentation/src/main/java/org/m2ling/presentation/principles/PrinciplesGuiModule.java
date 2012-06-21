@@ -17,7 +17,7 @@ import org.m2ling.presentation.events.Events;
 import org.m2ling.presentation.events.ObservationManager;
 import org.m2ling.presentation.events.Observer;
 import org.m2ling.presentation.principles.model.ViewPointBean;
-import org.m2ling.presentation.principles.utils.Converter;
+import org.m2ling.presentation.principles.utils.DTOConverter;
 import org.m2ling.presentation.widgets.SidebarEntry;
 import org.m2ling.service.principles.ViewPointService;
 
@@ -52,9 +52,12 @@ public class PrinciplesGuiModule extends GuiModule implements Observer {
 
 	private ObservationManager obs;
 
+	private DTOConverter.FromDTO fromDTO;
+
 	@Inject
 	public PrinciplesGuiModule(ViewPointService vpService, Logger logger, FeaturesEntry features,
-			ViewPointDialogFactory dialogFactory, ViewPointPanelFactory panelFactory, ObservationManager obs) {
+			ViewPointDialogFactory dialogFactory, ViewPointPanelFactory panelFactory, ObservationManager obs,
+			DTOConverter.FromDTO fromDTO) {
 		super();
 		setSizeFull();
 		this.vpService = vpService;
@@ -63,6 +66,7 @@ public class PrinciplesGuiModule extends GuiModule implements Observer {
 		this.dialogFactory = dialogFactory;
 		this.panelFactory = panelFactory;
 		this.obs = obs;
+		this.fromDTO = fromDTO;
 		((VerticalLayout) getContent()).setSpacing(false);
 		obs.register(this);
 	}
@@ -79,7 +83,7 @@ public class PrinciplesGuiModule extends GuiModule implements Observer {
 			((VerticalLayout) getContent()).setComponentAlignment(vert, Alignment.MIDDLE_CENTER);
 		} else {
 			for (ViewPointDTO dto : vpsDTO) {
-				ViewPointBean bean = Converter.ViewPointConverter.convertFromDTO(dto);
+				ViewPointBean bean = fromDTO.getViewPointBean(dto);
 				ViewPointPanel panel = panelFactory.getViewPointPanelFor(bean);
 				addComponent(panel);
 			}

@@ -7,18 +7,19 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Viewpoint DTO object used between layers.
+ * Rule DTO object used between layers.
  * 
  * @author Bertrand Florat <bertrand@florat.net>
  */
-public class ViewPointDTO {
+public class RuleDTO {
 
 	private final String id;
 	private final String name;
 	private final List<String> tags;
 	private final String description;
 	private final String comment;
-	private final List<String> statusLiterals;
+	private final String status;
+	private final String priority;
 
 	public static class Builder {
 
@@ -30,7 +31,8 @@ public class ViewPointDTO {
 		private List<String> tags = null;
 		private String description = null;
 		private String comment = null;
-		private List<String> statusLiterals;
+		private String status = null;
+		private String priority = null;
 
 		public Builder(String id, String name) {
 			this.id = id;
@@ -52,32 +54,34 @@ public class ViewPointDTO {
 			return this;
 		}
 
-		public Builder statusLiterals(List<String> statusLiterals) {
-			this.statusLiterals = statusLiterals;
+		public Builder status(String status) {
+			this.status = status;
 			return this;
 		}
 
-		public ViewPointDTO build() {
-			ViewPointDTO dto = new ViewPointDTO(this);
+		public Builder priority(String priority) {
+			this.priority = priority;
+			return this;
+		}
+
+		public RuleDTO build() {
+			RuleDTO dto = new RuleDTO(this);
 			return dto;
 		}
 	}
 
-	private ViewPointDTO(Builder builder) {
+	private RuleDTO(Builder builder) {
 		id = builder.id;
 		name = builder.name;
-		if (builder.tags != null ) {
+		if (builder.tags != null) {
 			tags = new ArrayList<String>(builder.tags); // defensive copy
 		} else {
 			tags = null;
 		}
 		description = builder.description;
 		comment = builder.comment;
-		if (builder.statusLiterals != null ) {
-			statusLiterals = new ArrayList<String>(builder.statusLiterals); // defensive copy
-		} else {
-			statusLiterals = null;
-		}
+		status = builder.status;
+		priority = builder.priority;
 	}
 
 	/**
@@ -86,7 +90,7 @@ public class ViewPointDTO {
 	public String getName() {
 		return name;
 	}
-	
+
 	/**
 	 * @return the id
 	 */
@@ -107,15 +111,12 @@ public class ViewPointDTO {
 	}
 
 	/**
-	 * Return a defensive copy of the status literals.
+	 * Return the status.
 	 * 
-	 * @return a defensive copy of the status literals
+	 * @return the status literal.
 	 */
-	public List<String> getStatusLiterals() {
-		if (statusLiterals == null) {
-			return null;
-		}
-		return new ArrayList<String>(statusLiterals);
+	public String getStatus() {
+		return status;
 	}
 
 	/**
@@ -130,6 +131,13 @@ public class ViewPointDTO {
 	 */
 	public String getComment() {
 		return comment;
+	}
+
+	/**
+	 * @return the priority
+	 */
+	public String getPriority() {
+		return priority;
 	}
 
 }

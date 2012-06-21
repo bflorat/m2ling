@@ -34,3 +34,24 @@
 	margin-bottom: 3px;
 }
 
+.principles_vp-panel-desc {
+	font-size: 90%;
+	margin-bottom: 3px;
+}
+
+.principles_vp-panel-comment {
+	border-style: dotted;
+	border-width:1px; 
+	font-size: 90%;
+	margin-bottom: 3px;
+	background-color:#b0c4de; 
+}
+
+.principles_vp-panel-tags {
+	font-style:italic;
+	margin-bottom: 3px;
+}
+
+
+
+

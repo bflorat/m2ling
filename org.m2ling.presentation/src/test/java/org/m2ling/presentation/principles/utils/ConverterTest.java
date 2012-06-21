@@ -22,7 +22,8 @@ public class ConverterTest {
 		List<String> tags = Arrays.asList(new String[] { "tag1", "tag2" });
 		ViewPointDTO dto = new ViewPointDTO.Builder("123", "foo").comment("comment1").description("desc1")
 				.statusLiterals(literals).tags(tags).build();
-		ViewPointBean bean = Converter.ViewPointConverter.convertFromDTO(dto);
+		DTOConverter.FromDTO converter = new DTOConverter.FromDTO();
+		ViewPointBean bean = converter.getViewPointBean(dto);
 		assertTrue(bean.getId().equals("123"));
 		assertTrue(bean.getComment().equals("comment1"));
 		assertTrue(bean.getDescription().equals("desc1"));
@@ -40,7 +41,8 @@ public class ConverterTest {
 		bean.setName("foo");
 		bean.setStatusLiterals("status1,status2");
 		bean.setTags("tag1,tag2");
-		ViewPointDTO dto = Converter.ViewPointConverter.convertToDTO(bean);
+		DTOConverter.ToDTO converter = new DTOConverter.ToDTO();
+		ViewPointDTO dto = converter.getViewPointDTO(bean);
 		assertTrue(dto.getId().equals("123"));
 		assertTrue(dto.getComment().equals("comment1"));
 		assertTrue(dto.getDescription().equals("desc1"));

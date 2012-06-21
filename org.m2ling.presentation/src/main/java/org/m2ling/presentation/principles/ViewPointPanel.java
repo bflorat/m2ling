@@ -14,10 +14,11 @@ import org.m2ling.common.exceptions.FunctionalException;
 import org.m2ling.presentation.events.Events;
 import org.m2ling.presentation.events.ObservationManager;
 import org.m2ling.presentation.principles.model.ViewPointBean;
-import org.m2ling.presentation.principles.utils.Converter;
+import org.m2ling.presentation.principles.utils.DTOConverter;
 import org.m2ling.presentation.principles.utils.IconManager;
 import org.m2ling.service.principles.ViewPointService;
 
+import com.google.common.base.Strings;
 import com.google.inject.Inject;
 import com.google.inject.assistedinject.Assisted;
 import com.vaadin.terminal.FileResource;
@@ -26,12 +27,12 @@ import com.vaadin.terminal.ThemeResource;
 import com.vaadin.ui.Alignment;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Button.ClickEvent;
-import com.vaadin.ui.Window.Notification;
 import com.vaadin.ui.Embedded;
 import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.Label;
 import com.vaadin.ui.Panel;
 import com.vaadin.ui.VerticalLayout;
+import com.vaadin.ui.Window.Notification;
 import com.vaadin.ui.themes.BaseTheme;
 
 /**
@@ -51,6 +52,8 @@ public class ViewPointPanel extends Panel {
 	private ViewPointService service;
 
 	private ObservationManager obs;
+	
+	private DTOConverter.ToDTO toDTO;
 
 	/**
 	 * Build an VP panel
@@ -62,20 +65,22 @@ public class ViewPointPanel extends Panel {
 	 */
 	@Inject
 	public ViewPointPanel(@Assisted ViewPointBean bean, Logger logger, ViewPointDialogFactory factory,
-			ViewPointService service, ObservationManager obs) {
+			ViewPointService service, ObservationManager obs,DTOConverter.ToDTO toDTO) {
 		super();
 		this.logger = logger;
 		this.bean = bean;
 		this.factory = factory;
 		this.service = service;
 		this.obs = obs;
+		this.toDTO = toDTO;
 		if (bean == null) {
 			throw new IllegalArgumentException("Null viewpoint");
 		}
 		vert = (VerticalLayout) getContent();
 		vert.setSpacing(true);
 		vert.setMargin(true);
-		vert.setSizeUndefined();
+		vert.setHeight("0%");
+		vert.setHeight(null);
 		setStyleName("principles_vp-panel");
 	}
 
@@ -116,7 +121,7 @@ public class ViewPointPanel extends Panel {
 		delete.addListener(new Button.ClickListener() {
 			public void buttonClick(ClickEvent event) {
 				try {
-					ViewPointDTO vpDTO = Converter.ViewPointConverter.convertToDTO(bean);
+					ViewPointDTO vpDTO = toDTO.getViewPointDTO(bean);
 					service.deleteViewPoint(vpDTO);
 					obs.notifySync(new org.m2ling.presentation.events.Event(Events.VP_CHANGE));
 				} catch (FunctionalException e) {
@@ -130,14 +135,6 @@ public class ViewPointPanel extends Panel {
 		Button rules = new Button("Rules");
 		rules.setStyleName(BaseTheme.BUTTON_LINK);
 		rules.addListener(new Button.ClickListener() {
-			public void buttonClick(ClickEvent event) {
-				// TODO
-			}
-		});
-
-		Button activities = new Button("Activities");
-		activities.setStyleName(BaseTheme.BUTTON_LINK);
-		activities.addListener(new Button.ClickListener() {
 			public void buttonClick(ClickEvent event) {
 				// TODO
 			}
@@ -159,6 +156,24 @@ public class ViewPointPanel extends Panel {
 			}
 		});
 
+		Label description = new Label(bean.getDescription());
+		description.setDescription(bean.getDescription());
+		description.setStyleName("principles_vp-panel-desc");
+		description.setWidth("100%");
+		description.setHeight(null);
+
+		Label comment = new Label(bean.getComment());
+		comment.setDescription(bean.getComment());
+		comment.setStyleName("principles_vp-panel-comment");
+		comment.setWidth("100%");
+		comment.setHeight(null);
+
+		Label tags = new Label(bean.getTags());
+		tags.setDescription(bean.getTags());
+		tags.setStyleName("principles_vp-panel-tags");
+		tags.setWidth("100%");
+		tags.setHeight(null);
+
 		// Layout
 		HorizontalLayout hl1 = new HorizontalLayout();
 		hl1.setSpacing(true);
@@ -169,13 +184,22 @@ public class ViewPointPanel extends Panel {
 		hl1.addComponent(edit);
 		hl1.addComponent(delete);
 
-		HorizontalLayout hl2 = new HorizontalLayout();
-		hl2.setSpacing(true);
-		hl2.addComponent(componentTypes);
-		hl2.addComponent(linkTypes);
-		hl2.addComponent(rules);
-		hl2.addComponent(activities);
+		HorizontalLayout hl3 = new HorizontalLayout();
+		hl3.setSpacing(true);
+		hl3.addComponent(new Label("Tags:"));
+		hl3.addComponent(tags);
+
 		addComponent(hl1);
-		addComponent(hl2);
+		if (!Strings.isNullOrEmpty(bean.getTags())) {
+			addComponent(hl3);
+		}
+		addComponent(description);
+		if (!Strings.isNullOrEmpty(bean.getComment())) {
+			addComponent(comment);
+		}
+		addComponent(componentTypes);
+		addComponent(linkTypes);
+		addComponent(rules);
+
 	}
 }

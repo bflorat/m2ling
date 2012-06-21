@@ -17,7 +17,7 @@ import org.m2ling.common.exceptions.FunctionalException;
 import org.m2ling.presentation.events.Events;
 import org.m2ling.presentation.events.ObservationManager;
 import org.m2ling.presentation.principles.model.ViewPointBean;
-import org.m2ling.presentation.principles.utils.Converter;
+import org.m2ling.presentation.principles.utils.DTOConverter;
 import org.m2ling.presentation.widgets.Command;
 import org.m2ling.presentation.widgets.OKCancel;
 import org.m2ling.service.principles.ViewPointService;
@@ -52,21 +52,22 @@ public class ViewPointDialog extends Window {
 	private Logger logger;
 
 	private ObservationManager obs;
+	
+	private DTOConverter.ToDTO toDTO;
 
 	/**
 	 * Build a view point dialog
 	 * 
-	 * @param vp
-	 *           an optional pre-filling view point (null when creating a new vp)
 	 */
 	@Inject
 	public ViewPointDialog(Logger logger, @Assisted @Nullable ViewPointBean vp, ViewPointService service,
-			ObservationManager obs) {
+			ObservationManager obs,DTOConverter.ToDTO toDTO) {
 		super(vp == null ? "New View Point" : vp.getName());
 		this.bean = vp;
 		this.service = service;
 		this.logger = logger;
 		this.obs = obs;
+		this.toDTO = toDTO;
 		// We need a bean to attach data to
 		if (vp == null) {
 			bean = new ViewPointBean();
@@ -95,7 +96,7 @@ public class ViewPointDialog extends Window {
 		Command ok = new Command() {
 			public void execute() {
 				form.commit();
-				ViewPointDTO vpDTO = Converter.ViewPointConverter.convertToDTO(bean);
+				ViewPointDTO vpDTO = toDTO.getViewPointDTO(bean);
 				try {
 					if (newVP) {
 						service.createViewPoint(vpDTO);

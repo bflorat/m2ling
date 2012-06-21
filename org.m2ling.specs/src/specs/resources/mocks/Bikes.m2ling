@@ -66,7 +66,7 @@
     <linkTypes id="_psOW0p8zEeGYS-4UJ-FpAArr" name="SERVICE_SYNC_RW" description="Synchronous call to Read and write services" sourceTypes="_E3EOwZoWEeG71vmJ5CR-iAe" destinationTypes="_1y2zQZoWEeG71vmJ5CR-iAe"/>
     <linkTypes id="_psOW0p8zEeGYS-4UJ-FpAAdgfgf" name="SERVICE_ASYNC_READ" description="Asynchronous call to read-only services used to retrieve large amount of data." sourceTypes="_E3EOwZoWEeG71vmJ5CR-iAe" destinationTypes="_1y2zQZoWEeG71vmJ5CR-iAe"/>
   </viewPoints>
-  <viewPoints id="_mHf5sKKSEeGOsOUMPsTb_w" name="Deployment" description="Contains all concepts used to deploy an application like : module, server, middleware">
+  <viewPoints id="_mHf5sKKSEeGOsOUMPsTb_w" name="Deployment architecture" description="Contains all concepts used to deploy an application like : module, server, middleware">
     <componentTypes id="_sgTcYaTjEeGhbskxmOc77w" name="Environment">
       <references targets="_-a222Gi7NYPtEuJdA _0pkjcZ9aEeGNFtlcQfU333 _aazazaza _1y2zQZohnnnmJ5CR-iA _Ybdmtd456 _wf5AQZ111YPtEuJdA __111CR-iA _fKt222vmJ5CR-iA _ha8mE333Mag01qc4bw _aazazazaerer"/>
     </componentTypes>

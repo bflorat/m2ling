@@ -35,11 +35,16 @@ public class OKCancel extends CustomComponent {
 		hz.setMargin(true);
 		okButton = new Button("OK", new Button.ClickListener() {
 			public void buttonClick(ClickEvent event) {
-				ok.execute();
+				try {
+					// Makes sure user can't click anymore
+					okButton.setDisableOnClick(true);
+					ok.execute();
+				} finally {
+					okButton.setDisableOnClick(false);
+				}
 			}
 		});
 		okButton.setIcon(new ThemeResource("../runo/icons/16/ok.png"));
-
 		cancelButton = new Button("Cancel", new Button.ClickListener() {
 			public void buttonClick(ClickEvent event) {
 				cancel.execute();

@@ -1,7 +1,5 @@
 /**
  * Copyright (C) 2012 Bertrand Florat
- *
- * @author "Bertrand Florat <bertrand@florat.net>"
  */
 package org.m2ling.presentation.principles.utils;
 
@@ -12,21 +10,56 @@ import org.m2ling.common.dto.core.ViewPointDTO;
 import org.m2ling.common.utils.Utils;
 import org.m2ling.presentation.principles.model.ViewPointBean;
 
-/**
- * Convert from/to DTO to/from bean
- */
-public class Converter {
+import com.google.inject.Singleton;
 
-	public static class ViewPointConverter {
-		public static ViewPointDTO convertToDTO(ViewPointBean bean) {
+/**
+ * 
+ * Convert presentation layer classes from and to DTO associated classes.
+ * 
+ * @author Bertrand Florat <bertrand@florat.net>
+ * 
+ */
+public class DTOConverter {
+
+	private DTOConverter() {
+		// Utility class, no instantiation
+	}
+
+	/**
+	 * Set of utility methods to get DTO objects from presentation objects.
+	 * 
+	 * @author Bertrand Florat <bertrand@florat.net>
+	 * 
+	 */
+	@Singleton
+	public static class ToDTO {
+
+		public ViewPointDTO getViewPointDTO(ViewPointBean bean) {
 			List<String> tags = Utils.stringListFromString(bean.getTags());
 			List<String> status = Utils.stringListFromString(bean.getStatusLiterals());
 			ViewPointDTO vpDTO = new ViewPointDTO.Builder(bean.getId(), bean.getName()).description(bean.getDescription())
 					.tags(tags).comment(bean.getComment()).statusLiterals(status).build();
 			return vpDTO;
 		}
+	}
 
-		public static ViewPointBean convertFromDTO(ViewPointDTO dto) {
+	/**
+	 * Set of utility methods to get model objects from DTO instances.
+	 * 
+	 * @author Bertrand Florat <bertrand@florat.net>
+	 * 
+	 */
+	@Singleton
+	public static class FromDTO {
+
+		/**
+		 * Return a new ViewPoint instance given a DTO or an already existing instance of any.
+		 * 
+		 * @param dto
+		 *           the dto
+		 * @return a new ViewPoint instance
+		 */
+		public ViewPointBean getViewPointBean(ViewPointDTO dto) {
 			ViewPointBean bean = new ViewPointBean();
 			bean.setId(dto.getId());
 			if (dto.getName() != null) {
@@ -63,6 +96,7 @@ public class Converter {
 			}
 			return bean;
 		}
+
 	}
 
 }
