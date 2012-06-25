@@ -13,6 +13,7 @@ import java.util.logging.Logger;
 
 import org.m2ling.common.configuration.Configuration;
 import org.m2ling.common.utils.Consts;
+import org.m2ling.common.utils.Msg;
 import org.m2ling.presentation.principles.model.ViewPointBean;
 
 import com.google.common.io.Files;
@@ -49,9 +50,9 @@ public class ViewPointIconUploader extends CustomComponent implements Upload.Pro
 		hl.setSpacing(true);
 		setSizeUndefined();
 		setCompositionRoot(hl);
-		upload = new Upload("Upload an icon for this view point", this);
+		upload = new Upload(Msg.get("pr.11"), this);
 		upload.setImmediate(true);
-		upload.setButtonCaption("Upload icon");
+		upload.setButtonCaption(Msg.get("pr.12"));
 		hl.addComponent(upload);
 	}
 
@@ -68,7 +69,7 @@ public class ViewPointIconUploader extends CustomComponent implements Upload.Pro
 			fos = new FileOutputStream(target);
 		} catch (final Exception e) {
 			logger.log(Level.SEVERE, "Can't create icon image for view point: " + bean.getId(), e);
-			getWindow().showNotification("Can't create icon image for view point: " + bean.getId(), e.getMessage(),
+			getWindow().showNotification(Msg.get("error.3") + " : " + bean.getId(), e.getMessage(),
 					Notification.TYPE_ERROR_MESSAGE);
 			return null;
 		}
@@ -83,7 +84,7 @@ public class ViewPointIconUploader extends CustomComponent implements Upload.Pro
 	public void updateProgress(long readBytes, long contentLength) {
 		if (contentLength > Consts.ICONS_MAX_SIZE_BYTES) {
 			upload.interruptUpload();
-			getWindow().showNotification("File too large", contentLength + " B", Notification.TYPE_ERROR_MESSAGE);
+			getWindow().showNotification(Msg.get("error.4"), contentLength + " B", Notification.TYPE_ERROR_MESSAGE);
 		}
 
 	}

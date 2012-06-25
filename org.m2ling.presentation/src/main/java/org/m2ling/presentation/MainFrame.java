@@ -5,6 +5,8 @@
  */
 package org.m2ling.presentation;
 
+import org.m2ling.common.utils.Msg;
+
 import com.vaadin.terminal.ThemeResource;
 import com.vaadin.ui.Accordion;
 import com.vaadin.ui.CustomComponent;
@@ -45,7 +47,7 @@ public class MainFrame extends CustomComponent {
 	public void setAppPanel(Panel panel) {
 		this.appPanel = panel;
 	}
-	
+
 	/**
 	 * @return the appPanel
 	 */
@@ -80,15 +82,14 @@ public class MainFrame extends CustomComponent {
 
 		// Accordion
 		accordion = new Accordion();
-		accordion.addComponent(new Label("Item1"));
 		accordion.setSizeFull();
 
 		// Search box
-		search = new TextField("Search");
+		search = new TextField(Msg.get("mf.search"));
 		search.setWidth("100%");
-
+		
 		// Comments area
-		comments = new TextArea("Comments");
+		comments = new TextArea(Msg.get("mf.comments"));
 		comments.setEnabled(false);
 		comments.setWidth("100%");
 		comments.setHeight("30px");
@@ -122,6 +123,7 @@ public class MainFrame extends CustomComponent {
 
 	public void resetAccordion() {
 		accordion.removeAllComponents();
+		
 		accordion.addComponent(comments);
 	}
 

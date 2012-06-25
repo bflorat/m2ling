@@ -7,6 +7,7 @@ import org.m2ling.presentation.principles.PrinciplesGuiModule;
 import org.m2ling.presentation.widgets.SidebarEntry;
 
 import com.google.inject.Inject;
+import com.google.inject.servlet.SessionScoped;
 import com.vaadin.Application;
 import com.vaadin.terminal.Terminal;
 import com.vaadin.ui.MenuBar;
@@ -15,6 +16,7 @@ import com.vaadin.ui.Window;
 import com.vaadin.ui.Window.Notification;
 
 @SuppressWarnings("serial")
+@SessionScoped
 public class M2lingApplication extends Application {
 
 	private Window mainWindow;
@@ -25,7 +27,7 @@ public class M2lingApplication extends Application {
 
 	private Logger logger;
 
-	private PrinciplesGuiModule principlesFrame;
+	private PrinciplesGuiModule principlesGuiModule;
 
 	private GuiModule currentApp;
 
@@ -33,7 +35,7 @@ public class M2lingApplication extends Application {
 	public M2lingApplication(Logger logger, PrinciplesGuiModule principles) {
 		super();
 		this.logger = logger;
-		this.principlesFrame = principles;
+		this.principlesGuiModule = principles;
 	}
 
 	@Override
@@ -51,7 +53,7 @@ public class M2lingApplication extends Application {
 		rootLayout.setSpacing(true);
 		rootLayout.setExpandRatio(mframe, 100);
 		// set m2principles app by default
-		setApp(principlesFrame);
+		setApp(principlesGuiModule);
 	}
 
 	private void initMenu() {
@@ -63,26 +65,23 @@ public class M2lingApplication extends Application {
 		// m2principles
 		menu.addItem("m2principles", null, new MenuBar.Command() {
 			public void menuSelected(MenuBar.MenuItem selectedItem) {
-				setApp(principlesFrame);
+				setApp(principlesGuiModule);
 			}
 		});
 	}
 
 	private void setApp(GuiModule app) {
-		if (app != this.currentApp) {
-			mframe.resetAccordion();
-			mframe.getAppPanel().setContent(app);
-			List<SidebarEntry> entries = app.getAccordionEntries();
-			for (SidebarEntry entry : entries) {
-				mframe.getAccordion().addTab(entry, entry.getLabel(), null, 0);
-				if (entry.isDefaultEntry()) {
-					mframe.getAccordion().setSelectedTab(entry);
-				}
+		mframe.resetAccordion();
+		mframe.getAppPanel().removeAllComponents();
+		mframe.getAppPanel().addComponent(app);
+		List<SidebarEntry> entries = app.getEntries();
+		for (SidebarEntry entry : entries) {
+			mframe.getAccordion().addTab(entry, entry.getLabel(), null, 0);
+			if (entry.isDefaultEntry()) {
+				mframe.getAccordion().setSelectedTab(entry);
 			}
-			this.currentApp = app;
-		} else {
-			logger.warning("Tried to apply existing application : " + app);
 		}
+		this.currentApp = app;
 	}
 
 	@Override

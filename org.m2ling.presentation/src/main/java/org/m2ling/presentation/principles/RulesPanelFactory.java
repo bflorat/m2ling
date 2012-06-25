@@ -12,6 +12,6 @@ import org.m2ling.presentation.principles.model.ViewPointBean;
  */
 public interface RulesPanelFactory {
 
-	RulesPanel getRulesPanelFor(ViewPointBean vp);
+	RulesPanel getRulesPanelFor(String vp);
 
 }

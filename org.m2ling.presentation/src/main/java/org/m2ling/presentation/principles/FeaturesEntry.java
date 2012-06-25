@@ -1,6 +1,7 @@
 package org.m2ling.presentation.principles;
 
 
+import org.m2ling.common.utils.Msg;
 import org.m2ling.presentation.widgets.SidebarEntry;
 
 import com.google.inject.Inject;
@@ -22,7 +23,9 @@ public class FeaturesEntry extends SidebarEntry {
 
 	@Override
 	public void attach() {
-		Button create = new Button("Create a view point", new Button.ClickListener() {
+		// Make sure to reset all previously displayed items
+		removeAllComponents();
+		Button create = new Button(Msg.get("pr.2"), new Button.ClickListener() {
 			public void buttonClick(ClickEvent event) {
 				ViewPointDialog vpDialog = factory.getViewPointDialogFor(null);
 				vpDialog.setModal(true);
@@ -40,6 +43,6 @@ public class FeaturesEntry extends SidebarEntry {
 	 */
 	@Override
 	public String getLabel() {
-		return "Features";
+		return Msg.get("pr.3");
 	}
 }

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <m2ling_domain:Root xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:m2ling_domain="http://m2ling.org/0.1">
   <viewPoints id="ertyuyreklbjnb,n" name="Logical Architecture" comment="Note that this viewpoint maps few concepts of physical architecture viewpoint." description="Applicative Architecture provides projects structure as modules, provides each module technology. Deals with software factories and system capabilities. Provides minimal details about physical architecture (list of servers by environment for instance).">
+    <tags>team_A</tags>
     <activities id="_ByQVkJn4EeGqFM2UF1dCGQ" name="Set up software factory" description="Set up development, integration and build tools for each project." accountables="_skmNgZhhEeGGf-qGrGj3yA" responsibles="_skmNgZhhEeGGf-qGrGj3yA"/>
     <componentTypes id="__w-CMZoWEeG71vmJ5CR-iA" name="ServicesContainer" description="Runs services (RMI, REST, SOAP...)" boundType="_kHJh8ZxEEeGi7NYPtEuJdA" enumeration="_BYD3EJ6REeGyndJ1yNTLVw">
       <references type="RUNS" targets="_1y2zQZoWEeG71vmJ5CR-iA"/>

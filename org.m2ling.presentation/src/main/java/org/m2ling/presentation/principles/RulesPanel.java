@@ -10,12 +10,11 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import org.m2ling.common.dto.core.RuleDTO;
-import org.m2ling.common.dto.core.ViewPointDTO;
 import org.m2ling.common.exceptions.FunctionalException;
+import org.m2ling.common.utils.Msg;
 import org.m2ling.presentation.events.Events;
 import org.m2ling.presentation.events.ObservationManager;
 import org.m2ling.presentation.principles.model.RuleBean;
-import org.m2ling.presentation.principles.model.ViewPointBean;
 import org.m2ling.presentation.principles.utils.DTOConverter;
 import org.m2ling.service.principles.RuleService;
 
@@ -37,7 +36,7 @@ import com.vaadin.ui.themes.BaseTheme;
 @SuppressWarnings("serial")
 public class RulesPanel extends VerticalLayout {
 
-	private ViewPointBean vp;
+	private String vp;
 
 	private RuleService service;
 
@@ -54,7 +53,7 @@ public class RulesPanel extends VerticalLayout {
 	 * 
 	 */
 	@Inject
-	public RulesPanel(Logger logger, @Assisted ViewPointBean vp, RuleService service, ObservationManager obs,
+	public RulesPanel(Logger logger, @Assisted String vp, RuleService service, ObservationManager obs,
 			DTOConverter.ToDTO toDTO, DTOConverter.FromDTO fromDTO) {
 		super();
 		this.vp = vp;
@@ -70,12 +69,15 @@ public class RulesPanel extends VerticalLayout {
 
 	@Override
 	public void attach() {
-		ViewPointDTO vpDTO = toDTO.getViewPointDTO(vp);
 		try {
-			List<RuleDTO> rules = service.getAllRules(vpDTO);
-			for (RuleDTO dto : rules) {
-				RuleBean rule = fromDTO.getRuleBean(dto);
-				addRule(rule);
+			List<RuleDTO> rules = service.getAllRules(vp);
+			if (rules.size() == 0) {
+				addComponent(new Label(Msg.get("pr.1")));
+			} else {
+				for (RuleDTO dto : rules) {
+					RuleBean rule = fromDTO.getRuleBean(dto);
+					addRule(rule);
+				}
 			}
 		} catch (FunctionalException e) {
 			logger.log(Level.SEVERE, e.getDetailedMessage(), e);
@@ -109,7 +111,7 @@ public class RulesPanel extends VerticalLayout {
 					obs.notifySync(new org.m2ling.presentation.events.Event(Events.VP_CHANGE));
 				} catch (FunctionalException e) {
 					logger.log(Level.SEVERE, e.getDetailedMessage(), e.getCause());
-					getWindow().showNotification("Operation failed : " + e.getDetailedMessage(),
+					getWindow().showNotification(Msg.get("error.1") + " : " + e.getDetailedMessage(),
 							Notification.TYPE_ERROR_MESSAGE);
 				}
 			}

@@ -21,6 +21,6 @@ public abstract class GuiModule extends Panel {
 	abstract public void attach();
 
 	/** Order list of accordion entries **/
-	abstract public List<SidebarEntry> getAccordionEntries();
+	abstract public List<SidebarEntry> getEntries();
 
 }

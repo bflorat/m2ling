@@ -8,9 +8,6 @@
 	display: none;
 }
 
-/*.v-menubar-menuitem-caption{
-	font-weight:bold;
-}*/
 .app {
 	font-weight: bold;
 	font-size: 160%
@@ -28,18 +25,18 @@
 	margin-bottom: 5px;
 }
 
-.principles_vp-panel-name .name{
+.principles_vp-panel-name {
 	font-weight: bold;
 	font-size: 150%;
 	margin-bottom: 3px;
 }
 
-.principles_vp-panel-desc .desc{
+.principles_vp-panel-desc,.desc{
 	font-size: 90%;
 	margin-bottom: 3px;
 }
 
-.principles_vp-panel-comment .comment{
+.principles_vp-panel-comment,.comment {
 	border-style: dotted;
 	border-width:1px; 
 	font-size: 90%;
@@ -47,7 +44,7 @@
 	background-color:#b0c4de; 
 }
 
-.principles_vp-panel-tags .tags{
+.principles_vp-panel-tags,.tags{
 	font-style:italic;
 	margin-bottom: 3px;
 }

@@ -12,6 +12,7 @@ import java.util.Set;
 import java.util.logging.Logger;
 
 import org.m2ling.common.dto.core.ViewPointDTO;
+import org.m2ling.common.utils.Msg;
 import org.m2ling.presentation.GuiModule;
 import org.m2ling.presentation.events.Events;
 import org.m2ling.presentation.events.ObservationManager;
@@ -99,7 +100,7 @@ public class PrinciplesGuiModule extends GuiModule implements Observer {
 		noneVPLabel.setIcon(new ThemeResource("img/16/information.png"));
 		// Use caption to set text to keep icon and label on the same line
 		noneVPLabel.setCaption("None view point found");
-		Button create = new Button("Create a view point", new Button.ClickListener() {
+		Button create = new Button(Msg.get("pr.2"), new Button.ClickListener() {
 			public void buttonClick(ClickEvent event) {
 				ViewPointDialog vpDialog = dialogFactory.getViewPointDialogFor(null);
 				vpDialog.setModal(true);
@@ -118,7 +119,7 @@ public class PrinciplesGuiModule extends GuiModule implements Observer {
 	 * @see org.m2ling.presentation.GuiModule#getAccordionEntries()
 	 */
 	@Override
-	public List<SidebarEntry> getAccordionEntries() {
+	public List<SidebarEntry> getEntries() {
 		List<SidebarEntry> out = new ArrayList<SidebarEntry>(5);
 
 		// Features entry

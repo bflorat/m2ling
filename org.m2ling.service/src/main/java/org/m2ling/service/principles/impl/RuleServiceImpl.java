@@ -8,7 +8,6 @@ import java.util.List;
 
 import org.m2ling.common.configuration.Configuration;
 import org.m2ling.common.dto.core.RuleDTO;
-import org.m2ling.common.dto.core.ViewPointDTO;
 import org.m2ling.common.exceptions.FunctionalException;
 import org.m2ling.common.exceptions.FunctionalException.Code;
 import org.m2ling.domain.Root;
@@ -63,11 +62,11 @@ public class RuleServiceImpl extends ServiceImpl implements RuleService {
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * org.m2ling.service.principles.RuleService#createRule(org.m2ling.common.dto.core.ViewPointDTO,
+	 * org.m2ling.service.principles.RuleService#createRule(String,
 	 * org.m2ling.common.dto.core.RuleDTO)
 	 */
 	@Override
-	public void createRule(final ViewPointDTO vp, final RuleDTO rule) throws FunctionalException {
+	public void createRule(final String vp, final RuleDTO rule) throws FunctionalException {
 		// TODO Auto-generated method stub
 
 	}
@@ -76,19 +75,19 @@ public class RuleServiceImpl extends ServiceImpl implements RuleService {
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * org.m2ling.service.principles.RuleService#getAllRules(org.m2ling.common.dto.core.ViewPointDTO)
+	 * org.m2ling.service.principles.RuleService#getAllRules(String)
 	 */
 	@Override
-	public List<RuleDTO> getAllRules(final ViewPointDTO vp) throws FunctionalException {
+	public List<RuleDTO> getAllRules(final String vp) throws FunctionalException {
 		{// Controls
-			if (util.getViewPointByID(vp.getId()) == null) {
+			if (util.getViewPointByID(vp) == null) {
 				throw new FunctionalException(Code.TARGET_NOT_FOUND, "Viewpoint doesn't exist", null, vp.toString());
 			}
 		}
 		Root root = pmanager.getRoot();
 		List<RuleDTO> out = Lists.newArrayList();
 		for (ViewPoint checked : root.getViewPoints()) {
-			if (checked.getId().equals(vp.getId())) {
+			if (checked.getId().equals(vp)) {
 				List<Rule> rules = checked.getRules();
 				for (Rule rule : rules) {
 					RuleDTO dto = new RuleDTO.Builder(rule.getId(), rule.getName()).comment(rule.getComment())

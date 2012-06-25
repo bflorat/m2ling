@@ -14,6 +14,7 @@ import javax.annotation.Nullable;
 
 import org.m2ling.common.dto.core.ViewPointDTO;
 import org.m2ling.common.exceptions.FunctionalException;
+import org.m2ling.common.utils.Msg;
 import org.m2ling.presentation.events.Events;
 import org.m2ling.presentation.events.ObservationManager;
 import org.m2ling.presentation.principles.model.ViewPointBean;
@@ -52,7 +53,7 @@ public class ViewPointDialog extends Window {
 	private Logger logger;
 
 	private ObservationManager obs;
-	
+
 	private DTOConverter.ToDTO toDTO;
 
 	/**
@@ -61,8 +62,8 @@ public class ViewPointDialog extends Window {
 	 */
 	@Inject
 	public ViewPointDialog(Logger logger, @Assisted @Nullable ViewPointBean vp, ViewPointService service,
-			ObservationManager obs,DTOConverter.ToDTO toDTO) {
-		super(vp == null ? "New View Point" : vp.getName());
+			ObservationManager obs, DTOConverter.ToDTO toDTO) {
+		super(vp == null ? Msg.get("pr.10") : vp.getName());
 		this.bean = vp;
 		this.service = service;
 		this.logger = logger;
@@ -85,7 +86,7 @@ public class ViewPointDialog extends Window {
 	public void attach() {
 		((VerticalLayout) getContent()).setSizeFull();
 		final Form form = new Form();
-		form.setCaption("Set view point settings");
+		form.setCaption(Msg.get("pr.4"));
 		// setFormFieldFactory() must be called before setting the data source or it is token into
 		// account
 		form.setFormFieldFactory(new ViewPointDialogFieldFactory());
@@ -107,8 +108,7 @@ public class ViewPointDialog extends Window {
 					obs.notifySync(new org.m2ling.presentation.events.Event(Events.VP_CHANGE));
 				} catch (FunctionalException e) {
 					logger.log(Level.SEVERE, e.getDetailedMessage(), e.getCause());
-					getWindow().showNotification("Operation failed : " + e.getDetailedMessage(),
-							Notification.TYPE_ERROR_MESSAGE);
+					getWindow().showNotification(Msg.get("error.1"), Notification.TYPE_ERROR_MESSAGE);
 				}
 			}
 		};
@@ -132,32 +132,30 @@ public class ViewPointDialog extends Window {
 			if ("name".equals(propertyId)) {
 				Field name = super.createField(item, propertyId, uiContext);
 				name.setRequired(true);
-				name.setRequiredError("View point name is mandatory");
-				name.setDescription("Name of the view point like 'Physical Architecture'");
+				name.setRequiredError(Msg.get("error.2"));
+				name.setDescription(Msg.get("pr.5"));
 				return name;
 			} else if ("description".equals(propertyId)) {
 				RichTextArea description = new RichTextArea();
-				description.setCaption("Description");
+				description.setCaption(Msg.get("gal.1"));
 				description.setHeight(20, UNITS_EX);
 				description.setWidth("100%");
-				description.setDescription("Additional information describing the view point");
+				description.setDescription(Msg.get("pr.6"));
 				return description;
 			} else if ("comment".equals(propertyId)) {
 				TextArea comment = new TextArea();
 				comment.setHeight(12, UNITS_EX);
 				comment.setWidth("100%");
-				comment.setCaption("Comments");
-				comment
-						.setDescription("Any comment about the view point, can be used a as reminder.<br/>Example : 'Work in progress, some component types missing.'");
+				comment.setCaption(Msg.get("mf.comments"));
+				comment.setDescription(Msg.get("pr.7"));
 				return comment;
 			} else if ("tags".equals(propertyId)) {
 				Field tags = super.createField(item, propertyId, uiContext);
-				tags.setDescription("Comma-separated strings used to group related items together and ease searches.<br/>Example : 'physical;team A;2012'");
+				tags.setDescription(Msg.get("pr.8"));
 				return tags;
 			} else if ("statusLiterals".equals(propertyId)) {
 				Field statusLiterals = super.createField(item, propertyId, uiContext);
-				statusLiterals
-						.setDescription("Comma-separated ordered strings defining available status for this view point items.<br/>Example : 'READY,RETIRED,FULL,AVAILABLE'");
+				statusLiterals.setDescription(Msg.get("pr.9"));
 				return statusLiterals;
 			} else {
 				return super.createField(item, propertyId, uiContext);

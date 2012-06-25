@@ -5,6 +5,8 @@
  */
 package org.m2ling.presentation.widgets;
 
+import org.m2ling.common.utils.Msg;
+
 import com.vaadin.terminal.ThemeResource;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Button.ClickEvent;
@@ -33,7 +35,7 @@ public class OKCancel extends CustomComponent {
 		HorizontalLayout hz = new HorizontalLayout();
 		hz.setSpacing(true);
 		hz.setMargin(true);
-		okButton = new Button("OK", new Button.ClickListener() {
+		okButton = new Button(Msg.get("gal.5"), new Button.ClickListener() {
 			public void buttonClick(ClickEvent event) {
 				try {
 					// Makes sure user can't click anymore
@@ -45,7 +47,7 @@ public class OKCancel extends CustomComponent {
 			}
 		});
 		okButton.setIcon(new ThemeResource("../runo/icons/16/ok.png"));
-		cancelButton = new Button("Cancel", new Button.ClickListener() {
+		cancelButton = new Button(Msg.get("gal.6"), new Button.ClickListener() {
 			public void buttonClick(ClickEvent event) {
 				cancel.execute();
 			}

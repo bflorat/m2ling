@@ -11,6 +11,7 @@ import java.util.logging.Logger;
 
 import org.m2ling.common.dto.core.ViewPointDTO;
 import org.m2ling.common.exceptions.FunctionalException;
+import org.m2ling.common.utils.Msg;
 import org.m2ling.presentation.events.Events;
 import org.m2ling.presentation.events.ObservationManager;
 import org.m2ling.presentation.principles.model.ViewPointBean;
@@ -109,7 +110,7 @@ public class ViewPointPanel extends Panel {
 		Label name = new Label(bean.getName());
 		name.setStyleName("principles_vp-panel-name");
 		name.setSizeUndefined();
-		Button edit = new Button("Edit");
+		Button edit = new Button(Msg.get("gal.2"));
 		edit.setStyleName(BaseTheme.BUTTON_LINK);
 		edit.addListener(new Button.ClickListener() {
 			public void buttonClick(ClickEvent event) {
@@ -119,7 +120,7 @@ public class ViewPointPanel extends Panel {
 			}
 		});
 
-		Button delete = new Button("Delete");
+		Button delete = new Button(Msg.get("gal.3"));
 		delete.setStyleName(BaseTheme.BUTTON_LINK);
 		delete.addListener(new Button.ClickListener() {
 			public void buttonClick(ClickEvent event) {
@@ -129,7 +130,7 @@ public class ViewPointPanel extends Panel {
 					obs.notifySync(new org.m2ling.presentation.events.Event(Events.VP_CHANGE));
 				} catch (FunctionalException e) {
 					logger.log(Level.SEVERE, e.getDetailedMessage(), e.getCause());
-					getWindow().showNotification("Operation failed : " + e.getDetailedMessage(),
+					getWindow().showNotification(Msg.get("error.1") + " : " + e.getDetailedMessage(),
 							Notification.TYPE_ERROR_MESSAGE);
 				}
 			}
@@ -137,9 +138,9 @@ public class ViewPointPanel extends Panel {
 
 		final VerticalLayout rulesHiddenPane = new VerticalLayout();
 		rulesHiddenPane.setVisible(false);
-		RulesPanel rulesPanel = rulesPanelFactory.getRulesPanelFor(bean);
+		RulesPanel rulesPanel = rulesPanelFactory.getRulesPanelFor(bean.getId());
 		rulesHiddenPane.addComponent(rulesPanel);
-		Button rules = new Button("Rules");
+		Button rules = new Button(Msg.get("pr.13"));
 		rules.setStyleName(BaseTheme.BUTTON_LINK);
 		rules.addListener(new Button.ClickListener() {
 			public void buttonClick(ClickEvent event) {
@@ -147,7 +148,7 @@ public class ViewPointPanel extends Panel {
 			}
 		});
 
-		Button componentTypes = new Button("Component types");
+		Button componentTypes = new Button(Msg.get("pr.14"));
 		componentTypes.setStyleName(BaseTheme.BUTTON_LINK);
 		componentTypes.addListener(new Button.ClickListener() {
 			public void buttonClick(ClickEvent event) {
@@ -155,7 +156,7 @@ public class ViewPointPanel extends Panel {
 			}
 		});
 
-		Button linkTypes = new Button("Link types");
+		Button linkTypes = new Button(Msg.get("pr.15"));
 		linkTypes.setStyleName(BaseTheme.BUTTON_LINK);
 		linkTypes.addListener(new Button.ClickListener() {
 			public void buttonClick(ClickEvent event) {
@@ -193,7 +194,7 @@ public class ViewPointPanel extends Panel {
 
 		HorizontalLayout hl3 = new HorizontalLayout();
 		hl3.setSpacing(true);
-		hl3.addComponent(new Label("Tags:"));
+		hl3.addComponent(new Label(Msg.get("gal.4") + " : "));
 		hl3.addComponent(tags);
 
 		addComponent(hl1);
