@@ -20,39 +20,41 @@
 	margin-left: 0px;
 }
 
-.principles_vp-panel {
-	margin-top: 5px;
-	margin-bottom: 5px;
-}
-
 .principles_vp-panel-name {
 	font-weight: bold;
 	font-size: 150%;
 	margin-bottom: 3px;
 }
 
-.principles_vp-panel-desc,.desc{
-	font-size: 90%;
+.command .v-button-caption {
+	font-size: 80%;
+}
+
+.principles_vp-panel-desc {
+	font-size: 110%;
 	margin-bottom: 3px;
 }
 
-.principles_vp-panel-comment,.comment {
-	border-style: dotted;
-	border-width:1px; 
-	font-size: 90%;
-	margin-bottom: 3px;
-	background-color:#b0c4de; 
+.principles_vp-panel {
+	padding: 3px;
+	margin: 5px;
+	border: 1px solid #dcdcdc;
 }
 
-.principles_vp-panel-tags,.tags{
-	font-style:italic;
-	margin-bottom: 3px;
+.comment {
+	font-style: italic;
+	font-size: 90%;
 }
 
 .principles_rules-panel {
-	margin-top: 5px;
-	margin-bottom: 5px;
+	padding: 5px;
 }
 
+.principles_rules-description {
+	font-weight: bold;
+}
 
-
+.principles_rules-name {
+	font-weight: bold;
+	display: list-item;
+}

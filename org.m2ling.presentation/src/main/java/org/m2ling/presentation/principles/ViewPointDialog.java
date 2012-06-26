@@ -79,7 +79,7 @@ public class ViewPointDialog extends Window {
 			newVP = false;
 		}
 		setWidth("650px");
-		setClosable(false);
+		setClosable(true);
 	}
 
 	@Override

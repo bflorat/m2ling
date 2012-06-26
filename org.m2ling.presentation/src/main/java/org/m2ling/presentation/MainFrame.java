@@ -12,7 +12,6 @@ import com.vaadin.ui.Accordion;
 import com.vaadin.ui.CustomComponent;
 import com.vaadin.ui.Embedded;
 import com.vaadin.ui.HorizontalSplitPanel;
-import com.vaadin.ui.Label;
 import com.vaadin.ui.Panel;
 import com.vaadin.ui.TextArea;
 import com.vaadin.ui.TextField;
@@ -36,7 +35,7 @@ public class MainFrame extends CustomComponent {
 
 	private Embedded logo;
 
-	private Panel appPanel;
+	private Panel app;
 
 	private HorizontalSplitPanel splitSidebar;
 
@@ -44,15 +43,12 @@ public class MainFrame extends CustomComponent {
 
 	private TextArea comments;
 
-	public void setAppPanel(Panel panel) {
-		this.appPanel = panel;
-	}
 
 	/**
 	 * @return the appPanel
 	 */
 	public Panel getAppPanel() {
-		return appPanel;
+		return app;
 	}
 
 	/**
@@ -77,9 +73,9 @@ public class MainFrame extends CustomComponent {
 		logo = new Embedded(null, resLogo);
 
 		// App panel
-		appPanel = new Panel();
-		appPanel.setSizeFull();
-
+		app = new Panel();
+		app.setSizeFull();
+	
 		// Accordion
 		accordion = new Accordion();
 		accordion.setSizeFull();
@@ -87,7 +83,7 @@ public class MainFrame extends CustomComponent {
 		// Search box
 		search = new TextField(Msg.get("mf.search"));
 		search.setWidth("100%");
-		
+
 		// Comments area
 		comments = new TextArea(Msg.get("mf.comments"));
 		comments.setEnabled(false);
@@ -118,12 +114,11 @@ public class MainFrame extends CustomComponent {
 		splitSidebar.setSplitPosition(20);
 		splitSidebar.setSizeFull();
 		splitSidebar.addComponent(sidebar);
-		splitSidebar.addComponent(appPanel);
+		splitSidebar.addComponent(app);
 	}
 
 	public void resetAccordion() {
 		accordion.removeAllComponents();
-		
 		accordion.addComponent(comments);
 	}
 

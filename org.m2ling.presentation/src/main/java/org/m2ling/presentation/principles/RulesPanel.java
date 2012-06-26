@@ -21,7 +21,6 @@ import org.m2ling.service.principles.RuleService;
 import com.google.common.base.Strings;
 import com.google.inject.Inject;
 import com.google.inject.assistedinject.Assisted;
-import com.vaadin.ui.Alignment;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Button.ClickEvent;
 import com.vaadin.ui.HorizontalLayout;
@@ -63,8 +62,9 @@ public class RulesPanel extends VerticalLayout {
 		this.vp = vp;
 		this.toDTO = toDTO;
 		this.fromDTO = fromDTO;
-		setSizeFull();
-		setStyleName("principles_rules-panel");
+		setHeight(null);
+		setWidth("95%");
+		addStyleName("principles_rules-panel");
 	}
 
 	@Override
@@ -79,19 +79,33 @@ public class RulesPanel extends VerticalLayout {
 					addRule(rule);
 				}
 			}
+			addComponent(getCreateRuleButton());
 		} catch (FunctionalException e) {
 			logger.log(Level.SEVERE, e.getDetailedMessage(), e);
 			getWindow().showNotification(e.getDetailedMessage(), Notification.TYPE_ERROR_MESSAGE);
 		}
 	}
 
+	private Button getCreateRuleButton() {
+		Button createRule = new Button(Msg.get("pr.16"));
+		createRule.setStyleName(BaseTheme.BUTTON_LINK);
+		createRule.addListener(new Button.ClickListener() {
+			public void buttonClick(ClickEvent event) {
+				// TODO
+			}
+		});
+		return createRule;
+	}
+
 	private void addRule(final RuleBean rule) {
 		// Name
-		Label name = new Label(rule.getName());
-		name.setStyleName("name");
+		Label name = new Label(Msg.get("pr.17") + rule.getName()
+				+ (!Strings.isNullOrEmpty(rule.getTags()) ? " [" + rule.getTags() + "]" : ""));
+		name.setStyleName("principles_rules-name");
 		name.setSizeUndefined();
-		Button edit = new Button("Edit");
+		Button edit = new Button(Msg.get("gal.2"));
 		edit.setStyleName(BaseTheme.BUTTON_LINK);
+		edit.addStyleName("command");
 		edit.addListener(new Button.ClickListener() {
 			public void buttonClick(ClickEvent event) {
 				// TODO
@@ -101,8 +115,9 @@ public class RulesPanel extends VerticalLayout {
 			}
 		});
 
-		Button delete = new Button("Delete");
+		Button delete = new Button(Msg.get("gal.3"));
 		delete.setStyleName(BaseTheme.BUTTON_LINK);
+		delete.addStyleName("command");
 		delete.addListener(new Button.ClickListener() {
 			public void buttonClick(ClickEvent event) {
 				try {
@@ -118,8 +133,7 @@ public class RulesPanel extends VerticalLayout {
 		});
 
 		Label description = new Label(rule.getDescription());
-		description.setDescription(rule.getDescription());
-		description.setStyleName("desc");
+		description.setStyleName("principles_rules-description");
 		description.setWidth("100%");
 		description.setHeight(null);
 
@@ -129,30 +143,16 @@ public class RulesPanel extends VerticalLayout {
 		comment.setWidth("100%");
 		comment.setHeight(null);
 
-		Label tags = new Label(rule.getTags());
-		tags.setDescription(rule.getTags());
-		tags.setStyleName("tags");
-		tags.setWidth("100%");
-		tags.setHeight(null);
-
 		// Layout
 		HorizontalLayout hl1 = new HorizontalLayout();
 		hl1.setSpacing(true);
 		hl1.addComponent(name);
-		hl1.setComponentAlignment(name, Alignment.MIDDLE_RIGHT);
 		hl1.addComponent(edit);
 		hl1.addComponent(delete);
-
-		HorizontalLayout hl3 = new HorizontalLayout();
-		hl3.setSpacing(true);
-		hl3.addComponent(new Label("Tags:"));
-		hl3.addComponent(tags);
-
 		addComponent(hl1);
-		if (!Strings.isNullOrEmpty(rule.getTags())) {
-			addComponent(hl3);
-		}
+
 		addComponent(description);
+
 		if (!Strings.isNullOrEmpty(rule.getComment())) {
 			addComponent(comment);
 		}

@@ -2,6 +2,10 @@
 <m2ling_domain:Root xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:m2ling_domain="http://m2ling.org/0.1">
   <viewPoints id="ertyuyreklbjnb,n" name="Logical Architecture" comment="Note that this viewpoint maps few concepts of physical architecture viewpoint." description="Applicative Architecture provides projects structure as modules, provides each module technology. Deals with software factories and system capabilities. Provides minimal details about physical architecture (list of servers by environment for instance).">
     <tags>team_A</tags>
+    <statusLiterals>APPLICABLE</statusLiterals>
+    <statusLiterals>UNDER_STUDY</statusLiterals>
+    <statusLiterals>REFUSED</statusLiterals>
+    <statusLiterals>OBSOLETE</statusLiterals>
     <activities id="_ByQVkJn4EeGqFM2UF1dCGQ" name="Set up software factory" description="Set up development, integration and build tools for each project." accountables="_skmNgZhhEeGGf-qGrGj3yA" responsibles="_skmNgZhhEeGGf-qGrGj3yA"/>
     <componentTypes id="__w-CMZoWEeG71vmJ5CR-iA" name="ServicesContainer" description="Runs services (RMI, REST, SOAP...)" boundType="_kHJh8ZxEEeGi7NYPtEuJdA" enumeration="_BYD3EJ6REeGyndJ1yNTLVw">
       <references type="RUNS" targets="_1y2zQZoWEeG71vmJ5CR-iA"/>
@@ -22,6 +26,9 @@
     <linkTypes id="_4Rfd0pqjEeGQsK1VSbibvw" name="NET_DATABASE" description="Synchronous Network protocol to access remote Postgres database. Default port : 5432. Can be used over TCP or UDP." sourceTypes="_1y2zQZoWEeG71vmJ5CR-iA" destinationTypes="_YbdmAZoXEeG71vmJ5CR-iA"/>
     <linkTypes id="_oHllkpqkEeGbI4NH3iicSg" name="HTTP_GUI" comment="" description="Synchronous HTTP access from end users to the GUI services. Default port : 80. Over TCP only. KEEP_ALIVE option enabled." sourceTypes="_8_BugZqkEeGbI4NH3iicSg _8_BugZqkEeGbI4NH3iicSg" destinationTypes="_fKtsQZoXEeG71vmJ5CR-iA"/>
     <linkTypes id="_2LrDApqyEeGVMag01qc4bw" name="LDAP" comment="" description="Synchronous access to a LDAP directory. Over TCP-IP." sourceTypes="_E3EOwZoWEeG71vmJ5CR-iA" destinationTypes="_ha8mEZqyEeGVMag01qc4bw"/>
+    <rules id="R1" name="R1" comment="This rule is one of the Bikes IS cornerstone." description="A GUI module can't map (using an hyperlink) another GUI module, each application must be integrated into the portal." status="APPLICABLE" priority="VERY_HIGH">
+      <tags>logical</tags>
+    </rules>
   </viewPoints>
   <viewPoints id="fsdfhjksdhfkjhsdkfj" name="Physical Architecture" comment="" description="Physical Architecture viewpoint provides all rules and concepts dealing with hardware, network aspects of a project.">
     <componentTypes id="_-aItkZxEEeGi7NYPtEuJdA" name="X86 Server" description="Intel-based server. Mostly 64 bits." reifiable="true">

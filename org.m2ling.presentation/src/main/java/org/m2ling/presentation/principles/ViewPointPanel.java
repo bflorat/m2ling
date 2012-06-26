@@ -40,11 +40,9 @@ import com.vaadin.ui.themes.BaseTheme;
  * View point summary
  */
 @SuppressWarnings("serial")
-public class ViewPointPanel extends Panel {
+public class ViewPointPanel extends VerticalLayout {
 
 	private final Logger logger;
-
-	private final VerticalLayout vert;
 
 	private final ViewPointBean bean;
 
@@ -80,11 +78,10 @@ public class ViewPointPanel extends Panel {
 		if (bean == null) {
 			throw new IllegalArgumentException("Null viewpoint");
 		}
-		vert = (VerticalLayout) getContent();
-		vert.setSpacing(true);
-		vert.setMargin(true);
-		vert.setHeight("0%");
-		vert.setHeight(null);
+		setSpacing(true);
+		setMargin(true);
+		setHeight(null);
+		setWidth("90%");
 		setStyleName("principles_vp-panel");
 	}
 
@@ -107,11 +104,13 @@ public class ViewPointPanel extends Panel {
 		icon.requestRepaint();
 
 		// Name
-		Label name = new Label(bean.getName());
+		Label name = new Label(bean.getName()
+				+ (!Strings.isNullOrEmpty(bean.getTags()) ? " [" + bean.getTags() + "]" : ""));
 		name.setStyleName("principles_vp-panel-name");
 		name.setSizeUndefined();
 		Button edit = new Button(Msg.get("gal.2"));
 		edit.setStyleName(BaseTheme.BUTTON_LINK);
+		edit.addStyleName("command");
 		edit.addListener(new Button.ClickListener() {
 			public void buttonClick(ClickEvent event) {
 				ViewPointDialog vpDialog = vpDialogFactory.getViewPointDialogFor(bean);
@@ -122,6 +121,7 @@ public class ViewPointPanel extends Panel {
 
 		Button delete = new Button(Msg.get("gal.3"));
 		delete.setStyleName(BaseTheme.BUTTON_LINK);
+		delete.addStyleName("command");
 		delete.addListener(new Button.ClickListener() {
 			public void buttonClick(ClickEvent event) {
 				try {
@@ -136,10 +136,12 @@ public class ViewPointPanel extends Panel {
 			}
 		});
 
-		final VerticalLayout rulesHiddenPane = new VerticalLayout();
+		final Panel rulesHiddenPane = new Panel();
 		rulesHiddenPane.setVisible(false);
+		rulesHiddenPane.setWidth("90%");
+		rulesHiddenPane.setHeight(null);
 		RulesPanel rulesPanel = rulesPanelFactory.getRulesPanelFor(bean.getId());
-		rulesHiddenPane.addComponent(rulesPanel);
+		rulesHiddenPane.setContent(rulesPanel);
 		Button rules = new Button(Msg.get("pr.13"));
 		rules.setStyleName(BaseTheme.BUTTON_LINK);
 		rules.addListener(new Button.ClickListener() {
@@ -172,15 +174,9 @@ public class ViewPointPanel extends Panel {
 
 		Label comment = new Label(bean.getComment());
 		comment.setDescription(bean.getComment());
-		comment.setStyleName("principles_vp-panel-comment");
+		comment.setStyleName("comment");
 		comment.setWidth("100%");
 		comment.setHeight(null);
-
-		Label tags = new Label(bean.getTags());
-		tags.setDescription(bean.getTags());
-		tags.setStyleName("principles_vp-panel-tags");
-		tags.setWidth("100%");
-		tags.setHeight(null);
 
 		// Layout
 		HorizontalLayout hl1 = new HorizontalLayout();
@@ -192,15 +188,7 @@ public class ViewPointPanel extends Panel {
 		hl1.addComponent(edit);
 		hl1.addComponent(delete);
 
-		HorizontalLayout hl3 = new HorizontalLayout();
-		hl3.setSpacing(true);
-		hl3.addComponent(new Label(Msg.get("gal.4") + " : "));
-		hl3.addComponent(tags);
-
 		addComponent(hl1);
-		if (!Strings.isNullOrEmpty(bean.getTags())) {
-			addComponent(hl3);
-		}
 		addComponent(description);
 		if (!Strings.isNullOrEmpty(bean.getComment())) {
 			addComponent(comment);
