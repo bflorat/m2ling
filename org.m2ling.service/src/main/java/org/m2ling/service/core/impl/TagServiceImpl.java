@@ -75,7 +75,7 @@ public class TagServiceImpl extends ServiceImpl implements TagService {
 			checkTypeAndID(type, itemID);
 			checkTagsList(tags);
 		}
-		HasTags htags = util.getHasTagsByTypeAndID(type, itemID);
+		HasTags htags = (HasTags) util.getItemByTypeAndID(type, itemID);
 		htags.getTags().addAll(tags);
 	}
 
@@ -92,7 +92,7 @@ public class TagServiceImpl extends ServiceImpl implements TagService {
 			checkTypeAndID(type, itemID);
 			checkTagsList(tags);
 		}
-		HasTags htags = util.getHasTagsByTypeAndID(type, itemID);
+		HasTags htags = (HasTags) util.getItemByTypeAndID(type, itemID);
 		// We clear and reuse the existing list to endorse defensive copy.
 		htags.getTags().clear();
 		htags.getTags().addAll(tags);
@@ -109,7 +109,7 @@ public class TagServiceImpl extends ServiceImpl implements TagService {
 		List<String> tags = null;
 		{ // Controls
 			checkTypeAndID(type, itemID);
-			HasTags htags = util.getHasTagsByTypeAndID(type, itemID);
+			HasTags htags = (HasTags) util.getItemByTypeAndID(type, itemID);
 			tags = htags.getTags();
 			if (!tags.contains(tag)) {
 				throw new FunctionalException(FunctionalException.Code.TARGET_NOT_FOUND, "Tag didn't exist previsously",
@@ -128,7 +128,7 @@ public class TagServiceImpl extends ServiceImpl implements TagService {
 	@Override
 	public List<String> getAllTags(Context context, Type type, String itemID) throws FunctionalException {
 		checkTypeAndID(type, itemID);
-		HasTags htags = util.getHasTagsByTypeAndID(type, itemID);
+		HasTags htags = (HasTags) util.getItemByTypeAndID(type, itemID);
 		List<String> tags = htags.getTags();
 		if (tags == null) {
 			String msg = "The tags list is null for item : " + htags;

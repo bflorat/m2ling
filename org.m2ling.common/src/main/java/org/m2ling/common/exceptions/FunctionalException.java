@@ -48,7 +48,9 @@ public class FunctionalException extends Exception {
 	public enum Code {
 		TARGET_NOT_FOUND,
 		SIZE_EXCEEDED,
-		DUPLICATES
+		DUPLICATES,
+		NULL_ARGUMENT,
+		ILLEGAL_ARGUMENT
 	}
 
 	/**

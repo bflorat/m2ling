@@ -54,7 +54,10 @@
 	font-weight: bold;
 }
 
-.principles_rules-name {
-	font-weight: bold;
-	display: list-item;
+.principles_vp_dialog_comment {
+	font-size: medium !important;
 }
+
+
+// -------- General setting 
+

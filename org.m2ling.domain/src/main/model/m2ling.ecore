@@ -222,6 +222,7 @@
       <eLiterals name="STREAM" value="5"/>
       <eLiterals name="VIEWPOINT" value="6"/>
       <eLiterals name="VIEW" value="7"/>
+      <eLiterals name="RULE" value="8" literal="RULE"/>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EEnum" name="RulePriority">
       <eLiterals name="VERY_LOW"/>

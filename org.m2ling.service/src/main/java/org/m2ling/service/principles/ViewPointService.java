@@ -52,9 +52,16 @@ public interface ViewPointService {
 
 	/**
 	 * Return the viewpoint DTO given a VP name (unique) if it exist, null otherwise.
-	 * 
+	 * @return the viewpoint DTO given a VP name (unique) if it exist, null otherwise
 	 */
 	ViewPointDTO getViewPointByName(String name);
+	
+	/**
+	 * Return the viewpoint DTO given an ID if it exist, null otherwise.
+	 * @return the viewpoint DTO given an ID if it exist, null otherwise
+	 * 
+	 */
+	ViewPointDTO getViewPointByID(String id);
 
 	/**
 	 * Drop the given viewpoint if it exists.

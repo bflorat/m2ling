@@ -3,8 +3,11 @@
  */
 package org.m2ling.service.util;
 
+import org.m2ling.common.dto.core.RuleDTO;
 import org.m2ling.common.dto.core.ViewPointDTO;
 import org.m2ling.domain.core.CoreFactory;
+import org.m2ling.domain.core.Rule;
+import org.m2ling.domain.core.RulePriority;
 import org.m2ling.domain.core.ViewPoint;
 
 import com.google.common.base.Strings;
@@ -89,26 +92,32 @@ public class DTOConverter {
 					vp.getStatusLiterals().add(status);
 				}
 			}
-			if (dto.getDescription() != null) {
-				vp.setDescription(dto.getDescription());
-			}
+			vp.setDescription(dto.getDescription());
 			vp.setComment(dto.getComment());
 			return vp;
 		}
 
 		/**
-		 * Return a new ViewPoint instance given a DTO or an already existing instance of any.
+		 * Return a new rule instance given a DTO.
 		 * 
 		 * @param dto
 		 *           the dto
-		 * @return a new ViewPoint instance
+		 * @return a new Rule instance
 		 */
-		public ViewPoint getViewPoint(ViewPointDTO dto) {
-			ViewPoint vp = util.getViewPointByName(dto.getName(), false);
-			if (vp != null) {
-				return vp;
+		public Rule newRule(RuleDTO dto) {
+			Rule rule = CoreFactory.eINSTANCE.createRule();
+			rule.setId(dto.getId());
+			rule.setName(dto.getName());
+			for (String tag : dto.getTags()) {
+				if (!Strings.isNullOrEmpty(tag)) {
+					rule.getTags().add(tag);
+				}
 			}
-			return newViewPoint(dto);
+			rule.setStatus(dto.getStatus());
+			rule.setPriority(RulePriority.get(dto.getPriority()));
+			rule.setDescription(dto.getDescription());
+			rule.setComment(dto.getComment());
+			return rule;
 		}
 
 	}

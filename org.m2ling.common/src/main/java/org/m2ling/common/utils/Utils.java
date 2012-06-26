@@ -12,6 +12,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import org.m2ling.common.exceptions.FunctionalException;
+
 import com.google.common.base.Splitter;
 import com.google.common.base.Strings;
 import com.google.inject.Module;
@@ -163,6 +165,52 @@ public class Utils {
 			throw new IllegalArgumentException(e);
 		}
 		return result;
+	}
+
+	/**
+	 * Common checks on tags
+	 * 
+	 * @param tags
+	 * @throws FunctionalException
+	 *            if one of the tags is too long
+	 * @throws FunctionalException
+	 *            if a tag duplication is detected
+	 * 
+	 */
+	public static void checkTags(List<String> tags) throws FunctionalException {
+		int index = 1;
+		for (String tag : tags) {
+			if (tag.length() > Consts.MAX_LABEL_SIZE) {
+				throw new FunctionalException(FunctionalException.Code.SIZE_EXCEEDED, "Tag is too long", null, "tag #"
+						+ index);
+			}
+			index++;
+		}
+		if (Utils.containsDup(tags)) {
+			throw new FunctionalException(FunctionalException.Code.DUPLICATES, "Tags contains duplicates", null, null);
+		}
+	}
+
+	/**
+	 * Generic toString() method that display all declared fields
+	 * 
+	 * @param obj
+	 */
+	public static String toString(Object obj) {
+		StringBuilder sb = new StringBuilder();
+		for (Field field : obj.getClass().getDeclaredFields()) {
+			field.setAccessible(true);
+			sb.append(field.getName());
+			sb.append('=');
+			try {
+				sb.append(field.get(obj).toString());
+			} catch (Exception e) {
+				// Should not append
+				e.printStackTrace();
+			}
+			sb.append(' ');
+		}
+		return sb.toString();
 	}
 
 }

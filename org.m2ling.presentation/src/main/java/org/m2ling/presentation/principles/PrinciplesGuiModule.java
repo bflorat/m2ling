@@ -23,6 +23,7 @@ import org.m2ling.presentation.widgets.SidebarEntry;
 import org.m2ling.service.principles.ViewPointService;
 
 import com.google.inject.Inject;
+import com.google.inject.servlet.SessionScoped;
 import com.vaadin.terminal.ThemeResource;
 import com.vaadin.ui.Alignment;
 import com.vaadin.ui.Button;
@@ -35,6 +36,7 @@ import com.vaadin.ui.themes.BaseTheme;
  * Main m2principles panel
  */
 @SuppressWarnings("serial")
+@SessionScoped
 public class PrinciplesGuiModule extends GuiModule implements Observer {
 
 	private static final long serialVersionUID = -3580103313824507265L;
@@ -135,8 +137,10 @@ public class PrinciplesGuiModule extends GuiModule implements Observer {
 	 */
 	@Override
 	public void update(org.m2ling.presentation.events.Event event) {
-		removeAllComponents();
-		attach();
+		if (event.getSubject() == Events.VP_CHANGE) {
+			removeAllComponents();
+			attach();
+		}
 	}
 
 	/*

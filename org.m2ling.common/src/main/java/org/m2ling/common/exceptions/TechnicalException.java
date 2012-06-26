@@ -45,7 +45,8 @@ public class TechnicalException extends RuntimeException {
 	}
 
 	public enum Code {
-		TRANSACTION_FAILED
+		TRANSACTION_FAILED,
+		NOT_YET_IMPLEMENTED
 	}
 	
 	/**

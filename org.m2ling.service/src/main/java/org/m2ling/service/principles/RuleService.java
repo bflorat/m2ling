@@ -34,8 +34,6 @@ public interface RuleService {
 	/**
 	 * Create a new rule for provided viewpoint.
 	 * 
-	 * @param vp
-	 *           the view point ID
 	 * @param rule
 	 *           the rule
 	 * @throws FunctionalException
@@ -43,7 +41,7 @@ public interface RuleService {
 	 * @throws FunctionalException
 	 *            if a rule already exist with id or name or if one of the DTO entry is faulty
 	 */
-	void createRule(String vp, RuleDTO rule) throws FunctionalException;
+	void createRule(RuleDTO rule) throws FunctionalException;
 
 	/**
 	 * Return all available rules given a viewpoint ID. If none rules is available, a void list is

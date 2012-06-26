@@ -8,9 +8,10 @@ import java.util.List;
 import java.util.StringTokenizer;
 import java.util.logging.Logger;
 
-import org.m2ling.common.exceptions.FunctionalException;
+import org.m2ling.common.exceptions.TechnicalException;
+import org.m2ling.common.exceptions.TechnicalException.Code;
 import org.m2ling.domain.Root;
-import org.m2ling.domain.core.HasTags;
+import org.m2ling.domain.core.Rule;
 import org.m2ling.domain.core.Type;
 import org.m2ling.domain.core.ViewPoint;
 import org.m2ling.persistence.PersistenceManager;
@@ -69,7 +70,7 @@ public class CoreUtil {
 	 * 
 	 * @param id
 	 *           the searched viewpoint id
-	 * @return a viewpoint denoted by the given name or null if none matches
+	 * @return a viewpoint denoted by the given id or null if none matches
 	 */
 	public ViewPoint getViewPointByID(String id) {
 		ViewPoint vp = null;
@@ -83,33 +84,28 @@ public class CoreUtil {
 	}
 
 	/**
-	 * Return any object matching provided type and ID. Note that the item ID is not necessary a "iD"
-	 * attribute. This method can return null of the throwError value is false.
+	 * Return a rule denoted by the given id or null if none matches.
 	 * 
-	 * @param type
-	 *           the HasTags item type
-	 * @param itemID
-	 *           the item ID to set tag to. * @param throwError throw an exception if the item
-	 *           doesn't exist
-	 * @return any object matching provided type and ID or null if none found
-	 **/
-	public Object getItemByTypeAndID(Type type, String itemID, boolean throwError) {
-		if (type == Type.VIEWPOINT) {
-			// For view points, the id is the name
-			return getViewPointByName(itemID, throwError);
-		} else {
-			if (throwError) {
-				// TODO
-				throw new UnsupportedOperationException("Not yet implemented");
-			} else {
-				return null;
+	 * @param id
+	 *           the searched id
+	 * @return an item denoted by the given id or null if none matches
+	 */
+	public Rule getRuleByID(String id) {
+		Root root = pmanager.getRoot();
+		for (ViewPoint v : root.getViewPoints()) {
+			List<Rule> rules = v.getRules();
+			for (Rule rule : rules) {
+				if (id.equals(rule.getId())) {
+					return rule;
+				}
 			}
 		}
+		return null;
 	}
 
 	/**
-	 * Return any HasTags item matching provided type and ID. Note that the item ID is not necessary
-	 * a "iD" attribute.
+	 * Return any object matching provided type and ID or null if none matches. Note that the item ID
+	 * is not necessary a "iD" attribute.
 	 * 
 	 * @param type
 	 *           the HasTags item type
@@ -117,15 +113,13 @@ public class CoreUtil {
 	 *           the item ID to set tag to.
 	 * @return any object matching provided type and ID or null if none found
 	 **/
-	public HasTags getHasTagsByTypeAndID(Type type, String itemID) throws FunctionalException {
-		Object o = getItemByTypeAndID(type, itemID, true);
-		if (o != null && o instanceof HasTags) {
-			return (HasTags) o;
+	public Object getItemByTypeAndID(Type type, String itemID) {
+		if (type == Type.VIEWPOINT) {
+			return getViewPointByID(itemID);
+		} else if (type == Type.RULE) {
+			return getRuleByID(itemID);
 		} else {
-			String msg = "Item found but is does not support Tags: " + o;
-			logger.warning(msg);
-			throw new FunctionalException(FunctionalException.Code.TARGET_NOT_FOUND,
-					"Item found but is does not support Tags", null, "Item : " + o);
+			throw new TechnicalException(Code.NOT_YET_IMPLEMENTED, null, null, null);
 		}
 	}
 

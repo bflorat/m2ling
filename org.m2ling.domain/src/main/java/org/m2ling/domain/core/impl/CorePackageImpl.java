@@ -2087,6 +2087,7 @@ public class CorePackageImpl extends EPackageImpl implements CorePackage {
 		addEEnumLiteral(typeEEnum, Type.STREAM);
 		addEEnumLiteral(typeEEnum, Type.VIEWPOINT);
 		addEEnumLiteral(typeEEnum, Type.VIEW);
+		addEEnumLiteral(typeEEnum, Type.RULE);
 
 		initEEnum(rulePriorityEEnum, RulePriority.class, "RulePriority");
 		addEEnumLiteral(rulePriorityEEnum, RulePriority.VERY_LOW);

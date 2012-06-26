@@ -12,7 +12,6 @@ import java.util.logging.Logger;
 import org.m2ling.common.dto.core.RuleDTO;
 import org.m2ling.common.exceptions.FunctionalException;
 import org.m2ling.common.utils.Msg;
-import org.m2ling.presentation.events.Events;
 import org.m2ling.presentation.events.ObservationManager;
 import org.m2ling.presentation.principles.model.RuleBean;
 import org.m2ling.presentation.principles.utils.DTOConverter;
@@ -47,16 +46,19 @@ public class RulesPanel extends VerticalLayout {
 
 	private DTOConverter.FromDTO fromDTO;
 
+	private RuleDialogFactory factory;
+
 	/**
 	 * Build a rules dialog
 	 * 
 	 */
 	@Inject
 	public RulesPanel(Logger logger, @Assisted String vp, RuleService service, ObservationManager obs,
-			DTOConverter.ToDTO toDTO, DTOConverter.FromDTO fromDTO) {
+			DTOConverter.ToDTO toDTO, DTOConverter.FromDTO fromDTO, RuleDialogFactory factory) {
 		super();
 		this.vp = vp;
 		this.service = service;
+		this.factory = factory;
 		this.logger = logger;
 		this.obs = obs;
 		this.vp = vp;
@@ -99,8 +101,11 @@ public class RulesPanel extends VerticalLayout {
 
 	private void addRule(final RuleBean rule) {
 		// Name
-		Label name = new Label(Msg.get("pr.17") + rule.getName()
-				+ (!Strings.isNullOrEmpty(rule.getTags()) ? " [" + rule.getTags() + "]" : ""));
+		String nameString = Msg.get("pr.17") + rule.getName()
+				+ (!Strings.isNullOrEmpty(rule.getTags()) ? " [" + rule.getTags() + "] " : " ");
+		nameString += "[" + Msg.get("gal.7") + " : " + rule.getStatus() + "] [" + Msg.get("gal.8") + " : "
+				+ rule.getPriority() + "]";
+		Label name = new Label(nameString);
 		name.setStyleName("principles_rules-name");
 		name.setSizeUndefined();
 		Button edit = new Button(Msg.get("gal.2"));
@@ -108,10 +113,9 @@ public class RulesPanel extends VerticalLayout {
 		edit.addStyleName("command");
 		edit.addListener(new Button.ClickListener() {
 			public void buttonClick(ClickEvent event) {
-				// TODO
-				// ViewPointDialog vpDialog = factory.getViewPointDialogFor(bean);
-				// vpDialog.setModal(true);
-				// getWindow().addWindow(vpDialog);
+				RuleDialog dialog = factory.getRuleDialogFor(rule);
+				dialog.setModal(true);
+				getWindow().addWindow(dialog);
 			}
 		});
 
@@ -123,7 +127,8 @@ public class RulesPanel extends VerticalLayout {
 				try {
 					RuleDTO ruleDTO = toDTO.getRuleDTO(rule);
 					service.deleteRule(ruleDTO);
-					obs.notifySync(new org.m2ling.presentation.events.Event(Events.VP_CHANGE));
+					removeAllComponents();
+					attach();
 				} catch (FunctionalException e) {
 					logger.log(Level.SEVERE, e.getDetailedMessage(), e.getCause());
 					getWindow().showNotification(Msg.get("error.1") + " : " + e.getDetailedMessage(),
@@ -156,6 +161,7 @@ public class RulesPanel extends VerticalLayout {
 		if (!Strings.isNullOrEmpty(rule.getComment())) {
 			addComponent(comment);
 		}
+		addComponent(new Label("<br/>", Label.CONTENT_RAW));
 	}
 
 }

@@ -5,6 +5,8 @@
  */
 package org.m2ling.presentation.binding;
 
+import org.m2ling.presentation.principles.RuleDialog;
+import org.m2ling.presentation.principles.RuleDialogFactory;
 import org.m2ling.presentation.principles.RulesPanel;
 import org.m2ling.presentation.principles.RulesPanelFactory;
 import org.m2ling.presentation.principles.ViewPointDialog;
@@ -40,6 +42,8 @@ public class PresentationPrincipleGuiceModule extends AbstractModule {
 					ViewPointPanelFactory.class));
 			install(new FactoryModuleBuilder().implement(RulesPanel.class, RulesPanel.class)
 					.build(RulesPanelFactory.class));
+			install(new FactoryModuleBuilder().implement(RuleDialog.class, RuleDialog.class)
+					.build(RuleDialogFactory.class));
 		}
 	}
 }

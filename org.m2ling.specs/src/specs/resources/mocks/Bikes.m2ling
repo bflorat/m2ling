@@ -26,9 +26,10 @@
     <linkTypes id="_4Rfd0pqjEeGQsK1VSbibvw" name="NET_DATABASE" description="Synchronous Network protocol to access remote Postgres database. Default port : 5432. Can be used over TCP or UDP." sourceTypes="_1y2zQZoWEeG71vmJ5CR-iA" destinationTypes="_YbdmAZoXEeG71vmJ5CR-iA"/>
     <linkTypes id="_oHllkpqkEeGbI4NH3iicSg" name="HTTP_GUI" comment="" description="Synchronous HTTP access from end users to the GUI services. Default port : 80. Over TCP only. KEEP_ALIVE option enabled." sourceTypes="_8_BugZqkEeGbI4NH3iicSg _8_BugZqkEeGbI4NH3iicSg" destinationTypes="_fKtsQZoXEeG71vmJ5CR-iA"/>
     <linkTypes id="_2LrDApqyEeGVMag01qc4bw" name="LDAP" comment="" description="Synchronous access to a LDAP directory. Over TCP-IP." sourceTypes="_E3EOwZoWEeG71vmJ5CR-iA" destinationTypes="_ha8mEZqyEeGVMag01qc4bw"/>
-    <rules id="R1" name="R1" comment="This rule is one of the Bikes IS cornerstone." description="A GUI module can't map (using an hyperlink) another GUI module, each application must be integrated into the portal." status="APPLICABLE" priority="VERY_HIGH">
+    <rules id="R1" name="R1" comment="This rule is one of the Bikes IS cornerstone." description="A GUI Module can't map (using an hyperlink for instance) another GUI Module, each application must be integrated into the portal." status="APPLICABLE" priority="VERY_HIGH">
       <tags>logical</tags>
     </rules>
+    <rules id="R2" name="R2" comment="" description="A Service Module can't call another Service Module" status="APPLICABLE" priority="VERY_HIGH"/>
   </viewPoints>
   <viewPoints id="fsdfhjksdhfkjhsdkfj" name="Physical Architecture" comment="" description="Physical Architecture viewpoint provides all rules and concepts dealing with hardware, network aspects of a project.">
     <componentTypes id="_-aItkZxEEeGi7NYPtEuJdA" name="X86 Server" description="Intel-based server. Mostly 64 bits." reifiable="true">

@@ -10,6 +10,7 @@ import java.util.List;
 import org.m2ling.common.configuration.Configuration;
 import org.m2ling.common.dto.core.ViewPointDTO;
 import org.m2ling.common.exceptions.FunctionalException;
+import org.m2ling.common.exceptions.FunctionalException.Code;
 import org.m2ling.common.utils.Consts;
 import org.m2ling.common.utils.Utils;
 import org.m2ling.domain.Root;
@@ -43,44 +44,46 @@ public class ViewPointServiceImpl extends ServiceImpl implements ViewPointServic
 		this.conf = conf;
 	}
 
-	private void checkDTO(final ViewPointDTO vpDTO) throws FunctionalException {
+	private void checkDTO(final ViewPointDTO dto) throws FunctionalException {
+		// VP existance
+		ViewPoint vp = util.getViewPointByID(dto.getId());
+		if (vp == null) {
+			throw new IllegalStateException("View point doesn't exists : " + dto.getId());
+		}
+		// nullity
+		if (dto == null) {
+			throw new FunctionalException(Code.NULL_ARGUMENT, "Null item provided", null, null);
+		}
 		// Name
-		if (vpDTO.getName().length() > Consts.MAX_LABEL_SIZE) {
+		if (dto.getName().length() == 0) {
+			throw new FunctionalException(FunctionalException.Code.NULL_ARGUMENT, "Void Name", null, dto.toString());
+		}
+		if (dto.getName().length() > Consts.MAX_LABEL_SIZE) {
 			throw new FunctionalException(FunctionalException.Code.SIZE_EXCEEDED, "Name too long", null, null);
 		}
 		// Status literals
 		int index = 1;
-		for (String literal : vpDTO.getStatusLiterals()) {
+		for (String literal : dto.getStatusLiterals()) {
 			if (literal.length() > Consts.MAX_LABEL_SIZE) {
 				throw new FunctionalException(FunctionalException.Code.SIZE_EXCEEDED, "Status literal name is too long",
 						null, "status #" + index);
 			}
 			index++;
 		}
-		if (Utils.containsDup(vpDTO.getStatusLiterals())) {
+		if (Utils.containsDup(dto.getStatusLiterals())) {
 			throw new FunctionalException(FunctionalException.Code.DUPLICATES, "Status literal contains duplicates", null,
 					null);
 		}
 		// Description
-		if (vpDTO.getDescription().length() > Consts.MAX_TEXT_SIZE) {
+		if (dto.getDescription().length() > Consts.MAX_TEXT_SIZE) {
 			throw new FunctionalException(FunctionalException.Code.SIZE_EXCEEDED, "Description too long", null, null);
 		}
 		// Comment
-		if (vpDTO.getComment().length() > Consts.MAX_TEXT_SIZE) {
+		if (dto.getComment().length() > Consts.MAX_TEXT_SIZE) {
 			throw new FunctionalException(FunctionalException.Code.SIZE_EXCEEDED, "Comment too long", null, null);
 		}
 		// Tags
-		index = 1;
-		for (String tag : vpDTO.getTags()) {
-			if (tag.length() > Consts.MAX_LABEL_SIZE) {
-				throw new FunctionalException(FunctionalException.Code.SIZE_EXCEEDED, "Tag is too long", null, "tag #"
-						+ index);
-			}
-			index++;
-		}
-		if (Utils.containsDup(vpDTO.getTags())) {
-			throw new FunctionalException(FunctionalException.Code.DUPLICATES, "Tags contains duplicates", null, null);
-		}
+		Utils.checkTags(dto.getTags());
 	}
 
 	public List<ViewPointDTO> getAllViewPoints() {
@@ -116,6 +119,7 @@ public class ViewPointServiceImpl extends ServiceImpl implements ViewPointServic
 		// test DTO
 		checkDTO(vpDTO);
 
+		//Processing
 		ViewPoint vp = fromDTO.newViewPoint(vpDTO);
 		Root root = pmanager.getRoot();
 		if (root.getViewPoints().contains(vp)) {
@@ -140,12 +144,9 @@ public class ViewPointServiceImpl extends ServiceImpl implements ViewPointServic
 	@Override
 	public void updateViewPoint(final ViewPointDTO vpDTO) throws FunctionalException {
 		// tests
-		ViewPoint vp = util.getViewPointByID(vpDTO.getId());
-		if (vp == null) {
-			throw new IllegalStateException("View point doesn't exists : " + vpDTO.getId());
-		}
 		checkDTO(vpDTO);
 		// Processing
+		ViewPoint vp = util.getViewPointByID(vpDTO.getId());
 		vp.setName(vpDTO.getName());
 		vp.setDescription(vpDTO.getDescription());
 		List<String> status = vp.getStatusLiterals();
@@ -171,6 +172,17 @@ public class ViewPointServiceImpl extends ServiceImpl implements ViewPointServic
 					vpDTO.toString());
 		}
 		pmanager.getRoot().getViewPoints().remove(vp);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.m2ling.service.principles.ViewPointService#getViewPointByID(java.lang.String)
+	 */
+	@Override
+	public ViewPointDTO getViewPointByID(String id) {
+		ViewPoint vp = util.getViewPointByID(id);
+		return toDTO.getViewPointDTO(vp);
 	}
 
 }

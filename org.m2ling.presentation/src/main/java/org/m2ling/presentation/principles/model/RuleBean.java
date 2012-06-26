@@ -7,12 +7,15 @@ package org.m2ling.presentation.principles.model;
 
 import java.io.Serializable;
 
+import org.m2ling.common.utils.Utils;
+
 /**
  * Mutable Rule bean
  */
 @SuppressWarnings("serial")
 public class RuleBean implements Serializable {
 
+	private String vpID = "";
 	private String id = "";
 	private String name = "";
 	/**
@@ -52,6 +55,14 @@ public class RuleBean implements Serializable {
 	 */
 	public void setId(String id) {
 		this.id = id;
+	}
+	
+	/**
+	 * @param id
+	 *           the view point id to set
+	 */
+	public void setViewPointId(String id) {
+		this.vpID = id;
 	}
 
 	/**
@@ -132,6 +143,17 @@ public class RuleBean implements Serializable {
 	 */
 	public String getDescription() {
 		return description;
+	}
+	
+	/**
+	 * @return the associated viewpoint id
+	 */
+	public String getViewPointId() {
+		return vpID;
+	}
+	
+	public String toString() {
+		return Utils.toString(this);
 	}
 
 }

@@ -97,7 +97,15 @@ public enum Type implements Enumerator {
 	 * @generated
 	 * @ordered
 	 */
-	VIEW(7, "VIEW", "VIEW");
+	VIEW(7, "VIEW", "VIEW"), /**
+	 * The '<em><b>RULE</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #RULE_VALUE
+	 * @generated
+	 * @ordered
+	 */
+	RULE(8, "RULE", "RULE");
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -227,6 +235,21 @@ public enum Type implements Enumerator {
 	public static final int VIEW_VALUE = 7;
 
 	/**
+	 * The '<em><b>RULE</b></em>' literal value.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of '<em><b>RULE</b></em>' literal object isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @see #RULE
+	 * @model
+	 * @generated
+	 * @ordered
+	 */
+	public static final int RULE_VALUE = 8;
+
+	/**
 	 * An array of all the '<em><b>Type</b></em>' enumerators.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -242,6 +265,7 @@ public enum Type implements Enumerator {
 			STREAM,
 			VIEWPOINT,
 			VIEW,
+			RULE,
 		};
 
 	/**
@@ -300,6 +324,7 @@ public enum Type implements Enumerator {
 			case STREAM_VALUE: return STREAM;
 			case VIEWPOINT_VALUE: return VIEWPOINT;
 			case VIEW_VALUE: return VIEW;
+			case RULE_VALUE: return RULE;
 		}
 		return null;
 	}

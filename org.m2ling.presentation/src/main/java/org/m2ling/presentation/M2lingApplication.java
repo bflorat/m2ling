@@ -73,7 +73,7 @@ public class M2lingApplication extends Application {
 	private void setApp(GuiModule app) {
 		mframe.resetAccordion();
 		mframe.getAppPanel().removeAllComponents();
-		mframe.getAppPanel().setContent(app);
+		mframe.getAppPanel().addComponent(app);
 		List<SidebarEntry> entries = app.getEntries();
 		for (SidebarEntry entry : entries) {
 			mframe.getAccordion().addTab(entry, entry.getLabel(), null, 0);

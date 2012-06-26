@@ -6,6 +6,8 @@ package org.m2ling.common.dto.core;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.m2ling.common.utils.Utils;
+
 /**
  * Viewpoint DTO object used between layers.
  * 
@@ -133,7 +135,7 @@ public class ViewPointDTO implements Comparable<ViewPointDTO> {
 	}
 
 	public String toString() {
-		return getId() + "/" + getName();
+		return Utils.toString(this);
 	}
 
 	public boolean equals(Object o) {

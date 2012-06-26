@@ -46,8 +46,9 @@ public class DTOConverter {
 
 		public RuleDTO getRuleDTO(RuleBean bean) {
 			List<String> tags = Utils.stringListFromString(bean.getTags());
-			RuleDTO dto = new RuleDTO.Builder(bean.getId(), bean.getName()).description(bean.getDescription()).tags(tags)
-					.comment(bean.getComment()).status(bean.getStatus()).priority(bean.getPriority()).build();
+			RuleDTO dto = new RuleDTO.Builder(bean.getViewPointId(), bean.getId(), bean.getName())
+					.description(bean.getDescription()).tags(tags).comment(bean.getComment()).status(bean.getStatus())
+					.priority(bean.getPriority()).build();
 			return dto;
 		}
 	}
@@ -71,22 +72,9 @@ public class DTOConverter {
 		public ViewPointBean getViewPointBean(ViewPointDTO dto) {
 			ViewPointBean bean = new ViewPointBean();
 			bean.setId(dto.getId());
-			if (dto.getName() != null) {
-				bean.setName(dto.getName());
-			} else {
-				bean.setName("");
-			}
-			if (dto.getComment() != null) {
-				bean.setComment(dto.getComment());
-			} else {
-				bean.setComment("");
-			}
-			if (dto.getDescription() != null) {
-				bean.setDescription(dto.getDescription());
-			} else {
-				// No null value or we'll get 'null' strings in the GUI
-				bean.setDescription("");
-			}
+			bean.setName((dto.getName() != null) ? dto.getName() : "");
+			bean.setComment((dto.getComment() != null) ? dto.getComment() : "");
+			bean.setDescription((dto.getDescription() != null) ? dto.getDescription() : "");
 			if (dto.getStatusLiterals() != null) {
 				String statusLiterals = Utils.stringListAsString(dto.getStatusLiterals());
 				bean.setStatusLiterals(statusLiterals);
@@ -116,6 +104,7 @@ public class DTOConverter {
 		public RuleBean getRuleBean(RuleDTO dto) {
 			RuleBean bean = new RuleBean();
 			bean.setId(dto.getId());
+			bean.setViewPointId(dto.getViewPointId());
 			bean.setName((dto.getName() != null) ? dto.getName() : "");
 			bean.setComment((dto.getComment() != null) ? dto.getComment() : "");
 			bean.setDescription((dto.getDescription() != null) ? dto.getDescription() : "");

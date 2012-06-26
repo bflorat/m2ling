@@ -7,6 +7,8 @@ package org.m2ling.presentation.principles.model;
 
 import java.io.Serializable;
 
+import org.m2ling.common.utils.Utils;
+
 /**
  * Mutable View point bean
  */
@@ -132,5 +134,11 @@ public class ViewPointBean implements Serializable {
 	public String getDescription() {
 		return description;
 	}
+	
+	public String toString() {
+		return Utils.toString(this);
+	}
+	
+	
 
 }

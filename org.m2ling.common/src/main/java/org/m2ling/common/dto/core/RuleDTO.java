@@ -6,6 +6,8 @@ package org.m2ling.common.dto.core;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.m2ling.common.utils.Utils;
+
 /**
  * Rule DTO object used between layers.
  * 
@@ -13,6 +15,7 @@ import java.util.List;
  */
 public class RuleDTO implements Comparable<RuleDTO> {
 
+	private final String vpID;
 	private final String id;
 	private final String name;
 	private final List<String> tags;
@@ -26,6 +29,7 @@ public class RuleDTO implements Comparable<RuleDTO> {
 		// Required configuration
 		private final String name;
 		private final String id;
+		private final String vpID;
 
 		// Optional configuration
 		private List<String> tags = null;
@@ -34,8 +38,9 @@ public class RuleDTO implements Comparable<RuleDTO> {
 		private String status = null;
 		private String priority = null;
 
-		public Builder(String id, String name) {
+		public Builder(String vpID, String id, String name) {
 			this.id = id;
+			this.vpID = vpID;
 			this.name = name;
 		}
 
@@ -73,6 +78,7 @@ public class RuleDTO implements Comparable<RuleDTO> {
 	private RuleDTO(Builder builder) {
 		id = builder.id;
 		name = builder.name;
+		vpID = builder.vpID;
 		if (builder.tags != null) {
 			tags = new ArrayList<String>(builder.tags); // defensive copy
 		} else {
@@ -92,10 +98,17 @@ public class RuleDTO implements Comparable<RuleDTO> {
 	}
 
 	/**
-	 * @return the id
+	 * @return the rule id
 	 */
 	public String getId() {
 		return id;
+	}
+
+	/**
+	 * @return the associated viewpoint id
+	 */
+	public String getViewPointId() {
+		return vpID;
 	}
 
 	/**
@@ -141,7 +154,7 @@ public class RuleDTO implements Comparable<RuleDTO> {
 	}
 
 	public String toString() {
-		return getId() + "/" + getName();
+		return Utils.toString(this);
 	}
 
 	public boolean equals(Object o) {
