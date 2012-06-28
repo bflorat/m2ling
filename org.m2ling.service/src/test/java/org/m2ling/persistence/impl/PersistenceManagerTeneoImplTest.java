@@ -15,7 +15,7 @@ import org.eclipselabs.emfpath.base.EObjects;
 import org.hibernate.Query;
 import org.junit.Test;
 import org.m2ling.domain.core.ViewPoint;
-import org.m2ling.service.AbstractTestCase;
+import org.m2ling.service.ServiceTestCase;
 
 import com.google.common.collect.Multimap;
 import com.google.common.collect.Multimaps;
@@ -24,7 +24,7 @@ import com.google.common.collect.Multimaps;
  * @author "Bertrand Florat <bertrand@florat.net>"
  * 
  */
-public class PersistenceManagerTeneoImplTest extends AbstractTestCase {
+public class PersistenceManagerTeneoImplTest extends ServiceTestCase {
 
 	/**
 	 * Copy a full mock collection into a fresh database and retrieve some items
@@ -34,7 +34,7 @@ public class PersistenceManagerTeneoImplTest extends AbstractTestCase {
 	@Test
 	public void testCopyMockToDatabase() throws IOException {
 		populateDatabase("Technical");
-		ViewPoint vp1 = (ViewPoint) resource.getEObject("vp1");
+		ViewPoint vp1 = (ViewPoint) resource.getEObject("id4");
 		assertFalse(vp1 == null);
 		assertEquals(vp1.getName(), "vp1");
 		resource.save(null);

@@ -3,7 +3,6 @@
  */
 package org.m2ling.domain.core;
 
-import org.eclipse.emf.common.util.EList;
 
 
 /**

@@ -23,6 +23,9 @@ public class RuleDTO implements Comparable<RuleDTO> {
 	private final String comment;
 	private final String status;
 	private final String priority;
+	private final String rationale;
+	private final String exceptions;
+	private final List<StatusEventDTO> history;
 
 	public static class Builder {
 
@@ -37,6 +40,9 @@ public class RuleDTO implements Comparable<RuleDTO> {
 		private String comment = null;
 		private String status = null;
 		private String priority = null;
+		private String rationale = null;
+		private String exceptions = null;
+		private List<StatusEventDTO> history = null;
 
 		public Builder(String vpID, String id, String name) {
 			this.id = id;
@@ -49,8 +55,23 @@ public class RuleDTO implements Comparable<RuleDTO> {
 			return this;
 		}
 
+		public Builder history(List<StatusEventDTO> history) {
+			this.history = history;
+			return this;
+		}
+
 		public Builder description(String description) {
 			this.description = description;
+			return this;
+		}
+		
+		public Builder rationale(String rationale) {
+			this.rationale = rationale;
+			return this;
+		}
+		
+		public Builder exceptions(String exceptions) {
+			this.exceptions = exceptions;
 			return this;
 		}
 
@@ -88,6 +109,9 @@ public class RuleDTO implements Comparable<RuleDTO> {
 		comment = builder.comment;
 		status = builder.status;
 		priority = builder.priority;
+		rationale = builder.rationale;
+		exceptions = builder.exceptions;
+		history = builder.history;
 	}
 
 	/**

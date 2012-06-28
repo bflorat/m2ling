@@ -5,7 +5,6 @@
  */
 package org.m2ling.presentation.principles;
 
-import org.m2ling.presentation.principles.model.ViewPointBean;
 
 /**
  * Produces Rules panels using the assisted injection pattern

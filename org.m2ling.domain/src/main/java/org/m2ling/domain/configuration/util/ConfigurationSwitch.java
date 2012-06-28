@@ -6,7 +6,6 @@ package org.m2ling.domain.configuration.util;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.util.Switch;
-import org.m2ling.domain.configuration.*;
 import org.m2ling.domain.configuration.ConfigurationPackage;
 import org.m2ling.domain.configuration.ParamDefOverrider;
 import org.m2ling.domain.configuration.ParameterDefinition;

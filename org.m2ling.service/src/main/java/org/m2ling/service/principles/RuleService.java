@@ -6,7 +6,6 @@ package org.m2ling.service.principles;
 import java.util.List;
 
 import org.m2ling.common.dto.core.RuleDTO;
-import org.m2ling.common.dto.core.ViewPointDTO;
 import org.m2ling.common.exceptions.FunctionalException;
 
 /**

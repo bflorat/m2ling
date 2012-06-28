@@ -3,14 +3,14 @@
   <viewPoints id="id1" description="" name="viewPointTag_">
     <tags>DEV1</tags>
   </viewPoints>
-  <viewPoints id="id2" description="" name="viewPointTag_DEV1">
+  <viewPoints "id2" description="" name="viewPointTag_DEV1">
     <tags>DEV1</tags>
   </viewPoints>
-  <viewPoints id="id3" description="" name="viewPointTag_DEV1_DEV2">
+  <viewPoints "id3" description="" name="viewPointTag_DEV1_DEV2">
     <tags>DEV1</tags>
     <tags>DEV2</tags>
   </viewPoints>
-  <viewPoints id="id4" description="vp1 label" name="vp1">
+  <viewPoints "id4" description="vp1 label" name="vp1">
     <activities id="_Nnj8IJXFEeGfDY1tsvvkpQ" name="activity1"/>
   </viewPoints>
 </m2ling_domain:Root>

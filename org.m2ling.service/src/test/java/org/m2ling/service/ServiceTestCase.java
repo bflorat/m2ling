@@ -6,9 +6,7 @@ package org.m2ling.service;
 import static junit.framework.Assert.fail;
 
 import java.io.IOException;
-import java.util.HashMap;
 import java.util.Map;
-import java.util.logging.Logger;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EPackage;
@@ -21,7 +19,6 @@ import org.junit.Before;
 import org.m2ling.common.configuration.Configuration;
 import org.m2ling.common.test_utils.M2lingUnitTest;
 import org.m2ling.common.utils.Consts;
-import org.m2ling.common.utils.Utils;
 import org.m2ling.domain.DomainFactory;
 import org.m2ling.domain.DomainPackage;
 import org.m2ling.domain.Root;
@@ -38,7 +35,7 @@ import org.m2ling.persistence.impl.PersistenceManagerTeneoImpl;
  * @author Bertrand Florat <bertrand@florat.net>
  * 
  */
-public class AbstractTestCase extends M2lingUnitTest{
+public class ServiceTestCase extends M2lingUnitTest{
 
 	
 	/** Convenient helper attribute to get mock root object, populated by a populateMock() call. */
