@@ -19,7 +19,7 @@ import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import org.junit.After;
 import org.junit.Before;
 import org.m2ling.common.configuration.Configuration;
-import org.m2ling.common.test_utils.TestHelper;
+import org.m2ling.common.test_utils.M2lingUnitTest;
 import org.m2ling.common.utils.Consts;
 import org.m2ling.common.utils.Utils;
 import org.m2ling.domain.DomainFactory;
@@ -38,10 +38,9 @@ import org.m2ling.persistence.impl.PersistenceManagerTeneoImpl;
  * @author Bertrand Florat <bertrand@florat.net>
  * 
  */
-public class AbstractTestCase {
+public class AbstractTestCase extends M2lingUnitTest{
 
-	protected Logger logger = Logger.getAnonymousLogger();
-
+	
 	/** Convenient helper attribute to get mock root object, populated by a populateMock() call. */
 	protected Root mockRoot;
 
@@ -107,14 +106,7 @@ public class AbstractTestCase {
 	 */
 	@Before
 	public void setUp() {
-		// Set M2LING_HOME variable for test mode
-		Map<String, String> newenv = new HashMap<String, String>();
-		newenv.put(Consts.M2LING_HOME_VARIABLE_NAME, TestHelper.getUTStorage().getAbsolutePath());
-		newenv.put(Consts.M2LING_DEBUG_VARIABLE_NAME, "true");
-		Utils.setEnv(newenv);
-		// Drop the configuration files
-		Configuration conf = new Configuration(null, logger);
-		conf.getConfigurationFile().delete();
+		super.setUp();
 	}
 
 	/**

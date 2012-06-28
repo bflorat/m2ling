@@ -16,7 +16,6 @@ import org.m2ling.domain.core.CoreFactory;
 import org.m2ling.domain.core.ViewPoint;
 import org.m2ling.persistence.PersistenceManager;
 import org.m2ling.persistence.impl.PersistenceManagerInMemoryImpl;
-import org.m2ling.persistence.impl.PersistenceManagerXMIImpl;
 
 /**
  * @author "Bertrand Florat <bertrand@florat.net>"
