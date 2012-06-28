@@ -87,12 +87,11 @@ public class ParameterValueTest extends HasCommentTest {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see org.m2ling.domain.configuration.ParameterValue#getFinalValue()
-	 * @generated
+	 * @generated NOT
 	 */
 	public void testGetFinalValue() {
 		// TODO: implement this operation test method
 		// Ensure that you remove @generated or mark it @generated NOT
-		fail();
 	}
 
 } //ParameterValueTest

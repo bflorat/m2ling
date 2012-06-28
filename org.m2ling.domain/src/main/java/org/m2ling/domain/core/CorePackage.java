@@ -186,22 +186,13 @@ public interface CorePackage extends EPackage {
 	int CONCEPT_ITEM__DESCRIPTION = HAS_NAME_AND_ID_FEATURE_COUNT + 3;
 
 	/**
-	 * The feature id for the '<em><b>Status Literals</b></em>' attribute list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CONCEPT_ITEM__STATUS_LITERALS = HAS_NAME_AND_ID_FEATURE_COUNT + 4;
-
-	/**
 	 * The number of structural features of the '<em>Concept Item</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CONCEPT_ITEM_FEATURE_COUNT = HAS_NAME_AND_ID_FEATURE_COUNT + 5;
+	int CONCEPT_ITEM_FEATURE_COUNT = HAS_NAME_AND_ID_FEATURE_COUNT + 4;
 
 	/**
 	 * The feature id for the '<em><b>Id</b></em>' attribute.
@@ -256,15 +247,6 @@ public interface CorePackage extends EPackage {
 	 * @ordered
 	 */
 	int COMPONENT_TYPE__DESCRIPTION = CONCEPT_ITEM__DESCRIPTION;
-
-	/**
-	 * The feature id for the '<em><b>Status Literals</b></em>' attribute list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int COMPONENT_TYPE__STATUS_LITERALS = CONCEPT_ITEM__STATUS_LITERALS;
 
 	/**
 	 * The feature id for the '<em><b>Engine Types</b></em>' reference list.
@@ -751,31 +733,22 @@ public interface CorePackage extends EPackage {
 	int COMPONENT_INSTANCE_FEATURE_COUNT = HAS_PARAMETER_VALUES_FEATURE_COUNT + 11;
 
 	/**
-	 * The feature id for the '<em><b>Id</b></em>' attribute.
+	 * The feature id for the '<em><b>Comment</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int VIEW_POINT__ID = CONCEPT_ITEM__ID;
+	int HAS_COMMENT__COMMENT = 0;
 
 	/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * The number of structural features of the '<em>Has Comment</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int VIEW_POINT__NAME = CONCEPT_ITEM__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Custom Properties</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int VIEW_POINT__CUSTOM_PROPERTIES = CONCEPT_ITEM__CUSTOM_PROPERTIES;
+	int HAS_COMMENT_FEATURE_COUNT = 1;
 
 	/**
 	 * The feature id for the '<em><b>Comment</b></em>' attribute.
@@ -784,16 +757,7 @@ public interface CorePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int VIEW_POINT__COMMENT = CONCEPT_ITEM__COMMENT;
-
-	/**
-	 * The feature id for the '<em><b>Tags</b></em>' attribute list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int VIEW_POINT__TAGS = CONCEPT_ITEM__TAGS;
+	int VIEW_POINT__COMMENT = HAS_COMMENT__COMMENT;
 
 	/**
 	 * The feature id for the '<em><b>Description</b></em>' attribute.
@@ -802,16 +766,34 @@ public interface CorePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int VIEW_POINT__DESCRIPTION = CONCEPT_ITEM__DESCRIPTION;
+	int VIEW_POINT__DESCRIPTION = HAS_COMMENT_FEATURE_COUNT + 0;
 
 	/**
-	 * The feature id for the '<em><b>Status Literals</b></em>' attribute list.
+	 * The feature id for the '<em><b>Id</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int VIEW_POINT__STATUS_LITERALS = CONCEPT_ITEM__STATUS_LITERALS;
+	int VIEW_POINT__ID = HAS_COMMENT_FEATURE_COUNT + 1;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VIEW_POINT__NAME = HAS_COMMENT_FEATURE_COUNT + 2;
+
+	/**
+	 * The feature id for the '<em><b>Tags</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VIEW_POINT__TAGS = HAS_COMMENT_FEATURE_COUNT + 3;
 
 	/**
 	 * The feature id for the '<em><b>Activities</b></em>' containment reference list.
@@ -820,7 +802,7 @@ public interface CorePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int VIEW_POINT__ACTIVITIES = CONCEPT_ITEM_FEATURE_COUNT + 0;
+	int VIEW_POINT__ACTIVITIES = HAS_COMMENT_FEATURE_COUNT + 4;
 
 	/**
 	 * The feature id for the '<em><b>Component Types</b></em>' containment reference list.
@@ -829,7 +811,7 @@ public interface CorePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int VIEW_POINT__COMPONENT_TYPES = CONCEPT_ITEM_FEATURE_COUNT + 1;
+	int VIEW_POINT__COMPONENT_TYPES = HAS_COMMENT_FEATURE_COUNT + 5;
 
 	/**
 	 * The feature id for the '<em><b>Link Types</b></em>' containment reference list.
@@ -838,7 +820,7 @@ public interface CorePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int VIEW_POINT__LINK_TYPES = CONCEPT_ITEM_FEATURE_COUNT + 2;
+	int VIEW_POINT__LINK_TYPES = HAS_COMMENT_FEATURE_COUNT + 6;
 
 	/**
 	 * The feature id for the '<em><b>Rules</b></em>' containment reference list.
@@ -847,7 +829,16 @@ public interface CorePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int VIEW_POINT__RULES = CONCEPT_ITEM_FEATURE_COUNT + 3;
+	int VIEW_POINT__RULES = HAS_COMMENT_FEATURE_COUNT + 7;
+
+	/**
+	 * The feature id for the '<em><b>Status Literals</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VIEW_POINT__STATUS_LITERALS = HAS_COMMENT_FEATURE_COUNT + 8;
 
 	/**
 	 * The number of structural features of the '<em>View Point</em>' class.
@@ -856,7 +847,7 @@ public interface CorePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int VIEW_POINT_FEATURE_COUNT = CONCEPT_ITEM_FEATURE_COUNT + 4;
+	int VIEW_POINT_FEATURE_COUNT = HAS_COMMENT_FEATURE_COUNT + 9;
 
 	/**
 	 * The feature id for the '<em><b>Id</b></em>' attribute.
@@ -1057,40 +1048,13 @@ public interface CorePackage extends EPackage {
 	int COMPONENT_INSTANCE_GROUP_FEATURE_COUNT = RUNTIME_ITEM_FEATURE_COUNT + 1;
 
 	/**
-	 * The feature id for the '<em><b>Id</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int VIEW__ID = ARCHITECTURE_ITEM__ID;
-
-	/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int VIEW__NAME = ARCHITECTURE_ITEM__NAME;
-
-	/**
 	 * The feature id for the '<em><b>Comment</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int VIEW__COMMENT = ARCHITECTURE_ITEM__COMMENT;
-
-	/**
-	 * The feature id for the '<em><b>Tags</b></em>' attribute list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int VIEW__TAGS = ARCHITECTURE_ITEM__TAGS;
+	int VIEW__COMMENT = HAS_COMMENT__COMMENT;
 
 	/**
 	 * The feature id for the '<em><b>Description</b></em>' attribute.
@@ -1099,7 +1063,34 @@ public interface CorePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int VIEW__DESCRIPTION = ARCHITECTURE_ITEM__DESCRIPTION;
+	int VIEW__DESCRIPTION = HAS_COMMENT_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VIEW__ID = HAS_COMMENT_FEATURE_COUNT + 1;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VIEW__NAME = HAS_COMMENT_FEATURE_COUNT + 2;
+
+	/**
+	 * The feature id for the '<em><b>Tags</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VIEW__TAGS = HAS_COMMENT_FEATURE_COUNT + 3;
 
 	/**
 	 * The feature id for the '<em><b>Components Groups</b></em>' containment reference list.
@@ -1108,7 +1099,7 @@ public interface CorePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int VIEW__COMPONENTS_GROUPS = ARCHITECTURE_ITEM_FEATURE_COUNT + 0;
+	int VIEW__COMPONENTS_GROUPS = HAS_COMMENT_FEATURE_COUNT + 4;
 
 	/**
 	 * The feature id for the '<em><b>Components</b></em>' containment reference list.
@@ -1117,7 +1108,7 @@ public interface CorePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int VIEW__COMPONENTS = ARCHITECTURE_ITEM_FEATURE_COUNT + 1;
+	int VIEW__COMPONENTS = HAS_COMMENT_FEATURE_COUNT + 5;
 
 	/**
 	 * The feature id for the '<em><b>View Point</b></em>' reference.
@@ -1126,7 +1117,7 @@ public interface CorePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int VIEW__VIEW_POINT = ARCHITECTURE_ITEM_FEATURE_COUNT + 2;
+	int VIEW__VIEW_POINT = HAS_COMMENT_FEATURE_COUNT + 6;
 
 	/**
 	 * The feature id for the '<em><b>Links</b></em>' containment reference list.
@@ -1135,7 +1126,7 @@ public interface CorePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int VIEW__LINKS = ARCHITECTURE_ITEM_FEATURE_COUNT + 3;
+	int VIEW__LINKS = HAS_COMMENT_FEATURE_COUNT + 7;
 
 	/**
 	 * The feature id for the '<em><b>Instances</b></em>' containment reference list.
@@ -1144,7 +1135,7 @@ public interface CorePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int VIEW__INSTANCES = ARCHITECTURE_ITEM_FEATURE_COUNT + 4;
+	int VIEW__INSTANCES = HAS_COMMENT_FEATURE_COUNT + 8;
 
 	/**
 	 * The feature id for the '<em><b>Instances Groups</b></em>' containment reference list.
@@ -1153,7 +1144,7 @@ public interface CorePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int VIEW__INSTANCES_GROUPS = ARCHITECTURE_ITEM_FEATURE_COUNT + 5;
+	int VIEW__INSTANCES_GROUPS = HAS_COMMENT_FEATURE_COUNT + 9;
 
 	/**
 	 * The feature id for the '<em><b>Streams</b></em>' containment reference list.
@@ -1162,7 +1153,7 @@ public interface CorePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int VIEW__STREAMS = ARCHITECTURE_ITEM_FEATURE_COUNT + 6;
+	int VIEW__STREAMS = HAS_COMMENT_FEATURE_COUNT + 10;
 
 	/**
 	 * The number of structural features of the '<em>View</em>' class.
@@ -1171,7 +1162,7 @@ public interface CorePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int VIEW_FEATURE_COUNT = ARCHITECTURE_ITEM_FEATURE_COUNT + 7;
+	int VIEW_FEATURE_COUNT = HAS_COMMENT_FEATURE_COUNT + 11;
 
 	/**
 	 * The feature id for the '<em><b>Status</b></em>' attribute.
@@ -1208,24 +1199,6 @@ public interface CorePackage extends EPackage {
 	 * @ordered
 	 */
 	int HAS_TAGS_FEATURE_COUNT = 1;
-
-	/**
-	 * The feature id for the '<em><b>Comment</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int HAS_COMMENT__COMMENT = 0;
-
-	/**
-	 * The number of structural features of the '<em>Has Comment</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int HAS_COMMENT_FEATURE_COUNT = 1;
 
 	/**
 	 * The feature id for the '<em><b>Custom Properties</b></em>' reference.
@@ -1344,15 +1317,6 @@ public interface CorePackage extends EPackage {
 	 * @ordered
 	 */
 	int LINK_TYPE__DESCRIPTION = CONCEPT_ITEM__DESCRIPTION;
-
-	/**
-	 * The feature id for the '<em><b>Status Literals</b></em>' attribute list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int LINK_TYPE__STATUS_LITERALS = CONCEPT_ITEM__STATUS_LITERALS;
 
 	/**
 	 * The feature id for the '<em><b>Source Types</b></em>' reference list.
@@ -2429,13 +2393,40 @@ public interface CorePackage extends EPackage {
 	int RULE__PRIORITY = HAS_NAME_AND_ID_FEATURE_COUNT + 5;
 
 	/**
+	 * The feature id for the '<em><b>Rationale</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RULE__RATIONALE = HAS_NAME_AND_ID_FEATURE_COUNT + 6;
+
+	/**
+	 * The feature id for the '<em><b>Exceptions</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RULE__EXCEPTIONS = HAS_NAME_AND_ID_FEATURE_COUNT + 7;
+
+	/**
+	 * The feature id for the '<em><b>History</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RULE__HISTORY = HAS_NAME_AND_ID_FEATURE_COUNT + 8;
+
+	/**
 	 * The number of structural features of the '<em>Rule</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int RULE_FEATURE_COUNT = HAS_NAME_AND_ID_FEATURE_COUNT + 6;
+	int RULE_FEATURE_COUNT = HAS_NAME_AND_ID_FEATURE_COUNT + 9;
 
 	/**
 	 * The meta object id for the '{@link org.m2ling.domain.core.impl.ReferenceImpl <em>Reference</em>}' class.
@@ -2520,6 +2511,43 @@ public interface CorePackage extends EPackage {
 	int REFERENCE_FEATURE_COUNT = HAS_COMMENT_FEATURE_COUNT + 6;
 
 	/**
+	 * The meta object id for the '{@link org.m2ling.domain.core.impl.StatusEventImpl <em>Status Event</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.m2ling.domain.core.impl.StatusEventImpl
+	 * @see org.m2ling.domain.core.impl.CorePackageImpl#getStatusEvent()
+	 * @generated
+	 */
+	int STATUS_EVENT = 43;
+
+	/**
+	 * The feature id for the '<em><b>Date</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STATUS_EVENT__DATE = 0;
+
+	/**
+	 * The feature id for the '<em><b>Status Literal</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STATUS_EVENT__STATUS_LITERAL = 1;
+
+	/**
+	 * The number of structural features of the '<em>Status Event</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STATUS_EVENT_FEATURE_COUNT = 2;
+
+	/**
 	 * The meta object id for the '{@link org.m2ling.domain.core.CustomPropertyType <em>Custom Property Type</em>}' enum.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2527,7 +2555,7 @@ public interface CorePackage extends EPackage {
 	 * @see org.m2ling.domain.core.impl.CorePackageImpl#getCustomPropertyType()
 	 * @generated
 	 */
-	int CUSTOM_PROPERTY_TYPE = 43;
+	int CUSTOM_PROPERTY_TYPE = 44;
 
 	/**
 	 * The meta object id for the '{@link org.m2ling.domain.core.ActivityStatus <em>Activity Status</em>}' enum.
@@ -2537,7 +2565,7 @@ public interface CorePackage extends EPackage {
 	 * @see org.m2ling.domain.core.impl.CorePackageImpl#getActivityStatus()
 	 * @generated
 	 */
-	int ACTIVITY_STATUS = 44;
+	int ACTIVITY_STATUS = 45;
 
 	/**
 	 * The meta object id for the '{@link org.m2ling.domain.core.Type <em>Type</em>}' enum.
@@ -2547,7 +2575,7 @@ public interface CorePackage extends EPackage {
 	 * @see org.m2ling.domain.core.impl.CorePackageImpl#getType()
 	 * @generated
 	 */
-	int TYPE = 45;
+	int TYPE = 46;
 
 	/**
 	 * The meta object id for the '{@link org.m2ling.domain.core.RulePriority <em>Rule Priority</em>}' enum.
@@ -2557,7 +2585,7 @@ public interface CorePackage extends EPackage {
 	 * @see org.m2ling.domain.core.impl.CorePackageImpl#getRulePriority()
 	 * @generated
 	 */
-	int RULE_PRIORITY = 46;
+	int RULE_PRIORITY = 47;
 
 
 	/**
@@ -2568,7 +2596,7 @@ public interface CorePackage extends EPackage {
 	 * @see org.m2ling.domain.core.impl.CorePackageImpl#getReferenceType()
 	 * @generated
 	 */
-	int REFERENCE_TYPE = 47;
+	int REFERENCE_TYPE = 48;
 
 
 	/**
@@ -2579,7 +2607,7 @@ public interface CorePackage extends EPackage {
 	 * @see org.m2ling.domain.core.impl.CorePackageImpl#getLinkTemporality()
 	 * @generated
 	 */
-	int LINK_TEMPORALITY = 48;
+	int LINK_TEMPORALITY = 49;
 
 	/**
 	 * The meta object id for the '{@link org.m2ling.domain.core.LinkAccessType <em>Link Access Type</em>}' enum.
@@ -2589,7 +2617,7 @@ public interface CorePackage extends EPackage {
 	 * @see org.m2ling.domain.core.impl.CorePackageImpl#getLinkAccessType()
 	 * @generated
 	 */
-	int LINK_ACCESS_TYPE = 49;
+	int LINK_ACCESS_TYPE = 50;
 
 
 	/**
@@ -2874,6 +2902,17 @@ public interface CorePackage extends EPackage {
 	EReference getViewPoint_Rules();
 
 	/**
+	 * Returns the meta object for the attribute list '{@link org.m2ling.domain.core.ViewPoint#getStatusLiterals <em>Status Literals</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute list '<em>Status Literals</em>'.
+	 * @see org.m2ling.domain.core.ViewPoint#getStatusLiterals()
+	 * @see #getViewPoint()
+	 * @generated
+	 */
+	EAttribute getViewPoint_StatusLiterals();
+
+	/**
 	 * Returns the meta object for class '{@link org.m2ling.domain.core.ComponentGroup <em>Component Group</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2934,17 +2973,6 @@ public interface CorePackage extends EPackage {
 	 * @generated
 	 */
 	EClass getConceptItem();
-
-	/**
-	 * Returns the meta object for the attribute list '{@link org.m2ling.domain.core.ConceptItem#getStatusLiterals <em>Status Literals</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute list '<em>Status Literals</em>'.
-	 * @see org.m2ling.domain.core.ConceptItem#getStatusLiterals()
-	 * @see #getConceptItem()
-	 * @generated
-	 */
-	EAttribute getConceptItem_StatusLiterals();
 
 	/**
 	 * Returns the meta object for class '{@link org.m2ling.domain.core.RuntimeItem <em>Runtime Item</em>}'.
@@ -3794,6 +3822,39 @@ public interface CorePackage extends EPackage {
 	EAttribute getRule_Priority();
 
 	/**
+	 * Returns the meta object for the attribute '{@link org.m2ling.domain.core.Rule#getRationale <em>Rationale</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Rationale</em>'.
+	 * @see org.m2ling.domain.core.Rule#getRationale()
+	 * @see #getRule()
+	 * @generated
+	 */
+	EAttribute getRule_Rationale();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.m2ling.domain.core.Rule#getExceptions <em>Exceptions</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Exceptions</em>'.
+	 * @see org.m2ling.domain.core.Rule#getExceptions()
+	 * @see #getRule()
+	 * @generated
+	 */
+	EAttribute getRule_Exceptions();
+
+	/**
+	 * Returns the meta object for the reference list '{@link org.m2ling.domain.core.Rule#getHistory <em>History</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference list '<em>History</em>'.
+	 * @see org.m2ling.domain.core.Rule#getHistory()
+	 * @see #getRule()
+	 * @generated
+	 */
+	EReference getRule_History();
+
+	/**
 	 * Returns the meta object for class '{@link org.m2ling.domain.core.Reference <em>Reference</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3824,6 +3885,38 @@ public interface CorePackage extends EPackage {
 	 * @generated
 	 */
 	EReference getReference_Targets();
+
+	/**
+	 * Returns the meta object for class '{@link org.m2ling.domain.core.StatusEvent <em>Status Event</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Status Event</em>'.
+	 * @see org.m2ling.domain.core.StatusEvent
+	 * @generated
+	 */
+	EClass getStatusEvent();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.m2ling.domain.core.StatusEvent#getDate <em>Date</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Date</em>'.
+	 * @see org.m2ling.domain.core.StatusEvent#getDate()
+	 * @see #getStatusEvent()
+	 * @generated
+	 */
+	EAttribute getStatusEvent_Date();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.m2ling.domain.core.StatusEvent#getStatusLiteral <em>Status Literal</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Status Literal</em>'.
+	 * @see org.m2ling.domain.core.StatusEvent#getStatusLiteral()
+	 * @see #getStatusEvent()
+	 * @generated
+	 */
+	EAttribute getStatusEvent_StatusLiteral();
 
 	/**
 	 * Returns the meta object for enum '{@link org.m2ling.domain.core.CustomPropertyType <em>Custom Property Type</em>}'.
@@ -4136,6 +4229,14 @@ public interface CorePackage extends EPackage {
 		EReference VIEW_POINT__RULES = eINSTANCE.getViewPoint_Rules();
 
 		/**
+		 * The meta object literal for the '<em><b>Status Literals</b></em>' attribute list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute VIEW_POINT__STATUS_LITERALS = eINSTANCE.getViewPoint_StatusLiterals();
+
+		/**
 		 * The meta object literal for the '{@link org.m2ling.domain.core.impl.ComponentGroupImpl <em>Component Group</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -4190,14 +4291,6 @@ public interface CorePackage extends EPackage {
 		 * @generated
 		 */
 		EClass CONCEPT_ITEM = eINSTANCE.getConceptItem();
-
-		/**
-		 * The meta object literal for the '<em><b>Status Literals</b></em>' attribute list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute CONCEPT_ITEM__STATUS_LITERALS = eINSTANCE.getConceptItem_StatusLiterals();
 
 		/**
 		 * The meta object literal for the '{@link org.m2ling.domain.core.impl.RuntimeItemImpl <em>Runtime Item</em>}' class.
@@ -4906,6 +4999,30 @@ public interface CorePackage extends EPackage {
 		EAttribute RULE__PRIORITY = eINSTANCE.getRule_Priority();
 
 		/**
+		 * The meta object literal for the '<em><b>Rationale</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute RULE__RATIONALE = eINSTANCE.getRule_Rationale();
+
+		/**
+		 * The meta object literal for the '<em><b>Exceptions</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute RULE__EXCEPTIONS = eINSTANCE.getRule_Exceptions();
+
+		/**
+		 * The meta object literal for the '<em><b>History</b></em>' reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference RULE__HISTORY = eINSTANCE.getRule_History();
+
+		/**
 		 * The meta object literal for the '{@link org.m2ling.domain.core.impl.ReferenceImpl <em>Reference</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -4930,6 +5047,32 @@ public interface CorePackage extends EPackage {
 		 * @generated
 		 */
 		EReference REFERENCE__TARGETS = eINSTANCE.getReference_Targets();
+
+		/**
+		 * The meta object literal for the '{@link org.m2ling.domain.core.impl.StatusEventImpl <em>Status Event</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.m2ling.domain.core.impl.StatusEventImpl
+		 * @see org.m2ling.domain.core.impl.CorePackageImpl#getStatusEvent()
+		 * @generated
+		 */
+		EClass STATUS_EVENT = eINSTANCE.getStatusEvent();
+
+		/**
+		 * The meta object literal for the '<em><b>Date</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute STATUS_EVENT__DATE = eINSTANCE.getStatusEvent_Date();
+
+		/**
+		 * The meta object literal for the '<em><b>Status Literal</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute STATUS_EVENT__STATUS_LITERAL = eINSTANCE.getStatusEvent_StatusLiteral();
 
 		/**
 		 * The meta object literal for the '{@link org.m2ling.domain.core.CustomPropertyType <em>Custom Property Type</em>}' enum.

@@ -60,6 +60,7 @@ import org.m2ling.domain.core.Rule;
 import org.m2ling.domain.core.RulePriority;
 import org.m2ling.domain.core.RuntimeItem;
 import org.m2ling.domain.core.Stakeholder;
+import org.m2ling.domain.core.StatusEvent;
 import org.m2ling.domain.core.Type;
 import org.m2ling.domain.core.URLConstraint;
 import org.m2ling.domain.core.View;
@@ -380,6 +381,13 @@ public class CorePackageImpl extends EPackageImpl implements CorePackage {
 	 * @generated
 	 */
 	private EClass referenceEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass statusEventEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -738,6 +746,15 @@ public class CorePackageImpl extends EPackageImpl implements CorePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getViewPoint_StatusLiterals() {
+		return (EAttribute)viewPointEClass.getEStructuralFeatures().get(4);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getComponentGroup() {
 		return componentGroupEClass;
 	}
@@ -785,15 +802,6 @@ public class CorePackageImpl extends EPackageImpl implements CorePackage {
 	 */
 	public EClass getConceptItem() {
 		return conceptItemEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getConceptItem_StatusLiterals() {
-		return (EAttribute)conceptItemEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -1521,6 +1529,33 @@ public class CorePackageImpl extends EPackageImpl implements CorePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getRule_Rationale() {
+		return (EAttribute)ruleEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getRule_Exceptions() {
+		return (EAttribute)ruleEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getRule_History() {
+		return (EReference)ruleEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getReference() {
 		return referenceEClass;
 	}
@@ -1541,6 +1576,33 @@ public class CorePackageImpl extends EPackageImpl implements CorePackage {
 	 */
 	public EReference getReference_Targets() {
 		return (EReference)referenceEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getStatusEvent() {
+		return statusEventEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getStatusEvent_Date() {
+		return (EAttribute)statusEventEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getStatusEvent_StatusLiteral() {
+		return (EAttribute)statusEventEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -1660,6 +1722,7 @@ public class CorePackageImpl extends EPackageImpl implements CorePackage {
 		createEReference(viewPointEClass, VIEW_POINT__COMPONENT_TYPES);
 		createEReference(viewPointEClass, VIEW_POINT__LINK_TYPES);
 		createEReference(viewPointEClass, VIEW_POINT__RULES);
+		createEAttribute(viewPointEClass, VIEW_POINT__STATUS_LITERALS);
 
 		componentGroupEClass = createEClass(COMPONENT_GROUP);
 		createEReference(componentGroupEClass, COMPONENT_GROUP__COMPONENTS);
@@ -1670,7 +1733,6 @@ public class CorePackageImpl extends EPackageImpl implements CorePackage {
 		architectureItemEClass = createEClass(ARCHITECTURE_ITEM);
 
 		conceptItemEClass = createEClass(CONCEPT_ITEM);
-		createEAttribute(conceptItemEClass, CONCEPT_ITEM__STATUS_LITERALS);
 
 		runtimeItemEClass = createEClass(RUNTIME_ITEM);
 		createEAttribute(runtimeItemEClass, RUNTIME_ITEM__STATUS);
@@ -1788,10 +1850,17 @@ public class CorePackageImpl extends EPackageImpl implements CorePackage {
 
 		ruleEClass = createEClass(RULE);
 		createEAttribute(ruleEClass, RULE__PRIORITY);
+		createEAttribute(ruleEClass, RULE__RATIONALE);
+		createEAttribute(ruleEClass, RULE__EXCEPTIONS);
+		createEReference(ruleEClass, RULE__HISTORY);
 
 		referenceEClass = createEClass(REFERENCE);
 		createEAttribute(referenceEClass, REFERENCE__TYPE);
 		createEReference(referenceEClass, REFERENCE__TARGETS);
+
+		statusEventEClass = createEClass(STATUS_EVENT);
+		createEAttribute(statusEventEClass, STATUS_EVENT__DATE);
+		createEAttribute(statusEventEClass, STATUS_EVENT__STATUS_LITERAL);
 
 		// Create enums
 		customPropertyTypeEEnum = createEEnum(CUSTOM_PROPERTY_TYPE);
@@ -1840,7 +1909,10 @@ public class CorePackageImpl extends EPackageImpl implements CorePackage {
 		componentInstanceEClass.getESuperTypes().add(this.getHasParameterValues());
 		componentInstanceEClass.getESuperTypes().add(this.getRuntimeItem());
 		componentInstanceEClass.getESuperTypes().add(this.getHasReferences());
-		viewPointEClass.getESuperTypes().add(this.getConceptItem());
+		viewPointEClass.getESuperTypes().add(this.getHasComment());
+		viewPointEClass.getESuperTypes().add(this.getHasDescription());
+		viewPointEClass.getESuperTypes().add(this.getHasNameAndID());
+		viewPointEClass.getESuperTypes().add(this.getHasTags());
 		componentGroupEClass.getESuperTypes().add(this.getArchitectureItem());
 		componentGroupEClass.getESuperTypes().add(this.getHasParameterDefinitions());
 		componentInstanceGroupEClass.getESuperTypes().add(this.getRuntimeItem());
@@ -1864,7 +1936,10 @@ public class CorePackageImpl extends EPackageImpl implements CorePackage {
 		runtimeItemEClass.getESuperTypes().add(this.getHasParameterValues());
 		runtimeItemEClass.getESuperTypes().add(this.getHasConstraints());
 		runtimeItemEClass.getESuperTypes().add(this.getHasDescription());
-		viewEClass.getESuperTypes().add(this.getArchitectureItem());
+		viewEClass.getESuperTypes().add(this.getHasComment());
+		viewEClass.getESuperTypes().add(this.getHasDescription());
+		viewEClass.getESuperTypes().add(this.getHasNameAndID());
+		viewEClass.getESuperTypes().add(this.getHasTags());
 		linkTypeEClass.getESuperTypes().add(this.getConceptItem());
 		linkEClass.getESuperTypes().add(this.getArchitectureItem());
 		instancesLinkEClass.getESuperTypes().add(this.getRuntimeItem());
@@ -1934,6 +2009,7 @@ public class CorePackageImpl extends EPackageImpl implements CorePackage {
 		initEReference(getViewPoint_ComponentTypes(), this.getComponentType(), null, "componentTypes", null, 0, -1, ViewPoint.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getViewPoint_LinkTypes(), this.getLinkType(), null, "linkTypes", null, 0, -1, ViewPoint.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getViewPoint_Rules(), this.getRule(), null, "rules", null, 0, -1, ViewPoint.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getViewPoint_StatusLiterals(), ecorePackage.getEString(), "statusLiterals", null, 0, -1, ViewPoint.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(componentGroupEClass, ComponentGroup.class, "ComponentGroup", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getComponentGroup_Components(), this.getComponent(), null, "components", null, 0, -1, ComponentGroup.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1944,7 +2020,6 @@ public class CorePackageImpl extends EPackageImpl implements CorePackage {
 		initEClass(architectureItemEClass, ArchitectureItem.class, "ArchitectureItem", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(conceptItemEClass, ConceptItem.class, "ConceptItem", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getConceptItem_StatusLiterals(), ecorePackage.getEString(), "statusLiterals", null, 1, -1, ConceptItem.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(runtimeItemEClass, RuntimeItem.class, "RuntimeItem", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getRuntimeItem_Status(), ecorePackage.getEString(), "status", null, 0, 1, RuntimeItem.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -2064,10 +2139,17 @@ public class CorePackageImpl extends EPackageImpl implements CorePackage {
 
 		initEClass(ruleEClass, Rule.class, "Rule", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getRule_Priority(), this.getRulePriority(), "priority", null, 0, 1, Rule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getRule_Rationale(), ecorePackage.getEString(), "rationale", null, 0, 1, Rule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getRule_Exceptions(), ecorePackage.getEString(), "exceptions", null, 0, 1, Rule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getRule_History(), this.getStatusEvent(), null, "history", null, 0, -1, Rule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(referenceEClass, Reference.class, "Reference", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getReference_Type(), this.getReferenceType(), "type", null, 0, 1, Reference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getReference_Targets(), this.getHasReferences(), null, "targets", null, 0, -1, Reference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(statusEventEClass, StatusEvent.class, "StatusEvent", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getStatusEvent_Date(), ecorePackage.getELong(), "date", null, 1, 1, StatusEvent.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getStatusEvent_StatusLiteral(), ecorePackage.getEString(), "statusLiteral", null, 1, 1, StatusEvent.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Initialize enums and add enum literals
 		initEEnum(customPropertyTypeEEnum, CustomPropertyType.class, "CustomPropertyType");

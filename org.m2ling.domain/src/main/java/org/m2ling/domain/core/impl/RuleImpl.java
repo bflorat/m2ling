@@ -11,6 +11,7 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EDataTypeUniqueEList;
+import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 import org.m2ling.domain.core.CorePackage;
 import org.m2ling.domain.core.CustomProperty;
 import org.m2ling.domain.core.HasComment;
@@ -20,6 +21,7 @@ import org.m2ling.domain.core.HasStatus;
 import org.m2ling.domain.core.HasTags;
 import org.m2ling.domain.core.Rule;
 import org.m2ling.domain.core.RulePriority;
+import org.m2ling.domain.core.StatusEvent;
 
 /**
  * <!-- begin-user-doc -->
@@ -34,6 +36,9 @@ import org.m2ling.domain.core.RulePriority;
  *   <li>{@link org.m2ling.domain.core.impl.RuleImpl#getDescription <em>Description</em>}</li>
  *   <li>{@link org.m2ling.domain.core.impl.RuleImpl#getStatus <em>Status</em>}</li>
  *   <li>{@link org.m2ling.domain.core.impl.RuleImpl#getPriority <em>Priority</em>}</li>
+ *   <li>{@link org.m2ling.domain.core.impl.RuleImpl#getRationale <em>Rationale</em>}</li>
+ *   <li>{@link org.m2ling.domain.core.impl.RuleImpl#getExceptions <em>Exceptions</em>}</li>
+ *   <li>{@link org.m2ling.domain.core.impl.RuleImpl#getHistory <em>History</em>}</li>
  * </ul>
  * </p>
  *
@@ -146,6 +151,56 @@ public class RuleImpl extends HasNameAndIDImpl implements Rule {
 	 * @ordered
 	 */
 	protected RulePriority priority = PRIORITY_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getRationale() <em>Rationale</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getRationale()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String RATIONALE_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getRationale() <em>Rationale</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getRationale()
+	 * @generated
+	 * @ordered
+	 */
+	protected String rationale = RATIONALE_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getExceptions() <em>Exceptions</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getExceptions()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String EXCEPTIONS_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getExceptions() <em>Exceptions</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getExceptions()
+	 * @generated
+	 * @ordered
+	 */
+	protected String exceptions = EXCEPTIONS_EDEFAULT;
+
+	/**
+	 * The cached value of the '{@link #getHistory() <em>History</em>}' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getHistory()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<StatusEvent> history;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -305,6 +360,60 @@ public class RuleImpl extends HasNameAndIDImpl implements Rule {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public String getRationale() {
+		return rationale;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setRationale(String newRationale) {
+		String oldRationale = rationale;
+		rationale = newRationale;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, CorePackage.RULE__RATIONALE, oldRationale, rationale));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String getExceptions() {
+		return exceptions;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setExceptions(String newExceptions) {
+		String oldExceptions = exceptions;
+		exceptions = newExceptions;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, CorePackage.RULE__EXCEPTIONS, oldExceptions, exceptions));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList<StatusEvent> getHistory() {
+		if (history == null) {
+			history = new EObjectResolvingEList<StatusEvent>(StatusEvent.class, this, CorePackage.RULE__HISTORY);
+		}
+		return history;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
@@ -321,6 +430,12 @@ public class RuleImpl extends HasNameAndIDImpl implements Rule {
 				return getStatus();
 			case CorePackage.RULE__PRIORITY:
 				return getPriority();
+			case CorePackage.RULE__RATIONALE:
+				return getRationale();
+			case CorePackage.RULE__EXCEPTIONS:
+				return getExceptions();
+			case CorePackage.RULE__HISTORY:
+				return getHistory();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -353,6 +468,16 @@ public class RuleImpl extends HasNameAndIDImpl implements Rule {
 			case CorePackage.RULE__PRIORITY:
 				setPriority((RulePriority)newValue);
 				return;
+			case CorePackage.RULE__RATIONALE:
+				setRationale((String)newValue);
+				return;
+			case CorePackage.RULE__EXCEPTIONS:
+				setExceptions((String)newValue);
+				return;
+			case CorePackage.RULE__HISTORY:
+				getHistory().clear();
+				getHistory().addAll((Collection<? extends StatusEvent>)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -383,6 +508,15 @@ public class RuleImpl extends HasNameAndIDImpl implements Rule {
 			case CorePackage.RULE__PRIORITY:
 				setPriority(PRIORITY_EDEFAULT);
 				return;
+			case CorePackage.RULE__RATIONALE:
+				setRationale(RATIONALE_EDEFAULT);
+				return;
+			case CorePackage.RULE__EXCEPTIONS:
+				setExceptions(EXCEPTIONS_EDEFAULT);
+				return;
+			case CorePackage.RULE__HISTORY:
+				getHistory().clear();
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -407,6 +541,12 @@ public class RuleImpl extends HasNameAndIDImpl implements Rule {
 				return STATUS_EDEFAULT == null ? status != null : !STATUS_EDEFAULT.equals(status);
 			case CorePackage.RULE__PRIORITY:
 				return priority != PRIORITY_EDEFAULT;
+			case CorePackage.RULE__RATIONALE:
+				return RATIONALE_EDEFAULT == null ? rationale != null : !RATIONALE_EDEFAULT.equals(rationale);
+			case CorePackage.RULE__EXCEPTIONS:
+				return EXCEPTIONS_EDEFAULT == null ? exceptions != null : !EXCEPTIONS_EDEFAULT.equals(exceptions);
+			case CorePackage.RULE__HISTORY:
+				return history != null && !history.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}
@@ -511,6 +651,10 @@ public class RuleImpl extends HasNameAndIDImpl implements Rule {
 		result.append(status);
 		result.append(", priority: ");
 		result.append(priority);
+		result.append(", rationale: ");
+		result.append(rationale);
+		result.append(", exceptions: ");
+		result.append(exceptions);
 		result.append(')');
 		return result.toString();
 	}

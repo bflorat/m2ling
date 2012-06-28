@@ -14,7 +14,7 @@ import org.m2ling.domain.core.View;
  * <!-- end-user-doc -->
  * @generated
  */
-public class ViewTest extends ArchitectureItemTest {
+public class ViewTest extends HasCommentTest {
 
 	/**
 	 * <!-- begin-user-doc -->

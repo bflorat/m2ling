@@ -32,7 +32,6 @@ import org.m2ling.domain.core.HasTags;
  *   <li>{@link org.m2ling.domain.core.impl.ConceptItemImpl#getComment <em>Comment</em>}</li>
  *   <li>{@link org.m2ling.domain.core.impl.ConceptItemImpl#getTags <em>Tags</em>}</li>
  *   <li>{@link org.m2ling.domain.core.impl.ConceptItemImpl#getDescription <em>Description</em>}</li>
- *   <li>{@link org.m2ling.domain.core.impl.ConceptItemImpl#getStatusLiterals <em>Status Literals</em>}</li>
  * </ul>
  * </p>
  *
@@ -105,16 +104,6 @@ public abstract class ConceptItemImpl extends HasNameAndIDImpl implements Concep
 	 * @ordered
 	 */
 	protected String description = DESCRIPTION_EDEFAULT;
-
-	/**
-	 * The cached value of the '{@link #getStatusLiterals() <em>Status Literals</em>}' attribute list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getStatusLiterals()
-	 * @generated
-	 * @ordered
-	 */
-	protected EList<String> statusLiterals;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -232,18 +221,6 @@ public abstract class ConceptItemImpl extends HasNameAndIDImpl implements Concep
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<String> getStatusLiterals() {
-		if (statusLiterals == null) {
-			statusLiterals = new EDataTypeUniqueEList<String>(String.class, this, CorePackage.CONCEPT_ITEM__STATUS_LITERALS);
-		}
-		return statusLiterals;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
@@ -256,8 +233,6 @@ public abstract class ConceptItemImpl extends HasNameAndIDImpl implements Concep
 				return getTags();
 			case CorePackage.CONCEPT_ITEM__DESCRIPTION:
 				return getDescription();
-			case CorePackage.CONCEPT_ITEM__STATUS_LITERALS:
-				return getStatusLiterals();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -284,10 +259,6 @@ public abstract class ConceptItemImpl extends HasNameAndIDImpl implements Concep
 			case CorePackage.CONCEPT_ITEM__DESCRIPTION:
 				setDescription((String)newValue);
 				return;
-			case CorePackage.CONCEPT_ITEM__STATUS_LITERALS:
-				getStatusLiterals().clear();
-				getStatusLiterals().addAll((Collection<? extends String>)newValue);
-				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -312,9 +283,6 @@ public abstract class ConceptItemImpl extends HasNameAndIDImpl implements Concep
 			case CorePackage.CONCEPT_ITEM__DESCRIPTION:
 				setDescription(DESCRIPTION_EDEFAULT);
 				return;
-			case CorePackage.CONCEPT_ITEM__STATUS_LITERALS:
-				getStatusLiterals().clear();
-				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -335,8 +303,6 @@ public abstract class ConceptItemImpl extends HasNameAndIDImpl implements Concep
 				return tags != null && !tags.isEmpty();
 			case CorePackage.CONCEPT_ITEM__DESCRIPTION:
 				return DESCRIPTION_EDEFAULT == null ? description != null : !DESCRIPTION_EDEFAULT.equals(description);
-			case CorePackage.CONCEPT_ITEM__STATUS_LITERALS:
-				return statusLiterals != null && !statusLiterals.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}
@@ -445,8 +411,6 @@ public abstract class ConceptItemImpl extends HasNameAndIDImpl implements Concep
 		result.append(tags);
 		result.append(", description: ");
 		result.append(description);
-		result.append(", statusLiterals: ");
-		result.append(statusLiterals);
 		result.append(')');
 		return result.toString();
 	}

@@ -791,6 +791,29 @@ public class CoreItemProviderAdapterFactory extends CoreAdapterFactory implement
 	}
 
 	/**
+	 * This keeps track of the one adapter used for all {@link org.m2ling.domain.core.StatusEvent} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected StatusEventItemProvider statusEventItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link org.m2ling.domain.core.StatusEvent}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createStatusEventAdapter() {
+		if (statusEventItemProvider == null) {
+			statusEventItemProvider = new StatusEventItemProvider(this);
+		}
+
+		return statusEventItemProvider;
+	}
+
+	/**
 	 * This returns the root adapter factory that contains this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -920,6 +943,7 @@ public class CoreItemProviderAdapterFactory extends CoreAdapterFactory implement
 		if (actorItemProvider != null) actorItemProvider.dispose();
 		if (ruleItemProvider != null) ruleItemProvider.dispose();
 		if (referenceItemProvider != null) referenceItemProvider.dispose();
+		if (statusEventItemProvider != null) statusEventItemProvider.dispose();
 	}
 
 }

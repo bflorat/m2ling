@@ -48,6 +48,7 @@ import org.m2ling.domain.core.RegexpConstraint;
 import org.m2ling.domain.core.Rule;
 import org.m2ling.domain.core.RuntimeItem;
 import org.m2ling.domain.core.Stakeholder;
+import org.m2ling.domain.core.StatusEvent;
 import org.m2ling.domain.core.URLConstraint;
 import org.m2ling.domain.core.View;
 import org.m2ling.domain.core.ViewPoint;
@@ -162,14 +163,10 @@ public class CoreSwitch<T> extends Switch<T> {
 			case CorePackage.VIEW_POINT: {
 				ViewPoint viewPoint = (ViewPoint)theEObject;
 				T result = caseViewPoint(viewPoint);
-				if (result == null) result = caseConceptItem(viewPoint);
-				if (result == null) result = caseHasNameAndID(viewPoint);
-				if (result == null) result = caseHasCustomProperties(viewPoint);
 				if (result == null) result = caseHasComment(viewPoint);
-				if (result == null) result = caseHasTags(viewPoint);
-				if (result == null) result = caseHasParameterDefinitions(viewPoint);
-				if (result == null) result = caseHasConstraints(viewPoint);
 				if (result == null) result = caseHasDescription(viewPoint);
+				if (result == null) result = caseHasNameAndID(viewPoint);
+				if (result == null) result = caseHasTags(viewPoint);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -239,13 +236,10 @@ public class CoreSwitch<T> extends Switch<T> {
 			case CorePackage.VIEW: {
 				View view = (View)theEObject;
 				T result = caseView(view);
-				if (result == null) result = caseArchitectureItem(view);
-				if (result == null) result = caseHasNameAndID(view);
 				if (result == null) result = caseHasComment(view);
-				if (result == null) result = caseHasTags(view);
-				if (result == null) result = caseHasParameterDefinitions(view);
-				if (result == null) result = caseHasConstraints(view);
 				if (result == null) result = caseHasDescription(view);
+				if (result == null) result = caseHasNameAndID(view);
+				if (result == null) result = caseHasTags(view);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -506,6 +500,12 @@ public class CoreSwitch<T> extends Switch<T> {
 				if (result == null) result = caseHasDescription(reference);
 				if (result == null) result = caseHasStatus(reference);
 				if (result == null) result = caseHasTags(reference);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case CorePackage.STATUS_EVENT: {
+				StatusEvent statusEvent = (StatusEvent)theEObject;
+				T result = caseStatusEvent(statusEvent);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -1155,6 +1155,21 @@ public class CoreSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseReference(Reference object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Status Event</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Status Event</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseStatusEvent(StatusEvent object) {
 		return null;
 	}
 

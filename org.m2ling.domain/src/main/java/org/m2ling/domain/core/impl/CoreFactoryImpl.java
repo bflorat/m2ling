@@ -46,6 +46,7 @@ import org.m2ling.domain.core.RegexpConstraint;
 import org.m2ling.domain.core.Rule;
 import org.m2ling.domain.core.RulePriority;
 import org.m2ling.domain.core.Stakeholder;
+import org.m2ling.domain.core.StatusEvent;
 import org.m2ling.domain.core.Type;
 import org.m2ling.domain.core.URLConstraint;
 import org.m2ling.domain.core.View;
@@ -133,6 +134,7 @@ public class CoreFactoryImpl extends EFactoryImpl implements CoreFactory {
 			case CorePackage.ACTOR: return createActor();
 			case CorePackage.RULE: return createRule();
 			case CorePackage.REFERENCE: return createReference();
+			case CorePackage.STATUS_EVENT: return createStatusEvent();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -500,6 +502,16 @@ public class CoreFactoryImpl extends EFactoryImpl implements CoreFactory {
 	public Reference createReference() {
 		ReferenceImpl reference = new ReferenceImpl();
 		return reference;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public StatusEvent createStatusEvent() {
+		StatusEventImpl statusEvent = new StatusEventImpl();
+		return statusEvent;
 	}
 
 	/**

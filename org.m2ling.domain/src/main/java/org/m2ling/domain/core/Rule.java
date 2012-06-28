@@ -3,6 +3,8 @@
  */
 package org.m2ling.domain.core;
 
+import org.eclipse.emf.common.util.EList;
+
 
 /**
  * <!-- begin-user-doc -->
@@ -13,6 +15,9 @@ package org.m2ling.domain.core;
  * The following features are supported:
  * <ul>
  *   <li>{@link org.m2ling.domain.core.Rule#getPriority <em>Priority</em>}</li>
+ *   <li>{@link org.m2ling.domain.core.Rule#getRationale <em>Rationale</em>}</li>
+ *   <li>{@link org.m2ling.domain.core.Rule#getExceptions <em>Exceptions</em>}</li>
+ *   <li>{@link org.m2ling.domain.core.Rule#getHistory <em>History</em>}</li>
  * </ul>
  * </p>
  *
@@ -56,5 +61,73 @@ public interface Rule extends HasNameAndID, HasCustomProperties, HasComment, Has
 	 * @generated
 	 */
 	void setPriority(RulePriority value);
+
+	/**
+	 * Returns the value of the '<em><b>Rationale</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Rationale</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Rationale</em>' attribute.
+	 * @see #setRationale(String)
+	 * @see org.m2ling.domain.core.CorePackage#getRule_Rationale()
+	 * @model
+	 * @generated
+	 */
+	String getRationale();
+
+	/**
+	 * Sets the value of the '{@link org.m2ling.domain.core.Rule#getRationale <em>Rationale</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Rationale</em>' attribute.
+	 * @see #getRationale()
+	 * @generated
+	 */
+	void setRationale(String value);
+
+	/**
+	 * Returns the value of the '<em><b>Exceptions</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Exceptions</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Exceptions</em>' attribute.
+	 * @see #setExceptions(String)
+	 * @see org.m2ling.domain.core.CorePackage#getRule_Exceptions()
+	 * @model
+	 * @generated
+	 */
+	String getExceptions();
+
+	/**
+	 * Sets the value of the '{@link org.m2ling.domain.core.Rule#getExceptions <em>Exceptions</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Exceptions</em>' attribute.
+	 * @see #getExceptions()
+	 * @generated
+	 */
+	void setExceptions(String value);
+
+	/**
+	 * Returns the value of the '<em><b>History</b></em>' reference list.
+	 * The list contents are of type {@link org.m2ling.domain.core.StatusEvent}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>History</em>' reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>History</em>' reference list.
+	 * @see org.m2ling.domain.core.CorePackage#getRule_History()
+	 * @model
+	 * @generated
+	 */
+	EList<StatusEvent> getHistory();
 
 } // Rule

@@ -49,6 +49,7 @@ import org.m2ling.domain.core.RegexpConstraint;
 import org.m2ling.domain.core.Rule;
 import org.m2ling.domain.core.RuntimeItem;
 import org.m2ling.domain.core.Stakeholder;
+import org.m2ling.domain.core.StatusEvent;
 import org.m2ling.domain.core.URLConstraint;
 import org.m2ling.domain.core.View;
 import org.m2ling.domain.core.ViewPoint;
@@ -287,6 +288,10 @@ public class CoreAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseReference(Reference object) {
 				return createReferenceAdapter();
+			}
+			@Override
+			public Adapter caseStatusEvent(StatusEvent object) {
+				return createStatusEventAdapter();
 			}
 			@Override
 			public Adapter defaultCase(EObject object) {
@@ -907,6 +912,20 @@ public class CoreAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createReferenceAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.m2ling.domain.core.StatusEvent <em>Status Event</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.m2ling.domain.core.StatusEvent
+	 * @generated
+	 */
+	public Adapter createStatusEventAdapter() {
 		return null;
 	}
 

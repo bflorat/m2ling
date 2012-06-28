@@ -309,6 +309,15 @@ public interface CoreFactory extends EFactory {
 	Reference createReference();
 
 	/**
+	 * Returns a new object of class '<em>Status Event</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Status Event</em>'.
+	 * @generated
+	 */
+	StatusEvent createStatusEvent();
+
+	/**
 	 * Returns the package supported by this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

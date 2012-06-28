@@ -17,6 +17,7 @@ import org.eclipse.emf.common.util.EList;
  *   <li>{@link org.m2ling.domain.core.ViewPoint#getComponentTypes <em>Component Types</em>}</li>
  *   <li>{@link org.m2ling.domain.core.ViewPoint#getLinkTypes <em>Link Types</em>}</li>
  *   <li>{@link org.m2ling.domain.core.ViewPoint#getRules <em>Rules</em>}</li>
+ *   <li>{@link org.m2ling.domain.core.ViewPoint#getStatusLiterals <em>Status Literals</em>}</li>
  * </ul>
  * </p>
  *
@@ -24,7 +25,7 @@ import org.eclipse.emf.common.util.EList;
  * @model
  * @generated
  */
-public interface ViewPoint extends ConceptItem {
+public interface ViewPoint extends HasComment, HasDescription, HasNameAndID, HasTags {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -95,5 +96,21 @@ public interface ViewPoint extends ConceptItem {
 	 * @generated
 	 */
 	EList<Rule> getRules();
+
+	/**
+	 * Returns the value of the '<em><b>Status Literals</b></em>' attribute list.
+	 * The list contents are of type {@link java.lang.String}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Status Literals</em>' attribute list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Status Literals</em>' attribute list.
+	 * @see org.m2ling.domain.core.CorePackage#getViewPoint_StatusLiterals()
+	 * @model
+	 * @generated
+	 */
+	EList<String> getStatusLiterals();
 
 } // ViewPoint

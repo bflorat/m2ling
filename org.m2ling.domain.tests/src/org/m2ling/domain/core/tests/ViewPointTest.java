@@ -14,7 +14,7 @@ import org.m2ling.domain.core.ViewPoint;
  * <!-- end-user-doc -->
  * @generated
  */
-public class ViewPointTest extends ConceptItemTest {
+public class ViewPointTest extends HasCommentTest {
 
 	/**
 	 * <!-- begin-user-doc -->

@@ -69,6 +69,9 @@ public class RuleItemProvider
 			addDescriptionPropertyDescriptor(object);
 			addStatusPropertyDescriptor(object);
 			addPriorityPropertyDescriptor(object);
+			addRationalePropertyDescriptor(object);
+			addExceptionsPropertyDescriptor(object);
+			addHistoryPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -206,6 +209,72 @@ public class RuleItemProvider
 	}
 
 	/**
+	 * This adds a property descriptor for the Rationale feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addRationalePropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_Rule_rationale_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_Rule_rationale_feature", "_UI_Rule_type"),
+				 CorePackage.Literals.RULE__RATIONALE,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				 null,
+				 null));
+	}
+
+	/**
+	 * This adds a property descriptor for the Exceptions feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addExceptionsPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_Rule_exceptions_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_Rule_exceptions_feature", "_UI_Rule_type"),
+				 CorePackage.Literals.RULE__EXCEPTIONS,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				 null,
+				 null));
+	}
+
+	/**
+	 * This adds a property descriptor for the History feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addHistoryPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_Rule_history_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_Rule_history_feature", "_UI_Rule_type"),
+				 CorePackage.Literals.RULE__HISTORY,
+				 true,
+				 false,
+				 true,
+				 null,
+				 null,
+				 null));
+	}
+
+	/**
 	 * This returns Rule.gif.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -247,6 +316,8 @@ public class RuleItemProvider
 			case CorePackage.RULE__DESCRIPTION:
 			case CorePackage.RULE__STATUS:
 			case CorePackage.RULE__PRIORITY:
+			case CorePackage.RULE__RATIONALE:
+			case CorePackage.RULE__EXCEPTIONS:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
 		}

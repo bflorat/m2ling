@@ -27,7 +27,7 @@ import org.eclipse.emf.common.util.EList;
  * @model
  * @generated
  */
-public interface View extends ArchitectureItem {
+public interface View extends HasComment, HasDescription, HasNameAndID, HasTags {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
