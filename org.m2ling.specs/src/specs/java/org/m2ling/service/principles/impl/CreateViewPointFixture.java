@@ -7,6 +7,8 @@ import org.m2ling.common.configuration.Configuration;
 import org.m2ling.common.dto.core.ViewPointDTO;
 import org.m2ling.common.exceptions.FunctionalException;
 import org.m2ling.persistence.impl.PersistenceManagerXMIImpl;
+import org.m2ling.presentation.principles.model.ViewPointBean;
+import org.m2ling.presentation.principles.utils.DTOConverter;
 import org.m2ling.service.principles.ViewPointService;
 import org.m2ling.service.util.CoreUtil;
 import org.m2ling.service.util.DTOConverter.FromDTO;
@@ -32,11 +34,26 @@ public class CreateViewPointFixture extends M2lingFixture {
 	 * 
 	 * @return the new viewpoint name
 	 * @throws FunctionalException
+	 * 
+	 * <li>id=<b concordion:set="#id">id_vp123</b></li>
+			<li>id=<b concordion:set="#name">vp123</b></li>
+			<li>id=<b concordion:set="#description">desc1</b></li>
+			<li>id=<b concordion:set="#comment">comment1</b></li>
+			<li>id=<b concordion:set="#tags">tag1,tag2</b></li>
+			<li>id=<b concordion:set="#statusLiterals">SUGGESTED,VALIDATED</b>
 	 */
-	public String getViewPointName(String id, String name) throws FunctionalException {
-		ViewPointDTO dto = new ViewPointDTO.Builder(id, name).build();
+	public String getViewPoint(String id, String name,String description,String comment,String tags,String statusLiterals) throws FunctionalException {
+		ViewPointBean bean = new ViewPointBean();
+		bean.setComment(comment);
+		bean.setDescription(description);
+		bean.setId(id);
+		bean.setName(name);
+		bean.setStatusLiterals(statusLiterals);
+		bean.setTags(tags);
+		ViewPointDTO dto = new DTOConverter.ToDTO().getViewPointDTO(bean);
 		service.createViewPoint(null,dto);
 		ViewPointDTO checkedDTO = service.getViewPointByName(null,name);
-		return checkedDTO.getName();
+		System.out.println(checkedDTO.toString());
+		return checkedDTO.toString();
 	}
 }

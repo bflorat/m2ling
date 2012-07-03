@@ -195,11 +195,7 @@ public class RuleServiceImpl extends ServiceImpl implements RuleService {
 			if (checked.getId().equals(vp)) {
 				List<Rule> rules = checked.getRules();
 				for (Rule rule : rules) {
-					List<StatusEventDTO> history = toDTO.getRuleHistoryDTO(rule);
-					RuleDTO dto = new RuleDTO.Builder(checked.getId(), rule.getId(), rule.getName())
-							.comment(rule.getComment()).description(rule.getDescription())
-							.priority(rule.getPriority().getLiteral()).history(history).rationale(rule.getRationale())
-							.exceptions(rule.getExceptions()).status(rule.getStatus()).tags(rule.getTags()).build();
+					RuleDTO dto = toDTO.getRuleDTO(rule);
 					out.add(dto);
 				}
 				break;

@@ -35,7 +35,7 @@
 			<li>id=<b concordion:set="#history">1330347208000:SUGGESTED,1341347208345:VALIDATED</b></li>
 		</ul>
 		should have following characteristics : <b
-			concordion:assertEquals="getRule(#id,#vpID,#name,#description,#comment,#status,#priority,#rationale,#exceptions,#tags,#history)">comment=comment1 description=desc1 exceptions=exception1 history=[date=1330347208000 statusLiteral=SUGGESTED , date=1341347208345 statusLiteral=VALIDATED ] id=ruleid1 name=rule1 priority=HIGH rationale=rationale1 status=VALIDATED tags=[tag1, tag2] vpID=id_vp1</b>.
+			concordion:assertEquals="getRule(#id,#vpID,#name,#description,#comment,#status,#priority,#rationale,#exceptions,#tags,#history)">comment=comment1 description=desc1 exceptions=exception1 history={1330347208000=SUGGESTED, 1341347208345=VALIDATED} id=ruleid1 name=rule1 priority=HIGH rationale=rationale1 status=VALIDATED tags=tag1,tag2 vpID=id_vp1</b>.
 		</p>
 	</div>
 

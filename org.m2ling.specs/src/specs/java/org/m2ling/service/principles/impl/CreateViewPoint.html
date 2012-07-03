@@ -3,8 +3,7 @@
 	xmlns:concordion="http://www.concordion.org/2007/concordion">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<link href="../../../../concordion.css" rel="stylesheet"
-	type="text/css" />
+<link href="../../../../concordion.css" rel="stylesheet" type="text/css" />
 
 <title>Viewpoint creation</title>
 </head>
@@ -21,9 +20,17 @@
 	<h2>Automated</h2>
 	<div class="example">
 		<h3>Example</h3>
-		<p>
-			A new viewpoint created with id <b concordion:set="#id">123456</b> and name <b concordion:set="#name">ArchiApp</b>
-			should be called <b concordion:assertEquals="getViewPointName(#id,#name)">ArchiApp</b>.
+		<p>A new viewpoint created with
+		<ul>
+			<li>id=<b concordion:set="#id">id_vp123</b></li>
+			<li>id=<b concordion:set="#name">vp123</b></li>
+			<li>id=<b concordion:set="#description">desc1</b></li>
+			<li>id=<b concordion:set="#comment">comment1</b></li>
+			<li>id=<b concordion:set="#tags">tag1,tag2</b></li>
+			<li>id=<b concordion:set="#statusLiterals">SUGGESTED,VALIDATED</b></li>
+		</ul>
+		should have following characteristics : <b
+			concordion:assertEquals="getViewPoint(#id,#name,#description,#comment,#tags,#statusLiterals)">comment=comment1 description=desc1 id=id_vp123 name=vp123 statusLiterals=[SUGGESTED, VALIDATED] tags=[tag1, tag2]</b>.
 		</p>
 	</div>
 

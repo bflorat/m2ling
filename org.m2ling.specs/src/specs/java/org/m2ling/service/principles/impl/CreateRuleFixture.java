@@ -7,7 +7,6 @@ import java.util.Properties;
 import java.util.StringTokenizer;
 import java.util.TreeMap;
 
-import org.junit.Test;
 import org.m2ling.common.configuration.Configuration;
 import org.m2ling.common.dto.core.RuleDTO;
 import org.m2ling.common.exceptions.FunctionalException;
@@ -68,8 +67,9 @@ public class CreateRuleFixture extends M2lingFixture {
 		List<RuleDTO> rules = service.getAllRules(null, "id_vp1");
 		for (RuleDTO rule : rules) {
 			if (rule.getId().equals(bean.getId())) {
-				System.out.println(rule.toString());
-				return rule.toString();
+				RuleBean out = new DTOConverter.FromDTO().getRuleBean(rule);
+				System.out.println(out);
+				return out.toString();
 			}
 		}
 		return "rule not found";
