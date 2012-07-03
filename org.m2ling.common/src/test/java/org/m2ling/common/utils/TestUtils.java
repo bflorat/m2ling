@@ -18,18 +18,17 @@ import org.junit.Test;
  * 
  */
 public class TestUtils {
-	
 	@Test
 	public void tagsAsStringEmptyList() {
 		ArrayList<String> tags = new ArrayList<String>();
 		assertTrue(Utils.stringListAsString(tags).equals(""));
 	}
-	
+
 	@Test(expected = IllegalArgumentException.class)
 	public void tagsAsStringNullList() {
 		Utils.stringListAsString(null);
 	}
-	
+
 	@Test(expected = IllegalArgumentException.class)
 	public void tagsAsStringOneNullItem() {
 		ArrayList<String> tags = new ArrayList<String>();
@@ -59,4 +58,11 @@ public class TestUtils {
 		assertTrue(list.get(1).equals("bar"));
 	}
 
+	@Test
+	public void toStringSortOrder() {
+		Boolean b = Boolean.TRUE;
+		String checked = Utils.toString(b);
+		assertTrue(checked
+				.matches(".*FALSE=false serialVersionUID=-3665804199014368530 TRUE=true TYPE=boolean value=true.*"));
+	}
 }

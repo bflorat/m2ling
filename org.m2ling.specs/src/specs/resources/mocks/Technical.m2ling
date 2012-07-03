@@ -10,7 +10,8 @@
     <tags>DEV1</tags>
     <tags>DEV2</tags>
   </viewPoints>
-  <viewPoints description="vp1 label" id="vp1" name="vp1">
+  <viewPoints description="vp1 label" id="id_vp1" name="vp1">
     <activities id="_Nnj8IJXFEeGfDY1tsvvkpQ" name="activity1"/>
+    <statusLiterals>VALIDATED</statusLiterals>
   </viewPoints>
 </m2ling_domain:Root>

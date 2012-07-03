@@ -127,7 +127,7 @@ public class DTOConverter {
 			bean.setViewPointId(dto.getViewPointId());
 			bean.setViewPointId(dto.getViewPointId());
 			bean.setName((dto.getName() != null) ? dto.getName() : "");
-			bean.setComment((dto.getComment() != null) ? dto.getComment() : "");
+			bean.setComment((dto.getComment() != null) ? dto.getDescription() : "");
 			bean.setDescription((dto.getDescription() != null) ? dto.getDescription() : "");
 			bean.setRationale((dto.getRationale() != null) ? dto.getRationale() : "");
 			bean.setDescription((dto.getDescription() != null) ? dto.getDescription() : "");

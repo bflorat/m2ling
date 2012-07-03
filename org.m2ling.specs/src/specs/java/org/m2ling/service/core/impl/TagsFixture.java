@@ -42,7 +42,6 @@ public class TagsFixture extends M2lingFixture {
 	 * Add given tags as text and return the new tag text. Note that the tags are actually applied
 	 * against a new instance of HasTags at each call.
 	 */
-	@Test
 	public String addTags(String previousTags, String newTags) throws FunctionalException {
 		List<String> newTagsList = Utils.stringListFromString(newTags);
 		serviceTag.addTags(MOCK_CONTEXT, Type.VIEWPOINT, getVPName(previousTags), newTagsList);

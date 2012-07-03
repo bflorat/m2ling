@@ -6,7 +6,9 @@ package org.m2ling.common.utils;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
@@ -26,7 +28,6 @@ import com.google.inject.Module;
  * 
  */
 public class Utils {
-
 	/**
 	 * Return a list from an iterable (convenient when using guava Splitter that only return an
 	 * iterable for now).
@@ -192,13 +193,20 @@ public class Utils {
 	}
 
 	/**
-	 * Generic toString() method that display all declared fields
+	 * Generic toString() method that display all declared fields sorted alphabetically/ignore case
 	 * 
 	 * @param obj
 	 */
 	public static String toString(Object obj) {
 		StringBuilder sb = new StringBuilder();
-		for (Field field : obj.getClass().getDeclaredFields()) {
+		List<Field> fields = Arrays.asList(obj.getClass().getDeclaredFields());
+		Collections.sort(fields, new Comparator<Field>() {
+			@Override
+			public int compare(Field o1, Field o2) {
+				return o1.getName().compareToIgnoreCase(o2.getName());
+			}
+		});
+		for (Field field : fields) {
 			field.setAccessible(true);
 			sb.append(field.getName());
 			sb.append('=');
@@ -212,5 +220,4 @@ public class Utils {
 		}
 		return sb.toString();
 	}
-
 }

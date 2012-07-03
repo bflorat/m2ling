@@ -52,20 +52,22 @@ public class RuleServiceImpl extends ServiceImpl implements RuleService {
 	 * Centralize all service entry verifications
 	 * 
 	 * @param dto
-	 * @param update
+	 * @param updateOnly
 	 *           : whether we update the item or not
 	 * @throws FunctionalException
 	 */
-	private void checkDTO(final RuleDTO dto, boolean update) throws FunctionalException {
+	private void checkDTO(final RuleDTO dto, boolean updateOnly) throws FunctionalException {
 		// Nullity
 		if (dto == null) {
 			throw new FunctionalException(Code.NULL_ARGUMENT, "Null item provided", null, null);
 		}
-		// item existence
-		Rule rule = util.getRuleByID(dto.getId());
-		if (rule == null) {
-			throw new FunctionalException(FunctionalException.Code.TARGET_NOT_FOUND, "Rule not found for provided id",
-					null, dto.toString());
+		if (updateOnly) {
+			// item existence
+			Rule rule = util.getRuleByID(dto.getId());
+			if (rule == null) {
+				throw new FunctionalException(FunctionalException.Code.TARGET_NOT_FOUND, "Rule not found for provided id",
+						null, dto.toString());
+			}
 		}
 		// Name
 		if (dto.getName().length() == 0) {
@@ -79,7 +81,7 @@ public class RuleServiceImpl extends ServiceImpl implements RuleService {
 			throw new FunctionalException(FunctionalException.Code.TARGET_NOT_FOUND,
 					"A viewpoint associated with this rule cannot be found", null, dto.toString());
 		}
-		if (!update) {
+		if (!updateOnly) {
 			// Check for existing rule with the same id
 			for (Rule r : vp.getRules()) {
 				if (r.getId().equals(dto.getId())) {

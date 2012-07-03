@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:concordion="http://www.concordion.org/2007/concordion">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link href="../../../../concordion.css" rel="stylesheet" type="text/css" />
+
+<title>Rule creation</title>
+</head>
+<body>
+	<a href='../index.html'>m2ling</a>&#160;/&#160;
+	<a href='index.html'>m2principles</a>&#160;/&#160;
+	<a href="Rules_static.html">Rules</a>
+
+	<H1>Rules creation</H1>
+	<p>Administrators or actors with adequate authorizations can create
+		a new rule against a given viewpoint.</p>
+
+	<h2>Automated</h2>
+	<div class="example">
+		<h3>Example</h3>
+		<p>
+			Given a view point named <b concordion:set="#vpID">id_vp1</b>, a new
+			rule created with :
+		<ul>
+			<li>id=<b concordion:set="#id">ruleid1</b></li>
+			<li>id=<b concordion:set="#name">rule1</b></li>
+			<li>id=<b concordion:set="#description">desc1</b></li>
+			<li>id=<b concordion:set="#comment">comment1</b></li>
+			<li>id=<b concordion:set="#status">VALIDATED</b></li>
+			<li>id=<b concordion:set="#priority">HIGH</b></li>
+			<li>id=<b concordion:set="#rationale">rationale1</b></li>
+			<li>id=<b concordion:set="#exceptions">exception1</b></li>
+			<li>id=<b concordion:set="#tags">tag1,tag2</b></li>
+			<li>id=<b concordion:set="#history">1330347208000:SUGGESTED,1341347208345:VALIDATED</b></li>
+		</ul>
+		should have following characteristics : <b
+			concordion:assertEquals="getRule(#id,#vpID,#name,#description,#comment,#status,#priority,#rationale,#exceptions,#tags,#history)">comment=comment1 description=desc1 exceptions=exception1 history=[date=1330347208000 statusLiteral=SUGGESTED , date=1341347208345 statusLiteral=VALIDATED ] id=ruleid1 name=rule1 priority=HIGH rationale=rationale1 status=VALIDATED tags=[tag1, tag2] vpID=id_vp1</b>.
+		</p>
+	</div>
+
+	<h2>Manual</h2>
+	Nothing
+	<h2>Out of scope</h2>
+	Nothing
+
+	<h2>Further details</h2>
+	<ul>
+	</ul>
+</body>
+</html>
