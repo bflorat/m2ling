@@ -265,10 +265,8 @@
       <eLiterals name="EVENT" value="7"/>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="StatusEvent">
-      <eStructuralFeatures xsi:type="ecore:EAttribute" name="date" lowerBound="1"
-          eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//ELong"/>
-      <eStructuralFeatures xsi:type="ecore:EAttribute" name="statusLiteral" lowerBound="1"
-          eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="date" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//ELong"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="statusLiteral" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     </eClassifiers>
   </eSubpackages>
   <eSubpackages name="configuration" nsURI="http://m2ling.org/configuration/0.1" nsPrefix="m2ling_configuration">

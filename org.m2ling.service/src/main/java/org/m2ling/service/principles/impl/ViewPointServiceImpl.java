@@ -6,11 +6,13 @@ package org.m2ling.service.principles.impl;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.logging.Logger;
 
 import org.m2ling.common.configuration.Configuration;
 import org.m2ling.common.dto.core.ViewPointDTO;
 import org.m2ling.common.exceptions.FunctionalException;
 import org.m2ling.common.exceptions.FunctionalException.Code;
+import org.m2ling.common.soa.Context;
 import org.m2ling.common.utils.Consts;
 import org.m2ling.common.utils.Utils;
 import org.m2ling.domain.Root;
@@ -30,29 +32,26 @@ import com.google.inject.Singleton;
  */
 @Singleton
 public class ViewPointServiceImpl extends ServiceImpl implements ViewPointService {
-
 	/**
 	 * Protected constructor to prevent direct instantiation
 	 */
 	@Inject
 	protected ViewPointServiceImpl(PersistenceManager pm, CoreUtil util, DTOConverter.FromDTO fromDTO,
-			DTOConverter.ToDTO toDTO, Configuration conf) {
-		super();
-		this.util = util;
-		this.toDTO = toDTO;
-		this.pmanager = pm;
-		this.conf = conf;
+			DTOConverter.ToDTO toDTO, Configuration conf, Logger logger) {
+		super(pm, util, fromDTO, toDTO, conf, logger);
 	}
 
-	private void checkDTO(final ViewPointDTO dto) throws FunctionalException {
-		// VP existance
-		ViewPoint vp = util.getViewPointByID(dto.getId());
-		if (vp == null) {
-			throw new IllegalStateException("View point doesn't exists : " + dto.getId());
-		}
-		// nullity
+	private void checkDTO(final ViewPointDTO dto, final boolean updateOnly) throws FunctionalException {
+		// Argument Nullity
 		if (dto == null) {
 			throw new FunctionalException(Code.NULL_ARGUMENT, "Null item provided", null, null);
+		}
+		if (updateOnly) {
+			// VP existence
+			ViewPoint vp = util.getViewPointByID(dto.getId());
+			if (vp == null) {
+				throw new FunctionalException(Code.TARGET_NOT_FOUND, "View point doesn't exists", null, dto.getId());
+			}
 		}
 		// Name
 		if (dto.getName().length() == 0) {
@@ -86,7 +85,7 @@ public class ViewPointServiceImpl extends ServiceImpl implements ViewPointServic
 		Utils.checkTags(dto.getTags());
 	}
 
-	public List<ViewPointDTO> getAllViewPoints() {
+	public List<ViewPointDTO> getAllViewPoints(final Context context) {
 		List<ViewPointDTO> vpDTOs = new ArrayList<ViewPointDTO>(10);
 		Root root = pmanager.getRoot();
 		for (ViewPoint vp : root.getViewPoints()) {
@@ -98,7 +97,7 @@ public class ViewPointServiceImpl extends ServiceImpl implements ViewPointServic
 	}
 
 	@Override
-	public ViewPointDTO getViewPointByName(final String name) {
+	public ViewPointDTO getViewPointByName(final Context context, final String name) {
 		Root root = pmanager.getRoot();
 		for (ViewPoint vp : root.getViewPoints()) {
 			if (name.equals(vp.getName())) {
@@ -115,11 +114,10 @@ public class ViewPointServiceImpl extends ServiceImpl implements ViewPointServic
 	 * .dto.core.ViewPointDTO)
 	 */
 	@Override
-	public void createViewPoint(final ViewPointDTO vpDTO) throws FunctionalException {
+	public void createViewPoint(final Context context, final ViewPointDTO vpDTO) throws FunctionalException {
 		// test DTO
-		checkDTO(vpDTO);
-
-		//Processing
+		checkDTO(vpDTO, false);
+		// Processing
 		ViewPoint vp = fromDTO.newViewPoint(vpDTO);
 		Root root = pmanager.getRoot();
 		if (root.getViewPoints().contains(vp)) {
@@ -142,9 +140,9 @@ public class ViewPointServiceImpl extends ServiceImpl implements ViewPointServic
 	 * ViewPointDTO)
 	 */
 	@Override
-	public void updateViewPoint(final ViewPointDTO vpDTO) throws FunctionalException {
+	public void updateViewPoint(final Context context, final ViewPointDTO vpDTO) throws FunctionalException {
 		// tests
-		checkDTO(vpDTO);
+		checkDTO(vpDTO, true);
 		// Processing
 		ViewPoint vp = util.getViewPointByID(vpDTO.getId());
 		vp.setName(vpDTO.getName());
@@ -165,7 +163,7 @@ public class ViewPointServiceImpl extends ServiceImpl implements ViewPointServic
 	 * .core.ViewPointDTO)
 	 */
 	@Override
-	public void deleteViewPoint(final ViewPointDTO vpDTO) throws FunctionalException {
+	public void deleteViewPoint(final Context context, final ViewPointDTO vpDTO) throws FunctionalException {
 		ViewPoint vp = util.getViewPointByID(vpDTO.getId());
 		if (vp == null) {
 			throw new FunctionalException(FunctionalException.Code.TARGET_NOT_FOUND, "View point doesn't exists", null,
@@ -180,9 +178,8 @@ public class ViewPointServiceImpl extends ServiceImpl implements ViewPointServic
 	 * @see org.m2ling.service.principles.ViewPointService#getViewPointByID(java.lang.String)
 	 */
 	@Override
-	public ViewPointDTO getViewPointByID(String id) {
+	public ViewPointDTO getViewPointByID(final Context context, String id) {
 		ViewPoint vp = util.getViewPointByID(id);
 		return toDTO.getViewPointDTO(vp);
 	}
-
 }

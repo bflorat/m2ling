@@ -3,11 +3,17 @@
  */
 package org.m2ling.service.util;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import org.eclipse.emf.common.util.EList;
 import org.m2ling.common.dto.core.RuleDTO;
+import org.m2ling.common.dto.core.StatusEventDTO;
 import org.m2ling.common.dto.core.ViewPointDTO;
 import org.m2ling.domain.core.CoreFactory;
 import org.m2ling.domain.core.Rule;
 import org.m2ling.domain.core.RulePriority;
+import org.m2ling.domain.core.StatusEvent;
 import org.m2ling.domain.core.ViewPoint;
 
 import com.google.common.base.Strings;
@@ -22,7 +28,6 @@ import com.google.inject.Singleton;
  * 
  */
 public class DTOConverter {
-
 	private DTOConverter() {
 		// Utility class, no instantiation
 	}
@@ -35,7 +40,6 @@ public class DTOConverter {
 	 */
 	@Singleton
 	public static class ToDTO {
-
 		CoreUtil util;
 
 		@Inject
@@ -52,6 +56,39 @@ public class DTOConverter {
 			builder.description(vp.getDescription());
 			return builder.build();
 		}
+
+		public RuleDTO getRuleDTO(Rule rule) {
+			ViewPoint vp = (ViewPoint) rule.eContainer();
+			RuleDTO.Builder builder = new RuleDTO.Builder(vp.getId(), rule.getId(), rule.getName());
+			builder.tags(rule.getTags());
+			builder.comment(rule.getComment());
+			builder.status(rule.getStatus());
+			builder.description(rule.getDescription());
+			builder.exceptions(rule.getExceptions());
+			builder.priority(rule.getPriority().getLiteral());
+			builder.rationale(rule.getRationale());
+			List<StatusEventDTO> history = getRuleHistoryDTO(rule);
+			builder.history(history);
+			return builder.build();
+		}
+
+		/**
+		 * Create and populate a rule history DTO from a given rule. If the history is void, a void
+		 * collection is returned.
+		 * 
+		 * @param rule
+		 *           : source rule
+		 * 
+		 * @return Create and populate a DTO from a given rule history.
+		 */
+		public List<StatusEventDTO> getRuleHistoryDTO(Rule rule) {
+			List<StatusEventDTO> out = new ArrayList<StatusEventDTO>(3);
+			for (StatusEvent event : rule.getHistory()) {
+				StatusEventDTO dto = new StatusEventDTO.Builder(event.getDate(), event.getStatusLiteral()).build();
+				out.add(dto);
+			}
+			return out;
+		}
 	}
 
 	/**
@@ -62,7 +99,6 @@ public class DTOConverter {
 	 */
 	@Singleton
 	public static class FromDTO {
-
 		CoreUtil util;
 
 		@Inject
@@ -117,9 +153,37 @@ public class DTOConverter {
 			rule.setPriority(RulePriority.get(dto.getPriority()));
 			rule.setDescription(dto.getDescription());
 			rule.setComment(dto.getComment());
+			rule.setRationale(dto.getRationale());
+			rule.setExceptions(dto.getExceptions());
+			List<StatusEvent> history = rule.getHistory();
+			history.clear();
+			for (StatusEventDTO i : dto.getHistory()) {
+				StatusEvent evt = CoreFactory.eINSTANCE.createStatusEvent();
+				evt.setDate(i.getDate());
+				evt.setStatusLiteral(i.getStatusLiteral());
+				history.add(evt);
+			}
 			return rule;
 		}
 
+		/**
+		 * Clear and populate a rule history from given dto
+		 * 
+		 * @param dto
+		 *           the source dto
+		 * @param rule
+		 *           target rule to populate
+		 * @return Clear and populate a rule history from given dto
+		 */
+		public void populateRuleHistory(List<StatusEventDTO> dto, Rule rule) {
+			EList<StatusEvent> history = rule.getHistory();
+			history.clear();
+			for (StatusEventDTO event : dto) {
+				StatusEvent se = CoreFactory.eINSTANCE.createStatusEvent();
+				se.setDate(event.getDate());
+				se.setStatusLiteral(event.getStatusLiteral());
+				history.add(se);
+			}
+		}
 	}
-
 }

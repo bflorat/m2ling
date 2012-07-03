@@ -29,10 +29,10 @@ public class ViewPointDTO implements Comparable<ViewPointDTO> {
 		private final String id;
 
 		// Optional configuration
-		private List<String> tags = null;
-		private String description = null;
-		private String comment = null;
-		private List<String> statusLiterals;
+		private List<String> tags = new ArrayList<String>(1);
+		private String description = "";
+		private String comment = "";
+		private List<String> statusLiterals = new ArrayList<String>(1);
 
 		public Builder(String id, String name) {
 			this.id = id;

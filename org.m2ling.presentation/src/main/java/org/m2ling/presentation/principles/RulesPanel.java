@@ -12,7 +12,6 @@ import java.util.logging.Logger;
 import org.m2ling.common.dto.core.RuleDTO;
 import org.m2ling.common.exceptions.FunctionalException;
 import org.m2ling.common.utils.Msg;
-import org.m2ling.presentation.events.ObservationManager;
 import org.m2ling.presentation.principles.model.RuleBean;
 import org.m2ling.presentation.principles.utils.DTOConverter;
 import org.m2ling.service.principles.RuleService;
@@ -40,8 +39,6 @@ public class RulesPanel extends VerticalLayout {
 
 	private Logger logger;
 
-	private ObservationManager obs;
-
 	private DTOConverter.ToDTO toDTO;
 
 	private DTOConverter.FromDTO fromDTO;
@@ -53,14 +50,13 @@ public class RulesPanel extends VerticalLayout {
 	 * 
 	 */
 	@Inject
-	public RulesPanel(Logger logger, @Assisted String vp, RuleService service, ObservationManager obs,
-			DTOConverter.ToDTO toDTO, DTOConverter.FromDTO fromDTO, RuleDialogFactory factory) {
+	public RulesPanel(Logger logger, @Assisted String vp, RuleService service, DTOConverter.ToDTO toDTO,
+			DTOConverter.FromDTO fromDTO, RuleDialogFactory factory) {
 		super();
 		this.vp = vp;
 		this.service = service;
 		this.factory = factory;
 		this.logger = logger;
-		this.obs = obs;
 		this.vp = vp;
 		this.toDTO = toDTO;
 		this.fromDTO = fromDTO;
@@ -72,7 +68,7 @@ public class RulesPanel extends VerticalLayout {
 	@Override
 	public void attach() {
 		try {
-			List<RuleDTO> rules = service.getAllRules(vp);
+			List<RuleDTO> rules = service.getAllRules(null,vp);
 			if (rules.size() == 0) {
 				addComponent(new Label(Msg.get("pr.1")));
 			} else {
@@ -102,9 +98,8 @@ public class RulesPanel extends VerticalLayout {
 	private void addRule(final RuleBean rule) {
 		// Name
 		String nameString = Msg.get("pr.17") + rule.getName()
-				+ (!Strings.isNullOrEmpty(rule.getTags()) ? " [" + rule.getTags() + "] " : " ");
-		nameString += "[" + Msg.get("gal.7") + " : " + rule.getStatus() + "] [" + Msg.get("gal.8") + " : "
-				+ rule.getPriority() + "]";
+				+ (!Strings.isNullOrEmpty(rule.getTags()) ? " [" + rule.getTags() + "], " : " ");
+		nameString += Msg.get("gal.7") + ": " + rule.getStatus() + ", " + Msg.get("gal.8") + ": " + rule.getPriority();
 		Label name = new Label(nameString);
 		name.setStyleName("principles_rules-name");
 		name.setSizeUndefined();
@@ -126,7 +121,7 @@ public class RulesPanel extends VerticalLayout {
 			public void buttonClick(ClickEvent event) {
 				try {
 					RuleDTO ruleDTO = toDTO.getRuleDTO(rule);
-					service.deleteRule(ruleDTO);
+					service.deleteRule(null,ruleDTO);
 					removeAllComponents();
 					attach();
 				} catch (FunctionalException e) {
@@ -141,6 +136,16 @@ public class RulesPanel extends VerticalLayout {
 		description.setStyleName("principles_rules-description");
 		description.setWidth("100%");
 		description.setHeight(null);
+
+		String rat = rule.getRationale();
+		Label rationale = new Label(Strings.isNullOrEmpty(rat) ? "" : Msg.get("gal.9") + " : " + rat);
+		rationale.setWidth("100%");
+		rationale.setHeight(null);
+
+		String ex = rule.getExceptions();
+		Label exceptions = new Label(Strings.isNullOrEmpty(ex) ? "" : Msg.get("pr.23") + " : " + ex);
+		exceptions.setWidth("100%");
+		exceptions.setHeight(null);
 
 		Label comment = new Label(rule.getComment());
 		comment.setDescription(rule.getComment());
@@ -157,6 +162,8 @@ public class RulesPanel extends VerticalLayout {
 		addComponent(hl1);
 
 		addComponent(description);
+		addComponent(rationale);
+		addComponent(exceptions);
 
 		if (!Strings.isNullOrEmpty(rule.getComment())) {
 			addComponent(comment);

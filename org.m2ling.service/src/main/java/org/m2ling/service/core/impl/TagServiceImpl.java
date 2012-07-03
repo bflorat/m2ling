@@ -3,17 +3,22 @@ package org.m2ling.service.core.impl;
 /**
  * Copyright (C) 2012 Bertrand Florat
  */
-
 import java.util.List;
 import java.util.logging.Level;
+import java.util.logging.Logger;
 
+import org.m2ling.common.configuration.Configuration;
 import org.m2ling.common.exceptions.FunctionalException;
+import org.m2ling.common.exceptions.FunctionalException.Code;
 import org.m2ling.common.security.ACResource;
 import org.m2ling.common.soa.Context;
 import org.m2ling.domain.core.HasTags;
 import org.m2ling.domain.core.Type;
+import org.m2ling.persistence.PersistenceManager;
 import org.m2ling.service.common.ServiceImpl;
 import org.m2ling.service.core.TagService;
+import org.m2ling.service.util.CoreUtil;
+import org.m2ling.service.util.DTOConverter;
 
 import com.google.common.base.Strings;
 import com.google.inject.Inject;
@@ -29,36 +34,42 @@ import com.google.inject.Singleton;
 @ACResource
 @Singleton
 public class TagServiceImpl extends ServiceImpl implements TagService {
-
-	@Inject
-	private java.util.logging.Logger logger;
-
 	/**
 	 * @see ServiceImpl
 	 */
-	protected TagServiceImpl() {
-		super();
+	@Inject
+	protected TagServiceImpl(PersistenceManager pm, CoreUtil util, DTOConverter.FromDTO fromDTO,
+			DTOConverter.ToDTO toDTO, Configuration conf, Logger logger) {
+		super(pm, util, fromDTO, toDTO, conf, logger);
 	}
 
-	private void checkTypeAndID(Type type, String itemID) {
+	private void checkTypeAndID(Type type, String itemID) throws FunctionalException {
 		if (type == null) {
-			throw new IllegalArgumentException("Provided type is null");
+			throw new FunctionalException(Code.NULL_ARGUMENT, "Provided type is null", null, null);
 		}
-		if (itemID == null) {
-			throw new IllegalArgumentException("Provided ID is null");
+		if (Strings.isNullOrEmpty(itemID)) {
+			throw new FunctionalException(Code.NULL_ARGUMENT, "Provided id is null or empty", null, itemID);
+		}
+		// check the item existence
+		Object item = util.getItemByTypeAndID(type, itemID);
+		if (item == null) {
+			throw new FunctionalException(Code.TARGET_NOT_FOUND, "Targeted item doesn't exist", null, itemID);
+		}
+		if (!(item instanceof HasTags)) {
+			throw new FunctionalException(Code.ILLEGAL_ARGUMENT, "Targeted item doesn't support tags", null, itemID);
 		}
 	}
 
-	private void checkTagsList(List<String> tags) {
+	private void checkTagsList(List<String> tags) throws FunctionalException {
 		if (tags == null || tags.size() == 0) {
-			throw new IllegalArgumentException("Invalid tags : " + tags);
+			throw new FunctionalException(Code.NULL_ARGUMENT, "Provided tags are null or empty", null, null);
 		}
 		for (String tag : tags) {
 			if (tag.contains(",")) {
-				throw new IllegalArgumentException("A tag can't contain the separator value : " + tag);
+				throw new FunctionalException(Code.ILLEGAL_ARGUMENT, "A tag can't contain the separator value", null, tag);
 			}
 			if (Strings.isNullOrEmpty(tag)) {
-				throw new IllegalArgumentException("A tag can't be null or void : " + tag);
+				throw new FunctionalException(Code.NULL_ARGUMENT, "A tag can't be null or void", null, tag);
 			}
 		}
 	}
@@ -70,12 +81,12 @@ public class TagServiceImpl extends ServiceImpl implements TagService {
 	 * org.m2ling.domain.core.Type, java.lang.String, java.util.List)
 	 */
 	@Override
-	public void addTags(Context context, Type type, String itemID, List<String> tags) throws FunctionalException {
+	public void addTags(Context context, Type type, String id, List<String> tags) throws FunctionalException {
 		{ // Controls
-			checkTypeAndID(type, itemID);
+			checkTypeAndID(type, id);
 			checkTagsList(tags);
 		}
-		HasTags htags = (HasTags) util.getItemByTypeAndID(type, itemID);
+		HasTags htags = (HasTags) util.getViewPointByID(id);
 		htags.getTags().addAll(tags);
 	}
 
@@ -137,5 +148,4 @@ public class TagServiceImpl extends ServiceImpl implements TagService {
 		}
 		return tags;
 	}
-
 }

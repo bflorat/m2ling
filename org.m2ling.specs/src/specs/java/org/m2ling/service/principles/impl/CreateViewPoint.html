@@ -22,8 +22,8 @@
 	<div class="example">
 		<h3>Example</h3>
 		<p>
-			A new viewpoint created with name <b concordion:set="#name">ArchiApp</b>
-			should be called <b concordion:assertEquals="getViewPointName(#name)">ArchiApp</b>.
+			A new viewpoint created with id <b concordion:set="#id">123456</b> and name <b concordion:set="#name">ArchiApp</b>
+			should be called <b concordion:assertEquals="getViewPointName(#id,#name)">ArchiApp</b>.
 		</p>
 	</div>
 
@@ -34,8 +34,6 @@
 
 	<h2>Further details</h2>
 	<ul>
-		<li><a href="ViewPointFromExisting.html">Viewpoint creation from existing base viewpoint</a>.</li>
-		<li><a href="ViewPointTags.html">Applying tags against viewpoints.</a></li>
 	</ul>
 </body>
 </html>

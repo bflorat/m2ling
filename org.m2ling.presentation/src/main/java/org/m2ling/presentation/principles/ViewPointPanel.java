@@ -41,19 +41,12 @@ import com.vaadin.ui.themes.BaseTheme;
  */
 @SuppressWarnings("serial")
 public class ViewPointPanel extends VerticalLayout {
-
 	private final Logger logger;
-
 	private final ViewPointBean bean;
-
 	private ViewPointDialogFactory vpDialogFactory;
-
 	private RulesPanelFactory rulesPanelFactory;
-
 	private ViewPointService service;
-
 	private ObservationManager obs;
-
 	private DTOConverter.ToDTO toDTO;
 
 	/**
@@ -88,7 +81,6 @@ public class ViewPointPanel extends VerticalLayout {
 	@Override
 	public void attach() {
 		super.attach();
-
 		// Build icon if any or use default icon otherwise
 		Embedded icon = null;
 		File iconFile = IconManager.getVPIconFile(bean);
@@ -102,7 +94,6 @@ public class ViewPointPanel extends VerticalLayout {
 		icon.setWidth("50px");
 		icon.setHeight("50px");
 		icon.requestRepaint();
-
 		// Name
 		Label name = new Label(bean.getName()
 				+ (!Strings.isNullOrEmpty(bean.getTags()) ? " [" + bean.getTags() + "]" : ""));
@@ -118,7 +109,6 @@ public class ViewPointPanel extends VerticalLayout {
 				getWindow().addWindow(vpDialog);
 			}
 		});
-
 		Button delete = new Button(Msg.get("gal.3"));
 		delete.setStyleName(BaseTheme.BUTTON_LINK);
 		delete.addStyleName("command");
@@ -126,7 +116,7 @@ public class ViewPointPanel extends VerticalLayout {
 			public void buttonClick(ClickEvent event) {
 				try {
 					ViewPointDTO vpDTO = toDTO.getViewPointDTO(bean);
-					service.deleteViewPoint(vpDTO);
+					service.deleteViewPoint(null, vpDTO);
 					obs.notifySync(new org.m2ling.presentation.events.Event(Events.VP_CHANGE));
 				} catch (FunctionalException e) {
 					logger.log(Level.SEVERE, e.getDetailedMessage(), e.getCause());
@@ -135,7 +125,6 @@ public class ViewPointPanel extends VerticalLayout {
 				}
 			}
 		});
-
 		final Panel rulesHiddenPane = new Panel();
 		rulesHiddenPane.setVisible(false);
 		rulesHiddenPane.setWidth("90%");
@@ -149,7 +138,6 @@ public class ViewPointPanel extends VerticalLayout {
 				rulesHiddenPane.setVisible(!rulesHiddenPane.isVisible());
 			}
 		});
-
 		Button componentTypes = new Button(Msg.get("pr.14"));
 		componentTypes.setStyleName(BaseTheme.BUTTON_LINK);
 		componentTypes.addListener(new Button.ClickListener() {
@@ -157,7 +145,6 @@ public class ViewPointPanel extends VerticalLayout {
 				// TODO
 			}
 		});
-
 		Button linkTypes = new Button(Msg.get("pr.15"));
 		linkTypes.setStyleName(BaseTheme.BUTTON_LINK);
 		linkTypes.addListener(new Button.ClickListener() {
@@ -165,19 +152,16 @@ public class ViewPointPanel extends VerticalLayout {
 				// TODO
 			}
 		});
-
 		Label description = new Label(bean.getDescription());
 		description.setDescription(bean.getDescription());
 		description.setStyleName("principles_vp-panel-desc");
 		description.setWidth("100%");
 		description.setHeight(null);
-
 		Label comment = new Label(bean.getComment());
 		comment.setDescription(bean.getComment());
 		comment.setStyleName("comment");
 		comment.setWidth("100%");
 		comment.setHeight(null);
-
 		// Layout
 		HorizontalLayout hl1 = new HorizontalLayout();
 		hl1.setSpacing(true);
@@ -187,7 +171,6 @@ public class ViewPointPanel extends VerticalLayout {
 		hl1.setComponentAlignment(name, Alignment.MIDDLE_RIGHT);
 		hl1.addComponent(edit);
 		hl1.addComponent(delete);
-
 		addComponent(hl1);
 		addComponent(description);
 		if (!Strings.isNullOrEmpty(bean.getComment())) {

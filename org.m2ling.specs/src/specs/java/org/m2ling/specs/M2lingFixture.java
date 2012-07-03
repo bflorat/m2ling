@@ -3,27 +3,25 @@
  *
  * @author "Bertrand Florat <bertrand@florat.net>"
  */
-package org.m2ling.common.test_utils;
+package org.m2ling.specs;
 
 import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.logging.Logger;
 
+import org.concordion.integration.junit3.ConcordionTestCase;
 import org.junit.After;
 import org.junit.Before;
-import org.m2ling.common.configuration.Configuration;
 import org.m2ling.common.utils.Consts;
 import org.m2ling.common.utils.Utils;
 
 /**
- * General UT implementation for any m2lign layer
+ * Main parent class for m2ling fixtures
  */
-public class M2lingUnitTest {
-
+public abstract class M2lingFixture extends ConcordionTestCase {
 	protected Logger logger = Logger.getAnonymousLogger();
 
-	
 	/**
 	 * Return the root file storage for temporary UT files.
 	 * 
@@ -32,7 +30,7 @@ public class M2lingUnitTest {
 	public File getUTStorage() {
 		return new File(System.getProperty("java.io.tmpdir") + "/m2ling");
 	}
-	
+
 	/**
 	 * Default setup code
 	 */
@@ -43,18 +41,12 @@ public class M2lingUnitTest {
 		newenv.put(Consts.M2LING_HOME_VARIABLE_NAME, getUTStorage().getAbsolutePath());
 		newenv.put(Consts.M2LING_DEBUG_VARIABLE_NAME, "true");
 		Utils.setEnv(newenv);
-		// Drop the configuration files
-		Configuration conf = new Configuration(null, logger);
-		conf.getConfigurationFile().delete();
 	}
-	
+
 	/**
 	 * Default tear down code
 	 */
 	@After
 	public void tearDown() {
-
 	}
-
-
 }

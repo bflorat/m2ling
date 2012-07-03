@@ -7,9 +7,12 @@ import java.util.List;
 
 import org.m2ling.common.dto.core.ViewPointDTO;
 import org.m2ling.common.exceptions.FunctionalException;
+import org.m2ling.common.soa.Context;
 
 /**
  * General contract for viewpoints services implementations.
+ * <p>
+ * All the methods take a context argument containing credentials and any useful technical data
  * <p>
  * All the methods can throw a TechnicalException in case of technical issue.
  * </p>
@@ -18,20 +21,19 @@ import org.m2ling.common.exceptions.FunctionalException;
  * access the viewpoint.
  * </p>
  */
-
 public interface ViewPointService {
 	/**
-	 * Update an existing view point given a view point given a viewpoint DTO. 
+	 * Update an existing view point given a view point given a viewpoint DTO.
 	 * 
 	 * @param vpDTO
 	 *           the view point DTO
 	 * @throws FunctionalException
 	 *            if the viewpoint doesn't exist or if one of the DTO entry is faulty
 	 */
-	void updateViewPoint(ViewPointDTO vpDTO) throws FunctionalException;
+	void updateViewPoint(Context context, ViewPointDTO vpDTO) throws FunctionalException;
 
 	/**
-	 * Create a new view point given a viewpoint DTO. 
+	 * Create a new view point given a viewpoint DTO.
 	 * 
 	 * @param vpDTO
 	 *           the view point DTO
@@ -39,29 +41,33 @@ public interface ViewPointService {
 	 *            if a viewpoint already exist with the provided name or if one of the DTO entry is
 	 *            faulty
 	 */
-	void createViewPoint(ViewPointDTO vpDTO) throws FunctionalException;
+	void createViewPoint(Context context, ViewPointDTO vpDTO) throws FunctionalException;
 
 	/**
 	 * Return all available viewpoints given user authorization and realm. If none viewpoints are
 	 * available, a void list is returned.
-	 * <p>Viewpoints are sorted by name.</p>
+	 * <p>
+	 * Viewpoints are sorted by name.
+	 * </p>
 	 * 
 	 * @return all available viewpoints DTO for current user.
 	 */
-	List<ViewPointDTO> getAllViewPoints();
+	List<ViewPointDTO> getAllViewPoints(Context context);
 
 	/**
 	 * Return the viewpoint DTO given a VP name (unique) if it exist, null otherwise.
+	 * 
 	 * @return the viewpoint DTO given a VP name (unique) if it exist, null otherwise
 	 */
-	ViewPointDTO getViewPointByName(String name);
-	
+	ViewPointDTO getViewPointByName(Context context, String name);
+
 	/**
 	 * Return the viewpoint DTO given an ID if it exist, null otherwise.
+	 * 
 	 * @return the viewpoint DTO given an ID if it exist, null otherwise
 	 * 
 	 */
-	ViewPointDTO getViewPointByID(String id);
+	ViewPointDTO getViewPointByID(Context context, String id);
 
 	/**
 	 * Drop the given viewpoint if it exists.
@@ -71,6 +77,5 @@ public interface ViewPointService {
 	 * @throws FunctionalException
 	 *            if viewpoint doesn't exist.
 	 */
-	void deleteViewPoint(ViewPointDTO vpDTO) throws FunctionalException;
-
+	void deleteViewPoint(Context context, ViewPointDTO vpDTO) throws FunctionalException;
 }

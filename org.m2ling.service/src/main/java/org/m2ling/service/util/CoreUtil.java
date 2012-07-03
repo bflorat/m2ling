@@ -28,9 +28,7 @@ import com.google.inject.Singleton;
  */
 @Singleton
 public class CoreUtil {
-
 	private Logger logger;
-
 	private PersistenceManager pmanager;
 
 	@Inject
@@ -38,31 +36,6 @@ public class CoreUtil {
 		super();
 		this.logger = logger;
 		this.pmanager = pm;
-	}
-
-	/**
-	 * Return a viewpoint denoted by the given name or null if none matches.
-	 * 
-	 * @param name
-	 *           the searched viewpoint name
-	 * @param throwError
-	 *           whether we throw an exception if the viewpoint doesn't exist
-	 * @return a viewpoint denoted by the given name or null if none matches
-	 * @throws IllegalArgumentException
-	 *            if the viewpoint doesn't exist
-	 */
-	public ViewPoint getViewPointByName(String name, boolean throwError) {
-		ViewPoint vp = null;
-		Root root = pmanager.getRoot();
-		for (ViewPoint v : root.getViewPoints()) {
-			if (name.equals(v.getName())) {
-				vp = v;
-			}
-		}
-		if (vp == null) {
-			throw new IllegalArgumentException("Viewpoint doesn't exist : " + name);
-		}
-		return vp;
 	}
 
 	/**
@@ -138,5 +111,4 @@ public class CoreUtil {
 		}
 		return (String[]) result.toArray();
 	}
-
 }

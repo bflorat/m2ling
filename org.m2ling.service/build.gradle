@@ -20,6 +20,7 @@ dependencies(){
 	
 	// test compile
 	configurations.compile.dependencies.each {dep->testCompile dep}
+	testCompile project(path: ':org.m2ling.common', configuration: 'tests')
 		
 }
 

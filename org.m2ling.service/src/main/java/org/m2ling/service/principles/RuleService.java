@@ -7,6 +7,7 @@ import java.util.List;
 
 import org.m2ling.common.dto.core.RuleDTO;
 import org.m2ling.common.exceptions.FunctionalException;
+import org.m2ling.common.soa.Context;
 
 /**
  * General contract for rules services implementations.
@@ -18,7 +19,6 @@ import org.m2ling.common.exceptions.FunctionalException;
  * access the viewpoint.
  * </p>
  */
-
 public interface RuleService {
 	/**
 	 * Update an existing rule.
@@ -28,7 +28,7 @@ public interface RuleService {
 	 * @throws FunctionalException
 	 *            if the rule doesn't exist or if one of the rule DTO entry is faulty
 	 */
-	void updateRule(RuleDTO rule) throws FunctionalException;
+	void updateRule(Context context, RuleDTO rule) throws FunctionalException;
 
 	/**
 	 * Create a new rule for provided viewpoint.
@@ -40,7 +40,7 @@ public interface RuleService {
 	 * @throws FunctionalException
 	 *            if a rule already exist with id or name or if one of the DTO entry is faulty
 	 */
-	void createRule(RuleDTO rule) throws FunctionalException;
+	void createRule(Context context, RuleDTO rule) throws FunctionalException;
 
 	/**
 	 * Return all available rules given a viewpoint ID. If none rules is available, a void list is
@@ -56,7 +56,7 @@ public interface RuleService {
 	 *            if the viewpoint doesn't exist
 	 * @return all available rules for given viewpoint
 	 */
-	List<RuleDTO> getAllRules(String vp) throws FunctionalException;
+	List<RuleDTO> getAllRules(Context context, String vp) throws FunctionalException;
 
 	/**
 	 * Drop the given rule if it exists.
@@ -66,6 +66,5 @@ public interface RuleService {
 	 * @throws FunctionalException
 	 *            if the rule doesn't exist.
 	 */
-	void deleteRule(RuleDTO rule) throws FunctionalException;
-
+	void deleteRule(Context context, RuleDTO rule) throws FunctionalException;
 }

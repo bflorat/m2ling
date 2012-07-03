@@ -1,12 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <m2ling_domain:Root xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:m2ling_domain="http://m2ling.org/0.1">
-  <viewPoints id="ertyuyreklbjnb,n" name="Logical Architecture" comment="Note that this viewpoint maps few concepts of physical architecture viewpoint." description="Applicative Architecture provides projects structure as modules, provides each module technology. Deals with software factories and system capabilities. Provides minimal details about physical architecture (list of servers by environment for instance).">
+  <viewPoints comment="Note that this viewpoint maps few concepts of physical architecture viewpoint." description="Applicative Architecture provides projects structure as modules, provides each module technology. Deals with software factories and system capabilities. Provides minimal details about physical architecture (list of servers by environment for instance)." id="ertyuyreklbjnb,n" name="Logical Architecture">
     <tags>team_A</tags>
-    <statusLiterals>SUBMITTED</statusLiterals>
-    <statusLiterals>UNDER_STUDY</statusLiterals>
-    <statusLiterals>APPLICABLE</statusLiterals>
-    <statusLiterals>REFUSED</statusLiterals>
-    <statusLiterals>OBSOLETE</statusLiterals>
     <activities id="_ByQVkJn4EeGqFM2UF1dCGQ" name="Set up software factory" description="Set up development, integration and build tools for each project." accountables="_skmNgZhhEeGGf-qGrGj3yA" responsibles="_skmNgZhhEeGGf-qGrGj3yA"/>
     <componentTypes id="__w-CMZoWEeG71vmJ5CR-iA" name="ServicesContainer" description="Runs services (RMI, REST, SOAP...)" boundType="_kHJh8ZxEEeGi7NYPtEuJdA" enumeration="_BYD3EJ6REeGyndJ1yNTLVw">
       <references type="RUNS" targets="_1y2zQZoWEeG71vmJ5CR-iA"/>
@@ -27,17 +22,18 @@
     <linkTypes id="_4Rfd0pqjEeGQsK1VSbibvw" name="NET_DATABASE" description="Synchronous Network protocol to access remote Postgres database. Default port : 5432. Can be used over TCP or UDP." sourceTypes="_1y2zQZoWEeG71vmJ5CR-iA" destinationTypes="_YbdmAZoXEeG71vmJ5CR-iA"/>
     <linkTypes id="_oHllkpqkEeGbI4NH3iicSg" name="HTTP_GUI" comment="" description="Synchronous HTTP access from end users to the GUI services. Default port : 80. Over TCP only. KEEP_ALIVE option enabled." sourceTypes="_8_BugZqkEeGbI4NH3iicSg _8_BugZqkEeGbI4NH3iicSg" destinationTypes="_fKtsQZoXEeG71vmJ5CR-iA"/>
     <linkTypes id="_2LrDApqyEeGVMag01qc4bw" name="LDAP" comment="" description="Synchronous access to a LDAP directory. Over TCP-IP." sourceTypes="_E3EOwZoWEeG71vmJ5CR-iA" destinationTypes="_ha8mEZqyEeGVMag01qc4bw"/>
-    <rules id="R1" name="R1" comment="This rule is one of the Bikes IS cornerstone." description="A GUI Module can't map (using an hyperlink for instance) another GUI Module, each application must be integrated into the portal." status="APPLICABLE" priority="VERY_HIGH">
+    <rules id="R1" name="R1" comment="This rule is one of the Bikes IS cornerstone." description="A GUI Module can't map (using an hyperlink for instance) another GUI Module, each application must be integrated into the portal." status="APPLICABLE" priority="VERY_HIGH" rationale="Centralizaing all the IS intranet websites URL into a single portal brings low coupling between websites, eases management and increases security." exceptions="If a GUI module is itself a sub-domain kind of portal, it may integrate several GUI modules URL as parameters and come with hyperkink to them but a special attention must be paid to manage these URL by the project team. The pointed application must not be available from the main portal but only manage by the sub-domain portail.">
       <tags>logical</tags>
     </rules>
     <rules id="R2" name="R2" comment="" description="A Service Module can't call another Service Module" status="APPLICABLE" priority="VERY_HIGH"/>
+    <statusLiterals>SUBMITTED</statusLiterals>
+    <statusLiterals>UNDER_STUDY</statusLiterals>
+    <statusLiterals>APPLICABLE</statusLiterals>
+    <statusLiterals>REFUSED</statusLiterals>
+    <statusLiterals>OBSOLETE</statusLiterals>
   </viewPoints>
-  <viewPoints id="fsdfhjksdhfkjhsdkfj" name="Physical Architecture" comment="" description="Physical Architecture viewpoint provides all rules and concepts dealing with hardware, network aspects of a project.">
-    <componentTypes id="_-aItkZxEEeGi7NYPtEuJdA" name="X86 Server" description="Intel-based server. Mostly 64 bits." reifiable="true">
-      <statusLiterals>AVAILABLE</statusLiterals>
-      <statusLiterals>REMOVED</statusLiterals>
-      <statusLiterals>FULL</statusLiterals>
-    </componentTypes>
+  <viewPoints comment="" description="Physical Architecture viewpoint provides all rules and concepts dealing with hardware, network aspects of a project." id="fsdfhjksdhfkjhsdkfj" name="Physical Architecture">
+    <componentTypes id="_-aItkZxEEeGi7NYPtEuJdA" name="X86 Server" description="Intel-based server. Mostly 64 bits." reifiable="true"/>
     <componentTypes id="_kOyogZ9ZEeGNFtlcQfUFgw" name="Router" description="Link networks between them." reifiable="true"/>
     <componentTypes id="_W3UboZ9aEeGNFtlcQfUFgw" name="LoadBalancer" description="Appliance load balancer. Dispatch a network request to a virtual IP mapping several devices." reifiable="true"/>
     <componentTypes id="_hQrcIZ9aEeGNFtlcQfUFgw" name="PC" description="PC type micro-computer" reifiable="true"/>
@@ -46,7 +42,7 @@
     <componentTypes id="_VIxZsZ9bEeGNFtlcQfUFgw" name="SAN" description="Massive storage device with Fiber channel access" reifiable="true"/>
     <linkTypes id="_FFDecp9bEeGNFtlcQfUFgw" name="GigaBit Ethernet" description="1000Mbps type ethernet link" sourceTypes="_McFWYZ9bEeGNFtlcQfUFgw _W3UboZ9aEeGNFtlcQfUFgw _hQrcIZ9aEeGNFtlcQfUFgw _kOyogZ9ZEeGNFtlcQfUFgw _0pkjcZ9aEeGNFtlcQfUFgw _-aItkZxEEeGi7NYPtEuJdA" destinationTypes="_McFWYZ9bEeGNFtlcQfUFgw _W3UboZ9aEeGNFtlcQfUFgw _hQrcIZ9aEeGNFtlcQfUFgw _kOyogZ9ZEeGNFtlcQfUFgw _0pkjcZ9aEeGNFtlcQfUFgw _-aItkZxEEeGi7NYPtEuJdA" reifiable="true"/>
   </viewPoints>
-  <viewPoints id="_uP3gkZniEeGeqKlv68ECYA" name="Enterprise Architecture" description="Enterprise Architecture deals with set of projects or the IS as a whole.">
+  <viewPoints description="Enterprise Architecture deals with set of projects or the IS as a whole." id="_uP3gkZniEeGeqKlv68ECYA" name="Enterprise Architecture">
     <componentTypes id="_REbGwZq2EeGVMag01qc4bw" name="Domain" comment="" description="A domain is the highest subdivision of an enterprise IS. Example : HR domain.">
       <references targets="_KEFloJq4EeGVMag01qc4bw"/>
     </componentTypes>
@@ -55,7 +51,7 @@
     </componentTypes>
     <componentTypes id="_c1vGwJq4EeGVMag01qc4bw" name="Application" description="An application is a technologically and project coherent set of functionalities."/>
   </viewPoints>
-  <viewPoints id="_ZrEkoJxEEeGi7NYPtEuJdA" name="Technical Architecture" comment="" description="Technology components and links between them">
+  <viewPoints comment="" description="Technology components and links between them" id="_ZrEkoJxEEeGi7NYPtEuJdA" name="Technical Architecture">
     <componentTypes id="_kHJh8ZxEEeGi7NYPtEuJdA" name="ApplicationServer" comment="" description="Runs services (SOAP,RMI,REST...) or execute dynamic Web pages"/>
     <componentTypes id="_wf5AQZxEEeGi7NYPtEuJdA" name="OS" description="Operating system">
       <references type="RUNS" targets="_kHJh8ZxEEeGi7NYPtEuJdA _wf5AQZxEEeGi7NYPtEuJdA _LyWEoZ6REeGyndJ1yNTLVw"/>
@@ -65,11 +61,7 @@
       <references type="RUNS" targets="_wf5AQZxEEeGi7NYPtEuJdA"/>
     </componentTypes>
   </viewPoints>
-  <viewPoints id="_FtwQsJ6sEeGsQqqxr3JCNw" name="Applicative architecture" description="Show applicative component from one or more applications and applicative links between them. Middleware are not modelised.">
-    <statusLiterals>VALIDATED</statusLiterals>
-    <statusLiterals>STUDIED</statusLiterals>
-    <statusLiterals>REFUSED</statusLiterals>
-    <statusLiterals>OBSOLETE</statusLiterals>
+  <viewPoints description="Show applicative component from one or more applications and applicative links between them. Middleware are not modelised." id="_FtwQsJ6sEeGsQqqxr3JCNw" name="Applicative architecture">
     <componentTypes id="_UI9CAZqmEeGbI4NH3iicSge" name="Application" comment="" description="An application implements a coherent set of information systems business services. It is built out of one or more applicative modules." boundType="_c1vGwJq4EeGVMag01qc4bw">
       <references targets="_E3EOwZoWEeG71vmJ5CR-iAe _E3EOwZoWEeG71vkjfdhbfb _1y2zQZoWEeG71vmJ5CR-iAe"/>
     </componentTypes>
@@ -85,8 +77,12 @@
     <rules id="bndbfndb" name="R2" comment="" description="Direct call between Services module are forbitten." status="VALIDATED" priority="VERY_HIGH">
       <tags>modules</tags>
     </rules>
+    <statusLiterals>VALIDATED</statusLiterals>
+    <statusLiterals>STUDIED</statusLiterals>
+    <statusLiterals>REFUSED</statusLiterals>
+    <statusLiterals>OBSOLETE</statusLiterals>
   </viewPoints>
-  <viewPoints id="_mHf5sKKSEeGOsOUMPsTb_w" name="Deployment architecture" description="Contains all concepts used to deploy an application like : module, server, middleware">
+  <viewPoints description="Contains all concepts used to deploy an application like : module, server, middleware" id="_mHf5sKKSEeGOsOUMPsTb_w" name="Deployment architecture">
     <componentTypes id="_sgTcYaTjEeGhbskxmOc77w" name="Environment">
       <references targets="_-a222Gi7NYPtEuJdA _0pkjcZ9aEeGNFtlcQfU333 _aazazaza _1y2zQZohnnnmJ5CR-iA _Ybdmtd456 _wf5AQZ111YPtEuJdA __111CR-iA _fKt222vmJ5CR-iA _ha8mE333Mag01qc4bw _aazazazaerer"/>
     </componentTypes>
@@ -111,7 +107,7 @@
     <componentTypes id="_ha8mE333Mag01qc4bw" name="LDAP directory" comment="" description="" boundType="_LyWEoZ6REeGyndJ1yNTLVw" enumeration="_cjliUJ6TEeGyndJ1yNTLVw"/>
     <componentTypes id="_aazazazaerer" name="BatchModule" comment="" description="Standalone Java batchs calling services modules" boundType="_aazazazaerer" reifiable="true"/>
   </viewPoints>
-  <views id="_6MLzgJngEeGCNbiGBiffzQ" name="Logical_BikesOnline" comment="" description="BikesOnline is a online house-built e-commerce solution to sell bikes." viewPoint="ertyuyreklbjnb,n">
+  <views comment="" description="BikesOnline is a online house-built e-commerce solution to sell bikes." id="_6MLzgJngEeGCNbiGBiffzQ" name="Logical_BikesOnline" viewPoint="ertyuyreklbjnb,n">
     <components id="_8fvV4p6TEeGyndJ1yNTLVw" name="AdminGUI" comment="" type="_E3EOwZoWEeG71vmJ5CR-iA" boundComponent="_hGsf4J89EeGNFtlcQfUFgw"/>
     <components id="_2aMpEp6VEeGbbcMFSNIrnA" name="AdminServices" type="_1y2zQZoWEeG71vmJ5CR-iA" boundComponent="_zPeqMJ89EeGNFtlcQfUFgw"/>
     <components id="_qODuQp6TEeGyndJ1yNTLVw" name="EndUserGUI" comment="" type="_E3EOwZoWEeG71vmJ5CR-iA" boundComponent="_osKccJ89EeGNFtlcQfUFgw"/>
@@ -137,7 +133,7 @@
     <links id="_aCyWg5xDEeGi7NYPtEuJdA" name="Stream3" type="_SA6SgpoZEeG71vmJ5CR-iA" origins="_qODuQp6TEeGyndJ1yNTLVw" destinations="_GHLjspxDEeGi7NYPtEuJdA"/>
     <links id="_NpfsI56UEeGyndJ1yNTLVw" name="Stream4" type="_4Rfd0pqjEeGQsK1VSbibvw" origins="_GHLjspxDEeGi7NYPtEuJdA" destinations="_SJP_gp6VEeGbbcMFSNIrnA"/>
   </views>
-  <views id="_0oVTkZ55EeGAFeVyyYKoXg" name="Enterprise architecture view" comment="" description="" viewPoint="_uP3gkZniEeGeqKlv68ECYA">
+  <views comment="" description="" id="_0oVTkZ55EeGAFeVyyYKoXg" name="Enterprise architecture view" viewPoint="_uP3gkZniEeGeqKlv68ECYA">
     <components id="_Uf_Bop56EeGAFeVyyYKoXg" name="eBusiness" comment="" type="_KEFloJq4EeGVMag01qc4bw">
       <references targets="_Uf_Bop56EeGAFeVyyYKoXg"/>
     </components>
@@ -146,7 +142,7 @@
     </components>
     <components id="_qUgd4p56EeGAFeVyyYKoXg" name="BikesOnline" comment="" type="_c1vGwJq4EeGVMag01qc4bw"/>
   </views>
-  <views id="_QXV2oZ6NEeGeZJhcjVrcWg" name="Technical catalog" comment="" description="Describes technical components available in Bikes IS" viewPoint="_ZrEkoJxEEeGi7NYPtEuJdA">
+  <views comment="" description="Describes technical components available in Bikes IS" id="_QXV2oZ6NEeGeZJhcjVrcWg" name="Technical catalog" viewPoint="_ZrEkoJxEEeGi7NYPtEuJdA">
     <componentsGroups id="_BYD3EJ6REeGyndJ1yNTLVw" name="Service containers" comment="" components="_CIvLcp6kEeGbbcMFSNIrnA"/>
     <componentsGroups id="_JzpRYJ6TEeGyndJ1yNTLVw" name="RDBMS" description="" components="_BIxBYp6SEeGyndJ1yNTLVw _G9AtYp6REeG"/>
     <componentsGroups id="_cjliUJ6TEeGyndJ1yNTLVw" name="Directories" components="_G9AtYp6REeGyndJ1yNTLVw"/>
@@ -164,7 +160,7 @@
     <components id="_BIxBYp6SEeGyndJ1yNTLVw" name="MySQL" description="" type="_LyWEoZ6REeGyndJ1yNTLVw"/>
     <components id="_CIvLcp6kEeGbbcMFSNIrnA" name="JBoss5" comment="" description="" type="_kHJh8ZxEEeGi7NYPtEuJdA"/>
   </views>
-  <views id="_QMVcEZ8zEeGYS-4UJ-FpAA" name="Sales applicative view" comment="" description="Contains all Sales applications and there modules" viewPoint="_FtwQsJ6sEeGsQqqxr3JCNw">
+  <views comment="" description="Contains all Sales applications and there modules" id="_QMVcEZ8zEeGYS-4UJ-FpAA" name="Sales applicative view" viewPoint="_FtwQsJ6sEeGsQqqxr3JCNw">
     <components id="_O1ehYp80EeGYS-4UJ-FpAA" name="BikesOnline" comment="" description="The main eCommerce Bikes Inc. application." type="_UI9CAZqmEeGbI4NH3iicSge">
       <references targets="_hGsf4J89EeGNFtlcQfUFgw _osKccJ89EeGNFtlcQfUFgw _zPeqMJ89EeGNFtlcQfUFgw _9xnzQJ89EeGNFtlcQfUFgw _VsqREp8zEeGYS-4UJ-FpAA"/>
     </components>
@@ -182,7 +178,7 @@
     <links id="_tUQzg58-" name="PAIEMENT_TRANSACTIONS" comment="" description="Access from BikesOnline GUI to payment services" type="_psOW0p8zEeGYS-4UJ-FpAArr" origins="_qODuQp6TEeGyndJ1yNTLVw" destinations="_9xnzQJ89EeGNFtlcQfUFgw"/>
     <links id="_tUQzg58-dscgfgx" name="ADMINISTRATION" comment="" description="Access from BikesOnline administrative GUI to BikesOnline administrative services" type="_psOW0p8zEeGYS-4UJ-FpAArr" origins="_8fvV4p6TEeGyndJ1yNTLVw" destinations="_zPeqMJ89EeGNFtlcQfUFgw"/>
   </views>
-  <views id="_o6dP8Z9lEeGNFtlcQfUFgw" name="Physical_BikesOnline" comment="" description="BikesOnline physical architecture" viewPoint="fsdfhjksdhfkjhsdkfj">
+  <views comment="" description="BikesOnline physical architecture" id="_o6dP8Z9lEeGNFtlcQfUFgw" name="Physical_BikesOnline" viewPoint="fsdfhjksdhfkjhsdkfj">
     <instances id="_av1GdKGYEeGWHchb0LRqvg" name="WebServer_1" comment="" status="AVAILABLE" component="_gfgfdeG3fPi34vn9KQ" boundComponentInstance="_Hk3"/>
     <instances id="_thEX5KGYEeGWHchb0LRqvg" name="AS_1" component="_JBJgUp_6EeG3fPi34vn9KQ" boundComponentInstance="_Hk3"/>
     <instances id="_xZASxKGYEeGWHchb0LRqvg" name="AS_2" component="_JBJgUp_6EeG3fPi34vn9KQ" boundComponentInstance="_HkPKsKA2AGg"/>
@@ -197,7 +193,7 @@
     <streams id="_Y9Q_16GcEeGpDeafbzGYMQ" name="cable5" source="_jv8xNKGaEeGAboe59Cwkcg" destination="_av1GdKGYEeGWHchb0LRqvg" link="_sJNsw6GbEeGpDeafbzGYMQ"/>
     <streams id="_iJPnN6GcEeGpDeafbzGYMQ" name="cable6" source="_jv8xNKGaEeGAboe59Cwkcg" destination="_O3JLxKGZEeGWHchb0LRqvg" link="_sJNsw6GbEeGpDeafbzGYMQ"/>
   </views>
-  <views id="_Ax_tkZ_6EeG3fPi34vn9KQ" name="DevicesCatalog" description="List available devices models" viewPoint="fsdfhjksdhfkjhsdkfj">
+  <views description="List available devices models" id="_Ax_tkZ_6EeG3fPi34vn9KQ" name="DevicesCatalog" viewPoint="fsdfhjksdhfkjhsdkfj">
     <components id="_gfgfdeG3fPi34vn9KQ" name="IBM-HS21" comment="" description="IBM blade, 16Go RAM, 2 quad-core." type="_-aItkZxEEeGi7NYPtEuJdA"/>
     <components id="_Jlytjhmp" name="Cisco-2900" comment="" description="Branch router" type="_kOyogZ9ZEeGNFtlcQfUFgw"/>
     <components id="_JBJgUp_6EeG3fPi34vn9KQ" name="IBM-HS22" description="IBM blade, 32Go RAM, 4 quad-core." type="_-aItkZxEEeGi7NYPtEuJdA"/>
@@ -216,7 +212,7 @@
     <instances id="_DzMO9KHBEeGIx4XXpoKVSg" name="ASA_1" component="_nKCmgp_6EeG3fPi34vn9KQ"/>
     <instances id="__E72BaSzEeGgK_AE-WB4xA" name="Environment_PROD" comment=""/>
   </views>
-  <views id="_7-nzcaKREeGOsOUMPsTb_w" name="Deployment_BikesOnline" comment="" description="Production view of BikesOnline deployment" viewPoint="ertyuyreklbjnb,n">
+  <views comment="" description="Production view of BikesOnline deployment" id="_7-nzcaKREeGOsOUMPsTb_w" name="Deployment_BikesOnline" viewPoint="ertyuyreklbjnb,n">
     <components id="_vDwQkqTjEeGhbskxmOc77w" name="Production" description="" type="_sgTcYaTjEeGhbskxmOc77w">
       <references targets="_Fe3JcqMoEeGkWPVFom68wQ _C2pRkqNKEeGULe7xIq_4Kg _itGiQqNJEefdfd_4Kgezezez _bTKAYqMhEeGTqOb8fWOx0Q _xi1DYqMoEeGkWPVFom68wQ _6b6KoqMtEeG9sM0bZ_WFcA _0VP9IqMnEeGkggwQ _eoxQUqMsEeG9sM0bZ_WFcA _LhezMqMoEeGkWPVFom68rerwQ _N13tUqNMEeGULe7xIq_4Kg _0dlLAqMtEeG9sM0bZ_WFcA _5S34QqMoEeGkWPVFom68wQ _itGiQqNJEeGULe7xIq_4Kg _ZKfHEqNKEeGULe7xIq_4Kg _itGiQqNJEeff4Kg _TmWPQqMtEeG9sM0bZ_WFcA _0VP9IqMnEeGkWPVFom68wQ"/>
     </components>

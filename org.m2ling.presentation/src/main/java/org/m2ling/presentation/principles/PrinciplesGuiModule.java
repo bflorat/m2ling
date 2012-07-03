@@ -78,7 +78,7 @@ public class PrinciplesGuiModule extends GuiModule implements Observer {
 	 */
 	@Override
 	public void attach() {
-		vpsDTO = vpService.getAllViewPoints();
+		vpsDTO = vpService.getAllViewPoints(null);
 		if (vpsDTO.size() == 0) {
 			VerticalLayout vert = getNoneVPPanel();
 			addComponent(vert);

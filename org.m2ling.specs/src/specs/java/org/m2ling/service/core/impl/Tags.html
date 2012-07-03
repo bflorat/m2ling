@@ -3,8 +3,7 @@
 	xmlns:concordion="http://www.concordion.org/2007/concordion">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<link href="../../../../concordion.css" rel="stylesheet"
-	type="text/css" />
+<link href="../../../../concordion.css" rel="stylesheet" type="text/css" />
 <title>Tags</title>
 </head>
 <body>
@@ -12,12 +11,13 @@
 	<a href='./index.html'>common</a>
 	<h1>Tag principles</h1>
 	<ul>
-		<li>Most m2ling items have a tag and they can be set from most pages.</li>
+		<li>Most m2ling items have a tag and they can be set from most
+			pages.</li>
 		<li>Search is case insensitive.</li>
 		<li>Search can mix tags like : foo,bar.</li>
 		<li>Most m2ling tools provide filters text fields used to filter
 			by tags (even diagrams).</li>
-			
+
 	</ul>
 	<H1>Apply tags against a taggable item</H1>
 	<p>User can add through GUI one or more tags to taggable items.
@@ -28,15 +28,15 @@
 	<h3>Special cases</h3>
 	<li>If a single tag <b
 		concordion:execute="#result=setTagWithComa()">contains a comma</b>, an
-		<b concordion:assertEquals="#result">IllegalArgumentException</b> is
+		<b concordion:assertEquals="#result">FunctionalException</b> is
 		expected.
 	</li>
 	<li>If a single tag <b concordion:execute="#result=setEmptyTag()">is
-			void</b>, an <b concordion:assertEquals="#result">IllegalArgumentException</b>
+			void</b>, an <b concordion:assertEquals="#result">FunctionalException</b>
 		is expected.
 	</li>
 	<li>If a single tag <b concordion:execute="#result=setEmptyTag()">is
-			null</b>, an <b concordion:assertEquals="#result">IllegalArgumentException</b>
+			null</b>, an <b concordion:assertEquals="#result">FunctionalException</b>
 		is expected.
 	</li>
 	<div class="example">
@@ -68,7 +68,7 @@
 				<td>DEV1,DEV2,application,Erich</td>
 			</tr>
 		</table>
-		
+
 		<h3>Tags setting examples</h3>
 		<table concordion:execute="#result=setTags(#existing,#new_tags)">
 			<tr>
@@ -101,8 +101,6 @@
 
 	<h2>Further details</h2>
 	<ul>
-		<li><a href="ViewPointFromExisting.html">Viewpoint creation
-				from existing base viewpoint</a>.</li>
 	</ul>
 </body>
 </html>

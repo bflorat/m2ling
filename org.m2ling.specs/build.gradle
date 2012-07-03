@@ -7,12 +7,12 @@ import org.apache.tools.ant.filters.ReplaceTokens
 defaultTasks('replaceInternalDefinition');
 
 dependencies() {
+	compile('junit:junit:4.8.2');
 	//tests
 	testCompile('org.concordion:concordion:1.4.2');
-	testCompile('org.hibernate:hibernate-core:3.6.0.Final');
-	testCompile(project(':org.m2ling.common'));
 	testCompile(project(':org.m2ling.service'));
-	testCompile(files("../org.m2ling.common/build/classes/test"));
+	testCompile(project(':org.m2ling.presentation'));
+	testCompile project(path: ':org.m2ling.common', configuration: 'tests')
 }
 
 File concordionOutputDir = file("${buildDir}/concordion-results");

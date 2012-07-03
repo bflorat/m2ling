@@ -84,10 +84,12 @@ public class M2lingApplication extends Application {
 		this.currentApp = app;
 	}
 
+	/**
+	 * Note that this works only when application is actually started. If an exception occurs during
+	 * application loading (including guice proactive object graph loading), it can't be reached.
+	 */
 	@Override
 	public void terminalError(Terminal.ErrorEvent event) {
-		// Call the default implementation.
-		super.terminalError(event);
 		// Some custom behavior.
 		if (getMainWindow() != null) {
 			getMainWindow().showNotification("An unchecked exception occured!", event.getThrowable().toString(),

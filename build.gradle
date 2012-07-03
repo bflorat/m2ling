@@ -23,10 +23,8 @@ subprojects(){
   compile('com.google.inject.extensions:guice-assistedinject:3.0');
 
   //tests
-  testCompile('com.google.inject:guice:3.0');	
   testCompile('junit:junit:4.8.2');
   testCompile('com.google.guava:guava:11.0');
-  testCompile('com.google.inject.extensions:guice-assistedinject:3.0');
 }
 
  version = '0.1';
@@ -35,5 +33,15 @@ subprojects(){
  jar() {
   manifest.attributes(provider: 'm2ling');
  }
+
+ // project A test code to poject B test code configuration :
+ task testJar(type: Jar, dependsOn: testClasses) {
+	baseName = "test-${project.archivesBaseName}"
+	from sourceSets.test.output
+ } 
+
+ configurations { tests }
+
+ artifacts { tests testJar }
 
 }

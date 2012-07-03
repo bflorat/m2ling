@@ -101,15 +101,11 @@ public class PersistenceManagerXMIImpl implements PersistenceManager {
 	 * Build XMI target file from configuration
 	 * 
 	 * @return XMI target file from configuration
-	 * @throw IllegalArgumentException if XMI file path is malformed
-	 * @thow IllegalStateException if XMI file path is not set in configuration
+	 * @throw TechnicalException if XMI file path is malformed
 	 */
 	private URI getFileURI() {
 		URI out = null;
 		String filePath = configuration.getSystemProperty(SpecificConfiguration.CONF_XMI_PATH);
-		if (configuration == null) {
-			throw new IllegalStateException("None XMI file path set in configuration");
-		}
 		// Can throw a IllegalArgumentException if URI build fails
 		out = URI.createFileURI(filePath);
 		return out;

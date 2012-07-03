@@ -34,7 +34,7 @@ public class PersistenceManagerTeneoImplTest extends ServiceTestCase {
 	@Test
 	public void testCopyMockToDatabase() throws IOException {
 		populateDatabase("Technical");
-		ViewPoint vp1 = (ViewPoint) resource.getEObject("id4");
+		ViewPoint vp1 = (ViewPoint) resource.getEObject("vp1");
 		assertFalse(vp1 == null);
 		assertEquals(vp1.getName(), "vp1");
 		resource.save(null);

@@ -3,7 +3,6 @@ package org.m2ling.common.configuration;
 /**
  * Copyright (C) 2012 Bertrand Florat
  */
-
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
@@ -14,8 +13,8 @@ import java.util.Map;
 import java.util.Properties;
 
 import org.junit.Test;
-import org.m2ling.common.test_utils.M2lingUnitTest;
 import org.m2ling.common.utils.Consts;
+import org.m2ling.common.utils.M2lingUnitTest;
 import org.m2ling.common.utils.Utils;
 
 /**
@@ -23,7 +22,6 @@ import org.m2ling.common.utils.Utils;
  * 
  */
 public class ConfigurationTest extends M2lingUnitTest {
-
 	@Test
 	public void confOverriden() {
 		Properties confOverriden = new Properties();

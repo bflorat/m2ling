@@ -5,16 +5,21 @@ package org.m2ling.service.principles.impl;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.logging.Logger;
 
 import org.m2ling.common.configuration.Configuration;
 import org.m2ling.common.dto.core.RuleDTO;
+import org.m2ling.common.dto.core.StatusEventDTO;
 import org.m2ling.common.exceptions.FunctionalException;
 import org.m2ling.common.exceptions.FunctionalException.Code;
+import org.m2ling.common.soa.Context;
 import org.m2ling.common.utils.Consts;
 import org.m2ling.common.utils.Utils;
 import org.m2ling.domain.Root;
+import org.m2ling.domain.core.CoreFactory;
 import org.m2ling.domain.core.Rule;
 import org.m2ling.domain.core.RulePriority;
+import org.m2ling.domain.core.StatusEvent;
 import org.m2ling.domain.core.ViewPoint;
 import org.m2ling.persistence.PersistenceManager;
 import org.m2ling.service.common.ServiceImpl;
@@ -39,15 +44,19 @@ public class RuleServiceImpl extends ServiceImpl implements RuleService {
 	 */
 	@Inject
 	protected RuleServiceImpl(PersistenceManager pm, CoreUtil util, DTOConverter.FromDTO fromDTO,
-			DTOConverter.ToDTO toDTO, Configuration conf) {
-		super();
-		this.util = util;
-		this.toDTO = toDTO;
-		this.pmanager = pm;
-		this.conf = conf;
+			DTOConverter.ToDTO toDTO, Configuration conf, Logger logger) {
+		super(pm, util, fromDTO, toDTO, conf, logger);
 	}
 
-	private void checkDTO(final RuleDTO dto) throws FunctionalException {
+	/**
+	 * Centralize all service entry verifications
+	 * 
+	 * @param dto
+	 * @param update
+	 *           : whether we update the item or not
+	 * @throws FunctionalException
+	 */
+	private void checkDTO(final RuleDTO dto, boolean update) throws FunctionalException {
 		// Nullity
 		if (dto == null) {
 			throw new FunctionalException(Code.NULL_ARGUMENT, "Null item provided", null, null);
@@ -58,7 +67,6 @@ public class RuleServiceImpl extends ServiceImpl implements RuleService {
 			throw new FunctionalException(FunctionalException.Code.TARGET_NOT_FOUND, "Rule not found for provided id",
 					null, dto.toString());
 		}
-
 		// Name
 		if (dto.getName().length() == 0) {
 			throw new FunctionalException(FunctionalException.Code.NULL_ARGUMENT, "Void Name", null, dto.toString());
@@ -71,18 +79,20 @@ public class RuleServiceImpl extends ServiceImpl implements RuleService {
 			throw new FunctionalException(FunctionalException.Code.TARGET_NOT_FOUND,
 					"A viewpoint associated with this rule cannot be found", null, dto.toString());
 		}
-		// Check for existing rule with the same id
-		for (Rule r : vp.getRules()) {
-			if (r.getId().equals(dto.getId())) {
-				throw new FunctionalException(FunctionalException.Code.DUPLICATES, "Rule already exists", null,
-						dto.toString());
+		if (!update) {
+			// Check for existing rule with the same id
+			for (Rule r : vp.getRules()) {
+				if (r.getId().equals(dto.getId())) {
+					throw new FunctionalException(FunctionalException.Code.DUPLICATES, "Rule already exists", null,
+							dto.toString());
+				}
 			}
-		}
-		// Check for existing rule with the same name
-		for (Rule r : vp.getRules()) {
-			if (r.getName().equals(dto.getName())) {
-				throw new FunctionalException(FunctionalException.Code.DUPLICATES,
-						"A rule already exists with the same name", null, dto.toString());
+			// Check for existing rule with the same name
+			for (Rule r : vp.getRules()) {
+				if (r.getName().equals(dto.getName())) {
+					throw new FunctionalException(FunctionalException.Code.DUPLICATES,
+							"A rule already exists with the same name", null, dto.toString());
+				}
 			}
 		}
 		// Status
@@ -125,21 +135,29 @@ public class RuleServiceImpl extends ServiceImpl implements RuleService {
 	 * @see org.m2ling.service.principles.RuleService#updateRule(org.m2ling.common.dto.core.RuleDTO)
 	 */
 	@Override
-	public void updateRule(final RuleDTO ruleDTO) throws FunctionalException {
+	public void updateRule(final Context context, final RuleDTO ruleDTO) throws FunctionalException {
 		// Controls
-		checkDTO(ruleDTO);
-
+		checkDTO(ruleDTO, true);
 		// Processing
 		Rule rule = util.getRuleByID(ruleDTO.getId());
-		ViewPoint vp = util.getViewPointByID(ruleDTO.getViewPointId());
 		rule.setName(ruleDTO.getName());
 		rule.setDescription(ruleDTO.getDescription());
 		rule.setPriority(RulePriority.get(ruleDTO.getPriority()));
 		rule.setStatus(ruleDTO.getStatus());
-		vp.setComment(ruleDTO.getComment());
-		List<String> tags = vp.getTags();
+		rule.setComment(ruleDTO.getComment());
+		rule.setExceptions(ruleDTO.getExceptions());
+		rule.setRationale(ruleDTO.getRationale());
+		List<String> tags = rule.getTags();
 		tags.clear();
 		tags.addAll(ruleDTO.getTags());
+		List<StatusEvent> history = rule.getHistory();
+		history.clear();
+		for (StatusEventDTO event : ruleDTO.getHistory()) {
+			StatusEvent se = CoreFactory.eINSTANCE.createStatusEvent();
+			se.setDate(event.getDate());
+			se.setStatusLiteral(event.getStatusLiteral());
+			history.add(se);
+		}
 	}
 
 	/*
@@ -148,10 +166,9 @@ public class RuleServiceImpl extends ServiceImpl implements RuleService {
 	 * @see org.m2ling.service.principles.RuleService#createRule( org.m2ling.common.dto.core.RuleDTO)
 	 */
 	@Override
-	public void createRule(final RuleDTO ruleDTO) throws FunctionalException {
+	public void createRule(final Context context, final RuleDTO ruleDTO) throws FunctionalException {
 		// Controls
-		checkDTO(ruleDTO);
-
+		checkDTO(ruleDTO, false);
 		// Processing
 		Rule rule = fromDTO.newRule(ruleDTO);
 		ViewPoint vp = util.getViewPointByID(ruleDTO.getViewPointId());
@@ -164,7 +181,7 @@ public class RuleServiceImpl extends ServiceImpl implements RuleService {
 	 * @see org.m2ling.service.principles.RuleService#getAllRules(String)
 	 */
 	@Override
-	public List<RuleDTO> getAllRules(final String vp) throws FunctionalException {
+	public List<RuleDTO> getAllRules(final Context context, final String vp) throws FunctionalException {
 		{// Controls
 			if (util.getViewPointByID(vp) == null) {
 				throw new FunctionalException(Code.TARGET_NOT_FOUND, "Viewpoint doesn't exist", null, vp.toString());
@@ -176,9 +193,11 @@ public class RuleServiceImpl extends ServiceImpl implements RuleService {
 			if (checked.getId().equals(vp)) {
 				List<Rule> rules = checked.getRules();
 				for (Rule rule : rules) {
+					List<StatusEventDTO> history = toDTO.getRuleHistoryDTO(rule);
 					RuleDTO dto = new RuleDTO.Builder(checked.getId(), rule.getId(), rule.getName())
 							.comment(rule.getComment()).description(rule.getDescription())
-							.priority(rule.getPriority().getLiteral()).status(rule.getStatus()).tags(rule.getTags()).build();
+							.priority(rule.getPriority().getLiteral()).history(history).rationale(rule.getRationale())
+							.exceptions(rule.getExceptions()).status(rule.getStatus()).tags(rule.getTags()).build();
 					out.add(dto);
 				}
 				break;
@@ -194,7 +213,7 @@ public class RuleServiceImpl extends ServiceImpl implements RuleService {
 	 * @see org.m2ling.service.principles.RuleService#deleteRule(org.m2ling.common.dto.core.RuleDTO)
 	 */
 	@Override
-	public void deleteRule(final RuleDTO ruleDTO) throws FunctionalException {
+	public void deleteRule(final Context context, final RuleDTO ruleDTO) throws FunctionalException {
 		Rule rule = null;
 		{// Controls
 			if (ruleDTO == null) {
@@ -208,5 +227,4 @@ public class RuleServiceImpl extends ServiceImpl implements RuleService {
 		ViewPoint vp = (ViewPoint) rule.eContainer();
 		vp.getRules().remove(rule);
 	}
-
 }

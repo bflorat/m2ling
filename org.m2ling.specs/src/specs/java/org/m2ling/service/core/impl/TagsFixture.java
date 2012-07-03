@@ -1,30 +1,41 @@
 package org.m2ling.service.core.impl;
 
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Properties;
 
-import org.concordion.integration.junit3.ConcordionTestCase;
 import org.junit.Test;
+import org.m2ling.common.configuration.Configuration;
+import org.m2ling.common.exceptions.FunctionalException;
 import org.m2ling.common.soa.Context;
 import org.m2ling.common.utils.Utils;
 import org.m2ling.domain.core.Type;
+import org.m2ling.persistence.impl.PersistenceManagerXMIImpl;
 import org.m2ling.service.core.TagService;
+import org.m2ling.service.util.CoreUtil;
+import org.m2ling.service.util.DTOConverter.FromDTO;
+import org.m2ling.service.util.DTOConverter.ToDTO;
+import org.m2ling.specs.M2lingFixture;
 
-public class TagsFixture extends ConcordionTestCase {
-
+public class TagsFixture extends M2lingFixture {
 	// Note that the service implementation is explicit in purpose, we don't use DI (best practice
 	// for UT).
 	TagService serviceTag;
-
 	/** Sample viewpoints are named against this prefix and their initial tag */
 	private static final String SAMPLE_VIEWPOINT_PREFIX = "viewPointTag_";
-
 	public static final Context MOCK_CONTEXT = Context.newContext(Context.Entry.USER, "hceheo").add(
 			Context.Entry.PWD_HASH, "8f7d88e901a5ad3a05d8cc0de93313fd76028f8c");
 
-	public TagsFixture() {
+	public TagsFixture() throws IOException {
 		super();
-		serviceTag = new TagServiceImpl();
+		String sampleXMI = "src/specs/resources/mocks/Technical.m2ling";
+		Properties prop = new Properties();
+		prop.setProperty(PersistenceManagerXMIImpl.SpecificConfiguration.CONF_XMI_PATH, sampleXMI);
+		Configuration configuration = new Configuration(prop, logger);
+		PersistenceManagerXMIImpl pm = new PersistenceManagerXMIImpl(logger, configuration);
+		CoreUtil util = new CoreUtil(logger, pm);
+		serviceTag = new TagServiceImpl(pm, util, new FromDTO(util), new ToDTO(util), configuration, logger);
 	}
 
 	/**
@@ -32,7 +43,7 @@ public class TagsFixture extends ConcordionTestCase {
 	 * against a new instance of HasTags at each call.
 	 */
 	@Test
-	public String addTags(String previousTags, String newTags) {
+	public String addTags(String previousTags, String newTags) throws FunctionalException {
 		List<String> newTagsList = Utils.stringListFromString(newTags);
 		serviceTag.addTags(MOCK_CONTEXT, Type.VIEWPOINT, getVPName(previousTags), newTagsList);
 		List<String> result = serviceTag.getAllTags(MOCK_CONTEXT, Type.VIEWPOINT, getVPName(previousTags));
@@ -43,7 +54,7 @@ public class TagsFixture extends ConcordionTestCase {
 	 * Set given tags as text and return the new tag text. Note that the tags are actually applied
 	 * against a new instance of HasTags at each call.
 	 */
-	public String setTags(String previousTags, String newTags) {
+	public String setTags(String previousTags, String newTags) throws FunctionalException {
 		List<String> newTagsList = Utils.stringListFromString(newTags);
 		serviceTag.setTags(MOCK_CONTEXT, Type.VIEWPOINT, getVPName(previousTags), newTagsList);
 		List<String> result = serviceTag.getAllTags(MOCK_CONTEXT, Type.VIEWPOINT, getVPName(previousTags));
@@ -62,10 +73,10 @@ public class TagsFixture extends ConcordionTestCase {
 			serviceTag.setTags(MOCK_CONTEXT, Type.VIEWPOINT, SAMPLE_VIEWPOINT_PREFIX, items);
 			List<String> result = serviceTag.getAllTags(MOCK_CONTEXT, Type.VIEWPOINT, SAMPLE_VIEWPOINT_PREFIX);
 			return Utils.stringListAsString(result);
-		} catch (IllegalArgumentException iae) {
-			return "IllegalArgumentException";
+		} catch (FunctionalException func) {
+			return "FunctionalException";
 		} catch (Exception e) {
-			return "<Unexpected IllegalArgumentException>";
+			return "<Unexpected exception>";
 		}
 	}
 
@@ -76,10 +87,10 @@ public class TagsFixture extends ConcordionTestCase {
 			serviceTag.setTags(MOCK_CONTEXT, Type.VIEWPOINT, SAMPLE_VIEWPOINT_PREFIX, items);
 			List<String> result = serviceTag.getAllTags(MOCK_CONTEXT, Type.VIEWPOINT, SAMPLE_VIEWPOINT_PREFIX);
 			return Utils.stringListAsString(result);
-		} catch (IllegalArgumentException iae) {
-			return "IllegalArgumentException";
+		} catch (FunctionalException func) {
+			return "FunctionalException";
 		} catch (Exception e) {
-			return "<Unexpected IllegalArgumentException>";
+			return "<Unexpected exception>";
 		}
 	}
 
@@ -90,10 +101,10 @@ public class TagsFixture extends ConcordionTestCase {
 			serviceTag.setTags(MOCK_CONTEXT, Type.VIEWPOINT, SAMPLE_VIEWPOINT_PREFIX, items);
 			List<String> result = serviceTag.getAllTags(MOCK_CONTEXT, Type.VIEWPOINT, SAMPLE_VIEWPOINT_PREFIX);
 			return Utils.stringListAsString(result);
-		} catch (IllegalArgumentException iae) {
-			return "IllegalArgumentException";
+		} catch (FunctionalException func) {
+			return "FunctionalException";
 		} catch (Exception e) {
-			return "<Unexpected IllegalArgumentException>";
+			return "<Unexpected exception>";
 		}
 	}
 }

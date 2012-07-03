@@ -18,7 +18,6 @@ import org.m2ling.common.dto.core.ViewPointDTO;
 import org.m2ling.common.exceptions.FunctionalException;
 import org.m2ling.common.utils.Msg;
 import org.m2ling.common.utils.Utils;
-import org.m2ling.domain.core.RulePriority;
 import org.m2ling.presentation.events.Events;
 import org.m2ling.presentation.events.ObservationManager;
 import org.m2ling.presentation.principles.model.RuleBean;
@@ -39,6 +38,7 @@ import com.vaadin.ui.Component;
 import com.vaadin.ui.DefaultFieldFactory;
 import com.vaadin.ui.Field;
 import com.vaadin.ui.Form;
+import com.vaadin.ui.Panel;
 import com.vaadin.ui.RichTextArea;
 import com.vaadin.ui.TextArea;
 import com.vaadin.ui.VerticalLayout;
@@ -49,25 +49,17 @@ import com.vaadin.ui.Window;
  */
 @SuppressWarnings("serial")
 public class RuleDialog extends Window {
-
 	/** Is it a new rule ? */
 	private boolean newRule = true;
-
 	private RuleBean bean;
-
 	private Logger logger;
-
 	private ObservationManager obs;
-
 	private DTOConverter.ToDTO toDTO;
-
 	private DTOConverter.FromDTO fromDTO;
-
 	private RuleService ruleService;
-
 	private ViewPointService vpService;
-
 	private ViewPointBean vpBean;
+	private Panel panel;
 
 	/**
 	 * Build a rule dialog
@@ -84,14 +76,13 @@ public class RuleDialog extends Window {
 		this.obs = obs;
 		this.toDTO = toDTO;
 		this.fromDTO = fromDTO;
+		newRule = (ruleBean == null);
 		// We need a bean to attach data to
-		if (ruleBean == null) {
+		if (newRule) {
 			bean = new RuleBean();
 			bean.setId(UUID.randomUUID().toString());
-			newRule = true;
 		} else {
 			this.bean = ruleBean;
-			newRule = false;
 		}
 		setWidth("650px");
 		setClosable(true);
@@ -99,8 +90,11 @@ public class RuleDialog extends Window {
 
 	@Override
 	public void attach() {
+		panel = new Panel();
+		panel.setSizeFull();
+		panel.getContent().setHeight("-1");
 		// Refresh associated viewpoint data
-		ViewPointDTO vpDTO = vpService.getViewPointByID(bean.getViewPointId());
+		ViewPointDTO vpDTO = vpService.getViewPointByID(null, bean.getViewPointId());
 		vpBean = fromDTO.getViewPointBean(vpDTO);
 		((VerticalLayout) getContent()).setSizeFull();
 		final Form form = new Form();
@@ -110,7 +104,7 @@ public class RuleDialog extends Window {
 		form.setFormFieldFactory(new RuleDialogFieldFactory());
 		form.setItemDataSource(new BeanItem<RuleBean>(bean));
 		form.setVisibleItemProperties(Arrays.asList(new String[] { "name", "status", "priority", "tags", "description",
-				"comment" }));
+				"rationale", "exceptions", "comment" }));
 		form.setValidationVisibleOnCommit(true);
 		Command ok = new Command() {
 			public void execute() {
@@ -118,9 +112,9 @@ public class RuleDialog extends Window {
 				RuleDTO ruleDTO = toDTO.getRuleDTO(bean);
 				try {
 					if (newRule) {
-						ruleService.createRule(ruleDTO);
+						ruleService.createRule(null, ruleDTO);
 					} else {
-						ruleService.updateRule(ruleDTO);
+						ruleService.updateRule(null, ruleDTO);
 					}
 					close();
 					obs.notifySync(new org.m2ling.presentation.events.Event(Events.VP_CHANGE));
@@ -136,9 +130,10 @@ public class RuleDialog extends Window {
 			}
 		};
 		OKCancel okc = new OKCancel(ok, cancel);
-		addComponent(form);
-		addComponent(okc);
-		((VerticalLayout) getContent()).setComponentAlignment(okc, Alignment.MIDDLE_LEFT);
+		panel.addComponent(form);
+		panel.addComponent(okc);
+		((VerticalLayout) panel.getContent()).setComponentAlignment(okc, Alignment.MIDDLE_LEFT);
+		addComponent(panel);
 	}
 
 	private class RuleDialogFieldFactory extends DefaultFieldFactory {
@@ -157,6 +152,20 @@ public class RuleDialog extends Window {
 				description.setWidth("100%");
 				description.setDescription(Msg.get("pr.6"));
 				return description;
+			} else if ("rationale".equals(propertyId)) {
+				RichTextArea rationale = new RichTextArea();
+				rationale.setCaption(Msg.get("gal.9"));
+				rationale.setHeight(20, UNITS_EX);
+				rationale.setWidth("100%");
+				rationale.setDescription(Msg.get("pr.22"));
+				return rationale;
+			} else if ("exceptions".equals(propertyId)) {
+				RichTextArea exceptions = new RichTextArea();
+				exceptions.setCaption(Msg.get("pr.23"));
+				exceptions.setHeight(20, UNITS_EX);
+				exceptions.setWidth("100%");
+				exceptions.setDescription(Msg.get("pr.24"));
+				return exceptions;
 			} else if ("comment".equals(propertyId)) {
 				TextArea comment = new TextArea();
 				comment.addStyleName("principles_vp_dialog_comment");

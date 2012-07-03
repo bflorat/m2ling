@@ -6,6 +6,8 @@
 package org.m2ling.presentation.principles.model;
 
 import java.io.Serializable;
+import java.util.Map;
+import java.util.TreeMap;
 
 import org.m2ling.common.utils.Utils;
 
@@ -26,6 +28,52 @@ public class RuleBean implements Serializable {
 	private String comment = "";
 	private String status = "";
 	private String priority = "";
+	private String rationale = "";
+	private String exceptions = "";
+	private Map<Long,String> history = new TreeMap<Long,String>();
+	
+
+	/**
+	 * @return the rationale
+	 */
+	public String getRationale() {
+		return rationale;
+	}
+
+	/**
+	 * @param rationale the rationale to set
+	 */
+	public void setRationale(String rationale) {
+		this.rationale = rationale;
+	}
+
+	/**
+	 * @return the exceptions
+	 */
+	public String getExceptions() {
+		return exceptions;
+	}
+
+	/**
+	 * @param exceptions the exceptions to set
+	 */
+	public void setExceptions(String exceptions) {
+		this.exceptions = exceptions;
+	}
+
+	/**
+	 * @return the history
+	 */
+	public Map<Long, String> getHistory() {
+		return history;
+	}
+
+	/**
+	 * @param history the history to set
+	 */
+	public void setHistory(Map<Long, String> history) {
+		this.history = history;
+	}
 
 	/**
 	 * @return the priority

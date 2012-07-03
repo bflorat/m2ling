@@ -100,9 +100,9 @@ public class ViewPointDialog extends Window {
 				ViewPointDTO vpDTO = toDTO.getViewPointDTO(bean);
 				try {
 					if (newVP) {
-						service.createViewPoint(vpDTO);
+						service.createViewPoint(null,vpDTO);
 					} else {
-						service.updateViewPoint(vpDTO);
+						service.updateViewPoint(null,vpDTO);
 					}
 					close();
 					obs.notifySync(new org.m2ling.presentation.events.Event(Events.VP_CHANGE));
