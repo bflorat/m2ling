@@ -193,7 +193,10 @@ public class Utils {
 	}
 
 	/**
-	 * Generic toString() method that display all declared fields sorted alphabetically/ignore case
+	 * Generic toString() method that display all declared fields sorted alphabetically/ignore case.
+	 * <p>
+	 * If a field is not initialized, the string <null> is displayed
+	 * </p>
 	 * 
 	 * @param obj
 	 */
@@ -211,7 +214,11 @@ public class Utils {
 			sb.append(field.getName());
 			sb.append('=');
 			try {
-				sb.append(field.get(obj).toString());
+				if (field.get(obj) == null) {
+					sb.append("<null>");
+				} else {
+					sb.append(field.get(obj).toString());
+				}
 			} catch (Exception e) {
 				// Should not append
 				e.printStackTrace();

@@ -16,7 +16,6 @@ import org.m2ling.presentation.principles.model.ViewPointBean;
  * Manages icons
  */
 public class IconManager {
-
 	/**
 	 * Return matching icon file for given bean id or null of none.
 	 * 
@@ -33,10 +32,12 @@ public class IconManager {
 				return false;
 			}
 		});
+		if (matchingFile == null) {
+			return null;
+		}
 		if (matchingFile.length > 0) {
 			icon = new File(iconDir.getAbsolutePath() + File.separatorChar + matchingFile[0]);
 		}
 		return icon;
 	}
-
 }

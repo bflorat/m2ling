@@ -53,7 +53,8 @@ public class CreateViewPointFixture extends M2lingFixture {
 		ViewPointDTO dto = new DTOConverter.ToDTO().getViewPointDTO(bean);
 		service.createViewPoint(null,dto);
 		ViewPointDTO checkedDTO = service.getViewPointByName(null,name);
-		System.out.println(checkedDTO.toString());
-		return checkedDTO.toString();
+		ViewPointBean outBean = new DTOConverter.FromDTO().getViewPointBean(checkedDTO);
+		System.out.println(outBean.toString());
+		return outBean.toString();
 	}
 }
