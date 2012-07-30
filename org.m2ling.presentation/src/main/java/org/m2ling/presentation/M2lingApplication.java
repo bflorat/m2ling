@@ -1,6 +1,7 @@
 package org.m2ling.presentation;
 
 import java.util.List;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import org.m2ling.presentation.principles.PrinciplesGuiModule;
@@ -18,17 +19,11 @@ import com.vaadin.ui.Window.Notification;
 @SuppressWarnings("serial")
 @SessionScoped
 public class M2lingApplication extends Application {
-
 	private Window mainWindow;
-
 	private MainFrame mframe;
-
 	private MenuBar menu;
-
 	private Logger logger;
-
 	private PrinciplesGuiModule principlesGuiModule;
-
 	private GuiModule currentApp;
 
 	@Inject
@@ -61,7 +56,6 @@ public class M2lingApplication extends Application {
 		menu.setWidth("100%");
 		menu.setHeight("30px");
 		menu.setStyleName("app");
-
 		// m2principles
 		menu.addItem("m2principles", null, new MenuBar.Command() {
 			public void menuSelected(MenuBar.MenuItem selectedItem) {
@@ -90,11 +84,11 @@ public class M2lingApplication extends Application {
 	 */
 	@Override
 	public void terminalError(Terminal.ErrorEvent event) {
+		logger.log(Level.SEVERE, "Untrapped error", event.getThrowable());
 		// Some custom behavior.
 		if (getMainWindow() != null) {
 			getMainWindow().showNotification("An unchecked exception occured!", event.getThrowable().toString(),
 					Notification.TYPE_ERROR_MESSAGE);
 		}
 	}
-
 }
