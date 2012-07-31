@@ -11,7 +11,7 @@ import java.util.logging.Logger;
 
 import org.m2ling.common.dto.core.RuleDTO;
 import org.m2ling.common.exceptions.FunctionalException;
-import org.m2ling.common.utils.Msg;
+import org.m2ling.presentation.i18n.Msg;
 import org.m2ling.presentation.principles.model.RuleBean;
 import org.m2ling.presentation.principles.utils.DTOConverter;
 import org.m2ling.service.principles.RuleService;
@@ -32,17 +32,11 @@ import com.vaadin.ui.themes.BaseTheme;
  */
 @SuppressWarnings("serial")
 public class RulesPanel extends VerticalLayout {
-
-	private String vp;
-
+	private String vpID;
 	private RuleService service;
-
 	private Logger logger;
-
 	private DTOConverter.ToDTO toDTO;
-
 	private DTOConverter.FromDTO fromDTO;
-
 	private RuleDialogFactory factory;
 
 	/**
@@ -50,14 +44,13 @@ public class RulesPanel extends VerticalLayout {
 	 * 
 	 */
 	@Inject
-	public RulesPanel(Logger logger, @Assisted String vp, RuleService service, DTOConverter.ToDTO toDTO,
+	public RulesPanel(Logger logger, @Assisted String vpID, RuleService service, DTOConverter.ToDTO toDTO,
 			DTOConverter.FromDTO fromDTO, RuleDialogFactory factory) {
 		super();
-		this.vp = vp;
+		this.vpID = vpID;
 		this.service = service;
 		this.factory = factory;
 		this.logger = logger;
-		this.vp = vp;
 		this.toDTO = toDTO;
 		this.fromDTO = fromDTO;
 		setHeight(null);
@@ -68,7 +61,7 @@ public class RulesPanel extends VerticalLayout {
 	@Override
 	public void attach() {
 		try {
-			List<RuleDTO> rules = service.getAllRules(null,vp);
+			List<RuleDTO> rules = service.getAllRules(null, vpID);
 			if (rules.size() == 0) {
 				addComponent(new Label(Msg.get("pr.1")));
 			} else {
@@ -80,7 +73,7 @@ public class RulesPanel extends VerticalLayout {
 			addComponent(getCreateRuleButton());
 		} catch (FunctionalException e) {
 			logger.log(Level.SEVERE, e.getDetailedMessage(), e);
-			getWindow().showNotification(e.getDetailedMessage(), Notification.TYPE_ERROR_MESSAGE);
+			getWindow().showNotification(Msg.humanMessage(e), Notification.TYPE_ERROR_MESSAGE);
 		}
 	}
 
@@ -89,7 +82,13 @@ public class RulesPanel extends VerticalLayout {
 		createRule.setStyleName(BaseTheme.BUTTON_LINK);
 		createRule.addListener(new Button.ClickListener() {
 			public void buttonClick(ClickEvent event) {
-				// TODO
+				// rule with null ID means "new rule". We can't pass null rule because VP'id is got from
+				// it
+				RuleBean bean = new RuleBean();
+				bean.setViewPointId(vpID);
+				RuleDialog dialog = factory.getRuleDialogFor(bean);
+				dialog.setModal(true);
+				getWindow().addWindow(dialog);
 			}
 		});
 		return createRule;
@@ -98,8 +97,8 @@ public class RulesPanel extends VerticalLayout {
 	private void addRule(final RuleBean rule) {
 		// Name
 		String nameString = Msg.get("pr.17") + rule.getName()
-				+ (!Strings.isNullOrEmpty(rule.getTags()) ? " [" + rule.getTags() + "], " : " ");
-		nameString += Msg.get("gal.7") + ": " + rule.getStatus() + ", " + Msg.get("gal.8") + ": " + rule.getPriority();
+				+ (!Strings.isNullOrEmpty(rule.getTags()) ? " [" + rule.getTags() + "]  " : " ");
+		nameString += Msg.get("gal.7") + ": " + rule.getStatus() + "  " + Msg.get("gal.8") + ": " + rule.getPriority();
 		Label name = new Label(nameString);
 		name.setStyleName("principles_rules-name");
 		name.setSizeUndefined();
@@ -113,7 +112,6 @@ public class RulesPanel extends VerticalLayout {
 				getWindow().addWindow(dialog);
 			}
 		});
-
 		Button delete = new Button(Msg.get("gal.3"));
 		delete.setStyleName(BaseTheme.BUTTON_LINK);
 		delete.addStyleName("command");
@@ -121,38 +119,32 @@ public class RulesPanel extends VerticalLayout {
 			public void buttonClick(ClickEvent event) {
 				try {
 					RuleDTO ruleDTO = toDTO.getRuleDTO(rule);
-					service.deleteRule(null,ruleDTO);
+					service.deleteRule(null, ruleDTO);
 					removeAllComponents();
 					attach();
 				} catch (FunctionalException e) {
 					logger.log(Level.SEVERE, e.getDetailedMessage(), e.getCause());
-					getWindow().showNotification(Msg.get("error.1") + " : " + e.getDetailedMessage(),
-							Notification.TYPE_ERROR_MESSAGE);
+					getWindow().showNotification(Msg.humanMessage(e), Notification.TYPE_ERROR_MESSAGE);
 				}
 			}
 		});
-
 		Label description = new Label(rule.getDescription());
 		description.setStyleName("principles_rules-description");
 		description.setWidth("100%");
 		description.setHeight(null);
-
 		String rat = rule.getRationale();
 		Label rationale = new Label(Strings.isNullOrEmpty(rat) ? "" : Msg.get("gal.9") + " : " + rat);
 		rationale.setWidth("100%");
 		rationale.setHeight(null);
-
 		String ex = rule.getExceptions();
 		Label exceptions = new Label(Strings.isNullOrEmpty(ex) ? "" : Msg.get("pr.23") + " : " + ex);
 		exceptions.setWidth("100%");
 		exceptions.setHeight(null);
-
 		Label comment = new Label(rule.getComment());
 		comment.setDescription(rule.getComment());
 		comment.setStyleName("comment");
 		comment.setWidth("100%");
 		comment.setHeight(null);
-
 		// Layout
 		HorizontalLayout hl1 = new HorizontalLayout();
 		hl1.setSpacing(true);
@@ -160,15 +152,12 @@ public class RulesPanel extends VerticalLayout {
 		hl1.addComponent(edit);
 		hl1.addComponent(delete);
 		addComponent(hl1);
-
 		addComponent(description);
 		addComponent(rationale);
 		addComponent(exceptions);
-
 		if (!Strings.isNullOrEmpty(rule.getComment())) {
 			addComponent(comment);
 		}
 		addComponent(new Label("<br/>", Label.CONTENT_RAW));
 	}
-
 }

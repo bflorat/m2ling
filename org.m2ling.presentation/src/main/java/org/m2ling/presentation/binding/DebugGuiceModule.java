@@ -15,7 +15,6 @@ import com.google.inject.AbstractModule;
  * Consts.M2LING_DEBUG_VARIABLE_NAME environment variable is set to true.
  */
 public class DebugGuiceModule extends AbstractModule {
-
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -27,5 +26,4 @@ public class DebugGuiceModule extends AbstractModule {
 			bind(PersistenceManager.class).to(PersistenceManagerXMIImpl.class);
 		}
 	}
-
 }

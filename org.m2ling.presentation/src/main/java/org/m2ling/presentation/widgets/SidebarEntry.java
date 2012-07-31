@@ -12,7 +12,6 @@ import com.vaadin.ui.Panel;
  */
 @SuppressWarnings("serial")
 public abstract class SidebarEntry extends Panel {
-
 	/** Should this entry be shown at startup ? */
 	private boolean defaultEntry = false;
 

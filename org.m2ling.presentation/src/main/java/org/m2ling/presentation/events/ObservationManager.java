@@ -1,7 +1,6 @@
 /**
  * Copyright (C) 2012 Bertrand Florat
  */
-
 package org.m2ling.presentation.events;
 
 import java.util.HashMap;
@@ -22,18 +21,14 @@ import com.google.inject.servlet.SessionScoped;
  */
 @SessionScoped
 public final class ObservationManager {
-
 	/** one event -> list of components. */
 	private ObserverRegistry observerRegistry;
-
 	/** Last event for a given subject (used for new objects that just registrated to this subject). */
 	private Map<Events, Properties> hLastEventBySubject = new HashMap<Events, Properties>(10);
-
 	/**
 	 * The queue itself. Must be synchronized, so we use a ConcurrentLinkedQueue which is thread-safe
 	 */
 	private BlockingQueue<Event> queue = new LinkedBlockingQueue<Event>();
-
 	private Logger logger;
 
 	/**
@@ -71,12 +66,10 @@ public final class ObservationManager {
 	 */
 	public synchronized void unregister(Observer observer) {
 		Set<Events> eventSubjectSet = observer.getRegistrationKeys();
-
 		// can return null if no keys are registered
 		if (eventSubjectSet == null) {
 			return;
 		}
-
 		for (Events subject : eventSubjectSet) {
 			boolean bRemoved = observerRegistry.unregister(subject, observer);
 			if (bRemoved) {

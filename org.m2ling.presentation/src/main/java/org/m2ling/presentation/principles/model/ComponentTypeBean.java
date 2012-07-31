@@ -14,7 +14,6 @@ import org.m2ling.common.utils.Utils;
  */
 @SuppressWarnings("serial")
 public class ComponentTypeBean implements Serializable {
-
 	private String id = "";
 	private String name = "";
 	/**
@@ -24,8 +23,6 @@ public class ComponentTypeBean implements Serializable {
 	private String description = "";
 	private String comment = "";
 	private String statusLiterals = "";
-
-
 
 	/**
 	 * @return the id
@@ -121,11 +118,8 @@ public class ComponentTypeBean implements Serializable {
 	public String getDescription() {
 		return description;
 	}
-	
+
 	public String toString() {
 		return Utils.toString(this);
 	}
-	
-	
-
 }

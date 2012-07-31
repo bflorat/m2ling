@@ -5,7 +5,7 @@
  */
 package org.m2ling.presentation;
 
-import org.m2ling.common.utils.Msg;
+import org.m2ling.presentation.i18n.Msg;
 
 import com.vaadin.terminal.ThemeResource;
 import com.vaadin.ui.Accordion;
@@ -21,9 +21,7 @@ import com.vaadin.ui.VerticalLayout;
  * 
  */
 public class MainFrame extends CustomComponent {
-
 	private static final long serialVersionUID = 569583488180673007L;
-
 	private Accordion accordion;
 
 	/**
@@ -34,15 +32,10 @@ public class MainFrame extends CustomComponent {
 	}
 
 	private Embedded logo;
-
 	private Panel app;
-
 	private HorizontalSplitPanel splitSidebar;
-
 	private TextField search;
-
 	private TextArea comments;
-
 
 	/**
 	 * @return the appPanel
@@ -71,19 +64,15 @@ public class MainFrame extends CustomComponent {
 		// Logo
 		ThemeResource resLogo = new ThemeResource("img/m2ling_logo.png");
 		logo = new Embedded(null, resLogo);
-
 		// App panel
 		app = new Panel();
 		app.setSizeFull();
-	
 		// Accordion
 		accordion = new Accordion();
 		accordion.setSizeFull();
-
 		// Search box
 		search = new TextField(Msg.get("mf.search"));
 		search.setWidth("100%");
-
 		// Comments area
 		comments = new TextArea(Msg.get("mf.comments"));
 		comments.setEnabled(false);
@@ -97,7 +86,6 @@ public class MainFrame extends CustomComponent {
 	private void buildMenuLayout() {
 		// Accordion
 		accordion.addTab(comments);
-
 		// Sidebar
 		VerticalLayout sidebar = new VerticalLayout();
 		sidebar.setSpacing(true);
@@ -108,7 +96,6 @@ public class MainFrame extends CustomComponent {
 		sidebar.setExpandRatio(accordion, 100);
 		sidebar.setMargin(true);
 		sidebar.setStyleName("sidebar");
-
 		// Sidebar | application
 		splitSidebar = new HorizontalSplitPanel();
 		splitSidebar.setSplitPosition(20);
@@ -121,5 +108,4 @@ public class MainFrame extends CustomComponent {
 		accordion.removeAllComponents();
 		accordion.addComponent(comments);
 	}
-
 }

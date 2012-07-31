@@ -12,11 +12,11 @@ import java.util.Set;
 import java.util.logging.Logger;
 
 import org.m2ling.common.dto.core.ViewPointDTO;
-import org.m2ling.common.utils.Msg;
 import org.m2ling.presentation.GuiModule;
 import org.m2ling.presentation.events.Events;
 import org.m2ling.presentation.events.ObservationManager;
 import org.m2ling.presentation.events.Observer;
+import org.m2ling.presentation.i18n.Msg;
 import org.m2ling.presentation.principles.model.ViewPointBean;
 import org.m2ling.presentation.principles.utils.DTOConverter;
 import org.m2ling.presentation.widgets.SidebarEntry;
@@ -38,23 +38,14 @@ import com.vaadin.ui.themes.BaseTheme;
 @SuppressWarnings("serial")
 @SessionScoped
 public class PrinciplesGuiModule extends GuiModule implements Observer {
-
 	private static final long serialVersionUID = -3580103313824507265L;
-
 	private List<ViewPointDTO> vpsDTO;
-
 	private ViewPointService vpService;
-
 	private Logger logger;
-
 	private FeaturesEntry features;
-
 	private ViewPointDialogFactory dialogFactory;
-
 	private ViewPointPanelFactory panelFactory;
-
 	private ObservationManager obs;
-
 	private DTOConverter.FromDTO fromDTO;
 
 	@Inject
@@ -122,10 +113,8 @@ public class PrinciplesGuiModule extends GuiModule implements Observer {
 	@Override
 	public List<SidebarEntry> getEntries() {
 		List<SidebarEntry> out = new ArrayList<SidebarEntry>(5);
-
 		// Features entry
 		features.setDefaultEntry(true);
-
 		out.add(features);
 		return out;
 	}
@@ -154,5 +143,4 @@ public class PrinciplesGuiModule extends GuiModule implements Observer {
 		events.add(Events.VP_CHANGE);
 		return events;
 	}
-
 }

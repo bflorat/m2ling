@@ -5,12 +5,9 @@
  */
 package org.m2ling.presentation.principles;
 
-
 /**
  * Produces Rules panels using the assisted injection pattern
  */
 public interface RulesPanelFactory {
-
 	RulesPanel getRulesPanelFor(String vp);
-
 }

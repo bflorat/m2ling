@@ -11,8 +11,5 @@ import org.m2ling.presentation.principles.model.ViewPointBean;
  * Produces viewpoint panels using the assisted injection pattern
  */
 public interface ViewPointPanelFactory {
-
-	
 	ViewPointPanel getViewPointPanelFor(ViewPointBean bean);
-
 }

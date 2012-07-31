@@ -54,8 +54,9 @@
 	font-weight: bold;
 }
 
-.principles_vp_dialog_comment {
-	font-size: medium !important;
+.v-textarea .v-richtextarea .gwt-RichTextArea { 
+	font-family: Arial, Helvetica, Tahoma, Verdana, sans-serif !important;
+	font-size: medium !important;	
 }
 
 

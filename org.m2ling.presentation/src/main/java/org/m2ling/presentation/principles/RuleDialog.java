@@ -16,10 +16,10 @@ import javax.annotation.Nullable;
 import org.m2ling.common.dto.core.RuleDTO;
 import org.m2ling.common.dto.core.ViewPointDTO;
 import org.m2ling.common.exceptions.FunctionalException;
-import org.m2ling.common.utils.Msg;
 import org.m2ling.common.utils.Utils;
 import org.m2ling.presentation.events.Events;
 import org.m2ling.presentation.events.ObservationManager;
+import org.m2ling.presentation.i18n.Msg;
 import org.m2ling.presentation.principles.model.RuleBean;
 import org.m2ling.presentation.principles.model.ViewPointBean;
 import org.m2ling.presentation.principles.utils.DTOConverter;
@@ -28,6 +28,7 @@ import org.m2ling.presentation.widgets.OKCancel;
 import org.m2ling.service.principles.RuleService;
 import org.m2ling.service.principles.ViewPointService;
 
+import com.google.common.base.Strings;
 import com.google.inject.Inject;
 import com.google.inject.assistedinject.Assisted;
 import com.vaadin.data.Item;
@@ -39,7 +40,7 @@ import com.vaadin.ui.DefaultFieldFactory;
 import com.vaadin.ui.Field;
 import com.vaadin.ui.Form;
 import com.vaadin.ui.Panel;
-import com.vaadin.ui.RichTextArea;
+import com.vaadin.ui.Select;
 import com.vaadin.ui.TextArea;
 import com.vaadin.ui.VerticalLayout;
 import com.vaadin.ui.Window;
@@ -68,7 +69,7 @@ public class RuleDialog extends Window {
 	@Inject
 	public RuleDialog(Logger logger, @Assisted @Nullable RuleBean ruleBean, RuleService ruleService,
 			ViewPointService vpService, ObservationManager obs, DTOConverter.ToDTO toDTO, DTOConverter.FromDTO fromDTO) {
-		super(ruleBean == null ? Msg.get("pr.18") : Msg.get("pr.17") + ruleBean.getName());
+		super(Strings.isNullOrEmpty(ruleBean.getId()) ? Msg.get("pr.18") : Msg.get("pr.17") + ruleBean.getName());
 		this.bean = ruleBean;
 		this.ruleService = ruleService;
 		this.vpService = vpService;
@@ -76,14 +77,11 @@ public class RuleDialog extends Window {
 		this.obs = obs;
 		this.toDTO = toDTO;
 		this.fromDTO = fromDTO;
-		newRule = (ruleBean == null);
-		// We need a bean to attach data to
+		newRule = Strings.isNullOrEmpty(ruleBean.getId());
 		if (newRule) {
-			bean = new RuleBean();
 			bean.setId(UUID.randomUUID().toString());
-		} else {
-			this.bean = ruleBean;
 		}
+		this.bean = ruleBean;
 		setWidth("650px");
 		setClosable(true);
 	}
@@ -98,17 +96,21 @@ public class RuleDialog extends Window {
 		vpBean = fromDTO.getViewPointBean(vpDTO);
 		((VerticalLayout) getContent()).setSizeFull();
 		final Form form = new Form();
-		form.setCaption(Msg.get("pr.4"));
 		// setFormFieldFactory() must be called before setting the data source or it is not token into
 		// account
 		form.setFormFieldFactory(new RuleDialogFieldFactory());
 		form.setItemDataSource(new BeanItem<RuleBean>(bean));
 		form.setVisibleItemProperties(Arrays.asList(new String[] { "name", "status", "priority", "tags", "description",
 				"rationale", "exceptions", "comment" }));
-		form.setValidationVisibleOnCommit(true);
 		Command ok = new Command() {
 			public void execute() {
-				form.commit();
+				try {
+					form.commit();
+				} catch (Exception e) {
+					// Ignored, we'll let the Form handle the errors
+					logger.finest(e.getMessage());
+					return;
+				}
 				RuleDTO ruleDTO = toDTO.getRuleDTO(bean);
 				try {
 					if (newRule) {
@@ -119,8 +121,8 @@ public class RuleDialog extends Window {
 					close();
 					obs.notifySync(new org.m2ling.presentation.events.Event(Events.VP_CHANGE));
 				} catch (FunctionalException e) {
-					logger.log(Level.SEVERE, e.getDetailedMessage(), e.getCause());
-					getWindow().showNotification(Msg.get("error.1"), Notification.TYPE_ERROR_MESSAGE);
+					logger.log(Level.SEVERE, e.getDetailedMessage(), e);
+					getWindow().showNotification(Msg.humanMessage(e), Notification.TYPE_ERROR_MESSAGE);
 				}
 			}
 		};
@@ -142,33 +144,34 @@ public class RuleDialog extends Window {
 			if ("name".equals(propertyId)) {
 				Field name = super.createField(item, propertyId, uiContext);
 				name.setRequired(true);
-				name.setRequiredError(Msg.get("error.2"));
-				name.setDescription(Msg.get("pr.5"));
+				name.setRequiredError(Msg.get("error.5"));
+				name.setDescription(Msg.get("pr.27"));
 				return name;
 			} else if ("description".equals(propertyId)) {
-				RichTextArea description = new RichTextArea();
+				TextArea description = new TextArea();
 				description.setCaption(Msg.get("gal.1"));
-				description.setHeight(20, UNITS_EX);
+				description.setHeight(12, UNITS_EX);
 				description.setWidth("100%");
-				description.setDescription(Msg.get("pr.6"));
+				description.setDescription(Msg.get("pr.27"));
+				description.setRequired(true);
 				return description;
 			} else if ("rationale".equals(propertyId)) {
-				RichTextArea rationale = new RichTextArea();
+				TextArea rationale = new TextArea();
 				rationale.setCaption(Msg.get("gal.9"));
-				rationale.setHeight(20, UNITS_EX);
+				rationale.setHeight(12, UNITS_EX);
 				rationale.setWidth("100%");
 				rationale.setDescription(Msg.get("pr.22"));
+				rationale.setRequired(true);
 				return rationale;
 			} else if ("exceptions".equals(propertyId)) {
-				RichTextArea exceptions = new RichTextArea();
+				TextArea exceptions = new TextArea();
 				exceptions.setCaption(Msg.get("pr.23"));
-				exceptions.setHeight(20, UNITS_EX);
+				exceptions.setHeight(12, UNITS_EX);
 				exceptions.setWidth("100%");
 				exceptions.setDescription(Msg.get("pr.24"));
 				return exceptions;
 			} else if ("comment".equals(propertyId)) {
 				TextArea comment = new TextArea();
-				comment.addStyleName("principles_vp_dialog_comment");
 				comment.setHeight(12, UNITS_EX);
 				comment.setWidth("100%");
 				comment.setCaption(Msg.get("mf.comments"));
@@ -186,14 +189,19 @@ public class RuleDialog extends Window {
 				}
 				status.setDescription(Msg.get("pr.20"));
 				status.setCaption(Msg.get("gal.7"));
+				status.setRequired(true);
+				status.setRequiredError(Msg.get("error.5"));
+				status.setNullSelectionAllowed(false);
 				return status;
 			} else if ("priority".equals(propertyId)) {
-				ComboBox priority = new ComboBox();
+				Select priority = new Select();
+				priority.setNullSelectionAllowed(false);
 				for (RulePriority pr : RulePriority.values()) {
-					priority.addItem(pr.name());
+					priority.addItem(Msg.get("rule_priority." + pr.name()));
 				}
 				priority.setDescription(Msg.get("pr.21"));
 				priority.setCaption(Msg.get("gal.8"));
+				priority.setRequired(true);
 				return priority;
 			} else {
 				return super.createField(item, propertyId, uiContext);

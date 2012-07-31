@@ -21,13 +21,10 @@ import com.google.inject.servlet.SessionScoped;
  */
 @SessionScoped
 class ObserverRegistry {
-
 	/** The list of Observers per Events. */
 	private final Map<Events, List<Observer>> hEventComponents = new Hashtable<Events, List<Observer>>(10);
-
 	/** Number of current executions for a given event. */
 	private Map<Event, Integer> canals = new HashMap<Event, Integer>(10);
-
 	private Logger logger;
 
 	@Inject
@@ -59,7 +56,6 @@ class ObserverRegistry {
 			}
 			canals.put(event, numberOfExecutions + 1);
 		}
-
 		try {
 			Events subject = event.getSubject();
 			List<Observer> observers = hEventComponents.get(subject);
@@ -84,7 +80,6 @@ class ObserverRegistry {
 				int numberOfExecutions = canals.get(event);
 				assert (numberOfExecutions > 0);
 				canals.put(event, numberOfExecutions - 1);
-
 				// to avoid adding more and more memory via the canals-map, we should remove items when
 				// they
 				// reach zero again

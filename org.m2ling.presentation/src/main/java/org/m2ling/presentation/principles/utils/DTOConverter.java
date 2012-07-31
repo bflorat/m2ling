@@ -142,7 +142,9 @@ public class DTOConverter {
 
 		/**
 		 * Return a time-sorted rule history map from provided DTO
-		 * @param dto source DTO
+		 * 
+		 * @param dto
+		 *           source DTO
 		 * @return a time-sorted rule history map from provided DTO
 		 */
 		public Map<Long, String> getHistoryBean(RuleDTO dto) {

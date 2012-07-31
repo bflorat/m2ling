@@ -25,7 +25,6 @@ import com.google.inject.assistedinject.FactoryModuleBuilder;
  * Guice bindings for m2principles features of presentation tiers
  */
 public class PresentationPrincipleGuiceModule extends AbstractModule {
-
 	/*
 	 * (non-Javadoc)
 	 * 

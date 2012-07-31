@@ -11,9 +11,9 @@ import java.util.logging.Logger;
 
 import org.m2ling.common.dto.core.ViewPointDTO;
 import org.m2ling.common.exceptions.FunctionalException;
-import org.m2ling.common.utils.Msg;
 import org.m2ling.presentation.events.Events;
 import org.m2ling.presentation.events.ObservationManager;
+import org.m2ling.presentation.i18n.Msg;
 import org.m2ling.presentation.principles.model.ViewPointBean;
 import org.m2ling.presentation.principles.utils.DTOConverter;
 import org.m2ling.presentation.principles.utils.IconManager;
@@ -120,8 +120,7 @@ public class ViewPointPanel extends VerticalLayout {
 					obs.notifySync(new org.m2ling.presentation.events.Event(Events.VP_CHANGE));
 				} catch (FunctionalException e) {
 					logger.log(Level.SEVERE, e.getDetailedMessage(), e.getCause());
-					getWindow().showNotification(Msg.get("error.1") + " : " + e.getDetailedMessage(),
-							Notification.TYPE_ERROR_MESSAGE);
+					getWindow().showNotification(Msg.humanMessage(e), Notification.TYPE_ERROR_MESSAGE);
 				}
 			}
 		});
@@ -152,6 +151,13 @@ public class ViewPointPanel extends VerticalLayout {
 				// TODO
 			}
 		});
+		Button activities = new Button(Msg.get("pr.25"));
+		activities.setStyleName(BaseTheme.BUTTON_LINK);
+		activities.addListener(new Button.ClickListener() {
+			public void buttonClick(ClickEvent event) {
+				// TODO
+			}
+		});
 		Label description = new Label(bean.getDescription());
 		description.setDescription(bean.getDescription());
 		description.setStyleName("principles_vp-panel-desc");
@@ -178,6 +184,7 @@ public class ViewPointPanel extends VerticalLayout {
 		}
 		addComponent(componentTypes);
 		addComponent(linkTypes);
+		addComponent(activities);
 		addComponent(rules);
 		addComponent(rulesHiddenPane);
 	}

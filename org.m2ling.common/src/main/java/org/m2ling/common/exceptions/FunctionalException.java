@@ -54,7 +54,6 @@ public class FunctionalException extends Exception {
 		TAGS_SEPARATOR,
 		INVALID_STATUS,
 		INVALID_PRIORITY
-		
 	}
 
 	/**

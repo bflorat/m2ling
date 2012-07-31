@@ -1,7 +1,6 @@
 package org.m2ling.presentation.principles;
 
-
-import org.m2ling.common.utils.Msg;
+import org.m2ling.presentation.i18n.Msg;
 import org.m2ling.presentation.widgets.SidebarEntry;
 
 import com.google.inject.Inject;
@@ -11,7 +10,6 @@ import com.vaadin.ui.themes.BaseTheme;
 
 @SuppressWarnings("serial")
 public class FeaturesEntry extends SidebarEntry {
-
 	ViewPointDialogFactory factory;
 
 	@Inject

@@ -1,6 +1,5 @@
 /**
  * Sample code from https://vaadin.com/wiki/-/wiki/Main/Integrating%20Vaadin%20with%20Guice%202.0?p_r_p_185834411_title=Integrating%2520Vaadin%2520with%2520Guice%25202.0 */
-
 package org.m2ling.presentation;
 
 import javax.servlet.ServletException;
@@ -18,7 +17,6 @@ import com.vaadin.terminal.gwt.server.AbstractApplicationServlet;
  * The Guice servlet
  */
 public class GuiceApplicationServlet extends AbstractApplicationServlet {
-
 	protected final Provider<Application> applicationProvider;
 
 	@Inject

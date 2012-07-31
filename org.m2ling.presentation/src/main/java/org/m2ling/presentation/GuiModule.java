@@ -16,11 +16,9 @@ import com.vaadin.ui.VerticalLayout;
  */
 @SuppressWarnings("serial")
 public abstract class GuiModule extends VerticalLayout {
-
 	@Override
 	abstract public void attach();
 
 	/** Order list of accordion entries **/
 	abstract public List<SidebarEntry> getEntries();
-
 }

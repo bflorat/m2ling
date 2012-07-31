@@ -14,9 +14,9 @@ import javax.annotation.Nullable;
 
 import org.m2ling.common.dto.core.ViewPointDTO;
 import org.m2ling.common.exceptions.FunctionalException;
-import org.m2ling.common.utils.Msg;
 import org.m2ling.presentation.events.Events;
 import org.m2ling.presentation.events.ObservationManager;
+import org.m2ling.presentation.i18n.Msg;
 import org.m2ling.presentation.principles.model.ViewPointBean;
 import org.m2ling.presentation.principles.utils.DTOConverter;
 import org.m2ling.presentation.widgets.Command;
@@ -32,7 +32,6 @@ import com.vaadin.ui.Component;
 import com.vaadin.ui.DefaultFieldFactory;
 import com.vaadin.ui.Field;
 import com.vaadin.ui.Form;
-import com.vaadin.ui.RichTextArea;
 import com.vaadin.ui.TextArea;
 import com.vaadin.ui.VerticalLayout;
 import com.vaadin.ui.Window;
@@ -42,18 +41,12 @@ import com.vaadin.ui.Window;
  */
 @SuppressWarnings("serial")
 public class ViewPointDialog extends Window {
-
 	/** Is it a new view point ? */
 	private boolean newVP = true;
-
 	private ViewPointBean bean;
-
 	private ViewPointService service;
-
 	private Logger logger;
-
 	private ObservationManager obs;
-
 	private DTOConverter.ToDTO toDTO;
 
 	/**
@@ -86,7 +79,6 @@ public class ViewPointDialog extends Window {
 	public void attach() {
 		((VerticalLayout) getContent()).setSizeFull();
 		final Form form = new Form();
-		form.setCaption(Msg.get("pr.4"));
 		// setFormFieldFactory() must be called before setting the data source or it is not token into
 		// account
 		form.setFormFieldFactory(new ViewPointDialogFieldFactory());
@@ -100,15 +92,15 @@ public class ViewPointDialog extends Window {
 				ViewPointDTO vpDTO = toDTO.getViewPointDTO(bean);
 				try {
 					if (newVP) {
-						service.createViewPoint(null,vpDTO);
+						service.createViewPoint(null, vpDTO);
 					} else {
-						service.updateViewPoint(null,vpDTO);
+						service.updateViewPoint(null, vpDTO);
 					}
 					close();
 					obs.notifySync(new org.m2ling.presentation.events.Event(Events.VP_CHANGE));
 				} catch (FunctionalException e) {
 					logger.log(Level.SEVERE, e.getDetailedMessage(), e.getCause());
-					getWindow().showNotification(Msg.get("error.1"), Notification.TYPE_ERROR_MESSAGE);
+					getWindow().showNotification(Msg.humanMessage(e), Notification.TYPE_ERROR_MESSAGE);
 				}
 			}
 		};
@@ -132,19 +124,17 @@ public class ViewPointDialog extends Window {
 			if ("name".equals(propertyId)) {
 				Field name = super.createField(item, propertyId, uiContext);
 				name.setRequired(true);
-				name.setRequiredError(Msg.get("error.2"));
 				name.setDescription(Msg.get("pr.5"));
 				return name;
 			} else if ("description".equals(propertyId)) {
-				RichTextArea description = new RichTextArea();
+				TextArea description = new TextArea();
 				description.setCaption(Msg.get("gal.1"));
-				description.setHeight(20, UNITS_EX);
+				description.setHeight(12, UNITS_EX);
 				description.setWidth("100%");
 				description.setDescription(Msg.get("pr.6"));
 				return description;
 			} else if ("comment".equals(propertyId)) {
 				TextArea comment = new TextArea();
-				comment.addStyleName("principles_vp_dialog_comment");
 				comment.setHeight(12, UNITS_EX);
 				comment.setWidth("100%");
 				comment.setCaption(Msg.get("mf.comments"));

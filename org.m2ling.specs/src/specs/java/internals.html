@@ -17,7 +17,11 @@
 	<ul>
 		<li>Presentation <u>
 			<li>don't use composite beans if possible, use only primitive
-				types to avoid using Vaadin nestedproperties</li>
+				types to avoid using Vaadin NestedProperties</li>
+			<li>Use "" field in beans, not null by convention. It avoids to
+				set setNullRepresentation("") in fields. The only exception is for
+				combobox items. For unknown reasons, the setNullSelectionAllowed()
+				doesn't work and the validation is not done.</li>
 		</u></li>
 		<li>Controls must be done :
 			<ul>

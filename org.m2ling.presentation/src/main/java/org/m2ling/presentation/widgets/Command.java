@@ -9,7 +9,5 @@ package org.m2ling.presentation.widgets;
  * Something to do
  */
 public interface Command {
-
 	void execute();
-	
 }

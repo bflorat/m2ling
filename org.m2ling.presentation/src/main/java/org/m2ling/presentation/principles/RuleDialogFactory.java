@@ -11,7 +11,6 @@ import org.m2ling.presentation.principles.model.RuleBean;
  * Produces rule dialogs using the assisted injection pattern
  */
 public interface RuleDialogFactory {
-
 	/**
 	 * Build a RuleDialog for given arguments
 	 * 
@@ -20,5 +19,4 @@ public interface RuleDialogFactory {
 	 * @return a RuleDialog for given arguments
 	 */
 	RuleDialog getRuleDialogFor(RuleBean bean);
-
 }

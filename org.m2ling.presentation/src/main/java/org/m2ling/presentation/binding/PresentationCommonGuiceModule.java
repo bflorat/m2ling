@@ -14,7 +14,6 @@ import com.google.inject.AbstractModule;
  * Guice bindings for common features of presentation tiers
  */
 public class PresentationCommonGuiceModule extends AbstractModule {
-
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -26,5 +25,4 @@ public class PresentationCommonGuiceModule extends AbstractModule {
 			bind(TagService.class).to(TagServiceImpl.class);
 		}
 	}
-
 }

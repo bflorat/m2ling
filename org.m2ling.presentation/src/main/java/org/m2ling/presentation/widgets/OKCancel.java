@@ -5,7 +5,7 @@
  */
 package org.m2ling.presentation.widgets;
 
-import org.m2ling.common.utils.Msg;
+import org.m2ling.presentation.i18n.Msg;
 
 import com.vaadin.terminal.ThemeResource;
 import com.vaadin.ui.Button;
@@ -17,7 +17,6 @@ import com.vaadin.ui.HorizontalLayout;
  * OK Cancel panel
  */
 public class OKCancel extends CustomComponent {
-
 	private static final long serialVersionUID = -5102018433538734852L;
 	private Button okButton;
 	private Button cancelButton;
@@ -59,5 +58,4 @@ public class OKCancel extends CustomComponent {
 		setSizeUndefined();
 		setCompositionRoot(hz);
 	}
-
 }

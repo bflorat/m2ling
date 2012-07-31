@@ -14,7 +14,6 @@ import org.m2ling.common.utils.Utils;
  */
 @SuppressWarnings("serial")
 public class ViewPointBean implements Serializable {
-
 	private String id = "";
 	private String name = "";
 	/**
@@ -34,7 +33,8 @@ public class ViewPointBean implements Serializable {
 	}
 
 	/**
-	 * @param iconPath the iconPath to set
+	 * @param iconPath
+	 *           the iconPath to set
 	 */
 	public void setIconPath(String iconPath) {
 		this.iconPath = iconPath;
@@ -134,11 +134,8 @@ public class ViewPointBean implements Serializable {
 	public String getDescription() {
 		return description;
 	}
-	
+
 	public String toString() {
 		return Utils.toString(this);
 	}
-	
-	
-
 }

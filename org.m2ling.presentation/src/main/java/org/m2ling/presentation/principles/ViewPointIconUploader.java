@@ -13,7 +13,7 @@ import java.util.logging.Logger;
 
 import org.m2ling.common.configuration.Configuration;
 import org.m2ling.common.utils.Consts;
-import org.m2ling.common.utils.Msg;
+import org.m2ling.presentation.i18n.Msg;
 import org.m2ling.presentation.principles.model.ViewPointBean;
 
 import com.google.common.io.Files;
@@ -86,6 +86,5 @@ public class ViewPointIconUploader extends CustomComponent implements Upload.Pro
 			upload.interruptUpload();
 			getWindow().showNotification(Msg.get("error.4"), contentLength + " B", Notification.TYPE_ERROR_MESSAGE);
 		}
-
 	}
 }

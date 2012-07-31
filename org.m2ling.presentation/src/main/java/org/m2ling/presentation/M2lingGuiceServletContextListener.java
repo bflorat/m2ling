@@ -1,6 +1,5 @@
 /**
  * Sample code from https://vaadin.com/wiki/-/wiki/Main/Integrating%20Vaadin%20with%20Guice%202.0?p_r_p_185834411_title=Integrating%2520Vaadin%2520with%2520Guice%25202.0 */
-
 package org.m2ling.presentation;
 
 import org.m2ling.common.utils.Utils;
@@ -22,7 +21,6 @@ import com.vaadin.Application;
  * Listener creating the guice injector
  */
 public class M2lingGuiceServletContextListener extends GuiceServletContextListener {
-
 	@Override
 	protected Injector getInjector() {
 		Injector injector = null;
@@ -33,11 +31,9 @@ public class M2lingGuiceServletContextListener extends GuiceServletContextListen
 				// trailing '/'
 				serve("*").with(GuiceApplicationServlet.class);
 				bind(Application.class).to(M2lingApplication.class);
-
 				// Presentation layer bindings
 				install(new PresentationCommonGuiceModule());
 				install(new PresentationPrincipleGuiceModule());
-
 				// Services layer bindings
 				install(new ServicesCommonGuiceModule());
 			}
@@ -51,5 +47,4 @@ public class M2lingGuiceServletContextListener extends GuiceServletContextListen
 		}
 		return injector;
 	}
-
 }

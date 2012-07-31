@@ -10,13 +10,14 @@ import java.util.Map;
 import java.util.TreeMap;
 
 import org.m2ling.common.utils.Utils;
+import org.m2ling.presentation.i18n.Msg;
+import org.m2ling.presentation.principles.RulePriority;
 
 /**
  * Mutable Rule bean
  */
 @SuppressWarnings("serial")
 public class RuleBean implements Serializable {
-
 	private String vpID = "";
 	private String id = "";
 	private String name = "";
@@ -26,12 +27,12 @@ public class RuleBean implements Serializable {
 	private String tags = "";
 	private String description = "";
 	private String comment = "";
-	private String status = "";
-	private String priority = "";
+	private String status = null;
+	// Default priority : medium
+	private String priority = Msg.get("rule_priority." + RulePriority.MEDIUM.name());
 	private String rationale = "";
 	private String exceptions = "";
-	private Map<Long,String> history = new TreeMap<Long,String>();
-	
+	private Map<Long, String> history = new TreeMap<Long, String>();
 
 	/**
 	 * @return the rationale
@@ -41,7 +42,8 @@ public class RuleBean implements Serializable {
 	}
 
 	/**
-	 * @param rationale the rationale to set
+	 * @param rationale
+	 *           the rationale to set
 	 */
 	public void setRationale(String rationale) {
 		this.rationale = rationale;
@@ -55,7 +57,8 @@ public class RuleBean implements Serializable {
 	}
 
 	/**
-	 * @param exceptions the exceptions to set
+	 * @param exceptions
+	 *           the exceptions to set
 	 */
 	public void setExceptions(String exceptions) {
 		this.exceptions = exceptions;
@@ -69,7 +72,8 @@ public class RuleBean implements Serializable {
 	}
 
 	/**
-	 * @param history the history to set
+	 * @param history
+	 *           the history to set
 	 */
 	public void setHistory(Map<Long, String> history) {
 		this.history = history;
@@ -104,7 +108,7 @@ public class RuleBean implements Serializable {
 	public void setId(String id) {
 		this.id = id;
 	}
-	
+
 	/**
 	 * @param id
 	 *           the view point id to set
@@ -192,16 +196,15 @@ public class RuleBean implements Serializable {
 	public String getDescription() {
 		return description;
 	}
-	
+
 	/**
 	 * @return the associated viewpoint id
 	 */
 	public String getViewPointId() {
 		return vpID;
 	}
-	
+
 	public String toString() {
 		return Utils.toString(this);
 	}
-
 }
