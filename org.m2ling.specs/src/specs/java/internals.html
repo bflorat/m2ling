@@ -15,6 +15,10 @@
 
 	<h1>Code</h1>
 	<ul>
+		<li>Presentation <u>
+			<li>don't use composite beans if possible, use only primitive
+				types to avoid using Vaadin nestedproperties</li>
+		</u></li>
 		<li>Controls must be done :
 			<ul>
 				<li>In presentation view as surface control interactively when
@@ -31,9 +35,10 @@
 					<li>Domain objects can't be null thanks EMF (to be verified)</li>
 				</ul>
 		</li>
-		<li>Tests
+			<li>Tests
 				<ul>
-					<li>No UT for boilerplate code like beans, DTO converter. Test them through acceptance test with full range of fields.</li>
+					<li>No UT for boilerplate code like beans, DTO converter. Test
+						them through acceptance test with full range of fields.</li>
 				</ul>
 		</li>
 	</ul>

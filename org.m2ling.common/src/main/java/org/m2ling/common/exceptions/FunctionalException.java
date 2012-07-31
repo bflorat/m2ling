@@ -12,27 +12,24 @@ import javax.annotation.Nullable;
  * This is a checked exception type.
  */
 public class FunctionalException extends Exception {
-
 	private String details;
 	private Code code;
-
 	private static final long serialVersionUID = -8262214820561085011L;
 
 	/**
 	 * Build a functional exception. <br>
-	 * Example : new FunctionalException(Code.TARGET_NOT_FOUND,<a NullPointerException>,<a viewpoint
-	 * id>);
+	 * Example : new FunctionalException(Code.TARGET_NOT_FOUND,<a viewpoint id>); <br>
+	 * Note that the internalized label associated with the error is provided in the presentation
+	 * layer. In case of API-style call, the label will be available from the API documentation.
 	 * 
 	 * @param code
-	 * @param msg
-	 *           message
 	 * @param origin
 	 *           : any source exception (can be null)
 	 * @param detail
 	 *           : additional details (can be null)
 	 */
-	public FunctionalException(Code code, String msg, @Nullable Throwable origin, @Nullable String details) {
-		super(msg, origin);
+	public FunctionalException(Code code, @Nullable Throwable origin, @Nullable String details) {
+		super("Functional error code " + code.name(), origin);
 		this.code = code;
 		this.details = details;
 	}
@@ -49,12 +46,20 @@ public class FunctionalException extends Exception {
 		TARGET_NOT_FOUND,
 		SIZE_EXCEEDED,
 		DUPLICATES,
+		DUPLICATE_STATUS_LITERAL,
+		DUPLICATE_NAME,
 		NULL_ARGUMENT,
-		ILLEGAL_ARGUMENT
+		ILLEGAL_ARGUMENT,
+		TAGS_NOT_SUPPORTED,
+		TAGS_SEPARATOR,
+		INVALID_STATUS,
+		INVALID_PRIORITY
+		
 	}
 
 	/**
 	 * Return a derivated string mixing message and details.
+	 * 
 	 * @return a derivated string mixing message and details
 	 */
 	public String getDetailedMessage() {
@@ -65,5 +70,4 @@ public class FunctionalException extends Exception {
 		}
 		return sb.toString();
 	}
-
 }

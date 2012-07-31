@@ -59,41 +59,38 @@ public class RuleServiceImpl extends ServiceImpl implements RuleService {
 	private void checkDTO(final RuleDTO dto, boolean updateOnly) throws FunctionalException {
 		// Nullity
 		if (dto == null) {
-			throw new FunctionalException(Code.NULL_ARGUMENT, "Null item provided", null, null);
+			throw new FunctionalException(Code.NULL_ARGUMENT, null, null);
 		}
 		if (updateOnly) {
 			// item existence
 			Rule rule = util.getRuleByID(dto.getId());
 			if (rule == null) {
-				throw new FunctionalException(FunctionalException.Code.TARGET_NOT_FOUND, "Rule not found for provided id",
-						null, dto.toString());
+				throw new FunctionalException(FunctionalException.Code.TARGET_NOT_FOUND, null, dto.toString());
 			}
 		}
 		// Name
 		if (dto.getName().length() == 0) {
-			throw new FunctionalException(FunctionalException.Code.NULL_ARGUMENT, "Void Name", null, dto.toString());
+			throw new FunctionalException(FunctionalException.Code.NULL_ARGUMENT, null, dto.toString());
 		}
 		if (dto.getName().length() > Consts.MAX_LABEL_SIZE) {
-			throw new FunctionalException(FunctionalException.Code.SIZE_EXCEEDED, "Name too long", null, null);
+			throw new FunctionalException(FunctionalException.Code.SIZE_EXCEEDED, null, "name");
 		}
 		ViewPoint vp = util.getViewPointByID(dto.getViewPointId());
 		if (vp == null) {
-			throw new FunctionalException(FunctionalException.Code.TARGET_NOT_FOUND,
-					"A viewpoint associated with this rule cannot be found", null, dto.toString());
+			throw new FunctionalException(FunctionalException.Code.TARGET_NOT_FOUND, null, "viewpoint="
+					+ dto.getViewPointId());
 		}
 		if (!updateOnly) {
 			// Check for existing rule with the same id
 			for (Rule r : vp.getRules()) {
 				if (r.getId().equals(dto.getId())) {
-					throw new FunctionalException(FunctionalException.Code.DUPLICATES, "Rule already exists", null,
-							dto.toString());
+					throw new FunctionalException(FunctionalException.Code.DUPLICATES, null, dto.toString());
 				}
 			}
 			// Check for existing rule with the same name
 			for (Rule r : vp.getRules()) {
 				if (r.getName().equals(dto.getName())) {
-					throw new FunctionalException(FunctionalException.Code.DUPLICATES,
-							"A rule already exists with the same name", null, dto.toString());
+					throw new FunctionalException(FunctionalException.Code.DUPLICATE_NAME, null, dto.toString());
 				}
 			}
 		}
@@ -105,8 +102,7 @@ public class RuleServiceImpl extends ServiceImpl implements RuleService {
 			}
 		}
 		if (!existing) {
-			throw new FunctionalException(FunctionalException.Code.TARGET_NOT_FOUND,
-					"Status is not from view point valid status", null, dto.toString());
+			throw new FunctionalException(FunctionalException.Code.INVALID_STATUS, null, dto.toString());
 		}
 		// priority
 		existing = false;
@@ -116,16 +112,15 @@ public class RuleServiceImpl extends ServiceImpl implements RuleService {
 			}
 		}
 		if (!existing) {
-			throw new FunctionalException(FunctionalException.Code.TARGET_NOT_FOUND, "Unknown priority", null,
-					dto.toString());
+			throw new FunctionalException(FunctionalException.Code.INVALID_PRIORITY, null, dto.toString());
 		}
 		// Description
 		if (dto.getDescription().length() > Consts.MAX_TEXT_SIZE) {
-			throw new FunctionalException(FunctionalException.Code.SIZE_EXCEEDED, "Description too long", null, null);
+			throw new FunctionalException(FunctionalException.Code.SIZE_EXCEEDED, null, "(description)");
 		}
 		// Comment
 		if (dto.getComment().length() > Consts.MAX_TEXT_SIZE) {
-			throw new FunctionalException(FunctionalException.Code.SIZE_EXCEEDED, "Comment too long", null, null);
+			throw new FunctionalException(FunctionalException.Code.SIZE_EXCEEDED, null, "(comment)");
 		}
 		// Tags
 		Utils.checkTags(dto.getTags());
@@ -186,7 +181,7 @@ public class RuleServiceImpl extends ServiceImpl implements RuleService {
 	public List<RuleDTO> getAllRules(final Context context, final String vp) throws FunctionalException {
 		{// Controls
 			if (util.getViewPointByID(vp) == null) {
-				throw new FunctionalException(Code.TARGET_NOT_FOUND, "Viewpoint doesn't exist", null, vp.toString());
+				throw new FunctionalException(Code.TARGET_NOT_FOUND, null, "Viewpoint=" + vp.toString());
 			}
 		}
 		Root root = pmanager.getRoot();
@@ -215,11 +210,11 @@ public class RuleServiceImpl extends ServiceImpl implements RuleService {
 		Rule rule = null;
 		{// Controls
 			if (ruleDTO == null) {
-				throw new FunctionalException(Code.NULL_ARGUMENT, "Null rule provied", null, null);
+				throw new FunctionalException(Code.NULL_ARGUMENT, null, "(rule)");
 			}
 			rule = util.getRuleByID(ruleDTO.getId());
 			if (rule == null) {
-				throw new FunctionalException(Code.TARGET_NOT_FOUND, "Viewpoint doesn't exist", null, ruleDTO.toString());
+				throw new FunctionalException(Code.TARGET_NOT_FOUND, null, "viewpoint=" + ruleDTO.getViewPointId());
 			}
 		}
 		ViewPoint vp = (ViewPoint) rule.eContainer();

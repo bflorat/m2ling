@@ -182,13 +182,12 @@ public class Utils {
 		int index = 1;
 		for (String tag : tags) {
 			if (tag.length() > Consts.MAX_LABEL_SIZE) {
-				throw new FunctionalException(FunctionalException.Code.SIZE_EXCEEDED, "Tag is too long", null, "tag #"
-						+ index);
+				throw new FunctionalException(FunctionalException.Code.SIZE_EXCEEDED, null, "tag #" + index);
 			}
 			index++;
 		}
 		if (Utils.containsDup(tags)) {
-			throw new FunctionalException(FunctionalException.Code.DUPLICATES, "Tags contains duplicates", null, null);
+			throw new FunctionalException(FunctionalException.Code.DUPLICATES, null, null);
 		}
 	}
 

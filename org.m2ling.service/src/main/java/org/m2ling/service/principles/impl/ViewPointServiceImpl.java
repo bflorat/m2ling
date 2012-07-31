@@ -44,42 +44,40 @@ public class ViewPointServiceImpl extends ServiceImpl implements ViewPointServic
 	private void checkDTO(final ViewPointDTO dto, final boolean updateOnly) throws FunctionalException {
 		// Argument Nullity
 		if (dto == null) {
-			throw new FunctionalException(Code.NULL_ARGUMENT, "Null item provided", null, null);
+			throw new FunctionalException(Code.NULL_ARGUMENT, null, null);
 		}
 		if (updateOnly) {
 			// VP existence
 			ViewPoint vp = util.getViewPointByID(dto.getId());
 			if (vp == null) {
-				throw new FunctionalException(Code.TARGET_NOT_FOUND, "View point doesn't exists", null, dto.getId());
+				throw new FunctionalException(Code.TARGET_NOT_FOUND, null, dto.getId());
 			}
 		}
 		// Name
 		if (dto.getName().length() == 0) {
-			throw new FunctionalException(FunctionalException.Code.NULL_ARGUMENT, "Void Name", null, dto.toString());
+			throw new FunctionalException(FunctionalException.Code.NULL_ARGUMENT, null, dto.toString());
 		}
 		if (dto.getName().length() > Consts.MAX_LABEL_SIZE) {
-			throw new FunctionalException(FunctionalException.Code.SIZE_EXCEEDED, "Name too long", null, null);
+			throw new FunctionalException(FunctionalException.Code.SIZE_EXCEEDED, null, "name");
 		}
 		// Status literals
 		int index = 1;
 		for (String literal : dto.getStatusLiterals()) {
 			if (literal.length() > Consts.MAX_LABEL_SIZE) {
-				throw new FunctionalException(FunctionalException.Code.SIZE_EXCEEDED, "Status literal name is too long",
-						null, "status #" + index);
+				throw new FunctionalException(FunctionalException.Code.SIZE_EXCEEDED, null, "statusLiteral #" + index);
 			}
 			index++;
 		}
 		if (Utils.containsDup(dto.getStatusLiterals())) {
-			throw new FunctionalException(FunctionalException.Code.DUPLICATES, "Status literal contains duplicates", null,
-					null);
+			throw new FunctionalException(FunctionalException.Code.DUPLICATE_STATUS_LITERAL, null, null);
 		}
 		// Description
 		if (dto.getDescription().length() > Consts.MAX_TEXT_SIZE) {
-			throw new FunctionalException(FunctionalException.Code.SIZE_EXCEEDED, "Description too long", null, null);
+			throw new FunctionalException(FunctionalException.Code.SIZE_EXCEEDED, null, "(description)");
 		}
 		// Comment
 		if (dto.getComment().length() > Consts.MAX_TEXT_SIZE) {
-			throw new FunctionalException(FunctionalException.Code.SIZE_EXCEEDED, "Comment too long", null, null);
+			throw new FunctionalException(FunctionalException.Code.SIZE_EXCEEDED, null, "(comment)");
 		}
 		// Tags
 		Utils.checkTags(dto.getTags());
@@ -166,8 +164,7 @@ public class ViewPointServiceImpl extends ServiceImpl implements ViewPointServic
 	public void deleteViewPoint(final Context context, final ViewPointDTO vpDTO) throws FunctionalException {
 		ViewPoint vp = util.getViewPointByID(vpDTO.getId());
 		if (vp == null) {
-			throw new FunctionalException(FunctionalException.Code.TARGET_NOT_FOUND, "View point doesn't exists", null,
-					vpDTO.toString());
+			throw new FunctionalException(FunctionalException.Code.TARGET_NOT_FOUND, null, vpDTO.toString());
 		}
 		pmanager.getRoot().getViewPoints().remove(vp);
 	}

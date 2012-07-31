@@ -92,7 +92,7 @@ public class CoreUtil {
 		} else if (type == Type.RULE) {
 			return getRuleByID(itemID);
 		} else {
-			throw new TechnicalException(Code.NOT_YET_IMPLEMENTED, null, null, null);
+			throw new TechnicalException(Code.NOT_YET_IMPLEMENTED, null, type.toString());
 		}
 	}
 

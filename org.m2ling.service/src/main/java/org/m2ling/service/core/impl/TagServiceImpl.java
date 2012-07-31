@@ -45,31 +45,31 @@ public class TagServiceImpl extends ServiceImpl implements TagService {
 
 	private void checkTypeAndID(Type type, String itemID) throws FunctionalException {
 		if (type == null) {
-			throw new FunctionalException(Code.NULL_ARGUMENT, "Provided type is null", null, null);
+			throw new FunctionalException(Code.NULL_ARGUMENT, null, "type");
 		}
 		if (Strings.isNullOrEmpty(itemID)) {
-			throw new FunctionalException(Code.NULL_ARGUMENT, "Provided id is null or empty", null, itemID);
+			throw new FunctionalException(Code.NULL_ARGUMENT, null, "id=" + itemID);
 		}
 		// check the item existence
 		Object item = util.getItemByTypeAndID(type, itemID);
 		if (item == null) {
-			throw new FunctionalException(Code.TARGET_NOT_FOUND, "Targeted item doesn't exist", null, itemID);
+			throw new FunctionalException(Code.TARGET_NOT_FOUND, null, "id=" + itemID);
 		}
 		if (!(item instanceof HasTags)) {
-			throw new FunctionalException(Code.ILLEGAL_ARGUMENT, "Targeted item doesn't support tags", null, itemID);
+			throw new FunctionalException(Code.TAGS_NOT_SUPPORTED, null, itemID);
 		}
 	}
 
 	private void checkTagsList(List<String> tags) throws FunctionalException {
 		if (tags == null || tags.size() == 0) {
-			throw new FunctionalException(Code.NULL_ARGUMENT, "Provided tags are null or empty", null, null);
+			throw new FunctionalException(Code.NULL_ARGUMENT, null, "tags=" + tags);
 		}
 		for (String tag : tags) {
 			if (tag.contains(",")) {
-				throw new FunctionalException(Code.ILLEGAL_ARGUMENT, "A tag can't contain the separator value", null, tag);
+				throw new FunctionalException(Code.TAGS_SEPARATOR, null, tag);
 			}
 			if (Strings.isNullOrEmpty(tag)) {
-				throw new FunctionalException(Code.NULL_ARGUMENT, "A tag can't be null or void", null, tag);
+				throw new FunctionalException(Code.NULL_ARGUMENT, null, "tag=" + tag);
 			}
 		}
 	}
@@ -123,8 +123,8 @@ public class TagServiceImpl extends ServiceImpl implements TagService {
 			HasTags htags = (HasTags) util.getItemByTypeAndID(type, itemID);
 			tags = htags.getTags();
 			if (!tags.contains(tag)) {
-				throw new FunctionalException(FunctionalException.Code.TARGET_NOT_FOUND, "Tag didn't exist previsously",
-						null, " tag=" + tag + " for item : " + htags);
+				throw new FunctionalException(FunctionalException.Code.TARGET_NOT_FOUND, null, " tag=" + tag
+						+ " for item : " + htags);
 			}
 		}
 		tags.remove(tag);
