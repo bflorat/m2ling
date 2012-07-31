@@ -73,7 +73,7 @@
           eType="#//core/ComponentInstance"/>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="ArchitectureItem" abstract="true"
-        eSuperTypes="#//core/HasNameAndID #//core/HasComment #//core/HasTags #//core/HasParameterDefinitions #//core/HasConstraints #//core/HasDescription"/>
+        eSuperTypes="#//core/HasNameAndID #//core/HasComment #//core/HasTags #//core/HasParameterDefinitions #//core/HasConstraints #//core/HasDescription #//core/HasStatus"/>
     <eClassifiers xsi:type="ecore:EClass" name="ConceptItem" abstract="true" eSuperTypes="#//core/HasNameAndID #//core/HasCustomProperties #//core/HasComment #//core/HasTags #//core/HasParameterDefinitions #//core/HasConstraints #//core/HasDescription"/>
     <eClassifiers xsi:type="ecore:EClass" name="RuntimeItem" abstract="true" eSuperTypes="#//core/HasNameAndID #//core/HasComment #//core/HasTags #//core/HasParameterValues #//core/HasConstraints #//core/HasDescription">
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="status" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>

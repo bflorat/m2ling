@@ -14,7 +14,7 @@ package org.m2ling.domain.core;
  * @model abstract="true"
  * @generated
  */
-public interface ArchitectureItem extends HasNameAndID, HasComment, HasTags, HasParameterDefinitions, HasConstraints, HasDescription {
+public interface ArchitectureItem extends HasNameAndID, HasComment, HasTags, HasParameterDefinitions, HasConstraints, HasDescription, HasStatus {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

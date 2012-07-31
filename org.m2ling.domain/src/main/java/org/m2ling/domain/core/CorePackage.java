@@ -367,13 +367,22 @@ public interface CorePackage extends EPackage {
 	int ARCHITECTURE_ITEM__DESCRIPTION = HAS_NAME_AND_ID_FEATURE_COUNT + 2;
 
 	/**
+	 * The feature id for the '<em><b>Status</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ARCHITECTURE_ITEM__STATUS = HAS_NAME_AND_ID_FEATURE_COUNT + 3;
+
+	/**
 	 * The number of structural features of the '<em>Architecture Item</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ARCHITECTURE_ITEM_FEATURE_COUNT = HAS_NAME_AND_ID_FEATURE_COUNT + 3;
+	int ARCHITECTURE_ITEM_FEATURE_COUNT = HAS_NAME_AND_ID_FEATURE_COUNT + 4;
 
 	/**
 	 * The meta object id for the '{@link org.m2ling.domain.core.impl.ComponentGroupImpl <em>Component Group</em>}' class.
@@ -439,6 +448,15 @@ public interface CorePackage extends EPackage {
 	 * @ordered
 	 */
 	int COMPONENT__DESCRIPTION = ARCHITECTURE_ITEM__DESCRIPTION;
+
+	/**
+	 * The feature id for the '<em><b>Status</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COMPONENT__STATUS = ARCHITECTURE_ITEM__STATUS;
 
 	/**
 	 * The feature id for the '<em><b>Type</b></em>' reference.
@@ -893,6 +911,15 @@ public interface CorePackage extends EPackage {
 	 * @ordered
 	 */
 	int COMPONENT_GROUP__DESCRIPTION = ARCHITECTURE_ITEM__DESCRIPTION;
+
+	/**
+	 * The feature id for the '<em><b>Status</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COMPONENT_GROUP__STATUS = ARCHITECTURE_ITEM__STATUS;
 
 	/**
 	 * The feature id for the '<em><b>Components</b></em>' reference list.
@@ -1416,6 +1443,15 @@ public interface CorePackage extends EPackage {
 	 * @ordered
 	 */
 	int LINK__DESCRIPTION = ARCHITECTURE_ITEM__DESCRIPTION;
+
+	/**
+	 * The feature id for the '<em><b>Status</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LINK__STATUS = ARCHITECTURE_ITEM__STATUS;
 
 	/**
 	 * The feature id for the '<em><b>Type</b></em>' reference.

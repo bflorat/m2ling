@@ -66,6 +66,7 @@ public class ArchitectureItemItemProvider
 			addCommentPropertyDescriptor(object);
 			addTagsPropertyDescriptor(object);
 			addDescriptionPropertyDescriptor(object);
+			addStatusPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -137,6 +138,28 @@ public class ArchitectureItemItemProvider
 	}
 
 	/**
+	 * This adds a property descriptor for the Status feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addStatusPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_HasStatus_status_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_HasStatus_status_feature", "_UI_HasStatus_type"),
+				 CorePackage.Literals.HAS_STATUS__STATUS,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				 null,
+				 null));
+	}
+
+	/**
 	 * This returns the label text for the adapted class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -165,6 +188,7 @@ public class ArchitectureItemItemProvider
 			case CorePackage.ARCHITECTURE_ITEM__COMMENT:
 			case CorePackage.ARCHITECTURE_ITEM__TAGS:
 			case CorePackage.ARCHITECTURE_ITEM__DESCRIPTION:
+			case CorePackage.ARCHITECTURE_ITEM__STATUS:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
 		}

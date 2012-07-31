@@ -6,7 +6,6 @@ package org.m2ling.domain.core.util;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.util.Switch;
-import org.m2ling.domain.core.*;
 import org.m2ling.domain.core.Activity;
 import org.m2ling.domain.core.ActivityTransition;
 import org.m2ling.domain.core.Actor;
@@ -143,6 +142,7 @@ public class CoreSwitch<T> extends Switch<T> {
 				if (result == null) result = caseHasParameterDefinitions(component);
 				if (result == null) result = caseHasConstraints(component);
 				if (result == null) result = caseHasDescription(component);
+				if (result == null) result = caseHasStatus(component);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -180,6 +180,7 @@ public class CoreSwitch<T> extends Switch<T> {
 				if (result == null) result = caseHasParameterDefinitions(componentGroup);
 				if (result == null) result = caseHasConstraints(componentGroup);
 				if (result == null) result = caseHasDescription(componentGroup);
+				if (result == null) result = caseHasStatus(componentGroup);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -205,6 +206,7 @@ public class CoreSwitch<T> extends Switch<T> {
 				if (result == null) result = caseHasParameterDefinitions(architectureItem);
 				if (result == null) result = caseHasConstraints(architectureItem);
 				if (result == null) result = caseHasDescription(architectureItem);
+				if (result == null) result = caseHasStatus(architectureItem);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -321,6 +323,7 @@ public class CoreSwitch<T> extends Switch<T> {
 				if (result == null) result = caseHasParameterDefinitions(link);
 				if (result == null) result = caseHasConstraints(link);
 				if (result == null) result = caseHasDescription(link);
+				if (result == null) result = caseHasStatus(link);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}

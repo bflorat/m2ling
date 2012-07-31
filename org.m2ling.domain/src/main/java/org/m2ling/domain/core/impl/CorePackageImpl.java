@@ -1923,6 +1923,7 @@ public class CorePackageImpl extends EPackageImpl implements CorePackage {
 		architectureItemEClass.getESuperTypes().add(this.getHasParameterDefinitions());
 		architectureItemEClass.getESuperTypes().add(this.getHasConstraints());
 		architectureItemEClass.getESuperTypes().add(this.getHasDescription());
+		architectureItemEClass.getESuperTypes().add(this.getHasStatus());
 		conceptItemEClass.getESuperTypes().add(this.getHasNameAndID());
 		conceptItemEClass.getESuperTypes().add(this.getHasCustomProperties());
 		conceptItemEClass.getESuperTypes().add(this.getHasComment());
