@@ -98,8 +98,9 @@ public class RulesPanel extends VerticalLayout {
 		// Name
 		String nameString = Msg.get("pr.17") + rule.getName()
 				+ (!Strings.isNullOrEmpty(rule.getTags()) ? " [" + rule.getTags() + "]  " : " ");
-		nameString += Msg.get("gal.7") + ": " + rule.getStatus() + "  " + Msg.get("gal.8") + ": " + rule.getPriority();
-		Label name = new Label(nameString);
+		nameString += "<br/>" + Msg.get("gal.7") + ": " + rule.getStatus() + ", " + Msg.get("gal.8") + ": "
+				+ rule.getPriority();
+		Label name = new Label(nameString, Label.CONTENT_RAW);
 		name.setStyleName("principles_rules-name");
 		name.setSizeUndefined();
 		Button edit = new Button(Msg.get("gal.2"));
@@ -128,19 +129,19 @@ public class RulesPanel extends VerticalLayout {
 				}
 			}
 		});
-		Label description = new Label(rule.getDescription());
+		Label description = new Label(rule.getDescription(), Label.CONTENT_RAW);
 		description.setStyleName("principles_rules-description");
 		description.setWidth("100%");
 		description.setHeight(null);
 		String rat = rule.getRationale();
-		Label rationale = new Label(Strings.isNullOrEmpty(rat) ? "" : Msg.get("gal.9") + " : " + rat);
+		Label rationale = new Label(Strings.isNullOrEmpty(rat) ? "" : Msg.get("gal.9") + " : " + rat, Label.CONTENT_RAW);
 		rationale.setWidth("100%");
 		rationale.setHeight(null);
 		String ex = rule.getExceptions();
-		Label exceptions = new Label(Strings.isNullOrEmpty(ex) ? "" : Msg.get("pr.23") + " : " + ex);
+		Label exceptions = new Label(Strings.isNullOrEmpty(ex) ? "" : Msg.get("pr.23") + " : " + ex, Label.CONTENT_RAW);
 		exceptions.setWidth("100%");
 		exceptions.setHeight(null);
-		Label comment = new Label(rule.getComment());
+		Label comment = new Label(rule.getComment(), Label.CONTENT_RAW);
 		comment.setDescription(rule.getComment());
 		comment.setStyleName("comment");
 		comment.setWidth("100%");
