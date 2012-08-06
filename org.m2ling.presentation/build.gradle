@@ -6,8 +6,17 @@ Executable specifications build script
 
 apply plugin : 'war'
 
+// Add Vaadin repository
+repositories{
+	maven{
+		url "http://maven.vaadin.com/vaadin-addons"
+	}
+}
+
 dependencies{
 	compile group:'com.vaadin', name:'vaadin', version:'6.7.9'
+	// Vaadin plugins
+	compile group:'org.vaadin.addon', name:'confirmdialog', version:'1.2.1'
 	compile(project(':org.m2ling.common'));
 	// not transitive because we want to avoid pulling dependency to domain project
 	compile(project(':org.m2ling.service')){

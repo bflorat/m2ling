@@ -21,6 +21,25 @@ public class RuleBean implements Serializable {
 	private String vpID = "";
 	private String id = "";
 	private String name = "";
+	/** Drop */
+	private String drop = "";
+
+	
+
+	/**
+	 * @return the drop
+	 */
+	public String getDrop() {
+		return drop;
+	}
+
+	/**
+	 * @param drop the drop to set
+	 */
+	public void setDrop(String drop) {
+		this.drop = drop;
+	}
+
 	/**
 	 * Comma-separated tags
 	 */

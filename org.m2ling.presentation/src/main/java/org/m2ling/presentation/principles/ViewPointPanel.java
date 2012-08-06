@@ -74,7 +74,7 @@ public class ViewPointPanel extends VerticalLayout {
 		setSpacing(true);
 		setMargin(true);
 		setHeight(null);
-		setWidth("90%");
+		setWidth("100%");
 		setStyleName("principles_vp-panel");
 	}
 
@@ -126,7 +126,7 @@ public class ViewPointPanel extends VerticalLayout {
 		});
 		final Panel rulesHiddenPane = new Panel();
 		rulesHiddenPane.setVisible(false);
-		rulesHiddenPane.setWidth("90%");
+		rulesHiddenPane.setWidth("100%");
 		rulesHiddenPane.setHeight(null);
 		RulesPanel rulesPanel = rulesPanelFactory.getRulesPanelFor(bean.getId());
 		rulesHiddenPane.setContent(rulesPanel);
