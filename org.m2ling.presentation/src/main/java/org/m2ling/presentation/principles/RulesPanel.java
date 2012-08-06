@@ -15,14 +15,22 @@ import org.m2ling.presentation.i18n.Msg;
 import org.m2ling.presentation.principles.model.RuleBean;
 import org.m2ling.presentation.principles.utils.DTOConverter;
 import org.m2ling.service.principles.RuleService;
+import org.vaadin.dialogs.ConfirmDialog;
 
 import com.google.common.base.Strings;
 import com.google.inject.Inject;
 import com.google.inject.assistedinject.Assisted;
+import com.vaadin.data.util.BeanContainer;
+import com.vaadin.data.util.BeanItem;
+import com.vaadin.terminal.ThemeResource;
+import com.vaadin.ui.AbstractSelect.ItemDescriptionGenerator;
+import com.vaadin.ui.Alignment;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Button.ClickEvent;
-import com.vaadin.ui.HorizontalLayout;
+import com.vaadin.ui.Component;
 import com.vaadin.ui.Label;
+import com.vaadin.ui.NativeButton;
+import com.vaadin.ui.Table;
 import com.vaadin.ui.VerticalLayout;
 import com.vaadin.ui.Window.Notification;
 import com.vaadin.ui.themes.BaseTheme;
@@ -32,12 +40,12 @@ import com.vaadin.ui.themes.BaseTheme;
  */
 @SuppressWarnings("serial")
 public class RulesPanel extends VerticalLayout {
-	private String vpID;
-	private RuleService service;
-	private Logger logger;
-	private DTOConverter.ToDTO toDTO;
-	private DTOConverter.FromDTO fromDTO;
-	private RuleDialogFactory factory;
+	private final String vpID;
+	private final RuleService service;
+	private final Logger logger;
+	private final DTOConverter.ToDTO toDTO;
+	private final DTOConverter.FromDTO fromDTO;
+	private final RuleDialogFactory factory;
 
 	/**
 	 * Build a rules dialog
@@ -54,8 +62,8 @@ public class RulesPanel extends VerticalLayout {
 		this.toDTO = toDTO;
 		this.fromDTO = fromDTO;
 		setHeight(null);
-		setWidth("95%");
-		addStyleName("principles_rules-panel");
+		setWidth("98%");
+		setMargin(true);
 	}
 
 	@Override
@@ -64,17 +72,125 @@ public class RulesPanel extends VerticalLayout {
 			List<RuleDTO> rules = service.getAllRules(null, vpID);
 			if (rules.size() == 0) {
 				addComponent(new Label(Msg.get("pr.1")));
+				Button create = getCreateRuleButton();
+				addComponent(create);
+				setComponentAlignment(create, Alignment.TOP_RIGHT);
 			} else {
+				BeanContainer<String, RuleBean> data = new BeanContainer<String, RuleBean>(RuleBean.class);
+				data.setBeanIdProperty("id");
 				for (RuleDTO dto : rules) {
 					RuleBean rule = fromDTO.getRuleBean(dto);
-					addRule(rule);
+					data.addBean(rule);
 				}
+				final Table table = new Table(null, data);
+				table.setWidth("100%");
+				table.setHeight("300px");
+				table.setVisibleColumns(new String[] { "drop", "name", "status", "priority", "description" });
+				table.setColumnExpandRatio("description", 1);
+				table.setItemDescriptionGenerator(new ItemDescriptionGenerator() {
+					public String generateDescription(Component source, Object itemId, Object propertyId) {
+						@SuppressWarnings("unchecked")
+						BeanContainer<String, RuleBean> data = (BeanContainer<String, RuleBean>) table
+								.getContainerDataSource();
+						RuleBean bean = (RuleBean) data.getItem(itemId).getBean();
+						return getHtmlDetails(bean);
+					}
+				});
+				table.setColumnHeaders(new String[] { Msg.get("gal.3"), Msg.get("gal.12"), Msg.get("gal.7"),
+						Msg.get("gal.8"), Msg.get("gal.1") + " (" + Msg.get("gal.10") + ")", });
+				table.addGeneratedColumn("name", new Table.ColumnGenerator() {
+					public Component generateCell(Table table, Object itemId, Object columnId) {
+						@SuppressWarnings("unchecked")
+						BeanContainer<String, RuleBean> data = (BeanContainer<String, RuleBean>) table
+								.getContainerDataSource();
+						BeanItem<RuleBean> item = data.getItem(itemId);
+						final RuleBean bean = item.getBean();
+						Button edit = new Button(bean.getName());
+						edit.setStyleName(BaseTheme.BUTTON_LINK);
+						edit.addListener(new Button.ClickListener() {
+							public void buttonClick(ClickEvent event) {
+								RuleDialog dialog = factory.getRuleDialogFor(bean);
+								dialog.setModal(true);
+								getWindow().addWindow(dialog);
+							}
+						});
+						return edit;
+					}
+				});
+				table.addGeneratedColumn("drop", new Table.ColumnGenerator() {
+					public Component generateCell(Table table, Object itemId, Object columnId) {
+						@SuppressWarnings("unchecked")
+						BeanContainer<String, RuleBean> data = (BeanContainer<String, RuleBean>) table
+								.getContainerDataSource();
+						BeanItem<RuleBean> item = data.getItem(itemId);
+						final RuleBean rule = item.getBean();
+						NativeButton drop = new NativeButton("");
+						drop.setSizeFull();
+						drop.setStyleName("borderless");
+						drop.setIcon(new ThemeResource("img/16/delete.png"));
+						drop.addListener(new Button.ClickListener() {
+							public void buttonClick(ClickEvent event) {
+								dropRule(rule);
+							}
+						});
+						return drop;
+					}
+				});
+				Button create = getCreateRuleButton();
+				addComponent(create);
+				setComponentAlignment(create, Alignment.TOP_RIGHT);
+				addComponent(new Label("<br/>",Label.CONTENT_RAW));
+				addComponent(table);
 			}
-			addComponent(getCreateRuleButton());
 		} catch (FunctionalException e) {
 			logger.log(Level.SEVERE, e.getDetailedMessage(), e);
 			getWindow().showNotification(Msg.humanMessage(e), Notification.TYPE_ERROR_MESSAGE);
 		}
+	}
+
+	private void dropRule(final RuleBean rule) {
+		ConfirmDialog.show(getApplication().getMainWindow(), Msg.get("confirm.1") + " " + Msg.get("confirm.2"),
+				new ConfirmDialog.Listener() {
+					public void onClose(ConfirmDialog dialog) {
+						if (dialog.isConfirmed()) {
+							try {
+								RuleDTO ruleDTO = toDTO.getRuleDTO(rule);
+								service.deleteRule(null, ruleDTO);
+								removeAllComponents();
+								attach();
+							} catch (FunctionalException e) {
+								logger.log(Level.SEVERE, e.getDetailedMessage(), e.getCause());
+								getWindow().showNotification(Msg.humanMessage(e), Notification.TYPE_ERROR_MESSAGE);
+							}
+						}
+					}
+				});
+	}
+
+	/**
+	 * Return HTML tooltip for a rule
+	 * 
+	 * @param bean
+	 * @return HTML tooltip for a rule
+	 */
+	private String getHtmlDetails(RuleBean bean) {
+		String out = "<b>" + Msg.get("gal.1") + " : </b>";
+		out += bean.getDescription();
+		out += "</br></br>";
+		out += "<b>Rationale : </b>";
+		out += bean.getRationale();
+		out += "</br></br>";
+		if (!Strings.isNullOrEmpty(bean.getExceptions())) {
+			out += "<b>" + Msg.get("pr.23") + " : </b>";
+			out += bean.getExceptions();
+			out += "</br></br>";
+		}
+		if (!Strings.isNullOrEmpty(bean.getComment())) {
+			out += "<b>" + Msg.get("gal.11") + " : </b>";
+			out += bean.getComment();
+			out += "</br></br>";
+		}
+		return out;
 	}
 
 	private Button getCreateRuleButton() {
@@ -92,73 +208,5 @@ public class RulesPanel extends VerticalLayout {
 			}
 		});
 		return createRule;
-	}
-
-	private void addRule(final RuleBean rule) {
-		// Name
-		String nameString = Msg.get("pr.17") + rule.getName()
-				+ (!Strings.isNullOrEmpty(rule.getTags()) ? " [" + rule.getTags() + "]  " : " ");
-		nameString += "<br/>" + Msg.get("gal.7") + ": " + rule.getStatus() + ", " + Msg.get("gal.8") + ": "
-				+ rule.getPriority();
-		Label name = new Label(nameString, Label.CONTENT_RAW);
-		name.setStyleName("principles_rules-name");
-		name.setSizeUndefined();
-		Button edit = new Button(Msg.get("gal.2"));
-		edit.setStyleName(BaseTheme.BUTTON_LINK);
-		edit.addStyleName("command");
-		edit.addListener(new Button.ClickListener() {
-			public void buttonClick(ClickEvent event) {
-				RuleDialog dialog = factory.getRuleDialogFor(rule);
-				dialog.setModal(true);
-				getWindow().addWindow(dialog);
-			}
-		});
-		Button delete = new Button(Msg.get("gal.3"));
-		delete.setStyleName(BaseTheme.BUTTON_LINK);
-		delete.addStyleName("command");
-		delete.addListener(new Button.ClickListener() {
-			public void buttonClick(ClickEvent event) {
-				try {
-					RuleDTO ruleDTO = toDTO.getRuleDTO(rule);
-					service.deleteRule(null, ruleDTO);
-					removeAllComponents();
-					attach();
-				} catch (FunctionalException e) {
-					logger.log(Level.SEVERE, e.getDetailedMessage(), e.getCause());
-					getWindow().showNotification(Msg.humanMessage(e), Notification.TYPE_ERROR_MESSAGE);
-				}
-			}
-		});
-		Label description = new Label(rule.getDescription(), Label.CONTENT_RAW);
-		description.setStyleName("principles_rules-description");
-		description.setWidth("100%");
-		description.setHeight(null);
-		String rat = rule.getRationale();
-		Label rationale = new Label(Strings.isNullOrEmpty(rat) ? "" : Msg.get("gal.9") + " : " + rat, Label.CONTENT_RAW);
-		rationale.setWidth("100%");
-		rationale.setHeight(null);
-		String ex = rule.getExceptions();
-		Label exceptions = new Label(Strings.isNullOrEmpty(ex) ? "" : Msg.get("pr.23") + " : " + ex, Label.CONTENT_RAW);
-		exceptions.setWidth("100%");
-		exceptions.setHeight(null);
-		Label comment = new Label(rule.getComment(), Label.CONTENT_RAW);
-		comment.setDescription(rule.getComment());
-		comment.setStyleName("comment");
-		comment.setWidth("100%");
-		comment.setHeight(null);
-		// Layout
-		HorizontalLayout hl1 = new HorizontalLayout();
-		hl1.setSpacing(true);
-		hl1.addComponent(name);
-		hl1.addComponent(edit);
-		hl1.addComponent(delete);
-		addComponent(hl1);
-		addComponent(description);
-		addComponent(rationale);
-		addComponent(exceptions);
-		if (!Strings.isNullOrEmpty(rule.getComment())) {
-			addComponent(comment);
-		}
-		addComponent(new Label("<br/>", Label.CONTENT_RAW));
 	}
 }

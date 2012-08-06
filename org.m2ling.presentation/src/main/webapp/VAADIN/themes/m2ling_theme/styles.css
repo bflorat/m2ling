@@ -46,19 +46,29 @@
 	font-size: 90%;
 }
 
-.principles_rules-panel {
-	padding: 5px;
-}
-
 .principles_rules-description {
 	font-weight: bold;
 }
 
-.v-textarea .v-richtextarea .gwt-RichTextArea { 
+.v-textarea .v-richtextarea .gwt-RichTextArea {
 	font-family: Arial, Helvetica, Tahoma, Verdana, sans-serif !important;
-	font-size: medium !important;	
+	font-size: medium !important;
 }
 
+.v-table-cell-wrapper { /* Required to allow multi-lines */
+	white-space: normal;
+}
 
-// -------- General setting 
+.v-nativebutton-borderless {
+	border: none;
+	background: transparent;
+}
 
+--------
+General
+
+
+ 
+
+
+setting

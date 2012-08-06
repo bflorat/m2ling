@@ -67,6 +67,9 @@ public class MainFrame extends CustomComponent {
 		// App panel
 		app = new Panel();
 		app.setSizeFull();
+		// This vertical layout is added automatically at panel creation,
+		// it must have an undefined size to allow scrolling
+		app.getContent().setHeight("-1");
 		// Accordion
 		accordion = new Accordion();
 		accordion.setSizeFull();
