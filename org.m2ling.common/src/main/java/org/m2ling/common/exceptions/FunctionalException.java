@@ -29,7 +29,7 @@ public class FunctionalException extends Exception {
 	 *           : additional details (can be null)
 	 */
 	public FunctionalException(Code code, @Nullable Throwable origin, @Nullable String details) {
-		super("Functional error code " + code.name(), origin);
+		super("Functional error code " + code.name() + " details: " + details, origin);
 		this.code = code;
 		this.details = details;
 	}

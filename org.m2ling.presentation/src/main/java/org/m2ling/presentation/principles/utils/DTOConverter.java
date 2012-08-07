@@ -4,7 +4,6 @@
 package org.m2ling.presentation.principles.utils;
 
 import java.io.File;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -53,32 +52,12 @@ public class DTOConverter {
 		 * @return a Rule DTO from provided rule bean
 		 */
 		public RuleDTO getRuleDTO(RuleBean bean) {
-			List<StatusEventDTO> history = getRuleHistoryDTO(bean);
+			// Note that we don't populate history into DTO as it is not used by the service
 			List<String> tags = Utils.stringListFromString(bean.getTags());
 			RuleDTO dto = new RuleDTO.Builder(bean.getViewPointId(), bean.getId(), bean.getName())
 					.description(bean.getDescription()).rationale(bean.getRationale()).exceptions(bean.getExceptions())
-					.tags(tags).comment(bean.getComment()).status(bean.getStatus()).priority(bean.getPriority())
-					.history(history).build();
+					.tags(tags).comment(bean.getComment()).status(bean.getStatus()).priority(bean.getPriority()).build();
 			return dto;
-		}
-
-		/**
-		 * Create and populate a DTO from a given rule history. If the history is void, a void
-		 * collection is returned.
-		 * 
-		 * @param source
-		 *           history
-		 * 
-		 * @return Create and populate a DTO from a given rule history.
-		 */
-		public List<StatusEventDTO> getRuleHistoryDTO(RuleBean bean) {
-			List<StatusEventDTO> out = new ArrayList<StatusEventDTO>(3);
-			Map<Long, String> history = bean.getHistory();
-			for (Long date : bean.getHistory().keySet()) {
-				StatusEventDTO dto = new StatusEventDTO.Builder(date, history.get(date)).build();
-				out.add(dto);
-			}
-			return out;
 		}
 	}
 

@@ -9,7 +9,6 @@ import java.util.logging.Logger;
 
 import org.m2ling.common.configuration.Conf;
 import org.m2ling.common.dto.core.RuleDTO;
-import org.m2ling.common.dto.core.StatusEventDTO;
 import org.m2ling.common.exceptions.FunctionalException;
 import org.m2ling.common.exceptions.FunctionalException.Code;
 import org.m2ling.common.soa.Context;
@@ -84,13 +83,13 @@ public class RuleServiceImpl extends ServiceImpl implements RuleService {
 			// Check for existing rule with the same id
 			for (Rule r : vp.getRules()) {
 				if (r.getId().equals(dto.getId())) {
-					throw new FunctionalException(FunctionalException.Code.DUPLICATES, null, dto.toString());
+					throw new FunctionalException(FunctionalException.Code.DUPLICATES, null, "id=" + dto.getId());
 				}
 			}
 			// Check for existing rule with the same name
 			for (Rule r : vp.getRules()) {
 				if (r.getName().equals(dto.getName())) {
-					throw new FunctionalException(FunctionalException.Code.DUPLICATE_NAME, null, dto.toString());
+					throw new FunctionalException(FunctionalException.Code.DUPLICATE_NAME, null, "name=" + dto.getName());
 				}
 			}
 		}
@@ -148,13 +147,10 @@ public class RuleServiceImpl extends ServiceImpl implements RuleService {
 		tags.clear();
 		tags.addAll(ruleDTO.getTags());
 		List<StatusEvent> history = rule.getHistory();
-		history.clear();
-		for (StatusEventDTO event : ruleDTO.getHistory()) {
-			StatusEvent se = CoreFactory.eINSTANCE.createStatusEvent();
-			se.setDate(event.getDate());
-			se.setStatusLiteral(event.getStatusLiteral());
-			history.add(se);
-		}
+		StatusEvent se = CoreFactory.eINSTANCE.createStatusEvent();
+		se.setDate(System.currentTimeMillis());
+		se.setStatusLiteral(rule.getStatus());
+		history.add(se);
 	}
 
 	/*
@@ -168,6 +164,13 @@ public class RuleServiceImpl extends ServiceImpl implements RuleService {
 		checkDTO(ruleDTO, false);
 		// Processing
 		Rule rule = fromDTO.newRule(ruleDTO);
+		// Set history
+		List<StatusEvent> history = rule.getHistory();
+		StatusEvent evt = CoreFactory.eINSTANCE.createStatusEvent();
+		evt.setDate(System.currentTimeMillis());
+		evt.setStatusLiteral(rule.getStatus());
+		history.add(evt);
+		// Add the rule
 		ViewPoint vp = util.getViewPointByID(ruleDTO.getViewPointId());
 		vp.getRules().add(rule);
 	}

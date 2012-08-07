@@ -155,14 +155,6 @@ public class DTOConverter {
 			rule.setComment(dto.getComment());
 			rule.setRationale(dto.getRationale());
 			rule.setExceptions(dto.getExceptions());
-			List<StatusEvent> history = rule.getHistory();
-			history.clear();
-			for (StatusEventDTO i : dto.getHistory()) {
-				StatusEvent evt = CoreFactory.eINSTANCE.createStatusEvent();
-				evt.setDate(i.getDate());
-				evt.setStatusLiteral(i.getStatusLiteral());
-				history.add(evt);
-			}
 			return rule;
 		}
 

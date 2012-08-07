@@ -32,10 +32,9 @@
 			<li>rationale=<b concordion:set="#rationale">rationale1</b></li>
 			<li>exception=<b concordion:set="#exceptions">exception1</b></li>
 			<li>tags=<b concordion:set="#tags">tag1,tag2</b></li>
-			<li>history=<b concordion:set="#history">1330347208000:SUGGESTED,1341347208345:VALIDATED</b></li>
 		</ul>
 		should have following characteristics : <b
-			concordion:assertEquals="getRule(#id,#vpID,#name,#description,#comment,#status,#priority,#rationale,#exceptions,#tags,#history)">comment=comment1 description=desc1 drop= exceptions=exception1 history={1330347208000=SUGGESTED, 1341347208345=VALIDATED} id=ruleid1 name=rule1 priority=HIGH rationale=rationale1 status=VALIDATED tags=tag1,tag2 vpID=id_vp1</b>.
+			concordion:assertEquals="getRule(#id,#vpID,#name,#description,#comment,#status,#priority,#rationale,#exceptions,#tags)">comment=comment1 description=desc1 drop= exceptions=exception1 id=ruleid1 name=rule1 priority=HIGH rationale=rationale1 status=VALIDATED tags=tag1,tag2 vpID=id_vp1</b>.
 		</p>
 	</div>
 

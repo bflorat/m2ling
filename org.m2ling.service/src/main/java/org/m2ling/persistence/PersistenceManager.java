@@ -18,5 +18,10 @@ public interface PersistenceManager {
 	 * @return the model root
 	 */
 	public Root getRoot();
+	
+	/**
+	 * Commit data to the underlying resource
+	 */
+	public void commit() throws Exception;
 
 }

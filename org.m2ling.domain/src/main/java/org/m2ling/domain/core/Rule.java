@@ -115,7 +115,7 @@ public interface Rule extends HasNameAndID, HasCustomProperties, HasComment, Has
 	void setExceptions(String value);
 
 	/**
-	 * Returns the value of the '<em><b>History</b></em>' reference list.
+	 * Returns the value of the '<em><b>History</b></em>' containment reference list.
 	 * The list contents are of type {@link org.m2ling.domain.core.StatusEvent}.
 	 * <!-- begin-user-doc -->
 	 * <p>
@@ -123,9 +123,9 @@ public interface Rule extends HasNameAndID, HasCustomProperties, HasComment, Has
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>History</em>' reference list.
+	 * @return the value of the '<em>History</em>' containment reference list.
 	 * @see org.m2ling.domain.core.CorePackage#getRule_History()
-	 * @model
+	 * @model containment="true"
 	 * @generated
 	 */
 	EList<StatusEvent> getHistory();

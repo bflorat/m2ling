@@ -43,7 +43,7 @@ public class TechnicalException extends RuntimeException {
 	}
 
 	public enum Code {
-		UNKWNOWN, TRANSACTION_FAILED, NOT_YET_IMPLEMENTED
+		UNKNOWN, TRANSACTION_FAILED, NOT_YET_IMPLEMENTED, ILLEGAL_STATE
 	}
 
 	/**

@@ -3,6 +3,8 @@
  */
 package org.m2ling.persistence.impl;
 
+import java.util.logging.Logger;
+
 import org.m2ling.domain.DomainFactory;
 import org.m2ling.domain.Root;
 import org.m2ling.persistence.PersistenceManager;
@@ -29,6 +31,15 @@ public class PersistenceManagerInMemoryImpl implements PersistenceManager {
 	 */
 	public Root getRoot() {
 		return root;
+	}
+
+	/* (non-Javadoc)
+	 * @see org.m2ling.persistence.PersistenceManager#commit()
+	 */
+	@Override
+	public void commit() {
+		Logger.getAnonymousLogger().warning("This implementation doesn't support commit.");
+		
 	}
 
 }

@@ -30,7 +30,6 @@ import org.m2ling.persistence.PersistenceManager;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 
-
 /**
  * Persistence Manager bringing Teneo implementation (load/store from a RDBMS).
  * 
@@ -39,7 +38,6 @@ import com.google.inject.Singleton;
  */
 @Singleton
 public class PersistenceManagerTeneoImpl implements PersistenceManager {
-
 	/**
 	 * List of available properties for this implementation. <br/>
 	 * Overridden values can be injected (for testing purpose).
@@ -97,17 +95,14 @@ public class PersistenceManagerTeneoImpl implements PersistenceManager {
 			result.put(CONF_TENEO_HBM2DDL_AUTO, "create");
 			return result;
 		}
-
 	}
 
 	/** M2ling model root element */
 	private Root root;
-
 	@SuppressWarnings("unused")
 	private Logger logger;
-
 	private final HbDataStore dataStore;
-
+	private Resource resource;
 	private static final String DATA_STORE_NAME = Consts.DATABASE_NAME + "_datastore";
 
 	/*
@@ -130,17 +125,14 @@ public class PersistenceManagerTeneoImpl implements PersistenceManager {
 		configuration.register(new SpecificConfiguration());
 		// create the HbDataStore using the name
 		dataStore = HbHelper.INSTANCE.createRegisterDataStore(DATA_STORE_NAME);
-
 		// set the properties
 		Properties databaseConf = configuration.getSystemProperties(SpecificConfiguration.CONF_TENEO_DRIVER,
 				SpecificConfiguration.CONF_TENEO_USER, SpecificConfiguration.CONF_TENEO_URL,
 				SpecificConfiguration.CONF_TENEO_PASS, SpecificConfiguration.CONF_TENEO_DIALECT,
 				SpecificConfiguration.CONF_TENEO_CASCADE_POLICY, SpecificConfiguration.CONF_TENEO_HBM2DDL_AUTO);
 		dataStore.setDataStoreProperties(databaseConf);
-
 		// sets its epackages stored in this datastore (it also processes recursively sub-packages)
 		dataStore.setEPackages(new EPackage[] { DomainPackage.eINSTANCE });
-
 		// initialize, also creates the database tables
 		try {
 			dataStore.initialize();
@@ -164,13 +156,24 @@ public class PersistenceManagerTeneoImpl implements PersistenceManager {
 	 * 
 	 * @return an hibernate resource for the m2ling database
 	 */
+	//TODO : this method should not be public, resource should be hidden
+	
 	public Resource getResource() {
 		String uriStr = "hibernate://?" + HibernateResource.DS_NAME_PARAM + "=" + DATA_STORE_NAME;
 		final URI uri = URI.createURI(uriStr);
 		ResourceSet resourceSet = new ResourceSetImpl();
-		Resource resource = resourceSet.createResource(uri);
+		resource = resourceSet.createResource(uri);
 		((ResourceImpl) resource).setIntrinsicIDToEObjectMap(new HashMap<String, EObject>());
 		return resource;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.m2ling.persistence.PersistenceManager#commit()
+	 */
+	@Override
+	public void commit() throws Exception {
+		resource.save(null);
+	}
 }

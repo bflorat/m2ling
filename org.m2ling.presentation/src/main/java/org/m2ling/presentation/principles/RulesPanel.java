@@ -5,19 +5,26 @@
  */
 package org.m2ling.presentation.principles;
 
+import java.text.DateFormat;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import org.m2ling.common.configuration.Conf;
 import org.m2ling.common.dto.core.RuleDTO;
 import org.m2ling.common.exceptions.FunctionalException;
 import org.m2ling.presentation.i18n.Msg;
 import org.m2ling.presentation.principles.model.RuleBean;
 import org.m2ling.presentation.principles.utils.DTOConverter;
+import org.m2ling.presentation.principles.utils.SpecificConfiguration;
 import org.m2ling.service.principles.RuleService;
 import org.vaadin.dialogs.ConfirmDialog;
 
 import com.google.common.base.Strings;
+import com.google.common.collect.Lists;
 import com.google.inject.Inject;
 import com.google.inject.assistedinject.Assisted;
 import com.vaadin.data.util.BeanContainer;
@@ -46,7 +53,8 @@ public class RulesPanel extends VerticalLayout {
 	private final DTOConverter.ToDTO toDTO;
 	private final DTOConverter.FromDTO fromDTO;
 	private final RuleDialogFactory factory;
-private final Msg msg;
+	private final Msg msg;
+	private final Conf conf;
 
 	/**
 	 * Build a rules dialog
@@ -54,7 +62,7 @@ private final Msg msg;
 	 */
 	@Inject
 	public RulesPanel(Logger logger, @Assisted String vpID, RuleService service, DTOConverter.ToDTO toDTO,
-			DTOConverter.FromDTO fromDTO, RuleDialogFactory factory,Msg msg) {
+			DTOConverter.FromDTO fromDTO, RuleDialogFactory factory, Msg msg, Conf conf) {
 		super();
 		this.vpID = vpID;
 		this.service = service;
@@ -63,6 +71,7 @@ private final Msg msg;
 		this.toDTO = toDTO;
 		this.fromDTO = fromDTO;
 		this.msg = msg;
+		this.conf = conf;
 		setHeight(null);
 		setWidth("98%");
 		setMargin(true);
@@ -193,9 +202,16 @@ private final Msg msg;
 			out += "</br></br>";
 		}
 		out += "<b>" + msg.get("pr.28") + " : </b><br/>";
-		for (Long date : bean.getHistory().keySet()){
-			//TODO out += new Locale
+		// Invert history so we see newer events first
+		List<Long> invertHistory = Lists.reverse(new ArrayList<Long>(bean.getHistory().keySet()));
+		for (Long date : invertHistory) {
+			Locale locale = new Locale(conf.getSystemProperty(SpecificConfiguration.CONF_PRESENTATION_DEFAULT_LOCALE));
+			DateFormat df = DateFormat.getDateInstance(DateFormat.MEDIUM, locale);
+			out += df.format(new Date(date));
+			out += " : ";
+			out += bean.getHistory().get(date) + "<br/>";
 		}
+		out += "</br></br>";
 		return out;
 	}
 

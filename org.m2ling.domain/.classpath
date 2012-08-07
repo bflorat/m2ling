@@ -19,7 +19,7 @@
 			<attribute name="org.eclipse.jst.component.dependency" value="../"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry exported="true" kind="lib" path="/home/bflorat/.gradle/caches/artifacts-13/filestore/com.google.guava/guava/11.0/jar/f8ebb252d9ce7ff71b68b494551711242b2118d6/guava-11.0.jar" sourcepath="/home/bflorat/.gradle/caches/artifacts-13/filestore/com.google.guava/guava/11.0/source/2caaa613428bc74609bfbd76f00cfef1b7b187d/guava-11.0-sources.jar">
+	<classpathentry exported="true" kind="lib" path="/home/bflorat/.gradle/caches/artifacts-13/filestore/com.google.guava/guava/11.0/jar/f8ebb252d9ce7ff71b68b494551711242b2118d6/guava-11.0.jar">
 		<attributes>
 			<attribute name="org.eclipse.jst.component.dependency" value="../"/>
 		</attributes>

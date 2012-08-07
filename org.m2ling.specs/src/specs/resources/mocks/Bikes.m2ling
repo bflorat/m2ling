@@ -24,8 +24,12 @@
     <linkTypes id="_2LrDApqyEeGVMag01qc4bw" name="LDAP" comment="" description="Synchronous access to a LDAP directory. Over TCP-IP." sourceTypes="_E3EOwZoWEeG71vmJ5CR-iA" destinationTypes="_ha8mEZqyEeGVMag01qc4bw"/>
     <rules id="R1" name="R1" comment="This rule is one of the Bikes IS cornerstone." description="A GUI Module can't map (using an hyperlink or a redirect for instance) another GUI Module, each application must be integrated into the portal." status="APPLICABLE" priority="VERY_HIGH" rationale="Centralizaing all the IS intranet websites URL into a single portal brings low coupling between websites, eases management and increases security." exceptions="If a GUI module is itself a sub-domain kind of portal, it may integrate several GUI modules URL as parameters and come with hyperkink to them but a special attention must be paid to manage these URL by the project team. The pointed application must not be available from the main portal but only manage by the sub-domain portail.">
       <tags>logical</tags>
+      <history date="1244310146000" statusLiteral="SUBMITTED"/>
+      <history date="1314350100000" statusLiteral="APPLICABLE"/>
     </rules>
-    <rules id="R2" name="R2" comment="" description="A Service Module can't call another Service Module" status="APPLICABLE" priority="VERY_HIGH"/>
+    <rules id="R2" name="R2" comment="" description="A Service Module can't call another Service Module" status="APPLICABLE" priority="VERY_HIGH" rationale="dsds" exceptions="">
+      <history date="1322310146000" statusLiteral="SUBMITTED"/>
+    </rules>
     <statusLiterals>SUBMITTED</statusLiterals>
     <statusLiterals>UNDER_STUDY</statusLiterals>
     <statusLiterals>APPLICABLE</statusLiterals>

@@ -2,10 +2,7 @@ package org.m2ling.service.principles.impl;
 
 import java.io.IOException;
 import java.util.List;
-import java.util.Map;
 import java.util.Properties;
-import java.util.StringTokenizer;
-import java.util.TreeMap;
 
 import org.m2ling.common.configuration.Conf;
 import org.m2ling.common.dto.core.RuleDTO;
@@ -27,7 +24,7 @@ public class CreateRuleFixture extends M2lingFixture {
 		String sampleXMI = "src/specs/resources/mocks/Technical.m2ling";
 		Properties prop = new Properties();
 		prop.setProperty(PersistenceManagerXMIImpl.SpecificConfiguration.CONF_XMI_PATH, sampleXMI);
-		Conf configuration = new Conf(prop, logger,null);
+		Conf configuration = new Conf(prop, logger, null);
 		PersistenceManagerXMIImpl pm = new PersistenceManagerXMIImpl(logger, configuration);
 		CoreUtil util = new CoreUtil(logger, pm);
 		service = new RuleServiceImpl(pm, util, new FromDTO(util), new ToDTO(util), configuration, logger);
@@ -42,7 +39,7 @@ public class CreateRuleFixture extends M2lingFixture {
 	 * @throws FunctionalException
 	 */
 	public String getRule(String id, String vpID, String name, String description, String comment, String status,
-			String priority, String rationale, String exceptions, String tags, String history) throws FunctionalException {
+			String priority, String rationale, String exceptions, String tags) throws FunctionalException {
 		RuleBean bean = new RuleBean();
 		bean.setComment(comment);
 		bean.setDescription(description);
@@ -54,22 +51,16 @@ public class CreateRuleFixture extends M2lingFixture {
 		bean.setStatus(status);
 		bean.setTags(tags);
 		bean.setViewPointId(vpID);
-		StringTokenizer st = new StringTokenizer(history, ",");
-		Map<Long, String> historyMap = new TreeMap<Long, String>();
-		while (st.hasMoreTokens()) {
-			String event = st.nextToken();
-			StringTokenizer st2 = new StringTokenizer(event, ":");
-			historyMap.put(Long.parseLong(st2.nextToken()), st2.nextToken());
-		}
-		bean.setHistory(historyMap);
 		RuleDTO dto = new DTOConverter.ToDTO().getRuleDTO(bean);
 		service.createRule(null, dto);
-		List<RuleDTO> rules = service.getAllRules(null, "id_vp1");
+		List<RuleDTO> rules = service.getAllRules(null, vpID);
 		for (RuleDTO rule : rules) {
 			if (rule.getId().equals(bean.getId())) {
 				RuleBean out = new DTOConverter.FromDTO().getRuleBean(rule);
 				System.out.println(out);
-				return out.toString();
+				// We have to omit history here because we can't compare from HTML value as the value is
+				// only created on the server side
+				return out.toString().replaceAll("history=\\{.*\\}", "");
 			}
 		}
 		return "rule not found";

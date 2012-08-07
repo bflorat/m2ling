@@ -29,6 +29,7 @@ import com.google.inject.Singleton;
  */
 @Singleton
 public class PersistenceManagerXMIImpl implements PersistenceManager {
+	private final Resource resource;
 
 	/**
 	 * List of available properties for this implementation and default connfiguration
@@ -38,7 +39,6 @@ public class PersistenceManagerXMIImpl implements PersistenceManager {
 	 */
 	@Singleton
 	public static class SpecificConfiguration implements Conf.SpecificConfiguration {
-
 		public static final String CONF_XMI_PATH = "org.m2ling.persistence.xmi.path";
 
 		/*
@@ -72,9 +72,7 @@ public class PersistenceManagerXMIImpl implements PersistenceManager {
 
 	/** Resource root element */
 	private Root root;
-
 	private Logger logger;
-
 	private Conf configuration;
 
 	@Inject
@@ -90,7 +88,7 @@ public class PersistenceManagerXMIImpl implements PersistenceManager {
 		DomainPackage domainPackage = DomainPackage.eINSTANCE;
 		ResourceFactoryImpl resourceFactory = new XMIResourceFactoryImpl();
 		rset.getResourceFactoryRegistry().getExtensionToFactoryMap().put("m2ling", resourceFactory);
-		Resource resource = rset.createResource(mainXMLfileURI);
+		resource = rset.createResource(mainXMLfileURI);
 		resource.load(null);
 		logger.info("Loaded successfuly resource : " + mainXMLfileURI);
 		// Root is always the first element in the resource
@@ -120,4 +118,13 @@ public class PersistenceManagerXMIImpl implements PersistenceManager {
 		return root;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.m2ling.persistence.PersistenceManager#commit()
+	 */
+	@Override
+	public void commit() throws Exception {
+		resource.save(null);
+	}
 }

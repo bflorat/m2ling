@@ -6,12 +6,14 @@ package org.m2ling.domain.core.impl;
 import java.util.Collection;
 
 import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EDataTypeUniqueEList;
-import org.eclipse.emf.ecore.util.EObjectResolvingEList;
+import org.eclipse.emf.ecore.util.EObjectContainmentEList;
+import org.eclipse.emf.ecore.util.InternalEList;
 import org.m2ling.domain.core.CorePackage;
 import org.m2ling.domain.core.CustomProperty;
 import org.m2ling.domain.core.HasComment;
@@ -193,7 +195,7 @@ public class RuleImpl extends HasNameAndIDImpl implements Rule {
 	protected String exceptions = EXCEPTIONS_EDEFAULT;
 
 	/**
-	 * The cached value of the '{@link #getHistory() <em>History</em>}' reference list.
+	 * The cached value of the '{@link #getHistory() <em>History</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getHistory()
@@ -404,9 +406,23 @@ public class RuleImpl extends HasNameAndIDImpl implements Rule {
 	 */
 	public EList<StatusEvent> getHistory() {
 		if (history == null) {
-			history = new EObjectResolvingEList<StatusEvent>(StatusEvent.class, this, CorePackage.RULE__HISTORY);
+			history = new EObjectContainmentEList<StatusEvent>(StatusEvent.class, this, CorePackage.RULE__HISTORY);
 		}
 		return history;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+		switch (featureID) {
+			case CorePackage.RULE__HISTORY:
+				return ((InternalEList<?>)getHistory()).basicRemove(otherEnd, msgs);
+		}
+		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
 
 	/**

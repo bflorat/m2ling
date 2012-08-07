@@ -41,7 +41,7 @@ public interface StatusEvent extends EObject {
 	 * @return the value of the '<em>Date</em>' attribute.
 	 * @see #setDate(long)
 	 * @see org.m2ling.domain.core.CorePackage#getStatusEvent_Date()
-	 * @model
+	 * @model required="true"
 	 * @generated
 	 */
 	long getDate();
@@ -67,7 +67,7 @@ public interface StatusEvent extends EObject {
 	 * @return the value of the '<em>Status Literal</em>' attribute.
 	 * @see #setStatusLiteral(String)
 	 * @see org.m2ling.domain.core.CorePackage#getStatusEvent_StatusLiteral()
-	 * @model
+	 * @model required="true"
 	 * @generated
 	 */
 	String getStatusLiteral();

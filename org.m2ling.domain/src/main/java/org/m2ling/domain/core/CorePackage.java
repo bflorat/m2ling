@@ -2447,7 +2447,7 @@ public interface CorePackage extends EPackage {
 	int RULE__EXCEPTIONS = HAS_NAME_AND_ID_FEATURE_COUNT + 7;
 
 	/**
-	 * The feature id for the '<em><b>History</b></em>' reference list.
+	 * The feature id for the '<em><b>History</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -3880,10 +3880,10 @@ public interface CorePackage extends EPackage {
 	EAttribute getRule_Exceptions();
 
 	/**
-	 * Returns the meta object for the reference list '{@link org.m2ling.domain.core.Rule#getHistory <em>History</em>}'.
+	 * Returns the meta object for the containment reference list '{@link org.m2ling.domain.core.Rule#getHistory <em>History</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference list '<em>History</em>'.
+	 * @return the meta object for the containment reference list '<em>History</em>'.
 	 * @see org.m2ling.domain.core.Rule#getHistory()
 	 * @see #getRule()
 	 * @generated
@@ -5051,7 +5051,7 @@ public interface CorePackage extends EPackage {
 		EAttribute RULE__EXCEPTIONS = eINSTANCE.getRule_Exceptions();
 
 		/**
-		 * The meta object literal for the '<em><b>History</b></em>' reference list feature.
+		 * The meta object literal for the '<em><b>History</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
