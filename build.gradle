@@ -13,6 +13,9 @@ subprojects(){
 
  repositories(){
   mavenCentral name: 'additional maven repository', artifactUrls: ["https://repository.jboss.org/nexus/content/groups/public"]  
+  maven{
+	url "http://maven.vaadin.com/vaadin-addons"
+  }
  }
 
 

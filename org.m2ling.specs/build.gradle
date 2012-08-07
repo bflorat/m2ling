@@ -7,7 +7,6 @@ import org.apache.tools.ant.filters.ReplaceTokens
 defaultTasks('replaceInternalDefinition');
 
 dependencies() {
-	compile('junit:junit:4.8.2');
 	//tests
 	testCompile('org.concordion:concordion:1.4.2');
 	testCompile(project(':org.m2ling.service'));

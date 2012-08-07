@@ -6,13 +6,6 @@ Executable specifications build script
 
 apply plugin : 'war'
 
-// Add Vaadin repository
-repositories{
-	maven{
-		url "http://maven.vaadin.com/vaadin-addons"
-	}
-}
-
 dependencies{
 	compile group:'com.vaadin', name:'vaadin', version:'6.7.9'
 	// Vaadin plugins
