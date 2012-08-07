@@ -4,10 +4,12 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import org.m2ling.common.configuration.Conf;
 import org.m2ling.presentation.principles.PrinciplesGuiModule;
 import org.m2ling.presentation.widgets.SidebarEntry;
 
 import com.google.inject.Inject;
+import com.google.inject.Provider;
 import com.google.inject.servlet.SessionScoped;
 import com.vaadin.Application;
 import com.vaadin.terminal.Terminal;
@@ -24,13 +26,16 @@ public class M2lingApplication extends Application {
 	private MenuBar menu;
 	private Logger logger;
 	private PrinciplesGuiModule principlesGuiModule;
+	@SuppressWarnings("unused")
 	private GuiModule currentApp;
+	private final Provider<MainFrame> mfprovider;
 
 	@Inject
-	public M2lingApplication(Logger logger, PrinciplesGuiModule principles) {
+	public M2lingApplication(Logger logger, PrinciplesGuiModule principles, Provider<MainFrame> mfp, Conf conf) {
 		super();
 		this.logger = logger;
 		this.principlesGuiModule = principles;
+		this.mfprovider = mfp;
 	}
 
 	@Override
@@ -41,7 +46,7 @@ public class M2lingApplication extends Application {
 		// Use all the screen size
 		mainWindow.getContent().setSizeFull();
 		initMenu();
-		mframe = new MainFrame();
+		mframe = mfprovider.get();
 		VerticalLayout rootLayout = (VerticalLayout) mainWindow.getContent();
 		mainWindow.addComponent(menu);
 		mainWindow.addComponent(mframe);

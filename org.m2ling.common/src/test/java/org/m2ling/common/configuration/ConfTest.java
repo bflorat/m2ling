@@ -21,12 +21,12 @@ import org.m2ling.common.utils.Utils;
  * @author "Bertrand Florat <bertrand@florat.net>"
  * 
  */
-public class ConfigurationTest extends M2lingUnitTest {
+public class ConfTest extends M2lingUnitTest {
 	@Test
 	public void confOverriden() {
 		Properties confOverriden = new Properties();
 		confOverriden.put(SpecificConfigurationMock.param1, "foo");
-		Configuration conf = new Configuration(confOverriden, logger);
+		Conf conf = new Conf(confOverriden, logger,null);
 		assertEquals(conf.getSystemProperty(SpecificConfigurationMock.param1), "foo");
 	}
 
@@ -36,8 +36,7 @@ public class ConfigurationTest extends M2lingUnitTest {
 		Map<String, String> newenv = new HashMap<String, String>();
 		newenv.put(Consts.M2LING_DEBUG_VARIABLE_NAME, "false");
 		Utils.setEnv(newenv);
-		Configuration conf = new Configuration(null, logger);
-		conf.register(new SpecificConfigurationMock());
+		Conf conf = new Conf(null, logger,new SpecificConfigurationMock());
 		assertEquals(conf.getSystemProperty(SpecificConfigurationMock.param1), "value_param1");
 		// check that service conf file has been created
 		assertTrue(new File(getUTStorage().getAbsolutePath() + File.separator + Consts.CONF_FILENAME).exists());
@@ -49,7 +48,7 @@ public class ConfigurationTest extends M2lingUnitTest {
 		newenv.put(Consts.M2LING_HOME_VARIABLE_NAME, getUTStorage().getAbsolutePath());
 		Utils.setEnv(newenv);
 		assertEquals(System.getenv(Consts.M2LING_HOME_VARIABLE_NAME), getUTStorage().getAbsolutePath());
-		Configuration conf = new Configuration(null, logger);
+		Conf conf = new Conf(null, logger,null);
 		conf.register(new SpecificConfigurationMock());
 		assertEquals(conf.getSystemProperty(SpecificConfigurationMock.param1), "value_param1_debug");
 		assertFalse(new File(getUTStorage().getAbsolutePath() + File.separator + Consts.CONF_FILENAME).exists());

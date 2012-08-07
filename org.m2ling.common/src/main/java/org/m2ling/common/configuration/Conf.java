@@ -6,11 +6,14 @@ package org.m2ling.common.configuration;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.util.Enumeration;
 import java.util.HashSet;
 import java.util.Properties;
 import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
+import javax.annotation.Nullable;
 
 import org.m2ling.common.utils.Consts;
 import org.m2ling.common.utils.Utils;
@@ -18,6 +21,7 @@ import org.m2ling.common.utils.Utils;
 import com.google.common.base.Strings;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
+import com.google.inject.name.Named;
 
 /**
  * 
@@ -30,7 +34,7 @@ import com.google.inject.Singleton;
  * </p>
  * <p>
  * If several layers are installed on a single machine (like it is today : presentation and service
- * layer are packaged in the same war), all layers configutations are mixed into a single
+ * layer are packaged in the same war), all layers configurations are mixed into a single
  * configuration file.
  * </p>
  * 
@@ -39,9 +43,13 @@ import com.google.inject.Singleton;
  * 
  */
 @Singleton
-public class Configuration {
-
-	Set<SpecificConfiguration> specificConfs = new HashSet<Configuration.SpecificConfiguration>(10);
+public class Conf {
+	Set<SpecificConfiguration> specificConfs = new HashSet<Conf.SpecificConfiguration>(10);
+	private Logger logger;
+	/** Conf file properties */
+	private Properties fileProperties;
+	/** Overriding properties */
+	private Properties override;
 
 	public interface SpecificConfiguration {
 		/**
@@ -64,26 +72,25 @@ public class Configuration {
 		specificConfs.add(specific);
 	}
 
-	private Logger logger;
-
-	/** System properties */
-	private Properties systemProperties;
-
-	/** Overriding properties */
-	private Properties override;
-
 	/**
 	 * Build a global configuration
 	 * 
 	 * @param override
 	 *           overriding properties or null of none
 	 * @param logger
+	 * @param bootstrapSpecificConf
+	 *           possible bootstraping specific configuration. Useful to ensure the conf is
+	 *           registrated during a complexe application startup.
 	 */
 	@Inject
-	public Configuration(Properties override, Logger logger) {
+	public Conf(Properties override, Logger logger,
+			@Nullable @Named("bootstrap") SpecificConfiguration bootstrapSpecificConf) {
 		super();
 		this.logger = logger;
 		this.override = override;
+		if (bootstrapSpecificConf != null) {
+			register(bootstrapSpecificConf);
+		}
 	}
 
 	/**
@@ -110,7 +117,10 @@ public class Configuration {
 	}
 
 	/**
-	 * Return a sub-set of properties for provided keys
+	 * Return a sub-set of properties for provided keys, a defensive copy of the system properties is
+	 * returned.
+	 * 
+	 * @return a sub-set of properties for provided keys
 	 * 
 	 * @param keys
 	 */
@@ -129,8 +139,12 @@ public class Configuration {
 	 * In debug mode, we return default configuration.
 	 * </p>
 	 * <p>
-	 * In regular mode, we read the configuration file (created in the {@code getConfigurationFile()}
-	 * method if it doesn't yet exist).
+	 * In regular mode, we read the configuration file if required (created in the
+	 * {@code getConfigurationFile()} method if it doesn't yet exist).
+	 * </p>
+	 * <p>
+	 * The result (apart from conf file loading) is not cached to allow runtime registration of
+	 * specific configurations.
 	 * </p>
 	 * 
 	 * @throw IllegalStateException if the configuration can't be read
@@ -138,22 +152,29 @@ public class Configuration {
 	 * @return the system properties
 	 */
 	private Properties getSystemProperties() {
-		if (this.systemProperties != null) {
-			return this.systemProperties;
-		}
 		// In debug mode, do not read the conf file
 		if (Utils.isDebugMode()) {
 			return getDefaultConfiguration();
 		}
-		Properties result;
-		File fileConf = getConfigurationFile();
-		try {
-			result = new Properties();
-			result.loadFromXML(new FileInputStream(fileConf));
-		} catch (Exception e) {
-			String msg = "Corrupted configuration file : " + fileConf.getAbsolutePath();
-			logger.log(Level.SEVERE, msg, e);
-			throw new IllegalStateException(msg, e);
+		Properties result = getDefaultConfiguration();
+		if (fileProperties == null) {
+			File fileConf = getConfigurationFile();
+			try {
+				fileProperties = new Properties();
+				fileProperties.loadFromXML(new FileInputStream(fileConf));
+			} catch (Exception e) {
+				String msg = "Corrupted configuration file : " + fileConf.getAbsolutePath();
+				logger.log(Level.SEVERE, msg, e);
+				throw new IllegalStateException(msg, e);
+			}
+		}
+		// Override defaults
+		if (fileProperties != null) {
+			Enumeration<?> names = fileProperties.propertyNames();
+			while (names.hasMoreElements()) {
+				String name = (String) names.nextElement();
+				result.setProperty(name, fileProperties.getProperty(name));
+			}
 		}
 		return result;
 	}

@@ -3,13 +3,10 @@
  */
 package org.m2ling.service.common;
 
-import org.m2ling.common.configuration.Configuration;
 import org.m2ling.common.security.ACResource;
 import org.m2ling.common.security.impl.ACResourceInterceptorImpl;
 import org.m2ling.persistence.PersistenceManager;
 import org.m2ling.persistence.impl.PersistenceManagerTeneoImpl;
-import org.m2ling.service.util.CoreUtil;
-import org.m2ling.service.util.DTOConverter;
 
 import com.google.inject.AbstractModule;
 import com.google.inject.matcher.Matchers;
@@ -31,10 +28,6 @@ public class ServicesCommonGuiceModule extends AbstractModule {
 	protected void configure() {
 		{ // Bindings
 			bind(PersistenceManager.class).to(PersistenceManagerTeneoImpl.class);
-			bind(CoreUtil.class);
-			bind(DTOConverter.FromDTO.class);
-			bind(DTOConverter.ToDTO.class);
-			bind(Configuration.class);
 		}
 
 		{// AOP bindings

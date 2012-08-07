@@ -16,7 +16,7 @@ import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import org.junit.After;
 import org.junit.Before;
-import org.m2ling.common.configuration.Configuration;
+import org.m2ling.common.configuration.Conf;
 import org.m2ling.common.utils.Consts;
 import org.m2ling.common.utils.M2lingUnitTest;
 import org.m2ling.domain.DomainFactory;
@@ -82,7 +82,7 @@ public class ServiceTestCase extends M2lingUnitTest{
 	 * @throws IOException
 	 */
 	public void populateDatabase(String mockName) throws IOException {
-		Configuration conf = new Configuration(null, logger);
+		Conf conf = new Conf(null, logger,null);
 		pm = new PersistenceManagerTeneoImpl(conf, logger);
 		// Load the resource
 		populateMock(mockName);

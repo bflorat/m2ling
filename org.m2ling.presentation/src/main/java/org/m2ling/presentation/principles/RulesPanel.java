@@ -46,6 +46,7 @@ public class RulesPanel extends VerticalLayout {
 	private final DTOConverter.ToDTO toDTO;
 	private final DTOConverter.FromDTO fromDTO;
 	private final RuleDialogFactory factory;
+private final Msg msg;
 
 	/**
 	 * Build a rules dialog
@@ -53,7 +54,7 @@ public class RulesPanel extends VerticalLayout {
 	 */
 	@Inject
 	public RulesPanel(Logger logger, @Assisted String vpID, RuleService service, DTOConverter.ToDTO toDTO,
-			DTOConverter.FromDTO fromDTO, RuleDialogFactory factory) {
+			DTOConverter.FromDTO fromDTO, RuleDialogFactory factory,Msg msg) {
 		super();
 		this.vpID = vpID;
 		this.service = service;
@@ -61,6 +62,7 @@ public class RulesPanel extends VerticalLayout {
 		this.logger = logger;
 		this.toDTO = toDTO;
 		this.fromDTO = fromDTO;
+		this.msg = msg;
 		setHeight(null);
 		setWidth("98%");
 		setMargin(true);
@@ -71,7 +73,7 @@ public class RulesPanel extends VerticalLayout {
 		try {
 			List<RuleDTO> rules = service.getAllRules(null, vpID);
 			if (rules.size() == 0) {
-				addComponent(new Label(Msg.get("pr.1")));
+				addComponent(new Label(msg.get("pr.1")));
 				Button create = getCreateRuleButton();
 				addComponent(create);
 				setComponentAlignment(create, Alignment.TOP_RIGHT);
@@ -96,8 +98,8 @@ public class RulesPanel extends VerticalLayout {
 						return getHtmlDetails(bean);
 					}
 				});
-				table.setColumnHeaders(new String[] { Msg.get("gal.3"), Msg.get("gal.12"), Msg.get("gal.7"),
-						Msg.get("gal.8"), Msg.get("gal.1") + " (" + Msg.get("gal.10") + ")", });
+				table.setColumnHeaders(new String[] { msg.get("gal.3"), msg.get("gal.12"), msg.get("gal.7"),
+						msg.get("gal.8"), msg.get("gal.1") + " (" + msg.get("gal.10") + ")", });
 				table.addGeneratedColumn("name", new Table.ColumnGenerator() {
 					public Component generateCell(Table table, Object itemId, Object columnId) {
 						@SuppressWarnings("unchecked")
@@ -139,17 +141,17 @@ public class RulesPanel extends VerticalLayout {
 				Button create = getCreateRuleButton();
 				addComponent(create);
 				setComponentAlignment(create, Alignment.TOP_RIGHT);
-				addComponent(new Label("<br/>",Label.CONTENT_RAW));
+				addComponent(new Label("<br/>", Label.CONTENT_RAW));
 				addComponent(table);
 			}
 		} catch (FunctionalException e) {
 			logger.log(Level.SEVERE, e.getDetailedMessage(), e);
-			getWindow().showNotification(Msg.humanMessage(e), Notification.TYPE_ERROR_MESSAGE);
+			getWindow().showNotification(msg.humanMessage(e), Notification.TYPE_ERROR_MESSAGE);
 		}
 	}
 
 	private void dropRule(final RuleBean rule) {
-		ConfirmDialog.show(getApplication().getMainWindow(), Msg.get("confirm.1") + " " + Msg.get("confirm.2"),
+		ConfirmDialog.show(getApplication().getMainWindow(), msg.get("confirm.1") + " " + msg.get("confirm.2"),
 				new ConfirmDialog.Listener() {
 					public void onClose(ConfirmDialog dialog) {
 						if (dialog.isConfirmed()) {
@@ -160,7 +162,7 @@ public class RulesPanel extends VerticalLayout {
 								attach();
 							} catch (FunctionalException e) {
 								logger.log(Level.SEVERE, e.getDetailedMessage(), e.getCause());
-								getWindow().showNotification(Msg.humanMessage(e), Notification.TYPE_ERROR_MESSAGE);
+								getWindow().showNotification(msg.humanMessage(e), Notification.TYPE_ERROR_MESSAGE);
 							}
 						}
 					}
@@ -174,27 +176,31 @@ public class RulesPanel extends VerticalLayout {
 	 * @return HTML tooltip for a rule
 	 */
 	private String getHtmlDetails(RuleBean bean) {
-		String out = "<b>" + Msg.get("gal.1") + " : </b>";
+		String out = "<b>" + msg.get("gal.1") + " : </b>";
 		out += bean.getDescription();
 		out += "</br></br>";
 		out += "<b>Rationale : </b>";
 		out += bean.getRationale();
 		out += "</br></br>";
 		if (!Strings.isNullOrEmpty(bean.getExceptions())) {
-			out += "<b>" + Msg.get("pr.23") + " : </b>";
+			out += "<b>" + msg.get("pr.23") + " : </b>";
 			out += bean.getExceptions();
 			out += "</br></br>";
 		}
 		if (!Strings.isNullOrEmpty(bean.getComment())) {
-			out += "<b>" + Msg.get("gal.11") + " : </b>";
+			out += "<b>" + msg.get("gal.11") + " : </b>";
 			out += bean.getComment();
 			out += "</br></br>";
+		}
+		out += "<b>" + msg.get("pr.28") + " : </b><br/>";
+		for (Long date : bean.getHistory().keySet()){
+			//TODO out += new Locale
 		}
 		return out;
 	}
 
 	private Button getCreateRuleButton() {
-		Button createRule = new Button(Msg.get("pr.16"));
+		Button createRule = new Button(msg.get("pr.16"));
 		createRule.setStyleName(BaseTheme.BUTTON_LINK);
 		createRule.addListener(new Button.ClickListener() {
 			public void buttonClick(ClickEvent event) {

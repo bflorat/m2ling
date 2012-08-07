@@ -12,7 +12,7 @@ import java.util.logging.Logger;
 
 import org.junit.After;
 import org.junit.Before;
-import org.m2ling.common.configuration.Configuration;
+import org.m2ling.common.configuration.Conf;
 import org.m2ling.common.utils.Consts;
 import org.m2ling.common.utils.Utils;
 
@@ -44,7 +44,7 @@ public class M2lingUnitTest {
 		newenv.put(Consts.M2LING_DEBUG_VARIABLE_NAME, "true");
 		Utils.setEnv(newenv);
 		// Drop the configuration files
-		Configuration conf = new Configuration(null, logger);
+		Conf conf = new Conf(null, logger,null);
 		conf.getConfigurationFile().delete();
 	}
 	

@@ -47,11 +47,12 @@ public class PrinciplesGuiModule extends GuiModule implements Observer {
 	private ViewPointPanelFactory panelFactory;
 	private ObservationManager obs;
 	private DTOConverter.FromDTO fromDTO;
+	private final Msg msg;
 
 	@Inject
 	public PrinciplesGuiModule(ViewPointService vpService, Logger logger, FeaturesEntry features,
 			ViewPointDialogFactory dialogFactory, ViewPointPanelFactory panelFactory, ObservationManager obs,
-			DTOConverter.FromDTO fromDTO) {
+			DTOConverter.FromDTO fromDTO, Msg msg) {
 		super();
 		this.vpService = vpService;
 		this.logger = logger;
@@ -60,6 +61,7 @@ public class PrinciplesGuiModule extends GuiModule implements Observer {
 		this.panelFactory = panelFactory;
 		this.obs = obs;
 		this.fromDTO = fromDTO;
+		this.msg = msg;
 		setSpacing(false);
 		obs.register(this);
 	}
@@ -92,7 +94,7 @@ public class PrinciplesGuiModule extends GuiModule implements Observer {
 		noneVPLabel.setIcon(new ThemeResource("img/16/information.png"));
 		// Use caption to set text to keep icon and label on the same line
 		noneVPLabel.setCaption("None view point found");
-		Button create = new Button(Msg.get("pr.2"), new Button.ClickListener() {
+		Button create = new Button(msg.get("pr.2"), new Button.ClickListener() {
 			public void buttonClick(ClickEvent event) {
 				ViewPointDialog vpDialog = dialogFactory.getViewPointDialogFor(null);
 				vpDialog.setModal(true);

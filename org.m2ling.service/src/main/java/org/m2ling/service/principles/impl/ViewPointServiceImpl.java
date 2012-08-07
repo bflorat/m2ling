@@ -8,7 +8,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.logging.Logger;
 
-import org.m2ling.common.configuration.Configuration;
+import org.m2ling.common.configuration.Conf;
 import org.m2ling.common.dto.core.ViewPointDTO;
 import org.m2ling.common.exceptions.FunctionalException;
 import org.m2ling.common.exceptions.FunctionalException.Code;
@@ -37,7 +37,7 @@ public class ViewPointServiceImpl extends ServiceImpl implements ViewPointServic
 	 */
 	@Inject
 	protected ViewPointServiceImpl(PersistenceManager pm, CoreUtil util, DTOConverter.FromDTO fromDTO,
-			DTOConverter.ToDTO toDTO, Configuration conf, Logger logger) {
+			DTOConverter.ToDTO toDTO, Conf conf, Logger logger) {
 		super(pm, util, fromDTO, toDTO, conf, logger);
 	}
 

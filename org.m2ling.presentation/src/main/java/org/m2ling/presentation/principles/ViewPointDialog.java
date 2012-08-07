@@ -44,10 +44,11 @@ public class ViewPointDialog extends Window {
 	/** Is it a new view point ? */
 	private boolean newVP = true;
 	private ViewPointBean bean;
-	private ViewPointService service;
-	private Logger logger;
-	private ObservationManager obs;
-	private DTOConverter.ToDTO toDTO;
+	private final ViewPointService service;
+	private final Logger logger;
+	private final ObservationManager obs;
+	private final DTOConverter.ToDTO toDTO;
+	private final Msg msg;
 
 	/**
 	 * Build a view point dialog
@@ -55,13 +56,14 @@ public class ViewPointDialog extends Window {
 	 */
 	@Inject
 	public ViewPointDialog(Logger logger, @Assisted @Nullable ViewPointBean vp, ViewPointService service,
-			ObservationManager obs, DTOConverter.ToDTO toDTO) {
-		super(vp == null ? Msg.get("pr.10") : vp.getName());
+			ObservationManager obs, DTOConverter.ToDTO toDTO, Msg msg) {
+		super(vp == null ? msg.get("pr.10") : vp.getName());
 		this.bean = vp;
 		this.service = service;
 		this.logger = logger;
 		this.obs = obs;
 		this.toDTO = toDTO;
+		this.msg = msg;
 		// We need a bean to attach data to
 		if (vp == null) {
 			bean = new ViewPointBean();
@@ -100,16 +102,26 @@ public class ViewPointDialog extends Window {
 					obs.notifySync(new org.m2ling.presentation.events.Event(Events.VP_CHANGE));
 				} catch (FunctionalException e) {
 					logger.log(Level.SEVERE, e.getDetailedMessage(), e.getCause());
-					getWindow().showNotification(Msg.humanMessage(e), Notification.TYPE_ERROR_MESSAGE);
+					getWindow().showNotification(msg.humanMessage(e), Notification.TYPE_ERROR_MESSAGE);
 				}
+			}
+
+			@Override
+			public String getLabel() {
+				return msg.get("gal.5");
 			}
 		};
 		Command cancel = new Command() {
 			public void execute() {
 				close();
 			}
+
+			@Override
+			public String getLabel() {
+				return msg.get("gal.6");
+			}
 		};
-		ViewPointIconUploader uploader = new ViewPointIconUploader(bean, logger);
+		ViewPointIconUploader uploader = new ViewPointIconUploader(bean, logger, msg);
 		OKCancel okc = new OKCancel(ok, cancel);
 		addComponent(form);
 		addComponent(uploader);
@@ -124,29 +136,29 @@ public class ViewPointDialog extends Window {
 			if ("name".equals(propertyId)) {
 				Field name = super.createField(item, propertyId, uiContext);
 				name.setRequired(true);
-				name.setDescription(Msg.get("pr.5"));
+				name.setDescription(msg.get("pr.5"));
 				return name;
 			} else if ("description".equals(propertyId)) {
 				TextArea description = new TextArea();
-				description.setCaption(Msg.get("gal.1"));
+				description.setCaption(msg.get("gal.1"));
 				description.setHeight(12, UNITS_EX);
 				description.setWidth("100%");
-				description.setDescription(Msg.get("pr.6"));
+				description.setDescription(msg.get("pr.6"));
 				return description;
 			} else if ("comment".equals(propertyId)) {
 				TextArea comment = new TextArea();
 				comment.setHeight(12, UNITS_EX);
 				comment.setWidth("100%");
-				comment.setCaption(Msg.get("mf.comments"));
-				comment.setDescription(Msg.get("pr.7"));
+				comment.setCaption(msg.get("mf.comments"));
+				comment.setDescription(msg.get("pr.7"));
 				return comment;
 			} else if ("tags".equals(propertyId)) {
 				Field tags = super.createField(item, propertyId, uiContext);
-				tags.setDescription(Msg.get("pr.8"));
+				tags.setDescription(msg.get("pr.8"));
 				return tags;
 			} else if ("statusLiterals".equals(propertyId)) {
 				Field statusLiterals = super.createField(item, propertyId, uiContext);
-				statusLiterals.setDescription(Msg.get("pr.9"));
+				statusLiterals.setDescription(msg.get("pr.9"));
 				return statusLiterals;
 			} else {
 				return super.createField(item, propertyId, uiContext);

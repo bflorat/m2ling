@@ -7,7 +7,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.logging.Logger;
 
-import org.m2ling.common.configuration.Configuration;
+import org.m2ling.common.configuration.Conf;
 import org.m2ling.common.dto.core.RuleDTO;
 import org.m2ling.common.dto.core.StatusEventDTO;
 import org.m2ling.common.exceptions.FunctionalException;
@@ -44,7 +44,7 @@ public class RuleServiceImpl extends ServiceImpl implements RuleService {
 	 */
 	@Inject
 	protected RuleServiceImpl(PersistenceManager pm, CoreUtil util, DTOConverter.FromDTO fromDTO,
-			DTOConverter.ToDTO toDTO, Configuration conf, Logger logger) {
+			DTOConverter.ToDTO toDTO, Conf conf, Logger logger) {
 		super(pm, util, fromDTO, toDTO, conf, logger);
 	}
 

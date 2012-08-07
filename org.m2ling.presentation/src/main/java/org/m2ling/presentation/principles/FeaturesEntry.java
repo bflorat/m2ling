@@ -10,11 +10,13 @@ import com.vaadin.ui.themes.BaseTheme;
 
 @SuppressWarnings("serial")
 public class FeaturesEntry extends SidebarEntry {
-	ViewPointDialogFactory factory;
+	private final ViewPointDialogFactory factory;
+	private final Msg msg;
 
 	@Inject
-	public FeaturesEntry(ViewPointDialogFactory factory) {
+	public FeaturesEntry(ViewPointDialogFactory factory, Msg msg) {
 		super();
+		this.msg = msg;
 		this.factory = factory;
 		setSizeFull();
 	}
@@ -23,7 +25,7 @@ public class FeaturesEntry extends SidebarEntry {
 	public void attach() {
 		// Make sure to reset all previously displayed items
 		removeAllComponents();
-		Button create = new Button(Msg.get("pr.2"), new Button.ClickListener() {
+		Button create = new Button(msg.get("pr.2"), new Button.ClickListener() {
 			public void buttonClick(ClickEvent event) {
 				ViewPointDialog vpDialog = factory.getViewPointDialogFor(null);
 				vpDialog.setModal(true);
@@ -41,6 +43,6 @@ public class FeaturesEntry extends SidebarEntry {
 	 */
 	@Override
 	public String getLabel() {
-		return Msg.get("pr.3");
+		return msg.get("pr.3");
 	}
 }

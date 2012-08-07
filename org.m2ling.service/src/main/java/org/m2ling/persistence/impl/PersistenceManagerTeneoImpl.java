@@ -21,7 +21,7 @@ import org.eclipse.emf.teneo.hibernate.HbHelper;
 import org.eclipse.emf.teneo.hibernate.resource.HibernateResource;
 import org.hibernate.Session;
 import org.hibernate.cfg.Environment;
-import org.m2ling.common.configuration.Configuration;
+import org.m2ling.common.configuration.Conf;
 import org.m2ling.common.utils.Consts;
 import org.m2ling.domain.DomainPackage;
 import org.m2ling.domain.Root;
@@ -48,7 +48,7 @@ public class PersistenceManagerTeneoImpl implements PersistenceManager {
 	 * 
 	 */
 	@Singleton
-	public static class SpecificConfiguration implements Configuration.SpecificConfiguration {
+	public static class SpecificConfiguration implements Conf.SpecificConfiguration {
 		public static final String CONF_TENEO_DRIVER = Environment.DRIVER;
 		public static final String CONF_TENEO_USER = Environment.USER;
 		public static final String CONF_TENEO_URL = Environment.URL;
@@ -124,7 +124,7 @@ public class PersistenceManagerTeneoImpl implements PersistenceManager {
 	 */
 	@Inject
 	// This is a just in time injection used to inject fields and SpecificConfiugration nested class
-	public PersistenceManagerTeneoImpl(Configuration configuration, Logger logger) {
+	public PersistenceManagerTeneoImpl(Conf configuration, Logger logger) {
 		this.logger = logger;
 		// Add this specific configuration to the global service configuration
 		configuration.register(new SpecificConfiguration());

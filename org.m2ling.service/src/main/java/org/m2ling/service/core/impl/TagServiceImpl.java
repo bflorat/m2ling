@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import org.m2ling.common.configuration.Configuration;
+import org.m2ling.common.configuration.Conf;
 import org.m2ling.common.exceptions.FunctionalException;
 import org.m2ling.common.exceptions.FunctionalException.Code;
 import org.m2ling.common.security.ACResource;
@@ -39,7 +39,7 @@ public class TagServiceImpl extends ServiceImpl implements TagService {
 	 */
 	@Inject
 	protected TagServiceImpl(PersistenceManager pm, CoreUtil util, DTOConverter.FromDTO fromDTO,
-			DTOConverter.ToDTO toDTO, Configuration conf, Logger logger) {
+			DTOConverter.ToDTO toDTO, Conf conf, Logger logger) {
 		super(pm, util, fromDTO, toDTO, conf, logger);
 	}
 

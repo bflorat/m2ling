@@ -61,6 +61,7 @@ public class RuleDialog extends Window {
 	private ViewPointService vpService;
 	private ViewPointBean vpBean;
 	private Panel panel;
+	private final Msg msg;
 
 	/**
 	 * Build a rule dialog
@@ -68,8 +69,9 @@ public class RuleDialog extends Window {
 	 */
 	@Inject
 	public RuleDialog(Logger logger, @Assisted @Nullable RuleBean ruleBean, RuleService ruleService,
-			ViewPointService vpService, ObservationManager obs, DTOConverter.ToDTO toDTO, DTOConverter.FromDTO fromDTO) {
-		super(Strings.isNullOrEmpty(ruleBean.getId()) ? Msg.get("pr.18") : Msg.get("pr.17") + ruleBean.getName());
+			ViewPointService vpService, ObservationManager obs, DTOConverter.ToDTO toDTO, DTOConverter.FromDTO fromDTO,
+			Msg msg) {
+		super(Strings.isNullOrEmpty(ruleBean.getId()) ? msg.get("pr.18") : msg.get("pr.17") + ruleBean.getName());
 		this.bean = ruleBean;
 		this.ruleService = ruleService;
 		this.vpService = vpService;
@@ -77,9 +79,11 @@ public class RuleDialog extends Window {
 		this.obs = obs;
 		this.toDTO = toDTO;
 		this.fromDTO = fromDTO;
+		this.msg = msg;
 		newRule = Strings.isNullOrEmpty(ruleBean.getId());
 		if (newRule) {
 			bean.setId(UUID.randomUUID().toString());
+			bean.setPriority(msg.get("rule_priority." + RulePriority.MEDIUM.name()));
 		}
 		this.bean = ruleBean;
 		setWidth("650px");
@@ -122,13 +126,23 @@ public class RuleDialog extends Window {
 					obs.notifySync(new org.m2ling.presentation.events.Event(Events.VP_CHANGE));
 				} catch (FunctionalException e) {
 					logger.log(Level.SEVERE, e.getDetailedMessage(), e);
-					getWindow().showNotification(Msg.humanMessage(e), Notification.TYPE_ERROR_MESSAGE);
+					getWindow().showNotification(msg.humanMessage(e), Notification.TYPE_ERROR_MESSAGE);
 				}
+			}
+
+			@Override
+			public String getLabel() {
+				return msg.get("gal.5");
 			}
 		};
 		Command cancel = new Command() {
 			public void execute() {
 				close();
+			}
+
+			@Override
+			public String getLabel() {
+				return msg.get("gal.6");
 			}
 		};
 		OKCancel okc = new OKCancel(ok, cancel);
@@ -144,42 +158,42 @@ public class RuleDialog extends Window {
 			if ("name".equals(propertyId)) {
 				Field name = super.createField(item, propertyId, uiContext);
 				name.setRequired(true);
-				name.setRequiredError(Msg.get("error.5"));
-				name.setDescription(Msg.get("pr.27"));
+				name.setRequiredError(msg.get("error.5"));
+				name.setDescription(msg.get("pr.27"));
 				return name;
 			} else if ("description".equals(propertyId)) {
 				TextArea description = new TextArea();
-				description.setCaption(Msg.get("gal.1"));
+				description.setCaption(msg.get("gal.1"));
 				description.setHeight(12, UNITS_EX);
 				description.setWidth("100%");
-				description.setDescription(Msg.get("pr.27"));
+				description.setDescription(msg.get("pr.27"));
 				description.setRequired(true);
 				return description;
 			} else if ("rationale".equals(propertyId)) {
 				TextArea rationale = new TextArea();
-				rationale.setCaption(Msg.get("gal.9"));
+				rationale.setCaption(msg.get("gal.9"));
 				rationale.setHeight(12, UNITS_EX);
 				rationale.setWidth("100%");
-				rationale.setDescription(Msg.get("pr.22"));
+				rationale.setDescription(msg.get("pr.22"));
 				rationale.setRequired(true);
 				return rationale;
 			} else if ("exceptions".equals(propertyId)) {
 				TextArea exceptions = new TextArea();
-				exceptions.setCaption(Msg.get("pr.23"));
+				exceptions.setCaption(msg.get("pr.23"));
 				exceptions.setHeight(12, UNITS_EX);
 				exceptions.setWidth("100%");
-				exceptions.setDescription(Msg.get("pr.24"));
+				exceptions.setDescription(msg.get("pr.24"));
 				return exceptions;
 			} else if ("comment".equals(propertyId)) {
 				TextArea comment = new TextArea();
 				comment.setHeight(12, UNITS_EX);
 				comment.setWidth("100%");
-				comment.setCaption(Msg.get("mf.comments"));
-				comment.setDescription(Msg.get("pr.7"));
+				comment.setCaption(msg.get("mf.comments"));
+				comment.setDescription(msg.get("pr.7"));
 				return comment;
 			} else if ("tags".equals(propertyId)) {
 				Field tags = super.createField(item, propertyId, uiContext);
-				tags.setDescription(Msg.get("pr.8"));
+				tags.setDescription(msg.get("pr.8"));
 				return tags;
 			} else if ("status".equals(propertyId)) {
 				ComboBox status = new ComboBox();
@@ -187,20 +201,20 @@ public class RuleDialog extends Window {
 				for (String st : statusList) {
 					status.addItem(st);
 				}
-				status.setDescription(Msg.get("pr.20"));
-				status.setCaption(Msg.get("gal.7"));
+				status.setDescription(msg.get("pr.20"));
+				status.setCaption(msg.get("gal.7"));
 				status.setRequired(true);
-				status.setRequiredError(Msg.get("error.5"));
+				status.setRequiredError(msg.get("error.5"));
 				status.setNullSelectionAllowed(false);
 				return status;
 			} else if ("priority".equals(propertyId)) {
 				Select priority = new Select();
 				priority.setNullSelectionAllowed(false);
 				for (RulePriority pr : RulePriority.values()) {
-					priority.addItem(Msg.get("rule_priority." + pr.name()));
+					priority.addItem(msg.get("rule_priority." + pr.name()));
 				}
-				priority.setDescription(Msg.get("pr.21"));
-				priority.setCaption(Msg.get("gal.8"));
+				priority.setDescription(msg.get("pr.21"));
+				priority.setCaption(msg.get("gal.8"));
 				priority.setRequired(true);
 				return priority;
 			} else {

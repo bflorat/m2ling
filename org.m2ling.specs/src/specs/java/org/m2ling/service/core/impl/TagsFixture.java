@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Properties;
 
 import org.junit.Test;
-import org.m2ling.common.configuration.Configuration;
+import org.m2ling.common.configuration.Conf;
 import org.m2ling.common.exceptions.FunctionalException;
 import org.m2ling.common.soa.Context;
 import org.m2ling.common.utils.Utils;
@@ -32,7 +32,7 @@ public class TagsFixture extends M2lingFixture {
 		String sampleXMI = "src/specs/resources/mocks/Technical.m2ling";
 		Properties prop = new Properties();
 		prop.setProperty(PersistenceManagerXMIImpl.SpecificConfiguration.CONF_XMI_PATH, sampleXMI);
-		Configuration configuration = new Configuration(prop, logger);
+		Conf configuration = new Conf(prop, logger,null);
 		PersistenceManagerXMIImpl pm = new PersistenceManagerXMIImpl(logger, configuration);
 		CoreUtil util = new CoreUtil(logger, pm);
 		serviceTag = new TagServiceImpl(pm, util, new FromDTO(util), new ToDTO(util), configuration, logger);

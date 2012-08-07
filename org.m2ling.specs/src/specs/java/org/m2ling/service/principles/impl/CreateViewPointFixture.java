@@ -3,7 +3,7 @@ package org.m2ling.service.principles.impl;
 import java.io.IOException;
 import java.util.Properties;
 
-import org.m2ling.common.configuration.Configuration;
+import org.m2ling.common.configuration.Conf;
 import org.m2ling.common.dto.core.ViewPointDTO;
 import org.m2ling.common.exceptions.FunctionalException;
 import org.m2ling.persistence.impl.PersistenceManagerXMIImpl;
@@ -23,7 +23,7 @@ public class CreateViewPointFixture extends M2lingFixture {
 		String sampleXMI = "src/specs/resources/mocks/Technical.m2ling";
 		Properties prop = new Properties();
 		prop.setProperty(PersistenceManagerXMIImpl.SpecificConfiguration.CONF_XMI_PATH, sampleXMI);
-		Configuration configuration = new Configuration(prop, logger);
+		Conf configuration = new Conf(prop, logger,null);
 		PersistenceManagerXMIImpl pm = new PersistenceManagerXMIImpl(logger, configuration);
 		CoreUtil util = new CoreUtil(logger, pm);
 		service = new ViewPointServiceImpl(pm, util, new FromDTO(util), new ToDTO(util), configuration, logger);

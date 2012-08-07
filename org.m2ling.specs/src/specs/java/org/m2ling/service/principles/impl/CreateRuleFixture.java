@@ -7,7 +7,7 @@ import java.util.Properties;
 import java.util.StringTokenizer;
 import java.util.TreeMap;
 
-import org.m2ling.common.configuration.Configuration;
+import org.m2ling.common.configuration.Conf;
 import org.m2ling.common.dto.core.RuleDTO;
 import org.m2ling.common.exceptions.FunctionalException;
 import org.m2ling.persistence.impl.PersistenceManagerXMIImpl;
@@ -27,7 +27,7 @@ public class CreateRuleFixture extends M2lingFixture {
 		String sampleXMI = "src/specs/resources/mocks/Technical.m2ling";
 		Properties prop = new Properties();
 		prop.setProperty(PersistenceManagerXMIImpl.SpecificConfiguration.CONF_XMI_PATH, sampleXMI);
-		Configuration configuration = new Configuration(prop, logger);
+		Conf configuration = new Conf(prop, logger,null);
 		PersistenceManagerXMIImpl pm = new PersistenceManagerXMIImpl(logger, configuration);
 		CoreUtil util = new CoreUtil(logger, pm);
 		service = new RuleServiceImpl(pm, util, new FromDTO(util), new ToDTO(util), configuration, logger);

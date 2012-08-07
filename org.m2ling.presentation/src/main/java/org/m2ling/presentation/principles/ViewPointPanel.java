@@ -48,6 +48,7 @@ public class ViewPointPanel extends VerticalLayout {
 	private ViewPointService service;
 	private ObservationManager obs;
 	private DTOConverter.ToDTO toDTO;
+	private Msg msg;
 
 	/**
 	 * Build an VP panel
@@ -59,7 +60,8 @@ public class ViewPointPanel extends VerticalLayout {
 	 */
 	@Inject
 	public ViewPointPanel(@Assisted ViewPointBean bean, Logger logger, ViewPointDialogFactory factory,
-			ViewPointService service, ObservationManager obs, DTOConverter.ToDTO toDTO, RulesPanelFactory rulesPanelFactory) {
+			ViewPointService service, ObservationManager obs, DTOConverter.ToDTO toDTO,
+			RulesPanelFactory rulesPanelFactory, Msg msg) {
 		super();
 		this.logger = logger;
 		this.bean = bean;
@@ -68,6 +70,7 @@ public class ViewPointPanel extends VerticalLayout {
 		this.obs = obs;
 		this.toDTO = toDTO;
 		this.rulesPanelFactory = rulesPanelFactory;
+		this.msg = msg;
 		if (bean == null) {
 			throw new IllegalArgumentException("Null viewpoint");
 		}
@@ -99,7 +102,7 @@ public class ViewPointPanel extends VerticalLayout {
 				+ (!Strings.isNullOrEmpty(bean.getTags()) ? " [" + bean.getTags() + "]" : ""));
 		name.setStyleName("principles_vp-panel-name");
 		name.setSizeUndefined();
-		Button edit = new Button(Msg.get("gal.2"));
+		Button edit = new Button(msg.get("gal.2"));
 		edit.setStyleName(BaseTheme.BUTTON_LINK);
 		edit.addStyleName("command");
 		edit.addListener(new Button.ClickListener() {
@@ -109,7 +112,7 @@ public class ViewPointPanel extends VerticalLayout {
 				getWindow().addWindow(vpDialog);
 			}
 		});
-		Button delete = new Button(Msg.get("gal.3"));
+		Button delete = new Button(msg.get("gal.3"));
 		delete.setStyleName(BaseTheme.BUTTON_LINK);
 		delete.addStyleName("command");
 		delete.addListener(new Button.ClickListener() {
@@ -120,7 +123,7 @@ public class ViewPointPanel extends VerticalLayout {
 					obs.notifySync(new org.m2ling.presentation.events.Event(Events.VP_CHANGE));
 				} catch (FunctionalException e) {
 					logger.log(Level.SEVERE, e.getDetailedMessage(), e.getCause());
-					getWindow().showNotification(Msg.humanMessage(e), Notification.TYPE_ERROR_MESSAGE);
+					getWindow().showNotification(msg.humanMessage(e), Notification.TYPE_ERROR_MESSAGE);
 				}
 			}
 		});
@@ -130,28 +133,28 @@ public class ViewPointPanel extends VerticalLayout {
 		rulesHiddenPane.setHeight(null);
 		RulesPanel rulesPanel = rulesPanelFactory.getRulesPanelFor(bean.getId());
 		rulesHiddenPane.setContent(rulesPanel);
-		Button rules = new Button(Msg.get("pr.13"));
+		Button rules = new Button(msg.get("pr.13"));
 		rules.setStyleName(BaseTheme.BUTTON_LINK);
 		rules.addListener(new Button.ClickListener() {
 			public void buttonClick(ClickEvent event) {
 				rulesHiddenPane.setVisible(!rulesHiddenPane.isVisible());
 			}
 		});
-		Button componentTypes = new Button(Msg.get("pr.14"));
+		Button componentTypes = new Button(msg.get("pr.14"));
 		componentTypes.setStyleName(BaseTheme.BUTTON_LINK);
 		componentTypes.addListener(new Button.ClickListener() {
 			public void buttonClick(ClickEvent event) {
 				// TODO
 			}
 		});
-		Button linkTypes = new Button(Msg.get("pr.15"));
+		Button linkTypes = new Button(msg.get("pr.15"));
 		linkTypes.setStyleName(BaseTheme.BUTTON_LINK);
 		linkTypes.addListener(new Button.ClickListener() {
 			public void buttonClick(ClickEvent event) {
 				// TODO
 			}
 		});
-		Button activities = new Button(Msg.get("pr.25"));
+		Button activities = new Button(msg.get("pr.25"));
 		activities.setStyleName(BaseTheme.BUTTON_LINK);
 		activities.addListener(new Button.ClickListener() {
 			public void buttonClick(ClickEvent event) {

@@ -8,7 +8,7 @@ package org.m2ling.presentation.principles.utils;
 import java.io.File;
 import java.io.FilenameFilter;
 
-import org.m2ling.common.configuration.Configuration;
+import org.m2ling.common.configuration.Conf;
 import org.m2ling.common.utils.Consts;
 import org.m2ling.presentation.principles.model.ViewPointBean;
 
@@ -22,7 +22,7 @@ public class IconManager {
 	 * @return icon file for given bean id or null of none
 	 */
 	public static File getVPIconFile(final ViewPointBean bean) {
-		File iconDir = new File(Configuration.getHomeDirectoryPath() + File.separatorChar + Consts.CONF_VP_ICONS_LOCATION);
+		File iconDir = new File(Conf.getHomeDirectoryPath() + File.separatorChar + Consts.CONF_VP_ICONS_LOCATION);
 		File icon = null;
 		String[] matchingFile = iconDir.list(new FilenameFilter() {
 			public boolean accept(File dir, String name) {

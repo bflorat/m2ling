@@ -7,7 +7,7 @@ package org.m2ling.common.configuration;
 
 import java.util.Properties;
 
-public class SpecificConfigurationMock implements Configuration.SpecificConfiguration {
+public class SpecificConfigurationMock implements Conf.SpecificConfiguration {
 	public static final String param1 = "param1";
 	public static final String param2 = "param2";
 

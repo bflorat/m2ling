@@ -5,7 +5,7 @@ package org.m2ling.service.common;
 
 import java.util.logging.Logger;
 
-import org.m2ling.common.configuration.Configuration;
+import org.m2ling.common.configuration.Conf;
 import org.m2ling.persistence.PersistenceManager;
 import org.m2ling.service.util.CoreUtil;
 import org.m2ling.service.util.DTOConverter;
@@ -45,12 +45,12 @@ abstract public class ServiceImpl {
 	/** Utilities class */
 	protected CoreUtil util;
 	/** Configuration */
-	protected Configuration conf;
+	protected Conf conf;
 	/** the logger */
 	protected java.util.logging.Logger logger;
 
 	protected ServiceImpl(PersistenceManager pm, CoreUtil util, DTOConverter.FromDTO fromDTO, DTOConverter.ToDTO toDTO,
-			Configuration conf, Logger logger) {
+			Conf conf, Logger logger) {
 		this.util = util;
 		this.fromDTO = fromDTO;
 		this.toDTO = toDTO;

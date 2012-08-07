@@ -2,6 +2,7 @@
  * Sample code from https://vaadin.com/wiki/-/wiki/Main/Integrating%20Vaadin%20with%20Guice%202.0?p_r_p_185834411_title=Integrating%2520Vaadin%2520with%2520Guice%25202.0 */
 package org.m2ling.presentation;
 
+import org.m2ling.common.configuration.Conf.SpecificConfiguration;
 import org.m2ling.common.utils.Utils;
 import org.m2ling.presentation.binding.DebugGuiceModule;
 import org.m2ling.presentation.binding.PresentationCommonGuiceModule;
@@ -12,6 +13,7 @@ import com.google.inject.Guice;
 import com.google.inject.Injector;
 import com.google.inject.Module;
 import com.google.inject.Stage;
+import com.google.inject.name.Names;
 import com.google.inject.servlet.GuiceServletContextListener;
 import com.google.inject.servlet.ServletModule;
 import com.google.inject.util.Modules;
@@ -36,6 +38,12 @@ public class M2lingGuiceServletContextListener extends GuiceServletContextListen
 				install(new PresentationPrincipleGuiceModule());
 				// Services layer bindings
 				install(new ServicesCommonGuiceModule());
+				// We bind this specific configuration to inject it directly at Conf instantiation.
+				// This is required because the Guice.createInjector() could create the Conf singleton
+				// then the Msg one before the register() method has a chance to be called. This would
+				// cause an NPE in the Msg class lacking the Locale value.
+				bind(SpecificConfiguration.class).annotatedWith(Names.named("bootstrap")).toInstance(
+						new org.m2ling.presentation.principles.utils.SpecificConfiguration());
 			}
 		};
 		if (Utils.isDebugMode()) {

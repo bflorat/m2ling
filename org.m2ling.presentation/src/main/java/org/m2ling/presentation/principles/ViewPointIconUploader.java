@@ -11,7 +11,7 @@ import java.io.OutputStream;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import org.m2ling.common.configuration.Configuration;
+import org.m2ling.common.configuration.Conf;
 import org.m2ling.common.utils.Consts;
 import org.m2ling.presentation.i18n.Msg;
 import org.m2ling.presentation.principles.model.ViewPointBean;
@@ -31,6 +31,7 @@ public class ViewPointIconUploader extends CustomComponent implements Upload.Pro
 	private ViewPointBean bean;
 	private Logger logger;
 	private final Upload upload;
+	private final Msg msg;
 
 	/**
 	 * Build an icon uploader
@@ -40,8 +41,9 @@ public class ViewPointIconUploader extends CustomComponent implements Upload.Pro
 	 * @throws IllegalArgumentException
 	 *            if vp is null
 	 */
-	public ViewPointIconUploader(ViewPointBean bean, Logger logger) {
+	public ViewPointIconUploader(ViewPointBean bean, Logger logger, Msg msg) {
 		this.logger = logger;
+		this.msg = msg;
 		if (bean == null) {
 			throw new IllegalArgumentException("Null viewpoint");
 		}
@@ -50,15 +52,15 @@ public class ViewPointIconUploader extends CustomComponent implements Upload.Pro
 		hl.setSpacing(true);
 		setSizeUndefined();
 		setCompositionRoot(hl);
-		upload = new Upload(Msg.get("pr.11"), this);
+		upload = new Upload(msg.get("pr.11"), this);
 		upload.setImmediate(true);
-		upload.setButtonCaption(Msg.get("pr.12"));
+		upload.setButtonCaption(msg.get("pr.12"));
 		hl.addComponent(upload);
 	}
 
 	public OutputStream receiveUpload(String filename, String MIMEType) {
 		FileOutputStream fos = null;
-		String home = Configuration.getHomeDirectoryPath();
+		String home = Conf.getHomeDirectoryPath();
 		// Store the uploaded icon as <vp id>.<original file extension> in the m2ling home
 		// directory/icons directory
 		target = new File(home + File.separatorChar + Consts.CONF_VP_ICONS_LOCATION + File.separatorChar + bean.getId()
@@ -69,7 +71,7 @@ public class ViewPointIconUploader extends CustomComponent implements Upload.Pro
 			fos = new FileOutputStream(target);
 		} catch (final Exception e) {
 			logger.log(Level.SEVERE, "Can't create icon image for view point: " + bean.getId(), e);
-			getWindow().showNotification(Msg.get("error.3") + " : " + bean.getId(), e.getMessage(),
+			getWindow().showNotification(msg.get("error.3") + " : " + bean.getId(), e.getMessage(),
 					Notification.TYPE_ERROR_MESSAGE);
 			return null;
 		}
@@ -84,7 +86,7 @@ public class ViewPointIconUploader extends CustomComponent implements Upload.Pro
 	public void updateProgress(long readBytes, long contentLength) {
 		if (contentLength > Consts.ICONS_MAX_SIZE_BYTES) {
 			upload.interruptUpload();
-			getWindow().showNotification(Msg.get("error.4"), contentLength + " B", Notification.TYPE_ERROR_MESSAGE);
+			getWindow().showNotification(msg.get("error.4"), contentLength + " B", Notification.TYPE_ERROR_MESSAGE);
 		}
 	}
 }

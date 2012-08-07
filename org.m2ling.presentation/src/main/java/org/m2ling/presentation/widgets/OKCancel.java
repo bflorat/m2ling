@@ -5,8 +5,7 @@
  */
 package org.m2ling.presentation.widgets;
 
-import org.m2ling.presentation.i18n.Msg;
-
+import com.google.inject.Inject;
 import com.vaadin.terminal.ThemeResource;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Button.ClickEvent;
@@ -18,8 +17,8 @@ import com.vaadin.ui.HorizontalLayout;
  */
 public class OKCancel extends CustomComponent {
 	private static final long serialVersionUID = -5102018433538734852L;
-	private Button okButton;
-	private Button cancelButton;
+	private final Button okButton;
+	private final Button cancelButton;
 
 	/**
 	 * Build a OKCancel panel
@@ -30,11 +29,12 @@ public class OKCancel extends CustomComponent {
 	 *           what to do when clicking on "cancel"
 	 */
 	@SuppressWarnings("serial")
+	@Inject
 	public OKCancel(final Command ok, final Command cancel) {
 		HorizontalLayout hz = new HorizontalLayout();
 		hz.setSpacing(true);
 		hz.setMargin(true);
-		okButton = new Button(Msg.get("gal.5"), new Button.ClickListener() {
+		okButton = new Button(ok.getLabel(), new Button.ClickListener() {
 			public void buttonClick(ClickEvent event) {
 				try {
 					// Makes sure user can't click anymore
@@ -46,7 +46,7 @@ public class OKCancel extends CustomComponent {
 			}
 		});
 		okButton.setIcon(new ThemeResource("../runo/icons/16/ok.png"));
-		cancelButton = new Button(Msg.get("gal.6"), new Button.ClickListener() {
+		cancelButton = new Button(cancel.getLabel(), new Button.ClickListener() {
 			public void buttonClick(ClickEvent event) {
 				cancel.execute();
 			}

@@ -13,7 +13,7 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceFactoryImpl;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
-import org.m2ling.common.configuration.Configuration;
+import org.m2ling.common.configuration.Conf;
 import org.m2ling.domain.DomainPackage;
 import org.m2ling.domain.Root;
 import org.m2ling.persistence.PersistenceManager;
@@ -37,7 +37,7 @@ public class PersistenceManagerXMIImpl implements PersistenceManager {
 	 * 
 	 */
 	@Singleton
-	public static class SpecificConfiguration implements Configuration.SpecificConfiguration {
+	public static class SpecificConfiguration implements Conf.SpecificConfiguration {
 
 		public static final String CONF_XMI_PATH = "org.m2ling.persistence.xmi.path";
 
@@ -75,10 +75,10 @@ public class PersistenceManagerXMIImpl implements PersistenceManager {
 
 	private Logger logger;
 
-	private Configuration configuration;
+	private Conf configuration;
 
 	@Inject
-	public PersistenceManagerXMIImpl(Logger logger, Configuration configuration) throws IOException {
+	public PersistenceManagerXMIImpl(Logger logger, Conf configuration) throws IOException {
 		this.configuration = configuration;
 		this.logger = logger;
 		// Add this specific configuration to the global service configuration

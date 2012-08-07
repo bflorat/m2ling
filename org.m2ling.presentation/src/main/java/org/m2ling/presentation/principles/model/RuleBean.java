@@ -10,8 +10,6 @@ import java.util.Map;
 import java.util.TreeMap;
 
 import org.m2ling.common.utils.Utils;
-import org.m2ling.presentation.i18n.Msg;
-import org.m2ling.presentation.principles.RulePriority;
 
 /**
  * Mutable Rule bean
@@ -24,8 +22,6 @@ public class RuleBean implements Serializable {
 	/** Drop */
 	private String drop = "";
 
-	
-
 	/**
 	 * @return the drop
 	 */
@@ -34,7 +30,8 @@ public class RuleBean implements Serializable {
 	}
 
 	/**
-	 * @param drop the drop to set
+	 * @param drop
+	 *           the drop to set
 	 */
 	public void setDrop(String drop) {
 		this.drop = drop;
@@ -48,7 +45,7 @@ public class RuleBean implements Serializable {
 	private String comment = "";
 	private String status = null;
 	// Default priority : medium
-	private String priority = Msg.get("rule_priority." + RulePriority.MEDIUM.name());
+	private String priority = "";
 	private String rationale = "";
 	private String exceptions = "";
 	private Map<Long, String> history = new TreeMap<Long, String>();
