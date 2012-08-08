@@ -17,7 +17,6 @@ import org.m2ling.common.dto.core.RuleDTO;
 import org.m2ling.common.dto.core.ViewPointDTO;
 import org.m2ling.common.exceptions.FunctionalException;
 import org.m2ling.common.utils.Utils;
-import org.m2ling.presentation.events.Events;
 import org.m2ling.presentation.events.ObservationManager;
 import org.m2ling.presentation.i18n.Msg;
 import org.m2ling.presentation.principles.model.RuleBean;
@@ -123,7 +122,6 @@ public class RuleDialog extends Window {
 						ruleService.updateRule(null, ruleDTO);
 					}
 					close();
-					obs.notifySync(new org.m2ling.presentation.events.Event(Events.VP_CHANGE));
 				} catch (FunctionalException e) {
 					logger.log(Level.SEVERE, e.getDetailedMessage(), e);
 					getWindow().showNotification(msg.humanMessage(e), Notification.TYPE_ERROR_MESSAGE);
