@@ -14,9 +14,10 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 import org.eclipse.emf.ecore.util.InternalEList;
-import org.m2ling.domain.core.ComponentGroup;
+import org.m2ling.domain.core.ArchitectureItem;
 import org.m2ling.domain.core.ComponentType;
 import org.m2ling.domain.core.CorePackage;
+import org.m2ling.domain.core.HasReferences;
 import org.m2ling.domain.core.Reference;
 
 /**
@@ -26,12 +27,11 @@ import org.m2ling.domain.core.Reference;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.m2ling.domain.core.impl.ComponentTypeImpl#getEngineTypes <em>Engine Types</em>}</li>
+ *   <li>{@link org.m2ling.domain.core.impl.ComponentTypeImpl#getReferences <em>References</em>}</li>
  *   <li>{@link org.m2ling.domain.core.impl.ComponentTypeImpl#getBoundType <em>Bound Type</em>}</li>
  *   <li>{@link org.m2ling.domain.core.impl.ComponentTypeImpl#getEnumeration <em>Enumeration</em>}</li>
  *   <li>{@link org.m2ling.domain.core.impl.ComponentTypeImpl#getInstantiationFactor <em>Instantiation Factor</em>}</li>
  *   <li>{@link org.m2ling.domain.core.impl.ComponentTypeImpl#isReifiable <em>Reifiable</em>}</li>
- *   <li>{@link org.m2ling.domain.core.impl.ComponentTypeImpl#getReferences <em>References</em>}</li>
  * </ul>
  * </p>
  *
@@ -46,14 +46,14 @@ public class ComponentTypeImpl extends ConceptItemImpl implements ComponentType 
 	public static final String copyright = "Copyright (C) 2012 Bertrand Florat";
 
 	/**
-	 * The cached value of the '{@link #getEngineTypes() <em>Engine Types</em>}' reference list.
+	 * The cached value of the '{@link #getReferences() <em>References</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getEngineTypes()
+	 * @see #getReferences()
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<ComponentType> engineTypes;
+	protected EList<Reference> references;
 
 	/**
 	 * The cached value of the '{@link #getBoundType() <em>Bound Type</em>}' reference.
@@ -73,7 +73,7 @@ public class ComponentTypeImpl extends ConceptItemImpl implements ComponentType 
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<ComponentGroup> enumeration;
+	protected EList<ArchitectureItem> enumeration;
 
 	/**
 	 * The default value of the '{@link #getInstantiationFactor() <em>Instantiation Factor</em>}' attribute.
@@ -116,16 +116,6 @@ public class ComponentTypeImpl extends ConceptItemImpl implements ComponentType 
 	protected boolean reifiable = REIFIABLE_EDEFAULT;
 
 	/**
-	 * The cached value of the '{@link #getReferences() <em>References</em>}' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getReferences()
-	 * @generated
-	 * @ordered
-	 */
-	protected EList<Reference> references;
-
-	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -149,21 +139,9 @@ public class ComponentTypeImpl extends ConceptItemImpl implements ComponentType 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<ComponentType> getEngineTypes() {
-		if (engineTypes == null) {
-			engineTypes = new EObjectResolvingEList<ComponentType>(ComponentType.class, this, CorePackage.COMPONENT_TYPE__ENGINE_TYPES);
-		}
-		return engineTypes;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EList<ComponentGroup> getEnumeration() {
+	public EList<ArchitectureItem> getEnumeration() {
 		if (enumeration == null) {
-			enumeration = new EObjectResolvingEList<ComponentGroup>(ComponentGroup.class, this, CorePackage.COMPONENT_TYPE__ENUMERATION);
+			enumeration = new EObjectResolvingEList<ArchitectureItem>(ArchitectureItem.class, this, CorePackage.COMPONENT_TYPE__ENUMERATION);
 		}
 		return enumeration;
 	}
@@ -282,8 +260,8 @@ public class ComponentTypeImpl extends ConceptItemImpl implements ComponentType 
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case CorePackage.COMPONENT_TYPE__ENGINE_TYPES:
-				return getEngineTypes();
+			case CorePackage.COMPONENT_TYPE__REFERENCES:
+				return getReferences();
 			case CorePackage.COMPONENT_TYPE__BOUND_TYPE:
 				if (resolve) return getBoundType();
 				return basicGetBoundType();
@@ -293,8 +271,6 @@ public class ComponentTypeImpl extends ConceptItemImpl implements ComponentType 
 				return getInstantiationFactor();
 			case CorePackage.COMPONENT_TYPE__REIFIABLE:
 				return isReifiable();
-			case CorePackage.COMPONENT_TYPE__REFERENCES:
-				return getReferences();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -308,26 +284,22 @@ public class ComponentTypeImpl extends ConceptItemImpl implements ComponentType 
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case CorePackage.COMPONENT_TYPE__ENGINE_TYPES:
-				getEngineTypes().clear();
-				getEngineTypes().addAll((Collection<? extends ComponentType>)newValue);
+			case CorePackage.COMPONENT_TYPE__REFERENCES:
+				getReferences().clear();
+				getReferences().addAll((Collection<? extends Reference>)newValue);
 				return;
 			case CorePackage.COMPONENT_TYPE__BOUND_TYPE:
 				setBoundType((ComponentType)newValue);
 				return;
 			case CorePackage.COMPONENT_TYPE__ENUMERATION:
 				getEnumeration().clear();
-				getEnumeration().addAll((Collection<? extends ComponentGroup>)newValue);
+				getEnumeration().addAll((Collection<? extends ArchitectureItem>)newValue);
 				return;
 			case CorePackage.COMPONENT_TYPE__INSTANTIATION_FACTOR:
 				setInstantiationFactor((Integer)newValue);
 				return;
 			case CorePackage.COMPONENT_TYPE__REIFIABLE:
 				setReifiable((Boolean)newValue);
-				return;
-			case CorePackage.COMPONENT_TYPE__REFERENCES:
-				getReferences().clear();
-				getReferences().addAll((Collection<? extends Reference>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -341,8 +313,8 @@ public class ComponentTypeImpl extends ConceptItemImpl implements ComponentType 
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case CorePackage.COMPONENT_TYPE__ENGINE_TYPES:
-				getEngineTypes().clear();
+			case CorePackage.COMPONENT_TYPE__REFERENCES:
+				getReferences().clear();
 				return;
 			case CorePackage.COMPONENT_TYPE__BOUND_TYPE:
 				setBoundType((ComponentType)null);
@@ -356,9 +328,6 @@ public class ComponentTypeImpl extends ConceptItemImpl implements ComponentType 
 			case CorePackage.COMPONENT_TYPE__REIFIABLE:
 				setReifiable(REIFIABLE_EDEFAULT);
 				return;
-			case CorePackage.COMPONENT_TYPE__REFERENCES:
-				getReferences().clear();
-				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -371,8 +340,8 @@ public class ComponentTypeImpl extends ConceptItemImpl implements ComponentType 
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case CorePackage.COMPONENT_TYPE__ENGINE_TYPES:
-				return engineTypes != null && !engineTypes.isEmpty();
+			case CorePackage.COMPONENT_TYPE__REFERENCES:
+				return references != null && !references.isEmpty();
 			case CorePackage.COMPONENT_TYPE__BOUND_TYPE:
 				return boundType != null;
 			case CorePackage.COMPONENT_TYPE__ENUMERATION:
@@ -381,10 +350,40 @@ public class ComponentTypeImpl extends ConceptItemImpl implements ComponentType 
 				return instantiationFactor != INSTANTIATION_FACTOR_EDEFAULT;
 			case CorePackage.COMPONENT_TYPE__REIFIABLE:
 				return reifiable != REIFIABLE_EDEFAULT;
-			case CorePackage.COMPONENT_TYPE__REFERENCES:
-				return references != null && !references.isEmpty();
 		}
 		return super.eIsSet(featureID);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public int eBaseStructuralFeatureID(int derivedFeatureID, Class<?> baseClass) {
+		if (baseClass == HasReferences.class) {
+			switch (derivedFeatureID) {
+				case CorePackage.COMPONENT_TYPE__REFERENCES: return CorePackage.HAS_REFERENCES__REFERENCES;
+				default: return -1;
+			}
+		}
+		return super.eBaseStructuralFeatureID(derivedFeatureID, baseClass);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public int eDerivedStructuralFeatureID(int baseFeatureID, Class<?> baseClass) {
+		if (baseClass == HasReferences.class) {
+			switch (baseFeatureID) {
+				case CorePackage.HAS_REFERENCES__REFERENCES: return CorePackage.COMPONENT_TYPE__REFERENCES;
+				default: return -1;
+			}
+		}
+		return super.eDerivedStructuralFeatureID(baseFeatureID, baseClass);
 	}
 
 	/**

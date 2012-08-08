@@ -268,9 +268,9 @@ public class ComponentInstanceItemProvider
 	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
+			childrenFeatures.add(CorePackage.Literals.HAS_REFERENCES__REFERENCES);
 			childrenFeatures.add(CorePackage.Literals.COMPONENT_INSTANCE__INSTANCES);
 			childrenFeatures.add(CorePackage.Literals.COMPONENT_INSTANCE__INSTANCES_GROUPS);
-			childrenFeatures.add(CorePackage.Literals.COMPONENT_INSTANCE__REFERENCES);
 		}
 		return childrenFeatures;
 	}
@@ -339,9 +339,9 @@ public class ComponentInstanceItemProvider
 			case CorePackage.COMPONENT_INSTANCE__STATUS:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
+			case CorePackage.COMPONENT_INSTANCE__REFERENCES:
 			case CorePackage.COMPONENT_INSTANCE__INSTANCES:
 			case CorePackage.COMPONENT_INSTANCE__INSTANCES_GROUPS:
-			case CorePackage.COMPONENT_INSTANCE__REFERENCES:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
 		}
@@ -361,6 +361,11 @@ public class ComponentInstanceItemProvider
 
 		newChildDescriptors.add
 			(createChildParameter
+				(CorePackage.Literals.HAS_REFERENCES__REFERENCES,
+				 CoreFactory.eINSTANCE.createReference()));
+
+		newChildDescriptors.add
+			(createChildParameter
 				(CorePackage.Literals.COMPONENT_INSTANCE__INSTANCES,
 				 CoreFactory.eINSTANCE.createComponentInstance()));
 
@@ -368,11 +373,6 @@ public class ComponentInstanceItemProvider
 			(createChildParameter
 				(CorePackage.Literals.COMPONENT_INSTANCE__INSTANCES_GROUPS,
 				 CoreFactory.eINSTANCE.createComponentInstanceGroup()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(CorePackage.Literals.COMPONENT_INSTANCE__REFERENCES,
-				 CoreFactory.eINSTANCE.createReference()));
 	}
 
 }

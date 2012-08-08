@@ -68,14 +68,11 @@
       </genEnums>
       <genClasses ecoreClass="m2ling.ecore#//core/ComponentType">
         <genFeatures notify="false" createChild="false" propertySortChoices="true"
-            ecoreFeature="ecore:EReference m2ling.ecore#//core/ComponentType/engineTypes"/>
-        <genFeatures notify="false" createChild="false" propertySortChoices="true"
             ecoreFeature="ecore:EReference m2ling.ecore#//core/ComponentType/boundType"/>
         <genFeatures notify="false" createChild="false" propertySortChoices="true"
             ecoreFeature="ecore:EReference m2ling.ecore#//core/ComponentType/enumeration"/>
         <genFeatures createChild="false" ecoreFeature="ecore:EAttribute m2ling.ecore#//core/ComponentType/instantiationFactor"/>
         <genFeatures createChild="false" ecoreFeature="ecore:EAttribute m2ling.ecore#//core/ComponentType/reifiable"/>
-        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference m2ling.ecore#//core/ComponentType/references"/>
       </genClasses>
       <genClasses ecoreClass="m2ling.ecore#//core/Component">
         <genFeatures notify="false" createChild="false" propertySortChoices="true"
@@ -83,7 +80,6 @@
         <genFeatures notify="false" createChild="false" propertySortChoices="true"
             ecoreFeature="ecore:EReference m2ling.ecore#//core/Component/boundComponent"/>
         <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference m2ling.ecore#//core/Component/instances"/>
-        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference m2ling.ecore#//core/Component/references"/>
       </genClasses>
       <genClasses ecoreClass="m2ling.ecore#//core/ComponentInstance">
         <genFeatures notify="false" createChild="false" propertySortChoices="true"
@@ -92,7 +88,6 @@
         <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference m2ling.ecore#//core/ComponentInstance/instancesGroups"/>
         <genFeatures notify="false" createChild="false" propertySortChoices="true"
             ecoreFeature="ecore:EReference m2ling.ecore#//core/ComponentInstance/boundComponentInstance"/>
-        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference m2ling.ecore#//core/ComponentInstance/references"/>
       </genClasses>
       <genClasses ecoreClass="m2ling.ecore#//core/ViewPoint">
         <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference m2ling.ecore#//core/ViewPoint/activities"/>
@@ -145,6 +140,10 @@
       <genClasses image="false" ecoreClass="m2ling.ecore#//core/HasParameterValues"/>
       <genClasses image="false" ecoreClass="m2ling.ecore#//core/HasDescription">
         <genFeatures createChild="false" ecoreFeature="ecore:EAttribute m2ling.ecore#//core/HasDescription/description"/>
+      </genClasses>
+      <genClasses image="false" ecoreClass="m2ling.ecore#//core/HasConstraints"/>
+      <genClasses image="false" ecoreClass="m2ling.ecore#//core/HasReferences">
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference m2ling.ecore#//core/HasReferences/references"/>
       </genClasses>
       <genClasses ecoreClass="m2ling.ecore#//core/CustomProperty"/>
       <genClasses ecoreClass="m2ling.ecore#//core/LinkType">
@@ -200,8 +199,6 @@
       <genClasses ecoreClass="m2ling.ecore#//core/MaxConstraint"/>
       <genClasses ecoreClass="m2ling.ecore#//core/EMailConstraint"/>
       <genClasses ecoreClass="m2ling.ecore#//core/FormatConstraint"/>
-      <genClasses image="false" ecoreClass="m2ling.ecore#//core/HasConstraints"/>
-      <genClasses image="false" ecoreClass="m2ling.ecore#//core/HasReferences"/>
       <genClasses ecoreClass="m2ling.ecore#//core/Activity">
         <genFeatures notify="false" createChild="false" propertySortChoices="true"
             ecoreFeature="ecore:EReference m2ling.ecore#//core/Activity/accountables"/>

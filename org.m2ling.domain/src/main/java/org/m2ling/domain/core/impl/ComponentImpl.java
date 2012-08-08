@@ -17,6 +17,7 @@ import org.m2ling.domain.core.Component;
 import org.m2ling.domain.core.ComponentInstance;
 import org.m2ling.domain.core.ComponentType;
 import org.m2ling.domain.core.CorePackage;
+import org.m2ling.domain.core.HasReferences;
 import org.m2ling.domain.core.Reference;
 
 /**
@@ -25,10 +26,10 @@ import org.m2ling.domain.core.Reference;
  * <p>
  * The following features are implemented:
  * <ul>
+ *   <li>{@link org.m2ling.domain.core.impl.ComponentImpl#getReferences <em>References</em>}</li>
  *   <li>{@link org.m2ling.domain.core.impl.ComponentImpl#getType <em>Type</em>}</li>
  *   <li>{@link org.m2ling.domain.core.impl.ComponentImpl#getBoundComponent <em>Bound Component</em>}</li>
  *   <li>{@link org.m2ling.domain.core.impl.ComponentImpl#getInstances <em>Instances</em>}</li>
- *   <li>{@link org.m2ling.domain.core.impl.ComponentImpl#getReferences <em>References</em>}</li>
  * </ul>
  * </p>
  *
@@ -40,6 +41,16 @@ public class ComponentImpl extends ArchitectureItemImpl implements Component {
 	 * @generated
 	 */
 	public static final String copyright = "Copyright (C) 2012 Bertrand Florat";
+
+	/**
+	 * The cached value of the '{@link #getReferences() <em>References</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getReferences()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<Reference> references;
 
 	/**
 	 * The cached value of the '{@link #getType() <em>Type</em>}' reference.
@@ -69,16 +80,6 @@ public class ComponentImpl extends ArchitectureItemImpl implements Component {
 	 * @ordered
 	 */
 	protected EList<ComponentInstance> instances;
-
-	/**
-	 * The cached value of the '{@link #getReferences() <em>References</em>}' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getReferences()
-	 * @generated
-	 * @ordered
-	 */
-	protected EList<Reference> references;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -214,10 +215,10 @@ public class ComponentImpl extends ArchitectureItemImpl implements Component {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case CorePackage.COMPONENT__INSTANCES:
-				return ((InternalEList<?>)getInstances()).basicRemove(otherEnd, msgs);
 			case CorePackage.COMPONENT__REFERENCES:
 				return ((InternalEList<?>)getReferences()).basicRemove(otherEnd, msgs);
+			case CorePackage.COMPONENT__INSTANCES:
+				return ((InternalEList<?>)getInstances()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -229,6 +230,8 @@ public class ComponentImpl extends ArchitectureItemImpl implements Component {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
+			case CorePackage.COMPONENT__REFERENCES:
+				return getReferences();
 			case CorePackage.COMPONENT__TYPE:
 				if (resolve) return getType();
 				return basicGetType();
@@ -237,8 +240,6 @@ public class ComponentImpl extends ArchitectureItemImpl implements Component {
 				return basicGetBoundComponent();
 			case CorePackage.COMPONENT__INSTANCES:
 				return getInstances();
-			case CorePackage.COMPONENT__REFERENCES:
-				return getReferences();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -251,6 +252,10 @@ public class ComponentImpl extends ArchitectureItemImpl implements Component {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
+			case CorePackage.COMPONENT__REFERENCES:
+				getReferences().clear();
+				getReferences().addAll((Collection<? extends Reference>)newValue);
+				return;
 			case CorePackage.COMPONENT__TYPE:
 				setType((ComponentType)newValue);
 				return;
@@ -260,10 +265,6 @@ public class ComponentImpl extends ArchitectureItemImpl implements Component {
 			case CorePackage.COMPONENT__INSTANCES:
 				getInstances().clear();
 				getInstances().addAll((Collection<? extends ComponentInstance>)newValue);
-				return;
-			case CorePackage.COMPONENT__REFERENCES:
-				getReferences().clear();
-				getReferences().addAll((Collection<? extends Reference>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -276,6 +277,9 @@ public class ComponentImpl extends ArchitectureItemImpl implements Component {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
+			case CorePackage.COMPONENT__REFERENCES:
+				getReferences().clear();
+				return;
 			case CorePackage.COMPONENT__TYPE:
 				setType((ComponentType)null);
 				return;
@@ -284,9 +288,6 @@ public class ComponentImpl extends ArchitectureItemImpl implements Component {
 				return;
 			case CorePackage.COMPONENT__INSTANCES:
 				getInstances().clear();
-				return;
-			case CorePackage.COMPONENT__REFERENCES:
-				getReferences().clear();
 				return;
 		}
 		super.eUnset(featureID);
@@ -299,16 +300,48 @@ public class ComponentImpl extends ArchitectureItemImpl implements Component {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
+			case CorePackage.COMPONENT__REFERENCES:
+				return references != null && !references.isEmpty();
 			case CorePackage.COMPONENT__TYPE:
 				return type != null;
 			case CorePackage.COMPONENT__BOUND_COMPONENT:
 				return boundComponent != null;
 			case CorePackage.COMPONENT__INSTANCES:
 				return instances != null && !instances.isEmpty();
-			case CorePackage.COMPONENT__REFERENCES:
-				return references != null && !references.isEmpty();
 		}
 		return super.eIsSet(featureID);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public int eBaseStructuralFeatureID(int derivedFeatureID, Class<?> baseClass) {
+		if (baseClass == HasReferences.class) {
+			switch (derivedFeatureID) {
+				case CorePackage.COMPONENT__REFERENCES: return CorePackage.HAS_REFERENCES__REFERENCES;
+				default: return -1;
+			}
+		}
+		return super.eBaseStructuralFeatureID(derivedFeatureID, baseClass);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public int eDerivedStructuralFeatureID(int baseFeatureID, Class<?> baseClass) {
+		if (baseClass == HasReferences.class) {
+			switch (baseFeatureID) {
+				case CorePackage.HAS_REFERENCES__REFERENCES: return CorePackage.COMPONENT__REFERENCES;
+				default: return -1;
+			}
+		}
+		return super.eDerivedStructuralFeatureID(baseFeatureID, baseClass);
 	}
 
 } // ComponentImpl

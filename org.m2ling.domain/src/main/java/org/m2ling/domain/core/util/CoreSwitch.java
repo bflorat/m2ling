@@ -293,6 +293,18 @@ public class CoreSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case CorePackage.HAS_CONSTRAINTS: {
+				HasConstraints hasConstraints = (HasConstraints)theEObject;
+				T result = caseHasConstraints(hasConstraints);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case CorePackage.HAS_REFERENCES: {
+				HasReferences hasReferences = (HasReferences)theEObject;
+				T result = caseHasReferences(hasReferences);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			case CorePackage.CUSTOM_PROPERTY: {
 				CustomProperty customProperty = (CustomProperty)theEObject;
 				T result = caseCustomProperty(customProperty);
@@ -430,18 +442,6 @@ public class CoreSwitch<T> extends Switch<T> {
 				FormatConstraint formatConstraint = (FormatConstraint)theEObject;
 				T result = caseFormatConstraint(formatConstraint);
 				if (result == null) result = caseConstraint(formatConstraint);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case CorePackage.HAS_CONSTRAINTS: {
-				HasConstraints hasConstraints = (HasConstraints)theEObject;
-				T result = caseHasConstraints(hasConstraints);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case CorePackage.HAS_REFERENCES: {
-				HasReferences hasReferences = (HasReferences)theEObject;
-				T result = caseHasReferences(hasReferences);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}

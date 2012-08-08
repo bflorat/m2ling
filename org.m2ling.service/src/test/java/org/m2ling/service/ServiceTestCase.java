@@ -100,9 +100,10 @@ public class ServiceTestCase extends M2lingUnitTest{
 
 	/**
 	 * Default setup code
+	 * @throws Exception 
 	 */
 	@Before
-	public void setUp() {
+	public void setUp() throws Exception {
 		super.setUp();
 	}
 

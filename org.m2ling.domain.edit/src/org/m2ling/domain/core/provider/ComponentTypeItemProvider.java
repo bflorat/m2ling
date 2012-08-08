@@ -60,35 +60,12 @@ public class ComponentTypeItemProvider extends ConceptItemItemProvider implement
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
-			addEngineTypesPropertyDescriptor(object);
 			addBoundTypePropertyDescriptor(object);
 			addEnumerationPropertyDescriptor(object);
 			addInstantiationFactorPropertyDescriptor(object);
 			addReifiablePropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
-	}
-
-	/**
-	 * This adds a property descriptor for the Engine Types feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void addEngineTypesPropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_ComponentType_engineTypes_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_ComponentType_engineTypes_feature", "_UI_ComponentType_type"),
-				 CorePackage.Literals.COMPONENT_TYPE__ENGINE_TYPES,
-				 true,
-				 false,
-				 true,
-				 null,
-				 null,
-				 null));
 	}
 
 	/**
@@ -192,7 +169,7 @@ public class ComponentTypeItemProvider extends ConceptItemItemProvider implement
 	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
-			childrenFeatures.add(CorePackage.Literals.COMPONENT_TYPE__REFERENCES);
+			childrenFeatures.add(CorePackage.Literals.HAS_REFERENCES__REFERENCES);
 		}
 		return childrenFeatures;
 	}
@@ -273,7 +250,7 @@ public class ComponentTypeItemProvider extends ConceptItemItemProvider implement
 
 		newChildDescriptors.add
 			(createChildParameter
-				(CorePackage.Literals.COMPONENT_TYPE__REFERENCES,
+				(CorePackage.Literals.HAS_REFERENCES__REFERENCES,
 				 CoreFactory.eINSTANCE.createReference()));
 	}
 

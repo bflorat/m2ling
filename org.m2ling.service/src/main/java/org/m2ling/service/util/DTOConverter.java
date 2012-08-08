@@ -7,9 +7,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.emf.common.util.EList;
+import org.m2ling.common.dto.core.ComponentTypeDTO;
 import org.m2ling.common.dto.core.RuleDTO;
 import org.m2ling.common.dto.core.StatusEventDTO;
 import org.m2ling.common.dto.core.ViewPointDTO;
+import org.m2ling.domain.core.ArchitectureItem;
+import org.m2ling.domain.core.Component;
+import org.m2ling.domain.core.ComponentType;
 import org.m2ling.domain.core.CoreFactory;
 import org.m2ling.domain.core.Rule;
 import org.m2ling.domain.core.RulePriority;
@@ -69,6 +73,21 @@ public class DTOConverter {
 			builder.rationale(rule.getRationale());
 			List<StatusEventDTO> history = getRuleHistoryDTO(rule);
 			builder.history(history);
+			return builder.build();
+		}
+
+		public ComponentTypeDTO getComponentTypeDTO(ComponentType ct) {
+			ViewPoint vp = (ViewPoint) ct.eContainer();
+			ComponentTypeDTO.Builder builder = new ComponentTypeDTO.Builder(vp.getId(), ct.getId(), ct.getName());
+			builder.tags(ct.getTags());
+			builder.comment(ct.getComment());
+			builder.description(ct.getDescription());
+			for (ArchitectureItem ai : ct.getEnumeration()) {
+				Component comp = (Component) ai;
+				builder.enumeration(comp.getId());
+			}
+			builder.instantiationFactor(ct.getInstantiationFactor());
+			builder.reifiable(ct.isReifiable());
 			return builder.build();
 		}
 
@@ -145,9 +164,7 @@ public class DTOConverter {
 			rule.setId(dto.getId());
 			rule.setName(dto.getName());
 			for (String tag : dto.getTags()) {
-				if (!Strings.isNullOrEmpty(tag)) {
-					rule.getTags().add(tag);
-				}
+				rule.getTags().add(tag);
 			}
 			rule.setStatus(dto.getStatus());
 			rule.setPriority(RulePriority.get(dto.getPriority()));
@@ -156,6 +173,33 @@ public class DTOConverter {
 			rule.setRationale(dto.getRationale());
 			rule.setExceptions(dto.getExceptions());
 			return rule;
+		}
+
+		/**
+		 * Return a new component type instance given a DTO.
+		 * 
+		 * @param dto
+		 *           the dto
+		 * @return a new component type instance
+		 */
+		public ComponentType newComponentType(ComponentTypeDTO dto) {
+			ComponentType ct = CoreFactory.eINSTANCE.createComponentType();
+			ct.setId(dto.getId());
+			ct.setName(dto.getName());
+			for (String tag : dto.getTags()) {
+				ct.getTags().add(tag);
+			}
+			ct.setDescription(dto.getDescription());
+			ct.setComment(dto.getComment());
+			ComponentType boundedType = util.getComponentTypeByID(dto.getBoundTypeID());
+			ct.setBoundType(boundedType);
+			ct.setInstantiationFactor(dto.getInstantiationFactor());
+			ct.setReifiable(dto.isReifiable());
+			for (String id : dto.getEnumeration()) {
+				Component comp = (Component) util.getComponentTypeByID(id);
+				ct.getEnumeration().add(comp);
+			}
+			return ct;
 		}
 
 		/**

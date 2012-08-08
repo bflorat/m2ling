@@ -30,6 +30,9 @@ import com.google.inject.Singleton;
 @Singleton
 public class PersistenceManagerXMIImpl implements PersistenceManager {
 	private final Resource resource;
+	/** Resource root element */
+	private Root root;
+	private Conf configuration;
 
 	/**
 	 * List of available properties for this implementation and default connfiguration
@@ -70,15 +73,9 @@ public class PersistenceManagerXMIImpl implements PersistenceManager {
 		}
 	}
 
-	/** Resource root element */
-	private Root root;
-	private Logger logger;
-	private Conf configuration;
-
 	@Inject
 	public PersistenceManagerXMIImpl(Logger logger, Conf configuration) throws IOException {
 		this.configuration = configuration;
-		this.logger = logger;
 		// Add this specific configuration to the global service configuration
 		configuration.register(new SpecificConfiguration());
 		URI mainXMLfileURI = getFileURI();

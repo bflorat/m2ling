@@ -55,7 +55,7 @@ public class RuleServiceImpl extends ServiceImpl implements RuleService {
 	 *           : whether we update the item or not
 	 * @throws FunctionalException
 	 */
-	private void checkDTO(final RuleDTO dto, boolean updateOnly) throws FunctionalException {
+	void checkDTO(final RuleDTO dto, boolean updateOnly) throws FunctionalException {
 		// Nullity
 		if (dto == null) {
 			throw new FunctionalException(Code.NULL_ARGUMENT, null, null);
@@ -94,23 +94,11 @@ public class RuleServiceImpl extends ServiceImpl implements RuleService {
 			}
 		}
 		// Status
-		boolean existing = false;
-		for (String status : vp.getStatusLiterals()) {
-			if (dto.getStatus().equals(status)) {
-				existing = true;
-			}
-		}
-		if (!existing) {
+		if (!vp.getStatusLiterals().contains(dto.getStatus())) {
 			throw new FunctionalException(FunctionalException.Code.INVALID_STATUS, null, dto.toString());
 		}
 		// priority
-		existing = false;
-		for (RulePriority pr : RulePriority.values()) {
-			if (dto.getPriority().equals(pr.name())) {
-				existing = true;
-			}
-		}
-		if (!existing) {
+		if (RulePriority.get(dto.getPriority()) == null) {
 			throw new FunctionalException(FunctionalException.Code.INVALID_PRIORITY, null, dto.toString());
 		}
 		// Description
@@ -209,17 +197,11 @@ public class RuleServiceImpl extends ServiceImpl implements RuleService {
 	 * @see org.m2ling.service.principles.RuleService#deleteRule(org.m2ling.common.dto.core.RuleDTO)
 	 */
 	@Override
-	public void deleteRule(final Context context, final RuleDTO ruleDTO) throws FunctionalException {
-		Rule rule = null;
+	public void deleteRule(final Context context, final RuleDTO dto) throws FunctionalException {
 		{// Controls
-			if (ruleDTO == null) {
-				throw new FunctionalException(Code.NULL_ARGUMENT, null, "(rule)");
-			}
-			rule = util.getRuleByID(ruleDTO.getId());
-			if (rule == null) {
-				throw new FunctionalException(Code.TARGET_NOT_FOUND, null, "viewpoint=" + ruleDTO.getViewPointId());
-			}
+			checkDTO(dto, true);
 		}
+		Rule rule = util.getRuleByID(dto.getId());
 		ViewPoint vp = (ViewPoint) rule.eContainer();
 		vp.getRules().remove(rule);
 	}

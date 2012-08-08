@@ -16,7 +16,6 @@ import org.eclipse.emf.common.util.EList;
  *   <li>{@link org.m2ling.domain.core.Component#getType <em>Type</em>}</li>
  *   <li>{@link org.m2ling.domain.core.Component#getBoundComponent <em>Bound Component</em>}</li>
  *   <li>{@link org.m2ling.domain.core.Component#getInstances <em>Instances</em>}</li>
- *   <li>{@link org.m2ling.domain.core.Component#getReferences <em>References</em>}</li>
  * </ul>
  * </p>
  *
@@ -99,21 +98,5 @@ public interface Component extends ArchitectureItem, HasParameterDefinitions, Ha
 	 * @generated
 	 */
 	EList<ComponentInstance> getInstances();
-
-	/**
-	 * Returns the value of the '<em><b>References</b></em>' containment reference list.
-	 * The list contents are of type {@link org.m2ling.domain.core.Reference}.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>References</em>' containment reference list isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>References</em>' containment reference list.
-	 * @see org.m2ling.domain.core.CorePackage#getComponent_References()
-	 * @model containment="true"
-	 * @generated
-	 */
-	EList<Reference> getReferences();
 
 } // Component

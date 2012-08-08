@@ -13,12 +13,10 @@ import org.eclipse.emf.common.util.EList;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link org.m2ling.domain.core.ComponentType#getEngineTypes <em>Engine Types</em>}</li>
  *   <li>{@link org.m2ling.domain.core.ComponentType#getBoundType <em>Bound Type</em>}</li>
  *   <li>{@link org.m2ling.domain.core.ComponentType#getEnumeration <em>Enumeration</em>}</li>
  *   <li>{@link org.m2ling.domain.core.ComponentType#getInstantiationFactor <em>Instantiation Factor</em>}</li>
  *   <li>{@link org.m2ling.domain.core.ComponentType#isReifiable <em>Reifiable</em>}</li>
- *   <li>{@link org.m2ling.domain.core.ComponentType#getReferences <em>References</em>}</li>
  * </ul>
  * </p>
  *
@@ -26,7 +24,7 @@ import org.eclipse.emf.common.util.EList;
  * @model
  * @generated
  */
-public interface ComponentType extends ConceptItem, HasParameterDefinitions, HasReferences {
+public interface ComponentType extends ConceptItem, HasReferences {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -35,24 +33,8 @@ public interface ComponentType extends ConceptItem, HasParameterDefinitions, Has
 	String copyright = "Copyright (C) 2012 Bertrand Florat";
 
 	/**
-	 * Returns the value of the '<em><b>Engine Types</b></em>' reference list.
-	 * The list contents are of type {@link org.m2ling.domain.core.ComponentType}.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Engine Types</em>' reference list isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Engine Types</em>' reference list.
-	 * @see org.m2ling.domain.core.CorePackage#getComponentType_EngineTypes()
-	 * @model
-	 * @generated
-	 */
-	EList<ComponentType> getEngineTypes();
-
-	/**
 	 * Returns the value of the '<em><b>Enumeration</b></em>' reference list.
-	 * The list contents are of type {@link org.m2ling.domain.core.ComponentGroup}.
+	 * The list contents are of type {@link org.m2ling.domain.core.ArchitectureItem}.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Enumeration</em>' reference list isn't clear,
@@ -64,7 +46,7 @@ public interface ComponentType extends ConceptItem, HasParameterDefinitions, Has
 	 * @model
 	 * @generated
 	 */
-	EList<ComponentGroup> getEnumeration();
+	EList<ArchitectureItem> getEnumeration();
 
 	/**
 	 * Returns the value of the '<em><b>Instantiation Factor</b></em>' attribute.
@@ -119,22 +101,6 @@ public interface ComponentType extends ConceptItem, HasParameterDefinitions, Has
 	 * @generated
 	 */
 	void setReifiable(boolean value);
-
-	/**
-	 * Returns the value of the '<em><b>References</b></em>' containment reference list.
-	 * The list contents are of type {@link org.m2ling.domain.core.Reference}.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>References</em>' containment reference list isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>References</em>' containment reference list.
-	 * @see org.m2ling.domain.core.CorePackage#getComponentType_References()
-	 * @model containment="true"
-	 * @generated
-	 */
-	EList<Reference> getReferences();
 
 	/**
 	 * Returns the value of the '<em><b>Bound Type</b></em>' reference.

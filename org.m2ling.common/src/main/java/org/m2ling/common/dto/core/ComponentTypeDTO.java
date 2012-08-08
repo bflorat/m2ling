@@ -11,22 +11,22 @@ import org.m2ling.common.utils.Utils;
 import com.google.common.collect.ImmutableList;
 
 /**
- * Rule DTO object used between layers.
+ * Component type DTO object used between layers.
  * 
  * @author Bertrand Florat <bertrand@florat.net>
  */
-public class RuleDTO implements Comparable<RuleDTO> {
+public class ComponentTypeDTO implements Comparable<ComponentTypeDTO> {
 	private final String vpID;
 	private final String id;
 	private final String name;
 	private final List<String> tags;
 	private final String description;
 	private final String comment;
-	private final String status;
-	private final String priority;
-	private final String rationale;
-	private final String exceptions;
-	private final List<StatusEventDTO> history;
+	private final List<ReferenceDTO> references;
+	private final String boundTypeID;
+	private final int iFactor;
+	private final boolean reifiable;
+	private final List<String> enumeration;
 
 	public static class Builder {
 		// Required configuration
@@ -37,11 +37,11 @@ public class RuleDTO implements Comparable<RuleDTO> {
 		private List<String> tags = new ArrayList<String>(1);
 		private String description = "";
 		private String comment = "";
-		private String status = "";
-		private String priority = "";
-		private String rationale = "";
-		private String exceptions = "";
-		private List<StatusEventDTO> history = new ArrayList<StatusEventDTO>(1);
+		private List<ReferenceDTO> references = new ArrayList<ReferenceDTO>(1);
+		private String boundTypeID;
+		private int iFactor;
+		private boolean reifiable;
+		private List<String> enumeration;
 
 		public Builder(String vpID, String id, String name) {
 			this.id = id;
@@ -54,23 +54,8 @@ public class RuleDTO implements Comparable<RuleDTO> {
 			return this;
 		}
 
-		public Builder history(List<StatusEventDTO> history) {
-			this.history = history;
-			return this;
-		}
-
 		public Builder description(String description) {
 			this.description = description;
-			return this;
-		}
-
-		public Builder rationale(String rationale) {
-			this.rationale = rationale;
-			return this;
-		}
-
-		public Builder exceptions(String exceptions) {
-			this.exceptions = exceptions;
 			return this;
 		}
 
@@ -79,34 +64,55 @@ public class RuleDTO implements Comparable<RuleDTO> {
 			return this;
 		}
 
-		public Builder status(String status) {
-			this.status = status;
+		public Builder reference(ReferenceDTO reference) {
+			this.references.add(reference);
 			return this;
 		}
 
-		public Builder priority(String priority) {
-			this.priority = priority;
+		public Builder boundTypeID(String boundTypeID) {
+			this.boundTypeID = boundTypeID;
 			return this;
 		}
 
-		public RuleDTO build() {
-			RuleDTO dto = new RuleDTO(this);
+		public Builder instantiationFactor(int iFactor) {
+			this.iFactor = iFactor;
+			return this;
+		}
+
+		public Builder reifiable(boolean reifiable) {
+			this.reifiable = reifiable;
+			return this;
+		}
+
+		/**
+		 * Add a component ID to the enumeration of acceptable values for a component type.
+		 * 
+		 * @param componentID
+		 * @return the builder
+		 */
+		public Builder enumeration(String componentID) {
+			this.enumeration.add(componentID);
+			return this;
+		}
+
+		public ComponentTypeDTO build() {
+			ComponentTypeDTO dto = new ComponentTypeDTO(this);
 			return dto;
 		}
 	}
 
-	private RuleDTO(Builder builder) {
+	private ComponentTypeDTO(Builder builder) {
 		id = builder.id;
 		name = builder.name;
 		vpID = builder.vpID;
 		tags = ImmutableList.copyOf(builder.tags); // defensive copy
 		description = builder.description;
 		comment = builder.comment;
-		status = builder.status;
-		priority = builder.priority;
-		rationale = builder.rationale;
-		exceptions = builder.exceptions;
-		history = builder.history;
+		references = builder.references;
+		boundTypeID = builder.boundTypeID;
+		iFactor = builder.iFactor;
+		reifiable = builder.reifiable;
+		enumeration = ImmutableList.copyOf(builder.enumeration);
 	}
 
 	/**
@@ -143,15 +149,6 @@ public class RuleDTO implements Comparable<RuleDTO> {
 	}
 
 	/**
-	 * Return the status.
-	 * 
-	 * @return the status literal.
-	 */
-	public String getStatus() {
-		return status;
-	}
-
-	/**
 	 * @return the description
 	 */
 	public String getDescription() {
@@ -165,32 +162,19 @@ public class RuleDTO implements Comparable<RuleDTO> {
 		return comment;
 	}
 
-	/**
-	 * @return the priority
-	 */
-	public String getPriority() {
-		return priority;
+	public String getBoundTypeID() {
+		return boundTypeID;
+	}
+
+	public int getInstantiationFactor() {
+		return iFactor;
 	}
 
 	/**
-	 * @return the rationale
+	 * @return the references
 	 */
-	public String getRationale() {
-		return rationale;
-	}
-
-	/**
-	 * @return the exceptions
-	 */
-	public String getExceptions() {
-		return exceptions;
-	}
-
-	/**
-	 * @return the history
-	 */
-	public List<StatusEventDTO> getHistory() {
-		return history;
+	public List<ReferenceDTO> getReferences() {
+		return references;
 	}
 
 	public String toString() {
@@ -198,10 +182,10 @@ public class RuleDTO implements Comparable<RuleDTO> {
 	}
 
 	public boolean equals(Object o) {
-		if (o == null || !(o instanceof RuleDTO)) {
+		if (o == null || !(o instanceof ComponentTypeDTO)) {
 			return false;
 		}
-		RuleDTO other = (RuleDTO) o;
+		ComponentTypeDTO other = (ComponentTypeDTO) o;
 		return other.getId().equals(getId());
 	}
 
@@ -211,7 +195,21 @@ public class RuleDTO implements Comparable<RuleDTO> {
 	 * @see java.lang.Comparable#compareTo(java.lang.Object)
 	 */
 	@Override
-	public int compareTo(RuleDTO o) {
+	public int compareTo(ComponentTypeDTO o) {
 		return o.getName().compareTo(o.getName());
+	}
+
+	/**
+	 * @return the reifiable
+	 */
+	public boolean isReifiable() {
+		return reifiable;
+	}
+
+	/**
+	 * @return the enumeration
+	 */
+	public List<String> getEnumeration() {
+		return enumeration;
 	}
 }

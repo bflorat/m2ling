@@ -18,18 +18,14 @@
         containment="true"/>
   </eClassifiers>
   <eSubpackages name="core" nsURI="http://m2ling.org/core/0.1" nsPrefix="m2ling_core">
-    <eClassifiers xsi:type="ecore:EClass" name="ComponentType" eSuperTypes="#//core/ConceptItem #//core/HasParameterDefinitions #//core/HasReferences">
-      <eStructuralFeatures xsi:type="ecore:EReference" name="engineTypes" upperBound="-1"
-          eType="#//core/ComponentType"/>
+    <eClassifiers xsi:type="ecore:EClass" name="ComponentType" eSuperTypes="#//core/ConceptItem #//core/HasReferences">
       <eStructuralFeatures xsi:type="ecore:EReference" name="boundType" eType="#//core/ComponentType"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="enumeration" upperBound="-1"
-          eType="#//core/ComponentGroup"/>
+          eType="#//core/ArchitectureItem"/>
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="instantiationFactor"
           eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt" defaultValueLiteral="1"/>
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="reifiable" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
           defaultValueLiteral="false"/>
-      <eStructuralFeatures xsi:type="ecore:EReference" name="references" upperBound="-1"
-          eType="#//core/Reference" containment="true"/>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="Component" eSuperTypes="#//core/ArchitectureItem #//core/HasParameterDefinitions #//core/HasReferences">
       <eStructuralFeatures xsi:type="ecore:EReference" name="type" lowerBound="1"
@@ -37,8 +33,6 @@
       <eStructuralFeatures xsi:type="ecore:EReference" name="boundComponent" eType="#//core/Component"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="instances" upperBound="-1"
           eType="#//core/ComponentInstance" containment="true"/>
-      <eStructuralFeatures xsi:type="ecore:EReference" name="references" upperBound="-1"
-          eType="#//core/Reference" containment="true"/>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="ComponentInstance" eSuperTypes="#//core/HasParameterValues #//core/RuntimeItem #//core/HasReferences">
       <eStructuralFeatures xsi:type="ecore:EReference" name="component" lowerBound="1"
@@ -49,8 +43,6 @@
           eType="#//core/ComponentInstanceGroup" containment="true"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="boundComponentInstance"
           eType="#//core/ComponentInstance"/>
-      <eStructuralFeatures xsi:type="ecore:EReference" name="references" upperBound="-1"
-          eType="#//core/Reference" containment="true"/>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="ViewPoint" eSuperTypes="#//core/HasComment #//core/HasDescription #//core/HasNameAndID #//core/HasTags">
       <eStructuralFeatures xsi:type="ecore:EReference" name="activities" upperBound="-1"
@@ -119,6 +111,11 @@
     <eClassifiers xsi:type="ecore:EClass" name="HasDescription" abstract="true">
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="description" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="HasConstraints" abstract="true"/>
+    <eClassifiers xsi:type="ecore:EClass" name="HasReferences" abstract="true">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="references" upperBound="-1"
+          eType="#//core/Reference" containment="true"/>
+    </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="CustomProperty"/>
     <eClassifiers xsi:type="ecore:EEnum" name="CustomPropertyType"/>
     <eClassifiers xsi:type="ecore:EClass" name="LinkType" eSuperTypes="#//core/ConceptItem">
@@ -176,8 +173,6 @@
     <eClassifiers xsi:type="ecore:EClass" name="MaxConstraint" eSuperTypes="#//core/BoundaryConstraint"/>
     <eClassifiers xsi:type="ecore:EClass" name="EMailConstraint" eSuperTypes="#//core/Constraint"/>
     <eClassifiers xsi:type="ecore:EClass" name="FormatConstraint" eSuperTypes="#//core/Constraint"/>
-    <eClassifiers xsi:type="ecore:EClass" name="HasConstraints" abstract="true"/>
-    <eClassifiers xsi:type="ecore:EClass" name="HasReferences" abstract="true"/>
     <eClassifiers xsi:type="ecore:EClass" name="Activity" eSuperTypes="#//core/HasNameAndID #//core/HasTags #//core/HasDescription">
       <eStructuralFeatures xsi:type="ecore:EReference" name="accountables" upperBound="-1"
           eType="#//core/Stakeholder"/>

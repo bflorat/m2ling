@@ -40,11 +40,11 @@ import org.m2ling.domain.core.RuntimeItem;
  *   <li>{@link org.m2ling.domain.core.impl.ComponentInstanceImpl#getTags <em>Tags</em>}</li>
  *   <li>{@link org.m2ling.domain.core.impl.ComponentInstanceImpl#getDescription <em>Description</em>}</li>
  *   <li>{@link org.m2ling.domain.core.impl.ComponentInstanceImpl#getStatus <em>Status</em>}</li>
+ *   <li>{@link org.m2ling.domain.core.impl.ComponentInstanceImpl#getReferences <em>References</em>}</li>
  *   <li>{@link org.m2ling.domain.core.impl.ComponentInstanceImpl#getComponent <em>Component</em>}</li>
  *   <li>{@link org.m2ling.domain.core.impl.ComponentInstanceImpl#getInstances <em>Instances</em>}</li>
  *   <li>{@link org.m2ling.domain.core.impl.ComponentInstanceImpl#getInstancesGroups <em>Instances Groups</em>}</li>
  *   <li>{@link org.m2ling.domain.core.impl.ComponentInstanceImpl#getBoundComponentInstance <em>Bound Component Instance</em>}</li>
- *   <li>{@link org.m2ling.domain.core.impl.ComponentInstanceImpl#getReferences <em>References</em>}</li>
  * </ul>
  * </p>
  *
@@ -178,6 +178,16 @@ public class ComponentInstanceImpl extends HasParameterValuesImpl implements Com
 	protected String status = STATUS_EDEFAULT;
 
 	/**
+	 * The cached value of the '{@link #getReferences() <em>References</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getReferences()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<Reference> references;
+
+	/**
 	 * The cached value of the '{@link #getComponent() <em>Component</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -216,16 +226,6 @@ public class ComponentInstanceImpl extends HasParameterValuesImpl implements Com
 	 * @ordered
 	 */
 	protected ComponentInstance boundComponentInstance;
-
-	/**
-	 * The cached value of the '{@link #getReferences() <em>References</em>}' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getReferences()
-	 * @generated
-	 * @ordered
-	 */
-	protected EList<Reference> references;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -387,12 +387,12 @@ public class ComponentInstanceImpl extends HasParameterValuesImpl implements Com
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
+			case CorePackage.COMPONENT_INSTANCE__REFERENCES:
+				return ((InternalEList<?>)getReferences()).basicRemove(otherEnd, msgs);
 			case CorePackage.COMPONENT_INSTANCE__INSTANCES:
 				return ((InternalEList<?>)getInstances()).basicRemove(otherEnd, msgs);
 			case CorePackage.COMPONENT_INSTANCE__INSTANCES_GROUPS:
 				return ((InternalEList<?>)getInstancesGroups()).basicRemove(otherEnd, msgs);
-			case CorePackage.COMPONENT_INSTANCE__REFERENCES:
-				return ((InternalEList<?>)getReferences()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -417,6 +417,8 @@ public class ComponentInstanceImpl extends HasParameterValuesImpl implements Com
 				return getDescription();
 			case CorePackage.COMPONENT_INSTANCE__STATUS:
 				return getStatus();
+			case CorePackage.COMPONENT_INSTANCE__REFERENCES:
+				return getReferences();
 			case CorePackage.COMPONENT_INSTANCE__COMPONENT:
 				if (resolve) return getComponent();
 				return basicGetComponent();
@@ -427,8 +429,6 @@ public class ComponentInstanceImpl extends HasParameterValuesImpl implements Com
 			case CorePackage.COMPONENT_INSTANCE__BOUND_COMPONENT_INSTANCE:
 				if (resolve) return getBoundComponentInstance();
 				return basicGetBoundComponentInstance();
-			case CorePackage.COMPONENT_INSTANCE__REFERENCES:
-				return getReferences();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -461,6 +461,10 @@ public class ComponentInstanceImpl extends HasParameterValuesImpl implements Com
 			case CorePackage.COMPONENT_INSTANCE__STATUS:
 				setStatus((String)newValue);
 				return;
+			case CorePackage.COMPONENT_INSTANCE__REFERENCES:
+				getReferences().clear();
+				getReferences().addAll((Collection<? extends Reference>)newValue);
+				return;
 			case CorePackage.COMPONENT_INSTANCE__COMPONENT:
 				setComponent((Component)newValue);
 				return;
@@ -474,10 +478,6 @@ public class ComponentInstanceImpl extends HasParameterValuesImpl implements Com
 				return;
 			case CorePackage.COMPONENT_INSTANCE__BOUND_COMPONENT_INSTANCE:
 				setBoundComponentInstance((ComponentInstance)newValue);
-				return;
-			case CorePackage.COMPONENT_INSTANCE__REFERENCES:
-				getReferences().clear();
-				getReferences().addAll((Collection<? extends Reference>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -509,6 +509,9 @@ public class ComponentInstanceImpl extends HasParameterValuesImpl implements Com
 			case CorePackage.COMPONENT_INSTANCE__STATUS:
 				setStatus(STATUS_EDEFAULT);
 				return;
+			case CorePackage.COMPONENT_INSTANCE__REFERENCES:
+				getReferences().clear();
+				return;
 			case CorePackage.COMPONENT_INSTANCE__COMPONENT:
 				setComponent((Component)null);
 				return;
@@ -520,9 +523,6 @@ public class ComponentInstanceImpl extends HasParameterValuesImpl implements Com
 				return;
 			case CorePackage.COMPONENT_INSTANCE__BOUND_COMPONENT_INSTANCE:
 				setBoundComponentInstance((ComponentInstance)null);
-				return;
-			case CorePackage.COMPONENT_INSTANCE__REFERENCES:
-				getReferences().clear();
 				return;
 		}
 		super.eUnset(featureID);
@@ -548,6 +548,8 @@ public class ComponentInstanceImpl extends HasParameterValuesImpl implements Com
 				return DESCRIPTION_EDEFAULT == null ? description != null : !DESCRIPTION_EDEFAULT.equals(description);
 			case CorePackage.COMPONENT_INSTANCE__STATUS:
 				return STATUS_EDEFAULT == null ? status != null : !STATUS_EDEFAULT.equals(status);
+			case CorePackage.COMPONENT_INSTANCE__REFERENCES:
+				return references != null && !references.isEmpty();
 			case CorePackage.COMPONENT_INSTANCE__COMPONENT:
 				return component != null;
 			case CorePackage.COMPONENT_INSTANCE__INSTANCES:
@@ -556,8 +558,6 @@ public class ComponentInstanceImpl extends HasParameterValuesImpl implements Com
 				return instancesGroups != null && !instancesGroups.isEmpty();
 			case CorePackage.COMPONENT_INSTANCE__BOUND_COMPONENT_INSTANCE:
 				return boundComponentInstance != null;
-			case CorePackage.COMPONENT_INSTANCE__REFERENCES:
-				return references != null && !references.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}
@@ -607,6 +607,7 @@ public class ComponentInstanceImpl extends HasParameterValuesImpl implements Com
 		}
 		if (baseClass == HasReferences.class) {
 			switch (derivedFeatureID) {
+				case CorePackage.COMPONENT_INSTANCE__REFERENCES: return CorePackage.HAS_REFERENCES__REFERENCES;
 				default: return -1;
 			}
 		}
@@ -658,6 +659,7 @@ public class ComponentInstanceImpl extends HasParameterValuesImpl implements Com
 		}
 		if (baseClass == HasReferences.class) {
 			switch (baseFeatureID) {
+				case CorePackage.HAS_REFERENCES__REFERENCES: return CorePackage.COMPONENT_INSTANCE__REFERENCES;
 				default: return -1;
 			}
 		}

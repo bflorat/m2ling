@@ -37,7 +37,7 @@ public class M2lingUnitTest {
 	 * Default setup code
 	 */
 	@Before
-	public void setUp() {
+	public void setUp() throws Exception{
 		// Set M2LING_HOME variable for test mode
 		Map<String, String> newenv = new HashMap<String, String>();
 		newenv.put(Consts.M2LING_HOME_VARIABLE_NAME, getUTStorage().getAbsolutePath());

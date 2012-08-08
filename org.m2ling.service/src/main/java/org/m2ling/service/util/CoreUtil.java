@@ -11,8 +11,11 @@ import java.util.logging.Logger;
 import org.m2ling.common.exceptions.TechnicalException;
 import org.m2ling.common.exceptions.TechnicalException.Code;
 import org.m2ling.domain.Root;
+import org.m2ling.domain.core.Component;
+import org.m2ling.domain.core.ComponentType;
 import org.m2ling.domain.core.Rule;
 import org.m2ling.domain.core.Type;
+import org.m2ling.domain.core.View;
 import org.m2ling.domain.core.ViewPoint;
 import org.m2ling.persistence.PersistenceManager;
 
@@ -77,6 +80,46 @@ public class CoreUtil {
 	}
 
 	/**
+	 * Return a component type denoted by the given id or null if none matches.
+	 * 
+	 * @param id
+	 *           the searched id
+	 * @return an item denoted by the given id or null if none matches
+	 */
+	public ComponentType getComponentTypeByID(String id) {
+		Root root = pmanager.getRoot();
+		for (ViewPoint v : root.getViewPoints()) {
+			List<ComponentType> cts = v.getComponentTypes();
+			for (ComponentType ct : cts) {
+				if (id.equals(ct.getId())) {
+					return ct;
+				}
+			}
+		}
+		return null;
+	}
+
+	/**
+	 * Return a component denoted by the given id or null if none matches.
+	 * 
+	 * @param id
+	 *           the searched id
+	 * @return an item denoted by the given id or null if none matches
+	 */
+	public Component getComponentByID(String id) {
+		Root root = pmanager.getRoot();
+		for (View v : root.getViews()) {
+			List<Component> comps = v.getComponents();
+			for (Component comp : comps) {
+				if (id.equals(comp.getId())) {
+					return comp;
+				}
+			}
+		}
+		return null;
+	}
+
+	/**
 	 * Return any object matching provided type and ID or null if none matches. Note that the item ID
 	 * is not necessary a "iD" attribute.
 	 * 
@@ -91,6 +134,10 @@ public class CoreUtil {
 			return getViewPointByID(itemID);
 		} else if (type == Type.RULE) {
 			return getRuleByID(itemID);
+		} else if (type == Type.COMPONENT_TYPE) {
+			return getComponentTypeByID(itemID);
+		} else if (type == Type.COMPONENT) {
+			return getComponentByID(itemID);
 		} else {
 			throw new TechnicalException(Code.NOT_YET_IMPLEMENTED, null, type.toString());
 		}

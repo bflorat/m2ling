@@ -121,8 +121,8 @@ public class ComponentItemProvider extends ArchitectureItemItemProvider implemen
 	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
+			childrenFeatures.add(CorePackage.Literals.HAS_REFERENCES__REFERENCES);
 			childrenFeatures.add(CorePackage.Literals.COMPONENT__INSTANCES);
-			childrenFeatures.add(CorePackage.Literals.COMPONENT__REFERENCES);
 		}
 		return childrenFeatures;
 	}
@@ -181,8 +181,8 @@ public class ComponentItemProvider extends ArchitectureItemItemProvider implemen
 		updateChildren(notification);
 
 		switch (notification.getFeatureID(Component.class)) {
-			case CorePackage.COMPONENT__INSTANCES:
 			case CorePackage.COMPONENT__REFERENCES:
+			case CorePackage.COMPONENT__INSTANCES:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
 		}
@@ -202,13 +202,13 @@ public class ComponentItemProvider extends ArchitectureItemItemProvider implemen
 
 		newChildDescriptors.add
 			(createChildParameter
-				(CorePackage.Literals.COMPONENT__INSTANCES,
-				 CoreFactory.eINSTANCE.createComponentInstance()));
+				(CorePackage.Literals.HAS_REFERENCES__REFERENCES,
+				 CoreFactory.eINSTANCE.createReference()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(CorePackage.Literals.COMPONENT__REFERENCES,
-				 CoreFactory.eINSTANCE.createReference()));
+				(CorePackage.Literals.COMPONENT__INSTANCES,
+				 CoreFactory.eINSTANCE.createComponentInstance()));
 	}
 
 

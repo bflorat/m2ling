@@ -189,6 +189,14 @@ public class CoreAdapterFactory extends AdapterFactoryImpl {
 				return createHasDescriptionAdapter();
 			}
 			@Override
+			public Adapter caseHasConstraints(HasConstraints object) {
+				return createHasConstraintsAdapter();
+			}
+			@Override
+			public Adapter caseHasReferences(HasReferences object) {
+				return createHasReferencesAdapter();
+			}
+			@Override
 			public Adapter caseCustomProperty(CustomProperty object) {
 				return createCustomPropertyAdapter();
 			}
@@ -255,14 +263,6 @@ public class CoreAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseFormatConstraint(FormatConstraint object) {
 				return createFormatConstraintAdapter();
-			}
-			@Override
-			public Adapter caseHasConstraints(HasConstraints object) {
-				return createHasConstraintsAdapter();
-			}
-			@Override
-			public Adapter caseHasReferences(HasReferences object) {
-				return createHasReferencesAdapter();
 			}
 			@Override
 			public Adapter caseActivity(Activity object) {

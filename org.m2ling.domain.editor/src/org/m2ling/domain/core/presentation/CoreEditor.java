@@ -118,8 +118,8 @@ import org.eclipse.ui.views.contentoutline.IContentOutlinePage;
 import org.eclipse.ui.views.properties.IPropertySheetPage;
 import org.eclipse.ui.views.properties.PropertySheet;
 import org.eclipse.ui.views.properties.PropertySheetPage;
-import org.m2ling.domain.core.provider.CoreItemProviderAdapterFactory;
 import org.m2ling.domain.configuration.provider.ConfigurationItemProviderAdapterFactory;
+import org.m2ling.domain.core.provider.CoreItemProviderAdapterFactory;
 import org.m2ling.domain.presentation.M2lingEditorPlugin;
 import org.m2ling.domain.provider.DomainItemProviderAdapterFactory;
 
