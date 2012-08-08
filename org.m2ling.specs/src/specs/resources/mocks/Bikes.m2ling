@@ -117,7 +117,7 @@
     <components id="_qODuQp6TEeGyndJ1yNTLVw" name="EndUserGUI" comment="" type="_E3EOwZoWEeG71vmJ5CR-iA" boundComponent="_osKccJ89EeGNFtlcQfUFgw"/>
     <components id="_xjupYp6VEeGbbcMFSNIrnA" name="PaiementServices" description="" type="_1y2zQZoWEeG71vmJ5CR-iA" boundComponent="_9xnzQJ89EeGNFtlcQfUFgw"/>
     <components id="_gmFcgp6VEeGbbcMFSNIrnA" name="Product Catalog Services" comment="" description="" type="_1y2zQZoWEeG71vmJ5CR-iA" boundComponent="_VsqREp8zEeGYS-4UJ-FpAA"/>
-    <components id="_Y-AZsqvvEeGqu4Jf39UauA" name="Jetty" description="" type="_fKtsQZoXEeG71vmJ5CR-iA" boundComponent="_BM4XQp6QEeGyndJ1yNTLVw">
+    <components id="_Y-AZsqgtekejey" name="Jetty" description="" type="_fKtsQZoXEeG71vmJ5CR-iA" boundComponent="_BM4XQp6QEeGyndJ1yNTLVw">
       <references type="RUNS" targets="_8fvV4p6TEeGyndJ1yNTLVw"/>
     </components>
     <components id="_4-yHMprbEeGE7MG94I-e3A" name="BikesOnlineClient" comment="" description="" type="_8_BugZqkEeGbI4NH3iicSg"/>
@@ -214,7 +214,6 @@
     <instances id="_x06rhKHAEeGIx4XXpoKVSg" name="Cisco 2800_1" description="" component="_JlK98p_7EeG3fPi34vn9KQ"/>
     <instances id="_AIVt1KHBEeGIx4XXpoKVSg" name="Cisco 2900_1" component="_Jlytjhmp"/>
     <instances id="_DzMO9KHBEeGIx4XXpoKVSg" name="ASA_1" component="_nKCmgp_6EeG3fPi34vn9KQ"/>
-    <instances id="__E72BaSzEeGgK_AE-WB4xA" name="Environment_PROD" comment=""/>
   </views>
   <views comment="" description="Production view of BikesOnline deployment" id="_7-nzcaKREeGOsOUMPsTb_w" name="Deployment_BikesOnline" viewPoint="ertyuyreklbjnb,n">
     <components id="_vDwQkqTjEeGhbskxmOc77w" name="Production" description="" type="_sgTcYaTjEeGhbskxmOc77w">
