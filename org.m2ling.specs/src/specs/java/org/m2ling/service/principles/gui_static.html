@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link href="../../../../../m2ling_spec.css" rel="stylesheet"
+	type="text/css" />
+
+<title>m2principles GUI specification</title>
+</head>
+<body>
+	<a href='../../../../index.html'>m2ling</a>&#160;/&#160;
+	<a href='./index.html'>m2principles</a>
+	<h1>Main screen</h1>
+	<pre>
++ View points [New]  (one create viewpoint button + some explanations + Tags : [] )
+  + ArchiApp [Delete] (VP label + status literals)
+      Default values for status literals : VALIDATED, PRODUCTION, RUNNING, CURRENTLY_DESIGNED, DEVELOPMENT, OBSOLETE, RETIRED, REFUSED 
+   + Components types [New] (table with all component types) [1] 
+    * Application [delete] (@see #1)
+     * GUIModule [delete]
+   + Link types (@see component types)
+    * WS_Sync [Delete] (see #2)
+   + Rules (@see component types), rules status literals. 
+      Default values for status literals : TO_BE_STUDIED, BEING_STUDIED, VALIDATED, OBSOLETE, REFUSED 
+    * R1 [Delete] (see #3)
+   + Activities (@see component types)
+    * param_defs [Delete] (see #4)
+    
+   
+#1 (Component form) : 
+Name: [] Tags: [tag1,tag2] 
+Label : []
+Run by : ?[]
+Restricted classes [[Jboss 5.0.1, JBoss 6]] 
+Custom properties [[]]
+[] isReifiable 
+Instantiation factor : []
+
+#2 (Link form) :
+Name: [] Tags: [tag1,tag2] 
+Label : []
+Between : ?[component type 1] with ?[component type 2] [1]
+(No more attributes like sync/async : we want to stay generic)
+Temporality : ?[]
+Access type : ?[]
+
+#3 (Rules form) :
+Name: [] Tags: [tag1,tag2] 
+Rationale : []
+Status : ?[@see Status enum]
+Priority : ?[@see Priority enum]
+Scope : []
+Exception [limitations, derogations...]
+History [[Date][Status]...]
+
+#4 (Activities form)
+Name: [] Tags: [tag1,tag2] 
+Rationale : []
+Responsible : ?[actor]
+Accountable : ?[actor]
+
+
+[1] links to self valid
+-------------------------------------------
+Comments area
+<display comments for selected item if any>
+	           
+	 
+[1] This is a flat structure because there are more than one way to organize 
+ components. The composition or run by attributes are described in each item form.
+	 
+#1 (ViewPoint form) : 
+Name: [] Tags: [tag1,tag2]
+	
+	</pre>
+</body>
+</html>
+
+

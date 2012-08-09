@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link href="../../m2ling_specs.css" rel="stylesheet" type="text/css" />
+<title>m2ling security items</title>
+</head>
+<body>
+	<a href='M2ling.html'>M2ling</a>
+	<h1>Right management</h1>
+	<pre>
+	* One or more people with a a general ADMIN right set in a property file
+	* People have a boolean to indicate they are ADMIN.
+	* ADMIN people have all rights on any m2ling application and have access to m2admin app.
+	(TODO : do better later here, make reusable profiles, realms... to limit the admin work)
+	* Authorization design : one ACResource (AccessControled Resource)	anotation on classes and methods; a Authorization class with AuthorizationType enum (CREATE,DELETE,UPDATE,READ) maps one or more ACResource and one or more stakeholder
+	
+	Mocking:
+	* Create a mock AOP autorization service which return always true if required.
+	
+	</pre>
+
+	<ul>
+	</ul>
+</body>
+</html>
+
+

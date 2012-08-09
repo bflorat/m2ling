@@ -6,7 +6,7 @@
 package org.m2ling.presentation.binding;
 
 import org.m2ling.service.core.TagService;
-import org.m2ling.service.core.impl.TagServiceImpl;
+import org.m2ling.service.core.TagServiceImpl;
 
 import com.google.inject.AbstractModule;
 

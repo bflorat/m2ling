@@ -22,7 +22,7 @@ import org.m2ling.common.utils.M2lingUnitTest;
 import org.m2ling.domain.DomainFactory;
 import org.m2ling.domain.DomainPackage;
 import org.m2ling.domain.Root;
-import org.m2ling.persistence.impl.PersistenceManagerTeneoImpl;
+import org.m2ling.persistence.PersistenceManagerTeneoImpl;
 
 /**
  * Parent class for all unit tests.

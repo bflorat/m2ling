@@ -10,6 +10,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.logging.Logger;
 
+import org.concordion.api.extension.Extensions;
 import org.concordion.integration.junit3.ConcordionTestCase;
 import org.junit.After;
 import org.junit.Before;
@@ -19,6 +20,7 @@ import org.m2ling.common.utils.Utils;
 /**
  * Main parent class for m2ling fixtures
  */
+@Extensions({MyCssExtension.class})
 public abstract class M2lingFixture extends ConcordionTestCase {
 	protected Logger logger = Logger.getAnonymousLogger();
 

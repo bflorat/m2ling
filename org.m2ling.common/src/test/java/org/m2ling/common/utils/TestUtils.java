@@ -65,4 +65,10 @@ public class TestUtils {
 		assertTrue(checked
 				.matches(".*FALSE=false serialVersionUID=-3665804199014368530 TRUE=true TYPE=boolean value=true.*"));
 	}
+	
+	@Test
+	public void shuffleStrings(){
+		String s = UUT.getShuffleString(1000);
+		assertTrue(s.length() == 1000);
+	}
 }

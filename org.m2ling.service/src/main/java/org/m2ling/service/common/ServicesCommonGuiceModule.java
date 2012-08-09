@@ -6,7 +6,7 @@ package org.m2ling.service.common;
 import org.m2ling.common.security.ACResource;
 import org.m2ling.common.security.impl.ACResourceInterceptorImpl;
 import org.m2ling.persistence.PersistenceManager;
-import org.m2ling.persistence.impl.PersistenceManagerTeneoImpl;
+import org.m2ling.persistence.PersistenceManagerTeneoImpl;
 
 import com.google.inject.AbstractModule;
 import com.google.inject.matcher.Matchers;

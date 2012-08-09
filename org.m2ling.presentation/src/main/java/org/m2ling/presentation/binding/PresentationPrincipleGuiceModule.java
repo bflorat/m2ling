@@ -14,9 +14,9 @@ import org.m2ling.presentation.principles.ViewPointDialogFactory;
 import org.m2ling.presentation.principles.ViewPointPanel;
 import org.m2ling.presentation.principles.ViewPointPanelFactory;
 import org.m2ling.service.principles.RuleService;
+import org.m2ling.service.principles.RuleServiceImpl;
 import org.m2ling.service.principles.ViewPointService;
-import org.m2ling.service.principles.impl.RuleServiceImpl;
-import org.m2ling.service.principles.impl.ViewPointServiceImpl;
+import org.m2ling.service.principles.ViewPointServiceImpl;
 
 import com.google.inject.AbstractModule;
 import com.google.inject.assistedinject.FactoryModuleBuilder;

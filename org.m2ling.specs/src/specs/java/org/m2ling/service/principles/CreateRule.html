@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:concordion="http://www.concordion.org/2007/concordion">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>Rule creation</title>
+</head>
+<body>
+	<H1>Rules creation</H1>
+	<p>Administrators or actors with adequate authorizations can create
+		a new rule against a given viewpoint.</p>
+	<p>A ~ViewPoint~ Rule is uniquely identified by its id.</p>
+	<h2>Automated</h2>
+	<div class="example">
+		<h3>Example</h3>
+		<p>
+			Given a view point named <b concordion:set="#vpID">id_vp1</b>, a new
+			rule created with :
+		<ul>
+			<li>id=<b concordion:set="#id">rule_id2</b></li>
+			<li>name=<b concordion:set="#name">rule2</b></li>
+			<li>description=<b concordion:set="#description">desc2</b></li>
+			<li>comment=<b concordion:set="#comment">comment2</b></li>
+			<li>status=<b concordion:set="#status">VALIDATED</b></li>
+			<li>priority=<b concordion:set="#priority">HIGH</b></li>
+			<li>rationale=<b concordion:set="#rationale">rationale2</b></li>
+			<li>exception=<b concordion:set="#exceptions">exception2</b></li>
+			<li>tags=<b concordion:set="#tags">tag1,tag2</b></li>
+		</ul>
+		should have following characteristics : <b
+			concordion:assertEquals="getRule(#id,#vpID,#name,#description,#comment,#status,#priority,#rationale,#exceptions,#tags)">comment=comment2
+			description=desc2 drop= exceptions=exception2 id=rule_id2 name=rule2
+			priority=HIGH rationale=rationale2 status=VALIDATED tags=tag1,tag2
+			vpID=id_vp1</b>.
+		</p>
+	</div>
+
+	<h2>Manual</h2>
+	Nothing
+	<h2>Out of scope</h2>
+	Nothing
+
+	<h2>Further details</h2>
+	<ul>
+	</ul>
+</body>
+</html>

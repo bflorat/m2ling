@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:concordion="http://www.concordion.org/2007/concordion">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>Viewpoint creation</title>
+</head>
+<body>
+	<H1>Viewpoint creation</H1>
+	<p>Administrators or actors with adequate authorizations can create
+		a new viewpoint to formalize aspects and rules of their concerns over
+		a system of interest.</p>
+	<p>A ~ViewPoint~ is uniquely identified by its id. Its name must be
+		unique.</p>
+	<h2>Automated</h2>
+	<div class="example">
+		<h3>Example</h3>
+		<p>A new viewpoint created with
+		<ul>
+			<li>id=<b concordion:set="#id">id_vp123</b></li>
+			<li>id=<b concordion:set="#name">vp123</b></li>
+			<li>id=<b concordion:set="#description">desc1</b></li>
+			<li>id=<b concordion:set="#comment">comment1</b></li>
+			<li>id=<b concordion:set="#tags">tag1,tag2</b></li>
+			<li>id=<b concordion:set="#statusLiterals">SUGGESTED,VALIDATED</b></li>
+		</ul>
+		should have following characteristics : <b
+			concordion:assertEquals="getViewPoint(#id,#name,#description,#comment,#tags,#statusLiterals)">comment=comment1
+			description=desc1 iconPath= id=id_vp123 name=vp123
+			statusLiterals=SUGGESTED,VALIDATED tags=tag1,tag2</b>.
+		</p>
+		<h3>Controls</h3>
+		<ul>
+			<li>A null input should make service call <b
+				concordion:assertEquals="getCheckNullDTO()">FAIL</b>
+			</li>
+			<li>ID and name can't be null, void or void once trimmed</li>
+			<li>ID size can't be larger than 40 characters</li>
+			<li>Name and status literal size can't be larger that 200
+				characters</li>
+			<li>description and comment size can't be larger that 2000
+				characters</li>
+			<li>See Tags specifications for tags limits</li>
+			<li>Following service inputs should make the service :
+				<table
+					concordion:execute="#result=getCheckDTOVerification(#id,#name,#description,#comment,#tags,#statusLiterals)">
+					<tr>
+						<th concordion:set="#id">ID</th>
+						<th concordion:set="#name">Name</th>
+						<th concordion:set="#description">Name</th>
+						<th concordion:set="#comment">Name</th>
+						<th concordion:set="#tags">Name</th>
+						<th concordion:set="#statusLiterals">Name</th>
+						<th concordion:assertEquals="#result">should :</th>
+					</tr>
+					<!-- Nominal -->
+					<tr>
+						<td>id_rule2</td>
+						<td>rule2</td>
+						<td>description2</td>
+						<td>comment2</td>
+						<td>tags1,tag2</td>
+						<td>VALIDATED,REFUSED</td>
+						<td>PASS</td>
+					</tr>
+					<!-- ID checks -->
+					<tr>
+						<td>null</td>
+						<td>rule2</td>
+						<td>description2</td>
+						<td>comment2</td>
+						<td>tags1,tag2</td>
+						<td>VALIDATED,REFUSED</td>
+						<td>FAIL</td>
+					</tr>
+					<tr>
+						<td></td>
+						<td>rule2</td>
+						<td>description2</td>
+						<td>comment2</td>
+						<td>tags1,tag2</td>
+						<td>VALIDATED,REFUSED</td>
+						<td>FAIL</td>
+					</tr>
+					<tr>
+						<td>space</td>
+						<td>rule2</td>
+						<td>description2</td>
+						<td>comment2</td>
+						<td>tags1,tag2</td>
+						<td>VALIDATED,REFUSED</td>
+						<td>FAIL</td>
+					</tr>
+					<tr>
+						<td>dkjshdhsqkjdhqskjhdkjqshdkjqshkjdhqskjhdkjqskdjhqskjdhqskhdkjqshdkjhqskjdhqskjhdkjqshdkjqshkdjqshkjdhqskjhdkjqshdkjhqskjdhqskhdk</td>
+						<td>rule2</td>
+						<td>description2</td>
+						<td>comment2</td>
+						<td>tags1,tag2</td>
+						<td>VALIDATED,REFUSED</td>
+						<td>FAIL</td>
+					</tr>
+					<!-- name check -->
+					<tr>
+						<td>id_rule2</td>
+						<td>null</td>
+						<td>description2</td>
+						<td>comment2</td>
+						<td>tags1,tag2</td>
+						<td>VALIDATED,REFUSED</td>
+						<td>FAIL</td>
+					</tr>
+					<tr>
+						<td>id_rule2</td>
+						<td></td>
+						<td>description2</td>
+						<td>comment2</td>
+						<td>tags1,tag2</td>
+						<td>VALIDATED,REFUSED</td>
+						<td>FAIL</td>
+					</tr>
+					<tr>
+						<td>id_rule2</td>
+						<td>space</td>
+						<td>description2</td>
+						<td>comment2</td>
+						<td>tags1,tag2</td>
+						<td>VALIDATED,REFUSED</td>
+						<td>FAIL</td>
+					</tr>
+					<tr>
+						<td>id_rule2</td>
+						<td>dkjshdhddsldljslkdl fdsf fsfdsf ssf
+							skjdlsjdkjslkdjskljdlsjdlj lsd jslk dkjs lkdjskldj sjd
+							sjdlksqkjdhqskjhdkjqshdkjqshkjdhqskjhdkjqskdjhqskjdhqskhdkjqshdkjhqskjdhqskjhdkjqshdkjqshkdjqsdsds
+							dsdsd shkjdhqskjhdkjqs</td>
+						<td>description2</td>
+						<td>comment2</td>
+						<td>tags1,tag2</td>
+						<td>VALIDATED,REFUSED</td>
+						<td>FAIL</td>
+					</tr>
+					<!-- Status literal -->
+					<tr>
+						<td>id_rule2</td>
+						<td>rule2</td>
+						<td>description2</td>
+						<td>comment2</td>
+						<td>tags1,tag2</td>
+						<td>dkjshdhddsldljslkdl fdsf fsfdsf ssf
+							skjdlsjdkjslkdjskljdlsjdlj lsd jslk dkjs lkdjskldj sjd
+							sjdlksqkjdhqskjhdkjqshdkjqshkjdhqskjhdkjqskdjhqskjdhqskhdkjqshdkjhqskjdhqskjhdkjqshdkjqshkdjqsdsds
+							dsdsd shkjdhqskjhdkjqs,foo</td>
+						<td>FAIL</td>
+					</tr>
+					<tr>
+						<td>id_rule2</td>
+						<td>rule2</td>
+						<td>description2</td>
+						<td>comment2</td>
+						<td>tags1,tag2</td>
+						<td>status1,status2</td>
+						<td>PASS</td>
+					</tr>
+
+				</table>
+			</li>
+		</ul>
+	</div>
+
+	<h2>Manual</h2>
+	Nothing
+	<h2>Out of scope</h2>
+	Nothing
+
+	<h2>Further details</h2>
+	<ul>
+	</ul>
+</body>
+</html>

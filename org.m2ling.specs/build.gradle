@@ -30,13 +30,12 @@ test {
 }
 
 
-task buildSpecs(dependsOn:['clean', 'test'])<<{
+task prepare_destination(dependsOn:['clean'])<<{
 	copy{
 		description 'Copy static HTML along with fixtures generated HTML files...'
 		from 'src/specs/java'
 		into concordionOutputDir
-		include '**/*_static.html'
-		include '**/index.html','*.css'
+		include '**/*.html'
 	}
 }
 
@@ -60,7 +59,7 @@ task loadGlossary<<{
  * ~entry~ to a href link. 
  * ?entry? to a note
  */
-task replaceInternalDefinition(dependsOn:['buildSpecs', 'loadGlossary'])<<{
+task replaceInternalDefinition(dependsOn:['prepare_destination', 'test', 'loadGlossary'])<<{
 	copy {
 		from concordionOutputDir
 		into "${concordionOutputDir}_tmp"

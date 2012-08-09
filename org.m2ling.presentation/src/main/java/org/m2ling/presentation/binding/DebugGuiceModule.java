@@ -6,7 +6,7 @@
 package org.m2ling.presentation.binding;
 
 import org.m2ling.persistence.PersistenceManager;
-import org.m2ling.persistence.impl.PersistenceManagerXMIImpl;
+import org.m2ling.persistence.PersistenceManagerXMIImpl;
 
 import com.google.inject.AbstractModule;
 

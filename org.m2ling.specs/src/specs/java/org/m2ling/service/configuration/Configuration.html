@@ -1,0 +1,42 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<link href="../../../../m2ling_specs.css" rel="stylesheet" type="text/css" />
+<title>m2configuration specifications directory</title>
+</head>
+<body>
+	<h1>m2configuration specifications</h1>
+	<h2>Generalities</h2>
+	<ul>
+		<li>A ~ParameterDefinition~ can be done at M1 or M2 level (M2
+			only for reifiable components types)</li>
+		<li>~Parameter~ value can be done at M0 level only (for reifiable
+			concepts), including instances groups.</li>
+		<li>PARAM uniquely identified by project id + its name</li>
+		<LI>If long description is unset, it is equal to short
+			description Projects and environments</LI>
+		<li>No configuration against links (for now). We consider that links
+			behavior depends on each component edge configuration</li>
+		<li>targetType can be used for M1 level configuration when set upon
+			non-reifiable components to provide explicit target type of
+			reifiable sub-components. If it is not set, we assume that target
+			type is the first sub-level of reifiable components.</li>
+		<li>It is possible to apply some parameter definitions against
+			components even if none component type is reifiable, then
+			m2configuration is used as a parameter catalog without value</li>
+		<li>When applying a parameter definition against a non-reifiable
+			component, a component instance group of name mycomponent_targettype is
+			created to provide value attachment. This group can't be dropped to
+			endorse value unicity among instances as expressed setting the definition
+			on the top-level component. It is automaticaly removed when no more
+			parameter definition is set. The instance group is "dynamic", kind of
+			subcomp* meaning : any new sub-component is automaticaly added to it.</li>
+	</ul>
+	<li><a href='gui_static.html'>GUI specifications</a></li>
+	<li><a href='security_static.html'>Security specifications</a></li>
+
+	<h2>Features</h2>
+
+
+</body>
+</html>
