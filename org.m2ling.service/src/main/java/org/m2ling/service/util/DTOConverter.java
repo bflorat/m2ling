@@ -23,6 +23,7 @@ import org.m2ling.domain.core.ViewPoint;
 import com.google.common.base.Strings;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
+import static org.m2ling.common.utils.Utils.nonull;
 
 /**
  * 
@@ -55,9 +56,9 @@ public class DTOConverter {
 		public ViewPointDTO getViewPointDTO(ViewPoint vp) {
 			ViewPointDTO.Builder builder = new ViewPointDTO.Builder(vp.getId(), vp.getName());
 			builder.tags(vp.getTags());
-			builder.comment(vp.getComment());
+			builder.comment(nonull(vp.getComment()));
 			builder.statusLiterals(vp.getStatusLiterals());
-			builder.description(vp.getDescription());
+			builder.description(nonull(vp.getDescription()));
 			return builder.build();
 		}
 
@@ -65,12 +66,12 @@ public class DTOConverter {
 			ViewPoint vp = (ViewPoint) rule.eContainer();
 			RuleDTO.Builder builder = new RuleDTO.Builder(vp.getId(), rule.getId(), rule.getName());
 			builder.tags(rule.getTags());
-			builder.comment(rule.getComment());
-			builder.status(rule.getStatus());
-			builder.description(rule.getDescription());
-			builder.exceptions(rule.getExceptions());
-			builder.priority(rule.getPriority().getLiteral());
-			builder.rationale(rule.getRationale());
+			builder.comment(nonull(rule.getComment()));
+			builder.status(nonull(rule.getStatus()));
+			builder.description(nonull(rule.getDescription()));
+			builder.exceptions(nonull(rule.getExceptions()));
+			builder.priority(nonull(rule.getPriority().getLiteral()));
+			builder.rationale(nonull(rule.getRationale()));
 			List<StatusEventDTO> history = getRuleHistoryDTO(rule);
 			builder.history(history);
 			return builder.build();
@@ -80,8 +81,8 @@ public class DTOConverter {
 			ViewPoint vp = (ViewPoint) ct.eContainer();
 			ComponentTypeDTO.Builder builder = new ComponentTypeDTO.Builder(vp.getId(), ct.getId(), ct.getName());
 			builder.tags(ct.getTags());
-			builder.comment(ct.getComment());
-			builder.description(ct.getDescription());
+			builder.comment(nonull(ct.getComment()));
+			builder.description(nonull(ct.getDescription()));
 			for (ArchitectureItem ai : ct.getEnumeration()) {
 				Component comp = (Component) ai;
 				builder.enumeration(comp.getId());

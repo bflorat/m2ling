@@ -8,6 +8,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.impl.EFactoryImpl;
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
+import org.m2ling.domain.*;
 import org.m2ling.domain.DomainFactory;
 import org.m2ling.domain.DomainPackage;
 import org.m2ling.domain.Root;

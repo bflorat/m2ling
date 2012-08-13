@@ -226,4 +226,17 @@ public class Utils {
 		}
 		return sb.toString();
 	}
+	
+	/**
+	 * Return the provided non null string or "" if null
+	 * @param s provided string
+	 * @return the provided non null string or "" if null
+	 */
+	public static String nonull(String s) {
+		if (s == null) {
+			return "";
+		} else {
+			return s;
+		}
+	}
 }

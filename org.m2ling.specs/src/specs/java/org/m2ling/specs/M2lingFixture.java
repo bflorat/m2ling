@@ -16,6 +16,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.m2ling.common.utils.Consts;
 import org.m2ling.common.utils.Utils;
+import org.m2ling.service.principles.ViewPointServiceImpl;
 
 /**
  * Main parent class for m2ling fixtures
@@ -23,7 +24,7 @@ import org.m2ling.common.utils.Utils;
 @Extensions({MyCssExtension.class})
 public abstract class M2lingFixture extends ConcordionTestCase {
 	protected Logger logger = Logger.getAnonymousLogger();
-
+	
 	/**
 	 * Return the root file storage for temporary UT files.
 	 * 

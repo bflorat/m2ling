@@ -8,6 +8,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.logging.Logger;
 
+import org.eclipse.emf.common.util.EList;
 import org.m2ling.common.configuration.Conf;
 import org.m2ling.common.dto.core.AccessType;
 import org.m2ling.common.dto.core.ViewPointDTO;
@@ -43,13 +44,14 @@ public class ViewPointServiceImpl extends ServiceImpl implements ViewPointServic
 	}
 
 	void checkDTO(final ViewPointDTO dto, final AccessType access) throws FunctionalException {
+		ViewPoint vp = null;
 		// Argument Nullity
 		if (dto == null) {
 			throw new FunctionalException(Code.NULL_ARGUMENT, null, null);
 		}
 		if (access != AccessType.CREATE) {
 			// VP existence
-			ViewPoint vp = util.getViewPointByID(dto.getId());
+			vp = util.getViewPointByID(dto.getId());
 			if (vp == null) {
 				throw new FunctionalException(Code.TARGET_NOT_FOUND, null, dto.getId());
 			}
@@ -72,6 +74,9 @@ public class ViewPointServiceImpl extends ServiceImpl implements ViewPointServic
 			// Status literals
 			int index = 1;
 			for (String literal : dto.getStatusLiterals()) {
+				if (literal == null) {
+					throw new FunctionalException(FunctionalException.Code.NULL_ARGUMENT, null, "(status Literal)");
+				}
 				if (literal.length() > Consts.MAX_LABEL_SIZE) {
 					throw new FunctionalException(FunctionalException.Code.SIZE_EXCEEDED, null, "statusLiteral #" + index);
 				}
@@ -81,15 +86,36 @@ public class ViewPointServiceImpl extends ServiceImpl implements ViewPointServic
 				throw new FunctionalException(FunctionalException.Code.DUPLICATE_STATUS_LITERAL, null, null);
 			}
 			// Description
+			if (dto.getDescription() == null) {
+				throw new FunctionalException(FunctionalException.Code.NULL_ARGUMENT, null, "(description)");
+			}
 			if (dto.getDescription().length() > Consts.MAX_TEXT_SIZE) {
 				throw new FunctionalException(FunctionalException.Code.SIZE_EXCEEDED, null, "(description)");
 			}
 			// Comment
+			if (dto.getComment() == null) {
+				throw new FunctionalException(FunctionalException.Code.NULL_ARGUMENT, null, "(comment)");
+			}
 			if (dto.getComment().length() > Consts.MAX_TEXT_SIZE) {
 				throw new FunctionalException(FunctionalException.Code.SIZE_EXCEEDED, null, "(comment)");
 			}
 			// Tags
 			Utils.checkTags(dto.getTags());
+		}
+		if (access == AccessType.UPDATE) {
+			EList<String> droppedStatusLiterals = vp.getStatusLiterals();
+			for (String literal : dto.getStatusLiterals()) {
+				droppedStatusLiterals.remove(literal);
+			}
+			// Check if a HasStatus item maps a status that has has been dropped
+			for (String sl : droppedStatusLiterals) {
+				if (util.containsStatusLiteral(vp.getId(), sl)) {
+					throw new FunctionalException(FunctionalException.Code.STATUS_USED, null, "(status literal)");
+				}
+			}
+			if (Utils.containsDup(dto.getStatusLiterals())) {
+				throw new FunctionalException(FunctionalException.Code.DUPLICATE_STATUS_LITERAL, null, null);
+			}
 		}
 	}
 

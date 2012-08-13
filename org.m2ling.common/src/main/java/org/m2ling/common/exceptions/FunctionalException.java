@@ -55,7 +55,8 @@ public class FunctionalException extends Exception {
 		INVALID_STATUS,
 		INVALID_PRIORITY,
 		INVALID_REFERENCE_TYPE,
-		NON_REIFIABLE_IFACTOR_SET
+		NON_REIFIABLE_IFACTOR_SET,
+		STATUS_USED
 		
 	}
 

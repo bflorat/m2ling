@@ -13,6 +13,7 @@ import org.m2ling.common.exceptions.TechnicalException.Code;
 import org.m2ling.domain.Root;
 import org.m2ling.domain.core.Component;
 import org.m2ling.domain.core.ComponentType;
+import org.m2ling.domain.core.Link;
 import org.m2ling.domain.core.Rule;
 import org.m2ling.domain.core.Type;
 import org.m2ling.domain.core.View;
@@ -49,14 +50,51 @@ public class CoreUtil {
 	 * @return a viewpoint denoted by the given id or null if none matches
 	 */
 	public ViewPoint getViewPointByID(String id) {
-		ViewPoint vp = null;
 		Root root = pmanager.getRoot();
 		for (ViewPoint v : root.getViewPoints()) {
 			if (id.equals(v.getId())) {
-				vp = v;
+				return v;
 			}
 		}
-		return vp;
+		return null;
+	}
+
+	/**
+	 * Return whether at least one HasStatus item from the given viewpoint id uses the provided
+	 * status literal.
+	 * 
+	 * @param id
+	 *           associated viewpoint id
+	 * @param searched
+	 *           status literal
+	 * @return whether at least one HasStatus item from the given viewpoint id uses the provided
+	 *         status literal
+	 */
+	public boolean containsStatusLiteral(String id, String statusLiteral) {
+		boolean out = false;
+		Root root = pmanager.getRoot();
+		for (ViewPoint v : root.getViewPoints()) {
+			if (id.equals(v.getId())) {
+				for (Rule rule : v.getRules()) {
+					if (statusLiteral.equals(rule.getStatus())) {
+						return true;
+					}
+				}
+				for (View view : root.getViews()) {
+					for (Component comp : view.getComponents()) {
+						if (statusLiteral.equals(comp.getStatus())) {
+							return true;
+						}
+					}
+					for (Link link : view.getLinks()) {
+						if (statusLiteral.equals(link.getStatus())) {
+							return true;
+						}
+					}
+				}
+			}
+		}
+		return out;
 	}
 
 	/**

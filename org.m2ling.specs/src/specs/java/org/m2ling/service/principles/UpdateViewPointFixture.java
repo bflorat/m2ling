@@ -8,21 +8,20 @@ import org.m2ling.common.configuration.Conf;
 import org.m2ling.common.dto.core.AccessType;
 import org.m2ling.common.dto.core.ViewPointDTO;
 import org.m2ling.common.exceptions.FunctionalException;
-import org.m2ling.common.utils.Utils;
 import org.m2ling.common.utils.UUT;
+import org.m2ling.common.utils.Utils;
 import org.m2ling.persistence.PersistenceManagerXMIImpl;
 import org.m2ling.presentation.principles.model.ViewPointBean;
 import org.m2ling.presentation.principles.utils.DTOConverter;
-import org.m2ling.service.principles.ViewPointServiceImpl;
 import org.m2ling.service.util.CoreUtil;
 import org.m2ling.service.util.DTOConverter.FromDTO;
 import org.m2ling.service.util.DTOConverter.ToDTO;
 import org.m2ling.specs.M2lingFixture;
 
-public class CreateViewPointFixture extends M2lingFixture {
+public class UpdateViewPointFixture extends M2lingFixture {
 	ViewPointServiceImpl service;
 
-	public CreateViewPointFixture() throws IOException {
+	public UpdateViewPointFixture() throws IOException {
 		super();
 	}
 
@@ -46,22 +45,8 @@ public class CreateViewPointFixture extends M2lingFixture {
 		}
 	}
 
-	/**
-	 * Create a viewpoint and return its name. We try to test the widest possible scope so we create
-	 * a presentation layer bean and check the returned presentation bean as well.
-	 * 
-	 * @return the new viewpoint name
-	 * @throws FunctionalException
-	 * 
-	 *            <li>id=<b concordion:set="#id">id_vp123</b></li> <li>id=<b
-	 *            concordion:set="#name">vp123</b></li> <li>id=<b
-	 *            concordion:set="#description">desc1</b></li> <li>id=<b
-	 *            concordion:set="#comment">comment1</b></li> <li>id=<b
-	 *            concordion:set="#tags">tag1,tag2</b></li> <li>id=<b
-	 *            concordion:set="#statusLiterals">SUGGESTED,VALIDATED</b>
-	 */
-	public String getViewPoint(String id, String name, String description, String comment, String tags,
-			String statusLiterals) throws FunctionalException {
+	public String update(String id, String name, String description, String comment, String tags, String statusLiterals)
+			throws FunctionalException {
 		reset();
 		ViewPointBean bean = new ViewPointBean();
 		bean.setComment(comment);
@@ -71,11 +56,53 @@ public class CreateViewPointFixture extends M2lingFixture {
 		bean.setStatusLiterals(statusLiterals);
 		bean.setTags(tags);
 		ViewPointDTO dto = new DTOConverter.ToDTO().getViewPointDTO(bean);
-		service.createViewPoint(null, dto);
+		service.updateViewPoint(null, dto);
 		ViewPointDTO checkedDTO = service.getViewPointByName(null, name);
 		ViewPointBean outBean = new DTOConverter.FromDTO().getViewPointBean(checkedDTO);
-		System.out.println(outBean.toString());
 		return outBean.toString();
+	}
+
+	public String getViewPoint(String id) {
+		ViewPointDTO dto = service.getViewPointByID(null, id);
+		ViewPointBean outBean = new DTOConverter.FromDTO().getViewPointBean(dto);
+		return outBean.toString();
+	}
+
+	public String updateStatusLiterals(String previousStatusLiterals, String newStatusLiterals) throws FunctionalException {
+		reset();
+		ViewPointDTO vp1DTO = service.getViewPointByName(null, "vp1");
+		List<String> previousStatusLiteralsList = Utils.stringListFromString(previousStatusLiterals);
+		ViewPointDTO dto = new ViewPointDTO.Builder(vp1DTO.getId(), vp1DTO.getName()).comment(vp1DTO.getComment())
+				.description(vp1DTO.getDescription()).tags(vp1DTO.getTags()).statusLiterals(previousStatusLiteralsList).build();
+		// Set the initial status literals
+		service.updateViewPoint(null, dto);
+		// try to set the new status literals
+		List<String> newStatusLiteralsList = Utils.stringListFromString(newStatusLiterals);
+		dto = new ViewPointDTO.Builder(vp1DTO.getId(), vp1DTO.getName()).comment(vp1DTO.getComment())
+				.description(vp1DTO.getDescription()).tags(vp1DTO.getTags()).statusLiterals(newStatusLiteralsList).build();
+		service.updateViewPoint(null, dto);
+		ViewPointDTO updatedVP = service.getViewPointByID(null, "id_vp1");
+		String out = Utils.stringListAsString(updatedVP.getStatusLiterals());
+		return out;
+	}
+
+	/**
+	 * Return FAIL or PASS
+	 */
+	public String updateStatusWithRule(String newStatusLiterals) throws FunctionalException {
+		reset();
+		// We assume that we have a "rule1" rule in VALIDATED status on vp1 vp (pre-filled in the
+		// technical mock)
+		ViewPointDTO vp1DTO = service.getViewPointByName(null, "vp1");
+		List<String> statusLiterals = Utils.stringListFromString(newStatusLiterals);
+		ViewPointDTO newVp1DTO = new ViewPointDTO.Builder(vp1DTO.getId(), vp1DTO.getName()).comment(vp1DTO.getComment())
+				.description(vp1DTO.getDescription()).tags(vp1DTO.getTags()).statusLiterals(statusLiterals).build();
+		try {
+			service.updateViewPoint(null, newVp1DTO);
+		} catch (FunctionalException fe) {
+			return "FAIL";
+		}
+		return "PASS";
 	}
 
 	/**
@@ -98,7 +125,7 @@ public class CreateViewPointFixture extends M2lingFixture {
 			}
 			ViewPointDTO dto = new ViewPointDTO.Builder(UUT.nul(id), UUT.nul(name)).description(UUT.nul(description))
 					.tags(tagsList).comment(UUT.nul(comment)).statusLiterals(status).build();
-			service.checkDTO(dto, AccessType.CREATE);
+			service.checkDTO(dto, AccessType.UPDATE);
 			return "PASS";
 		} catch (FunctionalException ex) {
 			return "FAIL";
@@ -108,7 +135,7 @@ public class CreateViewPointFixture extends M2lingFixture {
 	public String getCheckNullDTO() {
 		reset();
 		try {
-			service.checkDTO(null, AccessType.CREATE);
+			service.checkDTO(null, AccessType.UPDATE);
 			return "PASS";
 		} catch (FunctionalException ex) {
 			return "FAIL";

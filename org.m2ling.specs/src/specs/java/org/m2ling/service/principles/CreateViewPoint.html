@@ -12,9 +12,7 @@
 		a system of interest.</p>
 	<p>A ~ViewPoint~ is uniquely identified by its id. Its name must be
 		unique.</p>
-	<h2>Automated</h2>
 	<div class="example">
-		<h3>Example</h3>
 		<p>A new viewpoint created with
 		<ul>
 			<li>id=<b concordion:set="#id">id_vp123</b></li>
@@ -55,18 +53,37 @@
 					</tr>
 					<!-- Nominal -->
 					<tr>
-						<td>id_rule2</td>
-						<td>rule2</td>
+						<td>id_vp2</td>
+						<td>vp2</td>
 						<td>description2</td>
 						<td>comment2</td>
 						<td>tags1,tag2</td>
 						<td>VALIDATED,REFUSED</td>
 						<td>PASS</td>
 					</tr>
+					<!-- Existing VP -->
+					<tr>
+						<td>id_rule1</td>
+						<td>rule2</td>
+						<td>description2</td>
+						<td>comment2</td>
+						<td>tags1,tag2</td>
+						<td>status1,status1</td>
+						<td>FAIL</td>
+					</tr>
+					<tr>
+						<td>id_rule2</td>
+						<td>rule1</td>
+						<td>description2</td>
+						<td>comment2</td>
+						<td>tags1,tag2</td>
+						<td>status1,status1</td>
+						<td>FAIL</td>
+					</tr>
 					<!-- ID checks -->
 					<tr>
 						<td>null</td>
-						<td>rule2</td>
+						<td>vp2</td>
 						<td>description2</td>
 						<td>comment2</td>
 						<td>tags1,tag2</td>
@@ -75,7 +92,7 @@
 					</tr>
 					<tr>
 						<td></td>
-						<td>rule2</td>
+						<td>vp2</td>
 						<td>description2</td>
 						<td>comment2</td>
 						<td>tags1,tag2</td>
@@ -84,7 +101,7 @@
 					</tr>
 					<tr>
 						<td>space</td>
-						<td>rule2</td>
+						<td>vp2</td>
 						<td>description2</td>
 						<td>comment2</td>
 						<td>tags1,tag2</td>
@@ -93,7 +110,7 @@
 					</tr>
 					<tr>
 						<td>dkjshdhsqkjdhqskjhdkjqshdkjqshkjdhqskjhdkjqskdjhqskjdhqskhdkjqshdkjhqskjdhqskjhdkjqshdkjqshkdjqshkjdhqskjhdkjqshdkjhqskjdhqskhdk</td>
-						<td>rule2</td>
+						<td>vp2</td>
 						<td>description2</td>
 						<td>comment2</td>
 						<td>tags1,tag2</td>
@@ -102,7 +119,7 @@
 					</tr>
 					<!-- name check -->
 					<tr>
-						<td>id_rule2</td>
+						<td>id_vp2</td>
 						<td>null</td>
 						<td>description2</td>
 						<td>comment2</td>
@@ -111,7 +128,7 @@
 						<td>FAIL</td>
 					</tr>
 					<tr>
-						<td>id_rule2</td>
+						<td>id_vp2</td>
 						<td></td>
 						<td>description2</td>
 						<td>comment2</td>
@@ -120,7 +137,7 @@
 						<td>FAIL</td>
 					</tr>
 					<tr>
-						<td>id_rule2</td>
+						<td>id_vp2</td>
 						<td>space</td>
 						<td>description2</td>
 						<td>comment2</td>
@@ -129,7 +146,7 @@
 						<td>FAIL</td>
 					</tr>
 					<tr>
-						<td>id_rule2</td>
+						<td>id_vp2</td>
 						<td>dkjshdhddsldljslkdl fdsf fsfdsf ssf
 							skjdlsjdkjslkdjskljdlsjdlj lsd jslk dkjs lkdjskldj sjd
 							sjdlksqkjdhqskjhdkjqshdkjqshkjdhqskjhdkjqskdjhqskjdhqskhdkjqshdkjhqskjdhqskjhdkjqshdkjqshkdjqsdsds
@@ -142,8 +159,8 @@
 					</tr>
 					<!-- Status literal -->
 					<tr>
-						<td>id_rule2</td>
-						<td>rule2</td>
+						<td>id_vp2</td>
+						<td>vp2</td>
 						<td>description2</td>
 						<td>comment2</td>
 						<td>tags1,tag2</td>
@@ -154,27 +171,47 @@
 						<td>FAIL</td>
 					</tr>
 					<tr>
-						<td>id_rule2</td>
-						<td>rule2</td>
+						<td>id_vp2</td>
+						<td>vp2</td>
 						<td>description2</td>
 						<td>comment2</td>
 						<td>tags1,tag2</td>
 						<td>status1,status2</td>
 						<td>PASS</td>
 					</tr>
+					<!-- Dup status literal -->
+					<tr>
+						<td>id_vp2</td>
+						<td>vp2</td>
+						<td>description2</td>
+						<td>comment2</td>
+						<td>tags1,tag2</td>
+						<td>status1,status1</td>
+						<td>FAIL</td>
+					</tr>
+					<!-- Comment -->
+					<tr>
+						<td>id_vp2</td>
+						<td>vp2</td>
+						<td>description2</td>
+						<td></td>
+						<td>tags1,tag2</td>
+						<td>status1</td>
+						<td>PASS</td>
+					</tr>
+					<tr>
+						<td>id_vp2</td>
+						<td>vp2</td>
+						<td>description2</td>
+						<td>null</td>
+						<td>tags1,tag2</td>
+						<td>status1</td>
+						<td>FAIL</td>
+					</tr>
 
 				</table>
 			</li>
 		</ul>
 	</div>
-
-	<h2>Manual</h2>
-	Nothing
-	<h2>Out of scope</h2>
-	Nothing
-
-	<h2>Further details</h2>
-	<ul>
-	</ul>
 </body>
 </html>
