@@ -38,32 +38,33 @@ import com.vaadin.ui.themes.BaseTheme;
 @SuppressWarnings("serial")
 @SessionScoped
 public class PrinciplesGuiModule extends GuiModule implements Observer {
-	private static final long serialVersionUID = -3580103313824507265L;
 	private List<ViewPointDTO> vpsDTO;
 	private ViewPointService vpService;
 	private Logger logger;
-	private FeaturesEntry features;
 	private ViewPointDialogFactory dialogFactory;
 	private ViewPointPanelFactory panelFactory;
 	private ObservationManager obs;
 	private DTOConverter.FromDTO fromDTO;
 	private final Msg msg;
+	private VerticalLayout root;
 
 	@Inject
-	public PrinciplesGuiModule(ViewPointService vpService, Logger logger, FeaturesEntry features,
-			ViewPointDialogFactory dialogFactory, ViewPointPanelFactory panelFactory, ObservationManager obs,
-			DTOConverter.FromDTO fromDTO, Msg msg) {
+	public PrinciplesGuiModule(ViewPointService vpService, Logger logger, ViewPointDialogFactory dialogFactory,
+			ViewPointPanelFactory panelFactory, ObservationManager obs, DTOConverter.FromDTO fromDTO, Msg msg) {
 		super();
 		this.vpService = vpService;
 		this.logger = logger;
-		this.features = features;
 		this.dialogFactory = dialogFactory;
 		this.panelFactory = panelFactory;
 		this.obs = obs;
 		this.fromDTO = fromDTO;
 		this.msg = msg;
-		setSpacing(false);
 		obs.register(this);
+		setWidth("100%");
+		setHeight("100%");
+		root = (VerticalLayout)getContent();
+		root.setWidth("100%");
+		root.setHeight("-1");
 	}
 
 	/**
@@ -75,8 +76,19 @@ public class PrinciplesGuiModule extends GuiModule implements Observer {
 		if (vpsDTO.size() == 0) {
 			VerticalLayout vert = getNoneVPPanel();
 			addComponent(vert);
-			setComponentAlignment(vert, Alignment.MIDDLE_CENTER);
+			root.setComponentAlignment(vert, Alignment.MIDDLE_CENTER);
 		} else {
+			Button create = new Button(msg.get("pr.2"), new Button.ClickListener() {
+				public void buttonClick(ClickEvent event) {
+					ViewPointDialog vpDialog = dialogFactory.getViewPointDialogFor(null);
+					vpDialog.setModal(true);
+					getWindow().addWindow(vpDialog);
+				}
+			});
+			create.setStyleName(BaseTheme.BUTTON_LINK);
+			addComponent(create);
+			root.setComponentAlignment(create, Alignment.MIDDLE_RIGHT);
+			addComponent(new Label("<br/>", Label.CONTENT_RAW));
 			for (ViewPointDTO dto : vpsDTO) {
 				ViewPointBean bean = fromDTO.getViewPointBean(dto);
 				ViewPointPanel panel = panelFactory.getViewPointPanelFor(bean);
@@ -114,10 +126,8 @@ public class PrinciplesGuiModule extends GuiModule implements Observer {
 	 */
 	@Override
 	public List<SidebarEntry> getEntries() {
-		List<SidebarEntry> out = new ArrayList<SidebarEntry>(5);
-		// Features entry
-		features.setDefaultEntry(true);
-		out.add(features);
+		// None entry
+		List<SidebarEntry> out = new ArrayList<SidebarEntry>();
 		return out;
 	}
 

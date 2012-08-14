@@ -1,18 +1,17 @@
 package org.m2ling.presentation;
 
-import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import org.m2ling.common.configuration.Conf;
 import org.m2ling.presentation.principles.PrinciplesGuiModule;
-import org.m2ling.presentation.widgets.SidebarEntry;
 
 import com.google.inject.Inject;
-import com.google.inject.Provider;
 import com.google.inject.servlet.SessionScoped;
 import com.vaadin.Application;
 import com.vaadin.terminal.Terminal;
+import com.vaadin.terminal.ThemeResource;
+import com.vaadin.ui.Embedded;
 import com.vaadin.ui.MenuBar;
 import com.vaadin.ui.VerticalLayout;
 import com.vaadin.ui.Window;
@@ -22,20 +21,18 @@ import com.vaadin.ui.Window.Notification;
 @SessionScoped
 public class M2lingApplication extends Application {
 	private Window mainWindow;
-	private MainFrame mframe;
 	private MenuBar menu;
 	private Logger logger;
 	private PrinciplesGuiModule principlesGuiModule;
 	@SuppressWarnings("unused")
 	private GuiModule currentApp;
-	private final Provider<MainFrame> mfprovider;
+	private VerticalLayout root;
 
 	@Inject
-	public M2lingApplication(Logger logger, PrinciplesGuiModule principles, Provider<MainFrame> mfp, Conf conf) {
+	public M2lingApplication(Logger logger, PrinciplesGuiModule principles, Conf conf) {
 		super();
 		this.logger = logger;
 		this.principlesGuiModule = principles;
-		this.mfprovider = mfp;
 	}
 
 	@Override
@@ -44,14 +41,12 @@ public class M2lingApplication extends Application {
 		setTheme("m2ling_theme");
 		setMainWindow(mainWindow);
 		// Use all the screen size
-		mainWindow.getContent().setSizeFull();
+		root = (VerticalLayout) mainWindow.getContent();
+		root.setWidth("100%");
+		// Needs to be undefined to allow vertical scrolling
+		root.setHeight("-1");
 		initMenu();
-		mframe = mfprovider.get();
-		VerticalLayout rootLayout = (VerticalLayout) mainWindow.getContent();
-		mainWindow.addComponent(menu);
-		mainWindow.addComponent(mframe);
-		rootLayout.setSpacing(true);
-		rootLayout.setExpandRatio(mframe, 100);
+		root.setSpacing(true);
 		// set m2principles app by default
 		setApp(principlesGuiModule);
 	}
@@ -70,16 +65,13 @@ public class M2lingApplication extends Application {
 	}
 
 	private void setApp(GuiModule app) {
-		mframe.resetAccordion();
-		mframe.getAppPanel().removeAllComponents();
-		mframe.getAppPanel().addComponent(app);
-		List<SidebarEntry> entries = app.getEntries();
-		for (SidebarEntry entry : entries) {
-			mframe.getAccordion().addTab(entry, entry.getLabel(), null, 0);
-			if (entry.isDefaultEntry()) {
-				mframe.getAccordion().setSelectedTab(entry);
-			}
-		}
+		root.removeAllComponents();
+		// Logo
+		ThemeResource resLogo = new ThemeResource("img/m2ling_logo.png");
+		Embedded logo = new Embedded(null, resLogo);
+		root.addComponent(logo);
+		root.addComponent(menu);
+		root.addComponent(app);
 		this.currentApp = app;
 	}
 

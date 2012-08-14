@@ -37,8 +37,9 @@
 
 .principles_vp-panel {
 	padding: 3px;
-	margin: 5px;
-	border: 1px solid #dcdcdc;
+	margin-bottom: 5px;
+	border-bottom: 1px solid #dcdcdc;
+	border-top: 1px solid #dcdcdc;
 }
 
 .comment {

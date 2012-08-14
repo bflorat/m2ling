@@ -75,7 +75,7 @@ public class ViewPointPanel extends VerticalLayout {
 		}
 		setSpacing(true);
 		setMargin(true);
-		setHeight(null);
+		setHeight("-1");
 		setWidth("100%");
 		setStyleName("principles_vp-panel");
 	}

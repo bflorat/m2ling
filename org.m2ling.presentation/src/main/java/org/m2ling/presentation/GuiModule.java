@@ -9,13 +9,13 @@ import java.util.List;
 
 import org.m2ling.presentation.widgets.SidebarEntry;
 
-import com.vaadin.ui.VerticalLayout;
+import com.vaadin.ui.Panel;
 
 /**
  * A m2ling application
  */
 @SuppressWarnings("serial")
-public abstract class GuiModule extends VerticalLayout {
+public abstract class GuiModule extends Panel {
 	@Override
 	abstract public void attach();
 
