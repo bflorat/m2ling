@@ -9,7 +9,6 @@ import java.io.File;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import org.m2ling.common.dto.core.ViewPointDTO;
 import org.m2ling.common.exceptions.FunctionalException;
 import org.m2ling.presentation.events.Events;
 import org.m2ling.presentation.events.ObservationManager;
@@ -118,8 +117,7 @@ public class ViewPointPanel extends VerticalLayout {
 		delete.addListener(new Button.ClickListener() {
 			public void buttonClick(ClickEvent event) {
 				try {
-					ViewPointDTO vpDTO = toDTO.getViewPointDTO(bean);
-					service.deleteViewPoint(null, vpDTO);
+					service.deleteViewPoint(null, bean.getId());
 					obs.notifySync(new org.m2ling.presentation.events.Event(Events.VP_CHANGE));
 				} catch (FunctionalException e) {
 					logger.log(Level.SEVERE, e.getDetailedMessage(), e.getCause());

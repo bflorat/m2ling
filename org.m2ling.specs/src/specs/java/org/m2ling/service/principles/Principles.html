@@ -60,13 +60,14 @@
 		<li>Bound type : none, component type without components as enum,
 			component type with component group(s) as enum.</li>
 		<li>If an enum is given but no bound type, same bound type than
-			own component type is assumed</li>
+			own component type is assumed (the bound type is filled up on the domain layer)</li>
 		<li>If a component type is bound to another type, each component
 			instances of one of its component must be bound to one of the bound
 			type instances (if any) associated with the bound component.</li>
 		<li>Instantiation factor enforces the number of possibles
 			component instances for a component of a given type.</li>
-		
+		<p>It is not possible to drop a component, component instance or
+		associated component type while bound from another VP.</p>
 	</ul>
 
 	<ul>

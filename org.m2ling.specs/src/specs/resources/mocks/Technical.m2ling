@@ -12,7 +12,17 @@
   </viewPoints>
   <viewPoints description="vp1 label" id="id_vp1" name="vp1">
     <activities id="_Nnj8IJXFEeGfDY1tsvvkpQ" name="activity1"/>
+    <componentTypes id="id_comp_type_1" name="comp_type_1"/>
     <rules id="id_rule1" name="rule1" comment="comment_rule1" description="desc_rule1" status="VALIDATED" rationale="rationale_rule1" exceptions="exceptions_rule1"/>
     <statusLiterals>VALIDATED</statusLiterals>
   </viewPoints>
+  <viewPoints id="id_vp2" name="vp2">
+    <componentTypes id="id_comp_type_2" name="comp_type_2" description="" boundType="id_comp_type_1"/>
+  </viewPoints>
+  <views id="id_v1" name="v1" viewPoint="id_vp1">
+    <components id="id_comp1" name="comp1" status="" type="id_comp_type_1"/>
+  </views>
+  <views id="id_view_2" name="v2" viewPoint="id_vp2">
+    <components id="id_comp2" name="comp2" description="" type="id_comp_type_2"/>
+  </views>
 </m2ling_domain:Root>

@@ -18,6 +18,11 @@ import org.m2ling.common.soa.Context;
 import org.m2ling.common.utils.Consts;
 import org.m2ling.common.utils.Utils;
 import org.m2ling.domain.Root;
+import org.m2ling.domain.core.Component;
+import org.m2ling.domain.core.ComponentType;
+import org.m2ling.domain.core.Link;
+import org.m2ling.domain.core.LinkType;
+import org.m2ling.domain.core.View;
 import org.m2ling.domain.core.ViewPoint;
 import org.m2ling.persistence.PersistenceManager;
 import org.m2ling.service.common.ServiceImpl;
@@ -28,6 +33,10 @@ import com.google.common.base.Strings;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 
+/**
+ * @author "Bertrand Florat <bertrand@florat.net>"
+ * 
+ */
 /**
  * @author "Bertrand Florat <bertrand@florat.net>"
  * 
@@ -119,6 +128,12 @@ public class ViewPointServiceImpl extends ServiceImpl implements ViewPointServic
 		}
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * org.m2ling.service.principles.ViewPointService#getAllViewPoints(org.m2ling.common.soa.Context)
+	 */
 	public List<ViewPointDTO> getAllViewPoints(final Context context) {
 		List<ViewPointDTO> vpDTOs = new ArrayList<ViewPointDTO>(10);
 		Root root = pmanager.getRoot();
@@ -130,6 +145,13 @@ public class ViewPointServiceImpl extends ServiceImpl implements ViewPointServic
 		return vpDTOs;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * org.m2ling.service.principles.ViewPointService#getViewPointByName(org.m2ling.common.soa.Context
+	 * , java.lang.String)
+	 */
 	@Override
 	public ViewPointDTO getViewPointByName(final Context context, final String name) {
 		Root root = pmanager.getRoot();
@@ -144,8 +166,9 @@ public class ViewPointServiceImpl extends ServiceImpl implements ViewPointServic
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.m2ling.service.principles.ViewPointService#createViewPoint(org.m2ling
-	 * .dto.core.ViewPointDTO)
+	 * @see
+	 * org.m2ling.service.principles.ViewPointService#createViewPoint(org.m2ling.common.soa.Context,
+	 * org.m2ling.common.dto.core.ViewPointDTO)
 	 */
 	@Override
 	public void createViewPoint(final Context context, final ViewPointDTO vpDTO) throws FunctionalException {
@@ -170,8 +193,8 @@ public class ViewPointServiceImpl extends ServiceImpl implements ViewPointServic
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * org.m2ling.service.principles.ViewPointService#updateViewPoint(org.m2ling.common.dto.core.
-	 * ViewPointDTO)
+	 * org.m2ling.service.principles.ViewPointService#updateViewPoint(org.m2ling.common.soa.Context,
+	 * org.m2ling.common.dto.core.ViewPointDTO)
 	 */
 	@Override
 	public void updateViewPoint(final Context context, final ViewPointDTO vpDTO) throws FunctionalException {
@@ -193,14 +216,45 @@ public class ViewPointServiceImpl extends ServiceImpl implements ViewPointServic
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.m2ling.service.principles.ViewPointService#deleteViewPoint(org.m2ling.common.dto
-	 * .core.ViewPointDTO)
+	 * @see
+	 * org.m2ling.service.principles.ViewPointService#deleteViewPoint(org.m2ling.common.soa.Context,
+	 * java.lang.String)
 	 */
 	@Override
-	public void deleteViewPoint(final Context context, final ViewPointDTO vpDTO) throws FunctionalException {
-		ViewPoint vp = util.getViewPointByID(vpDTO.getId());
+	public void deleteViewPoint(final Context context, final String id) throws FunctionalException {
+		ViewPoint vp = util.getViewPointByID(id);
 		if (vp == null) {
-			throw new FunctionalException(FunctionalException.Code.TARGET_NOT_FOUND, null, vpDTO.toString());
+			throw new FunctionalException(FunctionalException.Code.TARGET_NOT_FOUND, null, "id=" + id);
+		}
+		// Check for existing components or links using this vp
+		EList<ComponentType> compTypes = vp.getComponentTypes();
+		EList<LinkType> linkTypes = vp.getLinkTypes();
+		for (View view : pmanager.getRoot().getViews()) {
+			// test local VP component presence
+			if (view.getViewPoint().equals(vp)) {
+				for (Component comp : view.getComponents()) {
+					if (compTypes.contains(comp.getType())) {
+						throw new FunctionalException(FunctionalException.Code.VP_IN_USE, null, "(" + view.getName() + "/"
+								+ comp.getName() + ")");
+					}
+				}
+				for (Link link : view.getLinks()) {
+					if (linkTypes.contains(link.getType())) {
+						throw new FunctionalException(FunctionalException.Code.VP_IN_USE, null, "(" + view.getName() + "/"
+								+ link.getName() + ")");
+					}
+				}
+			}
+			// Check for components from others VP bound to types from this VP
+			else {
+				for (Component comp : view.getComponents()) {
+					ComponentType ct = comp.getType().getBoundType();
+					if (ct != null && compTypes.contains(ct)) {
+						throw new FunctionalException(FunctionalException.Code.VP_IN_USE, null, "(" + view.getName() + "/"
+								+ comp.getName() + ")");
+					}
+				}
+			}
 		}
 		pmanager.getRoot().getViewPoints().remove(vp);
 	}
@@ -208,11 +262,16 @@ public class ViewPointServiceImpl extends ServiceImpl implements ViewPointServic
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.m2ling.service.principles.ViewPointService#getViewPointByID(java.lang.String)
+	 * @see
+	 * org.m2ling.service.principles.ViewPointService#getViewPointByID(org.m2ling.common.soa.Context,
+	 * java.lang.String)
 	 */
 	@Override
 	public ViewPointDTO getViewPointByID(final Context context, String id) {
 		ViewPoint vp = util.getViewPointByID(id);
+		if (vp == null) {
+			return null;
+		}
 		return toDTO.getViewPointDTO(vp);
 	}
 }

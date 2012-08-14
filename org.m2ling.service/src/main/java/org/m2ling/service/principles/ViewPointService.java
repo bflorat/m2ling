@@ -72,10 +72,10 @@ public interface ViewPointService {
 	/**
 	 * Drop the given viewpoint if it exists.
 	 * 
-	 * @param vpDTO
-	 *           the view point DTO
+	 * @param id
+	 *           the view point id
 	 * @throws FunctionalException
 	 *            if viewpoint doesn't exist.
 	 */
-	void deleteViewPoint(Context context, ViewPointDTO vpDTO) throws FunctionalException;
+	void deleteViewPoint(Context context, String id) throws FunctionalException;
 }

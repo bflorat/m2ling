@@ -3,198 +3,49 @@
 	xmlns:concordion="http://www.concordion.org/2007/concordion">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<title>Viewpoint creation</title>
+<title>Viewpoint deletion</title>
 </head>
 <body>
-	<H1>Viewpoint update and deletion</H1>
-	<p>Administrators or actors with adequate authorizations can update
-		some parts of existing viewpoint or delete them.</p>
+	<H1>Viewpoint deletion</H1>
+	<p>Administrators or actors with adequate authorizations can delete
+		existing viewpoints.</p>
+
+	<p>An existing viewpoint can be dropped :
 	<div class="example">
-		<h2>Update</h2>
-		<p>Very viewpoint attribute, including its name can be changed
-			except its id.
-		<p>Given these new settings :
-		<ul>
-			<li>id=<b concordion:set="#id">id_vp1</b></li>
-			<li>id=<b concordion:set="#name">vp1_new_name</b></li>
-			<li>id=<b concordion:set="#description">desc2</b></li>
-			<li>id=<b concordion:set="#comment">comment2</b></li>
-			<li>id=<b concordion:set="#tags">tag3,tag4</b></li>
-			<li>id=<b concordion:set="#tags">SUGGESTED,VALIDATED,REFUSED</b></li>
-		</ul>
-		When we update it <br /> <span
-			concordion:execute="update(#id,#name,#description,#comment,#tags,#statusLiterals)"></span>,
-		Then we the viewpoint should now have the following characteristics :
-		<b
-			concordion:assertEquals="getViewPoint(#id,#name,#description,#comment,#tags,#statusLiterals)">comment=comment2
-			description=desc2 iconPath= id=id_vp1 name=vp1_new_name
-			statusLiterals=SUGGESTED,VALIDATED,REFUSED tags=tag3,tag4</b>.
-		</p>
-		<p>
-			A status can't be removed while it is used by at least one item. <br />
-			Given a vp1 rule with status="VALIDATED" When we set <b
-				concordion="set=#status">VAL</b> against <span
-				concordion:execute="#resu=updateStatus(#status)" /> vp1<br /> Then
-			the status literal update </b> should <b concordion:assertEquals="#resu">FAIL</b>.
-		</p>
-		<p>
-			If one of the status is removed from status literal, it should be
-			removed from the available status. <br /> Given a current status=<b
-				concordion:set="previous_status">SUGGESTED,VALIDATED,REFUSED</b> <br />
-			When its status literals is updated to <b concordion:set="new_status">SUGGESTED,VALIDATED</b>,
-			<span concordion:execute="#resu=update(#previous_status,#new_status)" />
-			<br /> Then the viewpoint should contain <b
-				concordion:assertEquals="#resu">SUGGESTED,VALIDATED</b> status
-			literals.
-		</p>
+		Given an existing viewpoint <b concordion:set="#id">id_vp1</b><br />
+		When a delete is done against it <span
+			concordion:execute="#resu=deleteWithoutRefs(#id)" /><br /> Then a
+		search for it should return <b concordion:assertEquals="#resu">null</b>
+	</div>
+	</p>
+	<p>Trying to remove an unexisting viewpoint should fail
+	<div class="example">
+		Given an unexisting viewpoint <b concordion:set="#id">id_unknown</b><br />
+		Trying to delete it <span
+			concordion:execute="#resu=deleteWithoutRefs(#id)" /><br /> should <b
+			concordion:assertEquals="#resu">FAIL with code TARGET_NOT_FOUND</b>
+	</div>
+	</p>
+	<p>The viewpoint can't be dropped while one architecture item uses
+		a type defined in it.
+	<div class="example">
+		Given a viewpoint <b>id_vp1</b><br /> And a
+		component <b concordion:set="#id">id_vp1</b> whose type is
+		defined in this viewpoint<br />An attempt to delete the viewpoint <span
+			concordion:execute="#resu=deleteWithLocalComp(#id)" /> should <b
+			concordion:assertEquals="#resu">FAIL with code VP_IN_USE</b>
+	</div>
+	</p>
 
-		<h3>Controls</h3>
-		Note that a more extensive testing of arguments is done in the <a
-			href="CreateAndSearchViewPoint.html">Create and Search Viewpoint
-			page</a>.
-		<ul>
-			<li>A null input should make service call <b
-				concordion:assertEquals="getCheckNullDTO()">FAIL</b>
-			</li>
-			<li>ID and name can't be null, void or void once trimmed</li>
-			<li>ID size can't be larger than 40 characters</li>
-			<li>Given a viewpoint with following characteristics : id=<b
-				concordion:set="#id">id_vp3</b>, name=<b concordion:set="#name">vp3</b>,
-				description=<b concordion:set="#description">desc3</b>, comment=<b
-				concordion:set="#comment">comment3</b>, tags=<b
-				concordion:set="#tags">tag3,tag4</b>,status_literals=<b
-				concordion:set="#statusLiterals">SUGGESTED,VALIDATED</b>, following
-				service inputs should make the service :
-				<table
-					concordion:execute="#result=getCheckDTOVerification(#id,#name,#description,#comment,#tags,#statusLiterals)">
-					<tr>
-						<th concordion:set="#id">ID</th>
-						<th concordion:set="#name">Name</th>
-						<th concordion:set="#description">Name</th>
-						<th concordion:set="#comment">Name</th>
-						<th concordion:set="#tags">Name</th>
-						<th concordion:set="#statusLiterals">Name</th>
-						<th concordion:assertEquals="#result">should :</th>
-					</tr>
-					<!-- Nominal -->
-					<tr>
-						<td>id_vp3</td>
-						<td>rule32</td>
-						<td>description32</td>
-						<td>comment32</td>
-						<td>tags41,tag42</td>
-						<td>VALIDATED,REFUSED</td>
-						<td>PASS</td>
-					</tr>
-					<!-- Unexisting or malformed ID -->
-					<tr>
-						<td>foo</td>
-						<td>rule32</td>
-						<td>description32</td>
-						<td>comment32</td>
-						<td>tags41,tag42</td>
-						<td>VALIDATED,REFUSED</td>
-						<td>FAIL</td>
-					</tr>
-					<tr>
-						<td></td>
-						<td>rule32</td>
-						<td>description32</td>
-						<td>comment32</td>
-						<td>tags41,tag42</td>
-						<td>VALIDATED,REFUSED</td>
-						<td>FAIL</td>
-					</tr>
-					<tr>
-						<td>space</td>
-						<td>rule32</td>
-						<td>description32</td>
-						<td>comment32</td>
-						<td>tags41,tag42</td>
-						<td>VALIDATED,REFUSED</td>
-						<td>FAIL</td>
-					</tr>
-					<!-- name check -->
-					<tr>
-						<td>id_vp3</td>
-						<td>null</td>
-						<td>description2</td>
-						<td>comment2</td>
-						<td>tags1,tag2</td>
-						<td>VALIDATED,REFUSED</td>
-						<td>FAIL</td>
-					</tr>
-					<tr>
-						<td>id_vp3</td>
-						<td></td>
-						<td>description2</td>
-						<td>comment2</td>
-						<td>tags1,tag2</td>
-						<td>VALIDATED,REFUSED</td>
-						<td>FAIL</td>
-					</tr>
-					<tr>
-						<td>id_vp3</td>
-						<td>space</td>
-						<td>description2</td>
-						<td>comment2</td>
-						<td>tags1,tag2</td>
-						<td>VALIDATED,REFUSED</td>
-						<td>FAIL</td>
-					</tr>
-					<tr>
-						<td>id_vp3</td>
-						<td>dkjshdhddsldljslkdl fdsf fsfdsf ssf
-							skjdlsjdkjslkdjskljdlsjdlj lsd jslk dkjs lkdjskldj sjd
-							sjdlksqkjdhqskjhdkjqshdkjqshkjdhqskjhdkjqskdjhqskjdhqskhdkjqshdkjhqskjdhqskjhdkjqshdkjqshkdjqsdsds
-							dsdsd shkjdhqskjhdkjqs</td>
-						<td>description2</td>
-						<td>comment2</td>
-						<td>tags1,tag2</td>
-						<td>VALIDATED,REFUSED</td>
-						<td>FAIL</td>
-					</tr>
-					<!-- Status literal -->
-					<tr>
-						<td>id_vp3</td>
-						<td>rule2</td>
-						<td>description2</td>
-						<td>comment2</td>
-						<td>tags1,tag2</td>
-						<td>dkjshdhddsldljslkdl fdsf fsfdsf ssf
-							skjdlsjdkjslkdjskljdlsjdlj lsd jslk dkjs lkdjskldj sjd
-							sjdlksqkjdhqskjhdkjqshdkjqshkjdhqskjhdkjqskdjhqskjdhqskhdkjqshdkjhqskjdhqskjhdkjqshdkjqshkdjqsdsds
-							dsdsd shkjdhqskjhdkjqs,foo</td>
-						<td>FAIL</td>
-					</tr>
-					<tr>
-						<td>id_vp3</td>
-						<td>rule2</td>
-						<td>description2</td>
-						<td>comment2</td>
-						<td>tags1,tag2</td>
-						<td>status1,status2</td>
-						<td>PASS</td>
-					</tr>
-					<tr>
-						<td>id_vp3</td>
-						<td>rule2</td>
-						<td>description2</td>
-						<td>comment2</td>
-						<td>tags1,tag2</td>
-						<td>status1,status1</td>
-						<td>FAIL</td>
-					</tr>
-
-				</table>
-			</li>
-		</ul>
-
-		<h2>Delete</h2>
-		<p>It is not possible to drop a component, component instance or
-			associated component type while bound from another VP.
-			<p>Given a 
-		<p>
+	<p>The viewpoint can't be dropped while one of its component type
+		is used as binding from an architecture item from another viewpoint.</p>
+	<div class="example">
+		Given an existing viewpoint <b concordion:set="#id">id_vp1</b><br />
+		And a component <b>id_comp2</b> whose type
+		is defined in another viewpoint but whose type is bound to a type of
+		this viewpoint<br />An attempt to delete the viewpoint <span
+			concordion:execute="#resu=deleteWithBinding(#id)" /> should <b
+			concordion:assertEquals="#resu">FAIL with code VP_IN_USE</b>
 	</div>
 
 
