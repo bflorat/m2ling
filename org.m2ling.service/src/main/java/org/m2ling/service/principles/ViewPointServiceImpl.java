@@ -154,6 +154,9 @@ public class ViewPointServiceImpl extends ServiceImpl implements ViewPointServic
 	 */
 	@Override
 	public ViewPointDTO getViewPointByName(final Context context, final String name) {
+		if (name == null) {
+			return null;
+		}
 		Root root = pmanager.getRoot();
 		for (ViewPoint vp : root.getViewPoints()) {
 			if (name.equals(vp.getName())) {
@@ -161,6 +164,25 @@ public class ViewPointServiceImpl extends ServiceImpl implements ViewPointServic
 			}
 		}
 		return null;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * org.m2ling.service.principles.ViewPointService#getViewPointByID(org.m2ling.common.soa.Context,
+	 * java.lang.String)
+	 */
+	@Override
+	public ViewPointDTO getViewPointByID(final Context context, String id) {
+		if (id == null) {
+			return null;
+		}
+		ViewPoint vp = util.getViewPointByID(id);
+		if (vp == null) {
+			return null;
+		}
+		return toDTO.getViewPointDTO(vp);
 	}
 
 	/*
@@ -257,21 +279,5 @@ public class ViewPointServiceImpl extends ServiceImpl implements ViewPointServic
 			}
 		}
 		pmanager.getRoot().getViewPoints().remove(vp);
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * org.m2ling.service.principles.ViewPointService#getViewPointByID(org.m2ling.common.soa.Context,
-	 * java.lang.String)
-	 */
-	@Override
-	public ViewPointDTO getViewPointByID(final Context context, String id) {
-		ViewPoint vp = util.getViewPointByID(id);
-		if (vp == null) {
-			return null;
-		}
-		return toDTO.getViewPointDTO(vp);
 	}
 }

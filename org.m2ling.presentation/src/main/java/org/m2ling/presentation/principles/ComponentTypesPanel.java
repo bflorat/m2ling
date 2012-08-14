@@ -56,10 +56,6 @@ public class ComponentTypesPanel extends VerticalLayout {
 	private final Msg msg;
 	private final Conf conf;
 
-	/**
-	 * Build a rules dialog
-	 * 
-	 */
 	@Inject
 	public ComponentTypesPanel(Logger logger, @Assisted String vpID, RuleService service, DTOConverter.ToDTO toDTO,
 			DTOConverter.FromDTO fromDTO, RuleDialogFactory factory, Msg msg, Conf conf) {

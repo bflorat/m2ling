@@ -70,14 +70,14 @@ public class RuleServiceImpl extends ServiceImpl implements RuleService {
 		}
 		// Name and ID
 		if (access == AccessType.CREATE || access == AccessType.UPDATE) {
-			if (Strings.isNullOrEmpty(dto.getId())) {
-				throw new FunctionalException(FunctionalException.Code.NULL_ARGUMENT, null, "(name)");
+			if (dto.getId() == null || Strings.isNullOrEmpty(dto.getId().trim())) {
+				throw new FunctionalException(FunctionalException.Code.NULL_ARGUMENT, null, "(id)");
 			}
 			if (dto.getId().length() > 40) {
 				throw new FunctionalException(FunctionalException.Code.SIZE_EXCEEDED, null, "(id)");
 			}
-			if (Strings.isNullOrEmpty(dto.getName())) {
-				throw new FunctionalException(FunctionalException.Code.NULL_ARGUMENT, null, dto.toString());
+			if (dto.getName() == null || Strings.isNullOrEmpty(dto.getName().trim())) {
+				throw new FunctionalException(FunctionalException.Code.NULL_ARGUMENT, null, "(name)");
 			}
 			if (dto.getName().length() > Consts.MAX_LABEL_SIZE) {
 				throw new FunctionalException(FunctionalException.Code.SIZE_EXCEEDED, null, "(name)");

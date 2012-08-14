@@ -63,20 +63,27 @@ public class ComponentTypeServiceImpl extends ServiceImpl implements ComponentTy
 		if (dto == null) {
 			throw new FunctionalException(Code.NULL_ARGUMENT, null, null);
 		}
+		// Check id
+		if (dto.getId() == null || Strings.isNullOrEmpty(dto.getId().trim())) {
+			throw new FunctionalException(FunctionalException.Code.NULL_ARGUMENT, null, "(id)");
+		}
+		if (dto.getId().length() > 40) {
+			throw new FunctionalException(FunctionalException.Code.SIZE_EXCEEDED, null, "(id)");
+		}
+		// Check name
+		if (access == AccessType.CREATE || access == AccessType.UPDATE) {
+			if (dto.getName() == null || Strings.isNullOrEmpty(dto.getName().trim())) {
+				throw new FunctionalException(FunctionalException.Code.NULL_ARGUMENT, null, "(name)");
+			}
+			if (dto.getName().length() > Consts.MAX_LABEL_SIZE) {
+				throw new FunctionalException(FunctionalException.Code.SIZE_EXCEEDED, null, "(name)");
+			}
+		}
 		// item existence (except for creation access)
 		if (access != AccessType.CREATE) {
 			ComponentType ct = util.getComponentTypeByID(dto.getId());
 			if (ct == null) {
 				throw new FunctionalException(FunctionalException.Code.TARGET_NOT_FOUND, null, dto.toString());
-			}
-		}
-		// Name
-		if (access == AccessType.CREATE || access == AccessType.UPDATE) {
-			if (dto.getName().length() == 0) {
-				throw new FunctionalException(FunctionalException.Code.NULL_ARGUMENT, null, dto.toString());
-			}
-			if (dto.getName().length() > Consts.MAX_LABEL_SIZE) {
-				throw new FunctionalException(FunctionalException.Code.SIZE_EXCEEDED, null, "name");
 			}
 		}
 		// Check associated viewpoint existence
