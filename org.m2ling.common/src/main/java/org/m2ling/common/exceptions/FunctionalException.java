@@ -58,7 +58,11 @@ public class FunctionalException extends Exception {
 		NON_REIFIABLE_IFACTOR_SET,
 		STATUS_USED,
 		VP_IN_USE,
-		
+		BOUND_TYPE_BOUND,
+		DIFFERENT_TYPES,
+		LOCAL_BINDING,
+		DELTA_BINDING_REIFIABLE,
+		DELTA_BINDING_IF,
 	}
 
 	/**

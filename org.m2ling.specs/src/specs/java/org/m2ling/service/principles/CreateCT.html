@@ -1,0 +1,252 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:concordion="http://www.concordion.org/2007/concordion">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>Component type creation</title>
+</head>
+<body>
+	<H1>Component type creation</H1>
+	<p>Administrators or actors with adequate authorizations can create
+		a new CT (component type) that will be used as type by the components
+		created in the studio.</p>
+	<h2>Nominal rules</h2>
+	<p>A Component Type is uniquely identified by its id. Its name must
+		be unique.</p>
+	<div class="example">
+		<p>A new CT created with
+		<ul>
+			<li>id=<b concordion:set="#vpID">id_vp1</b></li>
+			<li>id=<b concordion:set="#id">id_ct11</b></li>
+			<li>id=<b concordion:set="#name">ct11</b></li>
+			<li>id=<b concordion:set="#desc">description1</b></li>
+			<li>id=<b concordion:set="#comment">comment1</b></li>
+			<li>id=<b concordion:set="#tags">tag1,tag2</b></li>
+			<li>id=<b concordion:set="#references">id_comp1,id_comp2</b></li>
+			<li>id=<b concordion:set="#boundTypeID">id_</b></li>
+		</ul>
+		should have following characteristics : <b
+			concordion:assertEquals="getViewPoint(#id,#name,#description,#comment,#tags,#statusLiterals)">comment=comment1
+			description=desc1 iconPath= id=id_vp123 name=vp123
+			statusLiterals=SUGGESTED,VALIDATED tags=tag1,tag2</b>.
+	</div>
+	</p>
+
+
+	<h2>Bindings and instantiation factor</h2>
+	<p>Instantiation factor enforces the number of possibles component
+		instances for a component of a given type. A Component Type can't be
+		reified if its instantiation factor is zero.</p>
+	<div class="example">TODO</div>
+	</p>
+	<li>A enumeration can contain either components or component
+		groups.</li>7
+	<li>All enumeration item (component or group) must exist.</li>
+	<li>All enumeration items must share the same component type.</li>
+	<li>If enumeration maps a component-type group, values are those
+		of its components.</li>
+	<li>If a bound type is given but none enumeration is provided, the
+		possible values are all component of given bound type in every view of
+		the bound VP.</li>
+	<li>An enumeration can't be provided without associated binding
+		type</li>
+	<p>A Component Type can't bind another component type itself
+		bounded.</p>
+	<p>A Component Type can't be bound to a component type of the same
+		VP.</p>
+	
+	<h2>Changes</h2>
+	<p>Any change of the instantiation factor must be be compatible
+		with the number of instances of component of this type and of
+		component bound to the type.</p>
+	<p>Bound type following attribute can be changed : name, tags ,
+		comment, description</p>
+	<p>Bound type following attribute can't be changed : instantiation factor, reifiable flag</p>
+
+	<h3>Controls</h3>
+	<ul>
+		<li>A null input should make service call <b
+			concordion:assertEquals="getCheckNullDTO()">FAIL</b>
+		</li>
+		<li>ID and name can't be null, void or void once trimmed</li>
+		<li>ID size can't be larger than 40 characters</li>
+		<li>Name can't be larger that 200 characters</li>
+		<li>description and comment size can't be larger that 2000
+			characters</li>
+		<li>See Tags specifications for tags limits</li>
+		<li>Following service inputs should make the service :
+			<table
+				concordion:execute="#result=getCheckDTOVerification(#id,#name,#description,#comment,#tags,#statusLiterals)">
+				<tr>
+					<th concordion:set="#id">ID</th>
+					<th concordion:set="#name">Name</th>
+					<th concordion:set="#description">Name</th>
+					<th concordion:set="#comment">Name</th>
+					<th concordion:set="#tags">Name</th>
+					<th concordion:set="#statusLiterals">Name</th>
+					<th concordion:assertEquals="#result">should :</th>
+				</tr>
+				<!-- Nominal -->
+				<tr>
+					<td>id_vp2</td>
+					<td>vp2</td>
+					<td>description2</td>
+					<td>comment2</td>
+					<td>tags1,tag2</td>
+					<td>VALIDATED,REFUSED</td>
+					<td>PASS</td>
+				</tr>
+				<!-- Existing VP -->
+				<tr>
+					<td>id_rule1</td>
+					<td>rule2</td>
+					<td>description2</td>
+					<td>comment2</td>
+					<td>tags1,tag2</td>
+					<td>status1,status1</td>
+					<td>FAIL</td>
+				</tr>
+				<tr>
+					<td>id_rule2</td>
+					<td>rule1</td>
+					<td>description2</td>
+					<td>comment2</td>
+					<td>tags1,tag2</td>
+					<td>status1,status1</td>
+					<td>FAIL</td>
+				</tr>
+				<!-- ID checks -->
+				<tr>
+					<td>null</td>
+					<td>vp2</td>
+					<td>description2</td>
+					<td>comment2</td>
+					<td>tags1,tag2</td>
+					<td>VALIDATED,REFUSED</td>
+					<td>FAIL</td>
+				</tr>
+				<tr>
+					<td></td>
+					<td>vp2</td>
+					<td>description2</td>
+					<td>comment2</td>
+					<td>tags1,tag2</td>
+					<td>VALIDATED,REFUSED</td>
+					<td>FAIL</td>
+				</tr>
+				<tr>
+					<td>space</td>
+					<td>vp2</td>
+					<td>description2</td>
+					<td>comment2</td>
+					<td>tags1,tag2</td>
+					<td>VALIDATED,REFUSED</td>
+					<td>FAIL</td>
+				</tr>
+				<tr>
+					<td>dkjshdhsqkjdhqskjhdkjqshdkjqshkjdhqskjhdkjqskdjhqskjdhqskhdkjqshdkjhqskjdhqskjhdkjqshdkjqshkdjqshkjdhqskjhdkjqshdkjhqskjdhqskhdk</td>
+					<td>vp2</td>
+					<td>description2</td>
+					<td>comment2</td>
+					<td>tags1,tag2</td>
+					<td>VALIDATED,REFUSED</td>
+					<td>FAIL</td>
+				</tr>
+				<!-- name check -->
+				<tr>
+					<td>id_vp2</td>
+					<td>null</td>
+					<td>description2</td>
+					<td>comment2</td>
+					<td>tags1,tag2</td>
+					<td>VALIDATED,REFUSED</td>
+					<td>FAIL</td>
+				</tr>
+				<tr>
+					<td>id_vp2</td>
+					<td></td>
+					<td>description2</td>
+					<td>comment2</td>
+					<td>tags1,tag2</td>
+					<td>VALIDATED,REFUSED</td>
+					<td>FAIL</td>
+				</tr>
+				<tr>
+					<td>id_vp2</td>
+					<td>space</td>
+					<td>description2</td>
+					<td>comment2</td>
+					<td>tags1,tag2</td>
+					<td>VALIDATED,REFUSED</td>
+					<td>FAIL</td>
+				</tr>
+				<tr>
+					<td>id_vp2</td>
+					<td>dkjshdhddsldljslkdl fdsf fsfdsf ssf
+						skjdlsjdkjslkdjskljdlsjdlj lsd jslk dkjs lkdjskldj sjd
+						sjdlksqkjdhqskjhdkjqshdkjqshkjdhqskjhdkjqskdjhqskjdhqskhdkjqshdkjhqskjdhqskjhdkjqshdkjqshkdjqsdsds
+						dsdsd shkjdhqskjhdkjqs</td>
+					<td>description2</td>
+					<td>comment2</td>
+					<td>tags1,tag2</td>
+					<td>VALIDATED,REFUSED</td>
+					<td>FAIL</td>
+				</tr>
+				<!-- Status literal -->
+				<tr>
+					<td>id_vp2</td>
+					<td>vp2</td>
+					<td>description2</td>
+					<td>comment2</td>
+					<td>tags1,tag2</td>
+					<td>dkjshdhddsldljslkdl fdsf fsfdsf ssf
+						skjdlsjdkjslkdjskljdlsjdlj lsd jslk dkjs lkdjskldj sjd
+						sjdlksqkjdhqskjhdkjqshdkjqshkjdhqskjhdkjqskdjhqskjdhqskhdkjqshdkjhqskjdhqskjhdkjqshdkjqshkdjqsdsds
+						dsdsd shkjdhqskjhdkjqs,foo</td>
+					<td>FAIL</td>
+				</tr>
+				<tr>
+					<td>id_vp2</td>
+					<td>vp2</td>
+					<td>description2</td>
+					<td>comment2</td>
+					<td>tags1,tag2</td>
+					<td>status1,status2</td>
+					<td>PASS</td>
+				</tr>
+				<!-- Dup status literal -->
+				<tr>
+					<td>id_vp2</td>
+					<td>vp2</td>
+					<td>description2</td>
+					<td>comment2</td>
+					<td>tags1,tag2</td>
+					<td>status1,status1</td>
+					<td>FAIL</td>
+				</tr>
+				<!-- Comment -->
+				<tr>
+					<td>id_vp2</td>
+					<td>vp2</td>
+					<td>description2</td>
+					<td></td>
+					<td>tags1,tag2</td>
+					<td>status1</td>
+					<td>PASS</td>
+				</tr>
+				<tr>
+					<td>id_vp2</td>
+					<td>vp2</td>
+					<td>description2</td>
+					<td>null</td>
+					<td>tags1,tag2</td>
+					<td>status1</td>
+					<td>FAIL</td>
+				</tr>
+
+			</table>
+		</li>
+	</ul>
+	</div>
+</body>
+</html>

@@ -59,6 +59,7 @@ public class ComponentTypeServiceImpl extends ServiceImpl implements ComponentTy
 	 * @throws FunctionalException
 	 */
 	void checkDTO(final ComponentTypeDTO dto, AccessType access) throws FunctionalException {
+		ComponentType target = null;
 		// Nullity
 		if (dto == null) {
 			throw new FunctionalException(Code.NULL_ARGUMENT, null, null);
@@ -81,8 +82,8 @@ public class ComponentTypeServiceImpl extends ServiceImpl implements ComponentTy
 		}
 		// item existence (except for creation access)
 		if (access != AccessType.CREATE) {
-			ComponentType ct = util.getComponentTypeByID(dto.getId());
-			if (ct == null) {
+			target = util.getComponentTypeByID(dto.getId());
+			if (target == null) {
 				throw new FunctionalException(FunctionalException.Code.TARGET_NOT_FOUND, null, dto.toString());
 			}
 		}
@@ -137,19 +138,64 @@ public class ComponentTypeServiceImpl extends ServiceImpl implements ComponentTy
 			}
 			// Bound type
 			if (!Strings.isNullOrEmpty(dto.getBoundTypeID())) {
-				// Check if the bound type exists in this VP or another one
-				ComponentType ct = (ComponentType) util.getItemByTypeAndID(Type.COMPONENT_TYPE, dto.getBoundTypeID());
-				if (ct == null) {
+				// Check if the bound type exists
+				ComponentType boundCT = (ComponentType) util.getItemByTypeAndID(Type.COMPONENT_TYPE, dto.getBoundTypeID());
+				if (boundCT == null) {
 					throw new FunctionalException(FunctionalException.Code.TARGET_NOT_FOUND, null, "boundTypeID="
 							+ dto.getBoundTypeID());
 				}
+				// Check that the bound type is from another VP
+				ViewPoint vpBoundType = (ViewPoint) boundCT.eContainer();
+				if (!vpBoundType.equals(vp)) {
+					throw new FunctionalException(FunctionalException.Code.LOCAL_BINDING, null, null);
+				}
+				// Check if the bound type is not bounded itself
+				if (boundCT.getBoundType() != null) {
+					throw new FunctionalException(FunctionalException.Code.BOUND_TYPE_BOUND, null, "boundTypeID="
+							+ dto.getBoundTypeID());
+				}
+				// Check for bound types that we don't try to set a reifiable flag or a instantiation
+				// factor different from bound type
+				if (boundCT.isReifiable() != dto.isReifiable()) {
+					throw new FunctionalException(FunctionalException.Code.DELTA_BINDING_REIFIABLE, null,
+							"boundType reifiable=" + boundCT.isReifiable());
+				}
+				if (boundCT.getInstantiationFactor() != dto.getInstantiationFactor()) {
+					throw new FunctionalException(FunctionalException.Code.DELTA_BINDING_IF, null,
+							"boundType instantiation factor=" + boundCT.getInstantiationFactor());
+				}
 			}
-			// Enumeration
+			// Enumeration, the list should contain a list of component ids from bound-type type
 			List<String> enumeration = dto.getEnumeration();
 			if (enumeration == null) {
 				throw new FunctionalException(FunctionalException.Code.NULL_ARGUMENT, null, "(enumeration)");
 			}
-			if (dto.getEnumeration().size() > 0) {
+			// enumeration can't be provided without associated binding type
+			if (enumeration.size() > 0 && dto.getBoundTypeID() == null) {
+				throw new FunctionalException(FunctionalException.Code.NULL_ARGUMENT, null, "(bound type)");
+			}
+			ComponentType firstCTFound = null;
+			for (String compId : enumeration) {
+				ArchitectureItem item = null;
+				// check that every every component or component group exists and is of boundtype
+				item = util.getComponentByID(compId);
+				// unknown component ? ok, search in groups
+				if (item == null) {
+					item = util.getComponentGroupByID(compId);
+				}
+				// still nothing ? leave in error
+				if (item == null) {
+					throw new FunctionalException(FunctionalException.Code.NULL_ARGUMENT, null, "(enumeration)");
+				}
+				// check that every component or group share the same CT
+				if (firstCTFound == null) {
+					firstCTFound = util.getComponentTypeForArchitectureItem(item);
+				} else {
+					ComponentType ct = util.getComponentTypeForArchitectureItem(item);
+					if (!ct.equals(firstCTFound)) {
+						throw new FunctionalException(FunctionalException.Code.DIFFERENT_TYPES, null, "(enumeration)");
+					}
+				}
 			}
 		}
 	}

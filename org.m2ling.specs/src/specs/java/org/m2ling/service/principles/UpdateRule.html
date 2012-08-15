@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:concordion="http://www.concordion.org/2007/concordion">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>Rule update</title>
+</head>
+<body>
+	<H1>Rule update</H1>
+	Administrators or actors with adequate authorizations can update rules.
+
+	<p>Every rule attribute, including its name can be changed except
+		its id.</p>
+	<div class="example">
+		Given a rule whose id is <b concordion:set="#id">id_rule1</b> and view
+		point id <b concordion:set="#vpID">id_vp1</b> <br/>
+		When we update the view point with following attributes :
+		<ul>
+			<li>id=<b concordion:set="#name">new rule name</b></li>
+			<li>id=<b concordion:set="#description">new desc</b></li>
+			<li>id=<b concordion:set="#rationale">new rationale</b></li>
+			<li>id=<b concordion:set="#exceptions">new exceptions</b></li>
+			<li>id=<b concordion:set="#comment">new comment</b></li>
+			<li>id=<b concordion:set="#tags">new tag1,new tag2</b></li>
+			<li>id=<b concordion:set="#status">REFUSED</b></li>
+			<li>id=<b concordion:set="#priority">HIGH</b></li>
+		</ul>
+		<span
+			concordion:execute="update(#id,#vpID,#name,#description,#comment,#status,#priority,#rationale,#exceptions,#tags)" />
+		Then we the viewpoint should now have the following
+		characteristics : <b concordion:assertEquals="getRule(#id)">comment=new
+			comment description=new desc drop= exceptions=new exceptions
+			id=id_rule1 name=new rule name priority=HIGH rationale=new rationale
+			status=REFUSED tags=new tag1,new tag2 vpID=id_vp1</b>.
+	</div>
+
+	<h3>Controls</h3>
+	Controls are basically the same updating than creating, check <a href='./CreateRule.html'>Rule creation</a>.
+	
+</body>
+</html>

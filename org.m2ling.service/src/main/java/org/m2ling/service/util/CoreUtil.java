@@ -11,7 +11,9 @@ import java.util.logging.Logger;
 import org.m2ling.common.exceptions.TechnicalException;
 import org.m2ling.common.exceptions.TechnicalException.Code;
 import org.m2ling.domain.Root;
+import org.m2ling.domain.core.ArchitectureItem;
 import org.m2ling.domain.core.Component;
+import org.m2ling.domain.core.ComponentGroup;
 import org.m2ling.domain.core.ComponentType;
 import org.m2ling.domain.core.Link;
 import org.m2ling.domain.core.Rule;
@@ -153,6 +155,50 @@ public class CoreUtil {
 					return comp;
 				}
 			}
+		}
+		return null;
+	}
+
+	/**
+	 * Return a component group denoted by the given id or null if none matches.
+	 * 
+	 * @param id
+	 *           the searched id
+	 * @return an item denoted by the given id or null if none matches
+	 */
+	public ComponentGroup getComponentGroupByID(String id) {
+		Root root = pmanager.getRoot();
+		for (View v : root.getViews()) {
+			List<ComponentGroup> groups = v.getComponentsGroups();
+			for (ComponentGroup group : groups) {
+				if (id.equals(group.getId())) {
+					return group;
+				}
+			}
+		}
+		return null;
+	}
+
+	/**
+	 * Return the component type of an architectural item. If the provided item is a group, the type
+	 * of the first contained item is returned. If the item is null or if the group is void, null is
+	 * returned.
+	 * 
+	 * @param item
+	 * @return the component type of the architectural item
+	 */
+	public ComponentType getComponentTypeForArchitectureItem(ArchitectureItem item) {
+		if (item == null) {
+			return null;
+		}
+		if (item instanceof Component) {
+			return ((Component) item).getType();
+		}
+		if (item instanceof ComponentGroup) {
+			if (((ComponentGroup) item).getComponents().size() == 0) {
+				return null;
+			}
+			return ((ComponentGroup) item).getComponents().get(0).getType();
 		}
 		return null;
 	}
