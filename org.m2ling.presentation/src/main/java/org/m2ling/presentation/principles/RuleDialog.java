@@ -7,6 +7,7 @@ package org.m2ling.presentation.principles;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Properties;
 import java.util.UUID;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -17,6 +18,8 @@ import org.m2ling.common.dto.core.RuleDTO;
 import org.m2ling.common.dto.core.ViewPointDTO;
 import org.m2ling.common.exceptions.FunctionalException;
 import org.m2ling.common.utils.Utils;
+import org.m2ling.presentation.events.Events;
+import org.m2ling.presentation.events.ObservationManager;
 import org.m2ling.presentation.i18n.Msg;
 import org.m2ling.presentation.principles.model.RuleBean;
 import org.m2ling.presentation.principles.model.ViewPointBean;
@@ -31,6 +34,7 @@ import com.google.inject.Inject;
 import com.google.inject.assistedinject.Assisted;
 import com.vaadin.data.Item;
 import com.vaadin.data.util.BeanItem;
+import com.vaadin.data.validator.IntegerValidator;
 import com.vaadin.ui.Alignment;
 import com.vaadin.ui.ComboBox;
 import com.vaadin.ui.Component;
@@ -49,7 +53,8 @@ import com.vaadin.ui.Window;
 public class RuleDialog extends Window {
 	/** Is it a new rule ? */
 	private boolean newRule = true;
-	private RuleBean bean;
+	private BeanItem<RuleBean> beanItem;
+	private RuleBean ruleBean;
 	private Logger logger;
 	private DTOConverter.ToDTO toDTO;
 	private DTOConverter.FromDTO fromDTO;
@@ -58,27 +63,32 @@ public class RuleDialog extends Window {
 	private ViewPointBean vpBean;
 	private Panel panel;
 	private final Msg msg;
+	private final ObservationManager obs;
 
 	/**
 	 * Build a rule dialog
 	 * 
 	 */
 	@Inject
-	public RuleDialog(Logger logger, @Assisted @Nullable RuleBean ruleBean, RuleService ruleService,
-			ViewPointService vpService, DTOConverter.ToDTO toDTO, DTOConverter.FromDTO fromDTO, Msg msg) {
-		super(Strings.isNullOrEmpty(ruleBean.getId()) ? msg.get("pr.18") : msg.get("pr.17") + ruleBean.getName());
-		this.bean = ruleBean;
+	public RuleDialog(Logger logger, @Assisted @Nullable BeanItem<RuleBean> ruleBeanItem, RuleService ruleService,
+			ViewPointService vpService, DTOConverter.ToDTO toDTO, DTOConverter.FromDTO fromDTO, Msg msg,
+			ObservationManager obs) {
+		super(Strings.isNullOrEmpty(ruleBeanItem.getBean().getId()) ? msg.get("pr.18") : msg.get("pr.17")
+				+ ruleBeanItem.getBean().getName());
+		this.beanItem = ruleBeanItem;
 		this.ruleService = ruleService;
 		this.vpService = vpService;
 		this.logger = logger;
 		this.toDTO = toDTO;
 		this.fromDTO = fromDTO;
 		this.msg = msg;
-		newRule = Strings.isNullOrEmpty(ruleBean.getId());
+		this.obs = obs;
+		newRule = Strings.isNullOrEmpty(ruleBeanItem.getBean().getId());
+		this.beanItem = ruleBeanItem;
 		if (newRule) {
-			bean.setId(UUID.randomUUID().toString());
+			beanItem.getItemProperty("id").setValue(UUID.randomUUID().toString());
 		}
-		this.bean = ruleBean;
+		ruleBean = ruleBeanItem.getBean();
 		setWidth("650px");
 		setClosable(true);
 	}
@@ -89,14 +99,14 @@ public class RuleDialog extends Window {
 		panel.setSizeFull();
 		panel.getContent().setHeight("-1");
 		// Refresh associated viewpoint data
-		ViewPointDTO vpDTO = vpService.getViewPointByID(null, bean.getViewPointId());
+		final ViewPointDTO vpDTO = vpService.getViewPointByID(null, ruleBean.getViewPointId());
 		vpBean = fromDTO.getViewPointBean(vpDTO);
 		((VerticalLayout) getContent()).setSizeFull();
 		final Form form = new Form();
 		// setFormFieldFactory() must be called before setting the data source or it is not token into
 		// account
 		form.setFormFieldFactory(new RuleDialogFieldFactory());
-		form.setItemDataSource(new BeanItem<RuleBean>(bean));
+		form.setItemDataSource(beanItem);
 		form.setVisibleItemProperties(Arrays.asList(new String[] { "name", "status", "priority", "tags", "description",
 				"rationale", "exceptions", "comment" }));
 		Command ok = new Command() {
@@ -108,7 +118,7 @@ public class RuleDialog extends Window {
 					logger.finest(e.getMessage());
 					return;
 				}
-				RuleDTO ruleDTO = toDTO.getRuleDTO(bean);
+				RuleDTO ruleDTO = toDTO.getRuleDTO(ruleBean);
 				try {
 					if (newRule) {
 						ruleService.createRule(null, ruleDTO);
@@ -120,6 +130,8 @@ public class RuleDialog extends Window {
 					logger.log(Level.SEVERE, e.getDetailedMessage(), e);
 					getWindow().showNotification(msg.humanMessage(e), Notification.TYPE_ERROR_MESSAGE);
 				}
+				Properties details = Utils.newProperties(Events.DETAIL_TARGET, vpDTO.getId());
+				obs.notifySync(new org.m2ling.presentation.events.Event(Events.RULE_CHANGE, details));
 			}
 
 			@Override
@@ -202,6 +214,7 @@ public class RuleDialog extends Window {
 			} else if ("priority".equals(propertyId)) {
 				Field priority = super.createField(item, propertyId, uiContext);
 				priority.setRequired(false);
+				priority.addValidator(new IntegerValidator(msg.get("error.5")));
 				priority.setDescription(msg.get("pr.21"));
 				priority.setCaption(msg.get("gal.8"));
 				return priority;

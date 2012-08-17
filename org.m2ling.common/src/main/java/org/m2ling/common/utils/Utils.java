@@ -12,6 +12,7 @@ import java.util.Comparator;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Properties;
 import java.util.Set;
 
 import org.m2ling.common.exceptions.FunctionalException;
@@ -225,6 +226,19 @@ public class Utils {
 			sb.append(' ');
 		}
 		return sb.toString();
+	}
+	
+	/**
+	 * Return a pre-populated properties with provided elements with element0=element1 element2=element3...
+	 * @param objs
+	 * @return a pre-populated properties with provided elements
+	 */
+	public static Properties newProperties(Object... objs){
+		Properties out = new Properties();
+		for (int index=0; index<objs.length;index+=2){
+			out.put(objs[index].toString(),objs[index+1].toString());
+		}
+		return out;
 	}
 	
 	/**

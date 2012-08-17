@@ -26,6 +26,8 @@ public class ComponentTypeBean implements Serializable {
 	private String enumeration = "";
 	private boolean reifiable = false;
 	private List<ReferenceBean> references;
+	/** GUI only item used to represent the drop button **/
+	private String drop = "";
 
 	public ComponentTypeBean() {
 		super();
@@ -44,6 +46,21 @@ public class ComponentTypeBean implements Serializable {
 
 	public int hashCode() {
 		return id.hashCode();
+	}
+	
+	/**
+	 * @return the drop
+	 */
+	public String getDrop() {
+		return drop;
+	}
+
+	/**
+	 * @param drop
+	 *           the drop to set
+	 */
+	public void setDrop(String drop) {
+		this.drop = drop;
 	}
 
 	/**

@@ -7,5 +7,7 @@ public enum Events {
 	/** A viewpoint has been removed/added /updated */
 	VP_CHANGE,
 	/** A rule has been removed/added/updated */
-	RULE_CHANGE
+	RULE_CHANGE,
+	
+	DETAIL_TARGET
 }

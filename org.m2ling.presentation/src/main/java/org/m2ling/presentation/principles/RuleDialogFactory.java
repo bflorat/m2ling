@@ -7,6 +7,8 @@ package org.m2ling.presentation.principles;
 
 import org.m2ling.presentation.principles.model.RuleBean;
 
+import com.vaadin.data.util.BeanItem;
+
 /**
  * Produces rule dialogs using the assisted injection pattern
  */
@@ -18,5 +20,5 @@ public interface RuleDialogFactory {
 	 *           the rule bean encapsulating all rule data
 	 * @return a RuleDialog for given arguments
 	 */
-	RuleDialog getRuleDialogFor(RuleBean bean);
+	RuleDialog getRuleDialogFor(BeanItem<RuleBean> beanItem);
 }

@@ -23,6 +23,7 @@
     <components id="id_comp1" name="comp1" status="" type="id_comp_type_1"/>
   </views>
   <views id="id_view_2" name="v2" viewPoint="id_vp2">
-    <components id="id_comp2" name="comp2" description="" type="id_comp_type_2"/>
+    <components id="id_comp1ct2" name="comp1ct2" description="" type="id_comp_type_2"/>
+    <components id="id_comp2ct2" name="comp2ct2" description="" type="id_comp_type_2"/>
   </views>
 </m2ling_domain:Root>

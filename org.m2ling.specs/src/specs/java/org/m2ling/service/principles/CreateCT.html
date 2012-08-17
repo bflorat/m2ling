@@ -16,28 +16,28 @@
 	<div class="example">
 		<p>A new CT created with
 		<ul>
-			<li>vp id=<b concordion:set="#vpID">id_vp1</b></li>
-			<li>id=<b concordion:set="#id">id_ct11</b></li>
-			<li>name=<b concordion:set="#name">ct11</b></li>
-			<li>description=<b concordion:set="#desc">description1</b></li>
-			<li>comment=<b concordion:set="#comment">comment1</b></li>
-			<li>tags=<b concordion:set="#tags">tag1,tag2</b></li>
-			<li>instantiation factor=<b concordion:set="#if">1</b></li>
-			<li>id=<b concordion:set="#boundTypeID">id_vp2</b></li>
-			<li>id=<b concordion:set="#references">id_comp21,id_comp22</b></li>
+			<li>vp id=<b concordion:set="#vpID">ertyuyreklbjnb,n</b></li>
+			<li>id=<b concordion:set="#id">id_ct1</b></li>
+			<li>name=<b concordion:set="#name">ESB Connector</b></li>
+			<li>description=<b concordion:set="#desc">Adapt the bus and a given technology</b></li>
+			<li>comment=<b concordion:set="#comment">Available components listed in Technical catalog</b></li>
+			<li>tags=<b concordion:set="#tags">logical,esb</b></li>
+			<li>instantiation factor=<b concordion:set="#if">n</b></li>
+			<li>bound type id=<b concordion:set="#boundTypeID">id_vp2</b></li>
+			<li>references ids=<b concordion:set="#references">id_comp21,id_comp22</b></li>
+			<li>reifiable=<b concordion:set="#reifiable">true</b></li>
+			<li>enumerations=<b concordion:set="#references">id_comp1ct2,id_comp2ct2</b></li>
 		</ul>
 		should have following characteristics : <b
-			concordion:assertEquals="getCT(#id,#name,#description,#comment,#tags,#references)">boundTypeID=id_vp2 comment=comment1
+			concordion:assertEquals="createCT(#vpID,#id,#name,#desc,#comment,#tags,#if,#boundTypeID,#references,#enumeration,#reifiable)">boundTypeID=id_vp2 comment=comment1
 			description=description1 drop= id=id_vp1 instantiationFactor=1 name=ct11 references=id_comp21,id_comp22 tags=tag1,tag2</b>.
 	</div>
 	</p>
-
 
 	<h2>Bindings and instantiation factor</h2>
 	<p>Instantiation factor enforces the number of possibles component
 		instances for a component of a given type. A Component Type can't be
 		reified if its instantiation factor is zero.</p>
-	<div class="example">TODO</div>
 	</p>
 	<li>A enumeration can contain either components or component
 		groups.</li>7
@@ -79,8 +79,9 @@
 		<li>See Tags specifications for tags limits</li>
 		<li>Following service inputs should make the service :
 			<table
-				concordion:execute="#result=getCheckDTOVerification(#id,#name,#description,#comment,#tags,#statusLiterals)">
+				concordion:execute="#result=getCheckDTOVerification(#vpID,#id,#name,#description,#comment,#tags,#statusLiterals)">
 				<tr>
+					<th>Tested</th>
 					<th concordion:set="#id">ID</th>
 					<th concordion:set="#name">Name</th>
 					<th concordion:set="#description">Name</th>
@@ -91,6 +92,7 @@
 				</tr>
 				<!-- Nominal -->
 				<tr>
+					<td>Nominal creation</td>
 					<td>id_vp2</td>
 					<td>vp2</td>
 					<td>description2</td>
@@ -99,10 +101,11 @@
 					<td>VALIDATED,REFUSED</td>
 					<td>PASS</td>
 				</tr>
-				<!-- Existing VP -->
+				<!-- Existing CT -->
 				<tr>
-					<td>id_rule1</td>
-					<td>rule2</td>
+					<td>Id of a existing CT</td>
+					<td>id_comp_type_1</td>
+					<td>a name</td>
 					<td>description2</td>
 					<td>comment2</td>
 					<td>tags1,tag2</td>
@@ -110,8 +113,9 @@
 					<td>FAIL</td>
 				</tr>
 				<tr>
-					<td>id_rule2</td>
-					<td>rule1</td>
+					<td>Name of a existing CT</td>
+					<td>id</td>
+					<td>comp_type_1</td>
 					<td>description2</td>
 					<td>comment2</td>
 					<td>tags1,tag2</td>

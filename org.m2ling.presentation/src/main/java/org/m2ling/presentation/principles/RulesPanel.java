@@ -8,14 +8,19 @@ package org.m2ling.presentation.principles;
 import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
+import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import org.m2ling.common.configuration.Conf;
 import org.m2ling.common.dto.core.RuleDTO;
 import org.m2ling.common.exceptions.FunctionalException;
+import org.m2ling.presentation.events.Events;
+import org.m2ling.presentation.events.ObservationManager;
+import org.m2ling.presentation.events.Observer;
 import org.m2ling.presentation.i18n.Msg;
 import org.m2ling.presentation.principles.model.RuleBean;
 import org.m2ling.presentation.principles.utils.DTOConverter;
@@ -46,7 +51,7 @@ import com.vaadin.ui.themes.BaseTheme;
  * List all rules for a given viewpoint
  */
 @SuppressWarnings("serial")
-public class RulesPanel extends VerticalLayout {
+public class RulesPanel extends VerticalLayout implements Observer {
 	private final String vpID;
 	private final RuleService service;
 	private final Logger logger;
@@ -62,7 +67,7 @@ public class RulesPanel extends VerticalLayout {
 	 */
 	@Inject
 	public RulesPanel(Logger logger, @Assisted String vpID, RuleService service, DTOConverter.ToDTO toDTO,
-			DTOConverter.FromDTO fromDTO, RuleDialogFactory factory, Msg msg, Conf conf) {
+			DTOConverter.FromDTO fromDTO, RuleDialogFactory factory, Msg msg, Conf conf, ObservationManager obs) {
 		super();
 		this.vpID = vpID;
 		this.service = service;
@@ -75,6 +80,7 @@ public class RulesPanel extends VerticalLayout {
 		setHeight(null);
 		setWidth("98%");
 		setMargin(true);
+		obs.register(this);
 	}
 
 	@Override
@@ -114,13 +120,12 @@ public class RulesPanel extends VerticalLayout {
 						@SuppressWarnings("unchecked")
 						BeanContainer<String, RuleBean> data = (BeanContainer<String, RuleBean>) table
 								.getContainerDataSource();
-						BeanItem<RuleBean> item = data.getItem(itemId);
-						final RuleBean bean = item.getBean();
-						Button edit = new Button(bean.getName());
+						final BeanItem<RuleBean> item = data.getItem(itemId);
+						Button edit = new Button(item.getBean().getName());
 						edit.setStyleName(BaseTheme.BUTTON_LINK);
 						edit.addListener(new Button.ClickListener() {
 							public void buttonClick(ClickEvent event) {
-								RuleDialog dialog = factory.getRuleDialogFor(bean);
+								RuleDialog dialog = factory.getRuleDialogFor(item);
 								dialog.setModal(true);
 								getWindow().addWindow(dialog);
 							}
@@ -224,11 +229,37 @@ public class RulesPanel extends VerticalLayout {
 				// it
 				RuleBean bean = new RuleBean();
 				bean.setViewPointId(vpID);
-				RuleDialog dialog = factory.getRuleDialogFor(bean);
+				RuleDialog dialog = factory.getRuleDialogFor(new BeanItem<RuleBean>(bean));
 				dialog.setModal(true);
 				getWindow().addWindow(dialog);
 			}
 		});
 		return createRule;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.m2ling.presentation.events.Observer#update(org.m2ling.presentation.events.Event)
+	 */
+	@Override
+	public void update(org.m2ling.presentation.events.Event event) {
+		// Only refresh targeted rule panel
+		if (event.getSubject() == Events.RULE_CHANGE && event.getDetails().get(Events.DETAIL_TARGET.name()).equals(vpID)) {
+			removeAllComponents();
+			attach();
+		}
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.m2ling.presentation.events.Observer#getRegistrationKeys()
+	 */
+	@Override
+	public Set<Events> getRegistrationKeys() {
+		Set<Events> events = new HashSet<Events>();
+		events.add(Events.RULE_CHANGE);
+		return events;
 	}
 }
