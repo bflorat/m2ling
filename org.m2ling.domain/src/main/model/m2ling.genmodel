@@ -20,12 +20,6 @@
     <nestedGenPackages prefix="Core" basePackage="org.m2ling.domain" disposableProviderFactory="true"
         ecorePackage="m2ling.ecore#//core">
       <genEnums typeSafeEnumCompatible="false" ecoreEnum="m2ling.ecore#//core/CustomPropertyType"/>
-      <genEnums typeSafeEnumCompatible="false" ecoreEnum="m2ling.ecore#//core/ActivityStatus">
-        <genEnumLiterals ecoreEnumLiteral="m2ling.ecore#//core/ActivityStatus/TODO"/>
-        <genEnumLiterals ecoreEnumLiteral="m2ling.ecore#//core/ActivityStatus/CANCELED"/>
-        <genEnumLiterals ecoreEnumLiteral="m2ling.ecore#//core/ActivityStatus/VALIDATED"/>
-        <genEnumLiterals ecoreEnumLiteral="m2ling.ecore#//core/ActivityStatus/WAITING_FOR_VALIDATION"/>
-      </genEnums>
       <genEnums typeSafeEnumCompatible="false" ecoreEnum="m2ling.ecore#//core/Type">
         <genEnumLiterals ecoreEnumLiteral="m2ling.ecore#//core/Type/COMPONENT_TYPE"/>
         <genEnumLiterals ecoreEnumLiteral="m2ling.ecore#//core/Type/LINK_TYPE"/>
@@ -36,13 +30,6 @@
         <genEnumLiterals ecoreEnumLiteral="m2ling.ecore#//core/Type/VIEWPOINT"/>
         <genEnumLiterals ecoreEnumLiteral="m2ling.ecore#//core/Type/VIEW"/>
         <genEnumLiterals ecoreEnumLiteral="m2ling.ecore#//core/Type/RULE"/>
-      </genEnums>
-      <genEnums typeSafeEnumCompatible="false" ecoreEnum="m2ling.ecore#//core/RulePriority">
-        <genEnumLiterals ecoreEnumLiteral="m2ling.ecore#//core/RulePriority/VERY_LOW"/>
-        <genEnumLiterals ecoreEnumLiteral="m2ling.ecore#//core/RulePriority/LOW"/>
-        <genEnumLiterals ecoreEnumLiteral="m2ling.ecore#//core/RulePriority/MEDIUM"/>
-        <genEnumLiterals ecoreEnumLiteral="m2ling.ecore#//core/RulePriority/HIGH"/>
-        <genEnumLiterals ecoreEnumLiteral="m2ling.ecore#//core/RulePriority/VERY_HIGH"/>
       </genEnums>
       <genEnums typeSafeEnumCompatible="false" ecoreEnum="m2ling.ecore#//core/ReferenceType">
         <genEnumLiterals ecoreEnumLiteral="m2ling.ecore#//core/ReferenceType/CONTAINS"/>

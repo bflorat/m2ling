@@ -35,7 +35,6 @@ public interface Rule extends HasNameAndID, HasCustomProperties, HasComment, Has
 
 	/**
 	 * Returns the value of the '<em><b>Priority</b></em>' attribute.
-	 * The literals are from the enumeration {@link org.m2ling.domain.core.RulePriority}.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Priority</em>' attribute isn't clear,
@@ -43,24 +42,22 @@ public interface Rule extends HasNameAndID, HasCustomProperties, HasComment, Has
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Priority</em>' attribute.
-	 * @see org.m2ling.domain.core.RulePriority
-	 * @see #setPriority(RulePriority)
+	 * @see #setPriority(int)
 	 * @see org.m2ling.domain.core.CorePackage#getRule_Priority()
 	 * @model
 	 * @generated
 	 */
-	RulePriority getPriority();
+	int getPriority();
 
 	/**
 	 * Sets the value of the '{@link org.m2ling.domain.core.Rule#getPriority <em>Priority</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Priority</em>' attribute.
-	 * @see org.m2ling.domain.core.RulePriority
 	 * @see #getPriority()
 	 * @generated
 	 */
-	void setPriority(RulePriority value);
+	void setPriority(int value);
 
 	/**
 	 * Returns the value of the '<em><b>Rationale</b></em>' attribute.

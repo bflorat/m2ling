@@ -7,6 +7,7 @@ package org.m2ling.presentation.principles.model;
 
 import java.io.Serializable;
 
+import org.m2ling.common.dto.core.ComponentTypeDTO;
 import org.m2ling.common.utils.Utils;
 
 /**
@@ -24,6 +25,22 @@ public class ViewPointBean implements Serializable {
 	private String comment = "";
 	private String statusLiterals = "";
 	private String iconPath = "";
+
+	public ViewPointBean() {
+		super();
+	}
+
+	public String toString() {
+		return Utils.toString(this);
+	}
+
+	public boolean equals(Object o) {
+		if (o == null || !(o instanceof ViewPointBean)) {
+			return false;
+		}
+		ViewPointBean other = (ViewPointBean) o;
+		return other.getId().equals(getId());
+	}
 
 	/**
 	 * @return the iconPath
@@ -109,9 +126,6 @@ public class ViewPointBean implements Serializable {
 		this.description = description;
 	}
 
-	public ViewPointBean() {
-	}
-
 	/**
 	 * @return the name
 	 */
@@ -133,9 +147,5 @@ public class ViewPointBean implements Serializable {
 	 */
 	public String getDescription() {
 		return description;
-	}
-
-	public String toString() {
-		return Utils.toString(this);
 	}
 }

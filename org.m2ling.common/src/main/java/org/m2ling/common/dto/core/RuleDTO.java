@@ -23,7 +23,7 @@ public class RuleDTO implements Comparable<RuleDTO> {
 	private final String description;
 	private final String comment;
 	private final String status;
-	private final String priority;
+	private final int priority;
 	private final String rationale;
 	private final String exceptions;
 	private final List<StatusEventDTO> history;
@@ -38,7 +38,7 @@ public class RuleDTO implements Comparable<RuleDTO> {
 		private String description = "";
 		private String comment = "";
 		private String status = "";
-		private String priority = "";
+		private int priority = 0;
 		private String rationale = "";
 		private String exceptions = "";
 		private List<StatusEventDTO> history = new ArrayList<StatusEventDTO>(1);
@@ -49,13 +49,13 @@ public class RuleDTO implements Comparable<RuleDTO> {
 			this.name = name;
 		}
 
-		public Builder tags(List<String> tags) {
-			this.tags = tags;
+		public Builder addTag(String tag) {
+			this.tags.add(tag);
 			return this;
 		}
 
-		public Builder history(List<StatusEventDTO> history) {
-			this.history = history;
+		public Builder addEvent(StatusEventDTO event) {
+			this.history.add(event);
 			return this;
 		}
 
@@ -84,7 +84,7 @@ public class RuleDTO implements Comparable<RuleDTO> {
 			return this;
 		}
 
-		public Builder priority(String priority) {
+		public Builder priority(int priority) {
 			this.priority = priority;
 			return this;
 		}
@@ -168,7 +168,7 @@ public class RuleDTO implements Comparable<RuleDTO> {
 	/**
 	 * @return the priority
 	 */
-	public String getPriority() {
+	public int getPriority() {
 		return priority;
 	}
 

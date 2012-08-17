@@ -452,6 +452,7 @@ public class CoreSwitch<T> extends Switch<T> {
 				if (result == null) result = caseHasNameAndID(activity);
 				if (result == null) result = caseHasTags(activity);
 				if (result == null) result = caseHasDescription(activity);
+				if (result == null) result = caseHasStatus(activity);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}

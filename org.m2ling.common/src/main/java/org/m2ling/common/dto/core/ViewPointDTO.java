@@ -14,7 +14,6 @@ import org.m2ling.common.utils.Utils;
  * @author Bertrand Florat <bertrand@florat.net>
  */
 public class ViewPointDTO implements Comparable<ViewPointDTO> {
-
 	private final String id;
 	private final String name;
 	private final List<String> tags;
@@ -23,11 +22,9 @@ public class ViewPointDTO implements Comparable<ViewPointDTO> {
 	private final List<String> statusLiterals;
 
 	public static class Builder {
-
 		// Required configuration
 		private final String name;
 		private final String id;
-
 		// Optional configuration
 		private List<String> tags = new ArrayList<String>(1);
 		private String description = "";
@@ -39,8 +36,8 @@ public class ViewPointDTO implements Comparable<ViewPointDTO> {
 			this.name = name;
 		}
 
-		public Builder tags(List<String> tags) {
-			this.tags = tags;
+		public Builder addTag(String tag) {
+			this.tags.add(tag);
 			return this;
 		}
 
@@ -54,8 +51,8 @@ public class ViewPointDTO implements Comparable<ViewPointDTO> {
 			return this;
 		}
 
-		public Builder statusLiterals(List<String> statusLiterals) {
-			this.statusLiterals = statusLiterals;
+		public Builder addStatusLiteral(String statusLiteral) {
+			this.statusLiterals.add(statusLiteral);
 			return this;
 		}
 
@@ -154,7 +151,5 @@ public class ViewPointDTO implements Comparable<ViewPointDTO> {
 	@Override
 	public int compareTo(ViewPointDTO o) {
 		return o.getName().compareTo(o.getName());
-
 	}
-
 }

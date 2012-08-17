@@ -49,8 +49,8 @@ public class ComponentTypeDTO implements Comparable<ComponentTypeDTO> {
 			this.name = name;
 		}
 
-		public Builder tags(List<String> tags) {
-			this.tags = tags;
+		public Builder addTag(String tag) {
+			this.tags.add(tag);
 			return this;
 		}
 
@@ -64,7 +64,7 @@ public class ComponentTypeDTO implements Comparable<ComponentTypeDTO> {
 			return this;
 		}
 
-		public Builder reference(ReferenceDTO reference) {
+		public Builder addReference(ReferenceDTO reference) {
 			this.references.add(reference);
 			return this;
 		}
@@ -85,12 +85,12 @@ public class ComponentTypeDTO implements Comparable<ComponentTypeDTO> {
 		}
 
 		/**
-		 * Add a component ID to the enumeration of acceptable values for a component type.
+		 * Set component IDs to the enumeration.
 		 * 
-		 * @param componentID
+		 * @param componentIDs
 		 * @return the builder
 		 */
-		public Builder enumeration(String componentID) {
+		public Builder addEnumerationID(String componentID) {
 			this.enumeration.add(componentID);
 			return this;
 		}

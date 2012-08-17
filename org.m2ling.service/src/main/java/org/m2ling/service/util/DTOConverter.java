@@ -3,6 +3,8 @@
  */
 package org.m2ling.service.util;
 
+import static org.m2ling.common.utils.Utils.nonull;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,14 +18,12 @@ import org.m2ling.domain.core.Component;
 import org.m2ling.domain.core.ComponentType;
 import org.m2ling.domain.core.CoreFactory;
 import org.m2ling.domain.core.Rule;
-import org.m2ling.domain.core.RulePriority;
 import org.m2ling.domain.core.StatusEvent;
 import org.m2ling.domain.core.ViewPoint;
 
 import com.google.common.base.Strings;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
-import static org.m2ling.common.utils.Utils.nonull;
 
 /**
  * 
@@ -55,9 +55,13 @@ public class DTOConverter {
 
 		public ViewPointDTO getViewPointDTO(ViewPoint vp) {
 			ViewPointDTO.Builder builder = new ViewPointDTO.Builder(vp.getId(), vp.getName());
-			builder.tags(vp.getTags());
+			for (String tag : vp.getTags()) {
+				builder.addTag(tag);
+			}
 			builder.comment(nonull(vp.getComment()));
-			builder.statusLiterals(vp.getStatusLiterals());
+			for (String statusLiteral : vp.getStatusLiterals()) {
+				builder.addStatusLiteral(statusLiteral);
+			}
 			builder.description(nonull(vp.getDescription()));
 			return builder.build();
 		}
@@ -65,27 +69,38 @@ public class DTOConverter {
 		public RuleDTO getRuleDTO(Rule rule) {
 			ViewPoint vp = (ViewPoint) rule.eContainer();
 			RuleDTO.Builder builder = new RuleDTO.Builder(vp.getId(), rule.getId(), rule.getName());
-			builder.tags(rule.getTags());
+			for (String tag : rule.getTags()) {
+				builder.addTag(tag);
+			}
 			builder.comment(nonull(rule.getComment()));
 			builder.status(nonull(rule.getStatus()));
 			builder.description(nonull(rule.getDescription()));
 			builder.exceptions(nonull(rule.getExceptions()));
-			builder.priority(nonull(rule.getPriority().getLiteral()));
+			builder.priority(rule.getPriority());
 			builder.rationale(nonull(rule.getRationale()));
-			List<StatusEventDTO> history = getRuleHistoryDTO(rule);
-			builder.history(history);
+			for (StatusEvent event : rule.getHistory()) {
+				StatusEventDTO eventDTO = getStatusEventDTO(event);
+				builder.addEvent(eventDTO);
+			}
+			return builder.build();
+		}
+
+		public StatusEventDTO getStatusEventDTO(StatusEvent event) {
+			StatusEventDTO.Builder builder = new StatusEventDTO.Builder(event.getDate(), event.getStatusLiteral());
 			return builder.build();
 		}
 
 		public ComponentTypeDTO getComponentTypeDTO(ComponentType ct) {
 			ViewPoint vp = (ViewPoint) ct.eContainer();
 			ComponentTypeDTO.Builder builder = new ComponentTypeDTO.Builder(vp.getId(), ct.getId(), ct.getName());
-			builder.tags(ct.getTags());
+			for (String tag : ct.getTags()) {
+				builder.addTag(tag);
+			}
 			builder.comment(nonull(ct.getComment()));
 			builder.description(nonull(ct.getDescription()));
 			for (ArchitectureItem ai : ct.getEnumeration()) {
 				Component comp = (Component) ai;
-				builder.enumeration(comp.getId());
+				builder.addEnumerationID(comp.getId());
 			}
 			builder.instantiationFactor(ct.getInstantiationFactor());
 			builder.reifiable(ct.isReifiable());
@@ -168,7 +183,7 @@ public class DTOConverter {
 				rule.getTags().add(tag);
 			}
 			rule.setStatus(dto.getStatus());
-			rule.setPriority(RulePriority.get(dto.getPriority()));
+			rule.setPriority(dto.getPriority());
 			rule.setDescription(dto.getDescription());
 			rule.setComment(dto.getComment());
 			rule.setRationale(dto.getRationale());

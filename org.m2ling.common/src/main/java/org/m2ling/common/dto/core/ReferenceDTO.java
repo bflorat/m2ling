@@ -43,7 +43,7 @@ public class ReferenceDTO {
 			targets = ImmutableList.of();
 		}
 
-		public Builder target(String id) {
+		public Builder addTarget(String id) {
 			targets.add(id);
 			return this;
 		}

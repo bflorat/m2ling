@@ -22,7 +22,6 @@ import org.m2ling.domain.core.HasDescription;
 import org.m2ling.domain.core.HasStatus;
 import org.m2ling.domain.core.HasTags;
 import org.m2ling.domain.core.Rule;
-import org.m2ling.domain.core.RulePriority;
 import org.m2ling.domain.core.StatusEvent;
 
 /**
@@ -142,7 +141,7 @@ public class RuleImpl extends HasNameAndIDImpl implements Rule {
 	 * @generated
 	 * @ordered
 	 */
-	protected static final RulePriority PRIORITY_EDEFAULT = RulePriority.VERY_LOW;
+	protected static final int PRIORITY_EDEFAULT = 0;
 
 	/**
 	 * The cached value of the '{@link #getPriority() <em>Priority</em>}' attribute.
@@ -152,7 +151,7 @@ public class RuleImpl extends HasNameAndIDImpl implements Rule {
 	 * @generated
 	 * @ordered
 	 */
-	protected RulePriority priority = PRIORITY_EDEFAULT;
+	protected int priority = PRIORITY_EDEFAULT;
 
 	/**
 	 * The default value of the '{@link #getRationale() <em>Rationale</em>}' attribute.
@@ -341,7 +340,7 @@ public class RuleImpl extends HasNameAndIDImpl implements Rule {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public RulePriority getPriority() {
+	public int getPriority() {
 		return priority;
 	}
 
@@ -350,9 +349,9 @@ public class RuleImpl extends HasNameAndIDImpl implements Rule {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setPriority(RulePriority newPriority) {
-		RulePriority oldPriority = priority;
-		priority = newPriority == null ? PRIORITY_EDEFAULT : newPriority;
+	public void setPriority(int newPriority) {
+		int oldPriority = priority;
+		priority = newPriority;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, CorePackage.RULE__PRIORITY, oldPriority, priority));
 	}
@@ -482,7 +481,7 @@ public class RuleImpl extends HasNameAndIDImpl implements Rule {
 				setStatus((String)newValue);
 				return;
 			case CorePackage.RULE__PRIORITY:
-				setPriority((RulePriority)newValue);
+				setPriority((Integer)newValue);
 				return;
 			case CorePackage.RULE__RATIONALE:
 				setRationale((String)newValue);

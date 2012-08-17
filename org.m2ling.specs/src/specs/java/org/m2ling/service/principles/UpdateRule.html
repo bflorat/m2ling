@@ -23,14 +23,14 @@
 			<li>id=<b concordion:set="#comment">new comment</b></li>
 			<li>id=<b concordion:set="#tags">new tag1,new tag2</b></li>
 			<li>id=<b concordion:set="#status">REFUSED</b></li>
-			<li>id=<b concordion:set="#priority">HIGH</b></li>
+			<li>id=<b concordion:set="#priority">3</b></li>
 		</ul>
 		<span
 			concordion:execute="update(#id,#vpID,#name,#description,#comment,#status,#priority,#rationale,#exceptions,#tags)" />
 		Then we the viewpoint should now have the following
 		characteristics : <b concordion:assertEquals="getRule(#id)">comment=new
 			comment description=new desc drop= exceptions=new exceptions
-			id=id_rule1 name=new rule name priority=HIGH rationale=new rationale
+			id=id_rule1 name=new rule name priority=3 rationale=new rationale
 			status=REFUSED tags=new tag1,new tag2 vpID=id_vp1</b>.
 	</div>
 

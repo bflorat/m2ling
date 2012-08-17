@@ -42,7 +42,7 @@ public class RuleServiceImplTest extends M2lingUnitTest {
 	@Test
 	public void testCheckDTONominalUpdate() {
 		RuleDTO dto = new RuleDTO.Builder("id_vp1", "id_rule1", "rule1").comment("new_comment_1")
-				.description("new desc 1").rationale("new rationale 1").exceptions("new exception 1").priority("HIGH")
+				.description("new desc 1").rationale("new rationale 1").exceptions("new exception 1").priority(3)
 				.status("VALIDATED").build();
 		try {
 			service.checkDTO(dto, AccessType.UPDATE);
@@ -55,7 +55,7 @@ public class RuleServiceImplTest extends M2lingUnitTest {
 	@Test
 	public void testCheckDTONominalCreate() {
 		RuleDTO dto = new RuleDTO.Builder("id_vp1", "id_rule2", "rule2").comment("comment_2").description("desc 2")
-				.rationale("rationale 2").exceptions("exception 2").priority("VERY_HIGH").status("VALIDATED").build();
+				.rationale("rationale 2").exceptions("exception 2").priority(3).status("VALIDATED").build();
 		try {
 			service.checkDTO(dto, AccessType.CREATE);
 		} catch (FunctionalException e) {
@@ -65,31 +65,30 @@ public class RuleServiceImplTest extends M2lingUnitTest {
 	}
 
 	@Test(expected = FunctionalException.class)
-	public void testCheckDTOFailCommentTooLongCreate() throws FunctionalException{
-	String comment = UUT. getShuffleString(3000);
+	public void testCheckDTOFailCommentTooLongCreate() throws FunctionalException {
+		String comment = UUT.getShuffleString(3000);
 		RuleDTO dto = new RuleDTO.Builder("id_vp1", "id_rule2", "rule2").comment(comment).description("desc 2")
-				.rationale("rationale 2").exceptions("exception 2").priority("VERY_HIGH").status("VALIDATED").build();
+				.rationale("rationale 2").exceptions("exception 2").priority(3).status("VALIDATED").build();
 		service.checkDTO(dto, AccessType.CREATE);
 	}
-	
+
 	@Test(expected = FunctionalException.class)
-	public void testCheckDTOFailCommentTooLongUpdate() throws FunctionalException{
-	String comment = UUT. getShuffleString(3000);
+	public void testCheckDTOFailCommentTooLongUpdate() throws FunctionalException {
+		String comment = UUT.getShuffleString(3000);
 		RuleDTO dto = new RuleDTO.Builder("id_vp1", "id_rule2", "rule2").comment(comment).description("desc 2")
-				.rationale("rationale 2").exceptions("exception 2").priority("VERY_HIGH").status("VALIDATED").build();
+				.rationale("rationale 2").exceptions("exception 2").priority(3).status("VALIDATED").build();
 		service.checkDTO(dto, AccessType.UPDATE);
 	}
-	
+
 	@Test(expected = FunctionalException.class)
-	public void testCheckDTOFailNullDTO() throws FunctionalException{
+	public void testCheckDTOFailNullDTO() throws FunctionalException {
 		service.checkDTO(null, AccessType.CREATE);
 	}
-	
+
 	@Test(expected = FunctionalException.class)
-	public void testCheckDTOFailNullName() throws FunctionalException{
+	public void testCheckDTOFailNullName() throws FunctionalException {
 		RuleDTO dto = new RuleDTO.Builder("id_vp1", "id_rule2", null).comment("comment 2").description("desc 2")
-				.rationale("rationale 2").exceptions("exception 2").priority("VERY_HIGH").status("VALIDATED").build();
+				.rationale("rationale 2").exceptions("exception 2").priority(3).status("VALIDATED").build();
 		service.checkDTO(dto, AccessType.CREATE);
 	}
-	
 }

@@ -173,22 +173,16 @@
     <eClassifiers xsi:type="ecore:EClass" name="MaxConstraint" eSuperTypes="#//core/BoundaryConstraint"/>
     <eClassifiers xsi:type="ecore:EClass" name="EMailConstraint" eSuperTypes="#//core/Constraint"/>
     <eClassifiers xsi:type="ecore:EClass" name="FormatConstraint" eSuperTypes="#//core/Constraint"/>
-    <eClassifiers xsi:type="ecore:EClass" name="Activity" eSuperTypes="#//core/HasNameAndID #//core/HasTags #//core/HasDescription">
+    <eClassifiers xsi:type="ecore:EClass" name="Activity" eSuperTypes="#//core/HasNameAndID #//core/HasTags #//core/HasDescription #//core/HasStatus">
       <eStructuralFeatures xsi:type="ecore:EReference" name="accountables" upperBound="-1"
           eType="#//core/Stakeholder"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="responsibles" upperBound="-1"
           eType="#//core/Stakeholder"/>
     </eClassifiers>
-    <eClassifiers xsi:type="ecore:EEnum" name="ActivityStatus">
-      <eLiterals name="TODO" value="1"/>
-      <eLiterals name="CANCELED" literal="CANCELED"/>
-      <eLiterals name="VALIDATED" value="2"/>
-      <eLiterals name="WAITING_FOR_VALIDATION" value="3"/>
-    </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="ActivityTransition" eSuperTypes="#//core/HasComment #//core/HasDescription">
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="date" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//ELong"/>
-      <eStructuralFeatures xsi:type="ecore:EAttribute" name="fromStatus" eType="#//core/ActivityStatus"/>
-      <eStructuralFeatures xsi:type="ecore:EAttribute" name="toStatus" eType="#//core/ActivityStatus"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="fromStatus" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="toStatus" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="activity" lowerBound="1"
           eType="#//core/Activity"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="actor" upperBound="-1"
@@ -218,15 +212,8 @@
       <eLiterals name="VIEW" value="7"/>
       <eLiterals name="RULE" value="8" literal="RULE"/>
     </eClassifiers>
-    <eClassifiers xsi:type="ecore:EEnum" name="RulePriority">
-      <eLiterals name="VERY_LOW"/>
-      <eLiterals name="LOW" value="1"/>
-      <eLiterals name="MEDIUM" value="2"/>
-      <eLiterals name="HIGH" value="3"/>
-      <eLiterals name="VERY_HIGH" value="4"/>
-    </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="Rule" eSuperTypes="#//core/HasNameAndID #//core/HasCustomProperties #//core/HasComment #//core/HasTags #//core/HasDescription #//core/HasStatus">
-      <eStructuralFeatures xsi:type="ecore:EAttribute" name="priority" eType="#//core/RulePriority"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="priority" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="rationale" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="exceptions" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="history" upperBound="-1"

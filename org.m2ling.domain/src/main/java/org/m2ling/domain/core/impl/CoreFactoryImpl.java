@@ -44,7 +44,6 @@ import org.m2ling.domain.core.Reference;
 import org.m2ling.domain.core.ReferenceType;
 import org.m2ling.domain.core.RegexpConstraint;
 import org.m2ling.domain.core.Rule;
-import org.m2ling.domain.core.RulePriority;
 import org.m2ling.domain.core.Stakeholder;
 import org.m2ling.domain.core.StatusEvent;
 import org.m2ling.domain.core.Type;
@@ -150,12 +149,8 @@ public class CoreFactoryImpl extends EFactoryImpl implements CoreFactory {
 		switch (eDataType.getClassifierID()) {
 			case CorePackage.CUSTOM_PROPERTY_TYPE:
 				return createCustomPropertyTypeFromString(eDataType, initialValue);
-			case CorePackage.ACTIVITY_STATUS:
-				return createActivityStatusFromString(eDataType, initialValue);
 			case CorePackage.TYPE:
 				return createTypeFromString(eDataType, initialValue);
-			case CorePackage.RULE_PRIORITY:
-				return createRulePriorityFromString(eDataType, initialValue);
 			case CorePackage.REFERENCE_TYPE:
 				return createReferenceTypeFromString(eDataType, initialValue);
 			case CorePackage.LINK_TEMPORALITY:
@@ -177,12 +172,8 @@ public class CoreFactoryImpl extends EFactoryImpl implements CoreFactory {
 		switch (eDataType.getClassifierID()) {
 			case CorePackage.CUSTOM_PROPERTY_TYPE:
 				return convertCustomPropertyTypeToString(eDataType, instanceValue);
-			case CorePackage.ACTIVITY_STATUS:
-				return convertActivityStatusToString(eDataType, instanceValue);
 			case CorePackage.TYPE:
 				return convertTypeToString(eDataType, instanceValue);
-			case CorePackage.RULE_PRIORITY:
-				return convertRulePriorityToString(eDataType, instanceValue);
 			case CorePackage.REFERENCE_TYPE:
 				return convertReferenceTypeToString(eDataType, instanceValue);
 			case CorePackage.LINK_TEMPORALITY:
@@ -539,26 +530,6 @@ public class CoreFactoryImpl extends EFactoryImpl implements CoreFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public ActivityStatus createActivityStatusFromString(EDataType eDataType, String initialValue) {
-		ActivityStatus result = ActivityStatus.get(initialValue);
-		if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
-		return result;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public String convertActivityStatusToString(EDataType eDataType, Object instanceValue) {
-		return instanceValue == null ? null : instanceValue.toString();
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public Type createTypeFromString(EDataType eDataType, String initialValue) {
 		Type result = Type.get(initialValue);
 		if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
@@ -571,26 +542,6 @@ public class CoreFactoryImpl extends EFactoryImpl implements CoreFactory {
 	 * @generated
 	 */
 	public String convertTypeToString(EDataType eDataType, Object instanceValue) {
-		return instanceValue == null ? null : instanceValue.toString();
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public RulePriority createRulePriorityFromString(EDataType eDataType, String initialValue) {
-		RulePriority result = RulePriority.get(initialValue);
-		if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
-		return result;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public String convertRulePriorityToString(EDataType eDataType, Object instanceValue) {
 		return instanceValue == null ? null : instanceValue.toString();
 	}
 

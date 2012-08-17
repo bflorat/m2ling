@@ -68,19 +68,31 @@ public class UpdateViewPointFixture extends M2lingFixture {
 		return outBean.toString();
 	}
 
-	public String updateStatusLiterals(String previousStatusLiterals, String newStatusLiterals) throws FunctionalException {
+	public String updateStatusLiterals(String previousStatusLiterals, String newStatusLiterals)
+			throws FunctionalException {
 		reset();
 		ViewPointDTO vp1DTO = service.getViewPointByName(null, "vp1");
 		List<String> previousStatusLiteralsList = Utils.stringListFromString(previousStatusLiterals);
-		ViewPointDTO dto = new ViewPointDTO.Builder(vp1DTO.getId(), vp1DTO.getName()).comment(vp1DTO.getComment())
-				.description(vp1DTO.getDescription()).tags(vp1DTO.getTags()).statusLiterals(previousStatusLiteralsList).build();
+		ViewPointDTO.Builder builder = new ViewPointDTO.Builder(vp1DTO.getId(), vp1DTO.getName()).comment(
+				vp1DTO.getComment()).description(vp1DTO.getDescription());
+		for (String tag : vp1DTO.getTags()) {
+			builder.addTag(tag);
+		}
+		for (String statusLiteral : previousStatusLiteralsList) {
+			builder.addStatusLiteral(statusLiteral);
+		}
 		// Set the initial status literals
-		service.updateViewPoint(null, dto);
+		service.updateViewPoint(null, builder.build());
 		// try to set the new status literals
-		List<String> newStatusLiteralsList = Utils.stringListFromString(newStatusLiterals);
-		dto = new ViewPointDTO.Builder(vp1DTO.getId(), vp1DTO.getName()).comment(vp1DTO.getComment())
-				.description(vp1DTO.getDescription()).tags(vp1DTO.getTags()).statusLiterals(newStatusLiteralsList).build();
-		service.updateViewPoint(null, dto);
+		builder = new ViewPointDTO.Builder(vp1DTO.getId(), vp1DTO.getName()).comment(vp1DTO.getComment()).description(
+				vp1DTO.getDescription());
+		for (String tag : vp1DTO.getTags()) {
+			builder.addTag(tag);
+		}
+		for (String statusLiteral : Utils.stringListFromString(newStatusLiterals)) {
+			builder.addStatusLiteral(statusLiteral);
+		}
+		service.updateViewPoint(null, builder.build());
 		ViewPointDTO updatedVP = service.getViewPointByID(null, "id_vp1");
 		String out = Utils.stringListAsString(updatedVP.getStatusLiterals());
 		return out;
@@ -94,11 +106,17 @@ public class UpdateViewPointFixture extends M2lingFixture {
 		// We assume that we have a "rule1" rule in VALIDATED status on vp1 vp (pre-filled in the
 		// technical mock)
 		ViewPointDTO vp1DTO = service.getViewPointByName(null, "vp1");
-		List<String> statusLiterals = Utils.stringListFromString(newStatusLiterals);
-		ViewPointDTO newVp1DTO = new ViewPointDTO.Builder(vp1DTO.getId(), vp1DTO.getName()).comment(vp1DTO.getComment())
-				.description(vp1DTO.getDescription()).tags(vp1DTO.getTags()).statusLiterals(statusLiterals).build();
+		List<String> statusLiteralsList = Utils.stringListFromString(newStatusLiterals);
+		ViewPointDTO.Builder builder = new ViewPointDTO.Builder(vp1DTO.getId(), vp1DTO.getName()).comment(
+				vp1DTO.getComment()).description(vp1DTO.getDescription());
+		for (String tag : vp1DTO.getTags()) {
+			builder.addTag(tag);
+		}
+		for (String statusLiteral : statusLiteralsList) {
+			builder.addStatusLiteral(statusLiteral);
+		}
 		try {
-			service.updateViewPoint(null, newVp1DTO);
+			service.updateViewPoint(null, builder.build());
 		} catch (FunctionalException fe) {
 			return "FAIL";
 		}
@@ -119,13 +137,19 @@ public class UpdateViewPointFixture extends M2lingFixture {
 			if (!tags.equals("null")) {
 				tagsList = Utils.stringListFromString(tags);
 			}
-			List<String> status = null;
-			if (!"null".equals(status)) {
-				status = Utils.stringListFromString(statusLiterals);
+			List<String> statusLiteralsList = null;
+			if (!"null".equals(statusLiterals)) {
+				statusLiteralsList = Utils.stringListFromString(statusLiterals);
 			}
-			ViewPointDTO dto = new ViewPointDTO.Builder(UUT.nul(id), UUT.nul(name)).description(UUT.nul(description))
-					.tags(tagsList).comment(UUT.nul(comment)).statusLiterals(status).build();
-			service.checkDTO(dto, AccessType.UPDATE);
+			ViewPointDTO.Builder builder = new ViewPointDTO.Builder(UUT.nul(id), UUT.nul(name)).description(
+					UUT.nul(description)).comment(UUT.nul(comment));
+			for (String tag : tagsList) {
+				builder.addTag(tag);
+			}
+			for (String statusLiteral : statusLiteralsList) {
+				builder.addStatusLiteral(statusLiteral);
+			}
+			service.checkDTO(builder.build(), AccessType.UPDATE);
 			return "PASS";
 		} catch (FunctionalException ex) {
 			return "FAIL";

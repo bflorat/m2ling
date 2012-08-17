@@ -38,7 +38,7 @@ public class UpdateRuleFixture extends M2lingFixture {
 	 * @throws FunctionalException
 	 */
 	public String getRule(String id, String vpID, String name, String description, String comment, String status,
-			String priority, String rationale, String exceptions, String tags) throws FunctionalException {
+			int priority, String rationale, String exceptions, String tags) throws FunctionalException {
 		RuleBean bean = new RuleBean();
 		bean.setComment(comment);
 		bean.setDescription(description);
@@ -72,7 +72,7 @@ public class UpdateRuleFixture extends M2lingFixture {
 	 * @throws FunctionalException
 	 */
 	public String update(String id, String vpID, String name, String description, String comment, String status,
-			String priority, String rationale, String exceptions, String tags) throws FunctionalException {
+			int priority, String rationale, String exceptions, String tags) throws FunctionalException {
 		RuleBean bean = new RuleBean();
 		bean.setComment(comment);
 		bean.setDescription(description);

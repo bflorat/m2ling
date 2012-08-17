@@ -21,6 +21,36 @@ public class RuleBean implements Serializable {
 	private String name = "";
 	/** Drop */
 	private String drop = "";
+	/**
+	 * Comma-separated tags
+	 */
+	private String tags = "";
+	private String description = "";
+	private String comment = "";
+	private String status = null;
+	private int priority = 0;
+	private String rationale = "";
+	private String exceptions = "";
+	private Map<Long, String> history = new TreeMap<Long, String>();
+
+	public String toString() {
+		return Utils.toString(this);
+	}
+
+	public boolean equals(Object other) {
+		if (other == null || !(other instanceof RuleBean)) {
+			return false;
+		}
+		return ((RuleBean) other).getId().equals(getId());
+	}
+
+	public int hashCode() {
+		return id.hashCode();
+	}
+
+	public RuleBean() {
+		super();
+	}
 
 	/**
 	 * @return the drop
@@ -36,19 +66,6 @@ public class RuleBean implements Serializable {
 	public void setDrop(String drop) {
 		this.drop = drop;
 	}
-
-	/**
-	 * Comma-separated tags
-	 */
-	private String tags = "";
-	private String description = "";
-	private String comment = "";
-	private String status = null;
-	// Default priority : medium
-	private String priority = "";
-	private String rationale = "";
-	private String exceptions = "";
-	private Map<Long, String> history = new TreeMap<Long, String>();
 
 	/**
 	 * @return the rationale
@@ -98,7 +115,7 @@ public class RuleBean implements Serializable {
 	/**
 	 * @return the priority
 	 */
-	public String getPriority() {
+	public int getPriority() {
 		return priority;
 	}
 
@@ -106,7 +123,7 @@ public class RuleBean implements Serializable {
 	 * @param priority
 	 *           the priority to set
 	 */
-	public void setPriority(String priority) {
+	public void setPriority(int priority) {
 		this.priority = priority;
 	}
 
@@ -187,9 +204,6 @@ public class RuleBean implements Serializable {
 		this.description = description;
 	}
 
-	public RuleBean() {
-	}
-
 	/**
 	 * @return the name
 	 */
@@ -218,9 +232,5 @@ public class RuleBean implements Serializable {
 	 */
 	public String getViewPointId() {
 		return vpID;
-	}
-
-	public String toString() {
-		return Utils.toString(this);
 	}
 }

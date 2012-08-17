@@ -6,6 +6,7 @@
 package org.m2ling.presentation.principles.model;
 
 import java.io.Serializable;
+import java.util.List;
 
 import org.m2ling.common.utils.Utils;
 
@@ -14,15 +15,126 @@ import org.m2ling.common.utils.Utils;
  */
 @SuppressWarnings("serial")
 public class ComponentTypeBean implements Serializable {
+	private String vpID = "";
 	private String id = "";
 	private String name = "";
-	/**
-	 * Comma-separated tags
-	 */
 	private String tags = "";
 	private String description = "";
 	private String comment = "";
-	private String statusLiterals = "";
+	private int iFactor = 0;
+	private String boundTypeID = "";
+	private String enumeration = "";
+	private boolean reifiable = false;
+	private List<ReferenceBean> references;
+
+	public ComponentTypeBean() {
+		super();
+	}
+
+	public String toString() {
+		return Utils.toString(this);
+	}
+
+	public boolean equals(Object other) {
+		if (other == null || !(other instanceof ComponentTypeBean)) {
+			return false;
+		}
+		return ((ComponentTypeBean) other).getId().equals(getId());
+	}
+
+	public int hashCode() {
+		return id.hashCode();
+	}
+
+	/**
+	 * @return the references
+	 */
+	public List<ReferenceBean> getReferences() {
+		return references;
+	}
+
+	/**
+	 * @param references
+	 *           the references to set
+	 */
+	public void setReferences(List<ReferenceBean> references) {
+		this.references = references;
+	}
+
+	/**
+	 * @return the vpID
+	 */
+	public String getVpID() {
+		return vpID;
+	}
+
+	/**
+	 * @param vpID
+	 *           the vpID to set
+	 */
+	public void setVpID(String vpID) {
+		this.vpID = vpID;
+	}
+
+	/**
+	 * @return the boundTypeID
+	 */
+	public String getBoundTypeID() {
+		return boundTypeID;
+	}
+
+	/**
+	 * @param boundTypeID
+	 *           the boundTypeID to set
+	 */
+	public void setBoundTypeID(String boundTypeID) {
+		this.boundTypeID = boundTypeID;
+	}
+
+	/**
+	 * @return the iFactor
+	 */
+	public int getiFactor() {
+		return iFactor;
+	}
+
+	/**
+	 * @param iFactor
+	 *           the iFactor to set
+	 */
+	public void setiFactor(int iFactor) {
+		this.iFactor = iFactor;
+	}
+
+	/**
+	 * @return the enumeration
+	 */
+	public String getEnumeration() {
+		return enumeration;
+	}
+
+	/**
+	 * @param enumeration
+	 *           the enumeration to set
+	 */
+	public void setEnumeration(String enumeration) {
+		this.enumeration = enumeration;
+	}
+
+	/**
+	 * @return the reifiable
+	 */
+	public boolean isReifiable() {
+		return reifiable;
+	}
+
+	/**
+	 * @param reifiable
+	 *           the reifiable to set
+	 */
+	public void setReifiable(boolean reifiable) {
+		this.reifiable = reifiable;
+	}
 
 	/**
 	 * @return the id
@@ -55,21 +167,6 @@ public class ComponentTypeBean implements Serializable {
 	}
 
 	/**
-	 * @return the statusLiterals
-	 */
-	public String getStatusLiterals() {
-		return statusLiterals;
-	}
-
-	/**
-	 * @param statusLiterals
-	 *           the statusLiterals to set
-	 */
-	public void setStatusLiterals(String statusLiterals) {
-		this.statusLiterals = statusLiterals;
-	}
-
-	/**
 	 * @param name
 	 *           the name to set
 	 */
@@ -93,9 +190,6 @@ public class ComponentTypeBean implements Serializable {
 		this.description = description;
 	}
 
-	public ComponentTypeBean() {
-	}
-
 	/**
 	 * @return the name
 	 */
@@ -117,9 +211,5 @@ public class ComponentTypeBean implements Serializable {
 	 */
 	public String getDescription() {
 		return description;
-	}
-
-	public String toString() {
-		return Utils.toString(this);
 	}
 }

@@ -18,7 +18,6 @@ import org.m2ling.common.utils.Utils;
 import org.m2ling.domain.Root;
 import org.m2ling.domain.core.CoreFactory;
 import org.m2ling.domain.core.Rule;
-import org.m2ling.domain.core.RulePriority;
 import org.m2ling.domain.core.StatusEvent;
 import org.m2ling.domain.core.ViewPoint;
 import org.m2ling.persistence.PersistenceManager;
@@ -107,10 +106,6 @@ public class RuleServiceImpl extends ServiceImpl implements RuleService {
 			if (!vp.getStatusLiterals().contains(dto.getStatus())) {
 				throw new FunctionalException(FunctionalException.Code.INVALID_STATUS, null, dto.toString());
 			}
-			// priority
-			if (RulePriority.get(dto.getPriority()) == null) {
-				throw new FunctionalException(FunctionalException.Code.INVALID_PRIORITY, null, dto.toString());
-			}
 			// Description
 			if (dto.getDescription().length() > Consts.MAX_TEXT_SIZE) {
 				throw new FunctionalException(FunctionalException.Code.SIZE_EXCEEDED, null, "(description)");
@@ -137,7 +132,7 @@ public class RuleServiceImpl extends ServiceImpl implements RuleService {
 		Rule rule = util.getRuleByID(ruleDTO.getId());
 		rule.setName(ruleDTO.getName());
 		rule.setDescription(ruleDTO.getDescription());
-		rule.setPriority(RulePriority.get(ruleDTO.getPriority()));
+		rule.setPriority(ruleDTO.getPriority());
 		rule.setStatus(ruleDTO.getStatus());
 		rule.setComment(ruleDTO.getComment());
 		rule.setExceptions(ruleDTO.getExceptions());

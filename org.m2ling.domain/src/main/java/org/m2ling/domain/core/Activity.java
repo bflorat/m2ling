@@ -22,7 +22,7 @@ import org.eclipse.emf.common.util.EList;
  * @model
  * @generated
  */
-public interface Activity extends HasNameAndID, HasTags, HasDescription {
+public interface Activity extends HasNameAndID, HasTags, HasDescription, HasStatus {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

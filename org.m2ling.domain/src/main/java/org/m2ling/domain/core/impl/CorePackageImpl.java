@@ -57,7 +57,6 @@ import org.m2ling.domain.core.Reference;
 import org.m2ling.domain.core.ReferenceType;
 import org.m2ling.domain.core.RegexpConstraint;
 import org.m2ling.domain.core.Rule;
-import org.m2ling.domain.core.RulePriority;
 import org.m2ling.domain.core.RuntimeItem;
 import org.m2ling.domain.core.Stakeholder;
 import org.m2ling.domain.core.StatusEvent;
@@ -401,21 +400,7 @@ public class CorePackageImpl extends EPackageImpl implements CorePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EEnum activityStatusEEnum = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	private EEnum typeEEnum = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EEnum rulePriorityEEnum = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -1592,26 +1577,8 @@ public class CorePackageImpl extends EPackageImpl implements CorePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EEnum getActivityStatus() {
-		return activityStatusEEnum;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EEnum getType() {
 		return typeEEnum;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EEnum getRulePriority() {
-		return rulePriorityEEnum;
 	}
 
 	/**
@@ -1834,9 +1801,7 @@ public class CorePackageImpl extends EPackageImpl implements CorePackage {
 
 		// Create enums
 		customPropertyTypeEEnum = createEEnum(CUSTOM_PROPERTY_TYPE);
-		activityStatusEEnum = createEEnum(ACTIVITY_STATUS);
 		typeEEnum = createEEnum(TYPE);
-		rulePriorityEEnum = createEEnum(RULE_PRIORITY);
 		referenceTypeEEnum = createEEnum(REFERENCE_TYPE);
 		linkTemporalityEEnum = createEEnum(LINK_TEMPORALITY);
 		linkAccessTypeEEnum = createEEnum(LINK_ACCESS_TYPE);
@@ -1929,6 +1894,7 @@ public class CorePackageImpl extends EPackageImpl implements CorePackage {
 		activityEClass.getESuperTypes().add(this.getHasNameAndID());
 		activityEClass.getESuperTypes().add(this.getHasTags());
 		activityEClass.getESuperTypes().add(this.getHasDescription());
+		activityEClass.getESuperTypes().add(this.getHasStatus());
 		activityTransitionEClass.getESuperTypes().add(this.getHasComment());
 		activityTransitionEClass.getESuperTypes().add(this.getHasDescription());
 		organisationalUnitEClass.getESuperTypes().add(this.getHasComment());
@@ -2088,8 +2054,8 @@ public class CorePackageImpl extends EPackageImpl implements CorePackage {
 
 		initEClass(activityTransitionEClass, ActivityTransition.class, "ActivityTransition", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getActivityTransition_Date(), ecorePackage.getELong(), "date", null, 0, 1, ActivityTransition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getActivityTransition_FromStatus(), this.getActivityStatus(), "fromStatus", null, 0, 1, ActivityTransition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getActivityTransition_ToStatus(), this.getActivityStatus(), "toStatus", null, 0, 1, ActivityTransition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getActivityTransition_FromStatus(), ecorePackage.getEString(), "fromStatus", null, 0, 1, ActivityTransition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getActivityTransition_ToStatus(), ecorePackage.getEString(), "toStatus", null, 0, 1, ActivityTransition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getActivityTransition_Activity(), this.getActivity(), null, "activity", null, 1, 1, ActivityTransition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getActivityTransition_Actor(), this.getActor(), null, "actor", null, 0, -1, ActivityTransition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
@@ -2105,7 +2071,7 @@ public class CorePackageImpl extends EPackageImpl implements CorePackage {
 		initEAttribute(getActor_LastName(), ecorePackage.getEString(), "lastName", null, 0, 1, Actor.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(ruleEClass, Rule.class, "Rule", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getRule_Priority(), this.getRulePriority(), "priority", null, 0, 1, Rule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getRule_Priority(), ecorePackage.getEInt(), "priority", null, 0, 1, Rule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getRule_Rationale(), ecorePackage.getEString(), "rationale", null, 0, 1, Rule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getRule_Exceptions(), ecorePackage.getEString(), "exceptions", null, 0, 1, Rule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getRule_History(), this.getStatusEvent(), null, "history", null, 0, -1, Rule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -2121,12 +2087,6 @@ public class CorePackageImpl extends EPackageImpl implements CorePackage {
 		// Initialize enums and add enum literals
 		initEEnum(customPropertyTypeEEnum, CustomPropertyType.class, "CustomPropertyType");
 
-		initEEnum(activityStatusEEnum, ActivityStatus.class, "ActivityStatus");
-		addEEnumLiteral(activityStatusEEnum, ActivityStatus.TODO);
-		addEEnumLiteral(activityStatusEEnum, ActivityStatus.CANCELED);
-		addEEnumLiteral(activityStatusEEnum, ActivityStatus.VALIDATED);
-		addEEnumLiteral(activityStatusEEnum, ActivityStatus.WAITING_FOR_VALIDATION);
-
 		initEEnum(typeEEnum, Type.class, "Type");
 		addEEnumLiteral(typeEEnum, Type.COMPONENT_TYPE);
 		addEEnumLiteral(typeEEnum, Type.LINK_TYPE);
@@ -2137,13 +2097,6 @@ public class CorePackageImpl extends EPackageImpl implements CorePackage {
 		addEEnumLiteral(typeEEnum, Type.VIEWPOINT);
 		addEEnumLiteral(typeEEnum, Type.VIEW);
 		addEEnumLiteral(typeEEnum, Type.RULE);
-
-		initEEnum(rulePriorityEEnum, RulePriority.class, "RulePriority");
-		addEEnumLiteral(rulePriorityEEnum, RulePriority.VERY_LOW);
-		addEEnumLiteral(rulePriorityEEnum, RulePriority.LOW);
-		addEEnumLiteral(rulePriorityEEnum, RulePriority.MEDIUM);
-		addEEnumLiteral(rulePriorityEEnum, RulePriority.HIGH);
-		addEEnumLiteral(rulePriorityEEnum, RulePriority.VERY_HIGH);
 
 		initEEnum(referenceTypeEEnum, ReferenceType.class, "ReferenceType");
 		addEEnumLiteral(referenceTypeEEnum, ReferenceType.CONTAINS);

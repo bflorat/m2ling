@@ -21,13 +21,6 @@ public class CreateRuleFixture extends M2lingFixture {
 
 	public CreateRuleFixture() throws IOException {
 		super();
-		String sampleXMI = "src/specs/resources/mocks/Technical.m2ling";
-		Properties prop = new Properties();
-		prop.setProperty(PersistenceManagerXMIImpl.SpecificConfiguration.CONF_XMI_PATH, sampleXMI);
-		Conf configuration = new Conf(prop, logger, null);
-		PersistenceManagerXMIImpl pm = new PersistenceManagerXMIImpl(logger, configuration);
-		CoreUtil util = new CoreUtil(logger, pm);
-		service = new RuleServiceImpl(pm, util, new FromDTO(util), new ToDTO(util), configuration, logger);
 	}
 
 	/**
@@ -39,7 +32,8 @@ public class CreateRuleFixture extends M2lingFixture {
 	 * @throws FunctionalException
 	 */
 	public String getRule(String id, String vpID, String name, String description, String comment, String status,
-			String priority, String rationale, String exceptions, String tags) throws FunctionalException {
+			int priority, String rationale, String exceptions, String tags) throws FunctionalException {
+		reset();
 		RuleBean bean = new RuleBean();
 		bean.setComment(comment);
 		bean.setDescription(description);
@@ -65,7 +59,7 @@ public class CreateRuleFixture extends M2lingFixture {
 		}
 		return "rule not found";
 	}
-	
+
 	public String getCheckNullDTO() {
 		reset();
 		try {
@@ -76,6 +70,25 @@ public class CreateRuleFixture extends M2lingFixture {
 		}
 	}
 	
+	public String getCheckDTOVerification(String id,String name,String description,String comment,String tags,String statusLiterals){
+		reset();
+		try {
+			//TODO
+			RuleBean bean = new RuleBean();
+			bean.setComment(comment);
+			bean.setDescription(description);
+			bean.setId(id);
+			bean.setName(name);
+			bean.setTags(tags);
+			RuleDTO dto = new DTOConverter.ToDTO().getRuleDTO(bean);
+			service.checkDTO(dto, AccessType.CREATE);
+			return "PASS";
+		} catch (FunctionalException ex) {
+			return "FAIL";
+		}
+		
+	}
+
 	/**
 	 * Make sure to instanciate a new pm at each test case so we reset the content to the
 	 * Technical.m2ling content

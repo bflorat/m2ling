@@ -62,7 +62,6 @@ public interface ActivityTransition extends HasComment, HasDescription {
 
 	/**
 	 * Returns the value of the '<em><b>From Status</b></em>' attribute.
-	 * The literals are from the enumeration {@link org.m2ling.domain.core.ActivityStatus}.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>From Status</em>' attribute isn't clear,
@@ -70,28 +69,25 @@ public interface ActivityTransition extends HasComment, HasDescription {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>From Status</em>' attribute.
-	 * @see org.m2ling.domain.core.ActivityStatus
-	 * @see #setFromStatus(ActivityStatus)
+	 * @see #setFromStatus(String)
 	 * @see org.m2ling.domain.core.CorePackage#getActivityTransition_FromStatus()
 	 * @model
 	 * @generated
 	 */
-	ActivityStatus getFromStatus();
+	String getFromStatus();
 
 	/**
 	 * Sets the value of the '{@link org.m2ling.domain.core.ActivityTransition#getFromStatus <em>From Status</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>From Status</em>' attribute.
-	 * @see org.m2ling.domain.core.ActivityStatus
 	 * @see #getFromStatus()
 	 * @generated
 	 */
-	void setFromStatus(ActivityStatus value);
+	void setFromStatus(String value);
 
 	/**
 	 * Returns the value of the '<em><b>To Status</b></em>' attribute.
-	 * The literals are from the enumeration {@link org.m2ling.domain.core.ActivityStatus}.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>To Status</em>' attribute isn't clear,
@@ -99,24 +95,22 @@ public interface ActivityTransition extends HasComment, HasDescription {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>To Status</em>' attribute.
-	 * @see org.m2ling.domain.core.ActivityStatus
-	 * @see #setToStatus(ActivityStatus)
+	 * @see #setToStatus(String)
 	 * @see org.m2ling.domain.core.CorePackage#getActivityTransition_ToStatus()
 	 * @model
 	 * @generated
 	 */
-	ActivityStatus getToStatus();
+	String getToStatus();
 
 	/**
 	 * Sets the value of the '{@link org.m2ling.domain.core.ActivityTransition#getToStatus <em>To Status</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>To Status</em>' attribute.
-	 * @see org.m2ling.domain.core.ActivityStatus
 	 * @see #getToStatus()
 	 * @generated
 	 */
-	void setToStatus(ActivityStatus value);
+	void setToStatus(String value);
 
 	/**
 	 * Returns the value of the '<em><b>Activity</b></em>' reference.

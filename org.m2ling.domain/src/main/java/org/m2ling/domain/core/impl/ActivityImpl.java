@@ -14,6 +14,7 @@ import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 import org.m2ling.domain.core.Activity;
 import org.m2ling.domain.core.CorePackage;
 import org.m2ling.domain.core.HasDescription;
+import org.m2ling.domain.core.HasStatus;
 import org.m2ling.domain.core.HasTags;
 import org.m2ling.domain.core.Stakeholder;
 
@@ -26,6 +27,7 @@ import org.m2ling.domain.core.Stakeholder;
  * <ul>
  *   <li>{@link org.m2ling.domain.core.impl.ActivityImpl#getTags <em>Tags</em>}</li>
  *   <li>{@link org.m2ling.domain.core.impl.ActivityImpl#getDescription <em>Description</em>}</li>
+ *   <li>{@link org.m2ling.domain.core.impl.ActivityImpl#getStatus <em>Status</em>}</li>
  *   <li>{@link org.m2ling.domain.core.impl.ActivityImpl#getAccountables <em>Accountables</em>}</li>
  *   <li>{@link org.m2ling.domain.core.impl.ActivityImpl#getResponsibles <em>Responsibles</em>}</li>
  * </ul>
@@ -70,6 +72,26 @@ public class ActivityImpl extends HasNameAndIDImpl implements Activity {
 	 * @ordered
 	 */
 	protected String description = DESCRIPTION_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getStatus() <em>Status</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getStatus()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String STATUS_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getStatus() <em>Status</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getStatus()
+	 * @generated
+	 * @ordered
+	 */
+	protected String status = STATUS_EDEFAULT;
 
 	/**
 	 * The cached value of the '{@link #getAccountables() <em>Accountables</em>}' reference list.
@@ -148,6 +170,27 @@ public class ActivityImpl extends HasNameAndIDImpl implements Activity {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public String getStatus() {
+		return status;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setStatus(String newStatus) {
+		String oldStatus = status;
+		status = newStatus;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, CorePackage.ACTIVITY__STATUS, oldStatus, status));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EList<Stakeholder> getResponsibles() {
 		if (responsibles == null) {
 			responsibles = new EObjectResolvingEList<Stakeholder>(Stakeholder.class, this, CorePackage.ACTIVITY__RESPONSIBLES);
@@ -179,6 +222,8 @@ public class ActivityImpl extends HasNameAndIDImpl implements Activity {
 				return getTags();
 			case CorePackage.ACTIVITY__DESCRIPTION:
 				return getDescription();
+			case CorePackage.ACTIVITY__STATUS:
+				return getStatus();
 			case CorePackage.ACTIVITY__ACCOUNTABLES:
 				return getAccountables();
 			case CorePackage.ACTIVITY__RESPONSIBLES:
@@ -202,6 +247,9 @@ public class ActivityImpl extends HasNameAndIDImpl implements Activity {
 				return;
 			case CorePackage.ACTIVITY__DESCRIPTION:
 				setDescription((String)newValue);
+				return;
+			case CorePackage.ACTIVITY__STATUS:
+				setStatus((String)newValue);
 				return;
 			case CorePackage.ACTIVITY__ACCOUNTABLES:
 				getAccountables().clear();
@@ -229,6 +277,9 @@ public class ActivityImpl extends HasNameAndIDImpl implements Activity {
 			case CorePackage.ACTIVITY__DESCRIPTION:
 				setDescription(DESCRIPTION_EDEFAULT);
 				return;
+			case CorePackage.ACTIVITY__STATUS:
+				setStatus(STATUS_EDEFAULT);
+				return;
 			case CorePackage.ACTIVITY__ACCOUNTABLES:
 				getAccountables().clear();
 				return;
@@ -251,6 +302,8 @@ public class ActivityImpl extends HasNameAndIDImpl implements Activity {
 				return tags != null && !tags.isEmpty();
 			case CorePackage.ACTIVITY__DESCRIPTION:
 				return DESCRIPTION_EDEFAULT == null ? description != null : !DESCRIPTION_EDEFAULT.equals(description);
+			case CorePackage.ACTIVITY__STATUS:
+				return STATUS_EDEFAULT == null ? status != null : !STATUS_EDEFAULT.equals(status);
 			case CorePackage.ACTIVITY__ACCOUNTABLES:
 				return accountables != null && !accountables.isEmpty();
 			case CorePackage.ACTIVITY__RESPONSIBLES:
@@ -278,6 +331,12 @@ public class ActivityImpl extends HasNameAndIDImpl implements Activity {
 				default: return -1;
 			}
 		}
+		if (baseClass == HasStatus.class) {
+			switch (derivedFeatureID) {
+				case CorePackage.ACTIVITY__STATUS: return CorePackage.HAS_STATUS__STATUS;
+				default: return -1;
+			}
+		}
 		return super.eBaseStructuralFeatureID(derivedFeatureID, baseClass);
 	}
 
@@ -300,6 +359,12 @@ public class ActivityImpl extends HasNameAndIDImpl implements Activity {
 				default: return -1;
 			}
 		}
+		if (baseClass == HasStatus.class) {
+			switch (baseFeatureID) {
+				case CorePackage.HAS_STATUS__STATUS: return CorePackage.ACTIVITY__STATUS;
+				default: return -1;
+			}
+		}
 		return super.eDerivedStructuralFeatureID(baseFeatureID, baseClass);
 	}
 
@@ -317,6 +382,8 @@ public class ActivityImpl extends HasNameAndIDImpl implements Activity {
 		result.append(tags);
 		result.append(", description: ");
 		result.append(description);
+		result.append(", status: ");
+		result.append(status);
 		result.append(')');
 		return result.toString();
 	}

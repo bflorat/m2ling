@@ -92,7 +92,7 @@ public class ActivityTransitionImpl extends HasCommentImpl implements ActivityTr
 	 * @generated
 	 * @ordered
 	 */
-	protected static final ActivityStatus FROM_STATUS_EDEFAULT = ActivityStatus.TODO;
+	protected static final String FROM_STATUS_EDEFAULT = null;
 
 	/**
 	 * The cached value of the '{@link #getFromStatus() <em>From Status</em>}' attribute.
@@ -102,7 +102,7 @@ public class ActivityTransitionImpl extends HasCommentImpl implements ActivityTr
 	 * @generated
 	 * @ordered
 	 */
-	protected ActivityStatus fromStatus = FROM_STATUS_EDEFAULT;
+	protected String fromStatus = FROM_STATUS_EDEFAULT;
 
 	/**
 	 * The default value of the '{@link #getToStatus() <em>To Status</em>}' attribute.
@@ -112,7 +112,7 @@ public class ActivityTransitionImpl extends HasCommentImpl implements ActivityTr
 	 * @generated
 	 * @ordered
 	 */
-	protected static final ActivityStatus TO_STATUS_EDEFAULT = ActivityStatus.TODO;
+	protected static final String TO_STATUS_EDEFAULT = null;
 
 	/**
 	 * The cached value of the '{@link #getToStatus() <em>To Status</em>}' attribute.
@@ -122,7 +122,7 @@ public class ActivityTransitionImpl extends HasCommentImpl implements ActivityTr
 	 * @generated
 	 * @ordered
 	 */
-	protected ActivityStatus toStatus = TO_STATUS_EDEFAULT;
+	protected String toStatus = TO_STATUS_EDEFAULT;
 
 	/**
 	 * The cached value of the '{@link #getActivity() <em>Activity</em>}' reference.
@@ -210,7 +210,7 @@ public class ActivityTransitionImpl extends HasCommentImpl implements ActivityTr
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public ActivityStatus getFromStatus() {
+	public String getFromStatus() {
 		return fromStatus;
 	}
 
@@ -219,9 +219,9 @@ public class ActivityTransitionImpl extends HasCommentImpl implements ActivityTr
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setFromStatus(ActivityStatus newFromStatus) {
-		ActivityStatus oldFromStatus = fromStatus;
-		fromStatus = newFromStatus == null ? FROM_STATUS_EDEFAULT : newFromStatus;
+	public void setFromStatus(String newFromStatus) {
+		String oldFromStatus = fromStatus;
+		fromStatus = newFromStatus;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, CorePackage.ACTIVITY_TRANSITION__FROM_STATUS, oldFromStatus, fromStatus));
 	}
@@ -231,7 +231,7 @@ public class ActivityTransitionImpl extends HasCommentImpl implements ActivityTr
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public ActivityStatus getToStatus() {
+	public String getToStatus() {
 		return toStatus;
 	}
 
@@ -240,9 +240,9 @@ public class ActivityTransitionImpl extends HasCommentImpl implements ActivityTr
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setToStatus(ActivityStatus newToStatus) {
-		ActivityStatus oldToStatus = toStatus;
-		toStatus = newToStatus == null ? TO_STATUS_EDEFAULT : newToStatus;
+	public void setToStatus(String newToStatus) {
+		String oldToStatus = toStatus;
+		toStatus = newToStatus;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, CorePackage.ACTIVITY_TRANSITION__TO_STATUS, oldToStatus, toStatus));
 	}
@@ -338,10 +338,10 @@ public class ActivityTransitionImpl extends HasCommentImpl implements ActivityTr
 				setDate((Long)newValue);
 				return;
 			case CorePackage.ACTIVITY_TRANSITION__FROM_STATUS:
-				setFromStatus((ActivityStatus)newValue);
+				setFromStatus((String)newValue);
 				return;
 			case CorePackage.ACTIVITY_TRANSITION__TO_STATUS:
-				setToStatus((ActivityStatus)newValue);
+				setToStatus((String)newValue);
 				return;
 			case CorePackage.ACTIVITY_TRANSITION__ACTIVITY:
 				setActivity((Activity)newValue);
@@ -397,9 +397,9 @@ public class ActivityTransitionImpl extends HasCommentImpl implements ActivityTr
 			case CorePackage.ACTIVITY_TRANSITION__DATE:
 				return date != DATE_EDEFAULT;
 			case CorePackage.ACTIVITY_TRANSITION__FROM_STATUS:
-				return fromStatus != FROM_STATUS_EDEFAULT;
+				return FROM_STATUS_EDEFAULT == null ? fromStatus != null : !FROM_STATUS_EDEFAULT.equals(fromStatus);
 			case CorePackage.ACTIVITY_TRANSITION__TO_STATUS:
-				return toStatus != TO_STATUS_EDEFAULT;
+				return TO_STATUS_EDEFAULT == null ? toStatus != null : !TO_STATUS_EDEFAULT.equals(toStatus);
 			case CorePackage.ACTIVITY_TRANSITION__ACTIVITY:
 				return activity != null;
 			case CorePackage.ACTIVITY_TRANSITION__ACTOR:

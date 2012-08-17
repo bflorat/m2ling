@@ -2096,13 +2096,22 @@ public interface CorePackage extends EPackage {
 	int ACTIVITY__DESCRIPTION = HAS_NAME_AND_ID_FEATURE_COUNT + 1;
 
 	/**
+	 * The feature id for the '<em><b>Status</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ACTIVITY__STATUS = HAS_NAME_AND_ID_FEATURE_COUNT + 2;
+
+	/**
 	 * The feature id for the '<em><b>Accountables</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ACTIVITY__ACCOUNTABLES = HAS_NAME_AND_ID_FEATURE_COUNT + 2;
+	int ACTIVITY__ACCOUNTABLES = HAS_NAME_AND_ID_FEATURE_COUNT + 3;
 
 	/**
 	 * The feature id for the '<em><b>Responsibles</b></em>' reference list.
@@ -2111,7 +2120,7 @@ public interface CorePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ACTIVITY__RESPONSIBLES = HAS_NAME_AND_ID_FEATURE_COUNT + 3;
+	int ACTIVITY__RESPONSIBLES = HAS_NAME_AND_ID_FEATURE_COUNT + 4;
 
 	/**
 	 * The number of structural features of the '<em>Activity</em>' class.
@@ -2120,7 +2129,7 @@ public interface CorePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ACTIVITY_FEATURE_COUNT = HAS_NAME_AND_ID_FEATURE_COUNT + 4;
+	int ACTIVITY_FEATURE_COUNT = HAS_NAME_AND_ID_FEATURE_COUNT + 5;
 
 	/**
 	 * The feature id for the '<em><b>Comment</b></em>' attribute.
@@ -2594,16 +2603,6 @@ public interface CorePackage extends EPackage {
 	int CUSTOM_PROPERTY_TYPE = 44;
 
 	/**
-	 * The meta object id for the '{@link org.m2ling.domain.core.ActivityStatus <em>Activity Status</em>}' enum.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.m2ling.domain.core.ActivityStatus
-	 * @see org.m2ling.domain.core.impl.CorePackageImpl#getActivityStatus()
-	 * @generated
-	 */
-	int ACTIVITY_STATUS = 45;
-
-	/**
 	 * The meta object id for the '{@link org.m2ling.domain.core.Type <em>Type</em>}' enum.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2611,18 +2610,7 @@ public interface CorePackage extends EPackage {
 	 * @see org.m2ling.domain.core.impl.CorePackageImpl#getType()
 	 * @generated
 	 */
-	int TYPE = 46;
-
-	/**
-	 * The meta object id for the '{@link org.m2ling.domain.core.RulePriority <em>Rule Priority</em>}' enum.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.m2ling.domain.core.RulePriority
-	 * @see org.m2ling.domain.core.impl.CorePackageImpl#getRulePriority()
-	 * @generated
-	 */
-	int RULE_PRIORITY = 47;
-
+	int TYPE = 45;
 
 	/**
 	 * The meta object id for the '{@link org.m2ling.domain.core.ReferenceType <em>Reference Type</em>}' enum.
@@ -2632,7 +2620,7 @@ public interface CorePackage extends EPackage {
 	 * @see org.m2ling.domain.core.impl.CorePackageImpl#getReferenceType()
 	 * @generated
 	 */
-	int REFERENCE_TYPE = 48;
+	int REFERENCE_TYPE = 46;
 
 
 	/**
@@ -2643,7 +2631,7 @@ public interface CorePackage extends EPackage {
 	 * @see org.m2ling.domain.core.impl.CorePackageImpl#getLinkTemporality()
 	 * @generated
 	 */
-	int LINK_TEMPORALITY = 49;
+	int LINK_TEMPORALITY = 47;
 
 	/**
 	 * The meta object id for the '{@link org.m2ling.domain.core.LinkAccessType <em>Link Access Type</em>}' enum.
@@ -2653,7 +2641,7 @@ public interface CorePackage extends EPackage {
 	 * @see org.m2ling.domain.core.impl.CorePackageImpl#getLinkAccessType()
 	 * @generated
 	 */
-	int LINK_ACCESS_TYPE = 50;
+	int LINK_ACCESS_TYPE = 48;
 
 
 	/**
@@ -3932,16 +3920,6 @@ public interface CorePackage extends EPackage {
 	EEnum getCustomPropertyType();
 
 	/**
-	 * Returns the meta object for enum '{@link org.m2ling.domain.core.ActivityStatus <em>Activity Status</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for enum '<em>Activity Status</em>'.
-	 * @see org.m2ling.domain.core.ActivityStatus
-	 * @generated
-	 */
-	EEnum getActivityStatus();
-
-	/**
 	 * Returns the meta object for enum '{@link org.m2ling.domain.core.Type <em>Type</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3950,16 +3928,6 @@ public interface CorePackage extends EPackage {
 	 * @generated
 	 */
 	EEnum getType();
-
-	/**
-	 * Returns the meta object for enum '{@link org.m2ling.domain.core.RulePriority <em>Rule Priority</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for enum '<em>Rule Priority</em>'.
-	 * @see org.m2ling.domain.core.RulePriority
-	 * @generated
-	 */
-	EEnum getRulePriority();
 
 	/**
 	 * Returns the meta object for enum '{@link org.m2ling.domain.core.ReferenceType <em>Reference Type</em>}'.
@@ -5064,16 +5032,6 @@ public interface CorePackage extends EPackage {
 		EEnum CUSTOM_PROPERTY_TYPE = eINSTANCE.getCustomPropertyType();
 
 		/**
-		 * The meta object literal for the '{@link org.m2ling.domain.core.ActivityStatus <em>Activity Status</em>}' enum.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see org.m2ling.domain.core.ActivityStatus
-		 * @see org.m2ling.domain.core.impl.CorePackageImpl#getActivityStatus()
-		 * @generated
-		 */
-		EEnum ACTIVITY_STATUS = eINSTANCE.getActivityStatus();
-
-		/**
 		 * The meta object literal for the '{@link org.m2ling.domain.core.Type <em>Type</em>}' enum.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -5082,16 +5040,6 @@ public interface CorePackage extends EPackage {
 		 * @generated
 		 */
 		EEnum TYPE = eINSTANCE.getType();
-
-		/**
-		 * The meta object literal for the '{@link org.m2ling.domain.core.RulePriority <em>Rule Priority</em>}' enum.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see org.m2ling.domain.core.RulePriority
-		 * @see org.m2ling.domain.core.impl.CorePackageImpl#getRulePriority()
-		 * @generated
-		 */
-		EEnum RULE_PRIORITY = eINSTANCE.getRulePriority();
 
 		/**
 		 * The meta object literal for the '{@link org.m2ling.domain.core.ReferenceType <em>Reference Type</em>}' enum.

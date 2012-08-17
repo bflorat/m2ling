@@ -1,7 +1,6 @@
 package org.m2ling.service.principles;
 
 import java.io.IOException;
-import java.util.List;
 import java.util.Properties;
 
 import org.m2ling.common.configuration.Conf;
@@ -68,17 +67,19 @@ public class SearchViewPointFixture extends M2lingFixture {
 			String statusLiterals) {
 		reset();
 		try {
-			List<String> tagsList = null;
+			ViewPointDTO.Builder builder = new ViewPointDTO.Builder(UUT.nul(id), UUT.nul(name)).description(
+					UUT.nul(description)).comment(UUT.nul(comment));
 			if (!tags.equals("null")) {
-				tagsList = Utils.stringListFromString(tags);
+				for (String tag : Utils.stringListFromString(tags)) {
+					builder.addTag(tag);
+				}
 			}
-			List<String> status = null;
-			if (!"null".equals(status)) {
-				status = Utils.stringListFromString(statusLiterals);
+			if (!"null".equals(statusLiterals)) {
+				for (String statusLiteral : Utils.stringListFromString(statusLiterals)) {
+					builder.addStatusLiteral(statusLiteral);
+				}
 			}
-			ViewPointDTO dto = new ViewPointDTO.Builder(UUT.nul(id), UUT.nul(name)).description(UUT.nul(description))
-					.tags(tagsList).comment(UUT.nul(comment)).statusLiterals(status).build();
-			service.checkDTO(dto, AccessType.CREATE);
+			service.checkDTO(builder.build(), AccessType.CREATE);
 			return "PASS";
 		} catch (FunctionalException ex) {
 			return "FAIL";

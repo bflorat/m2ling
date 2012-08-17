@@ -65,6 +65,7 @@ public class ActivityItemProvider
 
 			addTagsPropertyDescriptor(object);
 			addDescriptionPropertyDescriptor(object);
+			addStatusPropertyDescriptor(object);
 			addAccountablesPropertyDescriptor(object);
 			addResponsiblesPropertyDescriptor(object);
 		}
@@ -107,6 +108,28 @@ public class ActivityItemProvider
 				 getString("_UI_HasDescription_description_feature"),
 				 getString("_UI_PropertyDescriptor_description", "_UI_HasDescription_description_feature", "_UI_HasDescription_type"),
 				 CorePackage.Literals.HAS_DESCRIPTION__DESCRIPTION,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				 null,
+				 null));
+	}
+
+	/**
+	 * This adds a property descriptor for the Status feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addStatusPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_HasStatus_status_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_HasStatus_status_feature", "_UI_HasStatus_type"),
+				 CorePackage.Literals.HAS_STATUS__STATUS,
 				 true,
 				 false,
 				 false,
@@ -198,6 +221,7 @@ public class ActivityItemProvider
 		switch (notification.getFeatureID(Activity.class)) {
 			case CorePackage.ACTIVITY__TAGS:
 			case CorePackage.ACTIVITY__DESCRIPTION:
+			case CorePackage.ACTIVITY__STATUS:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
 		}

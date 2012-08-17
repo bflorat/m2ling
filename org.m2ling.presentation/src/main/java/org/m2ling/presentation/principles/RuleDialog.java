@@ -17,7 +17,6 @@ import org.m2ling.common.dto.core.RuleDTO;
 import org.m2ling.common.dto.core.ViewPointDTO;
 import org.m2ling.common.exceptions.FunctionalException;
 import org.m2ling.common.utils.Utils;
-import org.m2ling.presentation.events.ObservationManager;
 import org.m2ling.presentation.i18n.Msg;
 import org.m2ling.presentation.principles.model.RuleBean;
 import org.m2ling.presentation.principles.model.ViewPointBean;
@@ -39,7 +38,6 @@ import com.vaadin.ui.DefaultFieldFactory;
 import com.vaadin.ui.Field;
 import com.vaadin.ui.Form;
 import com.vaadin.ui.Panel;
-import com.vaadin.ui.Select;
 import com.vaadin.ui.TextArea;
 import com.vaadin.ui.VerticalLayout;
 import com.vaadin.ui.Window;
@@ -53,7 +51,6 @@ public class RuleDialog extends Window {
 	private boolean newRule = true;
 	private RuleBean bean;
 	private Logger logger;
-	private ObservationManager obs;
 	private DTOConverter.ToDTO toDTO;
 	private DTOConverter.FromDTO fromDTO;
 	private RuleService ruleService;
@@ -68,21 +65,18 @@ public class RuleDialog extends Window {
 	 */
 	@Inject
 	public RuleDialog(Logger logger, @Assisted @Nullable RuleBean ruleBean, RuleService ruleService,
-			ViewPointService vpService, ObservationManager obs, DTOConverter.ToDTO toDTO, DTOConverter.FromDTO fromDTO,
-			Msg msg) {
+			ViewPointService vpService, DTOConverter.ToDTO toDTO, DTOConverter.FromDTO fromDTO, Msg msg) {
 		super(Strings.isNullOrEmpty(ruleBean.getId()) ? msg.get("pr.18") : msg.get("pr.17") + ruleBean.getName());
 		this.bean = ruleBean;
 		this.ruleService = ruleService;
 		this.vpService = vpService;
 		this.logger = logger;
-		this.obs = obs;
 		this.toDTO = toDTO;
 		this.fromDTO = fromDTO;
 		this.msg = msg;
 		newRule = Strings.isNullOrEmpty(ruleBean.getId());
 		if (newRule) {
 			bean.setId(UUID.randomUUID().toString());
-			bean.setPriority(msg.get("rule_priority." + RulePriority.MEDIUM.name()));
 		}
 		this.bean = ruleBean;
 		setWidth("650px");
@@ -206,14 +200,10 @@ public class RuleDialog extends Window {
 				status.setNullSelectionAllowed(false);
 				return status;
 			} else if ("priority".equals(propertyId)) {
-				Select priority = new Select();
-				priority.setNullSelectionAllowed(false);
-				for (RulePriority pr : RulePriority.values()) {
-					priority.addItem(msg.get("rule_priority." + pr.name()));
-				}
+				Field priority = super.createField(item, propertyId, uiContext);
+				priority.setRequired(false);
 				priority.setDescription(msg.get("pr.21"));
 				priority.setCaption(msg.get("gal.8"));
-				priority.setRequired(true);
 				return priority;
 			} else {
 				return super.createField(item, propertyId, uiContext);
