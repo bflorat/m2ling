@@ -38,10 +38,10 @@ public class ComponentTypeDTO implements Comparable<ComponentTypeDTO> {
 		private String description = "";
 		private String comment = "";
 		private List<ReferenceDTO> references = new ArrayList<ReferenceDTO>(1);
-		private String boundTypeID;
-		private int iFactor;
-		private boolean reifiable;
-		private List<String> enumeration;
+		private String boundTypeID = "";
+		private int iFactor = 0;
+		private boolean reifiable = false;
+		private List<String> enumeration = new ArrayList<String>(1);
 
 		public Builder(String vpID, String id, String name) {
 			this.id = id;

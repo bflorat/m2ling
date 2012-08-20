@@ -109,10 +109,16 @@ public class ComponentTypeServiceImpl extends ServiceImpl implements ComponentTy
 		}
 		if (access == AccessType.CREATE || access == AccessType.UPDATE) {
 			// Description
+			if (dto.getDescription() == null) {
+				throw new FunctionalException(FunctionalException.Code.NULL_ARGUMENT, null, "(description)");
+			}
 			if (dto.getDescription().length() > Consts.MAX_TEXT_SIZE) {
 				throw new FunctionalException(FunctionalException.Code.SIZE_EXCEEDED, null, "(description)");
 			}
 			// Comment
+			if (dto.getComment() == null) {
+				throw new FunctionalException(FunctionalException.Code.NULL_ARGUMENT, null, "(comment)");
+			}
 			if (dto.getComment().length() > Consts.MAX_TEXT_SIZE) {
 				throw new FunctionalException(FunctionalException.Code.SIZE_EXCEEDED, null, "(comment)");
 			}
@@ -128,15 +134,18 @@ public class ComponentTypeServiceImpl extends ServiceImpl implements ComponentTy
 					throw new FunctionalException(FunctionalException.Code.INVALID_REFERENCE_TYPE, null, dto.toString());
 				}
 			}
-			// Instantiation factor
-			if (dto.getInstantiationFactor() < 0) {
-				throw new FunctionalException(FunctionalException.Code.ILLEGAL_ARGUMENT, null, "instantiationFactor="
+			// Instantiation factor, -1 or any positive value is valid
+			if (dto.getInstantiationFactor() != -1 && dto.getInstantiationFactor() < 0) {
+				throw new FunctionalException(FunctionalException.Code.WRONG_IF, null, "instantiationFactor="
 						+ dto.getInstantiationFactor());
 			}
 			if (dto.getInstantiationFactor() > 0 && !dto.isReifiable()) {
 				throw new FunctionalException(FunctionalException.Code.NON_REIFIABLE_IFACTOR_SET, null, dto.toString());
 			}
 			// Bound type
+			if (dto.getBoundTypeID() == null) {
+				throw new FunctionalException(FunctionalException.Code.NULL_ARGUMENT, null, "(boundTypeID)");
+			}
 			if (!Strings.isNullOrEmpty(dto.getBoundTypeID())) {
 				// Check if the bound type exists
 				ComponentType boundCT = (ComponentType) util.getItemByTypeAndID(Type.COMPONENT_TYPE, dto.getBoundTypeID());
@@ -146,7 +155,7 @@ public class ComponentTypeServiceImpl extends ServiceImpl implements ComponentTy
 				}
 				// Check that the bound type is from another VP
 				ViewPoint vpBoundType = (ViewPoint) boundCT.eContainer();
-				if (!vpBoundType.equals(vp)) {
+				if (vpBoundType.equals(vp)) {
 					throw new FunctionalException(FunctionalException.Code.LOCAL_BINDING, null, null);
 				}
 				// Check if the bound type is not bounded itself

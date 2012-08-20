@@ -17,6 +17,7 @@ import org.m2ling.domain.core.CustomProperty;
 import org.m2ling.domain.core.HasConstraints;
 import org.m2ling.domain.core.HasCustomProperties;
 import org.m2ling.domain.core.HasDescription;
+import org.m2ling.domain.core.HasNameAndID;
 import org.m2ling.domain.core.HasReferences;
 import org.m2ling.domain.core.HasStatus;
 import org.m2ling.domain.core.HasTags;
@@ -137,7 +138,7 @@ public class ReferenceImpl extends HasCommentImpl implements Reference {
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<HasReferences> targets;
+	protected EList<HasNameAndID> targets;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -276,9 +277,9 @@ public class ReferenceImpl extends HasCommentImpl implements Reference {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<HasReferences> getTargets() {
+	public EList<HasNameAndID> getTargets() {
 		if (targets == null) {
-			targets = new EObjectResolvingEList<HasReferences>(HasReferences.class, this, CorePackage.REFERENCE__TARGETS);
+			targets = new EObjectResolvingEList<HasNameAndID>(HasNameAndID.class, this, CorePackage.REFERENCE__TARGETS);
 		}
 		return targets;
 	}
@@ -335,7 +336,7 @@ public class ReferenceImpl extends HasCommentImpl implements Reference {
 				return;
 			case CorePackage.REFERENCE__TARGETS:
 				getTargets().clear();
-				getTargets().addAll((Collection<? extends HasReferences>)newValue);
+				getTargets().addAll((Collection<? extends HasNameAndID>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);

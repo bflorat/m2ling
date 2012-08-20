@@ -56,7 +56,7 @@
     <componentTypes id="_c1vGwJq4EeGVMag01qc4bw" name="Application" description="An application is a technologically and project coherent set of functionalities."/>
   </viewPoints>
   <viewPoints comment="" description="Technology components and links between them" id="_ZrEkoJxEEeGi7NYPtEuJdA" name="Technical Architecture">
-    <componentTypes id="_kHJh8ZxEEeGi7NYPtEuJdA" name="ApplicationServer" comment="" description="Runs services (SOAP,RMI,REST...) or execute dynamic Web pages"/>
+    <componentTypes id="_kHJh8ZxEEeGi7NYPtEuJdA" name="ApplicationServer" comment="" description="Runs services (SOAP,RMI,REST...) or execute dynamic Web pages" instantiationFactor="-1" reifiable="true"/>
     <componentTypes id="_wf5AQZxEEeGi7NYPtEuJdA" name="OS" description="Operating system">
       <references type="RUNS" targets="_kHJh8ZxEEeGi7NYPtEuJdA _wf5AQZxEEeGi7NYPtEuJdA _LyWEoZ6REeGyndJ1yNTLVw"/>
     </componentTypes>
@@ -147,7 +147,7 @@
     <components id="_qUgd4p56EeGAFeVyyYKoXg" name="BikesOnline" comment="" type="_c1vGwJq4EeGVMag01qc4bw"/>
   </views>
   <views comment="" description="Describes technical components available in Bikes IS" id="_QXV2oZ6NEeGeZJhcjVrcWg" name="Technical catalog" viewPoint="_ZrEkoJxEEeGi7NYPtEuJdA">
-    <componentsGroups id="_BYD3EJ6REeGyndJ1yNTLVw" name="Service containers" comment="" components="_CIvLcp6kEeGbbcMFSNIrnA"/>
+    <componentsGroups id="_BYD3EJ6REeGyndJ1yNTLVw" name="Service containers" comment="" components="_CIvLcp6kEeGbbcMFSNIrnA _C3DFRrfgfrfrnA"/>
     <componentsGroups id="_JzpRYJ6TEeGyndJ1yNTLVw" name="RDBMS" description="" components="_BIxBYp6SEeGyndJ1yNTLVw _G9AtYp6REeG"/>
     <componentsGroups id="_cjliUJ6TEeGyndJ1yNTLVw" name="Directories" components="_G9AtYp6REeGyndJ1yNTLVw"/>
     <componentsGroups id="_0GnPIJ6QEeGyndJ1yNTLVw" name="Web containers" comment="" components="_BM4XQp6QEeGyndJ1yNTLVw"/>
@@ -163,6 +163,7 @@
     <components id="_G9AtYp6REeG" name="PostgreSQL" comment="" type="_LyWEoZ6REeGyndJ1yNTLVw"/>
     <components id="_BIxBYp6SEeGyndJ1yNTLVw" name="MySQL" description="" type="_LyWEoZ6REeGyndJ1yNTLVw"/>
     <components id="_CIvLcp6kEeGbbcMFSNIrnA" name="JBoss5" comment="" description="" type="_kHJh8ZxEEeGi7NYPtEuJdA"/>
+    <components id="_C3DFRrfgfrfrnA" name="JBoss6" comment="" description="" type="_kHJh8ZxEEeGi7NYPtEuJdA"/>
   </views>
   <views comment="" description="Contains all Sales applications and there modules" id="_QMVcEZ8zEeGYS-4UJ-FpAA" name="Sales applicative view" viewPoint="_FtwQsJ6sEeGsQqqxr3JCNw">
     <components id="_O1ehYp80EeGYS-4UJ-FpAA" name="BikesOnline" comment="" description="The main eCommerce Bikes Inc. application." type="_UI9CAZqmEeGbI4NH3iicSge">

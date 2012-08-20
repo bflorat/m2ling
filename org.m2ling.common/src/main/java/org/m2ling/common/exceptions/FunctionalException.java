@@ -62,6 +62,7 @@ public class FunctionalException extends Exception {
 		LOCAL_BINDING,
 		DELTA_BINDING_REIFIABLE,
 		DELTA_BINDING_IF,
+		WRONG_IF
 	}
 
 	/**

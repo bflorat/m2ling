@@ -21,9 +21,9 @@ public class ComponentTypeBean implements Serializable {
 	private String tags = "";
 	private String description = "";
 	private String comment = "";
-	private int iFactor = 0;
+	private String iFactor = "0";
 	private String boundTypeID = "";
-	private String enumeration = "";
+	private List<String> enumeration;
 	private boolean reifiable = false;
 	private List<ReferenceBean> references;
 	/** GUI only item used to represent the drop button **/
@@ -47,7 +47,7 @@ public class ComponentTypeBean implements Serializable {
 	public int hashCode() {
 		return id.hashCode();
 	}
-	
+
 	/**
 	 * @return the drop
 	 */
@@ -81,7 +81,7 @@ public class ComponentTypeBean implements Serializable {
 	/**
 	 * @return the vpID
 	 */
-	public String getVpID() {
+	public String getViewPointId() {
 		return vpID;
 	}
 
@@ -89,7 +89,7 @@ public class ComponentTypeBean implements Serializable {
 	 * @param vpID
 	 *           the vpID to set
 	 */
-	public void setVpID(String vpID) {
+	public void setViewPointId(String vpID) {
 		this.vpID = vpID;
 	}
 
@@ -111,22 +111,22 @@ public class ComponentTypeBean implements Serializable {
 	/**
 	 * @return the iFactor
 	 */
-	public int getiFactor() {
+	public String getInstantiationFactor() {
 		return iFactor;
 	}
 
 	/**
 	 * @param iFactor
-	 *           the iFactor to set
+	 *           the iFactor to set. "n" or "*" means "any"
 	 */
-	public void setiFactor(int iFactor) {
+	public void setInstantiationFactor(String iFactor) {
 		this.iFactor = iFactor;
 	}
 
 	/**
 	 * @return the enumeration
 	 */
-	public String getEnumeration() {
+	public List<String> getEnumeration() {
 		return enumeration;
 	}
 
@@ -134,7 +134,7 @@ public class ComponentTypeBean implements Serializable {
 	 * @param enumeration
 	 *           the enumeration to set
 	 */
-	public void setEnumeration(String enumeration) {
+	public void setEnumeration(List<String> enumeration) {
 		this.enumeration = enumeration;
 	}
 

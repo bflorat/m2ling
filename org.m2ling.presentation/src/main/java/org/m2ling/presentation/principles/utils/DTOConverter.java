@@ -4,7 +4,9 @@
 package org.m2ling.presentation.principles.utils;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.m2ling.common.dto.core.ComponentTypeDTO;
@@ -79,13 +81,17 @@ public class DTOConverter {
 		 * @return a CT DTO from provided ct bean
 		 */
 		public ComponentTypeDTO getComponentTypeDTO(ComponentTypeBean bean) {
-			ComponentTypeDTO.Builder builder = new ComponentTypeDTO.Builder(bean.getVpID(), bean.getId(), bean.getName())
-					.description(bean.getDescription()).comment(bean.getComment()).boundTypeID(bean.getBoundTypeID())
-					.instantiationFactor(bean.getiFactor()).reifiable(bean.isReifiable());
+			int ifactor = 0;
+			if ("*".equals(bean.getInstantiationFactor())) {
+				ifactor = -1;
+			}
+			ComponentTypeDTO.Builder builder = new ComponentTypeDTO.Builder(bean.getViewPointId(), bean.getId(),
+					bean.getName()).description(bean.getDescription()).comment(bean.getComment())
+					.boundTypeID(bean.getBoundTypeID()).instantiationFactor(ifactor).reifiable(bean.isReifiable());
 			for (String tag : Utils.stringListFromString(bean.getTags())) {
 				builder.addTag(tag);
 			}
-			for (String componentID : Utils.stringListFromString(bean.getEnumeration())) {
+			for (String componentID : bean.getEnumeration()) {
 				builder.addEnumerationID(componentID);
 			}
 			for (ReferenceBean ref : bean.getReferences()) {
@@ -181,6 +187,55 @@ public class DTOConverter {
 				out.put(event.getDate(), event.getStatusLiteral());
 			}
 			return out;
+		}
+
+		/**
+		 * Return a reference bean from provided reference DTO
+		 * 
+		 * @param dto
+		 *           the reference DTO
+		 * @return a reference bean from provided reference DTO
+		 */
+		public ReferenceBean getReferenceBean(ReferenceDTO dto) {
+			ReferenceBean bean = new ReferenceBean();
+			bean.setType(dto.getType());
+			bean.setTargets(new ArrayList<String>(dto.getTargets()));
+			return bean;
+		}
+
+		/**
+		 * Return a new CT instance given a DTO or an already existing instance of any.
+		 * 
+		 * @param dto
+		 *           the dto
+		 * @return a new CT instance
+		 */
+		public ComponentTypeBean getComponentTypeBean(ComponentTypeDTO dto) {
+			ComponentTypeBean bean = new ComponentTypeBean();
+			bean.setId(dto.getId());
+			bean.setName((dto.getName() != null) ? dto.getName() : "");
+			bean.setComment((dto.getComment() != null) ? dto.getComment() : "");
+			bean.setDescription((dto.getDescription() != null) ? dto.getDescription() : "");
+			bean.setDescription((dto.getDescription() != null) ? dto.getDescription() : "");
+			String tags = Utils.stringListAsString(dto.getTags());
+			bean.setTags(tags);
+			bean.setBoundTypeID(dto.getBoundTypeID());
+			bean.setEnumeration(dto.getEnumeration());
+			String ifactor = "0";
+			if (dto.getInstantiationFactor() == -1) {
+				ifactor = "*";
+			} else {
+				ifactor = Integer.toString(dto.getInstantiationFactor());
+			}
+			bean.setInstantiationFactor(ifactor);
+			List<ReferenceBean> refs = new ArrayList<ReferenceBean>();
+			for (ReferenceDTO refDTO : dto.getReferences()) {
+				refs.add(getReferenceBean(refDTO));
+			}
+			bean.setReferences(refs);
+			bean.setReifiable(dto.isReifiable());
+			bean.setViewPointId(dto.getViewPointId());
+			return bean;
 		}
 	}
 }

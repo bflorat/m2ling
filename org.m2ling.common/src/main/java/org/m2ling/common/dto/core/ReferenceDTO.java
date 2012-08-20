@@ -5,6 +5,7 @@
  */
 package org.m2ling.common.dto.core;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.m2ling.common.utils.Utils;
@@ -23,7 +24,7 @@ public class ReferenceDTO {
 	private ReferenceDTO(Builder builder) {
 		super();
 		type = builder.type;
-		targets = builder.targets;
+		targets = ImmutableList.copyOf(builder.targets);
 	}
 
 	public String getType() {
@@ -40,7 +41,7 @@ public class ReferenceDTO {
 
 		public Builder(String type) {
 			this.type = type;
-			targets = ImmutableList.of();
+			targets = new ArrayList<String>(1);
 		}
 
 		public Builder addTarget(String id) {

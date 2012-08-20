@@ -61,7 +61,7 @@ public interface Reference extends HasComment, HasConstraints, HasCustomProperti
 
 	/**
 	 * Returns the value of the '<em><b>Targets</b></em>' reference list.
-	 * The list contents are of type {@link org.m2ling.domain.core.HasReferences}.
+	 * The list contents are of type {@link org.m2ling.domain.core.HasNameAndID}.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Targets</em>' reference list isn't clear,
@@ -73,6 +73,6 @@ public interface Reference extends HasComment, HasConstraints, HasCustomProperti
 	 * @model
 	 * @generated
 	 */
-	EList<HasReferences> getTargets();
+	EList<HasNameAndID> getTargets();
 
 } // Reference

@@ -12,248 +12,281 @@
 		created in the studio.</p>
 	<h2>Nominal rules</h2>
 	<p>A Component Type is uniquely identified by its id. Its name must
-		be unique.</p>
+		be unique.
 	<div class="example">
-		<p>A new CT created with
+		A new CT created with<span concordion:set="#justCheck=false" />
 		<ul>
 			<li>vp id=<b concordion:set="#vpID">ertyuyreklbjnb,n</b></li>
-			<li>id=<b concordion:set="#id">id_ct1</b></li>
-			<li>name=<b concordion:set="#name">ESB Connector</b></li>
-			<li>description=<b concordion:set="#desc">Adapt the bus and a given technology</b></li>
+			<li>id=<b concordion:set="#id">bis__w-CMZoWEeG71vmJ5CR-iA</b></li>
+			<li>name=<b concordion:set="#name">ServicesContainer2</b></li>
+			<li>description=<b concordion:set="#desc">Runs services (RMI, REST, SOAP...).</b></li>
 			<li>comment=<b concordion:set="#comment">Available components listed in Technical catalog</b></li>
-			<li>tags=<b concordion:set="#tags">logical,esb</b></li>
-			<li>instantiation factor=<b concordion:set="#if">n</b></li>
-			<li>bound type id=<b concordion:set="#boundTypeID">id_vp2</b></li>
-			<li>references ids=<b concordion:set="#references">id_comp21,id_comp22</b></li>
+			<li>tags=<b concordion:set="#tags">logical,SA</b></li>
+			<li>instantiation factor=<b concordion:set="#ifactor">*</b></li>
+			<li>bound type id=<b concordion:set="#boundTypeID">_kHJh8ZxEEeGi7NYPtEuJdA</b></li>
+			<li>references ids=<b concordion:set="#references">RUNS:_1y2zQZoWEeG71vmJ5CR-iA;DEPENDS_ON:_DAPYIZqnEeGbI4NH3iicSg,_ha8mEZqyEeGVMag01qc4bw</b></li>
 			<li>reifiable=<b concordion:set="#reifiable">true</b></li>
-			<li>enumerations=<b concordion:set="#references">id_comp1ct2,id_comp2ct2</b></li>
+			<li>enumeration=<b concordion:set="#enumeration">_CIvLcp6kEeGbbcMFSNIrnA,_C3DFRrfgfrfrnA</b></li>
 		</ul>
 		should have following characteristics : <b
-			concordion:assertEquals="createCT(#vpID,#id,#name,#desc,#comment,#tags,#if,#boundTypeID,#references,#enumeration,#reifiable)">boundTypeID=id_vp2 comment=comment1
-			description=description1 drop= id=id_vp1 instantiationFactor=1 name=ct11 references=id_comp21,id_comp22 tags=tag1,tag2</b>.
+			concordion:assertEquals="createAndGetCT(#justCheck,#vpID,#id,#name,#desc,#comment,#tags,#ifactor,#boundTypeID,#references,#enumeration,#reifiable)">
+			boundTypeID=_kHJh8ZxEEeGi7NYPtEuJdA 
+			comment=Available components listed in Technical catalog 
+			description=Runs services (RMI, REST, SOAP...). 
+			drop= 
+			enumeration=[_CIvLcp6kEeGbbcMFSNIrnA, _C3DFRrfgfrfrnA] 
+			id=bis__w-CMZoWEeG71vmJ5CR-iA 
+			iFactor=* name=ServicesContainer2 
+			references=[targets=[_1y2zQZoWEeG71vmJ5CR-iA] type=RUNS , targets=[_DAPYIZqnEeGbI4NH3iicSg, _ha8mEZqyEeGVMag01qc4bw] type=DEPENDS_ON ] 
+			reifiable=true 
+			tags=logical,SA 
+			vpID=ertyuyreklbjnb,n </b>
 	</div>
 	</p>
 
 	<h2>Bindings and instantiation factor</h2>
 	<p>Instantiation factor enforces the number of possibles component
 		instances for a component of a given type. A Component Type can't be
-		reified if its instantiation factor is zero.</p>
-	</p>
-	<li>A enumeration can contain either components or component
-		groups.</li>7
-	<li>All enumeration item (component or group) must exist.</li>
-	<li>All enumeration items must share the same component type.</li>
-	<li>If enumeration maps a component-type group, values are those
-		of its components.</li>
-	<li>If a bound type is given but none enumeration is provided, the
+		reified if its instantiation factor is zero. From the GUI point of
+		view, "any" is represented by the character "*". From the DTO, it is
+		the integer '-1'.</p>
+
+	<p>A enumeration can contain either components or component groups.</p>
+	<p>All enumeration item (component or group) must exist.</p>
+	<p>All enumeration items must share the same component type.</p>
+	<p>If enumeration maps a component-type group, values are those of
+		its components.</p>
+	<p>The enumeration cannot contain an item more that once.</p>
+	<p>If a bound type is given but none enumeration is provided, the
 		possible values are all component of given bound type in every view of
-		the bound VP.</li>
-	<li>An enumeration can't be provided without associated binding
-		type</li>
+		the bound VP.</p>
+	<p>An enumeration can't be provided without associated binding type</p>
 	<p>A Component Type can't bind another component type itself
-		bounded.</p>
+		bounded (no cascading bindings).</p>
 	<p>A Component Type can't be bound to a component type of the same
-		VP.</p>
-	
+		VP (no local bindings).</p>
+	<p>If one of following attribute is not provided, a binded CT get
+		them from the bound CT : name, tags ,comment, description</p>
 	<h2>Changes</h2>
 	<p>Any change of the instantiation factor must be be compatible
 		with the number of instances of component of this type and of
 		component bound to the type.</p>
-	<p>Bound type following attribute can be changed : name, tags ,
+	<p>Bound type following attributes can be changed : name, tags ,
 		comment, description</p>
-	<p>Bound type following attribute can't be changed : instantiation factor, reifiable flag</p>
-
-
-<TODO> : references
+	<p>Bound type following attributes *can't* be changed :
+		instantiation factor, reifiable flag</p>
+	<p>A reference can't be dropped while at least one component of the
+		component type use it against another component.</p>
 
 	<h3>Controls</h3>
 	<ul>
-		<li>A null input should make service call <b
+	<li>
+		A null input should make service call <b
 			concordion:assertEquals="getCheckNullDTO()">FAIL</b>
-		</li>
-		<li>ID and name can't be null, void or void once trimmed</li>
-		<li>ID size can't be larger than 40 characters</li>
-		<li>Name can't be larger that 200 characters</li>
-		<li>description and comment size can't be larger that 2000
-			characters</li>
-		<li>See Tags specifications for tags limits</li>
-		<li>Following service inputs should make the service :
-			<table
-				concordion:execute="#result=getCheckDTOVerification(#vpID,#id,#name,#description,#comment,#tags,#statusLiterals)">
-				<tr>
-					<th>Tested</th>
-					<th concordion:set="#id">ID</th>
-					<th concordion:set="#name">Name</th>
-					<th concordion:set="#description">Name</th>
-					<th concordion:set="#comment">Name</th>
-					<th concordion:set="#tags">Name</th>
-					<th concordion:set="#statusLiterals">Name</th>
-					<th concordion:assertEquals="#result">should :</th>
-				</tr>
-				<!-- Nominal -->
-				<tr>
-					<td>Nominal creation</td>
-					<td>id_vp2</td>
-					<td>vp2</td>
-					<td>description2</td>
-					<td>comment2</td>
-					<td>tags1,tag2</td>
-					<td>VALIDATED,REFUSED</td>
-					<td>PASS</td>
-				</tr>
-				<!-- Existing CT -->
-				<tr>
-					<td>Id of a existing CT</td>
-					<td>id_comp_type_1</td>
-					<td>a name</td>
-					<td>description2</td>
-					<td>comment2</td>
-					<td>tags1,tag2</td>
-					<td>status1,status1</td>
-					<td>FAIL</td>
-				</tr>
-				<tr>
-					<td>Name of a existing CT</td>
-					<td>id</td>
-					<td>comp_type_1</td>
-					<td>description2</td>
-					<td>comment2</td>
-					<td>tags1,tag2</td>
-					<td>status1,status1</td>
-					<td>FAIL</td>
-				</tr>
-				<!-- ID checks -->
-				<tr>
-					<td>null</td>
-					<td>vp2</td>
-					<td>description2</td>
-					<td>comment2</td>
-					<td>tags1,tag2</td>
-					<td>VALIDATED,REFUSED</td>
-					<td>FAIL</td>
-				</tr>
-				<tr>
-					<td></td>
-					<td>vp2</td>
-					<td>description2</td>
-					<td>comment2</td>
-					<td>tags1,tag2</td>
-					<td>VALIDATED,REFUSED</td>
-					<td>FAIL</td>
-				</tr>
-				<tr>
-					<td>space</td>
-					<td>vp2</td>
-					<td>description2</td>
-					<td>comment2</td>
-					<td>tags1,tag2</td>
-					<td>VALIDATED,REFUSED</td>
-					<td>FAIL</td>
-				</tr>
-				<tr>
-					<td>dkjshdhsqkjdhqskjhdkjqshdkjqshkjdhqskjhdkjqskdjhqskjdhqskhdkjqshdkjhqskjdhqskjhdkjqshdkjqshkdjqshkjdhqskjhdkjqshdkjhqskjdhqskhdk</td>
-					<td>vp2</td>
-					<td>description2</td>
-					<td>comment2</td>
-					<td>tags1,tag2</td>
-					<td>VALIDATED,REFUSED</td>
-					<td>FAIL</td>
-				</tr>
-				<!-- name check -->
-				<tr>
-					<td>id_vp2</td>
-					<td>null</td>
-					<td>description2</td>
-					<td>comment2</td>
-					<td>tags1,tag2</td>
-					<td>VALIDATED,REFUSED</td>
-					<td>FAIL</td>
-				</tr>
-				<tr>
-					<td>id_vp2</td>
-					<td></td>
-					<td>description2</td>
-					<td>comment2</td>
-					<td>tags1,tag2</td>
-					<td>VALIDATED,REFUSED</td>
-					<td>FAIL</td>
-				</tr>
-				<tr>
-					<td>id_vp2</td>
-					<td>space</td>
-					<td>description2</td>
-					<td>comment2</td>
-					<td>tags1,tag2</td>
-					<td>VALIDATED,REFUSED</td>
-					<td>FAIL</td>
-				</tr>
-				<tr>
-					<td>id_vp2</td>
-					<td>dkjshdhddsldljslkdl fdsf fsfdsf ssf
-						skjdlsjdkjslkdjskljdlsjdlj lsd jslk dkjs lkdjskldj sjd
-						sjdlksqkjdhqskjhdkjqshdkjqshkjdhqskjhdkjqskdjhqskjdhqskhdkjqshdkjhqskjdhqskjhdkjqshdkjqshkdjqsdsds
-						dsdsd shkjdhqskjhdkjqs</td>
-					<td>description2</td>
-					<td>comment2</td>
-					<td>tags1,tag2</td>
-					<td>VALIDATED,REFUSED</td>
-					<td>FAIL</td>
-				</tr>
-				<!-- Status literal -->
-				<tr>
-					<td>id_vp2</td>
-					<td>vp2</td>
-					<td>description2</td>
-					<td>comment2</td>
-					<td>tags1,tag2</td>
-					<td>dkjshdhddsldljslkdl fdsf fsfdsf ssf
-						skjdlsjdkjslkdjskljdlsjdlj lsd jslk dkjs lkdjskldj sjd
-						sjdlksqkjdhqskjhdkjqshdkjqshkjdhqskjhdkjqskdjhqskjdhqskhdkjqshdkjhqskjdhqskjhdkjqshdkjqshkdjqsdsds
-						dsdsd shkjdhqskjhdkjqs,foo</td>
-					<td>FAIL</td>
-				</tr>
-				<tr>
-					<td>id_vp2</td>
-					<td>vp2</td>
-					<td>description2</td>
-					<td>comment2</td>
-					<td>tags1,tag2</td>
-					<td>status1,status2</td>
-					<td>PASS</td>
-				</tr>
-				<!-- Dup status literal -->
-				<tr>
-					<td>id_vp2</td>
-					<td>vp2</td>
-					<td>description2</td>
-					<td>comment2</td>
-					<td>tags1,tag2</td>
-					<td>status1,status1</td>
-					<td>FAIL</td>
-				</tr>
-				<!-- Comment -->
-				<tr>
-					<td>id_vp2</td>
-					<td>vp2</td>
-					<td>description2</td>
-					<td></td>
-					<td>tags1,tag2</td>
-					<td>status1</td>
-					<td>PASS</td>
-				</tr>
-				<tr>
-					<td>id_vp2</td>
-					<td>vp2</td>
-					<td>description2</td>
-					<td>null</td>
-					<td>tags1,tag2</td>
-					<td>status1</td>
-					<td>FAIL</td>
-				</tr>
-
-			</table>
-		</li>
+	</li>
+	<li>ID and name can't be null, void or void once trimmed</li>
+	<li>ID size can't be larger than 40 characters</li>
+	<li>Name can't be larger that 200 characters</li>
+	<li>Description and comment size can't be larger that 2000
+		characters</li>
+	<li>See Tags specifications for tags limits</li>
 	</ul>
-	</div>
+		Following service inputs against <b concordion:set="#vpID">ertyuyreklbjnb,n</b>
+		viewpoint should make the service <span
+			concordion:set="#justCheck=true" /> :
+	<div class='example' >
+	<table
+		concordion:execute="#result=createAndGetCT(#justCheck,#vpID,#id,#name,#desc,
+				#comment,#tags,#ifactor,#boundTypeID,#references,#enumeration,#reifiable)">
+		<tr>
+			<th>Case</th>
+			<th concordion:set="#id">ID</th>
+			<th concordion:set="#name">Name</th>
+			<th concordion:set="#desc">Description</th>
+			<th concordion:set="#comment">Comment</th>
+			<th concordion:set="#tags">Tags</th>
+			<th concordion:set="#ifactor">IFactor</th>
+			<th concordion:set="#boundTypeID">BoundID</th>
+			<th concordion:set="#references">References</th>
+			<th concordion:set="#enumeration">Enumeration</th>
+			<th concordion:set="#reifiable">Reifiable</th>
+			<th concordion:assertEquals="#result">should :</th>
+		</tr>
+		<!-- Nominal -->
+		<tr>
+			<td>Nominal creation</td>
+			<td>bis__w-CMZoWEeG71vmJ5CR-iA</td>
+			<td>ServicesContainer2</td>
+			<td>Runs services (RMI, REST, SOAP...).</td>
+			<td>comment2</td>
+			<td>tags1,tag2</td>
+			<td>2</td>
+			<td>_kHJh8ZxEEeGi7NYPtEuJdA</td>
+			<td>RUNS:_1y2zQZoWEeG71vmJ5CR-iA;DEPENDS_ON:_DAPYIZqnEeGbI4NH3iicSg,_ha8mEZqyEeGVMag01qc4bw</td>
+			<td>_CIvLcp6kEeGbbcMFSNIrnA,_C3DFRrfgfrfrnA</td>
+			<td>false</td>
+			<td>PASS</td>
+		</tr>
+		<!-- Existing CT -->
+		<tr>
+			<td>Existing CT ID</td>
+			<td>__w-CMZoWEeG71vmJ5CR-iA</td>
+			<td>ServicesContainer2</td>
+			<td>Runs services (RMI, REST, SOAP...).</td>
+			<td>comment2</td>
+			<td>tags1,tag2</td>
+			<td>2</td>
+			<td>_kHJh8ZxEEeGi7NYPtEuJdA</td>
+			<td>RUNS:_1y2zQZoWEeG71vmJ5CR-iA;DEPENDS_ON:_DAPYIZqnEeGbI4NH3iicSg</td>
+			<td>_CIvLcp6kEeGbbcMFSNIrnA,_C3DFRrfgfrfrnA</td>
+			<td>false</td>
+			<td>FAIL with code DUPLICATES</td>
+		</tr>
+		<tr>
+			<td>Existing CT name</td>
+			<td>bisee__w-CMZoWEeCR-iA</td>
+			<td>ServicesContainer</td>
+			<td>Runs services (RMI, REST, SOAP...).</td>
+			<td>comment2</td>
+			<td>tags1,tag2</td>
+			<td>2</td>
+			<td>_kHJh8ZxEEeGi7NYPtEuJdA</td>
+			<td>RUNS:_1y2zQZoWEeG71vmJ5CR-iA;DEPENDS_ON:_DAPYIZqnEeGbI4NH3iicSg</td>
+			<td>_CIvLcp6kEeGbbcMFSNIrnA,_C3DFRrfgfrfrnA</td>
+			<td>false</td>
+			<td>FAIL with code DUPLICATE_NAME</td>
+		</tr>
+		<!-- ID checks -->
+		<tr>
+			<td>Null CT ID</td>
+			<td>null</td>
+			<td>ServicesContainer</td>
+			<td>Runs services (RMI, REST, SOAP...).</td>
+			<td>comment2</td>
+			<td>tags1,tag2</td>
+			<td>2</td>
+			<td>_kHJh8ZxEEeGi7NYPtEuJdA</td>
+			<td>RUNS:_1y2zQZoWEeG71vmJ5CR-iA;DEPENDS_ON:_DAPYIZqnEeGbI4NH3iicSg</td>
+			<td>_CIvLcp6kEeGbbcMFSNIrnA,_C3DFRrfgfrfrnA</td>
+			<td>false</td>
+			<td>FAIL with code NULL_ARGUMENT</td>
+		</tr>
+		<tr>
+			<td>Void CT ID</td>
+			<td></td>
+			<td>ServicesContainer</td>
+			<td>Runs services (RMI, REST, SOAP...).</td>
+			<td>comment2</td>
+			<td>tags1,tag2</td>
+			<td>2</td>
+			<td>_kHJh8ZxEEeGi7NYPtEuJdA</td>
+			<td>RUNS:_1y2zQZoWEeG71vmJ5CR-iA;DEPENDS_ON:_DAPYIZqnEeGbI4NH3iicSg</td>
+			<td>_CIvLcp6kEeGbbcMFSNIrnA,_C3DFRrfgfrfrnA</td>
+			<td>false</td>
+			<td>FAIL with code NULL_ARGUMENT</td>
+		</tr>
+		<tr>
+			<td>Void CT ID after trim</td>
+			<td>space</td>
+			<td>ServicesContainer</td>
+			<td>Runs services (RMI, REST, SOAP...).</td>
+			<td>comment2</td>
+			<td>tags1,tag2</td>
+			<td>2</td>
+			<td>_kHJh8ZxEEeGi7NYPtEuJdA</td>
+			<td>RUNS:_1y2zQZoWEeG71vmJ5CR-iA;DEPENDS_ON:_DAPYIZqnEeGbI4NH3iicSg</td>
+			<td>_CIvLcp6kEeGbbcMFSNIrnA,_C3DFRrfgfrfrnA</td>
+			<td>false</td>
+			<td>FAIL with code NULL_ARGUMENT</td>
+		</tr>
+		<tr>
+			<td>ID too long</td>
+			<td>dkjshdhsqkjdhqskjhdkjqshdkjqshkjdhqskjhdkjqskdjhqskjdhqskhdkjqshdkjhqskjdhqskjhdkjqshdkjqshkdjqshkjdhqskjhdkjqshdkjhqskjdhqskhdk</td>
+			<td>ServicesContainer</td>
+			<td>Runs services (RMI, REST, SOAP...).</td>
+			<td>comment2</td>
+			<td>tags1,tag2</td>
+			<td>2</td>
+			<td>_kHJh8ZxEEeGi7NYPtEuJdA</td>
+			<td>RUNS:_1y2zQZoWEeG71vmJ5CR-iA;DEPENDS_ON:_DAPYIZqnEeGbI4NH3iicSg</td>
+			<td>_CIvLcp6kEeGbbcMFSNIrnA,_C3DFRrfgfrfrnA</td>
+			<td>false</td>
+			<td>FAIL with code SIZE_EXCEEDED</td>
+		</tr>
+		<!-- name check -->
+		<tr>
+			<td>Null CT name</td>
+			<td>bis__w-CMZoWEeG71vmJ5CR-iA</td>
+			<td>null</td>
+			<td>Runs services (RMI, REST, SOAP...).</td>
+			<td>comment2</td>
+			<td>tags1,tag2</td>
+			<td>2</td>
+			<td>_kHJh8ZxEEeGi7NYPtEuJdA</td>
+			<td>RUNS:_1y2zQZoWEeG71vmJ5CR-iA;DEPENDS_ON:_DAPYIZqnEeGbI4NH3iicSg</td>
+			<td>_CIvLcp6kEeGbbcMFSNIrnA,_C3DFRrfgfrfrnA</td>
+			<td>false</td>
+			<td>FAIL with code NULL_ARGUMENT</td>
+		</tr>
+		<tr>
+			<td>Void CT name</td>
+			<td>bis__w-CMZoWEeG71vmJ5CR-iA</td>
+			<td></td>
+			<td>Runs services (RMI, REST, SOAP...).</td>
+			<td>comment2</td>
+			<td>tags1,tag2</td>
+			<td>2</td>
+			<td>_kHJh8ZxEEeGi7NYPtEuJdA</td>
+			<td>RUNS:_1y2zQZoWEeG71vmJ5CR-iA;DEPENDS_ON:_DAPYIZqnEeGbI4NH3iicSg</td>
+			<td>_CIvLcp6kEeGbbcMFSNIrnA,_C3DFRrfgfrfrnA</td>
+			<td>false</td>
+			<td>FAIL with code NULL_ARGUMENT</td>
+		</tr>
+		<tr>
+			<td>Void CT name after trim</td>
+			<td>bis__w-CMZoWEeG71vmJ5CR-iA</td>
+			<td>space</td>
+			<td>Runs services (RMI, REST, SOAP...).</td>
+			<td>comment2</td>
+			<td>tags1,tag2</td>
+			<td>2</td>
+			<td>_kHJh8ZxEEeGi7NYPtEuJdA</td>
+			<td>RUNS:_1y2zQZoWEeG71vmJ5CR-iA;DEPENDS_ON:_DAPYIZqnEeGbI4NH3iicSg</td>
+			<td>_CIvLcp6kEeGbbcMFSNIrnA,_C3DFRrfgfrfrnA</td>
+			<td>false</td>
+			<td>FAIL with code NULL_ARGUMENT</td>
+		</tr>
+		<tr>
+			<td>CT name too long</td>
+			<td>bis__w-CMZoWEeG71vmJ5CR-iA</td>
+			<td>dkjshdhsqkjdhqskjhdkjqshdkjqshkjdhqskjhdkjqskdjhqskjdhqskhdkjqshdkjhqskjdhqskjhdkjqshdkjqshkdjqshkjdhqskjhdkjqshdkjhqskjdhqskhdk</td>
+			<td>Runs services (RMI, REST, SOAP...).</td>
+			<td>comment2</td>
+			<td>tags1,tag2</td>
+			<td>2</td>
+			<td>_kHJh8ZxEEeGi7NYPtEuJdA</td>
+			<td>RUNS:_1y2zQZoWEeG71vmJ5CR-iA;DEPENDS_ON:_DAPYIZqnEeGbI4NH3iicSg</td>
+			<td>_CIvLcp6kEeGbbcMFSNIrnA,_C3DFRrfgfrfrnA</td>
+			<td>false</td>
+			<td>FAIL with code SIZE_EXCEEDED</td>
+		</tr>
+
+		<!-- Comment -->
+		<tr>
+			<td>Null comment</td>
+			<td>bis__w-CMZoWEeG71vmJ5CR-iA</td>
+			<td>ServicesContainer2</td>
+			<td>Runs services (RMI, REST, SOAP...).</td>
+			<td>null</td>
+			<td>tags1,tag2</td>
+			<td>2</td>
+			<td>_kHJh8ZxEEeGi7NYPtEuJdA</td>
+			<td>RUNS:_1y2zQZoWEeG71vmJ5CR-iA;DEPENDS_ON:_DAPYIZqnEeGbI4NH3iicSg</td>
+			<td>_CIvLcp6kEeGbbcMFSNIrnA,_C3DFRrfgfrfrnA</td>
+			<td>false</td>
+			<td>FAIL with code NULL_ARGUMENT</td>
+		</tr>
+	</table>
+	</div>	
 </body>
 </html>

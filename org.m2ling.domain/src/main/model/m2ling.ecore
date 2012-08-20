@@ -228,7 +228,7 @@
     <eClassifiers xsi:type="ecore:EClass" name="Reference" eSuperTypes="#//core/HasComment #//core/HasConstraints #//core/HasCustomProperties #//core/HasDescription #//core/HasStatus #//core/HasTags">
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" eType="#//core/ReferenceType"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="targets" upperBound="-1"
-          eType="#//core/HasReferences"/>
+          eType="#//core/HasNameAndID"/>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EEnum" name="LinkTemporality">
       <eLiterals name="SYNC"/>

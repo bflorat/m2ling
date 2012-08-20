@@ -10,6 +10,7 @@ import java.util.List;
 
 import org.eclipse.emf.common.util.EList;
 import org.m2ling.common.dto.core.ComponentTypeDTO;
+import org.m2ling.common.dto.core.ReferenceDTO;
 import org.m2ling.common.dto.core.RuleDTO;
 import org.m2ling.common.dto.core.StatusEventDTO;
 import org.m2ling.common.dto.core.ViewPointDTO;
@@ -17,6 +18,9 @@ import org.m2ling.domain.core.ArchitectureItem;
 import org.m2ling.domain.core.Component;
 import org.m2ling.domain.core.ComponentType;
 import org.m2ling.domain.core.CoreFactory;
+import org.m2ling.domain.core.HasNameAndID;
+import org.m2ling.domain.core.Reference;
+import org.m2ling.domain.core.ReferenceType;
 import org.m2ling.domain.core.Rule;
 import org.m2ling.domain.core.StatusEvent;
 import org.m2ling.domain.core.ViewPoint;
@@ -99,11 +103,25 @@ public class DTOConverter {
 			builder.comment(nonull(ct.getComment()));
 			builder.description(nonull(ct.getDescription()));
 			for (ArchitectureItem ai : ct.getEnumeration()) {
-				Component comp = (Component) ai;
-				builder.addEnumerationID(comp.getId());
+				builder.addEnumerationID(ai.getId());
 			}
 			builder.instantiationFactor(ct.getInstantiationFactor());
 			builder.reifiable(ct.isReifiable());
+			for (Reference ref : ct.getReferences()) {
+				ReferenceDTO refDTO = getReferenceDTO(ref);
+				builder.addReference(refDTO);
+			}
+			if (ct.getBoundType() != null) {
+				builder.boundTypeID(ct.getBoundType().getId());
+			}
+			return builder.build();
+		}
+
+		public ReferenceDTO getReferenceDTO(Reference ref) {
+			ReferenceDTO.Builder builder = new ReferenceDTO.Builder(ref.getType().name());
+			for (HasNameAndID target : ref.getTargets()) {
+				builder.addTarget(target.getId());
+			}
 			return builder.build();
 		}
 
@@ -212,8 +230,29 @@ public class DTOConverter {
 			ct.setInstantiationFactor(dto.getInstantiationFactor());
 			ct.setReifiable(dto.isReifiable());
 			for (String id : dto.getEnumeration()) {
-				Component comp = (Component) util.getComponentTypeByID(id);
+				ArchitectureItem comp = util.getComponentByID(id);
+				if (comp == null) {
+					// if comp is null, should be because it is actually a comp group
+					comp = util.getComponentGroupByID(id);
+				}
 				ct.getEnumeration().add(comp);
+			}
+			for (ReferenceDTO refDTO : dto.getReferences()) {
+				Reference reference = CoreFactory.eINSTANCE.createReference();
+				reference.setType(ReferenceType.get(refDTO.getType()));
+				EList<HasNameAndID> targets = reference.getTargets();
+				for (String target : refDTO.getTargets()) {
+					// Try component target
+					Component comp = util.getComponentByID(target);
+					if (comp == null) {
+						// OK, try component type
+						ComponentType compType = util.getComponentTypeByID(target);
+						targets.add(compType);
+					} else {
+						targets.add(comp);
+					}
+				}
+				ct.getReferences().add(reference);
 			}
 			return ct;
 		}
