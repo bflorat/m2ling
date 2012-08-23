@@ -95,17 +95,11 @@ public class ViewPointServiceImpl extends ServiceImpl implements ViewPointServic
 				throw new FunctionalException(FunctionalException.Code.DUPLICATE_STATUS_LITERAL, null, null);
 			}
 			// Description
-			if (dto.getDescription() == null) {
-				throw new FunctionalException(FunctionalException.Code.NULL_ARGUMENT, null, "(description)");
-			}
-			if (dto.getDescription().length() > Consts.MAX_TEXT_SIZE) {
+			if (dto.getDescription() != null && dto.getDescription().length() > Consts.MAX_TEXT_SIZE) {
 				throw new FunctionalException(FunctionalException.Code.SIZE_EXCEEDED, null, "(description)");
 			}
 			// Comment
-			if (dto.getComment() == null) {
-				throw new FunctionalException(FunctionalException.Code.NULL_ARGUMENT, null, "(comment)");
-			}
-			if (dto.getComment().length() > Consts.MAX_TEXT_SIZE) {
+			if (dto.getComment() != null && dto.getComment().length() > Consts.MAX_TEXT_SIZE) {
 				throw new FunctionalException(FunctionalException.Code.SIZE_EXCEEDED, null, "(comment)");
 			}
 			// Tags

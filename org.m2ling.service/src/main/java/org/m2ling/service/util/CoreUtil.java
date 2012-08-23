@@ -107,6 +107,9 @@ public class CoreUtil {
 	 * @return an item denoted by the given id or null if none matches
 	 */
 	public Rule getRuleByID(String id) {
+		if (id == null) {
+			return null;
+		}
 		Root root = pmanager.getRoot();
 		for (ViewPoint v : root.getViewPoints()) {
 			List<Rule> rules = v.getRules();
@@ -127,6 +130,9 @@ public class CoreUtil {
 	 * @return an item denoted by the given id or null if none matches
 	 */
 	public ComponentType getComponentTypeByID(String id) {
+		if (id == null) {
+			return null;
+		}
 		Root root = pmanager.getRoot();
 		for (ViewPoint v : root.getViewPoints()) {
 			List<ComponentType> cts = v.getComponentTypes();
@@ -147,6 +153,9 @@ public class CoreUtil {
 	 * @return an item denoted by the given id or null if none matches
 	 */
 	public Component getComponentByID(String id) {
+		if (id == null) {
+			return null;
+		}
 		Root root = pmanager.getRoot();
 		for (View v : root.getViews()) {
 			List<Component> comps = v.getComponents();
@@ -167,6 +176,9 @@ public class CoreUtil {
 	 * @return an item denoted by the given id or null if none matches
 	 */
 	public ComponentGroup getComponentGroupByID(String id) {
+		if (id == null) {
+			return null;
+		}
 		Root root = pmanager.getRoot();
 		for (View v : root.getViews()) {
 			List<ComponentGroup> groups = v.getComponentsGroups();
@@ -214,6 +226,9 @@ public class CoreUtil {
 	 * @return any object matching provided type and ID or null if none found
 	 **/
 	public Object getItemByTypeAndID(Type type, String itemID) {
+		if (itemID == null) {
+			return null;
+		}
 		if (type == Type.VIEWPOINT) {
 			return getViewPointByID(itemID);
 		} else if (type == Type.RULE) {

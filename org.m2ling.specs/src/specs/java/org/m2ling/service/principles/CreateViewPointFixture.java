@@ -82,7 +82,7 @@ public class CreateViewPointFixture extends M2lingFixture {
 	 * @param dto
 	 * @return "PASS" or "FAIL" according to result of checkDTO()
 	 */
-	public String getCheckDTOVerification(String id, String name, String description, String comment, String tags,
+	public String getCheckDTOVerification(String caseName,String id, String name, String description, String comment, String tags,
 			String statusLiterals) {
 		reset();
 		try {

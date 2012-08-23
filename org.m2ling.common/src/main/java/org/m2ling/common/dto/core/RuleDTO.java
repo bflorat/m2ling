@@ -35,12 +35,12 @@ public class RuleDTO implements Comparable<RuleDTO> {
 		private final String vpID;
 		// Optional configuration
 		private List<String> tags = new ArrayList<String>(1);
-		private String description = "";
-		private String comment = "";
-		private String status = "";
+		private String description = null;
+		private String comment = null;
+		private String status = null;
 		private int priority = 0;
-		private String rationale = "";
-		private String exceptions = "";
+		private String rationale = null;
+		private String exceptions = null;
 		private List<StatusEventDTO> history = new ArrayList<StatusEventDTO>(1);
 
 		public Builder(String vpID, String id, String name) {

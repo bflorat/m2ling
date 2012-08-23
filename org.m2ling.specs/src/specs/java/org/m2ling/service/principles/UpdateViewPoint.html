@@ -32,6 +32,7 @@
 
 	<p>A status can't be removed while it is used by at least one item.
 
+
 	
 	<div class="example">
 		Given a vp1 rule with status=VALIDATED <br />When we set <b
@@ -91,106 +92,6 @@
 					<td>VALIDATED,REFUSED</td>
 					<td>PASS</td>
 				</tr>
-				<!-- Unexisting or malformed ID -->
-				<tr>
-					<td>foo</td>
-					<td>vp1</td>
-					<td>description32</td>
-					<td>comment32</td>
-					<td>tags41,tag42</td>
-					<td>VALIDATED,REFUSED</td>
-					<td>FAIL</td>
-				</tr>
-				<tr>
-					<td></td>
-					<td>vp1</td>
-					<td>description32</td>
-					<td>comment32</td>
-					<td>tags41,tag42</td>
-					<td>VALIDATED,REFUSED</td>
-					<td>FAIL</td>
-				</tr>
-				<tr>
-					<td>space</td>
-					<td>vp1</td>
-					<td>description32</td>
-					<td>comment32</td>
-					<td>tags41,tag42</td>
-					<td>VALIDATED,REFUSED</td>
-					<td>FAIL</td>
-				</tr>
-				<!-- name check -->
-				<tr>
-					<td>id_vp1</td>
-					<td>null</td>
-					<td>description2</td>
-					<td>comment2</td>
-					<td>tags1,tag2</td>
-					<td>VALIDATED,REFUSED</td>
-					<td>FAIL</td>
-				</tr>
-				<tr>
-					<td>id_vp1</td>
-					<td></td>
-					<td>description2</td>
-					<td>comment2</td>
-					<td>tags1,tag2</td>
-					<td>VALIDATED,REFUSED</td>
-					<td>FAIL</td>
-				</tr>
-				<tr>
-					<td>id_vp1</td>
-					<td>space</td>
-					<td>description2</td>
-					<td>comment2</td>
-					<td>tags1,tag2</td>
-					<td>VALIDATED,REFUSED</td>
-					<td>FAIL</td>
-				</tr>
-				<tr>
-					<td>id_vp1</td>
-					<td>dkjshdhddsldljslkdl fdsf fsfdsf ssf
-						skjdlsjdkjslkdjskljdlsjdlj lsd jslk dkjs lkdjskldj sjd
-						sjdlksqkjdhqskjhdkjqshdkjqshkjdhqskjhdkjqskdjhqskjdhqskhdkjqshdkjhqskjdhqskjhdkjqshdkjqshkdjqsdsds
-						dsdsd shkjdhqskjhdkjqs</td>
-					<td>description2</td>
-					<td>comment2</td>
-					<td>tags1,tag2</td>
-					<td>VALIDATED,REFUSED</td>
-					<td>FAIL</td>
-				</tr>
-				<!-- Status literal -->
-				<tr>
-					<td>id_vp1</td>
-					<td>vp1</td>
-					<td>description2</td>
-					<td>comment2</td>
-					<td>tags1,tag2</td>
-					<td>dkjshdhddsldljslkdl fdsf fsfdsf ssf
-						skjdlsjdkjslkdjskljdlsjdlj lsd jslk dkjs lkdjskldj sjd
-						sjdlksqkjdhqskjhdkjqshdkjqshkjdhqskjhdkjqskdjhqskjdhqskhdkjqshdkjhqskjdhqskjhdkjqshdkjqshkdjqsdsds
-						dsdsd shkjdhqskjhdkjqs,foo</td>
-					<td>FAIL</td>
-				</tr>
-				<tr>
-					<td>id_vp1</td>
-					<td>vp1</td>
-					<td>description2</td>
-					<td>comment2</td>
-					<td>tags1,tag2</td>
-					<td>status1,status2, VALIDATED</td>
-					<td>PASS</td>
-				</tr>
-				<tr>
-					<td>id_vp1</td>
-					<td>vp1</td>
-					<td>description2</td>
-					<td>comment2</td>
-					<td>tags1,tag2</td>
-					<td>status1,status1</td>
-					<td>FAIL</td>
-				</tr>
-
 			</table>
 		</div>
 	</ul>

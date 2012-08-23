@@ -35,10 +35,10 @@ public class ComponentTypeDTO implements Comparable<ComponentTypeDTO> {
 		private final String vpID;
 		// Optional configuration
 		private List<String> tags = new ArrayList<String>(1);
-		private String description = "";
-		private String comment = "";
+		private String description = null;
+		private String comment = null;
 		private List<ReferenceDTO> references = new ArrayList<ReferenceDTO>(1);
-		private String boundTypeID = "";
+		private String boundTypeID = null;
 		private int iFactor = 0;
 		private boolean reifiable = false;
 		private List<String> enumeration = new ArrayList<String>(1);
@@ -196,6 +196,12 @@ public class ComponentTypeDTO implements Comparable<ComponentTypeDTO> {
 	 */
 	@Override
 	public int compareTo(ComponentTypeDTO o) {
+		// TODO : if names are not provided, items are not correctly sorted
+		// but we only have the bounded type ID and we don't want to perform
+		// a service call to get details just for sorting purpose.
+		if (getName() == null || o.getName() == null) {
+			return 0;
+		}
 		return o.getName().compareTo(o.getName());
 	}
 

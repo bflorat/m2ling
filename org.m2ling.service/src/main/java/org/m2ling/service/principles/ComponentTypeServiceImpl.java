@@ -73,11 +73,14 @@ public class ComponentTypeServiceImpl extends ServiceImpl implements ComponentTy
 		}
 		// Check name
 		if (access == AccessType.CREATE || access == AccessType.UPDATE) {
-			if (dto.getName() == null || Strings.isNullOrEmpty(dto.getName().trim())) {
-				throw new FunctionalException(FunctionalException.Code.NULL_ARGUMENT, null, "(name)");
-			}
-			if (dto.getName().length() > Consts.MAX_LABEL_SIZE) {
-				throw new FunctionalException(FunctionalException.Code.SIZE_EXCEEDED, null, "(name)");
+			// Name can be null
+			if (dto.getName() != null) {
+				if ("".equals(dto.getName().trim())) {
+					throw new FunctionalException(FunctionalException.Code.NULL_ARGUMENT, null, "(name)");
+				}
+				if (dto.getName().length() > Consts.MAX_LABEL_SIZE) {
+					throw new FunctionalException(FunctionalException.Code.SIZE_EXCEEDED, null, "(name)");
+				}
 			}
 		}
 		// item existence (except for creation access)
@@ -109,29 +112,39 @@ public class ComponentTypeServiceImpl extends ServiceImpl implements ComponentTy
 		}
 		if (access == AccessType.CREATE || access == AccessType.UPDATE) {
 			// Description
-			if (dto.getDescription() == null) {
-				throw new FunctionalException(FunctionalException.Code.NULL_ARGUMENT, null, "(description)");
-			}
-			if (dto.getDescription().length() > Consts.MAX_TEXT_SIZE) {
+			if (dto.getDescription() != null && dto.getDescription().length() > Consts.MAX_TEXT_SIZE) {
 				throw new FunctionalException(FunctionalException.Code.SIZE_EXCEEDED, null, "(description)");
 			}
 			// Comment
-			if (dto.getComment() == null) {
-				throw new FunctionalException(FunctionalException.Code.NULL_ARGUMENT, null, "(comment)");
-			}
-			if (dto.getComment().length() > Consts.MAX_TEXT_SIZE) {
+			if (dto.getComment() != null && dto.getComment().length() > Consts.MAX_TEXT_SIZE) {
 				throw new FunctionalException(FunctionalException.Code.SIZE_EXCEEDED, null, "(comment)");
 			}
 			// Tags
 			Utils.checkTags(dto.getTags());
 			// References
 			List<ReferenceDTO> references = dto.getReferences();
+			// Check global nullity
 			if (references == null) {
 				throw new FunctionalException(FunctionalException.Code.NULL_ARGUMENT, null, "(references)");
 			}
 			for (ReferenceDTO refDTO : references) {
+				// check reference nullity
+				if (refDTO == null) {
+					throw new FunctionalException(FunctionalException.Code.NULL_ARGUMENT, null, "(references)");
+				}
+				// check reference type
 				if (ReferenceType.get(refDTO.getType()) == null) {
 					throw new FunctionalException(FunctionalException.Code.INVALID_REFERENCE_TYPE, null, dto.toString());
+				}
+				// check reference targets and type
+				if (refDTO.getTargets() == null) {
+					throw new FunctionalException(FunctionalException.Code.NULL_ARGUMENT, null, "(references/target)");
+				}
+				// check targets non-existence
+				for (String targetID : refDTO.getTargets()) {
+					if (util.getComponentTypeByID(targetID) == null) {
+						throw new FunctionalException(FunctionalException.Code.TARGET_NOT_FOUND, null, "(references/target)");
+					}
 				}
 			}
 			// Instantiation factor, -1 or any positive value is valid
@@ -139,14 +152,11 @@ public class ComponentTypeServiceImpl extends ServiceImpl implements ComponentTy
 				throw new FunctionalException(FunctionalException.Code.WRONG_IF, null, "instantiationFactor="
 						+ dto.getInstantiationFactor());
 			}
-			if (dto.getInstantiationFactor() > 0 && !dto.isReifiable()) {
+			if ((dto.getInstantiationFactor() > 0 || dto.getInstantiationFactor() == -1) && !dto.isReifiable()) {
 				throw new FunctionalException(FunctionalException.Code.NON_REIFIABLE_IFACTOR_SET, null, dto.toString());
 			}
 			// Bound type
-			if (dto.getBoundTypeID() == null) {
-				throw new FunctionalException(FunctionalException.Code.NULL_ARGUMENT, null, "(boundTypeID)");
-			}
-			if (!Strings.isNullOrEmpty(dto.getBoundTypeID())) {
+			if (dto.getBoundTypeID() != null) {
 				// Check if the bound type exists
 				ComponentType boundCT = (ComponentType) util.getItemByTypeAndID(Type.COMPONENT_TYPE, dto.getBoundTypeID());
 				if (boundCT == null) {
@@ -181,7 +191,7 @@ public class ComponentTypeServiceImpl extends ServiceImpl implements ComponentTy
 			}
 			// enumeration can't be provided without associated binding type
 			if (enumeration.size() > 0 && dto.getBoundTypeID() == null) {
-				throw new FunctionalException(FunctionalException.Code.NULL_ARGUMENT, null, "(bound type)");
+				throw new FunctionalException(FunctionalException.Code.NULL_BOUND_TYPE_ENUMERATION, null, "(bound type)");
 			}
 			ComponentType firstCTFound = null;
 			for (String compId : enumeration) {

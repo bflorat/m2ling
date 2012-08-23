@@ -47,8 +47,9 @@
 	<p>Following service inputs should make the service :
 	<div class="example">
 		<table
-			concordion:execute="#result=getCheckDTOVerification(#id,#name,#description,#comment,#tags,#statusLiterals)">
+			concordion:execute="#result=getCheckDTOVerification(#caseName,#id,#name,#description,#comment,#tags,#statusLiterals)">
 			<tr>
+				<th concordion:set="#caseName">Case</th>
 				<th concordion:set="#id">ID</th>
 				<th concordion:set="#name">Name</th>
 				<th concordion:set="#description">Name</th>
@@ -57,8 +58,8 @@
 				<th concordion:set="#statusLiterals">Name</th>
 				<th concordion:assertEquals="#result">should :</th>
 			</tr>
-			<!-- Nominal -->
 			<tr>
+				<td>Nominal</td>
 				<td>id_vp2</td>
 				<td>vp2</td>
 				<td>description2</td>
@@ -67,8 +68,8 @@
 				<td>VALIDATED,REFUSED</td>
 				<td>PASS</td>
 			</tr>
-			<!-- Existing VP -->
 			<tr>
+				<td>Existing rule ID</td>
 				<td>id_rule1</td>
 				<td>rule2</td>
 				<td>description2</td>
@@ -78,6 +79,7 @@
 				<td>FAIL</td>
 			</tr>
 			<tr>
+				<td>Existing rule name</td>
 				<td>id_rule2</td>
 				<td>rule1</td>
 				<td>description2</td>
@@ -88,6 +90,7 @@
 			</tr>
 			<!-- ID checks -->
 			<tr>
+				<td>Null ID</td>
 				<td>null</td>
 				<td>vp2</td>
 				<td>description2</td>
@@ -97,6 +100,7 @@
 				<td>FAIL</td>
 			</tr>
 			<tr>
+				<td>Void ID</td>
 				<td></td>
 				<td>vp2</td>
 				<td>description2</td>
@@ -106,6 +110,7 @@
 				<td>FAIL</td>
 			</tr>
 			<tr>
+				<td>Null ID after trim</td>
 				<td>space</td>
 				<td>vp2</td>
 				<td>description2</td>
@@ -115,6 +120,7 @@
 				<td>FAIL</td>
 			</tr>
 			<tr>
+				<td>ID too long</td>
 				<td>dkjshdhsqkjdhqskjhdkjqshdkjqshkjdhqskjhdkjqskdjhqskjdhqskhdkjqshdkjhqskjdhqskjhdkjqshdkjqshkdjqshkjdhqskjhdkjqshdkjhqskjdhqskhdk</td>
 				<td>vp2</td>
 				<td>description2</td>
@@ -125,6 +131,7 @@
 			</tr>
 			<!-- name check -->
 			<tr>
+				<td>Null name</td>
 				<td>id_vp2</td>
 				<td>null</td>
 				<td>description2</td>
@@ -134,6 +141,7 @@
 				<td>FAIL</td>
 			</tr>
 			<tr>
+				<td>Void name</td>
 				<td>id_vp2</td>
 				<td></td>
 				<td>description2</td>
@@ -143,6 +151,7 @@
 				<td>FAIL</td>
 			</tr>
 			<tr>
+				<td>Void name after trim</td>
 				<td>id_vp2</td>
 				<td>space</td>
 				<td>description2</td>
@@ -152,6 +161,7 @@
 				<td>FAIL</td>
 			</tr>
 			<tr>
+				<td>Name too long</td>
 				<td>id_vp2</td>
 				<td>dkjshdhddsldljslkdl fdsf fsfdsf ssf
 					skjdlsjdkjslkdjskljdlsjdlj lsd jslk dkjs lkdjskldj sjd
@@ -165,6 +175,7 @@
 			</tr>
 			<!-- Status literal -->
 			<tr>
+				<td>Status literals too long</td>
 				<td>id_vp2</td>
 				<td>vp2</td>
 				<td>description2</td>
@@ -177,6 +188,7 @@
 				<td>FAIL</td>
 			</tr>
 			<tr>
+				<td>Right status literals</td>
 				<td>id_vp2</td>
 				<td>vp2</td>
 				<td>description2</td>
@@ -185,18 +197,19 @@
 				<td>status1,status2</td>
 				<td>PASS</td>
 			</tr>
-			<!-- Dup status literal -->
 			<tr>
+				<td>Unexisting status literals</td>
 				<td>id_vp2</td>
 				<td>vp2</td>
 				<td>description2</td>
 				<td>comment2</td>
 				<td>tags1,tag2</td>
-				<td>status1,status1</td>
-				<td>FAIL</td>
+				<td>foo_status</td>
+				<td>PASS</td>
 			</tr>
 			<!-- Comment -->
 			<tr>
+				<td>Void comment</td>
 				<td>id_vp2</td>
 				<td>vp2</td>
 				<td>description2</td>
@@ -206,13 +219,14 @@
 				<td>PASS</td>
 			</tr>
 			<tr>
+				<td>Null comment</td>
 				<td>id_vp2</td>
 				<td>vp2</td>
 				<td>description2</td>
 				<td>null</td>
 				<td>tags1,tag2</td>
 				<td>status1</td>
-				<td>FAIL</td>
+				<td>PASS</td>
 			</tr>
 
 		</table>

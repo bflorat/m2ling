@@ -70,7 +70,7 @@ public class CreateRuleFixture extends M2lingFixture {
 		}
 	}
 	
-	public String getCheckDTOVerification(String id,String name,String description,String comment,String tags,String statusLiterals){
+	public String getCheckDTOVerification(String caseName,String id,String name,String description,String comment,String tags,String statusLiterals){
 		reset();
 		try {
 			//TODO

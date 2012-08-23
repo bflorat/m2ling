@@ -182,6 +182,9 @@ public class Utils {
 	public static void checkTags(List<String> tags) throws FunctionalException {
 		int index = 1;
 		for (String tag : tags) {
+			if (tag == null || Strings.isNullOrEmpty(tag.trim())) {
+				throw new FunctionalException(FunctionalException.Code.NULL_ARGUMENT, null, "tag #" + index);
+			}
 			if (tag.length() > Consts.MAX_LABEL_SIZE) {
 				throw new FunctionalException(FunctionalException.Code.SIZE_EXCEEDED, null, "tag #" + index);
 			}
@@ -227,23 +230,27 @@ public class Utils {
 		}
 		return sb.toString();
 	}
-	
+
 	/**
-	 * Return a pre-populated properties with provided elements with element0=element1 element2=element3...
+	 * Return a pre-populated properties with provided elements with element0=element1
+	 * element2=element3...
+	 * 
 	 * @param objs
 	 * @return a pre-populated properties with provided elements
 	 */
-	public static Properties newProperties(Object... objs){
+	public static Properties newProperties(Object... objs) {
 		Properties out = new Properties();
-		for (int index=0; index<objs.length;index+=2){
-			out.put(objs[index].toString(),objs[index+1].toString());
+		for (int index = 0; index < objs.length; index += 2) {
+			out.put(objs[index].toString(), objs[index + 1].toString());
 		}
 		return out;
 	}
-	
+
 	/**
 	 * Return the provided non null string or "" if null
-	 * @param s provided string
+	 * 
+	 * @param s
+	 *           provided string
 	 * @return the provided non null string or "" if null
 	 */
 	public static String nonull(String s) {

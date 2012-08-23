@@ -106,9 +106,23 @@ public class RuleServiceImpl extends ServiceImpl implements RuleService {
 			if (!vp.getStatusLiterals().contains(dto.getStatus())) {
 				throw new FunctionalException(FunctionalException.Code.INVALID_STATUS, null, dto.toString());
 			}
-			// Description
+			// Description (mandatory)
+			if (dto.getDescription() == null || Strings.isNullOrEmpty(dto.getDescription().trim())) {
+				throw new FunctionalException(FunctionalException.Code.NULL_ARGUMENT, null, "(description)");
+			}
 			if (dto.getDescription().length() > Consts.MAX_TEXT_SIZE) {
 				throw new FunctionalException(FunctionalException.Code.SIZE_EXCEEDED, null, "(description)");
+			}
+			// Rationale (mandatory)
+			if (dto.getRationale() == null || Strings.isNullOrEmpty(dto.getRationale().trim())) {
+				throw new FunctionalException(FunctionalException.Code.NULL_ARGUMENT, null, "(rationale)");
+			}
+			if (dto.getRationale().length() > Consts.MAX_TEXT_SIZE) {
+				throw new FunctionalException(FunctionalException.Code.SIZE_EXCEEDED, null, "(rationale)");
+			}
+			// Exceptions
+			if (dto.getExceptions().length() > Consts.MAX_TEXT_SIZE) {
+				throw new FunctionalException(FunctionalException.Code.SIZE_EXCEEDED, null, "(exceptions)");
 			}
 			// Comment
 			if (dto.getComment().length() > Consts.MAX_TEXT_SIZE) {
