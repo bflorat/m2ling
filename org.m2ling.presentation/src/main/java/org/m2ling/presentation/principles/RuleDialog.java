@@ -95,65 +95,71 @@ public class RuleDialog extends Window {
 
 	@Override
 	public void attach() {
-		panel = new Panel();
-		panel.setSizeFull();
-		panel.getContent().setHeight("-1");
-		// Refresh associated viewpoint data
-		final ViewPointDTO vpDTO = vpService.getViewPointByID(null, ruleBean.getViewPointId());
-		vpBean = fromDTO.getViewPointBean(vpDTO);
-		((VerticalLayout) getContent()).setSizeFull();
-		final Form form = new Form();
-		// setFormFieldFactory() must be called before setting the data source or it is not token into
-		// account
-		form.setFormFieldFactory(new RuleDialogFieldFactory());
-		form.setItemDataSource(beanItem);
-		form.setVisibleItemProperties(Arrays.asList(new String[] { "name", "status", "priority", "tags", "description",
-				"rationale", "exceptions", "comment" }));
-		Command ok = new Command() {
-			public void execute() {
-				try {
-					form.commit();
-				} catch (Exception e) {
-					// Ignored, we'll let the Form handle the errors
-					logger.finest(e.getMessage());
-					return;
-				}
-				RuleDTO ruleDTO = toDTO.getRuleDTO(ruleBean);
-				try {
-					if (newRule) {
-						ruleService.createRule(null, ruleDTO);
-					} else {
-						ruleService.updateRule(null, ruleDTO);
+		try {
+			panel = new Panel();
+			panel.setSizeFull();
+			panel.getContent().setHeight("-1");
+			// Refresh associated viewpoint data
+			final ViewPointDTO vpDTO = vpService.getViewPointByID(null, ruleBean.getViewPointId());
+			vpBean = fromDTO.getViewPointBean(vpDTO);
+			((VerticalLayout) getContent()).setSizeFull();
+			final Form form = new Form();
+			// setFormFieldFactory() must be called before setting the data source or it is not token
+			// into
+			// account
+			form.setFormFieldFactory(new RuleDialogFieldFactory());
+			form.setItemDataSource(beanItem);
+			form.setVisibleItemProperties(Arrays.asList(new String[] { "name", "status", "priority", "tags",
+					"description", "rationale", "exceptions", "comment" }));
+			Command ok = new Command() {
+				public void execute() {
+					try {
+						form.commit();
+					} catch (Exception e) {
+						// Ignored, we'll let the Form handle the errors
+						logger.finest(e.getMessage());
+						return;
 					}
-					close();
-				} catch (FunctionalException e) {
-					logger.log(Level.SEVERE, e.getDetailedMessage(), e);
-					getWindow().showNotification(msg.humanMessage(e), Notification.TYPE_ERROR_MESSAGE);
+					RuleDTO ruleDTO = toDTO.getRuleDTO(ruleBean);
+					try {
+						if (newRule) {
+							ruleService.createRule(null, ruleDTO);
+						} else {
+							ruleService.updateRule(null, ruleDTO);
+						}
+						close();
+					} catch (FunctionalException e) {
+						logger.log(Level.SEVERE, e.getDetailedMessage(), e);
+						getWindow().showNotification(msg.humanMessage(e), Notification.TYPE_ERROR_MESSAGE);
+					}
+					Properties details = Utils.newProperties(Events.DETAIL_TARGET, vpDTO.getId());
+					obs.notifySync(new org.m2ling.presentation.events.Event(Events.RULE_CHANGE, details));
 				}
-				Properties details = Utils.newProperties(Events.DETAIL_TARGET, vpDTO.getId());
-				obs.notifySync(new org.m2ling.presentation.events.Event(Events.RULE_CHANGE, details));
-			}
 
-			@Override
-			public String getLabel() {
-				return msg.get("gal.5");
-			}
-		};
-		Command cancel = new Command() {
-			public void execute() {
-				close();
-			}
+				@Override
+				public String getLabel() {
+					return msg.get("gal.5");
+				}
+			};
+			Command cancel = new Command() {
+				public void execute() {
+					close();
+				}
 
-			@Override
-			public String getLabel() {
-				return msg.get("gal.6");
-			}
-		};
-		OKCancel okc = new OKCancel(ok, cancel);
-		panel.addComponent(form);
-		panel.addComponent(okc);
-		((VerticalLayout) panel.getContent()).setComponentAlignment(okc, Alignment.MIDDLE_LEFT);
-		addComponent(panel);
+				@Override
+				public String getLabel() {
+					return msg.get("gal.6");
+				}
+			};
+			OKCancel okc = new OKCancel(ok, cancel);
+			panel.addComponent(form);
+			panel.addComponent(okc);
+			((VerticalLayout) panel.getContent()).setComponentAlignment(okc, Alignment.MIDDLE_LEFT);
+			addComponent(panel);
+		} catch (FunctionalException e) {
+			logger.log(Level.SEVERE, e.getDetailedMessage(), e);
+			getWindow().showNotification(msg.humanMessage(e), Notification.TYPE_ERROR_MESSAGE);
+		}
 	}
 
 	private class RuleDialogFieldFactory extends DefaultFieldFactory {

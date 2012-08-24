@@ -9,27 +9,37 @@
 	<H1>Viewpoint search</H1>
 	<p>Administrators or actors with adequate authorizations can search a viewpoint.</p>
 	
-	<p>It is possible to retrieve all existing viewpoints :
+	<p class='rule'>It is possible to retrieve all existing viewpoints :
 	<div class="example">
-		Given five existing viewpoints vp1 and vp2<br/>
+		Given several existing viewpoints<br/>
 		When we ask for viewpoints listing<span concordion:execute="#resu=getAll()"/><br/>
-		Then we get <b concordion:assertEquals="#resu">5</b> viewpoints.
+		Then we get a number of viewpoints <b concordion:assertEquals="#resu">&gt;0</b>.
 	</div>
 	</p>
 	
-	<p>It is possible to get viewpoints by id :
+	<p class='rule'>It is possible to get viewpoints by non null id :
 	<div class="example">
 		Given an existing viewpoint whose id=<b concordion:set="#id">id_vp1</b> <br/>
 		When we search for it by ID<span concordion:execute="#resu=getVpByID(#id)"/><br/>
 		Then we should be a viewpoint named <b concordion:assertEquals="#resu">vp1</b>.
 	</div>
+	<div class="example">
+		Same query with <b concordion:set="#id">null</b> id should 
+		<span concordion:execute="#resu=getVpByID(#id)"/>
+		<b concordion:assertEquals="#resu">FAIL with code NULL_ARGUMENT</b>.
+	</div>
 	</p>
 	
-	<p>It is possible to get viewpoints by name :
+	<p class='rule'>It is possible to get viewpoints by name :
 	<div class="example">
 		Given an existing viewpoint whose name=<b concordion:set="#name">vp1</b> <br/>
 		When we search for it by name<span concordion:execute="#resu=getVpByName(#name)"/><br/>
 		Then we should be a viewpoint whose ID is <b concordion:assertEquals="#resu">id_vp1</b>.
+	</div>
+	<div class="example">
+		Same query with <b concordion:set="#name">null</b> name should 
+		<span concordion:execute="#resu=getVpByName(#name)"/>
+		<b concordion:assertEquals="#resu">FAIL with code NULL_ARGUMENT</b>.
 	</div>
 	</p>
 	

@@ -6,7 +6,21 @@
 <title>Component type search</title>
 </head>
 <body>
-	<H1>Component type search</H1>
-	<p></p>
+	<H1>Component type deletion</H1>
+	<p class='rule'>CT20 : A CT can't be removed while at least a single component of this type exists in any view.</p>
+	<div class='example'>
+		In this case, the <span concordion:execute="#resu=testDeleteExistingComp()"> 
+		service</span> should : <b concordion:assertEquals="#resu">FAIL with code CANT_DELETE_CT_EXISTING_COMP</b> 
+	</div>
+	<div class='example'>
+		If the CT has no associated component of its type, the deletion<span concordion:execute="#resu=testDeleteNoExistingComp()"> service</span> 
+		should : <b concordion:assertEquals="#resu">PASS</b> 
+	</div>
+		
+	<p class='rule'>CT21 : A CT can't be removed while at least a single CT is bound to it.</p>
+	<div class='example'>
+		In this case, the <span concordion:execute="#resu=testDeleteExistingBinding()">
+		 service</span> should : <b concordion:assertEquals="#resu">FAIL with code CANT_DELETE_CT_EXISTING_BINDING</b> 
+	</div>
 </body>
 </html>

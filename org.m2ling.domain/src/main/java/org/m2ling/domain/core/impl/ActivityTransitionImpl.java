@@ -12,7 +12,6 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 import org.m2ling.domain.core.Activity;
-import org.m2ling.domain.core.ActivityStatus;
 import org.m2ling.domain.core.ActivityTransition;
 import org.m2ling.domain.core.Actor;
 import org.m2ling.domain.core.CorePackage;

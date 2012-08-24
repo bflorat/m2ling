@@ -9,8 +9,23 @@
 	<H1>Component type deletion</H1>
 	<p>Administrators or actors with adequate authorizations can delete
 		a CT (component type).</p>
-	<p>A CT can't be removed while at least a single component is of this CT 
-	or while a CT of another viewpoint is bound to it.</p>
+	<p class='rule'>It is possible to retrieve all existing viewpoints
+		:
+	<div class="example">
+		Given several existing component type<br /> When we ask for
+		viewpoints listing<span concordion:execute="#resu=getAll()" /><br />
+		Then we get a number of ct <b concordion:assertEquals="#resu">&gt;0</b>.
+	</div>
+	</p>
+
+	<p class='rule'>It is possible to get viewpoints by id :
+	<div class="example">
+		Given an existing CT whose id=<b concordion:set="#id">id_comp_type_1</b>
+		<br /> When we search for it by ID<span
+			concordion:execute="#resu=getCTByID(#id)" /><br /> Then we should be
+		a viewpoint named <b concordion:assertEquals="#resu">comp_type_1</b>.
+	</div>
+	</p>
 
 </body>
 </html>

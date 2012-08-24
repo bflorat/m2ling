@@ -96,12 +96,32 @@ public class DTOConverter {
 
 		public ComponentTypeDTO getComponentTypeDTO(ComponentType ct) {
 			ViewPoint vp = (ViewPoint) ct.eContainer();
-			ComponentTypeDTO.Builder builder = new ComponentTypeDTO.Builder(vp.getId(), ct.getId(), ct.getName());
+			// If name is void or null, use bound type one
+			String name = ct.getName();
+			ComponentType boundType = ct.getBoundType();
+			if (Strings.isNullOrEmpty(ct.getName()) && boundType != null) {
+				name = boundType.getName();
+			}
+			ComponentTypeDTO.Builder builder = new ComponentTypeDTO.Builder(vp.getId(), ct.getId(), name);
 			for (String tag : ct.getTags()) {
 				builder.addTag(tag);
 			}
-			builder.comment(nonull(ct.getComment()));
-			builder.description(nonull(ct.getDescription()));
+			// Add bound type tags
+			if (boundType != null) {
+				for (String tag : boundType.getTags()) {
+					builder.addTag(tag);
+				}
+			}
+			if (Strings.isNullOrEmpty(ct.getComment()) && boundType != null) {
+				builder.comment(boundType.getComment());
+			} else {
+				builder.comment(ct.getComment());
+			}
+			if (Strings.isNullOrEmpty(ct.getDescription()) && boundType != null) {
+				builder.description(boundType.getDescription());
+			} else {
+				builder.description(ct.getDescription());
+			}
 			for (ArchitectureItem ai : ct.getEnumeration()) {
 				builder.addEnumerationID(ai.getId());
 			}

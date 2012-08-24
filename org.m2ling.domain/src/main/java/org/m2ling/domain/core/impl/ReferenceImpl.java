@@ -18,7 +18,6 @@ import org.m2ling.domain.core.HasConstraints;
 import org.m2ling.domain.core.HasCustomProperties;
 import org.m2ling.domain.core.HasDescription;
 import org.m2ling.domain.core.HasNameAndID;
-import org.m2ling.domain.core.HasReferences;
 import org.m2ling.domain.core.HasStatus;
 import org.m2ling.domain.core.HasTags;
 import org.m2ling.domain.core.Reference;

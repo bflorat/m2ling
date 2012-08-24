@@ -147,9 +147,11 @@ public class ViewPointServiceImpl extends ServiceImpl implements ViewPointServic
 	 * , java.lang.String)
 	 */
 	@Override
-	public ViewPointDTO getViewPointByName(final Context context, final String name) {
-		if (name == null) {
-			return null;
+	public ViewPointDTO getViewPointByName(final Context context, final String name) throws FunctionalException {
+		{// Controls
+			if (name == null || Strings.isNullOrEmpty(name.trim())) {
+				throw new FunctionalException(FunctionalException.Code.NULL_ARGUMENT, null, "(name)");
+			}
 		}
 		Root root = pmanager.getRoot();
 		for (ViewPoint vp : root.getViewPoints()) {
@@ -168,9 +170,11 @@ public class ViewPointServiceImpl extends ServiceImpl implements ViewPointServic
 	 * java.lang.String)
 	 */
 	@Override
-	public ViewPointDTO getViewPointByID(final Context context, String id) {
-		if (id == null) {
-			return null;
+	public ViewPointDTO getViewPointByID(final Context context, String id) throws FunctionalException {
+		{// controls
+			if (id == null || Strings.isNullOrEmpty(id.trim())) {
+				throw new FunctionalException(FunctionalException.Code.NULL_ARGUMENT, null, "(id)");
+			}
 		}
 		ViewPoint vp = util.getViewPointByID(id);
 		if (vp == null) {

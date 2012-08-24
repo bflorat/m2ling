@@ -2,52 +2,24 @@ package org.m2ling.service.principles;
 
 import java.io.IOException;
 import java.util.List;
-import java.util.Properties;
 
-import org.m2ling.common.configuration.Conf;
 import org.m2ling.common.dto.core.AccessType;
 import org.m2ling.common.dto.core.ViewPointDTO;
 import org.m2ling.common.exceptions.FunctionalException;
 import org.m2ling.common.utils.UUT;
 import org.m2ling.common.utils.Utils;
-import org.m2ling.persistence.PersistenceManagerXMIImpl;
 import org.m2ling.presentation.principles.model.ViewPointBean;
 import org.m2ling.presentation.principles.utils.DTOConverter;
-import org.m2ling.service.util.CoreUtil;
-import org.m2ling.service.util.DTOConverter.FromDTO;
-import org.m2ling.service.util.DTOConverter.ToDTO;
-import org.m2ling.specs.M2lingFixture;
 
-public class UpdateViewPointFixture extends M2lingFixture {
-	ViewPointServiceImpl service;
+public class UpdateViewPointFixture extends AbstractViewPointFixture {
 
 	public UpdateViewPointFixture() throws IOException {
 		super();
 	}
 
-	/**
-	 * Make sure to instanciate a new pm at each test case so we reset the content to the
-	 * Technical.m2ling content
-	 */
-	public void reset() {
-		String sampleXMI = "src/specs/resources/mocks/Technical.m2ling";
-		Properties prop = new Properties();
-		prop.setProperty(PersistenceManagerXMIImpl.SpecificConfiguration.CONF_XMI_PATH, sampleXMI);
-		Conf configuration = new Conf(prop, logger, null);
-		PersistenceManagerXMIImpl pm;
-		try {
-			pm = new PersistenceManagerXMIImpl(logger, configuration);
-			CoreUtil util = new CoreUtil(logger, pm);
-			service = new ViewPointServiceImpl(pm, util, new FromDTO(util), new ToDTO(util), configuration, logger);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
-
 	public String update(String id, String name, String description, String comment, String tags, String statusLiterals)
 			throws FunctionalException {
-		reset();
+		reset("Technical");
 		ViewPointBean bean = new ViewPointBean();
 		bean.setComment(comment);
 		bean.setDescription(description);
@@ -63,14 +35,19 @@ public class UpdateViewPointFixture extends M2lingFixture {
 	}
 
 	public String getViewPoint(String id) {
-		ViewPointDTO dto = service.getViewPointByID(null, id);
-		ViewPointBean outBean = new DTOConverter.FromDTO().getViewPointBean(dto);
-		return outBean.toString();
+		ViewPointDTO dto = null;
+		try {
+			dto = service.getViewPointByID(null, id);
+			ViewPointBean outBean = new DTOConverter.FromDTO().getViewPointBean(dto);
+			return outBean.toString();
+		} catch (FunctionalException fe) {
+			return "FAIL with code " + fe.getCode().name();
+		}
 	}
 
 	public String updateStatusLiterals(String previousStatusLiterals, String newStatusLiterals)
 			throws FunctionalException {
-		reset();
+		reset("Technical");
 		ViewPointDTO vp1DTO = service.getViewPointByName(null, "vp1");
 		List<String> previousStatusLiteralsList = Utils.stringListFromString(previousStatusLiterals);
 		ViewPointDTO.Builder builder = new ViewPointDTO.Builder(vp1DTO.getId(), vp1DTO.getName()).comment(
@@ -102,7 +79,7 @@ public class UpdateViewPointFixture extends M2lingFixture {
 	 * Return FAIL or PASS
 	 */
 	public String updateStatusWithRule(String newStatusLiterals) throws FunctionalException {
-		reset();
+		reset("Technical");
 		// We assume that we have a "rule1" rule in VALIDATED status on vp1 vp (pre-filled in the
 		// technical mock)
 		ViewPointDTO vp1DTO = service.getViewPointByName(null, "vp1");
@@ -131,7 +108,7 @@ public class UpdateViewPointFixture extends M2lingFixture {
 	 */
 	public String getCheckDTOVerification(String id, String name, String description, String comment, String tags,
 			String statusLiterals) {
-		reset();
+		reset("Technical");
 		try {
 			List<String> tagsList = null;
 			if (!tags.equals("null")) {
@@ -150,16 +127,6 @@ public class UpdateViewPointFixture extends M2lingFixture {
 				builder.addStatusLiteral(statusLiteral);
 			}
 			service.checkDTO(builder.build(), AccessType.UPDATE);
-			return "PASS";
-		} catch (FunctionalException ex) {
-			return "FAIL";
-		}
-	}
-
-	public String getCheckNullDTO() {
-		reset();
-		try {
-			service.checkDTO(null, AccessType.UPDATE);
 			return "PASS";
 		} catch (FunctionalException ex) {
 			return "FAIL";

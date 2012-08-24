@@ -113,14 +113,15 @@ public class Utils {
 	}
 
 	/**
-	 * Return a list from a string representation.
+	 * Return a list from a string representation. If the string is void or null, a void list is
+	 * returned.
 	 * 
 	 * @param string
 	 *           the comma-separated string representation
 	 * @return a list from a string representation
 	 */
 	public static List<String> stringListFromString(String string) {
-		if ("".equals(string)) {
+		if (string == null || "".equals(string.trim())) {
 			return new ArrayList<String>(0);
 		}
 		Iterable<String> it = Splitter.on(',').trimResults().split(string);

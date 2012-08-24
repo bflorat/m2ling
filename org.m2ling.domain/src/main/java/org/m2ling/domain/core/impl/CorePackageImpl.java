@@ -13,7 +13,6 @@ import org.m2ling.domain.DomainPackage;
 import org.m2ling.domain.configuration.ConfigurationPackage;
 import org.m2ling.domain.configuration.impl.ConfigurationPackageImpl;
 import org.m2ling.domain.core.Activity;
-import org.m2ling.domain.core.ActivityStatus;
 import org.m2ling.domain.core.ActivityTransition;
 import org.m2ling.domain.core.Actor;
 import org.m2ling.domain.core.ArchitectureItem;
@@ -1922,7 +1921,7 @@ public class CorePackageImpl extends EPackageImpl implements CorePackage {
 		initEClass(componentTypeEClass, ComponentType.class, "ComponentType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getComponentType_BoundType(), this.getComponentType(), null, "boundType", null, 0, 1, ComponentType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getComponentType_Enumeration(), this.getArchitectureItem(), null, "enumeration", null, 0, -1, ComponentType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getComponentType_InstantiationFactor(), ecorePackage.getEInt(), "instantiationFactor", "1", 0, 1, ComponentType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getComponentType_InstantiationFactor(), ecorePackage.getEInt(), "instantiationFactor", "0", 0, 1, ComponentType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getComponentType_Reifiable(), ecorePackage.getEBoolean(), "reifiable", "false", 0, 1, ComponentType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(componentEClass, Component.class, "Component", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);

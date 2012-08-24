@@ -14,6 +14,9 @@ import org.m2ling.common.dto.core.ReferenceDTO;
 import org.m2ling.common.dto.core.RuleDTO;
 import org.m2ling.common.dto.core.StatusEventDTO;
 import org.m2ling.common.dto.core.ViewPointDTO;
+import org.m2ling.common.exceptions.FunctionalException;
+import org.m2ling.common.exceptions.FunctionalException.Code;
+import org.m2ling.common.exceptions.TechnicalException;
 import org.m2ling.common.utils.Utils;
 import org.m2ling.presentation.i18n.Msg;
 import org.m2ling.presentation.principles.model.ComponentTypeBean;
@@ -84,6 +87,15 @@ public class DTOConverter {
 			int ifactor = 0;
 			if ("*".equals(bean.getInstantiationFactor())) {
 				ifactor = -1;
+			} else {
+				try {
+					ifactor = Integer.parseInt(bean.getInstantiationFactor());
+				} catch (NumberFormatException nfe) {
+					// it can occur only i there is a lack in the presentation surface controls, so it is
+					// a bug -> TechnicalException
+					throw new TechnicalException(org.m2ling.common.exceptions.TechnicalException.Code.INVALID_FORMAT, nfe,
+							"instanciation factor = " + bean.getInstantiationFactor());
+				}
 			}
 			ComponentTypeDTO.Builder builder = new ComponentTypeDTO.Builder(bean.getViewPointId(), bean.getId(),
 					bean.getName()).description(bean.getDescription()).comment(bean.getComment())

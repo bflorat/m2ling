@@ -15,7 +15,7 @@ import org.m2ling.common.soa.Context;
  * All the methods can throw a TechnicalException in case of technical issue.
  * </p>
  * <p>
- * All the methods cab throw an IllegalAccessException if current user has not the authorization to
+ * All the methods can throw an IllegalAccessException if current user has not the authorization to
  * access the viewpoint.
  * </p>
  */
@@ -59,12 +59,25 @@ public interface ComponentTypeService {
 	List<ComponentTypeDTO> getAllCT(Context context, String vp) throws FunctionalException;
 
 	/**
+	 * Return the CT DTO given an ID if it exist, null otherwise.
+	 * 
+	 * @return the viewpoint DTO given an ID if it exist, null otherwise
+	 * @throws FunctionalException
+	 *            id id is null or void
+	 * 
+	 */
+	ComponentTypeDTO getCTByID(Context context, String id) throws FunctionalException;
+
+	/**
 	 * Drop the given CT if it exists.
 	 * 
-	 * @param ct
-	 *           the CT DTO
+	 * @param id
+	 *           the CT id
+	 * 
+	 * @throws FunctionalException
+	 *            id id is null or void
 	 * @throws FunctionalException
 	 *            if the CT doesn't exist.
 	 */
-	void deleteCT(Context context, ComponentTypeDTO ct) throws FunctionalException;
+	void deleteCT(Context context, String id) throws FunctionalException;
 }

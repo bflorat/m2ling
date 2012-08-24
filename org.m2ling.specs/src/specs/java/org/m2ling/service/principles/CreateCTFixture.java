@@ -3,31 +3,102 @@ package org.m2ling.service.principles;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Properties;
 import java.util.StringTokenizer;
+import java.util.logging.Level;
+import java.util.logging.LogRecord;
 
-import org.m2ling.common.configuration.Conf;
-import org.m2ling.common.dto.core.AccessType;
 import org.m2ling.common.dto.core.ComponentTypeDTO;
 import org.m2ling.common.exceptions.FunctionalException;
+import org.m2ling.common.exceptions.TechnicalException;
 import org.m2ling.common.utils.UUT;
 import org.m2ling.common.utils.Utils;
-import org.m2ling.persistence.PersistenceManagerXMIImpl;
 import org.m2ling.presentation.principles.model.ComponentTypeBean;
 import org.m2ling.presentation.principles.model.ReferenceBean;
 import org.m2ling.presentation.principles.utils.DTOConverter;
-import org.m2ling.service.util.CoreUtil;
-import org.m2ling.service.util.DTOConverter.FromDTO;
-import org.m2ling.service.util.DTOConverter.ToDTO;
-import org.m2ling.specs.M2lingFixture;
 
 import com.google.common.base.Strings;
 
-public class CreateCTFixture extends M2lingFixture {
-	ComponentTypeServiceImpl service;
-
+public class CreateCTFixture extends AbstractCTFixture {
 	public CreateCTFixture() throws IOException {
 		super();
+	}
+
+	public String createWithIfAndReifiable(String ifactor, String reifiable) throws FunctionalException {
+		return createAndGetCT("true", "CT1", "id_vp_logical", "id_new_ct_logical_servicecontainer", "ServicesContainer2",
+				"", "", "", ifactor, "null", "", "", reifiable);
+	}
+
+	public String testNoBindingType() throws FunctionalException {
+		return createAndGetCT("true", "CT8", "id_vp_logical", "id_new_ct_logical_servicecontainer", "ServicesContainer2",
+				"", "", "", "*", "null", "", "id_comp_tech_jboss5", "true");
+	}
+
+	public String testCascadingBinding() throws FunctionalException {
+		return createAndGetCT("true", "CT8", "id_vp_logical", "id_new_ct_logical_servicecontainer", "ServicesContainer2",
+				"", "", "", "*", "id_ct_app_application", "", "id_comp_tech_jboss5", "true");
+	}
+
+	public String testLocalBinding() throws FunctionalException {
+		return createAndGetCT("true", "CT8", "id_vp_logical", "id_new_ct_logical_servicecontainer", "ServicesContainer2",
+				"", "", "", "*", "id_ct_logical_servicecontainer", "", "id_comp_tech_jboss5", "true");
+	}
+
+	public String testBoundDerivedName(String caseName, String ctAttributes, String boundCTAttributes)
+			throws FunctionalException {
+		try {
+			String ctName = null;
+			String ctTags = null;
+			String ctComment = null;
+			String ctDescription = null;
+			String boundName = null;
+			String boundTags = null;
+			String boundComment = null;
+			String boundDescription = null;
+			StringTokenizer st = new StringTokenizer(ctAttributes, "|");
+			while (st.hasMoreTokens()) {
+				ctName = st.nextToken();
+				ctTags = st.nextToken();
+				ctComment = st.nextToken();
+				ctDescription = st.nextToken();
+			}
+			StringTokenizer stBound = new StringTokenizer(boundCTAttributes, "|");
+			while (stBound.hasMoreTokens()) {
+				boundName = stBound.nextToken();
+				boundTags = stBound.nextToken();
+				boundComment = stBound.nextToken();
+				boundDescription = stBound.nextToken();
+			}
+			// First create the bound CT
+			String resu = createAndGetCT("true", "CT11", "id_vp_tech", "id_bound_ct_tech_servicecontainer", boundName,
+					boundDescription, boundComment, boundTags, "*", "null", "", "", "true");
+			logger.log(new LogRecord(Level.INFO, resu));
+			// then create the new CT
+			noreset = true;
+			resu = createAndGetCT("true", "CT11", "id_vp_logical", "id_new_ct_logical_servicecontainer", ctName,
+					ctDescription, ctComment, ctTags, "*", "id_bound_ct_tech_servicecontainer", "", "", "true");
+			logger.log(new LogRecord(Level.INFO, resu));
+			// Return the new CT attributes
+			ComponentTypeDTO ctDTO = service.getCTByID(null, "id_new_ct_logical_servicecontainer");
+			return ctDTO.getName() + "|" + ctDTO.getTags() + "|" + ctDTO.getComment() + "|" + ctDTO.getDescription();
+		} finally {
+			noreset = false;
+		}
+	}
+
+	public String testEnumeration(String caseName, String comps, String groups) throws FunctionalException {
+		String enumeration = "";
+		if (!("null".equals(comps)) && !Strings.isNullOrEmpty(comps)) {
+			enumeration += comps;
+		}
+		if (!("null".equals(groups)) && !Strings.isNullOrEmpty(groups)) {
+			if (enumeration.length() > 0) {
+				enumeration += "," + groups;
+			} else {
+				enumeration = groups;
+			}
+		}
+		return createAndGetCT("true", caseName, "id_vp_logical", "id_new_ct_logical_servicecontainer",
+				"ServicesContainer2", "", "", "", "-1", "id_ct_tech_applicationserver", "", enumeration, "true");
 	}
 
 	/**
@@ -42,7 +113,9 @@ public class CreateCTFixture extends M2lingFixture {
 	public String createAndGetCT(String justCheck, String caseName, String vpID, String id, String name, String desc,
 			String comment, String tags, String ifactor, String boundTypeID, String references, String enumeration,
 			String reifiable) throws FunctionalException {
-		reset();
+		if (!noreset) {
+			reset("Bikes");
+		}
 		vpID = UUT.nul(vpID);
 		id = UUT.nul(id);
 		name = UUT.nul(name);
@@ -70,10 +143,10 @@ public class CreateCTFixture extends M2lingFixture {
 				bean.setEnumeration(enumer);
 			}
 			bean.setInstantiationFactor(ifactor);
+			List<ReferenceBean> refs = new ArrayList<ReferenceBean>();
 			if (Strings.isNullOrEmpty(references)) {
-				bean.setReferences(null);
+				bean.setReferences(refs);
 			} else {
-				List<ReferenceBean> refs = new ArrayList<ReferenceBean>();
 				StringTokenizer st = new StringTokenizer(references, ";");
 				while (st.hasMoreTokens()) {
 					String ref = st.nextToken();
@@ -108,40 +181,8 @@ public class CreateCTFixture extends M2lingFixture {
 			return "Unknown item";
 		} catch (FunctionalException ex) {
 			return "FAIL with code " + ex.getCode().name();
+		} catch (TechnicalException ex) {
+			return "FAIL with code " + ex.getCode().name();
 		}
-	}
-
-	public String getCheckNullDTO() {
-		reset();
-		try {
-			service.checkDTO(null, AccessType.CREATE);
-			return "PASS";
-		} catch (FunctionalException ex) {
-			return "FAIL";
-		}
-	}
-
-	/**
-	 * Make sure to instantiate a new pm at each test case so we reset the content
-	 */
-	public void reset() {
-		String sampleXMI = "src/specs/resources/mocks/Bikes.m2ling";
-		Properties prop = new Properties();
-		prop.setProperty(PersistenceManagerXMIImpl.SpecificConfiguration.CONF_XMI_PATH, sampleXMI);
-		Conf configuration = new Conf(prop, logger, null);
-		PersistenceManagerXMIImpl pm;
-		try {
-			pm = new PersistenceManagerXMIImpl(logger, configuration);
-			CoreUtil util = new CoreUtil(logger, pm);
-			service = new ComponentTypeServiceImpl(pm, util, new FromDTO(util), new ToDTO(util), configuration, logger);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
-
-	public void createWithIfAndReifiable(String ifactor, String reifiable) throws FunctionalException {
-		createAndGetCT("", "", "ertyuyreklbjnb,n", "bis__w-CMZoWEeG71vmJ5CR-iA", "ServicesContainer2", "", "", "",
-				ifactor, "", "", "", reifiable);
 	}
 }

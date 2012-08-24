@@ -17,7 +17,7 @@ import org.m2ling.common.soa.Context;
  * All the methods can throw a TechnicalException in case of technical issue.
  * </p>
  * <p>
- * All the methods cab throw an IllegalAccessException if current user has not the authorization to
+ * All the methods can throw an IllegalAccessException if current user has not the authorization to
  * access the viewpoint.
  * </p>
  */
@@ -58,16 +58,18 @@ public interface ViewPointService {
 	 * Return the viewpoint DTO given a VP name (unique) if it exist, null otherwise.
 	 * 
 	 * @return the viewpoint DTO given a VP name (unique) if it exist, null otherwise
+	 * @throws FunctionalException if name is null or void
 	 */
-	ViewPointDTO getViewPointByName(Context context, String name);
+	ViewPointDTO getViewPointByName(Context context, String name) throws FunctionalException;
 
 	/**
 	 * Return the viewpoint DTO given an ID if it exist, null otherwise.
 	 * 
 	 * @return the viewpoint DTO given an ID if it exist, null otherwise
+	 * @throws FunctionalException if id is null or void
 	 * 
 	 */
-	ViewPointDTO getViewPointByID(Context context, String id);
+	ViewPointDTO getViewPointByID(Context context, String id) throws FunctionalException;
 
 	/**
 	 * Drop the given viewpoint if it exists.

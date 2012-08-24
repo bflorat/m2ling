@@ -50,7 +50,7 @@ public interface ComponentType extends ConceptItem, HasReferences {
 
 	/**
 	 * Returns the value of the '<em><b>Instantiation Factor</b></em>' attribute.
-	 * The default value is <code>"1"</code>.
+	 * The default value is <code>"0"</code>.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Instantiation Factor</em>' attribute isn't clear,
@@ -60,7 +60,7 @@ public interface ComponentType extends ConceptItem, HasReferences {
 	 * @return the value of the '<em>Instantiation Factor</em>' attribute.
 	 * @see #setInstantiationFactor(int)
 	 * @see org.m2ling.domain.core.CorePackage#getComponentType_InstantiationFactor()
-	 * @model default="1"
+	 * @model default="0"
 	 * @generated
 	 */
 	int getInstantiationFactor();

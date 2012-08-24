@@ -6,7 +6,6 @@ package org.m2ling.domain.util;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.util.Switch;
-import org.m2ling.domain.*;
 import org.m2ling.domain.DomainPackage;
 import org.m2ling.domain.Root;
 

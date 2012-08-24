@@ -19,9 +19,11 @@ import org.m2ling.common.utils.Consts;
 import org.m2ling.common.utils.Utils;
 import org.m2ling.domain.Root;
 import org.m2ling.domain.core.ArchitectureItem;
+import org.m2ling.domain.core.Component;
 import org.m2ling.domain.core.ComponentType;
 import org.m2ling.domain.core.ReferenceType;
 import org.m2ling.domain.core.Type;
+import org.m2ling.domain.core.View;
 import org.m2ling.domain.core.ViewPoint;
 import org.m2ling.persistence.PersistenceManager;
 import org.m2ling.service.common.ServiceImpl;
@@ -148,11 +150,14 @@ public class ComponentTypeServiceImpl extends ServiceImpl implements ComponentTy
 				}
 			}
 			// Instantiation factor, -1 or any positive value is valid
-			if (dto.getInstantiationFactor() != -1 && dto.getInstantiationFactor() < 0) {
+			if (dto.getInstantiationFactor() < 0 && dto.getInstantiationFactor() != -1) {
 				throw new FunctionalException(FunctionalException.Code.WRONG_IF, null, "instantiationFactor="
 						+ dto.getInstantiationFactor());
 			}
 			if ((dto.getInstantiationFactor() > 0 || dto.getInstantiationFactor() == -1) && !dto.isReifiable()) {
+				throw new FunctionalException(FunctionalException.Code.NON_REIFIABLE_IFACTOR_SET, null, dto.toString());
+			}
+			if (dto.getInstantiationFactor() == 0 && dto.isReifiable()) {
 				throw new FunctionalException(FunctionalException.Code.NON_REIFIABLE_IFACTOR_SET, null, dto.toString());
 			}
 			// Bound type
@@ -193,10 +198,9 @@ public class ComponentTypeServiceImpl extends ServiceImpl implements ComponentTy
 			if (enumeration.size() > 0 && dto.getBoundTypeID() == null) {
 				throw new FunctionalException(FunctionalException.Code.NULL_BOUND_TYPE_ENUMERATION, null, "(bound type)");
 			}
-			ComponentType firstCTFound = null;
+			// Check that every every component or component group exists and is of boundtype
 			for (String compId : enumeration) {
 				ArchitectureItem item = null;
-				// check that every every component or component group exists and is of boundtype
 				item = util.getComponentByID(compId);
 				// unknown component ? ok, search in groups
 				if (item == null) {
@@ -204,16 +208,12 @@ public class ComponentTypeServiceImpl extends ServiceImpl implements ComponentTy
 				}
 				// still nothing ? leave in error
 				if (item == null) {
-					throw new FunctionalException(FunctionalException.Code.NULL_ARGUMENT, null, "(enumeration)");
+					throw new FunctionalException(FunctionalException.Code.TARGET_NOT_FOUND, null, "(enumeration)");
 				}
-				// check that every component or group share the same CT
-				if (firstCTFound == null) {
-					firstCTFound = util.getComponentTypeForArchitectureItem(item);
-				} else {
-					ComponentType ct = util.getComponentTypeForArchitectureItem(item);
-					if (!ct.equals(firstCTFound)) {
-						throw new FunctionalException(FunctionalException.Code.DIFFERENT_TYPES, null, "(enumeration)");
-					}
+				// check that every component or group share the same CT = bound type
+				ComponentType ct = util.getComponentTypeForArchitectureItem(item);
+				if (!ct.getId().equals(dto.getBoundTypeID())) {
+					throw new FunctionalException(FunctionalException.Code.INVALID_TYPE, null, "(enumeration)");
 				}
 			}
 		}
@@ -280,11 +280,56 @@ public class ComponentTypeServiceImpl extends ServiceImpl implements ComponentTy
 	}
 
 	@Override
-	public void deleteCT(final Context context, final ComponentTypeDTO dto) throws FunctionalException {
-		// Controls
-		checkDTO(dto, AccessType.DELETE);
-		ComponentType type = util.getComponentTypeByID(dto.getId());
+	public void deleteCT(final Context context, final String id) throws FunctionalException {
+		{// Controls
+			if (id == null || Strings.isNullOrEmpty(id.trim())) {
+				throw new FunctionalException(FunctionalException.Code.NULL_ARGUMENT, null, "(id)");
+			}
+		}
+		ComponentType type = util.getComponentTypeByID(id);
+		if (type == null) {
+			throw new FunctionalException(FunctionalException.Code.TARGET_NOT_FOUND, null, "id=" + id);
+		}
+		// Check CT20 : none component of this type
+		for (View view : pmanager.getRoot().getViews()) {
+			for (Component comp : view.getComponents()) {
+				if (comp.getType().equals(type)) {
+					throw new FunctionalException(FunctionalException.Code.CANT_DELETE_CT_EXISTING_COMP, null,
+							"component name=" + comp.getName());
+				}
+			}
+		}
+		// Check CT21 : none CT binding against this CT
+		for (ViewPoint vp : pmanager.getRoot().getViewPoints()) {
+			for (ComponentType ct : vp.getComponentTypes()) {
+				if (!(ct.equals(type)) && type.equals(ct.getBoundType())) {
+					throw new FunctionalException(FunctionalException.Code.CANT_DELETE_CT_EXISTING_BINDING, null,
+							"componenet type name=" + ct.getName());
+				}
+			}
+		}
 		ViewPoint vp = (ViewPoint) type.eContainer();
 		vp.getComponentTypes().remove(type);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * org.m2ling.service.principles.ComponentTypeService#getCTByID(org.m2ling.common.soa.Context,
+	 * java.lang.String)
+	 */
+	@Override
+	public ComponentTypeDTO getCTByID(Context context, String id) throws FunctionalException {
+		{// Controls
+			if (id == null || Strings.isNullOrEmpty(id.trim())) {
+				throw new FunctionalException(FunctionalException.Code.NULL_ARGUMENT, null, "(id)");
+			}
+		}
+		ComponentType ct = util.getComponentTypeByID(id);
+		if (ct == null) {
+			return null;
+		}
+		return toDTO.getComponentTypeDTO(ct);
 	}
 }
