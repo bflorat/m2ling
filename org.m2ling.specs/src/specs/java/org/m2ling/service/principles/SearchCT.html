@@ -3,17 +3,17 @@
 	xmlns:concordion="http://www.concordion.org/2007/concordion">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<title>Component type deletion</title>
+<title>Component type search</title>
 </head>
 <body>
-	<H1>Component type deletion</H1>
-	<p>Administrators or actors with adequate authorizations can delete
+	<H1>Component type search</H1>
+	<p>Administrators or actors with adequate authorizations can search for
 		a CT (component type).</p>
 	<p class='rule'>It is possible to retrieve all existing viewpoints
 		:
 	<div class="example">
 		Given several existing component type<br /> When we ask for
-		viewpoints listing<span concordion:execute="#resu=getAll()" /><br />
+		ct listing<span concordion:execute="#resu=getAll()" /><br />
 		Then we get a number of ct <b concordion:assertEquals="#resu">&gt;0</b>.
 	</div>
 	</p>
@@ -23,7 +23,7 @@
 		Given an existing CT whose id=<b concordion:set="#id">id_comp_type_1</b>
 		<br /> When we search for it by ID<span
 			concordion:execute="#resu=getCTByID(#id)" /><br /> Then we should be
-		a viewpoint named <b concordion:assertEquals="#resu">comp_type_1</b>.
+		a CT named <b concordion:assertEquals="#resu">comp_type_1</b>.
 	</div>
 	</p>
 

@@ -67,8 +67,11 @@ public class ComponentTypeServiceImpl extends ServiceImpl implements ComponentTy
 			throw new FunctionalException(Code.NULL_ARGUMENT, null, null);
 		}
 		// Check id
-		if (dto.getId() == null || Strings.isNullOrEmpty(dto.getId().trim())) {
+		if (dto.getId() == null){
 			throw new FunctionalException(FunctionalException.Code.NULL_ARGUMENT, null, "(id)");
+		}
+		if (Strings.isNullOrEmpty(dto.getId().trim())){
+			throw new FunctionalException(FunctionalException.Code.VOID_ARGUMENT, null, "(id)");
 		}
 		if (dto.getId().length() > 40) {
 			throw new FunctionalException(FunctionalException.Code.SIZE_EXCEEDED, null, "(id)");
@@ -78,7 +81,7 @@ public class ComponentTypeServiceImpl extends ServiceImpl implements ComponentTy
 			// Name can be null
 			if (dto.getName() != null) {
 				if ("".equals(dto.getName().trim())) {
-					throw new FunctionalException(FunctionalException.Code.NULL_ARGUMENT, null, "(name)");
+					throw new FunctionalException(FunctionalException.Code.VOID_ARGUMENT, null, "(name)");
 				}
 				if (dto.getName().length() > Consts.MAX_LABEL_SIZE) {
 					throw new FunctionalException(FunctionalException.Code.SIZE_EXCEEDED, null, "(name)");
@@ -294,7 +297,7 @@ public class ComponentTypeServiceImpl extends ServiceImpl implements ComponentTy
 		for (View view : pmanager.getRoot().getViews()) {
 			for (Component comp : view.getComponents()) {
 				if (comp.getType().equals(type)) {
-					throw new FunctionalException(FunctionalException.Code.CANT_DELETE_CT_EXISTING_COMP, null,
+					throw new FunctionalException(FunctionalException.Code.CT_EXISTING_COMP, null,
 							"component name=" + comp.getName());
 				}
 			}
@@ -303,7 +306,7 @@ public class ComponentTypeServiceImpl extends ServiceImpl implements ComponentTy
 		for (ViewPoint vp : pmanager.getRoot().getViewPoints()) {
 			for (ComponentType ct : vp.getComponentTypes()) {
 				if (!(ct.equals(type)) && type.equals(ct.getBoundType())) {
-					throw new FunctionalException(FunctionalException.Code.CANT_DELETE_CT_EXISTING_BINDING, null,
+					throw new FunctionalException(FunctionalException.Code.CT_EXISTING_BINDING, null,
 							"componenet type name=" + ct.getName());
 				}
 			}

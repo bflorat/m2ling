@@ -13,13 +13,15 @@
   <viewPoints description="vp1 label" id="id_vp1" name="vp1">
     <activities id="_Nnj8IJXFEeGfDY1tsvvkpQ" name="activity1"/>
     <componentTypes id="id_comp_type_1" name="comp_type_1"/>
-    <componentTypes id="id_vp1_no_comp" name="ct_no_comp" boundType="id_vp1_bound_target" instantiationFactor="0"/>
+    <componentTypes id="id_vp1_no_comp" name="ct_no_comp" boundType="id_vp1_bound_target"/>
     <rules id="id_rule1" name="rule1" comment="comment_rule1" description="desc_rule1" status="VALIDATED" rationale="rationale_rule1" exceptions="exceptions_rule1"/>
     <statusLiterals>VALIDATED</statusLiterals>
+    <statusLiterals>REFUSED</statusLiterals>
+    <statusLiterals>SUGGESTED</statusLiterals>
   </viewPoints>
   <viewPoints id="id_vp2" name="vp2">
     <componentTypes id="id_comp_type_2" name="comp_type_2" description="" boundType="id_comp_type_1"/>
-    <componentTypes id="id_vp1_bound_target" name="bound_target" instantiationFactor="0"/>
+    <componentTypes id="id_vp1_bound_target" name="bound_target"/>
   </viewPoints>
   <views id="id_v1" name="v1" viewPoint="id_vp1">
     <components id="id_comp1" name="comp1" status="" type="id_comp_type_1"/>

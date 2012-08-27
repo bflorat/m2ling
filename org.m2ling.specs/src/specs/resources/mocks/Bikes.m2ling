@@ -86,11 +86,11 @@
     <statusLiterals>REFUSED</statusLiterals>
     <statusLiterals>OBSOLETE</statusLiterals>
   </viewPoints>
-  <viewPoints description="Contains all concepts used to deploy an application like : module, server, middleware" id="_mHf5sKKSEeGOsOUMPsTb_w" name="Deployment architecture">
+  <viewPoints description="Contains all concepts used to deploy an application like : module, server, middleware" id="id_vp_deploy" name="Deployment architecture">
     <componentTypes id="_sgTcYaTjEeGhbskxmOc77w" name="Environment">
-      <references targets="_-a222Gi7NYPtEuJdA _0pkjcZ9aEeGNFtlcQfU333 _aazazaza _1y2zQZohnnnmJ5CR-iA _Ybdmtd456 _wf5AQZ111YPtEuJdA __111CR-iA _fKt222vmJ5CR-iA _ha8mE333Mag01qc4bw _aazazazaerer"/>
+      <references targets="id_ct_deploy_X86 _0pkjcZ9aEeGNFtlcQfU333 _aazazaza _1y2zQZohnnnmJ5CR-iA _Ybdmtd456 _wf5AQZ111YPtEuJdA __111CR-iA _fKt222vmJ5CR-iA _ha8mE333Mag01qc4bw _aazazazaerer"/>
     </componentTypes>
-    <componentTypes id="_-a222Gi7NYPtEuJdA" name="X86 Server" description="Intel-based server. Mostly 64 bits." instantiationFactor="-1" reifiable="true">
+    <componentTypes id="id_ct_deploy_X86" name="X86 Server" description="Intel-based server. Mostly 64 bits." instantiationFactor="-1" reifiable="true">
       <references type="RUNS" targets="_wf5AQZ111YPtEuJdA"/>
     </componentTypes>
     <componentTypes id="_0pkjcZ9aEeGNFtlcQfU333" name="SPARC Server" description="SPARC RISC-based CPU server" instantiationFactor="-1" reifiable="true">
@@ -220,12 +220,12 @@
   </views>
   <views comment="" description="Production view of BikesOnline deployment" id="_7-nzcaKREeGOsOUMPsTb_w" name="Deployment_BikesOnline" viewPoint="id_vp_logical">
     <components id="_vDwQkqTjEeGhbskxmOc77w" name="Production" description="" type="_sgTcYaTjEeGhbskxmOc77w">
-      <references targets="_Fe3JcqMoEeGkWPVFom68wQ _C2pRkqNKEeGULe7xIq_4Kg _itGiQqNJEefdfd_4Kgezezez _bTKAYqMhEeGTqOb8fWOx0Q _xi1DYqMoEeGkWPVFom68wQ _6b6KoqMtEeG9sM0bZ_WFcA _0VP9IqMnEeGkggwQ _eoxQUqMsEeG9sM0bZ_WFcA _LhezMqMoEeGkWPVFom68rerwQ _N13tUqNMEeGULe7xIq_4Kg _0dlLAqMtEeG9sM0bZ_WFcA _5S34QqMoEeGkWPVFom68wQ _itGiQqNJEeGULe7xIq_4Kg _ZKfHEqNKEeGULe7xIq_4Kg _itGiQqNJEeff4Kg _TmWPQqMtEeG9sM0bZ_WFcA _0VP9IqMnEeGkWPVFom68wQ"/>
+      <references targets="id_comp_deploy_IBM-HS21 _C2pRkqNKEeGULe7xIq_4Kg _itGiQqNJEefdfd_4Kgezezez _bTKAYqMhEeGTqOb8fWOx0Q _xi1DYqMoEeGkWPVFom68wQ _6b6KoqMtEeG9sM0bZ_WFcA _0VP9IqMnEeGkggwQ _eoxQUqMsEeG9sM0bZ_WFcA _LhezMqMoEeGkWPVFom68rerwQ _N13tUqNMEeGULe7xIq_4Kg _0dlLAqMtEeG9sM0bZ_WFcA _5S34QqMoEeGkWPVFom68wQ _itGiQqNJEeGULe7xIq_4Kg _ZKfHEqNKEeGULe7xIq_4Kg _itGiQqNJEeff4Kg _TmWPQqMtEeG9sM0bZ_WFcA _0VP9IqMnEeGkWPVFom68wQ"/>
     </components>
-    <components id="_Fe3JcqMoEeGkWPVFom68wQ" type="_-a222Gi7NYPtEuJdA" boundComponent="_gfgfdeG3fPi34vn9KQ">
+    <components id="id_comp_deploy_IBM-HS21" type="id_ct_deploy_X86" boundComponent="_gfgfdeG3fPi34vn9KQ">
       <references type="RUNS" targets="_LhezMqMoEeGkWPVFom68rerwQ"/>
     </components>
-    <components id="_xi1DYqMoEeGkWPVFom68wQ" type="_-a222Gi7NYPtEuJdA" boundComponent="_JBJgUp_6EeG3fPi34vn9KQ">
+    <components id="_xi1DYqMoEeGkWPVFom68wQ" type="id_ct_deploy_X86" boundComponent="_JBJgUp_6EeG3fPi34vn9KQ">
       <references type="RUNS" targets="_eoxQUqMsEeG9sM0bZ_WFcA"/>
     </components>
     <components id="_5S34QqMoEeGkWPVFom68wQ" type="_0pkjcZ9aEeGNFtlcQfU333" boundComponent="_Y6hMwp_6EeG3fPi34vn9KQ">
@@ -257,7 +257,7 @@
     <components id="_C2pRkqNKEeGULe7xIq_4Kg" comment="" description="" type="_aazazaza" boundComponent="_hGsf4J89EeGNFtlcQfUFgw"/>
     <components id="_ZKfHEqNKEeGULe7xIq_4Kg" type="_Ybdmtd456" boundComponent="_G9AtYp6REeG"/>
     <components id="_N13tUqNMEeGULe7xIq_4Kg" type="_aazazazaerer" boundComponent="_bJoEgJ89EeGNFtlcQfUFgw"/>
-    <instances id="_Yv4RtKMpEeGkWPVFom68wQ" name="HS21_1" component="_Fe3JcqMoEeGkWPVFom68wQ" boundComponentInstance="_Hk3">
+    <instances id="_Yv4RtKMpEeGkWPVFom68wQ" name="HS21_1" component="id_comp_deploy_IBM-HS21" boundComponentInstance="_Hk3">
       <references type="RUNS" targets="_pQiyNKMqEeG9sM0bZ_WFcA"/>
     </instances>
     <instances id="_pQiyNKMqEeG9sM0bZ_WFcA" name="OS_HS21_1" component="_LhezMqMoEeGkWPVFom68rerwQ">

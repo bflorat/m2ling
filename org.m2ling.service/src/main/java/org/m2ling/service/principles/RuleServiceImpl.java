@@ -69,14 +69,20 @@ public class RuleServiceImpl extends ServiceImpl implements RuleService {
 		}
 		// Name and ID
 		if (access == AccessType.CREATE || access == AccessType.UPDATE) {
-			if (dto.getId() == null || Strings.isNullOrEmpty(dto.getId().trim())) {
+			if (dto.getId() == null) {
 				throw new FunctionalException(FunctionalException.Code.NULL_ARGUMENT, null, "(id)");
+			}
+			if (Strings.isNullOrEmpty(dto.getId().trim())) {
+				throw new FunctionalException(FunctionalException.Code.VOID_ARGUMENT, null, "(id)");
 			}
 			if (dto.getId().length() > 40) {
 				throw new FunctionalException(FunctionalException.Code.SIZE_EXCEEDED, null, "(id)");
 			}
-			if (dto.getName() == null || Strings.isNullOrEmpty(dto.getName().trim())) {
+			if (dto.getName() == null) {
 				throw new FunctionalException(FunctionalException.Code.NULL_ARGUMENT, null, "(name)");
+			}
+			if (Strings.isNullOrEmpty(dto.getName().trim())) {
+				throw new FunctionalException(FunctionalException.Code.VOID_ARGUMENT, null, "(name)");
 			}
 			if (dto.getName().length() > Consts.MAX_LABEL_SIZE) {
 				throw new FunctionalException(FunctionalException.Code.SIZE_EXCEEDED, null, "(name)");
@@ -102,8 +108,8 @@ public class RuleServiceImpl extends ServiceImpl implements RuleService {
 			}
 		}
 		if (access == AccessType.CREATE || access == AccessType.UPDATE) {
-			// Status
-			if (!vp.getStatusLiterals().contains(dto.getStatus())) {
+			// Status (null is valid)
+			if (dto.getStatus() != null && !vp.getStatusLiterals().contains(dto.getStatus())) {
 				throw new FunctionalException(FunctionalException.Code.INVALID_STATUS, null, dto.toString());
 			}
 			// Description (mandatory)
@@ -114,18 +120,21 @@ public class RuleServiceImpl extends ServiceImpl implements RuleService {
 				throw new FunctionalException(FunctionalException.Code.SIZE_EXCEEDED, null, "(description)");
 			}
 			// Rationale (mandatory)
-			if (dto.getRationale() == null || Strings.isNullOrEmpty(dto.getRationale().trim())) {
+			if (dto.getRationale() == null) {
 				throw new FunctionalException(FunctionalException.Code.NULL_ARGUMENT, null, "(rationale)");
+			}
+			if (Strings.isNullOrEmpty(dto.getRationale().trim())) {
+				throw new FunctionalException(FunctionalException.Code.VOID_ARGUMENT, null, "(rationale)");
 			}
 			if (dto.getRationale().length() > Consts.MAX_TEXT_SIZE) {
 				throw new FunctionalException(FunctionalException.Code.SIZE_EXCEEDED, null, "(rationale)");
 			}
-			// Exceptions
-			if (dto.getExceptions().length() > Consts.MAX_TEXT_SIZE) {
+			// Exceptions (can be null)
+			if (dto.getExceptions() != null && dto.getExceptions().length() > Consts.MAX_TEXT_SIZE) {
 				throw new FunctionalException(FunctionalException.Code.SIZE_EXCEEDED, null, "(exceptions)");
 			}
-			// Comment
-			if (dto.getComment().length() > Consts.MAX_TEXT_SIZE) {
+			// Comment (can be null)
+			if (dto.getComment() != null && dto.getComment().length() > Consts.MAX_TEXT_SIZE) {
 				throw new FunctionalException(FunctionalException.Code.SIZE_EXCEEDED, null, "(comment)");
 			}
 			// Tags

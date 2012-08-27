@@ -67,24 +67,36 @@ public class ViewPointServiceImpl extends ServiceImpl implements ViewPointServic
 		}
 		if (access == AccessType.CREATE || access == AccessType.UPDATE) {
 			// ID
-			if (dto.getId() == null || Strings.isNullOrEmpty(dto.getId().trim())) {
+			if (dto.getId() == null){
 				throw new FunctionalException(FunctionalException.Code.NULL_ARGUMENT, null, "(id)");
+			}
+			if (Strings.isNullOrEmpty(dto.getId().trim())){
+				throw new FunctionalException(FunctionalException.Code.VOID_ARGUMENT, null, "(id)");
 			}
 			if (dto.getId().length() > 40) {
 				throw new FunctionalException(FunctionalException.Code.SIZE_EXCEEDED, null, "(id)");
 			}
 			// Name
-			if (dto.getName() == null || Strings.isNullOrEmpty(dto.getName().trim())) {
+			if (dto.getName() == null){
 				throw new FunctionalException(FunctionalException.Code.NULL_ARGUMENT, null, "(name)");
+			}
+			if (Strings.isNullOrEmpty(dto.getName().trim())){
+				throw new FunctionalException(FunctionalException.Code.VOID_ARGUMENT, null, "(name)");
 			}
 			if (dto.getName().length() > Consts.MAX_LABEL_SIZE) {
 				throw new FunctionalException(FunctionalException.Code.SIZE_EXCEEDED, null, "(name)");
 			}
 			// Status literals
+			if (dto.getStatusLiterals() == null){
+				throw new FunctionalException(FunctionalException.Code.NULL_ARGUMENT, null, "(statusLiteral)");
+			}
 			int index = 1;
 			for (String literal : dto.getStatusLiterals()) {
-				if (literal == null) {
-					throw new FunctionalException(FunctionalException.Code.NULL_ARGUMENT, null, "(status Literal)");
+				if (literal == null){
+					throw new FunctionalException(FunctionalException.Code.NULL_ARGUMENT, null, "statusLiteral #" + index);
+				}
+				if ( Strings.isNullOrEmpty(literal.trim())) {
+					throw new FunctionalException(FunctionalException.Code.VOID_ARGUMENT, null, "statusLiteral #" + index);
 				}
 				if (literal.length() > Consts.MAX_LABEL_SIZE) {
 					throw new FunctionalException(FunctionalException.Code.SIZE_EXCEEDED, null, "statusLiteral #" + index);
@@ -149,8 +161,11 @@ public class ViewPointServiceImpl extends ServiceImpl implements ViewPointServic
 	@Override
 	public ViewPointDTO getViewPointByName(final Context context, final String name) throws FunctionalException {
 		{// Controls
-			if (name == null || Strings.isNullOrEmpty(name.trim())) {
+			if (name == null) {
 				throw new FunctionalException(FunctionalException.Code.NULL_ARGUMENT, null, "(name)");
+			}
+			if (Strings.isNullOrEmpty(name.trim())) {
+				throw new FunctionalException(FunctionalException.Code.VOID_ARGUMENT, null, "(name)");
 			}
 		}
 		Root root = pmanager.getRoot();

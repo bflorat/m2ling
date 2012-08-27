@@ -12,6 +12,7 @@
 		a system of interest.</p>
 	<p>A ~ViewPoint~ is uniquely identified by its id. Its name must be
 		unique.</p>
+	<h3>Round trip test from presentation to presentation layer</h3>
 	<div class="example">
 		<p>A new viewpoint created with
 		<ul>
@@ -27,7 +28,15 @@
 			description=desc1 iconPath= id=id_vp123 name=vp123
 			statusLiterals=SUGGESTED,VALIDATED tags=tag1,tag2</b>.
 		</p>
-		<h3>Controls</h3>
+		</div>
+		<h3>Status literals</h3>
+		<p class='rule'>Status literals are a list of strings setting possible status for rules (M2 level), architecture items (M1 level) 
+		and instances (M0 level).</p>
+		<p class='rule'>Status literals can be null as a whole. A void list of strings means that none status is defined and hence that
+		each HasStatus item should have a null status</p>
+		<p class='rule'>StatusLiterals can't contain a void or null element.</p>
+		<h3>Format controls</h3>
+		<div class="example">
 		<ul>
 			<li>A null input should make service call <b
 				concordion:assertEquals="getCheckNullDTO()">FAIL</b>
@@ -72,7 +81,7 @@
 						<td>comment2</td>
 						<td>tags1,tag2</td>
 						<td>status1,status1</td>
-						<td>FAIL</td>
+						<td>FAIL with code DUPLICATE_STATUS_LITERAL</td>
 					</tr>
 					<tr>
 						<td>Existing VP name</td>
@@ -82,7 +91,7 @@
 						<td>comment2</td>
 						<td>tags1,tag2</td>
 						<td>status1,status1</td>
-						<td>FAIL</td>
+						<td>FAIL with code DUPLICATE_STATUS_LITERAL</td>
 					</tr>
 					<!-- ID checks -->
 					<tr>
@@ -93,7 +102,7 @@
 						<td>comment2</td>
 						<td>tags1,tag2</td>
 						<td>VALIDATED,REFUSED</td>
-						<td>FAIL</td>
+						<td>FAIL with code NULL_ARGUMENT</td>
 					</tr>
 					<tr>
 					    <td>Void ID</td>
@@ -103,7 +112,7 @@
 						<td>comment2</td>
 						<td>tags1,tag2</td>
 						<td>VALIDATED,REFUSED</td>
-						<td>FAIL</td>
+						<td>FAIL with code VOID_ARGUMENT</td>
 					</tr>
 					<tr>
 					    <td>Void ID after trim</td>
@@ -113,7 +122,7 @@
 						<td>comment2</td>
 						<td>tags1,tag2</td>
 						<td>VALIDATED,REFUSED</td>
-						<td>FAIL</td>
+						<td>FAIL with code VOID_ARGUMENT</td>
 					</tr>
 					<tr>
 						<td>ID too long</td>
@@ -123,7 +132,7 @@
 						<td>comment2</td>
 						<td>tags1,tag2</td>
 						<td>VALIDATED,REFUSED</td>
-						<td>FAIL</td>
+						<td>FAIL with code SIZE_EXCEEDED</td>
 					</tr>
 					<!-- name check -->
 					<tr>
@@ -134,7 +143,7 @@
 						<td>comment2</td>
 						<td>tags1,tag2</td>
 						<td>VALIDATED,REFUSED</td>
-						<td>FAIL</td>
+						<td>FAIL with code NULL_ARGUMENT</td>
 					</tr>
 					<tr>
 					    <td>Void name</td>
@@ -144,7 +153,7 @@
 						<td>comment2</td>
 						<td>tags1,tag2</td>
 						<td>VALIDATED,REFUSED</td>
-						<td>FAIL</td>
+						<td>FAIL with code VOID_ARGUMENT</td>
 					</tr>
 					<tr>
 					    <td>Void ID after trim</td>
@@ -154,7 +163,7 @@
 						<td>comment2</td>
 						<td>tags1,tag2</td>
 						<td>VALIDATED,REFUSED</td>
-						<td>FAIL</td>
+						<td>FAIL with code VOID_ARGUMENT</td>
 					</tr>
 					<tr>
 					    <td>Name too long</td>
@@ -167,7 +176,7 @@
 						<td>comment2</td>
 						<td>tags1,tag2</td>
 						<td>VALIDATED,REFUSED</td>
-						<td>FAIL</td>
+						<td>FAIL with code SIZE_EXCEEDED</td>
 					</tr>
 					<!-- Status literal -->
 					<tr>
@@ -181,27 +190,37 @@
 							skjdlsjdkjslkdjskljdlsjdlj lsd jslk dkjs lkdjskldj sjd
 							sjdlksqkjdhqskjhdkjqshdkjqshkjdhqskjhdkjqskdjhqskjdhqskhdkjqshdkjhqskjdhqskjhdkjqshdkjqshkdjqsdsds
 							dsdsd shkjdhqskjhdkjqs,foo</td>
-						<td>FAIL</td>
+						<td>FAIL with code SIZE_EXCEEDED</td>
 					</tr>
 					<tr>
-					    <td>Null status literals</td>
+					    <td>Null status literal</td>
 						<td>id_vp2</td>
 						<td>vp2</td>
-						<td>null</td>
+						<td>desc</td>
 						<td>comment2</td>
 						<td>tags1,tag2</td>
-						<td>status1,status2</td>
-						<td>PASS</td>
+						<td>a,null</td>
+						<td>FAIL with code NULL_ARGUMENT</td>
 					</tr>
 					<tr>
-					    <td>Void status literals</td>
+					    <td>Void status literal</td>
 						<td>id_vp2</td>
 						<td>vp2</td>
-						<td></td>
+						<td>desc</td>
 						<td>comment2</td>
 						<td>tags1,tag2</td>
-						<td>status1,status2</td>
-						<td>PASS</td>
+						<td>,b</td>
+						<td>FAIL with code VOID_ARGUMENT</td>
+					</tr>
+					<tr>
+					    <td>Void after trim status literal</td>
+						<td>id_vp2</td>
+						<td>vp2</td>
+						<td>space</td>
+						<td>comment2</td>
+						<td>tags1,tag2</td>
+						<td>space,</td>
+						<td>FAIL with code VOID_ARGUMENT</td>
 					</tr>
 					<tr>
 						<td>Dup status literal</td>
@@ -211,7 +230,7 @@
 						<td>comment2</td>
 						<td>tags1,tag2</td>
 						<td>status1,status1</td>
-						<td>FAIL</td>
+						<td>FAIL with code DUPLICATE_STATUS_LITERAL</td>
 					</tr>
 					<!-- Comment -->
 					<tr>

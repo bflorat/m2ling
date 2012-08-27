@@ -26,12 +26,18 @@
 			<li>tags=<b concordion:set="#tags">tag1,tag2</b></li>
 		</ul>
 		should have following characteristics : <b
-			concordion:assertEquals="getRule(#id,#vpID,#name,#description,#comment,#status,#priority,#rationale,#exceptions,#tags)">comment=comment2
+			concordion:assertEquals="createAndGetRule(#id,#vpID,#name,#description,#comment,#status,#priority,#rationale,#exceptions,#tags)">comment=comment2
 			description=desc2 drop= exceptions=exception2 id=rule_id2 name=rule2
 			priority=3 rationale=rationale2 status=VALIDATED tags=tag1,tag2
 			vpID=id_vp1</b>.
 	</div>
-	<h3>Controls</h3>
+	<h3>Status</h3>
+	<p class='rule'>A rule status can't be void.</p>
+	<p class='rule'>A rule status must be one of its associated viewpoint status literals list or null if undefined.</p>
+	<div class='example'>
+		Attempt to <span concordion:execute='#resu=testNullStatus()'></span> create a rule with a <b>null</b> status should <b concordion:assertEquals='#resu'>PASS</b>.
+	</div>
+	<h3>Format controls</h3>
 	<ul>
 		<li>A null input should make service call <b
 			concordion:assertEquals="getCheckNullDTO()">FAIL</b>
@@ -42,30 +48,37 @@
 			characters</li>
 		<li>description and comment size can't be larger that 2000
 			characters</li>
+		<li>ID, VP ID, Description, rationale and name are mandatory</li>
 		<li>See Tags specifications for tags limits</li>
 	</ul>
 	<p>Following service inputs should make the service :
 	<div class="example">
 		<table
-			concordion:execute="#result=getCheckDTOVerification(#caseName,#id,#name,#description,#comment,#tags,#statusLiterals)">
+			concordion:execute="#result=getCheckDTOVerification(#caseName,#id,#name,#description,#rationale,#exceptions,#comment,#tags,#status,#priority)">
 			<tr>
 				<th concordion:set="#caseName">Case</th>
 				<th concordion:set="#id">ID</th>
 				<th concordion:set="#name">Name</th>
-				<th concordion:set="#description">Name</th>
-				<th concordion:set="#comment">Name</th>
-				<th concordion:set="#tags">Name</th>
-				<th concordion:set="#statusLiterals">Name</th>
+				<th concordion:set="#description">Description</th>
+				<th concordion:set="#exceptions">Exceptions</th>
+				<th concordion:set="#rationale">Rationale</th>
+				<th concordion:set="#comment">Comment</th>
+				<th concordion:set="#tags">Tags</th>
+				<th concordion:set="#status">Status</th>
+				<th concordion:set="#priority">Priority</th>
 				<th concordion:assertEquals="#result">should :</th>
 			</tr>
 			<tr>
 				<td>Nominal</td>
-				<td>id_vp2</td>
-				<td>vp2</td>
+				<td>id_rule4</td>
+				<td>rule4</td>
 				<td>description2</td>
+				<td>exceptions2</td>
+				<td>rationale2</td>
 				<td>comment2</td>
 				<td>tags1,tag2</td>
-				<td>VALIDATED,REFUSED</td>
+				<td>VALIDATED</td>
+				<td>3</td>
 				<td>PASS</td>
 			</tr>
 			<tr>
@@ -73,20 +86,26 @@
 				<td>id_rule1</td>
 				<td>rule2</td>
 				<td>description2</td>
+				<td>exceptions2</td>
+				<td>rationale2</td>
 				<td>comment2</td>
 				<td>tags1,tag2</td>
-				<td>status1,status1</td>
-				<td>FAIL</td>
+				<td>VALIDATED</td>
+				<td>3</td>
+				<td>FAIL with code DUPLICATES</td>
 			</tr>
 			<tr>
 				<td>Existing rule name</td>
-				<td>id_rule2</td>
+				<td>id_rule4</td>
 				<td>rule1</td>
 				<td>description2</td>
+				<td>exceptions2</td>
+				<td>rationale2</td>
 				<td>comment2</td>
 				<td>tags1,tag2</td>
-				<td>status1,status1</td>
-				<td>FAIL</td>
+				<td>VALIDATED</td>
+				<td>3</td>
+				<td>FAIL with code DUPLICATE_NAME</td>
 			</tr>
 			<!-- ID checks -->
 			<tr>
@@ -94,40 +113,52 @@
 				<td>null</td>
 				<td>vp2</td>
 				<td>description2</td>
+				<td>exceptions2</td>
+				<td>rationale2</td>
 				<td>comment2</td>
 				<td>tags1,tag2</td>
-				<td>VALIDATED,REFUSED</td>
-				<td>FAIL</td>
+				<td>VALIDATED</td>
+				<td>3</td>
+				<td>FAIL with code NULL_ARGUMENT</td>
 			</tr>
 			<tr>
 				<td>Void ID</td>
 				<td></td>
 				<td>vp2</td>
 				<td>description2</td>
+				<td>exceptions2</td>
+				<td>rationale2</td>
 				<td>comment2</td>
 				<td>tags1,tag2</td>
-				<td>VALIDATED,REFUSED</td>
-				<td>FAIL</td>
+				<td>VALIDATED</td>
+				<td>3</td>
+				<td>FAIL with code VOID_ARGUMENT</td>
 			</tr>
 			<tr>
-				<td>Null ID after trim</td>
+				<td>Void ID after trim</td>
 				<td>space</td>
 				<td>vp2</td>
 				<td>description2</td>
+				<td>exceptions2</td>
+				<td>rationale2</td>
 				<td>comment2</td>
 				<td>tags1,tag2</td>
-				<td>VALIDATED,REFUSED</td>
-				<td>FAIL</td>
+				<td>VALIDATED</td>
+				<td>3</td>
+				<td>FAIL with code VOID_ARGUMENT</td>
 			</tr>
 			<tr>
 				<td>ID too long</td>
 				<td>dkjshdhsqkjdhqskjhdkjqshdkjqshkjdhqskjhdkjqskdjhqskjdhqskhdkjqshdkjhqskjdhqskjhdkjqshdkjqshkdjqshkjdhqskjhdkjqshdkjhqskjdhqskhdk</td>
 				<td>vp2</td>
 				<td>description2</td>
+				<td>exceptions2</td>
+				<td>rationale2</td>
 				<td>comment2</td>
 				<td>tags1,tag2</td>
-				<td>VALIDATED,REFUSED</td>
-				<td>FAIL</td>
+				<td>VALIDATED</td>
+				<td>3</td>
+				<td>FAIL with code SIZE_EXCEEDED</td>
 			</tr>
 			<!-- name check -->
 			<tr>
@@ -135,30 +166,39 @@
 				<td>id_vp2</td>
 				<td>null</td>
 				<td>description2</td>
+				<td>exceptions2</td>
+				<td>rationale2</td>
 				<td>comment2</td>
 				<td>tags1,tag2</td>
-				<td>VALIDATED,REFUSED</td>
-				<td>FAIL</td>
+				<td>VALIDATED</td>
+				<td>3</td>
+				<td>FAIL with code NULL_ARGUMENT</td>
 			</tr>
 			<tr>
 				<td>Void name</td>
 				<td>id_vp2</td>
 				<td></td>
 				<td>description2</td>
+				<td>exceptions2</td>
+				<td>rationale2</td>
 				<td>comment2</td>
 				<td>tags1,tag2</td>
-				<td>VALIDATED,REFUSED</td>
-				<td>FAIL</td>
+				<td>VALIDATED</td>
+				<td>3</td>
+				<td>FAIL with code VOID_ARGUMENT</td>
 			</tr>
 			<tr>
 				<td>Void name after trim</td>
 				<td>id_vp2</td>
 				<td>space</td>
 				<td>description2</td>
+				<td>exceptions2</td>
+				<td>rationale2</td>
 				<td>comment2</td>
 				<td>tags1,tag2</td>
-				<td>VALIDATED,REFUSED</td>
-				<td>FAIL</td>
+				<td>VALIDATED</td>
+				<td>3</td>
+				<td>FAIL with code VOID_ARGUMENT</td>
 			</tr>
 			<tr>
 				<td>Name too long</td>
@@ -168,44 +208,27 @@
 					sjdlksqkjdhqskjhdkjqshdkjqshkjdhqskjhdkjqskdjhqskjdhqskhdkjqshdkjhqskjdhqskjhdkjqshdkjqshkdjqsdsds
 					dsdsd shkjdhqskjhdkjqs</td>
 				<td>description2</td>
+				<td>exceptions2</td>
+				<td>rationale2</td>
 				<td>comment2</td>
 				<td>tags1,tag2</td>
-				<td>VALIDATED,REFUSED</td>
-				<td>FAIL</td>
+				<td>VALIDATED</td>
+				<td>3</td>
+				<td>FAIL with code SIZE_EXCEEDED</td>
 			</tr>
 			<!-- Status literal -->
-			<tr>
-				<td>Status literals too long</td>
-				<td>id_vp2</td>
-				<td>vp2</td>
-				<td>description2</td>
-				<td>comment2</td>
-				<td>tags1,tag2</td>
-				<td>dkjshdhddsldljslkdl fdsf fsfdsf ssf
-					skjdlsjdkjslkdjskljdlsjdlj lsd jslk dkjs lkdjskldj sjd
-					sjdlksqkjdhqskjhdkjqshdkjqshkjdhqskjhdkjqskdjhqskjdhqskhdkjqshdkjhqskjdhqskjhdkjqshdkjqshkdjqsdsds
-					dsdsd shkjdhqskjhdkjqs,foo</td>
-				<td>FAIL</td>
-			</tr>
-			<tr>
-				<td>Right status literals</td>
-				<td>id_vp2</td>
-				<td>vp2</td>
-				<td>description2</td>
-				<td>comment2</td>
-				<td>tags1,tag2</td>
-				<td>status1,status2</td>
-				<td>PASS</td>
-			</tr>
 			<tr>
 				<td>Unexisting status literals</td>
 				<td>id_vp2</td>
 				<td>vp2</td>
 				<td>description2</td>
+				<td>exceptions2</td>
+				<td>rationale2</td>
 				<td>comment2</td>
 				<td>tags1,tag2</td>
 				<td>foo_status</td>
-				<td>PASS</td>
+				<td>3</td>
+				<td>FAIL with code INVALID_STATUS</td>
 			</tr>
 			<!-- Comment -->
 			<tr>
@@ -213,9 +236,12 @@
 				<td>id_vp2</td>
 				<td>vp2</td>
 				<td>description2</td>
+				<td>exceptions2</td>
+				<td>rationale2</td>
 				<td></td>
 				<td>tags1,tag2</td>
-				<td>status1</td>
+				<td>VALIDATED</td>
+				<td>3</td>
 				<td>PASS</td>
 			</tr>
 			<tr>
@@ -223,12 +249,68 @@
 				<td>id_vp2</td>
 				<td>vp2</td>
 				<td>description2</td>
+				<td>exceptions2</td>
+				<td>rationale2</td>
 				<td>null</td>
 				<td>tags1,tag2</td>
-				<td>status1</td>
+				<td>VALIDATED</td>
+				<td>3</td>
 				<td>PASS</td>
 			</tr>
-
+			<!-- Exceptions -->
+			<tr>
+				<td>Void exceptions</td>
+				<td>id_vp2</td>
+				<td>vp2</td>
+				<td>description2</td>
+				<td>space</td>
+				<td>rationale2</td>
+				<td>comment</td>
+				<td>tags1,tag2</td>
+				<td>VALIDATED</td>
+				<td>3</td>
+				<td>PASS</td>
+			</tr>
+			<tr>
+				<td>Null exceptions</td>
+				<td>id_vp2</td>
+				<td>vp2</td>
+				<td>description2</td>
+				<td>null</td>
+				<td>rationale2</td>
+				<td>comment</td>
+				<td>tags1,tag2</td>
+				<td>VALIDATED</td>
+				<td>3</td>
+				<td>PASS</td>
+			</tr>
+			<!-- Rationale -->
+			<tr>
+				<td>Void rationale</td>
+				<td>id_vp2</td>
+				<td>vp2</td>
+				<td>description2</td>
+				<td>exception</td>
+				<td>space</td>
+				<td>comment</td>
+				<td>tags1,tag2</td>
+				<td>VALIDATED</td>
+				<td>3</td>
+				<td>FAIL with code VOID_ARGUMENT</td>
+			</tr>
+			<tr>
+				<td>Null rationale</td>
+				<td>id_vp2</td>
+				<td>vp2</td>
+				<td>description2</td>
+				<td>exception</td>
+				<td>null</td>
+				<td>comment</td>
+				<td>tags1,tag2</td>
+				<td>VALIDATED</td>
+				<td>3</td>
+				<td>FAIL with code NULL_ARGUMENT</td>
+			</tr>
 		</table>
 	</div>
 	</p>

@@ -3,39 +3,87 @@
 	xmlns:concordion="http://www.concordion.org/2007/concordion">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<title>Rule update</title>
+<title>Rules update</title>
 </head>
 <body>
-	<H1>Rule update</H1>
+	<H1>Rules update</H1>
 	Administrators or actors with adequate authorizations can update rules.
 
-	<p>Every rule attribute, including its name can be changed except
-		its id.</p>
+	<p>Every rule attribute, including its name can be changed
+		except its id.</p>
 	<div class="example">
-		Given a rule whose id is <b concordion:set="#id">id_rule1</b> and view
-		point id <b concordion:set="#vpID">id_vp1</b> <br/>
-		When we update the view point with following attributes :
+		Given these new settings :
 		<ul>
-			<li>id=<b concordion:set="#name">new rule name</b></li>
-			<li>id=<b concordion:set="#description">new desc</b></li>
-			<li>id=<b concordion:set="#rationale">new rationale</b></li>
-			<li>id=<b concordion:set="#exceptions">new exceptions</b></li>
-			<li>id=<b concordion:set="#comment">new comment</b></li>
-			<li>id=<b concordion:set="#tags">new tag1,new tag2</b></li>
-			<li>id=<b concordion:set="#status">REFUSED</b></li>
-			<li>id=<b concordion:set="#priority">3</b></li>
+			<li>id_rule=<b concordion:set="#id">id_rule1</b></li>
+			<li>name=<b concordion:set="#name">new_name</b></li>
+			<li>description=<b concordion:set="#description">new description</b></li>
+			<li>comment=<b concordion:set="#comment">new comment</b></li>
+			<li>tags=<b concordion:set="#tags">new tag3,new tag4</b></li>
+			<li>status=<b concordion:set="#status">SUGGESTED</b></li>
+			<li>priority=<b concordion:set="#priority">1</b></li>
+			<li>rationale=<b concordion:set="#rationale">new_rationale</b></li>
+			<li>exceptions=<b concordion:set="#exceptions">new_exceptions</b></li>
 		</ul>
-		<span
-			concordion:execute="update(#id,#vpID,#name,#description,#comment,#status,#priority,#rationale,#exceptions,#tags)" />
-		Then we the viewpoint should now have the following
-		characteristics : <b concordion:assertEquals="getRule(#id)">comment=new
-			comment description=new desc drop= exceptions=new exceptions
-			id=id_rule1 name=new rule name priority=3 rationale=new rationale
-			status=REFUSED tags=new tag1,new tag2 vpID=id_vp1</b>.
+		When we update the rule <br /> <span
+			concordion:execute="update(#id,#name,#description,#comment,#tags,#status,#priority,#rationale,#exceptions)"/>
+		<br />Then the viewpoint should now have the following
+		characteristics : <b concordion:assertEquals="getRule(#id)">comment=new comment description=new description drop= 
+		exceptions=new_exceptions id=id_rule1 name=new_name priority=1 rationale=new_rationale status=SUGGESTED tags=new tag3,new tag4 vpID=id_vp1</b>.
 	</div>
-
-	<h3>Format controls</h3>
-	Controls are basically the same updating than creating, check <a href='./CreateRule.html'>Rule creation</a>.
 	
+	<h3>Format controls</h3>
+	<ul>
+		A null input should make service call <b
+			concordion:assertEquals="getCheckNullDTO()">FAIL</b>
+		
+		<div class="example">
+			Given a rule , following
+			service inputs should make the service :
+			<table
+				concordion:execute="#result=getCheckDTOVerification(#caseName, #id, #name, #description, #rationale,
+			#exceptions, #comment, #tags, #status, #priority)">
+				
+				<tr>
+					<th concordion:set="#caseName">Case</th>
+					<th concordion:set="#id">Id</th>
+					<th concordion:set="#name">Name</th>
+					<th concordion:set="#description">Description</th>
+					<th concordion:set="#rationale">Rationale</th>
+					<th concordion:set="#exceptions">Exceptions</th>
+					<th concordion:set="#comment">Comment</th>
+					<th concordion:set="#tags">Tags</th>
+					<th concordion:set="#status">Status</th>
+					<th concordion:set="#priority">Priority</th>
+					<th concordion:assertEquals="#result">should :</th>
+				</tr>
+				<tr>
+					<td>Nominal</td>
+					<td>id_vp1</td>
+					<td>rule</td>
+					<td>new_description</td>
+					<td>new_rationale</td>
+					<td>new_exceptions</td>
+					<td>new_comment</td>
+					<td>new_tags41,new_tag42</td>
+					<td>VALIDATED</td>
+					<td>4</td>
+					<td>PASS</td>
+				</tr>
+				<tr>
+					<td>Unexisting status</td>
+					<td>id_vp1</td>
+					<td>rule</td>
+					<td>new_description</td>
+					<td>new_rationale</td>
+					<td>new_exceptions</td>
+					<td>new_comment</td>
+					<td>new_tags41,new_tag42</td>
+					<td>foo_status</td>
+					<td>4</td>
+					<td>FAIL with code INVALID_STATUS</td>
+				</tr>
+			</table>
+		</div>
+	</ul>
 </body>
 </html>

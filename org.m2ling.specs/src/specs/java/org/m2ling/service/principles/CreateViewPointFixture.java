@@ -64,15 +64,13 @@ public class CreateViewPointFixture extends AbstractViewPointFixture {
 					builder.addTag(tag);
 				}
 			}
-			if (!"null".equals(statusLiterals)) {
-				for (String statusLiteral : Utils.stringListFromString(statusLiterals)) {
-					builder.addStatusLiteral(statusLiteral);
-				}
+			for (String statusLiteral : Utils.stringListFromString(statusLiterals)) {
+				builder.addStatusLiteral(UUT.nul(statusLiteral));
 			}
 			service.checkDTO(builder.build(), AccessType.CREATE);
 			return "PASS";
 		} catch (FunctionalException ex) {
-			return "FAIL";
+			return "FAIL with code " + ex.getCode().name();
 		}
 	}
 }

@@ -24,7 +24,7 @@
 		</ul>
 		When we update the view point <br /> <span
 			concordion:execute="update(#id,#name,#description,#comment,#tags,#statusLiterals)"></span>
-		<br />Then we the viewpoint should now have the following
+		<br />Then the viewpoint should now have the following
 		characteristics : <b concordion:assertEquals="getViewPoint(#id)">comment=comment2
 			description=desc2 iconPath= id=id_vp1 name=vp1_new_name
 			statusLiterals=SUGGESTED,VALIDATED,REFUSED tags=tag3,tag4</b>.

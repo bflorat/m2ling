@@ -11,16 +11,6 @@ public class SearchCTFixture extends AbstractCTFixture {
 		super();
 	}
 
-	public String testDeleteNoExistingComp() {
-		try {
-			reset("Technical");
-			service.deleteCT(null, "id_vp1_no_comp");
-			return "PASS";
-		} catch (FunctionalException fe) {
-			return "FAIL with code " + fe.getCode().name();
-		}
-	}
-
 	public String getAll() throws FunctionalException {
 		reset("Technical");
 		List<ComponentTypeDTO> list = service.getAllCT(null, "id_vp1");

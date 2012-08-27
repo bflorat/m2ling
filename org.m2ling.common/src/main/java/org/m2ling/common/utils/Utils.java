@@ -183,8 +183,11 @@ public class Utils {
 	public static void checkTags(List<String> tags) throws FunctionalException {
 		int index = 1;
 		for (String tag : tags) {
-			if (tag == null || Strings.isNullOrEmpty(tag.trim())) {
+			if (tag == null) {
 				throw new FunctionalException(FunctionalException.Code.NULL_ARGUMENT, null, "tag #" + index);
+			}
+			if (Strings.isNullOrEmpty(tag.trim())) {
+				throw new FunctionalException(FunctionalException.Code.VOID_ARGUMENT, null, "tag #" + index);
 			}
 			if (tag.length() > Consts.MAX_LABEL_SIZE) {
 				throw new FunctionalException(FunctionalException.Code.SIZE_EXCEEDED, null, "tag #" + index);

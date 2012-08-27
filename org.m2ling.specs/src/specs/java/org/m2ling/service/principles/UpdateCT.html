@@ -10,16 +10,26 @@
 	<p>Administrators or actors with adequate authorizations can Component type update
 		a CT (component type).</p>
 	<h2>Changes</h2>
-	<p>Any change of the instantiation factor must be be compatible
-		with the number of instances of component of this type and of
+	<p class='rule'>Any change of the instantiation factor must be be compatible
+		with the reifiable flag, the number of instances of component of this type and of
 		component bound to the type.</p>
-	<p>Bound type following attributes can be changed : name, tags ,
+	<div class='example'>
+		Given a reifiable and '*' instance factor CT with associated components and instances<BR />
+		When the IF is <span concordion:execute="#resu=testIFChangeToOneReifiable()" /> set to 0  <BR />
+		Then the update should <b concordion:assertEquals="#resu">FAIL with code NON_REIFIABLE_IFACTOR_SET</b>
+	</div>
+	<div class='example'>
+		Given a reifiable and '*' instance factor CT with associated components and instances<BR />
+		When the IF is set to 0  <BR />
+		And reifiable flag set to false<span concordion:execute="#resu=testIFChangeToOneReifiable()" /><BR />
+		Then the update should <b concordion:assertEquals="#resu">FAIL with code CT_EXISTING_COMP</b>
+	</div>
+	
+	<p class='rule'>Bound type following attributes can be changed : name, tags ,
 		comment, description</p>
-	<p>Bound type following attributes *can't* be changed : instantiation factor, reifiable flag</p>
+	<p class='rule'>Bound type following attributes *can't* be changed : instantiation factor, reifiable flag</p>
 	<p>A reference can't be dropped while at least one component of the component 
 	type use it against another component.</p>
 
-	<h3>Controls</h3>
-	<TODO> Do we need specific controls ?
 </body>
 </html>

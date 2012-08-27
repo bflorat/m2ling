@@ -8,6 +8,7 @@ import org.m2ling.common.configuration.Conf;
 import org.m2ling.common.dto.core.AccessType;
 import org.m2ling.common.dto.core.RuleDTO;
 import org.m2ling.common.exceptions.FunctionalException;
+import org.m2ling.common.utils.UUT;
 import org.m2ling.persistence.PersistenceManagerXMIImpl;
 import org.m2ling.presentation.principles.model.RuleBean;
 import org.m2ling.presentation.principles.utils.DTOConverter;
@@ -18,6 +19,7 @@ import org.m2ling.specs.M2lingFixture;
 
 public class AbstractRuleFixture extends M2lingFixture {
 	RuleServiceImpl service;
+	CoreUtil util;
 
 	public AbstractRuleFixture() throws IOException {
 		super();
@@ -45,7 +47,7 @@ public class AbstractRuleFixture extends M2lingFixture {
 		PersistenceManagerXMIImpl pm;
 		try {
 			pm = new PersistenceManagerXMIImpl(logger, configuration);
-			CoreUtil util = new CoreUtil(logger, pm);
+			util = new CoreUtil(logger, pm);
 			service = new RuleServiceImpl(pm, util, new FromDTO(util), new ToDTO(util), configuration, logger);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
@@ -61,7 +63,7 @@ public class AbstractRuleFixture extends M2lingFixture {
 	 * @return
 	 * @throws FunctionalException
 	 */
-	public String getRule(String id, String vpID, String name, String description, String comment, String status,
+	public String createAndGetRule(String id, String vpID, String name, String description, String comment, String status,
 			int priority, String rationale, String exceptions, String tags) throws FunctionalException {
 		reset("Technical");
 		RuleBean bean = new RuleBean();
@@ -88,6 +90,36 @@ public class AbstractRuleFixture extends M2lingFixture {
 			}
 		}
 		return "rule not found";
+	}
+	
+	public String getCheckDTOVerification(String caseName, String id, String name, String description, String rationale,
+			String exceptions, String comment, String tags, String status, String priority) {
+		reset("Technical");
+		id=UUT.nul(id);
+		name=UUT.nul(name);
+		description=UUT.nul(description);
+		comment=UUT.nul(comment);
+		status=UUT.nul(status);
+		exceptions=UUT.nul(exceptions);
+		rationale=UUT.nul(rationale);		
+		try {
+			RuleBean bean = new RuleBean();
+			bean.setComment(comment);
+			bean.setDescription(description);
+			bean.setId(id);
+			bean.setExceptions(exceptions);
+			bean.setRationale(rationale);
+			bean.setName(name);
+			bean.setPriority(Integer.parseInt(priority));
+			bean.setStatus(status);
+			bean.setTags(tags);
+			bean.setViewPointId("id_vp1");
+			RuleDTO dto = new DTOConverter.ToDTO().getRuleDTO(bean);
+			service.checkDTO(dto, AccessType.CREATE);
+			return "PASS";
+		} catch (FunctionalException ex) {
+			return "FAIL with code "+ex.getCode().name();
+		}
 	}
 
 }
