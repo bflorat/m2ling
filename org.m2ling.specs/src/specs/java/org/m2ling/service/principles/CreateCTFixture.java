@@ -13,7 +13,6 @@ import org.m2ling.common.exceptions.TechnicalException;
 import org.m2ling.common.utils.UUT;
 import org.m2ling.common.utils.Utils;
 import org.m2ling.presentation.principles.model.ComponentTypeBean;
-import org.m2ling.presentation.principles.model.ReferenceBean;
 import org.m2ling.presentation.principles.utils.DTOConverter;
 
 import com.google.common.base.Strings;
@@ -143,27 +142,7 @@ public class CreateCTFixture extends AbstractCTFixture {
 				bean.setEnumeration(enumer);
 			}
 			bean.setInstantiationFactor(ifactor);
-			List<ReferenceBean> refs = new ArrayList<ReferenceBean>();
-			if (Strings.isNullOrEmpty(references)) {
-				bean.setReferences(refs);
-			} else {
-				StringTokenizer st = new StringTokenizer(references, ";");
-				while (st.hasMoreTokens()) {
-					String ref = st.nextToken();
-					ReferenceBean refbean = new ReferenceBean();
-					StringTokenizer st2 = new StringTokenizer(ref, ":");
-					refbean.setType(st2.nextToken());
-					String targs = st2.nextToken();
-					StringTokenizer st3 = new StringTokenizer(targs, ",");
-					List<String> targets = new ArrayList<String>();
-					while (st3.hasMoreTokens()) {
-						targets.add(st3.nextToken());
-					}
-					refbean.setTargets(targets);
-					refs.add(refbean);
-				}
-				bean.setReferences(refs);
-			}
+			setReferences(bean, references);
 			bean.setReifiable(Boolean.parseBoolean(reifiable));
 			ComponentTypeDTO dto = new DTOConverter.ToDTO().getComponentTypeDTO(bean);
 			service.createCT(null, dto);

@@ -14,7 +14,6 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.m2ling.domain.core.Component;
-import org.m2ling.domain.core.ComponentInstance;
 import org.m2ling.domain.core.ComponentType;
 import org.m2ling.domain.core.CorePackage;
 import org.m2ling.domain.core.HasReferences;
@@ -29,7 +28,6 @@ import org.m2ling.domain.core.Reference;
  *   <li>{@link org.m2ling.domain.core.impl.ComponentImpl#getReferences <em>References</em>}</li>
  *   <li>{@link org.m2ling.domain.core.impl.ComponentImpl#getType <em>Type</em>}</li>
  *   <li>{@link org.m2ling.domain.core.impl.ComponentImpl#getBoundComponent <em>Bound Component</em>}</li>
- *   <li>{@link org.m2ling.domain.core.impl.ComponentImpl#getInstances <em>Instances</em>}</li>
  * </ul>
  * </p>
  *
@@ -70,16 +68,6 @@ public class ComponentImpl extends ArchitectureItemImpl implements Component {
 	 * @ordered
 	 */
 	protected Component boundComponent;
-
-	/**
-	 * The cached value of the '{@link #getInstances() <em>Instances</em>}' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getInstances()
-	 * @generated
-	 * @ordered
-	 */
-	protected EList<ComponentInstance> instances;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -189,18 +177,6 @@ public class ComponentImpl extends ArchitectureItemImpl implements Component {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<ComponentInstance> getInstances() {
-		if (instances == null) {
-			instances = new EObjectContainmentEList<ComponentInstance>(ComponentInstance.class, this, CorePackage.COMPONENT__INSTANCES);
-		}
-		return instances;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EList<Reference> getReferences() {
 		if (references == null) {
 			references = new EObjectContainmentEList<Reference>(Reference.class, this, CorePackage.COMPONENT__REFERENCES);
@@ -217,8 +193,6 @@ public class ComponentImpl extends ArchitectureItemImpl implements Component {
 		switch (featureID) {
 			case CorePackage.COMPONENT__REFERENCES:
 				return ((InternalEList<?>)getReferences()).basicRemove(otherEnd, msgs);
-			case CorePackage.COMPONENT__INSTANCES:
-				return ((InternalEList<?>)getInstances()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -238,8 +212,6 @@ public class ComponentImpl extends ArchitectureItemImpl implements Component {
 			case CorePackage.COMPONENT__BOUND_COMPONENT:
 				if (resolve) return getBoundComponent();
 				return basicGetBoundComponent();
-			case CorePackage.COMPONENT__INSTANCES:
-				return getInstances();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -262,10 +234,6 @@ public class ComponentImpl extends ArchitectureItemImpl implements Component {
 			case CorePackage.COMPONENT__BOUND_COMPONENT:
 				setBoundComponent((Component)newValue);
 				return;
-			case CorePackage.COMPONENT__INSTANCES:
-				getInstances().clear();
-				getInstances().addAll((Collection<? extends ComponentInstance>)newValue);
-				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -286,9 +254,6 @@ public class ComponentImpl extends ArchitectureItemImpl implements Component {
 			case CorePackage.COMPONENT__BOUND_COMPONENT:
 				setBoundComponent((Component)null);
 				return;
-			case CorePackage.COMPONENT__INSTANCES:
-				getInstances().clear();
-				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -306,8 +271,6 @@ public class ComponentImpl extends ArchitectureItemImpl implements Component {
 				return type != null;
 			case CorePackage.COMPONENT__BOUND_COMPONENT:
 				return boundComponent != null;
-			case CorePackage.COMPONENT__INSTANCES:
-				return instances != null && !instances.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}

@@ -37,14 +37,14 @@
     <statusLiterals>OBSOLETE</statusLiterals>
   </viewPoints>
   <viewPoints comment="" description="Physical Architecture viewpoint provides all rules and concepts dealing with hardware, network aspects of a project." id="fsdfhjksdhfkjhsdkfj" name="Physical Architecture">
-    <componentTypes id="_-aItkZxEEeGi7NYPtEuJdA" name="X86 Server" description="Intel-based server. Mostly 64 bits." reifiable="true"/>
-    <componentTypes id="_kOyogZ9ZEeGNFtlcQfUFgw" name="Router" description="Link networks between them." reifiable="true"/>
+    <componentTypes id="id_ct_physical_x86_server" name="X86 Server" description="Intel-based server. Mostly 64 bits." instantiationFactor="-1" reifiable="true"/>
+    <componentTypes id="_kOyogZ9ZEeGNFtlcQfUFgw" name="Router" description="Link networks between them." instantiationFactor="-1" reifiable="true"/>
     <componentTypes id="_W3UboZ9aEeGNFtlcQfUFgw" name="LoadBalancer" description="Appliance load balancer. Dispatch a network request to a virtual IP mapping several devices." reifiable="true"/>
-    <componentTypes id="_hQrcIZ9aEeGNFtlcQfUFgw" name="PC" description="PC type micro-computer" reifiable="true"/>
-    <componentTypes id="_0pkjcZ9aEeGNFtlcQfUFgw" name="SPARC Server" description="SPARC RISC-based CPU server" reifiable="true"/>
-    <componentTypes id="_McFWYZ9bEeGNFtlcQfUFgw" name="Firewall" description="Manages ports authorizations netween several devices or networks." reifiable="true"/>
-    <componentTypes id="_VIxZsZ9bEeGNFtlcQfUFgw" name="SAN" description="Massive storage device with Fiber channel access" reifiable="true"/>
-    <linkTypes id="_FFDecp9bEeGNFtlcQfUFgw" name="GigaBit Ethernet" description="1000Mbps type ethernet link" sourceTypes="_McFWYZ9bEeGNFtlcQfUFgw _W3UboZ9aEeGNFtlcQfUFgw _hQrcIZ9aEeGNFtlcQfUFgw _kOyogZ9ZEeGNFtlcQfUFgw _0pkjcZ9aEeGNFtlcQfUFgw _-aItkZxEEeGi7NYPtEuJdA" destinationTypes="_McFWYZ9bEeGNFtlcQfUFgw _W3UboZ9aEeGNFtlcQfUFgw _hQrcIZ9aEeGNFtlcQfUFgw _kOyogZ9ZEeGNFtlcQfUFgw _0pkjcZ9aEeGNFtlcQfUFgw _-aItkZxEEeGi7NYPtEuJdA" reifiable="true"/>
+    <componentTypes id="_hQrcIZ9aEeGNFtlcQfUFgw" name="PC" description="PC type micro-computer" instantiationFactor="-1" reifiable="true"/>
+    <componentTypes id="_0pkjcZ9aEeGNFtlcQfUFgw" name="SPARC Server" description="SPARC RISC-based CPU server" instantiationFactor="-1" reifiable="true"/>
+    <componentTypes id="_McFWYZ9bEeGNFtlcQfUFgw" name="Firewall" description="Manages ports authorizations netween several devices or networks." instantiationFactor="-1" reifiable="true"/>
+    <componentTypes id="_VIxZsZ9bEeGNFtlcQfUFgw" name="SAN" description="Massive storage device with Fiber channel access" instantiationFactor="-1" reifiable="true"/>
+    <linkTypes id="_FFDecp9bEeGNFtlcQfUFgw" name="GigaBit Ethernet" description="1000Mbps type ethernet link" sourceTypes="_McFWYZ9bEeGNFtlcQfUFgw _W3UboZ9aEeGNFtlcQfUFgw _hQrcIZ9aEeGNFtlcQfUFgw _kOyogZ9ZEeGNFtlcQfUFgw _0pkjcZ9aEeGNFtlcQfUFgw id_ct_physical_x86_server" destinationTypes="_McFWYZ9bEeGNFtlcQfUFgw _W3UboZ9aEeGNFtlcQfUFgw _hQrcIZ9aEeGNFtlcQfUFgw _kOyogZ9ZEeGNFtlcQfUFgw _0pkjcZ9aEeGNFtlcQfUFgw id_ct_physical_x86_server" reifiable="true"/>
   </viewPoints>
   <viewPoints description="Enterprise Architecture deals with set of projects or the IS as a whole." id="_uP3gkZniEeGeqKlv68ECYA" name="Enterprise Architecture">
     <componentTypes id="_REbGwZq2EeGVMag01qc4bw" name="Domain" comment="" description="A domain is the highest subdivision of an enterprise IS. Example : HR domain.">
@@ -57,11 +57,11 @@
   </viewPoints>
   <viewPoints comment="" description="Technology components and links between them" id="id_vp_tech" name="Technical Architecture">
     <componentTypes id="id_ct_tech_applicationserver" name="ApplicationServer" comment="" description="Runs services (SOAP,RMI,REST...) or execute dynamic Web pages" instantiationFactor="-1" reifiable="true"/>
-    <componentTypes id="_wf5AQZxEEeGi7NYPtEuJdA" name="OS" description="Operating system">
+    <componentTypes id="_wf5AQZxEEeGi7NYPtEuJdA" name="OS" description="Operating system" instantiationFactor="-1" reifiable="true">
       <references type="RUNS" targets="id_ct_tech_applicationserver _wf5AQZxEEeGi7NYPtEuJdA _LyWEoZ6REeGyndJ1yNTLVw"/>
     </componentTypes>
-    <componentTypes id="_LyWEoZ6REeGyndJ1yNTLVw" name="Persistence" comment="" description="RDBMS, others databases types, directories, MOM"/>
-    <componentTypes id="_-aItkZxEEeGi7gfgr" name="X86 Server" description="Intel-based server. Mostly 64 bits." reifiable="true">
+    <componentTypes id="_LyWEoZ6REeGyndJ1yNTLVw" name="Persistence" comment="" description="RDBMS, others databases types, directories, MOM" instantiationFactor="-1" reifiable="true"/>
+    <componentTypes id="id_ct_tech_x86_server" name="X86 Server" description="Intel-based server. Mostly 64 bits." boundType="id_ct_physical_x86_server" instantiationFactor="-1" reifiable="true">
       <references type="RUNS" targets="_wf5AQZxEEeGi7NYPtEuJdA"/>
     </componentTypes>
   </viewPoints>
@@ -88,28 +88,28 @@
   </viewPoints>
   <viewPoints description="Contains all concepts used to deploy an application like : module, server, middleware" id="id_vp_deploy" name="Deployment architecture">
     <componentTypes id="_sgTcYaTjEeGhbskxmOc77w" name="Environment">
-      <references targets="id_ct_deploy_X86 _0pkjcZ9aEeGNFtlcQfU333 _aazazaza _1y2zQZohnnnmJ5CR-iA _Ybdmtd456 _wf5AQZ111YPtEuJdA __111CR-iA _fKt222vmJ5CR-iA _ha8mE333Mag01qc4bw _aazazazaerer"/>
+      <references targets="id_ct_deploy_X86 _0pkjcZ9aEeGNFtlcQfU333 _aazazaza _1y2zQZohnnnmJ5CR-iA _Ybdmtd456 id_ct_deploy_OS __111CR-iA _fKt222vmJ5CR-iA _ha8mE333Mag01qc4bw _aazazazaerer"/>
     </componentTypes>
-    <componentTypes id="id_ct_deploy_X86" name="X86 Server" description="Intel-based server. Mostly 64 bits." instantiationFactor="-1" reifiable="true">
-      <references type="RUNS" targets="_wf5AQZ111YPtEuJdA"/>
+    <componentTypes id="id_ct_deploy_X86" name="X86 Server" description="Intel-based server. Mostly 64 bits." boundType="id_ct_physical_x86_server" instantiationFactor="-1" reifiable="true">
+      <references type="RUNS" targets="id_ct_deploy_OS"/>
     </componentTypes>
-    <componentTypes id="_0pkjcZ9aEeGNFtlcQfU333" name="SPARC Server" description="SPARC RISC-based CPU server" instantiationFactor="-1" reifiable="true">
-      <references type="RUNS" targets="_wf5AQZ111YPtEuJdA"/>
+    <componentTypes id="_0pkjcZ9aEeGNFtlcQfU333" name="SPARC Server" description="SPARC RISC-based CPU server" boundType="_0pkjcZ9aEeGNFtlcQfU333" instantiationFactor="-1" reifiable="true">
+      <references type="RUNS" targets="id_ct_deploy_OS"/>
     </componentTypes>
     <componentTypes id="_aazazaza" name="GUIModule" comment="" description="A GUI module serves Web pages destinated to end users." boundType="_E3EOwZoWEeG71vmJ5CR-iAe" instantiationFactor="-1" reifiable="true"/>
     <componentTypes id="_1y2zQZohnnnmJ5CR-iA" name="ServiceModule" comment="" description="A service module provides business services to batch or GUI modules and is responsible for enterprise data." boundType="id_ct_app_servicemodulee" instantiationFactor="-1" reifiable="true"/>
     <componentTypes id="_Ybdmtd456" name="RDBMS" comment="" description="Runs one or more databases. Database initial populating is out of the deployment scope itself, done by scripts." reifiable="true"/>
-    <componentTypes id="_wf5AQZ111YPtEuJdA" name="OS" description="Operating system" boundType="_wf5AQZxEEeGi7NYPtEuJdA" instantiationFactor="-1" reifiable="true">
+    <componentTypes id="id_ct_deploy_OS" name="OS" description="Operating system" boundType="_wf5AQZxEEeGi7NYPtEuJdA" instantiationFactor="-1" reifiable="true">
       <references type="RUNS" targets="_wf5AQZxEEeGi7NYPtEuJdA _fKt222vmJ5CR-iA _aazazazaerer _ha8mE333Mag01qc4bw"/>
     </componentTypes>
-    <componentTypes id="__111CR-iA" name="ServicesContainer" description="Runs services (RMI, REST, SOAP...)" boundType="id_ct_tech_applicationserver" enumeration="id_grp_tech_servicecontainers" instantiationFactor="-1">
+    <componentTypes id="__111CR-iA" name="ServicesContainer" description="Runs services (RMI, REST, SOAP...)" boundType="id_ct_tech_applicationserver" enumeration="id_grp_tech_servicecontainers" instantiationFactor="-1" reifiable="true">
       <references type="RUNS" targets="_1y2zQZohnnnmJ5CR-iA"/>
     </componentTypes>
-    <componentTypes id="_fKt222vmJ5CR-iA" name="WebContainer" comment="" description="A servlet/JSP container" boundType="id_ct_tech_applicationserver" enumeration="_0GnPIJ6QEeGyndJ1yNTLVw" instantiationFactor="-1">
+    <componentTypes id="_fKt222vmJ5CR-iA" name="WebContainer" comment="" description="A servlet/JSP container" boundType="id_ct_tech_applicationserver" enumeration="_0GnPIJ6QEeGyndJ1yNTLVw" instantiationFactor="-1" reifiable="true">
       <references type="RUNS" targets="_aazazaza"/>
     </componentTypes>
-    <componentTypes id="_ha8mE333Mag01qc4bw" name="LDAP directory" comment="" description="" boundType="_LyWEoZ6REeGyndJ1yNTLVw" enumeration="_cjliUJ6TEeGyndJ1yNTLVw"/>
-    <componentTypes id="_aazazazaerer" name="BatchModule" comment="" description="Standalone Java batchs calling services modules" boundType="_aazazazaerer" reifiable="true"/>
+    <componentTypes id="_ha8mE333Mag01qc4bw" name="LDAP directory" comment="" description="" boundType="_LyWEoZ6REeGyndJ1yNTLVw" enumeration="_cjliUJ6TEeGyndJ1yNTLVw" instantiationFactor="-1" reifiable="true"/>
+    <componentTypes id="_aazazazaerer" name="BatchModule" comment="" description="Standalone Java batchs calling services modules" boundType="_aazazazaerer" instantiationFactor="-1" reifiable="true"/>
   </viewPoints>
   <views comment="" description="BikesOnline is a online house-built e-commerce solution to sell bikes." id="_6MLzgJngEeGCNbiGBiffzQ" name="Logical_BikesOnline" viewPoint="id_vp_logical">
     <components id="_8fvV4p6TEeGyndJ1yNTLVw" name="AdminGUI" comment="" type="_E3EOwZoWEeG71vmJ5CR-iA" boundComponent="_hGsf4J89EeGNFtlcQfUFgw"/>
@@ -201,9 +201,9 @@
     <streams id="_iJPnN6GcEeGpDeafbzGYMQ" name="cable6" source="_jv8xNKGaEeGAboe59Cwkcg" destination="_O3JLxKGZEeGWHchb0LRqvg" link="_sJNsw6GbEeGpDeafbzGYMQ"/>
   </views>
   <views description="List available devices models" id="_Ax_tkZ_6EeG3fPi34vn9KQ" name="DevicesCatalog" viewPoint="fsdfhjksdhfkjhsdkfj">
-    <components id="_gfgfdeG3fPi34vn9KQ" name="IBM-HS21" comment="" description="IBM blade, 16Go RAM, 2 quad-core." type="_-aItkZxEEeGi7NYPtEuJdA"/>
+    <components id="_gfgfdeG3fPi34vn9KQ" name="IBM-HS21" comment="" description="IBM blade, 16Go RAM, 2 quad-core." type="id_ct_physical_x86_server"/>
     <components id="_Jlytjhmp" name="Cisco-2900" comment="" description="Branch router" type="_kOyogZ9ZEeGNFtlcQfUFgw"/>
-    <components id="_JBJgUp_6EeG3fPi34vn9KQ" name="IBM-HS22" description="IBM blade, 32Go RAM, 4 quad-core." type="_-aItkZxEEeGi7NYPtEuJdA"/>
+    <components id="_JBJgUp_6EeG3fPi34vn9KQ" name="IBM-HS22" description="IBM blade, 32Go RAM, 4 quad-core." type="id_ct_physical_x86_server"/>
     <components id="_Y6hMwp_6EeG3fPi34vn9KQ" name="Oracle-M3000" comment="" description="SPARC M3000 enterprise server" type="_0pkjcZ9aEeGNFtlcQfUFgw"/>
     <components id="_nKCmgp_6EeG3fPi34vn9KQ" name="Cisco-ASA 5520" comment="" description="Cisco ASA 5520 firewall" type="_McFWYZ9bEeGNFtlcQfUFgw"/>
     <components id="_41zdop_6EeG3fPi34vn9KQ" name="Alteon-LM-5500" comment="" description="Alteon LM-5500 load balancer" type="_McFWYZ9bEeGNFtlcQfUFgw"/>
@@ -220,12 +220,12 @@
   </views>
   <views comment="" description="Production view of BikesOnline deployment" id="_7-nzcaKREeGOsOUMPsTb_w" name="Deployment_BikesOnline" viewPoint="id_vp_logical">
     <components id="_vDwQkqTjEeGhbskxmOc77w" name="Production" description="" type="_sgTcYaTjEeGhbskxmOc77w">
-      <references targets="id_comp_deploy_IBM-HS21 _C2pRkqNKEeGULe7xIq_4Kg _itGiQqNJEefdfd_4Kgezezez _bTKAYqMhEeGTqOb8fWOx0Q _xi1DYqMoEeGkWPVFom68wQ _6b6KoqMtEeG9sM0bZ_WFcA _0VP9IqMnEeGkggwQ _eoxQUqMsEeG9sM0bZ_WFcA _LhezMqMoEeGkWPVFom68rerwQ _N13tUqNMEeGULe7xIq_4Kg _0dlLAqMtEeG9sM0bZ_WFcA _5S34QqMoEeGkWPVFom68wQ _itGiQqNJEeGULe7xIq_4Kg _ZKfHEqNKEeGULe7xIq_4Kg _itGiQqNJEeff4Kg _TmWPQqMtEeG9sM0bZ_WFcA _0VP9IqMnEeGkWPVFom68wQ"/>
+      <references targets="id_comp_deploy_IBM-HS21 _C2pRkqNKEeGULe7xIq_4Kg _itGiQqNJEefdfd_4Kgezezez _bTKAYqMhEeGTqOb8fWOx0Q id_comp_deploy_IBM-HS22 _6b6KoqMtEeG9sM0bZ_WFcA _0VP9IqMnEeGkggwQ _eoxQUqMsEeG9sM0bZ_WFcA id_comp_deploy_linux3_web_profile _N13tUqNMEeGULe7xIq_4Kg _0dlLAqMtEeG9sM0bZ_WFcA _5S34QqMoEeGkWPVFom68wQ _itGiQqNJEeGULe7xIq_4Kg _ZKfHEqNKEeGULe7xIq_4Kg _itGiQqNJEeff4Kg _TmWPQqMtEeG9sM0bZ_WFcA _0VP9IqMnEeGkWPVFom68wQ"/>
     </components>
     <components id="id_comp_deploy_IBM-HS21" type="id_ct_deploy_X86" boundComponent="_gfgfdeG3fPi34vn9KQ">
-      <references type="RUNS" targets="_LhezMqMoEeGkWPVFom68rerwQ"/>
+      <references type="RUNS" targets="id_comp_deploy_linux3_web_profile"/>
     </components>
-    <components id="_xi1DYqMoEeGkWPVFom68wQ" type="id_ct_deploy_X86" boundComponent="_JBJgUp_6EeG3fPi34vn9KQ">
+    <components id="id_comp_deploy_IBM-HS22" type="id_ct_deploy_X86" boundComponent="_JBJgUp_6EeG3fPi34vn9KQ">
       <references type="RUNS" targets="_eoxQUqMsEeG9sM0bZ_WFcA"/>
     </components>
     <components id="_5S34QqMoEeGkWPVFom68wQ" type="_0pkjcZ9aEeGNFtlcQfU333" boundComponent="_Y6hMwp_6EeG3fPi34vn9KQ">
@@ -240,13 +240,13 @@
     <components id="_0VP9IqMnEeGkWPVFom68wQ" type="_fKt222vmJ5CR-iA" boundComponent="_BM4XQp6QEdJ1yNTLVw">
       <references type="RUNS" targets="_bTKAYqMhEeGTqOb8fWOx0Q"/>
     </components>
-    <components id="_LhezMqMoEeGkWPVFom68rerwQ" name="Linux3_web_profile" description="" type="_wf5AQZ111YPtEuJdA" boundComponent="_a-g0Mp6OEeGeZJhcjVrcWg">
+    <components id="id_comp_deploy_linux3_web_profile" name="Linux3_web_profile" description="" type="id_ct_deploy_OS" boundComponent="_a-g0Mp6OEeGeZJhcjVrcWg">
       <references type="RUNS" targets="_0VP9IqMnEeGkggwQ _0VP9IqMnEeGkWPVFom68wQ"/>
     </components>
-    <components id="_eoxQUqMsEeG9sM0bZ_WFcA" name="Linux3_services_profile" type="_wf5AQZ111YPtEuJdA">
+    <components id="_eoxQUqMsEeG9sM0bZ_WFcA" name="Linux3_services_profile" type="id_ct_deploy_OS">
       <references type="RUNS" targets="_6b6KoqMtEeG9sM0bZ_WFcA _N13tUqNMEeGULe7xIq_4Kg"/>
     </components>
-    <components id="_TmWPQqMtEeG9sM0bZ_WFcA" name="Solaris_bikesonline" description="" type="_wf5AQZ111YPtEuJdA" boundComponent="id_comp_tech_solaris">
+    <components id="_TmWPQqMtEeG9sM0bZ_WFcA" name="Solaris_bikesonline" description="" type="id_ct_deploy_OS" boundComponent="id_comp_tech_solaris">
       <references type="RUNS" targets="_0dlLAqMtEeG9sM0bZ_WFcA _ZKfHEqNKEeGULe7xIq_4Kg"/>
     </components>
     <components id="_0dlLAqMtEeG9sM0bZ_WFcA" name="OpenLDAP" type="_ha8mE333Mag01qc4bw" boundComponent="_G9AtYp6REeGyndJ1yNTLVw"/>
@@ -260,7 +260,7 @@
     <instances id="_Yv4RtKMpEeGkWPVFom68wQ" name="HS21_1" component="id_comp_deploy_IBM-HS21" boundComponentInstance="_Hk3">
       <references type="RUNS" targets="_pQiyNKMqEeG9sM0bZ_WFcA"/>
     </instances>
-    <instances id="_pQiyNKMqEeG9sM0bZ_WFcA" name="OS_HS21_1" component="_LhezMqMoEeGkWPVFom68rerwQ">
+    <instances id="_pQiyNKMqEeG9sM0bZ_WFcA" name="OS_HS21_1" component="id_comp_deploy_linux3_web_profile">
       <references type="RUNS" targets="_E8hKBKMrEeG9sM0bZ_WFcA"/>
     </instances>
     <instances id="_E8hKBKMrEeG9sM0bZ_WFcA" name="tomcat_bikesonline_1" component="_0VP9IqMnEeGkWPVFom68wQ">
@@ -271,7 +271,7 @@
       <references type="RUNS" targets="_LG40BKNLEeGULe7xIq_4Kg"/>
     </instances>
     <instances id="_LG40BKNLEeGULe7xIq_4Kg" name="gui_admin_bikesonline_1" component="_C2pRkqNKEeGULe7xIq_4Kg"/>
-    <instances id="_jCLyhKMqEeG9sM0bZ_WFcA" name="HS22_1" description="" component="_xi1DYqMoEeGkWPVFom68wQ" boundComponentInstance="_HkPKsKAsEeGQjY87lm4AGg">
+    <instances id="_jCLyhKMqEeG9sM0bZ_WFcA" name="HS22_1" description="" component="id_comp_deploy_IBM-HS22" boundComponentInstance="_HkPKsKAsEeGQjY87lm4AGg">
       <references type="RUNS" targets="_pQiyNKMqEeG9sM0bZ_Wrff"/>
     </instances>
     <instances id="_pQiyNKMqEeG9sM0bZ_Wrff" name="OS_HS22_1" comment="" component="_eoxQUqMsEeG9sM0bZ_WFcA">
@@ -289,7 +289,7 @@
     </instances>
     <instances id="_6dSvFKNLEeGULe7xIq_4Kg" name="ldap_bikesonline_1" comment="" component="_0dlLAqMtEeG9sM0bZ_WFcA"/>
     <instances id="_ytg1ZKNKEeGULe7xIq_4Kg" name="postgresql_bikesonline_1" component="_ZKfHEqNKEeGULe7xIq_4Kg"/>
-    <instances id="_JUg6dKMqEeGnUvsnwHUYsw" component="_xi1DYqMoEeGkWPVFom68wQ" boundComponentInstance="_HkPKsKA2AGg">
+    <instances id="_JUg6dKMqEeGnUvsnwHUYsw" component="id_comp_deploy_IBM-HS22" boundComponentInstance="_HkPKsKA2AGg">
       <references type="RUNS" targets="_pQiyNKMqEeG9sM0bZ_Wsdsds"/>
     </instances>
     <instances id="_pQiyNKMqEeG9sM0bZ_Wsdsds" name="OS_HS22_2" comment="" component="_eoxQUqMsEeG9sM0bZ_WFcA">

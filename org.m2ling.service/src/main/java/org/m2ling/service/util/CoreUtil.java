@@ -8,12 +8,14 @@ import java.util.List;
 import java.util.StringTokenizer;
 import java.util.logging.Logger;
 
+import org.eclipse.emf.common.util.EList;
 import org.m2ling.common.exceptions.TechnicalException;
 import org.m2ling.common.exceptions.TechnicalException.Code;
 import org.m2ling.domain.Root;
 import org.m2ling.domain.core.ArchitectureItem;
 import org.m2ling.domain.core.Component;
 import org.m2ling.domain.core.ComponentGroup;
+import org.m2ling.domain.core.ComponentInstance;
 import org.m2ling.domain.core.ComponentType;
 import org.m2ling.domain.core.Link;
 import org.m2ling.domain.core.Rule;
@@ -213,6 +215,55 @@ public class CoreUtil {
 			return ((ComponentGroup) item).getComponents().get(0).getType();
 		}
 		return null;
+	}
+	
+	
+	/**
+	 * Return all components for a given component type ID. If it contains none component, a void
+	 * list is returned. If the ID is null, null is returned.
+	 * 
+	 * @param item
+	 * @return all components for a given component type
+	 */
+	public List<Component> getComponentsForCTID(String ctID) {
+		if (ctID == null) {
+			return null;
+		}
+		List<Component> result = new ArrayList<Component>();
+		Root root = pmanager.getRoot();
+		for (View v : root.getViews()) {
+			List<Component> comps = v.getComponents();
+			for (Component comp : comps) {
+				if (ctID.equals(comp.getType().getId())) {
+					result.add(comp);
+				}
+			}
+		}
+		return result;
+	}
+
+	/**
+	 * Return all components instances for a given component ID. If it contains none component,
+	 * a void list is returned. If the ID is null, null is returned.
+	 * 
+	 * @param item
+	 * @return all components instances for a given component type
+	 */
+	public List<ComponentInstance> getComponentsInstancesForComponentID(String ctID) {
+		if (ctID == null) {
+			return null;
+		}
+		List<ComponentInstance> result = new ArrayList<ComponentInstance>();
+		Root root = pmanager.getRoot();
+		for (View v : root.getViews()) {
+			List<ComponentInstance> instances = v.getInstances();
+			for (ComponentInstance instance : instances) {
+				if (ctID.equals(instance.getComponent().getId())) {
+					result.add(instance);
+				}
+			}
+		}
+		return result;
 	}
 
 	/**

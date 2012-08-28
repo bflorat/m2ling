@@ -1,21 +1,29 @@
 package org.m2ling.service.principles;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Properties;
+import java.util.StringTokenizer;
 
 import org.m2ling.common.configuration.Conf;
 import org.m2ling.common.dto.core.AccessType;
 import org.m2ling.common.exceptions.FunctionalException;
+import org.m2ling.domain.core.ComponentType;
 import org.m2ling.persistence.PersistenceManagerXMIImpl;
+import org.m2ling.presentation.principles.model.ComponentTypeBean;
+import org.m2ling.presentation.principles.model.ReferenceBean;
 import org.m2ling.service.util.CoreUtil;
 import org.m2ling.service.util.DTOConverter.FromDTO;
 import org.m2ling.service.util.DTOConverter.ToDTO;
 import org.m2ling.specs.M2lingFixture;
 
+import com.google.common.base.Strings;
+
 public class AbstractCTFixture extends M2lingFixture {
 	ComponentTypeServiceImpl service;
 	boolean noreset = false;
-	
+
 	public AbstractCTFixture() throws IOException {
 		super();
 	}
@@ -46,6 +54,30 @@ public class AbstractCTFixture extends M2lingFixture {
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		}
+	}
+
+	protected void setReferences(ComponentTypeBean bean, String references) {
+		List<ReferenceBean> refs = new ArrayList<ReferenceBean>();
+		if (Strings.isNullOrEmpty(references)) {
+			bean.setReferences(refs);
+		} else {
+			StringTokenizer st = new StringTokenizer(references, ";");
+			while (st.hasMoreTokens()) {
+				String ref = st.nextToken();
+				ReferenceBean refbean = new ReferenceBean();
+				StringTokenizer st2 = new StringTokenizer(ref, ":");
+				refbean.setType(st2.nextToken());
+				String targs = st2.nextToken();
+				StringTokenizer st3 = new StringTokenizer(targs, ",");
+				List<String> targets = new ArrayList<String>();
+				while (st3.hasMoreTokens()) {
+					targets.add(st3.nextToken());
+				}
+				refbean.setTargets(targets);
+				refs.add(refbean);
+			}
+			bean.setReferences(refs);
 		}
 	}
 }

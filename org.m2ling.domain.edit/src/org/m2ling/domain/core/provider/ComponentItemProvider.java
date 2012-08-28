@@ -122,7 +122,6 @@ public class ComponentItemProvider extends ArchitectureItemItemProvider implemen
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
 			childrenFeatures.add(CorePackage.Literals.HAS_REFERENCES__REFERENCES);
-			childrenFeatures.add(CorePackage.Literals.COMPONENT__INSTANCES);
 		}
 		return childrenFeatures;
 	}
@@ -182,7 +181,6 @@ public class ComponentItemProvider extends ArchitectureItemItemProvider implemen
 
 		switch (notification.getFeatureID(Component.class)) {
 			case CorePackage.COMPONENT__REFERENCES:
-			case CorePackage.COMPONENT__INSTANCES:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
 		}
@@ -204,11 +202,6 @@ public class ComponentItemProvider extends ArchitectureItemItemProvider implemen
 			(createChildParameter
 				(CorePackage.Literals.HAS_REFERENCES__REFERENCES,
 				 CoreFactory.eINSTANCE.createReference()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(CorePackage.Literals.COMPONENT__INSTANCES,
-				 CoreFactory.eINSTANCE.createComponentInstance()));
 	}
 
 

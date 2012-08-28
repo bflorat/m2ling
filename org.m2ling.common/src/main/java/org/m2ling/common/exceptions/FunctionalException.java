@@ -68,6 +68,8 @@ public class FunctionalException extends Exception {
 		INVALID_FORMAT,
 		CT_EXISTING_COMP,
 		CT_EXISTING_BINDING,
+		CT_INSUFFISENT_IF,
+		CT_REFERENCE_IN_USE
 	}
 
 	/**

@@ -9,27 +9,141 @@
 	<H1>Component type Component type update</H1>
 	<p>Administrators or actors with adequate authorizations can Component type update
 		a CT (component type).</p>
-	<h2>Changes</h2>
-	<p class='rule'>Any change of the instantiation factor must be be compatible
+	<h2>Instantiation factor</h2>
+	<p class='rule'>CT-31 Any change of the instantiation factor must be be compatible
 		with the reifiable flag, the number of instances of component of this type and of
 		component bound to the type.</p>
 	<div class='example'>
-		Given a reifiable and '*' instance factor CT with associated components and instances<BR />
-		When the IF is <span concordion:execute="#resu=testIFChangeToOneReifiable()" /> set to 0  <BR />
-		Then the update should <b concordion:assertEquals="#resu">FAIL with code NON_REIFIABLE_IFACTOR_SET</b>
-	</div>
-	<div class='example'>
-		Given a reifiable and '*' instance factor CT with associated components and instances<BR />
-		When the IF is set to 0  <BR />
-		And reifiable flag set to false<span concordion:execute="#resu=testIFChangeToOneReifiable()" /><BR />
-		Then the update should <b concordion:assertEquals="#resu">FAIL with code CT_EXISTING_COMP</b>
+		Given a reifiable and '*' instance factor component type in <b concordion:set="#vpID">id_vp_deploy</b> viewpoint with associated components and instances<BR />
+		
+		Following update settings combination should : 
+		<table
+				concordion:execute="#result=testUpdateIF(#caseName, #vpID, #id, #name, #ifactor, #reifiable)">
+				<tr>
+					<th concordion:set="#caseName">Case</th>
+					<th concordion:set="#id">Id</th>
+					<th concordion:set="#name">Name</th>
+					<th concordion:set="#ifactor">Instantiation factor</th>
+					<th concordion:set="#reifiable">Reifiable</th>
+					<th concordion:assertEquals="#result">should :</th>
+				</tr>
+				<tr>
+					<td>High IF, compatible with instances</td>
+					<td>id_ct_deploy_X86</td>
+					<td>X86 Server</td>
+					<td>10</td>
+					<td>true</td>
+					<td>PASS</td>
+				</tr>
+				<tr>
+					<td>IF=0, reifiable=true</td>
+					<td>id_ct_deploy_X86</td>
+					<td>X86 Server</td>
+					<td>0</td>
+					<td>true</td>
+					<td>FAIL with code NON_REIFIABLE_IFACTOR_SET</td>
+				</tr>
+				<tr>
+					<td>IF=0, reifiable=false</td>
+					<td>id_ct_deploy_X86</td>
+					<td>X86 Server</td>
+					<td>0</td>
+					<td>false</td>
+					<td>FAIL with code CT_INSUFFISENT_IF</td>
+				</tr>
+				<tr>
+					<td>IF less than max nb of instances</td>
+					<td>id_ct_deploy_X86</td>
+					<td>X86 Server</td>
+					<td>1</td>
+					<td>true</td>
+					<td>FAIL with code CT_INSUFFISENT_IF</td>
+				</tr>
+			</table>
 	</div>
 	
-	<p class='rule'>Bound type following attributes can be changed : name, tags ,
+	<h2>Binding</h2>
+	
+	<p class='rule'>CT32- Bound type following attributes can be changed : name, tags ,
 		comment, description</p>
-	<p class='rule'>Bound type following attributes *can't* be changed : instantiation factor, reifiable flag</p>
-	<p>A reference can't be dropped while at least one component of the component 
+	<p class='rule'>CT33- Bound type following attributes *can't* be changed : instantiation factor, reifiable flag</p>
+	
+	<div class='example'>
+		Given a id_ct_deploy_X86 reifiable and owning a '*' instance factor component type in 
+		<b concordion:set="#vpID">id_vp_deploy</b> viewpoint and bound to id_ct_physical_x86_server CT
+		Following update settings combination should : 
+		<table
+				concordion:execute="#result=testUpdateBound(#caseName, #vpID, #id, #name, #ifactor, #boundTypeID, #references, #enumeration, #reifiable, #description, #tags, #comment)">
+				<tr>
+					<th concordion:set="#caseName">Case</th>
+					<th concordion:set="#id">Id</th>
+					<th concordion:set="#name">Name</th>
+					<th concordion:set="#desc">Desc</th>
+					<th concordion:set="#tags">Tags</th>
+					<th concordion:set="#comment">Comment</th>
+					<th concordion:set="#boundTypeID">Bound type ID</th>
+					<th concordion:set="#references">References</th>
+					<th concordion:set="#enumeration">Enumeration</th>
+					<th concordion:set="#ifactor">Instantiation factor</th>
+					<th concordion:set="#reifiable">Reifiable</th>
+					<th concordion:assertEquals="#result">should :</th>
+				</tr>
+				<tr>
+					<td>Change of name, type, tags and description</td>
+					<td>id_ct_deploy_X86</td>
+					<td>new name</td>
+					<td>new desc</td>
+					<td>new tag,new tags2</td>
+					<td>new comment</td>
+					<td>id_ct_physical_x86_server</td>
+					<td>RUNS:id_ct_deploy_OS</td>
+					<td>null</td>
+					<td>*</td>
+					<td>true</td>
+					<td>PASS</td>
+				</tr>
+				<tr>
+					<td>Change of IF</td>
+					<td>id_ct_deploy_X86</td>
+					<td>new name</td>
+					<td>new desc</td>
+					<td>new tag,new tags2</td>
+					<td>new comment</td>
+					<td>id_ct_physical_x86_server</td>
+					<td>RUNS:id_ct_deploy_OS</td>
+					<td>null</td>
+					<td>10</td>
+					<td>true</td>
+					<td>FAIL with code DELTA_BINDING_IF</td>
+				</tr>
+				<tr>
+					<td>Change of Reifiable flag</td>
+					<td>id_ct_deploy_X86</td>
+					<td>new name</td>
+					<td>new desc</td>
+					<td>new tag,new tags2</td>
+					<td>new comment</td>
+					<td>id_ct_physical_x86_server</td>
+					<td>RUNS:id_ct_deploy_OS</td>
+					<td>null</td>
+					<td>*</td>
+					<td>false</td>
+					<td>FAIL with code NON_REIFIABLE_IFACTOR_SET</td>
+				</tr>
+		</table>
+	</div>
+	
+	<h2>References</h2>
+	<p class='rule'>CT34- A reference can't be dropped while at least one component of the component 
 	type use it against another component.</p>
-
+	<div class='example'>
+		Given a CT <b concordion:set="#sourceCTID">id_ct_deploy_X86</b> with a RUNS reference to <b concordion:set="#targetCTID">id_ct_deploy_OS</b> CT<br/>
+		And a component id_comp_deploy_IBM-HS21 which owns a RUNS reference toward id_comp_deploy_linux3_web_profile component <br/>
+		When we try to drop the CT reference <br/>
+		<span concordion:set="#references" ></span>
+		<span concordion:set="#caseName" >Drop existing ref</span>
+		<span concordion:execute="#resu=updateDropReference(#caseName,#sourceCTID,#references)"/><br/>
+		Then the service should <b concordion:assertEquals="#resu">FAIL with code CT_REFERENCE_IN_USE</b><br/> 
+	</div>
 </body>
 </html>

@@ -230,6 +230,31 @@ public class DTOConverter {
 		}
 
 		/**
+		 * Return a new reference given a DTO.
+		 * 
+		 * @param dto
+		 *           the dto
+		 * @return a new reference
+		 */
+		public Reference newReference(ReferenceDTO dto) {
+			Reference reference = CoreFactory.eINSTANCE.createReference();
+			reference.setType(ReferenceType.get(dto.getType()));
+			EList<HasNameAndID> targets = reference.getTargets();
+			for (String target : dto.getTargets()) {
+				// Try component target
+				Component comp = util.getComponentByID(target);
+				if (comp == null) {
+					// OK, try component type
+					ComponentType compType = util.getComponentTypeByID(target);
+					targets.add(compType);
+				} else {
+					targets.add(comp);
+				}
+			}
+			return reference;
+		}
+
+		/**
 		 * Return a new component type instance given a DTO.
 		 * 
 		 * @param dto
@@ -258,20 +283,7 @@ public class DTOConverter {
 				ct.getEnumeration().add(comp);
 			}
 			for (ReferenceDTO refDTO : dto.getReferences()) {
-				Reference reference = CoreFactory.eINSTANCE.createReference();
-				reference.setType(ReferenceType.get(refDTO.getType()));
-				EList<HasNameAndID> targets = reference.getTargets();
-				for (String target : refDTO.getTargets()) {
-					// Try component target
-					Component comp = util.getComponentByID(target);
-					if (comp == null) {
-						// OK, try component type
-						ComponentType compType = util.getComponentTypeByID(target);
-						targets.add(compType);
-					} else {
-						targets.add(comp);
-					}
-				}
+				Reference reference = newReference(refDTO);
 				ct.getReferences().add(reference);
 			}
 			return ct;

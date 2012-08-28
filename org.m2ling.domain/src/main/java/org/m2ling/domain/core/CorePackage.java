@@ -477,22 +477,13 @@ public interface CorePackage extends EPackage {
 	int COMPONENT__BOUND_COMPONENT = ARCHITECTURE_ITEM_FEATURE_COUNT + 2;
 
 	/**
-	 * The feature id for the '<em><b>Instances</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int COMPONENT__INSTANCES = ARCHITECTURE_ITEM_FEATURE_COUNT + 3;
-
-	/**
 	 * The number of structural features of the '<em>Component</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int COMPONENT_FEATURE_COUNT = ARCHITECTURE_ITEM_FEATURE_COUNT + 4;
+	int COMPONENT_FEATURE_COUNT = ARCHITECTURE_ITEM_FEATURE_COUNT + 3;
 
 	/**
 	 * The meta object id for the '{@link org.m2ling.domain.core.impl.RuntimeItemImpl <em>Runtime Item</em>}' class.
@@ -2731,17 +2722,6 @@ public interface CorePackage extends EPackage {
 	EReference getComponent_BoundComponent();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link org.m2ling.domain.core.Component#getInstances <em>Instances</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Instances</em>'.
-	 * @see org.m2ling.domain.core.Component#getInstances()
-	 * @see #getComponent()
-	 * @generated
-	 */
-	EReference getComponent_Instances();
-
-	/**
 	 * Returns the meta object for class '{@link org.m2ling.domain.core.ComponentInstance <em>Component Instance</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -4048,14 +4028,6 @@ public interface CorePackage extends EPackage {
 		 * @generated
 		 */
 		EReference COMPONENT__BOUND_COMPONENT = eINSTANCE.getComponent_BoundComponent();
-
-		/**
-		 * The meta object literal for the '<em><b>Instances</b></em>' containment reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference COMPONENT__INSTANCES = eINSTANCE.getComponent_Instances();
 
 		/**
 		 * The meta object literal for the '{@link org.m2ling.domain.core.impl.ComponentInstanceImpl <em>Component Instance</em>}' class.

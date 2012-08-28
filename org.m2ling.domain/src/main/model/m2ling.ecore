@@ -31,8 +31,6 @@
       <eStructuralFeatures xsi:type="ecore:EReference" name="type" lowerBound="1"
           eType="#//core/ComponentType"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="boundComponent" eType="#//core/Component"/>
-      <eStructuralFeatures xsi:type="ecore:EReference" name="instances" upperBound="-1"
-          eType="#//core/ComponentInstance" containment="true"/>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="ComponentInstance" eSuperTypes="#//core/HasParameterValues #//core/RuntimeItem #//core/HasReferences">
       <eStructuralFeatures xsi:type="ecore:EReference" name="component" lowerBound="1"
