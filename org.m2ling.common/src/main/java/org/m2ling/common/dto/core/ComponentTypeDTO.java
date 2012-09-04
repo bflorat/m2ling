@@ -16,36 +16,36 @@ import com.google.common.collect.ImmutableList;
  * @author Bertrand Florat <bertrand@florat.net>
  */
 public class ComponentTypeDTO implements Comparable<ComponentTypeDTO> {
-	private final String vpID;
+	private final HasNameAndIdDTO vp;
 	private final String id;
 	private final String name;
 	private final List<String> tags;
 	private final String description;
 	private final String comment;
 	private final List<ReferenceDTO> references;
-	private final String boundTypeID;
+	private final HasNameAndIdDTO boundType;
 	private final int iFactor;
 	private final boolean reifiable;
-	private final List<String> enumeration;
+	private final List<HasNameAndIdDTO> enumeration;
 
 	public static class Builder {
 		// Required configuration
 		private final String name;
 		private final String id;
-		private final String vpID;
+		private final HasNameAndIdDTO vp;
 		// Optional configuration
 		private List<String> tags = new ArrayList<String>(1);
 		private String description = null;
 		private String comment = null;
 		private List<ReferenceDTO> references = new ArrayList<ReferenceDTO>(1);
-		private String boundTypeID = null;
+		private HasNameAndIdDTO boundType;
 		private int iFactor = 0;
 		private boolean reifiable = false;
-		private List<String> enumeration = new ArrayList<String>(1);
+		private List<HasNameAndIdDTO> enumeration = new ArrayList<HasNameAndIdDTO>(1);
 
-		public Builder(String vpID, String id, String name) {
+		public Builder(HasNameAndIdDTO vp, String id, String name) {
 			this.id = id;
-			this.vpID = vpID;
+			this.vp = vp;
 			this.name = name;
 		}
 
@@ -69,8 +69,8 @@ public class ComponentTypeDTO implements Comparable<ComponentTypeDTO> {
 			return this;
 		}
 
-		public Builder boundTypeID(String boundTypeID) {
-			this.boundTypeID = boundTypeID;
+		public Builder boundType(HasNameAndIdDTO boundType) {
+			this.boundType = boundType;
 			return this;
 		}
 
@@ -85,13 +85,13 @@ public class ComponentTypeDTO implements Comparable<ComponentTypeDTO> {
 		}
 
 		/**
-		 * Set component IDs to the enumeration.
+		 * Add component IDs to the enumeration.
 		 * 
 		 * @param componentIDs
 		 * @return the builder
 		 */
-		public Builder addEnumerationID(String componentID) {
-			this.enumeration.add(componentID);
+		public Builder addEnumeration(HasNameAndIdDTO component) {
+			this.enumeration.add(component);
 			return this;
 		}
 
@@ -104,12 +104,12 @@ public class ComponentTypeDTO implements Comparable<ComponentTypeDTO> {
 	private ComponentTypeDTO(Builder builder) {
 		id = builder.id;
 		name = builder.name;
-		vpID = builder.vpID;
+		vp = builder.vp;
 		tags = ImmutableList.copyOf(builder.tags); // defensive copy
 		description = builder.description;
 		comment = builder.comment;
 		references = builder.references;
-		boundTypeID = builder.boundTypeID;
+		boundType = builder.boundType;
 		iFactor = builder.iFactor;
 		reifiable = builder.reifiable;
 		enumeration = ImmutableList.copyOf(builder.enumeration);
@@ -132,8 +132,8 @@ public class ComponentTypeDTO implements Comparable<ComponentTypeDTO> {
 	/**
 	 * @return the associated viewpoint id
 	 */
-	public String getViewPointId() {
-		return vpID;
+	public HasNameAndIdDTO getViewPoint() {
+		return vp;
 	}
 
 	/**
@@ -162,8 +162,8 @@ public class ComponentTypeDTO implements Comparable<ComponentTypeDTO> {
 		return comment;
 	}
 
-	public String getBoundTypeID() {
-		return boundTypeID;
+	public HasNameAndIdDTO getBoundType() {
+		return boundType;
 	}
 
 	public int getInstantiationFactor() {
@@ -175,6 +175,20 @@ public class ComponentTypeDTO implements Comparable<ComponentTypeDTO> {
 	 */
 	public List<ReferenceDTO> getReferences() {
 		return references;
+	}
+
+	/**
+	 * @return the reifiable
+	 */
+	public boolean isReifiable() {
+		return reifiable;
+	}
+
+	/**
+	 * @return the enumeration
+	 */
+	public List<HasNameAndIdDTO> getEnumeration() {
+		return enumeration;
 	}
 
 	public String toString() {
@@ -203,19 +217,5 @@ public class ComponentTypeDTO implements Comparable<ComponentTypeDTO> {
 			return 0;
 		}
 		return o.getName().compareTo(o.getName());
-	}
-
-	/**
-	 * @return the reifiable
-	 */
-	public boolean isReifiable() {
-		return reifiable;
-	}
-
-	/**
-	 * @return the enumeration
-	 */
-	public List<String> getEnumeration() {
-		return enumeration;
 	}
 }

@@ -220,11 +220,6 @@ public class RuleServiceImpl extends ServiceImpl implements RuleService {
 		return out;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.m2ling.service.principles.RuleService#deleteRule(org.m2ling.common.dto.core.RuleDTO)
-	 */
 	@Override
 	public void deleteRule(final Context context, final RuleDTO dto) throws FunctionalException {
 		{// Controls

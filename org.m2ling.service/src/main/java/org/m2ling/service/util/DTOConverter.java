@@ -10,6 +10,7 @@ import java.util.List;
 
 import org.eclipse.emf.common.util.EList;
 import org.m2ling.common.dto.core.ComponentTypeDTO;
+import org.m2ling.common.dto.core.HasNameAndIdDTO;
 import org.m2ling.common.dto.core.ReferenceDTO;
 import org.m2ling.common.dto.core.RuleDTO;
 import org.m2ling.common.dto.core.StatusEventDTO;
@@ -102,11 +103,12 @@ public class DTOConverter {
 			if (Strings.isNullOrEmpty(ct.getName()) && boundType != null) {
 				name = boundType.getName();
 			}
-			ComponentTypeDTO.Builder builder = new ComponentTypeDTO.Builder(vp.getId(), ct.getId(), name);
+			HasNameAndIdDTO hniVP = new HasNameAndIdDTO.Builder(vp.getId(), vp.getName()).build();
+			ComponentTypeDTO.Builder builder = new ComponentTypeDTO.Builder(hniVP, ct.getId(), name);
 			for (String tag : ct.getTags()) {
 				builder.addTag(tag);
 			}
-			// Add bound type tags
+			// Add bound type tags as well
 			if (boundType != null) {
 				for (String tag : boundType.getTags()) {
 					builder.addTag(tag);
@@ -123,7 +125,8 @@ public class DTOConverter {
 				builder.description(ct.getDescription());
 			}
 			for (ArchitectureItem ai : ct.getEnumeration()) {
-				builder.addEnumerationID(ai.getId());
+				HasNameAndIdDTO hniComp = new HasNameAndIdDTO.Builder(ai.getId(), ai.getName()).build();
+				builder.addEnumeration(hniComp);
 			}
 			builder.instantiationFactor(ct.getInstantiationFactor());
 			builder.reifiable(ct.isReifiable());
@@ -132,7 +135,9 @@ public class DTOConverter {
 				builder.addReference(refDTO);
 			}
 			if (ct.getBoundType() != null) {
-				builder.boundTypeID(ct.getBoundType().getId());
+				HasNameAndIdDTO hniBoundType = new HasNameAndIdDTO.Builder(ct.getBoundType().getId(), ct.getBoundType()
+						.getName()).build();
+				builder.boundType(hniBoundType);
 			}
 			return builder.build();
 		}
@@ -140,7 +145,8 @@ public class DTOConverter {
 		public ReferenceDTO getReferenceDTO(Reference ref) {
 			ReferenceDTO.Builder builder = new ReferenceDTO.Builder(ref.getType().name());
 			for (HasNameAndID target : ref.getTargets()) {
-				builder.addTarget(target.getId());
+				HasNameAndIdDTO hniDTO = new HasNameAndIdDTO.Builder(target.getId(), target.getName()).build();
+				builder.addTarget(hniDTO);
 			}
 			return builder.build();
 		}
@@ -240,12 +246,12 @@ public class DTOConverter {
 			Reference reference = CoreFactory.eINSTANCE.createReference();
 			reference.setType(ReferenceType.get(dto.getType()));
 			EList<HasNameAndID> targets = reference.getTargets();
-			for (String target : dto.getTargets()) {
+			for (HasNameAndIdDTO target : dto.getTargets()) {
 				// Try component target
-				Component comp = util.getComponentByID(target);
+				Component comp = util.getComponentByID(target.getId());
 				if (comp == null) {
 					// OK, try component type
-					ComponentType compType = util.getComponentTypeByID(target);
+					ComponentType compType = util.getComponentTypeByID(target.getId());
 					targets.add(compType);
 				} else {
 					targets.add(comp);
@@ -270,15 +276,15 @@ public class DTOConverter {
 			}
 			ct.setDescription(dto.getDescription());
 			ct.setComment(dto.getComment());
-			ComponentType boundedType = util.getComponentTypeByID(dto.getBoundTypeID());
+			ComponentType boundedType = util.getComponentTypeByID(dto.getBoundType().getId());
 			ct.setBoundType(boundedType);
 			ct.setInstantiationFactor(dto.getInstantiationFactor());
 			ct.setReifiable(dto.isReifiable());
-			for (String id : dto.getEnumeration()) {
-				ArchitectureItem comp = util.getComponentByID(id);
+			for (HasNameAndIdDTO hni : dto.getEnumeration()) {
+				ArchitectureItem comp = util.getComponentByID(hni.getId());
 				if (comp == null) {
 					// if comp is null, should be because it is actually a comp group
-					comp = util.getComponentGroupByID(id);
+					comp = util.getComponentGroupByID(hni.getId());
 				}
 				ct.getEnumeration().add(comp);
 			}

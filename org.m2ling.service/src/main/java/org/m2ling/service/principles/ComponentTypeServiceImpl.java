@@ -14,6 +14,7 @@ import org.eclipse.emf.ecore.util.EcoreUtil.EqualityHelper;
 import org.m2ling.common.configuration.Conf;
 import org.m2ling.common.dto.core.AccessType;
 import org.m2ling.common.dto.core.ComponentTypeDTO;
+import org.m2ling.common.dto.core.HasNameAndIdDTO;
 import org.m2ling.common.dto.core.ReferenceDTO;
 import org.m2ling.common.exceptions.FunctionalException;
 import org.m2ling.common.exceptions.FunctionalException.Code;
@@ -56,6 +57,85 @@ public class ComponentTypeServiceImpl extends ServiceImpl implements ComponentTy
 	protected ComponentTypeServiceImpl(PersistenceManager pm, CoreUtil util, DTOConverter.FromDTO fromDTO,
 			DTOConverter.ToDTO toDTO, Conf conf, Logger logger) {
 		super(pm, util, fromDTO, toDTO, conf, logger);
+	}
+
+	/**
+	 * Return whether the reference list contains the reference ref
+	 * 
+	 * @param list
+	 * @param ref
+	 * @return whether the reference list contains the reference ref
+	 */
+	private boolean containsRef(List<Reference> list, Reference checked) {
+		EqualityHelper eh = new EcoreUtil.EqualityHelper();
+		for (Reference ref : list) {
+			if (eh.equals(ref, checked)) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	private void checkIF(final ComponentTypeDTO dto, AccessType access) throws FunctionalException {
+		int ifactor = dto.getInstantiationFactor();
+		int maxNbInstances = 0;
+		for (Component comp : util.getComponentsForCTID(dto.getId())) {
+			List<ComponentInstance> instances = util.getComponentsInstancesForComponentID(comp.getId());
+			if (instances.size() > maxNbInstances) {
+				maxNbInstances = instances.size();
+			}
+		}
+		// Instantiation factor, -1 or any positive value is valid
+		if (ifactor < 0 && ifactor != -1) {
+			throw new FunctionalException(FunctionalException.Code.WRONG_IF, null, "instantiationFactor="
+					+ dto.getInstantiationFactor());
+		}
+		if ((ifactor > 0 || ifactor == -1) && !dto.isReifiable()) {
+			throw new FunctionalException(FunctionalException.Code.NON_REIFIABLE_IFACTOR_SET, null, dto.toString());
+		}
+		if (ifactor == 0 && dto.isReifiable()) {
+			throw new FunctionalException(FunctionalException.Code.NON_REIFIABLE_IFACTOR_SET, null, dto.toString());
+		}
+		// check CT-31
+		if (!dto.isReifiable() && maxNbInstances > 0) {
+			throw new FunctionalException(FunctionalException.Code.CT_INSUFFISENT_IF, null, dto.toString());
+		}
+		if (ifactor != -1 && ifactor < maxNbInstances) {
+			throw new FunctionalException(FunctionalException.Code.CT_INSUFFISENT_IF, null, dto.toString());
+		}
+	}
+
+	private void checkBoundType(final ComponentTypeDTO dto, AccessType access) throws FunctionalException {
+		if (dto.getBoundType() != null && dto.getBoundType().getId() != null) {
+			// Check if the bound type exists
+			ComponentType boundCT = (ComponentType) util.getItemByTypeAndID(Type.COMPONENT_TYPE, dto.getBoundType()
+					.getId());
+			if (boundCT == null) {
+				throw new FunctionalException(FunctionalException.Code.TARGET_NOT_FOUND, null, "boundTypeID="
+						+ dto.getBoundType().getId());
+			}
+			// Check that the bound type is from another VP
+			ViewPoint vp = util.getViewPointByID(dto.getViewPoint().getId());
+			ViewPoint vpBoundType = (ViewPoint) boundCT.eContainer();
+			if (vpBoundType.equals(vp)) {
+				throw new FunctionalException(FunctionalException.Code.LOCAL_BINDING, null, null);
+			}
+			// Check if the bound type is not bounded itself
+			if (boundCT.getBoundType() != null) {
+				throw new FunctionalException(FunctionalException.Code.BOUND_TYPE_BOUND, null, "boundTypeID="
+						+ dto.getBoundType().getId());
+			}
+			// Check for bound types that we don't try to set a reifiable flag or a instantiation
+			// factor different from bound type
+			if (boundCT.isReifiable() != dto.isReifiable()) {
+				throw new FunctionalException(FunctionalException.Code.DELTA_BINDING_REIFIABLE, null,
+						"boundType reifiable=" + boundCT.isReifiable());
+			}
+			if (boundCT.getInstantiationFactor() != dto.getInstantiationFactor()) {
+				throw new FunctionalException(FunctionalException.Code.DELTA_BINDING_IF, null,
+						"boundType instantiation factor=" + boundCT.getInstantiationFactor());
+			}
+		}
 	}
 
 	private void checkIdAndName(final ComponentTypeDTO dto, AccessType access) throws FunctionalException {
@@ -107,8 +187,11 @@ public class ComponentTypeServiceImpl extends ServiceImpl implements ComponentTy
 				throw new FunctionalException(FunctionalException.Code.NULL_ARGUMENT, null, "(references/target)");
 			}
 			// check targets non-existence
-			for (String targetID : refDTO.getTargets()) {
-				if (util.getComponentTypeByID(targetID) == null) {
+			for (HasNameAndIdDTO target : refDTO.getTargets()) {
+				if (target == null) {
+					throw new FunctionalException(FunctionalException.Code.NULL_ARGUMENT, null, "(references/target)");
+				}
+				if (util.getComponentTypeByID(target.getId()) == null) {
 					throw new FunctionalException(FunctionalException.Code.TARGET_NOT_FOUND, null, "(references/target)");
 				}
 			}
@@ -140,100 +223,25 @@ public class ComponentTypeServiceImpl extends ServiceImpl implements ComponentTy
 		}
 	}
 
-	/**
-	 * Return whether the reference list contains the reference ref
-	 * 
-	 * @param list
-	 * @param ref
-	 * @return whether the reference list contains the reference ref
-	 */
-	private boolean containsRef(List<Reference> list, Reference checked) {
-		EqualityHelper eh = new EcoreUtil.EqualityHelper();
-		for (Reference ref : list) {
-			if (eh.equals(ref, checked)) {
-				return true;
-			}
-		}
-		return false;
-	}
-
-	private void checkIF(final ComponentTypeDTO dto, AccessType access) throws FunctionalException {
-		int ifactor = dto.getInstantiationFactor();
-		int maxNbInstances = 0;
-		for (Component comp : util.getComponentsForCTID(dto.getId())) {
-			List<ComponentInstance> instances = util.getComponentsInstancesForComponentID(comp.getId());
-			if (instances.size() > maxNbInstances) {
-				maxNbInstances = instances.size();
-			}
-		}
-		// Instantiation factor, -1 or any positive value is valid
-		if (ifactor < 0 && ifactor != -1) {
-			throw new FunctionalException(FunctionalException.Code.WRONG_IF, null, "instantiationFactor="
-					+ dto.getInstantiationFactor());
-		}
-		if ((ifactor > 0 || ifactor == -1) && !dto.isReifiable()) {
-			throw new FunctionalException(FunctionalException.Code.NON_REIFIABLE_IFACTOR_SET, null, dto.toString());
-		}
-		if (ifactor == 0 && dto.isReifiable()) {
-			throw new FunctionalException(FunctionalException.Code.NON_REIFIABLE_IFACTOR_SET, null, dto.toString());
-		}
-		// check CT-31
-		if (!dto.isReifiable() && maxNbInstances > 0) {
-			throw new FunctionalException(FunctionalException.Code.CT_INSUFFISENT_IF, null, dto.toString());
-		}
-		if (ifactor != -1 && ifactor < maxNbInstances) {
-			throw new FunctionalException(FunctionalException.Code.CT_INSUFFISENT_IF, null, dto.toString());
-		}
-	}
-
-	private void checkBoundType(final ComponentTypeDTO dto, AccessType access) throws FunctionalException {
-		if (dto.getBoundTypeID() != null) {
-			// Check if the bound type exists
-			ComponentType boundCT = (ComponentType) util.getItemByTypeAndID(Type.COMPONENT_TYPE, dto.getBoundTypeID());
-			if (boundCT == null) {
-				throw new FunctionalException(FunctionalException.Code.TARGET_NOT_FOUND, null, "boundTypeID="
-						+ dto.getBoundTypeID());
-			}
-			// Check that the bound type is from another VP
-			ViewPoint vp = util.getViewPointByID(dto.getViewPointId());
-			ViewPoint vpBoundType = (ViewPoint) boundCT.eContainer();
-			if (vpBoundType.equals(vp)) {
-				throw new FunctionalException(FunctionalException.Code.LOCAL_BINDING, null, null);
-			}
-			// Check if the bound type is not bounded itself
-			if (boundCT.getBoundType() != null) {
-				throw new FunctionalException(FunctionalException.Code.BOUND_TYPE_BOUND, null, "boundTypeID="
-						+ dto.getBoundTypeID());
-			}
-			// Check for bound types that we don't try to set a reifiable flag or a instantiation
-			// factor different from bound type
-			if (boundCT.isReifiable() != dto.isReifiable()) {
-				throw new FunctionalException(FunctionalException.Code.DELTA_BINDING_REIFIABLE, null,
-						"boundType reifiable=" + boundCT.isReifiable());
-			}
-			if (boundCT.getInstantiationFactor() != dto.getInstantiationFactor()) {
-				throw new FunctionalException(FunctionalException.Code.DELTA_BINDING_IF, null,
-						"boundType instantiation factor=" + boundCT.getInstantiationFactor());
-			}
-		}
-	}
-
 	private void checkEnumeration(final ComponentTypeDTO dto, AccessType access) throws FunctionalException {
-		List<String> enumeration = dto.getEnumeration();
+		List<HasNameAndIdDTO> enumeration = dto.getEnumeration();
 		if (enumeration == null) {
 			throw new FunctionalException(FunctionalException.Code.NULL_ARGUMENT, null, "(enumeration)");
 		}
 		// enumeration can't be provided without associated binding type
-		if (enumeration.size() > 0 && dto.getBoundTypeID() == null) {
+		if (enumeration.size() > 0 && (dto.getBoundType() == null || dto.getBoundType().getId() == null)) {
 			throw new FunctionalException(FunctionalException.Code.NULL_BOUND_TYPE_ENUMERATION, null, "(bound type)");
 		}
 		// Check that every every component or component group exists and is of boundtype
-		for (String compId : enumeration) {
+		for (HasNameAndIdDTO comp : enumeration) {
+			if (comp == null || comp.getId() == null) {
+				throw new FunctionalException(FunctionalException.Code.NULL_ARGUMENT, null, "(enumeration)");
+			}
 			ArchitectureItem item = null;
-			item = util.getComponentByID(compId);
+			item = util.getComponentByID(comp.getId());
 			// unknown component ? ok, search in groups
 			if (item == null) {
-				item = util.getComponentGroupByID(compId);
+				item = util.getComponentGroupByID(comp.getId());
 			}
 			// still nothing ? leave in error
 			if (item == null) {
@@ -241,8 +249,30 @@ public class ComponentTypeServiceImpl extends ServiceImpl implements ComponentTy
 			}
 			// check that every component or group share the same CT = bound type
 			ComponentType ct = util.getComponentTypeForArchitectureItem(item);
-			if (!ct.getId().equals(dto.getBoundTypeID())) {
+			if (!ct.getId().equals(dto.getBoundType().getId())) {
 				throw new FunctionalException(FunctionalException.Code.INVALID_TYPE, null, "(enumeration)");
+			}
+		}
+	}
+
+	private void checkBeforeDeletion(final ComponentTypeDTO dto, AccessType access) throws FunctionalException {
+		ComponentType type = util.getComponentTypeByID(dto.getId());
+		// Check CT20 : none component of this type
+		for (View view : pmanager.getRoot().getViews()) {
+			for (Component comp : view.getComponents()) {
+				if (comp.getType().equals(type)) {
+					throw new FunctionalException(FunctionalException.Code.CT_EXISTING_COMP, null, "component name="
+							+ comp.getName());
+				}
+			}
+		}
+		// Check CT21 : none CT binding against this CT
+		for (ViewPoint vp : pmanager.getRoot().getViewPoints()) {
+			for (ComponentType ct : vp.getComponentTypes()) {
+				if (!(ct.equals(type)) && type.equals(ct.getBoundType())) {
+					throw new FunctionalException(FunctionalException.Code.CT_EXISTING_BINDING, null, "component type name="
+							+ ct.getName());
+				}
 			}
 		}
 	}
@@ -266,10 +296,17 @@ public class ComponentTypeServiceImpl extends ServiceImpl implements ComponentTy
 			}
 		}
 		// Check associated viewpoint existence
-		ViewPoint vp = util.getViewPointByID(dto.getViewPointId());
+		if (dto.getViewPoint() == null || dto.getViewPoint().getId() == null) {
+			throw new FunctionalException(FunctionalException.Code.NULL_ARGUMENT, null, "(viewpoint)");
+		}
+		ViewPoint vp = util.getViewPointByID(dto.getViewPoint().getId());
 		if (vp == null) {
 			throw new FunctionalException(FunctionalException.Code.TARGET_NOT_FOUND, null, "viewpoint="
-					+ dto.getViewPointId());
+					+ dto.getViewPoint().getId());
+		}
+		// check before deletion
+		if (access == AccessType.DELETE) {
+			checkBeforeDeletion(dto, access);
 		}
 		if (access == AccessType.CREATE) {
 			// Check for existing item with the same id
@@ -319,15 +356,18 @@ public class ComponentTypeServiceImpl extends ServiceImpl implements ComponentTy
 		List<String> tags = ct.getTags();
 		tags.clear();
 		tags.addAll(dto.getTags());
-		ComponentType boundType = util.getComponentTypeByID(dto.getBoundTypeID());
+		ComponentType boundType = null;
+		if (dto.getBoundType() != null) {
+			boundType = util.getComponentTypeByID(dto.getBoundType().getId());
+		}
 		ct.setBoundType(boundType);
 		ct.setInstantiationFactor(dto.getInstantiationFactor());
 		ct.setReifiable(dto.isReifiable());
 		List<ArchitectureItem> enumeration = ct.getEnumeration();
 		enumeration.clear();
 		List<ArchitectureItem> newEnumeration = new ArrayList<ArchitectureItem>(dto.getEnumeration().size());
-		for (String compID : dto.getEnumeration()) {
-			ArchitectureItem ai = util.getComponentByID(compID);
+		for (HasNameAndIdDTO comp : dto.getEnumeration()) {
+			ArchitectureItem ai = util.getComponentByID(comp.getId());
 			newEnumeration.add(ai);
 		}
 		enumeration.addAll(newEnumeration);
@@ -340,7 +380,7 @@ public class ComponentTypeServiceImpl extends ServiceImpl implements ComponentTy
 		// Processing
 		ComponentType ct = fromDTO.newComponentType(dto);
 		// Add the item
-		ViewPoint vp = util.getViewPointByID(dto.getViewPointId());
+		ViewPoint vp = util.getViewPointByID(dto.getViewPoint().getId());
 		vp.getComponentTypes().add(ct);
 	}
 
@@ -368,34 +408,11 @@ public class ComponentTypeServiceImpl extends ServiceImpl implements ComponentTy
 	}
 
 	@Override
-	public void deleteCT(final Context context, final String id) throws FunctionalException {
+	public void deleteCT(final Context context, final ComponentTypeDTO dto) throws FunctionalException {
 		{// Controls
-			if (id == null || Strings.isNullOrEmpty(id.trim())) {
-				throw new FunctionalException(FunctionalException.Code.NULL_ARGUMENT, null, "(id)");
-			}
+			checkDTO(dto, AccessType.DELETE);
 		}
-		ComponentType type = util.getComponentTypeByID(id);
-		if (type == null) {
-			throw new FunctionalException(FunctionalException.Code.TARGET_NOT_FOUND, null, "id=" + id);
-		}
-		// Check CT20 : none component of this type
-		for (View view : pmanager.getRoot().getViews()) {
-			for (Component comp : view.getComponents()) {
-				if (comp.getType().equals(type)) {
-					throw new FunctionalException(FunctionalException.Code.CT_EXISTING_COMP, null, "component name="
-							+ comp.getName());
-				}
-			}
-		}
-		// Check CT21 : none CT binding against this CT
-		for (ViewPoint vp : pmanager.getRoot().getViewPoints()) {
-			for (ComponentType ct : vp.getComponentTypes()) {
-				if (!(ct.equals(type)) && type.equals(ct.getBoundType())) {
-					throw new FunctionalException(FunctionalException.Code.CT_EXISTING_BINDING, null,
-							"componenet type name=" + ct.getName());
-				}
-			}
-		}
+		ComponentType type = util.getComponentTypeByID(dto.getId());
 		ViewPoint vp = (ViewPoint) type.eContainer();
 		vp.getComponentTypes().remove(type);
 	}

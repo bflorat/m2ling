@@ -13,6 +13,7 @@ import org.m2ling.common.exceptions.TechnicalException;
 import org.m2ling.common.utils.UUT;
 import org.m2ling.common.utils.Utils;
 import org.m2ling.presentation.principles.model.ComponentTypeBean;
+import org.m2ling.presentation.principles.model.HasNameAndIDBean;
 import org.m2ling.presentation.principles.utils.DTOConverter;
 
 import com.google.common.base.Strings;
@@ -133,13 +134,23 @@ public class CreateCTFixture extends AbstractCTFixture {
 			bean.setId(id);
 			bean.setName(name);
 			bean.setTags(tags);
-			bean.setViewPointId(vpID);
-			bean.setBoundTypeID(boundTypeID);
+			HasNameAndIDBean vp = new HasNameAndIDBean();
+			vp.setId(vpID);
+			bean.setViewPoint(vp);
+			HasNameAndIDBean boundType = new HasNameAndIDBean();
+			boundType.setId(boundTypeID);
+			bean.setBoundType(boundType);
 			if (Strings.isNullOrEmpty(enumeration)) {
-				bean.setEnumeration(new ArrayList<String>());
+				bean.setEnumeration(new ArrayList<HasNameAndIDBean>());
 			} else {
 				List<String> enumer = Utils.stringListFromString(enumeration);
-				bean.setEnumeration(enumer);
+				List<HasNameAndIDBean> enum2 = new ArrayList<HasNameAndIDBean>();
+				for (String compID : enumer) {
+					HasNameAndIDBean hni = new HasNameAndIDBean();
+					hni.setId(compID);
+					enum2.add(hni);
+				}
+				bean.setEnumeration(enum2);
 			}
 			bean.setInstantiationFactor(ifactor);
 			setReferences(bean, references);

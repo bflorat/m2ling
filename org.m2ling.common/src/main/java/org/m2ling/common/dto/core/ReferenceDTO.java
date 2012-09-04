@@ -19,7 +19,7 @@ public class ReferenceDTO {
 	/** Reference type literal, one of ReferenceType enum entry */
 	private final String type;
 	/** References list of ids */
-	private final List<String> targets;
+	private final List<HasNameAndIdDTO> targets;
 
 	private ReferenceDTO(Builder builder) {
 		super();
@@ -31,21 +31,21 @@ public class ReferenceDTO {
 		return this.type;
 	}
 
-	public List<String> getTargets() {
+	public List<HasNameAndIdDTO> getTargets() {
 		return this.targets;
 	}
 
 	public static class Builder {
 		private final String type;
-		private List<String> targets;
+		private List<HasNameAndIdDTO> targets;
 
 		public Builder(String type) {
 			this.type = type;
-			targets = new ArrayList<String>(1);
+			targets = new ArrayList<HasNameAndIdDTO>(1);
 		}
 
-		public Builder addTarget(String id) {
-			targets.add(id);
+		public Builder addTarget(HasNameAndIdDTO hni) {
+			targets.add(hni);
 			return this;
 		}
 

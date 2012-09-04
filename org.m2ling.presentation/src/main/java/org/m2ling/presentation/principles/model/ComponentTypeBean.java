@@ -15,15 +15,16 @@ import org.m2ling.common.utils.Utils;
  */
 @SuppressWarnings("serial")
 public class ComponentTypeBean implements Serializable {
-	private String vpID = "";
+	private HasNameAndIDBean vp;
 	private String id = "";
 	private String name = "";
 	private String tags = "";
 	private String description = "";
 	private String comment = "";
-	private String iFactor = "0";
-	private String boundTypeID = "";
-	private List<String> enumeration;
+	private String instantiationFactor = "0";
+	private HasNameAndIDBean boundType;
+	/** component id -> component name */
+	private List<HasNameAndIDBean> enumeration;
 	private boolean reifiable = false;
 	private List<ReferenceBean> references;
 	/** GUI only item used to represent the drop button **/
@@ -64,6 +65,36 @@ public class ComponentTypeBean implements Serializable {
 	}
 
 	/**
+	 * @return the instantiationFactor
+	 */
+	public String getInstantiationFactor() {
+		return instantiationFactor;
+	}
+
+	/**
+	 * @param instantiationFactor
+	 *           the instantiationFactor to set
+	 */
+	public void setInstantiationFactor(String instantiationFactor) {
+		this.instantiationFactor = instantiationFactor;
+	}
+
+	/**
+	 * @return the vp
+	 */
+	public HasNameAndIDBean getViewPoint() {
+		return vp;
+	}
+
+	/**
+	 * @param vpName
+	 *           the vpName to set
+	 */
+	public void setViewPoint(HasNameAndIDBean vp) {
+		this.vp = vp;
+	}
+
+	/**
 	 * @return the references
 	 */
 	public List<ReferenceBean> getReferences() {
@@ -79,54 +110,24 @@ public class ComponentTypeBean implements Serializable {
 	}
 
 	/**
-	 * @return the vpID
+	 * @return the boundType
 	 */
-	public String getViewPointId() {
-		return vpID;
+	public HasNameAndIDBean getBoundType() {
+		return boundType;
 	}
 
 	/**
-	 * @param vpID
-	 *           the vpID to set
+	 * @param boundType
+	 *           the boundType to set
 	 */
-	public void setViewPointId(String vpID) {
-		this.vpID = vpID;
-	}
-
-	/**
-	 * @return the boundTypeID
-	 */
-	public String getBoundTypeID() {
-		return boundTypeID;
-	}
-
-	/**
-	 * @param boundTypeID
-	 *           the boundTypeID to set
-	 */
-	public void setBoundTypeID(String boundTypeID) {
-		this.boundTypeID = boundTypeID;
-	}
-
-	/**
-	 * @return the iFactor
-	 */
-	public String getInstantiationFactor() {
-		return iFactor;
-	}
-
-	/**
-	 * @param iFactor
-	 *           the iFactor to set. "n" or "*" means "any"
-	 */
-	public void setInstantiationFactor(String iFactor) {
-		this.iFactor = iFactor;
+	public void setBoundType(HasNameAndIDBean boundType) {
+		this.boundType = boundType;
 	}
 
 	/**
 	 * @return the enumeration
 	 */
-	public List<String> getEnumeration() {
+	public List<HasNameAndIDBean> getEnumeration() {
 		return enumeration;
 	}
 
@@ -134,7 +135,7 @@ public class ComponentTypeBean implements Serializable {
 	 * @param enumeration
 	 *           the enumeration to set
 	 */
-	public void setEnumeration(List<String> enumeration) {
+	public void setEnumeration(List<HasNameAndIDBean> enumeration) {
 		this.enumeration = enumeration;
 	}
 

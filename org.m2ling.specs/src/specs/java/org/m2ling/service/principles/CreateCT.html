@@ -31,17 +31,17 @@
 		</ul>
 		should have following characteristics (full round trip from presentation to presentation) : <b
 			concordion:assertEquals="createAndGetCT(#justCheck,#caseName,#vpID,#id,#name,#desc,#comment,#tags,#ifactor,#boundTypeID,#references,#enumeration,#reifiable)">
-			boundTypeID=id_ct_tech_applicationserver 
-			comment=Available components listed in Technical catalog 
-			description=Runs services (RMI, REST, SOAP...). 
+			boundType=id=id_ct_tech_applicationserver name=ApplicationServer 
+			comment=Available components listed in Technical catalog description=Runs services (RMI, REST, SOAP...). 
 			drop= 
-			enumeration=[id_comp_tech_jboss5, id_comp_tech_jboss6] 
+			enumeration=[id=id_comp_tech_jboss5 name=JBoss5 , id=id_comp_tech_jboss6 name=JBoss6 ] 
 			id=new_id_ct_logical_servicecontainer 
-			iFactor=* name=ServicesContainer2 
-			references=[targets=[id_ct_app_servicemodule] type=RUNS , targets=[id_ct_logical_rdbms, id_ct_logical_ldap] type=DEPENDS_ON ] 
+			instantiationFactor=* 
+			name=ServicesContainer2 
+			references=[targets=[id=id_ct_app_servicemodule name=ServiceModule ] type=RUNS , targets=[id=id_ct_logical_rdbms name=RDBMS , id=id_ct_logical_ldap name=LDAP directory ] type=DEPENDS_ON ] 
 			reifiable=true 
 			tags=logical,SA 
-			vpID=id_vp_logical </b>
+			vp=id=id_vp_logical name=Logical Architecture</b>
 	</div>
 	</p>
 

@@ -16,9 +16,9 @@ import org.m2ling.common.utils.Utils;
  */
 @SuppressWarnings("serial")
 public class ReferenceBean implements Serializable {
-	/**Translated type literal */
+	/** Translated type literal */
 	private String type;
-	private List<String> targets;
+	private List<HasNameAndIDBean> targets;
 
 	public ReferenceBean() {
 		super();
@@ -60,7 +60,7 @@ public class ReferenceBean implements Serializable {
 	/**
 	 * @return the targets
 	 */
-	public List<String> getTargets() {
+	public List<HasNameAndIDBean> getTargets() {
 		return targets;
 	}
 
@@ -68,7 +68,7 @@ public class ReferenceBean implements Serializable {
 	 * @param targets
 	 *           the targets to set
 	 */
-	public void setTargets(List<String> targets) {
+	public void setTargets(List<HasNameAndIDBean> targets) {
 		this.targets = targets;
 	}
 }

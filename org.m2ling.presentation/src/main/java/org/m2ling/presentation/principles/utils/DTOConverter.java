@@ -10,16 +10,16 @@ import java.util.List;
 import java.util.Map;
 
 import org.m2ling.common.dto.core.ComponentTypeDTO;
+import org.m2ling.common.dto.core.HasNameAndIdDTO;
 import org.m2ling.common.dto.core.ReferenceDTO;
 import org.m2ling.common.dto.core.RuleDTO;
 import org.m2ling.common.dto.core.StatusEventDTO;
 import org.m2ling.common.dto.core.ViewPointDTO;
-import org.m2ling.common.exceptions.FunctionalException;
-import org.m2ling.common.exceptions.FunctionalException.Code;
 import org.m2ling.common.exceptions.TechnicalException;
 import org.m2ling.common.utils.Utils;
 import org.m2ling.presentation.i18n.Msg;
 import org.m2ling.presentation.principles.model.ComponentTypeBean;
+import org.m2ling.presentation.principles.model.HasNameAndIDBean;
 import org.m2ling.presentation.principles.model.ReferenceBean;
 import org.m2ling.presentation.principles.model.RuleBean;
 import org.m2ling.presentation.principles.model.ViewPointBean;
@@ -97,14 +97,19 @@ public class DTOConverter {
 							"instanciation factor = " + bean.getInstantiationFactor());
 				}
 			}
-			ComponentTypeDTO.Builder builder = new ComponentTypeDTO.Builder(bean.getViewPointId(), bean.getId(),
-					bean.getName()).description(bean.getDescription()).comment(bean.getComment())
-					.boundTypeID(bean.getBoundTypeID()).instantiationFactor(ifactor).reifiable(bean.isReifiable());
+			HasNameAndIdDTO vp = (bean.getViewPoint() == null) ? null : new HasNameAndIdDTO.Builder(bean.getViewPoint()
+					.getId(), bean.getViewPoint().getName()).build();
+			HasNameAndIdDTO boundType = (bean.getBoundType() == null) ? null : new HasNameAndIdDTO.Builder(bean
+					.getBoundType().getId(), bean.getBoundType().getName()).build();
+			ComponentTypeDTO.Builder builder = new ComponentTypeDTO.Builder(vp, bean.getId(), bean.getName())
+					.description(bean.getDescription()).comment(bean.getComment()).boundType(boundType)
+					.instantiationFactor(ifactor).reifiable(bean.isReifiable());
 			for (String tag : Utils.stringListFromString(bean.getTags())) {
 				builder.addTag(tag);
 			}
-			for (String componentID : bean.getEnumeration()) {
-				builder.addEnumerationID(componentID);
+			for (HasNameAndIDBean component : bean.getEnumeration()) {
+				HasNameAndIdDTO compDTO = new HasNameAndIdDTO.Builder(component.getId(), component.getName()).build();
+				builder.addEnumeration(compDTO);
 			}
 			for (ReferenceBean ref : bean.getReferences()) {
 				ReferenceDTO refDTO = getReferenceDTO(ref);
@@ -121,9 +126,25 @@ public class DTOConverter {
 		 */
 		public ReferenceDTO getReferenceDTO(ReferenceBean bean) {
 			ReferenceDTO.Builder builder = new ReferenceDTO.Builder(bean.getType());
-			for (String targetID : bean.getTargets()) {
-				builder.addTarget(targetID);
+			List<HasNameAndIDBean> targets = bean.getTargets();
+			for (HasNameAndIDBean target : targets) {
+				HasNameAndIdDTO hniDTO = getNameAndIdDTO(target);
+				builder.addTarget(hniDTO);
 			}
+			return builder.build();
+		}
+
+		/**
+		 * Create a HasNameAndID DTO from provided bean
+		 * 
+		 * @param bean
+		 * @return a HasNameAndID DTO from provided bean
+		 */
+		public HasNameAndIdDTO getNameAndIdDTO(HasNameAndIDBean bean) {
+			if (bean.getId() == null) {
+				return null;
+			}
+			HasNameAndIdDTO.Builder builder = new HasNameAndIdDTO.Builder(bean.getId(), bean.getName());
 			return builder.build();
 		}
 	}
@@ -211,7 +232,28 @@ public class DTOConverter {
 		public ReferenceBean getReferenceBean(ReferenceDTO dto) {
 			ReferenceBean bean = new ReferenceBean();
 			bean.setType(dto.getType());
-			bean.setTargets(new ArrayList<String>(dto.getTargets()));
+			List<HasNameAndIDBean> targets = new ArrayList<HasNameAndIDBean>();
+			for (HasNameAndIdDTO hniDTO : dto.getTargets()) {
+				targets.add(getHasNameAndIdBean(hniDTO));
+			}
+			bean.setTargets(targets);
+			return bean;
+		}
+
+		/**
+		 * Return a HasNameAndId bean from provided DTO
+		 * 
+		 * @param dto
+		 *           the HasNameAndId DTO
+		 * @return a HasNameAndId bean from provided DTO
+		 */
+		public HasNameAndIDBean getHasNameAndIdBean(HasNameAndIdDTO dto) {
+			if (dto == null) {
+				return null;
+			}
+			HasNameAndIDBean bean = new HasNameAndIDBean();
+			bean.setId(dto.getId());
+			bean.setName(dto.getName());
 			return bean;
 		}
 
@@ -228,11 +270,15 @@ public class DTOConverter {
 			bean.setName((dto.getName() != null) ? dto.getName() : "");
 			bean.setComment((dto.getComment() != null) ? dto.getComment() : "");
 			bean.setDescription((dto.getDescription() != null) ? dto.getDescription() : "");
-			bean.setDescription((dto.getDescription() != null) ? dto.getDescription() : "");
 			String tags = Utils.stringListAsString(dto.getTags());
 			bean.setTags(tags);
-			bean.setBoundTypeID(dto.getBoundTypeID());
-			bean.setEnumeration(dto.getEnumeration());
+			HasNameAndIDBean boundBean = getHasNameAndIdBean(dto.getBoundType());
+			bean.setBoundType(boundBean);
+			List<HasNameAndIDBean> enumBean = new ArrayList<HasNameAndIDBean>(1);
+			for (HasNameAndIdDTO compDTO : dto.getEnumeration()) {
+				enumBean.add(getHasNameAndIdBean(compDTO));
+			}
+			bean.setEnumeration(enumBean);
 			String ifactor = "0";
 			if (dto.getInstantiationFactor() == -1) {
 				ifactor = "*";
@@ -246,7 +292,8 @@ public class DTOConverter {
 			}
 			bean.setReferences(refs);
 			bean.setReifiable(dto.isReifiable());
-			bean.setViewPointId(dto.getViewPointId());
+			HasNameAndIDBean vpBean = getHasNameAndIdBean(dto.getViewPoint());
+			bean.setViewPoint(vpBean);
 			return bean;
 		}
 	}

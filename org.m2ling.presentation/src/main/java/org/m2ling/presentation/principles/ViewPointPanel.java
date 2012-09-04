@@ -44,6 +44,7 @@ public class ViewPointPanel extends VerticalLayout {
 	private final ViewPointBean bean;
 	private ViewPointDialogFactory vpDialogFactory;
 	private RulesPanelFactory rulesPanelFactory;
+	private ComponentTypePanelFactory ctPanelFactory;
 	private ViewPointService service;
 	private ObservationManager obs;
 	private DTOConverter.ToDTO toDTO;
@@ -60,7 +61,7 @@ public class ViewPointPanel extends VerticalLayout {
 	@Inject
 	public ViewPointPanel(@Assisted ViewPointBean bean, Logger logger, ViewPointDialogFactory factory,
 			ViewPointService service, ObservationManager obs, DTOConverter.ToDTO toDTO,
-			RulesPanelFactory rulesPanelFactory, Msg msg) {
+			RulesPanelFactory rulesPanelFactory, ComponentTypePanelFactory ctPanelFactory, Msg msg) {
 		super();
 		this.logger = logger;
 		this.bean = bean;
@@ -69,6 +70,7 @@ public class ViewPointPanel extends VerticalLayout {
 		this.obs = obs;
 		this.toDTO = toDTO;
 		this.rulesPanelFactory = rulesPanelFactory;
+		this.ctPanelFactory = ctPanelFactory;
 		this.msg = msg;
 		if (bean == null) {
 			throw new IllegalArgumentException("Null viewpoint");
@@ -125,6 +127,7 @@ public class ViewPointPanel extends VerticalLayout {
 				}
 			}
 		});
+		// Rules
 		final Panel rulesHiddenPane = new Panel();
 		rulesHiddenPane.setVisible(false);
 		rulesHiddenPane.setWidth("100%");
@@ -138,13 +141,21 @@ public class ViewPointPanel extends VerticalLayout {
 				rulesHiddenPane.setVisible(!rulesHiddenPane.isVisible());
 			}
 		});
+		// CTs
+		final Panel ctsHiddenPane = new Panel();
+		ctsHiddenPane.setVisible(false);
+		ctsHiddenPane.setWidth("100%");
+		ctsHiddenPane.setHeight(null);
+		ComponentTypesPanel ctsPanel = ctPanelFactory.getCTPanelFor(bean.getId());
+		ctsHiddenPane.setContent(ctsPanel);
 		Button componentTypes = new Button(msg.get("pr.14"));
 		componentTypes.setStyleName(BaseTheme.BUTTON_LINK);
 		componentTypes.addListener(new Button.ClickListener() {
 			public void buttonClick(ClickEvent event) {
-				// TODO
+				ctsHiddenPane.setVisible(!ctsHiddenPane.isVisible());
 			}
 		});
+		// Links
 		Button linkTypes = new Button(msg.get("pr.15"));
 		linkTypes.setStyleName(BaseTheme.BUTTON_LINK);
 		linkTypes.addListener(new Button.ClickListener() {
@@ -184,6 +195,7 @@ public class ViewPointPanel extends VerticalLayout {
 			addComponent(comment);
 		}
 		addComponent(componentTypes);
+		addComponent(ctsHiddenPane);
 		addComponent(linkTypes);
 		addComponent(activities);
 		addComponent(rules);

@@ -5,31 +5,25 @@
  */
 package org.m2ling.presentation.principles;
 
-import java.text.DateFormat;
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Locale;
 import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import org.m2ling.common.configuration.Conf;
-import org.m2ling.common.dto.core.RuleDTO;
+import org.m2ling.common.dto.core.ComponentTypeDTO;
 import org.m2ling.common.exceptions.FunctionalException;
 import org.m2ling.presentation.events.Events;
 import org.m2ling.presentation.events.ObservationManager;
 import org.m2ling.presentation.events.Observer;
 import org.m2ling.presentation.i18n.Msg;
-import org.m2ling.presentation.principles.model.RuleBean;
+import org.m2ling.presentation.principles.model.ComponentTypeBean;
+import org.m2ling.presentation.principles.model.HasNameAndIDBean;
 import org.m2ling.presentation.principles.utils.DTOConverter;
-import org.m2ling.presentation.principles.utils.SpecificConfiguration;
-import org.m2ling.service.principles.RuleService;
+import org.m2ling.service.principles.ComponentTypeService;
 import org.vaadin.dialogs.ConfirmDialog;
 
 import com.google.common.base.Strings;
-import com.google.common.collect.Lists;
 import com.google.inject.Inject;
 import com.google.inject.assistedinject.Assisted;
 import com.vaadin.data.util.BeanContainer;
@@ -48,35 +42,29 @@ import com.vaadin.ui.Window.Notification;
 import com.vaadin.ui.themes.BaseTheme;
 
 /**
- * List all rules for a given viewpoint
+ * List all component types (CT) for a given viewpoint
  */
 @SuppressWarnings("serial")
-public class RulesPanel extends VerticalLayout implements Observer {
+public class ComponentTypesPanel extends VerticalLayout implements Observer {
 	private final String vpID;
-	private final RuleService service;
+	private final ComponentTypeService serviceCT;
 	private final Logger logger;
 	private final DTOConverter.ToDTO toDTO;
 	private final DTOConverter.FromDTO fromDTO;
-	private final RuleDialogFactory factory;
+	// private final RuleDialogFactory factory;
 	private final Msg msg;
-	private final Conf conf;
 
-	/**
-	 * Build a rules dialog
-	 * 
-	 */
 	@Inject
-	public RulesPanel(Logger logger, @Assisted String vpID, RuleService service, DTOConverter.ToDTO toDTO,
-			DTOConverter.FromDTO fromDTO, RuleDialogFactory factory, Msg msg, Conf conf, ObservationManager obs) {
+	public ComponentTypesPanel(Logger logger, @Assisted String vpID, ComponentTypeService serviceCT,
+			DTOConverter.ToDTO toDTO, DTOConverter.FromDTO fromDTO, Msg msg, ObservationManager obs) {
 		super();
 		this.vpID = vpID;
-		this.service = service;
-		this.factory = factory;
+		this.serviceCT = serviceCT;
+		// this.factory = factory;
 		this.logger = logger;
 		this.toDTO = toDTO;
 		this.fromDTO = fromDTO;
 		this.msg = msg;
-		this.conf = conf;
 		setHeight(null);
 		setWidth("98%");
 		setMargin(true);
@@ -86,48 +74,54 @@ public class RulesPanel extends VerticalLayout implements Observer {
 	@Override
 	public void attach() {
 		try {
-			List<RuleDTO> rules = service.getAllRules(null, vpID);
-			if (rules.size() == 0) {
-				addComponent(new Label(msg.get("pr.1")));
-				Button create = getCreateRuleButton();
+			List<ComponentTypeDTO> cts = serviceCT.getAllCT(null, vpID);
+			if (cts.size() == 0) {
+				addComponent(new Label(msg.get("pr.35")));
+				Button create = getCreateButton();
 				addComponent(create);
 				setComponentAlignment(create, Alignment.TOP_RIGHT);
 			} else {
-				BeanContainer<String, RuleBean> data = new BeanContainer<String, RuleBean>(RuleBean.class);
+				BeanContainer<String, ComponentTypeBean> data = new BeanContainer<String, ComponentTypeBean>(
+						ComponentTypeBean.class);
 				data.setBeanIdProperty("id");
-				for (RuleDTO dto : rules) {
-					RuleBean rule = fromDTO.getRuleBean(dto);
-					data.addBean(rule);
+				for (ComponentTypeDTO dto : cts) {
+					ComponentTypeBean ctBean = fromDTO.getComponentTypeBean(dto);
+					data.addBean(ctBean);
 				}
 				final Table table = new Table(null, data);
 				table.setWidth("100%");
 				table.setHeight("300px");
-				table.setVisibleColumns(new String[] { "drop", "name", "status", "priority", "description","tags" });
-				table.setColumnExpandRatio("description", 1);
+				table.setVisibleColumns(new String[] { "drop", "name", "description", "instantiationFactor", "reifiable",
+						"boundType", "enumeration", "references", "tags" });
+				table.setColumnExpandRatio("description", 0.6f);
+				table.setColumnExpandRatio("references", 0.2f);
+				table.setColumnExpandRatio("enumeration", 0.2f);
 				table.setItemDescriptionGenerator(new ItemDescriptionGenerator() {
 					public String generateDescription(Component source, Object itemId, Object propertyId) {
 						@SuppressWarnings("unchecked")
-						BeanContainer<String, RuleBean> data = (BeanContainer<String, RuleBean>) table
+						BeanContainer<String, ComponentTypeBean> data = (BeanContainer<String, ComponentTypeBean>) table
 								.getContainerDataSource();
-						RuleBean bean = (RuleBean) data.getItem(itemId).getBean();
+						ComponentTypeBean bean = (ComponentTypeBean) data.getItem(itemId).getBean();
 						return getHtmlDetails(bean);
 					}
 				});
-				table.setColumnHeaders(new String[] { msg.get("gal.3"), msg.get("gal.12"), msg.get("gal.7"),
-						msg.get("gal.8"), msg.get("gal.1") + " (" + msg.get("gal.10") + ")", msg.get("gal.4")});
+				table.setColumnHeaders(new String[] { msg.get("gal.3"), msg.get("gal.12"),
+						msg.get("gal.1") + " (" + msg.get("gal.10") + ")", msg.get("pr.30"), msg.get("pr.31"),
+						msg.get("pr.36"), msg.get("pr.32"), msg.get("pr.33"), msg.get("gal.4") });
 				table.addGeneratedColumn("name", new Table.ColumnGenerator() {
 					public Component generateCell(Table table, Object itemId, Object columnId) {
 						@SuppressWarnings("unchecked")
-						BeanContainer<String, RuleBean> data = (BeanContainer<String, RuleBean>) table
+						BeanContainer<String, ComponentTypeBean> data = (BeanContainer<String, ComponentTypeBean>) table
 								.getContainerDataSource();
-						final BeanItem<RuleBean> item = data.getItem(itemId);
+						final BeanItem<ComponentTypeBean> item = data.getItem(itemId);
 						Button edit = new Button(item.getBean().getName());
 						edit.setStyleName(BaseTheme.BUTTON_LINK);
 						edit.addListener(new Button.ClickListener() {
 							public void buttonClick(ClickEvent event) {
-								RuleDialog dialog = factory.getRuleDialogFor(item);
-								dialog.setModal(true);
-								getWindow().addWindow(dialog);
+								// TODO
+								// RuleDialog dialog = factory.getRuleDialogFor(item);
+								// dialog.setModal(true);
+								// getWindow().addWindow(dialog);
 							}
 						});
 						return edit;
@@ -136,23 +130,61 @@ public class RulesPanel extends VerticalLayout implements Observer {
 				table.addGeneratedColumn("drop", new Table.ColumnGenerator() {
 					public Component generateCell(Table table, Object itemId, Object columnId) {
 						@SuppressWarnings("unchecked")
-						BeanContainer<String, RuleBean> data = (BeanContainer<String, RuleBean>) table
+						BeanContainer<String, ComponentTypeBean> data = (BeanContainer<String, ComponentTypeBean>) table
 								.getContainerDataSource();
-						BeanItem<RuleBean> item = data.getItem(itemId);
-						final RuleBean rule = item.getBean();
+						BeanItem<ComponentTypeBean> item = data.getItem(itemId);
+						final ComponentTypeBean ctBean = item.getBean();
 						NativeButton drop = new NativeButton("");
 						drop.setSizeFull();
 						drop.setStyleName("borderless");
 						drop.setIcon(new ThemeResource("img/16/delete.png"));
 						drop.addListener(new Button.ClickListener() {
 							public void buttonClick(ClickEvent event) {
-								dropRule(rule);
+								drop(ctBean);
 							}
 						});
 						return drop;
 					}
 				});
-				Button create = getCreateRuleButton();
+				table.addGeneratedColumn("boundType", new Table.ColumnGenerator() {
+					@Override
+					public Object generateCell(Table source, Object itemId, Object columnId) {
+						@SuppressWarnings("unchecked")
+						BeanContainer<String, ComponentTypeBean> data = (BeanContainer<String, ComponentTypeBean>) table
+								.getContainerDataSource();
+						BeanItem<ComponentTypeBean> item = data.getItem(itemId);
+						final ComponentTypeBean ctBean = item.getBean();
+						Label label = new Label("");
+						if (ctBean.getBoundType() != null) {
+							label = new Label(ctBean.getViewPoint().getName() + "/ " + ctBean.getBoundType().getName());
+						}
+						return label;
+					}
+				});
+				table.addGeneratedColumn("enumeration", new Table.ColumnGenerator() {
+					@Override
+					public Object generateCell(Table source, Object itemId, Object columnId) {
+						@SuppressWarnings("unchecked")
+						BeanContainer<String, ComponentTypeBean> data = (BeanContainer<String, ComponentTypeBean>) table
+								.getContainerDataSource();
+						BeanItem<ComponentTypeBean> item = data.getItem(itemId);
+						final ComponentTypeBean ctBean = item.getBean();
+						Label label = new Label("");
+						if (ctBean.getBoundType() != null) {
+							StringBuilder sb = new StringBuilder();
+							for (HasNameAndIDBean comp : ctBean.getEnumeration()) {
+								sb.append(comp.getName()).append(", ");
+							}
+							// Remove trailing comma
+							if (sb.length() > 0) {
+								sb.delete(sb.length() - 2, sb.length() - 1);
+							}
+							label = new Label(sb.toString());
+						}
+						return label;
+					}
+				});
+				Button create = getCreateButton();
 				addComponent(create);
 				setComponentAlignment(create, Alignment.TOP_RIGHT);
 				addComponent(new Label("<br/>", Label.CONTENT_RAW));
@@ -164,14 +196,14 @@ public class RulesPanel extends VerticalLayout implements Observer {
 		}
 	}
 
-	private void dropRule(final RuleBean rule) {
+	private void drop(final ComponentTypeBean ctBean) {
 		ConfirmDialog.show(getApplication().getMainWindow(), msg.get("confirm.1") + " " + msg.get("confirm.2"),
 				new ConfirmDialog.Listener() {
 					public void onClose(ConfirmDialog dialog) {
 						if (dialog.isConfirmed()) {
 							try {
-								RuleDTO ruleDTO = toDTO.getRuleDTO(rule);
-								service.deleteRule(null, ruleDTO);
+								ComponentTypeDTO ctDTO = toDTO.getComponentTypeDTO(ctBean);
+								serviceCT.deleteCT(null, ctDTO);
 								removeAllComponents();
 								attach();
 							} catch (FunctionalException e) {
@@ -184,57 +216,38 @@ public class RulesPanel extends VerticalLayout implements Observer {
 	}
 
 	/**
-	 * Return HTML tooltip for a rule
+	 * Return HTML tooltip for a CT
 	 * 
 	 * @param bean
-	 * @return HTML tooltip for a rule
+	 * @return HTML tooltip for a CT
 	 */
-	private String getHtmlDetails(RuleBean bean) {
+	private String getHtmlDetails(ComponentTypeBean bean) {
 		String out = "<b>" + msg.get("gal.1") + " : </b>";
 		out += bean.getDescription();
 		out += "</br></br>";
-		out += "<b>Rationale : </b>";
-		out += bean.getRationale();
-		out += "</br></br>";
-		if (!Strings.isNullOrEmpty(bean.getExceptions())) {
-			out += "<b>" + msg.get("pr.23") + " : </b>";
-			out += bean.getExceptions();
-			out += "</br></br>";
-		}
 		if (!Strings.isNullOrEmpty(bean.getComment())) {
 			out += "<b>" + msg.get("gal.11") + " : </b>";
 			out += bean.getComment();
 			out += "</br></br>";
 		}
-		out += "<b>" + msg.get("pr.28") + " : </b><br/>";
-		// Invert history so we see newer events first
-		List<Long> invertHistory = Lists.reverse(new ArrayList<Long>(bean.getHistory().keySet()));
-		for (Long date : invertHistory) {
-			Locale locale = new Locale(conf.getSystemProperty(SpecificConfiguration.CONF_PRESENTATION_DEFAULT_LOCALE));
-			DateFormat df = DateFormat.getDateInstance(DateFormat.MEDIUM, locale);
-			out += df.format(new Date(date));
-			out += " : ";
-			out += bean.getHistory().get(date) + "<br/>";
-		}
-		out += "</br></br>";
 		return out;
 	}
 
-	private Button getCreateRuleButton() {
-		Button createRule = new Button(msg.get("pr.16"));
-		createRule.setStyleName(BaseTheme.BUTTON_LINK);
-		createRule.addListener(new Button.ClickListener() {
+	private Button getCreateButton() {
+		Button create = new Button(msg.get("pr.34"));
+		create.setStyleName(BaseTheme.BUTTON_LINK);
+		create.addListener(new Button.ClickListener() {
 			public void buttonClick(ClickEvent event) {
-				// rule with null ID means "new rule". We can't pass null rule because VP'id is got from
+				// CT with null ID means "new CT". We can't pass null rule because VP'id is got from
 				// it
-				RuleBean bean = new RuleBean();
-				bean.setViewPointId(vpID);
-				RuleDialog dialog = factory.getRuleDialogFor(new BeanItem<RuleBean>(bean));
-				dialog.setModal(true);
-				getWindow().addWindow(dialog);
+				ComponentTypeBean bean = new ComponentTypeBean();
+				// TODO
+				// RuleDialog dialog = factory.getRuleDialogFor(new BeanItem<ComponentTypeBean>(bean));
+				// dialog.setModal(true);
+				// getWindow().addWindow(dialog);
 			}
 		});
-		return createRule;
+		return create;
 	}
 
 	/*
