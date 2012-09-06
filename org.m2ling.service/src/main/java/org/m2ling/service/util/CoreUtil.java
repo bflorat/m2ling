@@ -8,7 +8,6 @@ import java.util.List;
 import java.util.StringTokenizer;
 import java.util.logging.Logger;
 
-import org.eclipse.emf.common.util.EList;
 import org.m2ling.common.exceptions.TechnicalException;
 import org.m2ling.common.exceptions.TechnicalException.Code;
 import org.m2ling.domain.Root;

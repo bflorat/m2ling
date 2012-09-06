@@ -65,7 +65,6 @@ public class LinkTypeItemProvider
 
 			addSourceTypesPropertyDescriptor(object);
 			addDestinationTypesPropertyDescriptor(object);
-			addReifiablePropertyDescriptor(object);
 			addAccessTypePropertyDescriptor(object);
 			addTemporalityPropertyDescriptor(object);
 		}
@@ -112,28 +111,6 @@ public class LinkTypeItemProvider
 				 false,
 				 true,
 				 null,
-				 null,
-				 null));
-	}
-
-	/**
-	 * This adds a property descriptor for the Reifiable feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void addReifiablePropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_LinkType_reifiable_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_LinkType_reifiable_feature", "_UI_LinkType_type"),
-				 CorePackage.Literals.LINK_TYPE__REIFIABLE,
-				 true,
-				 false,
-				 false,
-				 ItemPropertyDescriptor.BOOLEAN_VALUE_IMAGE,
 				 null,
 				 null));
 	}
@@ -219,7 +196,6 @@ public class LinkTypeItemProvider
 		updateChildren(notification);
 
 		switch (notification.getFeatureID(LinkType.class)) {
-			case CorePackage.LINK_TYPE__REIFIABLE:
 			case CorePackage.LINK_TYPE__ACCESS_TYPE:
 			case CorePackage.LINK_TYPE__TEMPORALITY:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));

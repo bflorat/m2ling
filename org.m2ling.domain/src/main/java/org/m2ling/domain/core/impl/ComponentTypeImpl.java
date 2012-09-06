@@ -31,7 +31,6 @@ import org.m2ling.domain.core.Reference;
  *   <li>{@link org.m2ling.domain.core.impl.ComponentTypeImpl#getBoundType <em>Bound Type</em>}</li>
  *   <li>{@link org.m2ling.domain.core.impl.ComponentTypeImpl#getEnumeration <em>Enumeration</em>}</li>
  *   <li>{@link org.m2ling.domain.core.impl.ComponentTypeImpl#getInstantiationFactor <em>Instantiation Factor</em>}</li>
- *   <li>{@link org.m2ling.domain.core.impl.ComponentTypeImpl#isReifiable <em>Reifiable</em>}</li>
  * </ul>
  * </p>
  *
@@ -96,26 +95,6 @@ public class ComponentTypeImpl extends ConceptItemImpl implements ComponentType 
 	protected int instantiationFactor = INSTANTIATION_FACTOR_EDEFAULT;
 
 	/**
-	 * The default value of the '{@link #isReifiable() <em>Reifiable</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #isReifiable()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final boolean REIFIABLE_EDEFAULT = false;
-
-	/**
-	 * The cached value of the '{@link #isReifiable() <em>Reifiable</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #isReifiable()
-	 * @generated
-	 * @ordered
-	 */
-	protected boolean reifiable = REIFIABLE_EDEFAULT;
-
-	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -165,27 +144,6 @@ public class ComponentTypeImpl extends ConceptItemImpl implements ComponentType 
 		instantiationFactor = newInstantiationFactor;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, CorePackage.COMPONENT_TYPE__INSTANTIATION_FACTOR, oldInstantiationFactor, instantiationFactor));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public boolean isReifiable() {
-		return reifiable;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setReifiable(boolean newReifiable) {
-		boolean oldReifiable = reifiable;
-		reifiable = newReifiable;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, CorePackage.COMPONENT_TYPE__REIFIABLE, oldReifiable, reifiable));
 	}
 
 	/**
@@ -269,8 +227,6 @@ public class ComponentTypeImpl extends ConceptItemImpl implements ComponentType 
 				return getEnumeration();
 			case CorePackage.COMPONENT_TYPE__INSTANTIATION_FACTOR:
 				return getInstantiationFactor();
-			case CorePackage.COMPONENT_TYPE__REIFIABLE:
-				return isReifiable();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -298,9 +254,6 @@ public class ComponentTypeImpl extends ConceptItemImpl implements ComponentType 
 			case CorePackage.COMPONENT_TYPE__INSTANTIATION_FACTOR:
 				setInstantiationFactor((Integer)newValue);
 				return;
-			case CorePackage.COMPONENT_TYPE__REIFIABLE:
-				setReifiable((Boolean)newValue);
-				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -325,9 +278,6 @@ public class ComponentTypeImpl extends ConceptItemImpl implements ComponentType 
 			case CorePackage.COMPONENT_TYPE__INSTANTIATION_FACTOR:
 				setInstantiationFactor(INSTANTIATION_FACTOR_EDEFAULT);
 				return;
-			case CorePackage.COMPONENT_TYPE__REIFIABLE:
-				setReifiable(REIFIABLE_EDEFAULT);
-				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -348,8 +298,6 @@ public class ComponentTypeImpl extends ConceptItemImpl implements ComponentType 
 				return enumeration != null && !enumeration.isEmpty();
 			case CorePackage.COMPONENT_TYPE__INSTANTIATION_FACTOR:
 				return instantiationFactor != INSTANTIATION_FACTOR_EDEFAULT;
-			case CorePackage.COMPONENT_TYPE__REIFIABLE:
-				return reifiable != REIFIABLE_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
 	}
@@ -398,8 +346,6 @@ public class ComponentTypeImpl extends ConceptItemImpl implements ComponentType 
 		StringBuffer result = new StringBuffer(super.toString());
 		result.append(" (instantiationFactor: ");
 		result.append(instantiationFactor);
-		result.append(", reifiable: ");
-		result.append(reifiable);
 		result.append(')');
 		return result.toString();
 	}

@@ -25,7 +25,6 @@ public class ComponentTypeDTO implements Comparable<ComponentTypeDTO> {
 	private final List<ReferenceDTO> references;
 	private final HasNameAndIdDTO boundType;
 	private final int iFactor;
-	private final boolean reifiable;
 	private final List<HasNameAndIdDTO> enumeration;
 
 	public static class Builder {
@@ -40,7 +39,6 @@ public class ComponentTypeDTO implements Comparable<ComponentTypeDTO> {
 		private List<ReferenceDTO> references = new ArrayList<ReferenceDTO>(1);
 		private HasNameAndIdDTO boundType;
 		private int iFactor = 0;
-		private boolean reifiable = false;
 		private List<HasNameAndIdDTO> enumeration = new ArrayList<HasNameAndIdDTO>(1);
 
 		public Builder(HasNameAndIdDTO vp, String id, String name) {
@@ -79,11 +77,6 @@ public class ComponentTypeDTO implements Comparable<ComponentTypeDTO> {
 			return this;
 		}
 
-		public Builder reifiable(boolean reifiable) {
-			this.reifiable = reifiable;
-			return this;
-		}
-
 		/**
 		 * Add component IDs to the enumeration.
 		 * 
@@ -111,7 +104,6 @@ public class ComponentTypeDTO implements Comparable<ComponentTypeDTO> {
 		references = builder.references;
 		boundType = builder.boundType;
 		iFactor = builder.iFactor;
-		reifiable = builder.reifiable;
 		enumeration = ImmutableList.copyOf(builder.enumeration);
 	}
 
@@ -175,13 +167,6 @@ public class ComponentTypeDTO implements Comparable<ComponentTypeDTO> {
 	 */
 	public List<ReferenceDTO> getReferences() {
 		return references;
-	}
-
-	/**
-	 * @return the reifiable
-	 */
-	public boolean isReifiable() {
-		return reifiable;
 	}
 
 	/**

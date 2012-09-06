@@ -26,11 +26,10 @@
 			<li>instantiation factor=<b concordion:set="#ifactor">*</b></li>
 			<li>bound type id=<b concordion:set="#boundTypeID">id_ct_tech_applicationserver</b></li>
 			<li>references ids=<b concordion:set="#references">RUNS:id_ct_app_servicemodule;DEPENDS_ON:id_ct_logical_rdbms,id_ct_logical_ldap</b></li>
-			<li>reifiable=<b concordion:set="#reifiable">true</b></li>
 			<li>enumeration=<b concordion:set="#enumeration">id_comp_tech_jboss5,id_comp_tech_jboss6</b></li>
 		</ul>
 		should have following characteristics (full round trip from presentation to presentation) : <b
-			concordion:assertEquals="createAndGetCT(#justCheck,#caseName,#vpID,#id,#name,#desc,#comment,#tags,#ifactor,#boundTypeID,#references,#enumeration,#reifiable)">
+			concordion:assertEquals="createAndGetCT(#justCheck,#caseName,#vpID,#id,#name,#desc,#comment,#tags,#ifactor,#boundTypeID,#references,#enumeration)">
 			boundType=id=id_ct_tech_applicationserver name=ApplicationServer 
 			comment=Available components listed in Technical catalog description=Runs services (RMI, REST, SOAP...). 
 			drop= 
@@ -39,14 +38,12 @@
 			instantiationFactor=* 
 			name=ServicesContainer2 
 			references=[targets=[id=id_ct_app_servicemodule name=ServiceModule ] type=RUNS , targets=[id=id_ct_logical_rdbms name=RDBMS , id=id_ct_logical_ldap name=LDAP directory ] type=DEPENDS_ON ] 
-			reifiable=true 
 			tags=logical,SA 
 			vp=id=id_vp_logical name=Logical Architecture</b>
 	</div>
 	</p>
 
 	<h2>Bindings and instantiation factor</h2>
-	<h3>Coherence between ifactor and reifiable flag</h3>
 	<p class='rule'>CT1 : Instantiation factor enforces the number of possibles component
 		instances for a component of a given type. A Component Type can't be
 		reified if its instantiation factor is zero. From the GUI point of
@@ -54,41 +51,22 @@
 		the integer '-1'.
 		<div class='example'>
 			<table
-		concordion:execute="#result=createWithIfAndReifiable(#ifactor,#reifiable)">
+		concordion:execute="#result=createWithIf(#ifactor)">
 				<tr>
 					<th concordion:set="#ifactor">IFactor</th>
-					<th concordion:set="#reifiable">Reifiable</th>
 				<th concordion:assertEquals="#result">should :</th>
 				</tr>
 				<tr>
 					<td>1</td>
-					<td>true</td>
 					<td>PASS</td>
 				</tr>
 				<tr>
 					<td>*</td>
-					<td>true</td>
 					<td>PASS</td>
 				</tr>
 				<tr>
 					<td>0</td>
-					<td>true</td>
-					<td>FAIL with code NON_REIFIABLE_IFACTOR_SET</td>
-				</tr>
-				<tr>
-					<td>0</td>
-					<td>false</td>
 					<td>PASS</td>
-				</tr>
-				<tr>
-					<td>1</td>
-					<td>false</td>
-					<td>FAIL with code NON_REIFIABLE_IFACTOR_SET</td>
-				</tr>
-				<tr>
-					<td>*</td>
-					<td>false</td>
-					<td>FAIL with code NON_REIFIABLE_IFACTOR_SET</td>
 				</tr>
 			</table>
 		</div>
@@ -268,7 +246,7 @@
 	<div class='example' >
 	<table
 		concordion:execute="#result=createAndGetCT(#justCheck,#caseName,#vpID,#id,#name,#desc,
-				#comment,#tags,#ifactor,#boundTypeID,#references,#enumeration,#reifiable)">
+				#comment,#tags,#ifactor,#boundTypeID,#references,#enumeration)">
 		<tr>
 			<th concordion:set="#caseName">Case</th>
 			<th concordion:set="#id">ID</th>
@@ -280,7 +258,6 @@
 			<th concordion:set="#boundTypeID">BoundID</th>
 			<th concordion:set="#references">References</th>
 			<th concordion:set="#enumeration">Enumeration</th>
-			<th concordion:set="#reifiable">Reifiable</th>
 			<th concordion:assertEquals="#result">should :</th>
 		</tr>
 		<!-- Nominal -->
@@ -295,7 +272,6 @@
 			<td>id_ct_tech_applicationserver</td>
 			<td>RUNS:id_ct_app_servicemodule;DEPENDS_ON:id_ct_logical_rdbms,id_ct_logical_ldap</td>
 			<td>id_comp_tech_jboss5,id_comp_tech_jboss6</td>
-			<td>true</td>
 			<td>PASS</td>
 		</tr>
 		<!-- Existing CT -->
@@ -310,7 +286,6 @@
 			<td>id_ct_tech_applicationserver</td>
 			<td>RUNS:id_ct_app_servicemodule;DEPENDS_ON:id_ct_logical_rdbms</td>
 			<td>id_comp_tech_jboss5,id_comp_tech_jboss6</td>
-			<td>true</td>
 			<td>FAIL with code DUPLICATES</td>
 		</tr>
 		<tr>
@@ -324,7 +299,6 @@
 			<td>id_ct_tech_applicationserver</td>
 			<td>RUNS:id_ct_app_servicemodule;DEPENDS_ON:id_ct_logical_rdbms</td>
 			<td>id_comp_tech_jboss5,id_comp_tech_jboss6</td>
-			<td>true</td>
 			<td>FAIL with code DUPLICATE_NAME</td>
 		</tr>
 		<!-- ID checks -->
@@ -339,7 +313,6 @@
 			<td>id_ct_tech_applicationserver</td>
 			<td>RUNS:id_ct_app_servicemodule;DEPENDS_ON:id_ct_logical_rdbms</td>
 			<td>id_comp_tech_jboss5,id_comp_tech_jboss6</td>
-			<td>true</td>
 			<td>FAIL with code NULL_ARGUMENT</td>
 		</tr>
 		<tr>
@@ -353,7 +326,6 @@
 			<td>id_ct_tech_applicationserver</td>
 			<td>RUNS:id_ct_app_servicemodule;DEPENDS_ON:id_ct_logical_rdbms</td>
 			<td>id_comp_tech_jboss5,id_comp_tech_jboss6</td>
-			<td>true</td>
 			<td>FAIL with code VOID_ARGUMENT</td>
 		</tr>
 		<tr>
@@ -367,7 +339,6 @@
 			<td>id_ct_tech_applicationserver</td>
 			<td>RUNS:id_ct_app_servicemodule;DEPENDS_ON:id_ct_logical_rdbms</td>
 			<td>id_comp_tech_jboss5,id_comp_tech_jboss6</td>
-			<td>true</td>
 			<td>FAIL with code VOID_ARGUMENT</td>
 		</tr>
 		<!-- name check -->
@@ -382,7 +353,6 @@
 			<td>id_ct_tech_applicationserver</td>
 			<td>RUNS:id_ct_app_servicemodule;DEPENDS_ON:id_ct_logical_rdbms</td>
 			<td>id_comp_tech_jboss5,id_comp_tech_jboss6</td>
-			<td>true</td>
 			<td>PASS</td>
 		</tr>
 		<tr>
@@ -396,7 +366,6 @@
 			<td>id_ct_tech_applicationserver</td>
 			<td>RUNS:id_ct_app_servicemodule;DEPENDS_ON:id_ct_logical_rdbms</td>
 			<td>id_comp_tech_jboss5,id_comp_tech_jboss6</td>
-			<td>true</td>
 			<td>FAIL with code VOID_ARGUMENT</td>
 		</tr>
 		<tr>
@@ -410,7 +379,6 @@
 			<td>id_ct_tech_applicationserver</td>
 			<td>RUNS:id_ct_app_servicemodule;DEPENDS_ON:id_ct_logical_rdbms</td>
 			<td>id_comp_tech_jboss5,id_comp_tech_jboss6</td>
-			<td>true</td>
 			<td>FAIL with code VOID_ARGUMENT</td>
 		</tr>
 		<tr>
@@ -424,7 +392,6 @@
 			<td>id_ct_tech_applicationserver</td>
 			<td>RUNS:id_ct_app_servicemodule;DEPENDS_ON:id_ct_logical_rdbms</td>
 			<td>id_comp_tech_jboss5,id_comp_tech_jboss6</td>
-			<td>true</td>
 			<td>FAIL with code WRONG_IF</td>
 		</tr>
 		<tr>
@@ -438,7 +405,6 @@
 			<td>id_ct_tech_applicationserver</td>
 			<td>RUNS:id_ct_app_servicemodule;DEPENDS_ON:id_ct_logical_rdbms</td>
 			<td>id_comp_tech_jboss5,id_comp_tech_jboss6</td>
-			<td>true</td>
 			<td>FAIL with code INVALID_FORMAT</td>
 		</tr>
 		
@@ -454,7 +420,6 @@
 			<td>id_ct_tech_applicationserver</td>
 			<td>RUNS:id_ct_app_servicemodule;DEPENDS_ON:id_ct_logical_rdbms</td>
 			<td>id_comp_tech_jboss5,id_comp_tech_jboss6</td>
-			<td>true</td>
 			<td>PASS</td>
 		</tr>
 		<!-- References -->
@@ -469,7 +434,6 @@
 			<td>id_ct_tech_applicationserver</td>
 			<td>RUNS:foo;DEPENDS_ON:id_ct_logical_rdbms</td>
 			<td>id_comp_tech_jboss5,id_comp_tech_jboss6</td>
-			<td>true</td>
 			<td>FAIL with code TARGET_NOT_FOUND</td>
 		</tr>
 		<!-- Bound type -->
@@ -484,7 +448,6 @@
 			<td>null</td>
 			<td>DEPENDS_ON:id_ct_logical_rdbms</td>
 			<td></td>
-			<td>true</td>
 			<td>PASS</td>
 		</tr>
 		<tr>
@@ -498,7 +461,6 @@
 			<td>foo_ct</td>
 			<td>RUNS:id_ct_app_servicemodule;DEPENDS_ON:id_ct_logical_rdbms,id_ct_logical_ldap</td>
 			<td>id_comp_tech_jboss5,id_comp_tech_jboss6</td>
-			<td>true</td>
 			<td>FAIL with code TARGET_NOT_FOUND</td>
 		</tr>
 	</table>

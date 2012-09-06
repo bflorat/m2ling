@@ -285,22 +285,13 @@ public interface CorePackage extends EPackage {
 	int COMPONENT_TYPE__INSTANTIATION_FACTOR = CONCEPT_ITEM_FEATURE_COUNT + 3;
 
 	/**
-	 * The feature id for the '<em><b>Reifiable</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int COMPONENT_TYPE__REIFIABLE = CONCEPT_ITEM_FEATURE_COUNT + 4;
-
-	/**
 	 * The number of structural features of the '<em>Component Type</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int COMPONENT_TYPE_FEATURE_COUNT = CONCEPT_ITEM_FEATURE_COUNT + 5;
+	int COMPONENT_TYPE_FEATURE_COUNT = CONCEPT_ITEM_FEATURE_COUNT + 4;
 
 	/**
 	 * The meta object id for the '{@link org.m2ling.domain.core.impl.ArchitectureItemImpl <em>Architecture Item</em>}' class.
@@ -1583,22 +1574,13 @@ public interface CorePackage extends EPackage {
 	int LINK_TYPE__DESTINATION_TYPES = CONCEPT_ITEM_FEATURE_COUNT + 1;
 
 	/**
-	 * The feature id for the '<em><b>Reifiable</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int LINK_TYPE__REIFIABLE = CONCEPT_ITEM_FEATURE_COUNT + 2;
-
-	/**
 	 * The feature id for the '<em><b>Access Type</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int LINK_TYPE__ACCESS_TYPE = CONCEPT_ITEM_FEATURE_COUNT + 3;
+	int LINK_TYPE__ACCESS_TYPE = CONCEPT_ITEM_FEATURE_COUNT + 2;
 
 	/**
 	 * The feature id for the '<em><b>Temporality</b></em>' attribute.
@@ -1607,7 +1589,7 @@ public interface CorePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int LINK_TYPE__TEMPORALITY = CONCEPT_ITEM_FEATURE_COUNT + 4;
+	int LINK_TYPE__TEMPORALITY = CONCEPT_ITEM_FEATURE_COUNT + 3;
 
 	/**
 	 * The number of structural features of the '<em>Link Type</em>' class.
@@ -1616,7 +1598,7 @@ public interface CorePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int LINK_TYPE_FEATURE_COUNT = CONCEPT_ITEM_FEATURE_COUNT + 5;
+	int LINK_TYPE_FEATURE_COUNT = CONCEPT_ITEM_FEATURE_COUNT + 4;
 
 	/**
 	 * The feature id for the '<em><b>Id</b></em>' attribute.
@@ -2668,17 +2650,6 @@ public interface CorePackage extends EPackage {
 	EAttribute getComponentType_InstantiationFactor();
 
 	/**
-	 * Returns the meta object for the attribute '{@link org.m2ling.domain.core.ComponentType#isReifiable <em>Reifiable</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Reifiable</em>'.
-	 * @see org.m2ling.domain.core.ComponentType#isReifiable()
-	 * @see #getComponentType()
-	 * @generated
-	 */
-	EAttribute getComponentType_Reifiable();
-
-	/**
 	 * Returns the meta object for the reference '{@link org.m2ling.domain.core.ComponentType#getBoundType <em>Bound Type</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3167,17 +3138,6 @@ public interface CorePackage extends EPackage {
 	 * @generated
 	 */
 	EReference getLinkType_DestinationTypes();
-
-	/**
-	 * Returns the meta object for the attribute '{@link org.m2ling.domain.core.LinkType#isReifiable <em>Reifiable</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Reifiable</em>'.
-	 * @see org.m2ling.domain.core.LinkType#isReifiable()
-	 * @see #getLinkType()
-	 * @generated
-	 */
-	EAttribute getLinkType_Reifiable();
 
 	/**
 	 * Returns the meta object for the attribute '{@link org.m2ling.domain.core.LinkType#getAccessType <em>Access Type</em>}'.
@@ -3988,14 +3948,6 @@ public interface CorePackage extends EPackage {
 		EAttribute COMPONENT_TYPE__INSTANTIATION_FACTOR = eINSTANCE.getComponentType_InstantiationFactor();
 
 		/**
-		 * The meta object literal for the '<em><b>Reifiable</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute COMPONENT_TYPE__REIFIABLE = eINSTANCE.getComponentType_Reifiable();
-
-		/**
 		 * The meta object literal for the '<em><b>Bound Type</b></em>' reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -4394,14 +4346,6 @@ public interface CorePackage extends EPackage {
 		 * @generated
 		 */
 		EReference LINK_TYPE__DESTINATION_TYPES = eINSTANCE.getLinkType_DestinationTypes();
-
-		/**
-		 * The meta object literal for the '<em><b>Reifiable</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute LINK_TYPE__REIFIABLE = eINSTANCE.getLinkType_Reifiable();
 
 		/**
 		 * The meta object literal for the '<em><b>Access Type</b></em>' attribute feature.

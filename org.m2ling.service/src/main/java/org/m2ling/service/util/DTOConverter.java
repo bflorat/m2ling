@@ -129,7 +129,6 @@ public class DTOConverter {
 				builder.addEnumeration(hniComp);
 			}
 			builder.instantiationFactor(ct.getInstantiationFactor());
-			builder.reifiable(ct.isReifiable());
 			for (Reference ref : ct.getReferences()) {
 				ReferenceDTO refDTO = getReferenceDTO(ref);
 				builder.addReference(refDTO);
@@ -279,7 +278,6 @@ public class DTOConverter {
 			ComponentType boundedType = util.getComponentTypeByID(dto.getBoundType().getId());
 			ct.setBoundType(boundedType);
 			ct.setInstantiationFactor(dto.getInstantiationFactor());
-			ct.setReifiable(dto.isReifiable());
 			for (HasNameAndIdDTO hni : dto.getEnumeration()) {
 				ArchitectureItem comp = util.getComponentByID(hni.getId());
 				if (comp == null) {

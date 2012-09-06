@@ -25,7 +25,6 @@ public class ComponentTypeBean implements Serializable {
 	private HasNameAndIDBean boundType;
 	/** component id -> component name */
 	private List<HasNameAndIDBean> enumeration;
-	private boolean reifiable = false;
 	private List<ReferenceBean> references;
 	/** GUI only item used to represent the drop button **/
 	private String drop = "";
@@ -137,21 +136,6 @@ public class ComponentTypeBean implements Serializable {
 	 */
 	public void setEnumeration(List<HasNameAndIDBean> enumeration) {
 		this.enumeration = enumeration;
-	}
-
-	/**
-	 * @return the reifiable
-	 */
-	public boolean isReifiable() {
-		return reifiable;
-	}
-
-	/**
-	 * @param reifiable
-	 *           the reifiable to set
-	 */
-	public void setReifiable(boolean reifiable) {
-		this.reifiable = reifiable;
 	}
 
 	/**

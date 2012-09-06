@@ -91,8 +91,8 @@ public class ComponentTypesPanel extends VerticalLayout implements Observer {
 				final Table table = new Table(null, data);
 				table.setWidth("100%");
 				table.setHeight("300px");
-				table.setVisibleColumns(new String[] { "drop", "name", "description", "instantiationFactor", "reifiable",
-						"boundType", "enumeration", "references", "tags" });
+				table.setVisibleColumns(new String[] { "drop", "name", "description", "instantiationFactor", "boundType",
+						"enumeration", "references", "tags" });
 				table.setColumnExpandRatio("description", 0.4f);
 				table.setColumnExpandRatio("boundType", 0.2f);
 				table.setColumnExpandRatio("references", 0.2f);
@@ -107,8 +107,8 @@ public class ComponentTypesPanel extends VerticalLayout implements Observer {
 					}
 				});
 				table.setColumnHeaders(new String[] { msg.get("gal.3"), msg.get("gal.12"),
-						msg.get("gal.1") + " (" + msg.get("gal.10") + ")", msg.get("pr.30"), msg.get("pr.31"),
-						msg.get("pr.36"), msg.get("pr.32"), msg.get("pr.33"), msg.get("gal.4") });
+						msg.get("gal.1") + " (" + msg.get("gal.10") + ")", msg.get("pr.30"), msg.get("pr.36"),
+						msg.get("pr.32"), msg.get("pr.33"), msg.get("gal.4") });
 				table.addGeneratedColumn("name", new Table.ColumnGenerator() {
 					public Component generateCell(Table table, Object itemId, Object columnId) {
 						@SuppressWarnings("unchecked")

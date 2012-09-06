@@ -16,7 +16,6 @@ import org.eclipse.emf.common.util.EList;
  *   <li>{@link org.m2ling.domain.core.ComponentType#getBoundType <em>Bound Type</em>}</li>
  *   <li>{@link org.m2ling.domain.core.ComponentType#getEnumeration <em>Enumeration</em>}</li>
  *   <li>{@link org.m2ling.domain.core.ComponentType#getInstantiationFactor <em>Instantiation Factor</em>}</li>
- *   <li>{@link org.m2ling.domain.core.ComponentType#isReifiable <em>Reifiable</em>}</li>
  * </ul>
  * </p>
  *
@@ -74,33 +73,6 @@ public interface ComponentType extends ConceptItem, HasReferences {
 	 * @generated
 	 */
 	void setInstantiationFactor(int value);
-
-	/**
-	 * Returns the value of the '<em><b>Reifiable</b></em>' attribute.
-	 * The default value is <code>"false"</code>.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Reifiable</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Reifiable</em>' attribute.
-	 * @see #setReifiable(boolean)
-	 * @see org.m2ling.domain.core.CorePackage#getComponentType_Reifiable()
-	 * @model default="false"
-	 * @generated
-	 */
-	boolean isReifiable();
-
-	/**
-	 * Sets the value of the '{@link org.m2ling.domain.core.ComponentType#isReifiable <em>Reifiable</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Reifiable</em>' attribute.
-	 * @see #isReifiable()
-	 * @generated
-	 */
-	void setReifiable(boolean value);
 
 	/**
 	 * Returns the value of the '<em><b>Bound Type</b></em>' reference.

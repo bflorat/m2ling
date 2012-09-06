@@ -24,8 +24,6 @@
           eType="#//core/ArchitectureItem"/>
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="instantiationFactor"
           eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt" defaultValueLiteral="0"/>
-      <eStructuralFeatures xsi:type="ecore:EAttribute" name="reifiable" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
-          defaultValueLiteral="false"/>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="Component" eSuperTypes="#//core/ArchitectureItem #//core/HasParameterDefinitions #//core/HasReferences">
       <eStructuralFeatures xsi:type="ecore:EReference" name="type" lowerBound="1"
@@ -121,8 +119,6 @@
           upperBound="-1" eType="#//core/ComponentType"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="destinationTypes" lowerBound="1"
           upperBound="-1" eType="#//core/ComponentType"/>
-      <eStructuralFeatures xsi:type="ecore:EAttribute" name="reifiable" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
-          defaultValueLiteral="false"/>
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="accessType" eType="#//core/LinkAccessType"/>
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="temporality" eType="#//core/LinkTemporality"/>
     </eClassifiers>

@@ -37,14 +37,14 @@
     <statusLiterals>OBSOLETE</statusLiterals>
   </viewPoints>
   <viewPoints comment="" description="Physical Architecture viewpoint provides all rules and concepts dealing with hardware, network aspects of a project." id="fsdfhjksdhfkjhsdkfj" name="Physical Architecture">
-    <componentTypes id="id_ct_physical_x86_server" name="X86 Server" description="Intel-based server. Mostly 64 bits." instantiationFactor="-1" reifiable="true"/>
-    <componentTypes id="_kOyogZ9ZEeGNFtlcQfUFgw" name="Router" description="Link networks between them." instantiationFactor="-1" reifiable="true"/>
-    <componentTypes id="_W3UboZ9aEeGNFtlcQfUFgw" name="LoadBalancer" description="Appliance load balancer. Dispatch a network request to a virtual IP mapping several devices." reifiable="true"/>
-    <componentTypes id="_hQrcIZ9aEeGNFtlcQfUFgw" name="PC" description="PC type micro-computer" instantiationFactor="-1" reifiable="true"/>
-    <componentTypes id="_0pkjcZ9aEeGNFtlcQfUFgw" name="SPARC Server" description="SPARC RISC-based CPU server" instantiationFactor="-1" reifiable="true"/>
-    <componentTypes id="_McFWYZ9bEeGNFtlcQfUFgw" name="Firewall" description="Manages ports authorizations netween several devices or networks." instantiationFactor="-1" reifiable="true"/>
-    <componentTypes id="_VIxZsZ9bEeGNFtlcQfUFgw" name="SAN" description="Massive storage device with Fiber channel access" instantiationFactor="-1" reifiable="true"/>
-    <linkTypes id="_FFDecp9bEeGNFtlcQfUFgw" name="GigaBit Ethernet" description="1000Mbps type ethernet link" sourceTypes="_McFWYZ9bEeGNFtlcQfUFgw _W3UboZ9aEeGNFtlcQfUFgw _hQrcIZ9aEeGNFtlcQfUFgw _kOyogZ9ZEeGNFtlcQfUFgw _0pkjcZ9aEeGNFtlcQfUFgw id_ct_physical_x86_server" destinationTypes="_McFWYZ9bEeGNFtlcQfUFgw _W3UboZ9aEeGNFtlcQfUFgw _hQrcIZ9aEeGNFtlcQfUFgw _kOyogZ9ZEeGNFtlcQfUFgw _0pkjcZ9aEeGNFtlcQfUFgw id_ct_physical_x86_server" reifiable="true"/>
+    <componentTypes id="id_ct_physical_x86_server" name="X86 Server" description="Intel-based server. Mostly 64 bits." instantiationFactor="-1" />
+    <componentTypes id="_kOyogZ9ZEeGNFtlcQfUFgw" name="Router" description="Link networks between them." instantiationFactor="-1" />
+    <componentTypes id="_W3UboZ9aEeGNFtlcQfUFgw" name="LoadBalancer" description="Appliance load balancer. Dispatch a network request to a virtual IP mapping several devices." />
+    <componentTypes id="_hQrcIZ9aEeGNFtlcQfUFgw" name="PC" description="PC type micro-computer" instantiationFactor="-1" />
+    <componentTypes id="_0pkjcZ9aEeGNFtlcQfUFgw" name="SPARC Server" description="SPARC RISC-based CPU server" instantiationFactor="-1" />
+    <componentTypes id="_McFWYZ9bEeGNFtlcQfUFgw" name="Firewall" description="Manages ports authorizations netween several devices or networks." instantiationFactor="-1" />
+    <componentTypes id="_VIxZsZ9bEeGNFtlcQfUFgw" name="SAN" description="Massive storage device with Fiber channel access" instantiationFactor="-1" />
+    <linkTypes id="_FFDecp9bEeGNFtlcQfUFgw" name="GigaBit Ethernet" description="1000Mbps type ethernet link" sourceTypes="_McFWYZ9bEeGNFtlcQfUFgw _W3UboZ9aEeGNFtlcQfUFgw _hQrcIZ9aEeGNFtlcQfUFgw _kOyogZ9ZEeGNFtlcQfUFgw _0pkjcZ9aEeGNFtlcQfUFgw id_ct_physical_x86_server" destinationTypes="_McFWYZ9bEeGNFtlcQfUFgw _W3UboZ9aEeGNFtlcQfUFgw _hQrcIZ9aEeGNFtlcQfUFgw _kOyogZ9ZEeGNFtlcQfUFgw _0pkjcZ9aEeGNFtlcQfUFgw id_ct_physical_x86_server" />
   </viewPoints>
   <viewPoints description="Enterprise Architecture deals with set of projects or the IS as a whole." id="_uP3gkZniEeGeqKlv68ECYA" name="Enterprise Architecture">
     <componentTypes id="_REbGwZq2EeGVMag01qc4bw" name="Domain" comment="" description="A domain is the highest subdivision of an enterprise IS. Example : HR domain.">
@@ -56,12 +56,12 @@
     <componentTypes id="_c1vGwJq4EeGVMag01qc4bw" name="Application" description="An application is a technologically and project coherent set of functionalities."/>
   </viewPoints>
   <viewPoints comment="" description="Technology components and links between them" id="id_vp_tech" name="Technical Architecture">
-    <componentTypes id="id_ct_tech_applicationserver" name="ApplicationServer" comment="" description="Runs services (SOAP,RMI,REST...) or execute dynamic Web pages" instantiationFactor="-1" reifiable="true"/>
-    <componentTypes id="_wf5AQZxEEeGi7NYPtEuJdA" name="OS" description="Operating system" instantiationFactor="-1" reifiable="true">
+    <componentTypes id="id_ct_tech_applicationserver" name="ApplicationServer" comment="" description="Runs services (SOAP,RMI,REST...) or execute dynamic Web pages" instantiationFactor="-1" />
+    <componentTypes id="_wf5AQZxEEeGi7NYPtEuJdA" name="OS" description="Operating system" instantiationFactor="-1" >
       <references type="RUNS" targets="id_ct_tech_applicationserver _wf5AQZxEEeGi7NYPtEuJdA _LyWEoZ6REeGyndJ1yNTLVw"/>
     </componentTypes>
-    <componentTypes id="_LyWEoZ6REeGyndJ1yNTLVw" name="Persistence" comment="" description="RDBMS, others databases types, directories, MOM" instantiationFactor="-1" reifiable="true"/>
-    <componentTypes id="id_ct_tech_x86_server" name="X86 Server" description="Intel-based server. Mostly 64 bits." boundType="id_ct_physical_x86_server" instantiationFactor="-1" reifiable="true">
+    <componentTypes id="_LyWEoZ6REeGyndJ1yNTLVw" name="Persistence" comment="" description="RDBMS, others databases types, directories, MOM" instantiationFactor="-1" />
+    <componentTypes id="id_ct_tech_x86_server" name="X86 Server" description="Intel-based server. Mostly 64 bits." boundType="id_ct_physical_x86_server" instantiationFactor="-1" >
       <references type="RUNS" targets="_wf5AQZxEEeGi7NYPtEuJdA"/>
     </componentTypes>
   </viewPoints>
@@ -90,26 +90,26 @@
     <componentTypes id="_sgTcYaTjEeGhbskxmOc77w" name="Environment">
       <references targets="id_ct_deploy_X86 _0pkjcZ9aEeGNFtlcQfU333 _aazazaza _1y2zQZohnnnmJ5CR-iA _Ybdmtd456 id_ct_deploy_OS __111CR-iA _fKt222vmJ5CR-iA _ha8mE333Mag01qc4bw _aazazazaerer"/>
     </componentTypes>
-    <componentTypes id="id_ct_deploy_X86" name="X86 Server" description="Intel-based server. Mostly 64 bits." boundType="id_ct_physical_x86_server" instantiationFactor="-1" reifiable="true">
+    <componentTypes id="id_ct_deploy_X86" name="X86 Server" description="Intel-based server. Mostly 64 bits." boundType="id_ct_physical_x86_server" instantiationFactor="-1" >
       <references type="RUNS" targets="id_ct_deploy_OS"/>
     </componentTypes>
-    <componentTypes id="_0pkjcZ9aEeGNFtlcQfU333" name="SPARC Server" description="SPARC RISC-based CPU server" boundType="_0pkjcZ9aEeGNFtlcQfU333" instantiationFactor="-1" reifiable="true">
+    <componentTypes id="_0pkjcZ9aEeGNFtlcQfU333" name="SPARC Server" description="SPARC RISC-based CPU server" boundType="_0pkjcZ9aEeGNFtlcQfU333" instantiationFactor="-1" >
       <references type="RUNS" targets="id_ct_deploy_OS"/>
     </componentTypes>
-    <componentTypes id="_aazazaza" name="GUIModule" comment="" description="A GUI module serves Web pages destinated to end users." boundType="_E3EOwZoWEeG71vmJ5CR-iAe" instantiationFactor="-1" reifiable="true"/>
-    <componentTypes id="_1y2zQZohnnnmJ5CR-iA" name="ServiceModule" comment="" description="A service module provides business services to batch or GUI modules and is responsible for enterprise data." boundType="id_ct_app_servicemodulee" instantiationFactor="-1" reifiable="true"/>
-    <componentTypes id="_Ybdmtd456" name="RDBMS" comment="" description="Runs one or more databases. Database initial populating is out of the deployment scope itself, done by scripts." reifiable="true"/>
-    <componentTypes id="id_ct_deploy_OS" name="OS" description="Operating system" boundType="_wf5AQZxEEeGi7NYPtEuJdA" instantiationFactor="-1" reifiable="true">
+    <componentTypes id="_aazazaza" name="GUIModule" comment="" description="A GUI module serves Web pages destinated to end users." boundType="_E3EOwZoWEeG71vmJ5CR-iAe" instantiationFactor="-1" />
+    <componentTypes id="_1y2zQZohnnnmJ5CR-iA" name="ServiceModule" comment="" description="A service module provides business services to batch or GUI modules and is responsible for enterprise data." boundType="id_ct_app_servicemodulee" instantiationFactor="-1" />
+    <componentTypes id="_Ybdmtd456" name="RDBMS" comment="" description="Runs one or more databases. Database initial populating is out of the deployment scope itself, done by scripts." />
+    <componentTypes id="id_ct_deploy_OS" name="OS" description="Operating system" boundType="_wf5AQZxEEeGi7NYPtEuJdA" instantiationFactor="-1" >
       <references type="RUNS" targets="_wf5AQZxEEeGi7NYPtEuJdA _fKt222vmJ5CR-iA _aazazazaerer _ha8mE333Mag01qc4bw"/>
     </componentTypes>
-    <componentTypes id="__111CR-iA" name="ServicesContainer" description="Runs services (RMI, REST, SOAP...)" boundType="id_ct_tech_applicationserver" enumeration="id_grp_tech_servicecontainers" instantiationFactor="-1" reifiable="true">
+    <componentTypes id="__111CR-iA" name="ServicesContainer" description="Runs services (RMI, REST, SOAP...)" boundType="id_ct_tech_applicationserver" enumeration="id_grp_tech_servicecontainers" instantiationFactor="-1" >
       <references type="RUNS" targets="_1y2zQZohnnnmJ5CR-iA"/>
     </componentTypes>
-    <componentTypes id="_fKt222vmJ5CR-iA" name="WebContainer" comment="" description="A servlet/JSP container" boundType="id_ct_tech_applicationserver" enumeration="_0GnPIJ6QEeGyndJ1yNTLVw" instantiationFactor="-1" reifiable="true">
+    <componentTypes id="_fKt222vmJ5CR-iA" name="WebContainer" comment="" description="A servlet/JSP container" boundType="id_ct_tech_applicationserver" enumeration="_0GnPIJ6QEeGyndJ1yNTLVw" instantiationFactor="-1" >
       <references type="RUNS" targets="_aazazaza"/>
     </componentTypes>
-    <componentTypes id="_ha8mE333Mag01qc4bw" name="LDAP directory" comment="" description="" boundType="_LyWEoZ6REeGyndJ1yNTLVw" enumeration="_cjliUJ6TEeGyndJ1yNTLVw" instantiationFactor="-1" reifiable="true"/>
-    <componentTypes id="_aazazazaerer" name="BatchModule" comment="" description="Standalone Java batchs calling services modules" boundType="_aazazazaerer" instantiationFactor="-1" reifiable="true"/>
+    <componentTypes id="_ha8mE333Mag01qc4bw" name="LDAP directory" comment="" description="" boundType="_LyWEoZ6REeGyndJ1yNTLVw" enumeration="_cjliUJ6TEeGyndJ1yNTLVw" instantiationFactor="-1" />
+    <componentTypes id="_aazazazaerer" name="BatchModule" comment="" description="Standalone Java batchs calling services modules" boundType="_aazazazaerer" instantiationFactor="-1" />
   </viewPoints>
   <views comment="" description="BikesOnline is a online house-built e-commerce solution to sell bikes." id="_6MLzgJngEeGCNbiGBiffzQ" name="Logical_BikesOnline" viewPoint="id_vp_logical">
     <components id="_8fvV4p6TEeGyndJ1yNTLVw" name="AdminGUI" comment="" type="_E3EOwZoWEeG71vmJ5CR-iA" boundComponent="_hGsf4J89EeGNFtlcQfUFgw"/>

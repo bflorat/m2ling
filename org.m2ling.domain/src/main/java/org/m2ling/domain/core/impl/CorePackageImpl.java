@@ -523,15 +523,6 @@ public class CorePackageImpl extends EPackageImpl implements CorePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getComponentType_Reifiable() {
-		return (EAttribute)componentTypeEClass.getEStructuralFeatures().get(3);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EReference getComponentType_BoundType() {
 		return (EReference)componentTypeEClass.getEStructuralFeatures().get(0);
 	}
@@ -946,7 +937,7 @@ public class CorePackageImpl extends EPackageImpl implements CorePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getLinkType_Reifiable() {
+	public EAttribute getLinkType_AccessType() {
 		return (EAttribute)linkTypeEClass.getEStructuralFeatures().get(2);
 	}
 
@@ -955,17 +946,8 @@ public class CorePackageImpl extends EPackageImpl implements CorePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getLinkType_AccessType() {
-		return (EAttribute)linkTypeEClass.getEStructuralFeatures().get(3);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EAttribute getLinkType_Temporality() {
-		return (EAttribute)linkTypeEClass.getEStructuralFeatures().get(4);
+		return (EAttribute)linkTypeEClass.getEStructuralFeatures().get(3);
 	}
 
 	/**
@@ -1630,7 +1612,6 @@ public class CorePackageImpl extends EPackageImpl implements CorePackage {
 		createEReference(componentTypeEClass, COMPONENT_TYPE__BOUND_TYPE);
 		createEReference(componentTypeEClass, COMPONENT_TYPE__ENUMERATION);
 		createEAttribute(componentTypeEClass, COMPONENT_TYPE__INSTANTIATION_FACTOR);
-		createEAttribute(componentTypeEClass, COMPONENT_TYPE__REIFIABLE);
 
 		componentEClass = createEClass(COMPONENT);
 		createEReference(componentEClass, COMPONENT__TYPE);
@@ -1704,7 +1685,6 @@ public class CorePackageImpl extends EPackageImpl implements CorePackage {
 		linkTypeEClass = createEClass(LINK_TYPE);
 		createEReference(linkTypeEClass, LINK_TYPE__SOURCE_TYPES);
 		createEReference(linkTypeEClass, LINK_TYPE__DESTINATION_TYPES);
-		createEAttribute(linkTypeEClass, LINK_TYPE__REIFIABLE);
 		createEAttribute(linkTypeEClass, LINK_TYPE__ACCESS_TYPE);
 		createEAttribute(linkTypeEClass, LINK_TYPE__TEMPORALITY);
 
@@ -1912,7 +1892,6 @@ public class CorePackageImpl extends EPackageImpl implements CorePackage {
 		initEReference(getComponentType_BoundType(), this.getComponentType(), null, "boundType", null, 0, 1, ComponentType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getComponentType_Enumeration(), this.getArchitectureItem(), null, "enumeration", null, 0, -1, ComponentType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getComponentType_InstantiationFactor(), ecorePackage.getEInt(), "instantiationFactor", "0", 0, 1, ComponentType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getComponentType_Reifiable(), ecorePackage.getEBoolean(), "reifiable", "false", 0, 1, ComponentType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(componentEClass, Component.class, "Component", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getComponent_Type(), this.getComponentType(), null, "type", null, 1, 1, Component.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1988,7 +1967,6 @@ public class CorePackageImpl extends EPackageImpl implements CorePackage {
 		initEClass(linkTypeEClass, LinkType.class, "LinkType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getLinkType_SourceTypes(), this.getComponentType(), null, "sourceTypes", null, 1, -1, LinkType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getLinkType_DestinationTypes(), this.getComponentType(), null, "destinationTypes", null, 1, -1, LinkType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getLinkType_Reifiable(), ecorePackage.getEBoolean(), "reifiable", "false", 0, 1, LinkType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getLinkType_AccessType(), this.getLinkAccessType(), "accessType", null, 0, 1, LinkType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getLinkType_Temporality(), this.getLinkTemporality(), "temporality", null, 0, 1, LinkType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 

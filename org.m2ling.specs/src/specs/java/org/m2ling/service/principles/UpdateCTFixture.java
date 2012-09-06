@@ -22,7 +22,7 @@ public class UpdateCTFixture extends AbstractCTFixture {
 	}
 
 	@Test
-	public String testUpdateIF(String caseName, String vpID, String id, String name, String ifactor, String reifiable)
+	public String testUpdateIF(String caseName, String vpID, String id, String name, String ifactor)
 			throws FunctionalException {
 		reset("Bikes");
 		vpID = UUT.nul(vpID);
@@ -42,7 +42,6 @@ public class UpdateCTFixture extends AbstractCTFixture {
 			bean.setViewPoint(vp);
 			bean.setInstantiationFactor(ifactor);
 			bean.setEnumeration(new ArrayList<HasNameAndIDBean>());
-			bean.setReifiable(Boolean.parseBoolean(reifiable));
 			bean.setBoundType(null);
 			ComponentTypeDTO dto = new DTOConverter.ToDTO().getComponentTypeDTO(bean);
 			service.updateCT(null, dto);
@@ -62,7 +61,7 @@ public class UpdateCTFixture extends AbstractCTFixture {
 
 	@Test
 	public String testUpdateBound(String caseName, String vpID, String id, String name, String ifactor,
-			String boundTypeID, String references, String enumeration, String reifiable, String description, String tags,
+			String boundTypeID, String references, String enumeration, String description, String tags,
 			String comment) throws FunctionalException {
 		reset("Bikes");
 		vpID = UUT.nul(vpID);
@@ -102,7 +101,6 @@ public class UpdateCTFixture extends AbstractCTFixture {
 			}
 			bean.setInstantiationFactor(ifactor);
 			setReferences(bean, references);
-			bean.setReifiable(Boolean.parseBoolean(reifiable));
 			ComponentTypeDTO dto = new DTOConverter.ToDTO().getComponentTypeDTO(bean);
 			service.updateCT(null, dto);
 			List<ComponentTypeDTO> ctDTOS = service.getAllCT(null, vpID);
@@ -136,7 +134,6 @@ public class UpdateCTFixture extends AbstractCTFixture {
 			bean.setEnumeration(new ArrayList<HasNameAndIDBean>());
 			bean.setInstantiationFactor("-1");
 			setReferences(bean, references);
-			bean.setReifiable(true);
 			ComponentTypeDTO dto = new DTOConverter.ToDTO().getComponentTypeDTO(bean);
 			service.updateCT(null, dto);
 			List<ComponentTypeDTO> ctDTOS = service.getAllCT(null, "id_vp_deploy");

@@ -25,7 +25,6 @@ import org.m2ling.domain.core.LinkType;
  * <ul>
  *   <li>{@link org.m2ling.domain.core.impl.LinkTypeImpl#getSourceTypes <em>Source Types</em>}</li>
  *   <li>{@link org.m2ling.domain.core.impl.LinkTypeImpl#getDestinationTypes <em>Destination Types</em>}</li>
- *   <li>{@link org.m2ling.domain.core.impl.LinkTypeImpl#isReifiable <em>Reifiable</em>}</li>
  *   <li>{@link org.m2ling.domain.core.impl.LinkTypeImpl#getAccessType <em>Access Type</em>}</li>
  *   <li>{@link org.m2ling.domain.core.impl.LinkTypeImpl#getTemporality <em>Temporality</em>}</li>
  * </ul>
@@ -60,26 +59,6 @@ public class LinkTypeImpl extends ConceptItemImpl implements LinkType {
 	 * @ordered
 	 */
 	protected EList<ComponentType> destinationTypes;
-
-	/**
-	 * The default value of the '{@link #isReifiable() <em>Reifiable</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #isReifiable()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final boolean REIFIABLE_EDEFAULT = false;
-
-	/**
-	 * The cached value of the '{@link #isReifiable() <em>Reifiable</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #isReifiable()
-	 * @generated
-	 * @ordered
-	 */
-	protected boolean reifiable = REIFIABLE_EDEFAULT;
 
 	/**
 	 * The default value of the '{@link #getAccessType() <em>Access Type</em>}' attribute.
@@ -169,27 +148,6 @@ public class LinkTypeImpl extends ConceptItemImpl implements LinkType {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public boolean isReifiable() {
-		return reifiable;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setReifiable(boolean newReifiable) {
-		boolean oldReifiable = reifiable;
-		reifiable = newReifiable;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, CorePackage.LINK_TYPE__REIFIABLE, oldReifiable, reifiable));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public LinkAccessType getAccessType() {
 		return accessType;
 	}
@@ -239,8 +197,6 @@ public class LinkTypeImpl extends ConceptItemImpl implements LinkType {
 				return getSourceTypes();
 			case CorePackage.LINK_TYPE__DESTINATION_TYPES:
 				return getDestinationTypes();
-			case CorePackage.LINK_TYPE__REIFIABLE:
-				return isReifiable();
 			case CorePackage.LINK_TYPE__ACCESS_TYPE:
 				return getAccessType();
 			case CorePackage.LINK_TYPE__TEMPORALITY:
@@ -266,9 +222,6 @@ public class LinkTypeImpl extends ConceptItemImpl implements LinkType {
 				getDestinationTypes().clear();
 				getDestinationTypes().addAll((Collection<? extends ComponentType>)newValue);
 				return;
-			case CorePackage.LINK_TYPE__REIFIABLE:
-				setReifiable((Boolean)newValue);
-				return;
 			case CorePackage.LINK_TYPE__ACCESS_TYPE:
 				setAccessType((LinkAccessType)newValue);
 				return;
@@ -293,9 +246,6 @@ public class LinkTypeImpl extends ConceptItemImpl implements LinkType {
 			case CorePackage.LINK_TYPE__DESTINATION_TYPES:
 				getDestinationTypes().clear();
 				return;
-			case CorePackage.LINK_TYPE__REIFIABLE:
-				setReifiable(REIFIABLE_EDEFAULT);
-				return;
 			case CorePackage.LINK_TYPE__ACCESS_TYPE:
 				setAccessType(ACCESS_TYPE_EDEFAULT);
 				return;
@@ -318,8 +268,6 @@ public class LinkTypeImpl extends ConceptItemImpl implements LinkType {
 				return sourceTypes != null && !sourceTypes.isEmpty();
 			case CorePackage.LINK_TYPE__DESTINATION_TYPES:
 				return destinationTypes != null && !destinationTypes.isEmpty();
-			case CorePackage.LINK_TYPE__REIFIABLE:
-				return reifiable != REIFIABLE_EDEFAULT;
 			case CorePackage.LINK_TYPE__ACCESS_TYPE:
 				return accessType != ACCESS_TYPE_EDEFAULT;
 			case CorePackage.LINK_TYPE__TEMPORALITY:
@@ -338,9 +286,7 @@ public class LinkTypeImpl extends ConceptItemImpl implements LinkType {
 		if (eIsProxy()) return super.toString();
 
 		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (reifiable: ");
-		result.append(reifiable);
-		result.append(", accessType: ");
+		result.append(" (accessType: ");
 		result.append(accessType);
 		result.append(", temporality: ");
 		result.append(temporality);

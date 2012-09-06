@@ -103,7 +103,7 @@ public class DTOConverter {
 					.getBoundType().getId(), bean.getBoundType().getName()).build();
 			ComponentTypeDTO.Builder builder = new ComponentTypeDTO.Builder(vp, bean.getId(), bean.getName())
 					.description(bean.getDescription()).comment(bean.getComment()).boundType(boundType)
-					.instantiationFactor(ifactor).reifiable(bean.isReifiable());
+					.instantiationFactor(ifactor);
 			for (String tag : Utils.stringListFromString(bean.getTags())) {
 				builder.addTag(tag);
 			}
@@ -291,7 +291,6 @@ public class DTOConverter {
 				refs.add(getReferenceBean(refDTO));
 			}
 			bean.setReferences(refs);
-			bean.setReifiable(dto.isReifiable());
 			HasNameAndIDBean vpBean = getHasNameAndIdBean(dto.getViewPoint());
 			bean.setViewPoint(vpBean);
 			return bean;

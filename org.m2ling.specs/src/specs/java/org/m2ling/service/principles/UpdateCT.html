@@ -11,20 +11,19 @@
 		a CT (component type).</p>
 	<h2>Instantiation factor</h2>
 	<p class='rule'>CT-31 Any change of the instantiation factor must be be compatible
-		with the reifiable flag, the number of instances of component of this type and of
+		with the number of instances of component of this type and of
 		component bound to the type.</p>
 	<div class='example'>
-		Given a reifiable and '*' instance factor component type in <b concordion:set="#vpID">id_vp_deploy</b> viewpoint with associated components and instances<BR />
+		Given a '*' instance factor component type in <b concordion:set="#vpID">id_vp_deploy</b> viewpoint with associated components and instances<BR />
 		
 		Following update settings combination should : 
 		<table
-				concordion:execute="#result=testUpdateIF(#caseName, #vpID, #id, #name, #ifactor, #reifiable)">
+				concordion:execute="#result=testUpdateIF(#caseName, #vpID, #id, #name, #ifactor)">
 				<tr>
 					<th concordion:set="#caseName">Case</th>
 					<th concordion:set="#id">Id</th>
 					<th concordion:set="#name">Name</th>
 					<th concordion:set="#ifactor">Instantiation factor</th>
-					<th concordion:set="#reifiable">Reifiable</th>
 					<th concordion:assertEquals="#result">should :</th>
 				</tr>
 				<tr>
@@ -32,23 +31,13 @@
 					<td>id_ct_deploy_X86</td>
 					<td>X86 Server</td>
 					<td>10</td>
-					<td>true</td>
 					<td>PASS</td>
 				</tr>
 				<tr>
-					<td>IF=0, reifiable=true</td>
+					<td>IF=0</td>
 					<td>id_ct_deploy_X86</td>
 					<td>X86 Server</td>
 					<td>0</td>
-					<td>true</td>
-					<td>FAIL with code NON_REIFIABLE_IFACTOR_SET</td>
-				</tr>
-				<tr>
-					<td>IF=0, reifiable=false</td>
-					<td>id_ct_deploy_X86</td>
-					<td>X86 Server</td>
-					<td>0</td>
-					<td>false</td>
 					<td>FAIL with code CT_INSUFFISENT_IF</td>
 				</tr>
 				<tr>
@@ -56,7 +45,6 @@
 					<td>id_ct_deploy_X86</td>
 					<td>X86 Server</td>
 					<td>1</td>
-					<td>true</td>
 					<td>FAIL with code CT_INSUFFISENT_IF</td>
 				</tr>
 			</table>
@@ -66,14 +54,14 @@
 	
 	<p class='rule'>CT32- Bound type following attributes can be changed : name, tags ,
 		comment, description</p>
-	<p class='rule'>CT33- Bound type following attributes *can't* be changed : instantiation factor, reifiable flag</p>
+	<p class='rule'>CT33- Bound type following attributes *can't* be changed : instantiation factor</p>
 	
 	<div class='example'>
 		Given a id_ct_deploy_X86 reifiable and owning a '*' instance factor component type in 
 		<b concordion:set="#vpID">id_vp_deploy</b> viewpoint and bound to id_ct_physical_x86_server CT
 		Following update settings combination should : 
 		<table
-				concordion:execute="#result=testUpdateBound(#caseName, #vpID, #id, #name, #ifactor, #boundTypeID, #references, #enumeration, #reifiable, #description, #tags, #comment)">
+				concordion:execute="#result=testUpdateBound(#caseName, #vpID, #id, #name, #ifactor, #boundTypeID, #references, #enumeration, #description, #tags, #comment)">
 				<tr>
 					<th concordion:set="#caseName">Case</th>
 					<th concordion:set="#id">Id</th>
@@ -85,7 +73,6 @@
 					<th concordion:set="#references">References</th>
 					<th concordion:set="#enumeration">Enumeration</th>
 					<th concordion:set="#ifactor">Instantiation factor</th>
-					<th concordion:set="#reifiable">Reifiable</th>
 					<th concordion:assertEquals="#result">should :</th>
 				</tr>
 				<tr>
@@ -99,7 +86,6 @@
 					<td>RUNS:id_ct_deploy_OS</td>
 					<td>null</td>
 					<td>*</td>
-					<td>true</td>
 					<td>PASS</td>
 				</tr>
 				<tr>
@@ -113,22 +99,7 @@
 					<td>RUNS:id_ct_deploy_OS</td>
 					<td>null</td>
 					<td>10</td>
-					<td>true</td>
 					<td>FAIL with code DELTA_BINDING_IF</td>
-				</tr>
-				<tr>
-					<td>Change of Reifiable flag</td>
-					<td>id_ct_deploy_X86</td>
-					<td>new name</td>
-					<td>new desc</td>
-					<td>new tag,new tags2</td>
-					<td>new comment</td>
-					<td>id_ct_physical_x86_server</td>
-					<td>RUNS:id_ct_deploy_OS</td>
-					<td>null</td>
-					<td>*</td>
-					<td>false</td>
-					<td>FAIL with code NON_REIFIABLE_IFACTOR_SET</td>
 				</tr>
 		</table>
 	</div>

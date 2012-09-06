@@ -23,24 +23,24 @@ public class CreateCTFixture extends AbstractCTFixture {
 		super();
 	}
 
-	public String createWithIfAndReifiable(String ifactor, String reifiable) throws FunctionalException {
+	public String createWithIf(String ifactor) throws FunctionalException {
 		return createAndGetCT("true", "CT1", "id_vp_logical", "id_new_ct_logical_servicecontainer", "ServicesContainer2",
-				"", "", "", ifactor, "null", "", "", reifiable);
+				"", "", "", ifactor, "null", "", "");
 	}
 
 	public String testNoBindingType() throws FunctionalException {
 		return createAndGetCT("true", "CT8", "id_vp_logical", "id_new_ct_logical_servicecontainer", "ServicesContainer2",
-				"", "", "", "*", "null", "", "id_comp_tech_jboss5", "true");
+				"", "", "", "*", "null", "", "id_comp_tech_jboss5");
 	}
 
 	public String testCascadingBinding() throws FunctionalException {
 		return createAndGetCT("true", "CT8", "id_vp_logical", "id_new_ct_logical_servicecontainer", "ServicesContainer2",
-				"", "", "", "*", "id_ct_app_application", "", "id_comp_tech_jboss5", "true");
+				"", "", "", "*", "id_ct_app_application", "", "id_comp_tech_jboss5");
 	}
 
 	public String testLocalBinding() throws FunctionalException {
 		return createAndGetCT("true", "CT8", "id_vp_logical", "id_new_ct_logical_servicecontainer", "ServicesContainer2",
-				"", "", "", "*", "id_ct_logical_servicecontainer", "", "id_comp_tech_jboss5", "true");
+				"", "", "", "*", "id_ct_logical_servicecontainer", "", "id_comp_tech_jboss5");
 	}
 
 	public String testBoundDerivedName(String caseName, String ctAttributes, String boundCTAttributes)
@@ -70,12 +70,12 @@ public class CreateCTFixture extends AbstractCTFixture {
 			}
 			// First create the bound CT
 			String resu = createAndGetCT("true", "CT11", "id_vp_tech", "id_bound_ct_tech_servicecontainer", boundName,
-					boundDescription, boundComment, boundTags, "*", "null", "", "", "true");
+					boundDescription, boundComment, boundTags, "*", "null", "", "");
 			logger.log(new LogRecord(Level.INFO, resu));
 			// then create the new CT
 			noreset = true;
 			resu = createAndGetCT("true", "CT11", "id_vp_logical", "id_new_ct_logical_servicecontainer", ctName,
-					ctDescription, ctComment, ctTags, "*", "id_bound_ct_tech_servicecontainer", "", "", "true");
+					ctDescription, ctComment, ctTags, "*", "id_bound_ct_tech_servicecontainer", "", "");
 			logger.log(new LogRecord(Level.INFO, resu));
 			// Return the new CT attributes
 			ComponentTypeDTO ctDTO = service.getCTByID(null, "id_new_ct_logical_servicecontainer");
@@ -98,7 +98,7 @@ public class CreateCTFixture extends AbstractCTFixture {
 			}
 		}
 		return createAndGetCT("true", caseName, "id_vp_logical", "id_new_ct_logical_servicecontainer",
-				"ServicesContainer2", "", "", "", "-1", "id_ct_tech_applicationserver", "", enumeration, "true");
+				"ServicesContainer2", "", "", "", "-1", "id_ct_tech_applicationserver", "", enumeration);
 	}
 
 	/**
@@ -111,8 +111,7 @@ public class CreateCTFixture extends AbstractCTFixture {
 	 * @throws FunctionalException
 	 */
 	public String createAndGetCT(String justCheck, String caseName, String vpID, String id, String name, String desc,
-			String comment, String tags, String ifactor, String boundTypeID, String references, String enumeration,
-			String reifiable) throws FunctionalException {
+			String comment, String tags, String ifactor, String boundTypeID, String references, String enumeration) throws FunctionalException {
 		if (!noreset) {
 			reset("Bikes");
 		}
@@ -126,7 +125,6 @@ public class CreateCTFixture extends AbstractCTFixture {
 		boundTypeID = UUT.nul(boundTypeID);
 		references = UUT.nul(references);
 		enumeration = UUT.nul(enumeration);
-		reifiable = UUT.nul(reifiable);
 		try {
 			ComponentTypeBean bean = new ComponentTypeBean();
 			bean.setComment(comment);
@@ -154,7 +152,6 @@ public class CreateCTFixture extends AbstractCTFixture {
 			}
 			bean.setInstantiationFactor(ifactor);
 			setReferences(bean, references);
-			bean.setReifiable(Boolean.parseBoolean(reifiable));
 			ComponentTypeDTO dto = new DTOConverter.ToDTO().getComponentTypeDTO(bean);
 			service.createCT(null, dto);
 			List<ComponentTypeDTO> ctDTOS = service.getAllCT(null, vpID);

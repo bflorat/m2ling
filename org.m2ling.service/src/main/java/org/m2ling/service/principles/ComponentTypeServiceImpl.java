@@ -90,16 +90,7 @@ public class ComponentTypeServiceImpl extends ServiceImpl implements ComponentTy
 			throw new FunctionalException(FunctionalException.Code.WRONG_IF, null, "instantiationFactor="
 					+ dto.getInstantiationFactor());
 		}
-		if ((ifactor > 0 || ifactor == -1) && !dto.isReifiable()) {
-			throw new FunctionalException(FunctionalException.Code.NON_REIFIABLE_IFACTOR_SET, null, dto.toString());
-		}
-		if (ifactor == 0 && dto.isReifiable()) {
-			throw new FunctionalException(FunctionalException.Code.NON_REIFIABLE_IFACTOR_SET, null, dto.toString());
-		}
 		// check CT-31
-		if (!dto.isReifiable() && maxNbInstances > 0) {
-			throw new FunctionalException(FunctionalException.Code.CT_INSUFFISENT_IF, null, dto.toString());
-		}
 		if (ifactor != -1 && ifactor < maxNbInstances) {
 			throw new FunctionalException(FunctionalException.Code.CT_INSUFFISENT_IF, null, dto.toString());
 		}
@@ -124,12 +115,6 @@ public class ComponentTypeServiceImpl extends ServiceImpl implements ComponentTy
 			if (boundCT.getBoundType() != null) {
 				throw new FunctionalException(FunctionalException.Code.BOUND_TYPE_BOUND, null, "boundTypeID="
 						+ dto.getBoundType().getId());
-			}
-			// Check for bound types that we don't try to set a reifiable flag or a instantiation
-			// factor different from bound type
-			if (boundCT.isReifiable() != dto.isReifiable()) {
-				throw new FunctionalException(FunctionalException.Code.DELTA_BINDING_REIFIABLE, null,
-						"boundType reifiable=" + boundCT.isReifiable());
 			}
 			if (boundCT.getInstantiationFactor() != dto.getInstantiationFactor()) {
 				throw new FunctionalException(FunctionalException.Code.DELTA_BINDING_IF, null,
@@ -362,7 +347,6 @@ public class ComponentTypeServiceImpl extends ServiceImpl implements ComponentTy
 		}
 		ct.setBoundType(boundType);
 		ct.setInstantiationFactor(dto.getInstantiationFactor());
-		ct.setReifiable(dto.isReifiable());
 		List<ArchitectureItem> enumeration = ct.getEnumeration();
 		enumeration.clear();
 		List<ArchitectureItem> newEnumeration = new ArrayList<ArchitectureItem>(dto.getEnumeration().size());
