@@ -3,7 +3,7 @@
   <viewPoints comment="Note that this viewpoint maps few concepts of physical architecture viewpoint." description="Applicative Architecture provides projects structure as modules, provides each module technology. Deals with software factories and system capabilities. Provides minimal details about physical architecture (list of servers by environment for instance)." id="id_vp_logical" name="Logical Architecture">
     <tags>team_A</tags>
     <activities id="_ByQVkJn4EeGqFM2UF1dCGQ" name="Set up software factory" description="Set up development, integration and build tools for each project." accountables="_skmNgZhhEeGGf-qGrGj3yA" responsibles="_skmNgZhhEeGGf-qGrGj3yA"/>
-    <componentTypes id="id_ct_logical_servicecontainer" name="ServicesContainer" description="Runs services (RMI, REST, SOAP...)" boundType="id_ct_tech_applicationserver" enumeration="id_grp_tech_servicecontainers">
+    <componentTypes id="id_ct_logical_servicecontainer" name="ServicesContainer" description="Runs services (RMI, REST, SOAP...)" boundType="id_ct_tech_applicationserver" enumeration="id_grp_tech_servicecontainers id_comp_tech_jboss5">
       <references type="RUNS" targets="id_ct_app_servicemodule"/>
     </componentTypes>
     <componentTypes id="_fKtsQZoXEeG71vmJ5CR-iA" name="WebContainer" comment="" description="A servlet/JSP container" boundType="id_ct_tech_applicationserver" enumeration="_0GnPIJ6QEeGyndJ1yNTLVw">

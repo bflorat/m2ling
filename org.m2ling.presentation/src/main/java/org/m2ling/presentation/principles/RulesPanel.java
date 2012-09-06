@@ -104,15 +104,6 @@ public class RulesPanel extends VerticalLayout implements Observer {
 				table.setHeight("300px");
 				table.setVisibleColumns(new String[] { "drop", "name", "status", "priority", "description","tags" });
 				table.setColumnExpandRatio("description", 1);
-				table.setItemDescriptionGenerator(new ItemDescriptionGenerator() {
-					public String generateDescription(Component source, Object itemId, Object propertyId) {
-						@SuppressWarnings("unchecked")
-						BeanContainer<String, RuleBean> data = (BeanContainer<String, RuleBean>) table
-								.getContainerDataSource();
-						RuleBean bean = (RuleBean) data.getItem(itemId).getBean();
-						return getHtmlDetails(bean);
-					}
-				});
 				table.setColumnHeaders(new String[] { msg.get("gal.3"), msg.get("gal.12"), msg.get("gal.7"),
 						msg.get("gal.8"), msg.get("gal.1") + " (" + msg.get("gal.10") + ")", msg.get("gal.4")});
 				table.addGeneratedColumn("name", new Table.ColumnGenerator() {

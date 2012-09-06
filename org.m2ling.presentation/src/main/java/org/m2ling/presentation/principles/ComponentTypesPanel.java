@@ -93,7 +93,8 @@ public class ComponentTypesPanel extends VerticalLayout implements Observer {
 				table.setHeight("300px");
 				table.setVisibleColumns(new String[] { "drop", "name", "description", "instantiationFactor", "reifiable",
 						"boundType", "enumeration", "references", "tags" });
-				table.setColumnExpandRatio("description", 0.6f);
+				table.setColumnExpandRatio("description", 0.4f);
+				table.setColumnExpandRatio("boundType", 0.2f);
 				table.setColumnExpandRatio("references", 0.2f);
 				table.setColumnExpandRatio("enumeration", 0.2f);
 				table.setItemDescriptionGenerator(new ItemDescriptionGenerator() {
