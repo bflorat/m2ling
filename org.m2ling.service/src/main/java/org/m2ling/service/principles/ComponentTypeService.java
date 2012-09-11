@@ -43,7 +43,7 @@ public interface ComponentTypeService {
 	void createCT(Context context, ComponentTypeDTO ctDTO) throws FunctionalException;
 
 	/**
-	 * Return all available CT given a viewpoint ID. If none CT is available, a void list is
+	 * Return an alphabetically ordered list of available CT given a viewpoint ID. If none CT is available, a void list is
 	 * returned.
 	 * 
 	 * <p>

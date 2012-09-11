@@ -111,7 +111,8 @@ public class CreateCTFixture extends AbstractCTFixture {
 	 * @throws FunctionalException
 	 */
 	public String createAndGetCT(String justCheck, String caseName, String vpID, String id, String name, String desc,
-			String comment, String tags, String ifactor, String boundTypeID, String references, String enumeration) throws FunctionalException {
+			String comment, String tags, String ifactor, String boundTypeID, String references, String enumeration)
+			throws FunctionalException {
 		if (!noreset) {
 			reset("Bikes");
 		}

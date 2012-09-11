@@ -28,6 +28,18 @@ public class ReferenceBean implements Serializable {
 		return Utils.toString(this);
 	}
 
+	public String toTargetsString() {
+		StringBuilder sb = new StringBuilder();
+		for (HasNameAndIDBean target : targets) {
+			sb.append(target.getName()).append(", ");
+		}
+		// Drop trailing comma
+		if (sb.length() > 3) {
+			sb.delete(sb.length() - 2, sb.length());
+		}
+		return sb.toString();
+	}
+
 	public boolean equals(Object other) {
 		if (other == null || !(other instanceof ReferenceBean)) {
 			return false;

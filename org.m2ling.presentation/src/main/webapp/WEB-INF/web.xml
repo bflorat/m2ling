@@ -18,6 +18,11 @@
 			<param-name>application</param-name>
 			<param-value>org.m2ling.presentation.M2lingApplication</param-value>
 		</init-param>
+		<init-param>
+			<description>Application widgetset</description>
+			<param-name>widgetset</param-name>
+			<param-value>org.m2ling.presentation.widgetset.Org_m2ling_presentationWidgetset</param-value>
+		</init-param>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>m2ling</servlet-name>

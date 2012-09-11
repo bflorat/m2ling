@@ -195,12 +195,12 @@ public class ComponentTypeDTO implements Comparable<ComponentTypeDTO> {
 	 */
 	@Override
 	public int compareTo(ComponentTypeDTO o) {
-		// TODO : if names are not provided, items are not correctly sorted
+		// If names are not provided, items are not correctly sorted
 		// but we only have the bounded type ID and we don't want to perform
 		// a service call to get details just for sorting purpose.
 		if (getName() == null || o.getName() == null) {
 			return 0;
 		}
-		return o.getName().compareTo(o.getName());
+		return getName().compareToIgnoreCase(o.getName());
 	}
 }

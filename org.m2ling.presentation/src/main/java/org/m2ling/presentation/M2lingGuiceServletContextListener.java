@@ -2,6 +2,9 @@
  * Sample code from https://vaadin.com/wiki/-/wiki/Main/Integrating%20Vaadin%20with%20Guice%202.0?p_r_p_185834411_title=Integrating%2520Vaadin%2520with%2520Guice%25202.0 */
 package org.m2ling.presentation;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.m2ling.common.configuration.Conf.SpecificConfiguration;
 import org.m2ling.common.utils.Utils;
 import org.m2ling.presentation.binding.DebugGuiceModule;
@@ -29,9 +32,13 @@ public class M2lingGuiceServletContextListener extends GuiceServletContextListen
 		ServletModule module = new ServletModule() {
 			@Override
 			protected void configureServlets() {
+				// We need to set widget set programmatically as the param-init is not read
+				//  see http://code.google.com/p/google-guice/wiki/ServletRegexKeyMapping
+				Map<String, String> params = new HashMap<String, String>();
+				params.put("widgetset", "org.m2ling.presentation.widgetset.Org_m2ling_presentationWidgetset");
 				// Servlet specific bindings, we serve '*', not only /* to also handle url without
 				// trailing '/'
-				serve("*").with(GuiceApplicationServlet.class);
+				serve("*").with(GuiceApplicationServlet.class, params);
 				bind(Application.class).to(M2lingApplication.class);
 				// Presentation layer bindings
 				install(new PresentationCommonGuiceModule());

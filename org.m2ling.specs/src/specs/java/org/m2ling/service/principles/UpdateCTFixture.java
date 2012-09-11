@@ -61,8 +61,8 @@ public class UpdateCTFixture extends AbstractCTFixture {
 
 	@Test
 	public String testUpdateBound(String caseName, String vpID, String id, String name, String ifactor,
-			String boundTypeID, String references, String enumeration, String description, String tags,
-			String comment) throws FunctionalException {
+			String boundTypeID, String references, String enumeration, String description, String tags, String comment)
+			throws FunctionalException {
 		reset("Bikes");
 		vpID = UUT.nul(vpID);
 		id = UUT.nul(id);
@@ -118,7 +118,7 @@ public class UpdateCTFixture extends AbstractCTFixture {
 	}
 
 	@Test
-	public String updateDropReference(String caseName, String sourceCTID, String references) throws FunctionalException {
+	public String updateReference(String caseName, String sourceCTID, String references) throws FunctionalException {
 		reset("Bikes");
 		try {
 			ComponentTypeBean bean = new ComponentTypeBean();

@@ -19,7 +19,9 @@ import org.m2ling.presentation.events.Observer;
 import org.m2ling.presentation.i18n.Msg;
 import org.m2ling.presentation.principles.model.ComponentTypeBean;
 import org.m2ling.presentation.principles.model.HasNameAndIDBean;
+import org.m2ling.presentation.principles.model.ReferenceBean;
 import org.m2ling.presentation.principles.utils.DTOConverter;
+import org.m2ling.presentation.widgets.HelpPanel;
 import org.m2ling.service.principles.ComponentTypeService;
 import org.vaadin.dialogs.ConfirmDialog;
 
@@ -34,6 +36,7 @@ import com.vaadin.ui.Alignment;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Button.ClickEvent;
 import com.vaadin.ui.Component;
+import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.Label;
 import com.vaadin.ui.NativeButton;
 import com.vaadin.ui.Table;
@@ -53,10 +56,12 @@ public class ComponentTypesPanel extends VerticalLayout implements Observer {
 	private final DTOConverter.FromDTO fromDTO;
 	// private final RuleDialogFactory factory;
 	private final Msg msg;
+	private final PrinciplesGUIFactory factory;
 
 	@Inject
 	public ComponentTypesPanel(Logger logger, @Assisted String vpID, ComponentTypeService serviceCT,
-			DTOConverter.ToDTO toDTO, DTOConverter.FromDTO fromDTO, Msg msg, ObservationManager obs) {
+			DTOConverter.ToDTO toDTO, DTOConverter.FromDTO fromDTO, Msg msg, ObservationManager obs,
+			PrinciplesGUIFactory factory) {
 		super();
 		this.vpID = vpID;
 		this.serviceCT = serviceCT;
@@ -65,6 +70,7 @@ public class ComponentTypesPanel extends VerticalLayout implements Observer {
 		this.toDTO = toDTO;
 		this.fromDTO = fromDTO;
 		this.msg = msg;
+		this.factory = factory;
 		setHeight(null);
 		setWidth("98%");
 		setMargin(true);
@@ -119,10 +125,9 @@ public class ComponentTypesPanel extends VerticalLayout implements Observer {
 						edit.setStyleName(BaseTheme.BUTTON_LINK);
 						edit.addListener(new Button.ClickListener() {
 							public void buttonClick(ClickEvent event) {
-								// TODO
-								// RuleDialog dialog = factory.getRuleDialogFor(item);
-								// dialog.setModal(true);
-								// getWindow().addWindow(dialog);
+								ComponentTypeDialog dialog = factory.getComponentTypeDialogFor(item);
+								dialog.setModal(true);
+								getWindow().addWindow(dialog);
 							}
 						});
 						return edit;
@@ -185,9 +190,45 @@ public class ComponentTypesPanel extends VerticalLayout implements Observer {
 						return label;
 					}
 				});
+				table.addGeneratedColumn("references", new Table.ColumnGenerator() {
+					@Override
+					public Object generateCell(Table source, Object itemId, Object columnId) {
+						@SuppressWarnings("unchecked")
+						BeanContainer<String, ComponentTypeBean> data = (BeanContainer<String, ComponentTypeBean>) table
+								.getContainerDataSource();
+						BeanItem<ComponentTypeBean> item = data.getItem(itemId);
+						final ComponentTypeBean ctBean = item.getBean();
+						Label label = new Label("");
+						StringBuilder sbRefs = new StringBuilder();
+						for (ReferenceBean ref : ctBean.getReferences()) {
+							sbRefs.append(ref.getType()).append(": ");
+							for (HasNameAndIDBean target : ref.getTargets()) {
+								sbRefs.append(target.getName()).append(", ");
+							}
+							// Remove targets trailing comma
+							if (sbRefs.length() > 0) {
+								sbRefs.delete(sbRefs.length() - 2, sbRefs.length() - 1);
+							}
+							sbRefs.append("<br/>");
+						}
+						label = new Label(sbRefs.toString(), Label.CONTENT_RAW);
+						return label;
+					}
+				});
+				HorizontalLayout hl = new HorizontalLayout();
+				hl.setWidth("100%");
+				// help
+				HelpPanel help = new HelpPanel(msg.get("help.1"));
+				hl.addComponent(help);
+				hl.setComponentAlignment(help, Alignment.TOP_RIGHT);
+				// Create
 				Button create = getCreateButton();
-				addComponent(create);
-				setComponentAlignment(create, Alignment.TOP_RIGHT);
+				hl.addComponent(create);
+				hl.setComponentAlignment(create, Alignment.TOP_RIGHT);
+				// Global aggregation
+				addComponent(hl);
+				hl.setExpandRatio(help, 0.9f);
+				setComponentAlignment(hl, Alignment.TOP_RIGHT);
 				addComponent(new Label("<br/>", Label.CONTENT_RAW));
 				addComponent(table);
 			}
@@ -239,13 +280,11 @@ public class ComponentTypesPanel extends VerticalLayout implements Observer {
 		create.setStyleName(BaseTheme.BUTTON_LINK);
 		create.addListener(new Button.ClickListener() {
 			public void buttonClick(ClickEvent event) {
-				// CT with null ID means "new CT". We can't pass null rule because VP'id is got from
-				// it
+				// CT with null ID means "new CT"
 				ComponentTypeBean bean = new ComponentTypeBean();
-				// TODO
-				// RuleDialog dialog = factory.getRuleDialogFor(new BeanItem<ComponentTypeBean>(bean));
-				// dialog.setModal(true);
-				// getWindow().addWindow(dialog);
+				ComponentTypeDialog dialog = factory.getComponentTypeDialogFor(new BeanItem<ComponentTypeBean>(bean));
+				dialog.setModal(true);
+				getWindow().addWindow(dialog);
 			}
 		});
 		return create;

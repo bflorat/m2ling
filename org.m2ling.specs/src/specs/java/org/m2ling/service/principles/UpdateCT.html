@@ -113,8 +113,18 @@
 		When we try to drop the CT reference <br/>
 		<span concordion:set="#references" ></span>
 		<span concordion:set="#caseName" >Drop existing ref</span>
-		<span concordion:execute="#resu=updateDropReference(#caseName,#sourceCTID,#references)"/><br/>
+		<span concordion:execute="#resu=updateReference(#caseName,#sourceCTID,#references)"/><br/>
 		Then the service should <b concordion:assertEquals="#resu">FAIL with code CT_REFERENCE_IN_USE</b><br/> 
 	</div>
+	
+	<p class='rule'>CT-35 : A Component Type can refer itself at upgrade (can't be done at creation as reference target doesn't exist yet).</p>
+	<div class='example'>
+		<span concordion:set="#caseName" >CT-35</span>
+	    Given an existing CT <b concordion:set="#sourceCTID">id_ct_deploy_X86</b><br/> 
+	    When we set reference to <b concordion:set="#references" >RUNS:id_ct_deploy_X86</b><br/>
+		<span concordion:execute="#resu=updateReference(#caseName,#sourceCTID,#references)"/><br/>
+		Then the service should <b concordion:assertEquals="#resu">FAIL with code CT_REFERENCE_IN_USE</b><br/> 
+	</div>
+	
 </body>
 </html>

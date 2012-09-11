@@ -35,7 +35,6 @@ import com.google.inject.assistedinject.Assisted;
 import com.vaadin.data.util.BeanContainer;
 import com.vaadin.data.util.BeanItem;
 import com.vaadin.terminal.ThemeResource;
-import com.vaadin.ui.AbstractSelect.ItemDescriptionGenerator;
 import com.vaadin.ui.Alignment;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Button.ClickEvent;
@@ -57,7 +56,7 @@ public class RulesPanel extends VerticalLayout implements Observer {
 	private final Logger logger;
 	private final DTOConverter.ToDTO toDTO;
 	private final DTOConverter.FromDTO fromDTO;
-	private final RuleDialogFactory factory;
+	private final PrinciplesGUIFactory factory;
 	private final Msg msg;
 	private final Conf conf;
 
@@ -67,7 +66,7 @@ public class RulesPanel extends VerticalLayout implements Observer {
 	 */
 	@Inject
 	public RulesPanel(Logger logger, @Assisted String vpID, RuleService service, DTOConverter.ToDTO toDTO,
-			DTOConverter.FromDTO fromDTO, RuleDialogFactory factory, Msg msg, Conf conf, ObservationManager obs) {
+			DTOConverter.FromDTO fromDTO, PrinciplesGUIFactory factory, Msg msg, Conf conf, ObservationManager obs) {
 		super();
 		this.vpID = vpID;
 		this.service = service;

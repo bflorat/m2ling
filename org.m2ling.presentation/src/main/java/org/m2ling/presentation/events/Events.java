@@ -8,6 +8,7 @@ public enum Events {
 	VP_CHANGE,
 	/** A rule has been removed/added/updated */
 	RULE_CHANGE,
-	
+	/** A CT has been removed/added/updated */
+	CT_CHANGE,
 	DETAIL_TARGET
 }

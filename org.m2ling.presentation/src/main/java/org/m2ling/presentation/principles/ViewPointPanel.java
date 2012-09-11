@@ -42,9 +42,7 @@ import com.vaadin.ui.themes.BaseTheme;
 public class ViewPointPanel extends VerticalLayout {
 	private final Logger logger;
 	private final ViewPointBean bean;
-	private ViewPointDialogFactory vpDialogFactory;
-	private RulesPanelFactory rulesPanelFactory;
-	private ComponentTypePanelFactory ctPanelFactory;
+	private PrinciplesGUIFactory factory;
 	private ViewPointService service;
 	private ObservationManager obs;
 	private DTOConverter.ToDTO toDTO;
@@ -59,18 +57,15 @@ public class ViewPointPanel extends VerticalLayout {
 	 *            if bean is null
 	 */
 	@Inject
-	public ViewPointPanel(@Assisted ViewPointBean bean, Logger logger, ViewPointDialogFactory factory,
-			ViewPointService service, ObservationManager obs, DTOConverter.ToDTO toDTO,
-			RulesPanelFactory rulesPanelFactory, ComponentTypePanelFactory ctPanelFactory, Msg msg) {
+	public ViewPointPanel(@Assisted ViewPointBean bean, Logger logger, PrinciplesGUIFactory factory,
+			ViewPointService service, ObservationManager obs, DTOConverter.ToDTO toDTO, Msg msg) {
 		super();
 		this.logger = logger;
 		this.bean = bean;
-		this.vpDialogFactory = factory;
+		this.factory = factory;
 		this.service = service;
 		this.obs = obs;
 		this.toDTO = toDTO;
-		this.rulesPanelFactory = rulesPanelFactory;
-		this.ctPanelFactory = ctPanelFactory;
 		this.msg = msg;
 		if (bean == null) {
 			throw new IllegalArgumentException("Null viewpoint");
@@ -108,7 +103,7 @@ public class ViewPointPanel extends VerticalLayout {
 		edit.addStyleName("command");
 		edit.addListener(new Button.ClickListener() {
 			public void buttonClick(ClickEvent event) {
-				ViewPointDialog vpDialog = vpDialogFactory.getViewPointDialogFor(bean);
+				ViewPointDialog vpDialog = factory.getViewPointDialogFor(bean);
 				vpDialog.setModal(true);
 				getWindow().addWindow(vpDialog);
 			}
@@ -132,7 +127,7 @@ public class ViewPointPanel extends VerticalLayout {
 		rulesHiddenPane.setVisible(false);
 		rulesHiddenPane.setWidth("100%");
 		rulesHiddenPane.setHeight(null);
-		RulesPanel rulesPanel = rulesPanelFactory.getRulesPanelFor(bean.getId());
+		RulesPanel rulesPanel = factory.getRulesPanelFor(bean.getId());
 		rulesHiddenPane.setContent(rulesPanel);
 		Button rules = new Button(msg.get("pr.13"));
 		rules.setStyleName(BaseTheme.BUTTON_LINK);
@@ -146,7 +141,7 @@ public class ViewPointPanel extends VerticalLayout {
 		ctsHiddenPane.setVisible(false);
 		ctsHiddenPane.setWidth("100%");
 		ctsHiddenPane.setHeight(null);
-		ComponentTypesPanel ctsPanel = ctPanelFactory.getCTPanelFor(bean.getId());
+		ComponentTypesPanel ctsPanel = factory.getCTPanelFor(bean.getId());
 		ctsHiddenPane.setContent(ctsPanel);
 		Button componentTypes = new Button(msg.get("pr.14"));
 		componentTypes.setStyleName(BaseTheme.BUTTON_LINK);

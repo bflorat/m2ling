@@ -41,16 +41,16 @@ public class PrinciplesGuiModule extends GuiModule implements Observer {
 	private List<ViewPointDTO> vpsDTO;
 	private ViewPointService vpService;
 	private Logger logger;
-	private ViewPointDialogFactory dialogFactory;
-	private ViewPointPanelFactory panelFactory;
+	private PrinciplesGUIFactory dialogFactory;
+	private PrinciplesGUIFactory panelFactory;
 	private ObservationManager obs;
 	private DTOConverter.FromDTO fromDTO;
 	private final Msg msg;
 	private VerticalLayout root;
 
 	@Inject
-	public PrinciplesGuiModule(ViewPointService vpService, Logger logger, ViewPointDialogFactory dialogFactory,
-			ViewPointPanelFactory panelFactory, ObservationManager obs, DTOConverter.FromDTO fromDTO, Msg msg) {
+	public PrinciplesGuiModule(ViewPointService vpService, Logger logger, PrinciplesGUIFactory dialogFactory,
+			PrinciplesGUIFactory panelFactory, ObservationManager obs, DTOConverter.FromDTO fromDTO, Msg msg) {
 		super();
 		this.vpService = vpService;
 		this.logger = logger;
