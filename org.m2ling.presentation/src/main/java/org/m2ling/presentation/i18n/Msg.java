@@ -31,12 +31,13 @@ public class Msg {
 		locale = new Locale(conf.getSystemProperty(SpecificConfiguration.CONF_PRESENTATION_DEFAULT_LOCALE));
 		bundle = ResourceBundle.getBundle("org.m2ling.presentation.i18n.messages", locale, new UTF8Control());
 	}
-	
+
 	/**
-	 * Return global m2ling default locale used (can't be changed until next server startup) 
+	 * Return global m2ling default locale used (can't be changed until next server startup)
+	 * 
 	 * @return
 	 */
-	public Locale getDefaultLocale(){
+	public Locale getDefaultLocale() {
 		return this.locale;
 	}
 
@@ -74,11 +75,12 @@ public class Msg {
 	}
 
 	private String humanMessage(String code, String details) {
-		String out = "[" + code + "] ";
-		out += get("fcode." + code);
-		if (Strings.isNullOrEmpty(details)) {
-			out += details;
+		StringBuilder sb = new StringBuilder();
+		sb.append("[").append(code).append("] ");
+		sb.append(get("fcode." + code));
+		if (!Strings.isNullOrEmpty(details)) {
+			sb.append(" (").append(details).append(")");
 		}
-		return out;
+		return sb.toString();
 	}
 }

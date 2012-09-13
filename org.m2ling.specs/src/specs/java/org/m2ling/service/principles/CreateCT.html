@@ -463,6 +463,32 @@
 			<td>id_comp_tech_jboss5,id_comp_tech_jboss6</td>
 			<td>FAIL with code TARGET_NOT_FOUND</td>
 		</tr>
+		<tr>
+			<td>Format/null enumeration</td>
+			<td>new_id_ct_logical_servicecontainer</td>
+			<td>ServicesContainer2</td>
+			<td>Runs services (RMI, REST, SOAP...).</td>
+			<td>comment2</td>
+			<td>tags1,tag2</td>
+			<td>*</td>
+			<td>id_ct_tech_applicationserver</td>
+			<td>RUNS:id_ct_app_servicemodule;DEPENDS_ON:id_ct_logical_rdbms,id_ct_logical_ldap</td>
+			<td>null</td>
+			<td>FAIL with code TARGET_NOT_FOUND</td>
+		</tr>
+		<tr>
+			<td>Format/enumeration contains null</td>
+			<td>new_id_ct_logical_servicecontainer</td>
+			<td>ServicesContainer2</td>
+			<td>Runs services (RMI, REST, SOAP...).</td>
+			<td>comment2</td>
+			<td>tags1,tag2</td>
+			<td>*</td>
+			<td>id_ct_tech_applicationserver</td>
+			<td>RUNS:id_ct_app_servicemodule;DEPENDS_ON:id_ct_logical_rdbms,id_ct_logical_ldap</td>
+			<td>id_comp_tech_jboss5,null</td>
+			<td>FAIL with code TARGET_NOT_FOUND</td>
+		</tr>
 	</table>
 	</div>	
 </body>

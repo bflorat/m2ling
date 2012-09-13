@@ -33,21 +33,6 @@ public class ComponentTypeBean implements Serializable {
 		super();
 	}
 
-	public String toString() {
-		return Utils.toString(this);
-	}
-
-	public boolean equals(Object other) {
-		if (other == null || !(other instanceof ComponentTypeBean)) {
-			return false;
-		}
-		return ((ComponentTypeBean) other).getId().equals(getId());
-	}
-
-	public int hashCode() {
-		return id.hashCode();
-	}
-
 	/**
 	 * @return the drop
 	 */
@@ -213,5 +198,26 @@ public class ComponentTypeBean implements Serializable {
 	 */
 	public String getDescription() {
 		return description;
+	}
+
+	@Override
+	public String toString() {
+		return Utils.toString(this);
+	}
+
+	@Override
+	public boolean equals(Object other) {
+		if (other == this) {
+			return true;
+		}
+		if (other == null || !(other instanceof ComponentTypeBean)) {
+			return false;
+		}
+		return ((ComponentTypeBean) other).getId().equals(id);
+	}
+
+	@Override
+	public int hashCode() {
+		return id.hashCode();
 	}
 }

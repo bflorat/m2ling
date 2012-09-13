@@ -41,6 +41,9 @@ public class ReferenceBean implements Serializable {
 	}
 
 	public boolean equals(Object other) {
+		if (other == this) {
+			return true;
+		}
 		if (other == null || !(other instanceof ReferenceBean)) {
 			return false;
 		}

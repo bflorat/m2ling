@@ -5,12 +5,15 @@
  */
 package org.m2ling.presentation.principles;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Properties;
 import java.util.UUID;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.annotation.Nullable;
 
@@ -154,10 +157,11 @@ public class ComponentTypeDialog extends Window {
 		panel.setSizeFull();
 		panel.getContent().setHeight("-1");
 		form = new Form();
+		form.setImmediate(true);
 		form.setFormFieldFactory(new CTDialogFieldFactory());
 		form.setItemDataSource(beanItem);
 		form.setVisibleItemProperties(Arrays.asList(new String[] { "name", "tags", "description", "boundType",
-				"enumeration", "instantiationFactor", "comment" }));
+				"instantiationFactor", "comment" }));
 		// Command buttons
 		OKCancel okc = new OKCancel(ok, cancel);
 		panel.addComponent(new HelpPanel(msg.get("help.1")));
@@ -166,7 +170,7 @@ public class ComponentTypeDialog extends Window {
 		Panel references = new Panel(msg.get("pr.33"));
 		references.setWidth("100%");
 		references.setHeight("-1");
-		GridLayout gl = new GridLayout(3, ctBean.getReferences().size() + 1);
+		GridLayout gl = new GridLayout(4, ctBean.getReferences().size() + 1);
 		gl.setMargin(true);
 		gl.setSpacing(true);
 		gl.setWidth("100%");
@@ -177,12 +181,16 @@ public class ComponentTypeDialog extends Window {
 			row++;
 		}
 		// Add a void row to enable a new reference creation
-		addNewReference(null, gl, row);
+		ReferenceBean voidRefBean = new ReferenceBean();
+		voidRefBean.setTargets(new ArrayList<HasNameAndIDBean>());
+		addNewReference(voidRefBean, gl, row);
 		references.addComponent(gl);
 		panel.addComponent(references);
 		panel.addComponent(okc);
 		((VerticalLayout) panel.getContent()).setComponentAlignment(okc, Alignment.MIDDLE_LEFT);
 		addComponent(panel);
+		// FormExample form = new FormExample();
+		// addComponent(form);
 	}
 
 	/**
@@ -195,6 +203,7 @@ public class ComponentTypeDialog extends Window {
 	 */
 	private void addNewReference(final ReferenceBean refBean, final GridLayout gl, final int row) {
 		NativeButton drop = new NativeButton("");
+		drop.setDescription(msg.get("gal.3"));
 		drop.setSizeUndefined();
 		drop.setStyleName("borderless");
 		drop.setIcon(new ThemeResource("img/16/delete.png"));
@@ -205,16 +214,27 @@ public class ComponentTypeDialog extends Window {
 				attach();
 			}
 		});
-		// Combobox to select type if its a new reference, label otherwise
-		Component type = null;
-		if (refBean == null) {
-			type = new ComboBox(msg.get("pr.40"));
-			for (ReferenceType refType : ReferenceType.values()) {
-				((ComboBox) type).addItem(refType.name());
-			}
-		} else {
-			type = new Label(refBean.getType() + ": ");
+		// Combo box to select type
+		final ComboBox type = new ComboBox(msg.get("pr.40"));
+		type.setImmediate(true);
+		type.setNullSelectionAllowed(false);
+		type.setInputPrompt("--" + msg.get("pr.42") + "--");
+		for (ReferenceType refType : ReferenceType.values()) {
+			type.addItem(refType.name());
 		}
+		type.select(refBean.getType());
+		// We add the new reference once the type has been set
+		type.addListener(new Property.ValueChangeListener() {
+			@Override
+			public void valueChange(ValueChangeEvent event) {
+				refBean.setType((String) type.getValue());
+				if (!(ctBean.getReferences().contains(refBean))) {
+					ctBean.getReferences().add(refBean);
+					removeAllComponents();
+					attach();
+				}
+			}
+		});
 		type.setSizeUndefined();
 		PopupView targets = new PopupView(new PopupView.Content() {
 			@Override
@@ -239,18 +259,13 @@ public class ComponentTypeDialog extends Window {
 					logger.log(Level.SEVERE, fe.getDetailedMessage(), fe);
 					getWindow().showNotification(msg.humanMessage(fe), Notification.TYPE_ERROR_MESSAGE);
 				}
-				// Pre-select CT for existing references
-				if (ctBean != null) {
-					for (HasNameAndIDBean target : refBean.getTargets()) {
-						tcs.select(target);
-					}
-				}
 				tcs.setRows(10);
 				tcs.setNullSelectionAllowed(false);
 				tcs.setMultiSelect(true);
 				tcs.setLeftColumnCaption(msg.get("gal.14"));
 				tcs.setRightColumnCaption(msg.get("gal.15"));
 				tcs.setWidth("350px");
+				tcs.setImmediate(true);
 				tcs.addListener(new Property.ValueChangeListener() {
 					@Override
 					public void valueChange(ValueChangeEvent event) {
@@ -267,19 +282,18 @@ public class ComponentTypeDialog extends Window {
 
 			@Override
 			public String getMinimizedValueAsHTML() {
-				return (refBean == null) ? msg.get("pr.41") : refBean.toTargetsString();
+				return (refBean.getTargets().size() == 0) ? "[" + msg.get("pr.41") + "]" : refBean.toTargetsString();
 			}
 		});
 		targets.setHideOnMouseOut(false);
-		if (refBean != null) {
-			gl.addComponent(drop, 0, row);
-			gl.setComponentAlignment(drop, Alignment.MIDDLE_LEFT);
-		}
-		gl.addComponent(type, 1, row);
-		gl.setComponentAlignment(type, Alignment.MIDDLE_CENTER);
+		gl.addComponent(type, 0, row);
+		gl.addComponent(new Label(": "), 1, row);
+		gl.setComponentAlignment(type, Alignment.MIDDLE_LEFT);
 		gl.addComponent(targets, 2, row);
 		gl.setComponentAlignment(targets, Alignment.MIDDLE_CENTER);
 		gl.setColumnExpandRatio(2, 1);
+		gl.addComponent(drop, 3, row);
+		gl.setComponentAlignment(drop, Alignment.MIDDLE_RIGHT);
 	}
 
 	private class CTDialogFieldFactory extends DefaultFieldFactory {
@@ -320,16 +334,21 @@ public class ComponentTypeDialog extends Window {
 			} else if ("boundType".equals(propertyId)) {
 				Select boundType = new Select();
 				boundType.setCaption(msg.get("pr.36"));
+				boundType.setNullSelectionAllowed(true);
 				boundType.setDescription(msg.get("pr.36"));
+				boundType.setImmediate(true);
 				try {
 					List<ViewPointDTO> vpsDTO = vpService.getAllViewPoints(null);
 					for (ViewPointDTO vpDTO : vpsDTO) {
 						if (!(vpDTO.getId().equals(ctBean.getViewPoint().getId()))) {// Ignore CT from
 																											// local VP
 							List<ComponentTypeDTO> cts = ctService.getAllCT(null, vpDTO.getId());
-							for (ComponentTypeDTO ct : cts) {
-								boundType.addItem(ct.getId());
-								boundType.setItemCaption(ct.getId(), ct.getViewPoint().getName() + "/ " + ct.getName());
+							for (ComponentTypeDTO ctDTO : cts) {
+								HasNameAndIDBean bound = new HasNameAndIDBean();
+								bound.setName(ctDTO.getName());
+								bound.setId(ctDTO.getId());
+								boundType.addItem(bound);
+								boundType.setItemCaption(bound, ctDTO.getViewPoint().getName() + "/ " + ctDTO.getName());
 							}
 						}
 					}
@@ -344,6 +363,7 @@ public class ComponentTypeDialog extends Window {
 				enumeration.setDescription(msg.get("pr.36"));
 				// TODO : call future m2studio services to get components and component groups
 				// from views of others viewpoints.
+				// TODO : use a TwinColumnSelector like we use for references
 				return enumeration;
 			} else {
 				return super.createField(item, propertyId, uiContext);
@@ -361,7 +381,9 @@ public class ComponentTypeDialog extends Window {
 
 		@Override
 		public void validate(Object value) throws InvalidValueException {
-			// TODO Auto-generated method stub
+			if (!isValid(value)) {
+				throw new InvalidValueException("Invalid ifactor");
+			}
 		}
 
 		@Override
@@ -369,7 +391,10 @@ public class ComponentTypeDialog extends Window {
 			if (!(value instanceof String)) {
 				return false;
 			}
-			return false;
+			String ifactor = (String) value;
+			Pattern p = Pattern.compile("[0-9]*");
+			Matcher m = p.matcher(ifactor);
+			return "*".equals(ifactor) || m.matches();
 		}
 	};
 }

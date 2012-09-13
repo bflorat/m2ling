@@ -116,9 +116,10 @@ public class ComponentTypeServiceImpl extends ServiceImpl implements ComponentTy
 				throw new FunctionalException(FunctionalException.Code.BOUND_TYPE_BOUND, null, "boundTypeID="
 						+ dto.getBoundType().getId());
 			}
-			if (boundCT.getInstantiationFactor() != dto.getInstantiationFactor()) {
+			int boundIF = boundCT.getInstantiationFactor();
+			if (boundIF != dto.getInstantiationFactor()) {
 				throw new FunctionalException(FunctionalException.Code.DELTA_BINDING_IF, null,
-						"boundType instantiation factor=" + boundCT.getInstantiationFactor());
+						"boundType instantiation factor=" + ((boundIF == -1) ? "*" : "" + boundIF));
 			}
 		}
 	}

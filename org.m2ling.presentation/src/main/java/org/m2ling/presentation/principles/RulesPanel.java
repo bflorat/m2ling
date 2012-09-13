@@ -133,6 +133,7 @@ public class RulesPanel extends VerticalLayout implements Observer {
 						NativeButton drop = new NativeButton("");
 						drop.setSizeFull();
 						drop.setStyleName("borderless");
+						drop.setDescription(msg.get("gal.3"));
 						drop.setIcon(new ThemeResource("img/16/delete.png"));
 						drop.addListener(new Button.ClickListener() {
 							public void buttonClick(ClickEvent event) {

@@ -141,6 +141,7 @@ public class ComponentTypesPanel extends VerticalLayout implements Observer {
 						BeanItem<ComponentTypeBean> item = data.getItem(itemId);
 						final ComponentTypeBean ctBean = item.getBean();
 						NativeButton drop = new NativeButton("");
+						drop.setDescription(msg.get("gal.3"));
 						drop.setSizeFull();
 						drop.setStyleName("borderless");
 						drop.setIcon(new ThemeResource("img/16/delete.png"));
