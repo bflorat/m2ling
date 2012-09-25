@@ -189,8 +189,6 @@ public class ComponentTypeDialog extends Window {
 		panel.addComponent(okc);
 		((VerticalLayout) panel.getContent()).setComponentAlignment(okc, Alignment.MIDDLE_LEFT);
 		addComponent(panel);
-		// FormExample form = new FormExample();
-		// addComponent(form);
 	}
 
 	/**
@@ -286,14 +284,15 @@ public class ComponentTypeDialog extends Window {
 			}
 		});
 		targets.setHideOnMouseOut(false);
-		gl.addComponent(type, 0, row);
-		gl.addComponent(new Label(": "), 1, row);
-		gl.setComponentAlignment(type, Alignment.MIDDLE_LEFT);
-		gl.addComponent(targets, 2, row);
-		gl.setComponentAlignment(targets, Alignment.MIDDLE_CENTER);
-		gl.setColumnExpandRatio(2, 1);
-		gl.addComponent(drop, 3, row);
+		targets.setWidth("60%");
+		gl.addComponent(drop, 0, row);
 		gl.setComponentAlignment(drop, Alignment.MIDDLE_RIGHT);
+		gl.addComponent(type, 1, row);
+		gl.addComponent(new Label(": "), 2, row);
+		gl.setComponentAlignment(type, Alignment.MIDDLE_LEFT);
+		gl.addComponent(targets, 3, row);
+		gl.setComponentAlignment(targets, Alignment.MIDDLE_CENTER);
+		gl.setColumnExpandRatio(3, 1);
 	}
 
 	private class CTDialogFieldFactory extends DefaultFieldFactory {

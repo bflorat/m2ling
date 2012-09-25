@@ -67,7 +67,8 @@ public class FunctionalException extends Exception {
 		CT_EXISTING_COMP,
 		CT_EXISTING_BINDING,
 		CT_INSUFFISENT_IF,
-		CT_REFERENCE_IN_USE
+		CT_REFERENCE_IN_USE,
+		NONE_TARGET
 	}
 
 	/**

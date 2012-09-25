@@ -168,6 +168,10 @@ public class ComponentTypeServiceImpl extends ServiceImpl implements ComponentTy
 			if (ReferenceType.get(refDTO.getType()) == null) {
 				throw new FunctionalException(FunctionalException.Code.INVALID_REFERENCE_TYPE, null, dto.toString());
 			}
+			// check that the reference contains at least a single target
+			if (refDTO.getTargets().size() == 0) {
+				throw new FunctionalException(FunctionalException.Code.NONE_TARGET, null, "reference=" + refDTO.getType());
+			}
 			// check reference targets and type
 			if (refDTO.getTargets() == null) {
 				throw new FunctionalException(FunctionalException.Code.NULL_ARGUMENT, null, "(references/target)");
@@ -352,7 +356,7 @@ public class ComponentTypeServiceImpl extends ServiceImpl implements ComponentTy
 		enumeration.clear();
 		List<ArchitectureItem> newEnumeration = new ArrayList<ArchitectureItem>(dto.getEnumeration().size());
 		for (HasNameAndIdDTO comp : dto.getEnumeration()) {
-			ArchitectureItem ai = util.getComponentByID(comp.getId());
+			ArchitectureItem ai = util.getComponentOrGroupByID(comp.getId());
 			newEnumeration.add(ai);
 		}
 		enumeration.addAll(newEnumeration);

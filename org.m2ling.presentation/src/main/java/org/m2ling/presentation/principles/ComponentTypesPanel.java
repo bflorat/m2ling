@@ -18,8 +18,6 @@ import org.m2ling.presentation.events.ObservationManager;
 import org.m2ling.presentation.events.Observer;
 import org.m2ling.presentation.i18n.Msg;
 import org.m2ling.presentation.principles.model.ComponentTypeBean;
-import org.m2ling.presentation.principles.model.HasNameAndIDBean;
-import org.m2ling.presentation.principles.model.ReferenceBean;
 import org.m2ling.presentation.principles.utils.DTOConverter;
 import org.m2ling.presentation.widgets.HelpPanel;
 import org.m2ling.service.principles.ComponentTypeService;
@@ -165,6 +163,7 @@ public class ComponentTypesPanel extends VerticalLayout implements Observer {
 						if (ctBean.getBoundType() != null) {
 							label = new Label(ctBean.getViewPoint().getName() + "/ " + ctBean.getBoundType().getName());
 						}
+						label.setDescription(getHtmlDetails(ctBean));
 						return label;
 					}
 				});
@@ -178,16 +177,9 @@ public class ComponentTypesPanel extends VerticalLayout implements Observer {
 						final ComponentTypeBean ctBean = item.getBean();
 						Label label = new Label("");
 						if (ctBean.getBoundType() != null) {
-							StringBuilder sb = new StringBuilder();
-							for (HasNameAndIDBean comp : ctBean.getEnumeration()) {
-								sb.append(comp.getName()).append(", ");
-							}
-							// Remove trailing comma
-							if (sb.length() > 0) {
-								sb.delete(sb.length() - 2, sb.length() - 1);
-							}
-							label = new Label(sb.toString());
+							label = new Label(ctBean.getEnumerationAsString());
 						}
+						label.setDescription(getHtmlDetails(ctBean));
 						return label;
 					}
 				});
@@ -199,20 +191,8 @@ public class ComponentTypesPanel extends VerticalLayout implements Observer {
 								.getContainerDataSource();
 						BeanItem<ComponentTypeBean> item = data.getItem(itemId);
 						final ComponentTypeBean ctBean = item.getBean();
-						Label label = new Label("");
-						StringBuilder sbRefs = new StringBuilder();
-						for (ReferenceBean ref : ctBean.getReferences()) {
-							sbRefs.append(ref.getType()).append(": ");
-							for (HasNameAndIDBean target : ref.getTargets()) {
-								sbRefs.append(target.getName()).append(", ");
-							}
-							// Remove targets trailing comma
-							if (sbRefs.length() > 0) {
-								sbRefs.delete(sbRefs.length() - 2, sbRefs.length() - 1);
-							}
-							sbRefs.append("<br/>");
-						}
-						label = new Label(sbRefs.toString(), Label.CONTENT_RAW);
+						Label label = new Label(ctBean.getReferencesAsString(), Label.CONTENT_RAW);
+						label.setDescription(getHtmlDetails(ctBean));
 						return label;
 					}
 				});
@@ -271,6 +251,26 @@ public class ComponentTypesPanel extends VerticalLayout implements Observer {
 		if (!Strings.isNullOrEmpty(bean.getComment())) {
 			out += "<b>" + msg.get("gal.11") + " : </b>";
 			out += bean.getComment();
+			out += "</br></br>";
+		}
+		if (!Strings.isNullOrEmpty(bean.getTags())) {
+			out += "<b>" + msg.get("gal.4") + " : </b>";
+			out += bean.getTags();
+			out += "</br></br>";
+		}
+		if (bean.getBoundType() != null) {
+			out += "<b>" + msg.get("pr.36") + " : </b>";
+			out += bean.getViewPoint().getName() + "/ " + bean.getBoundType().getName();
+			out += "</br></br>";
+		}
+		if (bean.getEnumeration().size() > 0) {
+			out += "<b>" + msg.get("pr.32") + " : </b>";
+			out += bean.getEnumerationAsString();
+			out += "</br></br>";
+		}
+		if (bean.getReferences().size() > 0) {
+			out += "<b>" + msg.get("pr.33") + " : </b>";
+			out += bean.getReferencesAsString();
 			out += "</br></br>";
 		}
 		return out;

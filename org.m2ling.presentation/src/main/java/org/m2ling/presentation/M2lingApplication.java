@@ -4,6 +4,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import org.m2ling.common.configuration.Conf;
+import org.m2ling.presentation.i18n.Msg;
 import org.m2ling.presentation.principles.PrinciplesGuiModule;
 
 import com.google.inject.Inject;
@@ -27,12 +28,14 @@ public class M2lingApplication extends Application {
 	@SuppressWarnings("unused")
 	private GuiModule currentApp;
 	private VerticalLayout root;
+	private final Msg msg;
 
 	@Inject
-	public M2lingApplication(Logger logger, PrinciplesGuiModule principles, Conf conf) {
+	public M2lingApplication(Logger logger, PrinciplesGuiModule principles, Conf conf, Msg msg) {
 		super();
 		this.logger = logger;
 		this.principlesGuiModule = principles;
+		this.msg = msg;
 	}
 
 	@Override
@@ -84,8 +87,7 @@ public class M2lingApplication extends Application {
 		logger.log(Level.SEVERE, "Untrapped error", event.getThrowable());
 		// Some custom behavior.
 		if (getMainWindow() != null) {
-			getMainWindow().showNotification("An unchecked exception occured!", event.getThrowable().toString(),
-					Notification.TYPE_ERROR_MESSAGE);
+			getMainWindow().showNotification(msg.get("error.0"), Notification.TYPE_ERROR_MESSAGE);
 		}
 	}
 }

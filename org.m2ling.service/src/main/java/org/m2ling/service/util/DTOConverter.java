@@ -128,7 +128,6 @@ public class DTOConverter {
 				HasNameAndIdDTO hniComp = new HasNameAndIdDTO.Builder(ai.getId(), ai.getName()).build();
 				builder.addEnumeration(hniComp);
 			}
-			builder.instantiationFactor(ct.getInstantiationFactor());
 			for (Reference ref : ct.getReferences()) {
 				ReferenceDTO refDTO = getReferenceDTO(ref);
 				builder.addReference(refDTO);
@@ -137,6 +136,9 @@ public class DTOConverter {
 				HasNameAndIdDTO hniBoundType = new HasNameAndIdDTO.Builder(ct.getBoundType().getId(), ct.getBoundType()
 						.getName()).build();
 				builder.boundType(hniBoundType);
+				builder.instantiationFactor(ct.getBoundType().getInstantiationFactor());
+			} else {
+				builder.instantiationFactor(ct.getInstantiationFactor());
 			}
 			return builder.build();
 		}

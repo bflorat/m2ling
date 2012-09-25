@@ -85,6 +85,26 @@ public class ComponentTypeBean implements Serializable {
 	public List<ReferenceBean> getReferences() {
 		return references;
 	}
+	
+	/**
+	 * Return a human representation of the references
+	 * @return a human representation of the references
+	 */
+	public String getReferencesAsString() {
+		StringBuilder sbRefs = new StringBuilder();
+		for (ReferenceBean ref : references) {
+			sbRefs.append(ref.getType()).append(": ");
+			for (HasNameAndIDBean target : ref.getTargets()) {
+				sbRefs.append(target.getName()).append(", ");
+			}
+			// Remove targets trailing comma
+			if (sbRefs.length() > 0) {
+				sbRefs.delete(sbRefs.length() - 2, sbRefs.length() - 1);
+			}
+			sbRefs.append("<br/>");
+		}
+		return sbRefs.toString();
+	}
 
 	/**
 	 * @param references
@@ -114,6 +134,22 @@ public class ComponentTypeBean implements Serializable {
 	 */
 	public List<HasNameAndIDBean> getEnumeration() {
 		return enumeration;
+	}
+
+	/**
+	 * Return a human representation of an enumeration
+	 * @return a human representation of an enumeration
+	 */
+	public String getEnumerationAsString() {
+		StringBuilder sb = new StringBuilder();
+		for (HasNameAndIDBean comp : enumeration) {
+			sb.append(comp.getName()).append(", ");
+		}
+		// Remove trailing comma
+		if (sb.length() > 0) {
+			sb.delete(sb.length() - 2, sb.length() - 1);
+		}
+		return sb.toString();
 	}
 
 	/**

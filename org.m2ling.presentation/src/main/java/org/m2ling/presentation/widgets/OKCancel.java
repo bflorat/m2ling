@@ -5,7 +5,6 @@
  */
 package org.m2ling.presentation.widgets;
 
-import com.google.inject.Inject;
 import com.vaadin.terminal.ThemeResource;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Button.ClickEvent;
@@ -29,7 +28,6 @@ public class OKCancel extends CustomComponent {
 	 *           what to do when clicking on "cancel"
 	 */
 	@SuppressWarnings("serial")
-	@Inject
 	public OKCancel(final Command ok, final Command cancel) {
 		HorizontalLayout hz = new HorizontalLayout();
 		hz.setSpacing(true);

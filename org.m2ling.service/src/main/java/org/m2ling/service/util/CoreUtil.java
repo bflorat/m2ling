@@ -170,6 +170,45 @@ public class CoreUtil {
 	}
 
 	/**
+	 * Return a group denoted by the given id or null if none matches.
+	 * 
+	 * @param id
+	 *           the searched id
+	 * @return an item denoted by the given id or null if none matches
+	 */
+	public ComponentGroup getGroupByID(String id) {
+		if (id == null) {
+			return null;
+		}
+		Root root = pmanager.getRoot();
+		for (View v : root.getViews()) {
+			List<ComponentGroup> groups = v.getComponentsGroups();
+			for (ComponentGroup group : groups) {
+				if (id.equals(group.getId())) {
+					return group;
+				}
+			}
+		}
+		return null;
+	}
+
+	/**
+	 * Return a component or a group denoted by the given id or null if none matches.
+	 * 
+	 * @param id
+	 *           the searched id
+	 * @return an item denoted by the given id or null if none matches
+	 */
+	public ArchitectureItem getComponentOrGroupByID(String id) {
+		Component comp = getComponentByID(id);
+		if (comp != null) {
+			return comp;
+		} else {
+			return getGroupByID(id);
+		}
+	}
+
+	/**
 	 * Return a component group denoted by the given id or null if none matches.
 	 * 
 	 * @param id
@@ -215,8 +254,7 @@ public class CoreUtil {
 		}
 		return null;
 	}
-	
-	
+
 	/**
 	 * Return all components for a given component type ID. If it contains none component, a void
 	 * list is returned. If the ID is null, null is returned.
@@ -242,8 +280,8 @@ public class CoreUtil {
 	}
 
 	/**
-	 * Return all components instances for a given component ID. If it contains none component,
-	 * a void list is returned. If the ID is null, null is returned.
+	 * Return all components instances for a given component ID. If it contains none component, a
+	 * void list is returned. If the ID is null, null is returned.
 	 * 
 	 * @param item
 	 * @return all components instances for a given component type

@@ -45,6 +45,7 @@ public class HelpPanel extends CustomComponent {
 		hiddenPanel.setVisible(false);
 		hiddenPanel.setWidth("100%");
 		hiddenPanel.setHeight("200px");
+		hiddenPanel.addStyleName("help-panel");
 		Label label = new Label(text, Label.CONTENT_RAW);
 		label.setWidth("100%");
 		label.setHeight("-1");
