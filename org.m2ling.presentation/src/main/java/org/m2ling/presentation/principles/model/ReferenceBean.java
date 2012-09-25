@@ -6,6 +6,7 @@
 package org.m2ling.presentation.principles.model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -18,7 +19,7 @@ import org.m2ling.common.utils.Utils;
 public class ReferenceBean implements Serializable {
 	/** Translated type literal */
 	private String type;
-	private List<HasNameAndIDBean> targets;
+	private List<HasNameAndIDBean> targets = new ArrayList<HasNameAndIDBean>();
 
 	public ReferenceBean() {
 		super();

@@ -6,6 +6,7 @@
 package org.m2ling.presentation.principles.model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.m2ling.common.utils.Utils;
@@ -24,8 +25,8 @@ public class ComponentTypeBean implements Serializable {
 	private String instantiationFactor = "0";
 	private HasNameAndIDBean boundType;
 	/** component id -> component name */
-	private List<HasNameAndIDBean> enumeration;
-	private List<ReferenceBean> references;
+	private List<HasNameAndIDBean> enumeration = new ArrayList<HasNameAndIDBean>();
+	private List<ReferenceBean> references = new ArrayList<ReferenceBean>();
 	/** GUI only item used to represent the drop button **/
 	private String drop = "";
 

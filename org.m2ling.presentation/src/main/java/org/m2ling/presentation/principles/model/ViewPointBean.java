@@ -7,7 +7,6 @@ package org.m2ling.presentation.principles.model;
 
 import java.io.Serializable;
 
-import org.m2ling.common.dto.core.ComponentTypeDTO;
 import org.m2ling.common.utils.Utils;
 
 /**

@@ -1,6 +1,7 @@
 package org.m2ling.service.principles;
 
 import java.io.IOException;
+import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.StringTokenizer;
@@ -109,6 +110,10 @@ public class CreateCTFixture extends AbstractCTFixture {
 	 * @param name
 	 * @return
 	 * @throws FunctionalException
+	 * @throws NoSuchFieldException
+	 * @throws IllegalAccessException
+	 * @throws SecurityException
+	 * @throws IllegalArgumentException
 	 */
 	public String createAndGetCT(String justCheck, String caseName, String vpID, String id, String name, String desc,
 			String comment, String tags, String ifactor, String boundTypeID, String references, String enumeration)
@@ -139,21 +144,27 @@ public class CreateCTFixture extends AbstractCTFixture {
 			HasNameAndIDBean boundType = new HasNameAndIDBean();
 			boundType.setId(boundTypeID);
 			bean.setBoundType(boundType);
-			if (Strings.isNullOrEmpty(enumeration)) {
-				bean.setEnumeration(new ArrayList<HasNameAndIDBean>());
-			} else {
-				List<String> enumer = Utils.stringListFromString(enumeration);
-				List<HasNameAndIDBean> enum2 = new ArrayList<HasNameAndIDBean>();
-				for (String compID : enumer) {
-					HasNameAndIDBean hni = new HasNameAndIDBean();
-					hni.setId(compID);
-					enum2.add(hni);
-				}
-				bean.setEnumeration(enum2);
+			List<String> enumer = Utils.stringListFromString(enumeration);
+			List<HasNameAndIDBean> enum2 = new ArrayList<HasNameAndIDBean>();
+			for (String compID : enumer) {
+				HasNameAndIDBean hni = new HasNameAndIDBean();
+				hni.setId(compID);
+				enum2.add(hni);
 			}
+			bean.setEnumeration(enum2);
 			bean.setInstantiationFactor(ifactor);
 			setReferences(bean, references);
 			ComponentTypeDTO dto = new DTOConverter.ToDTO().getComponentTypeDTO(bean);
+			// enforce nullity provided by the test and that should have be reset by the bean code
+			if (enumeration == null) {
+				try {
+					Field field = ComponentTypeDTO.class.getDeclaredField("enumeration");
+					field.setAccessible(true);
+					field.set(dto, null);
+				} catch (Exception e) {
+					logger.log(Level.SEVERE, "", e);
+				}
+			}
 			service.createCT(null, dto);
 			List<ComponentTypeDTO> ctDTOS = service.getAllCT(null, vpID);
 			for (ComponentTypeDTO ctDTO : ctDTOS) {
