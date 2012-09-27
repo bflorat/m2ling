@@ -28,6 +28,14 @@ public class HasNameAndIDBean implements Serializable {
 		this.name = hsni.getName();
 	}
 
+	/** Static factory */
+	public static HasNameAndIDBean newInstance(String id, String name) {
+		HasNameAndIDBean bean = new HasNameAndIDBean();
+		bean.setId(id);
+		bean.setName(name);
+		return bean;
+	}
+
 	public String toString() {
 		return Utils.toString(this);
 	}

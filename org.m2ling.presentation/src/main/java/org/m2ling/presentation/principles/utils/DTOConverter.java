@@ -16,6 +16,7 @@ import org.m2ling.common.dto.core.RuleDTO;
 import org.m2ling.common.dto.core.StatusEventDTO;
 import org.m2ling.common.dto.core.ViewPointDTO;
 import org.m2ling.common.exceptions.TechnicalException;
+import org.m2ling.common.utils.Consts;
 import org.m2ling.common.utils.Utils;
 import org.m2ling.presentation.i18n.Msg;
 import org.m2ling.presentation.principles.model.ComponentTypeBean;
@@ -174,7 +175,7 @@ public class DTOConverter {
 			bean.setStatusLiterals(statusLiterals);
 			String tags = Utils.stringListAsString(dto.getTags());
 			bean.setTags(tags);
-			File icon = IconManager.getVPIconFile(bean);
+			File icon = IconManager.getIconFile(Consts.CONF_VP_ICONS_LOCATION, bean.getId());
 			if (icon != null) {
 				bean.setIconPath(icon.getAbsolutePath());
 			}
@@ -293,6 +294,10 @@ public class DTOConverter {
 			bean.setReferences(refs);
 			HasNameAndIDBean vpBean = getHasNameAndIdBean(dto.getViewPoint());
 			bean.setViewPoint(vpBean);
+			File icon = IconManager.getIconFile(Consts.CONF_CT_ICONS_LOCATION, bean.getId());
+			if (icon != null && icon.exists()) {
+				bean.setIconPath(icon.getAbsolutePath());
+			}
 			return bean;
 		}
 	}

@@ -10,11 +10,11 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import org.m2ling.common.exceptions.FunctionalException;
+import org.m2ling.common.utils.Consts;
 import org.m2ling.presentation.events.Events;
 import org.m2ling.presentation.events.ObservationManager;
 import org.m2ling.presentation.i18n.Msg;
 import org.m2ling.presentation.principles.model.ViewPointBean;
-import org.m2ling.presentation.principles.utils.DTOConverter;
 import org.m2ling.presentation.principles.utils.IconManager;
 import org.m2ling.service.principles.ViewPointService;
 
@@ -45,7 +45,6 @@ public class ViewPointPanel extends VerticalLayout {
 	private PrinciplesGUIFactory factory;
 	private ViewPointService service;
 	private ObservationManager obs;
-	private DTOConverter.ToDTO toDTO;
 	private Msg msg;
 
 	/**
@@ -58,14 +57,13 @@ public class ViewPointPanel extends VerticalLayout {
 	 */
 	@Inject
 	public ViewPointPanel(@Assisted ViewPointBean bean, Logger logger, PrinciplesGUIFactory factory,
-			ViewPointService service, ObservationManager obs, DTOConverter.ToDTO toDTO, Msg msg) {
+			ViewPointService service, ObservationManager obs, Msg msg) {
 		super();
 		this.logger = logger;
 		this.bean = bean;
 		this.factory = factory;
 		this.service = service;
 		this.obs = obs;
-		this.toDTO = toDTO;
 		this.msg = msg;
 		if (bean == null) {
 			throw new IllegalArgumentException("Null viewpoint");
@@ -82,7 +80,7 @@ public class ViewPointPanel extends VerticalLayout {
 		super.attach();
 		// Build icon if any or use default icon otherwise
 		Embedded icon = null;
-		File iconFile = IconManager.getVPIconFile(bean);
+		File iconFile = IconManager.getIconFile(Consts.CONF_VP_ICONS_LOCATION, bean.getId());
 		Resource res = null;
 		if (iconFile != null) {
 			res = new FileResource(iconFile, getApplication());

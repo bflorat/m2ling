@@ -14,9 +14,11 @@ import javax.annotation.Nullable;
 
 import org.m2ling.common.dto.core.ViewPointDTO;
 import org.m2ling.common.exceptions.FunctionalException;
+import org.m2ling.common.utils.Consts;
 import org.m2ling.presentation.events.Events;
 import org.m2ling.presentation.events.ObservationManager;
 import org.m2ling.presentation.i18n.Msg;
+import org.m2ling.presentation.principles.model.HasNameAndIDBean;
 import org.m2ling.presentation.principles.model.ViewPointBean;
 import org.m2ling.presentation.principles.utils.DTOConverter;
 import org.m2ling.presentation.widgets.Command;
@@ -74,8 +76,7 @@ public class ViewPointDialog extends Window {
 			newVP = false;
 		}
 		setWidth("650px");
-		// Not closable to control bean reset when user cancel a change or in case or error
-		setClosable(false);
+		setClosable(true);
 	}
 
 	@Override
@@ -122,7 +123,8 @@ public class ViewPointDialog extends Window {
 				return msg.get("gal.6");
 			}
 		};
-		ViewPointIconUploader uploader = new ViewPointIconUploader(bean, logger, msg);
+		HasNameAndIDBean hniBean = HasNameAndIDBean.newInstance(bean.getId(), bean.getName());
+		IconUploader uploader = new IconUploader(hniBean, Consts.CONF_VP_ICONS_LOCATION, logger, msg);
 		OKCancel okc = new OKCancel(ok, cancel);
 		addComponent(form);
 		addComponent(uploader);

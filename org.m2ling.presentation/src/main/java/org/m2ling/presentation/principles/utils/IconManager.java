@@ -9,24 +9,26 @@ import java.io.File;
 import java.io.FilenameFilter;
 
 import org.m2ling.common.configuration.Conf;
-import org.m2ling.common.utils.Consts;
-import org.m2ling.presentation.principles.model.ViewPointBean;
 
 /**
  * Manages icons
  */
 public class IconManager {
 	/**
-	 * Return matching icon file for given bean id or null of none.
+	 * Return an icon file or null if it doesn't exist
 	 * 
-	 * @return icon file for given bean id or null of none
+	 * @param prefix
+	 *           parent directory path of the icon starting from m2ling home
+	 * @param name
+	 *           name of the icon file without extension
+	 * @return an icon file or null if it doesn't exist
 	 */
-	public static File getVPIconFile(final ViewPointBean bean) {
-		File iconDir = new File(Conf.getHomeDirectoryPath() + File.separatorChar + Consts.CONF_VP_ICONS_LOCATION);
+	public static File getIconFile(String prefix, final String name) {
 		File icon = null;
+		File iconDir = new File(Conf.getHomeDirectoryPath() + File.separatorChar + prefix);
 		String[] matchingFile = iconDir.list(new FilenameFilter() {
-			public boolean accept(File dir, String name) {
-				if (name.matches(bean.getId() + ".*")) {
+			public boolean accept(File dir, String tested) {
+				if (tested.contains(name)) {
 					return true;
 				}
 				return false;

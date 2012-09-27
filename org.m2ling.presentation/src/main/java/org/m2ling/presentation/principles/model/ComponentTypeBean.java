@@ -29,6 +29,21 @@ public class ComponentTypeBean implements Serializable {
 	private List<ReferenceBean> references = new ArrayList<ReferenceBean>();
 	/** GUI only item used to represent the drop button **/
 	private String drop = "";
+	private String iconPath = "";
+
+	/**
+	 * @return the iconPath
+	 */
+	public String getIconPath() {
+		return iconPath;
+	}
+
+	/**
+	 * @param iconPath the iconPath to set
+	 */
+	public void setIconPath(String iconPath) {
+		this.iconPath = iconPath;
+	}
 
 	public ComponentTypeBean() {
 		super();
@@ -51,6 +66,7 @@ public class ComponentTypeBean implements Serializable {
 		for (ReferenceBean ref : ct.getReferences()) {
 			this.references.add(ref);
 		}
+		this.iconPath = ct.getIconPath();
 	}
 
 	/**

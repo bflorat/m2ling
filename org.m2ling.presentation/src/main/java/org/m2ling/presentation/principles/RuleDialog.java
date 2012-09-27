@@ -90,8 +90,7 @@ public class RuleDialog extends Window {
 		}
 		ruleBean = ruleBeanItem.getBean();
 		setWidth("650px");
-		// Not closable to control bean reset when user cancel a change or in case or error
-		setClosable(false);
+		setClosable(true);
 	}
 
 	@Override

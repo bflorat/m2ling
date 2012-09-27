@@ -36,8 +36,11 @@ public class Consts {
 	/** Configuration file name */
 	public static final String CONF_FILENAME = "m2ling_config.xml";
 
-	/** view points Icons storage location relative to M2LING_DEBUG_VARIABLE_NAME */
+	/** View points Icons storage location relative to M2LING_DEBUG_VARIABLE_NAME */
 	public static final String CONF_VP_ICONS_LOCATION = "icons" + File.separatorChar + "viewpoints";
+
+	/** Component types Icons storage location relative to M2LING_DEBUG_VARIABLE_NAME */
+	public static final String CONF_CT_ICONS_LOCATION = "icons" + File.separatorChar + "cts";
 
 	/** Max icon size in bytes */
 	public static final long ICONS_MAX_SIZE_BYTES = 5000000l;

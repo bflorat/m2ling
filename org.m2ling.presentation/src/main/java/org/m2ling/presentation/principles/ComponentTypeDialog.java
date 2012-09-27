@@ -20,6 +20,7 @@ import javax.annotation.Nullable;
 import org.m2ling.common.dto.core.ComponentTypeDTO;
 import org.m2ling.common.dto.core.ViewPointDTO;
 import org.m2ling.common.exceptions.FunctionalException;
+import org.m2ling.common.utils.Consts;
 import org.m2ling.common.utils.Utils;
 import org.m2ling.presentation.events.Events;
 import org.m2ling.presentation.events.ObservationManager;
@@ -151,8 +152,7 @@ public class ComponentTypeDialog extends Window {
 	public void attach() {
 		setWidth("650px");
 		setHeight("800px");
-		// Not closable to control bean reset when user cancel a change or in case or error
-		setClosable(false);
+		setClosable(true);
 		((VerticalLayout) getContent()).setSizeFull();
 		Panel panel = new Panel();
 		panel.setSizeFull();
@@ -163,6 +163,9 @@ public class ComponentTypeDialog extends Window {
 		form.setItemDataSource(beanItem);
 		form.setVisibleItemProperties(Arrays.asList(new String[] { "name", "tags", "description", "boundType",
 				"instantiationFactor", "comment" }));
+		// Icon uploader
+		HasNameAndIDBean hniBean = HasNameAndIDBean.newInstance(ctBean.getId(), ctBean.getName());
+		IconUploader uploader = new IconUploader(hniBean, Consts.CONF_CT_ICONS_LOCATION, logger, msg);
 		// Command buttons
 		OKCancel okc = new OKCancel(ok, cancel);
 		panel.addComponent(new HelpPanel(msg.get("help.1")));
@@ -187,8 +190,10 @@ public class ComponentTypeDialog extends Window {
 		addNewReference(voidRefBean, gl, row);
 		references.addComponent(gl);
 		panel.addComponent(references);
+		panel.addComponent(uploader);
 		panel.addComponent(okc);
 		((VerticalLayout) panel.getContent()).setComponentAlignment(okc, Alignment.MIDDLE_LEFT);
+		((VerticalLayout) panel.getContent()).setComponentAlignment(uploader, Alignment.MIDDLE_CENTER);
 		addComponent(panel);
 	}
 
@@ -249,9 +254,7 @@ public class ComponentTypeDialog extends Window {
 					cts = ctService.getAllCT(null, ctBean.getViewPoint().getId());
 					for (ComponentTypeDTO ctDTO : cts) {
 						ComponentTypeBean ctBean = fromDTO.getComponentTypeBean(ctDTO);
-						HasNameAndIDBean hsi = new HasNameAndIDBean();
-						hsi.setId(ctBean.getId());
-						hsi.setName(ctBean.getName());
+						HasNameAndIDBean hsi = HasNameAndIDBean.newInstance(ctBean.getId(), ctBean.getName());
 						container.addItem(hsi);
 					}
 				} catch (FunctionalException fe) {
@@ -344,9 +347,7 @@ public class ComponentTypeDialog extends Window {
 																											// local VP
 							List<ComponentTypeDTO> cts = ctService.getAllCT(null, vpDTO.getId());
 							for (ComponentTypeDTO ctDTO : cts) {
-								HasNameAndIDBean bound = new HasNameAndIDBean();
-								bound.setName(ctDTO.getName());
-								bound.setId(ctDTO.getId());
+								HasNameAndIDBean bound = HasNameAndIDBean.newInstance(ctDTO.getId(), ctDTO.getName());
 								boundType.addItem(bound);
 								boundType.setItemCaption(bound, ctDTO.getViewPoint().getName() + "/ " + ctDTO.getName());
 							}
