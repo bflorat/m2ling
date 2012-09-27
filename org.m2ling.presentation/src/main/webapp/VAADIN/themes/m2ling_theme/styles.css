@@ -61,7 +61,7 @@
 
 /* panel background is a bit tricky to set, see https://vaadin.com/forum/-/message_boards/view_message/77010#_19_message_77049 */
 .help-panel .v-panel-content > div {
-   background: #66A3D2;
+   background: #D5F2F8;
 }
 
 --------

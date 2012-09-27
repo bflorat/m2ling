@@ -70,17 +70,16 @@ import com.vaadin.ui.Window;
 public class ComponentTypeDialog extends Window {
 	/** Is it a new CT ? */
 	private boolean newCT = true;
-	private BeanItem<ComponentTypeBean> beanItem;
-	private ComponentTypeBean ctBean;
-	private Logger logger;
-	private DTOConverter.ToDTO toDTO;
-	private DTOConverter.FromDTO fromDTO;
-	private ComponentTypeService ctService;
-	private Panel panel;
+	private final BeanItem<ComponentTypeBean> beanItem;
+	private final ComponentTypeBean ctBean;
+	private final Logger logger;
+	private final DTOConverter.ToDTO toDTO;
+	private final DTOConverter.FromDTO fromDTO;
+	private final ComponentTypeService ctService;
 	private final Msg msg;
-	private final ObservationManager obs;
-	private ViewPointService vpService;
+	private final ViewPointService vpService;
 	private Form form;
+	private final ObservationManager obs;
 	private Command ok = new Command() {
 		public void execute() {
 			try {
@@ -98,12 +97,14 @@ public class ComponentTypeDialog extends Window {
 					ctService.updateCT(null, ctDTO);
 				}
 				close();
+				// Make sure to reset stored data in case of functional or technical issue
 			} catch (FunctionalException e) {
 				logger.log(Level.SEVERE, e.getDetailedMessage(), e);
 				getWindow().showNotification(msg.humanMessage(e), Notification.TYPE_ERROR_MESSAGE);
+				Properties details = Utils.newProperties(Events.DETAIL_VP, ctDTO.getViewPoint().getId());
+				details.put(Events.DETAIL_TARGET, ctBean.getId());
+				obs.notifySync(new org.m2ling.presentation.events.Event(Events.CT_CHANGE, details));
 			}
-			Properties details = Utils.newProperties(Events.DETAIL_TARGET, ctDTO.getViewPoint().getId());
-			obs.notifySync(new org.m2ling.presentation.events.Event(Events.CT_CHANGE, details));
 		}
 
 		@Override
@@ -140,20 +141,20 @@ public class ComponentTypeDialog extends Window {
 		this.msg = msg;
 		this.obs = obs;
 		newCT = Strings.isNullOrEmpty(ctBeanItem.getBean().getId());
-		this.beanItem = ctBeanItem;
 		if (newCT) {
 			beanItem.getItemProperty("id").setValue(UUID.randomUUID().toString());
 		}
 		ctBean = ctBeanItem.getBean();
-		setClosable(true);
 	}
 
 	@Override
 	public void attach() {
 		setWidth("650px");
 		setHeight("800px");
+		// Not closable to control bean reset when user cancel a change or in case or error
+		setClosable(false);
 		((VerticalLayout) getContent()).setSizeFull();
-		panel = new Panel();
+		Panel panel = new Panel();
 		panel.setSizeFull();
 		panel.getContent().setHeight("-1");
 		form = new Form();

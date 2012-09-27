@@ -227,6 +227,11 @@
 			</table>
 			</div>
 		</p>
+		<p class='rule'>CT12 : A reference target can't be void. Note that we don't test the case where the target is null as 
+			it is technically impossible to pass a DTO with a null target (ArrayList refuses this).
+			<div class='example'>In this case, the CT <span concordion:execute="#resu=testVoidRefTarget()">creation</span> 
+			should : <b concordion:assertEquals="#resu">FAIL with code NONE_TARGET</b> </div>
+		</p>
 	<h3>Format Controls</h3>
 	<ul class='rule'>
 	<li>

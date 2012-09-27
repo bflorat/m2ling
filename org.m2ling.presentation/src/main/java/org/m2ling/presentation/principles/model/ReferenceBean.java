@@ -25,6 +25,15 @@ public class ReferenceBean implements Serializable {
 		super();
 	}
 
+	/** Deep copy constructor **/
+	public ReferenceBean(ReferenceBean ref) {
+		super();
+		this.type = ref.getType();
+		for (HasNameAndIDBean target : targets) {
+			this.targets.add(new HasNameAndIDBean(target));
+		}
+	}
+
 	public String toString() {
 		return Utils.toString(this);
 	}

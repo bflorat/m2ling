@@ -33,6 +33,27 @@ public class RuleBean implements Serializable {
 	private String exceptions = "";
 	private Map<Long, String> history = new TreeMap<Long, String>();
 
+	public RuleBean() {
+		super();
+	}
+
+	/** Deep copy constructor **/
+	public RuleBean(RuleBean rule) {
+		super();
+		this.vpID = rule.getViewPointId();
+		this.id = rule.getId();
+		this.name = rule.getName();
+		this.tags = rule.getTags();
+		this.description = rule.getDescription();
+		this.comment = rule.getComment();
+		this.status = rule.getStatus();
+		this.priority = rule.getPriority();
+		this.rationale = rule.getRationale();
+		this.exceptions = rule.getExceptions();
+		// This is possible because Long and String are immutable
+		this.history = new TreeMap<Long, String>(rule.getHistory());
+	}
+
 	public String toString() {
 		return Utils.toString(this);
 	}
@@ -46,10 +67,6 @@ public class RuleBean implements Serializable {
 
 	public int hashCode() {
 		return id.hashCode();
-	}
-
-	public RuleBean() {
-		super();
 	}
 
 	/**

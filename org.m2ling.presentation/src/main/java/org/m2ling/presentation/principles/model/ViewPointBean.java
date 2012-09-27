@@ -29,6 +29,18 @@ public class ViewPointBean implements Serializable {
 		super();
 	}
 
+	/** Deep copy constructor **/
+	public ViewPointBean(ViewPointBean vp) {
+		super();
+		this.id = vp.getId();
+		this.name = vp.getName();
+		this.tags = vp.getTags();
+		this.description = vp.getDescription();
+		this.comment = vp.getComment();
+		this.statusLiterals = vp.getStatusLiterals();
+		this.iconPath = vp.getIconPath();
+	}
+
 	public String toString() {
 		return Utils.toString(this);
 	}

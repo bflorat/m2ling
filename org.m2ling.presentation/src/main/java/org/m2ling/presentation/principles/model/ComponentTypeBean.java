@@ -34,6 +34,25 @@ public class ComponentTypeBean implements Serializable {
 		super();
 	}
 
+	/** Deep copy constructor **/
+	public ComponentTypeBean(ComponentTypeBean ct) {
+		super();
+		this.vp = new HasNameAndIDBean(ct.getViewPoint());
+		this.id = ct.getId();
+		this.name = ct.getName();
+		this.tags = ct.getTags();
+		this.description = ct.getDescription();
+		this.comment = ct.getComment();
+		this.instantiationFactor = ct.getInstantiationFactor();
+		this.boundType = new HasNameAndIDBean(ct.getBoundType());
+		for (HasNameAndIDBean comp : ct.getEnumeration()) {
+			this.enumeration.add(new HasNameAndIDBean(comp));
+		}
+		for (ReferenceBean ref : ct.getReferences()) {
+			this.references.add(ref);
+		}
+	}
+
 	/**
 	 * @return the drop
 	 */
@@ -85,9 +104,10 @@ public class ComponentTypeBean implements Serializable {
 	public List<ReferenceBean> getReferences() {
 		return references;
 	}
-	
+
 	/**
 	 * Return a human representation of the references
+	 * 
 	 * @return a human representation of the references
 	 */
 	public String getReferencesAsString() {
@@ -138,6 +158,7 @@ public class ComponentTypeBean implements Serializable {
 
 	/**
 	 * Return a human representation of an enumeration
+	 * 
 	 * @return a human representation of an enumeration
 	 */
 	public String getEnumerationAsString() {

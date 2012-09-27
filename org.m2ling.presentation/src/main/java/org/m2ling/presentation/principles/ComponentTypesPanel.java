@@ -55,6 +55,8 @@ public class ComponentTypesPanel extends VerticalLayout implements Observer {
 	// private final RuleDialogFactory factory;
 	private final Msg msg;
 	private final PrinciplesGUIFactory factory;
+	/** Current data **/
+	private BeanContainer<String, ComponentTypeBean> data;
 
 	@Inject
 	public ComponentTypesPanel(Logger logger, @Assisted String vpID, ComponentTypeService serviceCT,
@@ -85,8 +87,7 @@ public class ComponentTypesPanel extends VerticalLayout implements Observer {
 				addComponent(create);
 				setComponentAlignment(create, Alignment.TOP_RIGHT);
 			} else {
-				BeanContainer<String, ComponentTypeBean> data = new BeanContainer<String, ComponentTypeBean>(
-						ComponentTypeBean.class);
+				data = new BeanContainer<String, ComponentTypeBean>(ComponentTypeBean.class);
 				data.setBeanIdProperty("id");
 				for (ComponentTypeDTO dto : cts) {
 					ComponentTypeBean ctBean = fromDTO.getComponentTypeBean(dto);
@@ -103,9 +104,6 @@ public class ComponentTypesPanel extends VerticalLayout implements Observer {
 				table.setColumnExpandRatio("enumeration", 0.2f);
 				table.setItemDescriptionGenerator(new ItemDescriptionGenerator() {
 					public String generateDescription(Component source, Object itemId, Object propertyId) {
-						@SuppressWarnings("unchecked")
-						BeanContainer<String, ComponentTypeBean> data = (BeanContainer<String, ComponentTypeBean>) table
-								.getContainerDataSource();
 						ComponentTypeBean bean = (ComponentTypeBean) data.getItem(itemId).getBean();
 						return getHtmlDetails(bean);
 					}
@@ -115,9 +113,6 @@ public class ComponentTypesPanel extends VerticalLayout implements Observer {
 						msg.get("pr.32"), msg.get("pr.33"), msg.get("gal.4") });
 				table.addGeneratedColumn("name", new Table.ColumnGenerator() {
 					public Component generateCell(Table table, Object itemId, Object columnId) {
-						@SuppressWarnings("unchecked")
-						BeanContainer<String, ComponentTypeBean> data = (BeanContainer<String, ComponentTypeBean>) table
-								.getContainerDataSource();
 						final BeanItem<ComponentTypeBean> item = data.getItem(itemId);
 						Button edit = new Button(item.getBean().getName());
 						edit.setStyleName(BaseTheme.BUTTON_LINK);
@@ -133,9 +128,6 @@ public class ComponentTypesPanel extends VerticalLayout implements Observer {
 				});
 				table.addGeneratedColumn("drop", new Table.ColumnGenerator() {
 					public Component generateCell(Table table, Object itemId, Object columnId) {
-						@SuppressWarnings("unchecked")
-						BeanContainer<String, ComponentTypeBean> data = (BeanContainer<String, ComponentTypeBean>) table
-								.getContainerDataSource();
 						BeanItem<ComponentTypeBean> item = data.getItem(itemId);
 						final ComponentTypeBean ctBean = item.getBean();
 						NativeButton drop = new NativeButton("");
@@ -154,9 +146,6 @@ public class ComponentTypesPanel extends VerticalLayout implements Observer {
 				table.addGeneratedColumn("boundType", new Table.ColumnGenerator() {
 					@Override
 					public Object generateCell(Table source, Object itemId, Object columnId) {
-						@SuppressWarnings("unchecked")
-						BeanContainer<String, ComponentTypeBean> data = (BeanContainer<String, ComponentTypeBean>) table
-								.getContainerDataSource();
 						BeanItem<ComponentTypeBean> item = data.getItem(itemId);
 						final ComponentTypeBean ctBean = item.getBean();
 						Label label = new Label("");
@@ -170,9 +159,6 @@ public class ComponentTypesPanel extends VerticalLayout implements Observer {
 				table.addGeneratedColumn("enumeration", new Table.ColumnGenerator() {
 					@Override
 					public Object generateCell(Table source, Object itemId, Object columnId) {
-						@SuppressWarnings("unchecked")
-						BeanContainer<String, ComponentTypeBean> data = (BeanContainer<String, ComponentTypeBean>) table
-								.getContainerDataSource();
 						BeanItem<ComponentTypeBean> item = data.getItem(itemId);
 						final ComponentTypeBean ctBean = item.getBean();
 						Label label = new Label("");
@@ -186,9 +172,6 @@ public class ComponentTypesPanel extends VerticalLayout implements Observer {
 				table.addGeneratedColumn("references", new Table.ColumnGenerator() {
 					@Override
 					public Object generateCell(Table source, Object itemId, Object columnId) {
-						@SuppressWarnings("unchecked")
-						BeanContainer<String, ComponentTypeBean> data = (BeanContainer<String, ComponentTypeBean>) table
-								.getContainerDataSource();
 						BeanItem<ComponentTypeBean> item = data.getItem(itemId);
 						final ComponentTypeBean ctBean = item.getBean();
 						Label label = new Label(ctBean.getReferencesAsString(), Label.CONTENT_RAW);
@@ -298,8 +281,9 @@ public class ComponentTypesPanel extends VerticalLayout implements Observer {
 	 */
 	@Override
 	public void update(org.m2ling.presentation.events.Event event) {
-		// Only refresh targeted rule panel
-		if (event.getSubject() == Events.RULE_CHANGE && event.getDetails().get(Events.DETAIL_TARGET.name()).equals(vpID)) {
+		// Forced refresh of a ct (mainly after an error, otherwise, the table is synchronized with the dialog using
+		// regular container/beanitem references)
+		if (event.getSubject() == Events.CT_CHANGE && event.getDetails().get(Events.DETAIL_VP.name()).equals(vpID)) {
 			removeAllComponents();
 			attach();
 		}
@@ -313,7 +297,7 @@ public class ComponentTypesPanel extends VerticalLayout implements Observer {
 	@Override
 	public Set<Events> getRegistrationKeys() {
 		Set<Events> events = new HashSet<Events>();
-		events.add(Events.RULE_CHANGE);
+		events.add(Events.CT_CHANGE);
 		return events;
 	}
 }

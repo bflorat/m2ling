@@ -21,6 +21,13 @@ public class HasNameAndIDBean implements Serializable {
 		super();
 	}
 
+	/** Deep copy constructor */
+	public HasNameAndIDBean(HasNameAndIDBean hsni) {
+		super();
+		this.id = hsni.getId();
+		this.name = hsni.getName();
+	}
+
 	public String toString() {
 		return Utils.toString(this);
 	}

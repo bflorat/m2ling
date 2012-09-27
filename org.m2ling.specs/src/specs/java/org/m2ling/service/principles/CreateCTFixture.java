@@ -9,10 +9,13 @@ import java.util.logging.Level;
 import java.util.logging.LogRecord;
 
 import org.m2ling.common.dto.core.ComponentTypeDTO;
+import org.m2ling.common.dto.core.HasNameAndIdDTO;
+import org.m2ling.common.dto.core.ReferenceDTO;
 import org.m2ling.common.exceptions.FunctionalException;
 import org.m2ling.common.exceptions.TechnicalException;
 import org.m2ling.common.utils.UUT;
 import org.m2ling.common.utils.Utils;
+import org.m2ling.presentation.principles.ReferenceType;
 import org.m2ling.presentation.principles.model.ComponentTypeBean;
 import org.m2ling.presentation.principles.model.HasNameAndIDBean;
 import org.m2ling.presentation.principles.utils.DTOConverter;
@@ -100,6 +103,21 @@ public class CreateCTFixture extends AbstractCTFixture {
 		}
 		return createAndGetCT("true", caseName, "id_vp_logical", "id_new_ct_logical_servicecontainer",
 				"ServicesContainer2", "", "", "", "-1", "id_ct_tech_applicationserver", "", enumeration);
+	}
+
+	public String testVoidRefTarget() throws FunctionalException {
+		try {
+			ReferenceDTO refDTO = new ReferenceDTO.Builder(ReferenceType.CONTAINS.name()).build();
+			HasNameAndIdDTO vpDTO = new HasNameAndIdDTO.Builder("id_vp_logical", "vp_logical").build();
+			ComponentTypeDTO dto = new ComponentTypeDTO.Builder(vpDTO, "id_void_ct_logical_servicecontainer",
+					"ServicesContainer2").addReference(refDTO).build();
+			service.createCT(null, dto);
+			return "PASS";
+		} catch (FunctionalException ex) {
+			return "FAIL with code " + ex.getCode().name();
+		} catch (TechnicalException ex) {
+			return "FAIL with code " + ex.getCode().name();
+		}
 	}
 
 	/**

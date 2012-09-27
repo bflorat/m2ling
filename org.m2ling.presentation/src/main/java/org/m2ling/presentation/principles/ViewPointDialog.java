@@ -74,7 +74,8 @@ public class ViewPointDialog extends Window {
 			newVP = false;
 		}
 		setWidth("650px");
-		setClosable(true);
+		// Not closable to control bean reset when user cancel a change or in case or error
+		setClosable(false);
 	}
 
 	@Override
