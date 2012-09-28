@@ -17,41 +17,35 @@ import org.m2ling.common.utils.Utils;
 @SuppressWarnings("serial")
 public class RuleBean implements Serializable {
 	private String vpID = "";
+
 	private String id = "";
+
 	private String name = "";
+
 	/** Drop */
 	private String drop = "";
+
 	/**
 	 * Comma-separated tags
 	 */
 	private String tags = "";
+
 	private String description = "";
+
 	private String comment = "";
+
 	private String status = null;
+
 	private int priority = 0;
+
 	private String rationale = "";
+
 	private String exceptions = "";
+
 	private Map<Long, String> history = new TreeMap<Long, String>();
 
 	public RuleBean() {
 		super();
-	}
-
-	/** Deep copy constructor **/
-	public RuleBean(RuleBean rule) {
-		super();
-		this.vpID = rule.getViewPointId();
-		this.id = rule.getId();
-		this.name = rule.getName();
-		this.tags = rule.getTags();
-		this.description = rule.getDescription();
-		this.comment = rule.getComment();
-		this.status = rule.getStatus();
-		this.priority = rule.getPriority();
-		this.rationale = rule.getRationale();
-		this.exceptions = rule.getExceptions();
-		// This is possible because Long and String are immutable
-		this.history = new TreeMap<Long, String>(rule.getHistory());
 	}
 
 	public String toString() {

@@ -19,19 +19,11 @@ import org.m2ling.common.utils.Utils;
 public class ReferenceBean implements Serializable {
 	/** Translated type literal */
 	private String type;
+
 	private List<HasNameAndIDBean> targets = new ArrayList<HasNameAndIDBean>();
 
 	public ReferenceBean() {
 		super();
-	}
-
-	/** Deep copy constructor **/
-	public ReferenceBean(ReferenceBean ref) {
-		super();
-		this.type = ref.getType();
-		for (HasNameAndIDBean target : targets) {
-			this.targets.add(new HasNameAndIDBean(target));
-		}
 	}
 
 	public String toString() {

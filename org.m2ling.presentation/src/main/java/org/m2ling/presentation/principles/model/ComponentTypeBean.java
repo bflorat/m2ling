@@ -17,18 +17,29 @@ import org.m2ling.common.utils.Utils;
 @SuppressWarnings("serial")
 public class ComponentTypeBean implements Serializable {
 	private HasNameAndIDBean vp;
+
 	private String id = "";
+
 	private String name = "";
+
 	private String tags = "";
+
 	private String description = "";
+
 	private String comment = "";
+
 	private String instantiationFactor = "0";
+
 	private HasNameAndIDBean boundType;
+
 	/** component id -> component name */
 	private List<HasNameAndIDBean> enumeration = new ArrayList<HasNameAndIDBean>();
+
 	private List<ReferenceBean> references = new ArrayList<ReferenceBean>();
+
 	/** GUI only item used to represent the drop button **/
 	private String drop = "";
+
 	private String iconPath = "";
 
 	/**
@@ -39,7 +50,8 @@ public class ComponentTypeBean implements Serializable {
 	}
 
 	/**
-	 * @param iconPath the iconPath to set
+	 * @param iconPath
+	 *           the iconPath to set
 	 */
 	public void setIconPath(String iconPath) {
 		this.iconPath = iconPath;
@@ -47,26 +59,6 @@ public class ComponentTypeBean implements Serializable {
 
 	public ComponentTypeBean() {
 		super();
-	}
-
-	/** Deep copy constructor **/
-	public ComponentTypeBean(ComponentTypeBean ct) {
-		super();
-		this.vp = new HasNameAndIDBean(ct.getViewPoint());
-		this.id = ct.getId();
-		this.name = ct.getName();
-		this.tags = ct.getTags();
-		this.description = ct.getDescription();
-		this.comment = ct.getComment();
-		this.instantiationFactor = ct.getInstantiationFactor();
-		this.boundType = new HasNameAndIDBean(ct.getBoundType());
-		for (HasNameAndIDBean comp : ct.getEnumeration()) {
-			this.enumeration.add(new HasNameAndIDBean(comp));
-		}
-		for (ReferenceBean ref : ct.getReferences()) {
-			this.references.add(ref);
-		}
-		this.iconPath = ct.getIconPath();
 	}
 
 	/**

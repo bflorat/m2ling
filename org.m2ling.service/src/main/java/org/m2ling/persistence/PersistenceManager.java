@@ -3,6 +3,7 @@
  */
 package org.m2ling.persistence;
 
+import org.m2ling.common.exceptions.TechnicalException;
 import org.m2ling.domain.Root;
 
 /**
@@ -22,6 +23,6 @@ public interface PersistenceManager {
 	/**
 	 * Commit data to the underlying resource
 	 */
-	public void commit() throws Exception;
+	public void commit() throws TechnicalException;
 
 }

@@ -102,10 +102,11 @@ public class ComponentTypeDialog extends Window {
 			} catch (FunctionalException e) {
 				logger.log(Level.SEVERE, e.getDetailedMessage(), e);
 				getWindow().showNotification(msg.humanMessage(e), Notification.TYPE_ERROR_MESSAGE);
-				Properties details = Utils.newProperties(Events.DETAIL_VP, ctDTO.getViewPoint().getId());
-				details.put(Events.DETAIL_TARGET, ctBean.getId());
-				obs.notifySync(new org.m2ling.presentation.events.Event(Events.CT_CHANGE, details));
 			}
+			// Force panel refresh (required to update due to error or to reflect new rows)
+			Properties details = Utils.newProperties(Events.DETAIL_VP, ctDTO.getViewPoint().getId());
+			details.put(Events.DETAIL_TARGET, ctBean.getId());
+			obs.notifySync(new org.m2ling.presentation.events.Event(Events.CT_CHANGE, details));
 		}
 
 		@Override

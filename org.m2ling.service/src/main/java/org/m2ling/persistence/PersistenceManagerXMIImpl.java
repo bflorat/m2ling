@@ -14,6 +14,8 @@ import org.eclipse.emf.ecore.resource.impl.ResourceFactoryImpl;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import org.m2ling.common.configuration.Conf;
+import org.m2ling.common.exceptions.TechnicalException;
+import org.m2ling.common.exceptions.TechnicalException.Code;
 import org.m2ling.domain.DomainPackage;
 import org.m2ling.domain.Root;
 
@@ -42,6 +44,7 @@ public class PersistenceManagerXMIImpl implements PersistenceManager {
 	@Singleton
 	public static class SpecificConfiguration implements Conf.SpecificConfiguration {
 		public static final String CONF_XMI_PATH = "org.m2ling.persistence.xmi.path";
+		public static final String CONF_DISABLE_COMMITS = "org.m2ling.persistence.xmi.disable_commits";
 
 		/*
 		 * (non-Javadoc)
@@ -52,8 +55,7 @@ public class PersistenceManagerXMIImpl implements PersistenceManager {
 		 */
 		public Properties getDefaultConfiguration() {
 			Properties result = new Properties();
-			// Currently no property default as this persistence implementation is only used in test
-			// mode.
+			result.setProperty(CONF_DISABLE_COMMITS, "false");
 			return result;
 		}
 
@@ -68,6 +70,7 @@ public class PersistenceManagerXMIImpl implements PersistenceManager {
 			Properties result = new Properties();
 			// Search by default a mock file located at /tmp/sample.m2ling
 			result.setProperty(CONF_XMI_PATH, System.getProperty("java.io.tmpdir") + "/sample.m2ling");
+			result.setProperty(CONF_DISABLE_COMMITS, "false");
 			return result;
 		}
 	}
@@ -120,7 +123,14 @@ public class PersistenceManagerXMIImpl implements PersistenceManager {
 	 * @see org.m2ling.persistence.PersistenceManager#commit()
 	 */
 	@Override
-	public void commit() throws Exception {
-		resource.save(null);
+	public void commit() throws TechnicalException {
+		if (configuration.getBoolean(SpecificConfiguration.CONF_DISABLE_COMMITS)){
+			return;
+		}
+		try {
+			resource.save(null);
+		} catch (Exception e) {
+			throw new TechnicalException(Code.TRANSACTION_FAILED, e, null);
+		}
 	}
 }

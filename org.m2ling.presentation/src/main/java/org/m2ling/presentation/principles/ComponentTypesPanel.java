@@ -18,6 +18,7 @@ import org.m2ling.presentation.events.ObservationManager;
 import org.m2ling.presentation.events.Observer;
 import org.m2ling.presentation.i18n.Msg;
 import org.m2ling.presentation.principles.model.ComponentTypeBean;
+import org.m2ling.presentation.principles.model.HasNameAndIDBean;
 import org.m2ling.presentation.principles.utils.DTOConverter;
 import org.m2ling.presentation.widgets.HelpPanel;
 import org.m2ling.service.principles.ComponentTypeService;
@@ -150,7 +151,7 @@ public class ComponentTypesPanel extends VerticalLayout implements Observer {
 						final ComponentTypeBean ctBean = item.getBean();
 						Label label = new Label("");
 						if (ctBean.getBoundType() != null) {
-							label = new Label(ctBean.getViewPoint().getName() + "/ " + ctBean.getBoundType().getName());
+							label = new Label(ctBean.getBoundType().getName());
 						}
 						label.setDescription(getHtmlDetails(ctBean));
 						return label;
@@ -266,6 +267,8 @@ public class ComponentTypesPanel extends VerticalLayout implements Observer {
 			public void buttonClick(ClickEvent event) {
 				// CT with null ID means "new CT"
 				ComponentTypeBean bean = new ComponentTypeBean();
+				HasNameAndIDBean vp = HasNameAndIDBean.newInstance(vpID, null);
+				bean.setViewPoint(vp);
 				ComponentTypeDialog dialog = factory.getComponentTypeDialogFor(new BeanItem<ComponentTypeBean>(bean));
 				dialog.setModal(true);
 				getWindow().addWindow(dialog);
@@ -281,7 +284,8 @@ public class ComponentTypesPanel extends VerticalLayout implements Observer {
 	 */
 	@Override
 	public void update(org.m2ling.presentation.events.Event event) {
-		// Forced refresh of a ct (mainly after an error, otherwise, the table is synchronized with the dialog using
+		// Forced refresh of a ct (mainly after an error, otherwise, the table is synchronized with
+		// the dialog using
 		// regular container/beanitem references)
 		if (event.getSubject() == Events.CT_CHANGE && event.getDetails().get(Events.DETAIL_VP.name()).equals(vpID)) {
 			removeAllComponents();

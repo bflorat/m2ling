@@ -40,8 +40,8 @@ public class M2lingUnitTest {
 	public void setUp() throws Exception{
 		// Set M2LING_HOME variable for test mode
 		Map<String, String> newenv = new HashMap<String, String>();
-		newenv.put(Consts.M2LING_HOME_VARIABLE_NAME, getUTStorage().getAbsolutePath());
-		newenv.put(Consts.M2LING_DEBUG_VARIABLE_NAME, "true");
+		newenv.put(Consts.M2LING_HOME, getUTStorage().getAbsolutePath());
+		newenv.put(Consts.M2LING_DEBUG, "true");
 		Utils.setEnv(newenv);
 		// Drop the configuration files
 		Conf conf = new Conf(null, logger,null);

@@ -15,17 +15,11 @@ import org.m2ling.common.utils.Utils;
 @SuppressWarnings("serial")
 public class HasNameAndIDBean implements Serializable {
 	private String name;
+
 	private String id;
 
 	public HasNameAndIDBean() {
 		super();
-	}
-
-	/** Deep copy constructor */
-	public HasNameAndIDBean(HasNameAndIDBean hsni) {
-		super();
-		this.id = hsni.getId();
-		this.name = hsni.getName();
 	}
 
 	/** Static factory */

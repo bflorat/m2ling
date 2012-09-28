@@ -36,6 +36,7 @@ import com.google.inject.Singleton;
 @Singleton
 public class CoreUtil {
 	private Logger logger;
+
 	private PersistenceManager pmanager;
 
 	@Inject

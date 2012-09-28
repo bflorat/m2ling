@@ -108,7 +108,7 @@ public class Utils {
 	 * @return whether we are running in debug mode
 	 */
 	public static boolean isDebugMode() {
-		String dev = System.getenv(Consts.M2LING_DEBUG_VARIABLE_NAME);
+		String dev = System.getenv(Consts.M2LING_DEBUG);
 		return (!Strings.isNullOrEmpty(dev) && "true".equals(dev));
 	}
 

@@ -16,9 +16,10 @@
       <references type="RUNS" targets="id_ct_logical_database"/>
     </componentTypes>
     <componentTypes id="id_ct_logical_ldap" name="LDAP directory" description="" boundType="_LyWEoZ6REeGyndJ1yNTLVw" enumeration="_cjliUJ6TEeGyndJ1yNTLVw"/>
-    <componentTypes id="_E3EOwZoWEeG71vmJ5CR-iA" name="GUIModule" comment="" description="A GUI module serves Web pages targeting to end users."/>
+    <componentTypes id="_E3EOwZoWEeG71vmJ5CR-iA" name="GUIModule" comment="" description="A GUI module serves Web pages targeting to end users." boundType="_E3EOwZoWEeG71vmJ5CR-iAe"/>
     <componentTypes id="id_ct_app_servicemodule" name="ServiceModule" comment="" description="A service module provides business services to batch or GUI modules and is responsible for enterprise data." boundType="id_ct_app_servicemodulee"/>
     <componentTypes id="id_ct_logical_database" name="Database" comment="" description="A database contains an application data (this data may or not be replicated among several clusters)"/>
+    <componentTypes id="eaba26c7-8083-4e80-b068-9daf541a68be" name="BatchModule" comment="" description="Batch module" boundType="_E3EOwZoWEeG71vkjfdhbfb"/>
     <linkTypes id="_SA6SgpoZEeG71vmJ5CR-iA" name="HTTP_REST" description="Synchronous REST call over HTTP. Default port : 80. Over TCP only." sourceTypes="_E3EOwZoWEeG71vmJ5CR-iA" destinationTypes="id_ct_app_servicemodule"/>
     <linkTypes id="_4Rfd0pqjEeGQsK1VSbibvw" name="NET_DATABASE" description="Synchronous Network protocol to access remote Postgres database. Default port : 5432. Can be used over TCP or UDP." sourceTypes="id_ct_app_servicemodule" destinationTypes="id_ct_logical_database"/>
     <linkTypes id="_oHllkpqkEeGbI4NH3iicSg" name="HTTP_GUI" comment="" description="Synchronous HTTP access from end users to the GUI services. Default port : 80. Over TCP only. KEEP_ALIVE option enabled." sourceTypes="_8_BugZqkEeGbI4NH3iicSg _8_BugZqkEeGbI4NH3iicSg" destinationTypes="_fKtsQZoXEeG71vmJ5CR-iA"/>

@@ -133,8 +133,13 @@ public class DTOConverter {
 				builder.addReference(refDTO);
 			}
 			if (ct.getBoundType() != null) {
-				HasNameAndIdDTO hniBoundType = new HasNameAndIdDTO.Builder(ct.getBoundType().getId(), ct.getBoundType()
-						.getName()).build();
+				// returned bound type name must contain vp name as well for GUI display
+				ViewPoint boundTypeVP = (ViewPoint) ct.getBoundType().eContainer();
+				StringBuilder boundTypeName = new StringBuilder(boundTypeVP.getName());
+				boundTypeName.append("/ ");
+				boundTypeName.append(ct.getBoundType().getName());
+				HasNameAndIdDTO hniBoundType = new HasNameAndIdDTO.Builder(ct.getBoundType().getId(),
+						boundTypeName.toString()).build();
 				builder.boundType(hniBoundType);
 				builder.instantiationFactor(ct.getBoundType().getInstantiationFactor());
 			} else {
@@ -277,8 +282,10 @@ public class DTOConverter {
 			}
 			ct.setDescription(dto.getDescription());
 			ct.setComment(dto.getComment());
-			ComponentType boundedType = util.getComponentTypeByID(dto.getBoundType().getId());
-			ct.setBoundType(boundedType);
+			if (dto.getBoundType() != null) {
+				ComponentType boundedType = util.getComponentTypeByID(dto.getBoundType().getId());
+				ct.setBoundType(boundedType);
+			}
 			ct.setInstantiationFactor(dto.getInstantiationFactor());
 			for (HasNameAndIdDTO hni : dto.getEnumeration()) {
 				ArchitectureItem comp = util.getComponentByID(hni.getId());

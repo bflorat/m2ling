@@ -22,6 +22,8 @@ import org.eclipse.emf.teneo.hibernate.resource.HibernateResource;
 import org.hibernate.Session;
 import org.hibernate.cfg.Environment;
 import org.m2ling.common.configuration.Conf;
+import org.m2ling.common.exceptions.TechnicalException;
+import org.m2ling.common.exceptions.TechnicalException.Code;
 import org.m2ling.common.utils.Consts;
 import org.m2ling.domain.DomainPackage;
 import org.m2ling.domain.Root;
@@ -155,8 +157,7 @@ public class PersistenceManagerTeneoImpl implements PersistenceManager {
 	 * 
 	 * @return an hibernate resource for the m2ling database
 	 */
-	//TODO : this method should not be public, resource should be hidden
-	
+	// TODO : this method should not be public, resource should be hidden
 	public Resource getResource() {
 		String uriStr = "hibernate://?" + HibernateResource.DS_NAME_PARAM + "=" + DATA_STORE_NAME;
 		final URI uri = URI.createURI(uriStr);
@@ -172,7 +173,11 @@ public class PersistenceManagerTeneoImpl implements PersistenceManager {
 	 * @see org.m2ling.persistence.PersistenceManager#commit()
 	 */
 	@Override
-	public void commit() throws Exception {
-		resource.save(null);
+	public void commit() throws TechnicalException {
+		try {
+			resource.save(null);
+		} catch (Exception e) {
+			throw new TechnicalException(Code.TRANSACTION_FAILED, e, null);
+		}
 	}
 }

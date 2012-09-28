@@ -117,6 +117,15 @@ public class Conf {
 	}
 
 	/**
+	 * Return the system property value for given key as booolean
+	 * @param key
+	 * @return the system property value for given key as booolean
+	 */
+	public boolean getBoolean(String key) {
+		return Boolean.parseBoolean(getSystemProperty(key));
+	}
+
+	/**
 	 * Return a sub-set of properties for provided keys, a defensive copy of the system properties is
 	 * returned.
 	 * 
@@ -185,7 +194,7 @@ public class Conf {
 	 * @return m2ling configuration top directory path
 	 */
 	public static String getHomeDirectoryPath() {
-		String m2lingHome = System.getenv(Consts.M2LING_HOME_VARIABLE_NAME);
+		String m2lingHome = System.getenv(Consts.M2LING_HOME);
 		if (Strings.isNullOrEmpty(m2lingHome)) {
 			m2lingHome = Consts.M2LING_HOME_DEFAULT_ABS_PATH;
 		}
@@ -203,7 +212,7 @@ public class Conf {
 		String m2lingHome = getHomeDirectoryPath();
 		fileConf = new File(m2lingHome + File.separator + Consts.CONF_FILENAME);
 		if (!fileConf.exists()) {
-			logger.warning(Consts.M2LING_HOME_VARIABLE_NAME + " variable name defined but no corresponding "
+			logger.warning(Consts.M2LING_HOME + " variable name defined but no corresponding "
 					+ fileConf.getAbsolutePath() + " file");
 			try {
 				// Make sure to create full directory structure

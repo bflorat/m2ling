@@ -34,7 +34,7 @@ public class ConfTest extends M2lingUnitTest {
 	public void debugUnset() {
 		// unset debug mode (activated by default by parent class)
 		Map<String, String> newenv = new HashMap<String, String>();
-		newenv.put(Consts.M2LING_DEBUG_VARIABLE_NAME, "false");
+		newenv.put(Consts.M2LING_DEBUG, "false");
 		Utils.setEnv(newenv);
 		Conf conf = new Conf(null, logger,new SpecificConfigurationMock());
 		assertEquals(conf.getSystemProperty(SpecificConfigurationMock.param1), "value_param1");
@@ -45,9 +45,9 @@ public class ConfTest extends M2lingUnitTest {
 	@Test
 	public void debugSet() {
 		Map<String, String> newenv = new HashMap<String, String>();
-		newenv.put(Consts.M2LING_HOME_VARIABLE_NAME, getUTStorage().getAbsolutePath());
+		newenv.put(Consts.M2LING_HOME, getUTStorage().getAbsolutePath());
 		Utils.setEnv(newenv);
-		assertEquals(System.getenv(Consts.M2LING_HOME_VARIABLE_NAME), getUTStorage().getAbsolutePath());
+		assertEquals(System.getenv(Consts.M2LING_HOME), getUTStorage().getAbsolutePath());
 		Conf conf = new Conf(null, logger,null);
 		conf.register(new SpecificConfigurationMock());
 		assertEquals(conf.getSystemProperty(SpecificConfigurationMock.param1), "value_param1_debug");

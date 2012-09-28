@@ -15,30 +15,24 @@ import org.m2ling.common.utils.Utils;
 @SuppressWarnings("serial")
 public class ViewPointBean implements Serializable {
 	private String id = "";
+
 	private String name = "";
+
 	/**
 	 * Comma-separated tags
 	 */
 	private String tags = "";
+
 	private String description = "";
+
 	private String comment = "";
+
 	private String statusLiterals = "";
+
 	private String iconPath = "";
 
 	public ViewPointBean() {
 		super();
-	}
-
-	/** Deep copy constructor **/
-	public ViewPointBean(ViewPointBean vp) {
-		super();
-		this.id = vp.getId();
-		this.name = vp.getName();
-		this.tags = vp.getTags();
-		this.description = vp.getDescription();
-		this.comment = vp.getComment();
-		this.statusLiterals = vp.getStatusLiterals();
-		this.iconPath = vp.getIconPath();
 	}
 
 	public String toString() {

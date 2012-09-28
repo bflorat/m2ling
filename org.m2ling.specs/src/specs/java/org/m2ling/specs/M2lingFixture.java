@@ -16,7 +16,6 @@ import org.junit.After;
 import org.junit.Before;
 import org.m2ling.common.utils.Consts;
 import org.m2ling.common.utils.Utils;
-import org.m2ling.service.principles.ViewPointServiceImpl;
 
 /**
  * Main parent class for m2ling fixtures
@@ -41,8 +40,8 @@ public abstract class M2lingFixture extends ConcordionTestCase {
 	public void setUp() {
 		// Set M2LING_HOME variable for test mode
 		Map<String, String> newenv = new HashMap<String, String>();
-		newenv.put(Consts.M2LING_HOME_VARIABLE_NAME, getUTStorage().getAbsolutePath());
-		newenv.put(Consts.M2LING_DEBUG_VARIABLE_NAME, "true");
+		newenv.put(Consts.M2LING_HOME, getUTStorage().getAbsolutePath());
+		newenv.put(Consts.M2LING_DEBUG, "true");
 		Utils.setEnv(newenv);
 	}
 

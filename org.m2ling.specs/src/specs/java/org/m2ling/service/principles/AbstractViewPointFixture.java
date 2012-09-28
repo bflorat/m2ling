@@ -38,6 +38,7 @@ public class AbstractViewPointFixture extends M2lingFixture {
 		String sampleXMI = "src/specs/resources/mocks/" + model + ".m2ling";
 		Properties prop = new Properties();
 		prop.setProperty(PersistenceManagerXMIImpl.SpecificConfiguration.CONF_XMI_PATH, sampleXMI);
+		prop.setProperty(PersistenceManagerXMIImpl.SpecificConfiguration.CONF_DISABLE_COMMITS, "true");
 		Conf configuration = new Conf(prop, logger, null);
 		try {
 			pm = new PersistenceManagerXMIImpl(logger, configuration);

@@ -360,6 +360,7 @@ public class ComponentTypeServiceImpl extends ServiceImpl implements ComponentTy
 			newEnumeration.add(ai);
 		}
 		enumeration.addAll(newEnumeration);
+		pmanager.commit();
 	}
 
 	@Override
@@ -371,6 +372,7 @@ public class ComponentTypeServiceImpl extends ServiceImpl implements ComponentTy
 		// Add the item
 		ViewPoint vp = util.getViewPointByID(dto.getViewPoint().getId());
 		vp.getComponentTypes().add(ct);
+		pmanager.commit();
 	}
 
 	@Override
@@ -404,6 +406,7 @@ public class ComponentTypeServiceImpl extends ServiceImpl implements ComponentTy
 		ComponentType type = util.getComponentTypeByID(dto.getId());
 		ViewPoint vp = (ViewPoint) type.eContainer();
 		vp.getComponentTypes().remove(type);
+		pmanager.commit();
 	}
 
 	/*

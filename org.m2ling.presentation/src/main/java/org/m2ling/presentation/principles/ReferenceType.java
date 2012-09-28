@@ -9,5 +9,8 @@ package org.m2ling.presentation.principles;
  * avoid direct dependency between presentation and domain layers.
  */
 public enum ReferenceType {
-	CONTAINS, RUNS, DEPENDS_ON, ADMINS;
+	CONTAINS,
+	RUNS,
+	DEPENDS_ON,
+	ADMINS;
 }
