@@ -17,30 +17,50 @@ import com.google.common.collect.ImmutableList;
  */
 public class RuleDTO implements Comparable<RuleDTO> {
 	private final String vpID;
+
 	private final String id;
+
 	private final String name;
+
 	private final List<String> tags;
+
 	private final String description;
+
 	private final String comment;
+
 	private final String status;
+
 	private final int priority;
+
 	private final String rationale;
+
 	private final String exceptions;
+
 	private final List<StatusEventDTO> history;
 
 	public static class Builder {
 		// Required configuration
 		private final String name;
+
 		private final String id;
+
 		private final String vpID;
+
 		// Optional configuration
 		private List<String> tags = new ArrayList<String>(1);
+
 		private String description = null;
+
 		private String comment = null;
+
 		private String status = null;
+
 		private int priority = 0;
+
 		private String rationale = null;
+
 		private String exceptions = null;
+
 		private List<StatusEventDTO> history = new ArrayList<StatusEventDTO>(1);
 
 		public Builder(String vpID, String id, String name) {
@@ -212,6 +232,16 @@ public class RuleDTO implements Comparable<RuleDTO> {
 	 */
 	@Override
 	public int compareTo(RuleDTO o) {
+		// Make sure this method is consistent with equals
+		if (this.equals(o)) {
+			return 0;
+		}
+		// If names are not provided, items are not correctly sorted
+		// but we only have the bounded type ID and we don't want to perform
+		// a service call to get details just for sorting purpose.
+		if (getName() == null || o.getName() == null) {
+			return -1;
+		}
 		return o.getName().compareTo(o.getName());
 	}
 }

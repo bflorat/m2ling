@@ -8,7 +8,7 @@
       <references description="" type="DEPENDS_ON" targets="id_ct_logical_ldap"/>
     </componentTypes>
     <componentTypes id="_fKtsQZoXEeG71vmJ5CR-iA" name="WebContainer" comment="" description="A servlet/JSP container" boundType="id_ct_tech_applicationserver" enumeration="_0GnPIJ6QEeGyndJ1yNTLVw">
-      <references type="RUNS" targets="_E3EOwZoWEeG71vmJ5CR-iA"/>
+      <references type="RUNS" targets="id_ct_logical_guimodule"/>
     </componentTypes>
     <componentTypes id="_8_BugZqkEeGbI4NH3iicSg" name="InternetWebClient" description="Internet end user web browser."/>
     <componentTypes id="_8_BugZqkEeGbI4N" name="IntranetWebClient" comment="" description="IntranetWebClient corporate end user web browser."/>
@@ -16,14 +16,14 @@
       <references type="RUNS" targets="id_ct_logical_database"/>
     </componentTypes>
     <componentTypes id="id_ct_logical_ldap" name="LDAP directory" description="" boundType="_LyWEoZ6REeGyndJ1yNTLVw" enumeration="_cjliUJ6TEeGyndJ1yNTLVw"/>
-    <componentTypes id="_E3EOwZoWEeG71vmJ5CR-iA" name="GUIModule" comment="" description="A GUI module serves Web pages targeting to end users." boundType="_E3EOwZoWEeG71vmJ5CR-iAe"/>
+    <componentTypes id="id_ct_logical_guimodule" name="GUIModule" comment="" description="A GUI module serves Web pages targeting to end users." boundType="_E3EOwZoWEeG71vmJ5CR-iAe"/>
     <componentTypes id="id_ct_app_servicemodule" name="ServiceModule" comment="" description="A service module provides business services to batch or GUI modules and is responsible for enterprise data." boundType="id_ct_app_servicemodulee"/>
     <componentTypes id="id_ct_logical_database" name="Database" comment="" description="A database contains an application data (this data may or not be replicated among several clusters)"/>
-    <componentTypes id="eaba26c7-8083-4e80-b068-9daf541a68be" name="BatchModule" comment="" description="Batch module" boundType="_E3EOwZoWEeG71vkjfdhbfb"/>
-    <linkTypes id="_SA6SgpoZEeG71vmJ5CR-iA" name="HTTP_REST" description="Synchronous REST call over HTTP. Default port : 80. Over TCP only." sourceTypes="_E3EOwZoWEeG71vmJ5CR-iA" destinationTypes="id_ct_app_servicemodule"/>
+    <componentTypes id="id_ct_logical_batchmodule" name="BatchModule" comment="" description="Batch module" boundType="_E3EOwZoWEeG71vkjfdhbfb"/>
+    <linkTypes id="_SA6SgpoZEeG71vmJ5CR-iA" name="HTTP_REST" description="Synchronous REST call over HTTP. Default port : 80. Over TCP only." sourceTypes="id_ct_logical_guimodule id_ct_logical_batchmodule" destinationTypes="id_ct_app_servicemodule"/>
     <linkTypes id="_4Rfd0pqjEeGQsK1VSbibvw" name="NET_DATABASE" description="Synchronous Network protocol to access remote Postgres database. Default port : 5432. Can be used over TCP or UDP." sourceTypes="id_ct_app_servicemodule" destinationTypes="id_ct_logical_database"/>
     <linkTypes id="_oHllkpqkEeGbI4NH3iicSg" name="HTTP_GUI" comment="" description="Synchronous HTTP access from end users to the GUI services. Default port : 80. Over TCP only. KEEP_ALIVE option enabled." sourceTypes="_8_BugZqkEeGbI4NH3iicSg _8_BugZqkEeGbI4NH3iicSg" destinationTypes="_fKtsQZoXEeG71vmJ5CR-iA"/>
-    <linkTypes id="_2LrDApqyEeGVMag01qc4bw" name="LDAP" comment="" description="Synchronous access to a LDAP directory. Over TCP-IP." sourceTypes="_E3EOwZoWEeG71vmJ5CR-iA" destinationTypes="id_ct_logical_ldap"/>
+    <linkTypes id="_2LrDApqyEeGVMag01qc4bw" name="LDAP" comment="" description="Synchronous access to a LDAP directory. Over TCP-IP." sourceTypes="id_ct_logical_guimodule" destinationTypes="id_ct_logical_ldap"/>
     <rules id="R1" name="R1" comment="This rule is one of the Bikes IS cornerstone." description="A GUI Module can't map (using an hyperlink or a redirect for instance) another GUI Module, each application must be integrated into the portal." status="APPLICABLE" priority="3" rationale="Centralizaing all the IS intranet websites URL into a single portal brings low coupling between websites, eases management and increases security." exceptions="If a GUI module is itself a sub-domain kind of portal, it may integrate several GUI modules URL as parameters and come with hyperkink to them but a special attention must be paid to manage these URL by the project team. The pointed application must not be available from the main portal but only manage by the sub-domain portail.">
       <tags>logical</tags>
       <history date="1244310146000" statusLiteral="SUBMITTED"/>
@@ -114,9 +114,9 @@
     <componentTypes id="_aazazazaerer" name="BatchModule" comment="" description="Standalone Java batchs calling services modules" boundType="_aazazazaerer" instantiationFactor="-1"/>
   </viewPoints>
   <views comment="" description="BikesOnline is a online house-built e-commerce solution to sell bikes." id="_6MLzgJngEeGCNbiGBiffzQ" name="Logical_BikesOnline" viewPoint="id_vp_logical">
-    <components id="_8fvV4p6TEeGyndJ1yNTLVw" name="AdminGUI" comment="" type="_E3EOwZoWEeG71vmJ5CR-iA" boundComponent="_hGsf4J89EeGNFtlcQfUFgw"/>
+    <components id="_8fvV4p6TEeGyndJ1yNTLVw" name="AdminGUI" comment="" type="id_ct_logical_guimodule" boundComponent="_hGsf4J89EeGNFtlcQfUFgw"/>
     <components id="_2aMpEp6VEeGbbcMFSNIrnA" name="AdminServices" type="id_ct_app_servicemodule" boundComponent="_zPeqMJ89EeGNFtlcQfUFgw"/>
-    <components id="_qODuQp6TEeGyndJ1yNTLVw" name="EndUserGUI" comment="" type="_E3EOwZoWEeG71vmJ5CR-iA" boundComponent="_osKccJ89EeGNFtlcQfUFgw"/>
+    <components id="_qODuQp6TEeGyndJ1yNTLVw" name="EndUserGUI" comment="" type="id_ct_logical_guimodule" boundComponent="_osKccJ89EeGNFtlcQfUFgw"/>
     <components id="_xjupYp6VEeGbbcMFSNIrnA" name="PaiementServices" description="" type="id_ct_app_servicemodule" boundComponent="_9xnzQJ89EeGNFtlcQfUFgw"/>
     <components id="_gmFcgp6VEeGbbcMFSNIrnA" name="Product Catalog Services" comment="" description="" type="id_ct_app_servicemodule" boundComponent="_VsqREp8zEeGYS-4UJ-FpAA"/>
     <components id="_Y-AZsqgtekejey" name="Jetty" description="" type="_fKtsQZoXEeG71vmJ5CR-iA" boundComponent="id_comp_tech_jetty">

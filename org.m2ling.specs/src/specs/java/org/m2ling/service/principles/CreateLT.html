@@ -22,14 +22,14 @@
 			<li>name=<b concordion:set="#name">HTTP_REST_2</b></li>
 			<li>access type=<b concordion:set="#access_type">RW</b></li>
 			<li>temporality=<b concordion:set="#temporality">SYNC</b></li>
-			<li>sources types=<b concordion:set="#sources_types">SYNC</b></li>
-			<li>targets types=<b concordion:set="#targets_types">SYNC</b></li>
+			<li>sources types=<b concordion:set="#sources_types">id_ct_logical_guimodule,id_ct_logical_batchmodule</b></li>
+			<li>targets types=<b concordion:set="#targets_types">id_ct_logical_servicemodule</b></li>
 			<li>description=<b concordion:set="#desc">Synchronous REST call over HTTP. Default port : 80. </b></li>
 			<li>comment=<b concordion:set="#comment">Over TCP only.</b></li>
 			<li>tags=<b concordion:set="#tags">logical,network</b></li>
 		</ul>
 		should have following characteristics (full round trip from presentation to presentation) : <b
-			concordion:assertEquals="createAndGetCT(#justCheck,#caseName,#vpID,#id,#name,#desc,#comment,#tags,#ifactor,#boundTypeID,#references,#enumeration)">
+			concordion:assertEquals="createAndGetLT(#justCheck,#caseName,#vpID,#id,#name,#desc,#comment,#tags,#access_type,#temporality,#sources_types,#targets_types)">
 			boundType=id=id_ct_tech_applicationserver name=ApplicationServer 
 			comment=Available components listed in Technical catalog description=Runs services (RMI, REST, SOAP...). 
 			drop= 
@@ -43,195 +43,12 @@
 	</div>
 	</p>
 
-	<h2>Bindings and instantiation factor</h2>
-	<p class='rule'>CT1 : Instantiation factor enforces the number of possibles component
-		instances for a component of a given type. A Component Type can't be
-		reified if its instantiation factor is zero. From the GUI point of
-		view, "any" is represented by the character "*". From the DTO, it is
-		the integer '-1'.
-		<div class='example'>
-			<table
-		concordion:execute="#result=createWithIf(#ifactor)">
-				<tr>
-					<th concordion:set="#ifactor">IFactor</th>
-				<th concordion:assertEquals="#result">should :</th>
-				</tr>
-				<tr>
-					<td>1</td>
-					<td>PASS</td>
-				</tr>
-				<tr>
-					<td>*</td>
-					<td>PASS</td>
-				</tr>
-				<tr>
-					<td>0</td>
-					<td>PASS</td>
-				</tr>
-			</table>
-		</div>
-		</p>
-	<h3>Enumeration content</h3>
-	<p class='rule'>CT2 : A enumeration can contain either components or component groups.</p>
-	<p class='rule'>CT3 : All enumeration items (component or group) must exist.</p>
-	<p class='rule'>CT4 : All enumeration items must share the same component type.</p>
-	<p class='rule'>CT5 : If enumeration maps a component-type group, values are those of
-		its components at time of use (eg if a group maps a new component 
-		after the CT creation, is will be valid.</p>
-		<p class ='commentary'>This is possible because the CT maps the groups themselves, not the component of the groups at CT creation.</p>
-		
-	<p class='rule'>CT6 : Duplicates in enumeration are allowed (even if they are pointless).</p>
-	<p class ='commentary'>This makes things simpler because a CT may be created with a comp1 and a group grp1 that doesn't contain comp1 but comp1 
-	may be added into grp1 later so we would have to check this every time we insert a new component into a group.</p> 
-	<div class='example'>
-		Given a CT "ServicesContainer" in Logical viewpoint bound to "ApplicationServer" CT in Technical viewpoint<br/>
-		And a CT "Database" in Logical viewpoint CT in Technical viewpoint<br/>
-		And a component set of application servers in technical viewpoint : JBoss5, Weblogic <br/>
-		And a component set of persistence software in technical viewpoint : Mysql , Oracle RDBMS<br/>
-		And a component group set in technical viewpoint : "RDBMS" containing Oracle RDBMS and Mysql<br/>  
-		And a component group set in technical viewpoint : "Service containers" containing Weblogic and JBoss5<br/>  
-		When setting following combination as enumeration to "ServicesContainer" logical view CT <br/>
-		Then the service should :
-			<table
-		concordion:execute="#result=testEnumeration(#caseName,#comps,#groups)">
-				<tr>
-					<th concordion:set="#caseName">Case</th>
-					<th concordion:set="#comps">Components</th>
-					<th concordion:set="#groups">Groups</th>
-				<th concordion:assertEquals="#result">should :</th>
-				</tr>
-				<tr>
-					<td>CT2/Nothing</td>
-					<td>null</td>
-					<td>null</td>
-					<td>PASS</td>
-				</tr>
-				<tr>
-					<td>CT2/Single component, no group</td>
-					<td>id_comp_tech_jboss5</td>
-					<td>null</td>
-					<td>PASS</td>
-				</tr>
-				<tr>
-					<td>CT2/Several components, no group</td>
-					<td>id_comp_tech_jboss5,id_comp_tech_jboss6</td>
-					<td>null</td>
-					<td>PASS</td>
-				</tr>
-				<tr>
-					<td>CT2/None component, one group</td>
-					<td>null</td>
-					<td>id_grp_tech_servicecontainers</td>
-					<td>PASS</td>
-				</tr>
-				<tr>
-					<td>CT3/Non-existing component</td>
-					<td>_foo</td>
-					<td>id_grp_tech_servicecontainers</td>
-					<td>FAIL with code TARGET_NOT_FOUND</td>
-				</tr>
-				<tr>
-					<td>CT3/Non-existing group</td>
-					<td>id_comp_tech_jboss5</td>
-					<td>_foo</td>
-					<td>FAIL with code TARGET_NOT_FOUND</td>
-				</tr>
-				<tr>
-					<td>CT4/Foreign Component type</td>
-					<td>id_comp_tech_solaris</td>
-					<td>null</td>
-					<td>FAIL with code INVALID_TYPE</td>
-				</tr>
-				<tr>
-					<td>CT4/Foreign group</td>
-					<td>null</td>
-					<td>id_grp_tech_rdbms</td>
-					<td>FAIL with code INVALID_TYPE</td>
-				</tr>
-				<tr>
-					<td>CT6/Dup component</td>
-					<td>id_comp_tech_jboss5,id_comp_tech_jboss5</td>
-					<td>null</td>
-					<td>PASS</td>
-				</tr>
-				<tr>
-					<td>CT6/Dup component with group</td>
-					<td>id_comp_tech_jboss5</td>
-					<td>id_grp_tech_servicecontainers</td>
-					<td>PASS</td>
-				</tr>
-			</table>
-	</div>
 	
-	<p class='rule'>CT7 : If a bound type is given but none enumeration is provided, the
-		possible values are all component of given bound type in every view of
-		the bound VP.</p>
-		<p class='commentary'>Will be tested in m2studio specifications</p>
+	
 	<p class='rule'>CT8 : An enumeration can't be provided without associated binding type.
 	<div class='example'>In this case, the CT <span concordion:execute="#resu=testNoBindingType()">creation</span> should : <b concordion:assertEquals="#resu">FAIL with code NULL_BOUND_TYPE_ENUMERATION</b> </div>
 	</p>
-	<p class='rule'>CT9 : A Component Type can't bind another component type itself
-		bounded (no cascading bindings).
-	<div class='example'>In this case, the CT <span concordion:execute="#resu=testCascadingBinding()">creation</span> 
-	should : <b concordion:assertEquals="#resu">FAIL with code BOUND_TYPE_BOUND</b> </div>
-	</p>
-	<p class='rule'>CT10 : A Component Type can't be bound to a component type of the same
-		VP (no local bindings).
-		<div class='example'>In this case, the CT <span concordion:execute="#resu=testLocalBinding()">creation</span> 
-	should : <b concordion:assertEquals="#resu">FAIL with code LOCAL_BINDING</b> </div>
-	</p>
-	<p class='rule'>CT11 : If one of following attribute is not provided, a binded CT get
-		them from the bound CT : name, comment, description. Tags from new CT and bound type (if any) are merged.
-		<div class='example'>
-		Given a CT "ServicesContainer" in Logical viewpoint bound to "ApplicationServer" CT in Technical viewpoint<br/>
-		When setting following combination of attributes to ServicesContainer<br/>
-		Then the new CT attributes should be :
-			<table
-		concordion:execute="#result=testBoundDerivedName(#caseName,#ctAttributes,#boundCTAttributes)">
-				<tr>
-					<th concordion:set="#caseName">Case</th>
-					<th concordion:set="#ctAttributes">New CT attributes (Name|tags|comment|description)</th>
-					<th concordion:set="#boundCTAttributes">Bound CT attributes (Name|tags|comment|description)</th>
-					<th concordion:assertEquals="#result">View from caller :</th>
-				</tr>
-				<tr>
-					<td>CT11/all null</td>
-					<td>null|null|null|null</td>
-					<td>a name|tagx,tagy|a comment|a description</td>
-					<td>a name|[tagx, tagy]|a comment|a description</td>
-				</tr>
-				<tr>
-					<td>CT11/null name</td>
-					<td>null|taga|comment2|description2</td>
-					<td>a name|tagx,tagy|a comment|a description</td>
-					<td>a name|[taga, tagx, tagy]|comment2|description2</td>
-				</tr>
-				<tr>
-					<td>CT11/null desc</td>
-					<td>name2|taga|comment2|null</td>
-					<td>a name|tagx,tagy|a comment|a description</td>
-					<td>name2|[taga, tagx, tagy]|comment2|a description</td>
-				</tr>
-				<tr>
-					<td>CT11/null comment and description</td>
-					<td>name2|taga|null|null</td>
-					<td>a name|tagx,tagy|a comment|a description</td>
-					<td>name2|[taga, tagx, tagy]|a comment|a description</td>
-				</tr>
-				<tr>
-					<td>CT11/null tags and description</td>
-					<td>name2|null|comment2|null</td>
-					<td>a name|tagx,tagy|a comment|a description</td>
-					<td>name2|[tagx, tagy]|comment2|a description</td>
-				</tr>
-			</table>
-			</div>
-		</p>
-		<p class='rule'>CT12 : A reference target can't be void. Note that we don't test the case where the target is null as 
-			it is technically impossible to pass a DTO with a null target (ArrayList refuses this).
-			<div class='example'>In this case, the CT <span concordion:execute="#resu=testVoidRefTarget()">creation</span> 
-			should : <b concordion:assertEquals="#resu">FAIL with code NONE_TARGET</b> </div>
-		</p>
+	
 	<h3>Format Controls</h3>
 	<ul class='rule'>
 	<li>

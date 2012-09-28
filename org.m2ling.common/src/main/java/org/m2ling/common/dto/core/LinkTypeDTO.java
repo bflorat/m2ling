@@ -11,14 +11,44 @@ import org.m2ling.common.utils.Utils;
 import com.google.common.collect.ImmutableList;
 
 /**
- * Component type DTO object used between layers.
+ * Link type DTO object used between layers.
  * 
  * @author Bertrand Florat <bertrand@florat.net>
  */
-public class ComponentTypeDTO implements Comparable<ComponentTypeDTO> {
+public class LinkTypeDTO implements Comparable<LinkTypeDTO> {
 	private final HasNameAndIdDTO vp;
 
 	private final String id;
+
+	/**
+	 * @return the temporality
+	 */
+	public String getTemporality() {
+		return temporality;
+	}
+
+	/**
+	 * @param temporality
+	 *           the temporality to set
+	 */
+	public void setTemporality(String temporality) {
+		this.temporality = temporality;
+	}
+
+	/**
+	 * @return the accessType
+	 */
+	public String getAccessType() {
+		return accessType;
+	}
+
+	/**
+	 * @param accessType
+	 *           the accessType to set
+	 */
+	public void setAccessType(String accessType) {
+		this.accessType = accessType;
+	}
 
 	private final String name;
 
@@ -28,13 +58,13 @@ public class ComponentTypeDTO implements Comparable<ComponentTypeDTO> {
 
 	private final String comment;
 
-	private final List<ReferenceDTO> references;
+	private final List<HasNameAndIdDTO> sourcesTypes;
 
-	private final HasNameAndIdDTO boundType;
+	private final List<HasNameAndIdDTO> targetsTypes;
 
-	private final int iFactor;
+	private String temporality;
 
-	private final List<HasNameAndIdDTO> enumeration;
+	private String accessType;
 
 	public static class Builder {
 		// Required configuration
@@ -51,13 +81,13 @@ public class ComponentTypeDTO implements Comparable<ComponentTypeDTO> {
 
 		private String comment = null;
 
-		private List<ReferenceDTO> references = new ArrayList<ReferenceDTO>(1);
+		private String temporality;
 
-		private HasNameAndIdDTO boundType;
+		private String accessType;
 
-		private int iFactor = 0;
+		private List<HasNameAndIdDTO> sourcesTypes = new ArrayList<HasNameAndIdDTO>(1);
 
-		private List<HasNameAndIdDTO> enumeration = new ArrayList<HasNameAndIdDTO>(1);
+		private List<HasNameAndIdDTO> targetsTypes = new ArrayList<HasNameAndIdDTO>(1);
 
 		public Builder(HasNameAndIdDTO vp, String id, String name) {
 			this.id = id;
@@ -80,49 +110,43 @@ public class ComponentTypeDTO implements Comparable<ComponentTypeDTO> {
 			return this;
 		}
 
-		public Builder addReference(ReferenceDTO reference) {
-			this.references.add(reference);
+		public Builder temporality(String temporality) {
+			this.temporality = temporality;
 			return this;
 		}
 
-		public Builder boundType(HasNameAndIdDTO boundType) {
-			this.boundType = boundType;
+		public Builder accessType(String accessType) {
+			this.accessType = accessType;
 			return this;
 		}
 
-		public Builder instantiationFactor(int iFactor) {
-			this.iFactor = iFactor;
+		public Builder addSourcesType(HasNameAndIdDTO sourcesType) {
+			this.sourcesTypes.add(sourcesType);
 			return this;
 		}
 
-		/**
-		 * Add component IDs to the enumeration.
-		 * 
-		 * @param componentIDs
-		 * @return the builder
-		 */
-		public Builder addEnumeration(HasNameAndIdDTO component) {
-			this.enumeration.add(component);
+		public Builder addTargetsType(HasNameAndIdDTO targetsType) {
+			this.targetsTypes.add(targetsType);
 			return this;
 		}
 
-		public ComponentTypeDTO build() {
-			ComponentTypeDTO dto = new ComponentTypeDTO(this);
+		public LinkTypeDTO build() {
+			LinkTypeDTO dto = new LinkTypeDTO(this);
 			return dto;
 		}
 	}
 
-	private ComponentTypeDTO(Builder builder) {
+	private LinkTypeDTO(Builder builder) {
 		id = builder.id;
 		name = builder.name;
 		vp = builder.vp;
 		tags = ImmutableList.copyOf(builder.tags); // defensive copy
 		description = builder.description;
 		comment = builder.comment;
-		references = builder.references;
-		boundType = builder.boundType;
-		iFactor = builder.iFactor;
-		enumeration = ImmutableList.copyOf(builder.enumeration);
+		accessType = builder.accessType;
+		temporality = builder.temporality;
+		sourcesTypes = ImmutableList.copyOf(builder.sourcesTypes);
+		targetsTypes = ImmutableList.copyOf(builder.targetsTypes);
 	}
 
 	/**
@@ -172,26 +196,18 @@ public class ComponentTypeDTO implements Comparable<ComponentTypeDTO> {
 		return comment;
 	}
 
-	public HasNameAndIdDTO getBoundType() {
-		return boundType;
-	}
-
-	public int getInstantiationFactor() {
-		return iFactor;
+	/**
+	 * @return the sourcesTypes
+	 */
+	public List<HasNameAndIdDTO> getSourcesTypes() {
+		return sourcesTypes;
 	}
 
 	/**
-	 * @return the references
+	 * @return the targetTypes
 	 */
-	public List<ReferenceDTO> getReferences() {
-		return references;
-	}
-
-	/**
-	 * @return the enumeration
-	 */
-	public List<HasNameAndIdDTO> getEnumeration() {
-		return enumeration;
+	public List<HasNameAndIdDTO> getTargetsTypes() {
+		return targetsTypes;
 	}
 
 	public String toString() {
@@ -199,10 +215,10 @@ public class ComponentTypeDTO implements Comparable<ComponentTypeDTO> {
 	}
 
 	public boolean equals(Object o) {
-		if (o == null || !(o instanceof ComponentTypeDTO)) {
+		if (o == null || !(o instanceof LinkTypeDTO)) {
 			return false;
 		}
-		ComponentTypeDTO other = (ComponentTypeDTO) o;
+		LinkTypeDTO other = (LinkTypeDTO) o;
 		return other.getId().equals(getId());
 	}
 
@@ -212,7 +228,7 @@ public class ComponentTypeDTO implements Comparable<ComponentTypeDTO> {
 	 * @see java.lang.Comparable#compareTo(java.lang.Object)
 	 */
 	@Override
-	public int compareTo(ComponentTypeDTO o) {
+	public int compareTo(LinkTypeDTO o) {
 		// Make sure this method is consistent with equals
 		if (this.equals(o)) {
 			return 0;

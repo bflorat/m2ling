@@ -28,6 +28,9 @@ public class Consts {
 	/** Component types Icons storage location relative to M2LING_DEBUG_VARIABLE_NAME */
 	public static final String CONF_CT_ICONS_LOCATION = "icons" + File.separatorChar + "cts";
 
+	/** Link types Icons storage location relative to M2LING_DEBUG_VARIABLE_NAME */
+	public static final String CONF_LT_ICONS_LOCATION = "icons" + File.separatorChar + "lts";
+
 	/** M2LING_HOME_VARIABLE_NAME default value */
 	public static final String M2LING_HOME_DEFAULT_ABS_PATH = System.getProperty("user.home") + File.separator
 			+ "m2ling";

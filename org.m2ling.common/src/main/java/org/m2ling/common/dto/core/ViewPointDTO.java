@@ -15,20 +15,30 @@ import org.m2ling.common.utils.Utils;
  */
 public class ViewPointDTO implements Comparable<ViewPointDTO> {
 	private final String id;
+
 	private final String name;
+
 	private final List<String> tags;
+
 	private final String description;
+
 	private final String comment;
+
 	private final List<String> statusLiterals;
 
 	public static class Builder {
 		// Required configuration
 		private final String name;
+
 		private final String id;
+
 		// Optional configuration
 		private List<String> tags = new ArrayList<String>(1);
+
 		private String description = "";
+
 		private String comment = "";
+
 		private List<String> statusLiterals = new ArrayList<String>(1);
 
 		public Builder(String id, String name) {
@@ -150,6 +160,16 @@ public class ViewPointDTO implements Comparable<ViewPointDTO> {
 	 */
 	@Override
 	public int compareTo(ViewPointDTO o) {
+		// Make sure this method is consistent with equals
+		if (this.equals(o)) {
+			return 0;
+		}
+		// If names are not provided, items are not correctly sorted
+		// but we only have the bounded type ID and we don't want to perform
+		// a service call to get details just for sorting purpose.
+		if (getName() == null || o.getName() == null) {
+			return -1;
+		}
 		return o.getName().compareTo(o.getName());
 	}
 }

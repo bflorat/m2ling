@@ -11,6 +11,7 @@ import java.util.Map;
 
 import org.m2ling.common.dto.core.ComponentTypeDTO;
 import org.m2ling.common.dto.core.HasNameAndIdDTO;
+import org.m2ling.common.dto.core.LinkTypeDTO;
 import org.m2ling.common.dto.core.ReferenceDTO;
 import org.m2ling.common.dto.core.RuleDTO;
 import org.m2ling.common.dto.core.StatusEventDTO;
@@ -21,6 +22,7 @@ import org.m2ling.common.utils.Utils;
 import org.m2ling.presentation.i18n.Msg;
 import org.m2ling.presentation.principles.model.ComponentTypeBean;
 import org.m2ling.presentation.principles.model.HasNameAndIDBean;
+import org.m2ling.presentation.principles.model.LinkTypeBean;
 import org.m2ling.presentation.principles.model.ReferenceBean;
 import org.m2ling.presentation.principles.model.RuleBean;
 import org.m2ling.presentation.principles.model.ViewPointBean;
@@ -115,6 +117,32 @@ public class DTOConverter {
 			for (ReferenceBean ref : bean.getReferences()) {
 				ReferenceDTO refDTO = getReferenceDTO(ref);
 				builder.addReference(refDTO);
+			}
+			return builder.build();
+		}
+
+		/**
+		 * Create a LT DTO from provided lt bean
+		 * 
+		 * @param bean
+		 * @return a LT DTO from provided lt bean
+		 */
+		public LinkTypeDTO getLinkTypeDTO(LinkTypeBean bean) {
+			HasNameAndIdDTO vp = (bean.getViewPoint() == null) ? null : new HasNameAndIdDTO.Builder(bean.getViewPoint()
+					.getId(), bean.getViewPoint().getName()).build();
+			LinkTypeDTO.Builder builder = new LinkTypeDTO.Builder(vp, bean.getId(), bean.getName())
+					.description(bean.getDescription()).comment(bean.getComment()).temporality(bean.getTemporality())
+					.accessType(bean.getAccessType());
+			for (String tag : Utils.stringListFromString(bean.getTags())) {
+				builder.addTag(tag);
+			}
+			for (HasNameAndIDBean ctBean : bean.getSourcesTypes()) {
+				HasNameAndIdDTO ctDTO = new HasNameAndIdDTO.Builder(ctBean.getId(), ctBean.getName()).build();
+				builder.addSourcesType(ctDTO);
+			}
+			for (HasNameAndIDBean ctBean : bean.getTargetsTypes()) {
+				HasNameAndIdDTO ctDTO = new HasNameAndIdDTO.Builder(ctBean.getId(), ctBean.getName()).build();
+				builder.addTargetsType(ctDTO);
 			}
 			return builder.build();
 		}
@@ -295,6 +323,40 @@ public class DTOConverter {
 			HasNameAndIDBean vpBean = getHasNameAndIdBean(dto.getViewPoint());
 			bean.setViewPoint(vpBean);
 			File icon = IconManager.getIconFile(Consts.CONF_CT_ICONS_LOCATION, bean.getId());
+			if (icon != null && icon.exists()) {
+				bean.setIconPath(icon.getAbsolutePath());
+			}
+			return bean;
+		}
+
+		/**
+		 * Return a new LT instance given a DTO or an already existing instance of any.
+		 * 
+		 * @param dto
+		 *           the dto
+		 * @return a new LT instance
+		 */
+		public LinkTypeBean getLinkTypeBean(LinkTypeDTO dto) {
+			LinkTypeBean bean = new LinkTypeBean();
+			bean.setId(dto.getId());
+			bean.setName((dto.getName() != null) ? dto.getName() : "");
+			bean.setComment((dto.getComment() != null) ? dto.getComment() : "");
+			bean.setDescription((dto.getDescription() != null) ? dto.getDescription() : "");
+			String tags = Utils.stringListAsString(dto.getTags());
+			bean.setTags(tags);
+			bean.setTemporality(dto.getTemporality());
+			bean.setAccessType(dto.getAccessType());
+			List<HasNameAndIDBean> sources = new ArrayList<HasNameAndIDBean>(1);
+			for (HasNameAndIdDTO ctDTO : dto.getSourcesTypes()) {
+				sources.add(getHasNameAndIdBean(ctDTO));
+			}
+			List<HasNameAndIDBean> targets = new ArrayList<HasNameAndIDBean>(1);
+			for (HasNameAndIdDTO ctDTO : dto.getTargetsTypes()) {
+				targets.add(getHasNameAndIdBean(ctDTO));
+			}
+			HasNameAndIDBean vpBean = getHasNameAndIdBean(dto.getViewPoint());
+			bean.setViewPoint(vpBean);
+			File icon = IconManager.getIconFile(Consts.CONF_LT_ICONS_LOCATION, bean.getId());
 			if (icon != null && icon.exists()) {
 				bean.setIconPath(icon.getAbsolutePath());
 			}

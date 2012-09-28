@@ -121,7 +121,7 @@ public class CreateLTFixture extends AbstractCTFixture {
 	}
 
 	/**
-	 * Create and return a component type from a presentation layer bean (to test it too), then
+	 * Create and return a link type from a presentation layer bean (to test it too), then
 	 * search it back
 	 * 
 	 * @param bean
@@ -133,8 +133,8 @@ public class CreateLTFixture extends AbstractCTFixture {
 	 * @throws SecurityException
 	 * @throws IllegalArgumentException
 	 */
-	public String createAndGetCT(String justCheck, String caseName, String vpID, String id, String name, String desc,
-			String comment, String tags, String ifactor, String boundTypeID, String references, String enumeration)
+	public String createAndGetLT(String justCheck, String caseName, String vpID, String id, String name, String desc,
+			String comment, String tags, String access_type, String temporality, String sources_types, String targets_types)
 			throws FunctionalException {
 		if (!noreset) {
 			reset("Bikes");
@@ -145,33 +145,7 @@ public class CreateLTFixture extends AbstractCTFixture {
 		desc = UUT.nul(desc);
 		comment = UUT.nul(comment);
 		tags = UUT.nul(tags);
-		ifactor = UUT.nul(ifactor);
-		boundTypeID = UUT.nul(boundTypeID);
-		references = UUT.nul(references);
-		enumeration = UUT.nul(enumeration);
-		try {
-			ComponentTypeBean bean = new ComponentTypeBean();
-			bean.setComment(comment);
-			bean.setDescription(desc);
-			bean.setId(id);
-			bean.setName(name);
-			bean.setTags(tags);
-			HasNameAndIDBean vp = new HasNameAndIDBean();
-			vp.setId(vpID);
-			bean.setViewPoint(vp);
-			HasNameAndIDBean boundType = new HasNameAndIDBean();
-			boundType.setId(boundTypeID);
-			bean.setBoundType(boundType);
-			List<String> enumer = Utils.stringListFromString(enumeration);
-			List<HasNameAndIDBean> enum2 = new ArrayList<HasNameAndIDBean>();
-			for (String compID : enumer) {
-				HasNameAndIDBean hni = new HasNameAndIDBean();
-				hni.setId(compID);
-				enum2.add(hni);
-			}
-			bean.setEnumeration(enum2);
-			bean.setInstantiationFactor(ifactor);
-			setReferences(bean, references);
+		
 			ComponentTypeDTO dto = new DTOConverter.ToDTO().getComponentTypeDTO(bean);
 			// enforce nullity provided by the test and that should have be reset by the bean code
 			if (enumeration == null) {
