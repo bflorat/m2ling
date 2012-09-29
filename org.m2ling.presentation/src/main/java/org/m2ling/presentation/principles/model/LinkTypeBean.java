@@ -37,7 +37,7 @@ public class LinkTypeBean implements Serializable {
 	/** Sources */
 	private List<HasNameAndIDBean> sourcesTypes = new ArrayList<HasNameAndIDBean>();
 
-	private List<HasNameAndIDBean> targetsTypes = new ArrayList<HasNameAndIDBean>();
+	private List<HasNameAndIDBean> destinationsTypes = new ArrayList<HasNameAndIDBean>();
 
 	/** GUI only item used to represent the drop button **/
 	private String drop = "";
@@ -90,18 +90,18 @@ public class LinkTypeBean implements Serializable {
 	}
 
 	/**
-	 * @return the targetsTypes
+	 * @return the destinationsTypes
 	 */
-	public List<HasNameAndIDBean> getTargetsTypes() {
-		return targetsTypes;
+	public List<HasNameAndIDBean> getDestinationsTypes() {
+		return destinationsTypes;
 	}
 
 	/**
-	 * @param targetsTypes
-	 *           the targetsTypes to set
+	 * @param destinationsTypes
+	 *           the destinationsTypes to set
 	 */
-	public void setTargetsTypes(List<HasNameAndIDBean> targetsTypes) {
-		this.targetsTypes = targetsTypes;
+	public void setDestinationsTypes(List<HasNameAndIDBean> destinationsTypes) {
+		this.destinationsTypes = destinationsTypes;
 	}
 
 	/**

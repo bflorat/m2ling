@@ -60,7 +60,7 @@ public class LinkTypeDTO implements Comparable<LinkTypeDTO> {
 
 	private final List<HasNameAndIdDTO> sourcesTypes;
 
-	private final List<HasNameAndIdDTO> targetsTypes;
+	private final List<HasNameAndIdDTO> destinationsTypes;
 
 	private String temporality;
 
@@ -87,7 +87,7 @@ public class LinkTypeDTO implements Comparable<LinkTypeDTO> {
 
 		private List<HasNameAndIdDTO> sourcesTypes = new ArrayList<HasNameAndIdDTO>(1);
 
-		private List<HasNameAndIdDTO> targetsTypes = new ArrayList<HasNameAndIdDTO>(1);
+		private List<HasNameAndIdDTO> destinationsTypes = new ArrayList<HasNameAndIdDTO>(1);
 
 		public Builder(HasNameAndIdDTO vp, String id, String name) {
 			this.id = id;
@@ -125,8 +125,8 @@ public class LinkTypeDTO implements Comparable<LinkTypeDTO> {
 			return this;
 		}
 
-		public Builder addTargetsType(HasNameAndIdDTO targetsType) {
-			this.targetsTypes.add(targetsType);
+		public Builder addDestinationsType(HasNameAndIdDTO destinationsType) {
+			this.destinationsTypes.add(destinationsType);
 			return this;
 		}
 
@@ -146,7 +146,7 @@ public class LinkTypeDTO implements Comparable<LinkTypeDTO> {
 		accessType = builder.accessType;
 		temporality = builder.temporality;
 		sourcesTypes = ImmutableList.copyOf(builder.sourcesTypes);
-		targetsTypes = ImmutableList.copyOf(builder.targetsTypes);
+		destinationsTypes = ImmutableList.copyOf(builder.destinationsTypes);
 	}
 
 	/**
@@ -204,10 +204,10 @@ public class LinkTypeDTO implements Comparable<LinkTypeDTO> {
 	}
 
 	/**
-	 * @return the targetTypes
+	 * @return the destinationsTypes
 	 */
-	public List<HasNameAndIdDTO> getTargetsTypes() {
-		return targetsTypes;
+	public List<HasNameAndIdDTO> getDestinationsTypes() {
+		return destinationsTypes;
 	}
 
 	public String toString() {

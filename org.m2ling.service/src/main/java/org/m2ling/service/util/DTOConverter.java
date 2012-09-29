@@ -11,6 +11,7 @@ import java.util.List;
 import org.eclipse.emf.common.util.EList;
 import org.m2ling.common.dto.core.ComponentTypeDTO;
 import org.m2ling.common.dto.core.HasNameAndIdDTO;
+import org.m2ling.common.dto.core.LinkTypeDTO;
 import org.m2ling.common.dto.core.ReferenceDTO;
 import org.m2ling.common.dto.core.RuleDTO;
 import org.m2ling.common.dto.core.StatusEventDTO;
@@ -20,6 +21,9 @@ import org.m2ling.domain.core.Component;
 import org.m2ling.domain.core.ComponentType;
 import org.m2ling.domain.core.CoreFactory;
 import org.m2ling.domain.core.HasNameAndID;
+import org.m2ling.domain.core.LinkAccessType;
+import org.m2ling.domain.core.LinkTemporality;
+import org.m2ling.domain.core.LinkType;
 import org.m2ling.domain.core.Reference;
 import org.m2ling.domain.core.ReferenceType;
 import org.m2ling.domain.core.Rule;
@@ -144,6 +148,30 @@ public class DTOConverter {
 				builder.instantiationFactor(ct.getBoundType().getInstantiationFactor());
 			} else {
 				builder.instantiationFactor(ct.getInstantiationFactor());
+			}
+			return builder.build();
+		}
+
+		public LinkTypeDTO getLinkTypeDTO(LinkType lt) {
+			ViewPoint vp = (ViewPoint) lt.eContainer();
+			// If name is void or null, use bound type one
+			String name = lt.getName();
+			HasNameAndIdDTO hniVP = new HasNameAndIdDTO.Builder(vp.getId(), vp.getName()).build();
+			LinkTypeDTO.Builder builder = new LinkTypeDTO.Builder(hniVP, lt.getId(), name);
+			for (String tag : lt.getTags()) {
+				builder.addTag(tag);
+			}
+			builder.comment(lt.getComment());
+			builder.description(lt.getDescription());
+			builder.accessType(lt.getAccessType().getLiteral());
+			builder.temporality(lt.getTemporality().getLiteral());
+			for (ComponentType ct : lt.getSourceTypes()) {
+				HasNameAndIdDTO hniDTO = new HasNameAndIdDTO.Builder(ct.getId(), ct.getName()).build();
+				builder.addSourcesType(hniDTO);
+			}
+			for (ComponentType ct : lt.getDestinationTypes()) {
+				HasNameAndIdDTO hniDTO = new HasNameAndIdDTO.Builder(ct.getId(), ct.getName()).build();
+				builder.addDestinationsType(hniDTO);
 			}
 			return builder.build();
 		}
@@ -300,6 +328,35 @@ public class DTOConverter {
 				ct.getReferences().add(reference);
 			}
 			return ct;
+		}
+
+		/**
+		 * Return a new link type instance given a DTO.
+		 * 
+		 * @param dto
+		 *           the dto
+		 * @return a new link type instance
+		 */
+		public LinkType newLinkType(LinkTypeDTO dto) {
+			LinkType lt = CoreFactory.eINSTANCE.createLinkType();
+			lt.setId(dto.getId());
+			lt.setName(dto.getName());
+			for (String tag : dto.getTags()) {
+				lt.getTags().add(tag);
+			}
+			lt.setDescription(dto.getDescription());
+			lt.setComment(dto.getComment());
+			lt.setAccessType(LinkAccessType.valueOf(dto.getAccessType()));
+			lt.setTemporality(LinkTemporality.valueOf(dto.getTemporality()));
+			for (HasNameAndIdDTO hniDTO : dto.getSourcesTypes()) {
+				ComponentType ct = util.getComponentTypeByID(hniDTO.getId());
+				lt.getSourceTypes().add(ct);
+			}
+			for (HasNameAndIdDTO hniDTO : dto.getDestinationsTypes()) {
+				ComponentType ct = util.getComponentTypeByID(hniDTO.getId());
+				lt.getDestinationTypes().add(ct);
+			}
+			return lt;
 		}
 
 		/**

@@ -140,9 +140,9 @@ public class DTOConverter {
 				HasNameAndIdDTO ctDTO = new HasNameAndIdDTO.Builder(ctBean.getId(), ctBean.getName()).build();
 				builder.addSourcesType(ctDTO);
 			}
-			for (HasNameAndIDBean ctBean : bean.getTargetsTypes()) {
+			for (HasNameAndIDBean ctBean : bean.getDestinationsTypes()) {
 				HasNameAndIdDTO ctDTO = new HasNameAndIdDTO.Builder(ctBean.getId(), ctBean.getName()).build();
-				builder.addTargetsType(ctDTO);
+				builder.addDestinationsType(ctDTO);
 			}
 			return builder.build();
 		}
@@ -351,7 +351,7 @@ public class DTOConverter {
 				sources.add(getHasNameAndIdBean(ctDTO));
 			}
 			List<HasNameAndIDBean> targets = new ArrayList<HasNameAndIDBean>(1);
-			for (HasNameAndIdDTO ctDTO : dto.getTargetsTypes()) {
+			for (HasNameAndIdDTO ctDTO : dto.getDestinationsTypes()) {
 				targets.add(getHasNameAndIdBean(ctDTO));
 			}
 			HasNameAndIDBean vpBean = getHasNameAndIdBean(dto.getViewPoint());
