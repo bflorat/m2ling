@@ -16,8 +16,8 @@ import org.eclipse.emf.common.util.EList;
  * <ul>
  *   <li>{@link org.m2ling.domain.core.LinkType#getSourceTypes <em>Source Types</em>}</li>
  *   <li>{@link org.m2ling.domain.core.LinkType#getDestinationTypes <em>Destination Types</em>}</li>
- *   <li>{@link org.m2ling.domain.core.LinkType#getAccessType <em>Access Type</em>}</li>
- *   <li>{@link org.m2ling.domain.core.LinkType#getTemporality <em>Temporality</em>}</li>
+ *   <li>{@link org.m2ling.domain.core.LinkType#getLinkAccessType <em>Link Access Type</em>}</li>
+ *   <li>{@link org.m2ling.domain.core.LinkType#getLinkTemporality <em>Link Temporality</em>}</li>
  * </ul>
  * </p>
  *
@@ -66,61 +66,61 @@ public interface LinkType extends ConceptItem {
 	EList<ComponentType> getDestinationTypes();
 
 	/**
-	 * Returns the value of the '<em><b>Access Type</b></em>' attribute.
+	 * Returns the value of the '<em><b>Link Access Type</b></em>' attribute.
 	 * The literals are from the enumeration {@link org.m2ling.domain.core.LinkAccessType}.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Access Type</em>' attribute isn't clear,
+	 * If the meaning of the '<em>Link Access Type</em>' attribute isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Access Type</em>' attribute.
+	 * @return the value of the '<em>Link Access Type</em>' attribute.
 	 * @see org.m2ling.domain.core.LinkAccessType
-	 * @see #setAccessType(LinkAccessType)
-	 * @see org.m2ling.domain.core.CorePackage#getLinkType_AccessType()
+	 * @see #setLinkAccessType(LinkAccessType)
+	 * @see org.m2ling.domain.core.CorePackage#getLinkType_LinkAccessType()
 	 * @model
 	 * @generated
 	 */
-	LinkAccessType getAccessType();
+	LinkAccessType getLinkAccessType();
 
 	/**
-	 * Sets the value of the '{@link org.m2ling.domain.core.LinkType#getAccessType <em>Access Type</em>}' attribute.
+	 * Sets the value of the '{@link org.m2ling.domain.core.LinkType#getLinkAccessType <em>Link Access Type</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Access Type</em>' attribute.
+	 * @param value the new value of the '<em>Link Access Type</em>' attribute.
 	 * @see org.m2ling.domain.core.LinkAccessType
-	 * @see #getAccessType()
+	 * @see #getLinkAccessType()
 	 * @generated
 	 */
-	void setAccessType(LinkAccessType value);
+	void setLinkAccessType(LinkAccessType value);
 
 	/**
-	 * Returns the value of the '<em><b>Temporality</b></em>' attribute.
+	 * Returns the value of the '<em><b>Link Temporality</b></em>' attribute.
 	 * The literals are from the enumeration {@link org.m2ling.domain.core.LinkTemporality}.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Temporality</em>' attribute isn't clear,
+	 * If the meaning of the '<em>Link Temporality</em>' attribute isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Temporality</em>' attribute.
+	 * @return the value of the '<em>Link Temporality</em>' attribute.
 	 * @see org.m2ling.domain.core.LinkTemporality
-	 * @see #setTemporality(LinkTemporality)
-	 * @see org.m2ling.domain.core.CorePackage#getLinkType_Temporality()
+	 * @see #setLinkTemporality(LinkTemporality)
+	 * @see org.m2ling.domain.core.CorePackage#getLinkType_LinkTemporality()
 	 * @model
 	 * @generated
 	 */
-	LinkTemporality getTemporality();
+	LinkTemporality getLinkTemporality();
 
 	/**
-	 * Sets the value of the '{@link org.m2ling.domain.core.LinkType#getTemporality <em>Temporality</em>}' attribute.
+	 * Sets the value of the '{@link org.m2ling.domain.core.LinkType#getLinkTemporality <em>Link Temporality</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Temporality</em>' attribute.
+	 * @param value the new value of the '<em>Link Temporality</em>' attribute.
 	 * @see org.m2ling.domain.core.LinkTemporality
-	 * @see #getTemporality()
+	 * @see #getLinkTemporality()
 	 * @generated
 	 */
-	void setTemporality(LinkTemporality value);
+	void setLinkTemporality(LinkTemporality value);
 
 } // LinkType

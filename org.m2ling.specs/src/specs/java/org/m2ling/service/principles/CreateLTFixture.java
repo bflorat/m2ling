@@ -1,128 +1,28 @@
 package org.m2ling.service.principles;
 
 import java.io.IOException;
-import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.StringTokenizer;
-import java.util.logging.Level;
-import java.util.logging.LogRecord;
 
-import org.m2ling.common.dto.core.ComponentTypeDTO;
+import org.m2ling.common.dto.core.AccessType;
 import org.m2ling.common.dto.core.HasNameAndIdDTO;
-import org.m2ling.common.dto.core.ReferenceDTO;
+import org.m2ling.common.dto.core.LinkTypeDTO;
 import org.m2ling.common.exceptions.FunctionalException;
 import org.m2ling.common.exceptions.TechnicalException;
 import org.m2ling.common.utils.UUT;
 import org.m2ling.common.utils.Utils;
-import org.m2ling.presentation.principles.ReferenceType;
-import org.m2ling.presentation.principles.model.ComponentTypeBean;
 import org.m2ling.presentation.principles.model.HasNameAndIDBean;
+import org.m2ling.presentation.principles.model.LinkTypeBean;
 import org.m2ling.presentation.principles.utils.DTOConverter;
 
-import com.google.common.base.Strings;
-
-public class CreateLTFixture extends AbstractCTFixture {
+public class CreateLTFixture extends AbstractLTFixture {
 	public CreateLTFixture() throws IOException {
 		super();
 	}
 
-	public String createWithIf(String ifactor) throws FunctionalException {
-		return createAndGetCT("true", "CT1", "id_vp_logical", "id_new_ct_logical_servicecontainer", "ServicesContainer2",
-				"", "", "", ifactor, "null", "", "");
-	}
-
-	public String testNoBindingType() throws FunctionalException {
-		return createAndGetCT("true", "CT8", "id_vp_logical", "id_new_ct_logical_servicecontainer", "ServicesContainer2",
-				"", "", "", "*", "null", "", "id_comp_tech_jboss5");
-	}
-
-	public String testCascadingBinding() throws FunctionalException {
-		return createAndGetCT("true", "CT8", "id_vp_logical", "id_new_ct_logical_servicecontainer", "ServicesContainer2",
-				"", "", "", "*", "id_ct_app_application", "", "id_comp_tech_jboss5");
-	}
-
-	public String testLocalBinding() throws FunctionalException {
-		return createAndGetCT("true", "CT8", "id_vp_logical", "id_new_ct_logical_servicecontainer", "ServicesContainer2",
-				"", "", "", "*", "id_ct_logical_servicecontainer", "", "id_comp_tech_jboss5");
-	}
-
-	public String testBoundDerivedName(String caseName, String ctAttributes, String boundCTAttributes)
-			throws FunctionalException {
-		try {
-			String ctName = null;
-			String ctTags = null;
-			String ctComment = null;
-			String ctDescription = null;
-			String boundName = null;
-			String boundTags = null;
-			String boundComment = null;
-			String boundDescription = null;
-			StringTokenizer st = new StringTokenizer(ctAttributes, "|");
-			while (st.hasMoreTokens()) {
-				ctName = st.nextToken();
-				ctTags = st.nextToken();
-				ctComment = st.nextToken();
-				ctDescription = st.nextToken();
-			}
-			StringTokenizer stBound = new StringTokenizer(boundCTAttributes, "|");
-			while (stBound.hasMoreTokens()) {
-				boundName = stBound.nextToken();
-				boundTags = stBound.nextToken();
-				boundComment = stBound.nextToken();
-				boundDescription = stBound.nextToken();
-			}
-			// First create the bound CT
-			String resu = createAndGetCT("true", "CT11", "id_vp_tech", "id_bound_ct_tech_servicecontainer", boundName,
-					boundDescription, boundComment, boundTags, "*", "null", "", "");
-			logger.log(new LogRecord(Level.INFO, resu));
-			// then create the new CT
-			noreset = true;
-			resu = createAndGetCT("true", "CT11", "id_vp_logical", "id_new_ct_logical_servicecontainer", ctName,
-					ctDescription, ctComment, ctTags, "*", "id_bound_ct_tech_servicecontainer", "", "");
-			logger.log(new LogRecord(Level.INFO, resu));
-			// Return the new CT attributes
-			ComponentTypeDTO ctDTO = service.getCTByID(null, "id_new_ct_logical_servicecontainer");
-			return ctDTO.getName() + "|" + ctDTO.getTags() + "|" + ctDTO.getComment() + "|" + ctDTO.getDescription();
-		} finally {
-			noreset = false;
-		}
-	}
-
-	public String testEnumeration(String caseName, String comps, String groups) throws FunctionalException {
-		String enumeration = "";
-		if (!("null".equals(comps)) && !Strings.isNullOrEmpty(comps)) {
-			enumeration += comps;
-		}
-		if (!("null".equals(groups)) && !Strings.isNullOrEmpty(groups)) {
-			if (enumeration.length() > 0) {
-				enumeration += "," + groups;
-			} else {
-				enumeration = groups;
-			}
-		}
-		return createAndGetCT("true", caseName, "id_vp_logical", "id_new_ct_logical_servicecontainer",
-				"ServicesContainer2", "", "", "", "-1", "id_ct_tech_applicationserver", "", enumeration);
-	}
-
-	public String testVoidRefTarget() throws FunctionalException {
-		try {
-			ReferenceDTO refDTO = new ReferenceDTO.Builder(ReferenceType.CONTAINS.name()).build();
-			HasNameAndIdDTO vpDTO = new HasNameAndIdDTO.Builder("id_vp_logical", "vp_logical").build();
-			ComponentTypeDTO dto = new ComponentTypeDTO.Builder(vpDTO, "id_void_ct_logical_servicecontainer",
-					"ServicesContainer2").addReference(refDTO).build();
-			service.createCT(null, dto);
-			return "PASS";
-		} catch (FunctionalException ex) {
-			return "FAIL with code " + ex.getCode().name();
-		} catch (TechnicalException ex) {
-			return "FAIL with code " + ex.getCode().name();
-		}
-	}
-
 	/**
-	 * Create and return a link type from a presentation layer bean (to test it too), then
-	 * search it back
+	 * Create and return a link type from a presentation layer bean (to test it too), then search it
+	 * back
 	 * 
 	 * @param bean
 	 * @param name
@@ -134,8 +34,8 @@ public class CreateLTFixture extends AbstractCTFixture {
 	 * @throws IllegalArgumentException
 	 */
 	public String createAndGetLT(String justCheck, String caseName, String vpID, String id, String name, String desc,
-			String comment, String tags, String access_type, String temporality, String sources_types, String targets_types)
-			throws FunctionalException {
+			String comment, String tags, String accessType, String temporality, String sourcesTypes,
+			String destinationsTypes) throws FunctionalException {
 		if (!noreset) {
 			reset("Bikes");
 		}
@@ -145,23 +45,36 @@ public class CreateLTFixture extends AbstractCTFixture {
 		desc = UUT.nul(desc);
 		comment = UUT.nul(comment);
 		tags = UUT.nul(tags);
-		
-			ComponentTypeDTO dto = new DTOConverter.ToDTO().getComponentTypeDTO(bean);
-			// enforce nullity provided by the test and that should have be reset by the bean code
-			if (enumeration == null) {
-				try {
-					Field field = ComponentTypeDTO.class.getDeclaredField("enumeration");
-					field.setAccessible(true);
-					field.set(dto, null);
-				} catch (Exception e) {
-					logger.log(Level.SEVERE, "", e);
-				}
-			}
-			service.createCT(null, dto);
-			List<ComponentTypeDTO> ctDTOS = service.getAllCT(null, vpID);
-			for (ComponentTypeDTO ctDTO : ctDTOS) {
-				if (ctDTO.getId().equals(bean.getId())) {
-					ComponentTypeBean out = new DTOConverter.FromDTO().getComponentTypeBean(ctDTO);
+		accessType = UUT.nul(accessType);
+		temporality = UUT.nul(temporality);
+		List<String> sourcesTypesAsStrings = Utils.stringListFromString(UUT.nul(sourcesTypes));
+		List<HasNameAndIDBean> sourcesTypesList = new ArrayList<HasNameAndIDBean>();
+		for (String ctID : sourcesTypesAsStrings) {
+			sourcesTypesList.add(HasNameAndIDBean.newInstance(ctID, ""));
+		}
+		List<String> destinationsTypesAsStrings = Utils.stringListFromString(UUT.nul(destinationsTypes));
+		List<HasNameAndIDBean> destinationsTypesList = new ArrayList<HasNameAndIDBean>();
+		for (String ctID : destinationsTypesAsStrings) {
+			destinationsTypesList.add(HasNameAndIDBean.newInstance(ctID, ""));
+		}
+		LinkTypeBean bean = new LinkTypeBean();
+		bean.setComment(comment);
+		bean.setDescription(desc);
+		bean.setDestinationsTypes(destinationsTypesList);
+		bean.setId(id);
+		bean.setLinkAccessType(accessType);
+		bean.setName(name);
+		bean.setSourcesTypes(sourcesTypesList);
+		bean.setTags(tags);
+		bean.setLinkTemporality(temporality);
+		bean.setViewPoint(HasNameAndIDBean.newInstance(vpID, ""));
+		LinkTypeDTO dto = new DTOConverter.ToDTO().getLinkTypeDTO(bean);
+		try {
+			service.createLT(null, dto);
+			List<LinkTypeDTO> ltDTOS = service.getAllLT(null, vpID);
+			for (LinkTypeDTO ltDTO : ltDTOS) {
+				if (ltDTO.getId().equals(bean.getId())) {
+					LinkTypeBean out = new DTOConverter.FromDTO().getLinkTypeBean(ltDTO);
 					if (Boolean.parseBoolean(justCheck)) {
 						return "PASS";
 					} else {
@@ -169,6 +82,77 @@ public class CreateLTFixture extends AbstractCTFixture {
 					}
 				}
 			}
+			return "Unknown item";
+		} catch (FunctionalException ex) {
+			return "FAIL with code " + ex.getCode().name();
+		} catch (TechnicalException ex) {
+			return "FAIL with code " + ex.getCode().name();
+		}
+	}
+
+	public String checkFormat(String caseName, String vpID, String id, String name, String desc, String comment,
+			String tags, String accessType, String temporality, String sourcesTypes, String destinationsTypes)
+			throws FunctionalException {
+		if (!noreset) {
+			reset("Bikes");
+		}
+		try {
+			HasNameAndIdDTO vp = new HasNameAndIdDTO.Builder(vpID, "").build();
+			LinkTypeDTO.Builder dtoBuilder = new LinkTypeDTO.Builder(vp, UUT.nul(id), UUT.nul(name));
+			if (UUT.nul(tags) != null) {
+				for (String tag : Utils.stringListFromString(tags)) {
+					dtoBuilder.addTag(tag);
+				}
+			}
+			dtoBuilder.comment(UUT.nul(comment));
+			dtoBuilder.description(UUT.nul(desc));
+			dtoBuilder.accessType(UUT.nul(accessType)).temporality(UUT.nul(temporality));
+			List<String> sourcesTypesAsStrings = Utils.stringListFromString(UUT.nul(sourcesTypes));
+			for (String ctID : sourcesTypesAsStrings) {
+				dtoBuilder.addSourcesType(new HasNameAndIdDTO.Builder(ctID, "").build());
+			}
+			List<String> destinationsTypesAsStrings = Utils.stringListFromString(UUT.nul(destinationsTypes));
+			for (String ctID : destinationsTypesAsStrings) {
+				dtoBuilder.addDestinationsType(new HasNameAndIdDTO.Builder(ctID, "").build());
+			}
+			service.checkDTO(dtoBuilder.build(), AccessType.CREATE);
+			return "PASS";
+		} catch (FunctionalException ex) {
+			return "FAIL with code " + ex.getCode().name();
+		} catch (TechnicalException ex) {
+			return "FAIL with code " + ex.getCode().name();
+		}
+	}
+
+	public String testNoneSource() {
+		if (!noreset) {
+			reset("Bikes");
+		}
+		try {
+			HasNameAndIdDTO vp = new HasNameAndIdDTO.Builder("id_vp_logical", "").build();
+			HasNameAndIdDTO dest = new HasNameAndIdDTO.Builder("id_ct_logical_servicemodule", "ct_logical_servicemodule")
+					.build();
+			LinkTypeDTO dto = new LinkTypeDTO.Builder(vp, "id_lt_logical_lt1", "lt1").accessType("RW").temporality("SYNC")
+					.addDestinationsType(dest).description("desc").build();
+			service.createLT(null, dto);
+			return "Unknown item";
+		} catch (FunctionalException ex) {
+			return "FAIL with code " + ex.getCode().name();
+		} catch (TechnicalException ex) {
+			return "FAIL with code " + ex.getCode().name();
+		}
+	}
+
+	public String testNoneDest() {
+		if (!noreset) {
+			reset("Bikes");
+		}
+		try {
+			HasNameAndIdDTO vp = new HasNameAndIdDTO.Builder("id_vp_logical", "").build();
+			HasNameAndIdDTO source = new HasNameAndIdDTO.Builder("id_ct_logical_guimodule", "").build();
+			LinkTypeDTO dto = new LinkTypeDTO.Builder(vp, "id_lt_logical_lt1", "lt1").accessType("RW").temporality("SYNC")
+					.description("desc").addSourcesType(source).build();
+			service.createLT(null, dto);
 			return "Unknown item";
 		} catch (FunctionalException ex) {
 			return "FAIL with code " + ex.getCode().name();

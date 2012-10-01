@@ -65,8 +65,8 @@ public class LinkTypeItemProvider
 
 			addSourceTypesPropertyDescriptor(object);
 			addDestinationTypesPropertyDescriptor(object);
-			addAccessTypePropertyDescriptor(object);
-			addTemporalityPropertyDescriptor(object);
+			addLinkAccessTypePropertyDescriptor(object);
+			addLinkTemporalityPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -116,19 +116,19 @@ public class LinkTypeItemProvider
 	}
 
 	/**
-	 * This adds a property descriptor for the Access Type feature.
+	 * This adds a property descriptor for the Link Access Type feature.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected void addAccessTypePropertyDescriptor(Object object) {
+	protected void addLinkAccessTypePropertyDescriptor(Object object) {
 		itemPropertyDescriptors.add
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
-				 getString("_UI_LinkType_accessType_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_LinkType_accessType_feature", "_UI_LinkType_type"),
-				 CorePackage.Literals.LINK_TYPE__ACCESS_TYPE,
+				 getString("_UI_LinkType_linkAccessType_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_LinkType_linkAccessType_feature", "_UI_LinkType_type"),
+				 CorePackage.Literals.LINK_TYPE__LINK_ACCESS_TYPE,
 				 true,
 				 false,
 				 false,
@@ -138,19 +138,19 @@ public class LinkTypeItemProvider
 	}
 
 	/**
-	 * This adds a property descriptor for the Temporality feature.
+	 * This adds a property descriptor for the Link Temporality feature.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected void addTemporalityPropertyDescriptor(Object object) {
+	protected void addLinkTemporalityPropertyDescriptor(Object object) {
 		itemPropertyDescriptors.add
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
-				 getString("_UI_LinkType_temporality_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_LinkType_temporality_feature", "_UI_LinkType_type"),
-				 CorePackage.Literals.LINK_TYPE__TEMPORALITY,
+				 getString("_UI_LinkType_linkTemporality_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_LinkType_linkTemporality_feature", "_UI_LinkType_type"),
+				 CorePackage.Literals.LINK_TYPE__LINK_TEMPORALITY,
 				 true,
 				 false,
 				 false,
@@ -196,8 +196,8 @@ public class LinkTypeItemProvider
 		updateChildren(notification);
 
 		switch (notification.getFeatureID(LinkType.class)) {
-			case CorePackage.LINK_TYPE__ACCESS_TYPE:
-			case CorePackage.LINK_TYPE__TEMPORALITY:
+			case CorePackage.LINK_TYPE__LINK_ACCESS_TYPE:
+			case CorePackage.LINK_TYPE__LINK_TEMPORALITY:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
 		}

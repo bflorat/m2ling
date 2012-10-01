@@ -1574,22 +1574,22 @@ public interface CorePackage extends EPackage {
 	int LINK_TYPE__DESTINATION_TYPES = CONCEPT_ITEM_FEATURE_COUNT + 1;
 
 	/**
-	 * The feature id for the '<em><b>Access Type</b></em>' attribute.
+	 * The feature id for the '<em><b>Link Access Type</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int LINK_TYPE__ACCESS_TYPE = CONCEPT_ITEM_FEATURE_COUNT + 2;
+	int LINK_TYPE__LINK_ACCESS_TYPE = CONCEPT_ITEM_FEATURE_COUNT + 2;
 
 	/**
-	 * The feature id for the '<em><b>Temporality</b></em>' attribute.
+	 * The feature id for the '<em><b>Link Temporality</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int LINK_TYPE__TEMPORALITY = CONCEPT_ITEM_FEATURE_COUNT + 3;
+	int LINK_TYPE__LINK_TEMPORALITY = CONCEPT_ITEM_FEATURE_COUNT + 3;
 
 	/**
 	 * The number of structural features of the '<em>Link Type</em>' class.
@@ -1664,13 +1664,13 @@ public interface CorePackage extends EPackage {
 	int LINK__TYPE = ARCHITECTURE_ITEM_FEATURE_COUNT + 0;
 
 	/**
-	 * The feature id for the '<em><b>Origins</b></em>' reference list.
+	 * The feature id for the '<em><b>Sources</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int LINK__ORIGINS = ARCHITECTURE_ITEM_FEATURE_COUNT + 1;
+	int LINK__SOURCES = ARCHITECTURE_ITEM_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Destinations</b></em>' reference list.
@@ -3140,26 +3140,26 @@ public interface CorePackage extends EPackage {
 	EReference getLinkType_DestinationTypes();
 
 	/**
-	 * Returns the meta object for the attribute '{@link org.m2ling.domain.core.LinkType#getAccessType <em>Access Type</em>}'.
+	 * Returns the meta object for the attribute '{@link org.m2ling.domain.core.LinkType#getLinkAccessType <em>Link Access Type</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Access Type</em>'.
-	 * @see org.m2ling.domain.core.LinkType#getAccessType()
+	 * @return the meta object for the attribute '<em>Link Access Type</em>'.
+	 * @see org.m2ling.domain.core.LinkType#getLinkAccessType()
 	 * @see #getLinkType()
 	 * @generated
 	 */
-	EAttribute getLinkType_AccessType();
+	EAttribute getLinkType_LinkAccessType();
 
 	/**
-	 * Returns the meta object for the attribute '{@link org.m2ling.domain.core.LinkType#getTemporality <em>Temporality</em>}'.
+	 * Returns the meta object for the attribute '{@link org.m2ling.domain.core.LinkType#getLinkTemporality <em>Link Temporality</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Temporality</em>'.
-	 * @see org.m2ling.domain.core.LinkType#getTemporality()
+	 * @return the meta object for the attribute '<em>Link Temporality</em>'.
+	 * @see org.m2ling.domain.core.LinkType#getLinkTemporality()
 	 * @see #getLinkType()
 	 * @generated
 	 */
-	EAttribute getLinkType_Temporality();
+	EAttribute getLinkType_LinkTemporality();
 
 	/**
 	 * Returns the meta object for class '{@link org.m2ling.domain.core.Link <em>Link</em>}'.
@@ -3183,15 +3183,15 @@ public interface CorePackage extends EPackage {
 	EReference getLink_Type();
 
 	/**
-	 * Returns the meta object for the reference list '{@link org.m2ling.domain.core.Link#getOrigins <em>Origins</em>}'.
+	 * Returns the meta object for the reference list '{@link org.m2ling.domain.core.Link#getSources <em>Sources</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference list '<em>Origins</em>'.
-	 * @see org.m2ling.domain.core.Link#getOrigins()
+	 * @return the meta object for the reference list '<em>Sources</em>'.
+	 * @see org.m2ling.domain.core.Link#getSources()
 	 * @see #getLink()
 	 * @generated
 	 */
-	EReference getLink_Origins();
+	EReference getLink_Sources();
 
 	/**
 	 * Returns the meta object for the reference list '{@link org.m2ling.domain.core.Link#getDestinations <em>Destinations</em>}'.
@@ -4348,20 +4348,20 @@ public interface CorePackage extends EPackage {
 		EReference LINK_TYPE__DESTINATION_TYPES = eINSTANCE.getLinkType_DestinationTypes();
 
 		/**
-		 * The meta object literal for the '<em><b>Access Type</b></em>' attribute feature.
+		 * The meta object literal for the '<em><b>Link Access Type</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute LINK_TYPE__ACCESS_TYPE = eINSTANCE.getLinkType_AccessType();
+		EAttribute LINK_TYPE__LINK_ACCESS_TYPE = eINSTANCE.getLinkType_LinkAccessType();
 
 		/**
-		 * The meta object literal for the '<em><b>Temporality</b></em>' attribute feature.
+		 * The meta object literal for the '<em><b>Link Temporality</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute LINK_TYPE__TEMPORALITY = eINSTANCE.getLinkType_Temporality();
+		EAttribute LINK_TYPE__LINK_TEMPORALITY = eINSTANCE.getLinkType_LinkTemporality();
 
 		/**
 		 * The meta object literal for the '{@link org.m2ling.domain.core.impl.LinkImpl <em>Link</em>}' class.
@@ -4382,12 +4382,12 @@ public interface CorePackage extends EPackage {
 		EReference LINK__TYPE = eINSTANCE.getLink_Type();
 
 		/**
-		 * The meta object literal for the '<em><b>Origins</b></em>' reference list feature.
+		 * The meta object literal for the '<em><b>Sources</b></em>' reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference LINK__ORIGINS = eINSTANCE.getLink_Origins();
+		EReference LINK__SOURCES = eINSTANCE.getLink_Sources();
 
 		/**
 		 * The meta object literal for the '<em><b>Destinations</b></em>' reference list feature.

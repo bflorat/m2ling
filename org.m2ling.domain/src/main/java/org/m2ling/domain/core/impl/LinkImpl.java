@@ -24,7 +24,7 @@ import org.m2ling.domain.core.LinkType;
  * The following features are implemented:
  * <ul>
  *   <li>{@link org.m2ling.domain.core.impl.LinkImpl#getType <em>Type</em>}</li>
- *   <li>{@link org.m2ling.domain.core.impl.LinkImpl#getOrigins <em>Origins</em>}</li>
+ *   <li>{@link org.m2ling.domain.core.impl.LinkImpl#getSources <em>Sources</em>}</li>
  *   <li>{@link org.m2ling.domain.core.impl.LinkImpl#getDestinations <em>Destinations</em>}</li>
  *   <li>{@link org.m2ling.domain.core.impl.LinkImpl#getTimeoutMillis <em>Timeout Millis</em>}</li>
  * </ul>
@@ -51,14 +51,14 @@ public class LinkImpl extends ArchitectureItemImpl implements Link {
 	protected LinkType type;
 
 	/**
-	 * The cached value of the '{@link #getOrigins() <em>Origins</em>}' reference list.
+	 * The cached value of the '{@link #getSources() <em>Sources</em>}' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getOrigins()
+	 * @see #getSources()
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<Component> origins;
+	protected EList<Component> sources;
 
 	/**
 	 * The cached value of the '{@link #getDestinations() <em>Destinations</em>}' reference list.
@@ -152,11 +152,11 @@ public class LinkImpl extends ArchitectureItemImpl implements Link {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<Component> getOrigins() {
-		if (origins == null) {
-			origins = new EObjectResolvingEList<Component>(Component.class, this, CorePackage.LINK__ORIGINS);
+	public EList<Component> getSources() {
+		if (sources == null) {
+			sources = new EObjectResolvingEList<Component>(Component.class, this, CorePackage.LINK__SOURCES);
 		}
-		return origins;
+		return sources;
 	}
 
 	/**
@@ -203,8 +203,8 @@ public class LinkImpl extends ArchitectureItemImpl implements Link {
 			case CorePackage.LINK__TYPE:
 				if (resolve) return getType();
 				return basicGetType();
-			case CorePackage.LINK__ORIGINS:
-				return getOrigins();
+			case CorePackage.LINK__SOURCES:
+				return getSources();
 			case CorePackage.LINK__DESTINATIONS:
 				return getDestinations();
 			case CorePackage.LINK__TIMEOUT_MILLIS:
@@ -225,9 +225,9 @@ public class LinkImpl extends ArchitectureItemImpl implements Link {
 			case CorePackage.LINK__TYPE:
 				setType((LinkType)newValue);
 				return;
-			case CorePackage.LINK__ORIGINS:
-				getOrigins().clear();
-				getOrigins().addAll((Collection<? extends Component>)newValue);
+			case CorePackage.LINK__SOURCES:
+				getSources().clear();
+				getSources().addAll((Collection<? extends Component>)newValue);
 				return;
 			case CorePackage.LINK__DESTINATIONS:
 				getDestinations().clear();
@@ -251,8 +251,8 @@ public class LinkImpl extends ArchitectureItemImpl implements Link {
 			case CorePackage.LINK__TYPE:
 				setType((LinkType)null);
 				return;
-			case CorePackage.LINK__ORIGINS:
-				getOrigins().clear();
+			case CorePackage.LINK__SOURCES:
+				getSources().clear();
 				return;
 			case CorePackage.LINK__DESTINATIONS:
 				getDestinations().clear();
@@ -274,8 +274,8 @@ public class LinkImpl extends ArchitectureItemImpl implements Link {
 		switch (featureID) {
 			case CorePackage.LINK__TYPE:
 				return type != null;
-			case CorePackage.LINK__ORIGINS:
-				return origins != null && !origins.isEmpty();
+			case CorePackage.LINK__SOURCES:
+				return sources != null && !sources.isEmpty();
 			case CorePackage.LINK__DESTINATIONS:
 				return destinations != null && !destinations.isEmpty();
 			case CorePackage.LINK__TIMEOUT_MILLIS:

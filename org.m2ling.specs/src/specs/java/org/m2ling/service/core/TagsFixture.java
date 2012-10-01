@@ -5,15 +5,12 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Properties;
 
-import org.junit.Test;
 import org.m2ling.common.configuration.Conf;
 import org.m2ling.common.exceptions.FunctionalException;
 import org.m2ling.common.soa.Context;
 import org.m2ling.common.utils.Utils;
 import org.m2ling.domain.core.Type;
 import org.m2ling.persistence.PersistenceManagerXMIImpl;
-import org.m2ling.service.core.TagService;
-import org.m2ling.service.core.TagServiceImpl;
 import org.m2ling.service.util.CoreUtil;
 import org.m2ling.service.util.DTOConverter.FromDTO;
 import org.m2ling.service.util.DTOConverter.ToDTO;

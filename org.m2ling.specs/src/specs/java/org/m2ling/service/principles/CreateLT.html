@@ -20,35 +20,43 @@
 			<li>vp id=<b concordion:set="#vpID">id_vp_logical</b></li>
 			<li>id=<b concordion:set="#id">new_id_ct_logical_http_rest</b></li>
 			<li>name=<b concordion:set="#name">HTTP_REST_2</b></li>
-			<li>access type=<b concordion:set="#access_type">RW</b></li>
-			<li>temporality=<b concordion:set="#temporality">SYNC</b></li>
-			<li>sources types=<b concordion:set="#sources_types">id_ct_logical_guimodule,id_ct_logical_batchmodule</b></li>
-			<li>targets types=<b concordion:set="#targets_types">id_ct_logical_servicemodule</b></li>
-			<li>description=<b concordion:set="#desc">Synchronous REST call over HTTP. Default port : 80. </b></li>
+			<li>access type=<b concordion:set="#accessType">RW</b></li>
+			<li>temporality=<b concordion:set="#temporality">ASYNC_PULL</b></li>
+			<li>sources types=<b concordion:set="#sourcesTypes">id_ct_logical_guimodule,id_ct_logical_batchmodule</b></li>
+			<li>destination types=<b concordion:set="#destinationsTypes">id_ct_logical_servicemodule</b></li>
+			<li>description=<b concordion:set="#desc">Asynchronous REST call over HTTP. Default port : 80. </b></li>
 			<li>comment=<b concordion:set="#comment">Over TCP only.</b></li>
 			<li>tags=<b concordion:set="#tags">logical,network</b></li>
 		</ul>
 		should have following characteristics (full round trip from presentation to presentation) : <b
-			concordion:assertEquals="createAndGetLT(#justCheck,#caseName,#vpID,#id,#name,#desc,#comment,#tags,#access_type,#temporality,#sources_types,#targets_types)">
-			boundType=id=id_ct_tech_applicationserver name=ApplicationServer 
-			comment=Available components listed in Technical catalog description=Runs services (RMI, REST, SOAP...). 
+			concordion:assertEquals="createAndGetLT(#justCheck,#caseName,#vpID,#id,#name,#desc,#comment,#tags,#accessType,#temporality,#sourcesTypes,#destinationsTypes)">
+			comment=Over TCP only. 
+			description=Asynchronous REST call over HTTP. Default port : 80. 
+			destinationsTypes=[id=id_ct_logical_servicemodule name=ServiceModule ] 
 			drop= 
-			enumeration=[id=id_comp_tech_jboss5 name=JBoss5 , id=id_comp_tech_jboss6 name=JBoss6 ] 
-			id=new_id_ct_logical_servicecontainer 
-			instantiationFactor=* 
-			name=ServicesContainer2 
-			references=[targets=[id=id_ct_app_servicemodule name=ServiceModule ] type=RUNS , targets=[id=id_ct_logical_rdbms name=RDBMS , id=id_ct_logical_ldap name=LDAP directory ] type=DEPENDS_ON ] 
-			tags=logical,SA 
+			iconPath= 
+			id=new_id_ct_logical_http_rest 
+			linkAccessType=RW 
+			linkTemporality=ASYNC_PULL 
+			name=HTTP_REST_2 
+			sourcesTypes=[id=id_ct_logical_guimodule name=GUIModule , id=id_ct_logical_batchmodule name=BatchModule ] 
+			tags=logical,network 
 			vp=id=id_vp_logical name=Logical Architecture</b>
 	</div>
 	</p>
+	
+	<p class='rule'>LT01 : A LT must contain at least a single component type as source.</p>
+	<div class='example'>
+		If the Lt contains none source, the creation <span concordion:execute="#resu=testNoneSource()"> 
+		service</span> should : <b concordion:assertEquals="#resu">FAIL with code LT_NONE_SOURCES_TYPES</b> 
+	</div>
 
-	
-	
-	<p class='rule'>CT8 : An enumeration can't be provided without associated binding type.
-	<div class='example'>In this case, the CT <span concordion:execute="#resu=testNoBindingType()">creation</span> should : <b concordion:assertEquals="#resu">FAIL with code NULL_BOUND_TYPE_ENUMERATION</b> </div>
-	</p>
-	
+	<p class='rule'>LT02 : A LT must contain at least a single component type as destination.</p>
+	<div class='example'>
+		If the Lt contains none destination, the creation <span concordion:execute="#resu=testNoneDest()"> 
+		service</span> should : <b concordion:assertEquals="#resu">FAIL with code LT_NONE_DEST_TYPES</b> 
+	</div>
+
 	<h3>Format Controls</h3>
 	<ul class='rule'>
 	<li>
@@ -63,12 +71,11 @@
 	<li>See Tags specifications for tags limits</li>
 	</ul>
 		Following service inputs against <b concordion:set="#vpID">id_vp_logical</b>
-		viewpoint should make the service <span
-			concordion:set="#justCheck=true" /> :
+		viewpoint should make the service :
 	<div class='example' >
 	<table
-		concordion:execute="#result=createAndGetCT(#justCheck,#caseName,#vpID,#id,#name,#desc,
-				#comment,#tags,#ifactor,#boundTypeID,#references,#enumeration)">
+		concordion:execute="#result=checkFormat(#caseName,#vpID,#id,#name,#desc,
+				#comment,#tags,#accessType,#temporality,#sourcesTypes,#destinationsTypes)">
 		<tr>
 			<th concordion:set="#caseName">Case</th>
 			<th concordion:set="#id">ID</th>
@@ -76,241 +83,259 @@
 			<th concordion:set="#desc">Description</th>
 			<th concordion:set="#comment">Comment</th>
 			<th concordion:set="#tags">Tags</th>
-			<th concordion:set="#ifactor">IFactor</th>
-			<th concordion:set="#boundTypeID">BoundID</th>
-			<th concordion:set="#references">References</th>
-			<th concordion:set="#enumeration">Enumeration</th>
+			<th concordion:set="#accessType">AccessType</th>
+			<th concordion:set="#temporality">Temporality</th>
+			<th concordion:set="#sourcesTypes">SourcesTypes</th>
+			<th concordion:set="#destinationsTypes">DestinationTypes</th>
 			<th concordion:assertEquals="#result">should :</th>
 		</tr>
 		<!-- Nominal -->
 		<tr>
 			<td>Format/Nominal creation</td>
-			<td>new_id_ct_logical_servicecontainer</td>
-			<td>ServicesContainer2</td>
-			<td>Runs services (RMI, REST, SOAP...).</td>
+			<td>new_id_lt_logical_http_rest</td>
+			<td>HTTP_REST_2</td>
+			<td>description2</td>
 			<td>comment2</td>
 			<td>tags1,tag2</td>
-			<td>*</td>
-			<td>id_ct_tech_applicationserver</td>
-			<td>RUNS:id_ct_app_servicemodule;DEPENDS_ON:id_ct_logical_rdbms,id_ct_logical_ldap</td>
-			<td>id_comp_tech_jboss5,id_comp_tech_jboss6</td>
+			<td>RW</td>
+			<td>ASYNC_PULL</td>
+			<td>id_ct_logical_guimodule,id_ct_logical_batchmodule</td>
+			<td>id_ct_logical_servicemodule</td>
 			<td>PASS</td>
 		</tr>
-		<!-- Existing CT -->
+		<!-- Existing LT -->
 		<tr>
-			<td>Format/Existing CT ID</td>
-			<td>id_ct_logical_servicecontainer</td>
-			<td>ServicesContainer2</td>
-			<td>Runs services (RMI, REST, SOAP...).</td>
+			<td>Format/Existing LT ID</td>
+			<td>id_lt_logical_http_rest</td>
+			<td>HTTP_REST_2</td>
+			<td>description2</td>
 			<td>comment2</td>
 			<td>tags1,tag2</td>
-			<td>*</td>
-			<td>id_ct_tech_applicationserver</td>
-			<td>RUNS:id_ct_app_servicemodule;DEPENDS_ON:id_ct_logical_rdbms</td>
-			<td>id_comp_tech_jboss5,id_comp_tech_jboss6</td>
+			<td>RW</td>
+			<td>ASYNC_PULL</td>
+			<td>id_ct_logical_guimodule,id_ct_logical_batchmodule</td>
+			<td>id_ct_logical_servicemodule</td>
 			<td>FAIL with code DUPLICATES</td>
 		</tr>
 		<tr>
-			<td>Format/Existing CT name</td>
-			<td>bisee__w-CMZoWEeCR-iA</td>
-			<td>ServicesContainer</td>
-			<td>Runs services (RMI, REST, SOAP...).</td>
+			<td>Format/Existing LT name</td>
+			<td>new_id_lt_logical_http_rest</td>
+			<td>HTTP_REST</td>
+			<td>description2</td>
 			<td>comment2</td>
 			<td>tags1,tag2</td>
-			<td>*</td>
-			<td>id_ct_tech_applicationserver</td>
-			<td>RUNS:id_ct_app_servicemodule;DEPENDS_ON:id_ct_logical_rdbms</td>
-			<td>id_comp_tech_jboss5,id_comp_tech_jboss6</td>
+			<td>RW</td>
+			<td>ASYNC_PULL</td>
+			<td>id_ct_logical_guimodule,id_ct_logical_batchmodule</td>
+			<td>id_ct_logical_servicemodule</td>
 			<td>FAIL with code DUPLICATE_NAME</td>
 		</tr>
 		<!-- ID checks -->
 		<tr>
-			<td>Format/Null CT ID</td>
+			<td>Format/Null LT ID</td>
 			<td>null</td>
-			<td>ServicesContainer</td>
-			<td>Runs services (RMI, REST, SOAP...).</td>
+			<td>HTTP_REST_2</td>
+			<td>description2</td>
 			<td>comment2</td>
 			<td>tags1,tag2</td>
-			<td>*</td>
-			<td>id_ct_tech_applicationserver</td>
-			<td>RUNS:id_ct_app_servicemodule;DEPENDS_ON:id_ct_logical_rdbms</td>
-			<td>id_comp_tech_jboss5,id_comp_tech_jboss6</td>
+			<td>RW</td>
+			<td>ASYNC_PULL</td>
+			<td>id_ct_logical_guimodule,id_ct_logical_batchmodule</td>
+			<td>id_ct_logical_servicemodule</td>
 			<td>FAIL with code NULL_ARGUMENT</td>
 		</tr>
 		<tr>
-			<td>Format/Void CT ID</td>
+			<td>Format/Void LT ID</td>
 			<td></td>
-			<td>ServicesContainer</td>
-			<td>Runs services (RMI, REST, SOAP...).</td>
+			<td>HTTP_REST_2</td>
+			<td>description2</td>
 			<td>comment2</td>
 			<td>tags1,tag2</td>
-			<td>*</td>
-			<td>id_ct_tech_applicationserver</td>
-			<td>RUNS:id_ct_app_servicemodule;DEPENDS_ON:id_ct_logical_rdbms</td>
-			<td>id_comp_tech_jboss5,id_comp_tech_jboss6</td>
+			<td>RW</td>
+			<td>ASYNC_PULL</td>
+			<td>id_ct_logical_guimodule,id_ct_logical_batchmodule</td>
+			<td>id_ct_logical_servicemodule</td>
 			<td>FAIL with code VOID_ARGUMENT</td>
 		</tr>
 		<tr>
-			<td>Format/Void CT ID after trim</td>
+			<td>Format/Void LT ID after trim</td>
 			<td>space</td>
-			<td>ServicesContainer</td>
-			<td>Runs services (RMI, REST, SOAP...).</td>
+			<td>HTTP_REST_2</td>
+			<td>description2</td>
 			<td>comment2</td>
 			<td>tags1,tag2</td>
-			<td>*</td>
-			<td>id_ct_tech_applicationserver</td>
-			<td>RUNS:id_ct_app_servicemodule;DEPENDS_ON:id_ct_logical_rdbms</td>
-			<td>id_comp_tech_jboss5,id_comp_tech_jboss6</td>
+			<td>RW</td>
+			<td>ASYNC_PULL</td>
+			<td>id_ct_logical_guimodule,id_ct_logical_batchmodule</td>
+			<td>id_ct_logical_servicemodule</td>
 			<td>FAIL with code VOID_ARGUMENT</td>
 		</tr>
 		<!-- name check -->
 		<tr>
-			<td>Format/Null CT name</td>
-			<td>new_id_ct_logical_servicecontainer</td>
+			<td>Format/Null LT name</td>
+			<td>new_id_lt_logical_http_rest</td>
 			<td>null</td>
-			<td>Runs services (RMI, REST, SOAP...).</td>
+			<td>description2</td>
 			<td>comment2</td>
 			<td>tags1,tag2</td>
-			<td>*</td>
-			<td>id_ct_tech_applicationserver</td>
-			<td>RUNS:id_ct_app_servicemodule;DEPENDS_ON:id_ct_logical_rdbms</td>
-			<td>id_comp_tech_jboss5,id_comp_tech_jboss6</td>
-			<td>PASS</td>
-		</tr>
-		<tr>
-			<td>Format/Void CT name</td>
-			<td>new_id_ct_logical_servicecontainer</td>
-			<td></td>
-			<td>Runs services (RMI, REST, SOAP...).</td>
-			<td>comment2</td>
-			<td>tags1,tag2</td>
-			<td>*</td>
-			<td>id_ct_tech_applicationserver</td>
-			<td>RUNS:id_ct_app_servicemodule;DEPENDS_ON:id_ct_logical_rdbms</td>
-			<td>id_comp_tech_jboss5,id_comp_tech_jboss6</td>
-			<td>FAIL with code VOID_ARGUMENT</td>
-		</tr>
-		<tr>
-			<td>Format/Void CT name after trim</td>
-			<td>new_id_ct_logical_servicecontainer</td>
-			<td>space</td>
-			<td>Runs services (RMI, REST, SOAP...).</td>
-			<td>comment2</td>
-			<td>tags1,tag2</td>
-			<td>*</td>
-			<td>id_ct_tech_applicationserver</td>
-			<td>RUNS:id_ct_app_servicemodule;DEPENDS_ON:id_ct_logical_rdbms</td>
-			<td>id_comp_tech_jboss5,id_comp_tech_jboss6</td>
-			<td>FAIL with code VOID_ARGUMENT</td>
-		</tr>
-		<tr>
-			<td>Format/Invalid instantiation factor (negative)</td>
-			<td>new_id_ct_logical_servicecontainer</td>
-			<td>null</td>
-			<td>Runs services (RMI, REST, SOAP...).</td>
-			<td>comment2</td>
-			<td>tags1,tag2</td>
-			<td>-3</td>
-			<td>id_ct_tech_applicationserver</td>
-			<td>RUNS:id_ct_app_servicemodule;DEPENDS_ON:id_ct_logical_rdbms</td>
-			<td>id_comp_tech_jboss5,id_comp_tech_jboss6</td>
-			<td>FAIL with code WRONG_IF</td>
-		</tr>
-		<tr>
-			<td>Format/Invalid instantiation factor (non integer)</td>
-			<td>new_id_ct_logical_servicecontainer</td>
-			<td>null</td>
-			<td>Runs services (RMI, REST, SOAP...).</td>
-			<td>comment2</td>
-			<td>tags1,tag2</td>
-			<td>wrong</td>
-			<td>id_ct_tech_applicationserver</td>
-			<td>RUNS:id_ct_app_servicemodule;DEPENDS_ON:id_ct_logical_rdbms</td>
-			<td>id_comp_tech_jboss5,id_comp_tech_jboss6</td>
-			<td>FAIL with code INVALID_FORMAT</td>
-		</tr>
-		
-		<!-- Comment -->
-		<tr>
-			<td>Format/Null comment</td>
-			<td>new_id_ct_logical_servicecontainer</td>
-			<td>ServicesContainer2</td>
-			<td>Runs services (RMI, REST, SOAP...).</td>
-			<td>null</td>
-			<td>tags1,tag2</td>
-			<td>*</td>
-			<td>id_ct_tech_applicationserver</td>
-			<td>RUNS:id_ct_app_servicemodule;DEPENDS_ON:id_ct_logical_rdbms</td>
-			<td>id_comp_tech_jboss5,id_comp_tech_jboss6</td>
-			<td>PASS</td>
-		</tr>
-		<!-- References -->
-		<tr>
-			<td>Format/Non-existing reference</td>
-			<td>new_id_ct_logical_servicecontainer</td>
-			<td>ServicesContainer2</td>
-			<td>Runs services (RMI, REST, SOAP...).</td>
-			<td>null</td>
-			<td>tags1,tag2</td>
-			<td>*</td>
-			<td>id_ct_tech_applicationserver</td>
-			<td>RUNS:foo;DEPENDS_ON:id_ct_logical_rdbms</td>
-			<td>id_comp_tech_jboss5,id_comp_tech_jboss6</td>
-			<td>FAIL with code TARGET_NOT_FOUND</td>
-		</tr>
-		<!-- Bound type -->
-		<tr>
-			<td>Format/Null boundtype</td>
-			<td>new_id_ct_logical_servicecontainer</td>
-			<td>ServicesContainer2</td>
-			<td>Runs services (RMI, REST, SOAP...).</td>
-			<td>null</td>
-			<td>tags1,tag2</td>
-			<td>*</td>
-			<td>null</td>
-			<td>DEPENDS_ON:id_ct_logical_rdbms</td>
-			<td></td>
-			<td>PASS</td>
-		</tr>
-		<tr>
-			<td>Format/Non-existing boundtype</td>
-			<td>new_id_ct_logical_servicecontainer</td>
-			<td>ServicesContainer2</td>
-			<td>Runs services (RMI, REST, SOAP...).</td>
-			<td>comment2</td>
-			<td>tags1,tag2</td>
-			<td>*</td>
-			<td>foo_ct</td>
-			<td>RUNS:id_ct_app_servicemodule;DEPENDS_ON:id_ct_logical_rdbms,id_ct_logical_ldap</td>
-			<td>id_comp_tech_jboss5,id_comp_tech_jboss6</td>
-			<td>FAIL with code TARGET_NOT_FOUND</td>
-		</tr>
-		<tr>
-			<td>Format/null enumeration</td>
-			<td>new_id_ct_logical_servicecontainer</td>
-			<td>ServicesContainer2</td>
-			<td>Runs services (RMI, REST, SOAP...).</td>
-			<td>comment2</td>
-			<td>tags1,tag2</td>
-			<td>*</td>
-			<td>id_ct_tech_applicationserver</td>
-			<td>RUNS:id_ct_app_servicemodule;DEPENDS_ON:id_ct_logical_rdbms,id_ct_logical_ldap</td>
-			<td>null</td>
+			<td>RW</td>
+			<td>ASYNC_PULL</td>
+			<td>id_ct_logical_guimodule,id_ct_logical_batchmodule</td>
+			<td>id_ct_logical_servicemodule</td>
 			<td>FAIL with code NULL_ARGUMENT</td>
 		</tr>
 		<tr>
-			<td>Format/enumeration contains null</td>
-			<td>new_id_ct_logical_servicecontainer</td>
-			<td>ServicesContainer2</td>
-			<td>Runs services (RMI, REST, SOAP...).</td>
+			<td>Format/Void LT name</td>
+			<td>new_id_lt_logical_http_rest</td>
+			<td></td>
+			<td>description2</td>
 			<td>comment2</td>
 			<td>tags1,tag2</td>
-			<td>*</td>
-			<td>id_ct_tech_applicationserver</td>
-			<td>RUNS:id_ct_app_servicemodule;DEPENDS_ON:id_ct_logical_rdbms,id_ct_logical_ldap</td>
-			<td>id_comp_tech_jboss5,null</td>
+			<td>RW</td>
+			<td>ASYNC_PULL</td>
+			<td>id_ct_logical_guimodule,id_ct_logical_batchmodule</td>
+			<td>id_ct_logical_servicemodule</td>
+			<td>FAIL with code VOID_ARGUMENT</td>
+		</tr>
+		<tr>
+			<td>Format/Void LT name after trim</td>
+			<td>new_id_lt_logical_http_rest</td>
+			<td>space</td>
+			<td>description2</td>
+			<td>comment2</td>
+			<td>tags1,tag2</td>
+			<td>RW</td>
+			<td>ASYNC_PULL</td>
+			<td>id_ct_logical_guimodule,id_ct_logical_batchmodule</td>
+			<td>id_ct_logical_servicemodule</td>
+			<td>FAIL with code VOID_ARGUMENT</td>
+		</tr>
+		<!--  Access type and temporality -->
+		<tr>
+			<td>Format/Invalid access type</td>
+			<td>new_id_lt_logical_http_rest</td>
+			<td>HTTP_REST_2</td>
+			<td>description2</td>
+			<td>comment2</td>
+			<td>tags1,tag2</td>
+			<td>foo</td>
+			<td>ASYNC_PULL</td>
+			<td>id_ct_logical_guimodule,id_ct_logical_batchmodule</td>
+			<td>id_ct_logical_servicemodule</td>
+			<td>FAIL with code LT_ILLEGAL_ACCESS_TYPE</td>
+		</tr>
+		<tr>
+			<td>Format/Null access type</td>
+			<td>new_id_lt_logical_http_rest</td>
+			<td>HTTP_REST_2</td>
+			<td>description2</td>
+			<td>comment2</td>
+			<td>tags1,tag2</td>
+			<td>null</td>
+			<td>ASYNC_PULL</td>
+			<td>id_ct_logical_guimodule,id_ct_logical_batchmodule</td>
+			<td>id_ct_logical_servicemodule</td>
+			<td>FAIL with code LT_ILLEGAL_ACCESS_TYPE</td>
+		</tr>
+		<tr>
+			<td>Format/Invalid temporality</td>
+			<td>new_id_lt_logical_http_rest</td>
+			<td>HTTP_REST_2</td>
+			<td>description2</td>
+			<td>comment2</td>
+			<td>tags1,tag2</td>
+			<td>RW</td>
+			<td>foo</td>
+			<td>id_ct_logical_guimodule,id_ct_logical_batchmodule</td>
+			<td>id_ct_logical_servicemodule</td>
+			<td>FAIL with code LT_ILLEGAL_TEMPORALITY</td>
+		</tr>
+		<tr>
+			<td>Format/Null temporality</td>
+			<td>new_id_lt_logical_http_rest</td>
+			<td>HTTP_REST_2</td>
+			<td>description2</td>
+			<td>comment2</td>
+			<td>tags1,tag2</td>
+			<td>RW</td>
+			<td>null</td>
+			<td>id_ct_logical_guimodule,id_ct_logical_batchmodule</td>
+			<td>id_ct_logical_servicemodule</td>
+			<td>FAIL with code LT_ILLEGAL_TEMPORALITY</td>
+		</tr>
+			
+		<!-- Comment -->
+		<tr>
+			<td>Format/Null comment</td>
+			<td>new_id_lt_logical_http_rest</td>
+			<td>HTTP_REST_2</td>
+			<td>description2</td>
+			<td>null</td>
+			<td>tags1,tag2</td>
+			<td>RW</td>
+			<td>ASYNC_PULL</td>
+			<td>id_ct_logical_guimodule,id_ct_logical_batchmodule</td>
+			<td>id_ct_logical_servicemodule</td>
+			<td>PASS</td>
+		</tr>
+		
+		<!-- Description -->
+		<tr>
+			<td>Format/Null description</td>
+			<td>new_id_lt_logical_http_rest</td>
+			<td>HTTP_REST_2</td>
+			<td>null</td>
+			<td>comment2</td>
+			<td>tags1,tag2</td>
+			<td>RW</td>
+			<td>ASYNC_PULL</td>
+			<td>id_ct_logical_guimodule,id_ct_logical_batchmodule</td>
+			<td>id_ct_logical_servicemodule</td>
+			<td>FAIL with code NULL_ARGUMENT</td>
+		</tr>
+		<tr>
+			<td>Format/Void description</td>
+			<td>new_id_lt_logical_http_rest</td>
+			<td>HTTP_REST_2</td>
+			<td>space</td>
+			<td>comment2</td>
+			<td>tags1,tag2</td>
+			<td>RW</td>
+			<td>ASYNC_PULL</td>
+			<td>id_ct_logical_guimodule,id_ct_logical_batchmodule</td>
+			<td>id_ct_logical_servicemodule</td>
+			<td>FAIL with code VOID_ARGUMENT</td>
+		</tr>
+		<!-- Sources and destination types -->
+		
+		<tr>
+			<td>Format/unexisting source types</td>
+			<td>new_id_lt_logical_http_rest</td>
+			<td>HTTP_REST_2</td>
+			<td>description2</td>
+			<td>comment2</td>
+			<td>tags1,tag2</td>
+			<td>RW</td>
+			<td>ASYNC_PULL</td>
+			<td>foo</td>
+			<td>id_ct_logical_servicemodule</td>
 			<td>FAIL with code TARGET_NOT_FOUND</td>
 		</tr>
+		
+		<tr>
+			<td>Format/unexisting destination types</td>
+			<td>new_id_lt_logical_http_rest</td>
+			<td>HTTP_REST_2</td>
+			<td>description2</td>
+			<td>comment2</td>
+			<td>tags1,tag2</td>
+			<td>RW</td>
+			<td>ASYNC_PULL</td>
+			<td>id_ct_logical_guimodule</td>
+			<td>foo</td>
+			<td>FAIL with code TARGET_NOT_FOUND</td>
+		</tr>
+		
 	</table>
 	</div>	
 </body>

@@ -5,12 +5,12 @@ package org.m2ling.presentation.principles;
 
 
 /**
- * Valid access types for link types
+ * Valid temporality for link types
  * 
  * <p>
  * CAUTION:
  * </p>
- * : MUST BE SYNCHRONIZED with the org.m2ling.domain.core.LinkTemporality class </p>
+ * : MUST BE SYNCHRONIZED with the org.m2ling.domain.core.LinkTemporality enum </p>
  */
 public enum LinkTemporality {
 	SYNC,

@@ -16,12 +16,12 @@
       <references type="RUNS" targets="id_ct_logical_database"/>
     </componentTypes>
     <componentTypes id="id_ct_logical_ldap" name="LDAP directory" description="" boundType="_LyWEoZ6REeGyndJ1yNTLVw" enumeration="_cjliUJ6TEeGyndJ1yNTLVw"/>
-    <componentTypes id="id_ct_logical_guimodule" name="GUIModule" comment="" description="A GUI module serves Web pages targeting to end users." boundType="_E3EOwZoWEeG71vmJ5CR-iAe"/>
-    <componentTypes id="id_ct_app_servicemodule" name="ServiceModule" comment="" description="A service module provides business services to batch or GUI modules and is responsible for enterprise data." boundType="id_ct_app_servicemodulee"/>
+    <componentTypes id="id_ct_logical_guimodule" name="GUIModule" comment="" description="A GUI module serves Web pages targeting to end users." boundType="id_ct_app_guimodule"/>
+    <componentTypes id="id_ct_logical_servicemodule" name="ServiceModule" comment="" description="A service module provides business services to batch or GUI modules and is responsible for enterprise data." boundType="id_ct_app_servicemodule"/>
     <componentTypes id="id_ct_logical_database" name="Database" comment="" description="A database contains an application data (this data may or not be replicated among several clusters)"/>
-    <componentTypes id="id_ct_logical_batchmodule" name="BatchModule" comment="" description="Batch module" boundType="_E3EOwZoWEeG71vkjfdhbfb"/>
-    <linkTypes id="_SA6SgpoZEeG71vmJ5CR-iA" name="HTTP_REST" description="Synchronous REST call over HTTP. Default port : 80. Over TCP only." sourceTypes="id_ct_logical_guimodule id_ct_logical_batchmodule" destinationTypes="id_ct_app_servicemodule"/>
-    <linkTypes id="_4Rfd0pqjEeGQsK1VSbibvw" name="NET_DATABASE" description="Synchronous Network protocol to access remote Postgres database. Default port : 5432. Can be used over TCP or UDP." sourceTypes="id_ct_app_servicemodule" destinationTypes="id_ct_logical_database"/>
+    <componentTypes id="id_ct_logical_batchmodule" name="BatchModule" comment="" description="Batch module" boundType="id_ct_app_batchmodule"/>
+    <linkTypes id="id_lt_logical_http_rest" name="HTTP_REST" description="Synchronous REST call over HTTP. Default port : 80. Over TCP only." sourceTypes="id_ct_logical_guimodule id_ct_logical_batchmodule" destinationTypes="id_ct_logical_servicemodule"/>
+    <linkTypes id="_4Rfd0pqjEeGQsK1VSbibvw" name="NET_DATABASE" description="Synchronous Network protocol to access remote Postgres database. Default port : 5432. Can be used over TCP or UDP." sourceTypes="id_ct_logical_servicemodule" destinationTypes="id_ct_logical_database"/>
     <linkTypes id="_oHllkpqkEeGbI4NH3iicSg" name="HTTP_GUI" comment="" description="Synchronous HTTP access from end users to the GUI services. Default port : 80. Over TCP only. KEEP_ALIVE option enabled." sourceTypes="_8_BugZqkEeGbI4NH3iicSg _8_BugZqkEeGbI4NH3iicSg" destinationTypes="_fKtsQZoXEeG71vmJ5CR-iA"/>
     <linkTypes id="_2LrDApqyEeGVMag01qc4bw" name="LDAP" comment="" description="Synchronous access to a LDAP directory. Over TCP-IP." sourceTypes="id_ct_logical_guimodule" destinationTypes="id_ct_logical_ldap"/>
     <rules id="R1" name="R1" comment="This rule is one of the Bikes IS cornerstone." description="A GUI Module can't map (using an hyperlink or a redirect for instance) another GUI Module, each application must be integrated into the portal." status="APPLICABLE" priority="3" rationale="Centralizaing all the IS intranet websites URL into a single portal brings low coupling between websites, eases management and increases security." exceptions="If a GUI module is itself a sub-domain kind of portal, it may integrate several GUI modules URL as parameters and come with hyperkink to them but a special attention must be paid to manage these URL by the project team. The pointed application must not be available from the main portal but only manage by the sub-domain portail.">
@@ -69,14 +69,14 @@
   </viewPoints>
   <viewPoints description="Show applicative component from one or more applications and applicative links between them. Middleware are not modelised." id="id_vp_app" name="Applicative architecture">
     <componentTypes id="id_ct_app_application" name="Application" comment="" description="An application implements a coherent set of information systems business services. It is built out of one or more applicative modules." boundType="_c1vGwJq4EeGVMag01qc4bw">
-      <references targets="_E3EOwZoWEeG71vmJ5CR-iAe _E3EOwZoWEeG71vkjfdhbfb id_ct_app_servicemodulee"/>
+      <references targets="id_ct_app_guimodule id_ct_app_batchmodule id_ct_app_servicemodule"/>
     </componentTypes>
-    <componentTypes id="_E3EOwZoWEeG71vmJ5CR-iAe" name="GUIModule" comment="" description="A GUI module serves Web pages targeting end users."/>
-    <componentTypes id="id_ct_app_servicemodulee" name="ServiceModule" comment="" description="A service module provides business services to batch or GUI modules and is responsible for enterprise data."/>
-    <componentTypes id="_E3EOwZoWEeG71vkjfdhbfb" name="BatchModule" comment="" description="A batch module contains one or more batchs computing complex and batch operations."/>
-    <linkTypes id="_psOW0p8zEeGYS-4UJ-FpAA" name="SERVICE_SYNC_READ" description="Synchronous call to read-only services" sourceTypes="_E3EOwZoWEeG71vmJ5CR-iAe" destinationTypes="id_ct_app_servicemodulee"/>
-    <linkTypes id="_psOW0p8zEeGYS-4UJ-FpAArr" name="SERVICE_SYNC_RW" description="Synchronous call to Read and write services" sourceTypes="_E3EOwZoWEeG71vmJ5CR-iAe" destinationTypes="id_ct_app_servicemodulee"/>
-    <linkTypes id="_psOW0p8zEeGYS-4UJ-FpAAdgfgf" name="SERVICE_ASYNC_READ" description="Asynchronous call to read-only services used to retrieve large amount of data." sourceTypes="_E3EOwZoWEeG71vmJ5CR-iAe" destinationTypes="id_ct_app_servicemodulee"/>
+    <componentTypes id="id_ct_app_guimodule" name="GUIModule" comment="" description="A GUI module serves Web pages targeting end users."/>
+    <componentTypes id="id_ct_app_servicemodule" name="ServiceModule" comment="" description="A service module provides business services to batch or GUI modules and is responsible for enterprise data."/>
+    <componentTypes id="id_ct_app_batchmodule" name="BatchModule" comment="" description="A batch module contains one or more batchs computing complex and batch operations."/>
+    <linkTypes id="_psOW0p8zEeGYS-4UJ-FpAA" name="SERVICE_SYNC_READ" description="Synchronous call to read-only services" sourceTypes="id_ct_app_guimodule" destinationTypes="id_ct_app_servicemodule"/>
+    <linkTypes id="_psOW0p8zEeGYS-4UJ-FpAArr" name="SERVICE_SYNC_RW" description="Synchronous call to Read and write services" sourceTypes="id_ct_app_guimodule" destinationTypes="id_ct_app_servicemodule"/>
+    <linkTypes id="_psOW0p8zEeGYS-4UJ-FpAAdgfgf" name="SERVICE_ASYNC_READ" description="Asynchronous call to read-only services used to retrieve large amount of data." sourceTypes="id_ct_app_guimodule" destinationTypes="id_ct_app_servicemodule"/>
     <rules id="dfsdhfkjehzlkm343" name="R1" comment="This rule emphases the rule of a portal." description="Direct call between GUI modules are forbitten." status="VALIDATED" priority="3">
       <tags>modules</tags>
     </rules>
@@ -98,8 +98,8 @@
     <componentTypes id="_0pkjcZ9aEeGNFtlcQfU333" name="SPARC Server" description="SPARC RISC-based CPU server" boundType="_0pkjcZ9aEeGNFtlcQfU333" instantiationFactor="-1">
       <references type="RUNS" targets="id_ct_deploy_OS"/>
     </componentTypes>
-    <componentTypes id="_aazazaza" name="GUIModule" comment="" description="A GUI module serves Web pages destinated to end users." boundType="_E3EOwZoWEeG71vmJ5CR-iAe" instantiationFactor="-1"/>
-    <componentTypes id="_1y2zQZohnnnmJ5CR-iA" name="ServiceModule" comment="" description="A service module provides business services to batch or GUI modules and is responsible for enterprise data." boundType="id_ct_app_servicemodulee" instantiationFactor="-1"/>
+    <componentTypes id="_aazazaza" name="GUIModule" comment="" description="A GUI module serves Web pages destinated to end users." boundType="id_ct_app_guimodule" instantiationFactor="-1"/>
+    <componentTypes id="_1y2zQZohnnnmJ5CR-iA" name="ServiceModule" comment="" description="A service module provides business services to batch or GUI modules and is responsible for enterprise data." boundType="id_ct_app_servicemodule" instantiationFactor="-1"/>
     <componentTypes id="_Ybdmtd456" name="RDBMS" comment="" description="Runs one or more databases. Database initial populating is out of the deployment scope itself, done by scripts."/>
     <componentTypes id="id_ct_deploy_OS" name="OS" description="Operating system" boundType="_wf5AQZxEEeGi7NYPtEuJdA" instantiationFactor="-1">
       <references type="RUNS" targets="_wf5AQZxEEeGi7NYPtEuJdA _fKt222vmJ5CR-iA _aazazazaerer _ha8mE333Mag01qc4bw"/>
@@ -134,10 +134,10 @@
       <references type="RUNS" targets="_qODuQp6TEeGyndJ1yNTLVw"/>
     </components>
     <components id="_1tPv4qvwEeGqu4Jf39UauA" name="BikesOnline_database" comment="" type="id_ct_logical_database"/>
-    <links id="fdfdsfsfsddsewv" name="Stream1" comment="" description="" type="_oHllkpqkEeGbI4NH3iicSg" origins="_4-yHMprbEeGE7MG94I-e3A" destinations="_qODuQp6TEeGyndJ1yNTLVw"/>
-    <links id="vn,khghjghj" name="Stream2" type="_2LrDApqyEeGVMag01qc4bw" origins="_qODuQp6TEeGyndJ1yNTLVw" destinations="_OJwP0pw_EeGE7MG94I-e3A"/>
-    <links id="_aCyWg5xDEeGi7NYPtEuJdA" name="Stream3" type="_SA6SgpoZEeG71vmJ5CR-iA" origins="_qODuQp6TEeGyndJ1yNTLVw" destinations="_GHLjspxDEeGi7NYPtEuJdA"/>
-    <links id="_NpfsI56UEeGyndJ1yNTLVw" name="Stream4" type="_4Rfd0pqjEeGQsK1VSbibvw" origins="_GHLjspxDEeGi7NYPtEuJdA" destinations="_SJP_gp6VEeGbbcMFSNIrnA"/>
+    <links id="fdfdsfsfsddsewv" name="Stream1" comment="" description="" type="_oHllkpqkEeGbI4NH3iicSg" sources="_4-yHMprbEeGE7MG94I-e3A" destinations="_qODuQp6TEeGyndJ1yNTLVw"/>
+    <links id="vn,khghjghj" name="Stream2" type="_2LrDApqyEeGVMag01qc4bw" sources="_qODuQp6TEeGyndJ1yNTLVw" destinations="_OJwP0pw_EeGE7MG94I-e3A"/>
+    <links id="_aCyWg5xDEeGi7NYPtEuJdA" name="Stream3" type="id_lt_logical_http_rest" sources="_qODuQp6TEeGyndJ1yNTLVw" destinations="_GHLjspxDEeGi7NYPtEuJdA"/>
+    <links id="_NpfsI56UEeGyndJ1yNTLVw" name="Stream4" type="_4Rfd0pqjEeGQsK1VSbibvw" sources="_GHLjspxDEeGi7NYPtEuJdA" destinations="_SJP_gp6VEeGbbcMFSNIrnA"/>
   </views>
   <views comment="" description="" id="_0oVTkZ55EeGAFeVyyYKoXg" name="Enterprise architecture view" viewPoint="_uP3gkZniEeGeqKlv68ECYA">
     <components id="_Uf_Bop56EeGAFeVyyYKoXg" name="eBusiness" comment="" type="_KEFloJq4EeGVMag01qc4bw">
@@ -173,19 +173,19 @@
     <components id="_O1ehYp80EeGYS-4UJ-FpAA" name="BikesOnline" comment="" description="The main eCommerce Bikes Inc. application." type="id_ct_app_application">
       <references targets="_hGsf4J89EeGNFtlcQfUFgw _osKccJ89EeGNFtlcQfUFgw _zPeqMJ89EeGNFtlcQfUFgw _9xnzQJ89EeGNFtlcQfUFgw _VsqREp8zEeGYS-4UJ-FpAA"/>
     </components>
-    <components id="_hGsf4J89EeGNFtlcQfUFgw" name="AdminGUI" description="A technical administration  GUI for BikesOnline app." type="_E3EOwZoWEeG71vmJ5CR-iAe"/>
-    <components id="_osKccJ89EeGNFtlcQfUFgw" name="EndUserGUI" description="GUI for all end-users BikesOnline app." type="_E3EOwZoWEeG71vmJ5CR-iAe"/>
-    <components id="_zPeqMJ89EeGNFtlcQfUFgw" name="AdminServices" comment="" description="Restricted administrative services" type="id_ct_app_servicemodulee"/>
-    <components id="_9xnzQJ89EeGNFtlcQfUFgw" name="PaiementServices" description="Secured payment services" type="id_ct_app_servicemodulee"/>
-    <components id="_VsqREp8zEeGYS-4UJ-FpAA" name="Product Catalog Services" description="" type="id_ct_app_servicemodulee"/>
+    <components id="_hGsf4J89EeGNFtlcQfUFgw" name="AdminGUI" description="A technical administration  GUI for BikesOnline app." type="id_ct_app_guimodule"/>
+    <components id="_osKccJ89EeGNFtlcQfUFgw" name="EndUserGUI" description="GUI for all end-users BikesOnline app." type="id_ct_app_guimodule"/>
+    <components id="_zPeqMJ89EeGNFtlcQfUFgw" name="AdminServices" comment="" description="Restricted administrative services" type="id_ct_app_servicemodule"/>
+    <components id="_9xnzQJ89EeGNFtlcQfUFgw" name="PaiementServices" description="Secured payment services" type="id_ct_app_servicemodule"/>
+    <components id="_VsqREp8zEeGYS-4UJ-FpAA" name="Product Catalog Services" description="" type="id_ct_app_servicemodule"/>
     <components id="_fL9Akp80EeGYS-4UJ-FpAA" name="OperationalDashboard" description="&quot;OperationalDashboard&quot; is a BI application" type="id_ct_app_application">
       <references targets="_bJoEgJ89EeGNFtlcQfUFgw"/>
     </components>
-    <components id="_bJoEgJ89EeGNFtlcQfUFgw" name="ODBatchs" comment="" type="_E3EOwZoWEeG71vmJ5CR-iAe"/>
-    <links id="_Uq7tU58-EeGNFtlcQfUFgw" name="TRANSACTIONS_REPORTING" description="Access from DO batchs to BikesOnline daily transactions for BI purposes." type="_psOW0p8zEeGYS-4UJ-FpAAdgfgf" origins="_bJoEgJ89EeGNFtlcQfUFgw" destinations="_9xnzQJ89EeGNFtlcQfUFgw"/>
-    <links id="_tUQzg58-EeGNFtlcQfUFgw" name="CATALOG_READING" comment="" description="Access from BikesOnline GUI to catalog services " type="_psOW0p8zEeGYS-4UJ-FpAA" origins="_qODuQp6TEeGyndJ1yNTLVw" destinations="_gmFcgp6VEeGbbcMFSNIrnA"/>
-    <links id="_tUQzg58-" name="PAIEMENT_TRANSACTIONS" comment="" description="Access from BikesOnline GUI to payment services" type="_psOW0p8zEeGYS-4UJ-FpAArr" origins="_qODuQp6TEeGyndJ1yNTLVw" destinations="_9xnzQJ89EeGNFtlcQfUFgw"/>
-    <links id="_tUQzg58-dscgfgx" name="ADMINISTRATION" comment="" description="Access from BikesOnline administrative GUI to BikesOnline administrative services" type="_psOW0p8zEeGYS-4UJ-FpAArr" origins="_8fvV4p6TEeGyndJ1yNTLVw" destinations="_zPeqMJ89EeGNFtlcQfUFgw"/>
+    <components id="_bJoEgJ89EeGNFtlcQfUFgw" name="ODBatchs" comment="" type="id_ct_app_guimodule"/>
+    <links id="_Uq7tU58-EeGNFtlcQfUFgw" name="TRANSACTIONS_REPORTING" description="Access from DO batchs to BikesOnline daily transactions for BI purposes." type="_psOW0p8zEeGYS-4UJ-FpAAdgfgf" sources="_bJoEgJ89EeGNFtlcQfUFgw" destinations="_9xnzQJ89EeGNFtlcQfUFgw"/>
+    <links id="_tUQzg58-EeGNFtlcQfUFgw" name="CATALOG_READING" comment="" description="Access from BikesOnline GUI to catalog services " type="_psOW0p8zEeGYS-4UJ-FpAA" sources="_qODuQp6TEeGyndJ1yNTLVw" destinations="_gmFcgp6VEeGbbcMFSNIrnA"/>
+    <links id="_tUQzg58-" name="PAIEMENT_TRANSACTIONS" comment="" description="Access from BikesOnline GUI to payment services" type="_psOW0p8zEeGYS-4UJ-FpAArr" sources="_qODuQp6TEeGyndJ1yNTLVw" destinations="_9xnzQJ89EeGNFtlcQfUFgw"/>
+    <links id="_tUQzg58-dscgfgx" name="ADMINISTRATION" comment="" description="Access from BikesOnline administrative GUI to BikesOnline administrative services" type="_psOW0p8zEeGYS-4UJ-FpAArr" sources="_8fvV4p6TEeGyndJ1yNTLVw" destinations="_zPeqMJ89EeGNFtlcQfUFgw"/>
   </views>
   <views comment="" description="BikesOnline physical architecture" id="_o6dP8Z9lEeGNFtlcQfUFgw" name="Physical_BikesOnline" viewPoint="fsdfhjksdhfkjhsdkfj">
     <instances id="_av1GdKGYEeGWHchb0LRqvg" name="WebServer_1" comment="" status="AVAILABLE" component="_gfgfdeG3fPi34vn9KQ" boundComponentInstance="_Hk3"/>
@@ -211,7 +211,7 @@
     <components id="_41zdop_6EeG3fPi34vn9KQ" name="Alteon-LM-5500" comment="" description="Alteon LM-5500 load balancer" type="_McFWYZ9bEeGNFtlcQfUFgw"/>
     <components id="_JlK98p_7EeG3fPi34vn9KQ" name="Cisco-2800" comment="" description="Branch router" type="_kOyogZ9ZEeGNFtlcQfUFgw"/>
     <components id="_jUElEp_7EeG3fPi34vn9KQ" name="Hitashi-HUS100" comment="" description="Hitachi Unified Storage 100 Family" type="_VIxZsZ9bEeGNFtlcQfUFgw"/>
-    <links id="_sJNsw6GbEeGpDeafbzGYMQ" name="Class 5E cable" comment="" description="Ethernet gigabit cable" type="_FFDecp9bEeGNFtlcQfUFgw" origins="_41zdop_6EeG3fPi34vn9KQ _JlK98p_7EeG3fPi34vn9KQ _Jlytjhmp _nKCmgp_6EeG3fPi34vn9KQ _gfgfdeG3fPi34vn9KQ _JBJgUp_6EeG3fPi34vn9KQ _Y6hMwp_6EeG3fPi34vn9KQ" destinations="_41zdop_6EeG3fPi34vn9KQ _JlK98p_7EeG3fPi34vn9KQ _Jlytjhmp _nKCmgp_6EeG3fPi34vn9KQ _gfgfdeG3fPi34vn9KQ _JBJgUp_6EeG3fPi34vn9KQ _Y6hMwp_6EeG3fPi34vn9KQ"/>
+    <links id="_sJNsw6GbEeGpDeafbzGYMQ" name="Class 5E cable" comment="" description="Ethernet gigabit cable" type="_FFDecp9bEeGNFtlcQfUFgw" sources="_41zdop_6EeG3fPi34vn9KQ _JlK98p_7EeG3fPi34vn9KQ _Jlytjhmp _nKCmgp_6EeG3fPi34vn9KQ _gfgfdeG3fPi34vn9KQ _JBJgUp_6EeG3fPi34vn9KQ _Y6hMwp_6EeG3fPi34vn9KQ" destinations="_41zdop_6EeG3fPi34vn9KQ _JlK98p_7EeG3fPi34vn9KQ _Jlytjhmp _nKCmgp_6EeG3fPi34vn9KQ _gfgfdeG3fPi34vn9KQ _JBJgUp_6EeG3fPi34vn9KQ _Y6hMwp_6EeG3fPi34vn9KQ"/>
     <instances id="_HkPKsKAsEeGQjY87lm4AGg" name="HS22_1" description="" component="_JBJgUp_6EeG3fPi34vn9KQ"/>
     <instances id="_sTQ3ZKAsEeGQjY87lm4AGg" name="M3000_1" description="" status="FULL" component="_Y6hMwp_6EeG3fPi34vn9KQ"/>
     <instances id="_HkPKsKA2AGg" name="HS22_2" description="" component="_JBJgUp_6EeG3fPi34vn9KQ"/>

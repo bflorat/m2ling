@@ -10,8 +10,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.m2ling.common.utils.Utils;
-import org.m2ling.domain.core.LinkAccessType;
-import org.m2ling.domain.core.LinkTemporality;
+import org.m2ling.presentation.principles.LinkAccessType;
+import org.m2ling.presentation.principles.LinkTemporality;
 
 /**
  * Mutable Link Type bean
@@ -30,9 +30,9 @@ public class LinkTypeBean implements Serializable {
 
 	private String comment = "";
 
-	private String temporality = LinkTemporality.SYNC.name();
+	private String linkTemporality = LinkTemporality.SYNC.name();
 
-	private String accessType = LinkAccessType.READ.name();
+	private String linkAccessType = LinkAccessType.READ.name();
 
 	/** Sources */
 	private List<HasNameAndIDBean> sourcesTypes = new ArrayList<HasNameAndIDBean>();
@@ -47,31 +47,31 @@ public class LinkTypeBean implements Serializable {
 	/**
 	 * @return the temporality
 	 */
-	public String getTemporality() {
-		return temporality;
+	public String getLinkTemporality() {
+		return linkTemporality;
 	}
 
 	/**
 	 * @param temporality
 	 *           the temporality to set
 	 */
-	public void setTemporality(String temporality) {
-		this.temporality = temporality;
+	public void setLinkTemporality(String temporality) {
+		this.linkTemporality = temporality;
 	}
 
 	/**
 	 * @return the accessType
 	 */
-	public String getAccessType() {
-		return accessType;
+	public String getLinkAccessType() {
+		return linkAccessType;
 	}
 
 	/**
 	 * @param accessType
 	 *           the accessType to set
 	 */
-	public void setAccessType(String accessType) {
-		this.accessType = accessType;
+	public void setLinkAccessType(String accessType) {
+		this.linkAccessType = accessType;
 	}
 
 	/**

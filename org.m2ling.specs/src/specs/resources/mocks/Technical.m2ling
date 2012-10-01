@@ -14,6 +14,9 @@
     <activities id="_Nnj8IJXFEeGfDY1tsvvkpQ" name="activity1"/>
     <componentTypes id="id_comp_type_1" name="comp_type_1"/>
     <componentTypes id="id_vp1_no_comp" name="ct_no_comp" boundType="id_vp1_bound_target"/>
+    <componentTypes id="id_comp_type_2" name="comp_type_2" description=""/>
+    <linkTypes id="id_vp1_no_link" name="vp1_no_link" description="desc" sourceTypes="id_comp_type_1" destinationTypes="id_comp_type_1"/>
+    <linkTypes id="id_vp1_link_type_1" name="vp1_link_type_1" comment="" description="desc" sourceTypes="id_comp_type_1" destinationTypes="id_comp_type_1"/>
     <rules id="id_rule1" name="rule1" comment="comment_rule1" description="desc_rule1" status="VALIDATED" rationale="rationale_rule1" exceptions="exceptions_rule1"/>
     <statusLiterals>VALIDATED</statusLiterals>
     <statusLiterals>REFUSED</statusLiterals>
@@ -25,6 +28,7 @@
   </viewPoints>
   <views id="id_v1" name="v1" viewPoint="id_vp1">
     <components id="id_comp1" name="comp1" status="" type="id_comp_type_1"/>
+    <links id="id_v1_link1" name="v1_link1" description="" type="id_vp1_link_type_1"/>
   </views>
   <views id="id_view_2" name="v2" viewPoint="id_vp2">
     <components id="id_comp1ct2" name="comp1ct2" description="" type="id_comp_type_2"/>

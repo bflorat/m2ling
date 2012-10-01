@@ -16,7 +16,7 @@ import org.eclipse.emf.common.util.EList;
  * The following features are supported:
  * <ul>
  *   <li>{@link org.m2ling.domain.core.Link#getType <em>Type</em>}</li>
- *   <li>{@link org.m2ling.domain.core.Link#getOrigins <em>Origins</em>}</li>
+ *   <li>{@link org.m2ling.domain.core.Link#getSources <em>Sources</em>}</li>
  *   <li>{@link org.m2ling.domain.core.Link#getDestinations <em>Destinations</em>}</li>
  *   <li>{@link org.m2ling.domain.core.Link#getTimeoutMillis <em>Timeout Millis</em>}</li>
  * </ul>
@@ -61,20 +61,20 @@ public interface Link extends ArchitectureItem {
 	void setType(LinkType value);
 
 	/**
-	 * Returns the value of the '<em><b>Origins</b></em>' reference list.
+	 * Returns the value of the '<em><b>Sources</b></em>' reference list.
 	 * The list contents are of type {@link org.m2ling.domain.core.Component}.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Origins</em>' reference list isn't clear,
+	 * If the meaning of the '<em>Sources</em>' reference list isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Origins</em>' reference list.
-	 * @see org.m2ling.domain.core.CorePackage#getLink_Origins()
+	 * @return the value of the '<em>Sources</em>' reference list.
+	 * @see org.m2ling.domain.core.CorePackage#getLink_Sources()
 	 * @model required="true"
 	 * @generated
 	 */
-	EList<Component> getOrigins();
+	EList<Component> getSources();
 
 	/**
 	 * Returns the value of the '<em><b>Destinations</b></em>' reference list.

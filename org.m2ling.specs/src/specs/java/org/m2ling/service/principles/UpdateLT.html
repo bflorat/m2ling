@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:concordion="http://www.concordion.org/2007/concordion">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>Link type update</title>
+</head>
+<body>
+	<H1>Link type update</H1>
+	<p>Administrators or actors with adequate authorizations can update
+		a LT (Link type).</p>
+
+	<p class='rule'>LT30 : A LT source type can't be removed while at
+		least a single link owns a source component of this CT in any view.
+	<div class='example'>
+		In this case <span concordion:set="linkTypeID">id_vp1_link_type_1</span>,
+		the update <span concordion:execute="#resu=testUpdateLT30(#linkTypeID)">
+			service</span> should : <b concordion:assertEquals="#resu">FAIL with
+			code LT_EXISTING_LINK</b>
+	</div>
+	<div class='example'>
+		If the LT has no associated link <span concordion:set="linkTypeID">id_vp1_no_link</span>
+		of its type, the update<span
+			concordion:execute="#resu=testUpdateLT30(#linkTypeID)"> service</span>
+		should : <b concordion:assertEquals="#resu">PASS</b>
+	</div>
+	</p>
+
+	<p class='rule'>LT31 : A LT destination type can't be removed while
+		at least a single link owns a source component of this CT in any view.
+	<div class='example'>
+		In this case <span concordion:set="linkTypeID">id_vp1_link_type_1</span>,
+		the update <span concordion:execute="#resu=testUpdateLT31(#linkTypeID)">
+			service</span> should : <b concordion:assertEquals="#resu">FAIL with
+			code LT_EXISTING_LINK</b>
+	</div>
+	<div class='example'>
+		If the LT has no associated link of its type, <span
+			concordion:set="linkTypeID">id_vp1_nolink</span> the update<span
+			concordion:execute="#resu=testUpdateLT31(#linkTypeID)"> service</span>
+		should : <b concordion:assertEquals="#resu">PASS</b>
+	</div>
+	</p>
+
+	<p class='rule'>LT32 : A LT shouldn't wind up with zero source type
+		after an update.
+	<div class='example'>
+		In this case<span concordion:set="linkTypeID">id_vp1_link_type_1</span>,
+		the update <span concordion:execute="#resu=testUpdateLT32(#linkTypeID)">
+			service</span> should : <b concordion:assertEquals="#resu">FAIL with
+			code LT_EXISTING_LINK</b>
+	</div>
+	</p>
+	<p class='rule'>LT33 : A LT shouldn't wind up with zero destination
+		type after an update.
+	<div class='example'>
+		In this case, <span concordion:set="linkTypeID">id_vp1_link_type_1</span>
+		the update <span concordion:execute="#resu=testUpdateLT33(#linkTypeID)">
+			service</span> should : <b concordion:assertEquals="#resu">FAIL with
+			code LT_EXISTING_LINK</b>
+	</div>
+	</p>
+
+</body>
+</html>

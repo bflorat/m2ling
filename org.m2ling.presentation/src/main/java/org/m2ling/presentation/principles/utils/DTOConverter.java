@@ -131,8 +131,8 @@ public class DTOConverter {
 			HasNameAndIdDTO vp = (bean.getViewPoint() == null) ? null : new HasNameAndIdDTO.Builder(bean.getViewPoint()
 					.getId(), bean.getViewPoint().getName()).build();
 			LinkTypeDTO.Builder builder = new LinkTypeDTO.Builder(vp, bean.getId(), bean.getName())
-					.description(bean.getDescription()).comment(bean.getComment()).temporality(bean.getTemporality())
-					.accessType(bean.getAccessType());
+					.description(bean.getDescription()).comment(bean.getComment()).temporality(bean.getLinkTemporality())
+					.accessType(bean.getLinkAccessType());
 			for (String tag : Utils.stringListFromString(bean.getTags())) {
 				builder.addTag(tag);
 			}
@@ -344,16 +344,18 @@ public class DTOConverter {
 			bean.setDescription((dto.getDescription() != null) ? dto.getDescription() : "");
 			String tags = Utils.stringListAsString(dto.getTags());
 			bean.setTags(tags);
-			bean.setTemporality(dto.getTemporality());
-			bean.setAccessType(dto.getAccessType());
+			bean.setLinkTemporality(dto.getTemporality());
+			bean.setLinkAccessType(dto.getLinkAccessType());
 			List<HasNameAndIDBean> sources = new ArrayList<HasNameAndIDBean>(1);
 			for (HasNameAndIdDTO ctDTO : dto.getSourcesTypes()) {
 				sources.add(getHasNameAndIdBean(ctDTO));
 			}
-			List<HasNameAndIDBean> targets = new ArrayList<HasNameAndIDBean>(1);
+			bean.setSourcesTypes(sources);
+			List<HasNameAndIDBean> destinations = new ArrayList<HasNameAndIDBean>(1);
 			for (HasNameAndIdDTO ctDTO : dto.getDestinationsTypes()) {
-				targets.add(getHasNameAndIdBean(ctDTO));
+				destinations.add(getHasNameAndIdBean(ctDTO));
 			}
+			bean.setDestinationsTypes(destinations);
 			HasNameAndIDBean vpBean = getHasNameAndIdBean(dto.getViewPoint());
 			bean.setViewPoint(vpBean);
 			File icon = IconManager.getIconFile(Consts.CONF_LT_ICONS_LOCATION, bean.getId());

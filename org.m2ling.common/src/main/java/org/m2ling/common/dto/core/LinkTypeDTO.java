@@ -38,7 +38,7 @@ public class LinkTypeDTO implements Comparable<LinkTypeDTO> {
 	/**
 	 * @return the accessType
 	 */
-	public String getAccessType() {
+	public String getLinkAccessType() {
 		return accessType;
 	}
 
@@ -46,7 +46,7 @@ public class LinkTypeDTO implements Comparable<LinkTypeDTO> {
 	 * @param accessType
 	 *           the accessType to set
 	 */
-	public void setAccessType(String accessType) {
+	public void setLinkAccessType(String accessType) {
 		this.accessType = accessType;
 	}
 

@@ -64,7 +64,7 @@ public class LinkItemProvider
 			super.getPropertyDescriptors(object);
 
 			addTypePropertyDescriptor(object);
-			addOriginsPropertyDescriptor(object);
+			addSourcesPropertyDescriptor(object);
 			addDestinationsPropertyDescriptor(object);
 			addTimeoutMillisPropertyDescriptor(object);
 		}
@@ -94,19 +94,19 @@ public class LinkItemProvider
 	}
 
 	/**
-	 * This adds a property descriptor for the Origins feature.
+	 * This adds a property descriptor for the Sources feature.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected void addOriginsPropertyDescriptor(Object object) {
+	protected void addSourcesPropertyDescriptor(Object object) {
 		itemPropertyDescriptors.add
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
-				 getString("_UI_Link_origins_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_Link_origins_feature", "_UI_Link_type"),
-				 CorePackage.Literals.LINK__ORIGINS,
+				 getString("_UI_Link_sources_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_Link_sources_feature", "_UI_Link_type"),
+				 CorePackage.Literals.LINK__SOURCES,
 				 true,
 				 false,
 				 true,

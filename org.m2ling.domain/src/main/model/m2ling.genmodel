@@ -135,14 +135,14 @@
             ecoreFeature="ecore:EReference m2ling.ecore#//core/LinkType/sourceTypes"/>
         <genFeatures notify="false" createChild="false" propertySortChoices="true"
             ecoreFeature="ecore:EReference m2ling.ecore#//core/LinkType/destinationTypes"/>
-        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute m2ling.ecore#//core/LinkType/accessType"/>
-        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute m2ling.ecore#//core/LinkType/temporality"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute m2ling.ecore#//core/LinkType/linkAccessType"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute m2ling.ecore#//core/LinkType/linkTemporality"/>
       </genClasses>
       <genClasses ecoreClass="m2ling.ecore#//core/Link">
         <genFeatures notify="false" createChild="false" propertySortChoices="true"
             ecoreFeature="ecore:EReference m2ling.ecore#//core/Link/type"/>
         <genFeatures notify="false" createChild="false" propertySortChoices="true"
-            ecoreFeature="ecore:EReference m2ling.ecore#//core/Link/origins"/>
+            ecoreFeature="ecore:EReference m2ling.ecore#//core/Link/sources"/>
         <genFeatures notify="false" createChild="false" propertySortChoices="true"
             ecoreFeature="ecore:EReference m2ling.ecore#//core/Link/destinations"/>
         <genFeatures createChild="false" ecoreFeature="ecore:EAttribute m2ling.ecore#//core/Link/timeoutMillis"/>

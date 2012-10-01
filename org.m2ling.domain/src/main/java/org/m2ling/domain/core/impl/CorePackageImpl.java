@@ -937,7 +937,7 @@ public class CorePackageImpl extends EPackageImpl implements CorePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getLinkType_AccessType() {
+	public EAttribute getLinkType_LinkAccessType() {
 		return (EAttribute)linkTypeEClass.getEStructuralFeatures().get(2);
 	}
 
@@ -946,7 +946,7 @@ public class CorePackageImpl extends EPackageImpl implements CorePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getLinkType_Temporality() {
+	public EAttribute getLinkType_LinkTemporality() {
 		return (EAttribute)linkTypeEClass.getEStructuralFeatures().get(3);
 	}
 
@@ -973,7 +973,7 @@ public class CorePackageImpl extends EPackageImpl implements CorePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getLink_Origins() {
+	public EReference getLink_Sources() {
 		return (EReference)linkEClass.getEStructuralFeatures().get(1);
 	}
 
@@ -1685,12 +1685,12 @@ public class CorePackageImpl extends EPackageImpl implements CorePackage {
 		linkTypeEClass = createEClass(LINK_TYPE);
 		createEReference(linkTypeEClass, LINK_TYPE__SOURCE_TYPES);
 		createEReference(linkTypeEClass, LINK_TYPE__DESTINATION_TYPES);
-		createEAttribute(linkTypeEClass, LINK_TYPE__ACCESS_TYPE);
-		createEAttribute(linkTypeEClass, LINK_TYPE__TEMPORALITY);
+		createEAttribute(linkTypeEClass, LINK_TYPE__LINK_ACCESS_TYPE);
+		createEAttribute(linkTypeEClass, LINK_TYPE__LINK_TEMPORALITY);
 
 		linkEClass = createEClass(LINK);
 		createEReference(linkEClass, LINK__TYPE);
-		createEReference(linkEClass, LINK__ORIGINS);
+		createEReference(linkEClass, LINK__SOURCES);
 		createEReference(linkEClass, LINK__DESTINATIONS);
 		createEAttribute(linkEClass, LINK__TIMEOUT_MILLIS);
 
@@ -1967,12 +1967,12 @@ public class CorePackageImpl extends EPackageImpl implements CorePackage {
 		initEClass(linkTypeEClass, LinkType.class, "LinkType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getLinkType_SourceTypes(), this.getComponentType(), null, "sourceTypes", null, 1, -1, LinkType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getLinkType_DestinationTypes(), this.getComponentType(), null, "destinationTypes", null, 1, -1, LinkType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getLinkType_AccessType(), this.getLinkAccessType(), "accessType", null, 0, 1, LinkType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getLinkType_Temporality(), this.getLinkTemporality(), "temporality", null, 0, 1, LinkType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getLinkType_LinkAccessType(), this.getLinkAccessType(), "linkAccessType", null, 0, 1, LinkType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getLinkType_LinkTemporality(), this.getLinkTemporality(), "linkTemporality", null, 0, 1, LinkType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(linkEClass, Link.class, "Link", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getLink_Type(), this.getLinkType(), null, "type", null, 1, 1, Link.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getLink_Origins(), this.getComponent(), null, "origins", null, 1, -1, Link.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getLink_Sources(), this.getComponent(), null, "sources", null, 1, -1, Link.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getLink_Destinations(), this.getComponent(), null, "destinations", null, 1, -1, Link.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getLink_TimeoutMillis(), ecorePackage.getELong(), "timeoutMillis", null, 0, 1, Link.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 

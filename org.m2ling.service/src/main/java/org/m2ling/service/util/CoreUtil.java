@@ -17,6 +17,7 @@ import org.m2ling.domain.core.ComponentGroup;
 import org.m2ling.domain.core.ComponentInstance;
 import org.m2ling.domain.core.ComponentType;
 import org.m2ling.domain.core.Link;
+import org.m2ling.domain.core.LinkType;
 import org.m2ling.domain.core.Rule;
 import org.m2ling.domain.core.Type;
 import org.m2ling.domain.core.View;
@@ -146,6 +147,30 @@ public class CoreUtil {
 		}
 		return null;
 	}
+	
+	/**
+	 * Return a link type denoted by the given id or null if none matches.
+	 * 
+	 * @param id
+	 *           the searched id
+	 * @return an item denoted by the given id or null if none matches
+	 */
+	public LinkType getLinkTypeByID(String id) {
+		if (id == null) {
+			return null;
+		}
+		Root root = pmanager.getRoot();
+		for (ViewPoint v : root.getViewPoints()) {
+			List<LinkType> lts = v.getLinkTypes();
+			for (LinkType lt : lts) {
+				if (id.equals(lt.getId())) {
+					return lt;
+				}
+			}
+		}
+		return null;
+	}
+
 
 	/**
 	 * Return a component denoted by the given id or null if none matches.
