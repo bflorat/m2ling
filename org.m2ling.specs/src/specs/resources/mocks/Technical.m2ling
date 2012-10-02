@@ -28,8 +28,8 @@
   </viewPoints>
   <views id="id_v1" name="v1" viewPoint="id_vp1">
     <components id="id_comp_v1_comp1" name="comp_v1_comp1" comment="" status="" type="id_ct_vp1_ct1"/>
-    <components id="id_comp_v1_comp2" name="comp_v1_comp1" comment="" description="" type="id_ct_vp1_ct1"/>
-    <links id="id_link_v1_link1" name="link_v1_link1" description="" type="id_lt_vp1_link_type_1" sources="id_comp_v1_comp1" destinations="id_comp_v1_comp1"/>
+    <components id="id_comp_v1_comp2" name="comp_v1_comp2" comment="" description="" type="id_ct_vp1_ct2"/>
+    <links id="id_link_v1_link1" name="link_v1_link1" description="" type="id_lt_vp1_link_type_1" sources="id_comp_v1_comp1 id_comp_v1_comp2" destinations="id_comp_v1_comp1 id_comp_v1_comp2"/>
   </views>
   <views id="id_view_2" name="v2" viewPoint="id_vp2">
     <components id="id_comp_v2_comp1" name="comp_v2_comp1" comment="" description="" type="id_ct_vp1_ct2"/>

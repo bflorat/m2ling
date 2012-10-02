@@ -117,30 +117,35 @@ public class LinkTypeServiceImpl extends ServiceImpl implements LinkTypeService 
 						+ ctDTO.getId());
 			}
 		}
-		// Rules #LT30 and #LT31 : do not drop a source or dest type if used by a existing link
-		// - Compute dropped source CT
-		LinkType lt = util.getLinkTypeByID(dto.getId());
-		List<ComponentType> droppedSourceType = Lists.newArrayList(lt.getSourceTypes());
-		for (HasNameAndIdDTO ctDTO : dto.getSourcesTypes()) {
-			ComponentType ct = util.getComponentTypeByID(ctDTO.getId());
-			droppedSourceType.remove(ct);
-		}
-		List<ComponentType> droppedDestType = Lists.newArrayList(lt.getDestinationTypes());
-		for (HasNameAndIdDTO ctDTO : dto.getDestinationsTypes()) {
-			ComponentType ct = util.getComponentTypeByID(ctDTO.getId());
-			droppedDestType.remove(ct);
-		}
-		List<View> views = util.getViewsByVPID(dto.getViewPoint().getId());
-		for (View v : views) {
-			for (Link link : v.getLinks()) {
-				for (Component comp : link.getSources()) {
-					if (droppedSourceType.contains(comp.getType())) {
-						throw new FunctionalException(Code.LT_EXISTING_LINK, null, "component=" + comp.getName());
-					}
-				}
-				for (Component comp : link.getDestinations()) {
-					if (droppedDestType.contains(comp.getType())) {
-						throw new FunctionalException(Code.LT_EXISTING_LINK, null, "component=" + comp.getName());
+		if (access == AccessType.UPDATE) {
+			// Rules #LT30 and #LT31 : do not drop a source or destination type
+			// if used by a existing link
+			// - Compute dropped source CT
+			LinkType lt = util.getLinkTypeByID(dto.getId());
+			List<ComponentType> droppedSourceTypes = Lists.newArrayList(lt.getSourceTypes());
+			for (HasNameAndIdDTO ctDTO : dto.getSourcesTypes()) {
+				ComponentType ct = util.getComponentTypeByID(ctDTO.getId());
+				droppedSourceTypes.remove(ct);
+			}
+			List<ComponentType> droppedDestTypes = Lists.newArrayList(lt.getDestinationTypes());
+			for (HasNameAndIdDTO ctDTO : dto.getDestinationsTypes()) {
+				ComponentType ct = util.getComponentTypeByID(ctDTO.getId());
+				droppedDestTypes.remove(ct);
+			}
+			// - Check only if some types have been dropped
+			if (droppedDestTypes.size() > 0 || droppedSourceTypes.size() > 0) {
+				for (View v : util.getViewsByVPID(dto.getViewPoint().getId())) {
+					for (Link link : v.getLinks()) {
+						for (Component comp : link.getSources()) {
+							if (droppedSourceTypes.contains(comp.getType())) {
+								throw new FunctionalException(Code.LT_EXISTING_LINK, null, "component=" + comp.getName());
+							}
+						}
+						for (Component comp : link.getDestinations()) {
+							if (droppedDestTypes.contains(comp.getType())) {
+								throw new FunctionalException(Code.LT_EXISTING_LINK, null, "component=" + comp.getName());
+							}
+						}
 					}
 				}
 			}
