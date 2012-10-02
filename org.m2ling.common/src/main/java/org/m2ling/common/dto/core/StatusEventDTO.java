@@ -70,7 +70,7 @@ public class StatusEventDTO implements Comparable<StatusEventDTO> {
 	 */
 	@Override
 	public int compareTo(StatusEventDTO o) {
-		return (int) (o.getDate() - o.getDate());
+		return (int) (getDate() - o.getDate());
 	}
 
 }

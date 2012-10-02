@@ -170,6 +170,6 @@ public class ViewPointDTO implements Comparable<ViewPointDTO> {
 		if (getName() == null || o.getName() == null) {
 			return -1;
 		}
-		return o.getName().compareTo(o.getName());
+		return name.compareTo(o.getName());
 	}
 }

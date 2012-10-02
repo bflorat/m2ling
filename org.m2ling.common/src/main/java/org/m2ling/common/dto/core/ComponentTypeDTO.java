@@ -223,6 +223,6 @@ public class ComponentTypeDTO implements Comparable<ComponentTypeDTO> {
 		if (getName() == null || o.getName() == null) {
 			return -1;
 		}
-		return getName().compareToIgnoreCase(o.getName());
+		return name.compareToIgnoreCase(o.getName());
 	}
 }
