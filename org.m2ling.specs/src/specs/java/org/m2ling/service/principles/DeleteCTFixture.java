@@ -15,7 +15,7 @@ public class DeleteCTFixture extends AbstractCTFixture {
 		try {
 			reset("Technical");
 			HasNameAndIdDTO vp = new HasNameAndIdDTO.Builder("id_vp1", "").build();
-			ComponentTypeDTO dto = new ComponentTypeDTO.Builder(vp, "id_vp1_no_comp", "vp1_no_comp").build();
+			ComponentTypeDTO dto = new ComponentTypeDTO.Builder(vp, "id_ct_vp1_no_comp", "ct_vp1_no_comp").build();
 			service.deleteCT(null, dto);
 			return "PASS";
 		} catch (FunctionalException fe) {
@@ -27,7 +27,7 @@ public class DeleteCTFixture extends AbstractCTFixture {
 		try {
 			reset("Technical");
 			HasNameAndIdDTO vp = new HasNameAndIdDTO.Builder("id_vp1", "").build();
-			ComponentTypeDTO dto = new ComponentTypeDTO.Builder(vp, "id_comp_type_1", "comp_type_1").build();
+			ComponentTypeDTO dto = new ComponentTypeDTO.Builder(vp, "id_ct_vp1_ct1", "ct_vp1_ct1").build();
 			service.deleteCT(null, dto);
 			return "PASS";
 		} catch (FunctionalException fe) {
@@ -39,7 +39,7 @@ public class DeleteCTFixture extends AbstractCTFixture {
 		try {
 			reset("Technical");
 			HasNameAndIdDTO vp = new HasNameAndIdDTO.Builder("id_vp1", "").build();
-			ComponentTypeDTO dto = new ComponentTypeDTO.Builder(vp, "id_vp1_bound_target", "vp1_bound_target").build();
+			ComponentTypeDTO dto = new ComponentTypeDTO.Builder(vp, "id_ct_vp1_bound_target", "ct_vp1_bound_target").build();
 			service.deleteCT(null, dto);
 			return "PASS";
 		} catch (FunctionalException fe) {

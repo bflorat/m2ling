@@ -15,7 +15,7 @@ public class DeleteLTFixture extends AbstractLTFixture {
 		try {
 			reset("Technical");
 			HasNameAndIdDTO vp = new HasNameAndIdDTO.Builder("id_vp1", "").build();
-			LinkTypeDTO dto = new LinkTypeDTO.Builder(vp, "id_vp1_no_link", "vp1_no_link").build();
+			LinkTypeDTO dto = new LinkTypeDTO.Builder(vp, "id_lt_vp1_no_link", "lt_vp1_no_link").build();
 			service.deleteLT(null, dto);
 			return "PASS";
 		} catch (FunctionalException fe) {
@@ -27,7 +27,7 @@ public class DeleteLTFixture extends AbstractLTFixture {
 		try {
 			reset("Technical");
 			HasNameAndIdDTO vp = new HasNameAndIdDTO.Builder("id_vp1", "").build();
-			LinkTypeDTO dto = new LinkTypeDTO.Builder(vp, "id_vp1_link_type_1", "vp1_link_type_1").build();
+			LinkTypeDTO dto = new LinkTypeDTO.Builder(vp, "id_lt_vp1_link_type_1", "lt_vp1_link_type_1").build();
 			service.deleteLT(null, dto);
 			return "PASS";
 		} catch (FunctionalException fe) {

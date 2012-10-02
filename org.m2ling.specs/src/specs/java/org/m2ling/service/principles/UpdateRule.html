@@ -14,7 +14,7 @@
 	<div class="example">
 		Given these new settings :
 		<ul>
-			<li>id_rule=<b concordion:set="#id">id_rule1</b></li>
+			<li>id_rule=<b concordion:set="#id">id_vp1_rule1</b></li>
 			<li>name=<b concordion:set="#name">new_name</b></li>
 			<li>description=<b concordion:set="#description">new description</b></li>
 			<li>comment=<b concordion:set="#comment">new comment</b></li>
@@ -28,19 +28,18 @@
 			concordion:execute="update(#id,#name,#description,#comment,#tags,#status,#priority,#rationale,#exceptions)"/>
 		<br />Then the viewpoint should now have the following
 		characteristics : <b concordion:assertEquals="getRule(#id)">comment=new comment description=new description drop= 
-		exceptions=new_exceptions id=id_rule1 name=new_name priority=1 rationale=new_rationale status=SUGGESTED tags=new tag3,new tag4 vpID=id_vp1</b>.
+		exceptions=new_exceptions id=id_vp1_rule1 name=new_name priority=1 rationale=new_rationale status=SUGGESTED tags=new tag3,new tag4 vpID=id_vp1</b>.
 	</div>
 	
 	<h3>Format controls</h3>
 	<ul>
-		A null input should make service call <b
-			concordion:assertEquals="getCheckNullDTO()">FAIL</b>
+		A null input should make service call <b concordion:assertEquals="getCheckNullDTO()">FAIL</b>
 		
 		<div class="example">
 			Given a rule , following
-			service inputs should make the service :
+			service inputs should make the <span concordion:set="#accessType">UPDATE</span> service :
 			<table
-				concordion:execute="#result=getCheckDTOVerification(#caseName, #id, #name, #description, #rationale,
+				concordion:execute="#result=getCheckDTOVerification(#caseName, #accessType, #id, #name, #description, #rationale,
 			#exceptions, #comment, #tags, #status, #priority)">
 				
 				<tr>
@@ -58,7 +57,7 @@
 				</tr>
 				<tr>
 					<td>Nominal</td>
-					<td>id_vp1</td>
+					<td>id_vp1_rule1</td>
 					<td>rule</td>
 					<td>new_description</td>
 					<td>new_rationale</td>
@@ -71,7 +70,7 @@
 				</tr>
 				<tr>
 					<td>Unexisting status</td>
-					<td>id_vp1</td>
+					<td>id_vp1_rule1</td>
 					<td>rule</td>
 					<td>new_description</td>
 					<td>new_rationale</td>

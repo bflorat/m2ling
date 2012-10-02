@@ -4,6 +4,7 @@
 package org.m2ling.service.util;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.StringTokenizer;
 import java.util.logging.Logger;
@@ -147,7 +148,7 @@ public class CoreUtil {
 		}
 		return null;
 	}
-	
+
 	/**
 	 * Return a link type denoted by the given id or null if none matches.
 	 * 
@@ -171,7 +172,6 @@ public class CoreUtil {
 		return null;
 	}
 
-
 	/**
 	 * Return a component denoted by the given id or null if none matches.
 	 * 
@@ -193,6 +193,37 @@ public class CoreUtil {
 			}
 		}
 		return null;
+	}
+
+	/**
+	 * Return all views for a given viewpoint.
+	 * <p>
+	 * The list may be void if none view is of the provided vp type
+	 * </p>
+	 * <p>
+	 * the list is not ordered
+	 * </p>
+	 * 
+	 * @param id
+	 *           the searched id
+	 * @return all views for a given viewpoint.
+	 * @throws TechnicalException
+	 *            if the id is not associated with an existing VP
+	 * @throws TechnicalException
+	 *            if the provided if is null
+	 */
+	public List<View> getViewsByVPID(String id) {
+		if (id == null) {
+			throw new TechnicalException(Code.ILLEGAL_STATE, null, "null vp id");
+		}
+		List<View> out = new ArrayList<View>(3);
+		Root root = pmanager.getRoot();
+		for (View v : root.getViews()) {
+			if (v.getViewPoint().getId().equals(id)) {
+				out.add(v);
+			}
+		}
+		return out;
 	}
 
 	/**

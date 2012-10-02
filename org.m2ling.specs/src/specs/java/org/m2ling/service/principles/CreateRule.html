@@ -15,7 +15,7 @@
 		Given a view point named <b concordion:set="#vpID">id_vp1</b>, a new
 		rule created with :
 		<ul>
-			<li>id=<b concordion:set="#id">rule_id2</b></li>
+			<li>id=<b concordion:set="#id">id_vp1_rule2</b></li>
 			<li>name=<b concordion:set="#name">rule2</b></li>
 			<li>description=<b concordion:set="#description">desc2</b></li>
 			<li>comment=<b concordion:set="#comment">comment2</b></li>
@@ -27,7 +27,7 @@
 		</ul>
 		should have following characteristics : <b
 			concordion:assertEquals="createAndGetRule(#id,#vpID,#name,#description,#comment,#status,#priority,#rationale,#exceptions,#tags)">comment=comment2
-			description=desc2 drop= exceptions=exception2 id=rule_id2 name=rule2
+			description=desc2 drop= exceptions=exception2 id=id_vp1_rule2 name=rule2
 			priority=3 rationale=rationale2 status=VALIDATED tags=tag1,tag2
 			vpID=id_vp1</b>.
 	</div>
@@ -52,9 +52,10 @@
 		<li>See Tags specifications for tags limits</li>
 	</ul>
 	<p>Following service inputs should make the service :
+	<span concordion:set="#accessType">CREATE</span>
 	<div class="example">
 		<table
-			concordion:execute="#result=getCheckDTOVerification(#caseName,#id,#name,#description,#rationale,#exceptions,#comment,#tags,#status,#priority)">
+			concordion:execute="#result=getCheckDTOVerification(#caseName,#accessType,#id,#name,#description,#rationale,#exceptions,#comment,#tags,#status,#priority)">
 			<tr>
 				<th concordion:set="#caseName">Case</th>
 				<th concordion:set="#id">ID</th>
@@ -70,7 +71,7 @@
 			</tr>
 			<tr>
 				<td>Nominal</td>
-				<td>id_rule4</td>
+				<td>id_vp1_rule4</td>
 				<td>rule4</td>
 				<td>description2</td>
 				<td>exceptions2</td>
@@ -83,7 +84,7 @@
 			</tr>
 			<tr>
 				<td>Existing rule ID</td>
-				<td>id_rule1</td>
+				<td>id_vp1_rule1</td>
 				<td>rule2</td>
 				<td>description2</td>
 				<td>exceptions2</td>
@@ -96,8 +97,8 @@
 			</tr>
 			<tr>
 				<td>Existing rule name</td>
-				<td>id_rule4</td>
-				<td>rule1</td>
+				<td>id_vp1_rule4</td>
+				<td>vp1_rule1</td>
 				<td>description2</td>
 				<td>exceptions2</td>
 				<td>rationale2</td>
@@ -163,7 +164,7 @@
 			<!-- name check -->
 			<tr>
 				<td>Null name</td>
-				<td>id_vp2</td>
+				<td>id_vp1_rule2</td>
 				<td>null</td>
 				<td>description2</td>
 				<td>exceptions2</td>
@@ -176,7 +177,7 @@
 			</tr>
 			<tr>
 				<td>Void name</td>
-				<td>id_vp2</td>
+				<td>id_vp1_rule2</td>
 				<td></td>
 				<td>description2</td>
 				<td>exceptions2</td>
@@ -189,7 +190,7 @@
 			</tr>
 			<tr>
 				<td>Void name after trim</td>
-				<td>id_vp2</td>
+				<td>id_vp1_rule2</td>
 				<td>space</td>
 				<td>description2</td>
 				<td>exceptions2</td>
@@ -202,7 +203,7 @@
 			</tr>
 			<tr>
 				<td>Name too long</td>
-				<td>id_vp2</td>
+				<td>id_vp1_rule2</td>
 				<td>dkjshdhddsldljslkdl fdsf fsfdsf ssf
 					skjdlsjdkjslkdjskljdlsjdlj lsd jslk dkjs lkdjskldj sjd
 					sjdlksqkjdhqskjhdkjqshdkjqshkjdhqskjhdkjqskdjhqskjdhqskhdkjqshdkjhqskjdhqskjhdkjqshdkjqshkdjqsdsds
@@ -219,7 +220,7 @@
 			<!-- Status literal -->
 			<tr>
 				<td>Unexisting status literals</td>
-				<td>id_vp2</td>
+				<td>id_vp1_rule2</td>
 				<td>vp2</td>
 				<td>description2</td>
 				<td>exceptions2</td>
@@ -233,7 +234,7 @@
 			<!-- Comment -->
 			<tr>
 				<td>Void comment</td>
-				<td>id_vp2</td>
+				<td>id_vp1_rule2</td>
 				<td>vp2</td>
 				<td>description2</td>
 				<td>exceptions2</td>
@@ -246,7 +247,7 @@
 			</tr>
 			<tr>
 				<td>Null comment</td>
-				<td>id_vp2</td>
+				<td>id_vp1_rule2</td>
 				<td>vp2</td>
 				<td>description2</td>
 				<td>exceptions2</td>
@@ -260,7 +261,7 @@
 			<!-- Exceptions -->
 			<tr>
 				<td>Void exceptions</td>
-				<td>id_vp2</td>
+				<td>id_vp1_rule2</td>
 				<td>vp2</td>
 				<td>description2</td>
 				<td>space</td>
@@ -273,7 +274,7 @@
 			</tr>
 			<tr>
 				<td>Null exceptions</td>
-				<td>id_vp2</td>
+				<td>id_vp1_rule2</td>
 				<td>vp2</td>
 				<td>description2</td>
 				<td>null</td>
@@ -287,7 +288,7 @@
 			<!-- Rationale -->
 			<tr>
 				<td>Void rationale</td>
-				<td>id_vp2</td>
+				<td>id_vp1_rule2</td>
 				<td>vp2</td>
 				<td>description2</td>
 				<td>exception</td>
@@ -300,7 +301,7 @@
 			</tr>
 			<tr>
 				<td>Null rationale</td>
-				<td>id_vp2</td>
+				<td>id_vp1_rule2</td>
 				<td>vp2</td>
 				<td>description2</td>
 				<td>exception</td>

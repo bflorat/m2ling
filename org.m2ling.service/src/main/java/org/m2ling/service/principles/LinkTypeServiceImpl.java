@@ -17,6 +17,7 @@ import org.m2ling.common.soa.Context;
 import org.m2ling.common.utils.Consts;
 import org.m2ling.common.utils.Utils;
 import org.m2ling.domain.Root;
+import org.m2ling.domain.core.Component;
 import org.m2ling.domain.core.ComponentType;
 import org.m2ling.domain.core.Link;
 import org.m2ling.domain.core.LinkAccessType;
@@ -94,12 +95,12 @@ public class LinkTypeServiceImpl extends ServiceImpl implements LinkTypeService 
 	}
 
 	private void checkSourcesAndDestTypes(final LinkTypeDTO dto, AccessType access) throws FunctionalException {
-		// Rule #LT-01
+		// Rule #LT32
 		if (dto.getSourcesTypes().size() == 0) {
 			throw new FunctionalException(FunctionalException.Code.LT_NONE_SOURCES_TYPES, null, "link name="
 					+ dto.getName());
 		}
-		// Rule #LT-02
+		// Rule #LT33
 		if (dto.getDestinationsTypes().size() == 0) {
 			throw new FunctionalException(FunctionalException.Code.LT_NONE_DEST_TYPES, null, "link name=" + dto.getName());
 		}
@@ -114,6 +115,34 @@ public class LinkTypeServiceImpl extends ServiceImpl implements LinkTypeService 
 			if (util.getComponentTypeByID(ctDTO.getId()) == null) {
 				throw new FunctionalException(FunctionalException.Code.TARGET_NOT_FOUND, null, "link type destination id="
 						+ ctDTO.getId());
+			}
+		}
+		// Rules #LT30 and #LT31 : do not drop a source or dest type if used by a existing link
+		// - Compute dropped source CT
+		LinkType lt = util.getLinkTypeByID(dto.getId());
+		List<ComponentType> droppedSourceType = Lists.newArrayList(lt.getSourceTypes());
+		for (HasNameAndIdDTO ctDTO : dto.getSourcesTypes()) {
+			ComponentType ct = util.getComponentTypeByID(ctDTO.getId());
+			droppedSourceType.remove(ct);
+		}
+		List<ComponentType> droppedDestType = Lists.newArrayList(lt.getDestinationTypes());
+		for (HasNameAndIdDTO ctDTO : dto.getDestinationsTypes()) {
+			ComponentType ct = util.getComponentTypeByID(ctDTO.getId());
+			droppedDestType.remove(ct);
+		}
+		List<View> views = util.getViewsByVPID(dto.getViewPoint().getId());
+		for (View v : views) {
+			for (Link link : v.getLinks()) {
+				for (Component comp : link.getSources()) {
+					if (droppedSourceType.contains(comp.getType())) {
+						throw new FunctionalException(Code.LT_EXISTING_LINK, null, "component=" + comp.getName());
+					}
+				}
+				for (Component comp : link.getDestinations()) {
+					if (droppedDestType.contains(comp.getType())) {
+						throw new FunctionalException(Code.LT_EXISTING_LINK, null, "component=" + comp.getName());
+					}
+				}
 			}
 		}
 	}

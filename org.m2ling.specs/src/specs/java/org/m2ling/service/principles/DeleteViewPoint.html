@@ -10,7 +10,7 @@
 	<p>Administrators or actors with adequate authorizations can delete
 		existing viewpoints.</p>
 
-	<p>An existing viewpoint can be dropped :
+	<p class='rule'>An existing viewpoint can be dropped :
 	<div class="example">
 		Given an existing viewpoint <b concordion:set="#id">id_vp1</b><br />
 		When a delete is done against it <span
@@ -18,7 +18,7 @@
 		search for it should return <b concordion:assertEquals="#resu">null</b>
 	</div>
 	</p>
-	<p>Trying to remove an unexisting viewpoint should fail
+	<p class='rule'>Trying to remove an unexisting viewpoint should fail
 	<div class="example">
 		Given an unexisting viewpoint <b concordion:set="#id">id_unknown</b><br />
 		Trying to delete it <span
@@ -26,7 +26,7 @@
 			concordion:assertEquals="#resu">FAIL with code TARGET_NOT_FOUND</b>
 	</div>
 	</p>
-	<p>The viewpoint can't be dropped while one architecture item uses
+	<p class='rule'>The viewpoint can't be dropped while one architecture item uses
 		a type defined in it.
 	<div class="example">
 		Given a viewpoint <b>id_vp1</b><br /> And a
@@ -37,11 +37,11 @@
 	</div>
 	</p>
 
-	<p>The viewpoint can't be dropped while one of its component type
+	<p class='rule'>The viewpoint can't be dropped while one of its component type
 		is used as binding from an architecture item from another viewpoint.</p>
 	<div class="example">
 		Given an existing viewpoint <b concordion:set="#id">id_vp1</b><br />
-		And a component <b>id_comp2</b> whose type
+		And a component <b>id_comp2ct2</b> whose type
 		is defined in another viewpoint but whose type is bound to a type of
 		this viewpoint<br />An attempt to delete the viewpoint <span
 			concordion:execute="#resu=deleteWithBinding(#id)" /> should <b

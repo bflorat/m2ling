@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.m2ling.common.dto.core.RuleDTO;
 import org.m2ling.common.exceptions.FunctionalException;
+import org.m2ling.common.utils.UUT;
 import org.m2ling.presentation.principles.model.RuleBean;
 import org.m2ling.presentation.principles.utils.DTOConverter;
 
@@ -25,15 +26,15 @@ public class UpdateRuleFixture extends AbstractRuleFixture {
 			int priority, String rationale, String exceptions) throws FunctionalException {
 		reset("Technical");
 		RuleBean bean = new RuleBean();
-		bean.setComment(comment);
-		bean.setDescription(description);
-		bean.setExceptions(exceptions);
-		bean.setId(id);
-		bean.setName(name);
+		bean.setComment(UUT.nul(comment));
+		bean.setDescription(UUT.nul(description));
+		bean.setExceptions(UUT.nul(exceptions));
+		bean.setId(UUT.nul(id));
+		bean.setName(UUT.nul(name));
 		bean.setPriority(priority);
-		bean.setRationale(rationale);
+		bean.setRationale(UUT.nul(rationale));
 		bean.setStatus(status);
-		bean.setTags(tags);
+		bean.setTags(UUT.nul(tags));
 		bean.setViewPointId("id_vp1");
 		RuleDTO dto = new DTOConverter.ToDTO().getRuleDTO(bean);
 		service.updateRule(null, dto);
@@ -41,7 +42,6 @@ public class UpdateRuleFixture extends AbstractRuleFixture {
 		for (RuleDTO rule : rules) {
 			if (rule.getId().equals(bean.getId())) {
 				RuleBean out = new DTOConverter.FromDTO().getRuleBean(rule);
-				System.out.println(out);
 				// We have to omit history here because we can't compare from HTML value as the value is
 				// only created on the server side
 				return out.toString().replaceAll("history=\\{.*\\}", "");

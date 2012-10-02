@@ -11,55 +11,101 @@
 		a LT (Link type).</p>
 
 	<p class='rule'>LT30 : A LT source type can't be removed while at
-		least a single link owns a source component of this CT in any view.
-	<div class='example'>
-		In this case <span concordion:set="linkTypeID">id_vp1_link_type_1</span>,
-		the update <span concordion:execute="#resu=testUpdateLT30(#linkTypeID)">
-			service</span> should : <b concordion:assertEquals="#resu">FAIL with
-			code LT_EXISTING_LINK</b>
-	</div>
-	<div class='example'>
-		If the LT has no associated link <span concordion:set="linkTypeID">id_vp1_no_link</span>
-		of its type, the update<span
-			concordion:execute="#resu=testUpdateLT30(#linkTypeID)"> service</span>
-		should : <b concordion:assertEquals="#resu">PASS</b>
-	</div>
-	</p>
+		least a single link owns a source component of this CT in any view.</p>
 
 	<p class='rule'>LT31 : A LT destination type can't be removed while
-		at least a single link owns a source component of this CT in any view.
-	<div class='example'>
-		In this case <span concordion:set="linkTypeID">id_vp1_link_type_1</span>,
-		the update <span concordion:execute="#resu=testUpdateLT31(#linkTypeID)">
-			service</span> should : <b concordion:assertEquals="#resu">FAIL with
-			code LT_EXISTING_LINK</b>
-	</div>
-	<div class='example'>
-		If the LT has no associated link of its type, <span
-			concordion:set="linkTypeID">id_vp1_nolink</span> the update<span
-			concordion:execute="#resu=testUpdateLT31(#linkTypeID)"> service</span>
-		should : <b concordion:assertEquals="#resu">PASS</b>
-	</div>
-	</p>
+		at least a single link owns a destination component of this CT in any
+		view.</p>
 
-	<p class='rule'>LT32 : A LT shouldn't wind up with zero source type
-		after an update.
-	<div class='example'>
-		In this case<span concordion:set="linkTypeID">id_vp1_link_type_1</span>,
-		the update <span concordion:execute="#resu=testUpdateLT32(#linkTypeID)">
-			service</span> should : <b concordion:assertEquals="#resu">FAIL with
-			code LT_EXISTING_LINK</b>
-	</div>
-	</p>
-	<p class='rule'>LT33 : A LT shouldn't wind up with zero destination
-		type after an update.
-	<div class='example'>
-		In this case, <span concordion:set="linkTypeID">id_vp1_link_type_1</span>
-		the update <span concordion:execute="#resu=testUpdateLT33(#linkTypeID)">
-			service</span> should : <b concordion:assertEquals="#resu">FAIL with
-			code LT_EXISTING_LINK</b>
-	</div>
-	</p>
+	<p class='rule'>LT32 : A LT shouldn't wind up with none source type
+		after an update.</p>
+	<p class='rule'>LT33 : A LT shouldn't wind up with none destination
+		type after an update.</p>
 
+	<H1>Examples</H1>
+	<div class='example'>
+		Given a link type 
+			in the id_vp1 viewpoint<br/>
+		And two CT id_comp_type_1 and id_comp_type_2 in the id_vp1 viewpoint<br/>
+		And a link in v1 view with sources with id_comp_type_1,id_comp_type_2 types and with destinations with 
+		id_comp_type_1,id_comp_type_2 types<br/>
+		When the update service is called <br/>
+		Then :
+		<table
+			concordion:execute="#result=updateLT(#caseName,#id,#sourcesTypes,#destinationsTypes)">
+			<tr>
+				<th concordion:set="#caseName">Case</th>
+				<th concordion:set="#id">Link type ID</th>
+				<th concordion:set="#sourcesTypes">SourcesTypes</th>
+				<th concordion:set="#destinationsTypes">DestinationTypes</th>
+				<th concordion:assertEquals="#result">should :</th>
+			</tr>
+			<!-- Nominal -->
+			<tr>
+				<td>No change</td>
+				<td>id_lt_vp1_link_type_1</td>
+				<td>id_ct_vp1_ct1,id_ct_vp1_ct2</td>
+				<td>id_ct_vp1_ct1,id_ct_vp1_ct2</td>
+				<td>PASS</td>
+			</tr>
+			<tr>
+				<td>#LT30 fail</td>
+				<td>id_lt_vp1_link_type_1</td>
+				<td>id_ct_vp1_ct2</td>
+				<td>id_ct_vp1_ct1,id_ct_vp1_ct2</td>
+				<td>FAIL with code LT_EXISTING_LINK</td>
+			</tr>
+			<tr>
+				<td>#LT30 pass</td>
+				<td>id_lt_vp1_link_type_1</td>
+				<td>id_ct_vp1_ct1</td>
+				<td>id_ct_vp1_ct1,id_ct_vp1_ct2</td>
+				<td>PASS</td>
+			</tr>
+			<tr>
+				<td>#LT31 fail</td>
+				<td>id_lt_vp1_link_type_1</td>
+				<td>id_ct_vp1_ct1,id_ct_vp1_ct2</td>
+				<td>id_ct_vp1_ct2</td>
+				<td>FAIL with code LT_EXISTING_LINK</td>
+			</tr>
+			<tr>
+				<td>#LT31 pass</td>
+				<td>id_lt_vp1_link_type_1</td>
+				<td>id_ct_vp1_ct1,id_ct_vp1_ct2</td>
+				<td>id_ct_vp1_ct1</td>
+				<td>PASS</td>
+			</tr>
+			<tr>
+				<td>#LT32 fail</td>
+				<td>id_lt_vp1_link_type_1</td>
+				<td></td>
+				<td>id_ct_vp1_ct1,id_ct_vp1_ct2</td>
+				<td>FAIL with code LT_NONE_SOURCES_TYPES</td>
+			</tr>
+			<tr>
+				<td>#LT32 pass</td>
+				<td>id_lt_vp1_link_type_1</td>
+				<td>id_ct_vp1_ct1</td>
+				<td>id_ct_vp1_ct1</td>
+				<td>PASS</td>
+			</tr>
+			<tr>
+				<td>#LT33 fail</td>
+				<td>id_lt_vp1_link_type_1</td>
+				<td>id_ct_vp1_ct1,id_ct_vp1_ct2</td>
+				<td></td>
+				<td>FAIL with code LT_NONE_DEST_TYPES</td>
+			</tr>
+			<tr>
+				<td>#LT33 pass</td>
+				<td>id_lt_vp1_link_type_1</td>
+				<td>id_ct_vp1_ct1,id_ct_vp1_ct2</td>
+				<td>id_ct_vp1_ct1</td>
+				<td>PASS</td>
+			</tr>
+			
+		</table>
+	</div>
 </body>
 </html>

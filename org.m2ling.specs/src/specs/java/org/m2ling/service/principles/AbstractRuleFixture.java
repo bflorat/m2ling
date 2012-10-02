@@ -93,7 +93,7 @@ public class AbstractRuleFixture extends M2lingFixture {
 		return "rule not found";
 	}
 	
-	public String getCheckDTOVerification(String caseName, String id, String name, String description, String rationale,
+	public String getCheckDTOVerification(String caseName, String accessType,String id, String name, String description, String rationale,
 			String exceptions, String comment, String tags, String status, String priority) {
 		reset("Technical");
 		id=UUT.nul(id);
@@ -116,7 +116,7 @@ public class AbstractRuleFixture extends M2lingFixture {
 			bean.setTags(tags);
 			bean.setViewPointId("id_vp1");
 			RuleDTO dto = new DTOConverter.ToDTO().getRuleDTO(bean);
-			service.checkDTO(dto, AccessType.CREATE);
+			service.checkDTO(dto, AccessType.valueOf(accessType));
 			return "PASS";
 		} catch (FunctionalException ex) {
 			return "FAIL with code "+ex.getCode().name();

@@ -12,26 +12,27 @@
   </viewPoints>
   <viewPoints description="vp1 label" id="id_vp1" name="vp1">
     <activities id="_Nnj8IJXFEeGfDY1tsvvkpQ" name="activity1"/>
-    <componentTypes id="id_comp_type_1" name="comp_type_1"/>
-    <componentTypes id="id_vp1_no_comp" name="ct_no_comp" boundType="id_vp1_bound_target"/>
-    <componentTypes id="id_comp_type_2" name="comp_type_2" description=""/>
-    <linkTypes id="id_vp1_no_link" name="vp1_no_link" description="desc" sourceTypes="id_comp_type_1" destinationTypes="id_comp_type_1"/>
-    <linkTypes id="id_vp1_link_type_1" name="vp1_link_type_1" comment="" description="desc" sourceTypes="id_comp_type_1" destinationTypes="id_comp_type_1"/>
-    <rules id="id_rule1" name="rule1" comment="comment_rule1" description="desc_rule1" status="VALIDATED" rationale="rationale_rule1" exceptions="exceptions_rule1"/>
+    <componentTypes id="id_ct_vp1_ct1" name="ct_vp1_ct1"/>
+    <componentTypes id="id_ct_vp1_no_comp" name="ct_vp1_no_comp" boundType="id_ct_vp1_bound_target"/>
+    <componentTypes id="id_ct_vp1_ct2" name="ct_vp1_ct2" description=""/>
+    <linkTypes id="id_lt_vp1_no_link" name="lt_vp1_no_link" comment="" description="desc" sourceTypes="id_ct_vp1_ct1" destinationTypes="id_ct_vp1_ct1"/>
+    <linkTypes id="id_lt_vp1_link_type_1" name="lt_vp1_link_type_1" comment="" description="desc" sourceTypes="id_ct_vp1_ct1 id_ct_vp1_ct2" destinationTypes="id_ct_vp1_ct1 id_ct_vp1_ct2"/>
+    <rules id="id_vp1_rule1" name="vp1_rule1" comment="comment_rule1" description="desc_rule1" status="VALIDATED" rationale="rationale_rule1" exceptions="exceptions_rule1"/>
     <statusLiterals>VALIDATED</statusLiterals>
     <statusLiterals>REFUSED</statusLiterals>
     <statusLiterals>SUGGESTED</statusLiterals>
   </viewPoints>
   <viewPoints id="id_vp2" name="vp2">
-    <componentTypes id="id_comp_type_2" name="comp_type_2" description="" boundType="id_comp_type_1"/>
-    <componentTypes id="id_vp1_bound_target" name="bound_target"/>
+    <componentTypes id="id_ct_vp2_comp_type_2" name="ct_vp2_comp_type_2" comment="" description="" boundType="id_ct_vp1_ct2"/>
+    <componentTypes id="id_ct_vp1_bound_target" name="ct_vp1_bound_target"/>
   </viewPoints>
   <views id="id_v1" name="v1" viewPoint="id_vp1">
-    <components id="id_comp1" name="comp1" status="" type="id_comp_type_1"/>
-    <links id="id_v1_link1" name="v1_link1" description="" type="id_vp1_link_type_1"/>
+    <components id="id_comp_v1_comp1" name="comp_v1_comp1" comment="" status="" type="id_ct_vp1_ct1"/>
+    <components id="id_comp_v1_comp2" name="comp_v1_comp1" comment="" description="" type="id_ct_vp1_ct1"/>
+    <links id="id_link_v1_link1" name="link_v1_link1" description="" type="id_lt_vp1_link_type_1" sources="id_comp_v1_comp1" destinations="id_comp_v1_comp1"/>
   </views>
   <views id="id_view_2" name="v2" viewPoint="id_vp2">
-    <components id="id_comp1ct2" name="comp1ct2" description="" type="id_comp_type_2"/>
-    <components id="id_comp2ct2" name="comp2ct2" description="" type="id_comp_type_2"/>
+    <components id="id_comp_v2_comp1" name="comp_v2_comp1" comment="" description="" type="id_ct_vp1_ct2"/>
+    <components id="id_comp_v2_comp2" name="comp_v2_comp2" comment="" description="" type="id_ct_vp2_comp_type_2"/>
   </views>
 </m2ling_domain:Root>

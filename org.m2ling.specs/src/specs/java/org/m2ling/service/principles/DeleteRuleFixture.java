@@ -48,7 +48,7 @@ public class DeleteRuleFixture extends AbstractRuleFixture {
 		try {
 			reset("Technical");
 			RuleBean bean = new RuleBean();
-			bean.setId("id_rule1");
+			bean.setId("id_vp1_rule1");
 			bean.setViewPointId("id_vp1");
 			RuleDTO dto = new DTOConverter.ToDTO().getRuleDTO(bean);
 			service.deleteRule(null, dto);
