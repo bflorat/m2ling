@@ -10,6 +10,8 @@ public enum Events {
 	RULE_CHANGE,
 	/** A CT has been removed/added/updated */
 	CT_CHANGE,
+	/** A LT has been removed/added/updated */
+	LT_CHANGE,
 	DETAIL_TARGET,
 	DETAIL_VP
 }

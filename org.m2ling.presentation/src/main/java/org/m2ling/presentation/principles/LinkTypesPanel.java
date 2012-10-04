@@ -11,17 +11,17 @@ import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import org.m2ling.common.dto.core.ComponentTypeDTO;
+import org.m2ling.common.dto.core.LinkTypeDTO;
 import org.m2ling.common.exceptions.FunctionalException;
 import org.m2ling.presentation.events.Events;
 import org.m2ling.presentation.events.ObservationManager;
 import org.m2ling.presentation.events.Observer;
 import org.m2ling.presentation.i18n.Msg;
-import org.m2ling.presentation.principles.model.ComponentTypeBean;
 import org.m2ling.presentation.principles.model.HasNameAndIDBean;
+import org.m2ling.presentation.principles.model.LinkTypeBean;
 import org.m2ling.presentation.principles.utils.DTOConverter;
 import org.m2ling.presentation.widgets.HelpPanel;
-import org.m2ling.service.principles.ComponentTypeService;
+import org.m2ling.service.principles.LinkTypeService;
 import org.vaadin.dialogs.ConfirmDialog;
 
 import com.google.common.base.Strings;
@@ -44,13 +44,13 @@ import com.vaadin.ui.Window.Notification;
 import com.vaadin.ui.themes.BaseTheme;
 
 /**
- * List all component types (CT) for a given viewpoint
+ * List all link types (LT) for a given viewpoint
  */
 @SuppressWarnings("serial")
-public class ComponentTypesPanel extends VerticalLayout implements Observer {
+public class LinkTypesPanel extends VerticalLayout implements Observer {
 	private final String vpID;
 
-	private final ComponentTypeService serviceCT;
+	private final LinkTypeService serviceLT;
 
 	private final Logger logger;
 
@@ -64,15 +64,14 @@ public class ComponentTypesPanel extends VerticalLayout implements Observer {
 	private final PrinciplesGUIFactory factory;
 
 	/** Current data **/
-	private BeanContainer<String, ComponentTypeBean> data;
+	private BeanContainer<String, LinkTypeBean> data;
 
 	@Inject
-	public ComponentTypesPanel(Logger logger, @Assisted String vpID, ComponentTypeService serviceCT,
-			DTOConverter.ToDTO toDTO, DTOConverter.FromDTO fromDTO, Msg msg, ObservationManager obs,
-			PrinciplesGUIFactory factory) {
+	public LinkTypesPanel(Logger logger, @Assisted String vpID, LinkTypeService serviceLT, DTOConverter.ToDTO toDTO,
+			DTOConverter.FromDTO fromDTO, Msg msg, ObservationManager obs, PrinciplesGUIFactory factory) {
 		super();
 		this.vpID = vpID;
-		this.serviceCT = serviceCT;
+		this.serviceLT = serviceLT;
 		// this.factory = factory;
 		this.logger = logger;
 		this.toDTO = toDTO;
@@ -88,18 +87,18 @@ public class ComponentTypesPanel extends VerticalLayout implements Observer {
 	@Override
 	public void attach() {
 		try {
-			List<ComponentTypeDTO> cts = serviceCT.getAllCT(null, vpID);
-			if (cts.size() == 0) {
-				addComponent(new HelpPanel(msg.get("help.1")));
-				addComponent(new Label(msg.get("pr.35")));
+			List<LinkTypeDTO> lts = serviceLT.getAllLT(null, vpID);
+			if (lts.size() == 0) {
+				addComponent(new HelpPanel(msg.get("help.2")));
+				addComponent(new Label(msg.get("pr.44")));
 				Button create = getCreateButton();
 				addComponent(create);
 				setComponentAlignment(create, Alignment.TOP_RIGHT);
 			} else {
-				data = new BeanContainer<String, ComponentTypeBean>(ComponentTypeBean.class);
+				data = new BeanContainer<String, LinkTypeBean>(LinkTypeBean.class);
 				data.setBeanIdProperty("id");
-				for (ComponentTypeDTO dto : cts) {
-					ComponentTypeBean ctBean = fromDTO.getComponentTypeBean(dto);
+				for (LinkTypeDTO dto : lts) {
+					LinkTypeBean ctBean = fromDTO.getLinkTypeBean(dto);
 					data.addBean(ctBean);
 				}
 				final Table table = new Table(null, data);
@@ -107,30 +106,29 @@ public class ComponentTypesPanel extends VerticalLayout implements Observer {
 				// We set a guess height for table depending on the nb of items + a fixed size for the
 				// header
 				// Note that UNITS_EM doesn't work for some reasons and that a row can be multi-lines.
-				table.setHeight(cts.size() * 40 + 10, UNITS_PIXELS);
-				table.setVisibleColumns(new String[] { "drop", "name", "description", "instantiationFactor", "boundType",
-						"enumeration", "references", "tags" });
-				table.setColumnExpandRatio("description", 0.4f);
-				table.setColumnExpandRatio("boundType", 0.2f);
-				table.setColumnExpandRatio("references", 0.2f);
-				table.setColumnExpandRatio("enumeration", 0.2f);
+				table.setHeight(lts.size() * 40 + 10, UNITS_PIXELS);
+				table.setVisibleColumns(new String[] { "drop", "name", "description", "linkTemporality", "linkAccessType",
+						"sourcesTypes", "destinationsTypes", "tags" });
+				table.setColumnExpandRatio("description", 0.6f);
+				table.setColumnExpandRatio("sourcesTypes", 0.2f);
+				table.setColumnExpandRatio("destinationsTypes", 0.2f);
 				table.setItemDescriptionGenerator(new ItemDescriptionGenerator() {
 					public String generateDescription(Component source, Object itemId, Object propertyId) {
-						ComponentTypeBean bean = (ComponentTypeBean) data.getItem(itemId).getBean();
+						LinkTypeBean bean = (LinkTypeBean) data.getItem(itemId).getBean();
 						return getHtmlDetails(bean);
 					}
 				});
 				table.setColumnHeaders(new String[] { msg.get("gal.3"), msg.get("gal.12"),
-						msg.get("gal.1") + " (" + msg.get("gal.10") + ")", msg.get("pr.30"), msg.get("pr.36"),
-						msg.get("pr.32"), msg.get("pr.33"), msg.get("gal.4") });
+						msg.get("gal.1") + " (" + msg.get("gal.10") + ")", msg.get("pr.45"), msg.get("pr.46"),
+						msg.get("pr.47"), msg.get("pr.48"), msg.get("gal.4") });
 				table.addGeneratedColumn("name", new Table.ColumnGenerator() {
 					public Component generateCell(Table table, Object itemId, Object columnId) {
-						final BeanItem<ComponentTypeBean> item = data.getItem(itemId);
+						final BeanItem<LinkTypeBean> item = data.getItem(itemId);
 						Button edit = new Button(item.getBean().getName());
 						edit.setStyleName(BaseTheme.BUTTON_LINK);
 						edit.addListener(new Button.ClickListener() {
 							public void buttonClick(ClickEvent event) {
-								ComponentTypeDialog dialog = factory.getComponentTypeDialogFor(item);
+								LinkTypeDialog dialog = factory.getLinkTypeDialogFor(item);
 								dialog.setModal(true);
 								getWindow().addWindow(dialog);
 							}
@@ -140,8 +138,8 @@ public class ComponentTypesPanel extends VerticalLayout implements Observer {
 				});
 				table.addGeneratedColumn("drop", new Table.ColumnGenerator() {
 					public Component generateCell(Table table, Object itemId, Object columnId) {
-						BeanItem<ComponentTypeBean> item = data.getItem(itemId);
-						final ComponentTypeBean ctBean = item.getBean();
+						BeanItem<LinkTypeBean> item = data.getItem(itemId);
+						final LinkTypeBean ctBean = item.getBean();
 						NativeButton drop = new NativeButton("");
 						drop.setDescription(msg.get("gal.3"));
 						drop.setSizeFull();
@@ -155,46 +153,30 @@ public class ComponentTypesPanel extends VerticalLayout implements Observer {
 						return drop;
 					}
 				});
-				table.addGeneratedColumn("boundType", new Table.ColumnGenerator() {
+				table.addGeneratedColumn("sourcesTypes", new Table.ColumnGenerator() {
 					@Override
 					public Object generateCell(Table source, Object itemId, Object columnId) {
-						BeanItem<ComponentTypeBean> item = data.getItem(itemId);
-						final ComponentTypeBean ctBean = item.getBean();
-						Label label = new Label("");
-						if (ctBean.getBoundType() != null) {
-							label = new Label(ctBean.getBoundType().getName());
-						}
-						label.setDescription(getHtmlDetails(ctBean));
+						BeanItem<LinkTypeBean> item = data.getItem(itemId);
+						final LinkTypeBean ltBean = item.getBean();
+						Label label = new Label(ltBean.getSourcesTypesAsString());
+						label.setDescription(getHtmlDetails(ltBean));
 						return label;
 					}
 				});
-				table.addGeneratedColumn("enumeration", new Table.ColumnGenerator() {
+				table.addGeneratedColumn("destinationsTypes", new Table.ColumnGenerator() {
 					@Override
 					public Object generateCell(Table source, Object itemId, Object columnId) {
-						BeanItem<ComponentTypeBean> item = data.getItem(itemId);
-						final ComponentTypeBean ctBean = item.getBean();
-						Label label = new Label("");
-						if (ctBean.getBoundType() != null) {
-							label = new Label(ctBean.getEnumerationAsString());
-						}
-						label.setDescription(getHtmlDetails(ctBean));
-						return label;
-					}
-				});
-				table.addGeneratedColumn("references", new Table.ColumnGenerator() {
-					@Override
-					public Object generateCell(Table source, Object itemId, Object columnId) {
-						BeanItem<ComponentTypeBean> item = data.getItem(itemId);
-						final ComponentTypeBean ctBean = item.getBean();
-						Label label = new Label(ctBean.getReferencesAsString(), Label.CONTENT_RAW);
-						label.setDescription(getHtmlDetails(ctBean));
+						BeanItem<LinkTypeBean> item = data.getItem(itemId);
+						final LinkTypeBean ltBean = item.getBean();
+						Label label = new Label(ltBean.getDestinationsTypesAsString());
+						label.setDescription(getHtmlDetails(ltBean));
 						return label;
 					}
 				});
 				HorizontalLayout hl = new HorizontalLayout();
 				hl.setWidth("100%");
 				// help
-				HelpPanel help = new HelpPanel(msg.get("help.1"));
+				HelpPanel help = new HelpPanel(msg.get("help.2"));
 				hl.addComponent(help);
 				hl.setComponentAlignment(help, Alignment.TOP_RIGHT);
 				// Create
@@ -214,14 +196,14 @@ public class ComponentTypesPanel extends VerticalLayout implements Observer {
 		}
 	}
 
-	private void drop(final ComponentTypeBean ctBean) {
+	private void drop(final LinkTypeBean ctBean) {
 		ConfirmDialog.show(getApplication().getMainWindow(), msg.get("confirm.1") + " " + msg.get("confirm.2"),
 				new ConfirmDialog.Listener() {
 					public void onClose(ConfirmDialog dialog) {
 						if (dialog.isConfirmed()) {
 							try {
-								ComponentTypeDTO ctDTO = toDTO.getComponentTypeDTO(ctBean);
-								serviceCT.deleteCT(null, ctDTO);
+								LinkTypeDTO ctDTO = toDTO.getLinkTypeDTO(ctBean);
+								serviceLT.deleteLT(null, ctDTO);
 								removeAllComponents();
 								attach();
 							} catch (FunctionalException e) {
@@ -239,10 +221,27 @@ public class ComponentTypesPanel extends VerticalLayout implements Observer {
 	 * @param bean
 	 * @return HTML tooltip for a CT
 	 */
-	private String getHtmlDetails(ComponentTypeBean bean) {
+	private String getHtmlDetails(LinkTypeBean bean) {
 		String out = "<b>" + msg.get("gal.1") + " : </b>";
 		out += bean.getDescription();
 		out += "</br></br>";
+		// temporality
+		out += "<b>" + msg.get("pr.45") + " : </b>";
+		out += bean.getLinkTemporality();
+		out += "</br></br>";
+		// Access type
+		out += "<b>" + msg.get("pr.46") + " : </b>";
+		out += bean.getLinkAccessType();
+		out += "</br></br>";
+		// Sources
+		out += "<b>" + msg.get("pr.47") + " : </b>";
+		out += bean.getSourcesTypesAsString();
+		out += "</br></br>";
+		// Destinations
+		out += "<b>" + msg.get("pr.48") + " : </b>";
+		out += bean.getDestinationsTypesAsString();
+		out += "</br></br>";
+		// Comments
 		if (!Strings.isNullOrEmpty(bean.getComment())) {
 			out += "<b>" + msg.get("gal.11") + " : </b>";
 			out += bean.getComment();
@@ -253,34 +252,19 @@ public class ComponentTypesPanel extends VerticalLayout implements Observer {
 			out += bean.getTags();
 			out += "</br></br>";
 		}
-		if (bean.getBoundType() != null) {
-			out += "<b>" + msg.get("pr.36") + " : </b>";
-			out += bean.getViewPoint().getName() + "/ " + bean.getBoundType().getName();
-			out += "</br></br>";
-		}
-		if (bean.getEnumeration().size() > 0) {
-			out += "<b>" + msg.get("pr.32") + " : </b>";
-			out += bean.getEnumerationAsString();
-			out += "</br></br>";
-		}
-		if (bean.getReferences().size() > 0) {
-			out += "<b>" + msg.get("pr.33") + " : </b>";
-			out += bean.getReferencesAsString();
-			out += "</br></br>";
-		}
 		return out;
 	}
 
 	private Button getCreateButton() {
-		Button create = new Button(msg.get("pr.34"));
+		Button create = new Button(msg.get("pr.49"));
 		create.setStyleName(BaseTheme.BUTTON_LINK);
 		create.addListener(new Button.ClickListener() {
 			public void buttonClick(ClickEvent event) {
-				// CT with null ID means "new CT"
-				ComponentTypeBean bean = new ComponentTypeBean();
+				// lt with null ID means "new LT"
+				LinkTypeBean bean = new LinkTypeBean();
 				HasNameAndIDBean vp = HasNameAndIDBean.newInstance(vpID, null);
 				bean.setViewPoint(vp);
-				ComponentTypeDialog dialog = factory.getComponentTypeDialogFor(new BeanItem<ComponentTypeBean>(bean));
+				LinkTypeDialog dialog = factory.getLinkTypeDialogFor(new BeanItem<LinkTypeBean>(bean));
 				dialog.setModal(true);
 				getWindow().addWindow(dialog);
 			}
@@ -295,10 +279,10 @@ public class ComponentTypesPanel extends VerticalLayout implements Observer {
 	 */
 	@Override
 	public void update(org.m2ling.presentation.events.Event event) {
-		// Forced refresh of a ct (mainly after an error, otherwise, the table is synchronized with
+		// Forced refresh of a lt (mainly after an error, otherwise, the table is synchronized with
 		// the dialog using
 		// regular container/beanitem references)
-		if (event.getSubject() == Events.CT_CHANGE && event.getDetails().get(Events.DETAIL_VP.name()).equals(vpID)) {
+		if (event.getSubject() == Events.LT_CHANGE && event.getDetails().get(Events.DETAIL_VP.name()).equals(vpID)) {
 			removeAllComponents();
 			attach();
 		}
@@ -312,7 +296,7 @@ public class ComponentTypesPanel extends VerticalLayout implements Observer {
 	@Override
 	public Set<Events> getRegistrationKeys() {
 		Set<Events> events = new HashSet<Events>();
-		events.add(Events.CT_CHANGE);
+		events.add(Events.LT_CHANGE);
 		return events;
 	}
 }

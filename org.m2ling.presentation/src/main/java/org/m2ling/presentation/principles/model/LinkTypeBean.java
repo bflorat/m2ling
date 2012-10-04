@@ -80,6 +80,23 @@ public class LinkTypeBean implements Serializable {
 	public List<HasNameAndIDBean> getSourcesTypes() {
 		return sourcesTypes;
 	}
+	
+	/**
+	 * Return a human representation of an sources types
+	 * 
+	 * @return a human representation of an sources types
+	 */
+	public String getSourcesTypesAsString() {
+		StringBuilder sb = new StringBuilder();
+		for (HasNameAndIDBean ct : sourcesTypes) {
+			sb.append(ct.getName()).append(", ");
+		}
+		// Remove trailing comma
+		if (sb.length() > 0) {
+			sb.delete(sb.length() - 2, sb.length() - 1);
+		}
+		return sb.toString();
+	}
 
 	/**
 	 * @param sourcesTypes
@@ -94,6 +111,23 @@ public class LinkTypeBean implements Serializable {
 	 */
 	public List<HasNameAndIDBean> getDestinationsTypes() {
 		return destinationsTypes;
+	}
+	
+	/**
+	 * Return a human representation of an destinations types
+	 * 
+	 * @return a human representation of an destinations types
+	 */
+	public String getDestinationsTypesAsString() {
+		StringBuilder sb = new StringBuilder();
+		for (HasNameAndIDBean ct : destinationsTypes) {
+			sb.append(ct.getName()).append(", ");
+		}
+		// Remove trailing comma
+		if (sb.length() > 0) {
+			sb.delete(sb.length() - 2, sb.length() - 1);
+		}
+		return sb.toString();
 	}
 
 	/**

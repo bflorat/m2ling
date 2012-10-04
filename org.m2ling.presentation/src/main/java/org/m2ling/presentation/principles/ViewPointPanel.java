@@ -41,10 +41,15 @@ import com.vaadin.ui.themes.BaseTheme;
 @SuppressWarnings("serial")
 public class ViewPointPanel extends VerticalLayout {
 	private final Logger logger;
+
 	private final ViewPointBean bean;
+
 	private PrinciplesGUIFactory factory;
+
 	private ViewPointService service;
+
 	private ObservationManager obs;
+
 	private Msg msg;
 
 	/**
@@ -148,14 +153,21 @@ public class ViewPointPanel extends VerticalLayout {
 				ctsHiddenPane.setVisible(!ctsHiddenPane.isVisible());
 			}
 		});
-		// Links
+		// LTs
+		final Panel ltsHiddenPane = new Panel();
+		ltsHiddenPane.setVisible(false);
+		ltsHiddenPane.setWidth("100%");
+		ltsHiddenPane.setHeight(null);
+		LinkTypesPanel ltsPanel = factory.getLTPanelFor(bean.getId());
+		ltsHiddenPane.setContent(ltsPanel);
 		Button linkTypes = new Button(msg.get("pr.15"));
 		linkTypes.setStyleName(BaseTheme.BUTTON_LINK);
 		linkTypes.addListener(new Button.ClickListener() {
 			public void buttonClick(ClickEvent event) {
-				// TODO
+				ltsHiddenPane.setVisible(!ltsHiddenPane.isVisible());
 			}
 		});
+		// Activities
 		Button activities = new Button(msg.get("pr.25"));
 		activities.setStyleName(BaseTheme.BUTTON_LINK);
 		activities.addListener(new Button.ClickListener() {
@@ -190,6 +202,7 @@ public class ViewPointPanel extends VerticalLayout {
 		addComponent(componentTypes);
 		addComponent(ctsHiddenPane);
 		addComponent(linkTypes);
+		addComponent(ltsHiddenPane);
 		addComponent(activities);
 		addComponent(rules);
 		addComponent(rulesHiddenPane);

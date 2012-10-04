@@ -81,7 +81,6 @@ public class IconUploader extends CustomComponent implements Upload.Receiver {
 		preview.setWidth("32px");
 		preview.setHeight("32px");
 		upload.setImmediate(true);
-		upload.setButtonCaption(msg.get("pr.12"));
 		hl.addComponent(upload);
 		hl.addComponent(preview);
 	}
