@@ -130,12 +130,16 @@ public class ViewPointPanel extends VerticalLayout {
 		rulesHiddenPane.setVisible(false);
 		rulesHiddenPane.setWidth("100%");
 		rulesHiddenPane.setHeight(null);
-		RulesPanel rulesPanel = factory.getRulesPanelFor(bean.getId());
-		rulesHiddenPane.setContent(rulesPanel);
 		Button rules = new Button(msg.get("pr.13"));
 		rules.setStyleName(BaseTheme.BUTTON_LINK);
 		rules.addListener(new Button.ClickListener() {
+			RulesPanel rulesPanel;
+
 			public void buttonClick(ClickEvent event) {
+				if (rulesPanel == null) {
+					rulesPanel = factory.getRulesPanelFor(bean.getId());
+				}
+				rulesHiddenPane.setContent(rulesPanel);
 				rulesHiddenPane.setVisible(!rulesHiddenPane.isVisible());
 			}
 		});
@@ -144,12 +148,16 @@ public class ViewPointPanel extends VerticalLayout {
 		ctsHiddenPane.setVisible(false);
 		ctsHiddenPane.setWidth("100%");
 		ctsHiddenPane.setHeight(null);
-		ComponentTypesPanel ctsPanel = factory.getCTPanelFor(bean.getId());
-		ctsHiddenPane.setContent(ctsPanel);
 		Button componentTypes = new Button(msg.get("pr.14"));
 		componentTypes.setStyleName(BaseTheme.BUTTON_LINK);
 		componentTypes.addListener(new Button.ClickListener() {
+			ComponentTypesPanel ctsPanel;
+
 			public void buttonClick(ClickEvent event) {
+				if (ctsPanel == null) {
+					ctsPanel = factory.getCTPanelFor(bean.getId());
+				}
+				ctsHiddenPane.setContent(ctsPanel);
 				ctsHiddenPane.setVisible(!ctsHiddenPane.isVisible());
 			}
 		});
@@ -158,12 +166,16 @@ public class ViewPointPanel extends VerticalLayout {
 		ltsHiddenPane.setVisible(false);
 		ltsHiddenPane.setWidth("100%");
 		ltsHiddenPane.setHeight(null);
-		LinkTypesPanel ltsPanel = factory.getLTPanelFor(bean.getId());
-		ltsHiddenPane.setContent(ltsPanel);
 		Button linkTypes = new Button(msg.get("pr.15"));
 		linkTypes.setStyleName(BaseTheme.BUTTON_LINK);
 		linkTypes.addListener(new Button.ClickListener() {
+			LinkTypesPanel ltsPanel;
+
 			public void buttonClick(ClickEvent event) {
+				if (ltsPanel == null) {
+					ltsPanel = factory.getLTPanelFor(bean.getId());
+				}
+				ltsHiddenPane.setContent(ltsPanel);
 				ltsHiddenPane.setVisible(!ltsHiddenPane.isVisible());
 			}
 		});

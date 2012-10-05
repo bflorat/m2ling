@@ -35,6 +35,7 @@ import com.google.inject.assistedinject.Assisted;
 import com.vaadin.data.util.BeanContainer;
 import com.vaadin.data.util.BeanItem;
 import com.vaadin.terminal.ThemeResource;
+import com.vaadin.ui.AbstractSelect.ItemDescriptionGenerator;
 import com.vaadin.ui.Alignment;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Button.ClickEvent;
@@ -99,7 +100,7 @@ public class RulesPanel extends VerticalLayout implements Observer {
 				addComponent(create);
 				setComponentAlignment(create, Alignment.TOP_RIGHT);
 			} else {
-				BeanContainer<String, RuleBean> data = new BeanContainer<String, RuleBean>(RuleBean.class);
+				final BeanContainer<String, RuleBean> data = new BeanContainer<String, RuleBean>(RuleBean.class);
 				data.setBeanIdProperty("id");
 				for (RuleDTO dto : rules) {
 					RuleBean rule = fromDTO.getRuleBean(dto);
@@ -115,6 +116,12 @@ public class RulesPanel extends VerticalLayout implements Observer {
 				table.setColumnExpandRatio("description", 1);
 				table.setColumnHeaders(new String[] { msg.get("gal.3"), msg.get("gal.12"), msg.get("gal.7"),
 						msg.get("gal.8"), msg.get("gal.1") + " (" + msg.get("gal.10") + ")", msg.get("gal.4") });
+				table.setItemDescriptionGenerator(new ItemDescriptionGenerator() {
+					public String generateDescription(Component source, Object itemId, Object propertyId) {
+						RuleBean bean = (RuleBean) data.getItem(itemId).getBean();
+						return getHtmlDetails(bean);
+					}
+				});
 				table.addGeneratedColumn("name", new Table.ColumnGenerator() {
 					public Component generateCell(Table table, Object itemId, Object columnId) {
 						@SuppressWarnings("unchecked")
@@ -130,6 +137,7 @@ public class RulesPanel extends VerticalLayout implements Observer {
 								getWindow().addWindow(dialog);
 							}
 						});
+						edit.setDescription(getHtmlDetails(item.getBean()));
 						return edit;
 					}
 				});
