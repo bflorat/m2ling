@@ -128,6 +128,7 @@ public class CoreSwitch<T> extends Switch<T> {
 				if (result == null) result = caseHasParameterDefinitions(componentType);
 				if (result == null) result = caseHasConstraints(componentType);
 				if (result == null) result = caseHasDescription(componentType);
+				if (result == null) result = caseHasStatus(componentType);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -220,6 +221,7 @@ public class CoreSwitch<T> extends Switch<T> {
 				if (result == null) result = caseHasParameterDefinitions(conceptItem);
 				if (result == null) result = caseHasConstraints(conceptItem);
 				if (result == null) result = caseHasDescription(conceptItem);
+				if (result == null) result = caseHasStatus(conceptItem);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -322,6 +324,7 @@ public class CoreSwitch<T> extends Switch<T> {
 				if (result == null) result = caseHasParameterDefinitions(linkType);
 				if (result == null) result = caseHasConstraints(linkType);
 				if (result == null) result = caseHasDescription(linkType);
+				if (result == null) result = caseHasStatus(linkType);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}

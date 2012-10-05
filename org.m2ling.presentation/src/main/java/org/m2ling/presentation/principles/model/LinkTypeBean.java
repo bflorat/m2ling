@@ -34,6 +34,8 @@ public class LinkTypeBean implements Serializable {
 
 	private String linkAccessType = LinkAccessType.READ.name();
 
+	private String status = "";
+
 	/** Sources */
 	private Set<HasNameAndIDBean> sourcesTypes = new LinkedHashSet<HasNameAndIDBean>();
 
@@ -80,7 +82,7 @@ public class LinkTypeBean implements Serializable {
 	public Set<HasNameAndIDBean> getSourcesTypes() {
 		return sourcesTypes;
 	}
-	
+
 	/**
 	 * Return a human representation of an sources types
 	 * 
@@ -112,7 +114,7 @@ public class LinkTypeBean implements Serializable {
 	public Set<HasNameAndIDBean> getDestinationsTypes() {
 		return destinationsTypes;
 	}
-	
+
 	/**
 	 * Return a human representation of an destinations types
 	 * 
@@ -239,6 +241,21 @@ public class LinkTypeBean implements Serializable {
 	 */
 	public void setDescription(String description) {
 		this.description = description;
+	}
+
+	/**
+	 * @return the status
+	 */
+	public String getStatus() {
+		return status;
+	}
+
+	/**
+	 * @param status
+	 *           the status to set
+	 */
+	public void setStatus(String status) {
+		this.status = status;
 	}
 
 	/**

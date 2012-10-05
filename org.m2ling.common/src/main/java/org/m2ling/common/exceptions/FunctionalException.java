@@ -13,7 +13,9 @@ import javax.annotation.Nullable;
  */
 public class FunctionalException extends Exception {
 	private String details;
+
 	private Code code;
+
 	private static final long serialVersionUID = -8262214820561085011L;
 
 	/**
@@ -73,8 +75,6 @@ public class FunctionalException extends Exception {
 		LT_NONE_DEST_TYPES,
 		LT_ILLEGAL_ACCESS_TYPE,
 		LT_ILLEGAL_TEMPORALITY,
-		
-		
 	}
 
 	/**

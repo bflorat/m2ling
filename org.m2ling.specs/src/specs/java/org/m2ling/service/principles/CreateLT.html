@@ -27,9 +27,10 @@
 			<li>description=<b concordion:set="#desc">Asynchronous REST call over HTTP. Default port : 80. </b></li>
 			<li>comment=<b concordion:set="#comment">Over TCP only.</b></li>
 			<li>tags=<b concordion:set="#tags">logical,network</b></li>
+			<li>status=<b concordion:set="#status">APPLICABLE</b></li>
 		</ul>
 		should have following characteristics (full round trip from presentation to presentation) : <b
-			concordion:assertEquals="createAndGetLT(#justCheck,#caseName,#vpID,#id,#name,#desc,#comment,#tags,#accessType,#temporality,#sourcesTypes,#destinationsTypes)">
+			concordion:assertEquals="createAndGetLT(#justCheck,#caseName,#vpID,#id,#name,#desc,#comment,#tags,#accessType,#temporality,#sourcesTypes,#destinationsTypes,#status)">
 			comment=Over TCP only. 
 			description=Asynchronous REST call over HTTP. Default port : 80. 
 			destinationsTypes=[id=id_ct_logical_servicemodule name=ServiceModule ] 
@@ -40,6 +41,7 @@
 			linkTemporality=ASYNC_PULL 
 			name=HTTP_REST_2 
 			sourcesTypes=[id=id_ct_logical_guimodule name=GUIModule , id=id_ct_logical_batchmodule name=BatchModule ] 
+			status=APPLICABLE 
 			tags=logical,network 
 			vp=id=id_vp_logical name=Logical Architecture</b>
 	</div>
@@ -75,7 +77,7 @@
 	<div class='example' >
 	<table
 		concordion:execute="#result=checkFormat(#caseName,#vpID,#id,#name,#desc,
-				#comment,#tags,#accessType,#temporality,#sourcesTypes,#destinationsTypes)">
+				#comment,#tags,#accessType,#temporality,#sourcesTypes,#destinationsTypes,#status)">
 		<tr>
 			<th concordion:set="#caseName">Case</th>
 			<th concordion:set="#id">ID</th>
@@ -87,6 +89,7 @@
 			<th concordion:set="#temporality">Temporality</th>
 			<th concordion:set="#sourcesTypes">SourcesTypes</th>
 			<th concordion:set="#destinationsTypes">DestinationTypes</th>
+			<th concordion:set="#status">Status</th>
 			<th concordion:assertEquals="#result">should :</th>
 		</tr>
 		<!-- Nominal -->
@@ -101,6 +104,7 @@
 			<td>ASYNC_PULL</td>
 			<td>id_ct_logical_guimodule,id_ct_logical_batchmodule</td>
 			<td>id_ct_logical_servicemodule</td>
+			<td>APPLICABLE</td>
 			<td>PASS</td>
 		</tr>
 		<!-- Existing LT -->
@@ -115,6 +119,7 @@
 			<td>ASYNC_PULL</td>
 			<td>id_ct_logical_guimodule,id_ct_logical_batchmodule</td>
 			<td>id_ct_logical_servicemodule</td>
+			<td>APPLICABLE</td>
 			<td>FAIL with code DUPLICATES</td>
 		</tr>
 		<tr>
@@ -128,6 +133,7 @@
 			<td>ASYNC_PULL</td>
 			<td>id_ct_logical_guimodule,id_ct_logical_batchmodule</td>
 			<td>id_ct_logical_servicemodule</td>
+			<td>APPLICABLE</td>
 			<td>FAIL with code DUPLICATE_NAME</td>
 		</tr>
 		<!-- ID checks -->
@@ -142,6 +148,7 @@
 			<td>ASYNC_PULL</td>
 			<td>id_ct_logical_guimodule,id_ct_logical_batchmodule</td>
 			<td>id_ct_logical_servicemodule</td>
+			<td>APPLICABLE</td>
 			<td>FAIL with code NULL_ARGUMENT</td>
 		</tr>
 		<tr>
@@ -155,6 +162,7 @@
 			<td>ASYNC_PULL</td>
 			<td>id_ct_logical_guimodule,id_ct_logical_batchmodule</td>
 			<td>id_ct_logical_servicemodule</td>
+			<td>APPLICABLE</td>
 			<td>FAIL with code VOID_ARGUMENT</td>
 		</tr>
 		<tr>
@@ -168,6 +176,7 @@
 			<td>ASYNC_PULL</td>
 			<td>id_ct_logical_guimodule,id_ct_logical_batchmodule</td>
 			<td>id_ct_logical_servicemodule</td>
+			<td>APPLICABLE</td>
 			<td>FAIL with code VOID_ARGUMENT</td>
 		</tr>
 		<!-- name check -->
@@ -182,6 +191,7 @@
 			<td>ASYNC_PULL</td>
 			<td>id_ct_logical_guimodule,id_ct_logical_batchmodule</td>
 			<td>id_ct_logical_servicemodule</td>
+			<td>APPLICABLE</td>
 			<td>FAIL with code NULL_ARGUMENT</td>
 		</tr>
 		<tr>
@@ -195,6 +205,7 @@
 			<td>ASYNC_PULL</td>
 			<td>id_ct_logical_guimodule,id_ct_logical_batchmodule</td>
 			<td>id_ct_logical_servicemodule</td>
+			<td>APPLICABLE</td>
 			<td>FAIL with code VOID_ARGUMENT</td>
 		</tr>
 		<tr>
@@ -208,6 +219,7 @@
 			<td>ASYNC_PULL</td>
 			<td>id_ct_logical_guimodule,id_ct_logical_batchmodule</td>
 			<td>id_ct_logical_servicemodule</td>
+			<td>APPLICABLE</td>
 			<td>FAIL with code VOID_ARGUMENT</td>
 		</tr>
 		<!--  Access type and temporality -->
@@ -222,6 +234,7 @@
 			<td>ASYNC_PULL</td>
 			<td>id_ct_logical_guimodule,id_ct_logical_batchmodule</td>
 			<td>id_ct_logical_servicemodule</td>
+			<td>APPLICABLE</td>
 			<td>FAIL with code LT_ILLEGAL_ACCESS_TYPE</td>
 		</tr>
 		<tr>
@@ -235,6 +248,7 @@
 			<td>ASYNC_PULL</td>
 			<td>id_ct_logical_guimodule,id_ct_logical_batchmodule</td>
 			<td>id_ct_logical_servicemodule</td>
+			<td>APPLICABLE</td>
 			<td>FAIL with code LT_ILLEGAL_ACCESS_TYPE</td>
 		</tr>
 		<tr>
@@ -248,6 +262,7 @@
 			<td>foo</td>
 			<td>id_ct_logical_guimodule,id_ct_logical_batchmodule</td>
 			<td>id_ct_logical_servicemodule</td>
+			<td>APPLICABLE</td>
 			<td>FAIL with code LT_ILLEGAL_TEMPORALITY</td>
 		</tr>
 		<tr>
@@ -261,6 +276,7 @@
 			<td>null</td>
 			<td>id_ct_logical_guimodule,id_ct_logical_batchmodule</td>
 			<td>id_ct_logical_servicemodule</td>
+			<td>APPLICABLE</td>
 			<td>FAIL with code LT_ILLEGAL_TEMPORALITY</td>
 		</tr>
 			
@@ -276,6 +292,7 @@
 			<td>ASYNC_PULL</td>
 			<td>id_ct_logical_guimodule,id_ct_logical_batchmodule</td>
 			<td>id_ct_logical_servicemodule</td>
+			<td>APPLICABLE</td>
 			<td>PASS</td>
 		</tr>
 		
@@ -291,6 +308,7 @@
 			<td>ASYNC_PULL</td>
 			<td>id_ct_logical_guimodule,id_ct_logical_batchmodule</td>
 			<td>id_ct_logical_servicemodule</td>
+			<td>APPLICABLE</td>
 			<td>FAIL with code NULL_ARGUMENT</td>
 		</tr>
 		<tr>
@@ -304,6 +322,7 @@
 			<td>ASYNC_PULL</td>
 			<td>id_ct_logical_guimodule,id_ct_logical_batchmodule</td>
 			<td>id_ct_logical_servicemodule</td>
+			<td>APPLICABLE</td>
 			<td>FAIL with code VOID_ARGUMENT</td>
 		</tr>
 		<!-- Sources and destination types -->
@@ -319,6 +338,7 @@
 			<td>ASYNC_PULL</td>
 			<td>foo</td>
 			<td>id_ct_logical_servicemodule</td>
+			<td>APPLICABLE</td>
 			<td>FAIL with code TARGET_NOT_FOUND</td>
 		</tr>
 		
@@ -333,7 +353,37 @@
 			<td>ASYNC_PULL</td>
 			<td>id_ct_logical_guimodule</td>
 			<td>foo</td>
+			<td>APPLICABLE</td>
 			<td>FAIL with code TARGET_NOT_FOUND</td>
+		</tr>
+		<!--  Status literals -->
+		<tr>
+			<td>Format/Unexisting status literal</td>
+			<td>new_id_lt_logical_http_rest</td>
+			<td>HTTP_REST_2</td>
+			<td>description2</td>
+			<td>comment2</td>
+			<td>tags1,tag2</td>
+			<td>RW</td>
+			<td>ASYNC_PULL</td>
+			<td>id_ct_logical_guimodule,id_ct_logical_batchmodule</td>
+			<td>id_ct_logical_servicemodule</td>
+			<td>foo_status</td>
+			<td>FAIL with code INVALID_STATUS</td>
+		</tr>
+		<tr>
+			<td>Format/null status literal</td>
+			<td>new_id_lt_logical_http_rest</td>
+			<td>HTTP_REST_2</td>
+			<td>description2</td>
+			<td>comment2</td>
+			<td>tags1,tag2</td>
+			<td>RW</td>
+			<td>ASYNC_PULL</td>
+			<td>id_ct_logical_guimodule,id_ct_logical_batchmodule</td>
+			<td>id_ct_logical_servicemodule</td>
+			<td>null</td>
+			<td>PASS</td>
 		</tr>
 		
 	</table>

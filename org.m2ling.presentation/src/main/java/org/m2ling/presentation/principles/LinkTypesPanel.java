@@ -107,8 +107,8 @@ public class LinkTypesPanel extends VerticalLayout implements Observer {
 				// header.
 				// Note that UNITS_EM doesn't work for some reasons and that a row can be multi-lines.
 				table.setHeight(lts.size() * 40 + 20, UNITS_PIXELS);
-				table.setVisibleColumns(new String[] { "drop", "name", "description", "linkTemporality", "linkAccessType",
-						"sourcesTypes", "destinationsTypes", "tags" });
+				table.setVisibleColumns(new String[] { "drop", "name", "description", "status", "linkTemporality",
+						"linkAccessType", "sourcesTypes", "destinationsTypes", "tags" });
 				table.setColumnExpandRatio("description", 0.6f);
 				table.setColumnExpandRatio("sourcesTypes", 0.2f);
 				table.setColumnExpandRatio("destinationsTypes", 0.2f);
@@ -119,8 +119,8 @@ public class LinkTypesPanel extends VerticalLayout implements Observer {
 					}
 				});
 				table.setColumnHeaders(new String[] { msg.get("gal.3"), msg.get("gal.12"),
-						msg.get("gal.1") + " (" + msg.get("gal.10") + ")", msg.get("pr.45"), msg.get("pr.46"),
-						msg.get("pr.47"), msg.get("pr.48"), msg.get("gal.4") });
+						msg.get("gal.1") + " (" + msg.get("gal.10") + ")", msg.get("gal.7"), msg.get("pr.45"),
+						msg.get("pr.46"), msg.get("pr.47"), msg.get("pr.48"), msg.get("gal.4") });
 				table.addGeneratedColumn("name", new Table.ColumnGenerator() {
 					public Component generateCell(Table table, Object itemId, Object columnId) {
 						final BeanItem<LinkTypeBean> item = data.getItem(itemId);
@@ -225,6 +225,11 @@ public class LinkTypesPanel extends VerticalLayout implements Observer {
 		String out = "<b>" + msg.get("gal.1") + " : </b>";
 		out += bean.getDescription();
 		out += "</br></br>";
+		if (!Strings.isNullOrEmpty(bean.getStatus())) {
+			out += "<b>" + msg.get("gal.7") + " : </b>";
+			out += bean.getStatus();
+			out += "</br></br>";
+		}
 		// temporality
 		out += "<b>" + msg.get("pr.45") + " : </b>";
 		out += bean.getLinkTemporality();

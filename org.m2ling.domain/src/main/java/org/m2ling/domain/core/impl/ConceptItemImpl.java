@@ -19,6 +19,7 @@ import org.m2ling.domain.core.HasConstraints;
 import org.m2ling.domain.core.HasCustomProperties;
 import org.m2ling.domain.core.HasDescription;
 import org.m2ling.domain.core.HasParameterDefinitions;
+import org.m2ling.domain.core.HasStatus;
 import org.m2ling.domain.core.HasTags;
 
 /**
@@ -32,6 +33,7 @@ import org.m2ling.domain.core.HasTags;
  *   <li>{@link org.m2ling.domain.core.impl.ConceptItemImpl#getComment <em>Comment</em>}</li>
  *   <li>{@link org.m2ling.domain.core.impl.ConceptItemImpl#getTags <em>Tags</em>}</li>
  *   <li>{@link org.m2ling.domain.core.impl.ConceptItemImpl#getDescription <em>Description</em>}</li>
+ *   <li>{@link org.m2ling.domain.core.impl.ConceptItemImpl#getStatus <em>Status</em>}</li>
  * </ul>
  * </p>
  *
@@ -104,6 +106,26 @@ public abstract class ConceptItemImpl extends HasNameAndIDImpl implements Concep
 	 * @ordered
 	 */
 	protected String description = DESCRIPTION_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getStatus() <em>Status</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getStatus()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String STATUS_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getStatus() <em>Status</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getStatus()
+	 * @generated
+	 * @ordered
+	 */
+	protected String status = STATUS_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -221,6 +243,27 @@ public abstract class ConceptItemImpl extends HasNameAndIDImpl implements Concep
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public String getStatus() {
+		return status;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setStatus(String newStatus) {
+		String oldStatus = status;
+		status = newStatus;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, CorePackage.CONCEPT_ITEM__STATUS, oldStatus, status));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
@@ -233,6 +276,8 @@ public abstract class ConceptItemImpl extends HasNameAndIDImpl implements Concep
 				return getTags();
 			case CorePackage.CONCEPT_ITEM__DESCRIPTION:
 				return getDescription();
+			case CorePackage.CONCEPT_ITEM__STATUS:
+				return getStatus();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -259,6 +304,9 @@ public abstract class ConceptItemImpl extends HasNameAndIDImpl implements Concep
 			case CorePackage.CONCEPT_ITEM__DESCRIPTION:
 				setDescription((String)newValue);
 				return;
+			case CorePackage.CONCEPT_ITEM__STATUS:
+				setStatus((String)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -283,6 +331,9 @@ public abstract class ConceptItemImpl extends HasNameAndIDImpl implements Concep
 			case CorePackage.CONCEPT_ITEM__DESCRIPTION:
 				setDescription(DESCRIPTION_EDEFAULT);
 				return;
+			case CorePackage.CONCEPT_ITEM__STATUS:
+				setStatus(STATUS_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -303,6 +354,8 @@ public abstract class ConceptItemImpl extends HasNameAndIDImpl implements Concep
 				return tags != null && !tags.isEmpty();
 			case CorePackage.CONCEPT_ITEM__DESCRIPTION:
 				return DESCRIPTION_EDEFAULT == null ? description != null : !DESCRIPTION_EDEFAULT.equals(description);
+			case CorePackage.CONCEPT_ITEM__STATUS:
+				return STATUS_EDEFAULT == null ? status != null : !STATUS_EDEFAULT.equals(status);
 		}
 		return super.eIsSet(featureID);
 	}
@@ -345,6 +398,12 @@ public abstract class ConceptItemImpl extends HasNameAndIDImpl implements Concep
 		if (baseClass == HasDescription.class) {
 			switch (derivedFeatureID) {
 				case CorePackage.CONCEPT_ITEM__DESCRIPTION: return CorePackage.HAS_DESCRIPTION__DESCRIPTION;
+				default: return -1;
+			}
+		}
+		if (baseClass == HasStatus.class) {
+			switch (derivedFeatureID) {
+				case CorePackage.CONCEPT_ITEM__STATUS: return CorePackage.HAS_STATUS__STATUS;
 				default: return -1;
 			}
 		}
@@ -392,6 +451,12 @@ public abstract class ConceptItemImpl extends HasNameAndIDImpl implements Concep
 				default: return -1;
 			}
 		}
+		if (baseClass == HasStatus.class) {
+			switch (baseFeatureID) {
+				case CorePackage.HAS_STATUS__STATUS: return CorePackage.CONCEPT_ITEM__STATUS;
+				default: return -1;
+			}
+		}
 		return super.eDerivedStructuralFeatureID(baseFeatureID, baseClass);
 	}
 
@@ -411,6 +476,8 @@ public abstract class ConceptItemImpl extends HasNameAndIDImpl implements Concep
 		result.append(tags);
 		result.append(", description: ");
 		result.append(description);
+		result.append(", status: ");
+		result.append(status);
 		result.append(')');
 		return result.toString();
 	}

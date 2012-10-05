@@ -322,6 +322,10 @@ public class ComponentTypeServiceImpl extends ServiceImpl implements ComponentTy
 			if (dto.getComment() != null && dto.getComment().length() > Consts.MAX_TEXT_SIZE) {
 				throw new FunctionalException(FunctionalException.Code.SIZE_EXCEEDED, null, "(comment)");
 			}
+			// Status (null is valid)
+			if (dto.getStatus() != null && !vp.getStatusLiterals().contains(dto.getStatus())) {
+				throw new FunctionalException(FunctionalException.Code.INVALID_STATUS, null, dto.toString());
+			}
 			// Tags
 			Utils.checkTags(dto.getTags());
 			// References
@@ -361,6 +365,7 @@ public class ComponentTypeServiceImpl extends ServiceImpl implements ComponentTy
 			newEnumeration.add(ai);
 		}
 		enumeration.addAll(newEnumeration);
+		ct.setStatus(dto.getStatus());
 		pmanager.commit();
 	}
 

@@ -227,6 +227,10 @@ public class LinkTypeServiceImpl extends ServiceImpl implements LinkTypeService 
 			if (dto.getDescription().length() > Consts.MAX_TEXT_SIZE) {
 				throw new FunctionalException(FunctionalException.Code.SIZE_EXCEEDED, null, "(description)");
 			}
+			// Status (null is valid)
+			if (dto.getStatus() != null && !vp.getStatusLiterals().contains(dto.getStatus())) {
+				throw new FunctionalException(FunctionalException.Code.INVALID_STATUS, null, dto.toString());
+			}
 			// Comment
 			if (dto.getComment() != null && dto.getComment().length() > Consts.MAX_TEXT_SIZE) {
 				throw new FunctionalException(FunctionalException.Code.SIZE_EXCEEDED, null, "(comment)");
@@ -266,6 +270,7 @@ public class LinkTypeServiceImpl extends ServiceImpl implements LinkTypeService 
 			ComponentType ct = util.getComponentTypeByID(ctDTO.getId());
 			destinations.add(ct);
 		}
+		lt.setStatus(dto.getStatus());
 		pmanager.commit();
 	}
 

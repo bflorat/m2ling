@@ -27,9 +27,10 @@
 			<li>bound type id=<b concordion:set="#boundTypeID">id_ct_tech_applicationserver</b></li>
 			<li>references ids=<b concordion:set="#references">RUNS:id_ct_app_servicemodule;DEPENDS_ON:id_ct_logical_rdbms,id_ct_logical_ldap</b></li>
 			<li>enumeration=<b concordion:set="#enumeration">id_comp_tech_jboss5,id_comp_tech_jboss6</b></li>
+			<li>status=<b concordion:set="#status">APPLICABLE</b></li>
 		</ul>
 		should have following characteristics (full round trip from presentation to presentation) : <b
-			concordion:assertEquals="createAndGetCT(#justCheck,#caseName,#vpID,#id,#name,#desc,#comment,#tags,#ifactor,#boundTypeID,#references,#enumeration)">
+			concordion:assertEquals="createAndGetCT(#justCheck,#caseName,#vpID,#id,#name,#desc,#comment,#tags,#ifactor,#boundTypeID,#references,#enumeration,#status)">
 			boundType=id=id_ct_tech_applicationserver name=Technical Architecture/ ApplicationServer 
 			comment=Available components listed in Technical catalog description=Runs services (RMI, REST, SOAP...). 
 			drop= 
@@ -39,6 +40,7 @@
 			instantiationFactor=* 
 			name=ServicesContainer2 
 			references=[targets=[id=id_ct_app_servicemodule name=ServiceModule ] type=RUNS , targets=[id=id_ct_logical_rdbms name=RDBMS , id=id_ct_logical_ldap name=LDAP directory ] type=DEPENDS_ON ] 
+			status=APPLICABLE 
 			tags=logical,SA 
 			vp=id=id_vp_logical name=Logical Architecture</b>
 	</div>
@@ -252,7 +254,7 @@
 	<div class='example' >
 	<table
 		concordion:execute="#result=createAndGetCT(#justCheck,#caseName,#vpID,#id,#name,#desc,
-				#comment,#tags,#ifactor,#boundTypeID,#references,#enumeration)">
+				#comment,#tags,#ifactor,#boundTypeID,#references,#enumeration,#status)">
 		<tr>
 			<th concordion:set="#caseName">Case</th>
 			<th concordion:set="#id">ID</th>
@@ -264,6 +266,7 @@
 			<th concordion:set="#boundTypeID">BoundID</th>
 			<th concordion:set="#references">References</th>
 			<th concordion:set="#enumeration">Enumeration</th>
+			<th concordion:set="#status">Status</th>
 			<th concordion:assertEquals="#result">should :</th>
 		</tr>
 		<!-- Nominal -->
@@ -278,6 +281,7 @@
 			<td>id_ct_tech_applicationserver</td>
 			<td>RUNS:id_ct_app_servicemodule;DEPENDS_ON:id_ct_logical_rdbms,id_ct_logical_ldap</td>
 			<td>id_comp_tech_jboss5,id_comp_tech_jboss6</td>
+			<td>APPLICABLE</td>
 			<td>PASS</td>
 		</tr>
 		<!-- Existing CT -->
@@ -292,6 +296,7 @@
 			<td>id_ct_tech_applicationserver</td>
 			<td>RUNS:id_ct_app_servicemodule;DEPENDS_ON:id_ct_logical_rdbms</td>
 			<td>id_comp_tech_jboss5,id_comp_tech_jboss6</td>
+			<td>APPLICABLE</td>
 			<td>FAIL with code DUPLICATES</td>
 		</tr>
 		<tr>
@@ -305,6 +310,7 @@
 			<td>id_ct_tech_applicationserver</td>
 			<td>RUNS:id_ct_app_servicemodule;DEPENDS_ON:id_ct_logical_rdbms</td>
 			<td>id_comp_tech_jboss5,id_comp_tech_jboss6</td>
+			<td>APPLICABLE</td>
 			<td>FAIL with code DUPLICATE_NAME</td>
 		</tr>
 		<!-- ID checks -->
@@ -319,6 +325,7 @@
 			<td>id_ct_tech_applicationserver</td>
 			<td>RUNS:id_ct_app_servicemodule;DEPENDS_ON:id_ct_logical_rdbms</td>
 			<td>id_comp_tech_jboss5,id_comp_tech_jboss6</td>
+			<td>APPLICABLE</td>
 			<td>FAIL with code NULL_ARGUMENT</td>
 		</tr>
 		<tr>
@@ -332,6 +339,7 @@
 			<td>id_ct_tech_applicationserver</td>
 			<td>RUNS:id_ct_app_servicemodule;DEPENDS_ON:id_ct_logical_rdbms</td>
 			<td>id_comp_tech_jboss5,id_comp_tech_jboss6</td>
+			<td>APPLICABLE</td>
 			<td>FAIL with code VOID_ARGUMENT</td>
 		</tr>
 		<tr>
@@ -345,6 +353,7 @@
 			<td>id_ct_tech_applicationserver</td>
 			<td>RUNS:id_ct_app_servicemodule;DEPENDS_ON:id_ct_logical_rdbms</td>
 			<td>id_comp_tech_jboss5,id_comp_tech_jboss6</td>
+			<td>APPLICABLE</td>
 			<td>FAIL with code VOID_ARGUMENT</td>
 		</tr>
 		<!-- name check -->
@@ -359,6 +368,7 @@
 			<td>id_ct_tech_applicationserver</td>
 			<td>RUNS:id_ct_app_servicemodule;DEPENDS_ON:id_ct_logical_rdbms</td>
 			<td>id_comp_tech_jboss5,id_comp_tech_jboss6</td>
+			<td>APPLICABLE</td>
 			<td>PASS</td>
 		</tr>
 		<tr>
@@ -372,6 +382,7 @@
 			<td>id_ct_tech_applicationserver</td>
 			<td>RUNS:id_ct_app_servicemodule;DEPENDS_ON:id_ct_logical_rdbms</td>
 			<td>id_comp_tech_jboss5,id_comp_tech_jboss6</td>
+			<td>APPLICABLE</td>
 			<td>FAIL with code VOID_ARGUMENT</td>
 		</tr>
 		<tr>
@@ -385,6 +396,7 @@
 			<td>id_ct_tech_applicationserver</td>
 			<td>RUNS:id_ct_app_servicemodule;DEPENDS_ON:id_ct_logical_rdbms</td>
 			<td>id_comp_tech_jboss5,id_comp_tech_jboss6</td>
+			<td>APPLICABLE</td>
 			<td>FAIL with code VOID_ARGUMENT</td>
 		</tr>
 		<tr>
@@ -398,6 +410,7 @@
 			<td>id_ct_tech_applicationserver</td>
 			<td>RUNS:id_ct_app_servicemodule;DEPENDS_ON:id_ct_logical_rdbms</td>
 			<td>id_comp_tech_jboss5,id_comp_tech_jboss6</td>
+			<td>APPLICABLE</td>
 			<td>FAIL with code WRONG_IF</td>
 		</tr>
 		<tr>
@@ -411,6 +424,7 @@
 			<td>id_ct_tech_applicationserver</td>
 			<td>RUNS:id_ct_app_servicemodule;DEPENDS_ON:id_ct_logical_rdbms</td>
 			<td>id_comp_tech_jboss5,id_comp_tech_jboss6</td>
+			<td>APPLICABLE</td>
 			<td>FAIL with code INVALID_FORMAT</td>
 		</tr>
 		
@@ -426,6 +440,7 @@
 			<td>id_ct_tech_applicationserver</td>
 			<td>RUNS:id_ct_app_servicemodule;DEPENDS_ON:id_ct_logical_rdbms</td>
 			<td>id_comp_tech_jboss5,id_comp_tech_jboss6</td>
+			<td>APPLICABLE</td>
 			<td>PASS</td>
 		</tr>
 		<!-- References -->
@@ -440,6 +455,7 @@
 			<td>id_ct_tech_applicationserver</td>
 			<td>RUNS:foo;DEPENDS_ON:id_ct_logical_rdbms</td>
 			<td>id_comp_tech_jboss5,id_comp_tech_jboss6</td>
+			<td>APPLICABLE</td>
 			<td>FAIL with code TARGET_NOT_FOUND</td>
 		</tr>
 		<!-- Bound type -->
@@ -454,6 +470,7 @@
 			<td>null</td>
 			<td>DEPENDS_ON:id_ct_logical_rdbms</td>
 			<td></td>
+			<td>APPLICABLE</td>
 			<td>PASS</td>
 		</tr>
 		<tr>
@@ -467,6 +484,7 @@
 			<td>foo_ct</td>
 			<td>RUNS:id_ct_app_servicemodule;DEPENDS_ON:id_ct_logical_rdbms,id_ct_logical_ldap</td>
 			<td>id_comp_tech_jboss5,id_comp_tech_jboss6</td>
+			<td>APPLICABLE</td>
 			<td>FAIL with code TARGET_NOT_FOUND</td>
 		</tr>
 		<tr>
@@ -480,6 +498,7 @@
 			<td>id_ct_tech_applicationserver</td>
 			<td>RUNS:id_ct_app_servicemodule;DEPENDS_ON:id_ct_logical_rdbms,id_ct_logical_ldap</td>
 			<td>null</td>
+			<td>APPLICABLE</td>
 			<td>FAIL with code NULL_ARGUMENT</td>
 		</tr>
 		<tr>
@@ -493,7 +512,37 @@
 			<td>id_ct_tech_applicationserver</td>
 			<td>RUNS:id_ct_app_servicemodule;DEPENDS_ON:id_ct_logical_rdbms,id_ct_logical_ldap</td>
 			<td>id_comp_tech_jboss5,null</td>
+			<td>APPLICABLE</td>
 			<td>FAIL with code TARGET_NOT_FOUND</td>
+		</tr>
+		<!--  Status literals -->
+		<tr>
+			<td>Format/Unexisting status literal</td>
+			<td>new_id_ct_logical_servicecontainer</td>
+			<td>ServicesContainer2</td>
+			<td>Runs services (RMI, REST, SOAP...).</td>
+			<td>comment2</td>
+			<td>tags1,tag2</td>
+			<td>*</td>
+			<td>id_ct_tech_applicationserver</td>
+			<td>RUNS:id_ct_app_servicemodule;DEPENDS_ON:id_ct_logical_rdbms,id_ct_logical_ldap</td>
+			<td>id_comp_tech_jboss5,id_comp_tech_jboss6</td>
+			<td>foo_status</td>
+			<td>FAIL with code INVALID_STATUS</td>
+		</tr>
+		<tr>
+			<td>Format/null status literal</td>
+			<td>new_id_ct_logical_servicecontainer</td>
+			<td>ServicesContainer2</td>
+			<td>Runs services (RMI, REST, SOAP...).</td>
+			<td>comment2</td>
+			<td>tags1,tag2</td>
+			<td>*</td>
+			<td>id_ct_tech_applicationserver</td>
+			<td>RUNS:id_ct_app_servicemodule;DEPENDS_ON:id_ct_logical_rdbms,id_ct_logical_ldap</td>
+			<td>id_comp_tech_jboss5,id_comp_tech_jboss6</td>
+			<td>null</td>
+			<td>PASS</td>
 		</tr>
 	</table>
 	</div>	

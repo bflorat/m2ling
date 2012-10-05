@@ -36,7 +36,7 @@ public class CreateLTFixture extends AbstractLTFixture {
 	 */
 	public String createAndGetLT(String justCheck, String caseName, String vpID, String id, String name, String desc,
 			String comment, String tags, String accessType, String temporality, String sourcesTypes,
-			String destinationsTypes) throws FunctionalException {
+			String destinationsTypes, String status) throws FunctionalException {
 		if (!noreset) {
 			reset("Bikes");
 		}
@@ -48,8 +48,9 @@ public class CreateLTFixture extends AbstractLTFixture {
 		tags = UUT.nul(tags);
 		accessType = UUT.nul(accessType);
 		temporality = UUT.nul(temporality);
+		status = UUT.nul(status);
 		List<String> sourcesTypesAsStrings = Utils.stringListFromString(UUT.nul(sourcesTypes));
-		Set<HasNameAndIDBean>  sourcesTypesList = new LinkedHashSet<HasNameAndIDBean>();
+		Set<HasNameAndIDBean> sourcesTypesList = new LinkedHashSet<HasNameAndIDBean>();
 		for (String ctID : sourcesTypesAsStrings) {
 			sourcesTypesList.add(HasNameAndIDBean.newInstance(ctID, ""));
 		}
@@ -67,6 +68,7 @@ public class CreateLTFixture extends AbstractLTFixture {
 		bean.setName(name);
 		bean.setSourcesTypes(sourcesTypesList);
 		bean.setTags(tags);
+		bean.setStatus(status);
 		bean.setLinkTemporality(temporality);
 		bean.setViewPoint(HasNameAndIDBean.newInstance(vpID, ""));
 		LinkTypeDTO dto = new DTOConverter.ToDTO().getLinkTypeDTO(bean);
@@ -92,8 +94,8 @@ public class CreateLTFixture extends AbstractLTFixture {
 	}
 
 	public String checkFormat(String caseName, String vpID, String id, String name, String desc, String comment,
-			String tags, String accessType, String temporality, String sourcesTypes, String destinationsTypes)
-			throws FunctionalException {
+			String tags, String accessType, String temporality, String sourcesTypes, String destinationsTypes,
+			String status) throws FunctionalException {
 		if (!noreset) {
 			reset("Bikes");
 		}
@@ -116,6 +118,7 @@ public class CreateLTFixture extends AbstractLTFixture {
 			for (String ctID : destinationsTypesAsStrings) {
 				dtoBuilder.addDestinationsType(new HasNameAndIdDTO.Builder(ctID, "").build());
 			}
+			dtoBuilder.status(UUT.nul(status));
 			service.checkDTO(dtoBuilder.build(), AccessType.CREATE);
 			return "PASS";
 		} catch (FunctionalException ex) {
@@ -133,8 +136,8 @@ public class CreateLTFixture extends AbstractLTFixture {
 			HasNameAndIdDTO vp = new HasNameAndIdDTO.Builder("id_vp_logical", "").build();
 			HasNameAndIdDTO dest = new HasNameAndIdDTO.Builder("id_ct_logical_servicemodule", "ct_logical_servicemodule")
 					.build();
-			LinkTypeDTO dto = new LinkTypeDTO.Builder(vp, "id_lt_logical_lt1", "lt1").linkAccessType("RW").linkTemporality("SYNC")
-					.addDestinationsType(dest).description("desc").build();
+			LinkTypeDTO dto = new LinkTypeDTO.Builder(vp, "id_lt_logical_lt1", "lt1").linkAccessType("RW")
+					.linkTemporality("SYNC").addDestinationsType(dest).description("desc").build();
 			service.createLT(null, dto);
 			return "Unknown item";
 		} catch (FunctionalException ex) {
@@ -151,8 +154,8 @@ public class CreateLTFixture extends AbstractLTFixture {
 		try {
 			HasNameAndIdDTO vp = new HasNameAndIdDTO.Builder("id_vp_logical", "").build();
 			HasNameAndIdDTO source = new HasNameAndIdDTO.Builder("id_ct_logical_guimodule", "").build();
-			LinkTypeDTO dto = new LinkTypeDTO.Builder(vp, "id_lt_logical_lt1", "lt1").linkAccessType("RW").linkTemporality("SYNC")
-					.description("desc").addSourcesType(source).build();
+			LinkTypeDTO dto = new LinkTypeDTO.Builder(vp, "id_lt_logical_lt1", "lt1").linkAccessType("RW")
+					.linkTemporality("SYNC").description("desc").addSourcesType(source).build();
 			service.createLT(null, dto);
 			return "Unknown item";
 		} catch (FunctionalException ex) {

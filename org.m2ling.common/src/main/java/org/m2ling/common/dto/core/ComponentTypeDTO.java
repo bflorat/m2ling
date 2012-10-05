@@ -39,6 +39,8 @@ public class ComponentTypeDTO implements Comparable<ComponentTypeDTO> {
 
 	private final Set<HasNameAndIdDTO> enumeration;
 
+	private final String status;
+
 	public static class Builder {
 		// Required configuration
 		private final String name;
@@ -59,6 +61,8 @@ public class ComponentTypeDTO implements Comparable<ComponentTypeDTO> {
 		private HasNameAndIdDTO boundType;
 
 		private int iFactor = 0;
+
+		private String status = null;
 
 		private Set<HasNameAndIdDTO> enumeration = new LinkedHashSet<HasNameAndIdDTO>(1);
 
@@ -98,6 +102,11 @@ public class ComponentTypeDTO implements Comparable<ComponentTypeDTO> {
 			return this;
 		}
 
+		public Builder status(String status) {
+			this.status = status;
+			return this;
+		}
+
 		/**
 		 * Add component IDs to the enumeration.
 		 * 
@@ -126,6 +135,7 @@ public class ComponentTypeDTO implements Comparable<ComponentTypeDTO> {
 		boundType = builder.boundType;
 		iFactor = builder.iFactor;
 		enumeration = ImmutableSet.copyOf(builder.enumeration);
+		status = builder.status;
 	}
 
 	/**
@@ -188,6 +198,13 @@ public class ComponentTypeDTO implements Comparable<ComponentTypeDTO> {
 	 */
 	public List<ReferenceDTO> getReferences() {
 		return references;
+	}
+
+	/**
+	 * @return the status
+	 */
+	public String getStatus() {
+		return status;
 	}
 
 	/**

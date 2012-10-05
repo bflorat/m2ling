@@ -42,6 +42,12 @@ public class ComponentTypeBean implements Serializable {
 
 	private String iconPath = "";
 
+	private String status = "";
+
+	public ComponentTypeBean() {
+		super();
+	}
+
 	/**
 	 * @return the iconPath
 	 */
@@ -57,8 +63,19 @@ public class ComponentTypeBean implements Serializable {
 		this.iconPath = iconPath;
 	}
 
-	public ComponentTypeBean() {
-		super();
+	/**
+	 * @return the status
+	 */
+	public String getStatus() {
+		return status;
+	}
+
+	/**
+	 * @param status
+	 *           the status to set
+	 */
+	public void setStatus(String status) {
+		this.status = status;
 	}
 
 	/**

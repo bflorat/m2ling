@@ -68,7 +68,9 @@
     </componentTypes>
   </viewPoints>
   <viewPoints description="Show applicative component from one or more applications and applicative links between them. Middleware are not modelised." id="id_vp_app" name="Applicative architecture">
-    <componentTypes id="id_ct_app_application" name="Application" comment="" description="An application implements a coherent set of information systems business services. It is built out of one or more applicative modules." boundType="_c1vGwJq4EeGVMag01qc4bw">
+    <componentTypes id="id_ct_app_application" name="Application" comment="" description="An application implements a coherent set of information systems business services. It is built out of one or more applicative modules." status="STUDIED" boundType="_c1vGwJq4EeGVMag01qc4bw">
+      <tags>fdfd</tags>
+      <tags>ttr</tags>
       <references targets="id_ct_app_guimodule id_ct_app_batchmodule id_ct_app_servicemodule"/>
     </componentTypes>
     <componentTypes id="id_ct_app_guimodule" name="GUIModule" comment="" description="A GUI module serves Web pages targeting end users."/>
@@ -76,7 +78,7 @@
     <componentTypes id="id_ct_app_batchmodule" name="BatchModule" comment="" description="A batch module contains one or more batchs computing complex and batch operations."/>
     <linkTypes id="_psOW0p8zEeGYS-4UJ-FpAA" name="SERVICE_SYNC_READ" comment="" description="Synchronous call to read-only services" sourceTypes="id_ct_app_guimodule" destinationTypes="id_ct_app_servicemodule" linkTemporality="ASYNC_PULL"/>
     <linkTypes id="_psOW0p8zEeGYS-4UJ-FpAArr" name="SERVICE_SYNC_RW" comment="" description="Synchronous call to Read and write services" sourceTypes="id_ct_app_guimodule" destinationTypes="id_ct_app_servicemodule"/>
-    <linkTypes id="_psOW0p8zEeGYS-4UJ-FpAAdgfgf" name="SERVICE_ASYNC_READ" comment="hop hop" description="Asynchronous call to read-only services used to retrieve large amount of data." sourceTypes="id_ct_app_batchmodule id_ct_app_guimodule" destinationTypes="id_ct_app_servicemodule" linkTemporality="ASYNC_PUSH">
+    <linkTypes id="_psOW0p8zEeGYS-4UJ-FpAAdgfgf" name="SERVICE_ASYNC_READ" comment="hop hop" description="Asynchronous call to read-only services used to retrieve large amount of data." status="STUDIED" sourceTypes="id_ct_app_batchmodule id_ct_app_guimodule" destinationTypes="id_ct_app_servicemodule" linkTemporality="ASYNC_PUSH">
       <tags>tag1</tags>
     </linkTypes>
     <rules id="dfsdhfkjehzlkm343" name="R1" comment="This rule emphases the rule of a portal." description="Direct call between GUI modules are forbitten." status="VALIDATED" priority="3" rationale="This makes centralized access control posssible">

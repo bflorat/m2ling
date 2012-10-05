@@ -186,13 +186,22 @@ public interface CorePackage extends EPackage {
 	int CONCEPT_ITEM__DESCRIPTION = HAS_NAME_AND_ID_FEATURE_COUNT + 3;
 
 	/**
+	 * The feature id for the '<em><b>Status</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONCEPT_ITEM__STATUS = HAS_NAME_AND_ID_FEATURE_COUNT + 4;
+
+	/**
 	 * The number of structural features of the '<em>Concept Item</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CONCEPT_ITEM_FEATURE_COUNT = HAS_NAME_AND_ID_FEATURE_COUNT + 4;
+	int CONCEPT_ITEM_FEATURE_COUNT = HAS_NAME_AND_ID_FEATURE_COUNT + 5;
 
 	/**
 	 * The feature id for the '<em><b>Id</b></em>' attribute.
@@ -247,6 +256,15 @@ public interface CorePackage extends EPackage {
 	 * @ordered
 	 */
 	int COMPONENT_TYPE__DESCRIPTION = CONCEPT_ITEM__DESCRIPTION;
+
+	/**
+	 * The feature id for the '<em><b>Status</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COMPONENT_TYPE__STATUS = CONCEPT_ITEM__STATUS;
 
 	/**
 	 * The feature id for the '<em><b>References</b></em>' containment reference list.
@@ -1554,6 +1572,15 @@ public interface CorePackage extends EPackage {
 	 * @ordered
 	 */
 	int LINK_TYPE__DESCRIPTION = CONCEPT_ITEM__DESCRIPTION;
+
+	/**
+	 * The feature id for the '<em><b>Status</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LINK_TYPE__STATUS = CONCEPT_ITEM__STATUS;
 
 	/**
 	 * The feature id for the '<em><b>Source Types</b></em>' reference list.

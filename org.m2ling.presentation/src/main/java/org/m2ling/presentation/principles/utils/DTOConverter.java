@@ -109,6 +109,10 @@ public class DTOConverter {
 			ComponentTypeDTO.Builder builder = new ComponentTypeDTO.Builder(vp, bean.getId(), bean.getName())
 					.description(bean.getDescription()).comment(bean.getComment()).boundType(boundType)
 					.instantiationFactor(ifactor);
+			String status = bean.getStatus();
+			if (status != null && !("".equals(status.trim()))) {
+				builder.status(status);
+			}
 			for (String tag : Utils.stringListFromString(bean.getTags())) {
 				builder.addTag(tag);
 			}
@@ -133,8 +137,8 @@ public class DTOConverter {
 			HasNameAndIdDTO vp = (bean.getViewPoint() == null) ? null : new HasNameAndIdDTO.Builder(bean.getViewPoint()
 					.getId(), bean.getViewPoint().getName()).build();
 			LinkTypeDTO.Builder builder = new LinkTypeDTO.Builder(vp, bean.getId(), bean.getName())
-					.description(bean.getDescription()).comment(bean.getComment()).linkTemporality(bean.getLinkTemporality())
-					.linkAccessType(bean.getLinkAccessType());
+					.description(bean.getDescription()).comment(bean.getComment())
+					.linkTemporality(bean.getLinkTemporality()).linkAccessType(bean.getLinkAccessType());
 			for (String tag : Utils.stringListFromString(bean.getTags())) {
 				builder.addTag(tag);
 			}
@@ -145,6 +149,10 @@ public class DTOConverter {
 			for (HasNameAndIDBean ctBean : bean.getDestinationsTypes()) {
 				HasNameAndIdDTO ctDTO = new HasNameAndIdDTO.Builder(ctBean.getId(), ctBean.getName()).build();
 				builder.addDestinationsType(ctDTO);
+			}
+			String status = bean.getStatus();
+			if (status != null && !("".equals(status.trim()))) {
+				builder.status(status);
 			}
 			return builder.build();
 		}
@@ -317,6 +325,8 @@ public class DTOConverter {
 				ifactor = Integer.toString(dto.getInstantiationFactor());
 			}
 			bean.setInstantiationFactor(ifactor);
+			String status = dto.getStatus();
+			bean.setStatus((status != null) ? status : "");
 			List<ReferenceBean> refs = new ArrayList<ReferenceBean>();
 			for (ReferenceDTO refDTO : dto.getReferences()) {
 				refs.add(getReferenceBean(refDTO));
@@ -364,6 +374,8 @@ public class DTOConverter {
 			if (icon != null && icon.exists()) {
 				bean.setIconPath(icon.getAbsolutePath());
 			}
+			String status = dto.getStatus();
+			bean.setStatus((status != null) ? status : "");
 			return bean;
 		}
 	}

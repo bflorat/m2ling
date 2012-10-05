@@ -16,6 +16,7 @@ import javax.annotation.Nullable;
 
 import org.m2ling.common.dto.core.ComponentTypeDTO;
 import org.m2ling.common.dto.core.LinkTypeDTO;
+import org.m2ling.common.dto.core.ViewPointDTO;
 import org.m2ling.common.exceptions.FunctionalException;
 import org.m2ling.common.utils.Consts;
 import org.m2ling.common.utils.Utils;
@@ -25,12 +26,14 @@ import org.m2ling.presentation.i18n.Msg;
 import org.m2ling.presentation.principles.model.ComponentTypeBean;
 import org.m2ling.presentation.principles.model.HasNameAndIDBean;
 import org.m2ling.presentation.principles.model.LinkTypeBean;
+import org.m2ling.presentation.principles.model.ViewPointBean;
 import org.m2ling.presentation.principles.utils.DTOConverter;
 import org.m2ling.presentation.widgets.Command;
 import org.m2ling.presentation.widgets.HelpPanel;
 import org.m2ling.presentation.widgets.OKCancel;
 import org.m2ling.service.principles.ComponentTypeService;
 import org.m2ling.service.principles.LinkTypeService;
+import org.m2ling.service.principles.ViewPointService;
 
 import com.google.common.base.Strings;
 import com.google.inject.Inject;
@@ -38,6 +41,7 @@ import com.google.inject.assistedinject.Assisted;
 import com.vaadin.data.Item;
 import com.vaadin.data.util.BeanItem;
 import com.vaadin.ui.Alignment;
+import com.vaadin.ui.ComboBox;
 import com.vaadin.ui.Component;
 import com.vaadin.ui.DefaultFieldFactory;
 import com.vaadin.ui.Field;
@@ -72,6 +76,8 @@ public class LinkTypeDialog extends Window {
 	private final Msg msg;
 
 	private final ComponentTypeService ctService;
+
+	private final ViewPointService vpService;
 
 	private Form form;
 
@@ -128,12 +134,13 @@ public class LinkTypeDialog extends Window {
 	 */
 	@Inject
 	public LinkTypeDialog(Logger logger, @Assisted @Nullable BeanItem<LinkTypeBean> ltBeanItem,
-			LinkTypeService ltService, DTOConverter.ToDTO toDTO, DTOConverter.FromDTO fromDTO, Msg msg,
-			ComponentTypeService ctService, ObservationManager obs) {
+			LinkTypeService ltService, ViewPointService vpService, DTOConverter.ToDTO toDTO, DTOConverter.FromDTO fromDTO,
+			Msg msg, ComponentTypeService ctService, ObservationManager obs) {
 		super(Strings.isNullOrEmpty(ltBeanItem.getBean().getId()) ? msg.get("pr.49") : ltBeanItem.getBean().getName());
 		this.beanItem = ltBeanItem;
 		this.ltService = ltService;
 		this.ctService = ctService;
+		this.vpService = vpService;
 		this.logger = logger;
 		this.toDTO = toDTO;
 		this.fromDTO = fromDTO;
@@ -159,8 +166,8 @@ public class LinkTypeDialog extends Window {
 		form.setImmediate(true);
 		form.setFormFieldFactory(new LTDialogFieldFactory());
 		form.setItemDataSource(beanItem);
-		form.setVisibleItemProperties(Arrays.asList(new String[] { "name", "tags", "description", "linkTemporality",
-				"linkAccessType", "sourcesTypes", "destinationsTypes", "comment" }));
+		form.setVisibleItemProperties(Arrays.asList(new String[] { "name", "tags", "description", "status",
+				"linkTemporality", "linkAccessType", "sourcesTypes", "destinationsTypes", "comment" }));
 		// Icon uploader
 		HasNameAndIDBean hniBean = HasNameAndIDBean.newInstance(ltBean.getId(), ltBean.getName());
 		IconUploader uploader = new IconUploader(hniBean, Consts.CONF_LT_ICONS_LOCATION, logger, msg);
@@ -203,6 +210,24 @@ public class LinkTypeDialog extends Window {
 				Field tags = super.createField(item, propertyId, uiContext);
 				tags.setDescription(msg.get("pr.8"));
 				return tags;
+			} else if ("status".equals(propertyId)) {
+				ComboBox status = new ComboBox();
+				try {
+					ViewPointDTO vpDTO = vpService.getViewPointByID(null, ltBean.getViewPoint().getId());
+					ViewPointBean vpBean = fromDTO.getViewPointBean(vpDTO);
+					List<String> statusList = Utils.stringListFromString(vpBean.getStatusLiterals());
+					for (String st : statusList) {
+						status.addItem(st);
+					}
+				} catch (FunctionalException fe) {
+					logger.log(Level.SEVERE, fe.getDetailedMessage(), fe);
+					getWindow().showNotification(msg.humanMessage(fe), Notification.TYPE_ERROR_MESSAGE);
+					return status;
+				}
+				status.setDescription(msg.get("pr.20"));
+				status.setCaption(msg.get("gal.7"));
+				status.setNullSelectionAllowed(true);
+				return status;
 			} else if ("linkTemporality".equals(propertyId)) {
 				Select linkTemporality = new Select();
 				for (LinkTemporality lt : LinkTemporality.values()) {

@@ -108,8 +108,8 @@ public class ComponentTypesPanel extends VerticalLayout implements Observer {
 				// header
 				// Note that UNITS_EM doesn't work for some reasons and that a row can be multi-lines.
 				table.setHeight(cts.size() * 40 + 20, UNITS_PIXELS);
-				table.setVisibleColumns(new String[] { "drop", "name", "description", "instantiationFactor", "boundType",
-						"enumeration", "references", "tags" });
+				table.setVisibleColumns(new String[] { "drop", "name", "description", "status", "instantiationFactor",
+						"boundType", "enumeration", "references", "tags" });
 				table.setColumnExpandRatio("description", 0.4f);
 				table.setColumnExpandRatio("boundType", 0.2f);
 				table.setColumnExpandRatio("references", 0.2f);
@@ -121,8 +121,8 @@ public class ComponentTypesPanel extends VerticalLayout implements Observer {
 					}
 				});
 				table.setColumnHeaders(new String[] { msg.get("gal.3"), msg.get("gal.12"),
-						msg.get("gal.1") + " (" + msg.get("gal.10") + ")", msg.get("pr.30"), msg.get("pr.36"),
-						msg.get("pr.32"), msg.get("pr.33"), msg.get("gal.4") });
+						msg.get("gal.1") + " (" + msg.get("gal.10") + ")", msg.get("gal.7"), msg.get("pr.30"),
+						msg.get("pr.36"), msg.get("pr.32"), msg.get("pr.33"), msg.get("gal.4") });
 				table.addGeneratedColumn("name", new Table.ColumnGenerator() {
 					public Component generateCell(Table table, Object itemId, Object columnId) {
 						final BeanItem<ComponentTypeBean> item = data.getItem(itemId);
@@ -246,6 +246,11 @@ public class ComponentTypesPanel extends VerticalLayout implements Observer {
 		if (!Strings.isNullOrEmpty(bean.getComment())) {
 			out += "<b>" + msg.get("gal.11") + " : </b>";
 			out += bean.getComment();
+			out += "</br></br>";
+		}
+		if (!Strings.isNullOrEmpty(bean.getStatus())) {
+			out += "<b>" + msg.get("gal.7") + " : </b>";
+			out += bean.getStatus();
 			out += "</br></br>";
 		}
 		if (!Strings.isNullOrEmpty(bean.getTags())) {

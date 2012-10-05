@@ -149,6 +149,7 @@ public class DTOConverter {
 			} else {
 				builder.instantiationFactor(ct.getInstantiationFactor());
 			}
+			builder.status(ct.getStatus());
 			return builder.build();
 		}
 
@@ -173,6 +174,7 @@ public class DTOConverter {
 				HasNameAndIdDTO hniDTO = new HasNameAndIdDTO.Builder(ct.getId(), ct.getName()).build();
 				builder.addDestinationsType(hniDTO);
 			}
+			builder.status(lt.getStatus());
 			return builder.build();
 		}
 
@@ -315,6 +317,7 @@ public class DTOConverter {
 				ct.setBoundType(boundedType);
 			}
 			ct.setInstantiationFactor(dto.getInstantiationFactor());
+			ct.setStatus(dto.getStatus());
 			for (HasNameAndIdDTO hni : dto.getEnumeration()) {
 				ArchitectureItem comp = util.getComponentByID(hni.getId());
 				if (comp == null) {
@@ -356,6 +359,7 @@ public class DTOConverter {
 				ComponentType ct = util.getComponentTypeByID(hniDTO.getId());
 				lt.getDestinationTypes().add(ct);
 			}
+			lt.setStatus(dto.getStatus());
 			return lt;
 		}
 

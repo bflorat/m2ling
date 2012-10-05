@@ -39,6 +39,8 @@ public class LinkTypeDTO implements Comparable<LinkTypeDTO> {
 
 	private String linkAccessType;
 
+	private final String status;
+
 	public static class Builder {
 		// Required configuration
 		private final String name;
@@ -61,6 +63,8 @@ public class LinkTypeDTO implements Comparable<LinkTypeDTO> {
 		private Set<HasNameAndIdDTO> sourcesTypes = new LinkedHashSet<HasNameAndIdDTO>(1);
 
 		private Set<HasNameAndIdDTO> destinationsTypes = new LinkedHashSet<HasNameAndIdDTO>(1);
+
+		private String status = null;
 
 		public Builder(HasNameAndIdDTO vp, String id, String name) {
 			this.id = id;
@@ -103,6 +107,11 @@ public class LinkTypeDTO implements Comparable<LinkTypeDTO> {
 			return this;
 		}
 
+		public Builder status(String status) {
+			this.status = status;
+			return this;
+		}
+
 		public LinkTypeDTO build() {
 			LinkTypeDTO dto = new LinkTypeDTO(this);
 			return dto;
@@ -120,6 +129,7 @@ public class LinkTypeDTO implements Comparable<LinkTypeDTO> {
 		linkTemporality = builder.linkTemporality;
 		sourcesTypes = ImmutableSet.copyOf(builder.sourcesTypes);
 		destinationsTypes = ImmutableSet.copyOf(builder.destinationsTypes);
+		status = builder.status;
 	}
 
 	public String toString() {
@@ -223,14 +233,6 @@ public class LinkTypeDTO implements Comparable<LinkTypeDTO> {
 	}
 
 	/**
-	 * @param linkTemporality
-	 *           the temporality to set
-	 */
-	public void setLinkTemporality(String linkTemporality) {
-		this.linkTemporality = linkTemporality;
-	}
-
-	/**
 	 * @return the linkAccessTypeType
 	 */
 	public String getLinkAccessType() {
@@ -238,10 +240,9 @@ public class LinkTypeDTO implements Comparable<LinkTypeDTO> {
 	}
 
 	/**
-	 * @param linkAccessType
-	 *           the linkAccessType to set
+	 * @return the status
 	 */
-	public void setLinkAccessType(String linkAccessType) {
-		this.linkAccessType = linkAccessType;
+	public String getStatus() {
+		return status;
 	}
 }

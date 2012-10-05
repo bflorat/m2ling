@@ -28,6 +28,7 @@ import org.m2ling.presentation.i18n.Msg;
 import org.m2ling.presentation.principles.model.ComponentTypeBean;
 import org.m2ling.presentation.principles.model.HasNameAndIDBean;
 import org.m2ling.presentation.principles.model.ReferenceBean;
+import org.m2ling.presentation.principles.model.ViewPointBean;
 import org.m2ling.presentation.principles.utils.DTOConverter;
 import org.m2ling.presentation.widgets.Command;
 import org.m2ling.presentation.widgets.HelpPanel;
@@ -71,16 +72,27 @@ import com.vaadin.ui.Window;
 public class ComponentTypeDialog extends Window {
 	/** Is it a new CT ? */
 	private boolean newCT = true;
+
 	private final BeanItem<ComponentTypeBean> beanItem;
+
 	private final ComponentTypeBean ctBean;
+
 	private final Logger logger;
+
 	private final DTOConverter.ToDTO toDTO;
+
 	private final DTOConverter.FromDTO fromDTO;
+
 	private final ComponentTypeService ctService;
+
 	private final Msg msg;
+
 	private final ViewPointService vpService;
+
 	private Form form;
+
 	private final ObservationManager obs;
+
 	private Command ok = new Command() {
 		public void execute() {
 			try {
@@ -114,6 +126,7 @@ public class ComponentTypeDialog extends Window {
 			return msg.get("gal.5");
 		}
 	};
+
 	private Command cancel = new Command() {
 		public void execute() {
 			close();
@@ -162,7 +175,7 @@ public class ComponentTypeDialog extends Window {
 		form.setImmediate(true);
 		form.setFormFieldFactory(new CTDialogFieldFactory());
 		form.setItemDataSource(beanItem);
-		form.setVisibleItemProperties(Arrays.asList(new String[] { "name", "tags", "description", "boundType",
+		form.setVisibleItemProperties(Arrays.asList(new String[] { "name", "tags", "description", "status", "boundType",
 				"instantiationFactor", "comment" }));
 		// Icon uploader
 		HasNameAndIDBean hniBean = HasNameAndIDBean.newInstance(ctBean.getId(), ctBean.getName());
@@ -301,6 +314,8 @@ public class ComponentTypeDialog extends Window {
 	}
 
 	private class CTDialogFieldFactory extends DefaultFieldFactory {
+		private ViewPointBean vpBean;
+
 		@Override
 		public Field createField(Item item, Object propertyId, Component uiContext) {
 			if ("name".equals(propertyId)) {
@@ -352,6 +367,8 @@ public class ComponentTypeDialog extends Window {
 								boundType.addItem(bound);
 								boundType.setItemCaption(bound, ctDTO.getViewPoint().getName() + "/ " + ctDTO.getName());
 							}
+						} else { // store it for future status use
+							vpBean = fromDTO.getViewPointBean(vpDTO);
 						}
 					}
 				} catch (FunctionalException fe) {
@@ -359,6 +376,16 @@ public class ComponentTypeDialog extends Window {
 					getWindow().showNotification(msg.humanMessage(fe), Notification.TYPE_ERROR_MESSAGE);
 				}
 				return boundType;
+			} else if ("status".equals(propertyId)) {
+				ComboBox status = new ComboBox();
+				List<String> statusList = Utils.stringListFromString(vpBean.getStatusLiterals());
+				for (String st : statusList) {
+					status.addItem(st);
+				}
+				status.setDescription(msg.get("pr.20"));
+				status.setCaption(msg.get("gal.7"));
+				status.setNullSelectionAllowed(true);
+				return status;
 			} else if ("enumeration".equals(propertyId)) {
 				Select enumeration = new Select();
 				enumeration.setCaption(msg.get("pr.32"));
