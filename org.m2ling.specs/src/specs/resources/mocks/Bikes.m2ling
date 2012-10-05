@@ -79,10 +79,10 @@
     <linkTypes id="_psOW0p8zEeGYS-4UJ-FpAAdgfgf" name="SERVICE_ASYNC_READ" comment="hop hop" description="Asynchronous call to read-only services used to retrieve large amount of data." sourceTypes="id_ct_app_batchmodule id_ct_app_guimodule" destinationTypes="id_ct_app_servicemodule" linkTemporality="ASYNC_PUSH">
       <tags>tag1</tags>
     </linkTypes>
-    <rules id="dfsdhfkjehzlkm343" name="R1" comment="This rule emphases the rule of a portal." description="Direct call between GUI modules are forbitten." status="VALIDATED" priority="3">
+    <rules id="dfsdhfkjehzlkm343" name="R1" comment="This rule emphases the rule of a portal." description="Direct call between GUI modules are forbitten." status="VALIDATED" priority="3" rationale="This makes centralized access control posssible">
       <tags>modules</tags>
     </rules>
-    <rules id="bndbfndb" name="R2" comment="" description="Direct call between Services module are forbitten." status="VALIDATED" priority="3">
+    <rules id="bndbfndb" name="R2" comment="" description="Direct call between Services module are forbitten." status="VALIDATED" priority="3" rationale="This makes the SOA architecture much simpler and avoid XA issues">
       <tags>modules</tags>
     </rules>
     <statusLiterals>VALIDATED</statusLiterals>
