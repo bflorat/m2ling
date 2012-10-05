@@ -4,9 +4,13 @@
 package org.m2ling.common.dto.core;
 
 import java.util.ArrayList;
+import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.m2ling.common.utils.Utils;
+
+import com.google.common.collect.ImmutableSet;
 
 /**
  * Viewpoint DTO object used between layers.
@@ -24,7 +28,7 @@ public class ViewPointDTO implements Comparable<ViewPointDTO> {
 
 	private final String comment;
 
-	private final List<String> statusLiterals;
+	private final Set<String> statusLiterals;
 
 	public static class Builder {
 		// Required configuration
@@ -39,7 +43,7 @@ public class ViewPointDTO implements Comparable<ViewPointDTO> {
 
 		private String comment = "";
 
-		private List<String> statusLiterals = new ArrayList<String>(1);
+		private Set<String> statusLiterals = new LinkedHashSet<String>(1);
 
 		public Builder(String id, String name) {
 			this.id = id;
@@ -82,11 +86,7 @@ public class ViewPointDTO implements Comparable<ViewPointDTO> {
 		}
 		description = builder.description;
 		comment = builder.comment;
-		if (builder.statusLiterals != null) {
-			statusLiterals = new ArrayList<String>(builder.statusLiterals); // defensive copy
-		} else {
-			statusLiterals = null;
-		}
+		statusLiterals = ImmutableSet.copyOf(builder.statusLiterals); // defensive copy
 	}
 
 	/**
@@ -120,11 +120,11 @@ public class ViewPointDTO implements Comparable<ViewPointDTO> {
 	 * 
 	 * @return a defensive copy of the status literals
 	 */
-	public List<String> getStatusLiterals() {
+	public Set<String> getStatusLiterals() {
 		if (statusLiterals == null) {
 			return null;
 		}
-		return new ArrayList<String>(statusLiterals);
+		return ImmutableSet.copyOf(statusLiterals);
 	}
 
 	/**

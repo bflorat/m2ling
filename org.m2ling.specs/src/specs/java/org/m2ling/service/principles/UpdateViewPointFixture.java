@@ -12,7 +12,6 @@ import org.m2ling.presentation.principles.model.ViewPointBean;
 import org.m2ling.presentation.principles.utils.DTOConverter;
 
 public class UpdateViewPointFixture extends AbstractViewPointFixture {
-
 	public UpdateViewPointFixture() throws IOException {
 		super();
 	}
@@ -71,7 +70,7 @@ public class UpdateViewPointFixture extends AbstractViewPointFixture {
 		}
 		service.updateViewPoint(null, builder.build());
 		ViewPointDTO updatedVP = service.getViewPointByID(null, "id_vp1");
-		String out = Utils.stringListAsString(updatedVP.getStatusLiterals());
+		String out = Utils.stringSetAsString(updatedVP.getStatusLiterals());
 		return out;
 	}
 

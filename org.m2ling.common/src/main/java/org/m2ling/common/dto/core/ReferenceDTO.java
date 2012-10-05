@@ -5,12 +5,12 @@
  */
 package org.m2ling.common.dto.core;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.LinkedHashSet;
+import java.util.Set;
 
 import org.m2ling.common.utils.Utils;
 
-import com.google.common.collect.ImmutableList;
+import com.google.common.collect.ImmutableSet;
 
 /**
  * Inter-layer reference communication object
@@ -19,29 +19,29 @@ public class ReferenceDTO {
 	/** Reference type literal, one of ReferenceType enum entry */
 	private final String type;
 	/** References list of ids */
-	private final List<HasNameAndIdDTO> targets;
+	private final Set<HasNameAndIdDTO> targets;
 
 	private ReferenceDTO(Builder builder) {
 		super();
 		type = builder.type;
-		targets = ImmutableList.copyOf(builder.targets);
+		targets = ImmutableSet.copyOf(builder.targets);
 	}
 
 	public String getType() {
 		return this.type;
 	}
 
-	public List<HasNameAndIdDTO> getTargets() {
+	public Set<HasNameAndIdDTO> getTargets() {
 		return this.targets;
 	}
 
 	public static class Builder {
 		private final String type;
-		private List<HasNameAndIdDTO> targets;
+		private Set<HasNameAndIdDTO> targets;
 
 		public Builder(String type) {
 			this.type = type;
-			targets = new ArrayList<HasNameAndIdDTO>(1);
+			targets = new LinkedHashSet<HasNameAndIdDTO>(1);
 		}
 
 		public Builder addTarget(HasNameAndIdDTO hni) {

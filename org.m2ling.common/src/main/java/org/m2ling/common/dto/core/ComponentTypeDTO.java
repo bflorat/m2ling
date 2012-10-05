@@ -4,11 +4,14 @@
 package org.m2ling.common.dto.core;
 
 import java.util.ArrayList;
+import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.m2ling.common.utils.Utils;
 
 import com.google.common.collect.ImmutableList;
+import com.google.common.collect.ImmutableSet;
 
 /**
  * Component type DTO object used between layers.
@@ -34,7 +37,7 @@ public class ComponentTypeDTO implements Comparable<ComponentTypeDTO> {
 
 	private final int iFactor;
 
-	private final List<HasNameAndIdDTO> enumeration;
+	private final Set<HasNameAndIdDTO> enumeration;
 
 	public static class Builder {
 		// Required configuration
@@ -57,7 +60,7 @@ public class ComponentTypeDTO implements Comparable<ComponentTypeDTO> {
 
 		private int iFactor = 0;
 
-		private List<HasNameAndIdDTO> enumeration = new ArrayList<HasNameAndIdDTO>(1);
+		private Set<HasNameAndIdDTO> enumeration = new LinkedHashSet<HasNameAndIdDTO>(1);
 
 		public Builder(HasNameAndIdDTO vp, String id, String name) {
 			this.id = id;
@@ -122,7 +125,7 @@ public class ComponentTypeDTO implements Comparable<ComponentTypeDTO> {
 		references = builder.references;
 		boundType = builder.boundType;
 		iFactor = builder.iFactor;
-		enumeration = ImmutableList.copyOf(builder.enumeration);
+		enumeration = ImmutableSet.copyOf(builder.enumeration);
 	}
 
 	/**
@@ -190,7 +193,7 @@ public class ComponentTypeDTO implements Comparable<ComponentTypeDTO> {
 	/**
 	 * @return the enumeration
 	 */
-	public List<HasNameAndIdDTO> getEnumeration() {
+	public Set<HasNameAndIdDTO> getEnumeration() {
 		return enumeration;
 	}
 

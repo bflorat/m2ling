@@ -52,12 +52,53 @@ public class ViewPointServiceImpl extends ServiceImpl implements ViewPointServic
 		super(pm, util, fromDTO, toDTO, conf, logger);
 	}
 
-	void checkDTO(final ViewPointDTO dto, final AccessType access) throws FunctionalException {
-		ViewPoint vp = null;
-		// Argument Nullity
+	private void checkIdAndName(final ViewPointDTO dto, AccessType access) throws FunctionalException {
+		// Nullity
 		if (dto == null) {
 			throw new FunctionalException(Code.NULL_ARGUMENT, null, null);
 		}
+		// Check id
+		if (dto.getId() == null) {
+			throw new FunctionalException(FunctionalException.Code.NULL_ARGUMENT, null, "(id)");
+		}
+		if (Strings.isNullOrEmpty(dto.getId().trim())) {
+			throw new FunctionalException(FunctionalException.Code.VOID_ARGUMENT, null, "(id)");
+		}
+		if (dto.getId().length() > 40) {
+			throw new FunctionalException(FunctionalException.Code.SIZE_EXCEEDED, null, "(id)");
+		}
+		// Check name
+		if (access == AccessType.CREATE || access == AccessType.UPDATE) {
+			if (dto.getName() == null) {
+				throw new FunctionalException(FunctionalException.Code.NULL_ARGUMENT, null, "(name)");
+			}
+			if ("".equals(dto.getName().trim())) {
+				throw new FunctionalException(FunctionalException.Code.VOID_ARGUMENT, null, "(name)");
+			}
+			if (dto.getName().length() > Consts.MAX_LABEL_SIZE) {
+				throw new FunctionalException(FunctionalException.Code.SIZE_EXCEEDED, null, "(name)");
+			}
+		}
+		if (access == AccessType.CREATE) {
+			// Check for existing item with the same id
+			List<ViewPoint> vps = pmanager.getRoot().getViewPoints();
+			for (ViewPoint item : vps) {
+				if (item.getId().equals(dto.getId())) {
+					throw new FunctionalException(FunctionalException.Code.DUPLICATES, null, "id=" + dto.getId());
+				}
+			}
+			// Check for existing item with the same name
+			for (ViewPoint item : vps) {
+				if (item.getName().equals(dto.getName())) {
+					throw new FunctionalException(FunctionalException.Code.DUPLICATE_NAME, null, "name=" + dto.getName());
+				}
+			}
+		}
+	}
+
+	void checkDTO(final ViewPointDTO dto, final AccessType access) throws FunctionalException {
+		ViewPoint vp = null;
+		checkIdAndName(dto, access);
 		if (access != AccessType.CREATE) {
 			// VP existence
 			vp = util.getViewPointByID(dto.getId());
@@ -66,45 +107,22 @@ public class ViewPointServiceImpl extends ServiceImpl implements ViewPointServic
 			}
 		}
 		if (access == AccessType.CREATE || access == AccessType.UPDATE) {
-			// ID
-			if (dto.getId() == null){
-				throw new FunctionalException(FunctionalException.Code.NULL_ARGUMENT, null, "(id)");
-			}
-			if (Strings.isNullOrEmpty(dto.getId().trim())){
-				throw new FunctionalException(FunctionalException.Code.VOID_ARGUMENT, null, "(id)");
-			}
-			if (dto.getId().length() > 40) {
-				throw new FunctionalException(FunctionalException.Code.SIZE_EXCEEDED, null, "(id)");
-			}
-			// Name
-			if (dto.getName() == null){
-				throw new FunctionalException(FunctionalException.Code.NULL_ARGUMENT, null, "(name)");
-			}
-			if (Strings.isNullOrEmpty(dto.getName().trim())){
-				throw new FunctionalException(FunctionalException.Code.VOID_ARGUMENT, null, "(name)");
-			}
-			if (dto.getName().length() > Consts.MAX_LABEL_SIZE) {
-				throw new FunctionalException(FunctionalException.Code.SIZE_EXCEEDED, null, "(name)");
-			}
 			// Status literals
-			if (dto.getStatusLiterals() == null){
+			if (dto.getStatusLiterals() == null) {
 				throw new FunctionalException(FunctionalException.Code.NULL_ARGUMENT, null, "(statusLiteral)");
 			}
 			int index = 1;
 			for (String literal : dto.getStatusLiterals()) {
-				if (literal == null){
+				if (literal == null) {
 					throw new FunctionalException(FunctionalException.Code.NULL_ARGUMENT, null, "statusLiteral #" + index);
 				}
-				if ( Strings.isNullOrEmpty(literal.trim())) {
+				if (Strings.isNullOrEmpty(literal.trim())) {
 					throw new FunctionalException(FunctionalException.Code.VOID_ARGUMENT, null, "statusLiteral #" + index);
 				}
 				if (literal.length() > Consts.MAX_LABEL_SIZE) {
 					throw new FunctionalException(FunctionalException.Code.SIZE_EXCEEDED, null, "statusLiteral #" + index);
 				}
 				index++;
-			}
-			if (Utils.containsDup(dto.getStatusLiterals())) {
-				throw new FunctionalException(FunctionalException.Code.DUPLICATE_STATUS_LITERAL, null, null);
 			}
 			// Description
 			if (dto.getDescription() != null && dto.getDescription().length() > Consts.MAX_TEXT_SIZE) {
@@ -128,9 +146,7 @@ public class ViewPointServiceImpl extends ServiceImpl implements ViewPointServic
 					throw new FunctionalException(FunctionalException.Code.STATUS_USED, null, "(status literal)");
 				}
 			}
-			if (Utils.containsDup(dto.getStatusLiterals())) {
-				throw new FunctionalException(FunctionalException.Code.DUPLICATE_STATUS_LITERAL, null, null);
-			}
+			// Note that status literal unicity is ensure by the use of a Set in DTO
 		}
 	}
 

@@ -78,6 +78,35 @@ public class Utils {
 		sb.deleteCharAt(sb.length() - 1);
 		return sb.toString();
 	}
+	
+	/**
+	 * Return a string set as a comma-separated string.
+	 * 
+	 * @param list
+	 * @return a comma-separated string. If set is empty, "" is returned.
+	 * @throws IllegalArgumentException
+	 *            if the set is null or if one of its element is null or empty
+	 */
+	public static String stringSetAsString(Set<String> set) {
+		{// Controls
+			if (set == null) {
+				throw new IllegalArgumentException("Null list");
+			}
+			if (set.size() == 0) {
+				return "";
+			}
+		}
+		StringBuilder sb = new StringBuilder();
+		for (String s : set) {
+			if (Strings.isNullOrEmpty(s)) {
+				throw new IllegalArgumentException("Null or empty list element : " + s);
+			}
+			sb.append(s).append(',');
+		}
+		// Drop last trailing comma
+		sb.deleteCharAt(sb.length() - 1);
+		return sb.toString();
+	}
 
 	/**
 	 * Set environment variable (into JVM memory only) Credit :

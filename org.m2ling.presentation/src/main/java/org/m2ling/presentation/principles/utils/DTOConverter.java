@@ -201,7 +201,7 @@ public class DTOConverter {
 			bean.setName((dto.getName() != null) ? dto.getName() : "");
 			bean.setComment((dto.getComment() != null) ? dto.getComment() : "");
 			bean.setDescription((dto.getDescription() != null) ? dto.getDescription() : "");
-			String statusLiterals = Utils.stringListAsString(dto.getStatusLiterals());
+			String statusLiterals = Utils.stringSetAsString(dto.getStatusLiterals());
 			bean.setStatusLiterals(statusLiterals);
 			String tags = Utils.stringListAsString(dto.getTags());
 			bean.setTags(tags);

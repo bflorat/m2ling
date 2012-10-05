@@ -4,7 +4,9 @@
 package org.m2ling.common.dto.core;
 
 import java.util.ArrayList;
+import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.m2ling.common.utils.Utils;
 
@@ -36,7 +38,7 @@ public class RuleDTO implements Comparable<RuleDTO> {
 
 	private final String exceptions;
 
-	private final List<StatusEventDTO> history;
+	private final Set<StatusEventDTO> history;
 
 	public static class Builder {
 		// Required configuration
@@ -61,7 +63,7 @@ public class RuleDTO implements Comparable<RuleDTO> {
 
 		private String exceptions = null;
 
-		private List<StatusEventDTO> history = new ArrayList<StatusEventDTO>(1);
+		private Set<StatusEventDTO> history = new LinkedHashSet<StatusEventDTO>(1);
 
 		public Builder(String vpID, String id, String name) {
 			this.id = id;
@@ -209,7 +211,7 @@ public class RuleDTO implements Comparable<RuleDTO> {
 	/**
 	 * @return the history
 	 */
-	public List<StatusEventDTO> getHistory() {
+	public Set<StatusEventDTO> getHistory() {
 		return history;
 	}
 

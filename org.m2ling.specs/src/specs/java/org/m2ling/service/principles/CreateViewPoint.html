@@ -64,8 +64,8 @@
 					<!-- Nominal -->
 					<tr>
 						<td>Nominal</td>
-						<td>id_vp2</td>
-						<td>vp2</td>
+						<td>id_new_vp2</td>
+						<td>new_vp2</td>
 						<td>description2</td>
 						<td>comment2</td>
 						<td>tags1,tag2</td>
@@ -75,29 +75,29 @@
 					<!-- Existing VP -->
 					<tr>
 						<td>Existing VP ID</td>
-						<td>id_rule1</td>
-						<td>rule2</td>
+						<td>id_vp1</td>
+						<td>new_vp1</td>
 						<td>description2</td>
 						<td>comment2</td>
 						<td>tags1,tag2</td>
 						<td>status1,status1</td>
-						<td>FAIL with code DUPLICATE_STATUS_LITERAL</td>
+						<td>FAIL with code DUPLICATES</td>
 					</tr>
 					<tr>
 						<td>Existing VP name</td>
-						<td>id_rule2</td>
-						<td>rule1</td>
+						<td>id_new_vp1</td>
+						<td>vp1</td>
 						<td>description2</td>
 						<td>comment2</td>
 						<td>tags1,tag2</td>
 						<td>status1,status1</td>
-						<td>FAIL with code DUPLICATE_STATUS_LITERAL</td>
+						<td>FAIL with code DUPLICATE_NAME</td>
 					</tr>
 					<!-- ID checks -->
 					<tr>
 						<td>Null ID</td>
 						<td>null</td>
-						<td>vp2</td>
+						<td>new_vp2</td>
 						<td>description2</td>
 						<td>comment2</td>
 						<td>tags1,tag2</td>
@@ -107,7 +107,7 @@
 					<tr>
 					    <td>Void ID</td>
 						<td></td>
-						<td>vp2</td>
+						<td>new_vp2</td>
 						<td>description2</td>
 						<td>comment2</td>
 						<td>tags1,tag2</td>
@@ -117,7 +117,7 @@
 					<tr>
 					    <td>Void ID after trim</td>
 						<td>space</td>
-						<td>vp2</td>
+						<td>new_vp2</td>
 						<td>description2</td>
 						<td>comment2</td>
 						<td>tags1,tag2</td>
@@ -127,7 +127,7 @@
 					<tr>
 						<td>ID too long</td>
 						<td>dkjshdhsqkjdhqskjhdkjqshdkjqshkjdhqskjhdkjqskdjhqskjdhqskhdkjqshdkjhqskjdhqskjhdkjqshdkjqshkdjqshkjdhqskjhdkjqshdkjhqskjdhqskhdk</td>
-						<td>vp2</td>
+						<td>new_vp2</td>
 						<td>description2</td>
 						<td>comment2</td>
 						<td>tags1,tag2</td>
@@ -137,7 +137,7 @@
 					<!-- name check -->
 					<tr>
 						<td>Null name</td>
-						<td>id_vp2</td>
+						<td>id_new_vp2</td>
 						<td>null</td>
 						<td>description2</td>
 						<td>comment2</td>
@@ -147,7 +147,7 @@
 					</tr>
 					<tr>
 					    <td>Void name</td>
-						<td>id_vp2</td>
+						<td>id_new_vp2</td>
 						<td></td>
 						<td>description2</td>
 						<td>comment2</td>
@@ -157,7 +157,7 @@
 					</tr>
 					<tr>
 					    <td>Void ID after trim</td>
-						<td>id_vp2</td>
+						<td>id_new_vp2</td>
 						<td>space</td>
 						<td>description2</td>
 						<td>comment2</td>
@@ -167,7 +167,7 @@
 					</tr>
 					<tr>
 					    <td>Name too long</td>
-						<td>id_vp2</td>
+						<td>id_new_vp2</td>
 						<td>dkjshdhddsldljslkdl fdsf fsfdsf ssf
 							skjdlsjdkjslkdjskljdlsjdlj lsd jslk dkjs lkdjskldj sjd
 							sjdlksqkjdhqskjhdkjqshdkjqshkjdhqskjhdkjqskdjhqskjdhqskhdkjqshdkjhqskjdhqskjhdkjqshdkjqshkdjqsdsds
@@ -181,8 +181,8 @@
 					<!-- Status literal -->
 					<tr>
 					    <td>Status literals too long</td>
-						<td>id_vp2</td>
-						<td>vp2</td>
+						<td>id_new_vp2</td>
+						<td>new_vp2</td>
 						<td>description2</td>
 						<td>comment2</td>
 						<td>tags1,tag2</td>
@@ -193,19 +193,9 @@
 						<td>FAIL with code SIZE_EXCEEDED</td>
 					</tr>
 					<tr>
-					    <td>Null status literal</td>
-						<td>id_vp2</td>
-						<td>vp2</td>
-						<td>desc</td>
-						<td>comment2</td>
-						<td>tags1,tag2</td>
-						<td>a,null</td>
-						<td>FAIL with code NULL_ARGUMENT</td>
-					</tr>
-					<tr>
 					    <td>Void status literal</td>
-						<td>id_vp2</td>
-						<td>vp2</td>
+						<td>id_new_vp2</td>
+						<td>new_vp2</td>
 						<td>desc</td>
 						<td>comment2</td>
 						<td>tags1,tag2</td>
@@ -214,29 +204,20 @@
 					</tr>
 					<tr>
 					    <td>Void after trim status literal</td>
-						<td>id_vp2</td>
-						<td>vp2</td>
+						<td>id_new_vp2</td>
+						<td>new_vp2</td>
 						<td>space</td>
 						<td>comment2</td>
 						<td>tags1,tag2</td>
 						<td>space,</td>
 						<td>FAIL with code VOID_ARGUMENT</td>
 					</tr>
-					<tr>
-						<td>Dup status literal</td>
-						<td>id_vp2</td>
-						<td>vp2</td>
-						<td>description2</td>
-						<td>comment2</td>
-						<td>tags1,tag2</td>
-						<td>status1,status1</td>
-						<td>FAIL with code DUPLICATE_STATUS_LITERAL</td>
-					</tr>
+					
 					<!-- Comment -->
 					<tr>
 						<td>Void comment</td>
-						<td>id_vp2</td>
-						<td>vp2</td>
+						<td>id_new_vp2</td>
+						<td>new_vp2</td>
 						<td>description2</td>
 						<td></td>
 						<td>tags1,tag2</td>
@@ -245,8 +226,8 @@
 					</tr>
 					<tr>
 					    <td>Null comment</td>
-						<td>id_vp2</td>
-						<td>vp2</td>
+						<td>id_new_vp2</td>
+						<td>new_vp2</td>
 						<td>description2</td>
 						<td>null</td>
 						<td>tags1,tag2</td>
@@ -254,6 +235,7 @@
 						<td>PASS</td>
 					</tr>
 				</table>
+				<p>Note that status literals can't contain a null literal because a set cannot handle null values</p>
 			</li>
 		</ul>
 	</div>

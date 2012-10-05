@@ -46,7 +46,6 @@ public class FunctionalException extends Exception {
 		TARGET_NOT_FOUND,
 		SIZE_EXCEEDED,
 		DUPLICATES,
-		DUPLICATE_STATUS_LITERAL,
 		DUPLICATE_NAME,
 		NULL_ARGUMENT,
 		VOID_ARGUMENT,

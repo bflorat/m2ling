@@ -4,6 +4,7 @@
 package org.m2ling.common.dto.core;
 
 import java.util.ArrayList;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -57,9 +58,9 @@ public class LinkTypeDTO implements Comparable<LinkTypeDTO> {
 
 		private String linkAccessType;
 
-		private List<HasNameAndIdDTO> sourcesTypes = new ArrayList<HasNameAndIdDTO>(1);
+		private Set<HasNameAndIdDTO> sourcesTypes = new LinkedHashSet<HasNameAndIdDTO>(1);
 
-		private List<HasNameAndIdDTO> destinationsTypes = new ArrayList<HasNameAndIdDTO>(1);
+		private Set<HasNameAndIdDTO> destinationsTypes = new LinkedHashSet<HasNameAndIdDTO>(1);
 
 		public Builder(HasNameAndIdDTO vp, String id, String name) {
 			this.id = id;

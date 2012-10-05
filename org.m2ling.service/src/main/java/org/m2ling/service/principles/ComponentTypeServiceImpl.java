@@ -6,6 +6,7 @@ package org.m2ling.service.principles;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Set;
 import java.util.logging.Logger;
 
 import org.eclipse.emf.common.util.EList;
@@ -214,7 +215,7 @@ public class ComponentTypeServiceImpl extends ServiceImpl implements ComponentTy
 	}
 
 	private void checkEnumeration(final ComponentTypeDTO dto, AccessType access) throws FunctionalException {
-		List<HasNameAndIdDTO> enumeration = dto.getEnumeration();
+		Set<HasNameAndIdDTO> enumeration = dto.getEnumeration();
 		if (enumeration == null) {
 			throw new FunctionalException(FunctionalException.Code.NULL_ARGUMENT, null, "(enumeration)");
 		}
