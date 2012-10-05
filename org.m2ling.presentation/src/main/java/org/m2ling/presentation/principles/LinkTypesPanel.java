@@ -104,9 +104,9 @@ public class LinkTypesPanel extends VerticalLayout implements Observer {
 				final Table table = new Table(null, data);
 				table.setWidth("100%");
 				// We set a guess height for table depending on the nb of items + a fixed size for the
-				// header
+				// header.
 				// Note that UNITS_EM doesn't work for some reasons and that a row can be multi-lines.
-				table.setHeight(lts.size() * 40 + 10, UNITS_PIXELS);
+				table.setHeight(lts.size() * 40 + 20, UNITS_PIXELS);
 				table.setVisibleColumns(new String[] { "drop", "name", "description", "linkTemporality", "linkAccessType",
 						"sourcesTypes", "destinationsTypes", "tags" });
 				table.setColumnExpandRatio("description", 0.6f);

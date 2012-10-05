@@ -95,6 +95,10 @@ public class LinkTypeServiceImpl extends ServiceImpl implements LinkTypeService 
 	}
 
 	private void checkSourcesAndDestTypes(final LinkTypeDTO dto, AccessType access) throws FunctionalException {
+		/*
+		 * Note that sources and destinations items unicity is implicitly managed by the fact that
+		 * they are Set
+		 */
 		// Rule #LT32
 		if (dto.getSourcesTypes().size() == 0) {
 			throw new FunctionalException(FunctionalException.Code.LT_NONE_SOURCES_TYPES, null, "link name="
@@ -118,10 +122,10 @@ public class LinkTypeServiceImpl extends ServiceImpl implements LinkTypeService 
 			}
 		}
 		if (access == AccessType.UPDATE) {
+			LinkType lt = util.getLinkTypeByID(dto.getId());
 			// Rules #LT30 and #LT31 : do not drop a source or destination type
 			// if used by a existing link
 			// - Compute dropped source CT
-			LinkType lt = util.getLinkTypeByID(dto.getId());
 			List<ComponentType> droppedSourceTypes = Lists.newArrayList(lt.getSourceTypes());
 			for (HasNameAndIdDTO ctDTO : dto.getSourcesTypes()) {
 				ComponentType ct = util.getComponentTypeByID(ctDTO.getId());
@@ -160,7 +164,7 @@ public class LinkTypeServiceImpl extends ServiceImpl implements LinkTypeService 
 					+ dto.getName());
 		}
 		try {
-			LinkTemporality.valueOf(dto.getTemporality());
+			LinkTemporality.valueOf(dto.getLinkTemporality());
 		} catch (Exception iea) {
 			throw new FunctionalException(FunctionalException.Code.LT_ILLEGAL_TEMPORALITY, null, "link name="
 					+ dto.getName());
@@ -249,7 +253,7 @@ public class LinkTypeServiceImpl extends ServiceImpl implements LinkTypeService 
 		tags.clear();
 		tags.addAll(dto.getTags());
 		lt.setLinkAccessType(LinkAccessType.valueOf(dto.getLinkAccessType()));
-		lt.setLinkTemporality(LinkTemporality.valueOf(dto.getTemporality()));
+		lt.setLinkTemporality(LinkTemporality.valueOf(dto.getLinkTemporality()));
 		List<ComponentType> sources = lt.getSourceTypes();
 		sources.clear();
 		for (HasNameAndIdDTO ctDTO : dto.getSourcesTypes()) {

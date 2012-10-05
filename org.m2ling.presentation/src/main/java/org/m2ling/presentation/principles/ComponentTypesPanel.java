@@ -107,7 +107,7 @@ public class ComponentTypesPanel extends VerticalLayout implements Observer {
 				// We set a guess height for table depending on the nb of items + a fixed size for the
 				// header
 				// Note that UNITS_EM doesn't work for some reasons and that a row can be multi-lines.
-				table.setHeight(cts.size() * 40 + 10, UNITS_PIXELS);
+				table.setHeight(cts.size() * 40 + 20, UNITS_PIXELS);
 				table.setVisibleColumns(new String[] { "drop", "name", "description", "instantiationFactor", "boundType",
 						"enumeration", "references", "tags" });
 				table.setColumnExpandRatio("description", 0.4f);

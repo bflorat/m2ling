@@ -52,12 +52,19 @@ import com.vaadin.ui.themes.BaseTheme;
 @SuppressWarnings("serial")
 public class RulesPanel extends VerticalLayout implements Observer {
 	private final String vpID;
+
 	private final RuleService service;
+
 	private final Logger logger;
+
 	private final DTOConverter.ToDTO toDTO;
+
 	private final DTOConverter.FromDTO fromDTO;
+
 	private final PrinciplesGUIFactory factory;
+
 	private final Msg msg;
+
 	private final Conf conf;
 
 	/**
@@ -100,11 +107,14 @@ public class RulesPanel extends VerticalLayout implements Observer {
 				}
 				final Table table = new Table(null, data);
 				table.setWidth("100%");
-				table.setHeight("300px");
-				table.setVisibleColumns(new String[] { "drop", "name", "status", "priority", "description","tags" });
+				// We set a guess height for table depending on the nb of items + a fixed size for the
+				// header
+				// Note that UNITS_EM doesn't work for some reasons and that a row can be multi-lines.
+				table.setHeight(rules.size() * 40 + 20, UNITS_PIXELS);
+				table.setVisibleColumns(new String[] { "drop", "name", "status", "priority", "description", "tags" });
 				table.setColumnExpandRatio("description", 1);
 				table.setColumnHeaders(new String[] { msg.get("gal.3"), msg.get("gal.12"), msg.get("gal.7"),
-						msg.get("gal.8"), msg.get("gal.1") + " (" + msg.get("gal.10") + ")", msg.get("gal.4")});
+						msg.get("gal.8"), msg.get("gal.1") + " (" + msg.get("gal.10") + ")", msg.get("gal.4") });
 				table.addGeneratedColumn("name", new Table.ColumnGenerator() {
 					public Component generateCell(Table table, Object itemId, Object columnId) {
 						@SuppressWarnings("unchecked")

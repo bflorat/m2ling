@@ -163,8 +163,8 @@ public class DTOConverter {
 			}
 			builder.comment(lt.getComment());
 			builder.description(lt.getDescription());
-			builder.accessType(lt.getLinkAccessType().getLiteral());
-			builder.temporality(lt.getLinkTemporality().getLiteral());
+			builder.linkAccessType(lt.getLinkAccessType().getLiteral());
+			builder.linkTemporality(lt.getLinkTemporality().getLiteral());
 			for (ComponentType ct : lt.getSourceTypes()) {
 				HasNameAndIdDTO hniDTO = new HasNameAndIdDTO.Builder(ct.getId(), ct.getName()).build();
 				builder.addSourcesType(hniDTO);
@@ -347,7 +347,7 @@ public class DTOConverter {
 			lt.setDescription(dto.getDescription());
 			lt.setComment(dto.getComment());
 			lt.setLinkAccessType(LinkAccessType.valueOf(dto.getLinkAccessType()));
-			lt.setLinkTemporality(LinkTemporality.valueOf(dto.getTemporality()));
+			lt.setLinkTemporality(LinkTemporality.valueOf(dto.getLinkTemporality()));
 			for (HasNameAndIdDTO hniDTO : dto.getSourcesTypes()) {
 				ComponentType ct = util.getComponentTypeByID(hniDTO.getId());
 				lt.getSourceTypes().add(ct);

@@ -1,8 +1,9 @@
 package org.m2ling.service.principles;
 
 import java.io.IOException;
-import java.util.ArrayList;
+import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.m2ling.common.dto.core.AccessType;
 import org.m2ling.common.dto.core.HasNameAndIdDTO;
@@ -48,12 +49,12 @@ public class CreateLTFixture extends AbstractLTFixture {
 		accessType = UUT.nul(accessType);
 		temporality = UUT.nul(temporality);
 		List<String> sourcesTypesAsStrings = Utils.stringListFromString(UUT.nul(sourcesTypes));
-		List<HasNameAndIDBean> sourcesTypesList = new ArrayList<HasNameAndIDBean>();
+		Set<HasNameAndIDBean>  sourcesTypesList = new LinkedHashSet<HasNameAndIDBean>();
 		for (String ctID : sourcesTypesAsStrings) {
 			sourcesTypesList.add(HasNameAndIDBean.newInstance(ctID, ""));
 		}
 		List<String> destinationsTypesAsStrings = Utils.stringListFromString(UUT.nul(destinationsTypes));
-		List<HasNameAndIDBean> destinationsTypesList = new ArrayList<HasNameAndIDBean>();
+		Set<HasNameAndIDBean> destinationsTypesList = new LinkedHashSet<HasNameAndIDBean>();
 		for (String ctID : destinationsTypesAsStrings) {
 			destinationsTypesList.add(HasNameAndIDBean.newInstance(ctID, ""));
 		}
@@ -106,7 +107,7 @@ public class CreateLTFixture extends AbstractLTFixture {
 			}
 			dtoBuilder.comment(UUT.nul(comment));
 			dtoBuilder.description(UUT.nul(desc));
-			dtoBuilder.accessType(UUT.nul(accessType)).temporality(UUT.nul(temporality));
+			dtoBuilder.linkAccessType(UUT.nul(accessType)).linkTemporality(UUT.nul(temporality));
 			List<String> sourcesTypesAsStrings = Utils.stringListFromString(UUT.nul(sourcesTypes));
 			for (String ctID : sourcesTypesAsStrings) {
 				dtoBuilder.addSourcesType(new HasNameAndIdDTO.Builder(ctID, "").build());
@@ -132,7 +133,7 @@ public class CreateLTFixture extends AbstractLTFixture {
 			HasNameAndIdDTO vp = new HasNameAndIdDTO.Builder("id_vp_logical", "").build();
 			HasNameAndIdDTO dest = new HasNameAndIdDTO.Builder("id_ct_logical_servicemodule", "ct_logical_servicemodule")
 					.build();
-			LinkTypeDTO dto = new LinkTypeDTO.Builder(vp, "id_lt_logical_lt1", "lt1").accessType("RW").temporality("SYNC")
+			LinkTypeDTO dto = new LinkTypeDTO.Builder(vp, "id_lt_logical_lt1", "lt1").linkAccessType("RW").linkTemporality("SYNC")
 					.addDestinationsType(dest).description("desc").build();
 			service.createLT(null, dto);
 			return "Unknown item";
@@ -150,7 +151,7 @@ public class CreateLTFixture extends AbstractLTFixture {
 		try {
 			HasNameAndIdDTO vp = new HasNameAndIdDTO.Builder("id_vp_logical", "").build();
 			HasNameAndIdDTO source = new HasNameAndIdDTO.Builder("id_ct_logical_guimodule", "").build();
-			LinkTypeDTO dto = new LinkTypeDTO.Builder(vp, "id_lt_logical_lt1", "lt1").accessType("RW").temporality("SYNC")
+			LinkTypeDTO dto = new LinkTypeDTO.Builder(vp, "id_lt_logical_lt1", "lt1").linkAccessType("RW").linkTemporality("SYNC")
 					.description("desc").addSourcesType(source).build();
 			service.createLT(null, dto);
 			return "Unknown item";

@@ -5,10 +5,12 @@ package org.m2ling.common.dto.core;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import org.m2ling.common.utils.Utils;
 
 import com.google.common.collect.ImmutableList;
+import com.google.common.collect.ImmutableSet;
 
 /**
  * Link type DTO object used between layers.
@@ -20,36 +22,6 @@ public class LinkTypeDTO implements Comparable<LinkTypeDTO> {
 
 	private final String id;
 
-	/**
-	 * @return the temporality
-	 */
-	public String getTemporality() {
-		return temporality;
-	}
-
-	/**
-	 * @param temporality
-	 *           the temporality to set
-	 */
-	public void setTemporality(String temporality) {
-		this.temporality = temporality;
-	}
-
-	/**
-	 * @return the accessType
-	 */
-	public String getLinkAccessType() {
-		return accessType;
-	}
-
-	/**
-	 * @param accessType
-	 *           the accessType to set
-	 */
-	public void setLinkAccessType(String accessType) {
-		this.accessType = accessType;
-	}
-
 	private final String name;
 
 	private final List<String> tags;
@@ -58,13 +30,13 @@ public class LinkTypeDTO implements Comparable<LinkTypeDTO> {
 
 	private final String comment;
 
-	private final List<HasNameAndIdDTO> sourcesTypes;
+	private final Set<HasNameAndIdDTO> sourcesTypes;
 
-	private final List<HasNameAndIdDTO> destinationsTypes;
+	private final Set<HasNameAndIdDTO> destinationsTypes;
 
-	private String temporality;
+	private String linkTemporality;
 
-	private String accessType;
+	private String linkAccessType;
 
 	public static class Builder {
 		// Required configuration
@@ -81,9 +53,9 @@ public class LinkTypeDTO implements Comparable<LinkTypeDTO> {
 
 		private String comment = null;
 
-		private String temporality;
+		private String linkTemporality;
 
-		private String accessType;
+		private String linkAccessType;
 
 		private List<HasNameAndIdDTO> sourcesTypes = new ArrayList<HasNameAndIdDTO>(1);
 
@@ -110,13 +82,13 @@ public class LinkTypeDTO implements Comparable<LinkTypeDTO> {
 			return this;
 		}
 
-		public Builder temporality(String temporality) {
-			this.temporality = temporality;
+		public Builder linkTemporality(String linkTemporality) {
+			this.linkTemporality = linkTemporality;
 			return this;
 		}
 
-		public Builder accessType(String accessType) {
-			this.accessType = accessType;
+		public Builder linkAccessType(String linkAccessType) {
+			this.linkAccessType = linkAccessType;
 			return this;
 		}
 
@@ -143,10 +115,42 @@ public class LinkTypeDTO implements Comparable<LinkTypeDTO> {
 		tags = ImmutableList.copyOf(builder.tags); // defensive copy
 		description = builder.description;
 		comment = builder.comment;
-		accessType = builder.accessType;
-		temporality = builder.temporality;
-		sourcesTypes = ImmutableList.copyOf(builder.sourcesTypes);
-		destinationsTypes = ImmutableList.copyOf(builder.destinationsTypes);
+		linkAccessType = builder.linkAccessType;
+		linkTemporality = builder.linkTemporality;
+		sourcesTypes = ImmutableSet.copyOf(builder.sourcesTypes);
+		destinationsTypes = ImmutableSet.copyOf(builder.destinationsTypes);
+	}
+
+	public String toString() {
+		return Utils.toString(this);
+	}
+
+	public boolean equals(Object o) {
+		if (o == null || !(o instanceof LinkTypeDTO)) {
+			return false;
+		}
+		LinkTypeDTO other = (LinkTypeDTO) o;
+		return other.getId().equals(getId());
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.lang.Comparable#compareTo(java.lang.Object)
+	 */
+	@Override
+	public int compareTo(LinkTypeDTO o) {
+		// Make sure this method is consistent with equals
+		if (this.equals(o)) {
+			return 0;
+		}
+		// If names are not provided, items are not correctly sorted
+		// but we only have the bounded type ID and we don't want to perform
+		// a service call to get details just for sorting purpose.
+		if (getName() == null || o.getName() == null) {
+			return -1;
+		}
+		return name.compareToIgnoreCase(o.getName());
 	}
 
 	/**
@@ -199,46 +203,44 @@ public class LinkTypeDTO implements Comparable<LinkTypeDTO> {
 	/**
 	 * @return the sourcesTypes
 	 */
-	public List<HasNameAndIdDTO> getSourcesTypes() {
+	public Set<HasNameAndIdDTO> getSourcesTypes() {
 		return sourcesTypes;
 	}
 
 	/**
 	 * @return the destinationsTypes
 	 */
-	public List<HasNameAndIdDTO> getDestinationsTypes() {
+	public Set<HasNameAndIdDTO> getDestinationsTypes() {
 		return destinationsTypes;
 	}
 
-	public String toString() {
-		return Utils.toString(this);
-	}
-
-	public boolean equals(Object o) {
-		if (o == null || !(o instanceof LinkTypeDTO)) {
-			return false;
-		}
-		LinkTypeDTO other = (LinkTypeDTO) o;
-		return other.getId().equals(getId());
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see java.lang.Comparable#compareTo(java.lang.Object)
+	/**
+	 * @return the temporality
 	 */
-	@Override
-	public int compareTo(LinkTypeDTO o) {
-		// Make sure this method is consistent with equals
-		if (this.equals(o)) {
-			return 0;
-		}
-		// If names are not provided, items are not correctly sorted
-		// but we only have the bounded type ID and we don't want to perform
-		// a service call to get details just for sorting purpose.
-		if (getName() == null || o.getName() == null) {
-			return -1;
-		}
-		return name.compareToIgnoreCase(o.getName());
+	public String getLinkTemporality() {
+		return linkTemporality;
+	}
+
+	/**
+	 * @param linkTemporality
+	 *           the temporality to set
+	 */
+	public void setLinkTemporality(String linkTemporality) {
+		this.linkTemporality = linkTemporality;
+	}
+
+	/**
+	 * @return the linkAccessTypeType
+	 */
+	public String getLinkAccessType() {
+		return linkAccessType;
+	}
+
+	/**
+	 * @param linkAccessType
+	 *           the linkAccessType to set
+	 */
+	public void setLinkAccessType(String linkAccessType) {
+		this.linkAccessType = linkAccessType;
 	}
 }

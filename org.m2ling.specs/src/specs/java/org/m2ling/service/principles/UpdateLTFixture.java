@@ -23,8 +23,8 @@ public class UpdateLTFixture extends AbstractLTFixture {
 			// use the id as name
 			HasNameAndIdDTO vp = new HasNameAndIdDTO.Builder("id_vp1", "").build();
 			LinkTypeDTO.Builder dtoBuilder = new LinkTypeDTO.Builder(vp, UUT.nul(id), UUT.nul(id));
-			dtoBuilder.accessType(LinkAccessType.RW.name());
-			dtoBuilder.temporality(LinkTemporality.SYNC.name());
+			dtoBuilder.linkAccessType(LinkAccessType.RW.name());
+			dtoBuilder.linkTemporality(LinkTemporality.SYNC.name());
 			dtoBuilder.description("desc");
 			List<String> sourcesTypesAsStrings = Utils.stringListFromString(UUT.nul(sourcesTypes));
 			for (String ctID : sourcesTypesAsStrings) {

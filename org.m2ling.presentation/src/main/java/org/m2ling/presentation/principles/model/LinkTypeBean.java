@@ -6,8 +6,8 @@
 package org.m2ling.presentation.principles.model;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.LinkedHashSet;
+import java.util.Set;
 
 import org.m2ling.common.utils.Utils;
 import org.m2ling.presentation.principles.LinkAccessType;
@@ -35,9 +35,9 @@ public class LinkTypeBean implements Serializable {
 	private String linkAccessType = LinkAccessType.READ.name();
 
 	/** Sources */
-	private List<HasNameAndIDBean> sourcesTypes = new ArrayList<HasNameAndIDBean>();
+	private Set<HasNameAndIDBean> sourcesTypes = new LinkedHashSet<HasNameAndIDBean>();
 
-	private List<HasNameAndIDBean> destinationsTypes = new ArrayList<HasNameAndIDBean>();
+	private Set<HasNameAndIDBean> destinationsTypes = new LinkedHashSet<HasNameAndIDBean>();
 
 	/** GUI only item used to represent the drop button **/
 	private String drop = "";
@@ -77,7 +77,7 @@ public class LinkTypeBean implements Serializable {
 	/**
 	 * @return the sourcesTypes
 	 */
-	public List<HasNameAndIDBean> getSourcesTypes() {
+	public Set<HasNameAndIDBean> getSourcesTypes() {
 		return sourcesTypes;
 	}
 	
@@ -102,14 +102,14 @@ public class LinkTypeBean implements Serializable {
 	 * @param sourcesTypes
 	 *           the sourcesTypes to set
 	 */
-	public void setSourcesTypes(List<HasNameAndIDBean> sourcesTypes) {
+	public void setSourcesTypes(Set<HasNameAndIDBean> sourcesTypes) {
 		this.sourcesTypes = sourcesTypes;
 	}
 
 	/**
 	 * @return the destinationsTypes
 	 */
-	public List<HasNameAndIDBean> getDestinationsTypes() {
+	public Set<HasNameAndIDBean> getDestinationsTypes() {
 		return destinationsTypes;
 	}
 	
@@ -134,7 +134,7 @@ public class LinkTypeBean implements Serializable {
 	 * @param destinationsTypes
 	 *           the destinationsTypes to set
 	 */
-	public void setDestinationsTypes(List<HasNameAndIDBean> destinationsTypes) {
+	public void setDestinationsTypes(Set<HasNameAndIDBean> destinationsTypes) {
 		this.destinationsTypes = destinationsTypes;
 	}
 

@@ -6,8 +6,10 @@ package org.m2ling.presentation.principles.utils;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.m2ling.common.dto.core.ComponentTypeDTO;
 import org.m2ling.common.dto.core.HasNameAndIdDTO;
@@ -131,8 +133,8 @@ public class DTOConverter {
 			HasNameAndIdDTO vp = (bean.getViewPoint() == null) ? null : new HasNameAndIdDTO.Builder(bean.getViewPoint()
 					.getId(), bean.getViewPoint().getName()).build();
 			LinkTypeDTO.Builder builder = new LinkTypeDTO.Builder(vp, bean.getId(), bean.getName())
-					.description(bean.getDescription()).comment(bean.getComment()).temporality(bean.getLinkTemporality())
-					.accessType(bean.getLinkAccessType());
+					.description(bean.getDescription()).comment(bean.getComment()).linkTemporality(bean.getLinkTemporality())
+					.linkAccessType(bean.getLinkAccessType());
 			for (String tag : Utils.stringListFromString(bean.getTags())) {
 				builder.addTag(tag);
 			}
@@ -344,14 +346,14 @@ public class DTOConverter {
 			bean.setDescription((dto.getDescription() != null) ? dto.getDescription() : "");
 			String tags = Utils.stringListAsString(dto.getTags());
 			bean.setTags(tags);
-			bean.setLinkTemporality(dto.getTemporality());
+			bean.setLinkTemporality(dto.getLinkTemporality());
 			bean.setLinkAccessType(dto.getLinkAccessType());
-			List<HasNameAndIDBean> sources = new ArrayList<HasNameAndIDBean>(1);
+			Set<HasNameAndIDBean> sources = new LinkedHashSet<HasNameAndIDBean>(1);
 			for (HasNameAndIdDTO ctDTO : dto.getSourcesTypes()) {
 				sources.add(getHasNameAndIdBean(ctDTO));
 			}
 			bean.setSourcesTypes(sources);
-			List<HasNameAndIDBean> destinations = new ArrayList<HasNameAndIDBean>(1);
+			Set<HasNameAndIDBean> destinations = new LinkedHashSet<HasNameAndIDBean>(1);
 			for (HasNameAndIdDTO ctDTO : dto.getDestinationsTypes()) {
 				destinations.add(getHasNameAndIdBean(ctDTO));
 			}

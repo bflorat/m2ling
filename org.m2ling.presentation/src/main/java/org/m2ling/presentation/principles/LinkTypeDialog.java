@@ -206,7 +206,7 @@ public class LinkTypeDialog extends Window {
 			} else if ("linkTemporality".equals(propertyId)) {
 				Select linkTemporality = new Select();
 				for (LinkTemporality lt : LinkTemporality.values()) {
-					linkTemporality.addItem(lt);
+					linkTemporality.addItem(lt.name());
 				}
 				linkTemporality.setCaption(msg.get("pr.45"));
 				linkTemporality.setDescription(msg.get("pr.50"));
@@ -215,7 +215,7 @@ public class LinkTypeDialog extends Window {
 			} else if ("linkAccessType".equals(propertyId)) {
 				Select linkAccessType = new Select();
 				for (LinkAccessType lat : LinkAccessType.values()) {
-					linkAccessType.addItem(lat);
+					linkAccessType.addItem(lat.name());
 				}
 				linkAccessType.setCaption(msg.get("pr.46"));
 				linkAccessType.setNullSelectionAllowed(true);

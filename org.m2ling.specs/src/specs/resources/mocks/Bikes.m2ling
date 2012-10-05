@@ -22,7 +22,7 @@
     <componentTypes id="id_ct_logical_batchmodule" name="BatchModule" comment="" description="Batch module" boundType="id_ct_app_batchmodule"/>
     <linkTypes id="id_lt_logical_http_rest" name="HTTP_REST" description="Synchronous REST call over HTTP. Default port : 80. Over TCP only." sourceTypes="id_ct_logical_guimodule id_ct_logical_batchmodule" destinationTypes="id_ct_logical_servicemodule"/>
     <linkTypes id="_4Rfd0pqjEeGQsK1VSbibvw" name="NET_DATABASE" description="Synchronous Network protocol to access remote Postgres database. Default port : 5432. Can be used over TCP or UDP." sourceTypes="id_ct_logical_servicemodule" destinationTypes="id_ct_logical_database"/>
-    <linkTypes id="_oHllkpqkEeGbI4NH3iicSg" name="HTTP_GUI" comment="" description="Synchronous HTTP access from end users to the GUI services. Default port : 80. Over TCP only. KEEP_ALIVE option enabled." sourceTypes="_8_BugZqkEeGbI4NH3iicSg _8_BugZqkEeGbI4NH3iicSg" destinationTypes="_fKtsQZoXEeG71vmJ5CR-iA"/>
+    <linkTypes id="_oHllkpqkEeGbI4NH3iicSg" name="HTTP_GUI" comment="" description="Synchronous HTTP access from end users to the GUI services. Default port : 80. Over TCP only. KEEP_ALIVE option enabled." sourceTypes="_8_BugZqkEeGbI4NH3iicSg" destinationTypes="_fKtsQZoXEeG71vmJ5CR-iA"/>
     <linkTypes id="_2LrDApqyEeGVMag01qc4bw" name="LDAP" comment="" description="Synchronous access to a LDAP directory. Over TCP-IP." sourceTypes="id_ct_logical_guimodule" destinationTypes="id_ct_logical_ldap"/>
     <rules id="R1" name="R1" comment="This rule is one of the Bikes IS cornerstone." description="A GUI Module can't map (using an hyperlink or a redirect for instance) another GUI Module, each application must be integrated into the portal." status="APPLICABLE" priority="3" rationale="Centralizaing all the IS intranet websites URL into a single portal brings low coupling between websites, eases management and increases security." exceptions="If a GUI module is itself a sub-domain kind of portal, it may integrate several GUI modules URL as parameters and come with hyperkink to them but a special attention must be paid to manage these URL by the project team. The pointed application must not be available from the main portal but only manage by the sub-domain portail.">
       <tags>logical</tags>
@@ -74,9 +74,11 @@
     <componentTypes id="id_ct_app_guimodule" name="GUIModule" comment="" description="A GUI module serves Web pages targeting end users."/>
     <componentTypes id="id_ct_app_servicemodule" name="ServiceModule" comment="" description="A service module provides business services to batch or GUI modules and is responsible for enterprise data."/>
     <componentTypes id="id_ct_app_batchmodule" name="BatchModule" comment="" description="A batch module contains one or more batchs computing complex and batch operations."/>
-    <linkTypes id="_psOW0p8zEeGYS-4UJ-FpAA" name="SERVICE_SYNC_READ" description="Synchronous call to read-only services" sourceTypes="id_ct_app_guimodule" destinationTypes="id_ct_app_servicemodule"/>
-    <linkTypes id="_psOW0p8zEeGYS-4UJ-FpAArr" name="SERVICE_SYNC_RW" description="Synchronous call to Read and write services" sourceTypes="id_ct_app_guimodule" destinationTypes="id_ct_app_servicemodule"/>
-    <linkTypes id="_psOW0p8zEeGYS-4UJ-FpAAdgfgf" name="SERVICE_ASYNC_READ" description="Asynchronous call to read-only services used to retrieve large amount of data." sourceTypes="id_ct_app_guimodule" destinationTypes="id_ct_app_servicemodule"/>
+    <linkTypes id="_psOW0p8zEeGYS-4UJ-FpAA" name="SERVICE_SYNC_READ" comment="" description="Synchronous call to read-only services" sourceTypes="id_ct_app_guimodule" destinationTypes="id_ct_app_servicemodule" linkTemporality="ASYNC_PULL"/>
+    <linkTypes id="_psOW0p8zEeGYS-4UJ-FpAArr" name="SERVICE_SYNC_RW" comment="" description="Synchronous call to Read and write services" sourceTypes="id_ct_app_guimodule" destinationTypes="id_ct_app_servicemodule"/>
+    <linkTypes id="_psOW0p8zEeGYS-4UJ-FpAAdgfgf" name="SERVICE_ASYNC_READ" comment="hop hop" description="Asynchronous call to read-only services used to retrieve large amount of data." sourceTypes="id_ct_app_batchmodule id_ct_app_guimodule" destinationTypes="id_ct_app_servicemodule" linkTemporality="ASYNC_PUSH">
+      <tags>tag1</tags>
+    </linkTypes>
     <rules id="dfsdhfkjehzlkm343" name="R1" comment="This rule emphases the rule of a portal." description="Direct call between GUI modules are forbitten." status="VALIDATED" priority="3">
       <tags>modules</tags>
     </rules>

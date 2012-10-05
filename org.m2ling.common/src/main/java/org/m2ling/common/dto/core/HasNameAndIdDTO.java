@@ -12,6 +12,7 @@ import org.m2ling.common.utils.Utils;
  */
 public class HasNameAndIdDTO {
 	private final String id;
+
 	private final String name;
 
 	private HasNameAndIdDTO(Builder builder) {
@@ -36,6 +37,7 @@ public class HasNameAndIdDTO {
 
 	public static class Builder {
 		private final String id;
+
 		private final String name;
 
 		public Builder(final String id, final String name) {
@@ -51,5 +53,15 @@ public class HasNameAndIdDTO {
 
 	public String toString() {
 		return Utils.toString(this);
+	}
+
+	public boolean equals(Object other) {
+		if (this == other) {
+			return true;
+		}
+		if (!(other instanceof HasNameAndIdDTO)) {
+			return false;
+		}
+		return id.equals(((HasNameAndIdDTO) other).getId());
 	}
 }
