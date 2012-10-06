@@ -22,6 +22,7 @@ import org.m2ling.presentation.principles.model.HasNameAndIDBean;
 import org.m2ling.presentation.principles.model.ViewPointBean;
 import org.m2ling.presentation.principles.utils.DTOConverter;
 import org.m2ling.presentation.widgets.Command;
+import org.m2ling.presentation.widgets.HelpPanel;
 import org.m2ling.presentation.widgets.OKCancel;
 import org.m2ling.service.principles.ViewPointService;
 
@@ -126,6 +127,8 @@ public class ViewPointDialog extends Window {
 		HasNameAndIDBean hniBean = HasNameAndIDBean.newInstance(bean.getId(), bean.getName());
 		IconUploader uploader = new IconUploader(hniBean, Consts.CONF_VP_ICONS_LOCATION, logger, msg);
 		OKCancel okc = new OKCancel(ok, cancel);
+		HelpPanel help = new HelpPanel(msg.get("help.3"));
+		addComponent(help);
 		addComponent(form);
 		addComponent(uploader);
 		addComponent(okc);

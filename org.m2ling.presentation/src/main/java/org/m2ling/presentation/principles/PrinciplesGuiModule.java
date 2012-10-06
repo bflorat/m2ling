@@ -19,6 +19,7 @@ import org.m2ling.presentation.events.Observer;
 import org.m2ling.presentation.i18n.Msg;
 import org.m2ling.presentation.principles.model.ViewPointBean;
 import org.m2ling.presentation.principles.utils.DTOConverter;
+import org.m2ling.presentation.widgets.HelpPanel;
 import org.m2ling.presentation.widgets.SidebarEntry;
 import org.m2ling.service.principles.ViewPointService;
 
@@ -39,13 +40,21 @@ import com.vaadin.ui.themes.BaseTheme;
 @SessionScoped
 public class PrinciplesGuiModule extends GuiModule implements Observer {
 	private List<ViewPointDTO> vpsDTO;
+
 	private ViewPointService vpService;
+
 	private Logger logger;
+
 	private PrinciplesGUIFactory dialogFactory;
+
 	private PrinciplesGUIFactory panelFactory;
+
 	private ObservationManager obs;
+
 	private DTOConverter.FromDTO fromDTO;
+
 	private final Msg msg;
+
 	private VerticalLayout root;
 
 	@Inject
@@ -62,7 +71,7 @@ public class PrinciplesGuiModule extends GuiModule implements Observer {
 		obs.register(this);
 		setWidth("100%");
 		setHeight("100%");
-		root = (VerticalLayout)getContent();
+		root = (VerticalLayout) getContent();
 		root.setWidth("100%");
 		root.setHeight("-1");
 	}

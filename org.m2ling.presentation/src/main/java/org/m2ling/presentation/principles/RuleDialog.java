@@ -25,6 +25,7 @@ import org.m2ling.presentation.principles.model.RuleBean;
 import org.m2ling.presentation.principles.model.ViewPointBean;
 import org.m2ling.presentation.principles.utils.DTOConverter;
 import org.m2ling.presentation.widgets.Command;
+import org.m2ling.presentation.widgets.HelpPanel;
 import org.m2ling.presentation.widgets.OKCancel;
 import org.m2ling.service.principles.RuleService;
 import org.m2ling.service.principles.ViewPointService;
@@ -152,6 +153,8 @@ public class RuleDialog extends Window {
 				}
 			};
 			OKCancel okc = new OKCancel(ok, cancel);
+			HelpPanel help = new HelpPanel(msg.get("help.4"));
+			panel.addComponent(help);
 			panel.addComponent(form);
 			panel.addComponent(okc);
 			((VerticalLayout) panel.getContent()).setComponentAlignment(okc, Alignment.MIDDLE_LEFT);
