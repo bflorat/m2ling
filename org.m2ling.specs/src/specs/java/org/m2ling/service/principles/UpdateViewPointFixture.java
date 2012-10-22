@@ -28,7 +28,7 @@ public class UpdateViewPointFixture extends AbstractViewPointFixture {
 		bean.setTags(tags);
 		ViewPointDTO dto = new DTOConverter.ToDTO().getViewPointDTO(bean);
 		service.updateViewPoint(null, dto);
-		ViewPointDTO checkedDTO = service.getViewPointByName(null, name);
+		ViewPointDTO checkedDTO = service.getViewPointByID(null, id);
 		ViewPointBean outBean = new DTOConverter.FromDTO().getViewPointBean(checkedDTO);
 		return outBean.toString();
 	}
@@ -47,7 +47,7 @@ public class UpdateViewPointFixture extends AbstractViewPointFixture {
 	public String updateStatusLiterals(String previousStatusLiterals, String newStatusLiterals)
 			throws FunctionalException {
 		reset("Technical");
-		ViewPointDTO vp1DTO = service.getViewPointByName(null, "vp1");
+		ViewPointDTO vp1DTO = service.getViewPointByID(null, "id_vp1");
 		List<String> previousStatusLiteralsList = Utils.stringListFromString(previousStatusLiterals);
 		ViewPointDTO.Builder builder = new ViewPointDTO.Builder(vp1DTO.getId(), vp1DTO.getName()).comment(
 				vp1DTO.getComment()).description(vp1DTO.getDescription());
@@ -81,7 +81,7 @@ public class UpdateViewPointFixture extends AbstractViewPointFixture {
 		reset("Technical");
 		// We assume that we have a "rule1" rule in VALIDATED status on vp1 vp (pre-filled in the
 		// technical mock)
-		ViewPointDTO vp1DTO = service.getViewPointByName(null, "vp1");
+		ViewPointDTO vp1DTO = service.getViewPointByID(null, "id_vp1");
 		List<String> statusLiteralsList = Utils.stringListFromString(newStatusLiterals);
 		ViewPointDTO.Builder builder = new ViewPointDTO.Builder(vp1DTO.getId(), vp1DTO.getName()).comment(
 				vp1DTO.getComment()).description(vp1DTO.getDescription());

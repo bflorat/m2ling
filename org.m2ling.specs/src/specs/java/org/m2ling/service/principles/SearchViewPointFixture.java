@@ -31,18 +31,4 @@ public class SearchViewPointFixture extends AbstractViewPointFixture {
 		}
 		return dto.getName();
 	}
-
-	public String getVpByName(String name) {
-		reset("Technical");
-		ViewPointDTO dto = null;
-		try {
-			dto = service.getViewPointByName(null, UUT.nul(name));
-		} catch (FunctionalException fe) {
-			return "FAIL with code " + fe.getCode().name();
-		}
-		if (dto == null) {
-			return "unkwown vp";
-		}
-		return dto.getId();
-	}
 }

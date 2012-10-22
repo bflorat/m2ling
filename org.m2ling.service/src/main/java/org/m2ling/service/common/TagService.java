@@ -2,7 +2,7 @@
  * Copyright (C) 2012 Bertrand Florat
  */
 
-package org.m2ling.service.core;
+package org.m2ling.service.common;
 
 import java.util.List;
 

@@ -75,11 +75,11 @@
           eType="#//core/ViewPoint"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="links" upperBound="-1"
           eType="#//core/Link" containment="true" eKeys="#//core/HasNameAndID/id"/>
-      <eStructuralFeatures xsi:type="ecore:EReference" name="instances" upperBound="-1"
+      <eStructuralFeatures xsi:type="ecore:EReference" name="componentInstances" upperBound="-1"
           eType="#//core/ComponentInstance" containment="true"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="instancesGroups" upperBound="-1"
           eType="#//core/ComponentInstanceGroup" containment="true"/>
-      <eStructuralFeatures xsi:type="ecore:EReference" name="streams" upperBound="-1"
+      <eStructuralFeatures xsi:type="ecore:EReference" name="linkInstances" upperBound="-1"
           eType="#//core/InstancesLink" containment="true"/>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="HasStatus" abstract="true">

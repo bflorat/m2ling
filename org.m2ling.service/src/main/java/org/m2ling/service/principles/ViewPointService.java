@@ -23,7 +23,7 @@ import org.m2ling.common.soa.Context;
  */
 public interface ViewPointService {
 	/**
-	 * Update an existing view point given a view point given a viewpoint DTO.
+	 * Update an existing view point given a viewpoint DTO.
 	 * 
 	 * @param vpDTO
 	 *           the view point DTO
@@ -55,18 +55,11 @@ public interface ViewPointService {
 	List<ViewPointDTO> getAllViewPoints(Context context);
 
 	/**
-	 * Return the viewpoint DTO given a VP name (unique) if it exist, null otherwise.
-	 * 
-	 * @return the viewpoint DTO given a VP name (unique) if it exist, null otherwise
-	 * @throws FunctionalException if name is null or void
-	 */
-	ViewPointDTO getViewPointByName(Context context, String name) throws FunctionalException;
-
-	/**
 	 * Return the viewpoint DTO given an ID if it exist, null otherwise.
 	 * 
 	 * @return the viewpoint DTO given an ID if it exist, null otherwise
-	 * @throws FunctionalException if id is null or void
+	 * @throws FunctionalException
+	 *            if id is null or void
 	 * 
 	 */
 	ViewPointDTO getViewPointByID(Context context, String id) throws FunctionalException;

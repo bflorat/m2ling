@@ -1,4 +1,4 @@
-package org.m2ling.service.core;
+package org.m2ling.service.common;
 
 /**
  * Copyright (C) 2012 Bertrand Florat
@@ -15,7 +15,6 @@ import org.m2ling.common.soa.Context;
 import org.m2ling.domain.core.HasTags;
 import org.m2ling.domain.core.Type;
 import org.m2ling.persistence.PersistenceManager;
-import org.m2ling.service.common.ServiceImpl;
 import org.m2ling.service.util.CoreUtil;
 import org.m2ling.service.util.DTOConverter;
 

@@ -171,32 +171,6 @@ public class ViewPointServiceImpl extends ServiceImpl implements ViewPointServic
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * org.m2ling.service.principles.ViewPointService#getViewPointByName(org.m2ling.common.soa.Context
-	 * , java.lang.String)
-	 */
-	@Override
-	public ViewPointDTO getViewPointByName(final Context context, final String name) throws FunctionalException {
-		{// Controls
-			if (name == null) {
-				throw new FunctionalException(FunctionalException.Code.NULL_ARGUMENT, null, "(name)");
-			}
-			if (Strings.isNullOrEmpty(name.trim())) {
-				throw new FunctionalException(FunctionalException.Code.VOID_ARGUMENT, null, "(name)");
-			}
-		}
-		Root root = pmanager.getRoot();
-		for (ViewPoint vp : root.getViewPoints()) {
-			if (name.equals(vp.getName())) {
-				return toDTO.getViewPointDTO(vp);
-			}
-		}
-		return null;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
 	 * org.m2ling.service.principles.ViewPointService#getViewPointByID(org.m2ling.common.soa.Context,
 	 * java.lang.String)
 	 */

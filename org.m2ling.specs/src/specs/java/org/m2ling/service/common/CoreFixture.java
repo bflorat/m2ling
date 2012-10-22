@@ -3,7 +3,7 @@
  *
  * @author "Bertrand Florat <bertrand@florat.net>"
  */
-package org.m2ling.service.core;
+package org.m2ling.service.common;
 
 import org.m2ling.specs.M2lingFixture;
 

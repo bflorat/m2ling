@@ -1,4 +1,4 @@
-package org.m2ling.service.core;
+package org.m2ling.service.common;
 
 import java.io.IOException;
 import java.util.Arrays;

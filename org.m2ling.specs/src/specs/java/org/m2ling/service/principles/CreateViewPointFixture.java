@@ -41,7 +41,7 @@ public class CreateViewPointFixture extends AbstractViewPointFixture {
 		bean.setTags(tags);
 		ViewPointDTO dto = new DTOConverter.ToDTO().getViewPointDTO(bean);
 		service.createViewPoint(null, dto);
-		ViewPointDTO checkedDTO = service.getViewPointByName(null, name);
+		ViewPointDTO checkedDTO = service.getViewPointByID(null, id);
 		ViewPointBean outBean = new DTOConverter.FromDTO().getViewPointBean(checkedDTO);
 		System.out.println(outBean.toString());
 		return outBean.toString();

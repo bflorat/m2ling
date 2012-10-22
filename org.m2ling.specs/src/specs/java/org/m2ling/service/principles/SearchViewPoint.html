@@ -30,19 +30,5 @@
 	</div>
 	</p>
 	
-	<p class='rule'>It is possible to get viewpoints by name :
-	<div class="example">
-		Given an existing viewpoint whose name=<b concordion:set="#name">vp1</b> <br/>
-		When we search for it by name<span concordion:execute="#resu=getVpByName(#name)"/><br/>
-		Then we should be a viewpoint whose ID is <b concordion:assertEquals="#resu">id_vp1</b>.
-	</div>
-	<div class="example">
-		Same query with <b concordion:set="#name">null</b> name should 
-		<span concordion:execute="#resu=getVpByName(#name)"/>
-		<b concordion:assertEquals="#resu">FAIL with code NULL_ARGUMENT</b>.
-	</div>
-	</p>
-	
-	
 </body>
 </html>
