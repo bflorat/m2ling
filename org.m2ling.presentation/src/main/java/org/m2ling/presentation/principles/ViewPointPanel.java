@@ -179,14 +179,6 @@ public class ViewPointPanel extends VerticalLayout {
 				ltsHiddenPane.setVisible(!ltsHiddenPane.isVisible());
 			}
 		});
-		// Activities
-		Button activities = new Button(msg.get("pr.25"));
-		activities.setStyleName(BaseTheme.BUTTON_LINK);
-		activities.addListener(new Button.ClickListener() {
-			public void buttonClick(ClickEvent event) {
-				// TODO
-			}
-		});
 		Label description = new Label(bean.getDescription());
 		description.setDescription(bean.getDescription());
 		description.setStyleName("principles_vp-panel-desc");
@@ -215,7 +207,6 @@ public class ViewPointPanel extends VerticalLayout {
 		addComponent(ctsHiddenPane);
 		addComponent(linkTypes);
 		addComponent(ltsHiddenPane);
-		addComponent(activities);
 		addComponent(rules);
 		addComponent(rulesHiddenPane);
 	}
