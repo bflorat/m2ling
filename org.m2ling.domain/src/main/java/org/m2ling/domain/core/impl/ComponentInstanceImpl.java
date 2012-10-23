@@ -16,7 +16,6 @@ import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.m2ling.domain.core.Component;
 import org.m2ling.domain.core.ComponentInstance;
-import org.m2ling.domain.core.ComponentInstanceGroup;
 import org.m2ling.domain.core.CorePackage;
 import org.m2ling.domain.core.HasComment;
 import org.m2ling.domain.core.HasConstraints;
@@ -42,8 +41,6 @@ import org.m2ling.domain.core.RuntimeItem;
  *   <li>{@link org.m2ling.domain.core.impl.ComponentInstanceImpl#getStatus <em>Status</em>}</li>
  *   <li>{@link org.m2ling.domain.core.impl.ComponentInstanceImpl#getReferences <em>References</em>}</li>
  *   <li>{@link org.m2ling.domain.core.impl.ComponentInstanceImpl#getComponent <em>Component</em>}</li>
- *   <li>{@link org.m2ling.domain.core.impl.ComponentInstanceImpl#getInstances <em>Instances</em>}</li>
- *   <li>{@link org.m2ling.domain.core.impl.ComponentInstanceImpl#getInstancesGroups <em>Instances Groups</em>}</li>
  *   <li>{@link org.m2ling.domain.core.impl.ComponentInstanceImpl#getBoundComponentInstance <em>Bound Component Instance</em>}</li>
  * </ul>
  * </p>
@@ -198,26 +195,6 @@ public class ComponentInstanceImpl extends HasParameterValuesImpl implements Com
 	protected Component component;
 
 	/**
-	 * The cached value of the '{@link #getInstances() <em>Instances</em>}' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getInstances()
-	 * @generated
-	 * @ordered
-	 */
-	protected EList<ComponentInstance> instances;
-
-	/**
-	 * The cached value of the '{@link #getInstancesGroups() <em>Instances Groups</em>}' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getInstancesGroups()
-	 * @generated
-	 * @ordered
-	 */
-	protected EList<ComponentInstanceGroup> instancesGroups;
-
-	/**
 	 * The cached value of the '{@link #getBoundComponentInstance() <em>Bound Component Instance</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -310,30 +287,6 @@ public class ComponentInstanceImpl extends HasParameterValuesImpl implements Com
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<ComponentInstance> getInstances() {
-		if (instances == null) {
-			instances = new EObjectContainmentEList<ComponentInstance>(ComponentInstance.class, this, CorePackage.COMPONENT_INSTANCE__INSTANCES);
-		}
-		return instances;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EList<ComponentInstanceGroup> getInstancesGroups() {
-		if (instancesGroups == null) {
-			instancesGroups = new EObjectContainmentEList<ComponentInstanceGroup>(ComponentInstanceGroup.class, this, CorePackage.COMPONENT_INSTANCE__INSTANCES_GROUPS);
-		}
-		return instancesGroups;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public ComponentInstance getBoundComponentInstance() {
 		if (boundComponentInstance != null && boundComponentInstance.eIsProxy()) {
 			InternalEObject oldBoundComponentInstance = (InternalEObject)boundComponentInstance;
@@ -389,10 +342,6 @@ public class ComponentInstanceImpl extends HasParameterValuesImpl implements Com
 		switch (featureID) {
 			case CorePackage.COMPONENT_INSTANCE__REFERENCES:
 				return ((InternalEList<?>)getReferences()).basicRemove(otherEnd, msgs);
-			case CorePackage.COMPONENT_INSTANCE__INSTANCES:
-				return ((InternalEList<?>)getInstances()).basicRemove(otherEnd, msgs);
-			case CorePackage.COMPONENT_INSTANCE__INSTANCES_GROUPS:
-				return ((InternalEList<?>)getInstancesGroups()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -422,10 +371,6 @@ public class ComponentInstanceImpl extends HasParameterValuesImpl implements Com
 			case CorePackage.COMPONENT_INSTANCE__COMPONENT:
 				if (resolve) return getComponent();
 				return basicGetComponent();
-			case CorePackage.COMPONENT_INSTANCE__INSTANCES:
-				return getInstances();
-			case CorePackage.COMPONENT_INSTANCE__INSTANCES_GROUPS:
-				return getInstancesGroups();
 			case CorePackage.COMPONENT_INSTANCE__BOUND_COMPONENT_INSTANCE:
 				if (resolve) return getBoundComponentInstance();
 				return basicGetBoundComponentInstance();
@@ -468,14 +413,6 @@ public class ComponentInstanceImpl extends HasParameterValuesImpl implements Com
 			case CorePackage.COMPONENT_INSTANCE__COMPONENT:
 				setComponent((Component)newValue);
 				return;
-			case CorePackage.COMPONENT_INSTANCE__INSTANCES:
-				getInstances().clear();
-				getInstances().addAll((Collection<? extends ComponentInstance>)newValue);
-				return;
-			case CorePackage.COMPONENT_INSTANCE__INSTANCES_GROUPS:
-				getInstancesGroups().clear();
-				getInstancesGroups().addAll((Collection<? extends ComponentInstanceGroup>)newValue);
-				return;
 			case CorePackage.COMPONENT_INSTANCE__BOUND_COMPONENT_INSTANCE:
 				setBoundComponentInstance((ComponentInstance)newValue);
 				return;
@@ -515,12 +452,6 @@ public class ComponentInstanceImpl extends HasParameterValuesImpl implements Com
 			case CorePackage.COMPONENT_INSTANCE__COMPONENT:
 				setComponent((Component)null);
 				return;
-			case CorePackage.COMPONENT_INSTANCE__INSTANCES:
-				getInstances().clear();
-				return;
-			case CorePackage.COMPONENT_INSTANCE__INSTANCES_GROUPS:
-				getInstancesGroups().clear();
-				return;
 			case CorePackage.COMPONENT_INSTANCE__BOUND_COMPONENT_INSTANCE:
 				setBoundComponentInstance((ComponentInstance)null);
 				return;
@@ -552,10 +483,6 @@ public class ComponentInstanceImpl extends HasParameterValuesImpl implements Com
 				return references != null && !references.isEmpty();
 			case CorePackage.COMPONENT_INSTANCE__COMPONENT:
 				return component != null;
-			case CorePackage.COMPONENT_INSTANCE__INSTANCES:
-				return instances != null && !instances.isEmpty();
-			case CorePackage.COMPONENT_INSTANCE__INSTANCES_GROUPS:
-				return instancesGroups != null && !instancesGroups.isEmpty();
 			case CorePackage.COMPONENT_INSTANCE__BOUND_COMPONENT_INSTANCE:
 				return boundComponentInstance != null;
 		}

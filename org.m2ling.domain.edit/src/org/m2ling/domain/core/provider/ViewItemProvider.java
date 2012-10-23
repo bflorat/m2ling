@@ -199,9 +199,9 @@ public class ViewItemProvider
 			childrenFeatures.add(CorePackage.Literals.VIEW__COMPONENTS_GROUPS);
 			childrenFeatures.add(CorePackage.Literals.VIEW__COMPONENTS);
 			childrenFeatures.add(CorePackage.Literals.VIEW__LINKS);
-			childrenFeatures.add(CorePackage.Literals.VIEW__INSTANCES);
+			childrenFeatures.add(CorePackage.Literals.VIEW__COMPONENT_INSTANCES);
 			childrenFeatures.add(CorePackage.Literals.VIEW__INSTANCES_GROUPS);
-			childrenFeatures.add(CorePackage.Literals.VIEW__STREAMS);
+			childrenFeatures.add(CorePackage.Literals.VIEW__LINK_INSTANCES);
 		}
 		return childrenFeatures;
 	}
@@ -265,9 +265,9 @@ public class ViewItemProvider
 			case CorePackage.VIEW__COMPONENTS_GROUPS:
 			case CorePackage.VIEW__COMPONENTS:
 			case CorePackage.VIEW__LINKS:
-			case CorePackage.VIEW__INSTANCES:
+			case CorePackage.VIEW__COMPONENT_INSTANCES:
 			case CorePackage.VIEW__INSTANCES_GROUPS:
-			case CorePackage.VIEW__STREAMS:
+			case CorePackage.VIEW__LINK_INSTANCES:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
 		}
@@ -302,7 +302,7 @@ public class ViewItemProvider
 
 		newChildDescriptors.add
 			(createChildParameter
-				(CorePackage.Literals.VIEW__INSTANCES,
+				(CorePackage.Literals.VIEW__COMPONENT_INSTANCES,
 				 CoreFactory.eINSTANCE.createComponentInstance()));
 
 		newChildDescriptors.add
@@ -312,7 +312,7 @@ public class ViewItemProvider
 
 		newChildDescriptors.add
 			(createChildParameter
-				(CorePackage.Literals.VIEW__STREAMS,
+				(CorePackage.Literals.VIEW__LINK_INSTANCES,
 				 CoreFactory.eINSTANCE.createInstancesLink()));
 	}
 

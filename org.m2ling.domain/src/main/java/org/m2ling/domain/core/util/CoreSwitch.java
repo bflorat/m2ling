@@ -136,11 +136,11 @@ public class CoreSwitch<T> extends Switch<T> {
 				Component component = (Component)theEObject;
 				T result = caseComponent(component);
 				if (result == null) result = caseArchitectureItem(component);
+				if (result == null) result = caseHasParameterDefinitions(component);
 				if (result == null) result = caseHasReferences(component);
 				if (result == null) result = caseHasNameAndID(component);
 				if (result == null) result = caseHasComment(component);
 				if (result == null) result = caseHasTags(component);
-				if (result == null) result = caseHasParameterDefinitions(component);
 				if (result == null) result = caseHasConstraints(component);
 				if (result == null) result = caseHasDescription(component);
 				if (result == null) result = caseHasStatus(component);
@@ -175,10 +175,10 @@ public class CoreSwitch<T> extends Switch<T> {
 				ComponentGroup componentGroup = (ComponentGroup)theEObject;
 				T result = caseComponentGroup(componentGroup);
 				if (result == null) result = caseArchitectureItem(componentGroup);
+				if (result == null) result = caseHasParameterDefinitions(componentGroup);
 				if (result == null) result = caseHasNameAndID(componentGroup);
 				if (result == null) result = caseHasComment(componentGroup);
 				if (result == null) result = caseHasTags(componentGroup);
-				if (result == null) result = caseHasParameterDefinitions(componentGroup);
 				if (result == null) result = caseHasConstraints(componentGroup);
 				if (result == null) result = caseHasDescription(componentGroup);
 				if (result == null) result = caseHasStatus(componentGroup);
@@ -204,7 +204,6 @@ public class CoreSwitch<T> extends Switch<T> {
 				if (result == null) result = caseHasNameAndID(architectureItem);
 				if (result == null) result = caseHasComment(architectureItem);
 				if (result == null) result = caseHasTags(architectureItem);
-				if (result == null) result = caseHasParameterDefinitions(architectureItem);
 				if (result == null) result = caseHasConstraints(architectureItem);
 				if (result == null) result = caseHasDescription(architectureItem);
 				if (result == null) result = caseHasStatus(architectureItem);
@@ -335,7 +334,6 @@ public class CoreSwitch<T> extends Switch<T> {
 				if (result == null) result = caseHasNameAndID(link);
 				if (result == null) result = caseHasComment(link);
 				if (result == null) result = caseHasTags(link);
-				if (result == null) result = caseHasParameterDefinitions(link);
 				if (result == null) result = caseHasConstraints(link);
 				if (result == null) result = caseHasDescription(link);
 				if (result == null) result = caseHasStatus(link);

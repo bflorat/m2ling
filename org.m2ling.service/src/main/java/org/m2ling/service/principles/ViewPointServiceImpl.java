@@ -34,10 +34,8 @@ import com.google.inject.Inject;
 import com.google.inject.Singleton;
 
 /**
- * @author "Bertrand Florat <bertrand@florat.net>"
+ * Viewpoint service nomimal implementation
  * 
- */
-/**
  * @author "Bertrand Florat <bertrand@florat.net>"
  * 
  */

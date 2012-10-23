@@ -38,6 +38,7 @@ import org.m2ling.domain.core.Stakeholder;
  *   <li>{@link org.m2ling.domain.core.impl.ActorImpl#getPwdHash <em>Pwd Hash</em>}</li>
  *   <li>{@link org.m2ling.domain.core.impl.ActorImpl#getFirstName <em>First Name</em>}</li>
  *   <li>{@link org.m2ling.domain.core.impl.ActorImpl#getLastName <em>Last Name</em>}</li>
+ *   <li>{@link org.m2ling.domain.core.impl.ActorImpl#getEmail <em>Email</em>}</li>
  * </ul>
  * </p>
  *
@@ -200,6 +201,26 @@ public class ActorImpl extends HasCustomPropertiesImpl implements Actor {
 	 * @ordered
 	 */
 	protected String lastName = LAST_NAME_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getEmail() <em>Email</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getEmail()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String EMAIL_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getEmail() <em>Email</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getEmail()
+	 * @generated
+	 * @ordered
+	 */
+	protected String email = EMAIL_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -387,6 +408,27 @@ public class ActorImpl extends HasCustomPropertiesImpl implements Actor {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public String getEmail() {
+		return email;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setEmail(String newEmail) {
+		String oldEmail = email;
+		email = newEmail;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, CorePackage.ACTOR__EMAIL, oldEmail, email));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@SuppressWarnings("unchecked")
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
@@ -437,6 +479,8 @@ public class ActorImpl extends HasCustomPropertiesImpl implements Actor {
 				return getFirstName();
 			case CorePackage.ACTOR__LAST_NAME:
 				return getLastName();
+			case CorePackage.ACTOR__EMAIL:
+				return getEmail();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -480,6 +524,9 @@ public class ActorImpl extends HasCustomPropertiesImpl implements Actor {
 			case CorePackage.ACTOR__LAST_NAME:
 				setLastName((String)newValue);
 				return;
+			case CorePackage.ACTOR__EMAIL:
+				setEmail((String)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -519,6 +566,9 @@ public class ActorImpl extends HasCustomPropertiesImpl implements Actor {
 			case CorePackage.ACTOR__LAST_NAME:
 				setLastName(LAST_NAME_EDEFAULT);
 				return;
+			case CorePackage.ACTOR__EMAIL:
+				setEmail(EMAIL_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -549,6 +599,8 @@ public class ActorImpl extends HasCustomPropertiesImpl implements Actor {
 				return FIRST_NAME_EDEFAULT == null ? firstName != null : !FIRST_NAME_EDEFAULT.equals(firstName);
 			case CorePackage.ACTOR__LAST_NAME:
 				return LAST_NAME_EDEFAULT == null ? lastName != null : !LAST_NAME_EDEFAULT.equals(lastName);
+			case CorePackage.ACTOR__EMAIL:
+				return EMAIL_EDEFAULT == null ? email != null : !EMAIL_EDEFAULT.equals(email);
 		}
 		return super.eIsSet(featureID);
 	}
@@ -621,6 +673,8 @@ public class ActorImpl extends HasCustomPropertiesImpl implements Actor {
 		result.append(firstName);
 		result.append(", lastName: ");
 		result.append(lastName);
+		result.append(", email: ");
+		result.append(email);
 		result.append(')');
 		return result.toString();
 	}

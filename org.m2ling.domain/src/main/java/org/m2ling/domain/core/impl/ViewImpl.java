@@ -42,9 +42,9 @@ import org.m2ling.domain.core.ViewPoint;
  *   <li>{@link org.m2ling.domain.core.impl.ViewImpl#getComponents <em>Components</em>}</li>
  *   <li>{@link org.m2ling.domain.core.impl.ViewImpl#getViewPoint <em>View Point</em>}</li>
  *   <li>{@link org.m2ling.domain.core.impl.ViewImpl#getLinks <em>Links</em>}</li>
- *   <li>{@link org.m2ling.domain.core.impl.ViewImpl#getInstances <em>Instances</em>}</li>
+ *   <li>{@link org.m2ling.domain.core.impl.ViewImpl#getComponentInstances <em>Component Instances</em>}</li>
  *   <li>{@link org.m2ling.domain.core.impl.ViewImpl#getInstancesGroups <em>Instances Groups</em>}</li>
- *   <li>{@link org.m2ling.domain.core.impl.ViewImpl#getStreams <em>Streams</em>}</li>
+ *   <li>{@link org.m2ling.domain.core.impl.ViewImpl#getLinkInstances <em>Link Instances</em>}</li>
  * </ul>
  * </p>
  *
@@ -178,14 +178,14 @@ public class ViewImpl extends HasCommentImpl implements View {
 	protected EList<Link> links;
 
 	/**
-	 * The cached value of the '{@link #getInstances() <em>Instances</em>}' containment reference list.
+	 * The cached value of the '{@link #getComponentInstances() <em>Component Instances</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getInstances()
+	 * @see #getComponentInstances()
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<ComponentInstance> instances;
+	protected EList<ComponentInstance> componentInstances;
 
 	/**
 	 * The cached value of the '{@link #getInstancesGroups() <em>Instances Groups</em>}' containment reference list.
@@ -198,14 +198,14 @@ public class ViewImpl extends HasCommentImpl implements View {
 	protected EList<ComponentInstanceGroup> instancesGroups;
 
 	/**
-	 * The cached value of the '{@link #getStreams() <em>Streams</em>}' containment reference list.
+	 * The cached value of the '{@link #getLinkInstances() <em>Link Instances</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getStreams()
+	 * @see #getLinkInstances()
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<InstancesLink> streams;
+	protected EList<InstancesLink> linkInstances;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -405,11 +405,11 @@ public class ViewImpl extends HasCommentImpl implements View {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<ComponentInstance> getInstances() {
-		if (instances == null) {
-			instances = new EObjectContainmentEList<ComponentInstance>(ComponentInstance.class, this, CorePackage.VIEW__INSTANCES);
+	public EList<ComponentInstance> getComponentInstances() {
+		if (componentInstances == null) {
+			componentInstances = new EObjectContainmentEList<ComponentInstance>(ComponentInstance.class, this, CorePackage.VIEW__COMPONENT_INSTANCES);
 		}
-		return instances;
+		return componentInstances;
 	}
 
 	/**
@@ -429,11 +429,11 @@ public class ViewImpl extends HasCommentImpl implements View {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<InstancesLink> getStreams() {
-		if (streams == null) {
-			streams = new EObjectContainmentEList<InstancesLink>(InstancesLink.class, this, CorePackage.VIEW__STREAMS);
+	public EList<InstancesLink> getLinkInstances() {
+		if (linkInstances == null) {
+			linkInstances = new EObjectContainmentEList<InstancesLink>(InstancesLink.class, this, CorePackage.VIEW__LINK_INSTANCES);
 		}
-		return streams;
+		return linkInstances;
 	}
 
 	/**
@@ -450,12 +450,12 @@ public class ViewImpl extends HasCommentImpl implements View {
 				return ((InternalEList<?>)getComponents()).basicRemove(otherEnd, msgs);
 			case CorePackage.VIEW__LINKS:
 				return ((InternalEList<?>)getLinks()).basicRemove(otherEnd, msgs);
-			case CorePackage.VIEW__INSTANCES:
-				return ((InternalEList<?>)getInstances()).basicRemove(otherEnd, msgs);
+			case CorePackage.VIEW__COMPONENT_INSTANCES:
+				return ((InternalEList<?>)getComponentInstances()).basicRemove(otherEnd, msgs);
 			case CorePackage.VIEW__INSTANCES_GROUPS:
 				return ((InternalEList<?>)getInstancesGroups()).basicRemove(otherEnd, msgs);
-			case CorePackage.VIEW__STREAMS:
-				return ((InternalEList<?>)getStreams()).basicRemove(otherEnd, msgs);
+			case CorePackage.VIEW__LINK_INSTANCES:
+				return ((InternalEList<?>)getLinkInstances()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -485,12 +485,12 @@ public class ViewImpl extends HasCommentImpl implements View {
 				return basicGetViewPoint();
 			case CorePackage.VIEW__LINKS:
 				return getLinks();
-			case CorePackage.VIEW__INSTANCES:
-				return getInstances();
+			case CorePackage.VIEW__COMPONENT_INSTANCES:
+				return getComponentInstances();
 			case CorePackage.VIEW__INSTANCES_GROUPS:
 				return getInstancesGroups();
-			case CorePackage.VIEW__STREAMS:
-				return getStreams();
+			case CorePackage.VIEW__LINK_INSTANCES:
+				return getLinkInstances();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -532,17 +532,17 @@ public class ViewImpl extends HasCommentImpl implements View {
 				getLinks().clear();
 				getLinks().addAll((Collection<? extends Link>)newValue);
 				return;
-			case CorePackage.VIEW__INSTANCES:
-				getInstances().clear();
-				getInstances().addAll((Collection<? extends ComponentInstance>)newValue);
+			case CorePackage.VIEW__COMPONENT_INSTANCES:
+				getComponentInstances().clear();
+				getComponentInstances().addAll((Collection<? extends ComponentInstance>)newValue);
 				return;
 			case CorePackage.VIEW__INSTANCES_GROUPS:
 				getInstancesGroups().clear();
 				getInstancesGroups().addAll((Collection<? extends ComponentInstanceGroup>)newValue);
 				return;
-			case CorePackage.VIEW__STREAMS:
-				getStreams().clear();
-				getStreams().addAll((Collection<? extends InstancesLink>)newValue);
+			case CorePackage.VIEW__LINK_INSTANCES:
+				getLinkInstances().clear();
+				getLinkInstances().addAll((Collection<? extends InstancesLink>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -580,14 +580,14 @@ public class ViewImpl extends HasCommentImpl implements View {
 			case CorePackage.VIEW__LINKS:
 				getLinks().clear();
 				return;
-			case CorePackage.VIEW__INSTANCES:
-				getInstances().clear();
+			case CorePackage.VIEW__COMPONENT_INSTANCES:
+				getComponentInstances().clear();
 				return;
 			case CorePackage.VIEW__INSTANCES_GROUPS:
 				getInstancesGroups().clear();
 				return;
-			case CorePackage.VIEW__STREAMS:
-				getStreams().clear();
+			case CorePackage.VIEW__LINK_INSTANCES:
+				getLinkInstances().clear();
 				return;
 		}
 		super.eUnset(featureID);
@@ -617,12 +617,12 @@ public class ViewImpl extends HasCommentImpl implements View {
 				return viewPoint != null;
 			case CorePackage.VIEW__LINKS:
 				return links != null && !links.isEmpty();
-			case CorePackage.VIEW__INSTANCES:
-				return instances != null && !instances.isEmpty();
+			case CorePackage.VIEW__COMPONENT_INSTANCES:
+				return componentInstances != null && !componentInstances.isEmpty();
 			case CorePackage.VIEW__INSTANCES_GROUPS:
 				return instancesGroups != null && !instancesGroups.isEmpty();
-			case CorePackage.VIEW__STREAMS:
-				return streams != null && !streams.isEmpty();
+			case CorePackage.VIEW__LINK_INSTANCES:
+				return linkInstances != null && !linkInstances.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}

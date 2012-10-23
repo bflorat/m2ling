@@ -269,8 +269,6 @@ public class ComponentInstanceItemProvider
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
 			childrenFeatures.add(CorePackage.Literals.HAS_REFERENCES__REFERENCES);
-			childrenFeatures.add(CorePackage.Literals.COMPONENT_INSTANCE__INSTANCES);
-			childrenFeatures.add(CorePackage.Literals.COMPONENT_INSTANCE__INSTANCES_GROUPS);
 		}
 		return childrenFeatures;
 	}
@@ -340,8 +338,6 @@ public class ComponentInstanceItemProvider
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
 			case CorePackage.COMPONENT_INSTANCE__REFERENCES:
-			case CorePackage.COMPONENT_INSTANCE__INSTANCES:
-			case CorePackage.COMPONENT_INSTANCE__INSTANCES_GROUPS:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
 		}
@@ -363,16 +359,6 @@ public class ComponentInstanceItemProvider
 			(createChildParameter
 				(CorePackage.Literals.HAS_REFERENCES__REFERENCES,
 				 CoreFactory.eINSTANCE.createReference()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(CorePackage.Literals.COMPONENT_INSTANCE__INSTANCES,
-				 CoreFactory.eINSTANCE.createComponentInstance()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(CorePackage.Literals.COMPONENT_INSTANCE__INSTANCES_GROUPS,
-				 CoreFactory.eINSTANCE.createComponentInstanceGroup()));
 	}
 
 }

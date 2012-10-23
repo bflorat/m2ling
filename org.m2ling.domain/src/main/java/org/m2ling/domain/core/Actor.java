@@ -20,6 +20,7 @@ import org.eclipse.emf.common.util.EList;
  *   <li>{@link org.m2ling.domain.core.Actor#getPwdHash <em>Pwd Hash</em>}</li>
  *   <li>{@link org.m2ling.domain.core.Actor#getFirstName <em>First Name</em>}</li>
  *   <li>{@link org.m2ling.domain.core.Actor#getLastName <em>Last Name</em>}</li>
+ *   <li>{@link org.m2ling.domain.core.Actor#getEmail <em>Email</em>}</li>
  * </ul>
  * </p>
  *
@@ -198,5 +199,31 @@ public interface Actor extends HasCustomProperties, HasTags, HasDescription {
 	 * @generated
 	 */
 	void setLastName(String value);
+
+	/**
+	 * Returns the value of the '<em><b>Email</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Email</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Email</em>' attribute.
+	 * @see #setEmail(String)
+	 * @see org.m2ling.domain.core.CorePackage#getActor_Email()
+	 * @model
+	 * @generated
+	 */
+	String getEmail();
+
+	/**
+	 * Sets the value of the '{@link org.m2ling.domain.core.Actor#getEmail <em>Email</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Email</em>' attribute.
+	 * @see #getEmail()
+	 * @generated
+	 */
+	void setEmail(String value);
 
 } // Actor

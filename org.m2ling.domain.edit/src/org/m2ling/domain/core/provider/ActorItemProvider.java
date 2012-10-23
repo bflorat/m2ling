@@ -72,6 +72,7 @@ public class ActorItemProvider
 			addPwdHashPropertyDescriptor(object);
 			addFirstNamePropertyDescriptor(object);
 			addLastNamePropertyDescriptor(object);
+			addEmailPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -275,6 +276,28 @@ public class ActorItemProvider
 	}
 
 	/**
+	 * This adds a property descriptor for the Email feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addEmailPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_Actor_email_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_Actor_email_feature", "_UI_Actor_type"),
+				 CorePackage.Literals.ACTOR__EMAIL,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				 null,
+				 null));
+	}
+
+	/**
 	 * This returns Actor.gif.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -318,6 +341,7 @@ public class ActorItemProvider
 			case CorePackage.ACTOR__PWD_HASH:
 			case CorePackage.ACTOR__FIRST_NAME:
 			case CorePackage.ACTOR__LAST_NAME:
+			case CorePackage.ACTOR__EMAIL:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
 		}

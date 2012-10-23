@@ -17,9 +17,9 @@ import org.eclipse.emf.common.util.EList;
  *   <li>{@link org.m2ling.domain.core.View#getComponents <em>Components</em>}</li>
  *   <li>{@link org.m2ling.domain.core.View#getViewPoint <em>View Point</em>}</li>
  *   <li>{@link org.m2ling.domain.core.View#getLinks <em>Links</em>}</li>
- *   <li>{@link org.m2ling.domain.core.View#getInstances <em>Instances</em>}</li>
+ *   <li>{@link org.m2ling.domain.core.View#getComponentInstances <em>Component Instances</em>}</li>
  *   <li>{@link org.m2ling.domain.core.View#getInstancesGroups <em>Instances Groups</em>}</li>
- *   <li>{@link org.m2ling.domain.core.View#getStreams <em>Streams</em>}</li>
+ *   <li>{@link org.m2ling.domain.core.View#getLinkInstances <em>Link Instances</em>}</li>
  * </ul>
  * </p>
  *
@@ -110,20 +110,20 @@ public interface View extends HasComment, HasDescription, HasNameAndID, HasTags 
 	EList<Link> getLinks();
 
 	/**
-	 * Returns the value of the '<em><b>Instances</b></em>' containment reference list.
+	 * Returns the value of the '<em><b>Component Instances</b></em>' containment reference list.
 	 * The list contents are of type {@link org.m2ling.domain.core.ComponentInstance}.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Instances</em>' containment reference list isn't clear,
+	 * If the meaning of the '<em>Component Instances</em>' containment reference list isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Instances</em>' containment reference list.
-	 * @see org.m2ling.domain.core.CorePackage#getView_Instances()
+	 * @return the value of the '<em>Component Instances</em>' containment reference list.
+	 * @see org.m2ling.domain.core.CorePackage#getView_ComponentInstances()
 	 * @model containment="true"
 	 * @generated
 	 */
-	EList<ComponentInstance> getInstances();
+	EList<ComponentInstance> getComponentInstances();
 
 	/**
 	 * Returns the value of the '<em><b>Instances Groups</b></em>' containment reference list.
@@ -142,19 +142,19 @@ public interface View extends HasComment, HasDescription, HasNameAndID, HasTags 
 	EList<ComponentInstanceGroup> getInstancesGroups();
 
 	/**
-	 * Returns the value of the '<em><b>Streams</b></em>' containment reference list.
+	 * Returns the value of the '<em><b>Link Instances</b></em>' containment reference list.
 	 * The list contents are of type {@link org.m2ling.domain.core.InstancesLink}.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Streams</em>' containment reference list isn't clear,
+	 * If the meaning of the '<em>Link Instances</em>' containment reference list isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Streams</em>' containment reference list.
-	 * @see org.m2ling.domain.core.CorePackage#getView_Streams()
+	 * @return the value of the '<em>Link Instances</em>' containment reference list.
+	 * @see org.m2ling.domain.core.CorePackage#getView_LinkInstances()
 	 * @model containment="true"
 	 * @generated
 	 */
-	EList<InstancesLink> getStreams();
+	EList<InstancesLink> getLinkInstances();
 
 } // View

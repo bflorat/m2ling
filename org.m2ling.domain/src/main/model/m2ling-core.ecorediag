@@ -663,14 +663,6 @@
     <element xsi:nil="true"/>
     <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="__MEWE3KdEeGl9tcezyLsuA" points="[53, 1, -155, 337]$[176, 1, -32, 337]$[176, -152, -32, 184]$[171, -152, -37, 184]$[171, -315, -37, 21]"/>
   </edges>
-  <edges xmi:type="notation:Edge" xmi:id="_CgabsHKeEeGl9tcezyLsuA" type="3003" source="_OiRxgFl4EeGeoaZMFQdv5A" target="_I2JIAGfEEeGsDNAUc-f6MQ">
-    <styles xmi:type="notation:ConnectorStyle" xmi:id="_CgabsXKeEeGl9tcezyLsuA" routing="Rectilinear" lineColor="4210752"/>
-    <styles xmi:type="notation:FontStyle" xmi:id="_CgabsnKeEeGl9tcezyLsuA" fontName="Sans"/>
-    <element xsi:nil="true"/>
-    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_Cgabs3KeEeGl9tcezyLsuA" points="[-18, 8, 105, 302]$[-119, 8, 4, 302]$[-119, -284, 4, 10]"/>
-    <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_CgeGEHKeEeGl9tcezyLsuA" id="(0.14285714285714285,0.32558139534883723)"/>
-    <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_CgeGEXKeEeGl9tcezyLsuA" id="(0.9251336898395722,0.7674418604651163)"/>
-  </edges>
   <edges xmi:type="notation:Edge" xmi:id="_RJmSoHKeEeGl9tcezyLsuA" type="3003" source="_OiS_oFl4EeGeoaZMFQdv5A" target="_ImSKQGfIEeGsDNAUc-f6MQ">
     <styles xmi:type="notation:ConnectorStyle" xmi:id="_RJmSoXKeEeGl9tcezyLsuA" routing="Rectilinear" lineColor="4210752"/>
     <styles xmi:type="notation:FontStyle" xmi:id="_RJmSonKeEeGl9tcezyLsuA" fontName="Sans"/>

@@ -15,6 +15,7 @@ import org.m2ling.common.dto.core.LinkTypeDTO;
 import org.m2ling.common.dto.core.ReferenceDTO;
 import org.m2ling.common.dto.core.RuleDTO;
 import org.m2ling.common.dto.core.StatusEventDTO;
+import org.m2ling.common.dto.core.ViewDTO;
 import org.m2ling.common.dto.core.ViewPointDTO;
 import org.m2ling.domain.core.ArchitectureItem;
 import org.m2ling.domain.core.Component;
@@ -28,6 +29,7 @@ import org.m2ling.domain.core.Reference;
 import org.m2ling.domain.core.ReferenceType;
 import org.m2ling.domain.core.Rule;
 import org.m2ling.domain.core.StatusEvent;
+import org.m2ling.domain.core.View;
 import org.m2ling.domain.core.ViewPoint;
 
 import com.google.common.base.Strings;
@@ -203,6 +205,16 @@ public class DTOConverter {
 				out.add(dto);
 			}
 			return out;
+		}
+
+		public ViewDTO getViewDTO(View view) {
+			ViewDTO.Builder builder = new ViewDTO.Builder(view.getId(), view.getName(), view.getViewPoint().getId());
+			for (String tag : view.getTags()) {
+				builder.addTag(tag);
+			}
+			builder.comment(nonull(view.getComment()));
+			builder.description(nonull(view.getDescription()));
+			return builder.build();
 		}
 	}
 
@@ -381,6 +393,29 @@ public class DTOConverter {
 				se.setStatusLiteral(event.getStatusLiteral());
 				history.add(se);
 			}
+		}
+
+		/**
+		 * Return a new View instance given a DTO.
+		 * 
+		 * @param dto
+		 *           the dto
+		 * @return a new View instance
+		 */
+		public View newView(ViewDTO dto) {
+			View view = CoreFactory.eINSTANCE.createView();
+			view.setId(dto.getId());
+			view.setName(dto.getName());
+			ViewPoint vp = util.getViewPointByID(dto.getVpID());
+			view.setViewPoint(vp);
+			for (String tag : dto.getTags()) {
+				if (!Strings.isNullOrEmpty(tag)) {
+					view.getTags().add(tag);
+				}
+			}
+			view.setDescription(dto.getDescription());
+			view.setComment(dto.getComment());
+			return view;
 		}
 	}
 }

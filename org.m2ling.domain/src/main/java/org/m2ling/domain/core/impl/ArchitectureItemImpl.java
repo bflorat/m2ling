@@ -15,7 +15,6 @@ import org.m2ling.domain.core.CorePackage;
 import org.m2ling.domain.core.HasComment;
 import org.m2ling.domain.core.HasConstraints;
 import org.m2ling.domain.core.HasDescription;
-import org.m2ling.domain.core.HasParameterDefinitions;
 import org.m2ling.domain.core.HasStatus;
 import org.m2ling.domain.core.HasTags;
 
@@ -316,11 +315,6 @@ public abstract class ArchitectureItemImpl extends HasNameAndIDImpl implements A
 				default: return -1;
 			}
 		}
-		if (baseClass == HasParameterDefinitions.class) {
-			switch (derivedFeatureID) {
-				default: return -1;
-			}
-		}
 		if (baseClass == HasConstraints.class) {
 			switch (derivedFeatureID) {
 				default: return -1;
@@ -357,11 +351,6 @@ public abstract class ArchitectureItemImpl extends HasNameAndIDImpl implements A
 		if (baseClass == HasTags.class) {
 			switch (baseFeatureID) {
 				case CorePackage.HAS_TAGS__TAGS: return CorePackage.ARCHITECTURE_ITEM__TAGS;
-				default: return -1;
-			}
-		}
-		if (baseClass == HasParameterDefinitions.class) {
-			switch (baseFeatureID) {
 				default: return -1;
 			}
 		}

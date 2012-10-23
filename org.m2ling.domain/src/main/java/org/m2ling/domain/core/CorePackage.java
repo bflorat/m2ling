@@ -706,31 +706,13 @@ public interface CorePackage extends EPackage {
 	int COMPONENT_INSTANCE__COMPONENT = HAS_PARAMETER_VALUES_FEATURE_COUNT + 7;
 
 	/**
-	 * The feature id for the '<em><b>Instances</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int COMPONENT_INSTANCE__INSTANCES = HAS_PARAMETER_VALUES_FEATURE_COUNT + 8;
-
-	/**
-	 * The feature id for the '<em><b>Instances Groups</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int COMPONENT_INSTANCE__INSTANCES_GROUPS = HAS_PARAMETER_VALUES_FEATURE_COUNT + 9;
-
-	/**
 	 * The feature id for the '<em><b>Bound Component Instance</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int COMPONENT_INSTANCE__BOUND_COMPONENT_INSTANCE = HAS_PARAMETER_VALUES_FEATURE_COUNT + 10;
+	int COMPONENT_INSTANCE__BOUND_COMPONENT_INSTANCE = HAS_PARAMETER_VALUES_FEATURE_COUNT + 8;
 
 	/**
 	 * The number of structural features of the '<em>Component Instance</em>' class.
@@ -739,7 +721,7 @@ public interface CorePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int COMPONENT_INSTANCE_FEATURE_COUNT = HAS_PARAMETER_VALUES_FEATURE_COUNT + 11;
+	int COMPONENT_INSTANCE_FEATURE_COUNT = HAS_PARAMETER_VALUES_FEATURE_COUNT + 9;
 
 	/**
 	 * The feature id for the '<em><b>Comment</b></em>' attribute.
@@ -1147,13 +1129,13 @@ public interface CorePackage extends EPackage {
 	int VIEW__LINKS = HAS_COMMENT_FEATURE_COUNT + 7;
 
 	/**
-	 * The feature id for the '<em><b>Instances</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Component Instances</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int VIEW__INSTANCES = HAS_COMMENT_FEATURE_COUNT + 8;
+	int VIEW__COMPONENT_INSTANCES = HAS_COMMENT_FEATURE_COUNT + 8;
 
 	/**
 	 * The feature id for the '<em><b>Instances Groups</b></em>' containment reference list.
@@ -1165,13 +1147,13 @@ public interface CorePackage extends EPackage {
 	int VIEW__INSTANCES_GROUPS = HAS_COMMENT_FEATURE_COUNT + 9;
 
 	/**
-	 * The feature id for the '<em><b>Streams</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Link Instances</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int VIEW__STREAMS = HAS_COMMENT_FEATURE_COUNT + 10;
+	int VIEW__LINK_INSTANCES = HAS_COMMENT_FEATURE_COUNT + 10;
 
 	/**
 	 * The number of structural features of the '<em>View</em>' class.
@@ -2357,13 +2339,22 @@ public interface CorePackage extends EPackage {
 	int ACTOR__LAST_NAME = HAS_CUSTOM_PROPERTIES_FEATURE_COUNT + 8;
 
 	/**
+	 * The feature id for the '<em><b>Email</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ACTOR__EMAIL = HAS_CUSTOM_PROPERTIES_FEATURE_COUNT + 9;
+
+	/**
 	 * The number of structural features of the '<em>Actor</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ACTOR_FEATURE_COUNT = HAS_CUSTOM_PROPERTIES_FEATURE_COUNT + 9;
+	int ACTOR_FEATURE_COUNT = HAS_CUSTOM_PROPERTIES_FEATURE_COUNT + 10;
 
 	/**
 	 * The feature id for the '<em><b>Id</b></em>' attribute.
@@ -2741,28 +2732,6 @@ public interface CorePackage extends EPackage {
 	EReference getComponentInstance_Component();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link org.m2ling.domain.core.ComponentInstance#getInstances <em>Instances</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Instances</em>'.
-	 * @see org.m2ling.domain.core.ComponentInstance#getInstances()
-	 * @see #getComponentInstance()
-	 * @generated
-	 */
-	EReference getComponentInstance_Instances();
-
-	/**
-	 * Returns the meta object for the containment reference list '{@link org.m2ling.domain.core.ComponentInstance#getInstancesGroups <em>Instances Groups</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Instances Groups</em>'.
-	 * @see org.m2ling.domain.core.ComponentInstance#getInstancesGroups()
-	 * @see #getComponentInstance()
-	 * @generated
-	 */
-	EReference getComponentInstance_InstancesGroups();
-
-	/**
 	 * Returns the meta object for the reference '{@link org.m2ling.domain.core.ComponentInstance#getBoundComponentInstance <em>Bound Component Instance</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3008,15 +2977,15 @@ public interface CorePackage extends EPackage {
 	EReference getView_Links();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link org.m2ling.domain.core.View#getInstances <em>Instances</em>}'.
+	 * Returns the meta object for the containment reference list '{@link org.m2ling.domain.core.View#getComponentInstances <em>Component Instances</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Instances</em>'.
-	 * @see org.m2ling.domain.core.View#getInstances()
+	 * @return the meta object for the containment reference list '<em>Component Instances</em>'.
+	 * @see org.m2ling.domain.core.View#getComponentInstances()
 	 * @see #getView()
 	 * @generated
 	 */
-	EReference getView_Instances();
+	EReference getView_ComponentInstances();
 
 	/**
 	 * Returns the meta object for the containment reference list '{@link org.m2ling.domain.core.View#getInstancesGroups <em>Instances Groups</em>}'.
@@ -3030,15 +2999,15 @@ public interface CorePackage extends EPackage {
 	EReference getView_InstancesGroups();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link org.m2ling.domain.core.View#getStreams <em>Streams</em>}'.
+	 * Returns the meta object for the containment reference list '{@link org.m2ling.domain.core.View#getLinkInstances <em>Link Instances</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Streams</em>'.
-	 * @see org.m2ling.domain.core.View#getStreams()
+	 * @return the meta object for the containment reference list '<em>Link Instances</em>'.
+	 * @see org.m2ling.domain.core.View#getLinkInstances()
 	 * @see #getView()
 	 * @generated
 	 */
-	EReference getView_Streams();
+	EReference getView_LinkInstances();
 
 	/**
 	 * Returns the meta object for class '{@link org.m2ling.domain.core.HasStatus <em>Has Status</em>}'.
@@ -3759,6 +3728,17 @@ public interface CorePackage extends EPackage {
 	EAttribute getActor_LastName();
 
 	/**
+	 * Returns the meta object for the attribute '{@link org.m2ling.domain.core.Actor#getEmail <em>Email</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Email</em>'.
+	 * @see org.m2ling.domain.core.Actor#getEmail()
+	 * @see #getActor()
+	 * @generated
+	 */
+	EAttribute getActor_Email();
+
+	/**
 	 * Returns the meta object for class '{@link org.m2ling.domain.core.Rule <em>Rule</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -4027,22 +4007,6 @@ public interface CorePackage extends EPackage {
 		EReference COMPONENT_INSTANCE__COMPONENT = eINSTANCE.getComponentInstance_Component();
 
 		/**
-		 * The meta object literal for the '<em><b>Instances</b></em>' containment reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference COMPONENT_INSTANCE__INSTANCES = eINSTANCE.getComponentInstance_Instances();
-
-		/**
-		 * The meta object literal for the '<em><b>Instances Groups</b></em>' containment reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference COMPONENT_INSTANCE__INSTANCES_GROUPS = eINSTANCE.getComponentInstance_InstancesGroups();
-
-		/**
 		 * The meta object literal for the '<em><b>Bound Component Instance</b></em>' reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -4243,12 +4207,12 @@ public interface CorePackage extends EPackage {
 		EReference VIEW__LINKS = eINSTANCE.getView_Links();
 
 		/**
-		 * The meta object literal for the '<em><b>Instances</b></em>' containment reference list feature.
+		 * The meta object literal for the '<em><b>Component Instances</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference VIEW__INSTANCES = eINSTANCE.getView_Instances();
+		EReference VIEW__COMPONENT_INSTANCES = eINSTANCE.getView_ComponentInstances();
 
 		/**
 		 * The meta object literal for the '<em><b>Instances Groups</b></em>' containment reference list feature.
@@ -4259,12 +4223,12 @@ public interface CorePackage extends EPackage {
 		EReference VIEW__INSTANCES_GROUPS = eINSTANCE.getView_InstancesGroups();
 
 		/**
-		 * The meta object literal for the '<em><b>Streams</b></em>' containment reference list feature.
+		 * The meta object literal for the '<em><b>Link Instances</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference VIEW__STREAMS = eINSTANCE.getView_Streams();
+		EReference VIEW__LINK_INSTANCES = eINSTANCE.getView_LinkInstances();
 
 		/**
 		 * The meta object literal for the '{@link org.m2ling.domain.core.impl.HasStatusImpl <em>Has Status</em>}' class.
@@ -4869,6 +4833,14 @@ public interface CorePackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute ACTOR__LAST_NAME = eINSTANCE.getActor_LastName();
+
+		/**
+		 * The meta object literal for the '<em><b>Email</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute ACTOR__EMAIL = eINSTANCE.getActor_Email();
 
 		/**
 		 * The meta object literal for the '{@link org.m2ling.domain.core.impl.RuleImpl <em>Rule</em>}' class.

@@ -402,4 +402,21 @@ public class CoreUtil {
 		}
 		return (String[]) result.toArray();
 	}
+
+	/**
+	 * Return a view denoted by the given id or null if none matches.
+	 * 
+	 * @param id
+	 *           the searched view id
+	 * @return a view denoted by the given id or null if none matches
+	 */
+	public View getViewByID(String id) {
+		Root root = pmanager.getRoot();
+		for (View v : root.getViews()) {
+			if (id.equals(v.getId())) {
+				return v;
+			}
+		}
+		return null;
+	}
 }

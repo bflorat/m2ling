@@ -16,6 +16,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
 import org.m2ling.domain.core.Component;
 import org.m2ling.domain.core.ComponentType;
 import org.m2ling.domain.core.CorePackage;
+import org.m2ling.domain.core.HasParameterDefinitions;
 import org.m2ling.domain.core.HasReferences;
 import org.m2ling.domain.core.Reference;
 
@@ -282,6 +283,11 @@ public class ComponentImpl extends ArchitectureItemImpl implements Component {
 	 */
 	@Override
 	public int eBaseStructuralFeatureID(int derivedFeatureID, Class<?> baseClass) {
+		if (baseClass == HasParameterDefinitions.class) {
+			switch (derivedFeatureID) {
+				default: return -1;
+			}
+		}
 		if (baseClass == HasReferences.class) {
 			switch (derivedFeatureID) {
 				case CorePackage.COMPONENT__REFERENCES: return CorePackage.HAS_REFERENCES__REFERENCES;
@@ -298,6 +304,11 @@ public class ComponentImpl extends ArchitectureItemImpl implements Component {
 	 */
 	@Override
 	public int eDerivedStructuralFeatureID(int baseFeatureID, Class<?> baseClass) {
+		if (baseClass == HasParameterDefinitions.class) {
+			switch (baseFeatureID) {
+				default: return -1;
+			}
+		}
 		if (baseClass == HasReferences.class) {
 			switch (baseFeatureID) {
 				case CorePackage.HAS_REFERENCES__REFERENCES: return CorePackage.COMPONENT__REFERENCES;
