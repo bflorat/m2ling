@@ -41,10 +41,10 @@ import org.m2ling.domain.core.HasParameterValues;
 import org.m2ling.domain.core.HasReferences;
 import org.m2ling.domain.core.HasStatus;
 import org.m2ling.domain.core.HasTags;
-import org.m2ling.domain.core.InstancesLink;
 import org.m2ling.domain.core.IntegerConstraint;
 import org.m2ling.domain.core.Link;
 import org.m2ling.domain.core.LinkAccessType;
+import org.m2ling.domain.core.LinkInstance;
 import org.m2ling.domain.core.LinkTemporality;
 import org.m2ling.domain.core.LinkType;
 import org.m2ling.domain.core.MaxConstraint;
@@ -210,7 +210,7 @@ public class CorePackageImpl extends EPackageImpl implements CorePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass instancesLinkEClass = null;
+	private EClass linkInstanceEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -730,15 +730,6 @@ public class CorePackageImpl extends EPackageImpl implements CorePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getRuntimeItem_Status() {
-		return (EAttribute)runtimeItemEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EClass getView() {
 		return viewEClass;
 	}
@@ -982,8 +973,8 @@ public class CorePackageImpl extends EPackageImpl implements CorePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EClass getInstancesLink() {
-		return instancesLinkEClass;
+	public EClass getLinkInstance() {
+		return linkInstanceEClass;
 	}
 
 	/**
@@ -991,8 +982,8 @@ public class CorePackageImpl extends EPackageImpl implements CorePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getInstancesLink_Source() {
-		return (EReference)instancesLinkEClass.getEStructuralFeatures().get(0);
+	public EReference getLinkInstance_Source() {
+		return (EReference)linkInstanceEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -1000,8 +991,8 @@ public class CorePackageImpl extends EPackageImpl implements CorePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getInstancesLink_Destination() {
-		return (EReference)instancesLinkEClass.getEStructuralFeatures().get(1);
+	public EReference getLinkInstance_Destination() {
+		return (EReference)linkInstanceEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -1009,8 +1000,8 @@ public class CorePackageImpl extends EPackageImpl implements CorePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getInstancesLink_Link() {
-		return (EReference)instancesLinkEClass.getEStructuralFeatures().get(2);
+	public EReference getLinkInstance_Link() {
+		return (EReference)linkInstanceEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
@@ -1630,7 +1621,6 @@ public class CorePackageImpl extends EPackageImpl implements CorePackage {
 		conceptItemEClass = createEClass(CONCEPT_ITEM);
 
 		runtimeItemEClass = createEClass(RUNTIME_ITEM);
-		createEAttribute(runtimeItemEClass, RUNTIME_ITEM__STATUS);
 
 		viewEClass = createEClass(VIEW);
 		createEReference(viewEClass, VIEW__COMPONENTS_GROUPS);
@@ -1683,10 +1673,10 @@ public class CorePackageImpl extends EPackageImpl implements CorePackage {
 		createEReference(linkEClass, LINK__DESTINATIONS);
 		createEAttribute(linkEClass, LINK__TIMEOUT_MILLIS);
 
-		instancesLinkEClass = createEClass(INSTANCES_LINK);
-		createEReference(instancesLinkEClass, INSTANCES_LINK__SOURCE);
-		createEReference(instancesLinkEClass, INSTANCES_LINK__DESTINATION);
-		createEReference(instancesLinkEClass, INSTANCES_LINK__LINK);
+		linkInstanceEClass = createEClass(LINK_INSTANCE);
+		createEReference(linkInstanceEClass, LINK_INSTANCE__SOURCE);
+		createEReference(linkInstanceEClass, LINK_INSTANCE__DESTINATION);
+		createEReference(linkInstanceEClass, LINK_INSTANCE__LINK);
 
 		stakeholderEClass = createEClass(STAKEHOLDER);
 		createEReference(stakeholderEClass, STAKEHOLDER__VIEWS);
@@ -1799,7 +1789,6 @@ public class CorePackageImpl extends EPackageImpl implements CorePackage {
 		componentEClass.getESuperTypes().add(this.getArchitectureItem());
 		componentEClass.getESuperTypes().add(this.getHasParameterDefinitions());
 		componentEClass.getESuperTypes().add(this.getHasReferences());
-		componentInstanceEClass.getESuperTypes().add(this.getHasParameterValues());
 		componentInstanceEClass.getESuperTypes().add(this.getRuntimeItem());
 		componentInstanceEClass.getESuperTypes().add(this.getHasReferences());
 		viewPointEClass.getESuperTypes().add(this.getHasComment());
@@ -1830,13 +1819,14 @@ public class CorePackageImpl extends EPackageImpl implements CorePackage {
 		runtimeItemEClass.getESuperTypes().add(this.getHasParameterValues());
 		runtimeItemEClass.getESuperTypes().add(this.getHasConstraints());
 		runtimeItemEClass.getESuperTypes().add(this.getHasDescription());
+		runtimeItemEClass.getESuperTypes().add(this.getHasStatus());
 		viewEClass.getESuperTypes().add(this.getHasComment());
 		viewEClass.getESuperTypes().add(this.getHasDescription());
 		viewEClass.getESuperTypes().add(this.getHasNameAndID());
 		viewEClass.getESuperTypes().add(this.getHasTags());
 		linkTypeEClass.getESuperTypes().add(this.getConceptItem());
 		linkEClass.getESuperTypes().add(this.getArchitectureItem());
-		instancesLinkEClass.getESuperTypes().add(this.getRuntimeItem());
+		linkInstanceEClass.getESuperTypes().add(this.getRuntimeItem());
 		stakeholderEClass.getESuperTypes().add(this.getHasNameAndID());
 		stakeholderEClass.getESuperTypes().add(this.getHasDescription());
 		floatConstraintEClass.getESuperTypes().add(this.getConstraint());
@@ -1909,7 +1899,6 @@ public class CorePackageImpl extends EPackageImpl implements CorePackage {
 		initEClass(conceptItemEClass, ConceptItem.class, "ConceptItem", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(runtimeItemEClass, RuntimeItem.class, "RuntimeItem", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getRuntimeItem_Status(), ecorePackage.getEString(), "status", null, 0, 1, RuntimeItem.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(viewEClass, View.class, "View", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getView_ComponentsGroups(), this.getComponentGroup(), null, "componentsGroups", null, 0, -1, View.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1920,7 +1909,7 @@ public class CorePackageImpl extends EPackageImpl implements CorePackage {
 		getView_Links().getEKeys().add(this.getHasNameAndID_Id());
 		initEReference(getView_ComponentInstances(), this.getComponentInstance(), null, "componentInstances", null, 0, -1, View.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getView_InstancesGroups(), this.getComponentInstanceGroup(), null, "instancesGroups", null, 0, -1, View.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getView_LinkInstances(), this.getInstancesLink(), null, "linkInstances", null, 0, -1, View.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getView_LinkInstances(), this.getLinkInstance(), null, "linkInstances", null, 0, -1, View.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(hasStatusEClass, HasStatus.class, "HasStatus", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getHasStatus_Status(), ecorePackage.getEString(), "status", null, 0, 1, HasStatus.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1964,10 +1953,10 @@ public class CorePackageImpl extends EPackageImpl implements CorePackage {
 		initEReference(getLink_Destinations(), this.getComponent(), null, "destinations", null, 1, -1, Link.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getLink_TimeoutMillis(), ecorePackage.getELong(), "timeoutMillis", null, 0, 1, Link.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEClass(instancesLinkEClass, InstancesLink.class, "InstancesLink", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getInstancesLink_Source(), this.getComponentInstance(), null, "source", null, 1, 1, InstancesLink.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getInstancesLink_Destination(), this.getComponentInstance(), null, "destination", null, 1, 1, InstancesLink.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getInstancesLink_Link(), this.getLink(), null, "link", null, 1, 1, InstancesLink.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEClass(linkInstanceEClass, LinkInstance.class, "LinkInstance", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getLinkInstance_Source(), this.getComponentInstance(), null, "source", null, 1, 1, LinkInstance.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getLinkInstance_Destination(), this.getComponentInstance(), null, "destination", null, 1, 1, LinkInstance.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getLinkInstance_Link(), this.getLink(), null, "link", null, 1, 1, LinkInstance.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(stakeholderEClass, Stakeholder.class, "Stakeholder", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getStakeholder_Views(), this.getView(), null, "views", null, 0, -1, Stakeholder.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

@@ -6,15 +6,15 @@ package org.m2ling.domain.core.tests;
 import junit.textui.TestRunner;
 
 import org.m2ling.domain.core.CoreFactory;
-import org.m2ling.domain.core.InstancesLink;
+import org.m2ling.domain.core.LinkInstance;
 
 /**
  * <!-- begin-user-doc -->
- * A test case for the model object '<em><b>Instances Link</b></em>'.
+ * A test case for the model object '<em><b>Link Instance</b></em>'.
  * <!-- end-user-doc -->
  * @generated
  */
-public class InstancesLinkTest extends RuntimeItemTest {
+public class LinkInstanceTest extends RuntimeItemTest {
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -29,28 +29,28 @@ public class InstancesLinkTest extends RuntimeItemTest {
 	 * @generated
 	 */
 	public static void main(String[] args) {
-		TestRunner.run(InstancesLinkTest.class);
+		TestRunner.run(LinkInstanceTest.class);
 	}
 
 	/**
-	 * Constructs a new Instances Link test case with the given name.
+	 * Constructs a new Link Instance test case with the given name.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public InstancesLinkTest(String name) {
+	public LinkInstanceTest(String name) {
 		super(name);
 	}
 
 	/**
-	 * Returns the fixture for this Instances Link test case.
+	 * Returns the fixture for this Link Instance test case.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
-	protected InstancesLink getFixture() {
-		return (InstancesLink)fixture;
+	protected LinkInstance getFixture() {
+		return (LinkInstance)fixture;
 	}
 
 	/**
@@ -75,4 +75,4 @@ public class InstancesLinkTest extends RuntimeItemTest {
 		setFixture(null);
 	}
 
-} //InstancesLinkTest
+} //LinkInstanceTest

@@ -9,25 +9,25 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.m2ling.domain.core.ComponentInstance;
 import org.m2ling.domain.core.CorePackage;
-import org.m2ling.domain.core.InstancesLink;
 import org.m2ling.domain.core.Link;
+import org.m2ling.domain.core.LinkInstance;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Instances Link</b></em>'.
+ * An implementation of the model object '<em><b>Link Instance</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.m2ling.domain.core.impl.InstancesLinkImpl#getSource <em>Source</em>}</li>
- *   <li>{@link org.m2ling.domain.core.impl.InstancesLinkImpl#getDestination <em>Destination</em>}</li>
- *   <li>{@link org.m2ling.domain.core.impl.InstancesLinkImpl#getLink <em>Link</em>}</li>
+ *   <li>{@link org.m2ling.domain.core.impl.LinkInstanceImpl#getSource <em>Source</em>}</li>
+ *   <li>{@link org.m2ling.domain.core.impl.LinkInstanceImpl#getDestination <em>Destination</em>}</li>
+ *   <li>{@link org.m2ling.domain.core.impl.LinkInstanceImpl#getLink <em>Link</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public class InstancesLinkImpl extends RuntimeItemImpl implements InstancesLink {
+public class LinkInstanceImpl extends RuntimeItemImpl implements LinkInstance {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -70,7 +70,7 @@ public class InstancesLinkImpl extends RuntimeItemImpl implements InstancesLink 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected InstancesLinkImpl() {
+	protected LinkInstanceImpl() {
 		super();
 	}
 
@@ -81,7 +81,7 @@ public class InstancesLinkImpl extends RuntimeItemImpl implements InstancesLink 
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return CorePackage.Literals.INSTANCES_LINK;
+		return CorePackage.Literals.LINK_INSTANCE;
 	}
 
 	/**
@@ -95,7 +95,7 @@ public class InstancesLinkImpl extends RuntimeItemImpl implements InstancesLink 
 			source = (ComponentInstance)eResolveProxy(oldSource);
 			if (source != oldSource) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, CorePackage.INSTANCES_LINK__SOURCE, oldSource, source));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, CorePackage.LINK_INSTANCE__SOURCE, oldSource, source));
 			}
 		}
 		return source;
@@ -119,7 +119,7 @@ public class InstancesLinkImpl extends RuntimeItemImpl implements InstancesLink 
 		ComponentInstance oldSource = source;
 		source = newSource;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, CorePackage.INSTANCES_LINK__SOURCE, oldSource, source));
+			eNotify(new ENotificationImpl(this, Notification.SET, CorePackage.LINK_INSTANCE__SOURCE, oldSource, source));
 	}
 
 	/**
@@ -133,7 +133,7 @@ public class InstancesLinkImpl extends RuntimeItemImpl implements InstancesLink 
 			destination = (ComponentInstance)eResolveProxy(oldDestination);
 			if (destination != oldDestination) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, CorePackage.INSTANCES_LINK__DESTINATION, oldDestination, destination));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, CorePackage.LINK_INSTANCE__DESTINATION, oldDestination, destination));
 			}
 		}
 		return destination;
@@ -157,7 +157,7 @@ public class InstancesLinkImpl extends RuntimeItemImpl implements InstancesLink 
 		ComponentInstance oldDestination = destination;
 		destination = newDestination;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, CorePackage.INSTANCES_LINK__DESTINATION, oldDestination, destination));
+			eNotify(new ENotificationImpl(this, Notification.SET, CorePackage.LINK_INSTANCE__DESTINATION, oldDestination, destination));
 	}
 
 	/**
@@ -171,7 +171,7 @@ public class InstancesLinkImpl extends RuntimeItemImpl implements InstancesLink 
 			link = (Link)eResolveProxy(oldLink);
 			if (link != oldLink) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, CorePackage.INSTANCES_LINK__LINK, oldLink, link));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, CorePackage.LINK_INSTANCE__LINK, oldLink, link));
 			}
 		}
 		return link;
@@ -195,7 +195,7 @@ public class InstancesLinkImpl extends RuntimeItemImpl implements InstancesLink 
 		Link oldLink = link;
 		link = newLink;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, CorePackage.INSTANCES_LINK__LINK, oldLink, link));
+			eNotify(new ENotificationImpl(this, Notification.SET, CorePackage.LINK_INSTANCE__LINK, oldLink, link));
 	}
 
 	/**
@@ -206,13 +206,13 @@ public class InstancesLinkImpl extends RuntimeItemImpl implements InstancesLink 
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case CorePackage.INSTANCES_LINK__SOURCE:
+			case CorePackage.LINK_INSTANCE__SOURCE:
 				if (resolve) return getSource();
 				return basicGetSource();
-			case CorePackage.INSTANCES_LINK__DESTINATION:
+			case CorePackage.LINK_INSTANCE__DESTINATION:
 				if (resolve) return getDestination();
 				return basicGetDestination();
-			case CorePackage.INSTANCES_LINK__LINK:
+			case CorePackage.LINK_INSTANCE__LINK:
 				if (resolve) return getLink();
 				return basicGetLink();
 		}
@@ -227,13 +227,13 @@ public class InstancesLinkImpl extends RuntimeItemImpl implements InstancesLink 
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case CorePackage.INSTANCES_LINK__SOURCE:
+			case CorePackage.LINK_INSTANCE__SOURCE:
 				setSource((ComponentInstance)newValue);
 				return;
-			case CorePackage.INSTANCES_LINK__DESTINATION:
+			case CorePackage.LINK_INSTANCE__DESTINATION:
 				setDestination((ComponentInstance)newValue);
 				return;
-			case CorePackage.INSTANCES_LINK__LINK:
+			case CorePackage.LINK_INSTANCE__LINK:
 				setLink((Link)newValue);
 				return;
 		}
@@ -248,13 +248,13 @@ public class InstancesLinkImpl extends RuntimeItemImpl implements InstancesLink 
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case CorePackage.INSTANCES_LINK__SOURCE:
+			case CorePackage.LINK_INSTANCE__SOURCE:
 				setSource((ComponentInstance)null);
 				return;
-			case CorePackage.INSTANCES_LINK__DESTINATION:
+			case CorePackage.LINK_INSTANCE__DESTINATION:
 				setDestination((ComponentInstance)null);
 				return;
-			case CorePackage.INSTANCES_LINK__LINK:
+			case CorePackage.LINK_INSTANCE__LINK:
 				setLink((Link)null);
 				return;
 		}
@@ -269,14 +269,14 @@ public class InstancesLinkImpl extends RuntimeItemImpl implements InstancesLink 
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case CorePackage.INSTANCES_LINK__SOURCE:
+			case CorePackage.LINK_INSTANCE__SOURCE:
 				return source != null;
-			case CorePackage.INSTANCES_LINK__DESTINATION:
+			case CorePackage.LINK_INSTANCE__DESTINATION:
 				return destination != null;
-			case CorePackage.INSTANCES_LINK__LINK:
+			case CorePackage.LINK_INSTANCE__LINK:
 				return link != null;
 		}
 		return super.eIsSet(featureID);
 	}
 
-} //InstancesLinkImpl
+} //LinkInstanceImpl

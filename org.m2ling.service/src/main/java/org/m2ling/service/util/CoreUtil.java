@@ -4,7 +4,6 @@
 package org.m2ling.service.util;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.StringTokenizer;
 import java.util.logging.Logger;
@@ -37,6 +36,7 @@ import com.google.inject.Singleton;
  */
 @Singleton
 public class CoreUtil {
+	@SuppressWarnings("unused")
 	private Logger logger;
 
 	private PersistenceManager pmanager;
@@ -350,7 +350,7 @@ public class CoreUtil {
 		List<ComponentInstance> result = new ArrayList<ComponentInstance>();
 		Root root = pmanager.getRoot();
 		for (View v : root.getViews()) {
-			List<ComponentInstance> instances = v.getInstances();
+			List<ComponentInstance> instances = v.getComponentInstances();
 			for (ComponentInstance instance : instances) {
 				if (ctID.equals(instance.getComponent().getId())) {
 					result.add(instance);

@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.m2ling.common.dto.core.AccessType;
 import org.m2ling.common.dto.core.ViewPointDTO;
+import org.m2ling.common.dto.core.ViewPointDTO.Builder;
 import org.m2ling.common.exceptions.FunctionalException;
 import org.m2ling.common.utils.UUT;
 import org.m2ling.common.utils.Utils;
@@ -49,7 +50,7 @@ public class UpdateViewPointFixture extends AbstractViewPointFixture {
 		reset("Technical");
 		ViewPointDTO vp1DTO = service.getViewPointByID(null, "id_vp1");
 		List<String> previousStatusLiteralsList = Utils.stringListFromString(previousStatusLiterals);
-		ViewPointDTO.Builder builder = new ViewPointDTO.Builder(vp1DTO.getId(), vp1DTO.getName()).comment(
+		ViewPointDTO.Builder builder = (ViewPointDTO.Builder) new ViewPointDTO.Builder(vp1DTO.getId(), vp1DTO.getName()).comment(
 				vp1DTO.getComment()).description(vp1DTO.getDescription());
 		for (String tag : vp1DTO.getTags()) {
 			builder.addTag(tag);
@@ -60,7 +61,7 @@ public class UpdateViewPointFixture extends AbstractViewPointFixture {
 		// Set the initial status literals
 		service.updateViewPoint(null, builder.build());
 		// try to set the new status literals
-		builder = new ViewPointDTO.Builder(vp1DTO.getId(), vp1DTO.getName()).comment(vp1DTO.getComment()).description(
+		builder = (ViewPointDTO.Builder) new ViewPointDTO.Builder(vp1DTO.getId(), vp1DTO.getName()).comment(vp1DTO.getComment()).description(
 				vp1DTO.getDescription());
 		for (String tag : vp1DTO.getTags()) {
 			builder.addTag(tag);
@@ -83,7 +84,7 @@ public class UpdateViewPointFixture extends AbstractViewPointFixture {
 		// technical mock)
 		ViewPointDTO vp1DTO = service.getViewPointByID(null, "id_vp1");
 		List<String> statusLiteralsList = Utils.stringListFromString(newStatusLiterals);
-		ViewPointDTO.Builder builder = new ViewPointDTO.Builder(vp1DTO.getId(), vp1DTO.getName()).comment(
+		ViewPointDTO.Builder builder = (ViewPointDTO.Builder) new ViewPointDTO.Builder(vp1DTO.getId(), vp1DTO.getName()).comment(
 				vp1DTO.getComment()).description(vp1DTO.getDescription());
 		for (String tag : vp1DTO.getTags()) {
 			builder.addTag(tag);
@@ -117,7 +118,7 @@ public class UpdateViewPointFixture extends AbstractViewPointFixture {
 			if (!"null".equals(statusLiterals)) {
 				statusLiteralsList = Utils.stringListFromString(statusLiterals);
 			}
-			ViewPointDTO.Builder builder = new ViewPointDTO.Builder(UUT.nul(id), UUT.nul(name)).description(
+			ViewPointDTO.Builder builder = (ViewPointDTO.Builder) new ViewPointDTO.Builder(UUT.nul(id), UUT.nul(name)).description(
 					UUT.nul(description)).comment(UUT.nul(comment));
 			for (String tag : tagsList) {
 				builder.addTag(tag);

@@ -5,34 +5,20 @@
  */
 package org.m2ling.presentation.principles.model;
 
-import java.io.Serializable;
 import java.util.Map;
 import java.util.TreeMap;
 
-import org.m2ling.common.utils.Utils;
+import org.m2ling.presentation.common.model.AbstractCommonBean;
 
 /**
  * Mutable Rule bean
  */
 @SuppressWarnings("serial")
-public class RuleBean implements Serializable {
+public class RuleBean extends AbstractCommonBean {
 	private String vpID = "";
-
-	private String id = "";
-
-	private String name = "";
 
 	/** Drop */
 	private String drop = "";
-
-	/**
-	 * Comma-separated tags
-	 */
-	private String tags = "";
-
-	private String description = "";
-
-	private String comment = "";
 
 	private String status = null;
 
@@ -48,19 +34,11 @@ public class RuleBean implements Serializable {
 		super();
 	}
 
-	public String toString() {
-		return Utils.toString(this);
-	}
-
 	public boolean equals(Object other) {
 		if (other == null || !(other instanceof RuleBean)) {
 			return false;
 		}
 		return ((RuleBean) other).getId().equals(getId());
-	}
-
-	public int hashCode() {
-		return id.hashCode();
 	}
 
 	/**
@@ -139,41 +117,11 @@ public class RuleBean implements Serializable {
 	}
 
 	/**
-	 * @return the id
-	 */
-	public String getId() {
-		return id;
-	}
-
-	/**
-	 * @param id
-	 *           the id to set
-	 */
-	public void setId(String id) {
-		this.id = id;
-	}
-
-	/**
 	 * @param id
 	 *           the view point id to set
 	 */
 	public void setViewPointId(String id) {
 		this.vpID = id;
-	}
-
-	/**
-	 * @return the comment
-	 */
-	public String getComment() {
-		return comment;
-	}
-
-	/**
-	 * @param comment
-	 *           the comment to set
-	 */
-	public void setComment(String comment) {
-		this.comment = comment;
 	}
 
 	/**
@@ -189,53 +137,6 @@ public class RuleBean implements Serializable {
 	 */
 	public void setStatus(String status) {
 		this.status = status;
-	}
-
-	/**
-	 * @param name
-	 *           the name to set
-	 */
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	/**
-	 * @param tags
-	 *           the tags to set
-	 */
-	public void setTags(String tags) {
-		this.tags = tags;
-	}
-
-	/**
-	 * @param description
-	 *           the description to set
-	 */
-	public void setDescription(String description) {
-		this.description = description;
-	}
-
-	/**
-	 * @return the name
-	 */
-	public String getName() {
-		return name;
-	}
-
-	/**
-	 * Return a defensive copy of the tags.
-	 * 
-	 * @return a defensive copy of the tags
-	 */
-	public String getTags() {
-		return tags;
-	}
-
-	/**
-	 * @return the description
-	 */
-	public String getDescription() {
-		return description;
 	}
 
 	/**

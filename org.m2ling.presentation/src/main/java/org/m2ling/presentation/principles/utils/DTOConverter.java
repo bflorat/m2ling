@@ -11,8 +11,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import org.m2ling.common.dto.core.ComponentDTO;
 import org.m2ling.common.dto.core.ComponentTypeDTO;
 import org.m2ling.common.dto.core.HasNameAndIdDTO;
+import org.m2ling.common.dto.core.LinkDTO;
 import org.m2ling.common.dto.core.LinkTypeDTO;
 import org.m2ling.common.dto.core.ReferenceDTO;
 import org.m2ling.common.dto.core.RuleDTO;
@@ -28,6 +30,8 @@ import org.m2ling.presentation.principles.model.LinkTypeBean;
 import org.m2ling.presentation.principles.model.ReferenceBean;
 import org.m2ling.presentation.principles.model.RuleBean;
 import org.m2ling.presentation.principles.model.ViewPointBean;
+import org.m2ling.presentation.studio.model.ComponentBean;
+import org.m2ling.presentation.studio.model.LinkBean;
 
 import com.google.inject.Singleton;
 
@@ -54,8 +58,8 @@ public class DTOConverter {
 		Msg msg;
 
 		public ViewPointDTO getViewPointDTO(ViewPointBean bean) {
-			ViewPointDTO.Builder builder = new ViewPointDTO.Builder(bean.getId(), bean.getName()).description(
-					bean.getDescription()).comment(bean.getComment());
+			ViewPointDTO.Builder builder = (ViewPointDTO.Builder) new ViewPointDTO.Builder(bean.getId(), bean.getName())
+					.description(bean.getDescription()).comment(bean.getComment());
 			for (String tag : Utils.stringListFromString(bean.getTags())) {
 				builder.addTag(tag);
 			}
@@ -73,9 +77,9 @@ public class DTOConverter {
 		 */
 		public RuleDTO getRuleDTO(RuleBean bean) {
 			// Note that we don't populate history into DTO as it is not used by the service
-			RuleDTO.Builder builder = new RuleDTO.Builder(bean.getViewPointId(), bean.getId(), bean.getName())
-					.description(bean.getDescription()).rationale(bean.getRationale()).exceptions(bean.getExceptions())
-					.comment(bean.getComment()).status(bean.getStatus()).priority(bean.getPriority());
+			RuleDTO.Builder builder = (RuleDTO.Builder) new RuleDTO.Builder(bean.getViewPointId(), bean.getId(),
+					bean.getName()).rationale(bean.getRationale()).exceptions(bean.getExceptions()).status(bean.getStatus())
+					.priority(bean.getPriority()).description(bean.getDescription()).comment(bean.getComment());
 			for (String tag : Utils.stringListFromString(bean.getTags())) {
 				builder.addTag(tag);
 			}
@@ -106,9 +110,9 @@ public class DTOConverter {
 					.getId(), bean.getViewPoint().getName()).build();
 			HasNameAndIdDTO boundType = (bean.getBoundType() == null) ? null : new HasNameAndIdDTO.Builder(bean
 					.getBoundType().getId(), bean.getBoundType().getName()).build();
-			ComponentTypeDTO.Builder builder = new ComponentTypeDTO.Builder(vp, bean.getId(), bean.getName())
-					.description(bean.getDescription()).comment(bean.getComment()).boundType(boundType)
-					.instantiationFactor(ifactor);
+			ComponentTypeDTO.Builder builder = (ComponentTypeDTO.Builder) new ComponentTypeDTO.Builder(vp, bean.getId(),
+					bean.getName()).boundType(boundType).instantiationFactor(ifactor).description(bean.getDescription())
+					.comment(bean.getComment());
 			String status = bean.getStatus();
 			if (status != null && !("".equals(status.trim()))) {
 				builder.status(status);
@@ -136,9 +140,9 @@ public class DTOConverter {
 		public LinkTypeDTO getLinkTypeDTO(LinkTypeBean bean) {
 			HasNameAndIdDTO vp = (bean.getViewPoint() == null) ? null : new HasNameAndIdDTO.Builder(bean.getViewPoint()
 					.getId(), bean.getViewPoint().getName()).build();
-			LinkTypeDTO.Builder builder = new LinkTypeDTO.Builder(vp, bean.getId(), bean.getName())
-					.description(bean.getDescription()).comment(bean.getComment())
-					.linkTemporality(bean.getLinkTemporality()).linkAccessType(bean.getLinkAccessType());
+			LinkTypeDTO.Builder builder = (LinkTypeDTO.Builder) new LinkTypeDTO.Builder(vp, bean.getId(), bean.getName())
+					.linkTemporality(bean.getLinkTemporality()).linkAccessType(bean.getLinkAccessType())
+					.description(bean.getDescription()).comment(bean.getComment());
 			for (String tag : Utils.stringListFromString(bean.getTags())) {
 				builder.addTag(tag);
 			}
@@ -184,6 +188,39 @@ public class DTOConverter {
 				return null;
 			}
 			HasNameAndIdDTO.Builder builder = new HasNameAndIdDTO.Builder(bean.getId(), bean.getName());
+			return builder.build();
+		}
+
+		public ComponentDTO getComponentDTO(ComponentBean bean) {
+			ComponentDTO compDTO = getComponentDTO(bean.getBoundComponent());
+			HasNameAndIdDTO typeDTO = getNameAndIdDTO(bean.getType());
+			ComponentDTO.Builder builder = (ComponentDTO.Builder) new ComponentDTO.Builder(bean.getId(), bean.getName())
+					.boundType(compDTO).type(typeDTO).description(bean.getDescription()).comment(bean.getComment());
+			String status = bean.getStatus();
+			if (status != null && !("".equals(status.trim()))) {
+				builder.status(status);
+			}
+			for (String tag : Utils.stringListFromString(bean.getTags())) {
+				builder.addTag(tag);
+			}
+			for (ReferenceBean ref : bean.getReferences()) {
+				ReferenceDTO refDTO = getReferenceDTO(ref);
+				builder.addReference(refDTO);
+			}
+			return builder.build();
+		}
+
+		public LinkDTO getLinkDTO(LinkBean bean) {
+			HasNameAndIdDTO typeDTO = getNameAndIdDTO(bean.getType());
+			LinkDTO.Builder builder = (LinkDTO.Builder) new LinkDTO.Builder(bean.getId(), bean.getName()).type(typeDTO)
+					.timeout(bean.getTimeout()).description(bean.getDescription()).comment(bean.getComment());
+			String status = bean.getStatus();
+			if (status != null && !("".equals(status.trim()))) {
+				builder.status(status);
+			}
+			for (String tag : Utils.stringListFromString(bean.getTags())) {
+				builder.addTag(tag);
+			}
 			return builder.build();
 		}
 	}

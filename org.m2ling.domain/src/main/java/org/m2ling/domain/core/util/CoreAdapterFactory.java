@@ -34,9 +34,9 @@ import org.m2ling.domain.core.HasParameterValues;
 import org.m2ling.domain.core.HasReferences;
 import org.m2ling.domain.core.HasStatus;
 import org.m2ling.domain.core.HasTags;
-import org.m2ling.domain.core.InstancesLink;
 import org.m2ling.domain.core.IntegerConstraint;
 import org.m2ling.domain.core.Link;
+import org.m2ling.domain.core.LinkInstance;
 import org.m2ling.domain.core.LinkType;
 import org.m2ling.domain.core.MaxConstraint;
 import org.m2ling.domain.core.MinConstraint;
@@ -209,8 +209,8 @@ public class CoreAdapterFactory extends AdapterFactoryImpl {
 				return createLinkAdapter();
 			}
 			@Override
-			public Adapter caseInstancesLink(InstancesLink object) {
-				return createInstancesLinkAdapter();
+			public Adapter caseLinkInstance(LinkInstance object) {
+				return createLinkInstanceAdapter();
 			}
 			@Override
 			public Adapter caseStakeholder(Stakeholder object) {
@@ -565,16 +565,16 @@ public class CoreAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.m2ling.domain.core.InstancesLink <em>Instances Link</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.m2ling.domain.core.LinkInstance <em>Link Instance</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.m2ling.domain.core.InstancesLink
+	 * @see org.m2ling.domain.core.LinkInstance
 	 * @generated
 	 */
-	public Adapter createInstancesLinkAdapter() {
+	public Adapter createLinkInstanceAdapter() {
 		return null;
 	}
 

@@ -2,6 +2,7 @@ package org.m2ling.service.principles;
 
 import java.io.IOException;
 
+import org.junit.Test;
 import org.m2ling.common.dto.core.AccessType;
 import org.m2ling.common.dto.core.ViewPointDTO;
 import org.m2ling.common.exceptions.FunctionalException;
@@ -29,6 +30,7 @@ public class CreateViewPointFixture extends AbstractViewPointFixture {
 	 *            concordion:set="#tags">tag1,tag2</b></li> <li>id=<b
 	 *            concordion:set="#statusLiterals">SUGGESTED,VALIDATED</b>
 	 */
+	@Test
 	public String getViewPoint(String id, String name, String description, String comment, String tags,
 			String statusLiterals) throws FunctionalException {
 		reset("Technical");
@@ -43,7 +45,6 @@ public class CreateViewPointFixture extends AbstractViewPointFixture {
 		service.createViewPoint(null, dto);
 		ViewPointDTO checkedDTO = service.getViewPointByID(null, id);
 		ViewPointBean outBean = new DTOConverter.FromDTO().getViewPointBean(checkedDTO);
-		System.out.println(outBean.toString());
 		return outBean.toString();
 	}
 
@@ -57,7 +58,7 @@ public class CreateViewPointFixture extends AbstractViewPointFixture {
 			String tags, String statusLiterals) {
 		reset("Technical");
 		try {
-			ViewPointDTO.Builder builder = new ViewPointDTO.Builder(UUT.nul(id), UUT.nul(name)).description(
+			ViewPointDTO.Builder builder = (ViewPointDTO.Builder)  new ViewPointDTO.Builder(UUT.nul(id), UUT.nul(name)).description(
 					UUT.nul(description)).comment(UUT.nul(comment));
 			if (!tags.equals("null")) {
 				for (String tag : Utils.stringListFromString(tags)) {

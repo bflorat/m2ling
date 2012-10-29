@@ -148,9 +148,9 @@ public class RuntimeItemItemProvider
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
-				 getString("_UI_RuntimeItem_status_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_RuntimeItem_status_feature", "_UI_RuntimeItem_type"),
-				 CorePackage.Literals.RUNTIME_ITEM__STATUS,
+				 getString("_UI_HasStatus_status_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_HasStatus_status_feature", "_UI_HasStatus_type"),
+				 CorePackage.Literals.HAS_STATUS__STATUS,
 				 true,
 				 false,
 				 false,

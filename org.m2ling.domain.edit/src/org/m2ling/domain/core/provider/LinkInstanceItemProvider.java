@@ -17,15 +17,15 @@ import org.eclipse.emf.edit.provider.IItemPropertySource;
 import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 import org.m2ling.domain.core.CorePackage;
-import org.m2ling.domain.core.InstancesLink;
+import org.m2ling.domain.core.LinkInstance;
 
 /**
- * This is the item provider adapter for a {@link org.m2ling.domain.core.InstancesLink} object.
+ * This is the item provider adapter for a {@link org.m2ling.domain.core.LinkInstance} object.
  * <!-- begin-user-doc -->
  * <!-- end-user-doc -->
  * @generated
  */
-public class InstancesLinkItemProvider
+public class LinkInstanceItemProvider
 	extends RuntimeItemItemProvider
 	implements
 		IEditingDomainItemProvider,
@@ -46,7 +46,7 @@ public class InstancesLinkItemProvider
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public InstancesLinkItemProvider(AdapterFactory adapterFactory) {
+	public LinkInstanceItemProvider(AdapterFactory adapterFactory) {
 		super(adapterFactory);
 	}
 
@@ -79,9 +79,9 @@ public class InstancesLinkItemProvider
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
-				 getString("_UI_InstancesLink_source_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_InstancesLink_source_feature", "_UI_InstancesLink_type"),
-				 CorePackage.Literals.INSTANCES_LINK__SOURCE,
+				 getString("_UI_LinkInstance_source_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_LinkInstance_source_feature", "_UI_LinkInstance_type"),
+				 CorePackage.Literals.LINK_INSTANCE__SOURCE,
 				 true,
 				 false,
 				 true,
@@ -101,9 +101,9 @@ public class InstancesLinkItemProvider
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
-				 getString("_UI_InstancesLink_destination_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_InstancesLink_destination_feature", "_UI_InstancesLink_type"),
-				 CorePackage.Literals.INSTANCES_LINK__DESTINATION,
+				 getString("_UI_LinkInstance_destination_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_LinkInstance_destination_feature", "_UI_LinkInstance_type"),
+				 CorePackage.Literals.LINK_INSTANCE__DESTINATION,
 				 true,
 				 false,
 				 true,
@@ -123,9 +123,9 @@ public class InstancesLinkItemProvider
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
-				 getString("_UI_InstancesLink_link_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_InstancesLink_link_feature", "_UI_InstancesLink_type"),
-				 CorePackage.Literals.INSTANCES_LINK__LINK,
+				 getString("_UI_LinkInstance_link_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_LinkInstance_link_feature", "_UI_LinkInstance_type"),
+				 CorePackage.Literals.LINK_INSTANCE__LINK,
 				 true,
 				 false,
 				 true,
@@ -135,14 +135,14 @@ public class InstancesLinkItemProvider
 	}
 
 	/**
-	 * This returns InstancesLink.gif.
+	 * This returns LinkInstance.gif.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
 	public Object getImage(Object object) {
-		return overlayImage(object, getResourceLocator().getImage("full/obj16/InstancesLink"));
+		return overlayImage(object, getResourceLocator().getImage("full/obj16/LinkInstance"));
 	}
 
 	/**
@@ -153,10 +153,10 @@ public class InstancesLinkItemProvider
 	 */
 	@Override
 	public String getText(Object object) {
-		String label = ((InstancesLink)object).getName();
+		String label = ((LinkInstance)object).getName();
 		return label == null || label.length() == 0 ?
-			getString("_UI_InstancesLink_type") :
-			getString("_UI_InstancesLink_type") + " " + label;
+			getString("_UI_LinkInstance_type") :
+			getString("_UI_LinkInstance_type") + " " + label;
 	}
 
 	/**

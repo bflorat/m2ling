@@ -22,8 +22,8 @@ import org.m2ling.domain.core.CorePackage;
 import org.m2ling.domain.core.HasDescription;
 import org.m2ling.domain.core.HasNameAndID;
 import org.m2ling.domain.core.HasTags;
-import org.m2ling.domain.core.InstancesLink;
 import org.m2ling.domain.core.Link;
+import org.m2ling.domain.core.LinkInstance;
 import org.m2ling.domain.core.View;
 import org.m2ling.domain.core.ViewPoint;
 
@@ -205,7 +205,7 @@ public class ViewImpl extends HasCommentImpl implements View {
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<InstancesLink> linkInstances;
+	protected EList<LinkInstance> linkInstances;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -429,9 +429,9 @@ public class ViewImpl extends HasCommentImpl implements View {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<InstancesLink> getLinkInstances() {
+	public EList<LinkInstance> getLinkInstances() {
 		if (linkInstances == null) {
-			linkInstances = new EObjectContainmentEList<InstancesLink>(InstancesLink.class, this, CorePackage.VIEW__LINK_INSTANCES);
+			linkInstances = new EObjectContainmentEList<LinkInstance>(LinkInstance.class, this, CorePackage.VIEW__LINK_INSTANCES);
 		}
 		return linkInstances;
 	}
@@ -542,7 +542,7 @@ public class ViewImpl extends HasCommentImpl implements View {
 				return;
 			case CorePackage.VIEW__LINK_INSTANCES:
 				getLinkInstances().clear();
-				getLinkInstances().addAll((Collection<? extends InstancesLink>)newValue);
+				getLinkInstances().addAll((Collection<? extends LinkInstance>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);

@@ -15,6 +15,7 @@ import org.m2ling.domain.core.HasComment;
 import org.m2ling.domain.core.HasConstraints;
 import org.m2ling.domain.core.HasDescription;
 import org.m2ling.domain.core.HasParameterValues;
+import org.m2ling.domain.core.HasStatus;
 import org.m2ling.domain.core.HasTags;
 import org.m2ling.domain.core.RuntimeItem;
 
@@ -331,6 +332,12 @@ public abstract class RuntimeItemImpl extends HasNameAndIDImpl implements Runtim
 				default: return -1;
 			}
 		}
+		if (baseClass == HasStatus.class) {
+			switch (derivedFeatureID) {
+				case CorePackage.RUNTIME_ITEM__STATUS: return CorePackage.HAS_STATUS__STATUS;
+				default: return -1;
+			}
+		}
 		return super.eBaseStructuralFeatureID(derivedFeatureID, baseClass);
 	}
 
@@ -366,6 +373,12 @@ public abstract class RuntimeItemImpl extends HasNameAndIDImpl implements Runtim
 		if (baseClass == HasDescription.class) {
 			switch (baseFeatureID) {
 				case CorePackage.HAS_DESCRIPTION__DESCRIPTION: return CorePackage.RUNTIME_ITEM__DESCRIPTION;
+				default: return -1;
+			}
+		}
+		if (baseClass == HasStatus.class) {
+			switch (baseFeatureID) {
+				case CorePackage.HAS_STATUS__STATUS: return CorePackage.RUNTIME_ITEM__STATUS;
 				default: return -1;
 			}
 		}

@@ -5,38 +5,19 @@
  */
 package org.m2ling.presentation.principles.model;
 
-import java.io.Serializable;
-
-import org.m2ling.common.utils.Utils;
+import org.m2ling.presentation.common.model.AbstractCommonBean;
 
 /**
  * Mutable View point bean
  */
 @SuppressWarnings("serial")
-public class ViewPointBean implements Serializable {
-	private String id = "";
-
-	private String name = "";
-
-	/**
-	 * Comma-separated tags
-	 */
-	private String tags = "";
-
-	private String description = "";
-
-	private String comment = "";
-
+public class ViewPointBean extends AbstractCommonBean {
 	private String statusLiterals = "";
 
 	private String iconPath = "";
 
 	public ViewPointBean() {
 		super();
-	}
-
-	public String toString() {
-		return Utils.toString(this);
 	}
 
 	public boolean equals(Object o) {
@@ -63,36 +44,6 @@ public class ViewPointBean implements Serializable {
 	}
 
 	/**
-	 * @return the id
-	 */
-	public String getId() {
-		return id;
-	}
-
-	/**
-	 * @param id
-	 *           the id to set
-	 */
-	public void setId(String id) {
-		this.id = id;
-	}
-
-	/**
-	 * @return the comment
-	 */
-	public String getComment() {
-		return comment;
-	}
-
-	/**
-	 * @param comment
-	 *           the comment to set
-	 */
-	public void setComment(String comment) {
-		this.comment = comment;
-	}
-
-	/**
 	 * @return the statusLiterals
 	 */
 	public String getStatusLiterals() {
@@ -105,52 +56,5 @@ public class ViewPointBean implements Serializable {
 	 */
 	public void setStatusLiterals(String statusLiterals) {
 		this.statusLiterals = statusLiterals;
-	}
-
-	/**
-	 * @param name
-	 *           the name to set
-	 */
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	/**
-	 * @param tags
-	 *           the tags to set
-	 */
-	public void setTags(String tags) {
-		this.tags = tags;
-	}
-
-	/**
-	 * @param description
-	 *           the description to set
-	 */
-	public void setDescription(String description) {
-		this.description = description;
-	}
-
-	/**
-	 * @return the name
-	 */
-	public String getName() {
-		return name;
-	}
-
-	/**
-	 * Return a defensive copy of the tags.
-	 * 
-	 * @return a defensive copy of the tags
-	 */
-	public String getTags() {
-		return tags;
-	}
-
-	/**
-	 * @return the description
-	 */
-	public String getDescription() {
-		return description;
 	}
 }

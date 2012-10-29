@@ -14,7 +14,7 @@ import org.m2ling.domain.core.CoreFactory;
  * <!-- end-user-doc -->
  * @generated
  */
-public class ComponentInstanceTest extends HasParameterValuesTest {
+public class ComponentInstanceTest extends RuntimeItemTest {
 
 	/**
 	 * <!-- begin-user-doc -->

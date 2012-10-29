@@ -17,52 +17,15 @@ import com.google.common.collect.ImmutableSet;
  * 
  * @author Bertrand Florat <bertrand@florat.net>
  */
-public class ViewPointDTO implements Comparable<ViewPointDTO> {
-	private final String id;
-
-	private final String name;
-
-	private final List<String> tags;
-
-	private final String description;
-
-	private final String comment;
-
+public class ViewPointDTO extends AbstractCommonDTO implements Comparable<ViewPointDTO> {
 	private final Set<String> statusLiterals;
 
-	public static class Builder {
-		// Required configuration
-		private final String name;
-
-		private final String id;
-
+	public static class Builder extends AbstractCommonDTO.Builder {
 		// Optional configuration
-		private List<String> tags = new ArrayList<String>(1);
-
-		private String description = "";
-
-		private String comment = "";
-
 		private Set<String> statusLiterals = new LinkedHashSet<String>(1);
 
 		public Builder(String id, String name) {
-			this.id = id;
-			this.name = name;
-		}
-
-		public Builder addTag(String tag) {
-			this.tags.add(tag);
-			return this;
-		}
-
-		public Builder description(String description) {
-			this.description = description;
-			return this;
-		}
-
-		public Builder comment(String comment) {
-			this.comment = comment;
-			return this;
+			super(id, name);
 		}
 
 		public Builder addStatusLiteral(String statusLiteral) {
@@ -77,43 +40,11 @@ public class ViewPointDTO implements Comparable<ViewPointDTO> {
 	}
 
 	private ViewPointDTO(Builder builder) {
-		id = builder.id;
-		name = builder.name;
-		if (builder.tags != null) {
-			tags = new ArrayList<String>(builder.tags); // defensive copy
-		} else {
-			tags = null;
-		}
-		description = builder.description;
-		comment = builder.comment;
+		super(builder);
 		statusLiterals = ImmutableSet.copyOf(builder.statusLiterals); // defensive copy
 	}
 
-	/**
-	 * @return the name
-	 */
-	public String getName() {
-		return name;
-	}
-
-	/**
-	 * @return the id
-	 */
-	public String getId() {
-		return id;
-	}
-
-	/**
-	 * Return a defensive copy of the tags.
-	 * 
-	 * @return a defensive copy of the tags
-	 */
-	public List<String> getTags() {
-		if (tags == null) {
-			return null;
-		}
-		return new ArrayList<String>(tags);
-	}
+	
 
 	/**
 	 * Return a defensive copy of the status literals.
@@ -127,24 +58,10 @@ public class ViewPointDTO implements Comparable<ViewPointDTO> {
 		return ImmutableSet.copyOf(statusLiterals);
 	}
 
-	/**
-	 * @return the description
-	 */
-	public String getDescription() {
-		return description;
-	}
+	
 
-	/**
-	 * @return the comment
-	 */
-	public String getComment() {
-		return comment;
-	}
 
-	public String toString() {
-		return Utils.toString(this);
-	}
-
+	
 	public boolean equals(Object o) {
 		if (o == null || !(o instanceof ViewPointDTO)) {
 			return false;
@@ -170,6 +87,6 @@ public class ViewPointDTO implements Comparable<ViewPointDTO> {
 		if (getName() == null || o.getName() == null) {
 			return -1;
 		}
-		return name.compareTo(o.getName());
+		return getName().compareTo(o.getName());
 	}
 }

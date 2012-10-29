@@ -33,9 +33,9 @@ import org.m2ling.domain.core.HasParameterValues;
 import org.m2ling.domain.core.HasReferences;
 import org.m2ling.domain.core.HasStatus;
 import org.m2ling.domain.core.HasTags;
-import org.m2ling.domain.core.InstancesLink;
 import org.m2ling.domain.core.IntegerConstraint;
 import org.m2ling.domain.core.Link;
+import org.m2ling.domain.core.LinkInstance;
 import org.m2ling.domain.core.LinkType;
 import org.m2ling.domain.core.MaxConstraint;
 import org.m2ling.domain.core.MinConstraint;
@@ -152,12 +152,13 @@ public class CoreSwitch<T> extends Switch<T> {
 				T result = caseComponentInstance(componentInstance);
 				if (result == null) result = caseRuntimeItem(componentInstance);
 				if (result == null) result = caseHasReferences(componentInstance);
-				if (result == null) result = caseHasParameterValues(componentInstance);
 				if (result == null) result = caseHasNameAndID(componentInstance);
 				if (result == null) result = caseHasComment(componentInstance);
 				if (result == null) result = caseHasTags(componentInstance);
+				if (result == null) result = caseHasParameterValues(componentInstance);
 				if (result == null) result = caseHasConstraints(componentInstance);
 				if (result == null) result = caseHasDescription(componentInstance);
+				if (result == null) result = caseHasStatus(componentInstance);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -195,6 +196,7 @@ public class CoreSwitch<T> extends Switch<T> {
 				if (result == null) result = caseHasParameterValues(componentInstanceGroup);
 				if (result == null) result = caseHasConstraints(componentInstanceGroup);
 				if (result == null) result = caseHasDescription(componentInstanceGroup);
+				if (result == null) result = caseHasStatus(componentInstanceGroup);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -233,6 +235,7 @@ public class CoreSwitch<T> extends Switch<T> {
 				if (result == null) result = caseHasParameterValues(runtimeItem);
 				if (result == null) result = caseHasConstraints(runtimeItem);
 				if (result == null) result = caseHasDescription(runtimeItem);
+				if (result == null) result = caseHasStatus(runtimeItem);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -340,16 +343,17 @@ public class CoreSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case CorePackage.INSTANCES_LINK: {
-				InstancesLink instancesLink = (InstancesLink)theEObject;
-				T result = caseInstancesLink(instancesLink);
-				if (result == null) result = caseRuntimeItem(instancesLink);
-				if (result == null) result = caseHasNameAndID(instancesLink);
-				if (result == null) result = caseHasComment(instancesLink);
-				if (result == null) result = caseHasTags(instancesLink);
-				if (result == null) result = caseHasParameterValues(instancesLink);
-				if (result == null) result = caseHasConstraints(instancesLink);
-				if (result == null) result = caseHasDescription(instancesLink);
+			case CorePackage.LINK_INSTANCE: {
+				LinkInstance linkInstance = (LinkInstance)theEObject;
+				T result = caseLinkInstance(linkInstance);
+				if (result == null) result = caseRuntimeItem(linkInstance);
+				if (result == null) result = caseHasNameAndID(linkInstance);
+				if (result == null) result = caseHasComment(linkInstance);
+				if (result == null) result = caseHasTags(linkInstance);
+				if (result == null) result = caseHasParameterValues(linkInstance);
+				if (result == null) result = caseHasConstraints(linkInstance);
+				if (result == null) result = caseHasDescription(linkInstance);
+				if (result == null) result = caseHasStatus(linkInstance);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -789,17 +793,17 @@ public class CoreSwitch<T> extends Switch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Instances Link</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Link Instance</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Instances Link</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Link Instance</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseInstancesLink(InstancesLink object) {
+	public T caseLinkInstance(LinkInstance object) {
 		return null;
 	}
 

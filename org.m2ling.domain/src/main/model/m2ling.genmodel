@@ -68,8 +68,6 @@
       <genClasses ecoreClass="m2ling.ecore#//core/ComponentInstance">
         <genFeatures notify="false" createChild="false" propertySortChoices="true"
             ecoreFeature="ecore:EReference m2ling.ecore#//core/ComponentInstance/component"/>
-        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference m2ling.ecore#//core/ComponentInstance/instances"/>
-        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference m2ling.ecore#//core/ComponentInstance/instancesGroups"/>
         <genFeatures notify="false" createChild="false" propertySortChoices="true"
             ecoreFeature="ecore:EReference m2ling.ecore#//core/ComponentInstance/boundComponentInstance"/>
       </genClasses>
@@ -90,18 +88,16 @@
       </genClasses>
       <genClasses image="false" ecoreClass="m2ling.ecore#//core/ArchitectureItem"/>
       <genClasses image="false" ecoreClass="m2ling.ecore#//core/ConceptItem"/>
-      <genClasses image="false" ecoreClass="m2ling.ecore#//core/RuntimeItem">
-        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute m2ling.ecore#//core/RuntimeItem/status"/>
-      </genClasses>
+      <genClasses image="false" ecoreClass="m2ling.ecore#//core/RuntimeItem"/>
       <genClasses ecoreClass="m2ling.ecore#//core/View">
         <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference m2ling.ecore#//core/View/componentsGroups"/>
         <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference m2ling.ecore#//core/View/components"/>
         <genFeatures notify="false" createChild="false" propertySortChoices="true"
             ecoreFeature="ecore:EReference m2ling.ecore#//core/View/viewPoint"/>
         <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference m2ling.ecore#//core/View/links"/>
-        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference m2ling.ecore#//core/View/instances"/>
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference m2ling.ecore#//core/View/componentInstances"/>
         <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference m2ling.ecore#//core/View/instancesGroups"/>
-        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference m2ling.ecore#//core/View/streams"/>
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference m2ling.ecore#//core/View/linkInstances"/>
       </genClasses>
       <genClasses image="false" ecoreClass="m2ling.ecore#//core/HasStatus">
         <genFeatures createChild="false" ecoreFeature="ecore:EAttribute m2ling.ecore#//core/HasStatus/status"/>
@@ -147,13 +143,13 @@
             ecoreFeature="ecore:EReference m2ling.ecore#//core/Link/destinations"/>
         <genFeatures createChild="false" ecoreFeature="ecore:EAttribute m2ling.ecore#//core/Link/timeoutMillis"/>
       </genClasses>
-      <genClasses ecoreClass="m2ling.ecore#//core/InstancesLink">
+      <genClasses ecoreClass="m2ling.ecore#//core/LinkInstance">
         <genFeatures notify="false" createChild="false" propertySortChoices="true"
-            ecoreFeature="ecore:EReference m2ling.ecore#//core/InstancesLink/source"/>
+            ecoreFeature="ecore:EReference m2ling.ecore#//core/LinkInstance/source"/>
         <genFeatures notify="false" createChild="false" propertySortChoices="true"
-            ecoreFeature="ecore:EReference m2ling.ecore#//core/InstancesLink/destination"/>
+            ecoreFeature="ecore:EReference m2ling.ecore#//core/LinkInstance/destination"/>
         <genFeatures notify="false" createChild="false" propertySortChoices="true"
-            ecoreFeature="ecore:EReference m2ling.ecore#//core/InstancesLink/link"/>
+            ecoreFeature="ecore:EReference m2ling.ecore#//core/LinkInstance/link"/>
       </genClasses>
       <genClasses ecoreClass="m2ling.ecore#//core/Stakeholder">
         <genFeatures notify="false" createChild="false" propertySortChoices="true"
@@ -208,6 +204,7 @@
         <genFeatures createChild="false" ecoreFeature="ecore:EAttribute m2ling.ecore#//core/Actor/pwdHash"/>
         <genFeatures createChild="false" ecoreFeature="ecore:EAttribute m2ling.ecore#//core/Actor/firstName"/>
         <genFeatures createChild="false" ecoreFeature="ecore:EAttribute m2ling.ecore#//core/Actor/lastName"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute m2ling.ecore#//core/Actor/email"/>
       </genClasses>
       <genClasses ecoreClass="m2ling.ecore#//core/Rule">
         <genFeatures createChild="false" ecoreFeature="ecore:EAttribute m2ling.ecore#//core/Rule/priority"/>

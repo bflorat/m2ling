@@ -21,7 +21,7 @@ package org.m2ling.domain.core;
  * @model
  * @generated
  */
-public interface ComponentInstance extends HasParameterValues, RuntimeItem, HasReferences {
+public interface ComponentInstance extends RuntimeItem, HasReferences {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

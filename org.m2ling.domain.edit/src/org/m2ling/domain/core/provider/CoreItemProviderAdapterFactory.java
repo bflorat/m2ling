@@ -377,26 +377,26 @@ public class CoreItemProviderAdapterFactory extends CoreAdapterFactory implement
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link org.m2ling.domain.core.InstancesLink} instances.
+	 * This keeps track of the one adapter used for all {@link org.m2ling.domain.core.LinkInstance} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected InstancesLinkItemProvider instancesLinkItemProvider;
+	protected LinkInstanceItemProvider linkInstanceItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link org.m2ling.domain.core.InstancesLink}.
+	 * This creates an adapter for a {@link org.m2ling.domain.core.LinkInstance}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
-	public Adapter createInstancesLinkAdapter() {
-		if (instancesLinkItemProvider == null) {
-			instancesLinkItemProvider = new InstancesLinkItemProvider(this);
+	public Adapter createLinkInstanceAdapter() {
+		if (linkInstanceItemProvider == null) {
+			linkInstanceItemProvider = new LinkInstanceItemProvider(this);
 		}
 
-		return instancesLinkItemProvider;
+		return linkInstanceItemProvider;
 	}
 
 	/**
@@ -925,7 +925,7 @@ public class CoreItemProviderAdapterFactory extends CoreAdapterFactory implement
 		if (customPropertyItemProvider != null) customPropertyItemProvider.dispose();
 		if (linkTypeItemProvider != null) linkTypeItemProvider.dispose();
 		if (linkItemProvider != null) linkItemProvider.dispose();
-		if (instancesLinkItemProvider != null) instancesLinkItemProvider.dispose();
+		if (linkInstanceItemProvider != null) linkInstanceItemProvider.dispose();
 		if (stakeholderItemProvider != null) stakeholderItemProvider.dispose();
 		if (floatConstraintItemProvider != null) floatConstraintItemProvider.dispose();
 		if (minConstraintItemProvider != null) minConstraintItemProvider.dispose();

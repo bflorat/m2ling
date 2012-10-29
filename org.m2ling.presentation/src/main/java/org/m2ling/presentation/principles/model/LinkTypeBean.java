@@ -5,11 +5,10 @@
  */
 package org.m2ling.presentation.principles.model;
 
-import java.io.Serializable;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
-import org.m2ling.common.utils.Utils;
+import org.m2ling.presentation.common.model.AbstractCommonBean;
 import org.m2ling.presentation.principles.LinkAccessType;
 import org.m2ling.presentation.principles.LinkTemporality;
 
@@ -17,18 +16,8 @@ import org.m2ling.presentation.principles.LinkTemporality;
  * Mutable Link Type bean
  */
 @SuppressWarnings("serial")
-public class LinkTypeBean implements Serializable {
+public class LinkTypeBean extends AbstractCommonBean {
 	private HasNameAndIDBean vp;
-
-	private String id = "";
-
-	private String name = "";
-
-	private String tags = "";
-
-	private String description = "";
-
-	private String comment = "";
 
 	private String linkTemporality = LinkTemporality.SYNC.name();
 
@@ -190,60 +179,6 @@ public class LinkTypeBean implements Serializable {
 	}
 
 	/**
-	 * @return the id
-	 */
-	public String getId() {
-		return id;
-	}
-
-	/**
-	 * @param id
-	 *           the id to set
-	 */
-	public void setId(String id) {
-		this.id = id;
-	}
-
-	/**
-	 * @return the comment
-	 */
-	public String getComment() {
-		return comment;
-	}
-
-	/**
-	 * @param comment
-	 *           the comment to set
-	 */
-	public void setComment(String comment) {
-		this.comment = comment;
-	}
-
-	/**
-	 * @param name
-	 *           the name to set
-	 */
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	/**
-	 * @param tags
-	 *           the tags to set
-	 */
-	public void setTags(String tags) {
-		this.tags = tags;
-	}
-
-	/**
-	 * @param description
-	 *           the description to set
-	 */
-	public void setDescription(String description) {
-		this.description = description;
-	}
-
-	/**
 	 * @return the status
 	 */
 	public String getStatus() {
@@ -258,34 +193,6 @@ public class LinkTypeBean implements Serializable {
 		this.status = status;
 	}
 
-	/**
-	 * @return the name
-	 */
-	public String getName() {
-		return name;
-	}
-
-	/**
-	 * Return a defensive copy of the tags.
-	 * 
-	 * @return a defensive copy of the tags
-	 */
-	public String getTags() {
-		return tags;
-	}
-
-	/**
-	 * @return the description
-	 */
-	public String getDescription() {
-		return description;
-	}
-
-	@Override
-	public String toString() {
-		return Utils.toString(this);
-	}
-
 	@Override
 	public boolean equals(Object other) {
 		if (other == this) {
@@ -294,11 +201,6 @@ public class LinkTypeBean implements Serializable {
 		if (other == null || !(other instanceof LinkTypeBean)) {
 			return false;
 		}
-		return ((LinkTypeBean) other).getId().equals(id);
-	}
-
-	@Override
-	public int hashCode() {
-		return id.hashCode();
+		return ((LinkTypeBean) other).getId().equals(getId());
 	}
 }

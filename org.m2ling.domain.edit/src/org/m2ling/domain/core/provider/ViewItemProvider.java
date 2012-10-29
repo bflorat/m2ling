@@ -313,7 +313,7 @@ public class ViewItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(CorePackage.Literals.VIEW__LINK_INSTANCES,
-				 CoreFactory.eINSTANCE.createInstancesLink()));
+				 CoreFactory.eINSTANCE.createLinkInstance()));
 	}
 
 }

@@ -27,10 +27,10 @@ import org.m2ling.domain.core.FormatConstraint;
 import org.m2ling.domain.core.HasComment;
 import org.m2ling.domain.core.HasCustomProperties;
 import org.m2ling.domain.core.HasNameAndID;
-import org.m2ling.domain.core.InstancesLink;
 import org.m2ling.domain.core.IntegerConstraint;
 import org.m2ling.domain.core.Link;
 import org.m2ling.domain.core.LinkAccessType;
+import org.m2ling.domain.core.LinkInstance;
 import org.m2ling.domain.core.LinkTemporality;
 import org.m2ling.domain.core.LinkType;
 import org.m2ling.domain.core.MaxConstraint;
@@ -113,7 +113,7 @@ public class CoreFactoryImpl extends EFactoryImpl implements CoreFactory {
 			case CorePackage.CUSTOM_PROPERTY: return createCustomProperty();
 			case CorePackage.LINK_TYPE: return createLinkType();
 			case CorePackage.LINK: return createLink();
-			case CorePackage.INSTANCES_LINK: return createInstancesLink();
+			case CorePackage.LINK_INSTANCE: return createLinkInstance();
 			case CorePackage.STAKEHOLDER: return createStakeholder();
 			case CorePackage.FLOAT_CONSTRAINT: return createFloatConstraint();
 			case CorePackage.MIN_CONSTRAINT: return createMinConstraint();
@@ -318,9 +318,9 @@ public class CoreFactoryImpl extends EFactoryImpl implements CoreFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public InstancesLink createInstancesLink() {
-		InstancesLinkImpl instancesLink = new InstancesLinkImpl();
-		return instancesLink;
+	public LinkInstance createLinkInstance() {
+		LinkInstanceImpl linkInstance = new LinkInstanceImpl();
+		return linkInstance;
 	}
 
 	/**

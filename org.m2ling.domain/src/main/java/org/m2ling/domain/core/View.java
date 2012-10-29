@@ -143,7 +143,7 @@ public interface View extends HasComment, HasDescription, HasNameAndID, HasTags 
 
 	/**
 	 * Returns the value of the '<em><b>Link Instances</b></em>' containment reference list.
-	 * The list contents are of type {@link org.m2ling.domain.core.InstancesLink}.
+	 * The list contents are of type {@link org.m2ling.domain.core.LinkInstance}.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Link Instances</em>' containment reference list isn't clear,
@@ -155,6 +155,6 @@ public interface View extends HasComment, HasDescription, HasNameAndID, HasTags 
 	 * @model containment="true"
 	 * @generated
 	 */
-	EList<InstancesLink> getLinkInstances();
+	EList<LinkInstance> getLinkInstances();
 
 } // View

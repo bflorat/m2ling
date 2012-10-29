@@ -625,22 +625,13 @@ public interface CorePackage extends EPackage {
 	int HAS_PARAMETER_VALUES = 16;
 
 	/**
-	 * The number of structural features of the '<em>Has Parameter Values</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int HAS_PARAMETER_VALUES_FEATURE_COUNT = 0;
-
-	/**
 	 * The feature id for the '<em><b>Id</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int COMPONENT_INSTANCE__ID = HAS_PARAMETER_VALUES_FEATURE_COUNT + 0;
+	int RUNTIME_ITEM__ID = HAS_NAME_AND_ID__ID;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -649,7 +640,7 @@ public interface CorePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int COMPONENT_INSTANCE__NAME = HAS_PARAMETER_VALUES_FEATURE_COUNT + 1;
+	int RUNTIME_ITEM__NAME = HAS_NAME_AND_ID__NAME;
 
 	/**
 	 * The feature id for the '<em><b>Comment</b></em>' attribute.
@@ -658,7 +649,7 @@ public interface CorePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int COMPONENT_INSTANCE__COMMENT = HAS_PARAMETER_VALUES_FEATURE_COUNT + 2;
+	int RUNTIME_ITEM__COMMENT = HAS_NAME_AND_ID_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Tags</b></em>' attribute list.
@@ -667,7 +658,7 @@ public interface CorePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int COMPONENT_INSTANCE__TAGS = HAS_PARAMETER_VALUES_FEATURE_COUNT + 3;
+	int RUNTIME_ITEM__TAGS = HAS_NAME_AND_ID_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Description</b></em>' attribute.
@@ -676,7 +667,7 @@ public interface CorePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int COMPONENT_INSTANCE__DESCRIPTION = HAS_PARAMETER_VALUES_FEATURE_COUNT + 4;
+	int RUNTIME_ITEM__DESCRIPTION = HAS_NAME_AND_ID_FEATURE_COUNT + 2;
 
 	/**
 	 * The feature id for the '<em><b>Status</b></em>' attribute.
@@ -685,7 +676,70 @@ public interface CorePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int COMPONENT_INSTANCE__STATUS = HAS_PARAMETER_VALUES_FEATURE_COUNT + 5;
+	int RUNTIME_ITEM__STATUS = HAS_NAME_AND_ID_FEATURE_COUNT + 3;
+
+	/**
+	 * The number of structural features of the '<em>Runtime Item</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RUNTIME_ITEM_FEATURE_COUNT = HAS_NAME_AND_ID_FEATURE_COUNT + 4;
+
+	/**
+	 * The feature id for the '<em><b>Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COMPONENT_INSTANCE__ID = RUNTIME_ITEM__ID;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COMPONENT_INSTANCE__NAME = RUNTIME_ITEM__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Comment</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COMPONENT_INSTANCE__COMMENT = RUNTIME_ITEM__COMMENT;
+
+	/**
+	 * The feature id for the '<em><b>Tags</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COMPONENT_INSTANCE__TAGS = RUNTIME_ITEM__TAGS;
+
+	/**
+	 * The feature id for the '<em><b>Description</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COMPONENT_INSTANCE__DESCRIPTION = RUNTIME_ITEM__DESCRIPTION;
+
+	/**
+	 * The feature id for the '<em><b>Status</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COMPONENT_INSTANCE__STATUS = RUNTIME_ITEM__STATUS;
 
 	/**
 	 * The feature id for the '<em><b>References</b></em>' containment reference list.
@@ -694,7 +748,7 @@ public interface CorePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int COMPONENT_INSTANCE__REFERENCES = HAS_PARAMETER_VALUES_FEATURE_COUNT + 6;
+	int COMPONENT_INSTANCE__REFERENCES = RUNTIME_ITEM_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Component</b></em>' reference.
@@ -703,7 +757,7 @@ public interface CorePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int COMPONENT_INSTANCE__COMPONENT = HAS_PARAMETER_VALUES_FEATURE_COUNT + 7;
+	int COMPONENT_INSTANCE__COMPONENT = RUNTIME_ITEM_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Bound Component Instance</b></em>' reference.
@@ -712,7 +766,7 @@ public interface CorePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int COMPONENT_INSTANCE__BOUND_COMPONENT_INSTANCE = HAS_PARAMETER_VALUES_FEATURE_COUNT + 8;
+	int COMPONENT_INSTANCE__BOUND_COMPONENT_INSTANCE = RUNTIME_ITEM_FEATURE_COUNT + 2;
 
 	/**
 	 * The number of structural features of the '<em>Component Instance</em>' class.
@@ -721,7 +775,7 @@ public interface CorePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int COMPONENT_INSTANCE_FEATURE_COUNT = HAS_PARAMETER_VALUES_FEATURE_COUNT + 9;
+	int COMPONENT_INSTANCE_FEATURE_COUNT = RUNTIME_ITEM_FEATURE_COUNT + 3;
 
 	/**
 	 * The feature id for the '<em><b>Comment</b></em>' attribute.
@@ -911,69 +965,6 @@ public interface CorePackage extends EPackage {
 	 * @ordered
 	 */
 	int COMPONENT_GROUP_FEATURE_COUNT = ARCHITECTURE_ITEM_FEATURE_COUNT + 1;
-
-	/**
-	 * The feature id for the '<em><b>Id</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int RUNTIME_ITEM__ID = HAS_NAME_AND_ID__ID;
-
-	/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int RUNTIME_ITEM__NAME = HAS_NAME_AND_ID__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Comment</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int RUNTIME_ITEM__COMMENT = HAS_NAME_AND_ID_FEATURE_COUNT + 0;
-
-	/**
-	 * The feature id for the '<em><b>Tags</b></em>' attribute list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int RUNTIME_ITEM__TAGS = HAS_NAME_AND_ID_FEATURE_COUNT + 1;
-
-	/**
-	 * The feature id for the '<em><b>Description</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int RUNTIME_ITEM__DESCRIPTION = HAS_NAME_AND_ID_FEATURE_COUNT + 2;
-
-	/**
-	 * The feature id for the '<em><b>Status</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int RUNTIME_ITEM__STATUS = HAS_NAME_AND_ID_FEATURE_COUNT + 3;
-
-	/**
-	 * The number of structural features of the '<em>Runtime Item</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int RUNTIME_ITEM_FEATURE_COUNT = HAS_NAME_AND_ID_FEATURE_COUNT + 4;
 
 	/**
 	 * The feature id for the '<em><b>Id</b></em>' attribute.
@@ -1228,6 +1219,15 @@ public interface CorePackage extends EPackage {
 	int HAS_PARAMETER_DEFINITIONS_FEATURE_COUNT = 0;
 
 	/**
+	 * The number of structural features of the '<em>Has Parameter Values</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int HAS_PARAMETER_VALUES_FEATURE_COUNT = 0;
+
+	/**
 	 * The meta object id for the '{@link org.m2ling.domain.core.impl.HasDescriptionImpl <em>Has Description</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1254,16 +1254,6 @@ public interface CorePackage extends EPackage {
 	 * @ordered
 	 */
 	int HAS_DESCRIPTION_FEATURE_COUNT = 1;
-
-	/**
-	 * The meta object id for the '{@link org.m2ling.domain.core.impl.InstancesLinkImpl <em>Instances Link</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.m2ling.domain.core.impl.InstancesLinkImpl
-	 * @see org.m2ling.domain.core.impl.CorePackageImpl#getInstancesLink()
-	 * @generated
-	 */
-	int INSTANCES_LINK = 23;
 
 	/**
 	 * The meta object id for the '{@link org.m2ling.domain.core.impl.StakeholderImpl <em>Stakeholder</em>}' class.
@@ -1709,13 +1699,23 @@ public interface CorePackage extends EPackage {
 	int LINK_FEATURE_COUNT = ARCHITECTURE_ITEM_FEATURE_COUNT + 4;
 
 	/**
+	 * The meta object id for the '{@link org.m2ling.domain.core.impl.LinkInstanceImpl <em>Link Instance</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.m2ling.domain.core.impl.LinkInstanceImpl
+	 * @see org.m2ling.domain.core.impl.CorePackageImpl#getLinkInstance()
+	 * @generated
+	 */
+	int LINK_INSTANCE = 23;
+
+	/**
 	 * The feature id for the '<em><b>Id</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int INSTANCES_LINK__ID = RUNTIME_ITEM__ID;
+	int LINK_INSTANCE__ID = RUNTIME_ITEM__ID;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -1724,7 +1724,7 @@ public interface CorePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int INSTANCES_LINK__NAME = RUNTIME_ITEM__NAME;
+	int LINK_INSTANCE__NAME = RUNTIME_ITEM__NAME;
 
 	/**
 	 * The feature id for the '<em><b>Comment</b></em>' attribute.
@@ -1733,7 +1733,7 @@ public interface CorePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int INSTANCES_LINK__COMMENT = RUNTIME_ITEM__COMMENT;
+	int LINK_INSTANCE__COMMENT = RUNTIME_ITEM__COMMENT;
 
 	/**
 	 * The feature id for the '<em><b>Tags</b></em>' attribute list.
@@ -1742,7 +1742,7 @@ public interface CorePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int INSTANCES_LINK__TAGS = RUNTIME_ITEM__TAGS;
+	int LINK_INSTANCE__TAGS = RUNTIME_ITEM__TAGS;
 
 	/**
 	 * The feature id for the '<em><b>Description</b></em>' attribute.
@@ -1751,7 +1751,7 @@ public interface CorePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int INSTANCES_LINK__DESCRIPTION = RUNTIME_ITEM__DESCRIPTION;
+	int LINK_INSTANCE__DESCRIPTION = RUNTIME_ITEM__DESCRIPTION;
 
 	/**
 	 * The feature id for the '<em><b>Status</b></em>' attribute.
@@ -1760,7 +1760,7 @@ public interface CorePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int INSTANCES_LINK__STATUS = RUNTIME_ITEM__STATUS;
+	int LINK_INSTANCE__STATUS = RUNTIME_ITEM__STATUS;
 
 	/**
 	 * The feature id for the '<em><b>Source</b></em>' reference.
@@ -1769,7 +1769,7 @@ public interface CorePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int INSTANCES_LINK__SOURCE = RUNTIME_ITEM_FEATURE_COUNT + 0;
+	int LINK_INSTANCE__SOURCE = RUNTIME_ITEM_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Destination</b></em>' reference.
@@ -1778,7 +1778,7 @@ public interface CorePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int INSTANCES_LINK__DESTINATION = RUNTIME_ITEM_FEATURE_COUNT + 1;
+	int LINK_INSTANCE__DESTINATION = RUNTIME_ITEM_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Link</b></em>' reference.
@@ -1787,16 +1787,16 @@ public interface CorePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int INSTANCES_LINK__LINK = RUNTIME_ITEM_FEATURE_COUNT + 2;
+	int LINK_INSTANCE__LINK = RUNTIME_ITEM_FEATURE_COUNT + 2;
 
 	/**
-	 * The number of structural features of the '<em>Instances Link</em>' class.
+	 * The number of structural features of the '<em>Link Instance</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int INSTANCES_LINK_FEATURE_COUNT = RUNTIME_ITEM_FEATURE_COUNT + 3;
+	int LINK_INSTANCE_FEATURE_COUNT = RUNTIME_ITEM_FEATURE_COUNT + 3;
 
 	/**
 	 * The feature id for the '<em><b>Id</b></em>' attribute.
@@ -2912,17 +2912,6 @@ public interface CorePackage extends EPackage {
 	EClass getRuntimeItem();
 
 	/**
-	 * Returns the meta object for the attribute '{@link org.m2ling.domain.core.RuntimeItem#getStatus <em>Status</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Status</em>'.
-	 * @see org.m2ling.domain.core.RuntimeItem#getStatus()
-	 * @see #getRuntimeItem()
-	 * @generated
-	 */
-	EAttribute getRuntimeItem_Status();
-
-	/**
 	 * Returns the meta object for class '{@link org.m2ling.domain.core.View <em>View</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3212,47 +3201,47 @@ public interface CorePackage extends EPackage {
 	EAttribute getLink_TimeoutMillis();
 
 	/**
-	 * Returns the meta object for class '{@link org.m2ling.domain.core.InstancesLink <em>Instances Link</em>}'.
+	 * Returns the meta object for class '{@link org.m2ling.domain.core.LinkInstance <em>Link Instance</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Instances Link</em>'.
-	 * @see org.m2ling.domain.core.InstancesLink
+	 * @return the meta object for class '<em>Link Instance</em>'.
+	 * @see org.m2ling.domain.core.LinkInstance
 	 * @generated
 	 */
-	EClass getInstancesLink();
+	EClass getLinkInstance();
 
 	/**
-	 * Returns the meta object for the reference '{@link org.m2ling.domain.core.InstancesLink#getSource <em>Source</em>}'.
+	 * Returns the meta object for the reference '{@link org.m2ling.domain.core.LinkInstance#getSource <em>Source</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the reference '<em>Source</em>'.
-	 * @see org.m2ling.domain.core.InstancesLink#getSource()
-	 * @see #getInstancesLink()
+	 * @see org.m2ling.domain.core.LinkInstance#getSource()
+	 * @see #getLinkInstance()
 	 * @generated
 	 */
-	EReference getInstancesLink_Source();
+	EReference getLinkInstance_Source();
 
 	/**
-	 * Returns the meta object for the reference '{@link org.m2ling.domain.core.InstancesLink#getDestination <em>Destination</em>}'.
+	 * Returns the meta object for the reference '{@link org.m2ling.domain.core.LinkInstance#getDestination <em>Destination</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the reference '<em>Destination</em>'.
-	 * @see org.m2ling.domain.core.InstancesLink#getDestination()
-	 * @see #getInstancesLink()
+	 * @see org.m2ling.domain.core.LinkInstance#getDestination()
+	 * @see #getLinkInstance()
 	 * @generated
 	 */
-	EReference getInstancesLink_Destination();
+	EReference getLinkInstance_Destination();
 
 	/**
-	 * Returns the meta object for the reference '{@link org.m2ling.domain.core.InstancesLink#getLink <em>Link</em>}'.
+	 * Returns the meta object for the reference '{@link org.m2ling.domain.core.LinkInstance#getLink <em>Link</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the reference '<em>Link</em>'.
-	 * @see org.m2ling.domain.core.InstancesLink#getLink()
-	 * @see #getInstancesLink()
+	 * @see org.m2ling.domain.core.LinkInstance#getLink()
+	 * @see #getLinkInstance()
 	 * @generated
 	 */
-	EReference getInstancesLink_Link();
+	EReference getLinkInstance_Link();
 
 	/**
 	 * Returns the meta object for class '{@link org.m2ling.domain.core.HasParameterDefinitions <em>Has Parameter Definitions</em>}'.
@@ -4157,14 +4146,6 @@ public interface CorePackage extends EPackage {
 		EClass RUNTIME_ITEM = eINSTANCE.getRuntimeItem();
 
 		/**
-		 * The meta object literal for the '<em><b>Status</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute RUNTIME_ITEM__STATUS = eINSTANCE.getRuntimeItem_Status();
-
-		/**
 		 * The meta object literal for the '{@link org.m2ling.domain.core.impl.ViewImpl <em>View</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -4397,14 +4378,14 @@ public interface CorePackage extends EPackage {
 		EAttribute LINK__TIMEOUT_MILLIS = eINSTANCE.getLink_TimeoutMillis();
 
 		/**
-		 * The meta object literal for the '{@link org.m2ling.domain.core.impl.InstancesLinkImpl <em>Instances Link</em>}' class.
+		 * The meta object literal for the '{@link org.m2ling.domain.core.impl.LinkInstanceImpl <em>Link Instance</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see org.m2ling.domain.core.impl.InstancesLinkImpl
-		 * @see org.m2ling.domain.core.impl.CorePackageImpl#getInstancesLink()
+		 * @see org.m2ling.domain.core.impl.LinkInstanceImpl
+		 * @see org.m2ling.domain.core.impl.CorePackageImpl#getLinkInstance()
 		 * @generated
 		 */
-		EClass INSTANCES_LINK = eINSTANCE.getInstancesLink();
+		EClass LINK_INSTANCE = eINSTANCE.getLinkInstance();
 
 		/**
 		 * The meta object literal for the '<em><b>Source</b></em>' reference feature.
@@ -4412,7 +4393,7 @@ public interface CorePackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference INSTANCES_LINK__SOURCE = eINSTANCE.getInstancesLink_Source();
+		EReference LINK_INSTANCE__SOURCE = eINSTANCE.getLinkInstance_Source();
 
 		/**
 		 * The meta object literal for the '<em><b>Destination</b></em>' reference feature.
@@ -4420,7 +4401,7 @@ public interface CorePackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference INSTANCES_LINK__DESTINATION = eINSTANCE.getInstancesLink_Destination();
+		EReference LINK_INSTANCE__DESTINATION = eINSTANCE.getLinkInstance_Destination();
 
 		/**
 		 * The meta object literal for the '<em><b>Link</b></em>' reference feature.
@@ -4428,7 +4409,7 @@ public interface CorePackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference INSTANCES_LINK__LINK = eINSTANCE.getInstancesLink_Link();
+		EReference LINK_INSTANCE__LINK = eINSTANCE.getLinkInstance_Link();
 
 		/**
 		 * The meta object literal for the '{@link org.m2ling.domain.core.impl.HasParameterDefinitionsImpl <em>Has Parameter Definitions</em>}' class.

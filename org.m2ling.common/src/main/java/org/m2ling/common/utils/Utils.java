@@ -78,7 +78,7 @@ public class Utils {
 		sb.deleteCharAt(sb.length() - 1);
 		return sb.toString();
 	}
-	
+
 	/**
 	 * Return a string set as a comma-separated string.
 	 * 
@@ -229,7 +229,8 @@ public class Utils {
 	}
 
 	/**
-	 * Generic toString() method that display all declared fields sorted alphabetically/ignore case.
+	 * Generic toString() method that display all declared fields and those of immediate parent class
+	 * sorted alphabetically/ignore case.
 	 * <p>
 	 * If a field is not initialized, the string <null> is displayed
 	 * </p>
@@ -238,7 +239,13 @@ public class Utils {
 	 */
 	public static String toString(Object obj) {
 		StringBuilder sb = new StringBuilder();
-		List<Field> fields = Arrays.asList(obj.getClass().getDeclaredFields());
+		// We need to instantiate an ArrayList here to get a collection that supported addAll
+		List<Field> fields = new ArrayList<Field>(Arrays.asList(obj.getClass().getDeclaredFields()));
+		Field[] parentFields = obj.getClass().getSuperclass().getDeclaredFields();
+		if (parentFields.length > 0) {
+			List<Field> parentFieldsList = Arrays.asList(parentFields);
+			fields.addAll(parentFieldsList);
+		}
 		Collections.sort(fields, new Comparator<Field>() {
 			@Override
 			public int compare(Field o1, Field o2) {

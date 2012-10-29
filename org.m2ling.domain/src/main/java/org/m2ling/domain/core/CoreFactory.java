@@ -147,13 +147,13 @@ public interface CoreFactory extends EFactory {
 	Link createLink();
 
 	/**
-	 * Returns a new object of class '<em>Instances Link</em>'.
+	 * Returns a new object of class '<em>Link Instance</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Instances Link</em>'.
+	 * @return a new object of class '<em>Link Instance</em>'.
 	 * @generated
 	 */
-	InstancesLink createInstancesLink();
+	LinkInstance createLinkInstance();
 
 	/**
 	 * Returns a new object of class '<em>Stakeholder</em>'.
