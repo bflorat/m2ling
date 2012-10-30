@@ -9,15 +9,15 @@ package org.m2ling.common.dto.core;
  * @author Bertrand Florat <bertrand@florat.net>
  */
 public final class ViewDTO extends AbstractCommonDTO implements Comparable<ViewDTO> {
-	private final String vpID;
+	private final HasNameAndIdDTO vp;
 
 	public static class Builder extends AbstractCommonDTO.Builder {
 		// Required configuration
-		private final String vpID;
+		private final HasNameAndIdDTO vp;
 
-		public Builder(String id, String name, String vpID) {
+		public Builder(String id, String name, HasNameAndIdDTO vp) {
 			super(id, name);
-			this.vpID = vpID;
+			this.vp = vp;
 		}
 
 		public ViewDTO build() {
@@ -28,7 +28,7 @@ public final class ViewDTO extends AbstractCommonDTO implements Comparable<ViewD
 
 	private ViewDTO(Builder builder) {
 		super(builder);
-		vpID = builder.vpID;
+		vp = builder.vp;
 	}
 
 	public boolean equals(Object o) {
@@ -62,7 +62,7 @@ public final class ViewDTO extends AbstractCommonDTO implements Comparable<ViewD
 	/**
 	 * @return the vpID
 	 */
-	public String getVpID() {
-		return vpID;
+	public HasNameAndIdDTO getViewpoint() {
+		return vp;
 	}
 }

@@ -140,12 +140,14 @@ public class LinkTypeServiceImpl extends ServiceImpl implements LinkTypeService 
 			if (droppedDestTypes.size() > 0 || droppedSourceTypes.size() > 0) {
 				for (View v : util.getViewsByVPID(dto.getViewPoint().getId())) {
 					for (Link link : v.getLinks()) {
-						for (Component comp : link.getSources()) {
+						List<Component> comps = util.getComponentForArchitectureItems(link.getSources());
+						for (Component comp : comps) {
 							if (droppedSourceTypes.contains(comp.getType())) {
 								throw new FunctionalException(Code.LT_EXISTING_LINK, null, "component=" + comp.getName());
 							}
 						}
-						for (Component comp : link.getDestinations()) {
+						comps = util.getComponentForArchitectureItems(link.getDestinations());
+						for (Component comp : comps) {
 							if (droppedDestTypes.contains(comp.getType())) {
 								throw new FunctionalException(Code.LT_EXISTING_LINK, null, "component=" + comp.getName());
 							}

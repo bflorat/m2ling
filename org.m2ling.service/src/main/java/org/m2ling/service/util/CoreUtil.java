@@ -266,6 +266,26 @@ public class CoreUtil {
 	}
 
 	/**
+	 * Return a list of components for a list of architecture items.
+	 * 
+	 * @param id
+	 *           the architecture item list
+	 * @return a set of components for a list of architecture items.
+	 */
+	public List<Component> getComponentForArchitectureItems(List<ArchitectureItem> items) {
+		List<Component> result = new ArrayList<Component>(items.size());
+		for (ArchitectureItem ai : items) {
+			if (ai instanceof Component) {
+				result.add((Component)ai);
+			} else if (ai instanceof ComponentGroup){
+				ComponentGroup group = (ComponentGroup)ai;
+				result.addAll(group.getComponents());
+			}
+		}
+		return result;
+	}
+
+	/**
 	 * Return a component group denoted by the given id or null if none matches.
 	 * 
 	 * @param id

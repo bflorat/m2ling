@@ -3,8 +3,7 @@
  */
 package org.m2ling.common.dto.core;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Set;
 
 /**
  * Link instance DTO object used between layers.
@@ -12,36 +11,36 @@ import java.util.List;
  * @author Bertrand Florat <bertrand@florat.net>
  */
 public final class LinkInstanceDTO extends AbstractCommonDTO implements Comparable<LinkInstanceDTO> {
-	private final ComponentDTO component;
+	private final HasNameAndIdDTO link;
 
-	private final LinkInstanceDTO boundInstance;
+	private final Set<HasNameAndIdDTO> sources;
 
-	private final List<ReferenceDTO> references;
+	private final Set<HasNameAndIdDTO> destinations;
 
 	public static class Builder extends AbstractCommonDTO.Builder {
 		// Optional configuration
-		private ComponentDTO component;
+		private HasNameAndIdDTO link;
 
-		private List<ReferenceDTO> references = new ArrayList<ReferenceDTO>(1);
+		private Set<HasNameAndIdDTO> sources;
 
-		private LinkInstanceDTO boundInstance;
+		private Set<HasNameAndIdDTO> destinations;
 
 		public Builder(String id, String name) {
 			super(id, name);
 		}
 
-		public Builder component(ComponentDTO component) {
-			this.component = component;
+		public Builder link(HasNameAndIdDTO link) {
+			this.link = link;
 			return this;
 		}
 
-		public Builder boundInstance(LinkInstanceDTO boundInstance) {
-			this.boundInstance = boundInstance;
+		public Builder addSource(HasNameAndIdDTO comp) {
+			this.sources.add(comp);
 			return this;
 		}
 
-		public Builder addReference(ReferenceDTO reference) {
-			this.references.add(reference);
+		public Builder addDestination(HasNameAndIdDTO comp) {
+			this.destinations.add(comp);
 			return this;
 		}
 
@@ -53,9 +52,9 @@ public final class LinkInstanceDTO extends AbstractCommonDTO implements Comparab
 
 	private LinkInstanceDTO(Builder builder) {
 		super(builder);
-		references = builder.references;
-		component = builder.component;
-		boundInstance = builder.boundInstance;
+		sources = builder.sources;
+		destinations = builder.destinations;
+		link = builder.link;
 	}
 
 	public boolean equals(Object o) {
@@ -89,21 +88,21 @@ public final class LinkInstanceDTO extends AbstractCommonDTO implements Comparab
 	/**
 	 * @return the associated component
 	 */
-	public ComponentDTO getComponent() {
-		return component;
+	public HasNameAndIdDTO getLink() {
+		return link;
 	}
 
 	/**
-	 * @return the references
+	 * @return the sources
 	 */
-	public List<ReferenceDTO> getReferences() {
-		return references;
+	public Set<HasNameAndIdDTO> getSources() {
+		return sources;
 	}
 
 	/**
-	 * @return the bound instance
+	 * @return the destinations
 	 */
-	public LinkInstanceDTO getBoundInstance() {
-		return boundInstance;
+	public Set<HasNameAndIdDTO> getDestinations() {
+		return destinations;
 	}
 }

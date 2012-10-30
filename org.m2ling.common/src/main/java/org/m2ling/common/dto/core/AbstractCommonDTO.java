@@ -13,7 +13,7 @@ import org.m2ling.common.utils.Utils;
  * 
  * @author Bertrand Florat <bertrand@florat.net>
  */
-abstract class AbstractCommonDTO {
+abstract public class AbstractCommonDTO {
 	private final String id;
 
 	private final String name;
@@ -26,7 +26,7 @@ abstract class AbstractCommonDTO {
 
 	private final String status;
 
-	public static class Builder {
+	public static abstract class Builder {
 		// Required configuration
 		private final String name;
 

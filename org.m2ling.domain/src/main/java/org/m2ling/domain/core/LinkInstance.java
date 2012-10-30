@@ -39,12 +39,12 @@ public interface LinkInstance extends RuntimeItem {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Source</em>' reference.
-	 * @see #setSource(ComponentInstance)
+	 * @see #setSource(RuntimeItem)
 	 * @see org.m2ling.domain.core.CorePackage#getLinkInstance_Source()
 	 * @model required="true"
 	 * @generated
 	 */
-	ComponentInstance getSource();
+	RuntimeItem getSource();
 
 	/**
 	 * Sets the value of the '{@link org.m2ling.domain.core.LinkInstance#getSource <em>Source</em>}' reference.
@@ -54,7 +54,7 @@ public interface LinkInstance extends RuntimeItem {
 	 * @see #getSource()
 	 * @generated
 	 */
-	void setSource(ComponentInstance value);
+	void setSource(RuntimeItem value);
 
 	/**
 	 * Returns the value of the '<em><b>Destination</b></em>' reference.
@@ -65,12 +65,12 @@ public interface LinkInstance extends RuntimeItem {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Destination</em>' reference.
-	 * @see #setDestination(ComponentInstance)
+	 * @see #setDestination(RuntimeItem)
 	 * @see org.m2ling.domain.core.CorePackage#getLinkInstance_Destination()
 	 * @model required="true"
 	 * @generated
 	 */
-	ComponentInstance getDestination();
+	RuntimeItem getDestination();
 
 	/**
 	 * Sets the value of the '{@link org.m2ling.domain.core.LinkInstance#getDestination <em>Destination</em>}' reference.
@@ -80,7 +80,7 @@ public interface LinkInstance extends RuntimeItem {
 	 * @see #getDestination()
 	 * @generated
 	 */
-	void setDestination(ComponentInstance value);
+	void setDestination(RuntimeItem value);
 
 	/**
 	 * Returns the value of the '<em><b>Link</b></em>' reference.

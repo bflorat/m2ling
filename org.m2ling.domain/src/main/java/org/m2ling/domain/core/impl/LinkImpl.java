@@ -11,7 +11,7 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EObjectResolvingEList;
-import org.m2ling.domain.core.Component;
+import org.m2ling.domain.core.ArchitectureItem;
 import org.m2ling.domain.core.CorePackage;
 import org.m2ling.domain.core.Link;
 import org.m2ling.domain.core.LinkType;
@@ -58,7 +58,7 @@ public class LinkImpl extends ArchitectureItemImpl implements Link {
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<Component> sources;
+	protected EList<ArchitectureItem> sources;
 
 	/**
 	 * The cached value of the '{@link #getDestinations() <em>Destinations</em>}' reference list.
@@ -68,7 +68,7 @@ public class LinkImpl extends ArchitectureItemImpl implements Link {
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<Component> destinations;
+	protected EList<ArchitectureItem> destinations;
 
 	/**
 	 * The default value of the '{@link #getTimeoutMillis() <em>Timeout Millis</em>}' attribute.
@@ -152,9 +152,9 @@ public class LinkImpl extends ArchitectureItemImpl implements Link {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<Component> getSources() {
+	public EList<ArchitectureItem> getSources() {
 		if (sources == null) {
-			sources = new EObjectResolvingEList<Component>(Component.class, this, CorePackage.LINK__SOURCES);
+			sources = new EObjectResolvingEList<ArchitectureItem>(ArchitectureItem.class, this, CorePackage.LINK__SOURCES);
 		}
 		return sources;
 	}
@@ -164,9 +164,9 @@ public class LinkImpl extends ArchitectureItemImpl implements Link {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<Component> getDestinations() {
+	public EList<ArchitectureItem> getDestinations() {
 		if (destinations == null) {
-			destinations = new EObjectResolvingEList<Component>(Component.class, this, CorePackage.LINK__DESTINATIONS);
+			destinations = new EObjectResolvingEList<ArchitectureItem>(ArchitectureItem.class, this, CorePackage.LINK__DESTINATIONS);
 		}
 		return destinations;
 	}
@@ -227,11 +227,11 @@ public class LinkImpl extends ArchitectureItemImpl implements Link {
 				return;
 			case CorePackage.LINK__SOURCES:
 				getSources().clear();
-				getSources().addAll((Collection<? extends Component>)newValue);
+				getSources().addAll((Collection<? extends ArchitectureItem>)newValue);
 				return;
 			case CorePackage.LINK__DESTINATIONS:
 				getDestinations().clear();
-				getDestinations().addAll((Collection<? extends Component>)newValue);
+				getDestinations().addAll((Collection<? extends ArchitectureItem>)newValue);
 				return;
 			case CorePackage.LINK__TIMEOUT_MILLIS:
 				setTimeoutMillis((Long)newValue);

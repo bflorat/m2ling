@@ -24,7 +24,7 @@ public class ComponentBean extends AbstractCommonBean {
 
 	private HasNameAndIDBean type;
 
-	private ComponentBean boundComponent;
+	private HasNameAndIDBean boundComponent;
 
 	public ComponentBean() {
 		super();
@@ -85,7 +85,7 @@ public class ComponentBean extends AbstractCommonBean {
 	/**
 	 * @return the boundComponent
 	 */
-	public ComponentBean getBoundComponent() {
+	public HasNameAndIDBean getBoundComponent() {
 		return boundComponent;
 	}
 
@@ -93,7 +93,7 @@ public class ComponentBean extends AbstractCommonBean {
 	 * @param boundComponent
 	 *           the boundComponent to set
 	 */
-	public void setBoundComponent(ComponentBean boundComponent) {
+	public void setBoundComponent(HasNameAndIDBean boundComponent) {
 		this.boundComponent = boundComponent;
 	}
 }

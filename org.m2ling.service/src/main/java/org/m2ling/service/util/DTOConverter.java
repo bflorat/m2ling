@@ -9,6 +9,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.ecore.EObject;
+import org.m2ling.common.dto.core.AbstractCommonDTO;
 import org.m2ling.common.dto.core.ComponentTypeDTO;
 import org.m2ling.common.dto.core.HasNameAndIdDTO;
 import org.m2ling.common.dto.core.LinkTypeDTO;
@@ -21,7 +23,11 @@ import org.m2ling.domain.core.ArchitectureItem;
 import org.m2ling.domain.core.Component;
 import org.m2ling.domain.core.ComponentType;
 import org.m2ling.domain.core.CoreFactory;
+import org.m2ling.domain.core.HasComment;
+import org.m2ling.domain.core.HasDescription;
 import org.m2ling.domain.core.HasNameAndID;
+import org.m2ling.domain.core.HasStatus;
+import org.m2ling.domain.core.HasTags;
 import org.m2ling.domain.core.LinkAccessType;
 import org.m2ling.domain.core.LinkTemporality;
 import org.m2ling.domain.core.LinkType;
@@ -64,28 +70,37 @@ public class DTOConverter {
 			this.util = util;
 		}
 
-		public ViewPointDTO getViewPointDTO(ViewPoint vp) {
-			ViewPointDTO.Builder builder = new ViewPointDTO.Builder(vp.getId(), vp.getName());
-			for (String tag : vp.getTags()) {
+		/**
+		 * Populate a common DTO builder with data from provided item (must be an
+		 * Architecture/Concept/RuntimeItem)
+		 * 
+		 * @param builder
+		 *           the type-specific builder
+		 * @param item
+		 *           the business object
+		 */
+		private void populateCommonBuilder(AbstractCommonDTO.Builder builder, EObject item) {
+			for (String tag : ((HasTags) item).getTags()) {
 				builder.addTag(tag);
 			}
-			builder.comment(nonull(vp.getComment()));
+			builder.comment(nonull(((HasComment) item).getComment()));
+			builder.description(nonull(((HasDescription) item).getDescription()));
+			builder.status(((HasStatus) item).getStatus());
+		}
+
+		public ViewPointDTO getViewPointDTO(ViewPoint vp) {
+			ViewPointDTO.Builder builder = new ViewPointDTO.Builder(vp.getId(), vp.getName());
+			populateCommonBuilder(builder, vp);
 			for (String statusLiteral : vp.getStatusLiterals()) {
 				builder.addStatusLiteral(statusLiteral);
 			}
-			builder.description(nonull(vp.getDescription()));
 			return builder.build();
 		}
 
 		public RuleDTO getRuleDTO(Rule rule) {
 			ViewPoint vp = (ViewPoint) rule.eContainer();
 			RuleDTO.Builder builder = new RuleDTO.Builder(vp.getId(), rule.getId(), rule.getName());
-			for (String tag : rule.getTags()) {
-				builder.addTag(tag);
-			}
-			builder.comment(nonull(rule.getComment()));
-			builder.status(nonull(rule.getStatus()));
-			builder.description(nonull(rule.getDescription()));
+			populateCommonBuilder(builder, rule);
 			builder.exceptions(nonull(rule.getExceptions()));
 			builder.priority(rule.getPriority());
 			builder.rationale(nonull(rule.getRationale()));
@@ -111,9 +126,7 @@ public class DTOConverter {
 			}
 			HasNameAndIdDTO hniVP = new HasNameAndIdDTO.Builder(vp.getId(), vp.getName()).build();
 			ComponentTypeDTO.Builder builder = new ComponentTypeDTO.Builder(hniVP, ct.getId(), name);
-			for (String tag : ct.getTags()) {
-				builder.addTag(tag);
-			}
+			populateCommonBuilder(builder, ct);
 			// Add bound type tags as well
 			if (boundType != null) {
 				for (String tag : boundType.getTags()) {
@@ -151,7 +164,6 @@ public class DTOConverter {
 			} else {
 				builder.instantiationFactor(ct.getInstantiationFactor());
 			}
-			builder.status(ct.getStatus());
 			return builder.build();
 		}
 
@@ -161,11 +173,7 @@ public class DTOConverter {
 			String name = lt.getName();
 			HasNameAndIdDTO hniVP = new HasNameAndIdDTO.Builder(vp.getId(), vp.getName()).build();
 			LinkTypeDTO.Builder builder = new LinkTypeDTO.Builder(hniVP, lt.getId(), name);
-			for (String tag : lt.getTags()) {
-				builder.addTag(tag);
-			}
-			builder.comment(lt.getComment());
-			builder.description(lt.getDescription());
+			populateCommonBuilder(builder, lt);
 			builder.linkAccessType(lt.getLinkAccessType().getLiteral());
 			builder.linkTemporality(lt.getLinkTemporality().getLiteral());
 			for (ComponentType ct : lt.getSourceTypes()) {
@@ -176,7 +184,6 @@ public class DTOConverter {
 				HasNameAndIdDTO hniDTO = new HasNameAndIdDTO.Builder(ct.getId(), ct.getName()).build();
 				builder.addDestinationsType(hniDTO);
 			}
-			builder.status(lt.getStatus());
 			return builder.build();
 		}
 
@@ -208,12 +215,10 @@ public class DTOConverter {
 		}
 
 		public ViewDTO getViewDTO(View view) {
-			ViewDTO.Builder builder = new ViewDTO.Builder(view.getId(), view.getName(), view.getViewPoint().getId());
-			for (String tag : view.getTags()) {
-				builder.addTag(tag);
-			}
-			builder.comment(nonull(view.getComment()));
-			builder.description(nonull(view.getDescription()));
+			HasNameAndIdDTO vp = new HasNameAndIdDTO.Builder(view.getViewPoint().getId(), view.getViewPoint().getName())
+					.build();
+			ViewDTO.Builder builder = new ViewDTO.Builder(view.getId(), view.getName(), vp);
+			populateCommonBuilder(builder, view);
 			return builder.build();
 		}
 	}
@@ -235,6 +240,22 @@ public class DTOConverter {
 		}
 
 		/**
+		 * Populate item fields with DTO data. Item must be an Architecture/Concept/RuntimeItem.
+		 */
+		private void populateCommonValues(EObject item, AbstractCommonDTO dto) {
+			((HasNameAndID) item).setId(dto.getId());
+			((HasNameAndID) item).setName(dto.getName());
+			for (String tag : dto.getTags()) {
+				if (!Strings.isNullOrEmpty(tag)) {
+					((HasTags) item).getTags().add(tag);
+				}
+			}
+			((HasStatus) item).setStatus(dto.getStatus());
+			((HasDescription) item).setDescription(dto.getDescription());
+			((HasComment) item).setComment(dto.getComment());
+		}
+
+		/**
 		 * Return a new ViewPoint instance given a DTO.
 		 * 
 		 * @param dto
@@ -243,20 +264,12 @@ public class DTOConverter {
 		 */
 		public ViewPoint newViewPoint(ViewPointDTO dto) {
 			ViewPoint vp = CoreFactory.eINSTANCE.createViewPoint();
-			vp.setId(dto.getId());
-			vp.setName(dto.getName());
-			for (String tag : dto.getTags()) {
-				if (!Strings.isNullOrEmpty(tag)) {
-					vp.getTags().add(tag);
-				}
-			}
+			populateCommonValues(vp, dto);
 			for (String status : dto.getStatusLiterals()) {
 				if (!Strings.isNullOrEmpty(status)) {
 					vp.getStatusLiterals().add(status);
 				}
 			}
-			vp.setDescription(dto.getDescription());
-			vp.setComment(dto.getComment());
 			return vp;
 		}
 
@@ -269,15 +282,8 @@ public class DTOConverter {
 		 */
 		public Rule newRule(RuleDTO dto) {
 			Rule rule = CoreFactory.eINSTANCE.createRule();
-			rule.setId(dto.getId());
-			rule.setName(dto.getName());
-			for (String tag : dto.getTags()) {
-				rule.getTags().add(tag);
-			}
-			rule.setStatus(dto.getStatus());
+			populateCommonValues(rule, dto);
 			rule.setPriority(dto.getPriority());
-			rule.setDescription(dto.getDescription());
-			rule.setComment(dto.getComment());
 			rule.setRationale(dto.getRationale());
 			rule.setExceptions(dto.getExceptions());
 			return rule;
@@ -317,19 +323,12 @@ public class DTOConverter {
 		 */
 		public ComponentType newComponentType(ComponentTypeDTO dto) {
 			ComponentType ct = CoreFactory.eINSTANCE.createComponentType();
-			ct.setId(dto.getId());
-			ct.setName(dto.getName());
-			for (String tag : dto.getTags()) {
-				ct.getTags().add(tag);
-			}
-			ct.setDescription(dto.getDescription());
-			ct.setComment(dto.getComment());
+			populateCommonValues(ct, dto);
 			if (dto.getBoundType() != null) {
 				ComponentType boundedType = util.getComponentTypeByID(dto.getBoundType().getId());
 				ct.setBoundType(boundedType);
 			}
 			ct.setInstantiationFactor(dto.getInstantiationFactor());
-			ct.setStatus(dto.getStatus());
 			for (HasNameAndIdDTO hni : dto.getEnumeration()) {
 				ArchitectureItem comp = util.getComponentByID(hni.getId());
 				if (comp == null) {
@@ -354,13 +353,7 @@ public class DTOConverter {
 		 */
 		public LinkType newLinkType(LinkTypeDTO dto) {
 			LinkType lt = CoreFactory.eINSTANCE.createLinkType();
-			lt.setId(dto.getId());
-			lt.setName(dto.getName());
-			for (String tag : dto.getTags()) {
-				lt.getTags().add(tag);
-			}
-			lt.setDescription(dto.getDescription());
-			lt.setComment(dto.getComment());
+			populateCommonValues(lt, dto);
 			lt.setLinkAccessType(LinkAccessType.valueOf(dto.getLinkAccessType()));
 			lt.setLinkTemporality(LinkTemporality.valueOf(dto.getLinkTemporality()));
 			for (HasNameAndIdDTO hniDTO : dto.getSourcesTypes()) {
@@ -371,7 +364,6 @@ public class DTOConverter {
 				ComponentType ct = util.getComponentTypeByID(hniDTO.getId());
 				lt.getDestinationTypes().add(ct);
 			}
-			lt.setStatus(dto.getStatus());
 			return lt;
 		}
 
@@ -404,17 +396,9 @@ public class DTOConverter {
 		 */
 		public View newView(ViewDTO dto) {
 			View view = CoreFactory.eINSTANCE.createView();
-			view.setId(dto.getId());
-			view.setName(dto.getName());
-			ViewPoint vp = util.getViewPointByID(dto.getVpID());
+			populateCommonValues(view, dto);
+			ViewPoint vp = util.getViewPointByID(dto.getViewpoint().getId());
 			view.setViewPoint(vp);
-			for (String tag : dto.getTags()) {
-				if (!Strings.isNullOrEmpty(tag)) {
-					view.getTags().add(tag);
-				}
-			}
-			view.setDescription(dto.getDescription());
-			view.setComment(dto.getComment());
 			return view;
 		}
 	}

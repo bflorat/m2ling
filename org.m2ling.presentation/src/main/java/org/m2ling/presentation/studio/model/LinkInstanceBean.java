@@ -20,15 +20,11 @@ public class LinkInstanceBean extends AbstractCommonBean {
 	/** Drop */
 	private String drop = "";
 
-	private int timeout = -1;
+	private Set<HasNameAndIDBean> sources = new LinkedHashSet<HasNameAndIDBean>();
 
-	private Set<ComponentInstanceBean> sources = new LinkedHashSet<ComponentInstanceBean>();
-
-	private Set<ComponentInstanceBean> destinations = new LinkedHashSet<ComponentInstanceBean>();
+	private Set<HasNameAndIDBean> destinations = new LinkedHashSet<HasNameAndIDBean>();
 
 	private HasNameAndIDBean link;
-
-	private LinkInstanceBean boundComponent;
 
 	public LinkInstanceBean() {
 		super();
@@ -76,39 +72,9 @@ public class LinkInstanceBean extends AbstractCommonBean {
 	}
 
 	/**
-	 * @return the boundComponent
-	 */
-	public LinkInstanceBean getBoundComponent() {
-		return boundComponent;
-	}
-
-	/**
-	 * @param boundComponent
-	 *           the boundComponent to set
-	 */
-	public void setBoundComponent(LinkInstanceBean boundComponent) {
-		this.boundComponent = boundComponent;
-	}
-
-	/**
-	 * @return the timeout
-	 */
-	public int getTimeout() {
-		return timeout;
-	}
-
-	/**
-	 * @param timeout
-	 *           the timeout to set
-	 */
-	public void setTimeout(int timeout) {
-		this.timeout = timeout;
-	}
-
-	/**
 	 * @return the sources
 	 */
-	public Set<ComponentInstanceBean> getSources() {
+	public Set<HasNameAndIDBean> getSources() {
 		return sources;
 	}
 
@@ -116,14 +82,14 @@ public class LinkInstanceBean extends AbstractCommonBean {
 	 * @param sources
 	 *           the sources to set
 	 */
-	public void setSources(Set<ComponentInstanceBean> sources) {
+	public void setSources(Set<HasNameAndIDBean> sources) {
 		this.sources = sources;
 	}
 
 	/**
 	 * @return the destinations
 	 */
-	public Set<ComponentInstanceBean> getDestinations() {
+	public Set<HasNameAndIDBean> getDestinations() {
 		return destinations;
 	}
 
@@ -131,7 +97,7 @@ public class LinkInstanceBean extends AbstractCommonBean {
 	 * @param destinations
 	 *           the destinations to set
 	 */
-	public void setDestinations(Set<ComponentInstanceBean> destinations) {
+	public void setDestinations(Set<HasNameAndIDBean> destinations) {
 		this.destinations = destinations;
 	}
 }

@@ -7,10 +7,10 @@ import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.m2ling.domain.core.ComponentInstance;
 import org.m2ling.domain.core.CorePackage;
 import org.m2ling.domain.core.Link;
 import org.m2ling.domain.core.LinkInstance;
+import org.m2ling.domain.core.RuntimeItem;
 
 /**
  * <!-- begin-user-doc -->
@@ -43,7 +43,7 @@ public class LinkInstanceImpl extends RuntimeItemImpl implements LinkInstance {
 	 * @generated
 	 * @ordered
 	 */
-	protected ComponentInstance source;
+	protected RuntimeItem source;
 
 	/**
 	 * The cached value of the '{@link #getDestination() <em>Destination</em>}' reference.
@@ -53,7 +53,7 @@ public class LinkInstanceImpl extends RuntimeItemImpl implements LinkInstance {
 	 * @generated
 	 * @ordered
 	 */
-	protected ComponentInstance destination;
+	protected RuntimeItem destination;
 
 	/**
 	 * The cached value of the '{@link #getLink() <em>Link</em>}' reference.
@@ -89,10 +89,10 @@ public class LinkInstanceImpl extends RuntimeItemImpl implements LinkInstance {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public ComponentInstance getSource() {
+	public RuntimeItem getSource() {
 		if (source != null && source.eIsProxy()) {
 			InternalEObject oldSource = (InternalEObject)source;
-			source = (ComponentInstance)eResolveProxy(oldSource);
+			source = (RuntimeItem)eResolveProxy(oldSource);
 			if (source != oldSource) {
 				if (eNotificationRequired())
 					eNotify(new ENotificationImpl(this, Notification.RESOLVE, CorePackage.LINK_INSTANCE__SOURCE, oldSource, source));
@@ -106,7 +106,7 @@ public class LinkInstanceImpl extends RuntimeItemImpl implements LinkInstance {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public ComponentInstance basicGetSource() {
+	public RuntimeItem basicGetSource() {
 		return source;
 	}
 
@@ -115,8 +115,8 @@ public class LinkInstanceImpl extends RuntimeItemImpl implements LinkInstance {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setSource(ComponentInstance newSource) {
-		ComponentInstance oldSource = source;
+	public void setSource(RuntimeItem newSource) {
+		RuntimeItem oldSource = source;
 		source = newSource;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, CorePackage.LINK_INSTANCE__SOURCE, oldSource, source));
@@ -127,10 +127,10 @@ public class LinkInstanceImpl extends RuntimeItemImpl implements LinkInstance {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public ComponentInstance getDestination() {
+	public RuntimeItem getDestination() {
 		if (destination != null && destination.eIsProxy()) {
 			InternalEObject oldDestination = (InternalEObject)destination;
-			destination = (ComponentInstance)eResolveProxy(oldDestination);
+			destination = (RuntimeItem)eResolveProxy(oldDestination);
 			if (destination != oldDestination) {
 				if (eNotificationRequired())
 					eNotify(new ENotificationImpl(this, Notification.RESOLVE, CorePackage.LINK_INSTANCE__DESTINATION, oldDestination, destination));
@@ -144,7 +144,7 @@ public class LinkInstanceImpl extends RuntimeItemImpl implements LinkInstance {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public ComponentInstance basicGetDestination() {
+	public RuntimeItem basicGetDestination() {
 		return destination;
 	}
 
@@ -153,8 +153,8 @@ public class LinkInstanceImpl extends RuntimeItemImpl implements LinkInstance {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setDestination(ComponentInstance newDestination) {
-		ComponentInstance oldDestination = destination;
+	public void setDestination(RuntimeItem newDestination) {
+		RuntimeItem oldDestination = destination;
 		destination = newDestination;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, CorePackage.LINK_INSTANCE__DESTINATION, oldDestination, destination));
@@ -228,10 +228,10 @@ public class LinkInstanceImpl extends RuntimeItemImpl implements LinkInstance {
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case CorePackage.LINK_INSTANCE__SOURCE:
-				setSource((ComponentInstance)newValue);
+				setSource((RuntimeItem)newValue);
 				return;
 			case CorePackage.LINK_INSTANCE__DESTINATION:
-				setDestination((ComponentInstance)newValue);
+				setDestination((RuntimeItem)newValue);
 				return;
 			case CorePackage.LINK_INSTANCE__LINK:
 				setLink((Link)newValue);
@@ -249,10 +249,10 @@ public class LinkInstanceImpl extends RuntimeItemImpl implements LinkInstance {
 	public void eUnset(int featureID) {
 		switch (featureID) {
 			case CorePackage.LINK_INSTANCE__SOURCE:
-				setSource((ComponentInstance)null);
+				setSource((RuntimeItem)null);
 				return;
 			case CorePackage.LINK_INSTANCE__DESTINATION:
-				setDestination((ComponentInstance)null);
+				setDestination((RuntimeItem)null);
 				return;
 			case CorePackage.LINK_INSTANCE__LINK:
 				setLink((Link)null);

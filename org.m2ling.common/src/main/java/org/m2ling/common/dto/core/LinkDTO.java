@@ -12,13 +12,13 @@ import java.util.Set;
  * @author Bertrand Florat <bertrand@florat.net>
  */
 public final class LinkDTO extends AbstractCommonDTO implements Comparable<LinkDTO> {
-	private final int timeout;
+	private final int timeoutMillis;
 
 	private final HasNameAndIdDTO type;
 
-	private final Set<ComponentDTO> sources;
+	private final Set<HasNameAndIdDTO> sources;
 
-	private final Set<ComponentDTO> destinations;
+	private final Set<HasNameAndIdDTO> destinations;
 
 	public static class Builder extends AbstractCommonDTO.Builder {
 		// Optional configuration
@@ -26,20 +26,20 @@ public final class LinkDTO extends AbstractCommonDTO implements Comparable<LinkD
 
 		private HasNameAndIdDTO type;
 
-		private Set<ComponentDTO> sources = new LinkedHashSet<ComponentDTO>();
+		private Set<HasNameAndIdDTO> sources = new LinkedHashSet<HasNameAndIdDTO>();
 
-		private Set<ComponentDTO> destinations = new LinkedHashSet<ComponentDTO>();
+		private Set<HasNameAndIdDTO> destinations = new LinkedHashSet<HasNameAndIdDTO>();
 
 		public Builder(String id, String name) {
 			super(id, name);
 		}
 
-		public Builder addSource(ComponentDTO comp) {
+		public Builder addSource(HasNameAndIdDTO comp) {
 			this.sources.add(comp);
 			return this;
 		}
 
-		public Builder addDestination(ComponentDTO comp) {
+		public Builder addDestination(HasNameAndIdDTO comp) {
 			this.destinations.add(comp);
 			return this;
 		}
@@ -63,7 +63,7 @@ public final class LinkDTO extends AbstractCommonDTO implements Comparable<LinkD
 	private LinkDTO(Builder builder) {
 		super(builder);
 		type = builder.type;
-		timeout = builder.timeout;
+		timeoutMillis = builder.timeout;
 		sources = builder.sources;
 		destinations = builder.destinations;
 	}
@@ -99,28 +99,28 @@ public final class LinkDTO extends AbstractCommonDTO implements Comparable<LinkD
 	/**
 	 * @return the sources
 	 */
-	public Set<ComponentDTO> getSources() {
+	public Set<HasNameAndIdDTO> getSources() {
 		return sources;
 	}
 
 	/**
 	 * @return the destinations
 	 */
-	public Set<ComponentDTO> getDestinations() {
+	public Set<HasNameAndIdDTO> getDestinations() {
 		return destinations;
 	}
 
 	/**
 	 * @return the type
 	 */
-	public HasNameAndIdDTO getComponentType() {
+	public HasNameAndIdDTO getLinkType() {
 		return type;
 	}
 
 	/**
 	 * @return the timeout
 	 */
-	public int getTimeout() {
-		return timeout;
+	public int getTimeoutMillis() {
+		return timeoutMillis;
 	}
 }

@@ -62,7 +62,7 @@ public interface Link extends ArchitectureItem {
 
 	/**
 	 * Returns the value of the '<em><b>Sources</b></em>' reference list.
-	 * The list contents are of type {@link org.m2ling.domain.core.Component}.
+	 * The list contents are of type {@link org.m2ling.domain.core.ArchitectureItem}.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Sources</em>' reference list isn't clear,
@@ -74,11 +74,11 @@ public interface Link extends ArchitectureItem {
 	 * @model required="true"
 	 * @generated
 	 */
-	EList<Component> getSources();
+	EList<ArchitectureItem> getSources();
 
 	/**
 	 * Returns the value of the '<em><b>Destinations</b></em>' reference list.
-	 * The list contents are of type {@link org.m2ling.domain.core.Component}.
+	 * The list contents are of type {@link org.m2ling.domain.core.ArchitectureItem}.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Destinations</em>' reference list isn't clear,
@@ -90,7 +90,7 @@ public interface Link extends ArchitectureItem {
 	 * @model required="true"
 	 * @generated
 	 */
-	EList<Component> getDestinations();
+	EList<ArchitectureItem> getDestinations();
 
 	/**
 	 * Returns the value of the '<em><b>Timeout Millis</b></em>' attribute.

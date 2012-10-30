@@ -22,13 +22,11 @@ public class LinkBean extends AbstractCommonBean {
 
 	private int timeout = -1;
 
-	private Set<ComponentBean> sources = new LinkedHashSet<ComponentBean>();
+	private Set<HasNameAndIDBean> sources = new LinkedHashSet<HasNameAndIDBean>();
 
-	private Set<ComponentBean> destinations = new LinkedHashSet<ComponentBean>();
+	private Set<HasNameAndIDBean> destinations = new LinkedHashSet<HasNameAndIDBean>();
 
 	private HasNameAndIDBean type;
-
-	private LinkBean boundComponent;
 
 	public LinkBean() {
 		super();
@@ -76,21 +74,6 @@ public class LinkBean extends AbstractCommonBean {
 	}
 
 	/**
-	 * @return the boundComponent
-	 */
-	public LinkBean getBoundComponent() {
-		return boundComponent;
-	}
-
-	/**
-	 * @param boundComponent
-	 *           the boundComponent to set
-	 */
-	public void setBoundComponent(LinkBean boundComponent) {
-		this.boundComponent = boundComponent;
-	}
-
-	/**
 	 * @return the timeout
 	 */
 	public int getTimeout() {
@@ -108,7 +91,7 @@ public class LinkBean extends AbstractCommonBean {
 	/**
 	 * @return the sources
 	 */
-	public Set<ComponentBean> getSources() {
+	public Set<HasNameAndIDBean> getSources() {
 		return sources;
 	}
 
@@ -116,14 +99,14 @@ public class LinkBean extends AbstractCommonBean {
 	 * @param sources
 	 *           the sources to set
 	 */
-	public void setSources(Set<ComponentBean> sources) {
+	public void setSources(Set<HasNameAndIDBean> sources) {
 		this.sources = sources;
 	}
 
 	/**
 	 * @return the destinations
 	 */
-	public Set<ComponentBean> getDestinations() {
+	public Set<HasNameAndIDBean> getDestinations() {
 		return destinations;
 	}
 
@@ -131,7 +114,7 @@ public class LinkBean extends AbstractCommonBean {
 	 * @param destinations
 	 *           the destinations to set
 	 */
-	public void setDestinations(Set<ComponentBean> destinations) {
+	public void setDestinations(Set<HasNameAndIDBean> destinations) {
 		this.destinations = destinations;
 	}
 }
