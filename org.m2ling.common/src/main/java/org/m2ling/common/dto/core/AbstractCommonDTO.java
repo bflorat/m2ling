@@ -24,6 +24,8 @@ abstract class AbstractCommonDTO {
 
 	private final String comment;
 
+	private final String status;
+
 	public static class Builder {
 		// Required configuration
 		private final String name;
@@ -33,6 +35,8 @@ abstract class AbstractCommonDTO {
 		// Optional configuration
 		private List<String> tags = new ArrayList<String>(1);
 
+		private String status;
+
 		private String description = "";
 
 		private String comment = "";
@@ -40,6 +44,18 @@ abstract class AbstractCommonDTO {
 		public Builder(String id, String name) {
 			this.id = id;
 			this.name = name;
+		}
+
+		public Builder status(String status) {
+			this.status = status;
+			return this;
+		}
+
+		/**
+		 * @return the status
+		 */
+		public String getStatus() {
+			return status;
 		}
 
 		public Builder addTag(String tag) {
@@ -66,6 +82,7 @@ abstract class AbstractCommonDTO {
 	public AbstractCommonDTO(Builder builder) {
 		id = builder.id;
 		name = builder.name;
+		status = builder.status;
 		if (builder.tags != null) {
 			tags = new ArrayList<String>(builder.tags); // defensive copy
 		} else {
@@ -117,5 +134,12 @@ abstract class AbstractCommonDTO {
 	 */
 	public String getComment() {
 		return comment;
+	}
+
+	/**
+	 * @return the status
+	 */
+	public String getStatus() {
+		return status;
 	}
 }

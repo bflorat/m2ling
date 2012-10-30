@@ -10,7 +10,7 @@ import org.m2ling.common.utils.Utils;
 /**
  * Inter-layer HasNameAndId communication object
  */
-public class HasNameAndIdDTO {
+public final class HasNameAndIdDTO {
 	private final String id;
 
 	private final String name;

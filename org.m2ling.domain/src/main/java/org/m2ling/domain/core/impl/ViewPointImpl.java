@@ -19,6 +19,7 @@ import org.m2ling.domain.core.ComponentType;
 import org.m2ling.domain.core.CorePackage;
 import org.m2ling.domain.core.HasDescription;
 import org.m2ling.domain.core.HasNameAndID;
+import org.m2ling.domain.core.HasStatus;
 import org.m2ling.domain.core.HasTags;
 import org.m2ling.domain.core.LinkType;
 import org.m2ling.domain.core.Rule;
@@ -34,6 +35,7 @@ import org.m2ling.domain.core.ViewPoint;
  *   <li>{@link org.m2ling.domain.core.impl.ViewPointImpl#getId <em>Id</em>}</li>
  *   <li>{@link org.m2ling.domain.core.impl.ViewPointImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.m2ling.domain.core.impl.ViewPointImpl#getTags <em>Tags</em>}</li>
+ *   <li>{@link org.m2ling.domain.core.impl.ViewPointImpl#getStatus <em>Status</em>}</li>
  *   <li>{@link org.m2ling.domain.core.impl.ViewPointImpl#getActivities <em>Activities</em>}</li>
  *   <li>{@link org.m2ling.domain.core.impl.ViewPointImpl#getComponentTypes <em>Component Types</em>}</li>
  *   <li>{@link org.m2ling.domain.core.impl.ViewPointImpl#getLinkTypes <em>Link Types</em>}</li>
@@ -129,6 +131,26 @@ public class ViewPointImpl extends HasCommentImpl implements ViewPoint {
 	 * @ordered
 	 */
 	protected EList<String> tags;
+
+	/**
+	 * The default value of the '{@link #getStatus() <em>Status</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getStatus()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String STATUS_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getStatus() <em>Status</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getStatus()
+	 * @generated
+	 * @ordered
+	 */
+	protected String status = STATUS_EDEFAULT;
 
 	/**
 	 * The cached value of the '{@link #getActivities() <em>Activities</em>}' containment reference list.
@@ -295,6 +317,27 @@ public class ViewPointImpl extends HasCommentImpl implements ViewPoint {
 	}
 
 	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String getStatus() {
+		return status;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setStatus(String newStatus) {
+		String oldStatus = status;
+		status = newStatus;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, CorePackage.VIEW_POINT__STATUS, oldStatus, status));
+	}
+
+	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
@@ -384,6 +427,8 @@ public class ViewPointImpl extends HasCommentImpl implements ViewPoint {
 				return getName();
 			case CorePackage.VIEW_POINT__TAGS:
 				return getTags();
+			case CorePackage.VIEW_POINT__STATUS:
+				return getStatus();
 			case CorePackage.VIEW_POINT__ACTIVITIES:
 				return getActivities();
 			case CorePackage.VIEW_POINT__COMPONENT_TYPES:
@@ -418,6 +463,9 @@ public class ViewPointImpl extends HasCommentImpl implements ViewPoint {
 			case CorePackage.VIEW_POINT__TAGS:
 				getTags().clear();
 				getTags().addAll((Collection<? extends String>)newValue);
+				return;
+			case CorePackage.VIEW_POINT__STATUS:
+				setStatus((String)newValue);
 				return;
 			case CorePackage.VIEW_POINT__ACTIVITIES:
 				getActivities().clear();
@@ -462,6 +510,9 @@ public class ViewPointImpl extends HasCommentImpl implements ViewPoint {
 			case CorePackage.VIEW_POINT__TAGS:
 				getTags().clear();
 				return;
+			case CorePackage.VIEW_POINT__STATUS:
+				setStatus(STATUS_EDEFAULT);
+				return;
 			case CorePackage.VIEW_POINT__ACTIVITIES:
 				getActivities().clear();
 				return;
@@ -496,6 +547,8 @@ public class ViewPointImpl extends HasCommentImpl implements ViewPoint {
 				return isSetName();
 			case CorePackage.VIEW_POINT__TAGS:
 				return tags != null && !tags.isEmpty();
+			case CorePackage.VIEW_POINT__STATUS:
+				return STATUS_EDEFAULT == null ? status != null : !STATUS_EDEFAULT.equals(status);
 			case CorePackage.VIEW_POINT__ACTIVITIES:
 				return activities != null && !activities.isEmpty();
 			case CorePackage.VIEW_POINT__COMPONENT_TYPES:
@@ -536,6 +589,12 @@ public class ViewPointImpl extends HasCommentImpl implements ViewPoint {
 				default: return -1;
 			}
 		}
+		if (baseClass == HasStatus.class) {
+			switch (derivedFeatureID) {
+				case CorePackage.VIEW_POINT__STATUS: return CorePackage.HAS_STATUS__STATUS;
+				default: return -1;
+			}
+		}
 		return super.eBaseStructuralFeatureID(derivedFeatureID, baseClass);
 	}
 
@@ -565,6 +624,12 @@ public class ViewPointImpl extends HasCommentImpl implements ViewPoint {
 				default: return -1;
 			}
 		}
+		if (baseClass == HasStatus.class) {
+			switch (baseFeatureID) {
+				case CorePackage.HAS_STATUS__STATUS: return CorePackage.VIEW_POINT__STATUS;
+				default: return -1;
+			}
+		}
 		return super.eDerivedStructuralFeatureID(baseFeatureID, baseClass);
 	}
 
@@ -586,6 +651,8 @@ public class ViewPointImpl extends HasCommentImpl implements ViewPoint {
 		if (nameESet) result.append(name); else result.append("<unset>");
 		result.append(", tags: ");
 		result.append(tags);
+		result.append(", status: ");
+		result.append(status);
 		result.append(", statusLiterals: ");
 		result.append(statusLiterals);
 		result.append(')');

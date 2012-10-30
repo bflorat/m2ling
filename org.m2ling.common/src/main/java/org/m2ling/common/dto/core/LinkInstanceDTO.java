@@ -11,9 +11,7 @@ import java.util.List;
  * 
  * @author Bertrand Florat <bertrand@florat.net>
  */
-public class LinkInstanceDTO extends AbstractCommonDTO implements Comparable<LinkInstanceDTO> {
-	private final String status;
-
+public final class LinkInstanceDTO extends AbstractCommonDTO implements Comparable<LinkInstanceDTO> {
 	private final ComponentDTO component;
 
 	private final LinkInstanceDTO boundInstance;
@@ -22,8 +20,6 @@ public class LinkInstanceDTO extends AbstractCommonDTO implements Comparable<Lin
 
 	public static class Builder extends AbstractCommonDTO.Builder {
 		// Optional configuration
-		private String status;
-
 		private ComponentDTO component;
 
 		private List<ReferenceDTO> references = new ArrayList<ReferenceDTO>(1);
@@ -32,11 +28,6 @@ public class LinkInstanceDTO extends AbstractCommonDTO implements Comparable<Lin
 
 		public Builder(String id, String name) {
 			super(id, name);
-		}
-
-		public Builder status(String status) {
-			this.status = status;
-			return this;
 		}
 
 		public Builder component(ComponentDTO component) {
@@ -62,7 +53,6 @@ public class LinkInstanceDTO extends AbstractCommonDTO implements Comparable<Lin
 
 	private LinkInstanceDTO(Builder builder) {
 		super(builder);
-		status = builder.status;
 		references = builder.references;
 		component = builder.component;
 		boundInstance = builder.boundInstance;
@@ -94,13 +84,6 @@ public class LinkInstanceDTO extends AbstractCommonDTO implements Comparable<Lin
 			return -1;
 		}
 		return getName().compareTo(o.getName());
-	}
-
-	/**
-	 * @return the status
-	 */
-	public String getStatus() {
-		return status;
 	}
 
 	/**

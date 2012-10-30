@@ -20,8 +20,6 @@ public class ComponentInstanceBean extends AbstractCommonBean {
 	/** Drop */
 	private String drop = "";
 
-	private String status = null;
-
 	private List<ReferenceBean> references = new ArrayList<ReferenceBean>(2);
 
 	private ComponentBean component;
@@ -56,21 +54,6 @@ public class ComponentInstanceBean extends AbstractCommonBean {
 	 */
 	public void setDrop(String drop) {
 		this.drop = drop;
-	}
-
-	/**
-	 * @return the status
-	 */
-	public String getStatus() {
-		return status;
-	}
-
-	/**
-	 * @param status
-	 *           the status to set
-	 */
-	public void setStatus(String status) {
-		this.status = status;
 	}
 
 	/**

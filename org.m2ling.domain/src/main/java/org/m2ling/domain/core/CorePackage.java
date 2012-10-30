@@ -841,13 +841,22 @@ public interface CorePackage extends EPackage {
 	int VIEW_POINT__TAGS = HAS_COMMENT_FEATURE_COUNT + 3;
 
 	/**
+	 * The feature id for the '<em><b>Status</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VIEW_POINT__STATUS = HAS_COMMENT_FEATURE_COUNT + 4;
+
+	/**
 	 * The feature id for the '<em><b>Activities</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int VIEW_POINT__ACTIVITIES = HAS_COMMENT_FEATURE_COUNT + 4;
+	int VIEW_POINT__ACTIVITIES = HAS_COMMENT_FEATURE_COUNT + 5;
 
 	/**
 	 * The feature id for the '<em><b>Component Types</b></em>' containment reference list.
@@ -856,7 +865,7 @@ public interface CorePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int VIEW_POINT__COMPONENT_TYPES = HAS_COMMENT_FEATURE_COUNT + 5;
+	int VIEW_POINT__COMPONENT_TYPES = HAS_COMMENT_FEATURE_COUNT + 6;
 
 	/**
 	 * The feature id for the '<em><b>Link Types</b></em>' containment reference list.
@@ -865,7 +874,7 @@ public interface CorePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int VIEW_POINT__LINK_TYPES = HAS_COMMENT_FEATURE_COUNT + 6;
+	int VIEW_POINT__LINK_TYPES = HAS_COMMENT_FEATURE_COUNT + 7;
 
 	/**
 	 * The feature id for the '<em><b>Rules</b></em>' containment reference list.
@@ -874,7 +883,7 @@ public interface CorePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int VIEW_POINT__RULES = HAS_COMMENT_FEATURE_COUNT + 7;
+	int VIEW_POINT__RULES = HAS_COMMENT_FEATURE_COUNT + 8;
 
 	/**
 	 * The feature id for the '<em><b>Status Literals</b></em>' attribute list.
@@ -883,7 +892,7 @@ public interface CorePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int VIEW_POINT__STATUS_LITERALS = HAS_COMMENT_FEATURE_COUNT + 8;
+	int VIEW_POINT__STATUS_LITERALS = HAS_COMMENT_FEATURE_COUNT + 9;
 
 	/**
 	 * The number of structural features of the '<em>View Point</em>' class.
@@ -892,7 +901,7 @@ public interface CorePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int VIEW_POINT_FEATURE_COUNT = HAS_COMMENT_FEATURE_COUNT + 9;
+	int VIEW_POINT_FEATURE_COUNT = HAS_COMMENT_FEATURE_COUNT + 10;
 
 	/**
 	 * The feature id for the '<em><b>Id</b></em>' attribute.
@@ -1084,13 +1093,22 @@ public interface CorePackage extends EPackage {
 	int VIEW__TAGS = HAS_COMMENT_FEATURE_COUNT + 3;
 
 	/**
+	 * The feature id for the '<em><b>Status</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VIEW__STATUS = HAS_COMMENT_FEATURE_COUNT + 4;
+
+	/**
 	 * The feature id for the '<em><b>Components Groups</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int VIEW__COMPONENTS_GROUPS = HAS_COMMENT_FEATURE_COUNT + 4;
+	int VIEW__COMPONENTS_GROUPS = HAS_COMMENT_FEATURE_COUNT + 5;
 
 	/**
 	 * The feature id for the '<em><b>Components</b></em>' containment reference list.
@@ -1099,7 +1117,7 @@ public interface CorePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int VIEW__COMPONENTS = HAS_COMMENT_FEATURE_COUNT + 5;
+	int VIEW__COMPONENTS = HAS_COMMENT_FEATURE_COUNT + 6;
 
 	/**
 	 * The feature id for the '<em><b>View Point</b></em>' reference.
@@ -1108,7 +1126,7 @@ public interface CorePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int VIEW__VIEW_POINT = HAS_COMMENT_FEATURE_COUNT + 6;
+	int VIEW__VIEW_POINT = HAS_COMMENT_FEATURE_COUNT + 7;
 
 	/**
 	 * The feature id for the '<em><b>Links</b></em>' containment reference list.
@@ -1117,7 +1135,7 @@ public interface CorePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int VIEW__LINKS = HAS_COMMENT_FEATURE_COUNT + 7;
+	int VIEW__LINKS = HAS_COMMENT_FEATURE_COUNT + 8;
 
 	/**
 	 * The feature id for the '<em><b>Component Instances</b></em>' containment reference list.
@@ -1126,7 +1144,7 @@ public interface CorePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int VIEW__COMPONENT_INSTANCES = HAS_COMMENT_FEATURE_COUNT + 8;
+	int VIEW__COMPONENT_INSTANCES = HAS_COMMENT_FEATURE_COUNT + 9;
 
 	/**
 	 * The feature id for the '<em><b>Instances Groups</b></em>' containment reference list.
@@ -1135,7 +1153,7 @@ public interface CorePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int VIEW__INSTANCES_GROUPS = HAS_COMMENT_FEATURE_COUNT + 9;
+	int VIEW__INSTANCES_GROUPS = HAS_COMMENT_FEATURE_COUNT + 10;
 
 	/**
 	 * The feature id for the '<em><b>Link Instances</b></em>' containment reference list.
@@ -1144,7 +1162,7 @@ public interface CorePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int VIEW__LINK_INSTANCES = HAS_COMMENT_FEATURE_COUNT + 10;
+	int VIEW__LINK_INSTANCES = HAS_COMMENT_FEATURE_COUNT + 11;
 
 	/**
 	 * The number of structural features of the '<em>View</em>' class.
@@ -1153,7 +1171,7 @@ public interface CorePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int VIEW_FEATURE_COUNT = HAS_COMMENT_FEATURE_COUNT + 11;
+	int VIEW_FEATURE_COUNT = HAS_COMMENT_FEATURE_COUNT + 12;
 
 	/**
 	 * The feature id for the '<em><b>Status</b></em>' attribute.

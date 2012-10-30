@@ -69,6 +69,7 @@ public class ViewItemProvider
 			addIdPropertyDescriptor(object);
 			addNamePropertyDescriptor(object);
 			addTagsPropertyDescriptor(object);
+			addStatusPropertyDescriptor(object);
 			addViewPointPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
@@ -154,6 +155,28 @@ public class ViewItemProvider
 				 getString("_UI_HasTags_tags_feature"),
 				 getString("_UI_PropertyDescriptor_description", "_UI_HasTags_tags_feature", "_UI_HasTags_type"),
 				 CorePackage.Literals.HAS_TAGS__TAGS,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				 null,
+				 null));
+	}
+
+	/**
+	 * This adds a property descriptor for the Status feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addStatusPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_HasStatus_status_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_HasStatus_status_feature", "_UI_HasStatus_type"),
+				 CorePackage.Literals.HAS_STATUS__STATUS,
 				 true,
 				 false,
 				 false,
@@ -260,6 +283,7 @@ public class ViewItemProvider
 			case CorePackage.VIEW__ID:
 			case CorePackage.VIEW__NAME:
 			case CorePackage.VIEW__TAGS:
+			case CorePackage.VIEW__STATUS:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
 			case CorePackage.VIEW__COMPONENTS_GROUPS:

@@ -27,7 +27,7 @@ import org.eclipse.emf.common.util.EList;
  * @model
  * @generated
  */
-public interface View extends HasComment, HasDescription, HasNameAndID, HasTags {
+public interface View extends HasComment, HasDescription, HasNameAndID, HasTags, HasStatus {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

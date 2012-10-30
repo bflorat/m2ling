@@ -36,7 +36,7 @@
       <eStructuralFeatures xsi:type="ecore:EReference" name="boundComponentInstance"
           eType="#//core/ComponentInstance"/>
     </eClassifiers>
-    <eClassifiers xsi:type="ecore:EClass" name="ViewPoint" eSuperTypes="#//core/HasComment #//core/HasDescription #//core/HasNameAndID #//core/HasTags">
+    <eClassifiers xsi:type="ecore:EClass" name="ViewPoint" eSuperTypes="#//core/HasComment #//core/HasDescription #//core/HasNameAndID #//core/HasTags #//core/HasStatus">
       <eStructuralFeatures xsi:type="ecore:EReference" name="activities" upperBound="-1"
           eType="#//core/Activity" containment="true"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="componentTypes" upperBound="-1"
@@ -60,7 +60,7 @@
         eSuperTypes="#//core/HasNameAndID #//core/HasComment #//core/HasTags #//core/HasConstraints #//core/HasDescription #//core/HasStatus"/>
     <eClassifiers xsi:type="ecore:EClass" name="ConceptItem" abstract="true" eSuperTypes="#//core/HasNameAndID #//core/HasCustomProperties #//core/HasComment #//core/HasTags #//core/HasParameterDefinitions #//core/HasConstraints #//core/HasDescription #//core/HasStatus"/>
     <eClassifiers xsi:type="ecore:EClass" name="RuntimeItem" abstract="true" eSuperTypes="#//core/HasNameAndID #//core/HasComment #//core/HasTags #//core/HasParameterValues #//core/HasConstraints #//core/HasDescription #//core/HasStatus"/>
-    <eClassifiers xsi:type="ecore:EClass" name="View" eSuperTypes="#//core/HasComment #//core/HasDescription #//core/HasNameAndID #//core/HasTags">
+    <eClassifiers xsi:type="ecore:EClass" name="View" eSuperTypes="#//core/HasComment #//core/HasDescription #//core/HasNameAndID #//core/HasTags #//core/HasStatus">
       <eStructuralFeatures xsi:type="ecore:EReference" name="componentsGroups" upperBound="-1"
           eType="#//core/ComponentGroup" containment="true"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="components" upperBound="-1"

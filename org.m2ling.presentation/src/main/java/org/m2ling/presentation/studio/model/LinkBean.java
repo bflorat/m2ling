@@ -20,8 +20,6 @@ public class LinkBean extends AbstractCommonBean {
 	/** Drop */
 	private String drop = "";
 
-	private String status = null;
-
 	private int timeout = -1;
 
 	private Set<ComponentBean> sources = new LinkedHashSet<ComponentBean>();
@@ -60,21 +58,6 @@ public class LinkBean extends AbstractCommonBean {
 	 */
 	public void setDrop(String drop) {
 		this.drop = drop;
-	}
-
-	/**
-	 * @return the status
-	 */
-	public String getStatus() {
-		return status;
-	}
-
-	/**
-	 * @param status
-	 *           the status to set
-	 */
-	public void setStatus(String status) {
-		this.status = status;
 	}
 
 	/**

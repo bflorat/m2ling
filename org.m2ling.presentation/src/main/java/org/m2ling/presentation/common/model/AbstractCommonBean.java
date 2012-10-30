@@ -18,6 +18,9 @@ public class AbstractCommonBean implements Serializable {
 
 	private String name = "";
 
+	/** status is null by default to mean "not fixed" */
+	private String status = null;
+
 	/**
 	 * Comma-separated tags
 	 */
@@ -34,7 +37,7 @@ public class AbstractCommonBean implements Serializable {
 	public String toString() {
 		return Utils.toString(this);
 	}
-	
+
 	@Override
 	public int hashCode() {
 		return id.hashCode();
@@ -115,5 +118,20 @@ public class AbstractCommonBean implements Serializable {
 	 */
 	public String getDescription() {
 		return description;
+	}
+
+	/**
+	 * @return the status
+	 */
+	public String getStatus() {
+		return status;
+	}
+
+	/**
+	 * @param status
+	 *           the status to set
+	 */
+	public void setStatus(String status) {
+		this.status = status;
 	}
 }

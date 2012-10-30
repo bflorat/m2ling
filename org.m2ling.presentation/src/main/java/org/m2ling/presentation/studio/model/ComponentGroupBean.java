@@ -18,8 +18,6 @@ public class ComponentGroupBean extends AbstractCommonBean {
 	/** Drop */
 	private String drop = "";
 
-	private String status = null;
-
 	private Set<ComponentBean> components = new LinkedHashSet<ComponentBean>(3);
 
 	public ComponentGroupBean() {
@@ -46,21 +44,6 @@ public class ComponentGroupBean extends AbstractCommonBean {
 	 */
 	public void setDrop(String drop) {
 		this.drop = drop;
-	}
-
-	/**
-	 * @return the status
-	 */
-	public String getStatus() {
-		return status;
-	}
-
-	/**
-	 * @param status
-	 *           the status to set
-	 */
-	public void setStatus(String status) {
-		this.status = status;
 	}
 
 	/**

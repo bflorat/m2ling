@@ -15,7 +15,7 @@ import com.google.common.collect.ImmutableSet;
 /**
  * Inter-layer reference communication object
  */
-public class ReferenceDTO {
+public final class ReferenceDTO {
 	/** Reference type literal, one of ReferenceType enum entry */
 	private final String type;
 	/** References list of ids */

@@ -3,12 +3,8 @@
  */
 package org.m2ling.common.dto.core;
 
-import java.util.ArrayList;
 import java.util.LinkedHashSet;
-import java.util.List;
 import java.util.Set;
-
-import org.m2ling.common.utils.Utils;
 
 import com.google.common.collect.ImmutableSet;
 
@@ -17,7 +13,7 @@ import com.google.common.collect.ImmutableSet;
  * 
  * @author Bertrand Florat <bertrand@florat.net>
  */
-public class ViewPointDTO extends AbstractCommonDTO implements Comparable<ViewPointDTO> {
+public final class ViewPointDTO extends AbstractCommonDTO implements Comparable<ViewPointDTO> {
 	private final Set<String> statusLiterals;
 
 	public static class Builder extends AbstractCommonDTO.Builder {

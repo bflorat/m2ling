@@ -11,9 +11,7 @@ import java.util.Set;
  * 
  * @author Bertrand Florat <bertrand@florat.net>
  */
-public class LinkDTO extends AbstractCommonDTO implements Comparable<LinkDTO> {
-	private final String status;
-
+public final class LinkDTO extends AbstractCommonDTO implements Comparable<LinkDTO> {
 	private final int timeout;
 
 	private final HasNameAndIdDTO type;
@@ -24,8 +22,6 @@ public class LinkDTO extends AbstractCommonDTO implements Comparable<LinkDTO> {
 
 	public static class Builder extends AbstractCommonDTO.Builder {
 		// Optional configuration
-		private String status;
-
 		private int timeout = -1;
 
 		private HasNameAndIdDTO type;
@@ -48,11 +44,6 @@ public class LinkDTO extends AbstractCommonDTO implements Comparable<LinkDTO> {
 			return this;
 		}
 
-		public Builder status(String status) {
-			this.status = status;
-			return this;
-		}
-
 		public Builder timeout(int timeout) {
 			this.timeout = timeout;
 			return this;
@@ -71,7 +62,6 @@ public class LinkDTO extends AbstractCommonDTO implements Comparable<LinkDTO> {
 
 	private LinkDTO(Builder builder) {
 		super(builder);
-		status = builder.status;
 		type = builder.type;
 		timeout = builder.timeout;
 		sources = builder.sources;
@@ -118,13 +108,6 @@ public class LinkDTO extends AbstractCommonDTO implements Comparable<LinkDTO> {
 	 */
 	public Set<ComponentDTO> getDestinations() {
 		return destinations;
-	}
-
-	/**
-	 * @return the status
-	 */
-	public String getStatus() {
-		return status;
 	}
 
 	/**

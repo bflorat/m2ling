@@ -23,8 +23,6 @@ public class LinkTypeBean extends AbstractCommonBean {
 
 	private String linkAccessType = LinkAccessType.READ.name();
 
-	private String status = "";
-
 	/** Sources */
 	private Set<HasNameAndIDBean> sourcesTypes = new LinkedHashSet<HasNameAndIDBean>();
 
@@ -176,21 +174,6 @@ public class LinkTypeBean extends AbstractCommonBean {
 	 */
 	public void setViewPoint(HasNameAndIDBean vp) {
 		this.vp = vp;
-	}
-
-	/**
-	 * @return the status
-	 */
-	public String getStatus() {
-		return status;
-	}
-
-	/**
-	 * @param status
-	 *           the status to set
-	 */
-	public void setStatus(String status) {
-		this.status = status;
 	}
 
 	@Override

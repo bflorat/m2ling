@@ -21,6 +21,7 @@ import org.m2ling.domain.core.ComponentInstanceGroup;
 import org.m2ling.domain.core.CorePackage;
 import org.m2ling.domain.core.HasDescription;
 import org.m2ling.domain.core.HasNameAndID;
+import org.m2ling.domain.core.HasStatus;
 import org.m2ling.domain.core.HasTags;
 import org.m2ling.domain.core.Link;
 import org.m2ling.domain.core.LinkInstance;
@@ -38,6 +39,7 @@ import org.m2ling.domain.core.ViewPoint;
  *   <li>{@link org.m2ling.domain.core.impl.ViewImpl#getId <em>Id</em>}</li>
  *   <li>{@link org.m2ling.domain.core.impl.ViewImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.m2ling.domain.core.impl.ViewImpl#getTags <em>Tags</em>}</li>
+ *   <li>{@link org.m2ling.domain.core.impl.ViewImpl#getStatus <em>Status</em>}</li>
  *   <li>{@link org.m2ling.domain.core.impl.ViewImpl#getComponentsGroups <em>Components Groups</em>}</li>
  *   <li>{@link org.m2ling.domain.core.impl.ViewImpl#getComponents <em>Components</em>}</li>
  *   <li>{@link org.m2ling.domain.core.impl.ViewImpl#getViewPoint <em>View Point</em>}</li>
@@ -136,6 +138,26 @@ public class ViewImpl extends HasCommentImpl implements View {
 	 * @ordered
 	 */
 	protected EList<String> tags;
+
+	/**
+	 * The default value of the '{@link #getStatus() <em>Status</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getStatus()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String STATUS_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getStatus() <em>Status</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getStatus()
+	 * @generated
+	 * @ordered
+	 */
+	protected String status = STATUS_EDEFAULT;
 
 	/**
 	 * The cached value of the '{@link #getComponentsGroups() <em>Components Groups</em>}' containment reference list.
@@ -331,6 +353,27 @@ public class ViewImpl extends HasCommentImpl implements View {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public String getStatus() {
+		return status;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setStatus(String newStatus) {
+		String oldStatus = status;
+		status = newStatus;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, CorePackage.VIEW__STATUS, oldStatus, status));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EList<ComponentGroup> getComponentsGroups() {
 		if (componentsGroups == null) {
 			componentsGroups = new EObjectContainmentEList<ComponentGroup>(ComponentGroup.class, this, CorePackage.VIEW__COMPONENTS_GROUPS);
@@ -476,6 +519,8 @@ public class ViewImpl extends HasCommentImpl implements View {
 				return getName();
 			case CorePackage.VIEW__TAGS:
 				return getTags();
+			case CorePackage.VIEW__STATUS:
+				return getStatus();
 			case CorePackage.VIEW__COMPONENTS_GROUPS:
 				return getComponentsGroups();
 			case CorePackage.VIEW__COMPONENTS:
@@ -516,6 +561,9 @@ public class ViewImpl extends HasCommentImpl implements View {
 			case CorePackage.VIEW__TAGS:
 				getTags().clear();
 				getTags().addAll((Collection<? extends String>)newValue);
+				return;
+			case CorePackage.VIEW__STATUS:
+				setStatus((String)newValue);
 				return;
 			case CorePackage.VIEW__COMPONENTS_GROUPS:
 				getComponentsGroups().clear();
@@ -568,6 +616,9 @@ public class ViewImpl extends HasCommentImpl implements View {
 			case CorePackage.VIEW__TAGS:
 				getTags().clear();
 				return;
+			case CorePackage.VIEW__STATUS:
+				setStatus(STATUS_EDEFAULT);
+				return;
 			case CorePackage.VIEW__COMPONENTS_GROUPS:
 				getComponentsGroups().clear();
 				return;
@@ -609,6 +660,8 @@ public class ViewImpl extends HasCommentImpl implements View {
 				return isSetName();
 			case CorePackage.VIEW__TAGS:
 				return tags != null && !tags.isEmpty();
+			case CorePackage.VIEW__STATUS:
+				return STATUS_EDEFAULT == null ? status != null : !STATUS_EDEFAULT.equals(status);
 			case CorePackage.VIEW__COMPONENTS_GROUPS:
 				return componentsGroups != null && !componentsGroups.isEmpty();
 			case CorePackage.VIEW__COMPONENTS:
@@ -653,6 +706,12 @@ public class ViewImpl extends HasCommentImpl implements View {
 				default: return -1;
 			}
 		}
+		if (baseClass == HasStatus.class) {
+			switch (derivedFeatureID) {
+				case CorePackage.VIEW__STATUS: return CorePackage.HAS_STATUS__STATUS;
+				default: return -1;
+			}
+		}
 		return super.eBaseStructuralFeatureID(derivedFeatureID, baseClass);
 	}
 
@@ -682,6 +741,12 @@ public class ViewImpl extends HasCommentImpl implements View {
 				default: return -1;
 			}
 		}
+		if (baseClass == HasStatus.class) {
+			switch (baseFeatureID) {
+				case CorePackage.HAS_STATUS__STATUS: return CorePackage.VIEW__STATUS;
+				default: return -1;
+			}
+		}
 		return super.eDerivedStructuralFeatureID(baseFeatureID, baseClass);
 	}
 
@@ -703,6 +768,8 @@ public class ViewImpl extends HasCommentImpl implements View {
 		if (nameESet) result.append(name); else result.append("<unset>");
 		result.append(", tags: ");
 		result.append(tags);
+		result.append(", status: ");
+		result.append(status);
 		result.append(')');
 		return result.toString();
 	}

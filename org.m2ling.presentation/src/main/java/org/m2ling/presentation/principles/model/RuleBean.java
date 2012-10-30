@@ -20,8 +20,6 @@ public class RuleBean extends AbstractCommonBean {
 	/** Drop */
 	private String drop = "";
 
-	private String status = null;
-
 	private int priority = 0;
 
 	private String rationale = "";
@@ -122,21 +120,6 @@ public class RuleBean extends AbstractCommonBean {
 	 */
 	public void setViewPointId(String id) {
 		this.vpID = id;
-	}
-
-	/**
-	 * @return the status
-	 */
-	public String getStatus() {
-		return status;
-	}
-
-	/**
-	 * @param status
-	 *           the status to set
-	 */
-	public void setStatus(String status) {
-		this.status = status;
 	}
 
 	/**

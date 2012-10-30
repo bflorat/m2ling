@@ -10,7 +10,7 @@ import org.m2ling.common.utils.Utils;
  * 
  * @author Bertrand Florat <bertrand@florat.net>
  */
-public class StatusEventDTO implements Comparable<StatusEventDTO> {
+public final class StatusEventDTO implements Comparable<StatusEventDTO> {
 
 	private final long date;
 	private final String statusLiteral;

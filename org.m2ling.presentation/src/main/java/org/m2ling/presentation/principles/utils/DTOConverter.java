@@ -78,8 +78,9 @@ public class DTOConverter {
 		public RuleDTO getRuleDTO(RuleBean bean) {
 			// Note that we don't populate history into DTO as it is not used by the service
 			RuleDTO.Builder builder = (RuleDTO.Builder) new RuleDTO.Builder(bean.getViewPointId(), bean.getId(),
-					bean.getName()).rationale(bean.getRationale()).exceptions(bean.getExceptions()).status(bean.getStatus())
-					.priority(bean.getPriority()).description(bean.getDescription()).comment(bean.getComment());
+					bean.getName()).rationale(bean.getRationale()).exceptions(bean.getExceptions())
+					.priority(bean.getPriority()).description(bean.getDescription()).comment(bean.getComment())
+					.status(bean.getStatus());
 			for (String tag : Utils.stringListFromString(bean.getTags())) {
 				builder.addTag(tag);
 			}

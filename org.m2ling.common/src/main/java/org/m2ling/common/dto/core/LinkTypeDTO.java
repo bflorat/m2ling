@@ -13,7 +13,7 @@ import com.google.common.collect.ImmutableSet;
  * 
  * @author Bertrand Florat <bertrand@florat.net>
  */
-public class LinkTypeDTO extends AbstractCommonDTO implements Comparable<LinkTypeDTO> {
+public final class LinkTypeDTO extends AbstractCommonDTO implements Comparable<LinkTypeDTO> {
 	private final HasNameAndIdDTO vp;
 
 	private final Set<HasNameAndIdDTO> sourcesTypes;
@@ -23,8 +23,6 @@ public class LinkTypeDTO extends AbstractCommonDTO implements Comparable<LinkTyp
 	private String linkTemporality;
 
 	private String linkAccessType;
-
-	private final String status;
 
 	public static class Builder extends AbstractCommonDTO.Builder {
 		// Required configuration
@@ -38,8 +36,6 @@ public class LinkTypeDTO extends AbstractCommonDTO implements Comparable<LinkTyp
 		private Set<HasNameAndIdDTO> sourcesTypes = new LinkedHashSet<HasNameAndIdDTO>(1);
 
 		private Set<HasNameAndIdDTO> destinationsTypes = new LinkedHashSet<HasNameAndIdDTO>(1);
-
-		private String status = null;
 
 		public Builder(HasNameAndIdDTO vp, String id, String name) {
 			super(id, name);
@@ -66,11 +62,6 @@ public class LinkTypeDTO extends AbstractCommonDTO implements Comparable<LinkTyp
 			return this;
 		}
 
-		public Builder status(String status) {
-			this.status = status;
-			return this;
-		}
-
 		public LinkTypeDTO build() {
 			LinkTypeDTO dto = new LinkTypeDTO(this);
 			return dto;
@@ -84,7 +75,6 @@ public class LinkTypeDTO extends AbstractCommonDTO implements Comparable<LinkTyp
 		linkTemporality = builder.linkTemporality;
 		sourcesTypes = ImmutableSet.copyOf(builder.sourcesTypes);
 		destinationsTypes = ImmutableSet.copyOf(builder.destinationsTypes);
-		status = builder.status;
 	}
 
 	public boolean equals(Object o) {
@@ -148,12 +138,5 @@ public class LinkTypeDTO extends AbstractCommonDTO implements Comparable<LinkTyp
 	 */
 	public String getLinkAccessType() {
 		return linkAccessType;
-	}
-
-	/**
-	 * @return the status
-	 */
-	public String getStatus() {
-		return status;
 	}
 }

@@ -1795,6 +1795,7 @@ public class CorePackageImpl extends EPackageImpl implements CorePackage {
 		viewPointEClass.getESuperTypes().add(this.getHasDescription());
 		viewPointEClass.getESuperTypes().add(this.getHasNameAndID());
 		viewPointEClass.getESuperTypes().add(this.getHasTags());
+		viewPointEClass.getESuperTypes().add(this.getHasStatus());
 		componentGroupEClass.getESuperTypes().add(this.getArchitectureItem());
 		componentGroupEClass.getESuperTypes().add(this.getHasParameterDefinitions());
 		componentInstanceGroupEClass.getESuperTypes().add(this.getRuntimeItem());
@@ -1824,6 +1825,7 @@ public class CorePackageImpl extends EPackageImpl implements CorePackage {
 		viewEClass.getESuperTypes().add(this.getHasDescription());
 		viewEClass.getESuperTypes().add(this.getHasNameAndID());
 		viewEClass.getESuperTypes().add(this.getHasTags());
+		viewEClass.getESuperTypes().add(this.getHasStatus());
 		linkTypeEClass.getESuperTypes().add(this.getConceptItem());
 		linkEClass.getESuperTypes().add(this.getArchitectureItem());
 		linkInstanceEClass.getESuperTypes().add(this.getRuntimeItem());

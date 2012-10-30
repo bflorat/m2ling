@@ -6,6 +6,7 @@ package org.m2ling.domain.core.util;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.util.Switch;
+import org.m2ling.domain.core.*;
 import org.m2ling.domain.core.Activity;
 import org.m2ling.domain.core.ActivityTransition;
 import org.m2ling.domain.core.Actor;
@@ -169,6 +170,7 @@ public class CoreSwitch<T> extends Switch<T> {
 				if (result == null) result = caseHasDescription(viewPoint);
 				if (result == null) result = caseHasNameAndID(viewPoint);
 				if (result == null) result = caseHasTags(viewPoint);
+				if (result == null) result = caseHasStatus(viewPoint);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -246,6 +248,7 @@ public class CoreSwitch<T> extends Switch<T> {
 				if (result == null) result = caseHasDescription(view);
 				if (result == null) result = caseHasNameAndID(view);
 				if (result == null) result = caseHasTags(view);
+				if (result == null) result = caseHasStatus(view);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}

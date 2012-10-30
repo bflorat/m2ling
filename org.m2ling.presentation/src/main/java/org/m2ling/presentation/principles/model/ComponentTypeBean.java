@@ -31,8 +31,6 @@ public class ComponentTypeBean extends AbstractCommonBean {
 
 	private String iconPath = "";
 
-	private String status = "";
-
 	public ComponentTypeBean() {
 		super();
 	}
@@ -50,21 +48,6 @@ public class ComponentTypeBean extends AbstractCommonBean {
 	 */
 	public void setIconPath(String iconPath) {
 		this.iconPath = iconPath;
-	}
-
-	/**
-	 * @return the status
-	 */
-	public String getStatus() {
-		return status;
-	}
-
-	/**
-	 * @param status
-	 *           the status to set
-	 */
-	public void setStatus(String status) {
-		this.status = status;
 	}
 
 	/**

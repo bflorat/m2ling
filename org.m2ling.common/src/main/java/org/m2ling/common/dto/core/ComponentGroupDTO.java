@@ -11,23 +11,14 @@ import java.util.Set;
  * 
  * @author Bertrand Florat <bertrand@florat.net>
  */
-public class ComponentGroupDTO extends AbstractCommonDTO implements Comparable<ComponentGroupDTO> {
-	private final String status;
-
+public final class ComponentGroupDTO extends AbstractCommonDTO implements Comparable<ComponentGroupDTO> {
 	private final Set<ComponentDTO> components;
 
 	public static class Builder extends AbstractCommonDTO.Builder {
-		private String status;
-
 		private Set<ComponentDTO> components = new LinkedHashSet<ComponentDTO>(2);
 
 		public Builder(String id, String name) {
 			super(id, name);
-		}
-
-		public Builder status(String status) {
-			this.status = status;
-			return this;
 		}
 
 		public Builder addComponent(ComponentDTO component) {
@@ -43,7 +34,6 @@ public class ComponentGroupDTO extends AbstractCommonDTO implements Comparable<C
 
 	private ComponentGroupDTO(Builder builder) {
 		super(builder);
-		status = builder.status;
 		components = builder.components;
 	}
 
@@ -73,13 +63,6 @@ public class ComponentGroupDTO extends AbstractCommonDTO implements Comparable<C
 			return -1;
 		}
 		return getName().compareTo(o.getName());
-	}
-
-	/**
-	 * @return the status
-	 */
-	public String getStatus() {
-		return status;
 	}
 
 	/**

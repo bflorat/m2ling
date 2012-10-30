@@ -15,7 +15,7 @@ import com.google.common.collect.ImmutableSet;
  * 
  * @author Bertrand Florat <bertrand@florat.net>
  */
-public class ComponentTypeDTO extends AbstractCommonDTO implements Comparable<ComponentTypeDTO> {
+public final class ComponentTypeDTO extends AbstractCommonDTO implements Comparable<ComponentTypeDTO> {
 	private final HasNameAndIdDTO vp;
 
 	private final List<ReferenceDTO> references;
@@ -25,8 +25,6 @@ public class ComponentTypeDTO extends AbstractCommonDTO implements Comparable<Co
 	private final int iFactor;
 
 	private final Set<HasNameAndIdDTO> enumeration;
-
-	private final String status;
 
 	public static class Builder extends AbstractCommonDTO.Builder {
 		// Required configuration
@@ -38,8 +36,6 @@ public class ComponentTypeDTO extends AbstractCommonDTO implements Comparable<Co
 		private HasNameAndIdDTO boundType;
 
 		private int iFactor = 0;
-
-		private String status = null;
 
 		private Set<HasNameAndIdDTO> enumeration = new LinkedHashSet<HasNameAndIdDTO>(1);
 
@@ -60,11 +56,6 @@ public class ComponentTypeDTO extends AbstractCommonDTO implements Comparable<Co
 
 		public Builder instantiationFactor(int iFactor) {
 			this.iFactor = iFactor;
-			return this;
-		}
-
-		public Builder status(String status) {
-			this.status = status;
 			return this;
 		}
 
@@ -92,7 +83,6 @@ public class ComponentTypeDTO extends AbstractCommonDTO implements Comparable<Co
 		boundType = builder.boundType;
 		iFactor = builder.iFactor;
 		enumeration = ImmutableSet.copyOf(builder.enumeration);
-		status = builder.status;
 	}
 
 	/**
@@ -115,13 +105,6 @@ public class ComponentTypeDTO extends AbstractCommonDTO implements Comparable<Co
 	 */
 	public List<ReferenceDTO> getReferences() {
 		return references;
-	}
-
-	/**
-	 * @return the status
-	 */
-	public String getStatus() {
-		return status;
 	}
 
 	/**

@@ -13,10 +13,8 @@ import org.m2ling.common.utils.Utils;
  * 
  * @author Bertrand Florat <bertrand@florat.net>
  */
-public class RuleDTO extends AbstractCommonDTO implements Comparable<RuleDTO> {
+public final class RuleDTO extends AbstractCommonDTO implements Comparable<RuleDTO> {
 	private final String vpID;
-
-	private final String status;
 
 	private final int priority;
 
@@ -31,8 +29,6 @@ public class RuleDTO extends AbstractCommonDTO implements Comparable<RuleDTO> {
 		private final String vpID;
 
 		// Optional configuration
-		private String status = null;
-
 		private int priority = 0;
 
 		private String rationale = null;
@@ -61,11 +57,6 @@ public class RuleDTO extends AbstractCommonDTO implements Comparable<RuleDTO> {
 			return this;
 		}
 
-		public Builder status(String status) {
-			this.status = status;
-			return this;
-		}
-
 		public Builder priority(int priority) {
 			this.priority = priority;
 			return this;
@@ -80,7 +71,6 @@ public class RuleDTO extends AbstractCommonDTO implements Comparable<RuleDTO> {
 	private RuleDTO(Builder builder) {
 		super(builder);
 		vpID = builder.vpID;
-		status = builder.status;
 		priority = builder.priority;
 		rationale = builder.rationale;
 		exceptions = builder.exceptions;
@@ -92,15 +82,6 @@ public class RuleDTO extends AbstractCommonDTO implements Comparable<RuleDTO> {
 	 */
 	public String getViewPointId() {
 		return vpID;
-	}
-
-	/**
-	 * Return the status.
-	 * 
-	 * @return the status literal.
-	 */
-	public String getStatus() {
-		return status;
 	}
 
 	/**
