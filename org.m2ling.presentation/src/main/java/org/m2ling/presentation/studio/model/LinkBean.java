@@ -20,13 +20,15 @@ public class LinkBean extends AbstractCommonBean {
 	/** Drop */
 	private String drop = "";
 
-	private int timeout = -1;
+	private long timeoutMillis = -1;
 
 	private Set<HasNameAndIDBean> sources = new LinkedHashSet<HasNameAndIDBean>();
 
 	private Set<HasNameAndIDBean> destinations = new LinkedHashSet<HasNameAndIDBean>();
 
 	private HasNameAndIDBean type;
+
+	private HasNameAndIDBean boundComponent;
 
 	public LinkBean() {
 		super();
@@ -74,18 +76,33 @@ public class LinkBean extends AbstractCommonBean {
 	}
 
 	/**
+	 * @return the boundComponent
+	 */
+	public HasNameAndIDBean getBoundComponent() {
+		return boundComponent;
+	}
+
+	/**
+	 * @param boundComponent
+	 *           the boundComponent to set
+	 */
+	public void setBoundComponent(HasNameAndIDBean boundComponent) {
+		this.boundComponent = boundComponent;
+	}
+
+	/**
 	 * @return the timeout
 	 */
-	public int getTimeout() {
-		return timeout;
+	public long getTimeoutMillis() {
+		return timeoutMillis;
 	}
 
 	/**
 	 * @param timeout
 	 *           the timeout to set
 	 */
-	public void setTimeout(int timeout) {
-		this.timeout = timeout;
+	public void setTimeoutMillis(long timeout) {
+		this.timeoutMillis = timeout;
 	}
 
 	/**

@@ -5,9 +5,6 @@
  */
 package org.m2ling.presentation.studio.model;
 
-import java.util.LinkedHashSet;
-import java.util.Set;
-
 import org.m2ling.common.utils.Utils;
 import org.m2ling.presentation.common.model.AbstractCommonBean;
 import org.m2ling.presentation.principles.model.HasNameAndIDBean;
@@ -20,9 +17,9 @@ public class LinkInstanceBean extends AbstractCommonBean {
 	/** Drop */
 	private String drop = "";
 
-	private Set<HasNameAndIDBean> sources = new LinkedHashSet<HasNameAndIDBean>();
+	private HasNameAndIDBean source;
 
-	private Set<HasNameAndIDBean> destinations = new LinkedHashSet<HasNameAndIDBean>();
+	private HasNameAndIDBean destination;
 
 	private HasNameAndIDBean link;
 
@@ -72,32 +69,32 @@ public class LinkInstanceBean extends AbstractCommonBean {
 	}
 
 	/**
-	 * @return the sources
+	 * @return the source
 	 */
-	public Set<HasNameAndIDBean> getSources() {
-		return sources;
+	public HasNameAndIDBean getSource() {
+		return source;
 	}
 
 	/**
-	 * @param sources
-	 *           the sources to set
+	 * @param source
+	 *           the source to set
 	 */
-	public void setSources(Set<HasNameAndIDBean> sources) {
-		this.sources = sources;
+	public void setSource(HasNameAndIDBean source) {
+		this.source = source;
 	}
 
 	/**
-	 * @return the destinations
+	 * @return the destination
 	 */
-	public Set<HasNameAndIDBean> getDestinations() {
-		return destinations;
+	public HasNameAndIDBean getDestination() {
+		return destination;
 	}
 
 	/**
-	 * @param destinations
-	 *           the destinations to set
+	 * @param destination
+	 *           the destination to set
 	 */
-	public void setDestinations(Set<HasNameAndIDBean> destinations) {
-		this.destinations = destinations;
+	public void setDestination(HasNameAndIDBean destination) {
+		this.destination = destination;
 	}
 }

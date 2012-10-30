@@ -13,13 +13,16 @@ import java.util.Set;
 
 import org.m2ling.common.dto.core.AbstractCommonDTO;
 import org.m2ling.common.dto.core.ComponentDTO;
+import org.m2ling.common.dto.core.ComponentInstanceDTO;
 import org.m2ling.common.dto.core.ComponentTypeDTO;
 import org.m2ling.common.dto.core.HasNameAndIdDTO;
 import org.m2ling.common.dto.core.LinkDTO;
+import org.m2ling.common.dto.core.LinkInstanceDTO;
 import org.m2ling.common.dto.core.LinkTypeDTO;
 import org.m2ling.common.dto.core.ReferenceDTO;
 import org.m2ling.common.dto.core.RuleDTO;
 import org.m2ling.common.dto.core.StatusEventDTO;
+import org.m2ling.common.dto.core.ViewDTO;
 import org.m2ling.common.dto.core.ViewPointDTO;
 import org.m2ling.common.exceptions.TechnicalException;
 import org.m2ling.common.utils.Consts;
@@ -33,7 +36,10 @@ import org.m2ling.presentation.principles.model.ReferenceBean;
 import org.m2ling.presentation.principles.model.RuleBean;
 import org.m2ling.presentation.principles.model.ViewPointBean;
 import org.m2ling.presentation.studio.model.ComponentBean;
+import org.m2ling.presentation.studio.model.ComponentInstanceBean;
 import org.m2ling.presentation.studio.model.LinkBean;
+import org.m2ling.presentation.studio.model.LinkInstanceBean;
+import org.m2ling.presentation.studio.model.ViewBean;
 
 import com.google.inject.Singleton;
 
@@ -197,7 +203,20 @@ public class DTOConverter {
 			HasNameAndIdDTO typeDTO = getNameAndIdDTO(bean.getType());
 			ComponentDTO.Builder builder = new ComponentDTO.Builder(bean.getId(), bean.getName());
 			populateCommonBuilder(builder, bean);
-			builder.boundType(boundComp).type(typeDTO).description(bean.getDescription()).comment(bean.getComment());
+			builder.boundType(boundComp).type(typeDTO);
+			for (ReferenceBean ref : bean.getReferences()) {
+				ReferenceDTO refDTO = getReferenceDTO(ref);
+				builder.addReference(refDTO);
+			}
+			return builder.build();
+		}
+
+		public ComponentInstanceDTO getComponentInstanceDTO(ComponentInstanceBean bean) {
+			HasNameAndIdDTO boundInstance = getNameAndIdDTO(bean.getBoundInstance());
+			HasNameAndIdDTO compDTO = getNameAndIdDTO(bean.getComponent());
+			ComponentInstanceDTO.Builder builder = new ComponentInstanceDTO.Builder(bean.getId(), bean.getName());
+			populateCommonBuilder(builder, bean);
+			builder.boundInstance(boundInstance).component(compDTO);
 			for (ReferenceBean ref : bean.getReferences()) {
 				ReferenceDTO refDTO = getReferenceDTO(ref);
 				builder.addReference(refDTO);
@@ -207,8 +226,30 @@ public class DTOConverter {
 
 		public LinkDTO getLinkDTO(LinkBean bean) {
 			HasNameAndIdDTO typeDTO = getNameAndIdDTO(bean.getType());
-			LinkDTO.Builder builder = new LinkDTO.Builder(bean.getId(), bean.getName()).type(typeDTO).timeout(
-					bean.getTimeout());
+			LinkDTO.Builder builder = new LinkDTO.Builder(bean.getId(), bean.getName());
+			builder.type(typeDTO).timeoutMillis(bean.getTimeoutMillis());
+			populateCommonBuilder(builder, bean);
+			for (HasNameAndIDBean sourceBean : bean.getSources()) {
+				builder.addSource(getNameAndIdDTO(sourceBean));
+			}
+			for (HasNameAndIDBean destBean : bean.getDestinations()) {
+				builder.addDestination(getNameAndIdDTO(destBean));
+			}
+			return builder.build();
+		}
+
+		public LinkInstanceDTO getLinkInstanceDTO(LinkInstanceBean bean) {
+			LinkInstanceDTO.Builder builder = new LinkInstanceDTO.Builder(bean.getId(), bean.getName());
+			builder.link(getNameAndIdDTO(bean.getLink()));
+			populateCommonBuilder(builder, bean);
+			builder.source(getNameAndIdDTO(bean.getSource()));
+			builder.destination(getNameAndIdDTO(bean.getDestination()));
+			return builder.build();
+		}
+
+		public ViewDTO getViewDTO(ViewBean bean) {
+			HasNameAndIdDTO vpDTO = getNameAndIdDTO(bean.getViewpoint());
+			ViewDTO.Builder builder = new ViewDTO.Builder(bean.getId(), bean.getName(), vpDTO);
 			populateCommonBuilder(builder, bean);
 			return builder.build();
 		}
@@ -224,10 +265,6 @@ public class DTOConverter {
 	public static class FromDTO {
 		/**
 		 * Populate DTO common fields with bean data
-		 * 
-		 * @param bean
-		 *           the
-		 * @param dto
 		 */
 		private void populateCommonBean(AbstractCommonBean bean, AbstractCommonDTO dto) {
 			bean.setId(dto.getId());
@@ -364,6 +401,36 @@ public class DTOConverter {
 			return bean;
 		}
 
+		public ComponentBean getComponentBean(ComponentDTO dto) {
+			ComponentBean bean = new ComponentBean();
+			populateCommonBean(bean, dto);
+			HasNameAndIDBean boundBean = getHasNameAndIdBean(dto.getBoundComponent());
+			bean.setBoundComponent(boundBean);
+			List<ReferenceBean> refs = new ArrayList<ReferenceBean>();
+			for (ReferenceDTO refDTO : dto.getReferences()) {
+				refs.add(getReferenceBean(refDTO));
+			}
+			bean.setReferences(refs);
+			HasNameAndIDBean ctBean = getHasNameAndIdBean(dto.getComponentType());
+			bean.setType(ctBean);
+			return bean;
+		}
+
+		public ComponentInstanceBean getComponentBean(ComponentInstanceDTO dto) {
+			ComponentInstanceBean bean = new ComponentInstanceBean();
+			populateCommonBean(bean, dto);
+			HasNameAndIDBean boundInstance = getHasNameAndIdBean(dto.getBoundInstance());
+			bean.setBoundInstance(boundInstance);
+			List<ReferenceBean> refs = new ArrayList<ReferenceBean>();
+			for (ReferenceDTO refDTO : dto.getReferences()) {
+				refs.add(getReferenceBean(refDTO));
+			}
+			bean.setReferences(refs);
+			HasNameAndIDBean compBean = getHasNameAndIdBean(dto.getComponent());
+			bean.setComponent(compBean);
+			return bean;
+		}
+
 		/**
 		 * Return a new LT instance given a DTO or an already existing instance of any.
 		 * 
@@ -392,6 +459,34 @@ public class DTOConverter {
 			if (icon != null && icon.exists()) {
 				bean.setIconPath(icon.getAbsolutePath());
 			}
+			return bean;
+		}
+
+		public LinkBean getLinkBean(LinkDTO dto) {
+			LinkBean bean = new LinkBean();
+			populateCommonBean(bean, dto);
+			Set<HasNameAndIDBean> sources = new LinkedHashSet<HasNameAndIDBean>(1);
+			for (HasNameAndIdDTO compDTO : dto.getSources()) {
+				sources.add(getHasNameAndIdBean(compDTO));
+			}
+			bean.setSources(sources);
+			Set<HasNameAndIDBean> destinations = new LinkedHashSet<HasNameAndIDBean>(1);
+			for (HasNameAndIdDTO compDTO : dto.getDestinations()) {
+				destinations.add(getHasNameAndIdBean(compDTO));
+			}
+			bean.setDestinations(destinations);
+			HasNameAndIDBean ltBean = getHasNameAndIdBean(dto.getLinkType());
+			bean.setType(ltBean);
+			bean.setTimeoutMillis(dto.getTimeoutMillis());
+			return bean;
+		}
+
+		public LinkInstanceBean getLinkInstanceBean(LinkInstanceDTO dto) {
+			LinkInstanceBean bean = new LinkInstanceBean();
+			populateCommonBean(bean, dto);
+			bean.setSource(getHasNameAndIdBean(dto.getSource()));
+			bean.setDestination(getHasNameAndIdBean(dto.getDestination()));
+			bean.setLink(getHasNameAndIdBean(dto.getLink()));
 			return bean;
 		}
 	}

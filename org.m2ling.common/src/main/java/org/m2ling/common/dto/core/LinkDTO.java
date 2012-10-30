@@ -12,7 +12,7 @@ import java.util.Set;
  * @author Bertrand Florat <bertrand@florat.net>
  */
 public final class LinkDTO extends AbstractCommonDTO implements Comparable<LinkDTO> {
-	private final int timeoutMillis;
+	private final long timeoutMillis;
 
 	private final HasNameAndIdDTO type;
 
@@ -22,7 +22,7 @@ public final class LinkDTO extends AbstractCommonDTO implements Comparable<LinkD
 
 	public static class Builder extends AbstractCommonDTO.Builder {
 		// Optional configuration
-		private int timeout = -1;
+		private long timeoutMillis = -1;
 
 		private HasNameAndIdDTO type;
 
@@ -44,8 +44,8 @@ public final class LinkDTO extends AbstractCommonDTO implements Comparable<LinkD
 			return this;
 		}
 
-		public Builder timeout(int timeout) {
-			this.timeout = timeout;
+		public Builder timeoutMillis(long timeoutMillis) {
+			this.timeoutMillis = timeoutMillis;
 			return this;
 		}
 
@@ -63,7 +63,7 @@ public final class LinkDTO extends AbstractCommonDTO implements Comparable<LinkD
 	private LinkDTO(Builder builder) {
 		super(builder);
 		type = builder.type;
-		timeoutMillis = builder.timeout;
+		timeoutMillis = builder.timeoutMillis;
 		sources = builder.sources;
 		destinations = builder.destinations;
 	}
@@ -120,7 +120,7 @@ public final class LinkDTO extends AbstractCommonDTO implements Comparable<LinkD
 	/**
 	 * @return the timeout
 	 */
-	public int getTimeoutMillis() {
+	public long getTimeoutMillis() {
 		return timeoutMillis;
 	}
 }

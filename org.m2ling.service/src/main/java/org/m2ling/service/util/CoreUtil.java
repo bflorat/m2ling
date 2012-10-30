@@ -268,7 +268,7 @@ public class CoreUtil {
 	/**
 	 * Return a list of components for a list of architecture items.
 	 * 
-	 * @param id
+	 * @param items
 	 *           the architecture item list
 	 * @return a set of components for a list of architecture items.
 	 */
@@ -276,9 +276,9 @@ public class CoreUtil {
 		List<Component> result = new ArrayList<Component>(items.size());
 		for (ArchitectureItem ai : items) {
 			if (ai instanceof Component) {
-				result.add((Component)ai);
-			} else if (ai instanceof ComponentGroup){
-				ComponentGroup group = (ComponentGroup)ai;
+				result.add((Component) ai);
+			} else if (ai instanceof ComponentGroup) {
+				ComponentGroup group = (ComponentGroup) ai;
 				result.addAll(group.getComponents());
 			}
 		}

@@ -11,8 +11,12 @@ import java.util.List;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.m2ling.common.dto.core.AbstractCommonDTO;
+import org.m2ling.common.dto.core.ComponentDTO;
+import org.m2ling.common.dto.core.ComponentInstanceDTO;
 import org.m2ling.common.dto.core.ComponentTypeDTO;
 import org.m2ling.common.dto.core.HasNameAndIdDTO;
+import org.m2ling.common.dto.core.LinkDTO;
+import org.m2ling.common.dto.core.LinkInstanceDTO;
 import org.m2ling.common.dto.core.LinkTypeDTO;
 import org.m2ling.common.dto.core.ReferenceDTO;
 import org.m2ling.common.dto.core.RuleDTO;
@@ -21,6 +25,7 @@ import org.m2ling.common.dto.core.ViewDTO;
 import org.m2ling.common.dto.core.ViewPointDTO;
 import org.m2ling.domain.core.ArchitectureItem;
 import org.m2ling.domain.core.Component;
+import org.m2ling.domain.core.ComponentInstance;
 import org.m2ling.domain.core.ComponentType;
 import org.m2ling.domain.core.CoreFactory;
 import org.m2ling.domain.core.HasComment;
@@ -28,7 +33,9 @@ import org.m2ling.domain.core.HasDescription;
 import org.m2ling.domain.core.HasNameAndID;
 import org.m2ling.domain.core.HasStatus;
 import org.m2ling.domain.core.HasTags;
+import org.m2ling.domain.core.Link;
 import org.m2ling.domain.core.LinkAccessType;
+import org.m2ling.domain.core.LinkInstance;
 import org.m2ling.domain.core.LinkTemporality;
 import org.m2ling.domain.core.LinkType;
 import org.m2ling.domain.core.Reference;
@@ -167,12 +174,91 @@ public class DTOConverter {
 			return builder.build();
 		}
 
+		public ComponentDTO getComponentDTO(Component comp) {
+			// If name is void or null, use bound comp one
+			String name = comp.getName();
+			Component boundComp = comp.getBoundComponent();
+			if (Strings.isNullOrEmpty(comp.getName()) && boundComp != null) {
+				name = boundComp.getName();
+			}
+			ComponentDTO.Builder builder = new ComponentDTO.Builder(comp.getId(), name);
+			populateCommonBuilder(builder, comp);
+			// Add bound comp tags as well
+			if (boundComp != null) {
+				for (String tag : boundComp.getTags()) {
+					builder.addTag(tag);
+				}
+			}
+			if (Strings.isNullOrEmpty(comp.getComment()) && boundComp != null) {
+				builder.comment(boundComp.getComment());
+			} else {
+				builder.comment(boundComp.getComment());
+			}
+			if (Strings.isNullOrEmpty(boundComp.getDescription()) && boundComp != null) {
+				builder.description(boundComp.getDescription());
+			} else {
+				builder.description(boundComp.getDescription());
+			}
+			for (Reference ref : comp.getReferences()) {
+				ReferenceDTO refDTO = getReferenceDTO(ref);
+				builder.addReference(refDTO);
+			}
+			if (comp.getBoundComponent() != null) {
+				HasNameAndIdDTO hniBoundComp = new HasNameAndIdDTO.Builder(comp.getBoundComponent().getId(), comp
+						.getBoundComponent().getName()).build();
+				builder.boundType(hniBoundComp);
+			}
+			HasNameAndIdDTO hniType = new HasNameAndIdDTO.Builder(comp.getType().getId(), comp.getType().getName())
+					.build();
+			builder.type(hniType);
+			return builder.build();
+		}
+
+		public ComponentInstanceDTO getComponentInstanceDTO(ComponentInstance instance) {
+			// If name is void or null, use bound instance one
+			String name = instance.getName();
+			ComponentInstance boundInstance = instance.getBoundComponentInstance();
+			if (Strings.isNullOrEmpty(instance.getName()) && boundInstance != null) {
+				name = boundInstance.getName();
+			}
+			ComponentInstanceDTO.Builder builder = new ComponentInstanceDTO.Builder(instance.getId(), name);
+			populateCommonBuilder(builder, instance);
+			// Add bound comp tags as well
+			if (boundInstance != null) {
+				for (String tag : boundInstance.getTags()) {
+					builder.addTag(tag);
+				}
+			}
+			if (Strings.isNullOrEmpty(instance.getComment()) && boundInstance != null) {
+				builder.comment(boundInstance.getComment());
+			} else {
+				builder.comment(boundInstance.getComment());
+			}
+			if (Strings.isNullOrEmpty(boundInstance.getDescription()) && boundInstance != null) {
+				builder.description(boundInstance.getDescription());
+			} else {
+				builder.description(boundInstance.getDescription());
+			}
+			for (Reference ref : instance.getReferences()) {
+				ReferenceDTO refDTO = getReferenceDTO(ref);
+				builder.addReference(refDTO);
+			}
+			if (instance.getBoundComponentInstance() != null) {
+				HasNameAndIdDTO hniBoundComp = new HasNameAndIdDTO.Builder(instance.getBoundComponentInstance().getId(),
+						instance.getBoundComponentInstance().getName()).build();
+				builder.boundInstance(hniBoundComp);
+			}
+			HasNameAndIdDTO hniComp = new HasNameAndIdDTO.Builder(instance.getComponent().getId(), instance.getComponent()
+					.getName()).build();
+			builder.component(hniComp);
+			return builder.build();
+		}
+
 		public LinkTypeDTO getLinkTypeDTO(LinkType lt) {
 			ViewPoint vp = (ViewPoint) lt.eContainer();
 			// If name is void or null, use bound type one
-			String name = lt.getName();
 			HasNameAndIdDTO hniVP = new HasNameAndIdDTO.Builder(vp.getId(), vp.getName()).build();
-			LinkTypeDTO.Builder builder = new LinkTypeDTO.Builder(hniVP, lt.getId(), name);
+			LinkTypeDTO.Builder builder = new LinkTypeDTO.Builder(hniVP, lt.getId(), lt.getName());
 			populateCommonBuilder(builder, lt);
 			builder.linkAccessType(lt.getLinkAccessType().getLiteral());
 			builder.linkTemporality(lt.getLinkTemporality().getLiteral());
@@ -184,6 +270,40 @@ public class DTOConverter {
 				HasNameAndIdDTO hniDTO = new HasNameAndIdDTO.Builder(ct.getId(), ct.getName()).build();
 				builder.addDestinationsType(hniDTO);
 			}
+			return builder.build();
+		}
+
+		public LinkDTO getLinkDTO(Link link) {
+			// If name is void or null, use bound type one
+			LinkDTO.Builder builder = new LinkDTO.Builder(link.getId(), link.getName());
+			populateCommonBuilder(builder, link);
+			List<Component> comps = util.getComponentForArchitectureItems(link.getSources());
+			for (Component comp : comps) {
+				HasNameAndIdDTO hniDTO = new HasNameAndIdDTO.Builder(comp.getId(), comp.getName()).build();
+				builder.addSource(hniDTO);
+			}
+			comps = util.getComponentForArchitectureItems(link.getDestinations());
+			for (Component comp : comps) {
+				HasNameAndIdDTO hniDTO = new HasNameAndIdDTO.Builder(comp.getId(), comp.getName()).build();
+				builder.addDestination(hniDTO);
+			}
+			builder.timeoutMillis(link.getTimeoutMillis());
+			return builder.build();
+		}
+
+		public LinkInstanceDTO getLinkInstanceDTO(LinkInstance instance) {
+			// If name is void or null, use bound type one
+			LinkInstanceDTO.Builder builder = new LinkInstanceDTO.Builder(instance.getId(), instance.getName());
+			populateCommonBuilder(builder, instance);
+			HasNameAndIdDTO hniSource = new HasNameAndIdDTO.Builder(instance.getSource().getId(), instance.getSource()
+					.getName()).build();
+			builder.source(hniSource);
+			HasNameAndIdDTO hniDest = new HasNameAndIdDTO.Builder(instance.getDestination().getId(), instance
+					.getDestination().getName()).build();
+			builder.destination(hniDest);
+			HasNameAndIdDTO hniLink = new HasNameAndIdDTO.Builder(instance.getLink().getId(), instance.getLink().getName())
+					.build();
+			builder.link(hniLink);
 			return builder.build();
 		}
 

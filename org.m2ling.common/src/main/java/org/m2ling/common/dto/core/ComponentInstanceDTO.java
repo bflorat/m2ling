@@ -12,29 +12,29 @@ import java.util.List;
  * @author Bertrand Florat <bertrand@florat.net>
  */
 public final class ComponentInstanceDTO extends AbstractCommonDTO implements Comparable<ComponentInstanceDTO> {
-	private final ComponentDTO component;
+	private final HasNameAndIdDTO component;
 
-	private final ComponentInstanceDTO boundInstance;
+	private final HasNameAndIdDTO boundInstance;
 
 	private final List<ReferenceDTO> references;
 
 	public static class Builder extends AbstractCommonDTO.Builder {
-		private ComponentDTO component;
+		private HasNameAndIdDTO component;
 
 		private List<ReferenceDTO> references = new ArrayList<ReferenceDTO>(1);
 
-		private ComponentInstanceDTO boundInstance;
+		private HasNameAndIdDTO boundInstance;
 
 		public Builder(String id, String name) {
 			super(id, name);
 		}
 
-		public Builder component(ComponentDTO component) {
+		public Builder component(HasNameAndIdDTO component) {
 			this.component = component;
 			return this;
 		}
 
-		public Builder boundInstance(ComponentInstanceDTO boundInstance) {
+		public Builder boundInstance(HasNameAndIdDTO boundInstance) {
 			this.boundInstance = boundInstance;
 			return this;
 		}
@@ -88,7 +88,7 @@ public final class ComponentInstanceDTO extends AbstractCommonDTO implements Com
 	/**
 	 * @return the associated component
 	 */
-	public ComponentDTO getComponent() {
+	public HasNameAndIdDTO getComponent() {
 		return component;
 	}
 
@@ -102,7 +102,7 @@ public final class ComponentInstanceDTO extends AbstractCommonDTO implements Com
 	/**
 	 * @return the bound instance
 	 */
-	public ComponentInstanceDTO getBoundInstance() {
+	public HasNameAndIdDTO getBoundInstance() {
 		return boundInstance;
 	}
 }

@@ -72,11 +72,7 @@ abstract public class AbstractCommonDTO {
 			this.comment = comment;
 			return this;
 		}
-
-		public Builder addLink(String comment) {
-			this.comment = comment;
-			return this;
-		}
+	
 	}
 
 	public AbstractCommonDTO(Builder builder) {

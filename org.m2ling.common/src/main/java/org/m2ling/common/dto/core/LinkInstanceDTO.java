@@ -3,7 +3,6 @@
  */
 package org.m2ling.common.dto.core;
 
-import java.util.Set;
 
 /**
  * Link instance DTO object used between layers.
@@ -13,17 +12,17 @@ import java.util.Set;
 public final class LinkInstanceDTO extends AbstractCommonDTO implements Comparable<LinkInstanceDTO> {
 	private final HasNameAndIdDTO link;
 
-	private final Set<HasNameAndIdDTO> sources;
+	private final HasNameAndIdDTO source;
 
-	private final Set<HasNameAndIdDTO> destinations;
+	private final HasNameAndIdDTO destination;
 
 	public static class Builder extends AbstractCommonDTO.Builder {
 		// Optional configuration
 		private HasNameAndIdDTO link;
 
-		private Set<HasNameAndIdDTO> sources;
+		private HasNameAndIdDTO source;
 
-		private Set<HasNameAndIdDTO> destinations;
+		private HasNameAndIdDTO destination;
 
 		public Builder(String id, String name) {
 			super(id, name);
@@ -34,13 +33,13 @@ public final class LinkInstanceDTO extends AbstractCommonDTO implements Comparab
 			return this;
 		}
 
-		public Builder addSource(HasNameAndIdDTO comp) {
-			this.sources.add(comp);
+		public Builder source(HasNameAndIdDTO comp) {
+			this.source = comp;
 			return this;
 		}
 
-		public Builder addDestination(HasNameAndIdDTO comp) {
-			this.destinations.add(comp);
+		public Builder destination(HasNameAndIdDTO comp) {
+			this.destination = comp;
 			return this;
 		}
 
@@ -52,8 +51,8 @@ public final class LinkInstanceDTO extends AbstractCommonDTO implements Comparab
 
 	private LinkInstanceDTO(Builder builder) {
 		super(builder);
-		sources = builder.sources;
-		destinations = builder.destinations;
+		source = builder.source;
+		destination = builder.destination;
 		link = builder.link;
 	}
 
@@ -93,16 +92,16 @@ public final class LinkInstanceDTO extends AbstractCommonDTO implements Comparab
 	}
 
 	/**
-	 * @return the sources
+	 * @return the source
 	 */
-	public Set<HasNameAndIdDTO> getSources() {
-		return sources;
+	public HasNameAndIdDTO getSource() {
+		return source;
 	}
 
 	/**
-	 * @return the destinations
+	 * @return the destination
 	 */
-	public Set<HasNameAndIdDTO> getDestinations() {
-		return destinations;
+	public HasNameAndIdDTO getDestination() {
+		return destination;
 	}
 }
