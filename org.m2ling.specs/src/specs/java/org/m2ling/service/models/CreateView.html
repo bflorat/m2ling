@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:concordion="http://www.concordion.org/2007/concordion">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>View creation</title>
+</head>
+<body>
+	<H1>View creation</H1>
+	<p>Administrators or actors with adequate authorizations can create
+		a new view to formalize aspects and rules of their concerns over
+		a system of interest.</p>
+	<p>A ~View~ is uniquely identified by its id. Its name must be
+		unique.</p>
+	<h3>Round trip test from presentation to presentation layer</h3>
+	<div class="example">
+		<p>A new view created with
+		<ul>
+			<li>id=<b concordion:set="#id">id_v123</b></li>
+			<li>id=<b concordion:set="#vpID">id_v123</b></li>
+			<li>id=<b concordion:set="#name">v123</b></li>
+			<li>id=<b concordion:set="#description">desc1</b></li>
+			<li>id=<b concordion:set="#comment">comment1</b></li>
+			<li>id=<b concordion:set="#tags">tag1,tag2</b></li>
+		</ul>
+		should have following characteristics : <b
+			concordion:assertEquals="getView(#id,#name,#description,#comment,#tags,#statusLiterals)">
+			comment=comment1
+			description=desc1 
+			id=id_v123 
+			name=v123 
+			status=&lt;null&gt; 
+			tags=tag1,tag2</b>.
+		</p>
+		</div>
+		<h3>Format controls</h3>
+		<div class="example">
+		<ul>
+			<li>A null input should make service call <b
+				concordion:assertEquals="getCheckNullDTO()">FAIL</b>
+			</li>
+			<li>ID and name can't be null, void or void once trimmed</li>
+			<li>ID size can't be larger than 40 characters</li>
+			<li>Name and status literal size can't be larger that 200
+				characters</li>
+			<li>description and comment size can't be larger that 2000
+				characters</li>
+			<li>See Tags specifications for tags limits</li>
+			<li>Following service inputs should make the service :
+				<table
+					concordion:execute="#result=getCheckDTOVerification(#caseName,#id,#name,#description,#comment,#tags,#statusLiterals)">
+					<tr>
+						<th concordion:set="#caseName">Case</th>
+						<th concordion:set="#id">ID</th>
+						<th concordion:set="#name">Name</th>
+						<th concordion:set="#description">Description</th>
+						<th concordion:set="#comment">Comment</th>
+						<th concordion:set="#tags">Tags</th>
+						<th concordion:set="#statusLiterals">statusLiterals</th>
+						<th concordion:assertEquals="#result">should :</th>
+					</tr>
+					<!-- Nominal -->
+					<tr>
+						<td>Nominal</td>
+						<td>id_new_vp2</td>
+						<td>new_vp2</td>
+						<td>description2</td>
+						<td>comment2</td>
+						<td>tags1,tag2</td>
+						<td>VALIDATED,REFUSED</td>
+						<td>PASS</td>
+					</tr>
+					<!-- Existing VP -->
+					<tr>
+						<td>Existing VP ID</td>
+						<td>id_vp1</td>
+						<td>new_vp1</td>
+						<td>description2</td>
+						<td>comment2</td>
+						<td>tags1,tag2</td>
+						<td>status1,status1</td>
+						<td>FAIL with code DUPLICATES</td>
+					</tr>
+					<tr>
+						<td>Existing VP name</td>
+						<td>id_new_vp1</td>
+						<td>vp1</td>
+						<td>description2</td>
+						<td>comment2</td>
+						<td>tags1,tag2</td>
+						<td>status1,status1</td>
+						<td>FAIL with code DUPLICATE_NAME</td>
+					</tr>
+					<!-- ID checks -->
+					<tr>
+						<td>Null ID</td>
+						<td>null</td>
+						<td>new_vp2</td>
+						<td>description2</td>
+						<td>comment2</td>
+						<td>tags1,tag2</td>
+						<td>VALIDATED,REFUSED</td>
+						<td>FAIL with code NULL_ARGUMENT</td>
+					</tr>
+					<tr>
+					    <td>Void ID</td>
+						<td></td>
+						<td>new_vp2</td>
+						<td>description2</td>
+						<td>comment2</td>
+						<td>tags1,tag2</td>
+						<td>VALIDATED,REFUSED</td>
+						<td>FAIL with code VOID_ARGUMENT</td>
+					</tr>
+					<tr>
+					    <td>Void ID after trim</td>
+						<td>space</td>
+						<td>new_vp2</td>
+						<td>description2</td>
+						<td>comment2</td>
+						<td>tags1,tag2</td>
+						<td>VALIDATED,REFUSED</td>
+						<td>FAIL with code VOID_ARGUMENT</td>
+					</tr>
+					<tr>
+						<td>ID too long</td>
+						<td>dkjshdhsqkjdhqskjhdkjqshdkjqshkjdhqskjhdkjqskdjhqskjdhqskhdkjqshdkjhqskjdhqskjhdkjqshdkjqshkdjqshkjdhqskjhdkjqshdkjhqskjdhqskhdk</td>
+						<td>new_vp2</td>
+						<td>description2</td>
+						<td>comment2</td>
+						<td>tags1,tag2</td>
+						<td>VALIDATED,REFUSED</td>
+						<td>FAIL with code SIZE_EXCEEDED</td>
+					</tr>
+					<!-- name check -->
+					<tr>
+						<td>Null name</td>
+						<td>id_new_vp2</td>
+						<td>null</td>
+						<td>description2</td>
+						<td>comment2</td>
+						<td>tags1,tag2</td>
+						<td>VALIDATED,REFUSED</td>
+						<td>FAIL with code NULL_ARGUMENT</td>
+					</tr>
+					<tr>
+					    <td>Void name</td>
+						<td>id_new_vp2</td>
+						<td></td>
+						<td>description2</td>
+						<td>comment2</td>
+						<td>tags1,tag2</td>
+						<td>VALIDATED,REFUSED</td>
+						<td>FAIL with code VOID_ARGUMENT</td>
+					</tr>
+					<tr>
+					    <td>Void ID after trim</td>
+						<td>id_new_vp2</td>
+						<td>space</td>
+						<td>description2</td>
+						<td>comment2</td>
+						<td>tags1,tag2</td>
+						<td>VALIDATED,REFUSED</td>
+						<td>FAIL with code VOID_ARGUMENT</td>
+					</tr>
+					<tr>
+					    <td>Name too long</td>
+						<td>id_new_vp2</td>
+						<td>dkjshdhddsldljslkdl fdsf fsfdsf ssf
+							skjdlsjdkjslkdjskljdlsjdlj lsd jslk dkjs lkdjskldj sjd
+							sjdlksqkjdhqskjhdkjqshdkjqshkjdhqskjhdkjqskdjhqskjdhqskhdkjqshdkjhqskjdhqskjhdkjqshdkjqshkdjqsdsds
+							dsdsd shkjdhqskjhdkjqs</td>
+						<td>description2</td>
+						<td>comment2</td>
+						<td>tags1,tag2</td>
+						<td>VALIDATED,REFUSED</td>
+						<td>FAIL with code SIZE_EXCEEDED</td>
+					</tr>
+					<!-- Status literal -->
+					<tr>
+					    <td>Status literals too long</td>
+						<td>id_new_vp2</td>
+						<td>new_vp2</td>
+						<td>description2</td>
+						<td>comment2</td>
+						<td>tags1,tag2</td>
+						<td>dkjshdhddsldljslkdl fdsf fsfdsf ssf
+							skjdlsjdkjslkdjskljdlsjdlj lsd jslk dkjs lkdjskldj sjd
+							sjdlksqkjdhqskjhdkjqshdkjqshkjdhqskjhdkjqskdjhqskjdhqskhdkjqshdkjhqskjdhqskjhdkjqshdkjqshkdjqsdsds
+							dsdsd shkjdhqskjhdkjqs,foo</td>
+						<td>FAIL with code SIZE_EXCEEDED</td>
+					</tr>
+					<tr>
+					    <td>Void status literal</td>
+						<td>id_new_vp2</td>
+						<td>new_vp2</td>
+						<td>desc</td>
+						<td>comment2</td>
+						<td>tags1,tag2</td>
+						<td>,b</td>
+						<td>FAIL with code VOID_ARGUMENT</td>
+					</tr>
+					<tr>
+					    <td>Void after trim status literal</td>
+						<td>id_new_vp2</td>
+						<td>new_vp2</td>
+						<td>space</td>
+						<td>comment2</td>
+						<td>tags1,tag2</td>
+						<td>space,</td>
+						<td>FAIL with code VOID_ARGUMENT</td>
+					</tr>
+					
+					<!-- Comment -->
+					<tr>
+						<td>Void comment</td>
+						<td>id_new_vp2</td>
+						<td>new_vp2</td>
+						<td>description2</td>
+						<td></td>
+						<td>tags1,tag2</td>
+						<td>status1</td>
+						<td>PASS</td>
+					</tr>
+					<tr>
+					    <td>Null comment</td>
+						<td>id_new_vp2</td>
+						<td>new_vp2</td>
+						<td>description2</td>
+						<td>null</td>
+						<td>tags1,tag2</td>
+						<td>status1</td>
+						<td>PASS</td>
+					</tr>
+				</table>
+				<p>Note that status literals can't contain a null literal because a set cannot handle null values</p>
+			</li>
+		</ul>
+	</div>
+</body>
+</html>

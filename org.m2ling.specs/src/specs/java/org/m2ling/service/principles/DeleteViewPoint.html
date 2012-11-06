@@ -12,7 +12,7 @@
 
 	<p class='rule'>An existing viewpoint can be dropped :
 	<div class="example">
-		Given an existing viewpoint <b concordion:set="#id">id_vp1</b><br />
+		Given an existing viewpoint <b concordion:set="#id">id_vp3</b><br />
 		When a delete is done against it <span
 			concordion:execute="#resu=deleteWithoutRefs(#id)" /><br /> Then a
 		search for it should return <b concordion:assertEquals="#resu">null</b>
@@ -26,13 +26,12 @@
 			concordion:assertEquals="#resu">FAIL with code TARGET_NOT_FOUND</b>
 	</div>
 	</p>
-	<p class='rule'>The viewpoint can't be dropped while one architecture item uses
-		a type defined in it.
+	<p class='rule'>The viewpoint can't be dropped while at least one view of this type exists.
 	<div class="example">
 		Given a viewpoint <b>id_vp1</b><br /> And a
-		component <b concordion:set="#id">id_vp1</b> whose type is
-		defined in this viewpoint<br />An attempt to delete the viewpoint <span
-			concordion:execute="#resu=deleteWithLocalComp(#id)" /> should <b
+		view <b concordion:set="#id">id_vp1</b> whose type is
+		this viewpoint<br />An attempt to delete the viewpoint <span
+			concordion:execute="#resu=deleteWithView(#id)" /> should <b
 			concordion:assertEquals="#resu">FAIL with code VP_IN_USE</b>
 	</div>
 	</p>

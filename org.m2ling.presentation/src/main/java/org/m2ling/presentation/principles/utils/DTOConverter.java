@@ -296,6 +296,20 @@ public class DTOConverter {
 		}
 
 		/**
+		 * Return a new View instance given a DTO or an already existing instance of any.
+		 * 
+		 * @param dto
+		 *           the dto
+		 * @return a new View instance
+		 */
+		public ViewBean getViewBean(ViewDTO dto) {
+			ViewBean bean = new ViewBean();
+			populateCommonBean(bean, dto);
+			bean.setViewpoint(getHasNameAndIdBean(dto.getViewpoint()));
+			return bean;
+		}
+
+		/**
 		 * Return a new Rule instance given a DTO or an already existing instance of any.
 		 * 
 		 * @param dto

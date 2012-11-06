@@ -18,10 +18,8 @@ import org.m2ling.common.soa.Context;
 import org.m2ling.common.utils.Consts;
 import org.m2ling.common.utils.Utils;
 import org.m2ling.domain.Root;
-import org.m2ling.domain.core.Component;
 import org.m2ling.domain.core.ComponentType;
-import org.m2ling.domain.core.Link;
-import org.m2ling.domain.core.LinkType;
+import org.m2ling.domain.core.Type;
 import org.m2ling.domain.core.View;
 import org.m2ling.domain.core.ViewPoint;
 import org.m2ling.persistence.PersistenceManager;
@@ -34,7 +32,7 @@ import com.google.inject.Inject;
 import com.google.inject.Singleton;
 
 /**
- * Viewpoint service nomimal implementation
+ * Viewpoint service nominal implementation
  * 
  * @author "Bertrand Florat <bertrand@florat.net>"
  * 
@@ -50,53 +48,10 @@ public class ViewPointServiceImpl extends ServiceImpl implements ViewPointServic
 		super(pm, util, fromDTO, toDTO, conf, logger);
 	}
 
-	private void checkIdAndName(final ViewPointDTO dto, AccessType access) throws FunctionalException {
-		// Nullity
-		if (dto == null) {
-			throw new FunctionalException(Code.NULL_ARGUMENT, null, null);
-		}
-		// Check id
-		if (dto.getId() == null) {
-			throw new FunctionalException(FunctionalException.Code.NULL_ARGUMENT, null, "(id)");
-		}
-		if (Strings.isNullOrEmpty(dto.getId().trim())) {
-			throw new FunctionalException(FunctionalException.Code.VOID_ARGUMENT, null, "(id)");
-		}
-		if (dto.getId().length() > 40) {
-			throw new FunctionalException(FunctionalException.Code.SIZE_EXCEEDED, null, "(id)");
-		}
-		// Check name
-		if (access == AccessType.CREATE || access == AccessType.UPDATE) {
-			if (dto.getName() == null) {
-				throw new FunctionalException(FunctionalException.Code.NULL_ARGUMENT, null, "(name)");
-			}
-			if ("".equals(dto.getName().trim())) {
-				throw new FunctionalException(FunctionalException.Code.VOID_ARGUMENT, null, "(name)");
-			}
-			if (dto.getName().length() > Consts.MAX_LABEL_SIZE) {
-				throw new FunctionalException(FunctionalException.Code.SIZE_EXCEEDED, null, "(name)");
-			}
-		}
-		if (access == AccessType.CREATE) {
-			// Check for existing item with the same id
-			List<ViewPoint> vps = pmanager.getRoot().getViewPoints();
-			for (ViewPoint item : vps) {
-				if (item.getId().equals(dto.getId())) {
-					throw new FunctionalException(FunctionalException.Code.DUPLICATES, null, "id=" + dto.getId());
-				}
-			}
-			// Check for existing item with the same name
-			for (ViewPoint item : vps) {
-				if (item.getName().equals(dto.getName())) {
-					throw new FunctionalException(FunctionalException.Code.DUPLICATE_NAME, null, "name=" + dto.getName());
-				}
-			}
-		}
-	}
-
 	void checkDTO(final ViewPointDTO dto, final AccessType access) throws FunctionalException {
 		ViewPoint vp = null;
-		checkIdAndName(dto, access);
+		checkIdAndName(dto, access, false);
+		// TODO : check status (status of the VP itself, not status literals)
 		if (access != AccessType.CREATE) {
 			// VP existence
 			vp = util.getViewPointByID(dto.getId());
@@ -200,15 +155,6 @@ public class ViewPointServiceImpl extends ServiceImpl implements ViewPointServic
 		// Processing
 		ViewPoint vp = fromDTO.newViewPoint(vpDTO);
 		Root root = pmanager.getRoot();
-		if (root.getViewPoints().contains(vp)) {
-			throw new IllegalStateException("View point already exist");
-		}
-		// Check for view point with the same name
-		for (ViewPoint vpChecked : root.getViewPoints()) {
-			if (vpChecked.getName().equals(vpDTO.getName())) {
-				throw new IllegalStateException("View point already exist with name : " + vpDTO.getName());
-			}
-		}
 		root.getViewPoints().add(vp);
 	}
 
@@ -234,6 +180,7 @@ public class ViewPointServiceImpl extends ServiceImpl implements ViewPointServic
 		List<String> tags = vp.getTags();
 		tags.clear();
 		tags.addAll(vpDTO.getTags());
+		vp.setStatus(vpDTO.getStatus());
 	}
 
 	/*
@@ -249,36 +196,36 @@ public class ViewPointServiceImpl extends ServiceImpl implements ViewPointServic
 		if (vp == null) {
 			throw new FunctionalException(FunctionalException.Code.TARGET_NOT_FOUND, null, "id=" + id);
 		}
-		// Check for existing components or links using this vp
+		// Check for existing views using this vp
 		EList<ComponentType> compTypes = vp.getComponentTypes();
-		EList<LinkType> linkTypes = vp.getLinkTypes();
 		for (View view : pmanager.getRoot().getViews()) {
-			// test local VP component presence
+			// check for views of this type
 			if (view.getViewPoint().equals(vp)) {
-				for (Component comp : view.getComponents()) {
-					if (compTypes.contains(comp.getType())) {
-						throw new FunctionalException(FunctionalException.Code.VP_IN_USE, null, "(" + view.getName() + "/"
-								+ comp.getName() + ")");
-					}
-				}
-				for (Link link : view.getLinks()) {
-					if (linkTypes.contains(link.getType())) {
-						throw new FunctionalException(FunctionalException.Code.VP_IN_USE, null, "(" + view.getName() + "/"
-								+ link.getName() + ")");
-					}
-				}
+				throw new FunctionalException(FunctionalException.Code.VP_IN_USE, null, "View: " + view.getName());
 			}
-			// Check for components from others VP bound to types from this VP
-			else {
-				for (Component comp : view.getComponents()) {
-					ComponentType ct = comp.getType().getBoundType();
-					if (ct != null && compTypes.contains(ct)) {
-						throw new FunctionalException(FunctionalException.Code.VP_IN_USE, null, "(" + view.getName() + "/"
-								+ comp.getName() + ")");
+		}
+		// Check for components from others VP bound to types from this VP
+		for (ViewPoint vpToCheck : pmanager.getRoot().getViewPoints()) {
+			if (!vpToCheck.equals(vp)) {
+				for (ComponentType ct : vpToCheck.getComponentTypes()) {
+					ComponentType boundCT = ct.getBoundType();
+					if (boundCT != null && compTypes.contains(boundCT)) {
+						throw new FunctionalException(FunctionalException.Code.VP_IN_USE, null, "Component type: " + vpToCheck.getName()
+								+ "/" + ct.getName() + ")");
 					}
 				}
 			}
 		}
 		pmanager.getRoot().getViewPoints().remove(vp);
+	}
+	
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.m2ling.service.common.ServiceImpl#getType()
+	 */
+	@Override
+	protected Type getType() {
+		return Type.VIEWPOINT;
 	}
 }

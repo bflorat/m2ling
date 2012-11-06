@@ -18,6 +18,7 @@ import org.m2ling.common.utils.Consts;
 import org.m2ling.common.utils.Utils;
 import org.m2ling.domain.Root;
 import org.m2ling.domain.core.Component;
+import org.m2ling.domain.core.Type;
 import org.m2ling.domain.core.View;
 import org.m2ling.domain.core.ViewPoint;
 import org.m2ling.persistence.PersistenceManager;
@@ -31,7 +32,7 @@ import com.google.inject.Singleton;
 
 /**
  * 
- * View service nomimal implementation
+ * View service nominal implementation
  * 
  * @author "Bertrand Florat <bertrand@florat.net>"
  * 
@@ -47,58 +48,14 @@ public class ViewServiceImpl extends ServiceImpl implements ViewService {
 		super(pm, util, fromDTO, toDTO, conf, logger);
 	}
 
-	private void checkIdAndName(final ViewDTO dto, AccessType access) throws FunctionalException {
-		// Nullity
-		if (dto == null) {
-			throw new FunctionalException(Code.NULL_ARGUMENT, null, null);
-		}
-		// Check id
-		if (dto.getId() == null) {
-			throw new FunctionalException(FunctionalException.Code.NULL_ARGUMENT, null, "(id)");
-		}
-		if (Strings.isNullOrEmpty(dto.getId().trim())) {
-			throw new FunctionalException(FunctionalException.Code.VOID_ARGUMENT, null, "(id)");
-		}
-		if (dto.getId().length() > 40) {
-			throw new FunctionalException(FunctionalException.Code.SIZE_EXCEEDED, null, "(id)");
-		}
-		// Check name
-		if (access == AccessType.CREATE || access == AccessType.UPDATE) {
-			if (dto.getName() == null) {
-				throw new FunctionalException(FunctionalException.Code.NULL_ARGUMENT, null, "(name)");
-			}
-			if ("".equals(dto.getName().trim())) {
-				throw new FunctionalException(FunctionalException.Code.VOID_ARGUMENT, null, "(name)");
-			}
-			if (dto.getName().length() > Consts.MAX_LABEL_SIZE) {
-				throw new FunctionalException(FunctionalException.Code.SIZE_EXCEEDED, null, "(name)");
-			}
-		}
-		if (access == AccessType.CREATE) {
-			// Check for existing item with the same id
-			List<View> vps = pmanager.getRoot().getViews();
-			for (View item : vps) {
-				if (item.getId().equals(dto.getId())) {
-					throw new FunctionalException(FunctionalException.Code.DUPLICATES, null, "id=" + dto.getId());
-				}
-			}
-			// Check for existing item with the same name
-			for (View item : vps) {
-				if (item.getName().equals(dto.getName())) {
-					throw new FunctionalException(FunctionalException.Code.DUPLICATE_NAME, null, "name=" + dto.getName());
-				}
-			}
-		}
-	}
-
 	void checkDTO(final ViewDTO dto, final AccessType access) throws FunctionalException {
-		View vp = null;
-		checkIdAndName(dto, access);
+		ViewPoint vp = null;
+		checkIdAndName(dto, access, false);
 		if (access != AccessType.CREATE) {
-			// view existence
-			vp = util.getViewByID(dto.getId());
+			// VP existence
+			vp = util.getViewPointByID(dto.getViewpoint().getId());
 			if (vp == null) {
-				throw new FunctionalException(Code.TARGET_NOT_FOUND, null, dto.getId());
+				throw new FunctionalException(Code.TARGET_NOT_FOUND, null, "Viewpoint name=" + dto.getViewpoint().getName());
 			}
 		}
 		if (access == AccessType.CREATE || access == AccessType.UPDATE) {
@@ -162,18 +119,9 @@ public class ViewServiceImpl extends ServiceImpl implements ViewService {
 		// test DTO
 		checkDTO(vDTO, AccessType.CREATE);
 		// Processing
-		View vp = fromDTO.newView(vDTO);
+		View view = fromDTO.newView(vDTO);
 		Root root = pmanager.getRoot();
-		if (root.getViews().contains(vp)) {
-			throw new IllegalStateException("View already exist");
-		}
-		// Check for view point with the same name
-		for (View vpChecked : root.getViews()) {
-			if (vpChecked.getName().equals(vDTO.getName())) {
-				throw new IllegalStateException("View already exist with name : " + vDTO.getName());
-			}
-		}
-		root.getViews().add(vp);
+		root.getViews().add(view);
 	}
 
 	/*
@@ -186,16 +134,16 @@ public class ViewServiceImpl extends ServiceImpl implements ViewService {
 	public void updateView(final Context context, final ViewDTO vDTO) throws FunctionalException {
 		// tests
 		checkDTO(vDTO, AccessType.UPDATE);
-		// Processing
+		// Processing (note that VP can't be changed so we don't set here)
 		View view = util.getViewByID(vDTO.getId());
 		view.setName(vDTO.getName());
-		ViewPoint vp = util.getViewPointByID(vDTO.getId());
-		view.setViewPoint(vp);
 		view.setDescription(vDTO.getDescription());
 		view.setComment(vDTO.getComment());
 		List<String> tags = view.getTags();
 		tags.clear();
 		tags.addAll(vDTO.getTags());
+		// TODO Check that status is valid
+		view.setStatus(vDTO.getStatus());
 	}
 
 	/*
@@ -210,11 +158,31 @@ public class ViewServiceImpl extends ServiceImpl implements ViewService {
 		if (view == null) {
 			throw new FunctionalException(FunctionalException.Code.TARGET_NOT_FOUND, null, "id=" + id);
 		}
-		// Drop associated item
-		for (Component comp : view.getComponents()) {
-			// TODO, call a component service
-			// no need for dropping links, instances and groups : done by these services
+		// Check if one of this view component is used as bound component
+		// (Note : no need to check component instances binding as the component check prevent the
+		// bound component instance deletion)
+		for (View v : pmanager.getRoot().getViews()) {
+			if (v.equals(view)) {
+				continue;
+			}
+			for (Component comp : v.getComponents()) {
+				if (view.getComponents().contains(comp.getBoundComponent())) {
+					throw new FunctionalException(FunctionalException.Code.VP_IN_USE, null, "(" + v.getName() + ")");
+				}
+			}
 		}
 		pmanager.getRoot().getViews().remove(view);
 	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.m2ling.service.common.ServiceImpl#getType()
+	 */
+	@Override
+	protected Type getType() {
+		return Type.VIEW;
+	}
+	
+	
 }

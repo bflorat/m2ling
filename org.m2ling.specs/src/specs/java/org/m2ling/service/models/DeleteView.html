@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:concordion="http://www.concordion.org/2007/concordion">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>View deletion</title>
+</head>
+<body>
+	<H1>View deletion</H1>
+	<p>Administrators or actors with adequate authorizations can delete
+		existing views.</p>
+
+	<p class='rule'>An existing view can be dropped :
+	<div class="example">
+		Given an existing view <b concordion:set="#idView">id_v1</b><br /> When a
+		delete is done against it <span
+			concordion:execute="#resu=delete(#id)" /><br /> Then a
+		search for it should return <b concordion:assertEquals="#resu">null</b>
+	</div>
+	</p>
+	<p class='rule'>#VI41 Trying to remove an unexisting view should
+		fail
+	<div class="example">
+		Given an unexisting view <b concordion:set="#idView">id_unknown</b><br />
+		Trying to delete it <span
+			concordion:execute="#resu=delete(#id)" /><br /> should <b
+			concordion:assertEquals="#resu">FAIL with code TARGET_NOT_FOUND</b>
+	</div>
+	</p>
+	<p class='rule'>#VI42 The view can't be dropped while at least one
+		of its components is used as binding for a component from another view
+		(this view always has a viewpoint type different from the one of this
+		view).
+	<div class="example">
+		Given a view <b concordion:set="#idView">id_vp1</b>
+		That contains a component <b>id_comp_v1_comp3</b> used as bound component by the component <b>id_comp_v2_comp3</b><br /> 
+		An attempt to delete the view <span
+			concordion:execute="#resu=delete(#idView)" /> should <b
+			concordion:assertEquals="#resu">FAIL with code VP_IN_USE</b>
+	</div>
+	</p>
+
+	<p class='rule'>#VI43 The view can't be dropped while at least one
+		of its component instances is used as binding for a component instance
+		from another view.
+	<div class="example">
+		Given a view <b concordion:set="#idView">id_vp1</b>
+		That contains a component instance <b>id_comp_v1_comp3_ci1</b> used as bound instance by the component instance <b>id_comp_v1_comp3_ci1</b><br /> 
+		An attempt to delete the view <span
+			concordion:execute="#resu=delete(#idView)" /> should <b
+			concordion:assertEquals="#resu">FAIL with code VP_IN_USE</b>
+	</div>
+	</p>
+
+</body>
+</html>

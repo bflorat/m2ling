@@ -195,8 +195,8 @@
       <eLiterals name="LINK_TYPE" value="1"/>
       <eLiterals name="COMPONENT" value="2"/>
       <eLiterals name="LINK" value="3"/>
-      <eLiterals name="COMPONENT_NODE" value="4"/>
-      <eLiterals name="STREAM" value="5"/>
+      <eLiterals name="COMPONENT_INSTANCE" value="4" literal="COMPONENT_INSTANCE"/>
+      <eLiterals name="LINK_INSTANCE" value="5" literal="LINK_INSTANCE"/>
       <eLiterals name="VIEWPOINT" value="6"/>
       <eLiterals name="VIEW" value="7"/>
       <eLiterals name="RULE" value="8" literal="RULE"/>

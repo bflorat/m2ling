@@ -23,6 +23,7 @@ import org.m2ling.domain.core.Link;
 import org.m2ling.domain.core.LinkAccessType;
 import org.m2ling.domain.core.LinkTemporality;
 import org.m2ling.domain.core.LinkType;
+import org.m2ling.domain.core.Type;
 import org.m2ling.domain.core.View;
 import org.m2ling.domain.core.ViewPoint;
 import org.m2ling.persistence.PersistenceManager;
@@ -50,35 +51,6 @@ public class LinkTypeServiceImpl extends ServiceImpl implements LinkTypeService 
 	protected LinkTypeServiceImpl(PersistenceManager pm, CoreUtil util, DTOConverter.FromDTO fromDTO,
 			DTOConverter.ToDTO toDTO, Conf conf, Logger logger) {
 		super(pm, util, fromDTO, toDTO, conf, logger);
-	}
-
-	private void checkIdAndName(final LinkTypeDTO dto, AccessType access) throws FunctionalException {
-		// Nullity
-		if (dto == null) {
-			throw new FunctionalException(Code.NULL_ARGUMENT, null, null);
-		}
-		// Check id
-		if (dto.getId() == null) {
-			throw new FunctionalException(FunctionalException.Code.NULL_ARGUMENT, null, "(id)");
-		}
-		if (Strings.isNullOrEmpty(dto.getId().trim())) {
-			throw new FunctionalException(FunctionalException.Code.VOID_ARGUMENT, null, "(id)");
-		}
-		if (dto.getId().length() > 40) {
-			throw new FunctionalException(FunctionalException.Code.SIZE_EXCEEDED, null, "(id)");
-		}
-		// Check name
-		if (access == AccessType.CREATE || access == AccessType.UPDATE) {
-			if (dto.getName() == null) {
-				throw new FunctionalException(FunctionalException.Code.NULL_ARGUMENT, null, "(name)");
-			}
-			if ("".equals(dto.getName().trim())) {
-				throw new FunctionalException(FunctionalException.Code.VOID_ARGUMENT, null, "(name)");
-			}
-			if (dto.getName().length() > Consts.MAX_LABEL_SIZE) {
-				throw new FunctionalException(FunctionalException.Code.SIZE_EXCEEDED, null, "(name)");
-			}
-		}
 	}
 
 	private void checkBeforeDeletion(final LinkTypeDTO dto, AccessType access) throws FunctionalException {
@@ -183,7 +155,7 @@ public class LinkTypeServiceImpl extends ServiceImpl implements LinkTypeService 
 	 */
 	void checkDTO(final LinkTypeDTO dto, AccessType access) throws FunctionalException {
 		LinkType target = null;
-		checkIdAndName(dto, access);
+		checkIdAndName(dto, access, false);
 		// item existence (except for creation access)
 		if (access != AccessType.CREATE) {
 			target = util.getLinkTypeByID(dto.getId());
@@ -340,5 +312,15 @@ public class LinkTypeServiceImpl extends ServiceImpl implements LinkTypeService 
 			return null;
 		}
 		return toDTO.getLinkTypeDTO(lt);
+	}
+	
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.m2ling.service.common.ServiceImpl#getType()
+	 */
+	@Override
+	protected Type getType() {
+		return Type.LINK_TYPE;
 	}
 }

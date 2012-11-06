@@ -24,8 +24,8 @@
         <genEnumLiterals ecoreEnumLiteral="m2ling.ecore#//core/Type/LINK_TYPE"/>
         <genEnumLiterals ecoreEnumLiteral="m2ling.ecore#//core/Type/COMPONENT"/>
         <genEnumLiterals ecoreEnumLiteral="m2ling.ecore#//core/Type/LINK"/>
-        <genEnumLiterals ecoreEnumLiteral="m2ling.ecore#//core/Type/COMPONENT_NODE"/>
-        <genEnumLiterals ecoreEnumLiteral="m2ling.ecore#//core/Type/STREAM"/>
+        <genEnumLiterals ecoreEnumLiteral="m2ling.ecore#//core/Type/COMPONENT_INSTANCE"/>
+        <genEnumLiterals ecoreEnumLiteral="m2ling.ecore#//core/Type/LINK_INSTANCE"/>
         <genEnumLiterals ecoreEnumLiteral="m2ling.ecore#//core/Type/VIEWPOINT"/>
         <genEnumLiterals ecoreEnumLiteral="m2ling.ecore#//core/Type/VIEW"/>
         <genEnumLiterals ecoreEnumLiteral="m2ling.ecore#//core/Type/RULE"/>

@@ -125,35 +125,6 @@ public class ComponentTypeServiceImpl extends ServiceImpl implements ComponentTy
 		}
 	}
 
-	private void checkIdAndName(final ComponentTypeDTO dto, AccessType access) throws FunctionalException {
-		// Nullity
-		if (dto == null) {
-			throw new FunctionalException(Code.NULL_ARGUMENT, null, null);
-		}
-		// Check id
-		if (dto.getId() == null) {
-			throw new FunctionalException(FunctionalException.Code.NULL_ARGUMENT, null, "(id)");
-		}
-		if (Strings.isNullOrEmpty(dto.getId().trim())) {
-			throw new FunctionalException(FunctionalException.Code.VOID_ARGUMENT, null, "(id)");
-		}
-		if (dto.getId().length() > 40) {
-			throw new FunctionalException(FunctionalException.Code.SIZE_EXCEEDED, null, "(id)");
-		}
-		// Check name
-		if (access == AccessType.CREATE || access == AccessType.UPDATE) {
-			// Name can be null
-			if (dto.getName() != null) {
-				if ("".equals(dto.getName().trim())) {
-					throw new FunctionalException(FunctionalException.Code.VOID_ARGUMENT, null, "(name)");
-				}
-				if (dto.getName().length() > Consts.MAX_LABEL_SIZE) {
-					throw new FunctionalException(FunctionalException.Code.SIZE_EXCEEDED, null, "(name)");
-				}
-			}
-		}
-	}
-
 	private void checkReferences(final ComponentTypeDTO dto, AccessType access) throws FunctionalException {
 		List<ReferenceDTO> references = dto.getReferences();
 		// Check global nullity
@@ -278,7 +249,7 @@ public class ComponentTypeServiceImpl extends ServiceImpl implements ComponentTy
 	 */
 	void checkDTO(final ComponentTypeDTO dto, AccessType access) throws FunctionalException {
 		ComponentType target = null;
-		checkIdAndName(dto, access);
+		checkIdAndName(dto, access, true);
 		// item existence (except for creation access)
 		if (access != AccessType.CREATE) {
 			target = util.getComponentTypeByID(dto.getId());
@@ -294,10 +265,6 @@ public class ComponentTypeServiceImpl extends ServiceImpl implements ComponentTy
 		if (vp == null) {
 			throw new FunctionalException(FunctionalException.Code.TARGET_NOT_FOUND, null, "viewpoint="
 					+ dto.getViewPoint().getId());
-		}
-		// check before deletion
-		if (access == AccessType.DELETE) {
-			checkBeforeDeletion(dto, access);
 		}
 		if (access == AccessType.CREATE) {
 			// Check for existing item with the same id
@@ -407,7 +374,7 @@ public class ComponentTypeServiceImpl extends ServiceImpl implements ComponentTy
 	@Override
 	public void deleteCT(final Context context, final ComponentTypeDTO dto) throws FunctionalException {
 		{// Controls
-			checkDTO(dto, AccessType.DELETE);
+			checkBeforeDeletion(dto, AccessType.DELETE);
 		}
 		ComponentType type = util.getComponentTypeByID(dto.getId());
 		ViewPoint vp = (ViewPoint) type.eContainer();
@@ -434,5 +401,15 @@ public class ComponentTypeServiceImpl extends ServiceImpl implements ComponentTy
 			return null;
 		}
 		return toDTO.getComponentTypeDTO(ct);
+	}
+	
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.m2ling.service.common.ServiceImpl#getType()
+	 */
+	@Override
+	protected Type getType() {
+		return Type.COMPONENT_TYPE;
 	}
 }

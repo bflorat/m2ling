@@ -16,7 +16,9 @@ import org.m2ling.domain.core.Component;
 import org.m2ling.domain.core.ComponentGroup;
 import org.m2ling.domain.core.ComponentInstance;
 import org.m2ling.domain.core.ComponentType;
+import org.m2ling.domain.core.HasNameAndID;
 import org.m2ling.domain.core.Link;
+import org.m2ling.domain.core.LinkInstance;
 import org.m2ling.domain.core.LinkType;
 import org.m2ling.domain.core.Rule;
 import org.m2ling.domain.core.Type;
@@ -173,6 +175,52 @@ public class CoreUtil {
 	}
 
 	/**
+	 * Return a link denoted by the given id or null if none matches.
+	 * 
+	 * @param id
+	 *           the searched id
+	 * @return an item denoted by the given id or null if none matches
+	 */
+	public Link getLinkByID(String id) {
+		if (id == null) {
+			return null;
+		}
+		Root root = pmanager.getRoot();
+		for (View v : root.getViews()) {
+			List<Link> links = v.getLinks();
+			for (Link link : links) {
+				if (id.equals(link.getId())) {
+					return link;
+				}
+			}
+		}
+		return null;
+	}
+
+	/**
+	 * Return a link instance denoted by the given id or null if none matches.
+	 * 
+	 * @param id
+	 *           the searched id
+	 * @return an item denoted by the given id or null if none matches
+	 */
+	public LinkInstance getLinkInstanceByID(String id) {
+		if (id == null) {
+			return null;
+		}
+		Root root = pmanager.getRoot();
+		for (View v : root.getViews()) {
+			List<LinkInstance> lis = v.getLinkInstances();
+			for (LinkInstance li : lis) {
+				if (id.equals(li.getId())) {
+					return li;
+				}
+			}
+		}
+		return null;
+	}
+
+	/**
 	 * Return a component denoted by the given id or null if none matches.
 	 * 
 	 * @param id
@@ -189,6 +237,29 @@ public class CoreUtil {
 			for (Component comp : comps) {
 				if (id.equals(comp.getId())) {
 					return comp;
+				}
+			}
+		}
+		return null;
+	}
+
+	/**
+	 * Return a component instance denoted by the given id or null if none matches.
+	 * 
+	 * @param id
+	 *           the searched id
+	 * @return an item denoted by the given id or null if none matches
+	 */
+	public ComponentInstance getComponentInstanceByID(String id) {
+		if (id == null) {
+			return null;
+		}
+		Root root = pmanager.getRoot();
+		for (View v : root.getViews()) {
+			List<ComponentInstance> cis = v.getComponentInstances();
+			for (ComponentInstance ci : cis) {
+				if (id.equals(ci.getId())) {
+					return ci;
 				}
 			}
 		}
@@ -390,7 +461,7 @@ public class CoreUtil {
 	 *           the item ID to set tag to.
 	 * @return any object matching provided type and ID or null if none found
 	 **/
-	public Object getItemByTypeAndID(Type type, String itemID) {
+	public HasNameAndID getItemByTypeAndID(Type type, String itemID) {
 		if (itemID == null) {
 			return null;
 		}
@@ -402,9 +473,104 @@ public class CoreUtil {
 			return getComponentTypeByID(itemID);
 		} else if (type == Type.COMPONENT) {
 			return getComponentByID(itemID);
+		} else if (type == Type.COMPONENT_INSTANCE) {
+			return getComponentInstanceByID(itemID);
+		} else if (type == Type.LINK_TYPE) {
+			return getLinkTypeByID(itemID);
+		} else if (type == Type.LINK) {
+			return getLinkByID(itemID);
+		} else if (type == Type.LINK_INSTANCE) {
+			return getLinkInstanceByID(itemID);
 		} else {
 			throw new TechnicalException(Code.NOT_YET_IMPLEMENTED, null, type.toString());
 		}
+	}
+
+	/**
+	 * Return the first item matching provided name or null if none matches.
+	 * 
+	 * @param type
+	 *           the HasTags item type
+	 * @param name
+	 *           the item name to search for.
+	 * @return the first item matching provided name or null if none matches.
+	 **/
+	public HasNameAndID getItemByTypeAndName(Type type, String name) {
+		if (name == null) {
+			return null;
+		}
+		if (type == Type.VIEWPOINT) {
+			for (ViewPoint vp : pmanager.getRoot().getViewPoints()) {
+				if (vp.getName().equals(name)) {
+					return vp;
+				}
+			}
+		} else if (type == Type.VIEW) {
+			for (View v : pmanager.getRoot().getViews()) {
+				if (v.getName().equals(name)) {
+					return v;
+				}
+			}
+		} else if (type == Type.RULE) {
+			for (ViewPoint v : pmanager.getRoot().getViewPoints()) {
+				for (Rule rule : v.getRules()) {
+					if (rule.getName().equals(name)) {
+						return rule;
+					}
+				}
+			}
+		} else if (type == Type.COMPONENT_TYPE) {
+			for (ViewPoint v : pmanager.getRoot().getViewPoints()) {
+				for (ComponentType ct : v.getComponentTypes()) {
+					if (ct.getName().equals(name)) {
+						return ct;
+					}
+				}
+			}
+		} else if (type == Type.LINK_TYPE) {
+			for (ViewPoint v : pmanager.getRoot().getViewPoints()) {
+				for (LinkType lt : v.getLinkTypes()) {
+					if (lt.getName().equals(name)) {
+						return lt;
+					}
+				}
+			}
+		} else if (type == Type.COMPONENT) {
+			for (View v : pmanager.getRoot().getViews()) {
+				for (Component comp : v.getComponents()) {
+					if (comp.getName().equals(name)) {
+						return comp;
+					}
+				}
+			}
+		} else if (type == Type.LINK) {
+			for (View v : pmanager.getRoot().getViews()) {
+				for (Link link : v.getLinks()) {
+					if (link.getName().equals(name)) {
+						return link;
+					}
+				}
+			}
+		} else if (type == Type.COMPONENT_INSTANCE) {
+			for (View v : pmanager.getRoot().getViews()) {
+				for (ComponentInstance ci : v.getComponentInstances()) {
+					if (ci.getName().equals(name)) {
+						return ci;
+					}
+				}
+			}
+		} else if (type == Type.LINK_INSTANCE) {
+			for (View v : pmanager.getRoot().getViews()) {
+				for (LinkInstance li : v.getLinkInstances()) {
+					if (li.getName().equals(name)) {
+						return li;
+					}
+				}
+			}
+		} else {
+			throw new TechnicalException(Code.NOT_YET_IMPLEMENTED, null, type.toString());
+		}
+		return null;
 	}
 
 	/**

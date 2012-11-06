@@ -24,7 +24,7 @@ public class DeleteViewPointFixture extends AbstractViewPointFixture {
 		}
 	}
 
-	public String deleteWithLocalComp(String id) throws FunctionalException {
+	public String deleteWithView(String id) throws FunctionalException {
 		try {
 			reset("Technical");
 			service.deleteViewPoint(null, id);

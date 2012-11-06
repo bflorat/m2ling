@@ -11,7 +11,6 @@ import org.m2ling.domain.core.ComponentInstance;
 import org.m2ling.domain.core.CorePackage;
 import org.m2ling.domain.core.Link;
 import org.m2ling.domain.core.LinkInstance;
-import org.m2ling.domain.core.RuntimeItem;
 
 /**
  * <!-- begin-user-doc -->

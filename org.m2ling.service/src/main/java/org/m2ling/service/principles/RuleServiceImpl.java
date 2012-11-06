@@ -19,6 +19,7 @@ import org.m2ling.domain.Root;
 import org.m2ling.domain.core.CoreFactory;
 import org.m2ling.domain.core.Rule;
 import org.m2ling.domain.core.StatusEvent;
+import org.m2ling.domain.core.Type;
 import org.m2ling.domain.core.ViewPoint;
 import org.m2ling.persistence.PersistenceManager;
 import org.m2ling.service.common.ServiceImpl;
@@ -56,56 +57,11 @@ public class RuleServiceImpl extends ServiceImpl implements RuleService {
 	 * @throws FunctionalException
 	 */
 	void checkDTO(final RuleDTO dto, AccessType access) throws FunctionalException {
-		// Nullity
-		if (dto == null) {
-			throw new FunctionalException(Code.NULL_ARGUMENT, null, null);
-		}
-		if (access != AccessType.CREATE) {
-			// item existence
-			Rule rule = util.getRuleByID(dto.getId());
-			if (rule == null) {
-				throw new FunctionalException(FunctionalException.Code.TARGET_NOT_FOUND, null, dto.toString());
-			}
-		}
-		// Name and ID
-		if (access == AccessType.CREATE || access == AccessType.UPDATE) {
-			if (dto.getId() == null) {
-				throw new FunctionalException(FunctionalException.Code.NULL_ARGUMENT, null, "(id)");
-			}
-			if (Strings.isNullOrEmpty(dto.getId().trim())) {
-				throw new FunctionalException(FunctionalException.Code.VOID_ARGUMENT, null, "(id)");
-			}
-			if (dto.getId().length() > 40) {
-				throw new FunctionalException(FunctionalException.Code.SIZE_EXCEEDED, null, "(id)");
-			}
-			if (dto.getName() == null) {
-				throw new FunctionalException(FunctionalException.Code.NULL_ARGUMENT, null, "(name)");
-			}
-			if (Strings.isNullOrEmpty(dto.getName().trim())) {
-				throw new FunctionalException(FunctionalException.Code.VOID_ARGUMENT, null, "(name)");
-			}
-			if (dto.getName().length() > Consts.MAX_LABEL_SIZE) {
-				throw new FunctionalException(FunctionalException.Code.SIZE_EXCEEDED, null, "(name)");
-			}
-		}
+		checkIdAndName(dto, access, false);
 		ViewPoint vp = util.getViewPointByID(dto.getViewPointId());
 		if (vp == null) {
 			throw new FunctionalException(FunctionalException.Code.TARGET_NOT_FOUND, null, "viewpoint="
 					+ dto.getViewPointId());
-		}
-		if (access == AccessType.CREATE) {
-			// Check for existing rule with the same id
-			for (Rule r : vp.getRules()) {
-				if (r.getId().equals(dto.getId())) {
-					throw new FunctionalException(FunctionalException.Code.DUPLICATES, null, "id=" + dto.getId());
-				}
-			}
-			// Check for existing rule with the same name
-			for (Rule r : vp.getRules()) {
-				if (r.getName().equals(dto.getName())) {
-					throw new FunctionalException(FunctionalException.Code.DUPLICATE_NAME, null, "name=" + dto.getName());
-				}
-			}
 		}
 		if (access == AccessType.CREATE || access == AccessType.UPDATE) {
 			// Status (null is valid)
@@ -228,5 +184,15 @@ public class RuleServiceImpl extends ServiceImpl implements RuleService {
 		Rule rule = util.getRuleByID(dto.getId());
 		ViewPoint vp = (ViewPoint) rule.eContainer();
 		vp.getRules().remove(rule);
+	}
+	
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.m2ling.service.common.ServiceImpl#getType()
+	 */
+	@Override
+	protected Type getType() {
+		return Type.RULE;
 	}
 }

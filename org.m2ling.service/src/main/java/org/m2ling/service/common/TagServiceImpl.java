@@ -146,4 +146,14 @@ public class TagServiceImpl extends ServiceImpl implements TagService {
 		}
 		return tags;
 	}
+	
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.m2ling.service.common.ServiceImpl#getType()
+	 */
+	@Override
+	protected Type getType() {
+		return null;
+	}
 }

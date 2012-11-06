@@ -60,26 +60,22 @@ public enum Type implements Enumerator {
 	LINK(3, "LINK", "LINK"),
 
 	/**
-	 * The '<em><b>COMPONENT NODE</b></em>' literal object.
+	 * The '<em><b>COMPONENT INSTANCE</b></em>' literal object.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #COMPONENT_NODE_VALUE
+	 * @see #COMPONENT_INSTANCE_VALUE
 	 * @generated
 	 * @ordered
 	 */
-	COMPONENT_NODE(4, "COMPONENT_NODE", "COMPONENT_NODE"),
-
-	/**
-	 * The '<em><b>STREAM</b></em>' literal object.
+	COMPONENT_INSTANCE(4, "COMPONENT_INSTANCE", "COMPONENT_INSTANCE"), /**
+	 * The '<em><b>LINK INSTANCE</b></em>' literal object.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #STREAM_VALUE
+	 * @see #LINK_INSTANCE_VALUE
 	 * @generated
 	 * @ordered
 	 */
-	STREAM(5, "STREAM", "STREAM"),
-
-	/**
+	LINK_INSTANCE(5, "LINK_INSTANCE", "LINK_INSTANCE"), /**
 	 * The '<em><b>VIEWPOINT</b></em>' literal object.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -175,34 +171,34 @@ public enum Type implements Enumerator {
 	public static final int LINK_VALUE = 3;
 
 	/**
-	 * The '<em><b>COMPONENT NODE</b></em>' literal value.
+	 * The '<em><b>COMPONENT INSTANCE</b></em>' literal value.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of '<em><b>COMPONENT NODE</b></em>' literal object isn't clear,
+	 * If the meaning of '<em><b>COMPONENT INSTANCE</b></em>' literal object isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @see #COMPONENT_NODE
+	 * @see #COMPONENT_INSTANCE
 	 * @model
 	 * @generated
 	 * @ordered
 	 */
-	public static final int COMPONENT_NODE_VALUE = 4;
+	public static final int COMPONENT_INSTANCE_VALUE = 4;
 
 	/**
-	 * The '<em><b>STREAM</b></em>' literal value.
+	 * The '<em><b>LINK INSTANCE</b></em>' literal value.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of '<em><b>STREAM</b></em>' literal object isn't clear,
+	 * If the meaning of '<em><b>LINK INSTANCE</b></em>' literal object isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @see #STREAM
+	 * @see #LINK_INSTANCE
 	 * @model
 	 * @generated
 	 * @ordered
 	 */
-	public static final int STREAM_VALUE = 5;
+	public static final int LINK_INSTANCE_VALUE = 5;
 
 	/**
 	 * The '<em><b>VIEWPOINT</b></em>' literal value.
@@ -261,8 +257,8 @@ public enum Type implements Enumerator {
 			LINK_TYPE,
 			COMPONENT,
 			LINK,
-			COMPONENT_NODE,
-			STREAM,
+			COMPONENT_INSTANCE,
+			LINK_INSTANCE,
 			VIEWPOINT,
 			VIEW,
 			RULE,
@@ -320,8 +316,8 @@ public enum Type implements Enumerator {
 			case LINK_TYPE_VALUE: return LINK_TYPE;
 			case COMPONENT_VALUE: return COMPONENT;
 			case LINK_VALUE: return LINK;
-			case COMPONENT_NODE_VALUE: return COMPONENT_NODE;
-			case STREAM_VALUE: return STREAM;
+			case COMPONENT_INSTANCE_VALUE: return COMPONENT_INSTANCE;
+			case LINK_INSTANCE_VALUE: return LINK_INSTANCE;
 			case VIEWPOINT_VALUE: return VIEWPOINT;
 			case VIEW_VALUE: return VIEW;
 			case RULE_VALUE: return RULE;

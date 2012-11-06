@@ -2038,8 +2038,8 @@ public class CorePackageImpl extends EPackageImpl implements CorePackage {
 		addEEnumLiteral(typeEEnum, Type.LINK_TYPE);
 		addEEnumLiteral(typeEEnum, Type.COMPONENT);
 		addEEnumLiteral(typeEEnum, Type.LINK);
-		addEEnumLiteral(typeEEnum, Type.COMPONENT_NODE);
-		addEEnumLiteral(typeEEnum, Type.STREAM);
+		addEEnumLiteral(typeEEnum, Type.COMPONENT_INSTANCE);
+		addEEnumLiteral(typeEEnum, Type.LINK_INSTANCE);
 		addEEnumLiteral(typeEEnum, Type.VIEWPOINT);
 		addEEnumLiteral(typeEEnum, Type.VIEW);
 		addEEnumLiteral(typeEEnum, Type.RULE);
