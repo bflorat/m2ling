@@ -43,13 +43,13 @@ public class CreateViewFixture extends AbstractViewFixture {
 	 * @param dto
 	 * @return "PASS" or "FAIL" according to result of checkDTO()
 	 */
-	public String getCheckDTOVerification(String caseName, String id, String vpID, String name, String description,
+	public String getCheckDTOVerification(String caseName, String id, String name, String vpID, String description,
 			String comment, String tags) {
 		reset("Technical");
 		try {
 			HasNameAndIdDTO vpDTO = null;
-			if (vpID != null) {
-				vpDTO = new HasNameAndIdDTO.Builder(vpID, "").build();
+			if (UUT.nul(vpID) != null) {
+				vpDTO = new HasNameAndIdDTO.Builder(UUT.nul(vpID), "").build();
 			}
 			ViewDTO.Builder builder = (ViewDTO.Builder) new ViewDTO.Builder(UUT.nul(id), UUT.nul(name), vpDTO)
 					.description(UUT.nul(description)).comment(UUT.nul(comment));

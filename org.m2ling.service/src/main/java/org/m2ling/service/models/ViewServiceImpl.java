@@ -10,6 +10,7 @@ import java.util.logging.Logger;
 
 import org.m2ling.common.configuration.Conf;
 import org.m2ling.common.dto.core.AccessType;
+import org.m2ling.common.dto.core.HasNameAndIdDTO;
 import org.m2ling.common.dto.core.ViewDTO;
 import org.m2ling.common.exceptions.FunctionalException;
 import org.m2ling.common.exceptions.FunctionalException.Code;
@@ -51,6 +52,8 @@ public class ViewServiceImpl extends ServiceImpl implements ViewService {
 	void checkDTO(final ViewDTO dto, final AccessType access) throws FunctionalException {
 		ViewPoint vp = null;
 		checkIdAndName(dto, access, false);
+		// Check VP
+		checkVP(dto, AccessType.CREATE);
 		if (access != AccessType.CREATE) {
 			// VP existence
 			vp = util.getViewPointByID(dto.getViewpoint().getId());
@@ -69,6 +72,22 @@ public class ViewServiceImpl extends ServiceImpl implements ViewService {
 			}
 			// Tags
 			Utils.checkTags(dto.getTags());
+		}
+	}
+
+	void checkVP(final ViewDTO dto, final AccessType access) throws FunctionalException {
+		HasNameAndIdDTO vpDTO = dto.getViewpoint();
+		if (access == AccessType.CREATE) {
+			if (vpDTO == null) {
+				throw new FunctionalException(Code.NULL_ARGUMENT, null, "(viewpoint id)");
+			} else if (vpDTO.getId() == null || "".equals(vpDTO.getId().trim())) {
+				throw new FunctionalException(Code.VOID_ARGUMENT, null, "(viewpoint id)");
+			} else {
+				ViewPoint vp = util.getViewPointByID(vpDTO.getId());
+				if (vp == null) {
+					throw new FunctionalException(Code.TARGET_NOT_FOUND, null, "Viewpoint id=" + vpDTO.getId());
+				}
+			}
 		}
 	}
 
@@ -115,11 +134,11 @@ public class ViewServiceImpl extends ServiceImpl implements ViewService {
 	 * org.m2ling.common.dto.core.ViewDTO)
 	 */
 	@Override
-	public void createView(final Context context, final ViewDTO vDTO) throws FunctionalException {
+	public void createView(final Context context, final ViewDTO dto) throws FunctionalException {
 		// test DTO
-		checkDTO(vDTO, AccessType.CREATE);
+		checkDTO(dto, AccessType.CREATE);
 		// Processing
-		View view = fromDTO.newView(vDTO);
+		View view = fromDTO.newView(dto);
 		Root root = pmanager.getRoot();
 		root.getViews().add(view);
 	}
@@ -183,6 +202,4 @@ public class ViewServiceImpl extends ServiceImpl implements ViewService {
 	protected Type getType() {
 		return Type.VIEW;
 	}
-	
-	
 }

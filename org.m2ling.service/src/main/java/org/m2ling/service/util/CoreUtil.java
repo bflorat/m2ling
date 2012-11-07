@@ -467,6 +467,8 @@ public class CoreUtil {
 		}
 		if (type == Type.VIEWPOINT) {
 			return getViewPointByID(itemID);
+		} else if (type == Type.VIEW) {
+			return getViewByID(itemID);
 		} else if (type == Type.RULE) {
 			return getRuleByID(itemID);
 		} else if (type == Type.COMPONENT_TYPE) {

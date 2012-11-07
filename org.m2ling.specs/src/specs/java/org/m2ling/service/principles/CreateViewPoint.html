@@ -36,18 +36,12 @@
 		each HasStatus item should have a null status</p>
 		<p class='rule'>StatusLiterals can't contain a void or null element.</p>
 		<h3>Format controls</h3>
+		<p>See <a href="../common/Core.html#Requirements">common service requirements</a></p>
 		<div class="example">
 		<ul>
 			<li>A null input should make service call <b
 				concordion:assertEquals="getCheckNullDTO()">FAIL</b>
 			</li>
-			<li>ID and name can't be null, void or void once trimmed</li>
-			<li>ID size can't be larger than 40 characters</li>
-			<li>Name and status literal size can't be larger that 200
-				characters</li>
-			<li>description and comment size can't be larger that 2000
-				characters</li>
-			<li>See Tags specifications for tags limits</li>
 			<li>Following service inputs should make the service :
 				<table
 					concordion:execute="#result=getCheckDTOVerification(#caseName,#id,#name,#description,#comment,#tags,#statusLiterals)">

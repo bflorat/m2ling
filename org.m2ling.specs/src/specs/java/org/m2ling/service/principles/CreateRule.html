@@ -38,19 +38,8 @@
 		Attempt to <span concordion:execute='#resu=testNullStatus()'></span> create a rule with a <b>null</b> status should <b concordion:assertEquals='#resu'>PASS</b>.
 	</div>
 	<h3>Format controls</h3>
-	<ul>
-		<li>A null input should make service call <b
-			concordion:assertEquals="getCheckNullDTO()">FAIL</b>
-		</li>
-		<li>ID and name can't be null, void or void once trimmed</li>
-		<li>ID size can't be larger than 40 characters</li>
-		<li>Name and status literal size can't be larger that 200
-			characters</li>
-		<li>description and comment size can't be larger that 2000
-			characters</li>
-		<li>ID, VP ID, Description, rationale and name are mandatory</li>
-		<li>See Tags specifications for tags limits</li>
-	</ul>
+	<p>See <a href="../common/Core.html#Requirements">common service requirements</a></p>
+	<p>VP ID is mandatory</p>
 	<p>Following service inputs should make the service :
 	<span concordion:set="#accessType">CREATE</span>
 	<div class="example">
