@@ -51,13 +51,17 @@ public class CoreUtil {
 	}
 
 	/**
-	 * Return a viewpoint denoted by the given id or null if none matches.
+	 * Return a viewpoint denoted by the given id or null if none matches. Null is returned if id is
+	 * null.
 	 * 
 	 * @param id
 	 *           the searched viewpoint id
 	 * @return a viewpoint denoted by the given id or null if none matches
 	 */
 	public ViewPoint getViewPointByID(String id) {
+		if (id == null) {
+			return null;
+		}
 		Root root = pmanager.getRoot();
 		for (ViewPoint v : root.getViewPoints()) {
 			if (id.equals(v.getId())) {
@@ -106,7 +110,7 @@ public class CoreUtil {
 	}
 
 	/**
-	 * Return a rule denoted by the given id or null if none matches.
+	 * Return a rule denoted by the given id or null if none matches. Null is returned if id is null.
 	 * 
 	 * @param id
 	 *           the searched id
@@ -129,7 +133,8 @@ public class CoreUtil {
 	}
 
 	/**
-	 * Return a component type denoted by the given id or null if none matches.
+	 * Return a component type denoted by the given id or null if none matches. Null is returned if
+	 * id is null.
 	 * 
 	 * @param id
 	 *           the searched id
@@ -152,7 +157,8 @@ public class CoreUtil {
 	}
 
 	/**
-	 * Return a link type denoted by the given id or null if none matches.
+	 * Return a link type denoted by the given id or null if none matches. Null is returned if id is
+	 * null.
 	 * 
 	 * @param id
 	 *           the searched id
@@ -175,7 +181,7 @@ public class CoreUtil {
 	}
 
 	/**
-	 * Return a link denoted by the given id or null if none matches.
+	 * Return a link denoted by the given id or null if none matches. Null is returned if id is null.
 	 * 
 	 * @param id
 	 *           the searched id
@@ -198,7 +204,8 @@ public class CoreUtil {
 	}
 
 	/**
-	 * Return a link instance denoted by the given id or null if none matches.
+	 * Return a link instance denoted by the given id or null if none matches. Null is returned if id
+	 * is null.
 	 * 
 	 * @param id
 	 *           the searched id
@@ -221,7 +228,8 @@ public class CoreUtil {
 	}
 
 	/**
-	 * Return a component denoted by the given id or null if none matches.
+	 * Return a component denoted by the given id or null if none matches. Null is returned if id is
+	 * null.
 	 * 
 	 * @param id
 	 *           the searched id
@@ -244,7 +252,8 @@ public class CoreUtil {
 	}
 
 	/**
-	 * Return a component instance denoted by the given id or null if none matches.
+	 * Return a component instance denoted by the given id or null if none matches. Null is returned
+	 * if id is null.
 	 * 
 	 * @param id
 	 *           the searched id
@@ -298,7 +307,8 @@ public class CoreUtil {
 	}
 
 	/**
-	 * Return a group denoted by the given id or null if none matches.
+	 * Return a group denoted by the given id or null if none matches. Null is returned if id is
+	 * null.
 	 * 
 	 * @param id
 	 *           the searched id
@@ -321,7 +331,8 @@ public class CoreUtil {
 	}
 
 	/**
-	 * Return a component or a group denoted by the given id or null if none matches.
+	 * Return a component or a group denoted by the given id or null if none matches. Null is
+	 * returned if id is null.
 	 * 
 	 * @param id
 	 *           the searched id
@@ -357,7 +368,8 @@ public class CoreUtil {
 	}
 
 	/**
-	 * Return a component group denoted by the given id or null if none matches.
+	 * Return a component group denoted by the given id or null if none matches. If id is null, null
+	 * is returned.
 	 * 
 	 * @param id
 	 *           the searched id
@@ -453,7 +465,7 @@ public class CoreUtil {
 
 	/**
 	 * Return any object matching provided type and ID or null if none matches. Note that the item ID
-	 * is not necessary a "iD" attribute.
+	 * is not necessary a "iD" attribute. Null is returned if id is null.
 	 * 
 	 * @param type
 	 *           the HasTags item type
@@ -489,7 +501,8 @@ public class CoreUtil {
 	}
 
 	/**
-	 * Return the first item matching provided name or null if none matches.
+	 * Return the first item matching provided name or null if none matches. Null is returned if id
+	 * is null.
 	 * 
 	 * @param type
 	 *           the HasTags item type
@@ -592,13 +605,16 @@ public class CoreUtil {
 	}
 
 	/**
-	 * Return a view denoted by the given id or null if none matches.
+	 * Return a view denoted by the given id or null if none matches. Null is returned if id is null.
 	 * 
 	 * @param id
 	 *           the searched view id
 	 * @return a view denoted by the given id or null if none matches
 	 */
 	public View getViewByID(String id) {
+		if (id == null) {
+			return null;
+		}
 		Root root = pmanager.getRoot();
 		for (View v : root.getViews()) {
 			if (id.equals(v.getId())) {

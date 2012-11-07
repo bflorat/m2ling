@@ -12,10 +12,10 @@
 
 	<p class='rule'>An existing view can be dropped :
 	<div class="example">
-		Given an existing view <b concordion:set="#idView">id_v1</b><br /> When a
-		delete is done against it <span
-			concordion:execute="#resu=delete(#id)" /><br /> Then a
-		search for it should return <b concordion:assertEquals="#resu">null</b>
+		Given an existing view <b concordion:set="#idView">id_vp2_v2</b><br /> 
+		When a delete is done against it <span
+			concordion:execute="#resu=delete(#idView)" /><br /> 
+		Then a search for it should return <b concordion:assertEquals="#resu">null</b>
 	</div>
 	</p>
 	<p class='rule'>#VI41 Trying to remove an unexisting view should
@@ -32,8 +32,8 @@
 		(this view always has a viewpoint type different from the one of this
 		view).
 	<div class="example">
-		Given a view <b concordion:set="#idView">id_vp1</b>
-		That contains a component <b>id_comp_v1_comp3</b> used as bound component by the component <b>id_comp_v2_comp3</b><br /> 
+		Given a view <b concordion:set="#idView">id_vp1_v1</b>
+		That contains a component <b>id_comp_vp1_v1_comp3</b> used as bound component by the component <b>id_comp_vp2_v2_comp3</b><br /> 
 		An attempt to delete the view <span
 			concordion:execute="#resu=delete(#idView)" /> should <b
 			concordion:assertEquals="#resu">FAIL with code VP_IN_USE</b>
@@ -44,8 +44,9 @@
 		of its component instances is used as binding for a component instance
 		from another view.
 	<div class="example">
-		Given a view <b concordion:set="#idView">id_vp1</b>
-		That contains a component instance <b>id_comp_v1_comp3_ci1</b> used as bound instance by the component instance <b>id_comp_v1_comp3_ci1</b><br /> 
+		Given a view <b concordion:set="#idView">id_vp1_v1</b>
+		That contains a component instance <b>id_ci_vp1_v1_comp3_ci1</b> used as bound instance 
+			by the component instance <b>id_ci_vp2_v2_comp3_ci1</b><br /> 
 		An attempt to delete the view <span
 			concordion:execute="#resu=delete(#idView)" /> should <b
 			concordion:assertEquals="#resu">FAIL with code VP_IN_USE</b>
