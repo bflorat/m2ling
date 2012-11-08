@@ -53,8 +53,8 @@ public class ViewServiceImpl extends ServiceImpl implements ViewService {
 		ViewPoint vp = null;
 		checkIdAndName(dto, access, false);
 		// Check VP
-		checkVP(dto, AccessType.CREATE);
-		if (access != AccessType.CREATE) {
+		checkVP(dto, access);
+		if (access == AccessType.CREATE) {
 			// VP existence
 			vp = util.getViewPointByID(dto.getViewpoint().getId());
 			if (vp == null) {

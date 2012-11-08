@@ -273,12 +273,6 @@ public class ComponentTypeServiceImpl extends ServiceImpl implements ComponentTy
 					throw new FunctionalException(FunctionalException.Code.DUPLICATES, null, "id=" + dto.getId());
 				}
 			}
-			// Check for existing item with the same name
-			for (ComponentType item : vp.getComponentTypes()) {
-				if (item.getName().equals(dto.getName())) {
-					throw new FunctionalException(FunctionalException.Code.DUPLICATE_NAME, null, "name=" + dto.getName());
-				}
-			}
 		}
 		if (access == AccessType.CREATE || access == AccessType.UPDATE) {
 			// Description

@@ -1,5 +1,5 @@
 /**
- * Copyright (C) 2012 Bertrand Florat
+  * Copyright (C) 2012 Bertrand Florat
  *
  * @author "Bertrand Florat <bertrand@florat.net>"
  */

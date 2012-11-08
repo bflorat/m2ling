@@ -105,10 +105,6 @@ abstract public class ServiceImpl {
 			if (util.getItemByTypeAndID(getType(), dto.getId()) != null) {
 				throw new FunctionalException(FunctionalException.Code.DUPLICATES, null, "id=" + dto.getId());
 			}
-			// Check for existing item with the same name
-			if (util.getItemByTypeAndName(getType(), dto.getName()) != null) {
-				throw new FunctionalException(FunctionalException.Code.DUPLICATE_NAME, null, "name=" + dto.getId());
-			}
 		}
 		if (access == AccessType.DELETE) {
 			if (util.getItemByTypeAndID(getType(), dto.getId()) == null) {

@@ -183,12 +183,6 @@ public class LinkTypeServiceImpl extends ServiceImpl implements LinkTypeService 
 					throw new FunctionalException(FunctionalException.Code.DUPLICATES, null, "id=" + dto.getId());
 				}
 			}
-			// Check for existing item with the same name
-			for (LinkType item : vp.getLinkTypes()) {
-				if (item.getName().equals(dto.getName())) {
-					throw new FunctionalException(FunctionalException.Code.DUPLICATE_NAME, null, "name=" + dto.getName());
-				}
-			}
 		}
 		if (access == AccessType.CREATE || access == AccessType.UPDATE) {
 			// Description

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:concordion="http://www.concordion.org/2007/concordion">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>View search</title>
+</head>
+<body>
+	<H1>View search</H1>
+	<p>Administrators or actors with adequate authorizations can search a View.</p>
+	
+	<p class='rule'>It is possible to retrieve all existing Views :
+	<div class="example">
+		Given several existing Views<br/>
+		When we ask for Views listing<span concordion:execute="#resu=getAll()"/><br/>
+		Then we get a number of Views <b concordion:assertEquals="#resu">&gt;0</b>.
+	</div>
+	</p>
+	
+	<p class='rule'>It is possible to get views by non null id :
+	<div class="example">
+		Given an existing view whose id=<b concordion:set="#id">id_vp1_v1</b> <br/>
+		When we search for it by ID<span concordion:execute="#resu=getVpByID(#id)"/><br/>
+		Then we should be a View named <b concordion:assertEquals="#resu">vp1_v1</b>.
+	</div>
+	<div class="example">
+		Same query with <b concordion:set="#id">null</b> id should 
+		<span concordion:execute="#resu=getVpByID(#id)"/>
+		<b concordion:assertEquals="#resu">FAIL with code NULL_ARGUMENT</b>.
+	</div>
+	</p>
+	
+</body>
+</html>
