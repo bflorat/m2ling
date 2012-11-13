@@ -465,11 +465,57 @@ public class DTOConverter {
 		}
 
 		/**
-		 * Return a new link type instance given a DTO.
+		 * Return a new component given a DTO.
 		 * 
 		 * @param dto
 		 *           the dto
-		 * @return a new link type instance
+		 * @return a new component
+		 */
+		public Component newComponent(ComponentDTO dto) {
+			Component comp = CoreFactory.eINSTANCE.createComponent();
+			populateCommonValues(comp, dto);
+			if (dto.getBoundComponent() != null) {
+				Component bounded = util.getComponentByID(dto.getBoundComponent().getId());
+				comp.setBoundComponent(bounded);
+			}
+			for (ReferenceDTO refDTO : dto.getReferences()) {
+				Reference reference = newReference(refDTO);
+				comp.getReferences().add(reference);
+			}
+			ComponentType type = util.getComponentTypeByID(dto.getComponentType().getId());
+			comp.setType(type);
+			return comp;
+		}
+
+		/**
+		 * Return a new component instance given a DTO.
+		 * 
+		 * @param dto
+		 *           the dto
+		 * @return a new component instance
+		 */
+		public ComponentInstance newComponentInstance(ComponentInstanceDTO dto) {
+			ComponentInstance ci = CoreFactory.eINSTANCE.createComponentInstance();
+			populateCommonValues(ci, dto);
+			if (dto.getBoundInstance() != null) {
+				ComponentInstance bounded = util.getComponentInstanceByID(dto.getBoundInstance().getId());
+				ci.setBoundComponentInstance(bounded);
+			}
+			for (ReferenceDTO refDTO : dto.getReferences()) {
+				Reference reference = newReference(refDTO);
+				ci.getReferences().add(reference);
+			}
+			Component comp = util.getComponentByID(dto.getComponent().getId());
+			ci.setComponent(comp);
+			return ci;
+		}
+
+		/**
+		 * Return a new link type given a DTO.
+		 * 
+		 * @param dto
+		 *           the dto
+		 * @return a new link type
 		 */
 		public LinkType newLinkType(LinkTypeDTO dto) {
 			LinkType lt = CoreFactory.eINSTANCE.createLinkType();
@@ -485,6 +531,47 @@ public class DTOConverter {
 				lt.getDestinationTypes().add(ct);
 			}
 			return lt;
+		}
+
+		/**
+		 * Return a new link given a DTO.
+		 * 
+		 * @param dto
+		 *           the dto
+		 * @return a new link
+		 */
+		public Link newLink(LinkDTO dto) {
+			Link link = CoreFactory.eINSTANCE.createLink();
+			populateCommonValues(link, dto);
+			for (HasNameAndIdDTO hniDTO : dto.getSources()) {
+				Component comp = util.getComponentByID(hniDTO.getId());
+				link.getSources().add(comp);
+			}
+			for (HasNameAndIdDTO hniDTO : dto.getDestinations()) {
+				Component comp = util.getComponentByID(hniDTO.getId());
+				link.getDestinations().add(comp);
+			}
+			link.setTimeoutMillis(dto.getTimeoutMillis());
+			return link;
+		}
+		
+		/**
+		 * Return a new link instance given a DTO.
+		 * 
+		 * @param dto
+		 *           the dto
+		 * @return a new link instance
+		 */
+		public LinkInstance newLinkInstance(LinkInstanceDTO dto) {
+			LinkInstance li = CoreFactory.eINSTANCE.createLinkInstance();
+			populateCommonValues(li, dto);
+			ComponentInstance ci = util.getComponentInstanceByID(dto.getSource().getId());
+			li.setSource(ci);
+			ci = util.getComponentInstanceByID(dto.getDestination().getId());
+			li.setDestination(ci);
+			Link link = util.getLinkByID(dto.getLink().getId());
+			li.setLink(link);
+			return li;
 		}
 
 		/**

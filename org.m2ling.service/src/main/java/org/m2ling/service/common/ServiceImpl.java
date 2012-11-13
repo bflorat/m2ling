@@ -102,12 +102,12 @@ abstract public class ServiceImpl {
 		}
 		if (access == AccessType.CREATE) {
 			// Check for existing item with the same id
-			if (util.getItemByTypeAndID(getType(), dto.getId()) != null) {
+			if (util.getItemByTypeAndID(getManagedType(), dto.getId()) != null) {
 				throw new FunctionalException(FunctionalException.Code.DUPLICATES, null, "id=" + dto.getId());
 			}
 		}
 		if (access == AccessType.DELETE) {
-			if (util.getItemByTypeAndID(getType(), dto.getId()) == null) {
+			if (util.getItemByTypeAndID(getManagedType(), dto.getId()) == null) {
 				throw new FunctionalException(FunctionalException.Code.TARGET_NOT_FOUND, null, "id=" + dto.getId());
 			}
 		}
@@ -118,5 +118,5 @@ abstract public class ServiceImpl {
 	 * 
 	 * @return item type managed by this service
 	 */
-	protected abstract Type getType();
+	protected abstract Type getManagedType();
 }

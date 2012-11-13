@@ -314,7 +314,7 @@ public class LinkTypeServiceImpl extends ServiceImpl implements LinkTypeService 
 	 * @see org.m2ling.service.common.ServiceImpl#getType()
 	 */
 	@Override
-	protected Type getType() {
+	protected Type getManagedType() {
 		return Type.LINK_TYPE;
 	}
 }

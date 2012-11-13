@@ -38,8 +38,7 @@ public interface ViewPointService {
 	 * @param vpDTO
 	 *           the view point DTO
 	 * @throws FunctionalException
-	 *            if a viewpoint already exist with the provided name or if one of the DTO entry is
-	 *            faulty
+	 *            if the DTO entry is faulty
 	 */
 	void createViewPoint(Context context, ViewPointDTO vpDTO) throws FunctionalException;
 

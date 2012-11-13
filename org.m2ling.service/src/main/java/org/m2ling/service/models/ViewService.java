@@ -18,7 +18,7 @@ import org.m2ling.common.soa.Context;
  * </p>
  * <p>
  * All the methods can throw an IllegalAccessException if current user has not the authorization to
- * access the view.
+ * access the viewpoint.
  * </p>
  */
 public interface ViewService {
@@ -38,7 +38,7 @@ public interface ViewService {
 	 * @param vDTO
 	 *           the view DTO
 	 * @throws FunctionalException
-	 *            if a view already exist with the provided name or if one of the DTO entry is faulty
+	 *            if the DTO entry is faulty
 	 */
 	void createView(Context context, ViewDTO vDTO) throws FunctionalException;
 

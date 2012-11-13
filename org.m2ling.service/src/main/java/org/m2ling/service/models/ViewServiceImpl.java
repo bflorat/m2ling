@@ -199,7 +199,7 @@ public class ViewServiceImpl extends ServiceImpl implements ViewService {
 	 * @see org.m2ling.service.common.ServiceImpl#getType()
 	 */
 	@Override
-	protected Type getType() {
+	protected Type getManagedType() {
 		return Type.VIEW;
 	}
 }

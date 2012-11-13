@@ -192,7 +192,7 @@ public class RuleServiceImpl extends ServiceImpl implements RuleService {
 	 * @see org.m2ling.service.common.ServiceImpl#getType()
 	 */
 	@Override
-	protected Type getType() {
+	protected Type getManagedType() {
 		return Type.RULE;
 	}
 }

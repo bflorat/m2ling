@@ -38,7 +38,7 @@ public interface RuleService {
 	 * @throws FunctionalException
 	 *            if the viewpoint doesn't exist
 	 * @throws FunctionalException
-	 *            if a rule already exist with id or name or if one of the DTO entry is faulty
+	 *            if the DTO entry is faulty
 	 */
 	void createRule(Context context, RuleDTO rule) throws FunctionalException;
 

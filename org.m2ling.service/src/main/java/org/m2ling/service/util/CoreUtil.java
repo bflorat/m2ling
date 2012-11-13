@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.StringTokenizer;
 import java.util.logging.Logger;
 
+import org.m2ling.common.exceptions.FunctionalException;
 import org.m2ling.common.exceptions.TechnicalException;
 import org.m2ling.common.exceptions.TechnicalException.Code;
 import org.m2ling.domain.Root;
@@ -15,6 +16,7 @@ import org.m2ling.domain.core.ArchitectureItem;
 import org.m2ling.domain.core.Component;
 import org.m2ling.domain.core.ComponentGroup;
 import org.m2ling.domain.core.ComponentInstance;
+import org.m2ling.domain.core.ComponentInstanceGroup;
 import org.m2ling.domain.core.ComponentType;
 import org.m2ling.domain.core.HasNameAndID;
 import org.m2ling.domain.core.Link;
@@ -287,14 +289,15 @@ public class CoreUtil {
 	 * @param id
 	 *           the searched id
 	 * @return all views for a given viewpoint.
-	 * @throws TechnicalException
+	 * @throws FunctionalException
 	 *            if the id is not associated with an existing VP
-	 * @throws TechnicalException
+	 * @throws FunctionalException
 	 *            if the provided if is null
 	 */
-	public List<View> getViewsByVPID(String id) {
+	public List<View> getViewsByVPID(String id) throws FunctionalException {
 		if (id == null) {
-			throw new TechnicalException(Code.ILLEGAL_STATE, null, "null vp id");
+			throw new FunctionalException(org.m2ling.common.exceptions.FunctionalException.Code.NULL_ARGUMENT, null,
+					"null vp id");
 		}
 		List<View> out = new ArrayList<View>(3);
 		Root root = pmanager.getRoot();
@@ -304,6 +307,35 @@ public class CoreUtil {
 			}
 		}
 		return out;
+	}
+
+	/**
+	 * Return the view associated with an item or null if none.
+	 * 
+	 * @param item
+	 *           the item
+	 * @return associated view
+	 */
+	public View getViewsByItem(Object item) {
+		Root root = pmanager.getRoot();
+		for (View v : root.getViews()) {
+			if (item instanceof Component && v.getComponents().contains(item)) {
+				return v;
+			} else if (item instanceof Link && v.getLinks().contains(item)) {
+				return v;
+			} else if (item instanceof ComponentGroup && v.getComponentsGroups().contains(item)) {
+				return v;
+			} else if (item instanceof ComponentInstance && v.getComponentInstances().contains(item)) {
+				return v;
+			} else if (item instanceof ComponentInstanceGroup && v.getInstancesGroups().contains(item)) {
+				return v;
+			} else if (item instanceof LinkInstance && v.getLinkInstances().contains(item)) {
+				return v;
+			} else {
+				throw new TechnicalException(Code.NOT_YET_IMPLEMENTED, null, item.toString());
+			}
+		}
+		return null;
 	}
 
 	/**

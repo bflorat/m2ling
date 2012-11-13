@@ -225,7 +225,7 @@ public class ViewPointServiceImpl extends ServiceImpl implements ViewPointServic
 	 * @see org.m2ling.service.common.ServiceImpl#getType()
 	 */
 	@Override
-	protected Type getType() {
+	protected Type getManagedType() {
 		return Type.VIEWPOINT;
 	}
 }

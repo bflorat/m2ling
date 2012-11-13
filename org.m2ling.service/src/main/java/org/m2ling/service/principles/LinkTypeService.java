@@ -39,7 +39,7 @@ public interface LinkTypeService {
 	 * @throws FunctionalException
 	 *            if the viewpoint doesn't exist
 	 * @throws FunctionalException
-	 *            if a lt already exist with id or name or if one of the DTO entry is faulty
+	 *            if the DTO entry is faulty
 	 */
 	void createLT(Context context, LinkTypeDTO ltDTO) throws FunctionalException;
 

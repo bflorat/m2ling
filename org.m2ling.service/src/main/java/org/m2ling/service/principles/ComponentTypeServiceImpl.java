@@ -403,7 +403,7 @@ public class ComponentTypeServiceImpl extends ServiceImpl implements ComponentTy
 	 * @see org.m2ling.service.common.ServiceImpl#getType()
 	 */
 	@Override
-	protected Type getType() {
+	protected Type getManagedType() {
 		return Type.COMPONENT_TYPE;
 	}
 }

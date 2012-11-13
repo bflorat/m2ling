@@ -38,7 +38,7 @@ public interface ComponentTypeService {
 	 * @throws FunctionalException
 	 *            if the viewpoint doesn't exist
 	 * @throws FunctionalException
-	 *            if a ct already exist with id or name or if one of the DTO entry is faulty
+	 *            if the DTO entry is faulty
 	 */
 	void createCT(Context context, ComponentTypeDTO ctDTO) throws FunctionalException;
 
@@ -61,7 +61,7 @@ public interface ComponentTypeService {
 	/**
 	 * Return the CT DTO given an ID if it exist, null otherwise.
 	 * 
-	 * @return the viewpoint DTO given an ID if it exist, null otherwise
+	 * @return the CT DTO given an ID if it exist, null otherwise
 	 * @throws FunctionalException
 	 *            id id is null or void
 	 * 
