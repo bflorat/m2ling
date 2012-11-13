@@ -32,6 +32,11 @@ public class CreateCTFixture extends AbstractCTFixture {
 				"", "", "", ifactor, "null", "", "", "APPLICABLE");
 	}
 
+	public String testExternalRefs() throws FunctionalException {
+		return createAndGetCT("true", "CT1", "id_vp_logical", "id_new_ct_logical_servicecontainer", "ServicesContainer2",
+				"", "", "", "1", "null", "RUNS:id_ct_app_application", "", "APPLICABLE");
+	}
+
 	public String testNoBindingType() throws FunctionalException {
 		return createAndGetCT("true", "CT8", "id_vp_logical", "id_new_ct_logical_servicecontainer", "ServicesContainer2",
 				"", "", "", "*", "null", "", "id_comp_tech_jboss5", "APPLICABLE");

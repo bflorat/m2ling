@@ -4,7 +4,7 @@
     <tags>team_A</tags>
     <activities id="_ByQVkJn4EeGqFM2UF1dCGQ" name="Set up software factory" description="Set up development, integration and build tools for each project." accountables="_skmNgZhhEeGGf-qGrGj3yA" responsibles="_skmNgZhhEeGGf-qGrGj3yA"/>
     <componentTypes id="id_ct_logical_servicecontainer" name="ServicesContainer" description="Runs services (RMI, REST, SOAP...)" boundType="id_ct_tech_applicationserver" enumeration="id_grp_tech_servicecontainers id_comp_tech_jboss5">
-      <references type="RUNS" targets="id_ct_app_servicemodule"/>
+      <references type="RUNS" targets="id_ct_logical_servicemodule"/>
       <references description="" type="DEPENDS_ON" targets="id_ct_logical_ldap"/>
     </componentTypes>
     <componentTypes id="_fKtsQZoXEeG71vmJ5CR-iA" name="WebContainer" comment="" description="A servlet/JSP container" boundType="id_ct_tech_applicationserver" enumeration="_0GnPIJ6QEeGyndJ1yNTLVw">
@@ -117,21 +117,21 @@
     <componentTypes id="_ha8mE333Mag01qc4bw" name="LDAP directory" comment="" description="" boundType="_LyWEoZ6REeGyndJ1yNTLVw" enumeration="_cjliUJ6TEeGyndJ1yNTLVw" instantiationFactor="-1"/>
     <componentTypes id="_aazazazaerer" name="BatchModule" comment="" description="Standalone Java batchs calling services modules" boundType="_aazazazaerer" instantiationFactor="-1"/>
   </viewPoints>
-  <views comment="" description="BikesOnline is a online house-built e-commerce solution to sell bikes." id="_6MLzgJngEeGCNbiGBiffzQ" name="Logical_BikesOnline" viewPoint="id_vp_logical">
-    <components id="_8fvV4p6TEeGyndJ1yNTLVw" name="AdminGUI" comment="" type="id_ct_logical_guimodule" boundComponent="_hGsf4J89EeGNFtlcQfUFgw"/>
-    <components id="_2aMpEp6VEeGbbcMFSNIrnA" name="AdminServices" type="id_ct_app_servicemodule" boundComponent="_zPeqMJ89EeGNFtlcQfUFgw"/>
+  <views comment="" description="BikesOnline is a online house-built e-commerce solution to sell bikes." id="id_view_vp_logical_Logical_BikesOnline" name="Logical_BikesOnline" viewPoint="id_vp_logical">
+    <components id="id_comp_view_Logical_BikesOnline_AdminGUI" name="AdminGUI" comment="" type="id_ct_logical_guimodule" boundComponent="_hGsf4J89EeGNFtlcQfUFgw"/>
+    <components id="id_comp_view_Logical_BikesOnline_AdminServices" name="AdminServices" type="id_ct_app_servicemodule" boundComponent="_zPeqMJ89EeGNFtlcQfUFgw"/>
     <components id="_qODuQp6TEeGyndJ1yNTLVw" name="EndUserGUI" comment="" type="id_ct_logical_guimodule" boundComponent="_osKccJ89EeGNFtlcQfUFgw"/>
     <components id="_xjupYp6VEeGbbcMFSNIrnA" name="PaiementServices" description="" type="id_ct_app_servicemodule" boundComponent="_9xnzQJ89EeGNFtlcQfUFgw"/>
     <components id="_gmFcgp6VEeGbbcMFSNIrnA" name="Product Catalog Services" comment="" description="" type="id_ct_app_servicemodule" boundComponent="_VsqREp8zEeGYS-4UJ-FpAA"/>
     <components id="_Y-AZsqgtekejey" name="Jetty" description="" type="_fKtsQZoXEeG71vmJ5CR-iA" boundComponent="id_comp_tech_jetty">
-      <references type="RUNS" targets="_8fvV4p6TEeGyndJ1yNTLVw"/>
+      <references type="RUNS" targets="id_comp_view_Logical_BikesOnline_AdminGUI"/>
     </components>
     <components id="_4-yHMprbEeGE7MG94I-e3A" name="BikesOnlineClient" comment="" description="" type="_8_BugZqkEeGbI4NH3iicSg"/>
-    <components id="_OJwP0pw_EeGE7MG94I-e3A" name="AuthenticationLDAP" description="" type="id_ct_logical_ldap"/>
+    <components id="id_comp_view_Logical_BikesOnline_AuthenticationLDAP" name="AuthenticationLDAP" description="" type="id_ct_logical_ldap"/>
     <components id="_GHLjspxDEeGi7NYPtEuJdA" name="JBoss5 Linux" comment="" description="" type="id_ct_logical_servicecontainer" boundComponent="id_comp_tech_jboss5">
-      <references type="RUNS" targets="_2aMpEp6VEeGbbcMFSNIrnA _xjupYp6VEeGbbcMFSNIrnA _gmFcgp6VEeGbbcMFSNIrnA"/>
+      <references type="RUNS" targets="id_comp_view_Logical_BikesOnline_AdminServices _xjupYp6VEeGbbcMFSNIrnA _gmFcgp6VEeGbbcMFSNIrnA"/>
     </components>
-    <components id="_SJP_gp6VEeGbbcMFSNIrnA" name="PostgreSQL" type="id_ct_logical_rdbms" boundComponent="_G9AtYp6REeG">
+    <components id="DEPENDS_ON:id_comp_view_Logical_BikesOnline_PostgreSQL" name="PostgreSQL" type="id_ct_logical_rdbms" boundComponent="_G9AtYp6REeG">
       <references type="RUNS" targets="_1tPv4qvwEeGqu4Jf39UauA"/>
     </components>
     <components id="_Y-AZsqvvEeGqu4Jf39UauA" name="Tomcat6" description="" type="_fKtsQZoXEeG71vmJ5CR-iA" boundComponent="_BM4XQp6QEdJ1yNTLVw">
@@ -139,9 +139,9 @@
     </components>
     <components id="_1tPv4qvwEeGqu4Jf39UauA" name="BikesOnline_database" comment="" type="id_ct_logical_database"/>
     <links id="fdfdsfsfsddsewv" name="Stream1" comment="" description="" type="_oHllkpqkEeGbI4NH3iicSg" sources="_4-yHMprbEeGE7MG94I-e3A" destinations="_qODuQp6TEeGyndJ1yNTLVw"/>
-    <links id="vn,khghjghj" name="Stream2" type="_2LrDApqyEeGVMag01qc4bw" sources="_qODuQp6TEeGyndJ1yNTLVw" destinations="_OJwP0pw_EeGE7MG94I-e3A"/>
+    <links id="vn,khghjghj" name="Stream2" type="_2LrDApqyEeGVMag01qc4bw" sources="_qODuQp6TEeGyndJ1yNTLVw" destinations="id_comp_view_Logical_BikesOnline_AuthenticationLDAP"/>
     <links id="_aCyWg5xDEeGi7NYPtEuJdA" name="Stream3" type="id_lt_logical_http_rest" sources="_qODuQp6TEeGyndJ1yNTLVw" destinations="_GHLjspxDEeGi7NYPtEuJdA"/>
-    <links id="_NpfsI56UEeGyndJ1yNTLVw" name="Stream4" type="_4Rfd0pqjEeGQsK1VSbibvw" sources="_GHLjspxDEeGi7NYPtEuJdA" destinations="_SJP_gp6VEeGbbcMFSNIrnA"/>
+    <links id="_NpfsI56UEeGyndJ1yNTLVw" name="Stream4" type="_4Rfd0pqjEeGQsK1VSbibvw" sources="_GHLjspxDEeGi7NYPtEuJdA" destinations="DEPENDS_ON:id_comp_view_Logical_BikesOnline_PostgreSQL"/>
   </views>
   <views comment="" description="" id="_0oVTkZ55EeGAFeVyyYKoXg" name="Enterprise architecture view" viewPoint="_uP3gkZniEeGeqKlv68ECYA">
     <components id="_Uf_Bop56EeGAFeVyyYKoXg" name="eBusiness" comment="" type="_KEFloJq4EeGVMag01qc4bw">
@@ -189,7 +189,7 @@
     <links id="_Uq7tU58-EeGNFtlcQfUFgw" name="TRANSACTIONS_REPORTING" description="Access from DO batchs to BikesOnline daily transactions for BI purposes." type="_psOW0p8zEeGYS-4UJ-FpAAdgfgf" sources="_bJoEgJ89EeGNFtlcQfUFgw" destinations="_9xnzQJ89EeGNFtlcQfUFgw"/>
     <links id="_tUQzg58-EeGNFtlcQfUFgw" name="CATALOG_READING" comment="" description="Access from BikesOnline GUI to catalog services " type="_psOW0p8zEeGYS-4UJ-FpAA" sources="_qODuQp6TEeGyndJ1yNTLVw" destinations="_gmFcgp6VEeGbbcMFSNIrnA"/>
     <links id="_tUQzg58-" name="PAIEMENT_TRANSACTIONS" comment="" description="Access from BikesOnline GUI to payment services" type="_psOW0p8zEeGYS-4UJ-FpAArr" sources="_qODuQp6TEeGyndJ1yNTLVw" destinations="_9xnzQJ89EeGNFtlcQfUFgw"/>
-    <links id="_tUQzg58-dscgfgx" name="ADMINISTRATION" comment="" description="Access from BikesOnline administrative GUI to BikesOnline administrative services" type="_psOW0p8zEeGYS-4UJ-FpAArr" sources="_8fvV4p6TEeGyndJ1yNTLVw" destinations="_zPeqMJ89EeGNFtlcQfUFgw"/>
+    <links id="_tUQzg58-dscgfgx" name="ADMINISTRATION" comment="" description="Access from BikesOnline administrative GUI to BikesOnline administrative services" type="_psOW0p8zEeGYS-4UJ-FpAArr" sources="id_comp_view_Logical_BikesOnline_AdminGUI" destinations="_zPeqMJ89EeGNFtlcQfUFgw"/>
   </views>
   <views comment="" description="BikesOnline physical architecture" id="_o6dP8Z9lEeGNFtlcQfUFgw" name="Physical_BikesOnline" viewPoint="fsdfhjksdhfkjhsdkfj">
     <componentInstances id="_av1GdKGYEeGWHchb0LRqvg" name="WebServer_1" comment="" status="AVAILABLE" component="_gfgfdeG3fPi34vn9KQ" boundComponentInstance="_Hk3"/>
@@ -308,7 +308,7 @@
     <componentInstances id="_LG40BKNLEeGUrere_4Kg" name="services_paiement_bikesonline_1" component="_itGiQqNJEeGULe7xIq_4Kg"/>
     <componentInstances id="_LG40BKNLEeGULe7xIq_4gg" name="services_paiement_bikesonline_2" description="" component="_9xnzQJ89EeGNFtlcQfUFgw"/>
   </views>
-  <stakeholders id="_skmNgZhhEeGGf-qGrGj3yA" name="Applicative Architect" views="_6MLzgJngEeGCNbiGBiffzQ _QMVcEZ8zEeGYS-4UJ-FpAA" viewPoints="id_vp_app id_vp_logical" actors="eaarchitecterich"/>
+  <stakeholders id="_skmNgZhhEeGGf-qGrGj3yA" name="Applicative Architect" views="id_view_vp_logical_Logical_BikesOnline _QMVcEZ8zEeGYS-4UJ-FpAA" viewPoints="id_vp_app id_vp_logical" actors="eaarchitecterich"/>
   <stakeholders id="_aB_ysZnaEeGRRqNqlyFgFw" name="Entreprise Architect" views="_0oVTkZ55EeGAFeVyyYKoXg" viewPoints="_uP3gkZniEeGeqKlv68ECYA" actors="pearchitect"/>
   <stakeholders id="_dX1QoZnbEeGRRqNqlyFgFw" name="Technical Architect" views="_QXV2oZ6NEeGeZJhcjVrcWg _7-nzcaKREeGOsOUMPsTb_w" viewPoints="id_vp_tech" actors="ktarchitect"/>
   <stakeholders id="_te1CAZneEeGiWdDszZQI0g" name="Support" description="This service provides backup/administration services for the Design office." actors="bsupport"/>

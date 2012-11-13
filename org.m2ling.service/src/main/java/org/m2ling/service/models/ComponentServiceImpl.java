@@ -25,6 +25,7 @@ import org.m2ling.domain.Root;
 import org.m2ling.domain.core.Component;
 import org.m2ling.domain.core.ComponentInstance;
 import org.m2ling.domain.core.ComponentType;
+import org.m2ling.domain.core.CoreFactory;
 import org.m2ling.domain.core.HasNameAndID;
 import org.m2ling.domain.core.Reference;
 import org.m2ling.domain.core.ReferenceType;
@@ -123,20 +124,15 @@ public class ComponentServiceImpl extends ServiceImpl implements ComponentServic
 			// check targets types
 			for (HasNameAndIdDTO target : refDTO.getTargets()) {
 				Component targetComp = util.getComponentByID(target.getId());
-				if (targetComp.getType() == null) {
-					throw new FunctionalException(FunctionalException.Code.NULL_ARGUMENT, null, "(references/target/type)");
-				}
 				ComponentType targetType = util.getComponentTypeByID(targetComp.getType().getId());
-				if (targetType == null) {
-					throw new FunctionalException(FunctionalException.Code.TARGET_NOT_FOUND, null,
-							"(references/target/type)");
-				}
 				// Search for a matching known reference
 				boolean found = false;
 				for (Reference reference : thisCompType.getReferences()) {
-					if (reference.getTargets().contains(targetType) && reference.getType().name().equals(refDTO.getType())) {
-						found = true;
-						break;
+					for (HasNameAndID checkedTarget : reference.getTargets()) {
+						if (checkedTarget.equals(targetType) && reference.getType().name().equals(refDTO.getType())) {
+							found = true;
+							break;
+						}
 					}
 				}
 				if (!found) {

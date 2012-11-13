@@ -148,13 +148,19 @@ public class ComponentTypeServiceImpl extends ServiceImpl implements ComponentTy
 			if (refDTO.getTargets() == null) {
 				throw new FunctionalException(FunctionalException.Code.NULL_ARGUMENT, null, "(references/target)");
 			}
-			// check targets non-existence
+			// check targets existence and the fact that targets types are local (in the CT VP)
+			ViewPoint thisVP = util.getViewPointByID(dto.getViewPoint().getId());// VP can't be null, already controlled
 			for (HasNameAndIdDTO target : refDTO.getTargets()) {
 				if (target == null) {
 					throw new FunctionalException(FunctionalException.Code.NULL_ARGUMENT, null, "(references/target)");
 				}
-				if (util.getComponentTypeByID(target.getId()) == null) {
+				ComponentType ctTarget = util.getComponentTypeByID(target.getId());
+				if (ctTarget == null) {
 					throw new FunctionalException(FunctionalException.Code.TARGET_NOT_FOUND, null, "(references/target)");
+				}
+				else if (!thisVP.getComponentTypes().contains(ctTarget)){
+					throw new FunctionalException(FunctionalException.Code.INVALID_REFERENCE_TYPE, null, dto.getReferences()
+							.toString());
 				}
 			}
 		}
@@ -396,7 +402,7 @@ public class ComponentTypeServiceImpl extends ServiceImpl implements ComponentTy
 		}
 		return toDTO.getComponentTypeDTO(ct);
 	}
-	
+
 	/*
 	 * (non-Javadoc)
 	 * 

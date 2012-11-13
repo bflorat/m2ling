@@ -58,22 +58,9 @@
 		service</span> should : <b concordion:assertEquals="#resu">FAIL with code LT_NONE_DEST_TYPES</b> 
 	</div>
 
-	<h3>Format Controls</h3>
-	<ul class='rule'>
-	<li>
-		A null input should make service call <b
-			concordion:assertEquals="getCheckNullDTO()">FAIL</b>
-	</li>
-	<li>ID and name can't be null, void or void once trimmed</li>
-	<li>ID size can't be larger than 40 characters</li>
-	<li>Name can't be larger that 200 characters</li>
-	<li>Description and comment size can't be larger that 2000
-		characters</li>
-	<li>See Tags specifications for tags limits</li>
-	</ul>
-		Following service inputs against <b concordion:set="#vpID">id_vp_logical</b>
-		viewpoint should make the service :
-	<div class='example' >
+	<h3>Format controls</h3>
+		<p>See <a href="../common/Core.html#Requirements">common service requirements</a></p>
+	<div class="example">
 	<table
 		concordion:execute="#result=checkFormat(#caseName,#vpID,#id,#name,#desc,
 				#comment,#tags,#accessType,#temporality,#sourcesTypes,#destinationsTypes,#status)">

@@ -10,9 +10,9 @@ import org.m2ling.common.configuration.Conf;
 import org.m2ling.common.dto.core.AccessType;
 import org.m2ling.common.exceptions.FunctionalException;
 import org.m2ling.persistence.PersistenceManagerXMIImpl;
-import org.m2ling.presentation.principles.model.ComponentTypeBean;
 import org.m2ling.presentation.principles.model.HasNameAndIDBean;
 import org.m2ling.presentation.principles.model.ReferenceBean;
+import org.m2ling.presentation.studio.model.ComponentBean;
 import org.m2ling.service.util.CoreUtil;
 import org.m2ling.service.util.DTOConverter.FromDTO;
 import org.m2ling.service.util.DTOConverter.ToDTO;
@@ -54,12 +54,11 @@ public class AbstractComponentFixture extends M2lingFixture {
 			CoreUtil util = new CoreUtil(logger, pm);
 			service = new ComponentServiceImpl(pm, util, new FromDTO(util), new ToDTO(util), configuration, logger);
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
 
-	protected void setReferences(ComponentTypeBean bean, String references) {
+	protected void setReferences(ComponentBean bean, String references) {
 		List<ReferenceBean> refs = new ArrayList<ReferenceBean>();
 		if (Strings.isNullOrEmpty(references)) {
 			bean.setReferences(refs);

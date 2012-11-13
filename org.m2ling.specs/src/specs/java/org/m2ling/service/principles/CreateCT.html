@@ -24,7 +24,7 @@
 			<li>tags=<b concordion:set="#tags">logical,SA</b></li>
 			<li>instantiation factor=<b concordion:set="#ifactor">*</b></li>
 			<li>bound type id=<b concordion:set="#boundTypeID">id_ct_tech_applicationserver</b></li>
-			<li>references ids=<b concordion:set="#references">RUNS:id_ct_app_servicemodule;DEPENDS_ON:id_ct_logical_rdbms,id_ct_logical_ldap</b></li>
+			<li>references ids=<b concordion:set="#references">RUNS:id_ct_logical_servicemodule;DEPENDS_ON:id_ct_logical_rdbms,id_ct_logical_ldap</b></li>
 			<li>enumeration=<b concordion:set="#enumeration">id_comp_tech_jboss5,id_comp_tech_jboss6</b></li>
 			<li>status=<b concordion:set="#status">APPLICABLE</b></li>
 		</ul>
@@ -38,7 +38,7 @@
 			id=new_id_ct_logical_servicecontainer 
 			instantiationFactor=* 
 			name=ServicesContainer2 
-			references=[targets=[id=id_ct_app_servicemodule name=ServiceModule ] type=RUNS , targets=[id=id_ct_logical_rdbms name=RDBMS , id=id_ct_logical_ldap name=LDAP directory ] type=DEPENDS_ON ] 
+			references=[targets=[id=id_ct_logical_servicemodule name=ServiceModule ] type=RUNS , targets=[id=id_ct_logical_rdbms name=RDBMS , id=id_ct_logical_ldap name=LDAP directory ] type=DEPENDS_ON ] 
 			status=APPLICABLE 
 			tags=logical,SA 
 			vp=id=id_vp_logical name=Logical Architecture</b>
@@ -228,24 +228,20 @@
 			</table>
 			</div>
 		</p>
+		
+		<h3>References rules</h3>
 		<p class='rule'>CT12 : A reference target can't be void. Note that we don't test the case where the target is null as 
 			it is technically impossible to pass a DTO with a null target (ArrayList refuses this).
 			<div class='example'>In this case, the CT <span concordion:execute="#resu=testVoidRefTarget()">creation</span> 
 			should : <b concordion:assertEquals="#resu">FAIL with code NONE_TARGET</b> </div>
 		</p>
-	<h3>Format Controls</h3>
-	<ul class='rule'>
-	<li>
-		A null input should make service call <b
-			concordion:assertEquals="getCheckNullDTO()">FAIL</b>
-	</li>
-	<li>ID and name can't be null, void or void once trimmed</li>
-	<li>ID size can't be larger than 40 characters</li>
-	<li>Name can't be larger that 200 characters</li>
-	<li>Description and comment size can't be larger that 2000
-		characters</li>
-	<li>See Tags specifications for tags limits</li>
-	</ul>
+		
+		<p class='rule'>CT13 : A reference target can't be external to the viewpoint.
+			<div class='example'>In this case, the CT <span concordion:execute="#resu=testExternalRefs()">creation</span> 
+			should : <b concordion:assertEquals="#resu">FAIL with code INVALID_REFERENCE_TYPE</b> </div>
+		</p>
+	<h3>Format controls</h3>
+		<p>See <a href="../common/Core.html#Requirements">common service requirements</a></p>
 		Following service inputs against <b concordion:set="#vpID">id_vp_logical</b>
 		viewpoint should make the service <span
 			concordion:set="#justCheck=true" /> :
@@ -277,7 +273,7 @@
 			<td>tags1,tag2</td>
 			<td>*</td>
 			<td>id_ct_tech_applicationserver</td>
-			<td>RUNS:id_ct_app_servicemodule;DEPENDS_ON:id_ct_logical_rdbms,id_ct_logical_ldap</td>
+			<td>RUNS:id_ct_logical_servicemodule;DEPENDS_ON:id_ct_logical_rdbms,id_ct_logical_ldap</td>
 			<td>id_comp_tech_jboss5,id_comp_tech_jboss6</td>
 			<td>APPLICABLE</td>
 			<td>PASS</td>
@@ -292,7 +288,7 @@
 			<td>tags1,tag2</td>
 			<td>*</td>
 			<td>id_ct_tech_applicationserver</td>
-			<td>RUNS:id_ct_app_servicemodule;DEPENDS_ON:id_ct_logical_rdbms</td>
+			<td>RUNS:id_ct_logical_servicemodule;DEPENDS_ON:id_ct_logical_rdbms</td>
 			<td>id_comp_tech_jboss5,id_comp_tech_jboss6</td>
 			<td>APPLICABLE</td>
 			<td>FAIL with code DUPLICATES</td>
@@ -307,7 +303,7 @@
 			<td>tags1,tag2</td>
 			<td>*</td>
 			<td>id_ct_tech_applicationserver</td>
-			<td>RUNS:id_ct_app_servicemodule;DEPENDS_ON:id_ct_logical_rdbms</td>
+			<td>RUNS:id_ct_logical_servicemodule;DEPENDS_ON:id_ct_logical_rdbms</td>
 			<td>id_comp_tech_jboss5,id_comp_tech_jboss6</td>
 			<td>APPLICABLE</td>
 			<td>FAIL with code NULL_ARGUMENT</td>
@@ -321,7 +317,7 @@
 			<td>tags1,tag2</td>
 			<td>*</td>
 			<td>id_ct_tech_applicationserver</td>
-			<td>RUNS:id_ct_app_servicemodule;DEPENDS_ON:id_ct_logical_rdbms</td>
+			<td>RUNS:id_ct_logical_servicemodule;DEPENDS_ON:id_ct_logical_rdbms</td>
 			<td>id_comp_tech_jboss5,id_comp_tech_jboss6</td>
 			<td>APPLICABLE</td>
 			<td>FAIL with code VOID_ARGUMENT</td>
@@ -335,7 +331,7 @@
 			<td>tags1,tag2</td>
 			<td>*</td>
 			<td>id_ct_tech_applicationserver</td>
-			<td>RUNS:id_ct_app_servicemodule;DEPENDS_ON:id_ct_logical_rdbms</td>
+			<td>RUNS:id_ct_logical_servicemodule;DEPENDS_ON:id_ct_logical_rdbms</td>
 			<td>id_comp_tech_jboss5,id_comp_tech_jboss6</td>
 			<td>APPLICABLE</td>
 			<td>FAIL with code VOID_ARGUMENT</td>
@@ -350,7 +346,7 @@
 			<td>tags1,tag2</td>
 			<td>*</td>
 			<td>id_ct_tech_applicationserver</td>
-			<td>RUNS:id_ct_app_servicemodule;DEPENDS_ON:id_ct_logical_rdbms</td>
+			<td>RUNS:id_ct_logical_servicemodule;DEPENDS_ON:id_ct_logical_rdbms</td>
 			<td>id_comp_tech_jboss5,id_comp_tech_jboss6</td>
 			<td>APPLICABLE</td>
 			<td>PASS</td>
@@ -364,7 +360,7 @@
 			<td>tags1,tag2</td>
 			<td>*</td>
 			<td>id_ct_tech_applicationserver</td>
-			<td>RUNS:id_ct_app_servicemodule;DEPENDS_ON:id_ct_logical_rdbms</td>
+			<td>RUNS:id_ct_logical_servicemodule;DEPENDS_ON:id_ct_logical_rdbms</td>
 			<td>id_comp_tech_jboss5,id_comp_tech_jboss6</td>
 			<td>APPLICABLE</td>
 			<td>FAIL with code VOID_ARGUMENT</td>
@@ -378,7 +374,7 @@
 			<td>tags1,tag2</td>
 			<td>*</td>
 			<td>id_ct_tech_applicationserver</td>
-			<td>RUNS:id_ct_app_servicemodule;DEPENDS_ON:id_ct_logical_rdbms</td>
+			<td>RUNS:id_ct_logical_servicemodule;DEPENDS_ON:id_ct_logical_rdbms</td>
 			<td>id_comp_tech_jboss5,id_comp_tech_jboss6</td>
 			<td>APPLICABLE</td>
 			<td>FAIL with code VOID_ARGUMENT</td>
@@ -392,7 +388,7 @@
 			<td>tags1,tag2</td>
 			<td>-3</td>
 			<td>id_ct_tech_applicationserver</td>
-			<td>RUNS:id_ct_app_servicemodule;DEPENDS_ON:id_ct_logical_rdbms</td>
+			<td>RUNS:id_ct_logical_servicemodule;DEPENDS_ON:id_ct_logical_rdbms</td>
 			<td>id_comp_tech_jboss5,id_comp_tech_jboss6</td>
 			<td>APPLICABLE</td>
 			<td>FAIL with code WRONG_IF</td>
@@ -406,7 +402,7 @@
 			<td>tags1,tag2</td>
 			<td>wrong</td>
 			<td>id_ct_tech_applicationserver</td>
-			<td>RUNS:id_ct_app_servicemodule;DEPENDS_ON:id_ct_logical_rdbms</td>
+			<td>RUNS:id_ct_logical_servicemodule;DEPENDS_ON:id_ct_logical_rdbms</td>
 			<td>id_comp_tech_jboss5,id_comp_tech_jboss6</td>
 			<td>APPLICABLE</td>
 			<td>FAIL with code INVALID_FORMAT</td>
@@ -422,7 +418,7 @@
 			<td>tags1,tag2</td>
 			<td>*</td>
 			<td>id_ct_tech_applicationserver</td>
-			<td>RUNS:id_ct_app_servicemodule;DEPENDS_ON:id_ct_logical_rdbms</td>
+			<td>RUNS:id_ct_logical_servicemodule;DEPENDS_ON:id_ct_logical_rdbms</td>
 			<td>id_comp_tech_jboss5,id_comp_tech_jboss6</td>
 			<td>APPLICABLE</td>
 			<td>PASS</td>
@@ -466,7 +462,7 @@
 			<td>tags1,tag2</td>
 			<td>*</td>
 			<td>foo_ct</td>
-			<td>RUNS:id_ct_app_servicemodule;DEPENDS_ON:id_ct_logical_rdbms,id_ct_logical_ldap</td>
+			<td>RUNS:id_ct_logical_servicemodule;DEPENDS_ON:id_ct_logical_rdbms,id_ct_logical_ldap</td>
 			<td>id_comp_tech_jboss5,id_comp_tech_jboss6</td>
 			<td>APPLICABLE</td>
 			<td>FAIL with code TARGET_NOT_FOUND</td>
@@ -480,7 +476,7 @@
 			<td>tags1,tag2</td>
 			<td>*</td>
 			<td>id_ct_tech_applicationserver</td>
-			<td>RUNS:id_ct_app_servicemodule;DEPENDS_ON:id_ct_logical_rdbms,id_ct_logical_ldap</td>
+			<td>RUNS:id_ct_logical_servicemodule;DEPENDS_ON:id_ct_logical_rdbms,id_ct_logical_ldap</td>
 			<td>null</td>
 			<td>APPLICABLE</td>
 			<td>FAIL with code NULL_ARGUMENT</td>
@@ -494,7 +490,7 @@
 			<td>tags1,tag2</td>
 			<td>*</td>
 			<td>id_ct_tech_applicationserver</td>
-			<td>RUNS:id_ct_app_servicemodule;DEPENDS_ON:id_ct_logical_rdbms,id_ct_logical_ldap</td>
+			<td>RUNS:id_ct_logical_servicemodule;DEPENDS_ON:id_ct_logical_rdbms,id_ct_logical_ldap</td>
 			<td>id_comp_tech_jboss5,null</td>
 			<td>APPLICABLE</td>
 			<td>FAIL with code TARGET_NOT_FOUND</td>
@@ -509,7 +505,7 @@
 			<td>tags1,tag2</td>
 			<td>*</td>
 			<td>id_ct_tech_applicationserver</td>
-			<td>RUNS:id_ct_app_servicemodule;DEPENDS_ON:id_ct_logical_rdbms,id_ct_logical_ldap</td>
+			<td>RUNS:id_ct_logical_servicemodule;DEPENDS_ON:id_ct_logical_rdbms,id_ct_logical_ldap</td>
 			<td>id_comp_tech_jboss5,id_comp_tech_jboss6</td>
 			<td>foo_status</td>
 			<td>FAIL with code INVALID_STATUS</td>
@@ -523,7 +519,7 @@
 			<td>tags1,tag2</td>
 			<td>*</td>
 			<td>id_ct_tech_applicationserver</td>
-			<td>RUNS:id_ct_app_servicemodule;DEPENDS_ON:id_ct_logical_rdbms,id_ct_logical_ldap</td>
+			<td>RUNS:id_ct_logical_servicemodule;DEPENDS_ON:id_ct_logical_rdbms,id_ct_logical_ldap</td>
 			<td>id_comp_tech_jboss5,id_comp_tech_jboss6</td>
 			<td>null</td>
 			<td>PASS</td>
