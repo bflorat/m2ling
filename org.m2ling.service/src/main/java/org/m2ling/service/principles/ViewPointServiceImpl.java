@@ -16,7 +16,6 @@ import org.m2ling.common.exceptions.FunctionalException;
 import org.m2ling.common.exceptions.FunctionalException.Code;
 import org.m2ling.common.soa.Context;
 import org.m2ling.common.utils.Consts;
-import org.m2ling.common.utils.Utils;
 import org.m2ling.domain.Root;
 import org.m2ling.domain.core.ComponentType;
 import org.m2ling.domain.core.Type;
@@ -77,18 +76,12 @@ public class ViewPointServiceImpl extends ServiceImpl implements ViewPointServic
 				}
 				index++;
 			}
-			// Description
-			if (dto.getDescription() != null && dto.getDescription().length() > Consts.MAX_TEXT_SIZE) {
-				throw new FunctionalException(FunctionalException.Code.SIZE_EXCEEDED, null, "(description)");
-			}
-			// Comment
-			if (dto.getComment() != null && dto.getComment().length() > Consts.MAX_TEXT_SIZE) {
-				throw new FunctionalException(FunctionalException.Code.SIZE_EXCEEDED, null, "(comment)");
-			}
-			// Tags
-			Utils.checkTags(dto.getTags());
+			checkDescription(dto.getDescription(), true);
+			checkComment(dto.getComment());
+			checkTags(dto.getTags());
 		}
 		if (access == AccessType.UPDATE) {
+			checkStatus(dto.getId(), dto.getStatus());
 			EList<String> droppedStatusLiterals = vp.getStatusLiterals();
 			for (String literal : dto.getStatusLiterals()) {
 				droppedStatusLiterals.remove(literal);
@@ -210,15 +203,15 @@ public class ViewPointServiceImpl extends ServiceImpl implements ViewPointServic
 				for (ComponentType ct : vpToCheck.getComponentTypes()) {
 					ComponentType boundCT = ct.getBoundType();
 					if (boundCT != null && compTypes.contains(boundCT)) {
-						throw new FunctionalException(FunctionalException.Code.VP_IN_USE, null, "Component type: " + vpToCheck.getName()
-								+ "/" + ct.getName() + ")");
+						throw new FunctionalException(FunctionalException.Code.VP_IN_USE, null, "Component type: "
+								+ vpToCheck.getName() + "/" + ct.getName() + ")");
 					}
 				}
 			}
 		}
 		pmanager.getRoot().getViewPoints().remove(vp);
 	}
-	
+
 	/*
 	 * (non-Javadoc)
 	 * 

@@ -5,7 +5,6 @@ package org.m2ling.service.principles;
 
 import java.util.List;
 
-import org.m2ling.common.dto.core.ComponentTypeDTO;
 import org.m2ling.common.dto.core.LinkTypeDTO;
 import org.m2ling.common.exceptions.FunctionalException;
 import org.m2ling.common.soa.Context;

@@ -20,8 +20,6 @@ import org.m2ling.common.dto.core.ReferenceDTO;
 import org.m2ling.common.exceptions.FunctionalException;
 import org.m2ling.common.exceptions.FunctionalException.Code;
 import org.m2ling.common.soa.Context;
-import org.m2ling.common.utils.Consts;
-import org.m2ling.common.utils.Utils;
 import org.m2ling.domain.Root;
 import org.m2ling.domain.core.ArchitectureItem;
 import org.m2ling.domain.core.Component;
@@ -149,7 +147,8 @@ public class ComponentTypeServiceImpl extends ServiceImpl implements ComponentTy
 				throw new FunctionalException(FunctionalException.Code.NULL_ARGUMENT, null, "(references/target)");
 			}
 			// check targets existence and the fact that targets types are local (in the CT VP)
-			ViewPoint thisVP = util.getViewPointByID(dto.getViewPoint().getId());// VP can't be null, already controlled
+			ViewPoint thisVP = util.getViewPointByID(dto.getViewPoint().getId());// VP can't be null,
+																										// already controlled
 			for (HasNameAndIdDTO target : refDTO.getTargets()) {
 				if (target == null) {
 					throw new FunctionalException(FunctionalException.Code.NULL_ARGUMENT, null, "(references/target)");
@@ -157,8 +156,7 @@ public class ComponentTypeServiceImpl extends ServiceImpl implements ComponentTy
 				ComponentType ctTarget = util.getComponentTypeByID(target.getId());
 				if (ctTarget == null) {
 					throw new FunctionalException(FunctionalException.Code.TARGET_NOT_FOUND, null, "(references/target)");
-				}
-				else if (!thisVP.getComponentTypes().contains(ctTarget)){
+				} else if (!thisVP.getComponentTypes().contains(ctTarget)) {
 					throw new FunctionalException(FunctionalException.Code.INVALID_REFERENCE_TYPE, null, dto.getReferences()
 							.toString());
 				}
@@ -281,21 +279,10 @@ public class ComponentTypeServiceImpl extends ServiceImpl implements ComponentTy
 			}
 		}
 		if (access == AccessType.CREATE || access == AccessType.UPDATE) {
-			// Description
-			if (dto.getDescription() != null && dto.getDescription().length() > Consts.MAX_TEXT_SIZE) {
-				throw new FunctionalException(FunctionalException.Code.SIZE_EXCEEDED, null, "(description)");
-			}
-			// Comment
-			if (dto.getComment() != null && dto.getComment().length() > Consts.MAX_TEXT_SIZE) {
-				throw new FunctionalException(FunctionalException.Code.SIZE_EXCEEDED, null, "(comment)");
-			}
-			// Status (null is valid)
-			if (dto.getStatus() != null && !vp.getStatusLiterals().contains(dto.getStatus())) {
-				throw new FunctionalException(FunctionalException.Code.INVALID_STATUS, null, dto.toString());
-			}
-			// Tags
-			Utils.checkTags(dto.getTags());
-			// References
+			checkDescription(dto.getDescription(),false);
+			checkComment(dto.getComment());
+			checkStatus(dto.getViewPoint(), dto.getStatus());
+			checkTags(dto.getTags());
 			checkReferences(dto, access);
 			// Instantiation factor
 			checkIF(dto, access);

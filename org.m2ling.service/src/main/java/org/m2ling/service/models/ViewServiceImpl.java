@@ -15,8 +15,6 @@ import org.m2ling.common.dto.core.ViewDTO;
 import org.m2ling.common.exceptions.FunctionalException;
 import org.m2ling.common.exceptions.FunctionalException.Code;
 import org.m2ling.common.soa.Context;
-import org.m2ling.common.utils.Consts;
-import org.m2ling.common.utils.Utils;
 import org.m2ling.domain.Root;
 import org.m2ling.domain.core.Component;
 import org.m2ling.domain.core.Type;
@@ -50,28 +48,13 @@ public class ViewServiceImpl extends ServiceImpl implements ViewService {
 	}
 
 	void checkDTO(final ViewDTO dto, final AccessType access) throws FunctionalException {
-		ViewPoint vp = null;
 		checkIdAndName(dto, access, false);
-		// Check VP
 		checkVP(dto, access);
-		if (access == AccessType.CREATE) {
-			// VP existence
-			vp = util.getViewPointByID(dto.getViewpoint().getId());
-			if (vp == null) {
-				throw new FunctionalException(Code.TARGET_NOT_FOUND, null, "Viewpoint name=" + dto.getViewpoint().getName());
-			}
-		}
 		if (access == AccessType.CREATE || access == AccessType.UPDATE) {
-			// Description
-			if (dto.getDescription() != null && dto.getDescription().length() > Consts.MAX_TEXT_SIZE) {
-				throw new FunctionalException(FunctionalException.Code.SIZE_EXCEEDED, null, "(description)");
-			}
-			// Comment
-			if (dto.getComment() != null && dto.getComment().length() > Consts.MAX_TEXT_SIZE) {
-				throw new FunctionalException(FunctionalException.Code.SIZE_EXCEEDED, null, "(comment)");
-			}
-			// Tags
-			Utils.checkTags(dto.getTags());
+			checkDescription(dto.getDescription(), true);
+			checkComment(dto.getComment());
+			checkStatus(dto.getViewpoint(), dto.getStatus());
+			checkTags(dto.getTags());
 		}
 	}
 

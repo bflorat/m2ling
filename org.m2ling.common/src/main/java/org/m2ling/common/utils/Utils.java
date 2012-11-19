@@ -199,34 +199,7 @@ public class Utils {
 		return result;
 	}
 
-	/**
-	 * Common checks on tags
-	 * 
-	 * @param tags
-	 * @throws FunctionalException
-	 *            if one of the tags is too long
-	 * @throws FunctionalException
-	 *            if a tag duplication is detected
-	 * 
-	 */
-	public static void checkTags(List<String> tags) throws FunctionalException {
-		int index = 1;
-		for (String tag : tags) {
-			if (tag == null) {
-				throw new FunctionalException(FunctionalException.Code.NULL_ARGUMENT, null, "tag #" + index);
-			}
-			if (Strings.isNullOrEmpty(tag.trim())) {
-				throw new FunctionalException(FunctionalException.Code.VOID_ARGUMENT, null, "tag #" + index);
-			}
-			if (tag.length() > Consts.MAX_LABEL_SIZE) {
-				throw new FunctionalException(FunctionalException.Code.SIZE_EXCEEDED, null, "tag #" + index);
-			}
-			index++;
-		}
-		if (Utils.containsDup(tags)) {
-			throw new FunctionalException(FunctionalException.Code.DUPLICATES, null, null);
-		}
-	}
+	
 
 	/**
 	 * Generic toString() method that display all declared fields and those of immediate parent class

@@ -14,7 +14,6 @@ import org.m2ling.common.exceptions.FunctionalException;
 import org.m2ling.common.exceptions.FunctionalException.Code;
 import org.m2ling.common.soa.Context;
 import org.m2ling.common.utils.Consts;
-import org.m2ling.common.utils.Utils;
 import org.m2ling.domain.Root;
 import org.m2ling.domain.core.CoreFactory;
 import org.m2ling.domain.core.Rule;
@@ -64,37 +63,38 @@ public class RuleServiceImpl extends ServiceImpl implements RuleService {
 					+ dto.getViewPointId());
 		}
 		if (access == AccessType.CREATE || access == AccessType.UPDATE) {
-			// Status (null is valid)
-			if (dto.getStatus() != null && !vp.getStatusLiterals().contains(dto.getStatus())) {
-				throw new FunctionalException(FunctionalException.Code.INVALID_STATUS, null, dto.toString());
-			}
-			// Description (mandatory)
-			if (dto.getDescription() == null || Strings.isNullOrEmpty(dto.getDescription().trim())) {
-				throw new FunctionalException(FunctionalException.Code.NULL_ARGUMENT, null, "(description)");
-			}
-			if (dto.getDescription().length() > Consts.MAX_TEXT_SIZE) {
-				throw new FunctionalException(FunctionalException.Code.SIZE_EXCEEDED, null, "(description)");
-			}
-			// Rationale (mandatory)
-			if (dto.getRationale() == null) {
-				throw new FunctionalException(FunctionalException.Code.NULL_ARGUMENT, null, "(rationale)");
-			}
-			if (Strings.isNullOrEmpty(dto.getRationale().trim())) {
-				throw new FunctionalException(FunctionalException.Code.VOID_ARGUMENT, null, "(rationale)");
-			}
-			if (dto.getRationale().length() > Consts.MAX_TEXT_SIZE) {
-				throw new FunctionalException(FunctionalException.Code.SIZE_EXCEEDED, null, "(rationale)");
-			}
-			// Exceptions (can be null)
-			if (dto.getExceptions() != null && dto.getExceptions().length() > Consts.MAX_TEXT_SIZE) {
-				throw new FunctionalException(FunctionalException.Code.SIZE_EXCEEDED, null, "(exceptions)");
-			}
-			// Comment (can be null)
-			if (dto.getComment() != null && dto.getComment().length() > Consts.MAX_TEXT_SIZE) {
-				throw new FunctionalException(FunctionalException.Code.SIZE_EXCEEDED, null, "(comment)");
-			}
-			// Tags
-			Utils.checkTags(dto.getTags());
+			checkStatus(dto.getViewPointId(), dto.getStatus());
+			checkDescription(dto.getDescription(), true);
+			checkRationale(dto);
+			checkExceptions(dto);
+			checkComment(dto.getComment());
+			checkTags(dto.getTags());
+		}
+	}
+
+	/**
+	 * @param dto
+	 * @throws FunctionalException
+	 */
+	private void checkExceptions(final RuleDTO dto) throws FunctionalException {
+		if (dto.getExceptions() != null && dto.getExceptions().length() > Consts.MAX_TEXT_SIZE) {
+			throw new FunctionalException(FunctionalException.Code.SIZE_EXCEEDED, null, "(exceptions)");
+		}
+	}
+
+	/**
+	 * @param dto
+	 * @throws FunctionalException
+	 */
+	private void checkRationale(final RuleDTO dto) throws FunctionalException {
+		if (dto.getRationale() == null) {
+			throw new FunctionalException(FunctionalException.Code.NULL_ARGUMENT, null, "(rationale)");
+		}
+		if (Strings.isNullOrEmpty(dto.getRationale().trim())) {
+			throw new FunctionalException(FunctionalException.Code.VOID_ARGUMENT, null, "(rationale)");
+		}
+		if (dto.getRationale().length() > Consts.MAX_TEXT_SIZE) {
+			throw new FunctionalException(FunctionalException.Code.SIZE_EXCEEDED, null, "(rationale)");
 		}
 	}
 
@@ -185,7 +185,7 @@ public class RuleServiceImpl extends ServiceImpl implements RuleService {
 		ViewPoint vp = (ViewPoint) rule.eContainer();
 		vp.getRules().remove(rule);
 	}
-	
+
 	/*
 	 * (non-Javadoc)
 	 * 

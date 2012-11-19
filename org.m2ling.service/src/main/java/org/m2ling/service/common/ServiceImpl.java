@@ -3,15 +3,19 @@
  */
 package org.m2ling.service.common;
 
+import java.util.List;
 import java.util.logging.Logger;
 
 import org.m2ling.common.configuration.Conf;
 import org.m2ling.common.dto.core.AbstractCommonDTO;
 import org.m2ling.common.dto.core.AccessType;
+import org.m2ling.common.dto.core.HasNameAndIdDTO;
 import org.m2ling.common.exceptions.FunctionalException;
 import org.m2ling.common.exceptions.FunctionalException.Code;
 import org.m2ling.common.utils.Consts;
+import org.m2ling.common.utils.Utils;
 import org.m2ling.domain.core.Type;
+import org.m2ling.domain.core.ViewPoint;
 import org.m2ling.persistence.PersistenceManager;
 import org.m2ling.service.util.CoreUtil;
 import org.m2ling.service.util.DTOConverter;
@@ -111,6 +115,105 @@ abstract public class ServiceImpl {
 				throw new FunctionalException(FunctionalException.Code.TARGET_NOT_FOUND, null, "id=" + dto.getId());
 			}
 		}
+	}
+
+	/**
+	 * Check comment
+	 * 
+	 * @param comment
+	 *           the provided comment
+	 * @throws FunctionalException
+	 *            if the comment has a wrong format
+	 */
+	protected void checkComment(final String comment) throws FunctionalException {
+		if (comment != null && comment.length() > Consts.MAX_TEXT_SIZE) {
+			throw new FunctionalException(FunctionalException.Code.SIZE_EXCEEDED, null, "(comment)");
+		}
+	}
+
+	/**
+	 * Check description
+	 * 
+	 * @param description
+	 *           the provided description
+	 * @throws FunctionalException
+	 *            if the description has a wrong format
+	 */
+	protected void checkDescription(final String description, final boolean descriptionMandatory)
+			throws FunctionalException {
+		if (description == null && descriptionMandatory) {
+			throw new FunctionalException(FunctionalException.Code.NULL_ARGUMENT, null, "(description)");
+		}
+		if (descriptionMandatory && description != null && "".equals(description.trim())) {
+			throw new FunctionalException(FunctionalException.Code.VOID_ARGUMENT, null, "(description)");
+		}
+		if (description != null && description.length() > Consts.MAX_TEXT_SIZE) {
+			throw new FunctionalException(FunctionalException.Code.SIZE_EXCEEDED, null, "(description)");
+		}
+	}
+
+	/**
+	 * Checks on tags
+	 * 
+	 * @param tags
+	 * @throws FunctionalException
+	 *            if the tags rules are not satified
+	 * 
+	 */
+	protected void checkTags(List<String> tags) throws FunctionalException {
+		int index = 1;
+		for (String tag : tags) {
+			if (tag == null) {
+				throw new FunctionalException(FunctionalException.Code.NULL_ARGUMENT, null, "tag #" + index);
+			}
+			if (Strings.isNullOrEmpty(tag.trim())) {
+				throw new FunctionalException(FunctionalException.Code.VOID_ARGUMENT, null, "tag #" + index);
+			}
+			if (tag.length() > Consts.MAX_LABEL_SIZE) {
+				throw new FunctionalException(FunctionalException.Code.SIZE_EXCEEDED, null, "tag #" + index);
+			}
+			index++;
+		}
+		if (Utils.containsDup(tags)) {
+			throw new FunctionalException(FunctionalException.Code.DUPLICATES, null, null);
+		}
+	}
+
+	/**
+	 * Check the status. null is allowed
+	 * 
+	 * @param vp
+	 *           the viewpoint associated with the item shose status is checked
+	 * @param status
+	 *           the status to check
+	 * @throws FunctionalException
+	 *            if the status is not in VP status literal list
+	 */
+	protected void checkStatus(HasNameAndIdDTO vp, String status) throws FunctionalException {
+		if (vp == null) {
+			throw new FunctionalException(FunctionalException.Code.NULL_ARGUMENT, null, "(viewpoint)");
+		}
+		ViewPoint storedVP = util.getViewPointByID(vp.getId());
+		if (storedVP == null) {
+			throw new FunctionalException(FunctionalException.Code.TARGET_NOT_FOUND, null, "Viewpoint id=" + vp.getId());
+		}
+		if (status != null && !storedVP.getStatusLiterals().contains(status)) {
+			throw new FunctionalException(FunctionalException.Code.INVALID_STATUS, null, null);
+		}
+	}
+
+	/**
+	 * Check the status. null is allowed
+	 * 
+	 * @param vpID
+	 *           the viewpoint ID associated with the item shose status is checked
+	 * @param status
+	 *           the status to check
+	 * @throws FunctionalException
+	 *            if the status is not in VP status literal list
+	 */
+	protected void checkStatus(String vpID, String status) throws FunctionalException {
+		checkStatus(new HasNameAndIdDTO.Builder(vpID, null).build(), status);
 	}
 
 	/**

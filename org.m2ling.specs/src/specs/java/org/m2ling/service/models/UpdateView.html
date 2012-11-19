@@ -41,11 +41,11 @@
 		Given these new settings :
 		<ul>
 			<li>id=<b concordion:set="#id">id_vp1_v1</b></li>
-			<li>id=<b concordion:set="#name">vp1_new_name</b></li>
-			<li>id=<b concordion:set="#vpID">id_foo</b></li>
-			<li>id=<b concordion:set="#description">desc2</b></li>
-			<li>id=<b concordion:set="#comment">comment2</b></li>
-			<li>id=<b concordion:set="#tags">tag3,tag4</b></li>
+			<li>name=<b concordion:set="#name">vp1_new_name</b></li>
+			<li>vpID=<b concordion:set="#vpID">id_vp2</b></li>
+			<li>Description=<b concordion:set="#description">desc2</b></li>
+			<li>Comment=<b concordion:set="#comment">comment2</b></li>
+			<li>Tags=<b concordion:set="#tags">tag3,tag4</b></li>
 		</ul>
 		When we update the view point <br /> <span
 			concordion:execute="update(#id,#name,#vpID,#description,#comment,#tags)"></span>

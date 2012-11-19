@@ -29,27 +29,27 @@ public class CreateCTFixture extends AbstractCTFixture {
 
 	public String createWithIf(String ifactor) throws FunctionalException {
 		return createAndGetCT("true", "CT1", "id_vp_logical", "id_new_ct_logical_servicecontainer", "ServicesContainer2",
-				"", "", "", ifactor, "null", "", "", "APPLICABLE");
+				"null", "", "", ifactor, "null", "", "", "APPLICABLE");
 	}
 
 	public String testExternalRefs() throws FunctionalException {
 		return createAndGetCT("true", "CT1", "id_vp_logical", "id_new_ct_logical_servicecontainer", "ServicesContainer2",
-				"", "", "", "1", "null", "RUNS:id_ct_app_application", "", "APPLICABLE");
+				"null", "", "", "1", "null", "RUNS:id_ct_app_application", "", "APPLICABLE");
 	}
 
 	public String testNoBindingType() throws FunctionalException {
 		return createAndGetCT("true", "CT8", "id_vp_logical", "id_new_ct_logical_servicecontainer", "ServicesContainer2",
-				"", "", "", "*", "null", "", "id_comp_tech_jboss5", "APPLICABLE");
+				"null", "", "", "*", "null", "", "id_comp_tech_jboss5", "APPLICABLE");
 	}
 
 	public String testCascadingBinding() throws FunctionalException {
 		return createAndGetCT("true", "CT8", "id_vp_logical", "id_new_ct_logical_servicecontainer", "ServicesContainer2",
-				"", "", "", "*", "id_ct_app_application", "", "id_comp_tech_jboss5", "APPLICABLE");
+				"null", "", "", "*", "id_ct_app_application", "", "id_comp_tech_jboss5", "APPLICABLE");
 	}
 
 	public String testLocalBinding() throws FunctionalException {
 		return createAndGetCT("true", "CT8", "id_vp_logical", "id_new_ct_logical_servicecontainer", "ServicesContainer2",
-				"", "", "", "*", "id_ct_logical_servicecontainer", "", "id_comp_tech_jboss5", "APPLICABLE");
+				"null", "", "", "*", "id_ct_logical_servicecontainer", "", "id_comp_tech_jboss5", "APPLICABLE");
 	}
 
 	public String testBoundDerivedName(String caseName, String ctAttributes, String boundCTAttributes)
@@ -96,10 +96,10 @@ public class CreateCTFixture extends AbstractCTFixture {
 
 	public String testEnumeration(String caseName, String comps, String groups) throws FunctionalException {
 		String enumeration = "";
-		if (!("null".equals(comps)) && !Strings.isNullOrEmpty(comps)) {
+		if (!"null".equals(comps) && !Strings.isNullOrEmpty(comps)) {
 			enumeration += comps;
 		}
-		if (!("null".equals(groups)) && !Strings.isNullOrEmpty(groups)) {
+		if (!"null".equals(groups) && !Strings.isNullOrEmpty(groups)) {
 			if (enumeration.length() > 0) {
 				enumeration += "," + groups;
 			} else {

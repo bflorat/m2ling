@@ -14,8 +14,6 @@ import org.m2ling.common.dto.core.LinkTypeDTO;
 import org.m2ling.common.exceptions.FunctionalException;
 import org.m2ling.common.exceptions.FunctionalException.Code;
 import org.m2ling.common.soa.Context;
-import org.m2ling.common.utils.Consts;
-import org.m2ling.common.utils.Utils;
 import org.m2ling.domain.Root;
 import org.m2ling.domain.core.Component;
 import org.m2ling.domain.core.ComponentType;
@@ -185,29 +183,11 @@ public class LinkTypeServiceImpl extends ServiceImpl implements LinkTypeService 
 			}
 		}
 		if (access == AccessType.CREATE || access == AccessType.UPDATE) {
-			// Description
-			if (dto.getDescription() == null) {
-				throw new FunctionalException(FunctionalException.Code.NULL_ARGUMENT, null, "(description)");
-			}
-			if ("".equals(dto.getDescription().trim())) {
-				throw new FunctionalException(FunctionalException.Code.VOID_ARGUMENT, null, "(description)");
-			}
-			if (dto.getDescription().length() > Consts.MAX_TEXT_SIZE) {
-				throw new FunctionalException(FunctionalException.Code.SIZE_EXCEEDED, null, "(description)");
-			}
-			// Status (null is valid)
-			if (dto.getStatus() != null && !vp.getStatusLiterals().contains(dto.getStatus())) {
-				throw new FunctionalException(FunctionalException.Code.INVALID_STATUS, null, dto.toString());
-			}
-			// Comment
-			if (dto.getComment() != null && dto.getComment().length() > Consts.MAX_TEXT_SIZE) {
-				throw new FunctionalException(FunctionalException.Code.SIZE_EXCEEDED, null, "(comment)");
-			}
-			// Tags
-			Utils.checkTags(dto.getTags());
-			// Sources and destination
+			checkDescription(dto.getDescription(), true);
+			checkStatus(dto.getViewPoint(), dto.getStatus());
+			checkComment(dto.getComment());
+			checkTags(dto.getTags());
 			checkSourcesAndDestTypes(dto, access);
-			// Access type and temporality
 			checkAccessAndTemporalityTypes(dto, access);
 		}
 	}
@@ -307,7 +287,7 @@ public class LinkTypeServiceImpl extends ServiceImpl implements LinkTypeService 
 		}
 		return toDTO.getLinkTypeDTO(lt);
 	}
-	
+
 	/*
 	 * (non-Javadoc)
 	 * 
