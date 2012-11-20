@@ -20,8 +20,10 @@ public class TagsFixture extends M2lingFixture {
 	// Note that the service implementation is explicit in purpose, we don't use DI (best practice
 	// for UT).
 	TagService serviceTag;
+
 	/** Sample viewpoints are named against this prefix and their initial tag */
 	private static final String SAMPLE_VIEWPOINT_PREFIX = "viewPointTag_";
+
 	public static final Context MOCK_CONTEXT = Context.newContext(Context.Entry.USER, "hceheo").add(
 			Context.Entry.PWD_HASH, "8f7d88e901a5ad3a05d8cc0de93313fd76028f8c");
 
@@ -30,7 +32,7 @@ public class TagsFixture extends M2lingFixture {
 		String sampleXMI = "src/specs/resources/mocks/Technical.m2ling";
 		Properties prop = new Properties();
 		prop.setProperty(PersistenceManagerXMIImpl.SpecificConfiguration.CONF_XMI_PATH, sampleXMI);
-		Conf configuration = new Conf(prop, logger,null);
+		Conf configuration = new Conf(prop, logger, null);
 		PersistenceManagerXMIImpl pm = new PersistenceManagerXMIImpl(logger, configuration);
 		CoreUtil util = new CoreUtil(logger, pm);
 		serviceTag = new TagServiceImpl(pm, util, new FromDTO(util), new ToDTO(util), configuration, logger);
@@ -98,6 +100,18 @@ public class TagsFixture extends M2lingFixture {
 			serviceTag.setTags(MOCK_CONTEXT, Type.VIEWPOINT, SAMPLE_VIEWPOINT_PREFIX, items);
 			List<String> result = serviceTag.getAllTags(MOCK_CONTEXT, Type.VIEWPOINT, SAMPLE_VIEWPOINT_PREFIX);
 			return Utils.stringListAsString(result);
+		} catch (FunctionalException func) {
+			return "FunctionalException";
+		} catch (Exception e) {
+			return "<Unexpected exception>";
+		}
+	}
+
+	public String setNullTags() {
+		try {
+			// We expect an IllegalArgumentException
+			serviceTag.setTags(MOCK_CONTEXT, Type.VIEWPOINT, SAMPLE_VIEWPOINT_PREFIX, null);
+			return "PASS";
 		} catch (FunctionalException func) {
 			return "FunctionalException";
 		} catch (Exception e) {

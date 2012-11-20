@@ -134,24 +134,35 @@ abstract public class ServiceImpl {
 	}
 
 	/**
-	 * Check description
+	 * Check description when null value is allowed
 	 * 
 	 * @param description
 	 *           the provided description
 	 * @throws FunctionalException
 	 *            if the description has a wrong format
 	 */
-	protected void checkDescription(final String description, final boolean descriptionMandatory)
-			throws FunctionalException {
-		if (description == null && descriptionMandatory) {
-			throw new FunctionalException(FunctionalException.Code.NULL_ARGUMENT, null, "(description)");
-		}
-		if (descriptionMandatory && description != null && "".equals(description.trim())) {
-			throw new FunctionalException(FunctionalException.Code.VOID_ARGUMENT, null, "(description)");
-		}
+	protected void checkDescriptionNullAllowed(final String description) throws FunctionalException {
 		if (description != null && description.length() > Consts.MAX_TEXT_SIZE) {
 			throw new FunctionalException(FunctionalException.Code.SIZE_EXCEEDED, null, "(description)");
 		}
+	}
+
+	/**
+	 * Check description when null is forbidden
+	 * 
+	 * @param description
+	 *           the provided description
+	 * @throws FunctionalException
+	 *            if the description has a wrong format
+	 */
+	protected void checkDescriptionNullForbidden(final String description) throws FunctionalException {
+		if (description == null) {
+			throw new FunctionalException(FunctionalException.Code.NULL_ARGUMENT, null, "(description)");
+		}
+		if ("".equals(description.trim())) {
+			throw new FunctionalException(FunctionalException.Code.VOID_ARGUMENT, null, "(description)");
+		}
+		checkDescriptionNullAllowed(description);
 	}
 
 	/**
@@ -159,10 +170,13 @@ abstract public class ServiceImpl {
 	 * 
 	 * @param tags
 	 * @throws FunctionalException
-	 *            if the tags rules are not satified
+	 *            if the tags rules are not satisfied
 	 * 
 	 */
 	protected void checkTags(List<String> tags) throws FunctionalException {
+		if (tags == null) {
+			throw new FunctionalException(FunctionalException.Code.NULL_ARGUMENT, null, "(tags)");
+		}
 		int index = 1;
 		for (String tag : tags) {
 			if (tag == null) {

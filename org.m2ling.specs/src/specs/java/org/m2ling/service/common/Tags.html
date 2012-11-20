@@ -23,17 +23,22 @@
 	<h2>Automated</h2>
 
 	<h3>Special cases</h3>
+	<li>If tags are globally <b
+		concordion:execute="#result=setNullTags()">null</b>, a
+		<b concordion:assertEquals="#result">FunctionalException</b> is
+		expected.
+	</li>
 	<li>If a single tag <b
-		concordion:execute="#result=setTagWithComa()">contains a comma</b>, an
+		concordion:execute="#result=setTagWithComa()">contains a comma</b>, a
 		<b concordion:assertEquals="#result">FunctionalException</b> is
 		expected.
 	</li>
 	<li>If a single tag <b concordion:execute="#result=setEmptyTag()">is
-			void</b>, an <b concordion:assertEquals="#result">FunctionalException</b>
+			void</b>, a <b concordion:assertEquals="#result">FunctionalException</b>
 		is expected.
 	</li>
 	<li>If a single tag <b concordion:execute="#result=setEmptyTag()">is
-			null</b>, an <b concordion:assertEquals="#result">FunctionalException</b>
+			null</b>, a <b concordion:assertEquals="#result">FunctionalException</b>
 		is expected.
 	</li>
 	<div class="example">
