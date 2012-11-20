@@ -98,98 +98,107 @@ public class RuleServiceImpl extends ServiceImpl implements RuleService {
 		}
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.m2ling.service.principles.RuleService#updateRule(org.m2ling.common.dto.core.RuleDTO)
+	/**
+	 * {@inheritDoc}
 	 */
 	@Override
 	public void updateRule(final Context context, final RuleDTO ruleDTO) throws FunctionalException {
-		// Controls
-		checkDTO(ruleDTO, AccessType.UPDATE);
-		// Processing
-		Rule rule = util.getRuleByID(ruleDTO.getId());
-		rule.setName(ruleDTO.getName());
-		rule.setDescription(ruleDTO.getDescription());
-		rule.setPriority(ruleDTO.getPriority());
-		rule.setStatus(ruleDTO.getStatus());
-		rule.setComment(ruleDTO.getComment());
-		rule.setExceptions(ruleDTO.getExceptions());
-		rule.setRationale(ruleDTO.getRationale());
-		List<String> tags = rule.getTags();
-		tags.clear();
-		tags.addAll(ruleDTO.getTags());
-		List<StatusEvent> history = rule.getHistory();
-		StatusEvent se = CoreFactory.eINSTANCE.createStatusEvent();
-		se.setDate(System.currentTimeMillis());
-		se.setStatusLiteral(rule.getStatus());
-		history.add(se);
+		try {
+			// Controls
+			checkDTO(ruleDTO, AccessType.UPDATE);
+			// Processing
+			Rule rule = util.getRuleByID(ruleDTO.getId());
+			rule.setName(ruleDTO.getName());
+			rule.setDescription(ruleDTO.getDescription());
+			rule.setPriority(ruleDTO.getPriority());
+			rule.setStatus(ruleDTO.getStatus());
+			rule.setComment(ruleDTO.getComment());
+			rule.setExceptions(ruleDTO.getExceptions());
+			rule.setRationale(ruleDTO.getRationale());
+			List<String> tags = rule.getTags();
+			tags.clear();
+			tags.addAll(ruleDTO.getTags());
+			List<StatusEvent> history = rule.getHistory();
+			StatusEvent se = CoreFactory.eINSTANCE.createStatusEvent();
+			se.setDate(System.currentTimeMillis());
+			se.setStatusLiteral(rule.getStatus());
+			history.add(se);
+		} catch (Exception ex) {
+			handleAnyException(ex);
+		}
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.m2ling.service.principles.RuleService#createRule( org.m2ling.common.dto.core.RuleDTO)
+	/**
+	 * {@inheritDoc}
 	 */
 	@Override
 	public void createRule(final Context context, final RuleDTO ruleDTO) throws FunctionalException {
-		// Controls
-		checkDTO(ruleDTO, AccessType.CREATE);
-		// Processing
-		Rule rule = fromDTO.newRule(ruleDTO);
-		// Set history
-		List<StatusEvent> history = rule.getHistory();
-		StatusEvent evt = CoreFactory.eINSTANCE.createStatusEvent();
-		evt.setDate(System.currentTimeMillis());
-		evt.setStatusLiteral(rule.getStatus());
-		history.add(evt);
-		// Add the rule
-		ViewPoint vp = util.getViewPointByID(ruleDTO.getViewPointId());
-		vp.getRules().add(rule);
+		try {
+			// Controls
+			checkDTO(ruleDTO, AccessType.CREATE);
+			// Processing
+			Rule rule = fromDTO.newRule(ruleDTO);
+			// Set history
+			List<StatusEvent> history = rule.getHistory();
+			StatusEvent evt = CoreFactory.eINSTANCE.createStatusEvent();
+			evt.setDate(System.currentTimeMillis());
+			evt.setStatusLiteral(rule.getStatus());
+			history.add(evt);
+			// Add the rule
+			ViewPoint vp = util.getViewPointByID(ruleDTO.getViewPointId());
+			vp.getRules().add(rule);
+		} catch (Exception ex) {
+			handleAnyException(ex);
+		}
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.m2ling.service.principles.RuleService#getAllRules(String)
+	/**
+	 * {@inheritDoc}
 	 */
 	@Override
 	public List<RuleDTO> getAllRules(final Context context, final String vp) throws FunctionalException {
-		{// Controls
+		List<RuleDTO> out = Lists.newArrayList();
+		try {
+			// Controls
 			if (util.getViewPointByID(vp) == null) {
 				throw new FunctionalException(Code.TARGET_NOT_FOUND, null, "Viewpoint=" + vp.toString());
 			}
-		}
-		Root root = pmanager.getRoot();
-		List<RuleDTO> out = Lists.newArrayList();
-		for (ViewPoint checked : root.getViewPoints()) {
-			if (checked.getId().equals(vp)) {
-				List<Rule> rules = checked.getRules();
-				for (Rule rule : rules) {
-					RuleDTO dto = toDTO.getRuleDTO(rule);
-					out.add(dto);
+			Root root = pmanager.getRoot();
+			for (ViewPoint checked : root.getViewPoints()) {
+				if (checked.getId().equals(vp)) {
+					List<Rule> rules = checked.getRules();
+					for (Rule rule : rules) {
+						RuleDTO dto = toDTO.getRuleDTO(rule);
+						out.add(dto);
+					}
+					break;
 				}
-				break;
 			}
+			Collections.sort(out);
+		} catch (Exception ex) {
+			handleAnyException(ex);
 		}
-		Collections.sort(out);
 		return out;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public void deleteRule(final Context context, final RuleDTO dto) throws FunctionalException {
-		{// Controls
+		try {
+			// Controls
 			checkDTO(dto, AccessType.DELETE);
+			Rule rule = util.getRuleByID(dto.getId());
+			ViewPoint vp = (ViewPoint) rule.eContainer();
+			vp.getRules().remove(rule);
+		} catch (Exception ex) {
+			handleAnyException(ex);
 		}
-		Rule rule = util.getRuleByID(dto.getId());
-		ViewPoint vp = (ViewPoint) rule.eContainer();
-		vp.getRules().remove(rule);
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.m2ling.service.common.ServiceImpl#getType()
+	/**
+	 * {@inheritDoc}
 	 */
 	@Override
 	protected Type getManagedType() {

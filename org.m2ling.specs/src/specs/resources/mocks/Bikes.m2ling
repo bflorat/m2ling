@@ -5,7 +5,7 @@
     <activities id="_ByQVkJn4EeGqFM2UF1dCGQ" name="Set up software factory" description="Set up development, integration and build tools for each project." accountables="_skmNgZhhEeGGf-qGrGj3yA" responsibles="_skmNgZhhEeGGf-qGrGj3yA"/>
     <componentTypes id="id_ct_logical_servicecontainer" name="ServicesContainer" description="Runs services (RMI, REST, SOAP...)" boundType="id_ct_tech_applicationserver" enumeration="id_grp_tech_servicecontainers id_comp_tech_jboss5">
       <references type="RUNS" targets="id_ct_logical_servicemodule"/>
-      <references description="" type="DEPENDS_ON" targets="id_ct_logical_ldap"/>
+      <references description="" type="DEPENDS_ON" targets="id_ct_logical_ldap id_ct_logical_rdbms"/>
     </componentTypes>
     <componentTypes id="_fKtsQZoXEeG71vmJ5CR-iA" name="WebContainer" comment="" description="A servlet/JSP container" boundType="id_ct_tech_applicationserver" enumeration="_0GnPIJ6QEeGyndJ1yNTLVw">
       <references type="RUNS" targets="id_ct_logical_guimodule"/>
@@ -119,7 +119,7 @@
   </viewPoints>
   <views comment="" description="BikesOnline is a online house-built e-commerce solution to sell bikes." id="id_view_vp_logical_Logical_BikesOnline" name="Logical_BikesOnline" viewPoint="id_vp_logical">
     <components id="id_comp_view_Logical_BikesOnline_AdminGUI" name="AdminGUI" comment="" type="id_ct_logical_guimodule" boundComponent="_hGsf4J89EeGNFtlcQfUFgw"/>
-    <components id="id_comp_view_Logical_BikesOnline_AdminServices" name="AdminServices" type="id_ct_app_servicemodule" boundComponent="_zPeqMJ89EeGNFtlcQfUFgw"/>
+    <components id="id_comp_view_Logical_BikesOnline_AdminServices" name="AdminServices" type="id_ct_logical_servicemodule" boundComponent="_zPeqMJ89EeGNFtlcQfUFgw"/>
     <components id="_qODuQp6TEeGyndJ1yNTLVw" name="EndUserGUI" comment="" type="id_ct_logical_guimodule" boundComponent="_osKccJ89EeGNFtlcQfUFgw"/>
     <components id="_xjupYp6VEeGbbcMFSNIrnA" name="PaiementServices" description="" type="id_ct_app_servicemodule" boundComponent="_9xnzQJ89EeGNFtlcQfUFgw"/>
     <components id="_gmFcgp6VEeGbbcMFSNIrnA" name="Product Catalog Services" comment="" description="" type="id_ct_app_servicemodule" boundComponent="_VsqREp8zEeGYS-4UJ-FpAA"/>
@@ -131,7 +131,7 @@
     <components id="_GHLjspxDEeGi7NYPtEuJdA" name="JBoss5 Linux" comment="" description="" type="id_ct_logical_servicecontainer" boundComponent="id_comp_tech_jboss5">
       <references type="RUNS" targets="id_comp_view_Logical_BikesOnline_AdminServices _xjupYp6VEeGbbcMFSNIrnA _gmFcgp6VEeGbbcMFSNIrnA"/>
     </components>
-    <components id="DEPENDS_ON:id_comp_view_Logical_BikesOnline_PostgreSQL" name="PostgreSQL" type="id_ct_logical_rdbms" boundComponent="_G9AtYp6REeG">
+    <components id="id_comp_view_Logical_BikesOnline_PostgreSQL" name="PostgreSQL" type="id_ct_logical_rdbms" boundComponent="_G9AtYp6REeG">
       <references type="RUNS" targets="_1tPv4qvwEeGqu4Jf39UauA"/>
     </components>
     <components id="_Y-AZsqvvEeGqu4Jf39UauA" name="Tomcat6" description="" type="_fKtsQZoXEeG71vmJ5CR-iA" boundComponent="_BM4XQp6QEdJ1yNTLVw">
@@ -141,7 +141,7 @@
     <links id="fdfdsfsfsddsewv" name="Stream1" comment="" description="" type="_oHllkpqkEeGbI4NH3iicSg" sources="_4-yHMprbEeGE7MG94I-e3A" destinations="_qODuQp6TEeGyndJ1yNTLVw"/>
     <links id="vn,khghjghj" name="Stream2" type="_2LrDApqyEeGVMag01qc4bw" sources="_qODuQp6TEeGyndJ1yNTLVw" destinations="id_comp_view_Logical_BikesOnline_AuthenticationLDAP"/>
     <links id="_aCyWg5xDEeGi7NYPtEuJdA" name="Stream3" type="id_lt_logical_http_rest" sources="_qODuQp6TEeGyndJ1yNTLVw" destinations="_GHLjspxDEeGi7NYPtEuJdA"/>
-    <links id="_NpfsI56UEeGyndJ1yNTLVw" name="Stream4" type="_4Rfd0pqjEeGQsK1VSbibvw" sources="_GHLjspxDEeGi7NYPtEuJdA" destinations="DEPENDS_ON:id_comp_view_Logical_BikesOnline_PostgreSQL"/>
+    <links id="_NpfsI56UEeGyndJ1yNTLVw" name="Stream4" type="_4Rfd0pqjEeGQsK1VSbibvw" sources="_GHLjspxDEeGi7NYPtEuJdA"/>
   </views>
   <views comment="" description="" id="_0oVTkZ55EeGAFeVyyYKoXg" name="Enterprise architecture view" viewPoint="_uP3gkZniEeGeqKlv68ECYA">
     <components id="_Uf_Bop56EeGAFeVyyYKoXg" name="eBusiness" comment="" type="_KEFloJq4EeGVMag01qc4bw">

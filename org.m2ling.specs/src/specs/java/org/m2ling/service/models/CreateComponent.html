@@ -13,21 +13,21 @@
 	<p>See <a href="../common/Core.html#Requirements">common service requirements</a></p>
 	<div class="example">
 		A new component created with<span concordion:set="#justCheck=false" /> 
-		<span concordion:set="#caseName">Roundtrip </span>
+		<span concordion:set="#caseName">Roundtrip</span>
 		<ul>
 			<li>View id=<b concordion:set="#vID">id_view_vp_logical_Logical_BikesOnline</b></li>
 			<li>ctID=<b concordion:set="#ctID">id_ct_logical_servicecontainer</b></li>
-			<li>id=<b concordion:set="#id">new_id</b></li>
+			<li>id=<b concordion:set="#id">a_new_id</b></li>
 			<li>name=<b concordion:set="#name">Weblogic</b></li>
 			<li>description=<b concordion:set="#desc">Another service container</b></li>
-			<li>comment=<b concordion:set="#comment">Runs some services</b></li>
+			<li>comment=<b concordion:set="#comment">Runs some cool services</b></li>
 			<li>tags=<b concordion:set="#tags">logical,soa</b></li>
 			<li>bound id=<b concordion:set="#boundID">id_comp_tech_weblogic</b></li>
 			<li>references ids=<b concordion:set="#references">RUNS:id_comp_view_Logical_BikesOnline_AdminServices;DEPENDS_ON:id_comp_view_Logical_BikesOnline_PostgreSQL,id_comp_view_Logical_BikesOnline_AuthenticationLDAP</b></li>
 			<li>status=<b concordion:set="#status">APPLICABLE</b></li>
 		</ul>
 		should have following characteristics (full round trip from presentation to presentation) : <b
-			concordion:assertEquals="createAndGetCT(#justCheck,#caseName,#vID,#ctID,#id,#name,#desc,#comment,#tags,#boundID,#references,#status)">
+			concordion:assertEquals="createAndGetComp(#justCheck,#caseName,#vID,#ctID,#id,#name,#desc,#comment,#tags,#boundID,#references,#status)">
 			boundType=id=id_ct_tech_applicationserver name=Technical Architecture/ ApplicationServer 
 			comment=Available components listed in Technical catalog description=Runs services (RMI, REST, SOAP...). 
 			drop= 
@@ -42,8 +42,17 @@
 			vp=id=id_vp_logical name=Logical Architecture</b>
 	</div>
 
+	<h3>References rules</h3>
+		<p class='rule'>#COMP1 : All references defined in CT has not to exist at the component level but those who exist must follow types defined in their associated CT.
+			<div class='example'>In this case, the CT <span concordion:execute="#resu=testVoidRefTarget()">creation</span> 
+			should : <b concordion:assertEquals="#resu">FAIL with code NONE_TARGET</b> </div>
+		</p>
+		
+		<p class='rule'>#COMP2 : Reference should not be null.
+			<div class='example'>If reference is null, the component <span concordion:execute="#resu=testExternalRefs()">creation</span> 
+			should : <b concordion:assertEquals="#resu">FAIL with code NULL_ARGUMENT</b> </div>
+		</p>
 
-All references defined in CT has not to exist at the component level but those who exist must follow types defined in their associated CT.
 
 
 

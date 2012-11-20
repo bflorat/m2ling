@@ -3,7 +3,6 @@
  */
 package org.m2ling.service.models;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.logging.Logger;
@@ -26,6 +25,7 @@ import org.m2ling.service.util.CoreUtil;
 import org.m2ling.service.util.DTOConverter;
 
 import com.google.common.base.Strings;
+import com.google.common.collect.Lists;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 
@@ -74,112 +74,117 @@ public class ViewServiceImpl extends ServiceImpl implements ViewService {
 		}
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.m2ling.service.principles.ViewService#getAllViews(org.m2ling.common.soa.Context)
-	 */
-	public List<ViewDTO> getAllViews(final Context context) {
-		List<ViewDTO> vDTOs = new ArrayList<ViewDTO>(10);
-		Root root = pmanager.getRoot();
-		for (View vp : root.getViews()) {
-			ViewDTO dto = toDTO.getViewDTO(vp);
-			vDTOs.add(dto);
+	/**
+	 * {@inheritDoc}
+	 **/
+	@Override
+	public List<ViewDTO> getAllViews(final Context context) throws FunctionalException {
+		List<ViewDTO> out = Lists.newArrayList();
+		try {
+			Root root = pmanager.getRoot();
+			for (View vp : root.getViews()) {
+				ViewDTO dto = toDTO.getViewDTO(vp);
+				out.add(dto);
+			}
+			Collections.sort(out);
+		} catch (Exception anyError) {
+			handleAnyException(anyError);
 		}
-		Collections.sort(vDTOs);
-		return vDTOs;
+		return out;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.m2ling.service.principles.ViewService#getViewByID(org.m2ling.common.soa.Context,
-	 * java.lang.String)
-	 */
+	/**
+	 * {@inheritDoc}
+	 **/
 	@Override
 	public ViewDTO getViewByID(final Context context, String id) throws FunctionalException {
-		{// controls
+		ViewDTO out = null;
+		try {
+			// controls
 			if (id == null || Strings.isNullOrEmpty(id.trim())) {
 				throw new FunctionalException(FunctionalException.Code.NULL_ARGUMENT, null, "(id)");
 			}
+			View vp = util.getViewByID(id);
+			if (vp != null) {
+				out = toDTO.getViewDTO(vp);
+			}
+		} catch (Exception anyError) {
+			handleAnyException(anyError);
 		}
-		View vp = util.getViewByID(id);
-		if (vp == null) {
-			return null;
-		}
-		return toDTO.getViewDTO(vp);
+		return out;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.m2ling.service.principles.ViewService#createView(org.m2ling.common.soa.Context,
-	 * org.m2ling.common.dto.core.ViewDTO)
-	 */
+	/**
+	 * {@inheritDoc}
+	 **/
 	@Override
 	public void createView(final Context context, final ViewDTO dto) throws FunctionalException {
-		// test DTO
-		checkDTO(dto, AccessType.CREATE);
-		// Processing
-		View view = fromDTO.newView(dto);
-		Root root = pmanager.getRoot();
-		root.getViews().add(view);
+		try {
+			// test DTO
+			checkDTO(dto, AccessType.CREATE);
+			// Processing
+			View view = fromDTO.newView(dto);
+			Root root = pmanager.getRoot();
+			root.getViews().add(view);
+		} catch (Exception anyError) {
+			handleAnyException(anyError);
+		}
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.m2ling.service.principles.ViewService#updateView(org.m2ling.common.soa.Context,
-	 * org.m2ling.common.dto.core.ViewDTO)
-	 */
+	/**
+	 * {@inheritDoc}
+	 **/
 	@Override
 	public void updateView(final Context context, final ViewDTO vDTO) throws FunctionalException {
-		// tests
-		checkDTO(vDTO, AccessType.UPDATE);
-		// Processing (note that VP can't be changed so we don't set here)
-		View view = util.getViewByID(vDTO.getId());
-		view.setName(vDTO.getName());
-		view.setDescription(vDTO.getDescription());
-		view.setComment(vDTO.getComment());
-		List<String> tags = view.getTags();
-		tags.clear();
-		tags.addAll(vDTO.getTags());
-		// TODO Check that status is valid
-		view.setStatus(vDTO.getStatus());
+		try {
+			// tests
+			checkDTO(vDTO, AccessType.UPDATE);
+			// Processing (note that VP can't be changed so we don't set here)
+			View view = util.getViewByID(vDTO.getId());
+			view.setName(vDTO.getName());
+			view.setDescription(vDTO.getDescription());
+			view.setComment(vDTO.getComment());
+			List<String> tags = view.getTags();
+			tags.clear();
+			tags.addAll(vDTO.getTags());
+			// TODO Check that status is valid
+			view.setStatus(vDTO.getStatus());
+		} catch (Exception anyError) {
+			handleAnyException(anyError);
+		}
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.m2ling.service.principles.ViewService#deleteView(org.m2ling.common.soa.Context,
-	 * java.lang.String)
+	/**
+	 * {@inheritDoc}
 	 */
 	@Override
 	public void deleteView(final Context context, final String id) throws FunctionalException {
-		View view = util.getViewByID(id);
-		if (view == null) {
-			throw new FunctionalException(FunctionalException.Code.TARGET_NOT_FOUND, null, "id=" + id);
-		}
-		// Check if one of this view component is used as bound component
-		// (Note : no need to check component instances binding as the component check prevent the
-		// bound component instance deletion)
-		for (View v : pmanager.getRoot().getViews()) {
-			if (v.equals(view)) {
-				continue;
+		try {
+			View view = util.getViewByID(id);
+			if (view == null) {
+				throw new FunctionalException(FunctionalException.Code.TARGET_NOT_FOUND, null, "id=" + id);
 			}
-			for (Component comp : v.getComponents()) {
-				if (view.getComponents().contains(comp.getBoundComponent())) {
-					throw new FunctionalException(FunctionalException.Code.VP_IN_USE, null, "(" + v.getName() + ")");
+			// Check if one of this view component is used as bound component
+			// (Note : no need to check component instances binding as the component check prevent the
+			// bound component instance deletion)
+			for (View v : pmanager.getRoot().getViews()) {
+				if (v.equals(view)) {
+					continue;
+				}
+				for (Component comp : v.getComponents()) {
+					if (view.getComponents().contains(comp.getBoundComponent())) {
+						throw new FunctionalException(FunctionalException.Code.VP_IN_USE, null, "(" + v.getName() + ")");
+					}
 				}
 			}
+			pmanager.getRoot().getViews().remove(view);
+		} catch (Exception anyError) {
+			handleAnyException(anyError);
 		}
-		pmanager.getRoot().getViews().remove(view);
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.m2ling.service.common.ServiceImpl#getType()
+	/**
+	 * {@inheritDoc}
 	 */
 	@Override
 	protected Type getManagedType() {

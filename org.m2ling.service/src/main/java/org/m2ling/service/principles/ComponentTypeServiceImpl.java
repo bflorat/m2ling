@@ -279,7 +279,7 @@ public class ComponentTypeServiceImpl extends ServiceImpl implements ComponentTy
 			}
 		}
 		if (access == AccessType.CREATE || access == AccessType.UPDATE) {
-			checkDescription(dto.getDescription(),false);
+			checkDescription(dto.getDescription(), false);
 			checkComment(dto.getComment());
 			checkStatus(dto.getViewPoint(), dto.getStatus());
 			checkTags(dto.getTags());
@@ -293,107 +293,128 @@ public class ComponentTypeServiceImpl extends ServiceImpl implements ComponentTy
 		}
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public void updateCT(final Context context, final ComponentTypeDTO dto) throws FunctionalException {
-		// Controls
-		checkDTO(dto, AccessType.UPDATE);
-		// Processing
-		ComponentType ct = util.getComponentTypeByID(dto.getId());
-		ct.setName(dto.getName());
-		ct.setDescription(dto.getDescription());
-		ct.setComment(dto.getComment());
-		List<String> tags = ct.getTags();
-		tags.clear();
-		tags.addAll(dto.getTags());
-		ComponentType boundType = null;
-		if (dto.getBoundType() != null) {
-			boundType = util.getComponentTypeByID(dto.getBoundType().getId());
+		try {
+			// Controls
+			checkDTO(dto, AccessType.UPDATE);
+			// Processing
+			ComponentType ct = util.getComponentTypeByID(dto.getId());
+			ct.setName(dto.getName());
+			ct.setDescription(dto.getDescription());
+			ct.setComment(dto.getComment());
+			List<String> tags = ct.getTags();
+			tags.clear();
+			tags.addAll(dto.getTags());
+			ComponentType boundType = null;
+			if (dto.getBoundType() != null) {
+				boundType = util.getComponentTypeByID(dto.getBoundType().getId());
+			}
+			ct.setBoundType(boundType);
+			ct.setInstantiationFactor(dto.getInstantiationFactor());
+			List<ArchitectureItem> enumeration = ct.getEnumeration();
+			enumeration.clear();
+			List<ArchitectureItem> newEnumeration = new ArrayList<ArchitectureItem>(dto.getEnumeration().size());
+			for (HasNameAndIdDTO comp : dto.getEnumeration()) {
+				ArchitectureItem ai = util.getComponentOrGroupByID(comp.getId());
+				newEnumeration.add(ai);
+			}
+			enumeration.addAll(newEnumeration);
+			ct.setStatus(dto.getStatus());
+			pmanager.commit();
+		} catch (Exception anyError) {
+			handleAnyException(anyError);
 		}
-		ct.setBoundType(boundType);
-		ct.setInstantiationFactor(dto.getInstantiationFactor());
-		List<ArchitectureItem> enumeration = ct.getEnumeration();
-		enumeration.clear();
-		List<ArchitectureItem> newEnumeration = new ArrayList<ArchitectureItem>(dto.getEnumeration().size());
-		for (HasNameAndIdDTO comp : dto.getEnumeration()) {
-			ArchitectureItem ai = util.getComponentOrGroupByID(comp.getId());
-			newEnumeration.add(ai);
-		}
-		enumeration.addAll(newEnumeration);
-		ct.setStatus(dto.getStatus());
-		pmanager.commit();
 	}
 
 	@Override
 	public void createCT(final Context context, final ComponentTypeDTO dto) throws FunctionalException {
-		// Controls
-		checkDTO(dto, AccessType.CREATE);
-		// Processing
-		ComponentType ct = fromDTO.newComponentType(dto);
-		// Add the item
-		ViewPoint vp = util.getViewPointByID(dto.getViewPoint().getId());
-		vp.getComponentTypes().add(ct);
-		pmanager.commit();
+		try {
+			// Controls
+			checkDTO(dto, AccessType.CREATE);
+			// Processing
+			ComponentType ct = fromDTO.newComponentType(dto);
+			// Add the item
+			ViewPoint vp = util.getViewPointByID(dto.getViewPoint().getId());
+			vp.getComponentTypes().add(ct);
+			pmanager.commit();
+		} catch (Exception anyError) {
+			handleAnyException(anyError);
+		}
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public List<ComponentTypeDTO> getAllCT(final Context context, final String vp) throws FunctionalException {
-		{// Controls
+		List<ComponentTypeDTO> out = Lists.newArrayList();
+		try {
+			// Controls
 			if (util.getViewPointByID(vp) == null) {
 				throw new FunctionalException(Code.TARGET_NOT_FOUND, null, "Viewpoint=" + vp.toString());
 			}
-		}
-		Root root = pmanager.getRoot();
-		List<ComponentTypeDTO> out = Lists.newArrayList();
-		for (ViewPoint checked : root.getViewPoints()) {
-			if (checked.getId().equals(vp)) {
-				List<ComponentType> cts = checked.getComponentTypes();
-				for (ComponentType ct : cts) {
-					ComponentTypeDTO dto = toDTO.getComponentTypeDTO(ct);
-					out.add(dto);
+			Root root = pmanager.getRoot();
+			for (ViewPoint checked : root.getViewPoints()) {
+				if (checked.getId().equals(vp)) {
+					List<ComponentType> cts = checked.getComponentTypes();
+					for (ComponentType ct : cts) {
+						ComponentTypeDTO dto = toDTO.getComponentTypeDTO(ct);
+						out.add(dto);
+					}
+					break;
 				}
-				break;
 			}
+			Collections.sort(out);
+		} catch (Exception anyError) {
+			handleAnyException(anyError);
 		}
-		Collections.sort(out);
 		return out;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public void deleteCT(final Context context, final ComponentTypeDTO dto) throws FunctionalException {
-		{// Controls
+		try {
+			// Controls
 			checkBeforeDeletion(dto, AccessType.DELETE);
+			ComponentType type = util.getComponentTypeByID(dto.getId());
+			ViewPoint vp = (ViewPoint) type.eContainer();
+			vp.getComponentTypes().remove(type);
+			pmanager.commit();
+		} catch (Exception anyError) {
+			handleAnyException(anyError);
 		}
-		ComponentType type = util.getComponentTypeByID(dto.getId());
-		ViewPoint vp = (ViewPoint) type.eContainer();
-		vp.getComponentTypes().remove(type);
-		pmanager.commit();
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * org.m2ling.service.principles.ComponentTypeService#getCTByID(org.m2ling.common.soa.Context,
-	 * java.lang.String)
+	/**
+	 * {@inheritDoc}
 	 */
 	@Override
 	public ComponentTypeDTO getCTByID(Context context, String id) throws FunctionalException {
-		{// Controls
+		ComponentTypeDTO out = null;
+		try {
+			// Controls
 			if (id == null || Strings.isNullOrEmpty(id.trim())) {
 				throw new FunctionalException(FunctionalException.Code.NULL_ARGUMENT, null, "(id)");
 			}
+			ComponentType ct = util.getComponentTypeByID(id);
+			if (ct != null) {
+				out = toDTO.getComponentTypeDTO(ct);
+			}
+		} catch (Exception anyError) {
+			handleAnyException(anyError);
 		}
-		ComponentType ct = util.getComponentTypeByID(id);
-		if (ct == null) {
-			return null;
-		}
-		return toDTO.getComponentTypeDTO(ct);
+		return out;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.m2ling.service.common.ServiceImpl#getType()
+	/**
+	 * {@inheritDoc}
 	 */
 	@Override
 	protected Type getManagedType() {

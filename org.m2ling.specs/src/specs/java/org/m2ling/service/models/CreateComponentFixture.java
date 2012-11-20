@@ -16,15 +16,7 @@ public class CreateComponentFixture extends AbstractComponentFixture {
 		super();
 	}
 
-	/*
-	 * public String testVoidRefTarget() throws FunctionalException { try { ReferenceDTO refDTO = new
-	 * ReferenceDTO.Builder(ReferenceType.CONTAINS.name()).build(); HasNameAndIdDTO vpDTO = new
-	 * HasNameAndIdDTO.Builder("id_vp_logical", "vp_logical").build(); ComponentTypeDTO dto = new
-	 * ComponentTypeDTO.Builder(vpDTO, "id_void_ct_logical_servicecontainer",
-	 * "ServicesContainer2").addReference(refDTO).build(); service.createCT(null, dto); return
-	 * "PASS"; } catch (FunctionalException ex) { return "FAIL with code " + ex.getCode().name(); }
-	 * catch (TechnicalException ex) { return "FAIL with code " + ex.getCode().name(); } }
-	 */
+	
 	/**
 	 * Create and return a component from a presentation layer bean (to test it too), then search it
 	 * back
@@ -33,7 +25,7 @@ public class CreateComponentFixture extends AbstractComponentFixture {
 	 * @param name
 	 * @return component toString or "Unknown item" or code failure string
 	 */
-	public String createAndGetCT(String justCheck, String caseName, String vID, String ctID, String id, String name,
+	public String createAndGetComp(String justCheck, String caseName, String vID, String ctID, String id, String name,
 			String desc, String comment, String tags, String boundID, String references, String status)
 			throws FunctionalException {
 		if (!noreset) {

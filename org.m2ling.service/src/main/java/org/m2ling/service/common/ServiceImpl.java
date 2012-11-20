@@ -4,6 +4,7 @@
 package org.m2ling.service.common;
 
 import java.util.List;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import org.m2ling.common.configuration.Conf;
@@ -11,6 +12,7 @@ import org.m2ling.common.dto.core.AbstractCommonDTO;
 import org.m2ling.common.dto.core.AccessType;
 import org.m2ling.common.dto.core.HasNameAndIdDTO;
 import org.m2ling.common.exceptions.FunctionalException;
+import org.m2ling.common.exceptions.TechnicalException;
 import org.m2ling.common.exceptions.FunctionalException.Code;
 import org.m2ling.common.utils.Consts;
 import org.m2ling.common.utils.Utils;
@@ -222,4 +224,47 @@ abstract public class ServiceImpl {
 	 * @return item type managed by this service
 	 */
 	protected abstract Type getManagedType();
+
+	/**
+	 * Final method called when exiting a service on any error
+	 * 
+	 * @param ex
+	 *           the initial exception
+	 * @throws FunctionalException
+	 *            if a functional exception occurred bellow
+	 * @throws TechnicalException
+	 *            if any exception (especially runtime exception) occurred bellow
+	 */
+	protected void handleAnyException(Exception ex) throws FunctionalException, TechnicalException {
+		if (ex instanceof FunctionalException) {
+			logger.log(Level.FINE, "Error when processing the service", ex);
+			throw (FunctionalException) ex;
+		} else if (ex instanceof TechnicalException) {
+			logger.log(Level.FINE, "Error when processing the service", ex);
+			throw (TechnicalException) ex;
+		} else {
+			logger.log(Level.FINE, "Error when processing the service", ex);
+			// Wrap any uncatched exception into a new TechnicalException
+			throw new TechnicalException(org.m2ling.common.exceptions.TechnicalException.Code.UNKNOWN, ex, null);
+		}
+	}
+
+	/**
+	 * Final method called when exiting a service that may may only throw technical errors
+	 * 
+	 * @param ex
+	 *           the initial exception
+	 * @throws TechnicalException
+	 *            if any exception (especially runtime exception) occurred bellow
+	 */
+	protected void handleTechException(Exception ex) throws TechnicalException {
+		if (ex instanceof TechnicalException) {
+			logger.log(Level.FINE, "Error when processing the service", ex);
+			throw (TechnicalException) ex;
+		} else {
+			logger.log(Level.FINE, "Error when processing the service", ex);
+			// Wrap any uncatched exception into a new TechnicalException
+			throw new TechnicalException(org.m2ling.common.exceptions.TechnicalException.Code.UNKNOWN, ex, null);
+		}
+	}
 }

@@ -7,6 +7,7 @@ import java.util.List;
 
 import org.m2ling.common.dto.core.ViewDTO;
 import org.m2ling.common.exceptions.FunctionalException;
+import org.m2ling.common.exceptions.TechnicalException;
 import org.m2ling.common.soa.Context;
 
 /**
@@ -50,8 +51,10 @@ public interface ViewService {
 	 * </p>
 	 * 
 	 * @return all available views DTO for current user.
+	 * @throws TechnicalException  in case of issue
+	 * @throws FunctionalException if id is null or void
 	 */
-	List<ViewDTO> getAllViews(Context context);
+	List<ViewDTO> getAllViews(Context context) throws FunctionalException, TechnicalException;
 
 	/**
 	 * Return the view DTO given an ID if it exist, null otherwise.

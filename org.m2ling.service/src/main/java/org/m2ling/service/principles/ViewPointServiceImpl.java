@@ -96,126 +96,126 @@ public class ViewPointServiceImpl extends ServiceImpl implements ViewPointServic
 		}
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * org.m2ling.service.principles.ViewPointService#getAllViewPoints(org.m2ling.common.soa.Context)
+	/**
+	 * {@inheritDoc}
 	 */
+	@Override
 	public List<ViewPointDTO> getAllViewPoints(final Context context) {
-		List<ViewPointDTO> vpDTOs = new ArrayList<ViewPointDTO>(10);
-		Root root = pmanager.getRoot();
-		for (ViewPoint vp : root.getViewPoints()) {
-			ViewPointDTO dto = toDTO.getViewPointDTO(vp);
-			vpDTOs.add(dto);
+		List<ViewPointDTO> out = new ArrayList<ViewPointDTO>(10);
+		try {
+			Root root = pmanager.getRoot();
+			for (ViewPoint vp : root.getViewPoints()) {
+				ViewPointDTO dto = toDTO.getViewPointDTO(vp);
+				out.add(dto);
+			}
+			Collections.sort(out);
+		} catch (Exception ex) {
+			handleTechException(ex);
 		}
-		Collections.sort(vpDTOs);
-		return vpDTOs;
+		return out;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * org.m2ling.service.principles.ViewPointService#getViewPointByID(org.m2ling.common.soa.Context,
-	 * java.lang.String)
+	/**
+	 * {@inheritDoc}
 	 */
 	@Override
 	public ViewPointDTO getViewPointByID(final Context context, String id) throws FunctionalException {
-		{// controls
+		ViewPointDTO out = null;
+		try {
+			// controls
 			if (id == null || Strings.isNullOrEmpty(id.trim())) {
 				throw new FunctionalException(FunctionalException.Code.NULL_ARGUMENT, null, "(id)");
 			}
+			ViewPoint vp = util.getViewPointByID(id);
+			if (vp != null) {
+				out = toDTO.getViewPointDTO(vp);
+			}
+		} catch (Exception ex) {
+			handleAnyException(ex);
 		}
-		ViewPoint vp = util.getViewPointByID(id);
-		if (vp == null) {
-			return null;
-		}
-		return toDTO.getViewPointDTO(vp);
+		return out;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * org.m2ling.service.principles.ViewPointService#createViewPoint(org.m2ling.common.soa.Context,
-	 * org.m2ling.common.dto.core.ViewPointDTO)
+	/**
+	 * {@inheritDoc}
 	 */
 	@Override
 	public void createViewPoint(final Context context, final ViewPointDTO vpDTO) throws FunctionalException {
-		// test DTO
-		checkDTO(vpDTO, AccessType.CREATE);
-		// Processing
-		ViewPoint vp = fromDTO.newViewPoint(vpDTO);
-		Root root = pmanager.getRoot();
-		root.getViewPoints().add(vp);
+		try {
+			// test DTO
+			checkDTO(vpDTO, AccessType.CREATE);
+			// Processing
+			ViewPoint vp = fromDTO.newViewPoint(vpDTO);
+			Root root = pmanager.getRoot();
+			root.getViewPoints().add(vp);
+		} catch (Exception ex) {
+			handleAnyException(ex);
+		}
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * org.m2ling.service.principles.ViewPointService#updateViewPoint(org.m2ling.common.soa.Context,
-	 * org.m2ling.common.dto.core.ViewPointDTO)
+	/**
+	 * {@inheritDoc}
 	 */
 	@Override
 	public void updateViewPoint(final Context context, final ViewPointDTO vpDTO) throws FunctionalException {
-		// tests
-		checkDTO(vpDTO, AccessType.UPDATE);
-		// Processing
-		ViewPoint vp = util.getViewPointByID(vpDTO.getId());
-		vp.setName(vpDTO.getName());
-		vp.setDescription(vpDTO.getDescription());
-		List<String> status = vp.getStatusLiterals();
-		status.clear();
-		status.addAll(vpDTO.getStatusLiterals());
-		vp.setComment(vpDTO.getComment());
-		List<String> tags = vp.getTags();
-		tags.clear();
-		tags.addAll(vpDTO.getTags());
-		vp.setStatus(vpDTO.getStatus());
+		try {
+			// tests
+			checkDTO(vpDTO, AccessType.UPDATE);
+			// Processing
+			ViewPoint vp = util.getViewPointByID(vpDTO.getId());
+			vp.setName(vpDTO.getName());
+			vp.setDescription(vpDTO.getDescription());
+			List<String> status = vp.getStatusLiterals();
+			status.clear();
+			status.addAll(vpDTO.getStatusLiterals());
+			vp.setComment(vpDTO.getComment());
+			List<String> tags = vp.getTags();
+			tags.clear();
+			tags.addAll(vpDTO.getTags());
+			vp.setStatus(vpDTO.getStatus());
+		} catch (Exception ex) {
+			handleAnyException(ex);
+		}
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * org.m2ling.service.principles.ViewPointService#deleteViewPoint(org.m2ling.common.soa.Context,
-	 * java.lang.String)
+	/**
+	 * {@inheritDoc}
 	 */
 	@Override
 	public void deleteViewPoint(final Context context, final String id) throws FunctionalException {
-		ViewPoint vp = util.getViewPointByID(id);
-		if (vp == null) {
-			throw new FunctionalException(FunctionalException.Code.TARGET_NOT_FOUND, null, "id=" + id);
-		}
-		// Check for existing views using this vp
-		EList<ComponentType> compTypes = vp.getComponentTypes();
-		for (View view : pmanager.getRoot().getViews()) {
-			// check for views of this type
-			if (view.getViewPoint().equals(vp)) {
-				throw new FunctionalException(FunctionalException.Code.VP_IN_USE, null, "View: " + view.getName());
+		try {
+			ViewPoint vp = util.getViewPointByID(id);
+			if (vp == null) {
+				throw new FunctionalException(FunctionalException.Code.TARGET_NOT_FOUND, null, "id=" + id);
 			}
-		}
-		// Check for components from others VP bound to types from this VP
-		for (ViewPoint vpToCheck : pmanager.getRoot().getViewPoints()) {
-			if (!vpToCheck.equals(vp)) {
-				for (ComponentType ct : vpToCheck.getComponentTypes()) {
-					ComponentType boundCT = ct.getBoundType();
-					if (boundCT != null && compTypes.contains(boundCT)) {
-						throw new FunctionalException(FunctionalException.Code.VP_IN_USE, null, "Component type: "
-								+ vpToCheck.getName() + "/" + ct.getName() + ")");
+			// Check for existing views using this vp
+			EList<ComponentType> compTypes = vp.getComponentTypes();
+			for (View view : pmanager.getRoot().getViews()) {
+				// check for views of this type
+				if (view.getViewPoint().equals(vp)) {
+					throw new FunctionalException(FunctionalException.Code.VP_IN_USE, null, "View: " + view.getName());
+				}
+			}
+			// Check for components from others VP bound to types from this VP
+			for (ViewPoint vpToCheck : pmanager.getRoot().getViewPoints()) {
+				if (!vpToCheck.equals(vp)) {
+					for (ComponentType ct : vpToCheck.getComponentTypes()) {
+						ComponentType boundCT = ct.getBoundType();
+						if (boundCT != null && compTypes.contains(boundCT)) {
+							throw new FunctionalException(FunctionalException.Code.VP_IN_USE, null, "Component type: "
+									+ vpToCheck.getName() + "/" + ct.getName() + ")");
+						}
 					}
 				}
 			}
+			pmanager.getRoot().getViewPoints().remove(vp);
+		} catch (Exception ex) {
+			handleAnyException(ex);
 		}
-		pmanager.getRoot().getViewPoints().remove(vp);
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.m2ling.service.common.ServiceImpl#getType()
+	/**
+	 * {@inheritDoc}
 	 */
 	@Override
 	protected Type getManagedType() {

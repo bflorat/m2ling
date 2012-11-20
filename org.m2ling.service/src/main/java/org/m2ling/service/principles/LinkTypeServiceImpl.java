@@ -192,106 +192,128 @@ public class LinkTypeServiceImpl extends ServiceImpl implements LinkTypeService 
 		}
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public void updateLT(final Context context, final LinkTypeDTO dto) throws FunctionalException {
-		// Controls
-		checkDTO(dto, AccessType.UPDATE);
-		// Processing
-		LinkType lt = util.getLinkTypeByID(dto.getId());
-		lt.setName(dto.getName());
-		lt.setDescription(dto.getDescription());
-		lt.setComment(dto.getComment());
-		List<String> tags = lt.getTags();
-		tags.clear();
-		tags.addAll(dto.getTags());
-		lt.setLinkAccessType(LinkAccessType.valueOf(dto.getLinkAccessType()));
-		lt.setLinkTemporality(LinkTemporality.valueOf(dto.getLinkTemporality()));
-		List<ComponentType> sources = lt.getSourceTypes();
-		sources.clear();
-		for (HasNameAndIdDTO ctDTO : dto.getSourcesTypes()) {
-			ComponentType ct = util.getComponentTypeByID(ctDTO.getId());
-			sources.add(ct);
+		try {
+			// Controls
+			checkDTO(dto, AccessType.UPDATE);
+			// Processing
+			LinkType lt = util.getLinkTypeByID(dto.getId());
+			lt.setName(dto.getName());
+			lt.setDescription(dto.getDescription());
+			lt.setComment(dto.getComment());
+			List<String> tags = lt.getTags();
+			tags.clear();
+			tags.addAll(dto.getTags());
+			lt.setLinkAccessType(LinkAccessType.valueOf(dto.getLinkAccessType()));
+			lt.setLinkTemporality(LinkTemporality.valueOf(dto.getLinkTemporality()));
+			List<ComponentType> sources = lt.getSourceTypes();
+			sources.clear();
+			for (HasNameAndIdDTO ctDTO : dto.getSourcesTypes()) {
+				ComponentType ct = util.getComponentTypeByID(ctDTO.getId());
+				sources.add(ct);
+			}
+			List<ComponentType> destinations = lt.getDestinationTypes();
+			destinations.clear();
+			for (HasNameAndIdDTO ctDTO : dto.getDestinationsTypes()) {
+				ComponentType ct = util.getComponentTypeByID(ctDTO.getId());
+				destinations.add(ct);
+			}
+			lt.setStatus(dto.getStatus());
+			pmanager.commit();
+		} catch (Exception anyError) {
+			handleAnyException(anyError);
 		}
-		List<ComponentType> destinations = lt.getDestinationTypes();
-		destinations.clear();
-		for (HasNameAndIdDTO ctDTO : dto.getDestinationsTypes()) {
-			ComponentType ct = util.getComponentTypeByID(ctDTO.getId());
-			destinations.add(ct);
-		}
-		lt.setStatus(dto.getStatus());
-		pmanager.commit();
 	}
 
 	@Override
 	public void createLT(final Context context, final LinkTypeDTO dto) throws FunctionalException {
-		// Controls
-		checkDTO(dto, AccessType.CREATE);
-		// Processing
-		LinkType lt = fromDTO.newLinkType(dto);
-		// Add the item
-		ViewPoint vp = util.getViewPointByID(dto.getViewPoint().getId());
-		vp.getLinkTypes().add(lt);
-		pmanager.commit();
+		try {
+			// Controls
+			checkDTO(dto, AccessType.CREATE);
+			// Processing
+			LinkType lt = fromDTO.newLinkType(dto);
+			// Add the item
+			ViewPoint vp = util.getViewPointByID(dto.getViewPoint().getId());
+			vp.getLinkTypes().add(lt);
+			pmanager.commit();
+		} catch (Exception anyError) {
+			handleAnyException(anyError);
+		}
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public List<LinkTypeDTO> getAllLT(final Context context, final String vp) throws FunctionalException {
-		{// Controls
+		List<LinkTypeDTO> out = Lists.newArrayList();
+		try {
+			// Controls
 			if (util.getViewPointByID(vp) == null) {
 				throw new FunctionalException(Code.TARGET_NOT_FOUND, null, "Viewpoint=" + vp.toString());
 			}
-		}
-		Root root = pmanager.getRoot();
-		List<LinkTypeDTO> out = Lists.newArrayList();
-		for (ViewPoint checked : root.getViewPoints()) {
-			if (checked.getId().equals(vp)) {
-				List<LinkType> lts = checked.getLinkTypes();
-				for (LinkType lt : lts) {
-					LinkTypeDTO dto = toDTO.getLinkTypeDTO(lt);
-					out.add(dto);
+			Root root = pmanager.getRoot();
+			for (ViewPoint checked : root.getViewPoints()) {
+				if (checked.getId().equals(vp)) {
+					List<LinkType> lts = checked.getLinkTypes();
+					for (LinkType lt : lts) {
+						LinkTypeDTO dto = toDTO.getLinkTypeDTO(lt);
+						out.add(dto);
+					}
+					break;
 				}
-				break;
 			}
+			Collections.sort(out);
+		} catch (Exception anyError) {
+			handleAnyException(anyError);
 		}
-		Collections.sort(out);
 		return out;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public void deleteLT(final Context context, final LinkTypeDTO dto) throws FunctionalException {
-		{// Controls
+		try {
+			// Controls
 			checkDTO(dto, AccessType.DELETE);
+			LinkType type = util.getLinkTypeByID(dto.getId());
+			ViewPoint vp = (ViewPoint) type.eContainer();
+			vp.getLinkTypes().remove(type);
+			pmanager.commit();
+		} catch (Exception anyError) {
+			handleAnyException(anyError);
 		}
-		LinkType type = util.getLinkTypeByID(dto.getId());
-		ViewPoint vp = (ViewPoint) type.eContainer();
-		vp.getLinkTypes().remove(type);
-		pmanager.commit();
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.m2ling.service.principles.LinkTypeService#getLTByID(org.m2ling.common.soa.Context,
-	 * java.lang.String)
+	/**
+	 * {@inheritDoc}
 	 */
 	@Override
 	public LinkTypeDTO getLTByID(Context context, String id) throws FunctionalException {
-		{// Controls
+		LinkTypeDTO out = null;
+		try {
+			// Controls
 			if (id == null || Strings.isNullOrEmpty(id.trim())) {
 				throw new FunctionalException(FunctionalException.Code.NULL_ARGUMENT, null, "(id)");
 			}
+			LinkType lt = util.getLinkTypeByID(id);
+			if (lt != null) {
+				out = toDTO.getLinkTypeDTO(lt);
+			}
+		} catch (Exception anyError) {
+			handleAnyException(anyError);
 		}
-		LinkType lt = util.getLinkTypeByID(id);
-		if (lt == null) {
-			return null;
-		}
-		return toDTO.getLinkTypeDTO(lt);
+		return out;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.m2ling.service.common.ServiceImpl#getType()
+	/**
+	 * {@inheritDoc}
 	 */
 	@Override
 	protected Type getManagedType() {
