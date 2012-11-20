@@ -183,7 +183,7 @@ public class LinkTypeServiceImpl extends ServiceImpl implements LinkTypeService 
 			}
 		}
 		if (access == AccessType.CREATE || access == AccessType.UPDATE) {
-			checkDescription(dto.getDescription(), true);
+			checkDescriptionMandatory(dto.getDescription());
 			checkStatus(dto.getViewPoint(), dto.getStatus());
 			checkComment(dto.getComment());
 			checkTags(dto.getTags());

@@ -279,7 +279,7 @@ public class ComponentTypeServiceImpl extends ServiceImpl implements ComponentTy
 			}
 		}
 		if (access == AccessType.CREATE || access == AccessType.UPDATE) {
-			checkDescription(dto.getDescription(), false);
+			checkDescriptionNotMandatory(dto.getDescription());
 			checkComment(dto.getComment());
 			checkStatus(dto.getViewPoint(), dto.getStatus());
 			checkTags(dto.getTags());

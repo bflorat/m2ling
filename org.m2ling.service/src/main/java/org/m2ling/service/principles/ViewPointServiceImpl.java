@@ -76,7 +76,7 @@ public class ViewPointServiceImpl extends ServiceImpl implements ViewPointServic
 				}
 				index++;
 			}
-			checkDescription(dto.getDescription(), true);
+			checkDescriptionMandatory(dto.getDescription());
 			checkComment(dto.getComment());
 			checkTags(dto.getTags());
 		}

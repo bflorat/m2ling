@@ -51,7 +51,7 @@ public class ViewServiceImpl extends ServiceImpl implements ViewService {
 		checkIdAndName(dto, access, false);
 		checkVP(dto, access);
 		if (access == AccessType.CREATE || access == AccessType.UPDATE) {
-			checkDescription(dto.getDescription(), true);
+			checkDescriptionMandatory(dto.getDescription());
 			checkComment(dto.getComment());
 			checkStatus(dto.getViewpoint(), dto.getStatus());
 			checkTags(dto.getTags());

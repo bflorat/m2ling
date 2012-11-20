@@ -134,35 +134,35 @@ abstract public class ServiceImpl {
 	}
 
 	/**
-	 * Check description when null value is allowed
+	 * Check description when a value is not mandatory
 	 * 
 	 * @param description
 	 *           the provided description
 	 * @throws FunctionalException
 	 *            if the description has a wrong format
 	 */
-	protected void checkDescriptionNullAllowed(final String description) throws FunctionalException {
+	protected void checkDescriptionNotMandatory(final String description) throws FunctionalException {
 		if (description != null && description.length() > Consts.MAX_TEXT_SIZE) {
 			throw new FunctionalException(FunctionalException.Code.SIZE_EXCEEDED, null, "(description)");
 		}
 	}
 
 	/**
-	 * Check description when null is forbidden
+	 * Check description when a non null/void value is mandatory
 	 * 
 	 * @param description
 	 *           the provided description
 	 * @throws FunctionalException
 	 *            if the description has a wrong format
 	 */
-	protected void checkDescriptionNullForbidden(final String description) throws FunctionalException {
+	protected void checkDescriptionMandatory(final String description) throws FunctionalException {
 		if (description == null) {
 			throw new FunctionalException(FunctionalException.Code.NULL_ARGUMENT, null, "(description)");
 		}
 		if ("".equals(description.trim())) {
 			throw new FunctionalException(FunctionalException.Code.VOID_ARGUMENT, null, "(description)");
 		}
-		checkDescriptionNullAllowed(description);
+		checkDescriptionNotMandatory(description);
 	}
 
 	/**

@@ -64,7 +64,7 @@ public class RuleServiceImpl extends ServiceImpl implements RuleService {
 		}
 		if (access == AccessType.CREATE || access == AccessType.UPDATE) {
 			checkStatus(dto.getViewPointId(), dto.getStatus());
-			checkDescription(dto.getDescription(), true);
+			checkDescriptionMandatory(dto.getDescription());
 			checkRationale(dto);
 			checkExceptions(dto);
 			checkComment(dto.getComment());

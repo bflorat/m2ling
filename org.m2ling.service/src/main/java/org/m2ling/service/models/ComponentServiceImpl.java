@@ -276,7 +276,7 @@ public class ComponentServiceImpl extends ServiceImpl implements ComponentServic
 			}
 		}
 		if (access == AccessType.CREATE || access == AccessType.UPDATE) {
-			checkDescription(dto.getDescription(), false);
+			checkDescriptionNotMandatory(dto.getDescription());
 			checkComment(dto.getComment());
 			checkStatus(view.getViewPoint().getId(), dto.getStatus());
 			checkTags(dto.getTags());
