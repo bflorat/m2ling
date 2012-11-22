@@ -68,7 +68,8 @@ public class ComponentServiceImpl extends ServiceImpl implements ComponentServic
 		// none component binding against this component ?
 		for (View checkedView : pmanager.getRoot().getViews()) {
 			if (checkedView.equals(viewOfCompToDelete)) {
-				// Local binding is not forbidden
+				// Local binding is not supported so we don't need to 
+				// check binding from the same view
 				continue;
 			}
 			for (Component checkedComp : checkedView.getComponents()) {
@@ -212,7 +213,10 @@ public class ComponentServiceImpl extends ServiceImpl implements ComponentServic
 	}
 
 	private void checkBoundComponent(final ComponentDTO dto, ComponentType ct) throws FunctionalException {
-		if (dto.getBoundComponent() != null && dto.getBoundComponent().getId() != null) {
+		if (ct.getBoundType() != null && dto.getBoundComponent() == null) {
+			throw new FunctionalException(FunctionalException.Code.COMP_MISSING_BINDING, null, "excpected bound type="
+					+ ct.getBoundType().getName());
+		} else if (dto.getBoundComponent() != null && dto.getBoundComponent().getId() != null) {
 			// Check if the bound component exists
 			Component bound = (Component) util.getComponentByID(dto.getBoundComponent().getId());
 			if (bound == null) {
@@ -395,6 +399,7 @@ public class ComponentServiceImpl extends ServiceImpl implements ComponentServic
 	public void deleteComponent(final Context context, final ComponentDTO dto) throws FunctionalException {
 		try {
 			// Controls
+			checkID(dto, AccessType.DELETE);
 			checkBeforeDeletion(dto);
 			Component comp = util.getComponentByID(dto.getId());
 			View vp = (View) comp.eContainer();

@@ -331,8 +331,6 @@ public class CoreUtil {
 				return v;
 			} else if (item instanceof LinkInstance && v.getLinkInstances().contains(item)) {
 				return v;
-			} else {
-				throw new TechnicalException(Code.NOT_YET_IMPLEMENTED, null, item.toString());
 			}
 		}
 		return null;

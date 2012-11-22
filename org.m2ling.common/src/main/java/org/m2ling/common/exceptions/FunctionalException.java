@@ -78,7 +78,8 @@ public class FunctionalException extends Exception {
 		COMP_REF_IN_USE,
 		COMP_EXISTING_INSTANCE,
 		COMP_ILLEGAL_BINDING,
-		COMP_EXISTING_BINDING
+		COMP_EXISTING_BINDING,
+		COMP_MISSING_BINDING,		
 	}
 
 	/**

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:concordion="http://www.concordion.org/2007/concordion">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>Component deletion</title>
+</head>
+<body>
+	<H1>Component deletion</H1>
+	<p class='rule'>#COMP20 : A component can't be removed while at least a single component instance of this type exists in the view.</p>
+	<div class='example'>
+		In this case, the <span concordion:execute="#resu=testDeleteExistingCI()"> 
+		service</span> should : <b concordion:assertEquals="#resu">FAIL with code COMP_EXISTING_INSTANCE</b> 
+	</div>
+	<div class='example'>
+		If the component has no associated component instance of its type, the deletion<span concordion:execute="#resu=testDeleteNoExistingCI()"> service</span> 
+		should : <b concordion:assertEquals="#resu">PASS</b> 
+	</div>
+		
+	<p class='rule'>#COMP21 : A component can't be removed while at least a single component is bound to it.</p>
+	<div class='example'>
+		In this case, the <span concordion:execute="#resu=testDeleteExistingBinding()">
+		 service</span> should : <b concordion:assertEquals="#resu">FAIL with code COMP_EXISTING_BINDING</b> 
+	</div>
+</body>
+</html>

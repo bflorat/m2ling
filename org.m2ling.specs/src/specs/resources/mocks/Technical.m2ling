@@ -33,6 +33,7 @@
     <components id="id_comp_vp1_v1_comp1" name="comp_vp1_v1_comp1" comment="" status="" type="id_ct_vp1_ct1"/>
     <components id="id_comp_vp1_v1_comp2" name="comp_vp1_v1_comp2" comment="" description="" type="id_ct_vp1_ct2"/>
     <components id="id_comp_vp1_v1_comp3" name="comp_vp1_v1_comp3" status="" type="id_ct_vp1_ct2"/>
+    <components id="id_comp_vp1_v1_comp4" name="comp_vp1_v1_comp4" comment="" description="" status="" type="id_ct_vp1_ct2"/>
     <links id="id_link_vp1_v1_link1" name="link_vp1_v1_link1" description="" type="id_lt_vp1_link_type_1" sources="id_comp_vp1_v1_comp1 id_comp_vp1_v1_comp2" destinations="id_comp_vp1_v1_comp1 id_comp_vp1_v1_comp2"/>
     <componentInstances id="id_ci_vp1_v1_comp3_ci1" name="ci_vp1_v1_comp3_ci1" comment="" description="" component="id_comp_vp1_v1_comp3" boundComponentInstance="id_ci_vp1_v1_comp3_ci1"/>
   </views>
@@ -40,6 +41,8 @@
     <components id="id_comp_vp2_v2_comp1" name="comp_vp2_v2_comp1" comment="" description="" type="id_ct_vp1_ct2"/>
     <components id="id_comp_vp2_v2_comp2" name="comp_vp2_v2_comp2" comment="" description="" type="id_ct_vp2_comp_type_2"/>
     <components id="id_comp_vp2_v2_comp3" name="comp_vp2_v2_comp3" comment="" status="" type="id_ct_vp2_comp_type_2" boundComponent="id_comp_vp1_v1_comp3"/>
+    <components id="id_comp_vp2_v2_comp4" name="comp_vp2_v2_comp4" comment="" status="" type="id_ct_vp2_comp_type_2" boundComponent="id_comp_vp1_v1_comp3"/>
+    <components id="id_comp_vp2_v2_comp5" name="comp_vp2_v2_comp5" comment="" description="" status="" type="id_ct_vp2_comp_type_2" boundComponent="id_comp_vp1_v1_comp4"/>
     <componentInstances id="id_ci_vp2_v2_comp3_ci1" name="ci_vp2_v2_comp3_ci1" comment="" component="id_comp_vp2_v2_comp3"/>
   </views>
 </m2ling_domain:Root>

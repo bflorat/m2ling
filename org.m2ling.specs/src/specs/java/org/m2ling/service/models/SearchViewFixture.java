@@ -27,7 +27,7 @@ public class SearchViewFixture extends AbstractViewFixture {
 			return "FAIL with code " + fe.getCode().name();
 		}
 		if (dto == null) {
-			return "unkwown vp";
+			return "unkwown view";
 		}
 		return dto.getName();
 	}

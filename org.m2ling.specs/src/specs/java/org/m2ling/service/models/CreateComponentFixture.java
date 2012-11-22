@@ -38,6 +38,26 @@ public class CreateComponentFixture extends AbstractComponentFixture {
 		}
 	}
 
+	public String testWrongTargetType() throws FunctionalException {
+		return checkFormat("COMP1/wrong target", "id_view_vp_logical_Logical_BikesOnline", "id_ct_logical_servicecontainer", "id_foo",
+				"Weblogic", "desc", "comment", "", "null", "RUNS:id_comp_view_Logical_BikesOnline_AdminGUI", "null");
+	}
+
+	public String testWrongReferenceType() throws FunctionalException {
+		return checkFormat("COMP1/wrong type", "id_view_vp_logical_Logical_BikesOnline", "id_ct_logical_servicecontainer", "id_foo",
+				"Weblogic", "desc", "comment", "", "null", "DEPENDS_ON:id_comp_view_Logical_BikesOnline_AdminGUI", "null");
+	}
+
+	public String testNullBinding() throws FunctionalException {
+		return checkFormat("COMP3", "id_view_vp_logical_Logical_BikesOnline", "id_ct_logical_servicecontainer", "id_foo",
+				"Weblogic", "desc", "comment", "", "null", "null", "null");
+	}
+	
+	public String testWrongBinding() throws FunctionalException {
+		return checkFormat("COMP4", "id_view_vp_logical_Logical_BikesOnline", "id_ct_logical_servicecontainer", "id_foo",
+				"Weblogic", "desc", "comment", "", "id_comp_tech_solaris", "null", "null");
+	}
+
 	/*
 	 * Direct DTO control check (without using presentation layer)
 	 */
@@ -57,7 +77,9 @@ public class CreateComponentFixture extends AbstractComponentFixture {
 			builder.description(UUT.nul(desc));
 			builder.status(UUT.nul(status));
 			setDTOReferences(builder, UUT.nul(references));
-			builder.boundType(new HasNameAndIdDTO.Builder(boundID, "").build());
+			if (UUT.nul(boundID) != null) {
+				builder.boundType(new HasNameAndIdDTO.Builder(boundID, "").build());
+			}
 			builder.type(new HasNameAndIdDTO.Builder(ctID, "").build());
 			service.checkDTO(builder.build(), UUT.nul(vID), AccessType.CREATE);
 			return "PASS";

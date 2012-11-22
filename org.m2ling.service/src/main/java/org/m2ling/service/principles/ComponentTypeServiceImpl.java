@@ -385,6 +385,7 @@ public class ComponentTypeServiceImpl extends ServiceImpl implements ComponentTy
 	public void deleteCT(final Context context, final ComponentTypeDTO dto) throws FunctionalException {
 		try {
 			// Controls
+			checkID(dto, AccessType.DELETE);
 			checkBeforeDeletion(dto, AccessType.DELETE);
 			ComponentType type = util.getComponentTypeByID(dto.getId());
 			ViewPoint vp = (ViewPoint) type.eContainer();
