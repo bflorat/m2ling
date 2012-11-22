@@ -153,7 +153,9 @@ public class LinkTypeServiceImpl extends ServiceImpl implements LinkTypeService 
 	 */
 	void checkDTO(final LinkTypeDTO dto, AccessType access) throws FunctionalException {
 		LinkType target = null;
-		checkIdAndName(dto, access, false);
+		checkNullDTO(dto);
+		checkID(dto, access);
+		checkNameWhenRequired(dto, access);
 		// item existence (except for creation access)
 		if (access != AccessType.CREATE) {
 			target = util.getLinkTypeByID(dto.getId());
@@ -161,28 +163,20 @@ public class LinkTypeServiceImpl extends ServiceImpl implements LinkTypeService 
 				throw new FunctionalException(FunctionalException.Code.TARGET_NOT_FOUND, null, dto.toString());
 			}
 		}
-		// Check associated viewpoint existence
-		if (dto.getViewPoint() == null || dto.getViewPoint().getId() == null) {
-			throw new FunctionalException(FunctionalException.Code.NULL_ARGUMENT, null, "(viewpoint)");
-		}
-		ViewPoint vp = util.getViewPointByID(dto.getViewPoint().getId());
-		if (vp == null) {
-			throw new FunctionalException(FunctionalException.Code.TARGET_NOT_FOUND, null, "viewpoint="
-					+ dto.getViewPoint().getId());
-		}
 		// check before deletion
 		if (access == AccessType.DELETE) {
 			checkBeforeDeletion(dto, access);
 		}
-		if (access == AccessType.CREATE) {
-			// Check for existing item with the same id
-			for (LinkType item : vp.getLinkTypes()) {
-				if (item.getId().equals(dto.getId())) {
-					throw new FunctionalException(FunctionalException.Code.DUPLICATES, null, "id=" + dto.getId());
-				}
-			}
-		}
 		if (access == AccessType.CREATE || access == AccessType.UPDATE) {
+			// Check associated viewpoint existence
+			if (dto.getViewPoint() == null || dto.getViewPoint().getId() == null) {
+				throw new FunctionalException(FunctionalException.Code.NULL_ARGUMENT, null, "(viewpoint)");
+			}
+			ViewPoint vp = util.getViewPointByID(dto.getViewPoint().getId());
+			if (vp == null) {
+				throw new FunctionalException(FunctionalException.Code.TARGET_NOT_FOUND, null, "viewpoint="
+						+ dto.getViewPoint().getId());
+			}
 			checkDescriptionMandatory(dto.getDescription());
 			checkStatus(dto.getViewPoint(), dto.getStatus());
 			checkComment(dto.getComment());

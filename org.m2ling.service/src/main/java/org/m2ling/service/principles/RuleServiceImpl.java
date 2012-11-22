@@ -56,13 +56,15 @@ public class RuleServiceImpl extends ServiceImpl implements RuleService {
 	 * @throws FunctionalException
 	 */
 	void checkDTO(final RuleDTO dto, AccessType access) throws FunctionalException {
-		checkIdAndName(dto, access, false);
-		ViewPoint vp = util.getViewPointByID(dto.getViewPointId());
-		if (vp == null) {
-			throw new FunctionalException(FunctionalException.Code.TARGET_NOT_FOUND, null, "viewpoint="
-					+ dto.getViewPointId());
-		}
+		checkNullDTO(dto);
+		checkID(dto, access);
+		checkNameWhenRequired(dto, access);
 		if (access == AccessType.CREATE || access == AccessType.UPDATE) {
+			ViewPoint vp = util.getViewPointByID(dto.getViewPointId());
+			if (vp == null) {
+				throw new FunctionalException(FunctionalException.Code.TARGET_NOT_FOUND, null, "viewpoint="
+						+ dto.getViewPointId());
+			}
 			checkStatus(dto.getViewPointId(), dto.getStatus());
 			checkDescriptionMandatory(dto.getDescription());
 			checkRationale(dto);

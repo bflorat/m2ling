@@ -243,7 +243,13 @@ public class ComponentServiceImpl extends ServiceImpl implements ComponentServic
 	 */
 	void checkDTO(final ComponentDTO dto, final String vID, final AccessType access) throws FunctionalException {
 		Component target = null;
-		checkIdAndName(dto, access, true);
+		checkNullDTO(dto);
+		checkID(dto, access);
+		if (dto.getBoundComponent() == null) {
+			checkNameWhenRequired(dto, access);
+		} else {
+			checkNameWhenNotRequired(dto, access);
+		}
 		// item existence (except for creation access)
 		if (access != AccessType.CREATE) {
 			target = util.getComponentByID(dto.getId());
@@ -251,32 +257,23 @@ public class ComponentServiceImpl extends ServiceImpl implements ComponentServic
 				throw new FunctionalException(FunctionalException.Code.TARGET_NOT_FOUND, null, dto.toString());
 			}
 		}
-		// Check associated view existence
-		View view = null;
-		if (access == AccessType.CREATE) {
-			if (vID == null) {
-				throw new FunctionalException(FunctionalException.Code.NULL_ARGUMENT, null, "(view)");
-			}
-			if ("".equals(vID.trim())) {
-				throw new FunctionalException(FunctionalException.Code.VOID_ARGUMENT, null, "(view)");
-			}
-			view = util.getViewByID(vID);
-		} else {// vID is ignored for access != create
-			view = util.getViewsByItem(target);
-		}
-		if (view == null) {
-			throw new FunctionalException(FunctionalException.Code.TARGET_NOT_FOUND, null, "(view)");
-		}
-		if (access == AccessType.CREATE) {
-			// Check for existing item with the same id
-			for (Component item : view.getComponents()) {
-				if (item.getId().equals(dto.getId())) {
-					throw new FunctionalException(FunctionalException.Code.DUPLICATES, null, "id=" + dto.getId());
-				}
-			}
-		}
 		if (access == AccessType.CREATE || access == AccessType.UPDATE) {
-			checkDescriptionNotMandatory(dto.getDescription());
+			// Check associated view existence
+			View view = null;
+			if (access == AccessType.CREATE) {
+				if (vID == null) {
+					throw new FunctionalException(FunctionalException.Code.NULL_ARGUMENT, null, "(view)");
+				}
+				if ("".equals(vID.trim())) {
+					throw new FunctionalException(FunctionalException.Code.VOID_ARGUMENT, null, "(view)");
+				}
+				view = util.getViewByID(vID);
+			} else {// vID is ignored for access != create
+				view = util.getViewsByItem(target);
+			}
+			if (view == null) {
+				throw new FunctionalException(FunctionalException.Code.TARGET_NOT_FOUND, null, "(view)");
+			}
 			checkComment(dto.getComment());
 			checkStatus(view.getViewPoint().getId(), dto.getStatus());
 			checkTags(dto.getTags());
@@ -289,6 +286,12 @@ public class ComponentServiceImpl extends ServiceImpl implements ComponentServic
 			checkReferences(dto, access, ct);
 			// Bound component
 			checkBoundComponent(dto, ct);
+			// Description
+			if (dto.getBoundComponent() == null) {
+				checkDescriptionMandatory(dto.getDescription());
+			} else {
+				checkDescriptionNotMandatory(dto.getDescription());
+			}
 		}
 	}
 

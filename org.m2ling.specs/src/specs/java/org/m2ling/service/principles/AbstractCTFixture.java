@@ -9,6 +9,7 @@ import java.util.StringTokenizer;
 import org.m2ling.common.configuration.Conf;
 import org.m2ling.common.dto.core.AccessType;
 import org.m2ling.common.exceptions.FunctionalException;
+import org.m2ling.common.utils.UUT;
 import org.m2ling.persistence.PersistenceManagerXMIImpl;
 import org.m2ling.presentation.principles.model.ComponentTypeBean;
 import org.m2ling.presentation.principles.model.HasNameAndIDBean;
@@ -75,7 +76,8 @@ public class AbstractCTFixture extends M2lingFixture {
 				List<HasNameAndIDBean> targets = new ArrayList<HasNameAndIDBean>();
 				while (st3.hasMoreTokens()) {
 					HasNameAndIDBean hsibean = new HasNameAndIDBean();
-					hsibean.setId(st3.nextToken());
+					String ctID = st3.nextToken();
+					hsibean.setId(UUT.nul(ctID));
 					// don't need to set the actual target name in the fixture
 					targets.add(hsibean);
 				}

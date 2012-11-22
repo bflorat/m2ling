@@ -253,7 +253,13 @@ public class ComponentTypeServiceImpl extends ServiceImpl implements ComponentTy
 	 */
 	void checkDTO(final ComponentTypeDTO dto, AccessType access) throws FunctionalException {
 		ComponentType target = null;
-		checkIdAndName(dto, access, true);
+		checkNullDTO(dto);
+		checkID(dto, access);
+		if (dto.getBoundType() == null) {
+			checkNameWhenRequired(dto, access);
+		} else {
+			checkNameWhenNotRequired(dto, access);
+		}
 		// item existence (except for creation access)
 		if (access != AccessType.CREATE) {
 			target = util.getComponentTypeByID(dto.getId());
@@ -261,25 +267,16 @@ public class ComponentTypeServiceImpl extends ServiceImpl implements ComponentTy
 				throw new FunctionalException(FunctionalException.Code.TARGET_NOT_FOUND, null, dto.toString());
 			}
 		}
-		// Check associated viewpoint existence
-		if (dto.getViewPoint() == null || dto.getViewPoint().getId() == null) {
-			throw new FunctionalException(FunctionalException.Code.NULL_ARGUMENT, null, "(viewpoint)");
-		}
-		ViewPoint vp = util.getViewPointByID(dto.getViewPoint().getId());
-		if (vp == null) {
-			throw new FunctionalException(FunctionalException.Code.TARGET_NOT_FOUND, null, "viewpoint="
-					+ dto.getViewPoint().getId());
-		}
-		if (access == AccessType.CREATE) {
-			// Check for existing item with the same id
-			for (ComponentType item : vp.getComponentTypes()) {
-				if (item.getId().equals(dto.getId())) {
-					throw new FunctionalException(FunctionalException.Code.DUPLICATES, null, "id=" + dto.getId());
-				}
-			}
-		}
 		if (access == AccessType.CREATE || access == AccessType.UPDATE) {
-			checkDescriptionNotMandatory(dto.getDescription());
+			// Check associated viewpoint existence
+			if (dto.getViewPoint() == null || dto.getViewPoint().getId() == null) {
+				throw new FunctionalException(FunctionalException.Code.NULL_ARGUMENT, null, "(viewpoint)");
+			}
+			ViewPoint vp = util.getViewPointByID(dto.getViewPoint().getId());
+			if (vp == null) {
+				throw new FunctionalException(FunctionalException.Code.TARGET_NOT_FOUND, null, "viewpoint="
+						+ dto.getViewPoint().getId());
+			}
 			checkComment(dto.getComment());
 			checkStatus(dto.getViewPoint(), dto.getStatus());
 			checkTags(dto.getTags());
@@ -290,6 +287,12 @@ public class ComponentTypeServiceImpl extends ServiceImpl implements ComponentTy
 			checkBoundType(dto, access);
 			// Enumeration, the list should contain a list of component ids from bound-type type
 			checkEnumeration(dto, access);
+			// Description
+			if (dto.getBoundType() == null) {
+				checkDescriptionMandatory(dto.getDescription());
+			} else {
+				checkDescriptionNotMandatory(dto.getDescription());
+			}
 		}
 	}
 

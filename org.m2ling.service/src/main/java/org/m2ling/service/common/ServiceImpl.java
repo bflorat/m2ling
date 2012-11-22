@@ -13,7 +13,6 @@ import org.m2ling.common.dto.core.AccessType;
 import org.m2ling.common.dto.core.HasNameAndIdDTO;
 import org.m2ling.common.exceptions.FunctionalException;
 import org.m2ling.common.exceptions.TechnicalException;
-import org.m2ling.common.exceptions.FunctionalException.Code;
 import org.m2ling.common.utils.Consts;
 import org.m2ling.common.utils.Utils;
 import org.m2ling.domain.core.Type;
@@ -78,12 +77,44 @@ abstract public class ServiceImpl {
 		this.logger = logger;
 	}
 
-	protected void checkIdAndName(final AbstractCommonDTO dto, AccessType access, boolean nullNameAllowed)
-			throws FunctionalException {
-		// Nullity
+	protected void checkNullDTO(final AbstractCommonDTO dto) throws FunctionalException {
 		if (dto == null) {
-			throw new FunctionalException(Code.NULL_ARGUMENT, null, null);
+			throw new FunctionalException(FunctionalException.Code.NULL_ARGUMENT, null, "(name)");
 		}
+	}
+
+	protected void checkNameWhenRequired(final AbstractCommonDTO dto, AccessType access) throws FunctionalException {
+		if (access == AccessType.CREATE || access == AccessType.UPDATE) {
+			if (dto.getName() == null) {
+				throw new FunctionalException(FunctionalException.Code.NULL_ARGUMENT, null, "(name)");
+			}
+			if (dto.getName() != null && "".equals(dto.getName().trim())) {
+				throw new FunctionalException(FunctionalException.Code.VOID_ARGUMENT, null, "(name)");
+			}
+			checkNameWhenNotRequired(dto, access);
+		}
+		if (access == AccessType.DELETE) {
+			if (util.getItemByTypeAndID(getManagedType(), dto.getId()) == null) {
+				throw new FunctionalException(FunctionalException.Code.TARGET_NOT_FOUND, null, "id=" + dto.getId());
+			}
+		}
+	}
+
+	protected void checkNameWhenNotRequired(final AbstractCommonDTO dto, AccessType access) throws FunctionalException {
+		if (access == AccessType.CREATE || access == AccessType.UPDATE) {
+			if (dto.getName() != null && dto.getName().length() > Consts.MAX_LABEL_SIZE) {
+				throw new FunctionalException(FunctionalException.Code.SIZE_EXCEEDED, null, "(name)");
+			}
+		}
+	}
+
+	/**
+	 * Check id format and detect dup items
+	 * 
+	 * @param dto
+	 * @throws FunctionalException
+	 */
+	protected void checkID(final AbstractCommonDTO dto, AccessType access) throws FunctionalException {
 		// Check id
 		if (dto.getId() == null) {
 			throw new FunctionalException(FunctionalException.Code.NULL_ARGUMENT, null, "(id)");
@@ -91,20 +122,8 @@ abstract public class ServiceImpl {
 		if (Strings.isNullOrEmpty(dto.getId().trim())) {
 			throw new FunctionalException(FunctionalException.Code.VOID_ARGUMENT, null, "(id)");
 		}
-		if (dto.getId().length() > 40) {
+		if (dto.getId().length() > 100) {
 			throw new FunctionalException(FunctionalException.Code.SIZE_EXCEEDED, null, "(id)");
-		}
-		// Check name
-		if (access == AccessType.CREATE || access == AccessType.UPDATE) {
-			if (!nullNameAllowed && dto.getName() == null) {
-				throw new FunctionalException(FunctionalException.Code.NULL_ARGUMENT, null, "(name)");
-			}
-			if (dto.getName() != null && "".equals(dto.getName().trim())) {
-				throw new FunctionalException(FunctionalException.Code.VOID_ARGUMENT, null, "(name)");
-			}
-			if (dto.getName() != null && dto.getName().length() > Consts.MAX_LABEL_SIZE) {
-				throw new FunctionalException(FunctionalException.Code.SIZE_EXCEEDED, null, "(name)");
-			}
 		}
 		if (access == AccessType.CREATE) {
 			// Check for existing item with the same id

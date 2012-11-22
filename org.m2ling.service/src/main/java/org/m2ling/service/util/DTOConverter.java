@@ -128,7 +128,7 @@ public class DTOConverter {
 			// If name is void or null, use bound type one
 			String name = ct.getName();
 			ComponentType boundType = ct.getBoundType();
-			if (Strings.isNullOrEmpty(ct.getName()) && boundType != null) {
+			if ((name == null || "".equals(name.trim())) && boundType != null) {
 				name = boundType.getName();
 			}
 			HasNameAndIdDTO hniVP = new HasNameAndIdDTO.Builder(vp.getId(), vp.getName()).build();
@@ -178,7 +178,7 @@ public class DTOConverter {
 			// If name is void or null, use bound comp one
 			String name = comp.getName();
 			Component boundComp = comp.getBoundComponent();
-			if (Strings.isNullOrEmpty(comp.getName()) && boundComp != null) {
+			if ((name == null || "".equals(name.trim())) && boundComp != null) {
 				name = boundComp.getName();
 			}
 			ComponentDTO.Builder builder = new ComponentDTO.Builder(comp.getId(), name);
@@ -192,12 +192,12 @@ public class DTOConverter {
 			if (Strings.isNullOrEmpty(comp.getComment()) && boundComp != null) {
 				builder.comment(boundComp.getComment());
 			} else {
-				builder.comment(boundComp.getComment());
+				builder.comment(comp.getComment());
 			}
-			if (Strings.isNullOrEmpty(boundComp.getDescription()) && boundComp != null) {
+			if (Strings.isNullOrEmpty(comp.getDescription()) && boundComp != null) {
 				builder.description(boundComp.getDescription());
 			} else {
-				builder.description(boundComp.getDescription());
+				builder.description(comp.getDescription());
 			}
 			for (Reference ref : comp.getReferences()) {
 				ReferenceDTO refDTO = getReferenceDTO(ref);
@@ -229,7 +229,7 @@ public class DTOConverter {
 					builder.addTag(tag);
 				}
 			}
-			if (Strings.isNullOrEmpty(instance.getComment()) && boundInstance != null) {
+			if ((name == null || "".equals(name.trim())) && boundInstance != null) {
 				builder.comment(boundInstance.getComment());
 			} else {
 				builder.comment(boundInstance.getComment());
@@ -554,7 +554,7 @@ public class DTOConverter {
 			link.setTimeoutMillis(dto.getTimeoutMillis());
 			return link;
 		}
-		
+
 		/**
 		 * Return a new link instance given a DTO.
 		 * 

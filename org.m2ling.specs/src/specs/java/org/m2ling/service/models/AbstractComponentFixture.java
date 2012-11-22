@@ -8,7 +8,11 @@ import java.util.StringTokenizer;
 
 import org.m2ling.common.configuration.Conf;
 import org.m2ling.common.dto.core.AccessType;
+import org.m2ling.common.dto.core.ComponentDTO;
+import org.m2ling.common.dto.core.HasNameAndIdDTO;
+import org.m2ling.common.dto.core.ReferenceDTO;
 import org.m2ling.common.exceptions.FunctionalException;
+import org.m2ling.common.utils.UUT;
 import org.m2ling.persistence.PersistenceManagerXMIImpl;
 import org.m2ling.presentation.principles.model.HasNameAndIDBean;
 import org.m2ling.presentation.principles.model.ReferenceBean;
@@ -58,7 +62,7 @@ public class AbstractComponentFixture extends M2lingFixture {
 		}
 	}
 
-	protected void setReferences(ComponentBean bean, String references) {
+	protected void setBeanReferences(ComponentBean bean, String references) {
 		List<ReferenceBean> refs = new ArrayList<ReferenceBean>();
 		if (Strings.isNullOrEmpty(references)) {
 			bean.setReferences(refs);
@@ -68,20 +72,59 @@ public class AbstractComponentFixture extends M2lingFixture {
 				String ref = st.nextToken();
 				ReferenceBean refbean = new ReferenceBean();
 				StringTokenizer st2 = new StringTokenizer(ref, ":");
-				refbean.setType(st2.nextToken());
-				String targs = st2.nextToken();
-				StringTokenizer st3 = new StringTokenizer(targs, ",");
-				List<HasNameAndIDBean> targets = new ArrayList<HasNameAndIDBean>();
-				while (st3.hasMoreTokens()) {
-					HasNameAndIDBean hsibean = new HasNameAndIDBean();
-					hsibean.setId(st3.nextToken());
-					// don't need to set the actual target name in the fixture
-					targets.add(hsibean);
+				if (st2.hasMoreTokens()) {
+					refbean.setType(UUT.nul(st2.nextToken()));
+				} else {
+					refbean.setType(null);
+					continue;
 				}
-				refbean.setTargets(targets);
+				if (st2.hasMoreTokens()) {
+					String targs = st2.nextToken();
+					StringTokenizer st3 = new StringTokenizer(targs, ",");
+					List<HasNameAndIDBean> targets = new ArrayList<HasNameAndIDBean>();
+					while (st3.hasMoreTokens()) {
+						HasNameAndIDBean hsibean = new HasNameAndIDBean();
+						hsibean.setId(UUT.nul(st3.nextToken()));
+						// don't need to set the actual target name in the fixture
+						targets.add(hsibean);
+					}
+					refbean.setTargets(targets);
+				} else {
+					refbean.setTargets(null);
+				}
 				refs.add(refbean);
 			}
 			bean.setReferences(refs);
+		}
+	}
+
+	protected void setDTOReferences(ComponentDTO.Builder builder, String references) {
+		if (Strings.isNullOrEmpty(references)) {
+			return;
+		} else {
+			StringTokenizer st = new StringTokenizer(references, ";");
+			while (st.hasMoreTokens()) {
+				String ref = UUT.nul(st.nextToken());
+				if (ref == null) {
+					builder.addReference(new ReferenceDTO.Builder(null).build());
+				} else {
+					StringTokenizer st2 = new StringTokenizer(ref, ":");
+					ReferenceDTO.Builder refBuilder = new ReferenceDTO.Builder(UUT.nul(st2.nextToken()));
+					if (st2.hasMoreTokens()) {
+						String targs = UUT.nul(st2.nextToken());
+						if (targs == null) {
+							refBuilder.addTarget(null);
+						} else {
+							StringTokenizer st3 = new StringTokenizer(targs, ",");
+							while (st3.hasMoreTokens()) {
+								HasNameAndIdDTO targetDTO = new HasNameAndIdDTO.Builder(UUT.nul(st3.nextToken()), "").build();
+								refBuilder.addTarget(targetDTO);
+							}
+						}
+					}
+					builder.addReference(refBuilder.build());
+				}
+			}
 		}
 	}
 }

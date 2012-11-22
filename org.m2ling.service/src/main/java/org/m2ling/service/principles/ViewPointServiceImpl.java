@@ -49,7 +49,9 @@ public class ViewPointServiceImpl extends ServiceImpl implements ViewPointServic
 
 	void checkDTO(final ViewPointDTO dto, final AccessType access) throws FunctionalException {
 		ViewPoint vp = null;
-		checkIdAndName(dto, access, false);
+		checkNullDTO(dto);
+		checkID(dto, access);
+		checkNameWhenRequired(dto, access);
 		// TODO : check status (status of the VP itself, not status literals)
 		if (access != AccessType.CREATE) {
 			// VP existence

@@ -48,7 +48,9 @@ public class ViewServiceImpl extends ServiceImpl implements ViewService {
 	}
 
 	void checkDTO(final ViewDTO dto, final AccessType access) throws FunctionalException {
-		checkIdAndName(dto, access, false);
+		checkNullDTO(dto);
+		checkID(dto,access);
+		checkNameWhenRequired(dto, access);
 		checkVP(dto, access);
 		if (access == AccessType.CREATE || access == AccessType.UPDATE) {
 			checkDescriptionMandatory(dto.getDescription());

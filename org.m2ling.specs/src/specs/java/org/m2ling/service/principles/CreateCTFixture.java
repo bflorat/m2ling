@@ -29,12 +29,28 @@ public class CreateCTFixture extends AbstractCTFixture {
 
 	public String createWithIf(String ifactor) throws FunctionalException {
 		return createAndGetCT("true", "CT1", "id_vp_logical", "id_new_ct_logical_servicecontainer", "ServicesContainer2",
-				"null", "", "", ifactor, "null", "", "", "APPLICABLE");
+				"desc", "", "", ifactor, "null", "", "", "APPLICABLE");
 	}
 
 	public String testExternalRefs() throws FunctionalException {
 		return createAndGetCT("true", "CT1", "id_vp_logical", "id_new_ct_logical_servicecontainer", "ServicesContainer2",
 				"null", "", "", "1", "null", "RUNS:id_ct_app_application", "", "APPLICABLE");
+	}
+
+	public String testNullRef() throws FunctionalException {
+		HasNameAndIdDTO vp = new HasNameAndIdDTO.Builder("id_vp_logical", "").build();
+		ComponentTypeDTO.Builder builder = new ComponentTypeDTO.Builder(vp, "id_foo", "ServicesContainer2");
+		HasNameAndIdDTO nullTarget = new HasNameAndIdDTO.Builder(null, "").build();
+		ReferenceDTO ref = new ReferenceDTO.Builder(ReferenceType.RUNS.name()).addTarget(nullTarget).build();
+		builder.addReference(ref);
+		try {
+			service.createCT(null, builder.build());
+			return "PASS";
+		} catch (FunctionalException ex) {
+			return "FAIL with code " + ex.getCode().name();
+		} catch (TechnicalException ex) {
+			return "FAIL with code " + ex.getCode().name();
+		}
 	}
 
 	public String testNoBindingType() throws FunctionalException {
@@ -165,8 +181,10 @@ public class CreateCTFixture extends AbstractCTFixture {
 			HasNameAndIDBean vp = new HasNameAndIDBean();
 			vp.setId(vpID);
 			bean.setViewPoint(vp);
-			HasNameAndIDBean boundType = new HasNameAndIDBean();
-			boundType.setId(boundTypeID);
+			HasNameAndIDBean boundType = null;
+			if (boundTypeID != null) {
+				boundType = HasNameAndIDBean.newInstance(boundTypeID, "");
+			}
 			bean.setBoundType(boundType);
 			List<String> enumer = Utils.stringListFromString(enumeration);
 			List<HasNameAndIDBean> enum2 = new ArrayList<HasNameAndIDBean>();
