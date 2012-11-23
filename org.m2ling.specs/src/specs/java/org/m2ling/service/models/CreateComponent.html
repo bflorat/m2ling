@@ -91,6 +91,10 @@
 		: <b concordion:assertEquals="#resu">FAIL with code COMP_ILLEGAL_BINDING</b>
 	</div>
 	</p>
+	
+	<p>Note that rule previous rules ensure implided rules already implemented in associated component types. 
+	For instance, it is impossible to bind a component to an already-bound component (binding chain) 
+	but we don't need to test this because it is already check at the CT level.</p>
 
 
 	<h3>Format controls</h3>
@@ -366,6 +370,7 @@
 				<td>APPLICABLE</td>
 				<td>FAIL with code TARGET_NOT_FOUND</td>
 			</tr>
+			
 		</table>
 	</div>
 </body>

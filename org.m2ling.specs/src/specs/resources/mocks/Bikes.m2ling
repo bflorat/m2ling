@@ -12,10 +12,10 @@
     </componentTypes>
     <componentTypes id="id_ct_logical_InternetWebClient" name="InternetWebClient" description="Internet end user web browser."/>
     <componentTypes id="_8_BugZqkEeGbI4N" name="IntranetWebClient" comment="" description="IntranetWebClient corporate end user web browser."/>
-    <componentTypes id="id_ct_logical_rdbms" name="RDBMS" comment="" description="A RDBMS" boundType="_LyWEoZ6REeGyndJ1yNTLVw" enumeration="id_grp_tech_rdbms">
+    <componentTypes id="id_ct_logical_rdbms" name="RDBMS" comment="" description="A RDBMS" boundType="id_ct_tech_persistence" enumeration="id_grp_tech_rdbms">
       <references type="RUNS" targets="id_ct_logical_database"/>
     </componentTypes>
-    <componentTypes id="id_ct_logical_ldap" name="LDAP directory" description="" boundType="_LyWEoZ6REeGyndJ1yNTLVw" enumeration="_cjliUJ6TEeGyndJ1yNTLVw"/>
+    <componentTypes id="id_ct_logical_ldap" name="LDAP directory" description="" boundType="id_ct_tech_persistence" enumeration="_cjliUJ6TEeGyndJ1yNTLVw"/>
     <componentTypes id="id_ct_logical_guimodule" name="GUIModule" comment="" description="A GUI module serves Web pages targeting to end users." boundType="id_ct_app_guimodule"/>
     <componentTypes id="id_ct_logical_servicemodule" name="ServiceModule" comment="" description="A service module provides business services to batch or GUI modules and is responsible for enterprise data." boundType="id_ct_app_servicemodule"/>
     <componentTypes id="id_ct_logical_database" name="Database" comment="" description="A database contains an application data (this data may or not be replicated among several clusters)"/>
@@ -60,9 +60,9 @@
   <viewPoints comment="" description="Technology components and links between them" id="id_vp_tech" name="Technical Architecture">
     <componentTypes id="id_ct_tech_applicationserver" name="ApplicationServer" comment="" description="Runs services (SOAP,RMI,REST...) or execute dynamic Web pages" instantiationFactor="-1"/>
     <componentTypes id="_wf5AQZxEEeGi7NYPtEuJdA" name="OS" description="Operating system" instantiationFactor="-1">
-      <references type="RUNS" targets="id_ct_tech_applicationserver _wf5AQZxEEeGi7NYPtEuJdA _LyWEoZ6REeGyndJ1yNTLVw"/>
+      <references type="RUNS" targets="id_ct_tech_applicationserver _wf5AQZxEEeGi7NYPtEuJdA id_ct_tech_persistence"/>
     </componentTypes>
-    <componentTypes id="_LyWEoZ6REeGyndJ1yNTLVw" name="Persistence" comment="" description="RDBMS, others databases types, directories, MOM" instantiationFactor="-1"/>
+    <componentTypes id="id_ct_tech_persistence" name="Persistence" comment="" description="RDBMS, others databases types, directories, MOM" instantiationFactor="-1"/>
     <componentTypes id="id_ct_tech_x86_server" name="X86 Server" description="Intel-based server. Mostly 64 bits." boundType="id_ct_physical_x86_server" instantiationFactor="-1">
       <references type="RUNS" targets="_wf5AQZxEEeGi7NYPtEuJdA"/>
     </componentTypes>
@@ -114,7 +114,7 @@
     <componentTypes id="_fKt222vmJ5CR-iA" name="WebContainer" comment="" description="A servlet/JSP container" boundType="id_ct_tech_applicationserver" enumeration="_0GnPIJ6QEeGyndJ1yNTLVw" instantiationFactor="-1">
       <references type="RUNS" targets="_aazazaza"/>
     </componentTypes>
-    <componentTypes id="_ha8mE333Mag01qc4bw" name="LDAP directory" comment="" description="" boundType="_LyWEoZ6REeGyndJ1yNTLVw" enumeration="_cjliUJ6TEeGyndJ1yNTLVw" instantiationFactor="-1"/>
+    <componentTypes id="_ha8mE333Mag01qc4bw" name="LDAP directory" comment="" description="" boundType="id_ct_tech_persistence" enumeration="_cjliUJ6TEeGyndJ1yNTLVw" instantiationFactor="-1"/>
     <componentTypes id="_aazazazaerer" name="BatchModule" comment="" description="Standalone Java batchs calling services modules" boundType="_aazazazaerer" instantiationFactor="-1"/>
   </viewPoints>
   <views comment="" description="BikesOnline is a online house-built e-commerce solution to sell bikes." id="id_view_vp_logical_Logical_BikesOnline" name="Logical_BikesOnline" viewPoint="id_vp_logical">
@@ -166,12 +166,12 @@
     </components>
     <components id="id_comp_tech_jetty" name="Jetty" comment="" type="id_ct_tech_applicationserver"/>
     <components id="_BM4XQp6QEdJ1yNTLVw" name="Tomcat6" comment="" description="" type="id_ct_tech_applicationserver"/>
-    <components id="_G9AtYp6REeGyndJ1yNTLVw" name="OpenLDAP" description="" type="_LyWEoZ6REeGyndJ1yNTLVw"/>
-    <components id="_G9AtYp6REeG" name="PostgreSQL" comment="" type="_LyWEoZ6REeGyndJ1yNTLVw"/>
-    <components id="id_comp_tech_mysql" name="MySQL" description="" type="_LyWEoZ6REeGyndJ1yNTLVw"/>
+    <components id="_G9AtYp6REeGyndJ1yNTLVw" name="OpenLDAP" description="" type="id_ct_tech_persistence"/>
+    <components id="_G9AtYp6REeG" name="PostgreSQL" comment="" type="id_ct_tech_persistence"/>
+    <components id="id_comp_tech_mysql" name="MySQL" description="" type="id_ct_tech_persistence"/>
     <components id="id_comp_tech_jboss5" name="JBoss5" comment="" description="" type="id_ct_tech_applicationserver"/>
     <components id="id_comp_tech_jboss6" name="JBoss6" comment="" description="" type="id_ct_tech_applicationserver"/>
-    <components id="id_comp_tech_oracle" name="Oracle RDBMS" comment="" status="" type="_LyWEoZ6REeGyndJ1yNTLVw"/>
+    <components id="id_comp_tech_oracle" name="Oracle RDBMS" comment="" status="" type="id_ct_tech_persistence"/>
     <components id="id_comp_tech_weblogic" name="Weblogic" comment="" description="" type="id_ct_tech_applicationserver"/>
   </views>
   <views comment="" description="Contains all Sales applications and there modules" id="_QMVcEZ8zEeGYS-4UJ-FpAA" name="Sales applicative view" viewPoint="id_vp_app">

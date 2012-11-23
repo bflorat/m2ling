@@ -3,56 +3,14 @@
 	xmlns:concordion="http://www.concordion.org/2007/concordion">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<title>Component type update</title>
+<title>Component update</title>
 </head>
 <body>
-	<H1>Component type update</H1>
+	<H1>Component update</H1>
 	<p>Administrators or actors with adequate authorizations can update
-		a CT (component type).</p>
-	<h2>Instantiation factor</h2>
-	<p class='rule'>CT-31 Any change of the instantiation factor must be be compatible
-		with the number of instances of component of this type and of
-		component bound to the type.</p>
-	<div class='example'>
-		Given a '*' instance factor component type in <b concordion:set="#vpID">id_vp_deploy</b> viewpoint with associated components and instances<BR />
-		
-		Following update settings combination should : 
-		<table
-				concordion:execute="#result=testUpdateIF(#caseName, #vpID, #id, #name, #ifactor)">
-				<tr>
-					<th concordion:set="#caseName">Case</th>
-					<th concordion:set="#id">Id</th>
-					<th concordion:set="#name">Name</th>
-					<th concordion:set="#ifactor">Instantiation factor</th>
-					<th concordion:assertEquals="#result">should :</th>
-				</tr>
-				<tr>
-					<td>High IF, compatible with instances</td>
-					<td>id_ct_deploy_X86</td>
-					<td>X86 Server</td>
-					<td>10</td>
-					<td>PASS</td>
-				</tr>
-				<tr>
-					<td>IF=0</td>
-					<td>id_ct_deploy_X86</td>
-					<td>X86 Server</td>
-					<td>0</td>
-					<td>FAIL with code CT_INSUFFISENT_IF</td>
-				</tr>
-				<tr>
-					<td>IF less than max nb of instances</td>
-					<td>id_ct_deploy_X86</td>
-					<td>X86 Server</td>
-					<td>1</td>
-					<td>FAIL with code CT_INSUFFISENT_IF</td>
-				</tr>
-			</table>
-	</div>
-	
+		a Component.</p>
 	<h2>Binding</h2>
-	
-	<p class='rule'>CT32- Bound type following attributes can be changed : name, tags ,
+	<p class='rule'>#COMP31- Bound type following attributes can be changed : name, tags ,
 		comment, description</p>
 	<p class='rule'>CT33- Bound type following attributes *can't* be changed : instantiation factor</p>
 	
@@ -104,25 +62,8 @@
 		</table>
 	</div>
 	
-	<p class='rule'>CT36- Once set, a component type binding cannot be changed or dropped while a least 
-	a single component is bound to a component of its type.</p>
-	<div class='example'>
-		Trying to drop the binding of a CT with existing bound component <span concordion:execute="#resu=testDropBinding()">
-		 </span> should : <b concordion:assertEquals="#resu">FAIL with code CT_CANNOT_CHANGE_BINDING</b> 
-	</div>
-	<div class='example'>
-		Trying to drop the binding of a CT with no existing bound component <span concordion:execute="#resu=testDropBindingNoComp()">
-		 </span> should : <b concordion:assertEquals="#resu">PASS</b> 
-	</div>
-	<div class='example'>
-		Trying to change the binding of a CT with existing bound component <span concordion:execute="#resu=testChangeBinding()">
-		 </span> should : <b concordion:assertEquals="#resu">FAIL with code CT_CANNOT_CHANGE_BINDING</b> 
-	</div>
-	<div class='example'>
-		Trying to change the binding of a CT with no existing bound component <span concordion:execute="#resu=testChangeBindingNoComp()">
-		 </span> should : <b concordion:assertEquals="#resu">PASS</b> 
-	</div>
-		
+	bound component can't be changed if CI exist
+	
 	<h2>References</h2>
 	<p class='rule'>CT34- A reference can't be dropped while at least one component of the component 
 	type use it against another component.</p>

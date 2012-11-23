@@ -75,51 +75,100 @@ public class ComponentTypeServiceImpl extends ServiceImpl implements ComponentTy
 		return false;
 	}
 
-	private void checkIF(final ComponentTypeDTO dto, AccessType access) throws FunctionalException {
+	private void checkIF(final ComponentTypeDTO dto, AccessType access, final ComponentType ct)
+			throws FunctionalException {
 		int ifactor = dto.getInstantiationFactor();
 		int maxNbInstances = 0;
-		for (Component comp : util.getComponentsForCTID(dto.getId())) {
-			List<ComponentInstance> instances = util.getComponentsInstancesForComponentID(comp.getId());
-			if (instances.size() > maxNbInstances) {
-				maxNbInstances = instances.size();
-			}
-		}
 		// Instantiation factor, -1 or any positive value is valid
 		if (ifactor < 0 && ifactor != -1) {
 			throw new FunctionalException(FunctionalException.Code.WRONG_IF, null, "instantiationFactor="
 					+ dto.getInstantiationFactor());
 		}
-		// check CT-31
-		if (ifactor != -1 && ifactor < maxNbInstances) {
-			throw new FunctionalException(FunctionalException.Code.CT_INSUFFISENT_IF, null, dto.toString());
+		if (access == AccessType.UPDATE) {
+			for (Component comp : util.getComponentsForCTID(dto.getId())) {
+				List<ComponentInstance> instances = util.getComponentsInstancesForComponentID(comp.getId());
+				if (instances.size() > maxNbInstances) {
+					maxNbInstances = instances.size();
+				}
+			}
+			// check CT-31
+			if (ifactor != -1 && ifactor < maxNbInstances) {
+				throw new FunctionalException(FunctionalException.Code.CT_INSUFFISENT_IF, null, dto.toString());
+			}
+			// check that we don't change the IF if bounded
+			if (ct.getBoundType() != null) {
+				int currentBoundIF = ct.getBoundType().getInstantiationFactor();
+				if (currentBoundIF != dto.getInstantiationFactor()) {
+					throw new FunctionalException(FunctionalException.Code.DELTA_BINDING_IF, null,
+							"boundType instantiation factor=" + ((currentBoundIF == -1) ? "*" : "" + currentBoundIF));
+				}
+			}
 		}
 	}
 
-	private void checkBoundType(final ComponentTypeDTO dto, AccessType access) throws FunctionalException {
-		if (dto.getBoundType() != null && dto.getBoundType().getId() != null) {
-			// Check if the bound type exists
+	private void checkBoundType(final ComponentTypeDTO dto, AccessType access, final ComponentType target)
+			throws FunctionalException {
+		if (access == AccessType.UPDATE) {
+			checkNoIllegalBindingChange(dto, target);
+		}
+		if (dto.getBoundType() != null) {
 			ComponentType boundCT = (ComponentType) util.getItemByTypeAndID(Type.COMPONENT_TYPE, dto.getBoundType()
 					.getId());
-			if (boundCT == null) {
-				throw new FunctionalException(FunctionalException.Code.TARGET_NOT_FOUND, null, "boundTypeID="
-						+ dto.getBoundType().getId());
-			}
-			// Check that the bound type is from another VP
-			ViewPoint vp = util.getViewPointByID(dto.getViewPoint().getId());
-			ViewPoint vpBoundType = (ViewPoint) boundCT.eContainer();
-			if (vpBoundType.equals(vp)) {
-				throw new FunctionalException(FunctionalException.Code.LOCAL_BINDING, null, null);
-			}
-			// Check if the bound type is not bounded itself
-			if (boundCT.getBoundType() != null) {
-				throw new FunctionalException(FunctionalException.Code.BOUND_TYPE_BOUND, null, "boundTypeID="
-						+ dto.getBoundType().getId());
-			}
-			int boundIF = boundCT.getInstantiationFactor();
-			if (boundIF != dto.getInstantiationFactor()) {
-				throw new FunctionalException(FunctionalException.Code.DELTA_BINDING_IF, null,
-						"boundType instantiation factor=" + ((boundIF == -1) ? "*" : "" + boundIF));
-			}
+			checkBoundTypeExists(boundCT);
+			checkBoundTypeIsFromAnotherVP(dto, boundCT);
+			checkNoChainBinding(dto, boundCT);
+		}
+	}
+
+	private void checkBoundTypeExists(final ComponentType ct) throws FunctionalException {
+		// Check if the bound type exists
+		if (util.getItemByTypeAndID(Type.COMPONENT_TYPE, ct.getId()) == null) {
+			throw new FunctionalException(FunctionalException.Code.TARGET_NOT_FOUND, null, "boundTypeID=" + ct.getId());
+		}
+	}
+
+	private void checkNoIllegalBindingChange(final ComponentTypeDTO dto, final ComponentType target)
+			throws FunctionalException {
+		ComponentType currentCT = target.getBoundType();
+		boolean existingCompsForChangedType = (util.getComponentsForCTID(target.getId()).size() > 0);
+		// Attempt to drop the bound type
+		if (dto.getBoundType() == null && currentCT != null && existingCompsForChangedType) {
+			throw new FunctionalException(FunctionalException.Code.CT_CANNOT_CHANGE_BINDING, null, "Current bound type="
+					+ dto.getBoundType());
+		}
+		// Attempt to change the bound type (note that we handle the case where currentCT is null)
+		if (dto.getBoundType() != null && !dto.getBoundType().getId().equals(currentCT.getId())
+				&& existingCompsForChangedType) {
+			throw new FunctionalException(FunctionalException.Code.CT_CANNOT_CHANGE_BINDING, null, "Current bound type="
+					+ dto.getBoundType());
+		}
+	}
+
+	/**
+	 * @param dto
+	 * @param boundCT
+	 * @throws FunctionalException
+	 */
+	private void checkBoundTypeIsFromAnotherVP(final ComponentTypeDTO dto, ComponentType boundCT)
+			throws FunctionalException {
+		// Check that the bound type is from another VP
+		ViewPoint vp = util.getViewPointByID(dto.getViewPoint().getId());
+		ViewPoint vpBoundType = (ViewPoint) boundCT.eContainer();
+		if (vpBoundType.equals(vp)) {
+			throw new FunctionalException(FunctionalException.Code.LOCAL_BINDING, null, null);
+		}
+	}
+
+	/**
+	 * @param dto
+	 * @param boundCT
+	 * @throws FunctionalException
+	 */
+	private void checkNoChainBinding(final ComponentTypeDTO dto, ComponentType boundCT) throws FunctionalException {
+		// Check if the bound type is not bounded itself
+		if (boundCT.getBoundType() != null) {
+			throw new FunctionalException(FunctionalException.Code.BOUND_TYPE_BOUND, null, "boundTypeID="
+					+ dto.getBoundType().getId());
 		}
 	}
 
@@ -268,23 +317,15 @@ public class ComponentTypeServiceImpl extends ServiceImpl implements ComponentTy
 			}
 		}
 		if (access == AccessType.CREATE || access == AccessType.UPDATE) {
-			// Check associated viewpoint existence
-			if (dto.getViewPoint() == null || dto.getViewPoint().getId() == null) {
-				throw new FunctionalException(FunctionalException.Code.NULL_ARGUMENT, null, "(viewpoint)");
-			}
-			ViewPoint vp = util.getViewPointByID(dto.getViewPoint().getId());
-			if (vp == null) {
-				throw new FunctionalException(FunctionalException.Code.TARGET_NOT_FOUND, null, "viewpoint="
-						+ dto.getViewPoint().getId());
-			}
+			checkVPExist(dto);
 			checkComment(dto.getComment());
 			checkStatus(dto.getViewPoint(), dto.getStatus());
 			checkTags(dto.getTags());
 			checkReferences(dto, access);
-			// Instantiation factor
-			checkIF(dto, access);
 			// Bound type
-			checkBoundType(dto, access);
+			checkBoundType(dto, access, target);
+			// Instantiation factor
+			checkIF(dto, access, target);
 			// Enumeration, the list should contain a list of component ids from bound-type type
 			checkEnumeration(dto, access);
 			// Description
@@ -293,6 +334,22 @@ public class ComponentTypeServiceImpl extends ServiceImpl implements ComponentTy
 			} else {
 				checkDescriptionNotMandatory(dto.getDescription());
 			}
+		}
+	}
+
+	/**
+	 * @param dto
+	 * @throws FunctionalException
+	 */
+	private void checkVPExist(final ComponentTypeDTO dto) throws FunctionalException {
+		// Check associated viewpoint existence
+		if (dto.getViewPoint() == null || dto.getViewPoint().getId() == null) {
+			throw new FunctionalException(FunctionalException.Code.NULL_ARGUMENT, null, "(viewpoint)");
+		}
+		ViewPoint vp = util.getViewPointByID(dto.getViewPoint().getId());
+		if (vp == null) {
+			throw new FunctionalException(FunctionalException.Code.TARGET_NOT_FOUND, null, "viewpoint="
+					+ dto.getViewPoint().getId());
 		}
 	}
 

@@ -12,9 +12,10 @@
   </viewPoints>
   <viewPoints description="vp1 label" id="id_vp1" name="vp1">
     <activities id="_Nnj8IJXFEeGfDY1tsvvkpQ" name="activity1"/>
-    <componentTypes id="id_ct_vp1_ct1" name="ct_vp1_ct1"/>
-    <componentTypes id="id_ct_vp1_no_comp" name="ct_vp1_no_comp" boundType="id_ct_vp1_bound_target"/>
-    <componentTypes id="id_ct_vp1_ct2" name="ct_vp1_ct2" description=""/>
+    <componentTypes id="id_ct_vp1_ct1" name="ct_vp1_ct1" description="desc"/>
+    <componentTypes id="id_ct_vp1_no_comp" name="ct_vp1_no_comp" comment="" description="desc" boundType="id_ct_vp1_bound_target"/>
+    <componentTypes id="id_ct_vp1_ct2" name="ct_vp1_ct2" description="desc CT2"/>
+    <componentTypes id="id_ct_vp1_ct3" name="ct_vp1_ct3" description="CT used as bouding by a VP2 CT"/>
     <linkTypes id="id_lt_vp1_no_link" name="lt_vp1_no_link" comment="" description="desc" sourceTypes="id_ct_vp1_ct1" destinationTypes="id_ct_vp1_ct1"/>
     <linkTypes id="id_lt_vp1_link_type_1" name="lt_vp1_link_type_1" comment="" description="desc" sourceTypes="id_ct_vp1_ct1 id_ct_vp1_ct2" destinationTypes="id_ct_vp1_ct1 id_ct_vp1_ct2"/>
     <rules id="id_vp1_rule1" name="vp1_rule1" comment="comment_rule1" description="desc_rule1" status="VALIDATED" rationale="rationale_rule1" exceptions="exceptions_rule1"/>
@@ -24,7 +25,9 @@
   </viewPoints>
   <viewPoints id="id_vp2" name="vp2">
     <componentTypes id="id_ct_vp2_comp_type_2" name="ct_vp2_comp_type_2" comment="" description="" boundType="id_ct_vp1_ct2"/>
-    <componentTypes id="id_ct_vp1_bound_target" name="ct_vp1_bound_target"/>
+    <componentTypes id="id_ct_vp1_bound_target" name="ct_vp1_bound_target" description="desc"/>
+    <componentTypes id="id_ct_vp2_ct3" name="ct_vp2_ct3" description="Bound CT with no component " boundType="id_ct_vp1_ct3"/>
+    <componentTypes id="id_ct_vp2_ct4" name="ct_vp2_ct4" description="Bound CT with components" status="" boundType="id_ct_vp1_ct3"/>
   </viewPoints>
   <viewPoints id="id_vp3" name="vp3">
     <componentTypes id="id_cp_vp3_comp_type_1" name="cp_vp3_comp_type_1" comment=""/>
@@ -34,6 +37,7 @@
     <components id="id_comp_vp1_v1_comp2" name="comp_vp1_v1_comp2" comment="" description="" type="id_ct_vp1_ct2"/>
     <components id="id_comp_vp1_v1_comp3" name="comp_vp1_v1_comp3" status="" type="id_ct_vp1_ct2"/>
     <components id="id_comp_vp1_v1_comp4" name="comp_vp1_v1_comp4" comment="" description="" status="" type="id_ct_vp1_ct2"/>
+    <components id="id_comp_vp1_v1_comp5" name="comp_vp1_v1_comp5" comment="" description="" status="" type="id_ct_vp1_ct3"/>
     <links id="id_link_vp1_v1_link1" name="link_vp1_v1_link1" description="" type="id_lt_vp1_link_type_1" sources="id_comp_vp1_v1_comp1 id_comp_vp1_v1_comp2" destinations="id_comp_vp1_v1_comp1 id_comp_vp1_v1_comp2"/>
     <componentInstances id="id_ci_vp1_v1_comp3_ci1" name="ci_vp1_v1_comp3_ci1" comment="" description="" component="id_comp_vp1_v1_comp3" boundComponentInstance="id_ci_vp1_v1_comp3_ci1"/>
   </views>
@@ -43,6 +47,7 @@
     <components id="id_comp_vp2_v2_comp3" name="comp_vp2_v2_comp3" comment="" status="" type="id_ct_vp2_comp_type_2" boundComponent="id_comp_vp1_v1_comp3"/>
     <components id="id_comp_vp2_v2_comp4" name="comp_vp2_v2_comp4" comment="" status="" type="id_ct_vp2_comp_type_2" boundComponent="id_comp_vp1_v1_comp3"/>
     <components id="id_comp_vp2_v2_comp5" name="comp_vp2_v2_comp5" comment="" description="" status="" type="id_ct_vp2_comp_type_2" boundComponent="id_comp_vp1_v1_comp4"/>
+    <components id="id_comp_vp2_v2_comp6" name="comp_vp2_v2_comp6" comment="" description="" status="" type="id_ct_vp2_ct4" boundComponent="id_comp_vp1_v1_comp5"/>
     <componentInstances id="id_ci_vp2_v2_comp3_ci1" name="ci_vp2_v2_comp3_ci1" comment="" component="id_comp_vp2_v2_comp3"/>
   </views>
 </m2ling_domain:Root>
