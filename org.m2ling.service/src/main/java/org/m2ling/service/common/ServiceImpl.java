@@ -232,7 +232,7 @@ abstract public class ServiceImpl {
 		if (storedVP == null) {
 			throw new FunctionalException(FunctionalException.Code.TARGET_NOT_FOUND, null, "Viewpoint id=" + vp.getId());
 		}
-		if (status != null && !storedVP.getStatusLiterals().contains(status)) {
+		if (!Strings.isNullOrEmpty(status) && !storedVP.getStatusLiterals().contains(status)) {
 			throw new FunctionalException(FunctionalException.Code.INVALID_STATUS, null, null);
 		}
 	}

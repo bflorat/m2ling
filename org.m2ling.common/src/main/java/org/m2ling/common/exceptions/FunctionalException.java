@@ -60,7 +60,6 @@ public class FunctionalException extends Exception {
 		BOUND_TYPE_BOUND,
 		INVALID_TYPE,
 		LOCAL_BINDING,
-		DELTA_BINDING_IF,
 		WRONG_IF,
 		NULL_BOUND_TYPE_ENUMERATION,
 		INVALID_FORMAT,

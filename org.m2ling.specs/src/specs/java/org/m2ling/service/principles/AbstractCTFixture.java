@@ -31,7 +31,9 @@ public class AbstractCTFixture extends M2lingFixture {
 	}
 
 	public String getCheckNullDTO() {
-		reset("Technical");
+		if (!noreset) {
+			reset("Technical");
+		}
 		try {
 			service.checkDTO(null, AccessType.CREATE);
 			return "PASS";

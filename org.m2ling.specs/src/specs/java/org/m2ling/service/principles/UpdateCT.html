@@ -11,8 +11,7 @@
 		a CT (component type).</p>
 	<h2>Instantiation factor</h2>
 	<p class='rule'>CT-31 Any change of the instantiation factor must be be compatible
-		with the number of instances of component of this type and of
-		component bound to the type.</p>
+		with the number of instances of component of this type.</p>
 	<div class='example'>
 		Given a '*' instance factor component type in <b concordion:set="#vpID">id_vp_deploy</b> viewpoint with associated components and instances<BR />
 		
@@ -53,9 +52,9 @@
 	<h2>Binding</h2>
 	
 	<p class='rule'>CT32- Bound type following attributes can be changed : name, tags ,
-		comment, description</p>
-	<p class='rule'>CT33- Bound type following attributes *can't* be changed : instantiation factor</p>
-	
+		comment, description, IF</p>
+	<p>Note that we accept that a bound CT have a different If than those of its binding CT but it is implicitly enforced 
+	because any component/component instance has then to be bound to a component/component instance of associated binding CT.</p>
 	<div class='example'>
 		Given a id_ct_deploy_X86 reifiable and owning a '*' instance factor component type in 
 		<b concordion:set="#vpID">id_vp_deploy</b> viewpoint and bound to id_ct_physical_x86_server CT
@@ -99,7 +98,7 @@
 					<td>RUNS:id_ct_deploy_OS</td>
 					<td>null</td>
 					<td>10</td>
-					<td>FAIL with code DELTA_BINDING_IF</td>
+					<td>PASS</td>
 				</tr>
 		</table>
 	</div>
@@ -124,25 +123,23 @@
 	</div>
 		
 	<h2>References</h2>
-	<p class='rule'>CT34- A reference can't be dropped while at least one component of the component 
+	<p class='rule'><span concordion:set="#caseName">CT34</span> : A reference can't be dropped while at least one component of the component 
 	type use it against another component.</p>
 	<div class='example'>
 		Given a CT <b concordion:set="#sourceCTID">id_ct_deploy_X86</b> with a RUNS reference to <b concordion:set="#targetCTID">id_ct_deploy_OS</b> CT<br/>
-		And a component id_comp_deploy_IBM-HS21 which owns a RUNS reference toward id_comp_deploy_linux3_web_profile component <br/>
+		And a component id_comp_deploy_IBM_HS21 which owns a RUNS reference toward id_comp_deploy_linux3_web_profile component <br/>
 		When we try to drop the CT reference <br/>
 		<span concordion:set="#references" ></span>
-		<span concordion:set="#caseName" >Drop existing ref</span>
 		<span concordion:execute="#resu=updateReference(#caseName,#sourceCTID,#references)"/><br/>
 		Then the service should <b concordion:assertEquals="#resu">FAIL with code CT_REFERENCE_IN_USE</b><br/> 
 	</div>
 	
-	<p class='rule'>CT-35 : A Component Type can refer itself at upgrade (can't be done at creation as reference target doesn't exist yet).</p>
+	<p class='rule'><span concordion:set="#caseName">CT35</span> : A Component Type can refer itself at upgrade (can't be done at creation as reference target doesn't exist yet).</p>
 	<div class='example'>
-		<span concordion:set="#caseName" >CT-35</span>
-	    Given an existing CT <b concordion:set="#sourceCTID">id_ct_deploy_X86</b><br/> 
-	    When we set reference to <b concordion:set="#references" >RUNS:id_ct_deploy_X86</b><br/>
+		Given an existing CT <b concordion:set="#sourceCTID">id_ct_deploy_X86</b><br/> 
+	    When we add a reference so the references are <b concordion:set="#references" >RUNS:id_ct_deploy_OS,id_ct_deploy_X86</b><br/>
 		<span concordion:execute="#resu=updateReference(#caseName,#sourceCTID,#references)"/><br/>
-		Then the service should <b concordion:assertEquals="#resu">FAIL with code CT_REFERENCE_IN_USE</b><br/> 
+		Then the service should <b concordion:assertEquals="#resu">PASS</b><br/> 
 	</div>
 	
 </body>

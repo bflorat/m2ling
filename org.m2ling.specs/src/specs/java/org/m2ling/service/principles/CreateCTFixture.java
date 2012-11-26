@@ -30,7 +30,7 @@ public class CreateCTFixture extends AbstractCTFixture {
 	public String createWithIf(String ifactor) throws FunctionalException {
 		return createAndGetCT("true", "CT1", "id_vp_logical", "id_new_ct_logical_servicecontainer", "ServicesContainer2",
 				"desc", "", "", ifactor, "null", "", "", "APPLICABLE");
-	}
+	} 
 
 	public String testExternalRefs() throws FunctionalException {
 		return createAndGetCT("true", "CT1", "id_vp_logical", "id_new_ct_logical_servicecontainer", "ServicesContainer2",
@@ -162,7 +162,7 @@ public class CreateCTFixture extends AbstractCTFixture {
 		}
 		vpID = UUT.nul(vpID);
 		id = UUT.nul(id);
-		name = UUT.nul(name);
+		name = UUT.nul(name); 
 		desc = UUT.nul(desc);
 		comment = UUT.nul(comment);
 		tags = UUT.nul(tags);

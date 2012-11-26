@@ -106,7 +106,7 @@
     <componentTypes id="_1y2zQZohnnnmJ5CR-iA" name="ServiceModule" comment="" description="A service module provides business services to batch or GUI modules and is responsible for enterprise data." boundType="id_ct_app_servicemodule" instantiationFactor="-1"/>
     <componentTypes id="_Ybdmtd456" name="RDBMS" comment="" description="Runs one or more databases. Database initial populating is out of the deployment scope itself, done by scripts."/>
     <componentTypes id="id_ct_deploy_OS" name="OS" description="Operating system" boundType="_wf5AQZxEEeGi7NYPtEuJdA" instantiationFactor="-1">
-      <references type="RUNS" targets="_wf5AQZxEEeGi7NYPtEuJdA _fKt222vmJ5CR-iA _aazazazaerer _ha8mE333Mag01qc4bw"/>
+      <references type="RUNS" targets="_fKt222vmJ5CR-iA _aazazazaerer _ha8mE333Mag01qc4bw id_ct_deploy_OS"/>
     </componentTypes>
     <componentTypes id="__111CR-iA" name="ServicesContainer" description="Runs services (RMI, REST, SOAP...)" boundType="id_ct_tech_applicationserver" enumeration="id_grp_tech_servicecontainers" instantiationFactor="-1">
       <references type="RUNS" targets="_1y2zQZohnnnmJ5CR-iA"/>
@@ -153,12 +153,12 @@
     </components>
     <components id="_qUgd4p56EeGAFeVyyYKoXg" name="BikesOnline" comment="" type="_c1vGwJq4EeGVMag01qc4bw"/>
   </views>
-  <views comment="" description="Describes technical components available in Bikes IS" id="_QXV2oZ6NEeGeZJhcjVrcWg" name="Technical catalog" viewPoint="id_vp_tech">
+  <views comment="" description="Describes technical components available in Bikes IS" id="id_view_tech_catalog" name="Technical catalog" viewPoint="id_vp_tech">
     <componentsGroups id="id_grp_tech_servicecontainers" name="Service containers" comment="" components="id_comp_tech_jboss5 id_comp_tech_jboss6"/>
     <componentsGroups id="id_grp_tech_rdbms" name="RDBMS" description="" components="id_comp_tech_mysql _G9AtYp6REeG id_comp_tech_oracle"/>
     <componentsGroups id="_cjliUJ6TEeGyndJ1yNTLVw" name="Directories" components="_G9AtYp6REeGyndJ1yNTLVw"/>
     <componentsGroups id="_0GnPIJ6QEeGyndJ1yNTLVw" name="Web containers" comment="" components="id_comp_tech_jetty"/>
-    <components id="_a-g0Mp6OEeGeZJhcjVrcWg" name="Linux3" comment="" type="_wf5AQZxEEeGi7NYPtEuJdA">
+    <components id="id_comp_tech_Linux3" name="Linux3" comment="" description="" type="_wf5AQZxEEeGi7NYPtEuJdA">
       <references type="RUNS" targets="id_comp_tech_jetty _BM4XQp6QEdJ1yNTLVw id_comp_tech_jboss5"/>
     </components>
     <components id="id_comp_tech_solaris" name="Solaris" comment="" type="_wf5AQZxEEeGi7NYPtEuJdA">
@@ -193,9 +193,9 @@
     <links id="_tUQzg58-dscgfgx" name="ADMINISTRATION" comment="" description="Access from BikesOnline administrative GUI to BikesOnline administrative services" type="_psOW0p8zEeGYS-4UJ-FpAArr" sources="id_comp_view_Logical_BikesOnline_AdminGUI" destinations="_zPeqMJ89EeGNFtlcQfUFgw"/>
   </views>
   <views comment="" description="BikesOnline physical architecture" id="_o6dP8Z9lEeGNFtlcQfUFgw" name="Physical_BikesOnline" viewPoint="fsdfhjksdhfkjhsdkfj">
-    <componentInstances id="_av1GdKGYEeGWHchb0LRqvg" name="WebServer_1" comment="" status="AVAILABLE" component="_gfgfdeG3fPi34vn9KQ" boundComponentInstance="_Hk3"/>
-    <componentInstances id="_thEX5KGYEeGWHchb0LRqvg" name="AS_1" component="_JBJgUp_6EeG3fPi34vn9KQ" boundComponentInstance="_Hk3"/>
-    <componentInstances id="_xZASxKGYEeGWHchb0LRqvg" name="AS_2" component="_JBJgUp_6EeG3fPi34vn9KQ" boundComponentInstance="_HkPKsKA2AGg"/>
+    <componentInstances id="_av1GdKGYEeGWHchb0LRqvg" name="WebServer_1" comment="" status="AVAILABLE" component="id_comp_physical_catalog_ibm-hs21" boundComponentInstance="_Hk3"/>
+    <componentInstances id="_thEX5KGYEeGWHchb0LRqvg" name="AS_1" component="id_comp_physical_catalog_ibm-hs22" boundComponentInstance="_Hk3"/>
+    <componentInstances id="_xZASxKGYEeGWHchb0LRqvg" name="AS_2" component="id_comp_physical_catalog_ibm-hs22" boundComponentInstance="_HkPKsKA2AGg"/>
     <componentInstances id="_6aYMpKGYEeGWHchb0LRqvg" name="Internet_Router_1" comment="" component="_Jlytjhmp" boundComponentInstance="_AIVt1KHBEeGIx4XXpoKVSg"/>
     <componentInstances id="_AyNRZKGZEeGWHchb0LRqvg" name="Firewall_1" comment="" description="" component="_nKCmgp_6EeG3fPi34vn9KQ" boundComponentInstance="_DzMO9KHBEeGIx4XXpoKVSg"/>
     <componentInstances id="_O3JLxKGZEeGWHchb0LRqvg" name="DataServer_1" description="" component="_Y6hMwp_6EeG3fPi34vn9KQ" boundComponentInstance="_sTQ3ZKAsEeGQjY87lm4AGg"/>
@@ -208,31 +208,31 @@
     <linkInstances id="_iJPnN6GcEeGpDeafbzGYMQ" name="cable6" source="_jv8xNKGaEeGAboe59Cwkcg" destination="_O3JLxKGZEeGWHchb0LRqvg" link="_sJNsw6GbEeGpDeafbzGYMQ"/>
   </views>
   <views description="List available devices models" id="_Ax_tkZ_6EeG3fPi34vn9KQ" name="DevicesCatalog" viewPoint="fsdfhjksdhfkjhsdkfj">
-    <components id="_gfgfdeG3fPi34vn9KQ" name="IBM-HS21" comment="" description="IBM blade, 16Go RAM, 2 quad-core." type="id_ct_physical_x86_server"/>
+    <components id="id_comp_physical_catalog_ibm-hs21" name="IBM-HS21" comment="" description="IBM blade, 16Go RAM, 2 quad-core." type="id_ct_physical_x86_server"/>
     <components id="_Jlytjhmp" name="Cisco-2900" comment="" description="Branch router" type="_kOyogZ9ZEeGNFtlcQfUFgw"/>
-    <components id="_JBJgUp_6EeG3fPi34vn9KQ" name="IBM-HS22" description="IBM blade, 32Go RAM, 4 quad-core." type="id_ct_physical_x86_server"/>
+    <components id="id_comp_physical_catalog_ibm-hs22" name="IBM-HS22" description="IBM blade, 32Go RAM, 4 quad-core." type="id_ct_physical_x86_server"/>
     <components id="_Y6hMwp_6EeG3fPi34vn9KQ" name="Oracle-M3000" comment="" description="SPARC M3000 enterprise server" type="_0pkjcZ9aEeGNFtlcQfUFgw"/>
     <components id="_nKCmgp_6EeG3fPi34vn9KQ" name="Cisco-ASA 5520" comment="" description="Cisco ASA 5520 firewall" type="_McFWYZ9bEeGNFtlcQfUFgw"/>
     <components id="_41zdop_6EeG3fPi34vn9KQ" name="Alteon-LM-5500" comment="" description="Alteon LM-5500 load balancer" type="_McFWYZ9bEeGNFtlcQfUFgw"/>
     <components id="_JlK98p_7EeG3fPi34vn9KQ" name="Cisco-2800" comment="" description="Branch router" type="_kOyogZ9ZEeGNFtlcQfUFgw"/>
     <components id="_jUElEp_7EeG3fPi34vn9KQ" name="Hitashi-HUS100" comment="" description="Hitachi Unified Storage 100 Family" type="_VIxZsZ9bEeGNFtlcQfUFgw"/>
-    <links id="_sJNsw6GbEeGpDeafbzGYMQ" name="Class 5E cable" comment="" description="Ethernet gigabit cable" type="_FFDecp9bEeGNFtlcQfUFgw" sources="_41zdop_6EeG3fPi34vn9KQ _JlK98p_7EeG3fPi34vn9KQ _Jlytjhmp _nKCmgp_6EeG3fPi34vn9KQ _gfgfdeG3fPi34vn9KQ _JBJgUp_6EeG3fPi34vn9KQ _Y6hMwp_6EeG3fPi34vn9KQ" destinations="_41zdop_6EeG3fPi34vn9KQ _JlK98p_7EeG3fPi34vn9KQ _Jlytjhmp _nKCmgp_6EeG3fPi34vn9KQ _gfgfdeG3fPi34vn9KQ _JBJgUp_6EeG3fPi34vn9KQ _Y6hMwp_6EeG3fPi34vn9KQ"/>
-    <componentInstances id="_HkPKsKAsEeGQjY87lm4AGg" name="HS22_1" description="" component="_JBJgUp_6EeG3fPi34vn9KQ"/>
+    <links id="_sJNsw6GbEeGpDeafbzGYMQ" name="Class 5E cable" comment="" description="Ethernet gigabit cable" type="_FFDecp9bEeGNFtlcQfUFgw" sources="_41zdop_6EeG3fPi34vn9KQ _JlK98p_7EeG3fPi34vn9KQ _Jlytjhmp _nKCmgp_6EeG3fPi34vn9KQ id_comp_physical_catalog_ibm-hs21 id_comp_physical_catalog_ibm-hs22 _Y6hMwp_6EeG3fPi34vn9KQ" destinations="_41zdop_6EeG3fPi34vn9KQ _JlK98p_7EeG3fPi34vn9KQ _Jlytjhmp _nKCmgp_6EeG3fPi34vn9KQ id_comp_physical_catalog_ibm-hs21 id_comp_physical_catalog_ibm-hs22 _Y6hMwp_6EeG3fPi34vn9KQ"/>
+    <componentInstances id="_HkPKsKAsEeGQjY87lm4AGg" name="HS22_1" description="" component="id_comp_physical_catalog_ibm-hs22"/>
     <componentInstances id="_sTQ3ZKAsEeGQjY87lm4AGg" name="M3000_1" description="" status="FULL" component="_Y6hMwp_6EeG3fPi34vn9KQ"/>
-    <componentInstances id="_HkPKsKA2AGg" name="HS22_2" description="" component="_JBJgUp_6EeG3fPi34vn9KQ"/>
-    <componentInstances id="_Hk3" name="HS21_1" description="" component="_JBJgUp_6EeG3fPi34vn9KQ"/>
+    <componentInstances id="_HkPKsKA2AGg" name="HS22_2" description="" component="id_comp_physical_catalog_ibm-hs22"/>
+    <componentInstances id="_Hk3" name="HS21_1" description="" component="id_comp_physical_catalog_ibm-hs22"/>
     <componentInstances id="_x06rhKHAEeGIx4XXpoKVSg" name="Cisco 2800_1" description="" component="_JlK98p_7EeG3fPi34vn9KQ"/>
     <componentInstances id="_AIVt1KHBEeGIx4XXpoKVSg" name="Cisco 2900_1" component="_Jlytjhmp"/>
     <componentInstances id="_DzMO9KHBEeGIx4XXpoKVSg" name="ASA_1" component="_nKCmgp_6EeG3fPi34vn9KQ"/>
   </views>
-  <views comment="" description="Production view of BikesOnline deployment" id="_7-nzcaKREeGOsOUMPsTb_w" name="Deployment_BikesOnline" viewPoint="id_vp_logical">
+  <views comment="" description="Production view of BikesOnline deployment" id="id_view_deploy_production" name="Deployment_BikesOnline" viewPoint="id_vp_logical">
     <components id="_vDwQkqTjEeGhbskxmOc77w" name="Production" description="" type="_sgTcYaTjEeGhbskxmOc77w">
-      <references targets="id_comp_deploy_IBM-HS21 _C2pRkqNKEeGULe7xIq_4Kg _itGiQqNJEefdfd_4Kgezezez _bTKAYqMhEeGTqOb8fWOx0Q id_comp_deploy_IBM-HS22 _6b6KoqMtEeG9sM0bZ_WFcA _0VP9IqMnEeGkggwQ _eoxQUqMsEeG9sM0bZ_WFcA id_comp_deploy_linux3_web_profile _N13tUqNMEeGULe7xIq_4Kg _0dlLAqMtEeG9sM0bZ_WFcA _5S34QqMoEeGkWPVFom68wQ _itGiQqNJEeGULe7xIq_4Kg _ZKfHEqNKEeGULe7xIq_4Kg _itGiQqNJEeff4Kg _TmWPQqMtEeG9sM0bZ_WFcA _0VP9IqMnEeGkWPVFom68wQ"/>
+      <references targets="id_comp_deploy_IBM_HS21 _C2pRkqNKEeGULe7xIq_4Kg _itGiQqNJEefdfd_4Kgezezez _bTKAYqMhEeGTqOb8fWOx0Q id_comp_deploy_IBM_HS22 _6b6KoqMtEeG9sM0bZ_WFcA id_comp_deploy_production_jetty _eoxQUqMsEeG9sM0bZ_WFcA id_comp_deploy_linux3_web_profile _N13tUqNMEeGULe7xIq_4Kg _0dlLAqMtEeG9sM0bZ_WFcA _5S34QqMoEeGkWPVFom68wQ _itGiQqNJEeGULe7xIq_4Kg _ZKfHEqNKEeGULe7xIq_4Kg _itGiQqNJEeff4Kg _TmWPQqMtEeG9sM0bZ_WFcA id_comp_deploy_production_tomcat6"/>
     </components>
-    <components id="id_comp_deploy_IBM-HS21" type="id_ct_deploy_X86" boundComponent="_gfgfdeG3fPi34vn9KQ">
+    <components id="id_comp_deploy_IBM_HS21" type="id_ct_deploy_X86" boundComponent="id_comp_physical_catalog_ibm-hs21">
       <references type="RUNS" targets="id_comp_deploy_linux3_web_profile"/>
     </components>
-    <components id="id_comp_deploy_IBM-HS22" type="id_ct_deploy_X86" boundComponent="_JBJgUp_6EeG3fPi34vn9KQ">
+    <components id="id_comp_deploy_IBM_HS22" type="id_ct_deploy_X86" boundComponent="id_comp_physical_catalog_ibm-hs22">
       <references type="RUNS" targets="_eoxQUqMsEeG9sM0bZ_WFcA"/>
     </components>
     <components id="_5S34QqMoEeGkWPVFom68wQ" type="_0pkjcZ9aEeGNFtlcQfU333" boundComponent="_Y6hMwp_6EeG3fPi34vn9KQ">
@@ -240,15 +240,15 @@
     </components>
     <components id="_itGiQqNJEefdfd_4Kgezezez" type="_1y2zQZohnnnmJ5CR-iA" boundComponent="_zPeqMJ89EeGNFtlcQfUFgw"/>
     <components id="_itGiQqNJEeff4Kg" type="_1y2zQZohnnnmJ5CR-iA" boundComponent="_VsqREp8zEeGYS-4UJ-FpAA"/>
-    <components id="_0VP9IqMnEeGkggwQ" description="" type="_fKt222vmJ5CR-iA" boundComponent="id_comp_tech_jetty">
+    <components id="id_comp_deploy_production_jetty" description="" type="_fKt222vmJ5CR-iA" boundComponent="id_comp_tech_jetty">
       <references type="RUNS" targets="_C2pRkqNKEeGULe7xIq_4Kg"/>
     </components>
     <components id="_bTKAYqMhEeGTqOb8fWOx0Q" type="_aazazaza" boundComponent="_osKccJ89EeGNFtlcQfUFgw"/>
-    <components id="_0VP9IqMnEeGkWPVFom68wQ" type="_fKt222vmJ5CR-iA" boundComponent="_BM4XQp6QEdJ1yNTLVw">
+    <components id="id_comp_deploy_production_tomcat6" type="_fKt222vmJ5CR-iA" boundComponent="_BM4XQp6QEdJ1yNTLVw">
       <references type="RUNS" targets="_bTKAYqMhEeGTqOb8fWOx0Q"/>
     </components>
-    <components id="id_comp_deploy_linux3_web_profile" name="Linux3_web_profile" description="" type="id_ct_deploy_OS" boundComponent="_a-g0Mp6OEeGeZJhcjVrcWg">
-      <references type="RUNS" targets="_0VP9IqMnEeGkggwQ _0VP9IqMnEeGkWPVFom68wQ"/>
+    <components id="id_comp_deploy_linux3_web_profile" name="Linux3_web_profile" description="" type="id_ct_deploy_OS" boundComponent="id_comp_tech_Linux3">
+      <references type="RUNS" targets="id_comp_deploy_production_jetty id_comp_deploy_production_tomcat6"/>
     </components>
     <components id="_eoxQUqMsEeG9sM0bZ_WFcA" name="Linux3_services_profile" type="id_ct_deploy_OS">
       <references type="RUNS" targets="_6b6KoqMtEeG9sM0bZ_WFcA _N13tUqNMEeGULe7xIq_4Kg"/>
@@ -264,24 +264,24 @@
     <components id="_C2pRkqNKEeGULe7xIq_4Kg" comment="" description="" type="_aazazaza" boundComponent="_hGsf4J89EeGNFtlcQfUFgw"/>
     <components id="_ZKfHEqNKEeGULe7xIq_4Kg" type="_Ybdmtd456" boundComponent="_G9AtYp6REeG"/>
     <components id="_N13tUqNMEeGULe7xIq_4Kg" type="_aazazazaerer" boundComponent="_bJoEgJ89EeGNFtlcQfUFgw"/>
-    <componentInstances id="_Yv4RtKMpEeGkWPVFom68wQ" name="HS21_1" component="id_comp_deploy_IBM-HS21" boundComponentInstance="_Hk3">
-      <references type="RUNS" targets="_pQiyNKMqEeG9sM0bZ_WFcA"/>
+    <componentInstances id="id_ci_deploy_HS21_1" name="HS21_1" component="id_comp_deploy_IBM_HS21" boundComponentInstance="_Hk3">
+      <references type="RUNS" targets="id_ci_deploy_OS_HS21_1"/>
     </componentInstances>
-    <componentInstances id="_pQiyNKMqEeG9sM0bZ_WFcA" name="OS_HS21_1" component="id_comp_deploy_linux3_web_profile">
+    <componentInstances id="id_ci_deploy_OS_HS21_1" name="OS_HS21_1" component="id_comp_deploy_linux3_web_profile">
       <references type="RUNS" targets="_E8hKBKMrEeG9sM0bZ_WFcA"/>
     </componentInstances>
-    <componentInstances id="_E8hKBKMrEeG9sM0bZ_WFcA" name="tomcat_bikesonline_1" component="_0VP9IqMnEeGkWPVFom68wQ">
+    <componentInstances id="_E8hKBKMrEeG9sM0bZ_WFcA" name="tomcat_bikesonline_1" component="id_comp_deploy_production_tomcat6">
       <references type="RUNS" targets="_Ste_hKMrEeG9sM0bZ_WFcA"/>
     </componentInstances>
     <componentInstances id="_Ste_hKMrEeG9sM0bZ_WFcA" name="gui_end_user_1" component="_bTKAYqMhEeGTqOb8fWOx0Q"/>
-    <componentInstances id="_Y4t3FKNJEeGULe7xIq_4Kg" name="jetty_admin_1" comment="" component="_0VP9IqMnEeGkggwQ">
+    <componentInstances id="_Y4t3FKNJEeGULe7xIq_4Kg" name="jetty_admin_1" comment="" component="id_comp_deploy_production_jetty">
       <references type="RUNS" targets="_LG40BKNLEeGULe7xIq_4Kg"/>
     </componentInstances>
     <componentInstances id="_LG40BKNLEeGULe7xIq_4Kg" name="gui_admin_bikesonline_1" component="_C2pRkqNKEeGULe7xIq_4Kg"/>
-    <componentInstances id="_jCLyhKMqEeG9sM0bZ_WFcA" name="HS22_1" description="" component="id_comp_deploy_IBM-HS22" boundComponentInstance="_HkPKsKAsEeGQjY87lm4AGg">
-      <references type="RUNS" targets="_pQiyNKMqEeG9sM0bZ_Wrff"/>
+    <componentInstances id="id_ci_deploy_HS22_1" name="HS22_1" description="" component="id_comp_deploy_IBM_HS22" boundComponentInstance="_HkPKsKAsEeGQjY87lm4AGg">
+      <references type="RUNS" targets="id_ci_deploy_OS_HS22_1"/>
     </componentInstances>
-    <componentInstances id="_pQiyNKMqEeG9sM0bZ_Wrff" name="OS_HS22_1" comment="" component="_eoxQUqMsEeG9sM0bZ_WFcA">
+    <componentInstances id="id_ci_deploy_OS_HS22_1" name="OS_HS22_1" comment="" component="_eoxQUqMsEeG9sM0bZ_WFcA">
       <references type="RUNS" targets="_UmUCBKMuEeG9sM0bZ_WFcA _rctPVKNMEeGULe7xIq_4Kg"/>
     </componentInstances>
     <componentInstances id="_UmUCBKMuEeG9sM0bZ_WFcA" name="jboss_bikesonline_1" comment="" component="_6b6KoqMtEeG9sM0bZ_WFcA">
@@ -299,7 +299,7 @@
     <componentInstances id="_pQiyNKMqEeG9sM0bZ_Wsdsds" name="OS_HS22_2" comment="" component="_eoxQUqMsEeG9sM0bZ_WFcA">
       <references type="RUNS" targets="_UmUCBKMuEeG9sM0bZrzereA"/>
     </componentInstances>
-    <componentInstances id="_JUg6dKMqEeGnUvsnwHUYsw" component="id_comp_deploy_IBM-HS22" boundComponentInstance="_HkPKsKA2AGg">
+    <componentInstances id="id_ci_deploy_HS22_2" component="id_comp_deploy_IBM_HS22" boundComponentInstance="_HkPKsKA2AGg">
       <references type="RUNS" targets="_pQiyNKMqEeG9sM0bZ_Wsdsds"/>
     </componentInstances>
     <componentInstances id="_rctPVKNMEeGULe7xIq_4Kg" name="batch_bikeonline_1" component="_N13tUqNMEeGULe7xIq_4Kg"/>
@@ -311,7 +311,7 @@
   </views>
   <stakeholders id="_skmNgZhhEeGGf-qGrGj3yA" name="Applicative Architect" views="id_view_vp_logical_Logical_BikesOnline _QMVcEZ8zEeGYS-4UJ-FpAA" viewPoints="id_vp_app id_vp_logical" actors="eaarchitecterich"/>
   <stakeholders id="_aB_ysZnaEeGRRqNqlyFgFw" name="Entreprise Architect" views="_0oVTkZ55EeGAFeVyyYKoXg" viewPoints="_uP3gkZniEeGeqKlv68ECYA" actors="pearchitect"/>
-  <stakeholders id="_dX1QoZnbEeGRRqNqlyFgFw" name="Technical Architect" views="_QXV2oZ6NEeGeZJhcjVrcWg _7-nzcaKREeGOsOUMPsTb_w" viewPoints="id_vp_tech" actors="ktarchitect"/>
+  <stakeholders id="_dX1QoZnbEeGRRqNqlyFgFw" name="Technical Architect" views="id_view_tech_catalog id_view_deploy_production" viewPoints="id_vp_tech" actors="ktarchitect"/>
   <stakeholders id="_te1CAZneEeGiWdDszZQI0g" name="Support" description="This service provides backup/administration services for the Design office." actors="bsupport"/>
   <stakeholders id="_Tig0gZnfEeGiWdDszZQI0g" name="Operations Architect" description="The operation architect is an operations expert responsible for building SLA/OLA along with the Applicative Architect of each project and to ensure these agrements are followed." viewPoints="fsdfhjksdhfkjhsdkfj" actors="aoarchitect"/>
   <units id="_mWgzQJhkEeGxRNCeID_vlg" name="Design Office" description="This It department produces functional specifications, urbanisation, application architecture and developement."/>
@@ -323,6 +323,6 @@
   <actors stakeholders="_Tig0gZnfEeGiWdDszZQI0g" unit="_eegzQJhkEiixRNCeID_vlg" username="aoarchitect" pwdHash="3670ceb10cb54b972d3fb52dd5cb30536eda0338" firstName="Amy " lastName="Oarchitect"/>
   <configuration>
     <definitions comment="Concept level (Component type) parameter definition, applies to any component of this type." id="hfkjdhfkjsdf" name="WEB_PORT_HTTP" target="_fKt222vmJ5CR-iA" type="INTEGER" description="HTTP port for web containers." defaultValue="80" exampleValue="8080" expression="" longDescription=""/>
-    <definitions comment="See also http://tomcat.apache.org/tomcat-5.5-doc/config/context.html#Common_Attributes" id="_p_Q0MKWtEeGh9OUjQ8dRYw" name="reloadable" target="_0VP9IqMnEeGkWPVFom68wQ" description="Whether the tomcat hot reload web applications." defaultValue="false" exampleValue="" expression="" longDescription="If true, Tomcat classloader reloads wars when added or overridden in the webapps directory."/>
+    <definitions comment="See also http://tomcat.apache.org/tomcat-5.5-doc/config/context.html#Common_Attributes" id="_p_Q0MKWtEeGh9OUjQ8dRYw" name="reloadable" target="id_comp_deploy_production_tomcat6" description="Whether the tomcat hot reload web applications." defaultValue="false" exampleValue="" expression="" longDescription="If true, Tomcat classloader reloads wars when added or overridden in the webapps directory."/>
   </configuration>
 </m2ling_domain:Root>

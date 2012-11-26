@@ -10,8 +10,6 @@ import java.util.Set;
 import java.util.logging.Logger;
 
 import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.ecore.util.EcoreUtil;
-import org.eclipse.emf.ecore.util.EcoreUtil.EqualityHelper;
 import org.m2ling.common.configuration.Conf;
 import org.m2ling.common.dto.core.AccessType;
 import org.m2ling.common.dto.core.ComponentTypeDTO;
@@ -59,16 +57,28 @@ public class ComponentTypeServiceImpl extends ServiceImpl implements ComponentTy
 	}
 
 	/**
-	 * Return whether the reference list contains the reference ref
+	 * Return whether the reference list contains "checked". The references may have different
+	 * targets (but the same type). We consider that list contains checked if at least one ref of list contains every targets of checked
+	 * for a given type exist.
 	 * 
 	 * @param list
 	 * @param ref
-	 * @return whether the reference list contains the reference ref
+	 * @return whether the reference list contains contains "checked"
 	 */
 	private boolean containsRef(List<Reference> list, Reference checked) {
-		EqualityHelper eh = new EcoreUtil.EqualityHelper();
 		for (Reference ref : list) {
-			if (eh.equals(ref, checked)) {
+			if (!ref.getType().equals(checked.getType())) {
+				continue;
+			}
+			List<String> checkedTargetsIDs = new ArrayList<String>();
+			for (HasNameAndID target : checked.getTargets()) {
+				checkedTargetsIDs.add(target.getId());
+			}
+			List<String> refTargetsIDs = new ArrayList<String>();
+			for (HasNameAndID target : ref.getTargets()) {
+				refTargetsIDs.add(target.getId());
+			}
+			if (refTargetsIDs.containsAll(checkedTargetsIDs)) {
 				return true;
 			}
 		}
@@ -95,14 +105,6 @@ public class ComponentTypeServiceImpl extends ServiceImpl implements ComponentTy
 			if (ifactor != -1 && ifactor < maxNbInstances) {
 				throw new FunctionalException(FunctionalException.Code.CT_INSUFFISENT_IF, null, dto.toString());
 			}
-			// check that we don't change the IF if bounded
-			if (ct.getBoundType() != null) {
-				int currentBoundIF = ct.getBoundType().getInstantiationFactor();
-				if (currentBoundIF != dto.getInstantiationFactor()) {
-					throw new FunctionalException(FunctionalException.Code.DELTA_BINDING_IF, null,
-							"boundType instantiation factor=" + ((currentBoundIF == -1) ? "*" : "" + currentBoundIF));
-				}
-			}
 		}
 	}
 
@@ -111,9 +113,8 @@ public class ComponentTypeServiceImpl extends ServiceImpl implements ComponentTy
 		if (access == AccessType.UPDATE) {
 			checkNoIllegalBindingChange(dto, target);
 		}
-		if (dto.getBoundType() != null) {
-			ComponentType boundCT = (ComponentType) util.getItemByTypeAndID(Type.COMPONENT_TYPE, dto.getBoundType()
-					.getId());
+		if (!isNullBinding(dto)) {
+			ComponentType boundCT = util.getComponentTypeByID(dto.getBoundType().getId());
 			checkBoundTypeExists(boundCT);
 			checkBoundTypeIsFromAnotherVP(dto, boundCT);
 			checkNoChainBinding(dto, boundCT);
@@ -122,8 +123,8 @@ public class ComponentTypeServiceImpl extends ServiceImpl implements ComponentTy
 
 	private void checkBoundTypeExists(final ComponentType ct) throws FunctionalException {
 		// Check if the bound type exists
-		if (util.getItemByTypeAndID(Type.COMPONENT_TYPE, ct.getId()) == null) {
-			throw new FunctionalException(FunctionalException.Code.TARGET_NOT_FOUND, null, "boundTypeID=" + ct.getId());
+		if (ct == null || util.getComponentTypeByID(ct.getId()) == null) {
+			throw new FunctionalException(FunctionalException.Code.TARGET_NOT_FOUND, null, "(boundType)");
 		}
 	}
 
@@ -132,16 +133,19 @@ public class ComponentTypeServiceImpl extends ServiceImpl implements ComponentTy
 		ComponentType currentCT = target.getBoundType();
 		boolean existingCompsForChangedType = (util.getComponentsForCTID(target.getId()).size() > 0);
 		// Attempt to drop the bound type
-		if (dto.getBoundType() == null && currentCT != null && existingCompsForChangedType) {
+		if (isNullBinding(dto) && currentCT != null && existingCompsForChangedType) {
 			throw new FunctionalException(FunctionalException.Code.CT_CANNOT_CHANGE_BINDING, null, "Current bound type="
 					+ dto.getBoundType());
 		}
 		// Attempt to change the bound type (note that we handle the case where currentCT is null)
-		if (dto.getBoundType() != null && !dto.getBoundType().getId().equals(currentCT.getId())
-				&& existingCompsForChangedType) {
+		if (!isNullBinding(dto) && !dto.getBoundType().getId().equals(currentCT.getId()) && existingCompsForChangedType) {
 			throw new FunctionalException(FunctionalException.Code.CT_CANNOT_CHANGE_BINDING, null, "Current bound type="
 					+ dto.getBoundType());
 		}
+	}
+
+	private boolean isNullBinding(final ComponentTypeDTO dto) {
+		return dto.getBoundType() == null || Strings.isNullOrEmpty(dto.getBoundType().getId());
 	}
 
 	/**
@@ -179,62 +183,88 @@ public class ComponentTypeServiceImpl extends ServiceImpl implements ComponentTy
 			throw new FunctionalException(FunctionalException.Code.NULL_ARGUMENT, null, "(references)");
 		}
 		for (ReferenceDTO refDTO : references) {
-			// check reference nullity
-			if (refDTO == null) {
-				throw new FunctionalException(FunctionalException.Code.NULL_ARGUMENT, null, "(references)");
-			}
-			// check reference type
-			if (ReferenceType.get(refDTO.getType()) == null) {
-				throw new FunctionalException(FunctionalException.Code.INVALID_REFERENCE_TYPE, null, dto.toString());
-			}
-			// check that the reference contains at least a single target
-			if (refDTO.getTargets().size() == 0) {
-				throw new FunctionalException(FunctionalException.Code.NONE_TARGET, null, "reference=" + refDTO.getType());
-			}
-			// check reference targets and type
-			if (refDTO.getTargets() == null) {
-				throw new FunctionalException(FunctionalException.Code.NULL_ARGUMENT, null, "(references/target)");
-			}
-			// check targets existence and the fact that targets types are local (in the CT VP)
-			ViewPoint thisVP = util.getViewPointByID(dto.getViewPoint().getId());// VP can't be null,
-																										// already controlled
-			for (HasNameAndIdDTO target : refDTO.getTargets()) {
-				if (target == null) {
-					throw new FunctionalException(FunctionalException.Code.NULL_ARGUMENT, null, "(references/target)");
-				}
-				ComponentType ctTarget = util.getComponentTypeByID(target.getId());
-				if (ctTarget == null) {
-					throw new FunctionalException(FunctionalException.Code.TARGET_NOT_FOUND, null, "(references/target)");
-				} else if (!thisVP.getComponentTypes().contains(ctTarget)) {
-					throw new FunctionalException(FunctionalException.Code.INVALID_REFERENCE_TYPE, null, dto.getReferences()
-							.toString());
-				}
-			}
+			checkReferenceFormat(dto, refDTO);
+			checkTargetsExistAndLocal(dto, refDTO);
 		}
-		// check that we don't drop a used reference
 		if (access == AccessType.UPDATE) {
-			List<Reference> dtoRefs = new ArrayList<Reference>();
-			for (ReferenceDTO r : dto.getReferences()) {
-				dtoRefs.add(fromDTO.newReference(r));
-			}
-			ComponentType ct = util.getComponentTypeByID(dto.getId());
-			EList<Reference> currentRefs = ct.getReferences();
-			for (Reference currentRef : currentRefs) {
-				if (!containsRef(dtoRefs, currentRef)) {
-					// a reference has been dropped
-					for (Component comp : util.getComponentsForCTID(dto.getId())) {
-						for (Reference compRef : comp.getReferences()) {
-							for (HasNameAndID target : compRef.getTargets()) {
-								Component compTarget = (Component) target;
-								if (currentRef.getTargets().contains(compTarget.getType())) {
-									throw new FunctionalException(FunctionalException.Code.CT_REFERENCE_IN_USE, null,
-											"component=" + comp.getName());
-								}
+			// check that we don't drop a used reference
+			checkReferenceDrop(dto);
+		}
+	}
+
+	/**
+	 * @param dto
+	 * @throws FunctionalException
+	 */
+	private void checkReferenceDrop(final ComponentTypeDTO dto) throws FunctionalException {
+		List<Reference> dtoRefs = new ArrayList<Reference>();
+		for (ReferenceDTO r : dto.getReferences()) {
+			dtoRefs.add(fromDTO.newReference(r));
+		}
+		ComponentType ct = util.getComponentTypeByID(dto.getId());
+		EList<Reference> currentRefs = ct.getReferences();
+		for (Reference currentRef : currentRefs) {
+			if (!containsRef(dtoRefs, currentRef)) {
+				// a reference has been dropped
+				for (Component comp : util.getComponentsForCTID(dto.getId())) {
+					for (Reference compRef : comp.getReferences()) {
+						for (HasNameAndID target : compRef.getTargets()) {
+							Component compTarget = (Component) target;
+							if (currentRef.getTargets().contains(compTarget.getType())) {
+								throw new FunctionalException(FunctionalException.Code.CT_REFERENCE_IN_USE, null, "component="
+										+ comp.getName());
 							}
 						}
 					}
 				}
 			}
+		}
+	}
+
+	/**
+	 * @param dto
+	 * @param refDTO
+	 * @throws FunctionalException
+	 */
+	private void checkTargetsExistAndLocal(final ComponentTypeDTO dto, ReferenceDTO refDTO) throws FunctionalException {
+		// check targets existence and the fact that targets types are local (in the CT VP)
+		ViewPoint thisVP = util.getViewPointByID(dto.getViewPoint().getId());// VP can't be null,
+																									// already controlled
+		for (HasNameAndIdDTO target : refDTO.getTargets()) {
+			if (target == null) {
+				throw new FunctionalException(FunctionalException.Code.NULL_ARGUMENT, null, "(references/target)");
+			}
+			ComponentType ctTarget = util.getComponentTypeByID(target.getId());
+			if (ctTarget == null) {
+				throw new FunctionalException(FunctionalException.Code.TARGET_NOT_FOUND, null, "(references/target)");
+			} else if (!thisVP.getComponentTypes().contains(ctTarget)) {
+				throw new FunctionalException(FunctionalException.Code.INVALID_REFERENCE_TYPE, null, dto.getReferences()
+						.toString());
+			}
+		}
+	}
+
+	/**
+	 * @param dto
+	 * @param refDTO
+	 * @throws FunctionalException
+	 */
+	private void checkReferenceFormat(final ComponentTypeDTO dto, ReferenceDTO refDTO) throws FunctionalException {
+		// check reference nullity
+		if (refDTO == null) {
+			throw new FunctionalException(FunctionalException.Code.NULL_ARGUMENT, null, "(references)");
+		}
+		// check reference type
+		if (ReferenceType.get(refDTO.getType()) == null) {
+			throw new FunctionalException(FunctionalException.Code.INVALID_REFERENCE_TYPE, null, dto.toString());
+		}
+		// check that the reference contains at least a single target
+		if (refDTO.getTargets().size() == 0) {
+			throw new FunctionalException(FunctionalException.Code.NONE_TARGET, null, "reference=" + refDTO.getType());
+		}
+		// check targets nullity
+		if (refDTO.getTargets() == null) {
+			throw new FunctionalException(FunctionalException.Code.NULL_ARGUMENT, null, "(references/target)");
 		}
 	}
 

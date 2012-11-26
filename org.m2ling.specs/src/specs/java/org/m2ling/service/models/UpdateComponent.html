@@ -8,83 +8,76 @@
 <body>
 	<H1>Component update</H1>
 	<p>Administrators or actors with adequate authorizations can update
-		a Component.</p>
+		a component.</p>
 	<h2>Binding</h2>
-	<p class='rule'>#COMP31- Bound type following attributes can be changed : name, tags ,
-		comment, description</p>
-	<p class='rule'>CT33- Bound type following attributes *can't* be changed : instantiation factor</p>
-	
+	<p class='rule'>#COMP31- A new bound type have to follow associated CT binding rules</p>
+	<p class='rule'>#COMP32- Bound type can only be changed if the
+		component contains none instance</p>
 	<div class='example'>
-		Given a id_ct_deploy_X86 reifiable and owning a '*' instance factor component type in 
-		<b concordion:set="#vpID">id_vp_deploy</b> viewpoint and bound to id_ct_physical_x86_server CT
-		Following update settings combination should : 
+		An attempt to change a component binding should : 
 		<table
-				concordion:execute="#result=testUpdateBound(#caseName, #vpID, #id, #name, #ifactor, #boundTypeID, #references, #enumeration, #description, #tags, #comment)">
-				<tr>
-					<th concordion:set="#caseName">Case</th>
-					<th concordion:set="#id">Id</th>
-					<th concordion:set="#name">Name</th>
-					<th concordion:set="#desc">Desc</th>
-					<th concordion:set="#tags">Tags</th>
-					<th concordion:set="#comment">Comment</th>
-					<th concordion:set="#boundTypeID">Bound type ID</th>
-					<th concordion:set="#references">References</th>
-					<th concordion:set="#enumeration">Enumeration</th>
-					<th concordion:set="#ifactor">Instantiation factor</th>
-					<th concordion:assertEquals="#result">should :</th>
-				</tr>
-				<tr>
-					<td>Change of name, type, tags and description</td>
-					<td>id_ct_deploy_X86</td>
-					<td>new name</td>
-					<td>new desc</td>
-					<td>new tag,new tags2</td>
-					<td>new comment</td>
-					<td>id_ct_physical_x86_server</td>
-					<td>RUNS:id_ct_deploy_OS</td>
-					<td>null</td>
-					<td>*</td>
-					<td>PASS</td>
-				</tr>
-				<tr>
-					<td>Change of IF</td>
-					<td>id_ct_deploy_X86</td>
-					<td>new name</td>
-					<td>new desc</td>
-					<td>new tag,new tags2</td>
-					<td>new comment</td>
-					<td>id_ct_physical_x86_server</td>
-					<td>RUNS:id_ct_deploy_OS</td>
-					<td>null</td>
-					<td>10</td>
-					<td>FAIL with code DELTA_BINDING_IF</td>
-				</tr>
+			concordion:execute="#result=updateBinding(#caseName,#compID,#boundID)">
+			<tr>
+				<th concordion:set="#caseName">Case</th>
+				<th concordion:set="#compID">Component ID</th>
+				<th concordion:set="#boundID">New bound ID</th>
+				<th concordion:assertEquals="#result">Should:</th>
+			</tr>
+			<tr>
+				<td>Change binding of a component with instance(s)</td>
+				<td>id_comp_vp2_v2_comp3</td>
+				<td>id_comp_vp1_v1_comp2</td>
+				<td>FAIL with code COMP_EXISTING_BINDING</td>
+			</tr>
+			<tr>
+				<td>Change binding of a component with none instance</td>
+				<td>id_comp_vp2_v2_comp4</td>
+				<td>id_comp_vp1_v1_comp3</td>
+				<td>PASS</td>
+			</tr>
+			<tr>
+				<td>Drop binding</td>
+				<td>id_comp_vp2_v2_comp4</td>
+				<td>null</td>
+				<td>FAIL with code COMP_MISSING_BINDING</td>
+			</tr>
+			<tr>
+				<td>Change to illegal binding</td>
+				<td>id_comp_vp2_v2_comp4</td>
+				<td>id_comp_vp1_v1_comp1</td>
+				<td>FAIL with code COMP_ILLEGAL_BINDING</td>
+			</tr>
 		</table>
 	</div>
-	
-	bound component can't be changed if CI exist
-	
+
 	<h2>References</h2>
-	<p class='rule'>CT34- A reference can't be dropped while at least one component of the component 
-	type use it against another component.</p>
+	<p class='rule'>#COMP33 : A reference can't be dropped while at the source component contains at least a single CI that owns a reference with same type and target than the reference we attempt to drop.</p>
 	<div class='example'>
-		Given a CT <b concordion:set="#sourceCTID">id_ct_deploy_X86</b> with a RUNS reference to <b concordion:set="#targetCTID">id_ct_deploy_OS</b> CT<br/>
-		And a component id_comp_deploy_IBM-HS21 which owns a RUNS reference toward id_comp_deploy_linux3_web_profile component <br/>
-		When we try to drop the CT reference <br/>
-		<span concordion:set="#references" ></span>
-		<span concordion:set="#caseName" >Drop existing ref</span>
-		<span concordion:execute="#resu=updateReference(#caseName,#sourceCTID,#references)"/><br/>
-		Then the service should <b concordion:assertEquals="#resu">FAIL with code CT_REFERENCE_IN_USE</b><br/> 
+		Given a component that owns a RUNS reference against another component<br/> 
+		And that owns a CI with a RUNS reference to a target of the to-be-dropped component<br/> 
+		When a attempt to drop a component reference  <span
+			concordion:execute="#resu=updateReferenceStillCI()" /> is done<br />
+		Then the service should <b concordion:assertEquals="#resu">FAIL
+			with code  COMP_REF_IN_USE</b><br />
 	</div>
-	
-	<p class='rule'>CT-35 : A Component Type can refer itself at upgrade (can't be done at creation as reference target doesn't exist yet).</p>
 	<div class='example'>
-		<span concordion:set="#caseName" >CT-35</span>
-	    Given an existing CT <b concordion:set="#sourceCTID">id_ct_deploy_X86</b><br/> 
-	    When we set reference to <b concordion:set="#references" >RUNS:id_ct_deploy_X86</b><br/>
-		<span concordion:execute="#resu=updateReference(#caseName,#sourceCTID,#references)"/><br/>
-		Then the service should <b concordion:assertEquals="#resu">FAIL with code CT_REFERENCE_IN_USE</b><br/> 
-	</div>
+		Given a component that owns a RUNS reference against another component<br/> 
+		And that owns NONE CI <br/>
+		When a attempt to drop a component reference  <span
+			concordion:execute="#resu=updateReferenceNoCI()" /> is done<br />
+		Then the service should <b concordion:assertEquals="#resu">PASS</b><br />
+	</div> 
 	
+		<p class='rule'>#COMP34 : If the CT allows it, a component can refer itself at
+		upgrade (can't be done at creation as this target doesn't exist
+		yet).</p>
+	<div class='example'>
+		Given an existing component <b concordion:set="#sourceCompID">id_comp_deploy_linux3_web_profile</b> with a single RUNS:id_comp_deploy_production_tomcat6,id_comp_deploy_production_jetty 
+		  in view <b concordion:set="#viewID">id_view_deploy_production</b><br/> 
+	    When we add a reference so the references are <b concordion:set="#references">RUNS:id_comp_deploy_production_tomcat6,id_comp_deploy_production_jetty,id_comp_deploy_linux3_web_profile</b><br/>
+		<span concordion:execute="#resu=updateReference(#sourceCompID,#references,#viewID)"/><br/>
+		Then the service should <b concordion:assertEquals="#resu">PASS</b><br/> 
+	</div>
+
 </body>
 </html>

@@ -92,7 +92,7 @@
 	</div>
 	</p>
 	
-	<p>Note that rule previous rules ensure implided rules already implemented in associated component types. 
+	<p>Note that rule previous rules ensure implied rules already implemented in associated component types. 
 	For instance, it is impossible to bind a component to an already-bound component (binding chain) 
 	but we don't need to test this because it is already check at the CT level.</p>
 
@@ -102,6 +102,7 @@
 		See <a href="../common/Core.html#Requirements">common service
 			requirements</a>
 	</p>
+	<p>Description can be null or void, even without bound component</p>
 	Following service inputs against
 	<b concordion:set="#vpID">id_vp_logical</b> viewpoint should make the
 	service:
@@ -180,6 +181,49 @@
 				<td>null</td>
 				<td>APPLICABLE</td>
 				<td>FAIL with code TARGET_NOT_FOUND</td>
+			</tr>
+			<!--  Description -->
+			<tr>
+				<td>Format/Null description</td>
+				<td>id_view_vp_logical_Logical_BikesOnline</td>
+				<td>id_ct_logical_servicecontainer</td>
+				<td>a_new_id</td>
+				<td>ServicesContainer2</td>
+				<td>null</td>
+				<td>comment2</td>
+				<td>tags1,tag2</td>
+				<td>id_comp_tech_weblogic</td>
+				<td>RUNS:id_comp_view_Logical_BikesOnline_AdminServices;DEPENDS_ON:id_comp_view_Logical_BikesOnline_PostgreSQL,id_comp_view_Logical_BikesOnline_AuthenticationLDAP</td>
+				<td>APPLICABLE</td>
+				<td>PASS</td>
+			</tr>
+			<tr>
+				<td>Format/Void description</td>
+				<td>id_view_vp_logical_Logical_BikesOnline</td>
+				<td>id_ct_logical_servicecontainer</td>
+				<td>a_new_id</td>
+				<td>ServicesContainer2</td>
+				<td></td>
+				<td>comment2</td>
+				<td>tags1,tag2</td>
+				<td>id_comp_tech_weblogic</td>
+				<td>RUNS:id_comp_view_Logical_BikesOnline_AdminServices;DEPENDS_ON:id_comp_view_Logical_BikesOnline_PostgreSQL,id_comp_view_Logical_BikesOnline_AuthenticationLDAP</td>
+				<td>APPLICABLE</td>
+				<td>PASS</td>
+			</tr>
+			<tr>
+				<td>Format/Void description after trim</td>
+				<td>id_view_vp_logical_Logical_BikesOnline</td>
+				<td>id_ct_logical_servicecontainer</td>
+				<td>a_new_id</td>
+				<td>ServicesContainer2</td>
+				<td>space</td>
+				<td>comment2</td>
+				<td>tags1,tag2</td>
+				<td>id_comp_tech_weblogic</td>
+				<td>RUNS:id_comp_view_Logical_BikesOnline_AdminServices;DEPENDS_ON:id_comp_view_Logical_BikesOnline_PostgreSQL,id_comp_view_Logical_BikesOnline_AuthenticationLDAP</td>
+				<td>APPLICABLE</td>
+				<td>PASS</td>
 			</tr>
 			<!--  Type check -->
 			<tr>

@@ -9,8 +9,6 @@ import java.util.List;
 import java.util.logging.Logger;
 
 import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.ecore.util.EcoreUtil;
-import org.eclipse.emf.ecore.util.EcoreUtil.EqualityHelper;
 import org.m2ling.common.configuration.Conf;
 import org.m2ling.common.dto.core.AccessType;
 import org.m2ling.common.dto.core.ComponentDTO;
@@ -68,7 +66,7 @@ public class ComponentServiceImpl extends ServiceImpl implements ComponentServic
 		// none component binding against this component ?
 		for (View checkedView : pmanager.getRoot().getViews()) {
 			if (checkedView.equals(viewOfCompToDelete)) {
-				// Local binding is not supported so we don't need to 
+				// Local binding is not supported so we don't need to
 				// check binding from the same view
 				continue;
 			}
@@ -82,19 +80,8 @@ public class ComponentServiceImpl extends ServiceImpl implements ComponentServic
 		}
 	}
 
-	/**
-	 * Check DTO references
-	 * 
-	 * @param dto
-	 *           the DTO
-	 * @param access
-	 *           the access type
-	 * @param ct
-	 *           the component type of the component to be created or updated
-	 * @throws FunctionalException
-	 *            if the argument doesn't follow the operation contract
-	 */
-	private void checkReferences(final ComponentDTO dto, AccessType access, ComponentType ct) throws FunctionalException {
+	private void checkReferences(final ComponentDTO dto, final AccessType access, final Component target,
+			final ComponentType ct) throws FunctionalException {
 		List<ReferenceDTO> references = dto.getReferences();
 		// Check global nullity
 		if (references == null) {
@@ -102,29 +89,38 @@ public class ComponentServiceImpl extends ServiceImpl implements ComponentServic
 		}
 		ComponentType thisCompType = ct;
 		for (ReferenceDTO refDTO : references) {
-			// check reference nullity
-			if (refDTO == null) {
-				throw new FunctionalException(FunctionalException.Code.NULL_ARGUMENT, null, "(references)");
-			}
-			// check reference type
-			if (ReferenceType.get(refDTO.getType()) == null) {
-				throw new FunctionalException(FunctionalException.Code.INVALID_REFERENCE_TYPE, null, dto.toString());
-			}
-			// check that the reference contains at least a single target
-			if (refDTO.getTargets().size() == 0) {
-				throw new FunctionalException(FunctionalException.Code.NONE_TARGET, null, "reference=" + refDTO.getType());
-			}
-			// check reference targets and type
-			if (refDTO.getTargets() == null) {
-				throw new FunctionalException(FunctionalException.Code.NULL_ARGUMENT, null, "(references/target)");
-			}
+			checkReferenceFormat(dto, refDTO);
 			checkTargetsExistence(refDTO);
 			checkTargetsTypes(thisCompType, refDTO);
 		}
 		// check that we don't drop a used reference (no need to check DELETE access type as we can't
 		// delete a component while instances still exist)
 		if (access == AccessType.UPDATE) {
-			checkReferenceDeletion(dto, thisCompType);
+			checkReferenceDeletion(dto, target);
+		}
+	}
+
+	/**
+	 * @param dto
+	 * @param refDTO
+	 * @throws FunctionalException
+	 */
+	private void checkReferenceFormat(final ComponentDTO dto, ReferenceDTO refDTO) throws FunctionalException {
+		// check reference nullity
+		if (refDTO == null) {
+			throw new FunctionalException(FunctionalException.Code.NULL_ARGUMENT, null, "(references)");
+		}
+		// check reference type
+		if (ReferenceType.get(refDTO.getType()) == null) {
+			throw new FunctionalException(FunctionalException.Code.INVALID_REFERENCE_TYPE, null, dto.toString());
+		}
+		// check that the reference contains at least a single target
+		if (refDTO.getTargets().size() == 0) {
+			throw new FunctionalException(FunctionalException.Code.NONE_TARGET, null, "reference=" + refDTO.getType());
+		}
+		// check targets nullity
+		if (refDTO.getTargets() == null) {
+			throw new FunctionalException(FunctionalException.Code.NULL_ARGUMENT, null, "(references/target)");
 		}
 	}
 
@@ -171,12 +167,12 @@ public class ComponentServiceImpl extends ServiceImpl implements ComponentServic
 		}
 	}
 
-	private void checkReferenceDeletion(final ComponentDTO dto, ComponentType thisCompType) throws FunctionalException {
+	private void checkReferenceDeletion(final ComponentDTO dto, Component thisComp) throws FunctionalException {
 		List<Reference> dtoRefs = new ArrayList<Reference>();
 		for (ReferenceDTO r : dto.getReferences()) {
 			dtoRefs.add(fromDTO.newReference(r));
 		}
-		EList<Reference> currentRefs = thisCompType.getReferences();
+		EList<Reference> currentRefs = thisComp.getReferences();
 		for (Reference currentRef : currentRefs) {
 			if (!containsRef(dtoRefs, currentRef)) {
 				// a reference has been dropped
@@ -196,27 +192,74 @@ public class ComponentServiceImpl extends ServiceImpl implements ComponentServic
 	}
 
 	/**
-	 * Return whether the reference list contains the reference ref
+	 * Return whether the reference list contains "checked". The references may have different
+	 * targets (but the same type). We consider that list contains checked if at least one ref of list contains every targets of checked
+	 * for a given type exist.
 	 * 
 	 * @param list
 	 * @param ref
-	 * @return whether the reference list contains the reference ref
+	 * @return whether the reference list contains contains "checked"
 	 */
 	private boolean containsRef(List<Reference> list, Reference checked) {
-		EqualityHelper eh = new EcoreUtil.EqualityHelper();
 		for (Reference ref : list) {
-			if (eh.equals(ref, checked)) {
+			if (!ref.getType().equals(checked.getType())) {
+				continue;
+			}
+			List<String> checkedTargetsIDs = new ArrayList<String>();
+			for (HasNameAndID target : checked.getTargets()) {
+				checkedTargetsIDs.add(target.getId());
+			}
+			List<String> refTargetsIDs = new ArrayList<String>();
+			for (HasNameAndID target : ref.getTargets()) {
+				refTargetsIDs.add(target.getId());
+			}
+			if (refTargetsIDs.containsAll(checkedTargetsIDs)) {
 				return true;
 			}
 		}
 		return false;
 	}
 
-	private void checkBoundComponent(final ComponentDTO dto, ComponentType ct) throws FunctionalException {
-		if (ct.getBoundType() != null && dto.getBoundComponent() == null) {
-			throw new FunctionalException(FunctionalException.Code.COMP_MISSING_BINDING, null, "excpected bound type="
+	private void checkBoundComponent(final ComponentDTO dto, AccessType access, Component target, ComponentType ct)
+			throws FunctionalException {
+		checkBoundComponentConformToCT(dto, ct);
+		checkForExistingCI(dto, access, target, ct);
+	}
+
+	private void checkForExistingCI(final ComponentDTO dto, AccessType access, Component target, ComponentType ct)
+			throws FunctionalException {
+		// Check that none CI exist before actually changing a legal binding
+		if (access == AccessType.UPDATE) {
+			boolean existingCIForChangedComp = (util.getComponentsInstancesForComponentID(target.getId()).size() > 0);
+			// Attempt to drop the bound component
+			if (isNullBinding(dto) && target.getBoundComponent() != null && existingCIForChangedComp) {
+				throw new FunctionalException(FunctionalException.Code.COMP_EXISTING_INSTANCE, null,
+						"Current bound component=" + dto.getBoundComponent());
+			}
+			// Attempt to change the bound component (note that we handle the case where ct is null)
+			if (!isNullBinding(dto) && target.getBoundComponent() != null
+					&& !dto.getBoundComponent().getId().equals(target.getBoundComponent().getId())
+					&& existingCIForChangedComp) {
+				throw new FunctionalException(FunctionalException.Code.COMP_EXISTING_BINDING, null,
+						"Current bound component=" + dto.getBoundComponent());
+			}
+		}
+	}
+
+	private boolean isNullBinding(final ComponentDTO dto) {
+		return dto.getBoundComponent() == null || Strings.isNullOrEmpty(dto.getBoundComponent().getId());
+	}
+
+	/**
+	 * @param dto
+	 * @param ct
+	 * @throws FunctionalException
+	 */
+	private void checkBoundComponentConformToCT(final ComponentDTO dto, ComponentType ct) throws FunctionalException {
+		if (ct.getBoundType() != null && isNullBinding(dto)) {
+			throw new FunctionalException(FunctionalException.Code.COMP_MISSING_BINDING, null, "expected bound type="
 					+ ct.getBoundType().getName());
-		} else if (dto.getBoundComponent() != null && dto.getBoundComponent().getId() != null) {
+		} else if (!isNullBinding(dto)) {
 			// Check if the bound component exists
 			Component bound = (Component) util.getComponentByID(dto.getBoundComponent().getId());
 			if (bound == null) {
@@ -265,12 +308,7 @@ public class ComponentServiceImpl extends ServiceImpl implements ComponentServic
 			// Check associated view existence
 			View view = null;
 			if (access == AccessType.CREATE) {
-				if (vID == null) {
-					throw new FunctionalException(FunctionalException.Code.NULL_ARGUMENT, null, "(view)");
-				}
-				if ("".equals(vID.trim())) {
-					throw new FunctionalException(FunctionalException.Code.VOID_ARGUMENT, null, "(view)");
-				}
+				checkViewIDFormat(vID);
 				view = util.getViewByID(vID);
 			} else {// vID is ignored for access != create
 				view = util.getViewsByItem(target);
@@ -287,15 +325,24 @@ public class ComponentServiceImpl extends ServiceImpl implements ComponentServic
 				throw new FunctionalException(FunctionalException.Code.TARGET_NOT_FOUND, null, "(component type)");
 			}
 			// References
-			checkReferences(dto, access, ct);
+			checkReferences(dto, access, target, ct);
 			// Bound component
-			checkBoundComponent(dto, ct);
+			checkBoundComponent(dto, access, target, ct);
 			// Description
-			if (dto.getBoundComponent() == null) {
-				checkDescriptionMandatory(dto.getDescription());
-			} else {
-				checkDescriptionNotMandatory(dto.getDescription());
-			}
+			checkDescriptionNotMandatory(dto.getDescription());
+		}
+	}
+
+	/**
+	 * @param vID
+	 * @throws FunctionalException
+	 */
+	private void checkViewIDFormat(final String vID) throws FunctionalException {
+		if (vID == null) {
+			throw new FunctionalException(FunctionalException.Code.NULL_ARGUMENT, null, "(view)");
+		}
+		if ("".equals(vID.trim())) {
+			throw new FunctionalException(FunctionalException.Code.VOID_ARGUMENT, null, "(view)");
 		}
 	}
 
