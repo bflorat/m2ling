@@ -177,12 +177,12 @@
 	should : <b concordion:assertEquals="#resu">FAIL with code BOUND_TYPE_BOUND</b> </div>
 	</p>
 	<p class='rule'>CT10 : A Component Type can't be bound to a component type of the same
-		VP (no local bindings).
+		VP (no local bindings).</p>
 		<div class='example'>In this case, the CT <span concordion:execute="#resu=testLocalBinding()">creation</span> 
 	should : <b concordion:assertEquals="#resu">FAIL with code LOCAL_BINDING</b> </div>
-	</p>
 	<p class='rule'>CT11 : If one of following attribute is not provided, a binded CT get
 		them from the bound CT : name, comment, description. Tags from new CT and bound type (if any) are merged.
+		</p>
 		<div class='example'>
 		Given a CT "ServicesContainer" in Logical viewpoint bound to "ApplicationServer" CT in Technical viewpoint<br/>
 		When setting following combination of attributes to ServicesContainer<br/>
@@ -226,8 +226,56 @@
 					<td>name2|[tagx, tagy]|comment2|a description</td>
 				</tr>
 			</table>
-			</div>
-		</p>
+		</div>
+		
+		<p class='rule'>CT15 : If status is null and the CT is bound, we use the bound CT status if it is among VP status literal 
+	    (otherwise, it is kept null).</p>
+	    <div class='example'>
+		Given a CT "ServicesContainer" in Logical viewpoint bound to "ApplicationServer" CT in Technical viewpoint<br/>
+		When setting following combination of attributes to ServicesContainer<br/>
+		Then the new CT attributes should be :
+			<table
+		concordion:execute="#result=testBoundDerivedStatus(#caseName,#boundCTID,#vpStatusLiterals,#boundVPStatusLiterals,#status,#boundStatus)">
+				<tr>
+					<th concordion:set="#caseName">Case</th>
+					<th concordion:set="#vpStatusLiterals">This CT VP status literals</th>
+					<th concordion:set="#vpStatusLiterals">This CT VP status literals</th>
+					<th concordion:set="#boundCTAttributes">Bound CT attributes (Name|tags|comment|description)</th>
+					<th concordion:assertEquals="#result">View from caller :</th>
+				</tr>
+				<tr>
+					<td>CT11/all null</td>
+					<td>null|null|null|null</td>
+					<td>a name|tagx,tagy|a comment|a description</td>
+					<td>a name|[tagx, tagy]|a comment|a description</td>
+				</tr>
+				<tr>
+					<td>CT11/null name</td>
+					<td>null|taga|comment2|description2</td>
+					<td>a name|tagx,tagy|a comment|a description</td>
+					<td>a name|[taga, tagx, tagy]|comment2|description2</td>
+				</tr>
+				<tr>
+					<td>CT11/null desc</td>
+					<td>name2|taga|comment2|null</td>
+					<td>a name|tagx,tagy|a comment|a description</td>
+					<td>name2|[taga, tagx, tagy]|comment2|a description</td>
+				</tr>
+				<tr>
+					<td>CT11/null comment and description</td>
+					<td>name2|taga|null|null</td>
+					<td>a name|tagx,tagy|a comment|a description</td>
+					<td>name2|[taga, tagx, tagy]|a comment|a description</td>
+				</tr>
+				<tr>
+					<td>CT11/null tags and description</td>
+					<td>name2|null|comment2|null</td>
+					<td>a name|tagx,tagy|a comment|a description</td>
+					<td>name2|[tagx, tagy]|comment2|a description</td>
+				</tr>
+			</table>
+		</div>
+	    
 		
 		<h3>References rules</h3>
 		<p class='rule'>CT12 : A reference target can't be void. Note that we don't test the case where the target is null as 
@@ -245,10 +293,13 @@
 			<div class='example'>In this case, the CT <span concordion:execute="#resu=testExternalRefs()">creation</span> 
 			should : <b concordion:assertEquals="#resu">FAIL with code INVALID_REFERENCE_TYPE</b> </div>
 		</p>
+		s		  
 		
 		
 	<h3>Format controls</h3>
-		<p>See <a href="../common/Core.html#Requirements">common service requirements</a></p>
+		<ul>
+		  <li>See <a href="../common/Core.html#Requirements">common service requirements</a> </li>
+  		</ul>
 		Following service inputs against <b concordion:set="#vpID">id_vp_logical</b>
 		viewpoint should make the service <span
 			concordion:set="#justCheck=true" /> :

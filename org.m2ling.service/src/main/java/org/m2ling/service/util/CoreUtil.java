@@ -316,7 +316,7 @@ public class CoreUtil {
 	 *           the item
 	 * @return associated view
 	 */
-	public View getViewsByItem(Object item) {
+	public View getViewByItem(Object item) {
 		Root root = pmanager.getRoot();
 		for (View v : root.getViews()) {
 			if (item instanceof Component && v.getComponents().contains(item)) {

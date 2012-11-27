@@ -30,7 +30,7 @@ public class CreateCTFixture extends AbstractCTFixture {
 	public String createWithIf(String ifactor) throws FunctionalException {
 		return createAndGetCT("true", "CT1", "id_vp_logical", "id_new_ct_logical_servicecontainer", "ServicesContainer2",
 				"desc", "", "", ifactor, "null", "", "", "APPLICABLE");
-	} 
+	}
 
 	public String testExternalRefs() throws FunctionalException {
 		return createAndGetCT("true", "CT1", "id_vp_logical", "id_new_ct_logical_servicecontainer", "ServicesContainer2",
@@ -42,6 +42,7 @@ public class CreateCTFixture extends AbstractCTFixture {
 		ComponentTypeDTO.Builder builder = new ComponentTypeDTO.Builder(vp, "id_foo", "ServicesContainer2");
 		HasNameAndIdDTO nullTarget = new HasNameAndIdDTO.Builder(null, "").build();
 		ReferenceDTO ref = new ReferenceDTO.Builder(ReferenceType.RUNS.name()).addTarget(nullTarget).build();
+		builder.status("APPLICABLE");
 		builder.addReference(ref);
 		try {
 			service.createCT(null, builder.build());
@@ -130,8 +131,9 @@ public class CreateCTFixture extends AbstractCTFixture {
 		try {
 			ReferenceDTO refDTO = new ReferenceDTO.Builder(ReferenceType.CONTAINS.name()).build();
 			HasNameAndIdDTO vpDTO = new HasNameAndIdDTO.Builder("id_vp_logical", "vp_logical").build();
-			ComponentTypeDTO dto = new ComponentTypeDTO.Builder(vpDTO, "id_void_ct_logical_servicecontainer",
-					"ServicesContainer2").addReference(refDTO).build();
+			ComponentTypeDTO dto = ((org.m2ling.common.dto.core.ComponentTypeDTO.Builder) new ComponentTypeDTO.Builder(
+					vpDTO, "id_void_ct_logical_servicecontainer", "ServicesContainer2").addReference(refDTO).status(
+					"APPLICABLE")).build();
 			service.createCT(null, dto);
 			return "PASS";
 		} catch (FunctionalException ex) {
@@ -162,7 +164,7 @@ public class CreateCTFixture extends AbstractCTFixture {
 		}
 		vpID = UUT.nul(vpID);
 		id = UUT.nul(id);
-		name = UUT.nul(name); 
+		name = UUT.nul(name);
 		desc = UUT.nul(desc);
 		comment = UUT.nul(comment);
 		tags = UUT.nul(tags);

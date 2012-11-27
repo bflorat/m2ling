@@ -64,66 +64,55 @@ public class LinkTypeServiceImpl extends ServiceImpl implements LinkTypeService 
 		}
 	}
 
-	private void checkSourcesAndDestTypes(final LinkTypeDTO dto, AccessType access) throws FunctionalException {
-		/*
-		 * Note that sources and destinations items unicity is implicitly managed by the fact that
-		 * they are Set
-		 */
-		// Rule #LT32
+	private void checkRemovedCTNotInUse(final LinkTypeDTO dto, LinkType lt) throws FunctionalException {
+		List<ComponentType> droppedSourceTypes = Lists.newArrayList(lt.getSourceTypes());
+		for (HasNameAndIdDTO ctDTO : dto.getSourcesTypes()) {
+			ComponentType ct = util.getComponentTypeByID(ctDTO.getId());
+			droppedSourceTypes.remove(ct);
+		}
+		List<ComponentType> droppedDestTypes = Lists.newArrayList(lt.getDestinationTypes());
+		for (HasNameAndIdDTO ctDTO : dto.getDestinationsTypes()) {
+			ComponentType ct = util.getComponentTypeByID(ctDTO.getId());
+			droppedDestTypes.remove(ct);
+		}
+		if (droppedDestTypes.size() > 0 || droppedSourceTypes.size() > 0) {
+			for (View v : util.getViewsByVPID(dto.getViewPoint().getId())) {
+				for (Link link : v.getLinks()) {
+					List<Component> comps = util.getComponentForArchitectureItems(link.getSources());
+					for (Component comp : comps) {
+						if (droppedSourceTypes.contains(comp.getType())) {
+							throw new FunctionalException(Code.LT_EXISTING_LINK, null, "component=" + comp.getName());
+						}
+					}
+					comps = util.getComponentForArchitectureItems(link.getDestinations());
+					for (Component comp : comps) {
+						if (droppedDestTypes.contains(comp.getType())) {
+							throw new FunctionalException(Code.LT_EXISTING_LINK, null, "component=" + comp.getName());
+						}
+					}
+				}
+			}
+		}
+	}
+
+	private void checkSourcesAndDestsSize(final LinkTypeDTO dto) throws FunctionalException {
 		if (dto.getSourcesTypes().size() == 0) {
-			throw new FunctionalException(FunctionalException.Code.LT_NONE_SOURCES_TYPES, null, "link name="
-					+ dto.getName());
+			throw new FunctionalException(FunctionalException.Code.NONE_SOURCES_TYPES, null, "link name=" + dto.getName());
 		}
-		// Rule #LT33
 		if (dto.getDestinationsTypes().size() == 0) {
-			throw new FunctionalException(FunctionalException.Code.LT_NONE_DEST_TYPES, null, "link name=" + dto.getName());
+			throw new FunctionalException(FunctionalException.Code.NONE_DEST_TYPES, null, "link name=" + dto.getName());
 		}
-		// check existence of sources and destination CTs
+	}
+
+	private void checkCTsExistence(final LinkTypeDTO dto) throws FunctionalException {
 		for (HasNameAndIdDTO ctDTO : dto.getSourcesTypes()) {
 			if (util.getComponentTypeByID(ctDTO.getId()) == null) {
-				throw new FunctionalException(FunctionalException.Code.TARGET_NOT_FOUND, null, "link type source id="
-						+ ctDTO.getId());
+				throw new FunctionalException(FunctionalException.Code.TARGET_NOT_FOUND, null, "(link type source)");
 			}
 		}
 		for (HasNameAndIdDTO ctDTO : dto.getDestinationsTypes()) {
 			if (util.getComponentTypeByID(ctDTO.getId()) == null) {
-				throw new FunctionalException(FunctionalException.Code.TARGET_NOT_FOUND, null, "link type destination id="
-						+ ctDTO.getId());
-			}
-		}
-		if (access == AccessType.UPDATE) {
-			LinkType lt = util.getLinkTypeByID(dto.getId());
-			// Rules #LT30 and #LT31 : do not drop a source or destination type
-			// if used by a existing link
-			// - Compute dropped source CT
-			List<ComponentType> droppedSourceTypes = Lists.newArrayList(lt.getSourceTypes());
-			for (HasNameAndIdDTO ctDTO : dto.getSourcesTypes()) {
-				ComponentType ct = util.getComponentTypeByID(ctDTO.getId());
-				droppedSourceTypes.remove(ct);
-			}
-			List<ComponentType> droppedDestTypes = Lists.newArrayList(lt.getDestinationTypes());
-			for (HasNameAndIdDTO ctDTO : dto.getDestinationsTypes()) {
-				ComponentType ct = util.getComponentTypeByID(ctDTO.getId());
-				droppedDestTypes.remove(ct);
-			}
-			// - Check only if some types have been dropped
-			if (droppedDestTypes.size() > 0 || droppedSourceTypes.size() > 0) {
-				for (View v : util.getViewsByVPID(dto.getViewPoint().getId())) {
-					for (Link link : v.getLinks()) {
-						List<Component> comps = util.getComponentForArchitectureItems(link.getSources());
-						for (Component comp : comps) {
-							if (droppedSourceTypes.contains(comp.getType())) {
-								throw new FunctionalException(Code.LT_EXISTING_LINK, null, "component=" + comp.getName());
-							}
-						}
-						comps = util.getComponentForArchitectureItems(link.getDestinations());
-						for (Component comp : comps) {
-							if (droppedDestTypes.contains(comp.getType())) {
-								throw new FunctionalException(Code.LT_EXISTING_LINK, null, "component=" + comp.getName());
-							}
-						}
-					}
-				}
+				throw new FunctionalException(FunctionalException.Code.TARGET_NOT_FOUND, null, "(link type destination)");
 			}
 		}
 	}
@@ -181,7 +170,14 @@ public class LinkTypeServiceImpl extends ServiceImpl implements LinkTypeService 
 			checkStatus(dto.getViewPoint(), dto.getStatus());
 			checkComment(dto.getComment());
 			checkTags(dto.getTags());
-			checkSourcesAndDestTypes(dto, access);
+			checkSourcesAndDestsSize(dto);
+			// Note that sources and destinations items unicity is implicitly managed by the fact that
+			// they are Set
+			checkCTsExistence(dto);
+			if (access == AccessType.UPDATE) {
+				LinkType lt = util.getLinkTypeByID(dto.getId());
+				checkRemovedCTNotInUse(dto, lt);
+			}
 			checkAccessAndTemporalityTypes(dto, access);
 		}
 	}
@@ -248,7 +244,7 @@ public class LinkTypeServiceImpl extends ServiceImpl implements LinkTypeService 
 		try {
 			// Controls
 			if (util.getViewPointByID(vp) == null) {
-				throw new FunctionalException(Code.TARGET_NOT_FOUND, null, "Viewpoint=" + vp.toString());
+				throw new FunctionalException(Code.TARGET_NOT_FOUND, null, "Viewpoint id=" + vp);
 			}
 			Root root = pmanager.getRoot();
 			for (ViewPoint checked : root.getViewPoints()) {

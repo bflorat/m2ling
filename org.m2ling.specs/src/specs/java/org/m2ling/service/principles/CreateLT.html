@@ -49,13 +49,13 @@
 	<p class='rule'>LT01 : A LT must contain at least a single component type as source.</p>
 	<div class='example'>
 		If the Lt contains none source, the creation <span concordion:execute="#resu=testNoneSource()"> 
-		service</span> should : <b concordion:assertEquals="#resu">FAIL with code LT_NONE_SOURCES_TYPES</b> 
+		service</span> should : <b concordion:assertEquals="#resu">FAIL with code NONE_SOURCES_TYPES</b> 
 	</div>
 
 	<p class='rule'>LT02 : A LT must contain at least a single component type as destination.</p>
 	<div class='example'>
 		If the Lt contains none destination, the creation <span concordion:execute="#resu=testNoneDest()"> 
-		service</span> should : <b concordion:assertEquals="#resu">FAIL with code LT_NONE_DEST_TYPES</b> 
+		service</span> should : <b concordion:assertEquals="#resu">FAIL with code NONE_DEST_TYPES</b> 
 	</div>
 
 	<h3>Format controls</h3>
@@ -328,9 +328,9 @@
 			<td>APPLICABLE</td>
 			<td>FAIL with code TARGET_NOT_FOUND</td>
 		</tr>
-		<!--  Status literals -->
+		<!--  Status -->
 		<tr>
-			<td>Format/Unexisting status literal</td>
+			<td>Format/Unknown status</td>
 			<td>new_id_lt_logical_http_rest</td>
 			<td>HTTP_REST_2</td>
 			<td>description2</td>
@@ -344,7 +344,7 @@
 			<td>FAIL with code INVALID_STATUS</td>
 		</tr>
 		<tr>
-			<td>Format/null status literal</td>
+			<td>Format/null status</td>
 			<td>new_id_lt_logical_http_rest</td>
 			<td>HTTP_REST_2</td>
 			<td>description2</td>

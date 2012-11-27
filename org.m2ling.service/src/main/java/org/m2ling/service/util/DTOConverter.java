@@ -288,6 +288,9 @@ public class DTOConverter {
 				builder.addDestination(hniDTO);
 			}
 			builder.timeoutMillis(link.getTimeoutMillis());
+			LinkType lt = link.getType();
+			HasNameAndIdDTO typeDTO = new HasNameAndIdDTO.Builder(lt.getId(), lt.getName()).build();
+			builder.type(typeDTO);
 			return builder.build();
 		}
 
@@ -552,6 +555,8 @@ public class DTOConverter {
 				link.getDestinations().add(comp);
 			}
 			link.setTimeoutMillis(dto.getTimeoutMillis());
+			LinkType lt = util.getLinkTypeByID(dto.getLinkType().getId());
+			link.setType(lt);
 			return link;
 		}
 

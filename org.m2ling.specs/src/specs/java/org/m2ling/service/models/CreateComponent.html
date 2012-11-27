@@ -52,13 +52,13 @@
 		defined in their associated CT. 
 	<div class='example'>
 		If a reference target has a wrong type<br/>
-		then the component creation should <span
+		then the component <span
 			concordion:execute="#resu=testWrongTargetType()">creation</span> should
 		: <b concordion:assertEquals="#resu">FAIL with code COMP_ILLEGAL_REFERENCE</b>
 	</div>
 	<div class='example'>
 		If a reference target is right but has a wrong type (like RUNS instead of DEPENDS_ON)<br/>
-		then the component creation should <span
+		then the component <span
 			concordion:execute="#resu=testWrongReferenceType()">creation</span> should
 		: <b concordion:assertEquals="#resu">FAIL with code COMP_ILLEGAL_REFERENCE</b>
 	</div>
@@ -98,11 +98,12 @@
 
 
 	<h3>Format controls</h3>
-	<p>
-		See <a href="../common/Core.html#Requirements">common service
-			requirements</a>
-	</p>
-	<p>Description can be null or void, even without bound component</p>
+	<ul>
+		<li>See <a href="../common/Core.html#Requirements">common service
+				requirements</a></li>
+		<li>Description can be null or void, even without bound component</li>
+	</ul>
+	
 	Following service inputs against
 	<b concordion:set="#vpID">id_vp_logical</b> viewpoint should make the
 	service:

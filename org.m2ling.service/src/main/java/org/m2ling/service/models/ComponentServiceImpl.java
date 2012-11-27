@@ -55,21 +55,17 @@ public class ComponentServiceImpl extends ServiceImpl implements ComponentServic
 
 	private void checkBeforeDeletion(final ComponentDTO dto) throws FunctionalException {
 		Component compToDelete = util.getComponentByID(dto.getId());
-		View viewOfCompToDelete = util.getViewsByItem(compToDelete);
-		// none instance for this component ?
-		for (ComponentInstance instance : viewOfCompToDelete.getComponentInstances()) {
-			if (instance.getComponent().equals(compToDelete)) {
-				throw new FunctionalException(FunctionalException.Code.COMP_EXISTING_INSTANCE, null, "instance name="
-						+ instance.getName());
+		// none instance for this component ? note that CI can be in others views than their component
+		for (View view : pmanager.getRoot().getViews()) {
+			for (ComponentInstance instance : view.getComponentInstances()) {
+				if (instance.getComponent().equals(compToDelete)) {
+					throw new FunctionalException(FunctionalException.Code.COMP_EXISTING_INSTANCE, null, "instance name="
+							+ instance.getName());
+				}
 			}
 		}
 		// none component binding against this component ?
 		for (View checkedView : pmanager.getRoot().getViews()) {
-			if (checkedView.equals(viewOfCompToDelete)) {
-				// Local binding is not supported so we don't need to
-				// check binding from the same view
-				continue;
-			}
 			for (Component checkedComp : checkedView.getComponents()) {
 				Component checkedBoundComp = checkedComp.getBoundComponent();
 				if (checkedBoundComp != null && checkedBoundComp.equals(compToDelete)) {
@@ -193,8 +189,8 @@ public class ComponentServiceImpl extends ServiceImpl implements ComponentServic
 
 	/**
 	 * Return whether the reference list contains "checked". The references may have different
-	 * targets (but the same type). We consider that list contains checked if at least one ref of list contains every targets of checked
-	 * for a given type exist.
+	 * targets (but the same type). We consider that list contains checked if at least one ref of
+	 * list contains every targets of checked for a given type exist.
 	 * 
 	 * @param list
 	 * @param ref
@@ -299,10 +295,7 @@ public class ComponentServiceImpl extends ServiceImpl implements ComponentServic
 		}
 		// item existence (except for creation access)
 		if (access != AccessType.CREATE) {
-			target = util.getComponentByID(dto.getId());
-			if (target == null) {
-				throw new FunctionalException(FunctionalException.Code.TARGET_NOT_FOUND, null, dto.toString());
-			}
+			target = checkComponentExists(dto);
 		}
 		if (access == AccessType.CREATE || access == AccessType.UPDATE) {
 			// Check associated view existence
@@ -311,7 +304,7 @@ public class ComponentServiceImpl extends ServiceImpl implements ComponentServic
 				checkViewIDFormat(vID);
 				view = util.getViewByID(vID);
 			} else {// vID is ignored for access != create
-				view = util.getViewsByItem(target);
+				view = util.getViewByItem(target);
 			}
 			if (view == null) {
 				throw new FunctionalException(FunctionalException.Code.TARGET_NOT_FOUND, null, "(view)");
@@ -334,9 +327,19 @@ public class ComponentServiceImpl extends ServiceImpl implements ComponentServic
 	}
 
 	/**
-	 * @param vID
+	 * @param dto
+	 * @return
 	 * @throws FunctionalException
 	 */
+	private Component checkComponentExists(final ComponentDTO dto) throws FunctionalException {
+		Component target;
+		target = util.getComponentByID(dto.getId());
+		if (target == null) {
+			throw new FunctionalException(FunctionalException.Code.TARGET_NOT_FOUND, null, dto.toString());
+		}
+		return target;
+	}
+
 	private void checkViewIDFormat(final String vID) throws FunctionalException {
 		if (vID == null) {
 			throw new FunctionalException(FunctionalException.Code.NULL_ARGUMENT, null, "(view)");
@@ -399,11 +402,14 @@ public class ComponentServiceImpl extends ServiceImpl implements ComponentServic
 		try {
 			// Controls
 			checkDTO(dto, vID, AccessType.CREATE);
+			if (vID == null) {
+				throw new FunctionalException(FunctionalException.Code.NULL_ARGUMENT, null, "(view)");
+			}
 			// Processing
 			Component ct = fromDTO.newComponent(dto);
 			// Add the item
-			View vp = util.getViewByID(vID);
-			vp.getComponents().add(ct);
+			View view = util.getViewByID(vID);
+			view.getComponents().add(ct);
 			pmanager.commit();
 		} catch (Exception anyError) {
 			handleAnyException(anyError);
@@ -449,8 +455,8 @@ public class ComponentServiceImpl extends ServiceImpl implements ComponentServic
 			checkID(dto, AccessType.DELETE);
 			checkBeforeDeletion(dto);
 			Component comp = util.getComponentByID(dto.getId());
-			View vp = (View) comp.eContainer();
-			vp.getComponents().remove(comp);
+			View view = (View) comp.eContainer();
+			view.getComponents().remove(comp);
 			pmanager.commit();
 		} catch (Exception anyError) {
 			handleAnyException(anyError);

@@ -28,8 +28,6 @@ public class LinkBean extends AbstractCommonBean {
 
 	private HasNameAndIDBean type;
 
-	private HasNameAndIDBean boundComponent;
-
 	public LinkBean() {
 		super();
 	}
@@ -73,21 +71,6 @@ public class LinkBean extends AbstractCommonBean {
 	 */
 	public void setType(HasNameAndIDBean type) {
 		this.type = type;
-	}
-
-	/**
-	 * @return the boundComponent
-	 */
-	public HasNameAndIDBean getBoundComponent() {
-		return boundComponent;
-	}
-
-	/**
-	 * @param boundComponent
-	 *           the boundComponent to set
-	 */
-	public void setBoundComponent(HasNameAndIDBean boundComponent) {
-		this.boundComponent = boundComponent;
 	}
 
 	/**

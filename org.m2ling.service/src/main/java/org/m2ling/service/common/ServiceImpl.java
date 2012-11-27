@@ -218,21 +218,21 @@ abstract public class ServiceImpl {
 	 * Check the status. null is allowed
 	 * 
 	 * @param vp
-	 *           the viewpoint associated with the item shose status is checked
+	 *           the viewpoint associated with the item whose status is checked
 	 * @param status
 	 *           the status to check
 	 * @throws FunctionalException
 	 *            if the status is not in VP status literal list
 	 */
 	protected void checkStatus(HasNameAndIdDTO vp, String status) throws FunctionalException {
-		if (vp == null) {
+		if (vp == null || vp.getId() == null) {
 			throw new FunctionalException(FunctionalException.Code.NULL_ARGUMENT, null, "(viewpoint)");
 		}
 		ViewPoint storedVP = util.getViewPointByID(vp.getId());
 		if (storedVP == null) {
 			throw new FunctionalException(FunctionalException.Code.TARGET_NOT_FOUND, null, "Viewpoint id=" + vp.getId());
 		}
-		if (!Strings.isNullOrEmpty(status) && !storedVP.getStatusLiterals().contains(status)) {
+		if (storedVP.getStatusLiterals() != null && !storedVP.getStatusLiterals().contains(status)) {
 			throw new FunctionalException(FunctionalException.Code.INVALID_STATUS, null, null);
 		}
 	}

@@ -465,14 +465,6 @@
         <element xmi:type="ecore:EEnumLiteral" href="m2ling.ecore#//core/Type/LINK"/>
         <layoutConstraint xmi:type="notation:Location" xmi:id="_VF1tMXz7EeGxYN6Z18g5WA"/>
       </children>
-      <children xmi:type="notation:Node" xmi:id="_WDvf4Hz7EeGxYN6Z18g5WA" type="2006">
-        <element xmi:type="ecore:EEnumLiteral" href="m2ling.ecore#//core/Type/COMPONENT_NODE"/>
-        <layoutConstraint xmi:type="notation:Location" xmi:id="_WDvf4Xz7EeGxYN6Z18g5WA"/>
-      </children>
-      <children xmi:type="notation:Node" xmi:id="_YMNoQHz7EeGxYN6Z18g5WA" type="2006">
-        <element xmi:type="ecore:EEnumLiteral" href="m2ling.ecore#//core/Type/STREAM"/>
-        <layoutConstraint xmi:type="notation:Location" xmi:id="_YMNoQXz7EeGxYN6Z18g5WA"/>
-      </children>
       <children xmi:type="notation:Node" xmi:id="_BJC2EX2UEeG9QeH0AfpiyA" type="2006">
         <element xmi:type="ecore:EEnumLiteral" href="m2ling.ecore#//core/Type/VIEWPOINT"/>
         <layoutConstraint xmi:type="notation:Location" xmi:id="_BJDdIH2UEeG9QeH0AfpiyA"/>

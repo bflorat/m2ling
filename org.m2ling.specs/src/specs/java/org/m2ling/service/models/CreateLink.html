@@ -1,0 +1,392 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:concordion="http://www.concordion.org/2007/concordion">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>Link creation</title>
+</head>
+<body>
+	<H1>Link creation</H1>
+	<p>Administrators or actors with adequate authorizations can create
+		a new links that will be used as type by the links created in the
+		studio.</p>
+	<h2>Nominal rules</h2>
+	<p>
+		See <a href="../common/Core.html#Requirements">common service
+			requirements</a>
+	</p>
+
+	<div class="example">
+		A new link created with <span concordion:set="#caseName">Roundtrip
+		</span>
+		<ul>
+			<li>vID=<b concordion:set="#vID">id_view_vp_logical_Logical_BikesOnline</b></li>
+			<li>id=<b concordion:set="#id">id_new_link</b></li>
+			<li>ltID=<b concordion:set="#ltID">id_lt_logical_http_rest</b></li>
+			<li>name=<b concordion:set="#name">STREAM6</b></li>
+			<li>sources=<b concordion:set="#sources">id_comp_view_Logical_BikesOnline_AdminGUI,id_comp_view_Logical_BikesOnline_EndUserGUI</b></li>
+			<li>destination=<b concordion:set="#destinations">id_comp_view_Logical_BikesOnline_AdminServices,id_comp_view_Logical_BikesOnline_PaymentServices</b></li>
+			<li>description=<b concordion:set="#desc">Asynchronous REST
+					call over HTTP. Default port : 80. </b></li>
+			<li>comment=<b concordion:set="#comment">Over TCP only.</b></li>
+			<li>tags=<b concordion:set="#tags">logical,network</b></li>
+			<li>timeout=<b concordion:set="#timeout">3</b></li>
+			<li>status=<b concordion:set="#status">APPLICABLE</b></li>
+		</ul>
+		should have following characteristics (full round trip from
+		presentation to presentation) : <b
+			concordion:assertEquals="createAndGetLink(#caseName,#vID,#id,#ltID,#name,#desc,#comment,#tags,#timeout,#sources,#destinations,#status)">
+			comment=Over TCP only. description=Asynchronous REST call over HTTP.
+			Default port : 80.
+			destinations=[id=id_comp_view_Logical_BikesOnline_AdminServices
+			name=AdminServices ,
+			id=id_comp_view_Logical_BikesOnline_PaymentServices
+			name=PaymentServices ] drop= id=id_new_link name=STREAM6
+			sources=[id=id_comp_view_Logical_BikesOnline_AdminGUI name=AdminGUI ,
+			id=id_comp_view_Logical_BikesOnline_EndUserGUI name=EndUserGUI ]
+			status=APPLICABLE tags=logical,network timeoutMillis=3
+			type=id=id_lt_logical_http_rest name=HTTP_REST</b>
+	</div>
+
+	<p class='rule'>#Link01 : A link must contain at least a single
+		component as source.</p>
+	<div class='example'>
+		If the link contains none <b concordion:set="#sourceOrDest">source</b>, the creation <span
+			concordion:execute="#resu=testNoneSourceOrDest(#sourceOrDest)"> service</span> should :
+		<b concordion:assertEquals="#resu">FAIL with code
+			NONE_SOURCES_TYPES</b>
+	</div>
+
+	<p class='rule'>#Link02 : A link must contain at least a single
+		component as destination.</p>
+	<div class='example'>
+		If the link contains none <b concordion:set="#sourceOrDest">destination</b>, the creation <span
+			concordion:execute="#resu=testNoneSourceOrDest(#sourceOrDest)"> service</span> should : <b
+			concordion:assertEquals="#resu">FAIL with code NONE_DEST_TYPES</b>
+	</div>
+	
+	<p class='rule'>#Link03 : Component sources and destinations must follow types defined in their associated LT. </p>
+		<div class='example'>
+			If a <b concordion:set="#sourceOrDest">source</b> target has a wrong type<br/>
+			Then the link <span
+				concordion:execute="#resu=testWrongSourceOrDestType(#sourceOrDest)">creation</span> should
+			: <b concordion:assertEquals="#resu">FAIL with code LINK_ILLEGAL_SOURCE_OR_DEST</b>
+		</div>
+		<div class='example'>
+			If a <b concordion:set="#sourceOrDest">destination</b> target has a wrong type<br/>
+			Then the link <span
+				concordion:execute="#resu=testWrongSourceOrDestType(#sourceOrDest)">creation</span> should
+			: <b concordion:assertEquals="#resu">FAIL with code LINK_ILLEGAL_SOURCE_OR_DEST</b>
+		</div>
+	
+
+	<h3>Format controls</h3>
+	<ul>
+		<li>See <a href="../common/Core.html#Requirements">common
+				service requirements</a></li>
+		<li>A negative timeout means "undefined". Any negative value is accepted.</li>
+	</ul>
+	<div class="example">
+		<table
+			concordion:execute="#result=checkFormat(#caseName,#vID,#id,#ltID,#name,#desc,
+				#comment,#tags,#timeout,#sources,#destinations,#status)">
+			<tr>
+				<th concordion:set="#caseName">Case</th>
+				<th concordion:set="#vID">View ID</th>
+				<th concordion:set="#id">ID</th>
+				<th concordion:set="#ltID">LT ID</th>
+				<th concordion:set="#name">Name</th>
+				<th concordion:set="#desc">Description</th>
+				<th concordion:set="#comment">Comment</th>
+				<th concordion:set="#tags">Tags</th>
+				<th concordion:set="#timeout">Timeout (ms)</th>
+				<th concordion:set="#sources">Sources</th>
+				<th concordion:set="#destinations">Destination</th>
+				<th concordion:set="#status">Status</th>
+				<th concordion:assertEquals="#result">should :</th>
+			</tr>
+			<!-- Nominal -->
+			<tr>
+				<td>Format/Nominal creation</td>
+				<td>id_view_physical_BikesOnline</td>
+				<td>id_new_link</td>
+				<td>id_lt_physical_gigabit</td>
+				<td>Physical gigabit link</td>
+				<td>description2</td>
+				<td>comment2</td>
+				<td>tags1,tag2</td>
+				<td>10000</td>
+				<td>id_comp_physical_catalog_ibm_hs21</td>
+				<td>id_comp_physical_catalog_ibm_hs21</td>
+				<td>APPLICABLE</td>
+				<td>PASS</td>
+			</tr>
+			<!-- ID -->
+			<tr>
+				<td>Format/existing ID</td>
+				<td>id_view_physical_BikesOnline</td>
+				<td>id_link_physical_cable5E</td>
+				<td>id_lt_physical_gigabit</td>
+				<td>Physical gigabit link</td>
+				<td>description2</td>
+				<td>comment2</td>
+				<td>tags1,tag2</td>
+				<td>10000</td>
+				<td>id_comp_physical_catalog_ibm_hs21</td>
+				<td>id_comp_physical_catalog_ibm_hs21</td>
+				<td>APPLICABLE</td>
+				<td>FAIL with code DUPLICATES</td>
+			</tr>
+			<tr>
+				<td>Format/Null ID</td>
+				<td>id_view_physical_BikesOnline</td>
+				<td>null</td>
+				<td>id_lt_physical_gigabit</td>
+				<td>Physical gigabit link</td>
+				<td>description2</td>
+				<td>comment2</td>
+				<td>tags1,tag2</td>
+				<td>10000</td>
+				<td>id_comp_physical_catalog_ibm_hs21</td>
+				<td>id_comp_physical_catalog_ibm_hs21</td>
+				<td>APPLICABLE</td>
+				<td>FAIL with code NULL_ARGUMENT</td>
+			</tr>
+			<tr>
+				<td>Format/void id</td>
+				<td>id_view_physical_BikesOnline</td>
+				<td></td>
+				<td>id_lt_physical_gigabit</td>
+				<td>Physical gigabit link</td>
+				<td>description2</td>
+				<td>comment2</td>
+				<td>tags1,tag2</td>
+				<td>10000</td>
+				<td>id_comp_physical_catalog_ibm_hs21</td>
+				<td>id_comp_physical_catalog_ibm_hs21</td>
+				<td>APPLICABLE</td>
+				<td>FAIL with code VOID_ARGUMENT</td>
+			</tr>
+			<!-- LT check -->
+			<tr>
+				<td>Format/Null LT ID</td>
+				<td>id_view_physical_BikesOnline</td>
+				<td>id_new_link</td>
+				<td>null</td>
+				<td>Physical gigabit link</td>
+				<td>description2</td>
+				<td>comment2</td>
+				<td>tags1,tag2</td>
+				<td>10000</td>
+				<td>id_comp_physical_catalog_ibm_hs21</td>
+				<td>id_comp_physical_catalog_ibm_hs21</td>
+				<td>APPLICABLE</td>
+				<td>FAIL with code NULL_ARGUMENT</td>
+			</tr>
+			<tr>
+				<td>Format/void LT ID</td>
+				<td>id_view_physical_BikesOnline</td>
+				<td>id_new_link</td>
+				<td></td>
+				<td>Physical gigabit link</td>
+				<td>description2</td>
+				<td>comment2</td>
+				<td>tags1,tag2</td>
+				<td>10000</td>
+				<td>id_comp_physical_catalog_ibm_hs21</td>
+				<td>id_comp_physical_catalog_ibm_hs21</td>
+				<td>APPLICABLE</td>
+				<td>FAIL with code VOID_ARGUMENT</td>
+			</tr>
+			<tr>
+				<td>Format/Unexisting LT</td>
+				<td>id_view_physical_BikesOnline</td>
+				<td>id_new_link</td>
+				<td>id_foo</td>
+				<td>Physical gigabit link</td>
+				<td>description2</td>
+				<td>comment2</td>
+				<td>tags1,tag2</td>
+				<td>10000</td>
+				<td>id_comp_physical_catalog_ibm_hs21</td>
+				<td>id_comp_physical_catalog_ibm_hs21</td>
+				<td>APPLICABLE</td>
+				<td>FAIL with code TARGET_NOT_FOUND</td>
+			</tr>
+			<!-- name check -->
+			<tr>
+				<td>Format/Null name</td>
+				<td>id_view_physical_BikesOnline</td>
+				<td>id_new_link</td>
+				<td>id_lt_physical_gigabit</td>
+				<td>null</td>
+				<td>description2</td>
+				<td>comment2</td>
+				<td>tags1,tag2</td>
+				<td>10000</td>
+				<td>id_comp_physical_catalog_ibm_hs21</td>
+				<td>id_comp_physical_catalog_ibm_hs21</td>
+				<td>APPLICABLE</td>
+				<td>FAIL with code NULL_ARGUMENT</td>
+			</tr>
+			<tr>
+				<td>Format/Void name</td>
+				<td>id_view_physical_BikesOnline</td>
+				<td>id_new_link</td>
+				<td>id_lt_physical_gigabit</td>
+				<td></td>
+				<td>description2</td>
+				<td>comment2</td>
+				<td>tags1,tag2</td>
+				<td>10000</td>
+				<td>id_comp_physical_catalog_ibm_hs21</td>
+				<td>id_comp_physical_catalog_ibm_hs21</td>
+				<td>APPLICABLE</td>
+				<td>FAIL with code VOID_ARGUMENT</td>
+			</tr>
+			<tr>
+				<td>Format/Void name after trim</td>
+				<td>id_view_physical_BikesOnline</td>
+				<td>id_new_link</td>
+				<td>id_lt_physical_gigabit</td>
+				<td>space</td>
+				<td>description2</td>
+				<td>comment2</td>
+				<td>tags1,tag2</td>
+				<td>10000</td>
+				<td>id_comp_physical_catalog_ibm_hs21</td>
+				<td>id_comp_physical_catalog_ibm_hs21</td>
+				<td>APPLICABLE</td>
+				<td>FAIL with code VOID_ARGUMENT</td>
+			</tr>
+			<!-- Comment -->
+			<tr>
+				<td>Format/Null comment</td>
+				<td>id_view_physical_BikesOnline</td>
+				<td>id_new_link</td>
+				<td>id_lt_physical_gigabit</td>
+				<td>Physical gigabit link</td>
+				<td>description2</td>
+				<td>null</td>
+				<td>tags1,tag2</td>
+				<td>10000</td>
+				<td>id_comp_physical_catalog_ibm_hs21</td>
+				<td>id_comp_physical_catalog_ibm_hs21</td>
+				<td>APPLICABLE</td>
+				<td>PASS</td>
+			</tr>
+
+			<!-- Description -->
+			<tr>
+				<td>Format/Null description</td>
+				<td>id_view_physical_BikesOnline</td>
+				<td>id_new_link</td>
+				<td>id_lt_physical_gigabit</td>
+				<td>Physical gigabit link</td>
+				<td>null</td>
+				<td>comment2</td>
+				<td>tags1,tag2</td>
+				<td>10000</td>
+				<td>id_comp_physical_catalog_ibm_hs21</td>
+				<td>id_comp_physical_catalog_ibm_hs21</td>
+				<td>APPLICABLE</td>
+				<td>PASS</td>
+			</tr>
+			<tr>
+				<td>Format/Void description</td>
+				<td>id_view_physical_BikesOnline</td>
+				<td>id_new_link</td>
+				<td>id_lt_physical_gigabit</td>
+				<td>Physical gigabit link</td>
+				<td></td>
+				<td>comment2</td>
+				<td>tags1,tag2</td>
+				<td>10000</td>
+				<td>id_comp_physical_catalog_ibm_hs21</td>
+				<td>id_comp_physical_catalog_ibm_hs21</td>
+				<td>APPLICABLE</td>
+				<td>PASS</td>
+			</tr>
+			<tr>
+				<td>Format/Void description after trim</td>
+				<td>id_view_physical_BikesOnline</td>
+				<td>id_new_link</td>
+				<td>id_lt_physical_gigabit</td>
+				<td>Physical gigabit link</td>
+				<td>space</td>
+				<td>comment2</td>
+				<td>tags1,tag2</td>
+				<td>10000</td>
+				<td>id_comp_physical_catalog_ibm_hs21</td>
+				<td>id_comp_physical_catalog_ibm_hs21</td>
+				<td>APPLICABLE</td>
+				<td>PASS</td>
+			</tr>
+			<!-- Sources and destination -->
+			<tr>
+				<td>Format/unexisting source</td>
+				<td>id_view_physical_BikesOnline</td>
+				<td>id_new_link</td>
+				<td>id_lt_physical_gigabit</td>
+				<td>Physical gigabit link</td>
+				<td>description2</td>
+				<td>comment2</td>
+				<td>tags1,tag2</td>
+				<td>10000</td>
+				<td>id_comp_physical_catalog_ibm_hs21,id_foo</td>
+				<td>id_comp_physical_catalog_ibm_hs21</td>
+				<td>APPLICABLE</td>
+				<td>FAIL with code TARGET_NOT_FOUND</td>
+			</tr>
+
+			<tr>
+				<td>Format/unexisting destination</td>
+				<td>id_view_physical_BikesOnline</td>
+				<td>id_new_link</td>
+				<td>id_lt_physical_gigabit</td>
+				<td>Physical gigabit link</td>
+				<td>description2</td>
+				<td>comment2</td>
+				<td>tags1,tag2</td>
+				<td>10000</td>
+				<td>id_comp_physical_catalog_ibm_hs21</td>
+				<td>id_comp_physical_catalog_ibm_hs21,id_foo</td>
+				<td>APPLICABLE</td>
+				<td>FAIL with code TARGET_NOT_FOUND</td>
+			</tr>
+			<!--  Status -->
+			<tr>
+				<td>Format/Unknown status</td>
+				<td>id_view_physical_BikesOnline</td>
+				<td>id_new_link</td>
+				<td>id_lt_physical_gigabit</td>
+				<td>Physical gigabit link</td>
+				<td>description2</td>
+				<td>comment2</td>
+				<td>tags1,tag2</td>
+				<td>10000</td>
+				<td>id_comp_physical_catalog_ibm_hs21</td>
+				<td>id_comp_physical_catalog_ibm_hs21,id_foo</td>
+				<td>foo</td>
+				<td>FAIL with code INVALID_STATUS</td>
+			</tr>
+			<tr>
+				<td>Format/invalid null status</td>
+				<td>id_view_physical_BikesOnline</td>
+				<td>id_new_link</td>
+				<td>id_lt_physical_gigabit</td>
+				<td>Physical gigabit link</td>
+				<td>description2</td>
+				<td>comment2</td>
+				<td>tags1,tag2</td>
+				<td>10000</td>
+				<td>id_comp_physical_catalog_ibm_hs21</td>
+				<td>id_comp_physical_catalog_ibm_hs21,id_foo</td>
+				<td>null</td>
+				<td>FAIL with code INVALID_STATUS</td>
+			</tr>
+
+		</table>
+	</div>
+</body>
+</html>
