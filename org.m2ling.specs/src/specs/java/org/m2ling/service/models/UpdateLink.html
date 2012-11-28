@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:concordion="http://www.concordion.org/2007/concordion">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>Link update</title>
+</head>
+<body>
+	<H1>Link update</H1>
+	<p>Administrators or actors with adequate authorizations can update
+		a link.</p>
+
+	<p class='rule'>#Link30 : A component source can't be removed while at
+		least a single link instance (LI) owns a source component instance of this component in any view.</p>
+	<p class='rule'>#Link31 : A component destination can't be removed while at
+		least a single link instance (LI) owns a destination component instance of this component in any view.</p>
+	<p class='rule'>#Link32 : A Link shouldn't wind up with none source 
+		after an update.</p>
+	<p class='rule'>#Link33 : A Link shouldn't wind up with none destination
+		after an update.</p>
+
+	<H1>Examples</H1>
+	<div class='example'>
+		Given a link id_link_vp2_v2_l1 in the id_vp2_v2 view with source components : 
+		  {id_comp_vp2_v2_comp1,id_comp_vp2_v2_comp2} and destination components : {id_comp_vp2_v2_comp3,id_comp_vp2_v2_comp4}<br/>
+		And a LI id_link_vp2_v2_l1_1 {id_ci_vp2_v2_comp1_ci1 to id_ci_vp2_v2_comp3_ci1} in the same id_vp2_v2 view<br/>
+		When the update service is called <br/>
+		Then :
+		<table
+			concordion:execute="#result=updateLink(#caseName,#id,#sources,#destinations)">
+			<tr>
+				<th concordion:set="#caseName">Case</th>
+				<th concordion:set="#id">Link ID</th>
+				<th concordion:set="#sources">Sources</th>
+				<th concordion:set="#destinations">Destination</th>
+				<th concordion:assertEquals="#result">should :</th>
+			</tr>
+			<!-- Nominal -->
+			<tr>
+				<td>No change</td>
+				<td>id_link_vp2_v2_l1</td>
+				<td>id_comp_vp2_v2_comp1,id_comp_vp2_v2_comp2</td>
+				<td>id_comp_vp2_v2_comp3,id_comp_vp2_v2_comp4</td>
+				<td>PASS</td>
+			</tr>
+			<tr>
+				<td>#Link30 fail</td>
+				<td>id_link_vp2_v2_l1</td>
+				<td>id_comp_vp2_v2_comp2</td>
+				<td>id_comp_vp2_v2_comp3,id_comp_vp2_v2_comp4</td>
+				<td>FAIL with code LINK_IN_USE</td>
+			</tr>
+			<tr>
+				<td>#Link31 fail</td>
+				<td>id_link_vp2_v2_l1</td>
+				<td>id_comp_vp2_v2_comp1,id_comp_vp2_v2_comp2</td>
+				<td>id_comp_vp2_v2_comp4</td>
+				<td>FAIL with code LINK_IN_USE</td>
+			</tr>
+			<tr>
+				<td>#Link32 fail</td>
+				<td>id_link_vp2_v2_l1</td>
+				<td></td>
+				<td>id_comp_vp2_v2_comp3,id_comp_vp2_v2_comp4</td>
+				<td>FAIL with code NONE_SOURCES_TYPES</td>
+			</tr>
+			<tr>
+				<td>#Link33 fail</td>
+				<td>id_link_vp2_v2_l1</td>
+				<td>id_comp_vp2_v2_comp1,id_comp_vp2_v2_comp2</td>
+				<td></td>
+				<td>FAIL with code NONE_DEST_TYPES</td>
+			</tr>
+		</table>
+	</div>
+</body>
+</html>

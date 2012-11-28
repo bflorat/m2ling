@@ -192,12 +192,21 @@ public class LinkServiceImpl extends ServiceImpl implements LinkService {
 			Component comp = util.getComponentByID(compDTO.getId());
 			droppedDestComponents.remove(comp);
 		}
-		if (droppedDestComponents.size() > 0 || droppedSourceComponents.size() > 0) {
+		if ( droppedSourceComponents.size() > 0) {
 			for (LinkInstance li : view.getLinkInstances()) {
 				ComponentInstance ci = li.getSource();
 				Component comp = ci.getComponent();
-				if (droppedSourceComponents.contains(comp) || droppedDestComponents.contains(comp)) {
-					throw new FunctionalException(Code.LINK_IN_USE, null, "Component instance=" + ci.getName());
+				if (droppedSourceComponents.contains(comp)) {
+					throw new FunctionalException(Code.LINK_IN_USE, null, "Source component instance=" + ci.getName());
+				}
+			}
+		}
+		if ( droppedDestComponents.size() > 0) {
+			for (LinkInstance li : view.getLinkInstances()) {
+				ComponentInstance ci = li.getDestination();
+				Component comp = ci.getComponent();
+				if (droppedDestComponents.contains(comp)) {
+					throw new FunctionalException(Code.LINK_IN_USE, null, "Destination component instance=" + ci.getName());
 				}
 			}
 		}
