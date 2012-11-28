@@ -113,11 +113,11 @@ public class LinkServiceImpl extends ServiceImpl implements LinkService {
 		}
 	}
 
-	private void checkViewIDFormat(final String vID) throws FunctionalException {
-		if (vID == null) {
+	private void checkViewIDFormat(final LinkDTO dto) throws FunctionalException {
+		if (dto.getView() == null || dto.getView().getId() == null) {
 			throw new FunctionalException(FunctionalException.Code.NULL_ARGUMENT, null, "(view)");
 		}
-		if ("".equals(vID.trim())) {
+		if ("".equals(dto.getView().getId().trim())) {
 			throw new FunctionalException(FunctionalException.Code.VOID_ARGUMENT, null, "(view)");
 		}
 	}
@@ -127,13 +127,11 @@ public class LinkServiceImpl extends ServiceImpl implements LinkService {
 	 * 
 	 * @param dto
 	 *           : Link DTO to check
-	 * @param vID
-	 *           : view ID
 	 * @param access
 	 *           : access type used to discriminate the check
 	 * @throws FunctionalException
 	 */
-	void checkDTO(final LinkDTO dto, final String vID, final AccessType access) throws FunctionalException {
+	void checkDTO(final LinkDTO dto, final AccessType access) throws FunctionalException {
 		Link target = null;
 		View view = null;
 		LinkType lt = null;
@@ -156,8 +154,8 @@ public class LinkServiceImpl extends ServiceImpl implements LinkService {
 		if (access == AccessType.CREATE || access == AccessType.UPDATE) {
 			// Check associated view existence
 			if (access == AccessType.CREATE) {
-				checkViewIDFormat(vID);
-				view = util.getViewByID(vID);
+				checkViewIDFormat(dto);
+				view = util.getViewByID(dto.getView().getId());
 			} else {// vID is ignored for access != create
 				view = util.getViewByItem(target);
 			}
@@ -192,7 +190,7 @@ public class LinkServiceImpl extends ServiceImpl implements LinkService {
 			Component comp = util.getComponentByID(compDTO.getId());
 			droppedDestComponents.remove(comp);
 		}
-		if ( droppedSourceComponents.size() > 0) {
+		if (droppedSourceComponents.size() > 0) {
 			for (LinkInstance li : view.getLinkInstances()) {
 				ComponentInstance ci = li.getSource();
 				Component comp = ci.getComponent();
@@ -201,7 +199,7 @@ public class LinkServiceImpl extends ServiceImpl implements LinkService {
 				}
 			}
 		}
-		if ( droppedDestComponents.size() > 0) {
+		if (droppedDestComponents.size() > 0) {
 			for (LinkInstance li : view.getLinkInstances()) {
 				ComponentInstance ci = li.getDestination();
 				Component comp = ci.getComponent();
@@ -219,7 +217,7 @@ public class LinkServiceImpl extends ServiceImpl implements LinkService {
 	public void updateLink(final Context context, final LinkDTO dto) throws FunctionalException {
 		try {
 			// Controls
-			checkDTO(dto, null, AccessType.UPDATE);
+			checkDTO(dto, AccessType.UPDATE);
 			// Processing
 			Link link = util.getLinkByID(dto.getId());
 			link.setName(dto.getName());
@@ -248,17 +246,14 @@ public class LinkServiceImpl extends ServiceImpl implements LinkService {
 	}
 
 	@Override
-	public void createLink(final Context context, final LinkDTO dto, final String vID) throws FunctionalException {
+	public void createLink(final Context context, final LinkDTO dto) throws FunctionalException {
 		try {
 			// Controls
-			checkDTO(dto, vID, AccessType.CREATE);
-			if (util.getViewByID(vID) == null) {
-				throw new FunctionalException(FunctionalException.Code.NULL_ARGUMENT, null, "(view)");
-			}
+			checkDTO(dto, AccessType.CREATE);
 			// Processing
 			Link link = fromDTO.newLink(dto);
 			// Add the item
-			View view = util.getViewByID(vID);
+			View view = util.getViewByID(dto.getView().getId());
 			view.getLinks().add(link);
 			pmanager.commit();
 		} catch (Exception anyError) {
@@ -302,7 +297,7 @@ public class LinkServiceImpl extends ServiceImpl implements LinkService {
 	public void deleteLink(final Context context, final LinkDTO dto) throws FunctionalException {
 		try {
 			// Controls
-			checkDTO(dto, null, AccessType.DELETE);
+			checkDTO(dto, AccessType.DELETE);
 			Link link = util.getLinkByID(dto.getId());
 			View view = (View) link.eContainer();
 			view.getLinks().remove(link);

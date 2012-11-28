@@ -191,7 +191,7 @@ public class DTOConverter {
 		 * @return a HasNameAndID DTO from provided bean
 		 */
 		public HasNameAndIdDTO getNameAndIdDTO(HasNameAndIDBean bean) {
-			if (bean.getId() == null) {
+			if (bean == null || bean.getId() == null) {
 				return null;
 			}
 			HasNameAndIdDTO.Builder builder = new HasNameAndIdDTO.Builder(bean.getId(), bean.getName());
@@ -201,7 +201,8 @@ public class DTOConverter {
 		public ComponentDTO getComponentDTO(ComponentBean bean) {
 			HasNameAndIdDTO boundComp = getNameAndIdDTO(bean.getBoundComponent());
 			HasNameAndIdDTO typeDTO = getNameAndIdDTO(bean.getType());
-			ComponentDTO.Builder builder = new ComponentDTO.Builder(bean.getId(), bean.getName());
+			HasNameAndIdDTO viewDTO = getNameAndIdDTO(bean.getView());
+			ComponentDTO.Builder builder = new ComponentDTO.Builder(bean.getId(), bean.getName(), viewDTO);
 			populateCommonBuilder(builder, bean);
 			builder.boundType(boundComp).type(typeDTO);
 			for (ReferenceBean ref : bean.getReferences()) {
@@ -226,7 +227,8 @@ public class DTOConverter {
 
 		public LinkDTO getLinkDTO(LinkBean bean) {
 			HasNameAndIdDTO typeDTO = getNameAndIdDTO(bean.getType());
-			LinkDTO.Builder builder = new LinkDTO.Builder(bean.getId(), bean.getName());
+			HasNameAndIdDTO viewDTO = getNameAndIdDTO(bean.getView());
+			LinkDTO.Builder builder = new LinkDTO.Builder(bean.getId(), bean.getName(), viewDTO);
 			builder.type(typeDTO).timeoutMillis(bean.getTimeoutMillis());
 			populateCommonBuilder(builder, bean);
 			for (HasNameAndIDBean sourceBean : bean.getSources()) {
@@ -426,6 +428,8 @@ public class DTOConverter {
 			}
 			bean.setReferences(refs);
 			HasNameAndIDBean ctBean = getHasNameAndIdBean(dto.getComponentType());
+			HasNameAndIDBean viewBean = getHasNameAndIdBean(dto.getView());
+			bean.setView(viewBean);
 			bean.setType(ctBean);
 			return bean;
 		}
@@ -490,7 +494,9 @@ public class DTOConverter {
 			}
 			bean.setDestinations(destinations);
 			HasNameAndIDBean ltBean = getHasNameAndIdBean(dto.getLinkType());
+			HasNameAndIDBean viewBean = getHasNameAndIdBean(dto.getView());
 			bean.setType(ltBean);
+			bean.setView(viewBean);
 			bean.setTimeoutMillis(dto.getTimeoutMillis());
 			return bean;
 		}

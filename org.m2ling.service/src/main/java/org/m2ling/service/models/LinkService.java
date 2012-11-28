@@ -35,14 +35,12 @@ public interface LinkService {
 	 * 
 	 * @param linkDTO
 	 *           the link type
-	 * @param vID
-	 *           view ID to add the link to
 	 * @throws FunctionalException
 	 *            if the viewpoint doesn't exist
 	 * @throws FunctionalException
 	 *            if the DTO entry is faulty
 	 */
-	void createLink(Context context, LinkDTO linkDTO, String vID) throws FunctionalException;
+	void createLink(Context context, LinkDTO linkDTO) throws FunctionalException;
 
 	/**
 	 * Return an alphabetically ordered list of available links given a view ID. If none link is

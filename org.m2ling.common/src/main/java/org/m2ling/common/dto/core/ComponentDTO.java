@@ -18,15 +18,20 @@ public final class ComponentDTO extends AbstractCommonDTO implements Comparable<
 
 	private final HasNameAndIdDTO boundComponent;
 
+	private final HasNameAndIdDTO view;
+
 	public static class Builder extends AbstractCommonDTO.Builder {
+		private HasNameAndIdDTO view;
+
 		private HasNameAndIdDTO type;
 
 		private List<ReferenceDTO> references = new ArrayList<ReferenceDTO>(1);
 
 		private HasNameAndIdDTO boundComponent;
 
-		public Builder(String id, String name) {
+		public Builder(String id, String name, HasNameAndIdDTO view) {
 			super(id, name);
+			this.view = view;
 		}
 
 		public Builder boundType(HasNameAndIdDTO boundComponent) {
@@ -55,6 +60,7 @@ public final class ComponentDTO extends AbstractCommonDTO implements Comparable<
 		references = builder.references;
 		type = builder.type;
 		boundComponent = builder.boundComponent;
+		view = builder.view;
 	}
 
 	public boolean equals(Object o) {
@@ -104,5 +110,12 @@ public final class ComponentDTO extends AbstractCommonDTO implements Comparable<
 	 */
 	public List<ReferenceDTO> getReferences() {
 		return references;
+	}
+
+	/**
+	 * @return the view DTO
+	 */
+	public HasNameAndIdDTO getView() {
+		return view;
 	}
 }

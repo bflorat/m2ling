@@ -36,7 +36,7 @@ public class AbstractComponentFixture extends M2lingFixture {
 	public String getCheckNullDTO() {
 		reset("Technical");
 		try {
-			service.checkDTO(null, "id_v1", AccessType.CREATE);
+			service.checkDTO(null, AccessType.CREATE);
 			return "PASS";
 		} catch (FunctionalException ex) {
 			return "FAIL";

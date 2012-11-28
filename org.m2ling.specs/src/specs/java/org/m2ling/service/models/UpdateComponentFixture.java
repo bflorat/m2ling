@@ -24,7 +24,7 @@ public class UpdateComponentFixture extends AbstractComponentFixture {
 		try {
 			// Reuse existing attributes to avoid changing out-of scope attributes
 			ComponentDTO compDTO = service.getComponentByID(null, compID);
-			ComponentDTO.Builder builder = new ComponentDTO.Builder(compID, compDTO.getName());
+			ComponentDTO.Builder builder = new ComponentDTO.Builder(compID, compDTO.getName(), null);
 			for (String tag : compDTO.getTags()) {
 				builder.addTag(tag);
 			}
@@ -36,7 +36,7 @@ public class UpdateComponentFixture extends AbstractComponentFixture {
 			}
 			builder.boundType(new HasNameAndIdDTO.Builder(boundID, "").build());
 			builder.type(compDTO.getComponentType());
-			service.checkDTO(builder.build(), "id_vp2_v2", AccessType.UPDATE);
+			service.checkDTO(builder.build(), AccessType.UPDATE);
 			return "PASS";
 		} catch (FunctionalException ex) {
 			return "FAIL with code " + ex.getCode().name();
@@ -52,7 +52,7 @@ public class UpdateComponentFixture extends AbstractComponentFixture {
 		try {
 			// Reuse existing attributes to avoid changing out-of scope attributes
 			ComponentDTO compDTO = service.getComponentByID(null, "id_comp_deploy_IBM_HS21");
-			ComponentDTO.Builder builder = new ComponentDTO.Builder(compDTO.getId(), compDTO.getName());
+			ComponentDTO.Builder builder = new ComponentDTO.Builder(compDTO.getId(), compDTO.getName(), null);
 			for (String tag : compDTO.getTags()) {
 				builder.addTag(tag);
 			}
@@ -64,7 +64,7 @@ public class UpdateComponentFixture extends AbstractComponentFixture {
 				builder.boundType(new HasNameAndIdDTO.Builder(compDTO.getBoundComponent().getId(), "").build());
 			}
 			builder.type(compDTO.getComponentType());
-			service.checkDTO(builder.build(), "id_vp2_v2", AccessType.UPDATE);
+			service.checkDTO(builder.build(), AccessType.UPDATE);
 			return "PASS";
 		} catch (FunctionalException ex) {
 			return "FAIL with code " + ex.getCode().name();
@@ -80,7 +80,7 @@ public class UpdateComponentFixture extends AbstractComponentFixture {
 		try {
 			// Reuse existing attributes to avoid changing out-of scope attributes
 			ComponentDTO compDTO = service.getComponentByID(null, "id_comp_tech_Linux3");
-			ComponentDTO.Builder builder = new ComponentDTO.Builder(compDTO.getId(), compDTO.getName());
+			ComponentDTO.Builder builder = new ComponentDTO.Builder(compDTO.getId(), compDTO.getName(), null);
 			for (String tag : compDTO.getTags()) {
 				builder.addTag(tag);
 			}
@@ -92,7 +92,7 @@ public class UpdateComponentFixture extends AbstractComponentFixture {
 				builder.boundType(new HasNameAndIdDTO.Builder(compDTO.getBoundComponent().getId(), "").build());
 			}
 			builder.type(compDTO.getComponentType());
-			service.checkDTO(builder.build(), "id_view_tech_catalog", AccessType.UPDATE);
+			service.checkDTO(builder.build(), AccessType.UPDATE);
 			return "PASS";
 		} catch (FunctionalException ex) {
 			return "FAIL with code " + ex.getCode().name();
@@ -108,7 +108,7 @@ public class UpdateComponentFixture extends AbstractComponentFixture {
 		try {
 			// Reuse existing attributes to avoid changing out-of scope attributes
 			ComponentDTO compDTO = service.getComponentByID(null, sourceCompID);
-			ComponentDTO.Builder builder = new ComponentDTO.Builder(compDTO.getId(), compDTO.getName());
+			ComponentDTO.Builder builder = new ComponentDTO.Builder(compDTO.getId(), compDTO.getName(), null);
 			for (String tag : compDTO.getTags()) {
 				builder.addTag(tag);
 			}
@@ -118,7 +118,7 @@ public class UpdateComponentFixture extends AbstractComponentFixture {
 			setDTOReferences(builder, references);
 			builder.type(compDTO.getComponentType());
 			builder.boundType(compDTO.getBoundComponent());
-			service.checkDTO(builder.build(), viewID, AccessType.UPDATE);
+			service.checkDTO(builder.build(), AccessType.UPDATE);
 			return "PASS";
 		} catch (FunctionalException ex) {
 			return "FAIL with code " + ex.getCode().name();

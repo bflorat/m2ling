@@ -24,7 +24,7 @@ public class AbstractLinkFixture extends M2lingFixture {
 	public String getCheckNullDTO() {
 		reset("Technical");
 		try {
-			service.checkDTO(null, "id_vp1_v1", AccessType.CREATE);
+			service.checkDTO(null, AccessType.CREATE);
 			return "PASS";
 		} catch (FunctionalException ex) {
 			return "FAIL";

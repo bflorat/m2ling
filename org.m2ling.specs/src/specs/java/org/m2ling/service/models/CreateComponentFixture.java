@@ -22,17 +22,18 @@ public class CreateComponentFixture extends AbstractComponentFixture {
 	}
 
 	public String testNullRef() throws FunctionalException {
-		if (!noreset){
+		if (!noreset) {
 			reset("Bikes");
 		}
-		ComponentDTO.Builder builder = new ComponentDTO.Builder("id_foo", "Weblogic");
+		HasNameAndIdDTO view = new HasNameAndIdDTO.Builder("id_view_vp_logical_Logical_BikesOnline", "").build();
+		ComponentDTO.Builder builder = new ComponentDTO.Builder("id_foo", "Weblogic", view);
 		builder.type(new HasNameAndIdDTO.Builder("id_ct_logical_servicecontainer", "").build());
 		builder.description("desc");
 		HasNameAndIdDTO nullTarget = new HasNameAndIdDTO.Builder(null, "").build();
 		ReferenceDTO ref = new ReferenceDTO.Builder(ReferenceType.RUNS.name()).addTarget(nullTarget).build();
 		builder.addReference(ref);
 		try {
-			service.createComponent(null, builder.build(), "id_view_vp_logical_Logical_BikesOnline");
+			service.createComponent(null, builder.build());
 			return "PASS";
 		} catch (FunctionalException ex) {
 			return "FAIL with code " + ex.getCode().name();
@@ -42,20 +43,22 @@ public class CreateComponentFixture extends AbstractComponentFixture {
 	}
 
 	public String testWrongTargetType() throws FunctionalException {
-		return checkFormat("COMP1/wrong target", "id_view_vp_logical_Logical_BikesOnline", "id_ct_logical_servicecontainer", "id_foo",
-				"Weblogic", "desc", "comment", "", "null", "RUNS:id_comp_view_Logical_BikesOnline_AdminGUI", "null");
+		return checkFormat("COMP1/wrong target", "id_view_vp_logical_Logical_BikesOnline",
+				"id_ct_logical_servicecontainer", "id_foo", "Weblogic", "desc", "comment", "", "null",
+				"RUNS:id_comp_view_Logical_BikesOnline_AdminGUI", "null");
 	}
 
 	public String testWrongReferenceType() throws FunctionalException {
-		return checkFormat("COMP1/wrong type", "id_view_vp_logical_Logical_BikesOnline", "id_ct_logical_servicecontainer", "id_foo",
-				"Weblogic", "desc", "comment", "", "null", "DEPENDS_ON:id_comp_view_Logical_BikesOnline_AdminGUI", "null");
+		return checkFormat("COMP1/wrong type", "id_view_vp_logical_Logical_BikesOnline",
+				"id_ct_logical_servicecontainer", "id_foo", "Weblogic", "desc", "comment", "", "null",
+				"DEPENDS_ON:id_comp_view_Logical_BikesOnline_AdminGUI", "null");
 	}
 
 	public String testNullBinding() throws FunctionalException {
 		return checkFormat("COMP3", "id_view_vp_logical_Logical_BikesOnline", "id_ct_logical_servicecontainer", "id_foo",
 				"Weblogic", "desc", "comment", "", "null", "null", "null");
 	}
-	
+
 	public String testWrongBinding() throws FunctionalException {
 		return checkFormat("COMP4", "id_view_vp_logical_Logical_BikesOnline", "id_ct_logical_servicecontainer", "id_foo",
 				"Weblogic", "desc", "comment", "", "id_comp_tech_solaris", "null", "null");
@@ -70,7 +73,8 @@ public class CreateComponentFixture extends AbstractComponentFixture {
 			reset("Bikes");
 		}
 		try {
-			ComponentDTO.Builder builder = new ComponentDTO.Builder(UUT.nul(id), UUT.nul(name));
+			HasNameAndIdDTO view = new HasNameAndIdDTO.Builder(UUT.nul(vID), "").build();
+			ComponentDTO.Builder builder = new ComponentDTO.Builder(UUT.nul(id), UUT.nul(name), view);
 			if (UUT.nul(tags) != null) {
 				for (String tag : Utils.stringListFromString(tags)) {
 					builder.addTag(tag);
@@ -84,7 +88,7 @@ public class CreateComponentFixture extends AbstractComponentFixture {
 				builder.boundType(new HasNameAndIdDTO.Builder(boundID, "").build());
 			}
 			builder.type(new HasNameAndIdDTO.Builder(ctID, "").build());
-			service.checkDTO(builder.build(), UUT.nul(vID), AccessType.CREATE);
+			service.checkDTO(builder.build(), AccessType.CREATE);
 			return "PASS";
 		} catch (FunctionalException ex) {
 			return "FAIL with code " + ex.getCode().name();
@@ -108,6 +112,10 @@ public class CreateComponentFixture extends AbstractComponentFixture {
 			reset("Bikes");
 		}
 		vID = UUT.nul(vID);
+		HasNameAndIDBean view = null;
+		if (vID != null){
+			view = HasNameAndIDBean.newInstance(vID, "");
+		}
 		ctID = UUT.nul(ctID);
 		id = UUT.nul(id);
 		name = UUT.nul(name);
@@ -128,8 +136,9 @@ public class CreateComponentFixture extends AbstractComponentFixture {
 			bean.setBoundComponent(HasNameAndIDBean.newInstance(boundID, ""));
 			setBeanReferences(bean, references);
 			bean.setStatus(status);
+			bean.setView(view); 
 			ComponentDTO dto = new DTOConverter.ToDTO().getComponentDTO(bean);
-			service.createComponent(null, dto, vID);
+			service.createComponent(null, dto);
 			List<ComponentDTO> compDTOS = service.getAllComponents(null, vID);
 			for (ComponentDTO compDTO : compDTOS) {
 				if (compDTO.getId().equals(bean.getId())) {

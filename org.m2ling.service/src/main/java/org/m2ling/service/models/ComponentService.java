@@ -35,14 +35,12 @@ public interface ComponentService {
 	 * 
 	 * @param compDTO
 	 *           the component
-	 * @param vID
-	 *           view ID
 	 * @throws FunctionalException
 	 *            if the view doesn't exist
 	 * @throws FunctionalException
 	 *            if the DTO entry is faulty
 	 */
-	void createComponent(Context context, ComponentDTO compDTO, String vID) throws FunctionalException;
+	void createComponent(Context context, ComponentDTO compDTO) throws FunctionalException;
 
 	/**
 	 * Return an alphabetically ordered list of available Component given a view ID. If none

@@ -12,10 +12,10 @@ public class DeleteComponentFixture extends AbstractComponentFixture {
 
 	public String testDeleteNoExistingCI() {
 		try {
-			if (!noreset){
+			if (!noreset) {
 				reset("Technical");
 			}
-			ComponentDTO dto = new ComponentDTO.Builder("id_comp_vp2_v2_comp1", "").build();
+			ComponentDTO dto = new ComponentDTO.Builder("id_comp_vp2_v2_comp5", "", null).build();
 			service.deleteComponent(null, dto);
 			return "PASS";
 		} catch (FunctionalException fe) {
@@ -24,11 +24,11 @@ public class DeleteComponentFixture extends AbstractComponentFixture {
 	}
 
 	public String testDeleteExistingCI() {
-		if (!noreset){
+		if (!noreset) {
 			reset("Technical");
 		}
 		try {
-			ComponentDTO dto = new ComponentDTO.Builder("id_comp_vp2_v2_comp3", "").build();
+			ComponentDTO dto = new ComponentDTO.Builder("id_comp_vp2_v2_comp3", "", null).build();
 			service.deleteComponent(null, dto);
 			return "PASS";
 		} catch (FunctionalException fe) {
@@ -38,7 +38,7 @@ public class DeleteComponentFixture extends AbstractComponentFixture {
 
 	public String testDeleteExistingBinding() {
 		try {
-			ComponentDTO dto = new ComponentDTO.Builder("id_comp_vp1_v1_comp4", "").build();
+			ComponentDTO dto = new ComponentDTO.Builder("id_comp_vp1_v1_comp5", "", null).build();
 			service.deleteComponent(null, dto);
 			return "PASS";
 		} catch (FunctionalException fe) {

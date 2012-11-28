@@ -278,13 +278,11 @@ public class ComponentServiceImpl extends ServiceImpl implements ComponentServic
 	 * Centralize all service entry verifications
 	 * 
 	 * @param dto
-	 * @param vID
-	 *           the associated view ID for creation or null for others access types
 	 * @param access
 	 *           access type used to discriminate the check
 	 * @throws FunctionalException
 	 */
-	void checkDTO(final ComponentDTO dto, final String vID, final AccessType access) throws FunctionalException {
+	void checkDTO(final ComponentDTO dto, final AccessType access) throws FunctionalException {
 		Component target = null;
 		checkNullDTO(dto);
 		checkID(dto, access);
@@ -301,8 +299,8 @@ public class ComponentServiceImpl extends ServiceImpl implements ComponentServic
 			// Check associated view existence
 			View view = null;
 			if (access == AccessType.CREATE) {
-				checkViewIDFormat(vID);
-				view = util.getViewByID(vID);
+				checkViewIDFormat(dto);
+				view = util.getViewByID(dto.getView().getId());
 			} else {// vID is ignored for access != create
 				view = util.getViewByItem(target);
 			}
@@ -340,11 +338,11 @@ public class ComponentServiceImpl extends ServiceImpl implements ComponentServic
 		return target;
 	}
 
-	private void checkViewIDFormat(final String vID) throws FunctionalException {
-		if (vID == null) {
+	private void checkViewIDFormat(final ComponentDTO dto) throws FunctionalException {
+		if (dto.getView() == null || dto.getView().getId() == null) {
 			throw new FunctionalException(FunctionalException.Code.NULL_ARGUMENT, null, "(view)");
 		}
-		if ("".equals(vID.trim())) {
+		if ("".equals(dto.getView().getId().trim())) {
 			throw new FunctionalException(FunctionalException.Code.VOID_ARGUMENT, null, "(view)");
 		}
 	}
@@ -372,7 +370,7 @@ public class ComponentServiceImpl extends ServiceImpl implements ComponentServic
 	public void updateComponent(final Context context, final ComponentDTO dto) throws FunctionalException {
 		try {
 			// Controls
-			checkDTO(dto, null, AccessType.UPDATE);
+			checkDTO(dto, AccessType.UPDATE);
 			// Processing
 			Component ct = util.getComponentByID(dto.getId());
 			ct.setName(dto.getName());
@@ -397,18 +395,14 @@ public class ComponentServiceImpl extends ServiceImpl implements ComponentServic
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void createComponent(final Context context, final ComponentDTO dto, final String vID)
-			throws FunctionalException {
+	public void createComponent(final Context context, final ComponentDTO dto) throws FunctionalException {
 		try {
 			// Controls
-			checkDTO(dto, vID, AccessType.CREATE);
-			if (vID == null) {
-				throw new FunctionalException(FunctionalException.Code.NULL_ARGUMENT, null, "(view)");
-			}
+			checkDTO(dto, AccessType.CREATE);
 			// Processing
 			Component ct = fromDTO.newComponent(dto);
 			// Add the item
-			View view = util.getViewByID(vID);
+			View view = util.getViewByID(dto.getView().getId());
 			view.getComponents().add(ct);
 			pmanager.commit();
 		} catch (Exception anyError) {

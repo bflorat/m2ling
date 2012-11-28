@@ -19,8 +19,13 @@ public final class LinkDTO extends AbstractCommonDTO implements Comparable<LinkD
 	private final Set<HasNameAndIdDTO> sources;
 
 	private final Set<HasNameAndIdDTO> destinations;
+	
+	private final HasNameAndIdDTO view;
 
 	public static class Builder extends AbstractCommonDTO.Builder {
+		// Mandatory items
+		private HasNameAndIdDTO view;
+		
 		// Optional configuration
 		private long timeoutMillis = -1;
 
@@ -30,8 +35,9 @@ public final class LinkDTO extends AbstractCommonDTO implements Comparable<LinkD
 
 		private Set<HasNameAndIdDTO> destinations = new LinkedHashSet<HasNameAndIdDTO>();
 
-		public Builder(String id, String name) {
+		public Builder(String id, String name, HasNameAndIdDTO view) {
 			super(id, name);
+			this.view= view;
 		}
 
 		public Builder addSource(HasNameAndIdDTO comp) {
@@ -66,6 +72,7 @@ public final class LinkDTO extends AbstractCommonDTO implements Comparable<LinkD
 		timeoutMillis = builder.timeoutMillis;
 		sources = builder.sources;
 		destinations = builder.destinations;
+		view = builder.view;
 	}
 
 	public boolean equals(Object o) {
@@ -122,5 +129,12 @@ public final class LinkDTO extends AbstractCommonDTO implements Comparable<LinkD
 	 */
 	public long getTimeoutMillis() {
 		return timeoutMillis;
+	}
+	
+	/**
+	 * @return the view DTO
+	 */
+	public HasNameAndIdDTO getView() {
+		return view;
 	}
 }

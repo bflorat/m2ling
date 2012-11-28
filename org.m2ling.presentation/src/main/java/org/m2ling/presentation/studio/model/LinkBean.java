@@ -27,6 +27,8 @@ public class LinkBean extends AbstractCommonBean {
 	private Set<HasNameAndIDBean> destinations = new LinkedHashSet<HasNameAndIDBean>();
 
 	private HasNameAndIDBean type;
+	
+	private HasNameAndIDBean view;
 
 	public LinkBean() {
 		super();
@@ -117,4 +119,20 @@ public class LinkBean extends AbstractCommonBean {
 	public void setDestinations(Set<HasNameAndIDBean> destinations) {
 		this.destinations = destinations;
 	}
+
+	/**
+	 * @return the view
+	 */
+	public HasNameAndIDBean getView() {
+		return view;
+	}
+
+	/**
+	 * @param view the view to set
+	 */
+	public void setView(HasNameAndIDBean view) {
+		this.view = view;
+	}
+	
+	
 }

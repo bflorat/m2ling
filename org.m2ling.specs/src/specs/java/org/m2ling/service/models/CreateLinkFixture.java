@@ -31,6 +31,10 @@ public class CreateLinkFixture extends AbstractLinkFixture {
 			reset("Bikes");
 		}
 		vID = UUT.nul(vID);
+		HasNameAndIDBean view = null;
+		if (vID != null){
+			view = HasNameAndIDBean.newInstance(vID, "");
+		}
 		id = UUT.nul(id);
 		name = UUT.nul(name);
 		desc = UUT.nul(desc);
@@ -60,9 +64,10 @@ public class CreateLinkFixture extends AbstractLinkFixture {
 		bean.setTags(tags);
 		bean.setStatus(status);
 		bean.setType(HasNameAndIDBean.newInstance(ltID, ""));
+		bean.setView(view);
 		LinkDTO dto = new DTOConverter.ToDTO().getLinkDTO(bean);
 		try {
-			service.createLink(null, dto, vID);
+			service.createLink(null, dto);
 			List<LinkDTO> linkDTOS = service.getAllLinks(null, vID);
 			for (LinkDTO linkDTO : linkDTOS) {
 				if (linkDTO.getId().equals(bean.getId())) {
@@ -80,7 +85,7 @@ public class CreateLinkFixture extends AbstractLinkFixture {
 
 	public String testNoneSourceOrDest(String sourceOrDest) {
 		if (!noreset) {
-			reset("Bikes");
+			reset("Bikes"); 
 		}
 		try {
 			HasNameAndIdDTO view = new HasNameAndIdDTO.Builder("id_view_vp_logical_Logical_BikesOnline", "").build();
@@ -88,7 +93,7 @@ public class CreateLinkFixture extends AbstractLinkFixture {
 			HasNameAndIdDTO source = new HasNameAndIdDTO.Builder("id_comp_view_Logical_BikesOnline_AdminGUI", "").build();
 			HasNameAndIdDTO dest = new HasNameAndIdDTO.Builder("id_comp_view_Logical_BikesOnline_AdminServices", "")
 					.build();
-			LinkDTO.Builder builder = ((LinkDTO.Builder) new LinkDTO.Builder("id_new_link", "new_link").type(type));
+			LinkDTO.Builder builder = ((LinkDTO.Builder) new LinkDTO.Builder("id_new_link", "new_link", view).type(type));
 			LinkDTO dto = null;
 			if ("destination".equals(sourceOrDest)) { // no "destination", we add the source
 				builder.addSource(source);
@@ -97,7 +102,7 @@ public class CreateLinkFixture extends AbstractLinkFixture {
 			}
 			builder.status("APPLICABLE");
 			dto = builder.build();
-			service.checkDTO(dto, view.getId(), AccessType.CREATE);
+			service.checkDTO(dto, AccessType.CREATE);
 			return "PASS";
 		} catch (FunctionalException ex) {
 			return "FAIL with code " + ex.getCode().name();
@@ -122,9 +127,9 @@ public class CreateLinkFixture extends AbstractLinkFixture {
 				dest = new HasNameAndIdDTO.Builder("id_comp_view_Logical_BikesOnline_AdminGUI", "").build();
 			}
 			HasNameAndIdDTO type = new HasNameAndIdDTO.Builder("id_lt_logical_http_rest", "").build();
-			LinkDTO dto = ((LinkDTO.Builder) new LinkDTO.Builder("id_new_link", "new_link").type(type).addSource(source)
+			LinkDTO dto = ((LinkDTO.Builder) new LinkDTO.Builder("id_new_link", "new_link",view).type(type).addSource(source)
 					.addDestination(dest).status("APPLICABLE")).build();
-			service.checkDTO(dto, view.getId(), AccessType.CREATE);
+			service.checkDTO(dto, AccessType.CREATE);
 			return "PASS";
 		} catch (FunctionalException ex) {
 			return "FAIL with code " + ex.getCode().name();
@@ -136,12 +141,13 @@ public class CreateLinkFixture extends AbstractLinkFixture {
 	public String checkFormat(String caseName, String vID, String id, String ltID, String name, String desc,
 			String comment, String tags, String timeout, String sources, String destinations, String status)
 			throws FunctionalException {
-		if (!noreset) {  
+		if (!noreset) {
 			reset("Bikes");
 		}
 		try {
 			HasNameAndIdDTO type = new HasNameAndIdDTO.Builder(UUT.nul(ltID), "").build();
-			LinkDTO.Builder dtoBuilder = new LinkDTO.Builder(UUT.nul(id), UUT.nul(name));
+			HasNameAndIdDTO view = new HasNameAndIdDTO.Builder(UUT.nul(vID), "").build();
+			LinkDTO.Builder dtoBuilder = new LinkDTO.Builder(UUT.nul(id), UUT.nul(name),view);
 			if (UUT.nul(tags) != null) {
 				for (String tag : Utils.stringListFromString(tags)) {
 					dtoBuilder.addTag(tag);
@@ -160,7 +166,7 @@ public class CreateLinkFixture extends AbstractLinkFixture {
 				dtoBuilder.addDestination(new HasNameAndIdDTO.Builder(compID, "").build());
 			}
 			dtoBuilder.status(UUT.nul(status));
-			service.checkDTO(dtoBuilder.build(), vID, AccessType.CREATE);
+			service.checkDTO(dtoBuilder.build(), AccessType.CREATE);
 			return "PASS";
 		} catch (FunctionalException ex) {
 			return "FAIL with code " + ex.getCode().name();

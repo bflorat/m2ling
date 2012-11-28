@@ -186,13 +186,16 @@ public class DTOConverter {
 		}
 
 		public ComponentDTO getComponentDTO(Component comp) {
+			View view = util.getViewByItem(comp);
+			HasNameAndIdDTO viewDTO = new HasNameAndIdDTO.Builder(view.getId(), view.getName()).build();
+			
 			// If name is void or null, use bound comp one
 			String name = comp.getName();
 			Component boundComp = comp.getBoundComponent();
 			if ((name == null || "".equals(name.trim())) && boundComp != null) {
 				name = boundComp.getName();
 			}
-			ComponentDTO.Builder builder = new ComponentDTO.Builder(comp.getId(), name);
+			ComponentDTO.Builder builder = new ComponentDTO.Builder(comp.getId(), name,viewDTO);
 			populateCommonBuilder(builder, comp);
 			// Add bound comp tags as well
 			if (boundComp != null) {
@@ -219,7 +222,6 @@ public class DTOConverter {
 						.getBoundComponent().getName()).build();
 				builder.boundType(hniBoundComp);
 				String boundStatus = comp.getBoundComponent().getStatus();
-				View view = (View) comp.eContainer();
 				ViewPoint vp = view.getViewPoint();
 				if (comp.getStatus() == null && !Strings.isNullOrEmpty(boundStatus)
 						&& vp.getStatusLiterals().contains(boundStatus)) {
@@ -293,7 +295,9 @@ public class DTOConverter {
 
 		public LinkDTO getLinkDTO(Link link) {
 			// If name is void or null, use bound type one
-			LinkDTO.Builder builder = new LinkDTO.Builder(link.getId(), link.getName());
+			View view = util.getViewByItem(link);
+			HasNameAndIdDTO viewDTO = new HasNameAndIdDTO.Builder(view.getId(), view.getName()).build();
+			LinkDTO.Builder builder = new LinkDTO.Builder(link.getId(), link.getName(), viewDTO);
 			populateCommonBuilder(builder, link);
 			List<Component> comps = util.getComponentForArchitectureItems(link.getSources());
 			for (Component comp : comps) {

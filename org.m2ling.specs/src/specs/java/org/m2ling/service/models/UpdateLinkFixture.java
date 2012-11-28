@@ -18,10 +18,10 @@ public class UpdateLinkFixture extends AbstractLinkFixture {
 	@Test
 	public String updateLink(String caseName, String id, String sources, String destinations) {
 		try {
-			reset("Technical");   
-			// reuse existing values 
+			reset("Technical");
+			// reuse existing values
 			LinkDTO oldLink = service.getLinkByID(null, id);
-			LinkDTO.Builder dtoBuilder = new LinkDTO.Builder(UUT.nul(id), UUT.nul(id));
+			LinkDTO.Builder dtoBuilder = new LinkDTO.Builder( oldLink.getId(), oldLink.getName(), null);
 			dtoBuilder.description(oldLink.getDescription());
 			dtoBuilder.comment(oldLink.getComment());
 			dtoBuilder.status(oldLink.getStatus());
