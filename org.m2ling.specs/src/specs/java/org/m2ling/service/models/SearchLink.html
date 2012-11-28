@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:concordion="http://www.concordion.org/2007/concordion">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>Link search</title>
+</head>
+<body>
+	<H1>Link search</H1>
+	<p>Administrators or actors with adequate authorizations can search for
+		a link.</p>
+	<p class='rule'>It is possible to retrieve all existing links
+		:</p>
+	<div class="example">
+		Given several existing links<br /> When we ask for
+		link listing<span concordion:execute="#resu=getAll()" /><br />
+		Then we get a number of links <b concordion:assertEquals="#resu">&gt;0</b>.
+	</div>
+
+	<p class='rule'>It is possible to get a link by id :</p>
+	<div class="example">
+		Given an existing link whose id=<b concordion:set="#id">id_link_vp1_v1_link1</b>
+		<br /> When we search for it by ID<span
+			concordion:execute="#resu=getLinkByID(#id)" /><br /> Then we should be
+		a link named <b concordion:assertEquals="#resu">link_vp1_v1_link1</b>.
+	</div>	
+
+</body>
+</html>

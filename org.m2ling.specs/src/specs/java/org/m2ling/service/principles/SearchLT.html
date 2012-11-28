@@ -10,22 +10,20 @@
 	<p>Administrators or actors with adequate authorizations can search for
 		a LT (Link type).</p>
 	<p class='rule'>It is possible to retrieve all existing LTs
-		:
+		:</p>
 	<div class="example">
 		Given several existing Link type<br /> When we ask for
 		lt listing<span concordion:execute="#resu=getAll()" /><br />
 		Then we get a number of lt <b concordion:assertEquals="#resu">&gt;0</b>.
 	</div>
-	</p>
 
-	<p class='rule'>It is possible to get LT by id :
+	<p class='rule'>It is possible to get LT by id :</p>
 	<div class="example">
 		Given an existing LT whose id=<b concordion:set="#id">id_lt_vp1_link_type_1</b>
 		<br /> When we search for it by ID<span
-			concordion:execute="#resu=getCTByID(#id)" /><br /> Then we should be
-		a CT named <b concordion:assertEquals="#resu">lt_vp1_link_type_1</b>.
+			concordion:execute="#resu=getLTByID(#id)" /><br /> Then we should be
+		a LT named <b concordion:assertEquals="#resu">lt_vp1_link_type_1</b>.
 	</div>
-	</p>
 
 </body>
 </html>

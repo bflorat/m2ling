@@ -28,16 +28,25 @@ public class CreateCTFixture extends AbstractCTFixture {
 	}
 
 	public String createWithIf(String ifactor) throws FunctionalException {
+		if (!noreset) {
+			reset("Bikes");
+		}
 		return createAndGetCT("true", "CT1", "id_vp_logical", "id_new_ct_logical_servicecontainer", "ServicesContainer2",
 				"desc", "", "", ifactor, "null", "", "", "APPLICABLE");
 	}
 
 	public String testExternalRefs() throws FunctionalException {
+		if (!noreset) {
+			reset("Bikes");
+		}
 		return createAndGetCT("true", "CT1", "id_vp_logical", "id_new_ct_logical_servicecontainer", "ServicesContainer2",
 				"null", "", "", "1", "null", "RUNS:id_ct_app_application", "", "APPLICABLE");
 	}
 
 	public String testNullRef() throws FunctionalException {
+		if (!noreset) {
+			reset("Bikes");
+		}
 		HasNameAndIdDTO vp = new HasNameAndIdDTO.Builder("id_vp_logical", "").build();
 		ComponentTypeDTO.Builder builder = new ComponentTypeDTO.Builder(vp, "id_foo", "ServicesContainer2");
 		HasNameAndIdDTO nullTarget = new HasNameAndIdDTO.Builder(null, "").build();
@@ -55,22 +64,34 @@ public class CreateCTFixture extends AbstractCTFixture {
 	}
 
 	public String testNoBindingType() throws FunctionalException {
+		if (!noreset) {
+			reset("Bikes");
+		}
 		return createAndGetCT("true", "CT8", "id_vp_logical", "id_new_ct_logical_servicecontainer", "ServicesContainer2",
 				"null", "", "", "*", "null", "", "id_comp_tech_jboss5", "APPLICABLE");
 	}
 
 	public String testCascadingBinding() throws FunctionalException {
+		if (!noreset) {
+			reset("Bikes");
+		}
 		return createAndGetCT("true", "CT8", "id_vp_logical", "id_new_ct_logical_servicecontainer", "ServicesContainer2",
 				"null", "", "", "*", "id_ct_app_application", "", "id_comp_tech_jboss5", "APPLICABLE");
 	}
 
 	public String testLocalBinding() throws FunctionalException {
+		if (!noreset) {
+			reset("Bikes");
+		}
 		return createAndGetCT("true", "CT8", "id_vp_logical", "id_new_ct_logical_servicecontainer", "ServicesContainer2",
 				"null", "", "", "*", "id_ct_logical_servicecontainer", "", "id_comp_tech_jboss5", "APPLICABLE");
 	}
 
 	public String testBoundDerivedName(String caseName, String ctAttributes, String boundCTAttributes)
 			throws FunctionalException {
+		if (!noreset) {
+			reset("Bikes");
+		}
 		try {
 			String ctName = null;
 			String ctTags = null;
@@ -112,6 +133,9 @@ public class CreateCTFixture extends AbstractCTFixture {
 	}
 
 	public String testEnumeration(String caseName, String comps, String groups) throws FunctionalException {
+		if (!noreset) {
+			reset("Bikes");
+		}
 		String enumeration = "";
 		if (!"null".equals(comps) && !Strings.isNullOrEmpty(comps)) {
 			enumeration += comps;
@@ -128,6 +152,9 @@ public class CreateCTFixture extends AbstractCTFixture {
 	}
 
 	public String testVoidRefTarget() throws FunctionalException {
+		if (!noreset) {
+			reset("Bikes");
+		}
 		try {
 			ReferenceDTO refDTO = new ReferenceDTO.Builder(ReferenceType.CONTAINS.name()).build();
 			HasNameAndIdDTO vpDTO = new HasNameAndIdDTO.Builder("id_vp_logical", "vp_logical").build();
@@ -223,6 +250,30 @@ public class CreateCTFixture extends AbstractCTFixture {
 				}
 			}
 			return "Unknown item";
+		} catch (FunctionalException ex) {
+			return "FAIL with code " + ex.getCode().name();
+		} catch (TechnicalException ex) {
+			return "FAIL with code " + ex.getCode().name();
+		}
+	}
+
+	public String testBoundDerivedStatus(String boundCTID, String status) {
+		if (!noreset) {
+			reset("Technical");
+		}
+		try {
+			HasNameAndIdDTO vpDTO = new HasNameAndIdDTO.Builder("id_vp1", "").build();
+			ComponentTypeDTO.Builder builder = new ComponentTypeDTO.Builder(vpDTO, "id_new_ct", "new ct");
+			if (UUT.nul(boundCTID) != null) {
+				HasNameAndIdDTO boundDTO = new HasNameAndIdDTO.Builder(boundCTID, "").build();
+				builder.boundType(boundDTO);
+			}
+			builder.description("desc");
+			builder.status(UUT.nul(status));
+			ComponentTypeDTO dto = builder.build();
+			service.createCT(null, dto);
+			ComponentTypeDTO ctDTO = service.getCTByID(null, "id_new_ct");
+			return ctDTO.getStatus();
 		} catch (FunctionalException ex) {
 			return "FAIL with code " + ex.getCode().name();
 		} catch (TechnicalException ex) {

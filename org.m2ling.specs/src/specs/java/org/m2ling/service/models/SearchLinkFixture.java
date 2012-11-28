@@ -1,27 +1,27 @@
-package org.m2ling.service.principles;
+package org.m2ling.service.models;
 
 import java.io.IOException;
 import java.util.List;
 
-import org.m2ling.common.dto.core.LinkTypeDTO;
+import org.m2ling.common.dto.core.LinkDTO;
 import org.m2ling.common.exceptions.FunctionalException;
 
-public class SearchLTFixture extends AbstractLTFixture {
-	public SearchLTFixture() throws IOException {
+public class SearchLinkFixture extends AbstractLinkFixture {
+	public SearchLinkFixture() throws IOException {
 		super();
 	}
 
 	public String getAll() throws FunctionalException {
 		reset("Technical");
-		List<LinkTypeDTO> list = service.getAllLT(null, "id_vp1");
+		List<LinkDTO> list = service.getAllLinks(null, "id_vp1_v1");
 		return (list.size() > 0) ? ">0" : "=0";
 	}
 
-	public String getLTByID(String id) {
+	public String getLinkByID(String id) {
 		reset("Technical");
-		LinkTypeDTO dto = null;
+		LinkDTO dto = null;
 		try {
-			dto = service.getLTByID(null, id);
+			dto = service.getLinkByID(null, id);
 		} catch (FunctionalException fe) {
 			return "FAIL with code" + fe.getCode().name();
 		}

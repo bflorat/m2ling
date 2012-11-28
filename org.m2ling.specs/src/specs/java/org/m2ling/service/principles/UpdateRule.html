@@ -26,63 +26,62 @@
 		</ul>
 		When we update the rule <br /> <span
 			concordion:execute="update(#id,#name,#description,#comment,#tags,#status,#priority,#rationale,#exceptions)"/>
-		<br />Then the viewpoint should now have the following
+		<br />Then the rule should now have the following
 		characteristics : <b concordion:assertEquals="getRule(#id)">comment=new comment description=new description drop= 
 		exceptions=new_exceptions id=id_vp1_rule1 name=new_name priority=1 rationale=new_rationale status=SUGGESTED tags=new tag3,new tag4 vpID=id_vp1</b>.
 	</div>
 	
 	<h3>Format controls</h3>
 	<ul>
-		A null input should make service call <b concordion:assertEquals="getCheckNullDTO()">FAIL</b>
-		
-		<div class="example">
-			Given a rule , following
-			service inputs should make the <span concordion:set="#accessType">UPDATE</span> service :
-			<table
-				concordion:execute="#result=getCheckDTOVerification(#caseName, #accessType, #id, #name, #description, #rationale,
-			#exceptions, #comment, #tags, #status, #priority)">
-				
-				<tr>
-					<th concordion:set="#caseName">Case</th>
-					<th concordion:set="#id">Id</th>
-					<th concordion:set="#name">Name</th>
-					<th concordion:set="#description">Description</th>
-					<th concordion:set="#rationale">Rationale</th>
-					<th concordion:set="#exceptions">Exceptions</th>
-					<th concordion:set="#comment">Comment</th>
-					<th concordion:set="#tags">Tags</th>
-					<th concordion:set="#status">Status</th>
-					<th concordion:set="#priority">Priority</th>
-					<th concordion:assertEquals="#result">should :</th>
-				</tr>
-				<tr>
-					<td>Nominal</td>
-					<td>id_vp1_rule1</td>
-					<td>rule</td>
-					<td>new_description</td>
-					<td>new_rationale</td>
-					<td>new_exceptions</td>
-					<td>new_comment</td>
-					<td>new_tags41,new_tag42</td>
-					<td>VALIDATED</td>
-					<td>4</td>
-					<td>PASS</td>
-				</tr>
-				<tr>
-					<td>Unexisting status</td>
-					<td>id_vp1_rule1</td>
-					<td>rule</td>
-					<td>new_description</td>
-					<td>new_rationale</td>
-					<td>new_exceptions</td>
-					<td>new_comment</td>
-					<td>new_tags41,new_tag42</td>
-					<td>foo_status</td>
-					<td>4</td>
-					<td>FAIL with code INVALID_STATUS</td>
-				</tr>
-			</table>
+		<li>A null input should make service call <b concordion:assertEquals="getCheckNullDTO()">FAIL</b></li>
+	</ul>	
+	<div class="example">
+		Given a rule , following
+		service inputs should make the <span concordion:set="#accessType">UPDATE</span> service :
+		<table
+			concordion:execute="#result=getCheckDTOVerification(#caseName, #accessType, #id, #name, #description, #rationale,
+		#exceptions, #comment, #tags, #status, #priority)">
+			
+			<tr>
+				<th concordion:set="#caseName">Case</th>
+				<th concordion:set="#id">Id</th>
+				<th concordion:set="#name">Name</th>
+				<th concordion:set="#description">Description</th>
+				<th concordion:set="#rationale">Rationale</th>
+				<th concordion:set="#exceptions">Exceptions</th>
+				<th concordion:set="#comment">Comment</th>
+				<th concordion:set="#tags">Tags</th>
+				<th concordion:set="#status">Status</th>
+				<th concordion:set="#priority">Priority</th>
+				<th concordion:assertEquals="#result">should :</th>
+			</tr>
+			<tr>
+				<td>Nominal</td>
+				<td>id_vp1_rule1</td>
+				<td>rule</td>
+				<td>new_description</td>
+				<td>new_rationale</td>
+				<td>new_exceptions</td>
+				<td>new_comment</td>
+				<td>new_tags41,new_tag42</td>
+				<td>VALIDATED</td>
+				<td>4</td>
+				<td>PASS</td>
+			</tr>
+			<tr>
+				<td>Unexisting status</td>
+				<td>id_vp1_rule1</td>
+				<td>rule</td>
+				<td>new_description</td>
+				<td>new_rationale</td>
+				<td>new_exceptions</td>
+				<td>new_comment</td>
+				<td>new_tags41,new_tag42</td>
+				<td>foo_status</td>
+				<td>4</td>
+				<td>FAIL with code INVALID_STATUS</td>
+			</tr>
+		</table>
 		</div>
-	</ul>
-</body>
+	</body>
 </html>

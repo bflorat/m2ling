@@ -92,7 +92,13 @@ public class DTOConverter {
 			}
 			builder.comment(nonull(((HasComment) item).getComment()));
 			builder.description(nonull(((HasDescription) item).getDescription()));
-			builder.status(((HasStatus) item).getStatus());
+			HasStatus hs = (HasStatus) item;
+			// Transform empty status to null in DTO
+			if (hs.getStatus() != null && "".equals(hs.getStatus().trim())) {
+				builder.status(null);
+			} else {
+				builder.status(hs.getStatus());
+			}
 		}
 
 		public ViewPointDTO getViewPointDTO(ViewPoint vp) {
@@ -168,6 +174,11 @@ public class DTOConverter {
 						boundTypeName.toString()).build();
 				builder.boundType(hniBoundType);
 				builder.instantiationFactor(ct.getBoundType().getInstantiationFactor());
+				String boundStatus = ct.getBoundType().getStatus();
+				if (ct.getStatus() == null && !Strings.isNullOrEmpty(boundStatus)
+						&& vp.getStatusLiterals().contains(boundStatus)) {
+					builder.status(boundStatus);
+				}
 			} else {
 				builder.instantiationFactor(ct.getInstantiationFactor());
 			}
@@ -207,6 +218,13 @@ public class DTOConverter {
 				HasNameAndIdDTO hniBoundComp = new HasNameAndIdDTO.Builder(comp.getBoundComponent().getId(), comp
 						.getBoundComponent().getName()).build();
 				builder.boundType(hniBoundComp);
+				String boundStatus = comp.getBoundComponent().getStatus();
+				View view = (View) comp.eContainer();
+				ViewPoint vp = view.getViewPoint();
+				if (comp.getStatus() == null && !Strings.isNullOrEmpty(boundStatus)
+						&& vp.getStatusLiterals().contains(boundStatus)) {
+					builder.status(boundStatus);
+				}
 			}
 			HasNameAndIdDTO hniType = new HasNameAndIdDTO.Builder(comp.getType().getId(), comp.getType().getName())
 					.build();

@@ -38,8 +38,8 @@ public class DeleteCTFixture extends AbstractCTFixture {
 	public String testDeleteExistingBinding() {
 		try {
 			reset("Technical");
-			HasNameAndIdDTO vp = new HasNameAndIdDTO.Builder("id_vp1", "").build();
-			ComponentTypeDTO dto = new ComponentTypeDTO.Builder(vp, "id_ct_vp1_bound_target", "ct_vp1_bound_target").build();
+			HasNameAndIdDTO vp = new HasNameAndIdDTO.Builder("id_vp2", "").build();
+			ComponentTypeDTO dto = new ComponentTypeDTO.Builder(vp, "id_ct_vp2_bound_target", "ct_vp2_bound_target").build();
 			service.deleteCT(null, dto);
 			return "PASS";
 		} catch (FunctionalException fe) {

@@ -28,12 +28,12 @@ public class UpdateRuleFixture extends AbstractRuleFixture {
 		RuleBean bean = new RuleBean();
 		bean.setComment(UUT.nul(comment));
 		bean.setDescription(UUT.nul(description));
-		bean.setExceptions(UUT.nul(exceptions));
+		bean.setExceptions(UUT.nul(exceptions)); 
 		bean.setId(UUT.nul(id));
 		bean.setName(UUT.nul(name));
 		bean.setPriority(priority);
 		bean.setRationale(UUT.nul(rationale));
-		bean.setStatus(status);
+		bean.setStatus(UUT.nul(status));
 		bean.setTags(UUT.nul(tags));
 		bean.setViewPointId("id_vp1");
 		RuleDTO dto = new DTOConverter.ToDTO().getRuleDTO(bean);

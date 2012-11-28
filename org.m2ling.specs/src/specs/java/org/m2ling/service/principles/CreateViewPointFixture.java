@@ -58,8 +58,8 @@ public class CreateViewPointFixture extends AbstractViewPointFixture {
 			String tags, String statusLiterals) {
 		reset("Technical");
 		try {
-			ViewPointDTO.Builder builder = (ViewPointDTO.Builder)  new ViewPointDTO.Builder(UUT.nul(id), UUT.nul(name)).description(
-					UUT.nul(description)).comment(UUT.nul(comment));
+			ViewPointDTO.Builder builder = (ViewPointDTO.Builder) new ViewPointDTO.Builder(UUT.nul(id), UUT.nul(name))
+					.description(UUT.nul(description)).comment(UUT.nul(comment));
 			if (!tags.equals("null")) {
 				for (String tag : Utils.stringListFromString(tags)) {
 					builder.addTag(tag);

@@ -11,18 +11,19 @@ public class SearchComponentFixture extends AbstractComponentFixture {
 	public SearchComponentFixture() throws IOException {
 		super();
 	}
-	
-	public void setUp(){
-		super.setUp();
-		reset("Bikes");
-	}
 
 	public String getAll(String vID) throws FunctionalException {
+		if (!noreset) {
+			reset("Bikes");
+		}
 		List<ComponentDTO> list = service.getAllComponents(null, vID);
-		return (list.size() > 0) ? ">0" : "=0"; 
+		return (list.size() > 0) ? ">0" : "=0";
 	}
 
 	public String getComponentByID(String id) {
+		if (!noreset) {
+			reset("Bikes");
+		}
 		ComponentDTO dto = null;
 		try {
 			dto = service.getComponentByID(null, UUT.nul(id));

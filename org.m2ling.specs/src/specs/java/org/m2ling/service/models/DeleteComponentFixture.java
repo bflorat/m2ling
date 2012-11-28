@@ -10,13 +10,11 @@ public class DeleteComponentFixture extends AbstractComponentFixture {
 		super();
 	}
 
-	public void setUp() {
-		super.setUp();
-		reset("Technical");
-	}
-
 	public String testDeleteNoExistingCI() {
 		try {
+			if (!noreset){
+				reset("Technical");
+			}
 			ComponentDTO dto = new ComponentDTO.Builder("id_comp_vp2_v2_comp1", "").build();
 			service.deleteComponent(null, dto);
 			return "PASS";
@@ -26,6 +24,9 @@ public class DeleteComponentFixture extends AbstractComponentFixture {
 	}
 
 	public String testDeleteExistingCI() {
+		if (!noreset){
+			reset("Technical");
+		}
 		try {
 			ComponentDTO dto = new ComponentDTO.Builder("id_comp_vp2_v2_comp3", "").build();
 			service.deleteComponent(null, dto);

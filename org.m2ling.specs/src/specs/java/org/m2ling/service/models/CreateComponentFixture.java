@@ -22,6 +22,9 @@ public class CreateComponentFixture extends AbstractComponentFixture {
 	}
 
 	public String testNullRef() throws FunctionalException {
+		if (!noreset){
+			reset("Bikes");
+		}
 		ComponentDTO.Builder builder = new ComponentDTO.Builder("id_foo", "Weblogic");
 		builder.type(new HasNameAndIdDTO.Builder("id_ct_logical_servicecontainer", "").build());
 		builder.description("desc");
