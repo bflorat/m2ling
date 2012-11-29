@@ -3,11 +3,11 @@
 	xmlns:concordion="http://www.concordion.org/2007/concordion">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<title>Component type deletion</title>
+<title>Link type deletion</title>
 </head>
 <body>
 	<H1>Link type deletion</H1>
-	<p class='rule'>LT20 : A LT can't be removed while at least a single link of this type exists in any view.
+	<p class='rule'>LT20 : A LT can't be removed while at least a single link of this type exists in any view.</p>
 	<div class='example'>
 		In this case, the <span concordion:execute="#resu=testDeleteExistingLink()"> 
 		service</span> should : <b concordion:assertEquals="#resu">FAIL with code LT_EXISTING_LINK</b> 
@@ -16,7 +16,7 @@
 		If the LT has no associated link of its type, the deletion<span concordion:execute="#resu=testDeleteNoExistingLink()"> service</span> 
 		should : <b concordion:assertEquals="#resu">PASS</b> 
 	</div>
-	</p>
+	
 
 </body>
 </html>

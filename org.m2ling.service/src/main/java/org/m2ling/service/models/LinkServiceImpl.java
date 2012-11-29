@@ -51,9 +51,9 @@ public class LinkServiceImpl extends ServiceImpl implements LinkService {
 	}
 
 	private void checkNoLinkInstancesForLink(final Link target, final AccessType access) throws FunctionalException {
-		View view = util.getViewByItem(target);
+		View view = (View)target.eContainer();
 		for (LinkInstance li : view.getLinkInstances()) {
-			if (li.getLink().equals(target)) {
+			if (li.getLink().equals(target)) { 
 				throw new FunctionalException(FunctionalException.Code.LINK_IN_USE, null, "link instance name="
 						+ li.getName());
 			}

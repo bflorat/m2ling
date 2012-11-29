@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:concordion="http://www.concordion.org/2007/concordion">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>Link deletion</title>
+</head>
+<body>
+	<H1>Link deletion</H1>
+	<p class='rule'>#Link20 : A link can't be removed while at least a single link instance of this type exists in any view.</p>
+	<div class='example'>
+		In this case, the <span concordion:execute="#resu=testDeleteExistingLI()"> 
+		service</span> should : <b concordion:assertEquals="#resu">FAIL with code LINK_IN_USE</b> 
+	</div>
+	<div class='example'>
+		If the link has no associated LI of its type, the deletion<span concordion:execute="#resu=testDeleteNoExistingLI()"> service</span> 
+		should : <b concordion:assertEquals="#resu">PASS</b> 
+	</div>
+	
+
+</body>
+</html>
