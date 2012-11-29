@@ -180,7 +180,7 @@ public class RulesPanel extends VerticalLayout implements Observer {
 						if (dialog.isConfirmed()) {
 							try {
 								RuleDTO ruleDTO = toDTO.getRuleDTO(rule);
-								service.deleteRule(null, ruleDTO);
+								service.deleteRule(null, ruleDTO.getId());
 								removeAllComponents();
 								attach();
 							} catch (FunctionalException e) {

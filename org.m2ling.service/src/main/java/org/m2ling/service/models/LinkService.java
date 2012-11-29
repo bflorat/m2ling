@@ -73,12 +73,12 @@ public interface LinkService {
 	 * Drop the given Link if it exists.
 	 * 
 	 * @param id
-	 *           the Link DTO
+	 *           the Link id
 	 * 
 	 * @throws FunctionalException
 	 *            if id is null or void
 	 * @throws FunctionalException
 	 *            if the Link doesn't exist.
 	 */
-	void deleteLink(Context context, LinkDTO dto) throws FunctionalException;
+	void deleteLink(Context context, String id) throws FunctionalException;
 }

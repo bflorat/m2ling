@@ -268,9 +268,10 @@ public class LinkTypeServiceImpl extends ServiceImpl implements LinkTypeService 
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void deleteLT(final Context context, final LinkTypeDTO dto) throws FunctionalException {
+	public void deleteLT(final Context context, final String id) throws FunctionalException {
 		try {
 			// Controls
+			LinkTypeDTO dto = new LinkTypeDTO.Builder(null, id, null).build();
 			checkDTO(dto, AccessType.DELETE);
 			LinkType type = util.getLinkTypeByID(dto.getId());
 			ViewPoint vp = (ViewPoint) type.eContainer();

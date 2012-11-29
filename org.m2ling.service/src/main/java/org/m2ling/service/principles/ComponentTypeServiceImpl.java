@@ -469,9 +469,10 @@ public class ComponentTypeServiceImpl extends ServiceImpl implements ComponentTy
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void deleteCT(final Context context, final ComponentTypeDTO dto) throws FunctionalException {
+	public void deleteCT(final Context context, final String id) throws FunctionalException {
 		try {
 			// Controls
+			ComponentTypeDTO dto = new ComponentTypeDTO.Builder(null, id, null).build();
 			checkID(dto, AccessType.DELETE);
 			checkBeforeDeletion(dto, AccessType.DELETE);
 			ComponentType type = util.getComponentTypeByID(dto.getId());

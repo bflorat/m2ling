@@ -203,7 +203,7 @@ public class LinkTypesPanel extends VerticalLayout implements Observer {
 						if (dialog.isConfirmed()) {
 							try {
 								LinkTypeDTO ctDTO = toDTO.getLinkTypeDTO(ctBean);
-								serviceLT.deleteLT(null, ctDTO);
+								serviceLT.deleteLT(null, ctDTO.getId());
 								removeAllComponents();
 								attach();
 							} catch (FunctionalException e) {

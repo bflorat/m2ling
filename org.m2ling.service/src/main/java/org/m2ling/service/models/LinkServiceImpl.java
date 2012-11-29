@@ -294,9 +294,10 @@ public class LinkServiceImpl extends ServiceImpl implements LinkService {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void deleteLink(final Context context, final LinkDTO dto) throws FunctionalException {
+	public void deleteLink(final Context context, final String id) throws FunctionalException {
 		try {
 			// Controls
+			LinkDTO dto = new LinkDTO.Builder(id,null,null).build();
 			checkDTO(dto, AccessType.DELETE);
 			Link link = util.getLinkByID(dto.getId());
 			View view = (View) link.eContainer();

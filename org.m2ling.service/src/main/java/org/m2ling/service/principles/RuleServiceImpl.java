@@ -187,9 +187,10 @@ public class RuleServiceImpl extends ServiceImpl implements RuleService {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void deleteRule(final Context context, final RuleDTO dto) throws FunctionalException {
+	public void deleteRule(final Context context, final String id) throws FunctionalException {
 		try {
 			// Controls
+			RuleDTO dto = new RuleDTO.Builder(null, id, null).build();
 			checkDTO(dto, AccessType.DELETE);
 			Rule rule = util.getRuleByID(dto.getId());
 			ViewPoint vp = (ViewPoint) rule.eContainer();

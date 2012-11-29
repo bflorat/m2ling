@@ -21,7 +21,7 @@ public class DeleteRuleFixture extends AbstractRuleFixture {
 			bean.setId("id_rulex");
 			bean.setViewPointId("id_vpx");
 			RuleDTO dto = new DTOConverter.ToDTO().getRuleDTO(bean);
-			service.deleteRule(null, dto);
+			service.deleteRule(null, dto.getId());
 			return "PASS";
 		} catch (FunctionalException fe) {
 			return "FAIL with code " + fe.getCode().name();
@@ -36,7 +36,7 @@ public class DeleteRuleFixture extends AbstractRuleFixture {
 			bean.setId("id_rulex");
 			bean.setViewPointId("id_vp1");
 			RuleDTO dto = new DTOConverter.ToDTO().getRuleDTO(bean);
-			service.deleteRule(null, dto);
+			service.deleteRule(null, dto.getId());
 			return "PASS";
 		} catch (FunctionalException fe) {
 			return "FAIL with code " + fe.getCode().name();
@@ -51,7 +51,7 @@ public class DeleteRuleFixture extends AbstractRuleFixture {
 			bean.setId("id_vp1_rule1");
 			bean.setViewPointId("id_vp1");
 			RuleDTO dto = new DTOConverter.ToDTO().getRuleDTO(bean);
-			service.deleteRule(null, dto);
+			service.deleteRule(null, dto.getId());
 			return "PASS";
 		} catch (FunctionalException fe) {
 			return "FAIL with code " + fe.getCode().name();

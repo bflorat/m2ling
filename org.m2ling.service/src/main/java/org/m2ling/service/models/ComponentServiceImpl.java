@@ -443,9 +443,10 @@ public class ComponentServiceImpl extends ServiceImpl implements ComponentServic
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void deleteComponent(final Context context, final ComponentDTO dto) throws FunctionalException {
+	public void deleteComponent(final Context context, final String id) throws FunctionalException {
 		try {
 			// Controls
+			ComponentDTO dto = new ComponentDTO.Builder(id, null, null).build();
 			checkID(dto, AccessType.DELETE);
 			checkBeforeDeletion(dto);
 			Component comp = util.getComponentByID(dto.getId());

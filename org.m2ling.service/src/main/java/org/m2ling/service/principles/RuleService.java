@@ -62,9 +62,9 @@ public interface RuleService {
 	 * Drop the given rule if it exists.
 	 * 
 	 * @param rule
-	 *           the view point DTO
+	 *           the rule id
 	 * @throws FunctionalException
 	 *            if the rule doesn't exist.
 	 */
-	void deleteRule(Context context, RuleDTO rule) throws FunctionalException;
+	void deleteRule(Context context, String id) throws FunctionalException;
 }

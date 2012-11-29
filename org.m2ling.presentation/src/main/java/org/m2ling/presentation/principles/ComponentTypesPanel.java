@@ -221,7 +221,7 @@ public class ComponentTypesPanel extends VerticalLayout implements Observer {
 						if (dialog.isConfirmed()) {
 							try {
 								ComponentTypeDTO ctDTO = toDTO.getComponentTypeDTO(ctBean);
-								serviceCT.deleteCT(null, ctDTO);
+								serviceCT.deleteCT(null, ctDTO.getId());
 								removeAllComponents();
 								attach();
 							} catch (FunctionalException e) {

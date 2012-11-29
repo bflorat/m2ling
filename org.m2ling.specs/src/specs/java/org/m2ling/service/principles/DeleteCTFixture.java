@@ -2,8 +2,6 @@ package org.m2ling.service.principles;
 
 import java.io.IOException;
 
-import org.m2ling.common.dto.core.ComponentTypeDTO;
-import org.m2ling.common.dto.core.HasNameAndIdDTO;
 import org.m2ling.common.exceptions.FunctionalException;
 
 public class DeleteCTFixture extends AbstractCTFixture {
@@ -14,9 +12,7 @@ public class DeleteCTFixture extends AbstractCTFixture {
 	public String testDeleteNoExistingComp() {
 		try {
 			reset("Technical");
-			HasNameAndIdDTO vp = new HasNameAndIdDTO.Builder("id_vp1", "").build();
-			ComponentTypeDTO dto = new ComponentTypeDTO.Builder(vp, "id_ct_vp1_no_comp", "ct_vp1_no_comp").build();
-			service.deleteCT(null, dto);
+			service.deleteCT(null, "id_ct_vp1_no_comp");
 			return "PASS";
 		} catch (FunctionalException fe) {
 			return "FAIL with code " + fe.getCode().name();
@@ -26,9 +22,7 @@ public class DeleteCTFixture extends AbstractCTFixture {
 	public String testDeleteExistingComp() {
 		try {
 			reset("Technical");
-			HasNameAndIdDTO vp = new HasNameAndIdDTO.Builder("id_vp1", "").build();
-			ComponentTypeDTO dto = new ComponentTypeDTO.Builder(vp, "id_ct_vp1_ct1", "ct_vp1_ct1").build();
-			service.deleteCT(null, dto);
+			service.deleteCT(null, "id_ct_vp1_ct1");
 			return "PASS";
 		} catch (FunctionalException fe) {
 			return "FAIL with code " + fe.getCode().name();
@@ -38,9 +32,7 @@ public class DeleteCTFixture extends AbstractCTFixture {
 	public String testDeleteExistingBinding() {
 		try {
 			reset("Technical");
-			HasNameAndIdDTO vp = new HasNameAndIdDTO.Builder("id_vp2", "").build();
-			ComponentTypeDTO dto = new ComponentTypeDTO.Builder(vp, "id_ct_vp2_bound_target", "ct_vp2_bound_target").build();
-			service.deleteCT(null, dto);
+			service.deleteCT(null, "id_ct_vp2_bound_target");
 			return "PASS";
 		} catch (FunctionalException fe) {
 			return "FAIL with code " + fe.getCode().name();

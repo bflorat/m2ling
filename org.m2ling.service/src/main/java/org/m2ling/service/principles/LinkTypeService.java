@@ -72,12 +72,12 @@ public interface LinkTypeService {
 	 * Drop the given LT if it exists.
 	 * 
 	 * @param id
-	 *           the LT DTO
+	 *           the LT id
 	 * 
 	 * @throws FunctionalException
 	 *            if id is null or void
 	 * @throws FunctionalException
 	 *            if the LT doesn't exist.
 	 */
-	void deleteLT(Context context, LinkTypeDTO dto) throws FunctionalException;
+	void deleteLT(Context context, String id) throws FunctionalException;
 }

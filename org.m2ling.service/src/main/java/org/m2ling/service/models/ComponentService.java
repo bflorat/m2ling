@@ -73,12 +73,12 @@ public interface ComponentService {
 	 * Drop the given Component if it exists.
 	 * 
 	 * @param id
-	 *           the Component DTO
+	 *           the Component id
 	 * 
 	 * @throws FunctionalException
 	 *            if id is null or void
 	 * @throws FunctionalException
 	 *            if the Component doesn't exist.
 	 */
-	void deleteComponent(Context context, ComponentDTO dto) throws FunctionalException;
+	void deleteComponent(Context context, String id) throws FunctionalException;
 }

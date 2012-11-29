@@ -72,12 +72,12 @@ public interface ComponentTypeService {
 	 * Drop the given CT if it exists.
 	 * 
 	 * @param id
-	 *           the CT DTO
+	 *           the CT id
 	 * 
 	 * @throws FunctionalException
 	 *            if id is null or void
 	 * @throws FunctionalException
 	 *            if the CT doesn't exist.
 	 */
-	void deleteCT(Context context, ComponentTypeDTO dto) throws FunctionalException;
+	void deleteCT(Context context, String id) throws FunctionalException;
 }
