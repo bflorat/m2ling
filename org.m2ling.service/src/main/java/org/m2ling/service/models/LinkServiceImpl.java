@@ -62,7 +62,7 @@ public class LinkServiceImpl extends ServiceImpl implements LinkService {
 
 	private void checkSourcesAndDestinationsExistence(final LinkDTO dto) throws FunctionalException {
 		// nullity of sources and destinations
-		if (dto.getSources() == null) {
+		if (dto.getSources() == null ) {
 			throw new FunctionalException(FunctionalException.Code.NULL_ARGUMENT, null, "(source component)");
 		}
 		if (dto.getDestinations() == null) {

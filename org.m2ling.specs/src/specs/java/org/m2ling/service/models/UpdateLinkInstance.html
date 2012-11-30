@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:concordion="http://www.concordion.org/2007/concordion">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>Link instance update</title>
+</head>
+<body>
+	<H1>Link instance update</H1>
+	<p>Administrators or actors with adequate authorizations can update
+		a link instance.</p>
+	<div class='rule'>
+	<p>If a link instance <b concordion:set="#sourceOrDest">source</b> is set to null.<br/>
+	Then the <span concordion:execute="#resu=testMissingSourceOrDest(#sourceOrDest)"> service</span> 
+		should : <b concordion:assertEquals="#resu">FAIL with code NULL_ARGUMENT</b></p>
+		 
+	<p>If a link instance <b concordion:set="#sourceOrDest">destination</b> is set to null.<br/>
+	Then the <span concordion:execute="#resu=testMissingSourceOrDest(#sourceOrDest)"> service</span> 
+		should : <b concordion:assertEquals="#resu">FAIL with code NULL_ARGUMENT</b></p>
+		
+	<p>If a link instance <b concordion:set="#sourceOrDest">source</b> doesn't follow source component instance defined in its link,<br/>
+	Then the <span concordion:execute="#resu=testWrongSourceOrDest(#sourceOrDest)"> service</span> 
+		should : <b concordion:assertEquals="#resu">FAIL with code LI_ILLEGAL_SOURCE_OR_DEST</b></p>
+		
+	<p>If a link instance <b concordion:set="#sourceOrDest">destination</b> doesn't follow destination component instance defined in its link,<br/>
+	Then the <span concordion:execute="#resu=testWrongSourceOrDest(#sourceOrDest)"> service</span> 
+		should : <b concordion:assertEquals="#resu">FAIL with code LI_ILLEGAL_SOURCE_OR_DEST</b></p>
+	</div>
+		
+</body>
+</html>

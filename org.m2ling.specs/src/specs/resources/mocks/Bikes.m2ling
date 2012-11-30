@@ -197,12 +197,12 @@
     <componentInstances id="_av1GdKGYEeGWHchb0LRqvg" name="WebServer_1" comment="" status="AVAILABLE" component="id_comp_physical_catalog_ibm_hs21" boundComponentInstance="_Hk3"/>
     <componentInstances id="_thEX5KGYEeGWHchb0LRqvg" name="AS_1" component="id_comp_physical_catalog_ibm_hs22" boundComponentInstance="_Hk3"/>
     <componentInstances id="_xZASxKGYEeGWHchb0LRqvg" name="AS_2" component="id_comp_physical_catalog_ibm_hs22" boundComponentInstance="_HkPKsKA2AGg"/>
-    <componentInstances id="_6aYMpKGYEeGWHchb0LRqvg" name="Internet_Router_1" comment="" component="_Jlytjhmp" boundComponentInstance="_AIVt1KHBEeGIx4XXpoKVSg"/>
-    <componentInstances id="_AyNRZKGZEeGWHchb0LRqvg" name="Firewall_1" comment="" description="" component="_nKCmgp_6EeG3fPi34vn9KQ" boundComponentInstance="_DzMO9KHBEeGIx4XXpoKVSg"/>
+    <componentInstances id="id_li_physical_routeur1" name="Internet_Router_1" comment="" component="_Jlytjhmp" boundComponentInstance="_AIVt1KHBEeGIx4XXpoKVSg"/>
+    <componentInstances id="id_li_physical_fw1" name="Firewall_1" comment="" description="" component="_nKCmgp_6EeG3fPi34vn9KQ" boundComponentInstance="_DzMO9KHBEeGIx4XXpoKVSg"/>
     <componentInstances id="_O3JLxKGZEeGWHchb0LRqvg" name="DataServer_1" description="" component="_Y6hMwp_6EeG3fPi34vn9KQ" boundComponentInstance="_sTQ3ZKAsEeGQjY87lm4AGg"/>
     <componentInstances id="_jv8xNKGaEeGAboe59Cwkcg" name="Router_2" description="BikesOnline dedicated router" component="_JlK98p_7EeG3fPi34vn9KQ" boundComponentInstance="_x06rhKHAEeGIx4XXpoKVSg"/>
-    <linkInstances id="id_li_physical_cable1" name="cable1" source="_6aYMpKGYEeGWHchb0LRqvg" destination="_AyNRZKGZEeGWHchb0LRqvg" link="id_link_physical_cable5E"/>
-    <linkInstances id="id_li_physical_cable2" name="cable2" source="_AyNRZKGZEeGWHchb0LRqvg" destination="_jv8xNKGaEeGAboe59Cwkcg" link="id_link_physical_cable5E"/>
+    <linkInstances id="id_li_physical_cable1" name="cable1" source="id_li_physical_routeur1" destination="id_li_physical_fw1" link="id_link_physical_cable5E"/>
+    <linkInstances id="id_li_physical_cable2" name="cable2" source="id_li_physical_fw1" destination="_jv8xNKGaEeGAboe59Cwkcg" link="id_link_physical_cable5E"/>
     <linkInstances id="id_li_physical_cable3" name="cable3" source="_jv8xNKGaEeGAboe59Cwkcg" destination="_thEX5KGYEeGWHchb0LRqvg" link="id_link_physical_cable5E"/>
     <linkInstances id="id_li_physical_cable4" name="cable4" description="" source="_jv8xNKGaEeGAboe59Cwkcg" destination="_xZASxKGYEeGWHchb0LRqvg" link="id_link_physical_cable5E"/>
     <linkInstances id="id_li_physical_cable5" name="cable5" source="_jv8xNKGaEeGAboe59Cwkcg" destination="_av1GdKGYEeGWHchb0LRqvg" link="id_link_physical_cable5E"/>

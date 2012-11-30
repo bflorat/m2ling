@@ -48,14 +48,14 @@ public class LinkInstanceServiceImpl extends ServiceImpl implements LinkInstance
 	}
 
 	private void checkSourceAndDestinationExistence(final LinkInstanceDTO dto) throws FunctionalException {
-		HasNameAndIdDTO ciDTO = dto.getSource();
-		if (util.getComponentInstanceByID(ciDTO.getId()) == null) {
+		HasNameAndIdDTO sourceCIDTO = dto.getSource();
+		if (util.getComponentInstanceByID(sourceCIDTO.getId()) == null) {
 			throw new FunctionalException(FunctionalException.Code.TARGET_NOT_FOUND, null, "(source component instance)");
 		}
-		ciDTO = dto.getDestination();
-		if (util.getComponentInstanceByID(ciDTO.getId()) == null) {
+		HasNameAndIdDTO destCIDTO = dto.getDestination();
+		if (util.getComponentInstanceByID(destCIDTO.getId()) == null) {
 			throw new FunctionalException(FunctionalException.Code.TARGET_NOT_FOUND, null,
-					"(destination component instance)" + ciDTO.getId());
+					"(destination component instance)" + destCIDTO.getId());
 		}
 	}
 
@@ -85,13 +85,13 @@ public class LinkInstanceServiceImpl extends ServiceImpl implements LinkInstance
 			throw new FunctionalException(FunctionalException.Code.LI_ILLEGAL_SOURCE_OR_DEST, null,
 					"link instance destination=" + dto.getDestination());
 		}
-	} 
+	}
 
 	private void checkSourceAndDestinationFormat(final LinkInstanceDTO dto) throws FunctionalException {
-		if (dto.getSource() == null) {
+		if (dto.getSource() == null || dto.getSource().getId() == null) {
 			throw new FunctionalException(FunctionalException.Code.NULL_ARGUMENT, null, "(source component instance)");
 		}
-		if (dto.getDestination() == null) {
+		if (dto.getDestination() == null || dto.getDestination().getId() == null) {
 			throw new FunctionalException(FunctionalException.Code.NULL_ARGUMENT, null, "(destination component instance)");
 		}
 	}
@@ -239,9 +239,9 @@ public class LinkInstanceServiceImpl extends ServiceImpl implements LinkInstance
 			// Controls
 			LinkInstanceDTO dto = new LinkInstanceDTO.Builder(id, null, null).build();
 			checkDTO(dto, AccessType.DELETE);
-			Link link = util.getLinkByID(dto.getId());
-			View view = (View) link.eContainer();
-			view.getLinks().remove(link);
+			LinkInstance li = util.getLinkInstanceByID(dto.getId());
+			View view = (View) li.eContainer();
+			view.getLinks().remove(li);
 			pmanager.commit();
 		} catch (Exception anyError) {
 			handleAnyException(anyError);
