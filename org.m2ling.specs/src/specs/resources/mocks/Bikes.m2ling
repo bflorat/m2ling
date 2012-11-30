@@ -140,10 +140,10 @@
     </components>
     <components id="_1tPv4qvwEeGqu4Jf39UauA" name="BikesOnline_database" comment="" type="id_ct_logical_database"/>
     <components id="id_comp_view_Logical_InternetWebClient" name="LinuxWebClient" comment="" description="A linux browser" type="id_ct_logical_InternetWebClient"/>
-    <links id="fdfdsfsfsddsewv" name="Stream1" comment="" description="" type="_oHllkpqkEeGbI4NH3iicSg" sources="_4-yHMprbEeGE7MG94I-e3A" destinations="id_comp_view_Logical_BikesOnline_EndUserGUI"/>
-    <links id="vn,khghjghj" name="Stream2" type="_2LrDApqyEeGVMag01qc4bw" sources="id_comp_view_Logical_BikesOnline_EndUserGUI" destinations="id_comp_view_Logical_BikesOnline_AuthenticationLDAP"/>
-    <links id="_aCyWg5xDEeGi7NYPtEuJdA" name="Stream3" type="id_lt_logical_http_rest" sources="id_comp_view_Logical_BikesOnline_EndUserGUI" destinations="_GHLjspxDEeGi7NYPtEuJdA"/>
-    <links id="_NpfsI56UEeGyndJ1yNTLVw" name="Stream4" type="_4Rfd0pqjEeGQsK1VSbibvw" sources="_GHLjspxDEeGi7NYPtEuJdA"/>
+    <links id="id_link_logical_stream1" name="Stream1" comment="" description="" type="_oHllkpqkEeGbI4NH3iicSg" sources="_4-yHMprbEeGE7MG94I-e3A" destinations="id_comp_view_Logical_BikesOnline_EndUserGUI"/>
+    <links id="id_link_logical_stream2" name="Stream2" type="_2LrDApqyEeGVMag01qc4bw" sources="id_comp_view_Logical_BikesOnline_EndUserGUI" destinations="id_comp_view_Logical_BikesOnline_AuthenticationLDAP"/>
+    <links id="id_link_logical_stream3" name="Stream3" type="id_lt_logical_http_rest" sources="id_comp_view_Logical_BikesOnline_EndUserGUI" destinations="_GHLjspxDEeGi7NYPtEuJdA"/>
+    <links id="id_link_logical_stream4" name="Stream4" type="_4Rfd0pqjEeGQsK1VSbibvw" sources="_GHLjspxDEeGi7NYPtEuJdA"/>
   </views>
   <views comment="" description="" id="_0oVTkZ55EeGAFeVyyYKoXg" name="Enterprise architecture view" viewPoint="_uP3gkZniEeGeqKlv68ECYA">
     <components id="_Uf_Bop56EeGAFeVyyYKoXg" name="eBusiness" comment="" type="_KEFloJq4EeGVMag01qc4bw">
@@ -276,9 +276,9 @@
     </componentInstances>
     <componentInstances id="_Ste_hKMrEeG9sM0bZ_WFcA" name="gui_end_user_1" component="_bTKAYqMhEeGTqOb8fWOx0Q"/>
     <componentInstances id="_Y4t3FKNJEeGULe7xIq_4Kg" name="jetty_admin_1" comment="" component="id_comp_deploy_production_jetty">
-      <references type="RUNS" targets="_LG40BKNLEeGULe7xIq_4Kg"/>
+      <references type="RUNS" targets="id_comp_deploy_prod_gui_admin_bikesonline_1"/>
     </componentInstances>
-    <componentInstances id="_LG40BKNLEeGULe7xIq_4Kg" name="gui_admin_bikesonline_1" component="_C2pRkqNKEeGULe7xIq_4Kg"/>
+    <componentInstances id="id_comp_deploy_prod_gui_admin_bikesonline_1" name="gui_admin_bikesonline_1" component="_C2pRkqNKEeGULe7xIq_4Kg"/>
     <componentInstances id="id_ci_deploy_HS22_1" name="HS22_1" description="" component="id_comp_deploy_IBM_HS22" boundComponentInstance="_HkPKsKAsEeGQjY87lm4AGg">
       <references type="RUNS" targets="id_ci_deploy_OS_HS22_1"/>
     </componentInstances>
@@ -286,9 +286,9 @@
       <references type="RUNS" targets="_UmUCBKMuEeG9sM0bZ_WFcA _rctPVKNMEeGULe7xIq_4Kg"/>
     </componentInstances>
     <componentInstances id="_UmUCBKMuEeG9sM0bZ_WFcA" name="jboss_bikesonline_1" comment="" component="_6b6KoqMtEeG9sM0bZ_WFcA">
-      <references type="RUNS" targets="_LG40BKNLEeGUrere_4Kg _LG40BKNLEedsdsLe7xIq_4Kg"/>
+      <references type="RUNS" targets="_LG40BKNLEeGUrere_4Kg id_comp_deploy_prod_services_admin_bikesonline_1"/>
     </componentInstances>
-    <componentInstances id="_LG40BKNLEedsdsLe7xIq_4Kg" name="services_admin_bikesonline_1" comment="" component="_C2pRkqNKEeGULe7xIq_4Kg"/>
+    <componentInstances id="id_comp_deploy_prod_services_admin_bikesonline_1" name="services_admin_bikesonline_1" comment="" component="_C2pRkqNKEeGULe7xIq_4Kg"/>
     <componentInstances id="_iC1uBKMtEeG9sM0bZ_WFcA" component="_5S34QqMoEeGkWPVFom68wQ" boundComponentInstance="_sTQ3ZKAsEeGQjY87lm4AGg">
       <references type="RUNS" targets="_dDF2hKMtEeG9sM0bZ_WFcA"/>
     </componentInstances>

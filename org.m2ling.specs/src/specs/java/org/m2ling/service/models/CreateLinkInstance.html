@@ -3,12 +3,12 @@
 	xmlns:concordion="http://www.concordion.org/2007/concordion">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<title>Link creation</title>
+<title>Link instance creation</title>
 </head>
 <body>
-	<H1>Link creation</H1>
+	<H1>Link Instance (LI) creation</H1>
 	<p>Administrators or actors with adequate authorizations can create
-		a new links.</p>
+		a new link instance.</p>
 	<h2>Nominal rules</h2>
 	<p>
 		See <a href="../common/Core.html#Requirements">common service
@@ -16,25 +16,24 @@
 	</p>
 
 	<div class="example">
-		A new link created with <span concordion:set="#caseName">Roundtrip
+		A new LI created with <span concordion:set="#caseName">Roundtrip
 		</span>
 		<ul>
-			<li>vID=<b concordion:set="#vID">id_view_vp_logical_Logical_BikesOnline</b></li>
-			<li>id=<b concordion:set="#id">id_new_link</b></li>
-			<li>ltID=<b concordion:set="#ltID">id_lt_logical_http_rest</b></li>
-			<li>name=<b concordion:set="#name">STREAM6</b></li>
-			<li>sources=<b concordion:set="#sources">id_comp_view_Logical_BikesOnline_AdminGUI,id_comp_view_Logical_BikesOnline_EndUserGUI</b></li>
-			<li>destination=<b concordion:set="#destinations">id_comp_view_Logical_BikesOnline_AdminServices,id_comp_view_Logical_BikesOnline_PaymentServices</b></li>
+			<li>vID=<b concordion:set="#vID">id_view_deploy_production</b></li>
+			<li>id=<b concordion:set="#id">id_new_LI</b></li>
+			<li>linkID=<b concordion:set="#linkID">id_link_deploy_prod_stream1_1</b></li>
+			<li>name=<b concordion:set="#name">stream_admin_1_1</b></li>
+			<li>sources=<b concordion:set="#sourceID">id_comp_deploy_prod_gui_admin_bikesonline_1</b></li>
+			<li>destination=<b concordion:set="#destinationID">id_comp_deploy_prod_services_admin_bikesonline_1</b></li>
 			<li>description=<b concordion:set="#desc">Asynchronous REST
 					call over HTTP. Default port : 80. </b></li>
 			<li>comment=<b concordion:set="#comment">Over TCP only.</b></li>
 			<li>tags=<b concordion:set="#tags">logical,network</b></li>
-			<li>timeout=<b concordion:set="#timeout">3</b></li>
 			<li>status=<b concordion:set="#status">APPLICABLE</b></li>
 		</ul>
 		should have following characteristics (full round trip from
 		presentation to presentation) : <b
-			concordion:assertEquals="createAndGetLink(#caseName,#vID,#id,#ltID,#name,#desc,#comment,#tags,#timeout,#sources,#destinations,#status)">
+			concordion:assertEquals="createAndGet(#caseName,#vID,#id,#linkID,#name,#desc,#comment,#tags,#sourceID,#destinationID,#status)">
 			comment=Over TCP only. description=Asynchronous REST call over HTTP.
 			Default port : 80.
 			destinations=[id=id_comp_view_Logical_BikesOnline_AdminServices
@@ -48,24 +47,7 @@
 			view=id=id_view_vp_logical_Logical_BikesOnline name=Logical_BikesOnline </b>
 	</div>
 
-	<p class='rule'>#Link01 : A link must contain at least a single
-		component as source.</p>
-	<div class='example'>
-		If the link contains none <b concordion:set="#sourceOrDest">source</b>, the creation <span
-			concordion:execute="#resu=testNoneSourceOrDest(#sourceOrDest)"> service</span> should :
-		<b concordion:assertEquals="#resu">FAIL with code
-			NONE_SOURCES_TYPES</b>
-	</div>
-
-	<p class='rule'>#Link02 : A link must contain at least a single
-		component as destination.</p>
-	<div class='example'>
-		If the link contains none <b concordion:set="#sourceOrDest">destination</b>, the creation <span
-			concordion:execute="#resu=testNoneSourceOrDest(#sourceOrDest)"> service</span> should : <b
-			concordion:assertEquals="#resu">FAIL with code NONE_DEST_TYPES</b>
-	</div>
-	
-	<p class='rule'>#Link03 : Component sources and destinations must follow types defined in their associated LT. </p>
+	<p class='rule'>#LI01 : Component sources and destinations can't be null and must follow types defined in their associated LT. </p>
 		<div class='example'>
 			If a <b concordion:set="#sourceOrDest">source</b> target has a wrong type<br/>
 			Then the link <span
@@ -84,38 +66,36 @@
 	<ul>
 		<li>See <a href="../common/Core.html#Requirements">common
 				service requirements</a></li>
-		<li>A negative timeout means "undefined". Any negative value is accepted.</li>
+		<li>Source and destination can't be null</li>
 	</ul>
 	<div class="example">
 		<table
 			concordion:execute="#result=checkFormat(#caseName,#vID,#id,#ltID,#name,#desc,
-				#comment,#tags,#timeout,#sources,#destinations,#status)">
+				#comment,#tags,#sourceID,#destinationID,#status)">
 			<tr>
 				<th concordion:set="#caseName">Case</th>
 				<th concordion:set="#vID">View ID</th>
 				<th concordion:set="#id">ID</th>
-				<th concordion:set="#ltID">LT ID</th>
+				<th concordion:set="#linkID">LT ID</th>
 				<th concordion:set="#name">Name</th>
 				<th concordion:set="#desc">Description</th>
 				<th concordion:set="#comment">Comment</th>
 				<th concordion:set="#tags">Tags</th>
-				<th concordion:set="#timeout">Timeout (ms)</th>
-				<th concordion:set="#sources">Sources</th>
-				<th concordion:set="#destinations">Destination</th>
+				<th concordion:set="#sourceID">Sources</th>
+				<th concordion:set="#destinationID">Destination</th>
 				<th concordion:set="#status">Status</th>
 				<th concordion:assertEquals="#result">should :</th>
 			</tr>
 			<!-- Nominal -->
 			<tr>
 				<td>Format/Nominal creation</td>
-				<td>id_view_physical_BikesOnline</td>
-				<td>id_new_link</td>
+				<td>id_view_deploy_production</td>
+				<td>id_new_li</td>
 				<td>id_lt_physical_gigabit</td>
 				<td>Physical gigabit link</td>
 				<td>description2</td>
 				<td>comment2</td>
 				<td>tags1,tag2</td>
-				<td>10000</td>
 				<td>id_comp_physical_catalog_ibm_hs21</td>
 				<td>id_comp_physical_catalog_ibm_hs21</td>
 				<td>APPLICABLE</td>
@@ -131,7 +111,6 @@
 				<td>description2</td>
 				<td>comment2</td>
 				<td>tags1,tag2</td>
-				<td>10000</td>
 				<td>id_comp_physical_catalog_ibm_hs21</td>
 				<td>id_comp_physical_catalog_ibm_hs21</td>
 				<td>APPLICABLE</td>
@@ -146,7 +125,6 @@
 				<td>description2</td>
 				<td>comment2</td>
 				<td>tags1,tag2</td>
-				<td>10000</td>
 				<td>id_comp_physical_catalog_ibm_hs21</td>
 				<td>id_comp_physical_catalog_ibm_hs21</td>
 				<td>APPLICABLE</td>
@@ -161,7 +139,6 @@
 				<td>description2</td>
 				<td>comment2</td>
 				<td>tags1,tag2</td>
-				<td>10000</td>
 				<td>id_comp_physical_catalog_ibm_hs21</td>
 				<td>id_comp_physical_catalog_ibm_hs21</td>
 				<td>APPLICABLE</td>
@@ -177,7 +154,6 @@
 				<td>description2</td>
 				<td>comment2</td>
 				<td>tags1,tag2</td>
-				<td>10000</td>
 				<td>id_comp_physical_catalog_ibm_hs21</td>
 				<td>id_comp_physical_catalog_ibm_hs21</td>
 				<td>APPLICABLE</td>
@@ -192,7 +168,6 @@
 				<td>description2</td>
 				<td>comment2</td>
 				<td>tags1,tag2</td>
-				<td>10000</td>
 				<td>id_comp_physical_catalog_ibm_hs21</td>
 				<td>id_comp_physical_catalog_ibm_hs21</td>
 				<td>APPLICABLE</td>
@@ -207,7 +182,6 @@
 				<td>description2</td>
 				<td>comment2</td>
 				<td>tags1,tag2</td>
-				<td>10000</td>
 				<td>id_comp_physical_catalog_ibm_hs21</td>
 				<td>id_comp_physical_catalog_ibm_hs21</td>
 				<td>APPLICABLE</td>
@@ -223,7 +197,6 @@
 				<td>description2</td>
 				<td>comment2</td>
 				<td>tags1,tag2</td>
-				<td>10000</td>
 				<td>id_comp_physical_catalog_ibm_hs21</td>
 				<td>id_comp_physical_catalog_ibm_hs21</td>
 				<td>APPLICABLE</td>
@@ -253,7 +226,6 @@
 				<td>description2</td>
 				<td>comment2</td>
 				<td>tags1,tag2</td>
-				<td>10000</td>
 				<td>id_comp_physical_catalog_ibm_hs21</td>
 				<td>id_comp_physical_catalog_ibm_hs21</td>
 				<td>APPLICABLE</td>
@@ -269,7 +241,6 @@
 				<td>description2</td>
 				<td>null</td>
 				<td>tags1,tag2</td>
-				<td>10000</td>
 				<td>id_comp_physical_catalog_ibm_hs21</td>
 				<td>id_comp_physical_catalog_ibm_hs21</td>
 				<td>APPLICABLE</td>
@@ -286,7 +257,6 @@
 				<td>null</td>
 				<td>comment2</td>
 				<td>tags1,tag2</td>
-				<td>10000</td>
 				<td>id_comp_physical_catalog_ibm_hs21</td>
 				<td>id_comp_physical_catalog_ibm_hs21</td>
 				<td>APPLICABLE</td>
@@ -301,7 +271,6 @@
 				<td></td>
 				<td>comment2</td>
 				<td>tags1,tag2</td>
-				<td>10000</td>
 				<td>id_comp_physical_catalog_ibm_hs21</td>
 				<td>id_comp_physical_catalog_ibm_hs21</td>
 				<td>APPLICABLE</td>
@@ -316,7 +285,6 @@
 				<td>space</td>
 				<td>comment2</td>
 				<td>tags1,tag2</td>
-				<td>10000</td>
 				<td>id_comp_physical_catalog_ibm_hs21</td>
 				<td>id_comp_physical_catalog_ibm_hs21</td>
 				<td>APPLICABLE</td>
@@ -332,7 +300,6 @@
 				<td>description2</td>
 				<td>comment2</td>
 				<td>tags1,tag2</td>
-				<td>10000</td>
 				<td>id_comp_physical_catalog_ibm_hs21,id_foo</td>
 				<td>id_comp_physical_catalog_ibm_hs21</td>
 				<td>APPLICABLE</td>
@@ -348,7 +315,6 @@
 				<td>description2</td>
 				<td>comment2</td>
 				<td>tags1,tag2</td>
-				<td>10000</td>
 				<td>id_comp_physical_catalog_ibm_hs21</td>
 				<td>id_comp_physical_catalog_ibm_hs21,id_foo</td>
 				<td>APPLICABLE</td>
@@ -364,7 +330,6 @@
 				<td>description2</td>
 				<td>comment2</td>
 				<td>tags1,tag2</td>
-				<td>10000</td>
 				<td>id_comp_physical_catalog_ibm_hs21</td>
 				<td>id_comp_physical_catalog_ibm_hs21,id_foo</td>
 				<td>foo</td>
@@ -379,13 +344,11 @@
 				<td>description2</td>
 				<td>comment2</td>
 				<td>tags1,tag2</td>
-				<td>10000</td>
 				<td>id_comp_physical_catalog_ibm_hs21</td>
 				<td>id_comp_physical_catalog_ibm_hs21</td>
 				<td>null</td>
 				<td>PASS</td>
 			</tr>
-
 		</table>
 	</div>
 </body>

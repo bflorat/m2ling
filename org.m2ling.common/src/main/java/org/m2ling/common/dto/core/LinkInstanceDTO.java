@@ -15,8 +15,13 @@ public final class LinkInstanceDTO extends AbstractCommonDTO implements Comparab
 	private final HasNameAndIdDTO source;
 
 	private final HasNameAndIdDTO destination;
+	
+	private final HasNameAndIdDTO view;
 
 	public static class Builder extends AbstractCommonDTO.Builder {
+	// Mandatory items
+			private HasNameAndIdDTO view;
+			
 		// Optional configuration
 		private HasNameAndIdDTO link;
 
@@ -24,8 +29,9 @@ public final class LinkInstanceDTO extends AbstractCommonDTO implements Comparab
 
 		private HasNameAndIdDTO destination;
 
-		public Builder(String id, String name) {
+		public Builder(String id, String name, HasNameAndIdDTO view) {
 			super(id, name);
+			this.view= view;
 		}
 
 		public Builder link(HasNameAndIdDTO link) {
@@ -54,6 +60,7 @@ public final class LinkInstanceDTO extends AbstractCommonDTO implements Comparab
 		source = builder.source;
 		destination = builder.destination;
 		link = builder.link;
+		view = builder.view;
 	}
 
 	public boolean equals(Object o) {
@@ -103,5 +110,12 @@ public final class LinkInstanceDTO extends AbstractCommonDTO implements Comparab
 	 */
 	public HasNameAndIdDTO getDestination() {
 		return destination;
+	}
+	
+	/**
+	 * @return the view DTO
+	 */
+	public HasNameAndIdDTO getView() {
+		return view;
 	}
 }

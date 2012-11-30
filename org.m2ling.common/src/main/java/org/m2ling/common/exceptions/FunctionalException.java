@@ -82,6 +82,7 @@ public class FunctionalException extends Exception {
 		COMP_MISSING_BINDING,	
 		LINK_IN_USE,
 		LINK_ILLEGAL_SOURCE_OR_DEST,
+		LI_ILLEGAL_SOURCE_OR_DEST
 		
 	}
 

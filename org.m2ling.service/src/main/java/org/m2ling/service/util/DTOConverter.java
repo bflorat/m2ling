@@ -318,7 +318,9 @@ public class DTOConverter {
 
 		public LinkInstanceDTO getLinkInstanceDTO(LinkInstance instance) {
 			// If name is void or null, use bound type one
-			LinkInstanceDTO.Builder builder = new LinkInstanceDTO.Builder(instance.getId(), instance.getName());
+			View view = util.getViewByItem(instance);
+			HasNameAndIdDTO viewDTO = new HasNameAndIdDTO.Builder(view.getId(), view.getName()).build();
+			LinkInstanceDTO.Builder builder = new LinkInstanceDTO.Builder(instance.getId(), instance.getName(),viewDTO);
 			populateCommonBuilder(builder, instance);
 			HasNameAndIdDTO hniSource = new HasNameAndIdDTO.Builder(instance.getSource().getId(), instance.getSource()
 					.getName()).build();

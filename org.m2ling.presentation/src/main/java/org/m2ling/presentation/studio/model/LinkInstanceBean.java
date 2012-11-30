@@ -22,6 +22,8 @@ public class LinkInstanceBean extends AbstractCommonBean {
 	private HasNameAndIDBean destination;
 
 	private HasNameAndIDBean link;
+	
+	private HasNameAndIDBean view;
 
 	public LinkInstanceBean() {
 		super();
@@ -96,5 +98,19 @@ public class LinkInstanceBean extends AbstractCommonBean {
 	 */
 	public void setDestination(HasNameAndIDBean destination) {
 		this.destination = destination;
+	}
+	
+	/**
+	 * @return the view
+	 */
+	public HasNameAndIDBean getView() {
+		return view;
+	}
+
+	/**
+	 * @param view the view to set
+	 */
+	public void setView(HasNameAndIDBean view) {
+		this.view = view;
 	}
 }

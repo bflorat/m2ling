@@ -241,7 +241,8 @@ public class DTOConverter {
 		}
 
 		public LinkInstanceDTO getLinkInstanceDTO(LinkInstanceBean bean) {
-			LinkInstanceDTO.Builder builder = new LinkInstanceDTO.Builder(bean.getId(), bean.getName());
+			HasNameAndIdDTO viewDTO = getNameAndIdDTO(bean.getView());
+			LinkInstanceDTO.Builder builder = new LinkInstanceDTO.Builder(bean.getId(), bean.getName(),viewDTO);
 			builder.link(getNameAndIdDTO(bean.getLink()));
 			populateCommonBuilder(builder, bean);
 			builder.source(getNameAndIdDTO(bean.getSource()));
@@ -494,8 +495,8 @@ public class DTOConverter {
 			}
 			bean.setDestinations(destinations);
 			HasNameAndIDBean ltBean = getHasNameAndIdBean(dto.getLinkType());
-			HasNameAndIDBean viewBean = getHasNameAndIdBean(dto.getView());
 			bean.setType(ltBean);
+			HasNameAndIDBean viewBean = getHasNameAndIdBean(dto.getView());
 			bean.setView(viewBean);
 			bean.setTimeoutMillis(dto.getTimeoutMillis());
 			return bean;
@@ -507,6 +508,8 @@ public class DTOConverter {
 			bean.setSource(getHasNameAndIdBean(dto.getSource()));
 			bean.setDestination(getHasNameAndIdBean(dto.getDestination()));
 			bean.setLink(getHasNameAndIdBean(dto.getLink()));
+			HasNameAndIDBean viewBean = getHasNameAndIdBean(dto.getView());
+			bean.setView(viewBean);
 			return bean;
 		}
 	}

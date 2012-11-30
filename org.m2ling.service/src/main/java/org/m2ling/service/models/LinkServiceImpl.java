@@ -51,9 +51,9 @@ public class LinkServiceImpl extends ServiceImpl implements LinkService {
 	}
 
 	private void checkNoLinkInstancesForLink(final Link target, final AccessType access) throws FunctionalException {
-		View view = (View)target.eContainer();
+		View view = (View) target.eContainer();
 		for (LinkInstance li : view.getLinkInstances()) {
-			if (li.getLink().equals(target)) { 
+			if (li.getLink().equals(target)) {
 				throw new FunctionalException(FunctionalException.Code.LINK_IN_USE, null, "link instance name="
 						+ li.getName());
 			}
@@ -61,6 +61,13 @@ public class LinkServiceImpl extends ServiceImpl implements LinkService {
 	}
 
 	private void checkSourcesAndDestinationsExistence(final LinkDTO dto) throws FunctionalException {
+		// nullity of sources and destinations
+		if (dto.getSources() == null) {
+			throw new FunctionalException(FunctionalException.Code.NULL_ARGUMENT, null, "(source component)");
+		}
+		if (dto.getDestinations() == null) {
+			throw new FunctionalException(FunctionalException.Code.NULL_ARGUMENT, null, "(destination component)");
+		}
 		// check existence of sources and destination Components
 		for (HasNameAndIdDTO compDTO : dto.getSources()) {
 			if (util.getComponentByID(compDTO.getId()) == null) {
@@ -167,6 +174,7 @@ public class LinkServiceImpl extends ServiceImpl implements LinkService {
 			checkComment(dto.getComment());
 			checkTags(dto.getTags());
 			// Note that sources and destinations items unicity is implicitly managed by the fact that
+			// they are Set collections
 			checkSourcesAndDestinationsSize(dto);
 			checkSourcesAndDestinationsExistence(dto);
 			checkSourcesAndDestinationsConformToLT(dto, lt);
@@ -245,6 +253,9 @@ public class LinkServiceImpl extends ServiceImpl implements LinkService {
 		}
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public void createLink(final Context context, final LinkDTO dto) throws FunctionalException {
 		try {
@@ -297,7 +308,7 @@ public class LinkServiceImpl extends ServiceImpl implements LinkService {
 	public void deleteLink(final Context context, final String id) throws FunctionalException {
 		try {
 			// Controls
-			LinkDTO dto = new LinkDTO.Builder(id,null,null).build();
+			LinkDTO dto = new LinkDTO.Builder(id, null, null).build();
 			checkDTO(dto, AccessType.DELETE);
 			Link link = util.getLinkByID(dto.getId());
 			View view = (View) link.eContainer();
