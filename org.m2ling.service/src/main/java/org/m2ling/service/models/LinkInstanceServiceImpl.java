@@ -73,19 +73,19 @@ public class LinkInstanceServiceImpl extends ServiceImpl implements LinkInstance
 
 	private void checkSourceAndDestinationConformToLink(final LinkInstanceDTO dto, final Link link)
 			throws FunctionalException {
-		HasNameAndIdDTO ciDTO = dto.getSource();
-		ComponentInstance ci = util.getComponentInstanceByID(ciDTO.getId());
-		if (ci == null || !link.getSources().contains(ci.getComponent())) {
+		HasNameAndIdDTO sourceDTO = dto.getSource();
+		ComponentInstance sourceInstance = util.getComponentInstanceByID(sourceDTO.getId());
+		if (sourceInstance == null || !link.getSources().contains(sourceInstance.getComponent())) {
 			throw new FunctionalException(FunctionalException.Code.LI_ILLEGAL_SOURCE_OR_DEST, null,
 					"link instance source=" + dto.getSource());
 		}
-		ciDTO = dto.getDestination();
-		ci = util.getComponentInstanceByID(ci.getId());
-		if (ci == null || !link.getDestinations().contains(ci.getComponent())) {
+		HasNameAndIdDTO destDTO = dto.getDestination();
+		ComponentInstance destInstance = util.getComponentInstanceByID(destDTO.getId());
+		if (destInstance == null || !link.getDestinations().contains(destInstance.getComponent())) {
 			throw new FunctionalException(FunctionalException.Code.LI_ILLEGAL_SOURCE_OR_DEST, null,
 					"link instance destination=" + dto.getDestination());
 		}
-	}
+	} 
 
 	private void checkSourceAndDestinationFormat(final LinkInstanceDTO dto) throws FunctionalException {
 		if (dto.getSource() == null) {

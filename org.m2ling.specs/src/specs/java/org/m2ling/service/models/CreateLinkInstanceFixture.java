@@ -77,19 +77,19 @@ public class CreateLinkInstanceFixture extends AbstractLinkInstanceFixture {
 			reset("Bikes");
 		}
 		try {
-			HasNameAndIdDTO view = new HasNameAndIdDTO.Builder("id_view_vp_logical_Logical_BikesOnline", "").build();
+			HasNameAndIdDTO view = new HasNameAndIdDTO.Builder("id_view_deploy", "").build();
 			HasNameAndIdDTO source = null;
 			HasNameAndIdDTO dest = null;
 			if ("destination".equals(sourceOrDest)) { // wrong "destination"
-				source = new HasNameAndIdDTO.Builder("id_comp_view_Logical_BikesOnline_AdminGUI", "").build();
-				dest = new HasNameAndIdDTO.Builder("id_comp_view_Logical_BikesOnline_EndUserGUI", "").build();
+				source = new HasNameAndIdDTO.Builder("id_comp_deploy_prod_gui_admin_bikesonline_1", "").build();
+				dest = new HasNameAndIdDTO.Builder("id_comp_deploy_prod_gui_admin_bikesonline_1", "").build();
 			} else if ("source".equals(sourceOrDest)) {// Wrong source
-				source = new HasNameAndIdDTO.Builder("id_comp_view_Logical_BikesOnline_AdminServices", "").build();
-				dest = new HasNameAndIdDTO.Builder("id_comp_view_Logical_BikesOnline_AdminGUI", "").build();
+				source = new HasNameAndIdDTO.Builder("id_comp_deploy_prod_services_admin_bikesonline_1", "").build();
+				dest = new HasNameAndIdDTO.Builder("id_comp_deploy_prod_services_admin_bikesonline_1", "").build();
 			}
-			HasNameAndIdDTO type = new HasNameAndIdDTO.Builder("id_lt_logical_http_rest", "").build();
-			LinkInstanceDTO dto = ((LinkInstanceDTO.Builder) new LinkInstanceDTO.Builder("id_new_link", "new_link", view)
-					.link(type).source(source).destination(dest).status("APPLICABLE")).build();
+			HasNameAndIdDTO link = new HasNameAndIdDTO.Builder("id_link_deploy_REST_admin", "").build();
+			LinkInstanceDTO dto = ((LinkInstanceDTO.Builder) new LinkInstanceDTO.Builder("id_new_li", "new_li", view)
+					.link(link).source(source).destination(dest).status("APPLICABLE")).build();
 			service.checkDTO(dto, AccessType.CREATE);
 			return "PASS";
 		} catch (FunctionalException ex) {
@@ -100,8 +100,7 @@ public class CreateLinkInstanceFixture extends AbstractLinkInstanceFixture {
 	}
 
 	public String checkFormat(String caseName, String vID, String id, String linkID, String name, String desc,
-			String comment, String tags, String timeout, String sourceID, String destinationID, String status)
-			throws FunctionalException {
+			String comment, String tags, String sourceID, String destinationID, String status) throws FunctionalException {
 		if (!noreset) {
 			reset("Bikes");
 		}
