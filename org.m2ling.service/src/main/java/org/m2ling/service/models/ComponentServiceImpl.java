@@ -23,10 +23,10 @@ import org.m2ling.domain.core.ComponentInstance;
 import org.m2ling.domain.core.ComponentType;
 import org.m2ling.domain.core.HasNameAndID;
 import org.m2ling.domain.core.Reference;
-import org.m2ling.domain.core.ReferenceType;
 import org.m2ling.domain.core.Type;
 import org.m2ling.domain.core.View;
 import org.m2ling.persistence.PersistenceManager;
+import org.m2ling.service.common.ReferenceHelper;
 import org.m2ling.service.common.ServiceImpl;
 import org.m2ling.service.util.CoreUtil;
 import org.m2ling.service.util.DTOConverter;
@@ -44,13 +44,16 @@ import com.google.inject.Singleton;
  */
 @Singleton
 public class ComponentServiceImpl extends ServiceImpl implements ComponentService {
+	private ReferenceHelper refHelper;
+
 	/**
 	 * Protected constructor to prevent direct instantiation
 	 */
 	@Inject
 	protected ComponentServiceImpl(PersistenceManager pm, CoreUtil util, DTOConverter.FromDTO fromDTO,
-			DTOConverter.ToDTO toDTO, Conf conf, Logger logger) {
+			DTOConverter.ToDTO toDTO, Conf conf, Logger logger, ReferenceHelper refHelper) {
 		super(pm, util, fromDTO, toDTO, conf, logger);
+		this.refHelper = refHelper;
 	}
 
 	private void checkBeforeDeletion(final ComponentDTO dto) throws FunctionalException {
@@ -85,7 +88,7 @@ public class ComponentServiceImpl extends ServiceImpl implements ComponentServic
 		}
 		ComponentType thisCompType = ct;
 		for (ReferenceDTO refDTO : references) {
-			checkReferenceFormat(dto, refDTO);
+			refHelper.checkReferenceFormat(refDTO);
 			checkTargetsExistence(refDTO);
 			checkTargetsTypes(thisCompType, refDTO);
 		}
@@ -93,30 +96,6 @@ public class ComponentServiceImpl extends ServiceImpl implements ComponentServic
 		// delete a component while instances still exist)
 		if (access == AccessType.UPDATE) {
 			checkReferenceDeletion(dto, target);
-		}
-	}
-
-	/**
-	 * @param dto
-	 * @param refDTO
-	 * @throws FunctionalException
-	 */
-	private void checkReferenceFormat(final ComponentDTO dto, ReferenceDTO refDTO) throws FunctionalException {
-		// check reference nullity
-		if (refDTO == null) {
-			throw new FunctionalException(FunctionalException.Code.NULL_ARGUMENT, null, "(references)");
-		}
-		// check reference type
-		if (ReferenceType.get(refDTO.getType()) == null) {
-			throw new FunctionalException(FunctionalException.Code.INVALID_REFERENCE_TYPE, null, dto.toString());
-		}
-		// check that the reference contains at least a single target
-		if (refDTO.getTargets().size() == 0) {
-			throw new FunctionalException(FunctionalException.Code.NONE_TARGET, null, "reference=" + refDTO.getType());
-		}
-		// check targets nullity
-		if (refDTO.getTargets() == null) {
-			throw new FunctionalException(FunctionalException.Code.NULL_ARGUMENT, null, "(references/target)");
 		}
 	}
 
@@ -170,7 +149,7 @@ public class ComponentServiceImpl extends ServiceImpl implements ComponentServic
 		}
 		EList<Reference> currentRefs = thisComp.getReferences();
 		for (Reference currentRef : currentRefs) {
-			if (!containsRef(dtoRefs, currentRef)) {
+			if (!refHelper.containsRef(dtoRefs, currentRef)) {
 				// a reference has been dropped
 				for (ComponentInstance instance : util.getComponentsInstancesForComponentID(dto.getId())) {
 					for (Reference instanceRef : instance.getReferences()) {
@@ -185,35 +164,6 @@ public class ComponentServiceImpl extends ServiceImpl implements ComponentServic
 				}
 			}
 		}
-	}
-
-	/**
-	 * Return whether the reference list contains "checked". The references may have different
-	 * targets (but the same type). We consider that list contains checked if at least one ref of
-	 * list contains every targets of checked for a given type exist.
-	 * 
-	 * @param list
-	 * @param ref
-	 * @return whether the reference list contains contains "checked"
-	 */
-	private boolean containsRef(List<Reference> list, Reference checked) {
-		for (Reference ref : list) {
-			if (!ref.getType().equals(checked.getType())) {
-				continue;
-			}
-			List<String> checkedTargetsIDs = new ArrayList<String>();
-			for (HasNameAndID target : checked.getTargets()) {
-				checkedTargetsIDs.add(target.getId());
-			}
-			List<String> refTargetsIDs = new ArrayList<String>();
-			for (HasNameAndID target : ref.getTargets()) {
-				refTargetsIDs.add(target.getId());
-			}
-			if (refTargetsIDs.containsAll(checkedTargetsIDs)) {
-				return true;
-			}
-		}
-		return false;
 	}
 
 	private void checkBoundComponent(final ComponentDTO dto, AccessType access, Component target, ComponentType ct)

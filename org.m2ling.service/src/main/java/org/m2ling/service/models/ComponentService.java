@@ -64,7 +64,7 @@ public interface ComponentService {
 	 * 
 	 * @return the Component DTO given an ID if it exist, null otherwise
 	 * @throws FunctionalException
-	 *            id id is null or void
+	 *            if id is null or void
 	 * 
 	 */
 	ComponentDTO getComponentByID(Context context, String id) throws FunctionalException;
