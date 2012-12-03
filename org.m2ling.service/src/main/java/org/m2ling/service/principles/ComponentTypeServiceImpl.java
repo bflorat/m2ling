@@ -47,14 +47,14 @@ import com.google.inject.Singleton;
  */
 @Singleton
 public class ComponentTypeServiceImpl extends ServiceImpl implements ComponentTypeService {
-	
 	private ReferenceHelper refHelper;
+
 	/**
 	 * Protected constructor to prevent direct instantiation
 	 */
 	@Inject
 	protected ComponentTypeServiceImpl(PersistenceManager pm, CoreUtil util, DTOConverter.FromDTO fromDTO,
-			DTOConverter.ToDTO toDTO, Conf conf, Logger logger,ReferenceHelper refHelper) {
+			DTOConverter.ToDTO toDTO, Conf conf, Logger logger, ReferenceHelper refHelper) {
 		super(pm, util, fromDTO, toDTO, conf, logger);
 		this.refHelper = refHelper;
 	}
@@ -158,7 +158,8 @@ public class ComponentTypeServiceImpl extends ServiceImpl implements ComponentTy
 		}
 		for (ReferenceDTO refDTO : references) {
 			refHelper.checkReferenceFormat(refDTO);
-			checkTargetsExistAndLocal(dto, refDTO);
+			refHelper.checkTargetsExistence(refDTO, getManagedType());
+			checkTargetsAreLocal(dto, refDTO);
 		}
 		if (access == AccessType.UPDATE) {
 			// check that we don't drop a used reference
@@ -195,23 +196,13 @@ public class ComponentTypeServiceImpl extends ServiceImpl implements ComponentTy
 		}
 	}
 
-	/**
-	 * @param dto
-	 * @param refDTO
-	 * @throws FunctionalException
-	 */
-	private void checkTargetsExistAndLocal(final ComponentTypeDTO dto, ReferenceDTO refDTO) throws FunctionalException {
+	private void checkTargetsAreLocal(final ComponentTypeDTO dto, ReferenceDTO refDTO) throws FunctionalException {
 		// check targets existence and the fact that targets types are local (in the CT VP)
-		ViewPoint thisVP = util.getViewPointByID(dto.getViewPoint().getId());// VP can't be null,
-																									// already controlled
+		// VP can't be null, already controlled
+		ViewPoint thisVP = util.getViewPointByID(dto.getViewPoint().getId());
 		for (HasNameAndIdDTO target : refDTO.getTargets()) {
-			if (target == null) {
-				throw new FunctionalException(FunctionalException.Code.NULL_ARGUMENT, null, "(references/target)");
-			}
 			ComponentType ctTarget = util.getComponentTypeByID(target.getId());
-			if (ctTarget == null) {
-				throw new FunctionalException(FunctionalException.Code.TARGET_NOT_FOUND, null, "(references/target)");
-			} else if (!thisVP.getComponentTypes().contains(ctTarget)) {
+			if (!thisVP.getComponentTypes().contains(ctTarget)) {
 				throw new FunctionalException(FunctionalException.Code.INVALID_REFERENCE_TYPE, null, dto.getReferences()
 						.toString());
 			}

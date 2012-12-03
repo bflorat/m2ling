@@ -89,7 +89,7 @@ public class ComponentServiceImpl extends ServiceImpl implements ComponentServic
 		ComponentType thisCompType = ct;
 		for (ReferenceDTO refDTO : references) {
 			refHelper.checkReferenceFormat(refDTO);
-			checkTargetsExistence(refDTO);
+			refHelper.checkTargetsExistence(refDTO, getManagedType());
 			checkTargetsTypes(thisCompType, refDTO);
 		}
 		// check that we don't drop a used reference (no need to check DELETE access type as we can't
@@ -99,11 +99,6 @@ public class ComponentServiceImpl extends ServiceImpl implements ComponentServic
 		}
 	}
 
-	/**
-	 * @param thisCompType
-	 * @param refDTO
-	 * @throws FunctionalException
-	 */
 	private void checkTargetsTypes(ComponentType thisCompType, ReferenceDTO refDTO) throws FunctionalException {
 		for (HasNameAndIdDTO target : refDTO.getTargets()) {
 			Component targetComp = util.getComponentByID(target.getId());
@@ -122,22 +117,6 @@ public class ComponentServiceImpl extends ServiceImpl implements ComponentServic
 			}
 			if (!found) {
 				throw new FunctionalException(FunctionalException.Code.COMP_ILLEGAL_REFERENCE, null, "Reference=" + refDTO);
-			}
-		}
-	}
-
-	/**
-	 * @param refDTO
-	 * @throws FunctionalException
-	 */
-	private void checkTargetsExistence(ReferenceDTO refDTO) throws FunctionalException {
-		for (HasNameAndIdDTO target : refDTO.getTargets()) {
-			if (target == null) {
-				throw new FunctionalException(FunctionalException.Code.NULL_ARGUMENT, null, "(references/target)");
-			}
-			Component targetComp = util.getComponentByID(target.getId());
-			if (targetComp == null) {
-				throw new FunctionalException(FunctionalException.Code.TARGET_NOT_FOUND, null, "(references/target)");
 			}
 		}
 	}
@@ -169,10 +148,10 @@ public class ComponentServiceImpl extends ServiceImpl implements ComponentServic
 	private void checkBoundComponent(final ComponentDTO dto, AccessType access, Component target, ComponentType ct)
 			throws FunctionalException {
 		checkBoundComponentConformToCT(dto, ct);
-		checkForExistingCI(dto, access, target, ct);
+		checkForExistingCI(dto, access, target);
 	}
 
-	private void checkForExistingCI(final ComponentDTO dto, AccessType access, Component target, ComponentType ct)
+	private void checkForExistingCI(final ComponentDTO dto, AccessType access, Component target)
 			throws FunctionalException {
 		// Check that none CI exist before actually changing a legal binding
 		if (access == AccessType.UPDATE) {
@@ -203,7 +182,7 @@ public class ComponentServiceImpl extends ServiceImpl implements ComponentServic
 	 */
 	private void checkBoundComponentConformToCT(final ComponentDTO dto, ComponentType ct) throws FunctionalException {
 		if (ct.getBoundType() != null && isNullBinding(dto)) {
-			throw new FunctionalException(FunctionalException.Code.COMP_MISSING_BINDING, null, "expected bound type="
+			throw new FunctionalException(FunctionalException.Code.MISSING_BINDING, null, "expected bound type="
 					+ ct.getBoundType().getName());
 		} else if (!isNullBinding(dto)) {
 			// Check if the bound component exists
@@ -243,7 +222,10 @@ public class ComponentServiceImpl extends ServiceImpl implements ComponentServic
 		}
 		// item existence (except for creation access)
 		if (access != AccessType.CREATE) {
-			target = checkComponentExists(dto);
+			target = util.getComponentByID(dto.getId());
+			if (target == null) {
+				throw new FunctionalException(FunctionalException.Code.TARGET_NOT_FOUND, null, dto.toString());
+			}
 		}
 		if (access == AccessType.CREATE || access == AccessType.UPDATE) {
 			// Check associated view existence
@@ -261,7 +243,7 @@ public class ComponentServiceImpl extends ServiceImpl implements ComponentServic
 			checkStatus(view.getViewPoint().getId(), dto.getStatus());
 			checkTags(dto.getTags());
 			// Type
-			ComponentType ct = getCT(dto, access);
+			ComponentType ct = getCT(dto, access, target);
 			if (ct == null) {
 				throw new FunctionalException(FunctionalException.Code.TARGET_NOT_FOUND, null, "(component type)");
 			}
@@ -274,20 +256,6 @@ public class ComponentServiceImpl extends ServiceImpl implements ComponentServic
 		}
 	}
 
-	/**
-	 * @param dto
-	 * @return
-	 * @throws FunctionalException
-	 */
-	private Component checkComponentExists(final ComponentDTO dto) throws FunctionalException {
-		Component target;
-		target = util.getComponentByID(dto.getId());
-		if (target == null) {
-			throw new FunctionalException(FunctionalException.Code.TARGET_NOT_FOUND, null, dto.toString());
-		}
-		return target;
-	}
-
 	private void checkViewIDFormat(final ComponentDTO dto) throws FunctionalException {
 		if (dto.getView() == null || dto.getView().getId() == null) {
 			throw new FunctionalException(FunctionalException.Code.NULL_ARGUMENT, null, "(view)");
@@ -297,9 +265,10 @@ public class ComponentServiceImpl extends ServiceImpl implements ComponentServic
 		}
 	}
 
-	private ComponentType getCT(final ComponentDTO dto, final AccessType access) throws FunctionalException {
+	private ComponentType getCT(final ComponentDTO dto, final AccessType access, final Component comp)
+			throws FunctionalException {
 		ComponentType ct = null;
-		// We want to ignore attempt to try CT for update so in the UPDATE case, we get the type
+		// We want to ignore attempt to change CT during update so in the UPDATE case, we get the type
 		// from the stored component, not from the DTO.
 		if (access == AccessType.CREATE) {
 			if (dto.getComponentType() == null) {
@@ -307,7 +276,6 @@ public class ComponentServiceImpl extends ServiceImpl implements ComponentServic
 			}
 			ct = util.getComponentTypeByID(dto.getComponentType().getId());
 		} else if (access == AccessType.UPDATE) {
-			Component comp = util.getComponentByID(dto.getId());
 			ct = comp.getType();
 		}
 		return ct;
@@ -322,19 +290,19 @@ public class ComponentServiceImpl extends ServiceImpl implements ComponentServic
 			// Controls
 			checkDTO(dto, AccessType.UPDATE);
 			// Processing
-			Component ct = util.getComponentByID(dto.getId());
-			ct.setName(dto.getName());
-			ct.setDescription(dto.getDescription());
-			ct.setComment(dto.getComment());
-			List<String> tags = ct.getTags();
+			Component comp = util.getComponentByID(dto.getId());
+			comp.setName(dto.getName());
+			comp.setDescription(dto.getDescription());
+			comp.setComment(dto.getComment());
+			List<String> tags = comp.getTags();
 			tags.clear();
 			tags.addAll(dto.getTags());
 			Component bound = null;
 			if (dto.getBoundComponent() != null) {
 				bound = util.getComponentByID(dto.getBoundComponent().getId());
 			}
-			ct.setBoundComponent(bound);
-			ct.setStatus(dto.getStatus());
+			comp.setBoundComponent(bound);
+			comp.setStatus(dto.getStatus());
 			pmanager.commit();
 		} catch (Exception anyError) {
 			handleAnyException(anyError);
