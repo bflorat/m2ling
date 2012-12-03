@@ -25,6 +25,8 @@ public class ComponentInstanceBean extends AbstractCommonBean {
 	private HasNameAndIDBean component;
 
 	private HasNameAndIDBean boundInstance;
+	
+	private HasNameAndIDBean view;
 
 	public ComponentInstanceBean() {
 		super();
@@ -95,5 +97,19 @@ public class ComponentInstanceBean extends AbstractCommonBean {
 	 */
 	public void setBoundInstance(HasNameAndIDBean boundInstance) {
 		this.boundInstance = boundInstance;
+	}
+	
+	/**
+	 * @return the view
+	 */
+	public HasNameAndIDBean getView() {
+		return view;
+	}
+
+	/**
+	 * @param view the view to set
+	 */
+	public void setView(HasNameAndIDBean view) {
+		this.view = view;
 	}
 }

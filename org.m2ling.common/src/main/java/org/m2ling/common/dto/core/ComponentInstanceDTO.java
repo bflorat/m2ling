@@ -18,15 +18,20 @@ public final class ComponentInstanceDTO extends AbstractCommonDTO implements Com
 
 	private final List<ReferenceDTO> references;
 
+	private final HasNameAndIdDTO view;
+
 	public static class Builder extends AbstractCommonDTO.Builder {
+		private HasNameAndIdDTO view;
+
 		private HasNameAndIdDTO component;
 
 		private List<ReferenceDTO> references = new ArrayList<ReferenceDTO>(1);
 
 		private HasNameAndIdDTO boundInstance;
 
-		public Builder(String id, String name) {
+		public Builder(String id, String name, HasNameAndIdDTO view) {
 			super(id, name);
+			this.view = view;
 		}
 
 		public Builder component(HasNameAndIdDTO component) {
@@ -55,6 +60,7 @@ public final class ComponentInstanceDTO extends AbstractCommonDTO implements Com
 		references = builder.references;
 		component = builder.component;
 		boundInstance = builder.boundInstance;
+		view = builder.view;
 	}
 
 	public boolean equals(Object o) {
@@ -104,5 +110,12 @@ public final class ComponentInstanceDTO extends AbstractCommonDTO implements Com
 	 */
 	public HasNameAndIdDTO getBoundInstance() {
 		return boundInstance;
+	}
+
+	/**
+	 * @return the view DTO
+	 */
+	public HasNameAndIdDTO getView() {
+		return view;
 	}
 }

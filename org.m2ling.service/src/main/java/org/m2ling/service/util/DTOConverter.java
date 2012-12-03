@@ -188,14 +188,13 @@ public class DTOConverter {
 		public ComponentDTO getComponentDTO(Component comp) {
 			View view = util.getViewByItem(comp);
 			HasNameAndIdDTO viewDTO = new HasNameAndIdDTO.Builder(view.getId(), view.getName()).build();
-			
 			// If name is void or null, use bound comp one
 			String name = comp.getName();
 			Component boundComp = comp.getBoundComponent();
 			if ((name == null || "".equals(name.trim())) && boundComp != null) {
 				name = boundComp.getName();
 			}
-			ComponentDTO.Builder builder = new ComponentDTO.Builder(comp.getId(), name,viewDTO);
+			ComponentDTO.Builder builder = new ComponentDTO.Builder(comp.getId(), name, viewDTO);
 			populateCommonBuilder(builder, comp);
 			// Add bound comp tags as well
 			if (boundComp != null) {
@@ -235,13 +234,15 @@ public class DTOConverter {
 		}
 
 		public ComponentInstanceDTO getComponentInstanceDTO(ComponentInstance instance) {
+			View view = util.getViewByItem(instance);
+			HasNameAndIdDTO viewDTO = new HasNameAndIdDTO.Builder(view.getId(), view.getName()).build();
 			// If name is void or null, use bound instance one
 			String name = instance.getName();
 			ComponentInstance boundInstance = instance.getBoundComponentInstance();
 			if (Strings.isNullOrEmpty(instance.getName()) && boundInstance != null) {
 				name = boundInstance.getName();
 			}
-			ComponentInstanceDTO.Builder builder = new ComponentInstanceDTO.Builder(instance.getId(), name);
+			ComponentInstanceDTO.Builder builder = new ComponentInstanceDTO.Builder(instance.getId(), name, viewDTO);
 			populateCommonBuilder(builder, instance);
 			// Add bound comp tags as well
 			if (boundInstance != null) {
@@ -320,7 +321,7 @@ public class DTOConverter {
 			// If name is void or null, use bound type one
 			View view = util.getViewByItem(instance);
 			HasNameAndIdDTO viewDTO = new HasNameAndIdDTO.Builder(view.getId(), view.getName()).build();
-			LinkInstanceDTO.Builder builder = new LinkInstanceDTO.Builder(instance.getId(), instance.getName(),viewDTO);
+			LinkInstanceDTO.Builder builder = new LinkInstanceDTO.Builder(instance.getId(), instance.getName(), viewDTO);
 			populateCommonBuilder(builder, instance);
 			HasNameAndIdDTO hniSource = new HasNameAndIdDTO.Builder(instance.getSource().getId(), instance.getSource()
 					.getName()).build();

@@ -215,7 +215,8 @@ public class DTOConverter {
 		public ComponentInstanceDTO getComponentInstanceDTO(ComponentInstanceBean bean) {
 			HasNameAndIdDTO boundInstance = getNameAndIdDTO(bean.getBoundInstance());
 			HasNameAndIdDTO compDTO = getNameAndIdDTO(bean.getComponent());
-			ComponentInstanceDTO.Builder builder = new ComponentInstanceDTO.Builder(bean.getId(), bean.getName());
+			HasNameAndIdDTO viewDTO = getNameAndIdDTO(bean.getView());
+			ComponentInstanceDTO.Builder builder = new ComponentInstanceDTO.Builder(bean.getId(), bean.getName(),viewDTO);
 			populateCommonBuilder(builder, bean);
 			builder.boundInstance(boundInstance).component(compDTO);
 			for (ReferenceBean ref : bean.getReferences()) {
@@ -447,6 +448,8 @@ public class DTOConverter {
 			bean.setReferences(refs);
 			HasNameAndIDBean compBean = getHasNameAndIdBean(dto.getComponent());
 			bean.setComponent(compBean);
+			HasNameAndIDBean viewBean = getHasNameAndIdBean(dto.getView());
+			bean.setView(viewBean);
 			return bean;
 		}
 

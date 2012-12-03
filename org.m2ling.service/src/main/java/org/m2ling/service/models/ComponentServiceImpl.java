@@ -147,7 +147,7 @@ public class ComponentServiceImpl extends ServiceImpl implements ComponentServic
 
 	private void checkBoundComponent(final ComponentDTO dto, AccessType access, Component target, ComponentType ct)
 			throws FunctionalException {
-		checkBoundComponentConformToCT(dto, ct);
+		checkBoundComponentLegal(dto, ct);
 		checkForExistingCI(dto, access, target);
 	}
 
@@ -175,16 +175,14 @@ public class ComponentServiceImpl extends ServiceImpl implements ComponentServic
 		return dto.getBoundComponent() == null || Strings.isNullOrEmpty(dto.getBoundComponent().getId());
 	}
 
-	/**
-	 * @param dto
-	 * @param ct
-	 * @throws FunctionalException
-	 */
-	private void checkBoundComponentConformToCT(final ComponentDTO dto, ComponentType ct) throws FunctionalException {
+	private void checkBoundComponentLegal(final ComponentDTO dto, ComponentType ct) throws FunctionalException {
 		if (ct.getBoundType() != null && isNullBinding(dto)) {
 			throw new FunctionalException(FunctionalException.Code.MISSING_BINDING, null, "expected bound type="
 					+ ct.getBoundType().getName());
 		} else if (!isNullBinding(dto)) {
+			if (dto.getBoundComponent().getId() == null) {
+				throw new FunctionalException(FunctionalException.Code.NULL_ARGUMENT, null, "(bound ID)");
+			}
 			// Check if the bound component exists
 			Component bound = (Component) util.getComponentByID(dto.getBoundComponent().getId());
 			if (bound == null) {
