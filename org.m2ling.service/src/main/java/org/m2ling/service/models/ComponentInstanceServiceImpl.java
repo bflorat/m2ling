@@ -4,6 +4,7 @@
 package org.m2ling.service.models;
 
 import java.util.Collections;
+import java.util.Iterator;
 import java.util.List;
 import java.util.logging.Logger;
 
@@ -19,6 +20,7 @@ import org.m2ling.domain.Root;
 import org.m2ling.domain.core.Component;
 import org.m2ling.domain.core.ComponentInstance;
 import org.m2ling.domain.core.HasNameAndID;
+import org.m2ling.domain.core.LinkInstance;
 import org.m2ling.domain.core.Reference;
 import org.m2ling.domain.core.Type;
 import org.m2ling.domain.core.View;
@@ -183,6 +185,16 @@ public class ComponentInstanceServiceImpl extends ServiceImpl implements Compone
 		}
 	}
 
+	private void checkNoLinkInvolvingThisCI(ComponentInstance ciToDelete) throws FunctionalException {
+		for (View view : pmanager.getRoot().getViews()) {
+			for (LinkInstance li : view.getLinkInstances()) {
+				if (li.getSource().equals(ciToDelete) || li.getDestination().equals(ciToDelete)) {
+					throw new FunctionalException(FunctionalException.Code.LINK_IN_USE, null, "Link name=" + li.getName());
+				}
+			}
+		}
+	}
+
 	private void checkViewIDFormat(final ComponentInstanceDTO dto) throws FunctionalException {
 		if (dto.getView() == null || dto.getView().getId() == null) {
 			throw new FunctionalException(FunctionalException.Code.NULL_ARGUMENT, null, "(view)");
@@ -206,6 +218,32 @@ public class ComponentInstanceServiceImpl extends ServiceImpl implements Compone
 			comp = ci.getComponent();
 		}
 		return comp;
+	}
+
+	/**
+	 * Drop CI orphan references (if the reference contains no more targets, it is dropped)
+	 * 
+	 **/
+	private void cleanOrphanReferences(final ComponentInstance ciToDelete) {
+		// Search for CI having a reference to compToDelete
+		for (View view : pmanager.getRoot().getViews()) {
+			for (ComponentInstance ci : view.getComponentInstances()) {
+				Iterator<Reference> itRefs = ci.getReferences().iterator();
+				while (itRefs.hasNext()) {
+					Reference ref = itRefs.next();
+					Iterator<HasNameAndID> itTargets = ref.getTargets().iterator();
+					while (itTargets.hasNext()) {
+						HasNameAndID target = itTargets.next();
+						if (target.getId().equals(ciToDelete.getId())) {
+							itTargets.remove();
+							if (ref.getTargets().size() == 0) {
+								itRefs.remove();
+							}
+						}
+					}
+				}
+			}
+		}
 	}
 
 	/**
@@ -293,10 +331,12 @@ public class ComponentInstanceServiceImpl extends ServiceImpl implements Compone
 			// Controls
 			ComponentInstanceDTO dto = new ComponentInstanceDTO.Builder(id, null, null).build();
 			checkID(dto, AccessType.DELETE);
-			ComponentInstance ci = util.getComponentInstanceByID(dto.getId());
-			checkNoBindingToThisCI(ci);
-			View view = (View) ci.eContainer();
-			view.getComponentInstances().remove(ci);
+			ComponentInstance ciToDelete = util.getComponentInstanceByID(dto.getId());
+			checkNoBindingToThisCI(ciToDelete);
+			checkNoLinkInvolvingThisCI(ciToDelete);
+			View view = (View) ciToDelete.eContainer();
+			view.getComponentInstances().remove(ciToDelete);
+			cleanOrphanReferences(ciToDelete);
 			pmanager.commit();
 		} catch (Exception anyError) {
 			handleAnyException(anyError);

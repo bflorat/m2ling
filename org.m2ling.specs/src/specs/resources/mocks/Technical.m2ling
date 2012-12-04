@@ -16,8 +16,27 @@
     <componentTypes id="id_ct_vp1_no_comp" name="ct_vp1_no_comp" comment="" description="desc" boundType="id_ct_vp2_bound_target"/>
     <componentTypes id="id_ct_vp1_ct2" name="ct_vp1_ct2" description="desc CT2"/>
     <componentTypes id="id_ct_vp1_ct3" name="ct_vp1_ct3" description="CT used as bouding by a VP2 CT"/>
+    <componentTypes id="id_ct_vp1_ct4" name="ct_vp1_ct4" description="desc ct_vp1_ct4" status="">
+      <references targets="id_ct_vp1_ct5"/>
+      <references type="DEPENDS_ON" targets="id_ct_vp1_ct1 id_ct_vp1_ct5"/>
+    </componentTypes>
+    <componentTypes id="id_ct_vp1_ct5" name="ct_vp1_ct5" description="desc ct_vp1_ct5" status=""/>
+    <componentTypes id="id_ct_vp1_ct6" name="ct_vp1_ct6" comment="" description="desc ct_vp1_ct6">
+      <references targets="id_ct_vp1_ct7"/>
+    </componentTypes>
+    <componentTypes id="id_ct_vp1_ct7" name="ct_vp1_ct7" comment="" description="desc  ct_vp1_ct7"/>
+    <componentTypes id="id_ct_vp1_ct8" name="ct_vp1_ct8" comment="" description="desc  ct_vp1_ct8"/>
+    <componentTypes id="id_ct_vp1_ct9" name="ct_vp1_ct9" comment="" description="desc  ct_vp1_ct9"/>
+    <componentTypes id="id_ct_vp1_ct10" name="ct_vp1_ct10" comment="" description="desc  ct_vp1_ct10"/>
+    <componentTypes id="id_ct_vp1_ct11" name="ct_vp1_ct11" comment="" description="desc  ct_vp1_ct11"/>
+    <componentTypes id="id_ct_vp1_ct12" name="ct_vp1_ct12" comment="" description="desc  ct_vp1_ct12"/>
+    <componentTypes id="id_ct_vp1_ct13" name="ct_vp1_ct13" comment="" description="desc  ct_vp1_ct13" status=""/>
     <linkTypes id="id_lt_vp1_no_link" name="lt_vp1_no_link" comment="" description="desc" sourceTypes="id_ct_vp1_ct1" destinationTypes="id_ct_vp1_ct1"/>
     <linkTypes id="id_lt_vp1_link_type_1" name="lt_vp1_link_type_1" comment="" description="desc" sourceTypes="id_ct_vp1_ct1 id_ct_vp1_ct2" destinationTypes="id_ct_vp1_ct1 id_ct_vp1_ct2"/>
+    <linkTypes id="id_lt_vp1_ct8to9" name="lt_vp1_ct8to9" comment="" description="desc lt_vp1_ct8to9" sourceTypes="id_ct_vp1_ct8" destinationTypes="id_ct_vp1_ct9"/>
+    <linkTypes id="id_lt_vp1_ct9to10" name="lt_vp1_ct9to10" comment="" description="desc lt_vp1_ct9to10" sourceTypes="id_ct_vp1_ct9" destinationTypes="id_ct_vp1_ct10"/>
+    <linkTypes id="id_lt_vp1_v1_comp11to12" name="lt_vp1_comp11to12" comment="" description="desc lt_vp1_comp11to12" sourceTypes="id_ct_vp1_ct8" destinationTypes="id_ct_vp1_ct9"/>
+    <linkTypes id="id_lt_vp1_v1_comp12to13" name="lt_vp1_comp12to13" comment="" description="desc lt_vp1_comp12to13" sourceTypes="id_ct_vp1_ct8" destinationTypes="id_ct_vp1_ct9"/>
     <rules id="id_vp1_rule1" name="vp1_rule1" comment="comment_rule1" description="desc_rule1" status="VALIDATED" rationale="rationale_rule1" exceptions="exceptions_rule1"/>
     <statusLiterals>VALIDATED</statusLiterals>
     <statusLiterals>REFUSED</statusLiterals>
@@ -42,8 +61,27 @@
     <components id="id_comp_vp1_v1_comp3" name="comp_vp1_v1_comp3" status="" type="id_ct_vp1_ct2"/>
     <components id="id_comp_vp1_v1_comp4" name="comp_vp1_v1_comp4" comment="" description="" status="" type="id_ct_vp1_ct2"/>
     <components id="id_comp_vp1_v1_comp5" name="comp_vp1_v1_comp5" comment="" description="" status="" type="id_ct_vp1_ct3"/>
+    <components id="id_comp_vp1_v1_comp4.1" name="comp_vp1_v1_comp4.1" comment="" description="" status="" type="id_ct_vp1_ct4">
+      <references targets="id_comp_vp1_v1_comp5.1"/>
+      <references type="DEPENDS_ON" targets="id_comp_vp1_v1_comp5.1 id_comp_vp1_v1_comp5.2"/>
+    </components>
+    <components id="id_comp_vp1_v1_comp5.1" name="comp_vp1_v1_comp5.1" comment="" description="" status="" type="id_ct_vp1_ct5"/>
+    <components id="id_comp_vp1_v1_comp5.2" name="comp_vp1_v1_comp5.2" comment="" description="" status="" type="id_ct_vp1_ct5"/>
+    <components id="id_comp_vp1_v1_comp4.3" name="comp_vp1_v1_comp4.3" comment="" description="" status="" type="id_ct_vp1_ct4">
+      <references targets="id_comp_vp1_v1_comp5.3"/>
+    </components>
+    <components id="id_comp_vp1_v1_comp5.3" name="comp_vp1_v1_comp5.3" comment="" description="" status="" type="id_ct_vp1_ct5"/>
+    <components id="id_comp_vp1_v1_comp11.1" name="comp_vp1_v1_comp11.1" status="" type="id_ct_vp1_ct11"/>
+    <components id="id_comp_vp1_v1_comp12.1" name="comp_vp1_v1_comp12.1" description="" status="" type="id_ct_vp1_ct12"/>
+    <components id="id_comp_vp1_v1_comp13.1" name="comp_vp1_v1_comp13.1" description="" status="" type="id_ct_vp1_ct13"/>
     <links id="id_link_vp1_v1_link1" name="link_vp1_v1_link1" description="" type="id_lt_vp1_link_type_1" sources="id_comp_vp1_v1_comp1 id_comp_vp1_v1_comp2" destinations="id_comp_vp1_v1_comp1 id_comp_vp1_v1_comp2"/>
+    <links id="id_link_vp1_v1_comp11.1to12.1" name="link_vp1_v1_comp11.1to12.1" description="" type="id_lt_vp1_v1_comp11to12" sources="id_comp_vp1_v1_comp11.1" destinations="id_comp_vp1_v1_comp12.1"/>
+    <links id="id_link_vp1_v1_comp12.1to13.1" name="link_vp1_v1_comp12.1to13.1" description="" status="" type="id_lt_vp1_v1_comp12to13" sources="id_comp_vp1_v1_comp12.1" destinations="id_comp_vp1_v1_comp13.1"/>
     <componentInstances id="id_ci_vp1_v1_comp3_ci1" name="ci_vp1_v1_comp3_ci1" comment="" description="" component="id_comp_vp1_v1_comp3" boundComponentInstance="id_ci_vp1_v1_comp3_ci1"/>
+    <componentInstances id="id_ci_vp1_v1_comp4.3.1" name="ci_vp1_v1_comp4.3.1" comment="" description="" component="id_comp_vp1_v1_comp4.3">
+      <references targets="id_ci_vp1_v1_comp5.3.1"/>
+    </componentInstances>
+    <componentInstances id="id_ci_vp1_v1_comp5.3.1" name="ci_vp1_v1_comp5.3.1" comment="" description="" component="id_comp_vp1_v1_comp5.3"/>
   </views>
   <views description="" id="id_vp2_v2" name="vp2_v2" viewPoint="id_vp2">
     <components id="id_comp_vp2_v2_comp1" name="comp_vp2_v2_comp1" comment="" description="" status="" type="id_ct_vp2_comp_type_2"/>

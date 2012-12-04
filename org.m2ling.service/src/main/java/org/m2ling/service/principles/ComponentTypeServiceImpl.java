@@ -24,6 +24,7 @@ import org.m2ling.domain.core.Component;
 import org.m2ling.domain.core.ComponentInstance;
 import org.m2ling.domain.core.ComponentType;
 import org.m2ling.domain.core.HasNameAndID;
+import org.m2ling.domain.core.LinkType;
 import org.m2ling.domain.core.Reference;
 import org.m2ling.domain.core.Type;
 import org.m2ling.domain.core.View;
@@ -241,9 +242,18 @@ public class ComponentTypeServiceImpl extends ServiceImpl implements ComponentTy
 		}
 	}
 
-	private void checkBeforeDeletion(final ComponentTypeDTO dto, AccessType access) throws FunctionalException {
-		ComponentType type = util.getComponentTypeByID(dto.getId());
-		// Check CT20 : none component of this type
+	private void checkNoneBindingToThisCT(ComponentType type) throws FunctionalException {
+		for (ViewPoint vp : pmanager.getRoot().getViewPoints()) {
+			for (ComponentType ct : vp.getComponentTypes()) {
+				if (!(ct.equals(type)) && type.equals(ct.getBoundType())) {
+					throw new FunctionalException(FunctionalException.Code.CT_EXISTING_BINDING, null, "component type name="
+							+ ct.getName());
+				}
+			}
+		}
+	}
+
+	private void checkNoneComponentForThisCT(ComponentType type) throws FunctionalException {
 		for (View view : pmanager.getRoot().getViews()) {
 			for (Component comp : view.getComponents()) {
 				if (comp.getType().equals(type)) {
@@ -252,13 +262,24 @@ public class ComponentTypeServiceImpl extends ServiceImpl implements ComponentTy
 				}
 			}
 		}
-		// Check CT21 : none CT binding against this CT
-		for (ViewPoint vp : pmanager.getRoot().getViewPoints()) {
-			for (ComponentType ct : vp.getComponentTypes()) {
-				if (!(ct.equals(type)) && type.equals(ct.getBoundType())) {
-					throw new FunctionalException(FunctionalException.Code.CT_EXISTING_BINDING, null, "component type name="
+	}
+
+	private void checkNoReferenceToThisCT(ViewPoint vp, ComponentType ctToDelete) throws FunctionalException {
+		for (ComponentType ct : vp.getComponentTypes()) {
+			List<Reference> refs = ct.getReferences();
+			for (Reference ref : refs) {
+				if (ref.getTargets().contains(ctToDelete)) {
+					throw new FunctionalException(FunctionalException.Code.CT_REFERENCE_IN_USE, null, "component type name="
 							+ ct.getName());
 				}
+			}
+		}
+	}
+
+	private void checkNoLinkTypeInvolvingThisCT(ViewPoint vp, ComponentType ctToDelete) throws FunctionalException {
+		for (LinkType lt : vp.getLinkTypes()) {
+			if (lt.getSourceTypes().contains(ctToDelete) || lt.getDestinationTypes().contains(ctToDelete)) {
+				throw new FunctionalException(FunctionalException.Code.LINK_IN_USE, null, "Link type name=" + lt.getName());
 			}
 		}
 	}
@@ -415,10 +436,13 @@ public class ComponentTypeServiceImpl extends ServiceImpl implements ComponentTy
 			// Controls
 			ComponentTypeDTO dto = new ComponentTypeDTO.Builder(null, id, null).build();
 			checkID(dto, AccessType.DELETE);
-			checkBeforeDeletion(dto, AccessType.DELETE);
-			ComponentType type = util.getComponentTypeByID(dto.getId());
-			ViewPoint vp = (ViewPoint) type.eContainer();
-			vp.getComponentTypes().remove(type);
+			ComponentType ctToDelete = util.getComponentTypeByID(dto.getId());
+			ViewPoint vp = (ViewPoint) ctToDelete.eContainer();
+			checkNoneComponentForThisCT(ctToDelete);
+			checkNoneBindingToThisCT(ctToDelete);
+			checkNoReferenceToThisCT(vp, ctToDelete);
+			checkNoLinkTypeInvolvingThisCT(vp, ctToDelete);
+			vp.getComponentTypes().remove(ctToDelete);
 			pmanager.commit();
 		} catch (Exception anyError) {
 			handleAnyException(anyError);

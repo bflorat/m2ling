@@ -17,6 +17,7 @@ import org.m2ling.persistence.PersistenceManagerXMIImpl;
 import org.m2ling.presentation.principles.model.HasNameAndIDBean;
 import org.m2ling.presentation.principles.model.ReferenceBean;
 import org.m2ling.presentation.studio.model.ComponentBean;
+import org.m2ling.service.common.ReferenceHelper;
 import org.m2ling.service.util.CoreUtil;
 import org.m2ling.service.util.DTOConverter.FromDTO;
 import org.m2ling.service.util.DTOConverter.ToDTO;
@@ -56,7 +57,8 @@ public class AbstractComponentFixture extends M2lingFixture {
 		try {
 			pm = new PersistenceManagerXMIImpl(logger, configuration);
 			CoreUtil util = new CoreUtil(logger, pm);
-			service = new ComponentServiceImpl(pm, util, new FromDTO(util), new ToDTO(util), configuration, logger);
+			ReferenceHelper refHelper = new ReferenceHelper(util);
+			service = new ComponentServiceImpl(pm, util, new FromDTO(util), new ToDTO(util), configuration, logger,refHelper);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

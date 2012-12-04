@@ -45,7 +45,7 @@
 	</div>
 
 	<h2>Bindings and instantiation factor</h2>
-	<p class='rule'>CT1 : Instantiation factor enforces the number of possibles component
+	<p class='rule'>#CT1 : Instantiation factor enforces the number of possibles component
 		instances for a component of a given type. A Component Type can't be
 		reified if its instantiation factor is zero. From the GUI point of
 		view, "any" is represented by the character "*". From the DTO, it is
@@ -73,15 +73,15 @@
 		</div>
 	
 	<h3>Enumeration content</h3>
-	<p class='rule'>CT2 : A enumeration can contain either components or component groups.</p>
-	<p class='rule'>CT3 : All enumeration items (component or group) must exist.</p>
-	<p class='rule'>CT4 : All enumeration items must share the same component type.</p>
-	<p class='rule'>CT5 : If enumeration maps a component-type group, values are those of
+	<p class='rule'>#CT2 : A enumeration can contain either components or component groups.</p>
+	<p class='rule'>#CT3 : All enumeration items (component or group) must exist.</p>
+	<p class='rule'>#CT4 : All enumeration items must share the same component type.</p>
+	<p class='rule'>#CT5 : If enumeration maps a component-type group, values are those of
 		its components at time of use (eg if a group maps a new component 
 		after the CT creation, is will be valid.</p>
 		<p class ='commentary'>This is possible because the CT maps the groups themselves, not the component of the groups at CT creation.</p>
 		
-	<p class='rule'>CT6 : Duplicates in enumeration are allowed (even if they are pointless).</p>
+	<p class='rule'>#CT6 : Duplicates in enumeration are allowed (even if they are pointless).</p>
 	<p class ='commentary'>This makes things simpler because a CT may be created with a comp1 and a group grp1 that doesn't contain comp1 but comp1 
 	may be added into grp1 later so we would have to check this every time we insert a new component into a group.</p> 
 	<div class='example'>
@@ -164,24 +164,24 @@
 			</table>
 	</div>
 	
-	<p class='rule'>CT7 : If a bound type is given but none enumeration is provided, the
+	<p class='rule'>#CT7 : If a bound type is given but none enumeration is provided, the
 		possible values are all component of given bound type in every view of
 		the bound VP.</p>
 		<p class='commentary'>Will be tested in m2studio specifications</p>
-	<p class='rule'>CT8 : An enumeration can't be provided without associated binding type.</p>
+	<p class='rule'>#CT8 : An enumeration can't be provided without associated binding type.</p>
 	<div class='example'>In this case, the CT <span concordion:execute="#resu=testNoBindingType()">creation</span> should : <b concordion:assertEquals="#resu">FAIL with code NULL_BOUND_TYPE_ENUMERATION</b> </div>
 	
 	<h3>Binding rules</h3>
-	<p class='rule'>CT9 : A Component Type can't bind another component type itself
+	<p class='rule'>#CT9 : A Component Type can't bind another component type itself
 		bounded (no cascading bindings).</p>
 	<div class='example'>In this case, the CT <span concordion:execute="#resu=testCascadingBinding()">creation</span> 
 	should : <b concordion:assertEquals="#resu">FAIL with code BOUND_TYPE_BOUND</b> </div>
 	
-	<p class='rule'>CT10 : A Component Type can't be bound to a component type of the same
+	<p class='rule'>#CT10 : A Component Type can't be bound to a component type of the same
 		VP (no local bindings).</p>
 		<div class='example'>In this case, the CT <span concordion:execute="#resu=testLocalBinding()">creation</span> 
 	should : <b concordion:assertEquals="#resu">FAIL with code LOCAL_BINDING</b> </div>
-	<p class='rule'>CT11 : If one of following attribute is not provided, a binded CT get
+	<p class='rule'>#CT11 : If one of following attribute is not provided, a binded CT get
 		them from the bound CT : name, comment, description. Tags from new CT and bound type (if any) are merged.
 		</p>
 		<div class='example'>
@@ -229,7 +229,7 @@
 			</table>
 		</div>
 		
-		<p class='rule'>CT15 : If status is null and the CT is bound, we use the bound CT status if it is among VP status literal 
+		<p class='rule'>#CT15 : If status is null and the CT is bound, we use the bound CT status if it is among VP status literal 
 	    (otherwise, it is kept null). If the CT is not bound, null value means "unspecified" 
   			and if the CT is bound, it means "Use the bound CT status is it is set".</p>
 	    <div class='example'>
@@ -304,18 +304,18 @@
 		</div>
 	    
 		<h3>References rules</h3>
-		<p class='rule'>CT12 : A reference target can't be void. </p>
+		<p class='rule'>#CT12 : A reference target can't be void. </p>
 		<p>Note that we don't test the case where the target is null as 
 			it is technically impossible to pass a DTO with a null target (ArrayList refuses this).</p>
 			<div class='example'>In this case, the CT <span concordion:execute="#resu=testVoidRefTarget()">creation</span> 
 			should : <b concordion:assertEquals="#resu">FAIL with code NONE_TARGET</b> </div>
 				
-		<p class='rule'>CT14 : A reference target can't be null.</p>
+		<p class='rule'>#CT14 : A reference target can't be null.</p>
 			<div class='example'>In this case, the CT <span concordion:execute="#resu=testNullRef()">creation</span> 
 			should : <b concordion:assertEquals="#resu">FAIL with code TARGET_NOT_FOUND</b> </div>
 				
-		<p class='rule'>CT13 : A reference target can't be external to the viewpoint.</p>
-			<div class='example'>In this case, the CT <span concordion:execute="#resu=testExternalRefs()">creation</span> 
+		<p class='rule'>#CT13 : A reference target can't be external to the viewpoint.</p>
+		<div class='example'>In this case, the CT <span concordion:execute="#resu=testExternalRefs()">creation</span> 
 			should : <b concordion:assertEquals="#resu">FAIL with code INVALID_REFERENCE_TYPE</b> </div>
 		
 	<h3>Format controls</h3>

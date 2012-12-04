@@ -7,20 +7,46 @@
 </head>
 <body>
 	<H1>Component type deletion</H1>
-	<p class='rule'>CT20 : A CT can't be removed while at least a single component of this type exists in any view.</p>
+	<p class='rule'>#CT20 : A CT can't be removed while at least a single component of this type exists in any view.</p>
 	<div class='example'>
-		In this case, the <span concordion:execute="#resu=testDeleteExistingComp()"> 
+		When we try to drop <b concordion:set="#id">id_ct_vp1_ct1</b> having some components<br/>
+		Then the <span concordion:execute="#resu=testDelete(#id)"> 
 		service</span> should : <b concordion:assertEquals="#resu">FAIL with code CT_EXISTING_COMP</b> 
 	</div>
 	<div class='example'>
-		If the CT has no associated component of its type, the deletion<span concordion:execute="#resu=testDeleteNoExistingComp()"> service</span> 
+		When we try to drop <b concordion:set="#id">id_ct_vp1_no_comp</b> having none component<br/>
+		Then the <span concordion:execute="#resu=testDelete(#id)"> service</span> 
 		should : <b concordion:assertEquals="#resu">PASS</b> 
 	</div>
 		
-	<p class='rule'>CT21 : A CT can't be removed while at least a single CT is bound to it.</p>
+	<p class='rule'>#CT21 : A CT can't be removed while at least a single CT is bound to it.</p>
 	<div class='example'>
-		In this case, the <span concordion:execute="#resu=testDeleteExistingBinding()">
-		 service</span> should : <b concordion:assertEquals="#resu">FAIL with code CT_EXISTING_BINDING</b> 
+		When we try to drop <b concordion:set="#id">id_ct_vp2_bound_target</b> having some CT bound to it<br/>
+		Then the <span concordion:execute="#resu=testDelete(#id)"> service</span> 
+		should : <b concordion:assertEquals="#resu">FAIL with code CT_EXISTING_BINDING</b> 
 	</div>
+	
+	<p class='rule'>#CT22 : A CT can't be dropped while at least a single CT owns a reference against it.</p>
+	<div class='example'>
+		Given CT id_ct_vp1_ct6 with a reference to id_ct_vp1_ct7 <br/>
+		When we try to drop <b concordion:set="#id">id_ct_vp1_ct7</b><br/>
+		Then the <span concordion:execute="#resu=testDelete(#id)"> service</span> 
+		should : <b concordion:assertEquals="#resu">FAIL with code CT_REFERENCE_IN_USE</b> 
+	</div>
+	
+	<p class='rule'>#CT23 : A CT can't be dropped while a least a single LT uses it as source or target.</p>
+	<div class='example'>
+		Given a LT id_lt_vp1_ct9to10 between id_ct_vp1_ct9 and id_ct_vp1_ct10
+		When we try to drop <b concordion:set="#id">id_ct_vp1_ct10</b><br/>
+		Then the <span concordion:execute="#resu=testDelete(#id)"> service</span> 
+		should : <b concordion:assertEquals="#resu">FAIL with code LINK_IN_USE</b> 
+	</div>
+	<div class='example'>
+		Given a LT id_lt_vp1_ct8to9 between id_ct_vp1_ct8 and id_ct_vp1_ct9
+		When we try to drop <b concordion:set="#id">id_ct_vp1_ct8</b><br/>
+		Then the <span concordion:execute="#resu=testDelete(#id)"> service</span> 
+		should : <b concordion:assertEquals="#resu">FAIL with code LINK_IN_USE</b> 
+	</div>
+		
 </body>
 </html>

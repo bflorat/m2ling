@@ -50,7 +50,7 @@
 
 	<h3>References rules</h3>
 	<p class='rule'>#COMP1 : Component references must follow types
-		defined in their associated CT. 
+		defined in their associated CT. </p>
 	<div class='example'>
 		If a reference target has a wrong type<br/>
 		then the component <span
@@ -63,35 +63,35 @@
 			concordion:execute="#resu=testWrongReferenceType()">creation</span> should
 		: <b concordion:assertEquals="#resu">FAIL with code COMP_ILLEGAL_REFERENCE</b>
 	</div>
-	</p>
+	
+	<p class='rule'>#COMP5 : self-references are allowed.</p>
+	<div class='example'>TODO : test to be done</div>
+	
 
-	<p class='rule'>#COMP2 : A reference target can't be null.
+	<p class='rule'>#COMP2 : A reference target can't be null.</p>
 	<div class='example'>
 		In this case, the CT <span concordion:execute="#resu=testNullRef()">creation</span>
 		should : <b concordion:assertEquals="#resu">FAIL with code
 			TARGET_NOT_FOUND</b>
 	</div>
-	</p>
 
 
 	<h3>Binding rules</h3>
 	<p class='rule'>#COMP3 : If a CT is bound, all components of its
-		type should be bound.
+		type should be bound.</p>
 	<div class='example'>
 		If a component has no bound component,<br/>
 		Then the component <span
 			concordion:execute="#resu=testNullBinding()">creation</span> should
-		: <b concordion:assertEquals="#resu">FAIL with code COMP_MISSING_BINDING</b>
+		: <b concordion:assertEquals="#resu">FAIL with code MISSING_BINDING</b>
 	</div>
-	</p>
 	
-	<p class='rule'>#COMP4 : If a component is bound to another component, the bound component type must be those defined in the first component type.
+	<p class='rule'>#COMP4 : If a component is bound to another component, the bound component type must be those defined in the first component type.</p>
 	<div class='example'>
 		If the bound component type is wrong, the component <span
 			concordion:execute="#resu=testWrongBinding()">creation</span> should
 		: <b concordion:assertEquals="#resu">FAIL with code COMP_ILLEGAL_BINDING</b>
 	</div>
-	</p>
 	
 	<p>Note that rule previous rules ensure implied rules already implemented in associated component types. 
 	For instance, it is impossible to bind a component to an already-bound component (binding chain) 

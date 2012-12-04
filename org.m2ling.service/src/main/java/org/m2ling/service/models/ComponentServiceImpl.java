@@ -5,6 +5,7 @@ package org.m2ling.service.models;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Iterator;
 import java.util.List;
 import java.util.logging.Logger;
 
@@ -22,6 +23,7 @@ import org.m2ling.domain.core.Component;
 import org.m2ling.domain.core.ComponentInstance;
 import org.m2ling.domain.core.ComponentType;
 import org.m2ling.domain.core.HasNameAndID;
+import org.m2ling.domain.core.Link;
 import org.m2ling.domain.core.Reference;
 import org.m2ling.domain.core.Type;
 import org.m2ling.domain.core.View;
@@ -253,6 +255,16 @@ public class ComponentServiceImpl extends ServiceImpl implements ComponentServic
 		}
 	}
 
+	private void checkNoLinkInvolvingThisComponent(Component compToDelete) throws FunctionalException {
+		for (View view : pmanager.getRoot().getViews()) {
+			for (Link link : view.getLinks()) {
+				if (link.getSources().contains(compToDelete) || link.getDestinations().contains(compToDelete)) {
+					throw new FunctionalException(FunctionalException.Code.LINK_IN_USE, null, "Link name=" + link.getName());
+				}
+			}
+		}
+	}
+
 	private void checkViewIDFormat(final ComponentDTO dto) throws FunctionalException {
 		if (dto.getView() == null || dto.getView().getId() == null) {
 			throw new FunctionalException(FunctionalException.Code.NULL_ARGUMENT, null, "(view)");
@@ -314,35 +326,16 @@ public class ComponentServiceImpl extends ServiceImpl implements ComponentServic
 		// Search for component having a reference to compToDelete
 		for (View view : pmanager.getRoot().getViews()) {
 			for (Component comp : view.getComponents()) {
-				for (Reference ref : comp.getReferences()) {
-					for (HasNameAndID target : ref.getTargets()) {
+				Iterator<Reference> itRefs = comp.getReferences().iterator();
+				while (itRefs.hasNext()) {
+					Reference ref = itRefs.next();
+					Iterator<HasNameAndID> itTargets = ref.getTargets().iterator();
+					while (itTargets.hasNext()) {
+						HasNameAndID target = itTargets.next();
 						if (target.getId().equals(compToDelete.getId())) {
-							ref.getTargets().remove(target);
+							itTargets.remove();
 							if (ref.getTargets().size() == 0) {
-								comp.getReferences().remove(ref);
-							}
-						}
-					}
-				}
-			}
-		}
-	}
-
-	private void checkNoCIWithDroppedReference(final Component compToDelete) throws FunctionalException {
-		// Note that CI can be in another view than the component and that self-reference are allowed
-		for (View view : pmanager.getRoot().getViews()) {
-			for (Component comp : view.getComponents()) {
-				for (Reference ref : comp.getReferences()) {
-					for (HasNameAndID target : ref.getTargets()) {
-						if (target.getId().equals(compToDelete.getId())) {
-							// check if a CI use the same dropped reference type
-							for (ComponentInstance ci : util.getComponentsInstancesForComponentID(comp.getId())) {
-								for (Reference ciRef : ci.getReferences()) {
-									if (ciRef.getType() == ref.getType() && ciRef.getComment().equals(comp)) {
-										throw new FunctionalException(FunctionalException.Code.COMP_REF_IN_USE, null, "instance="
-												+ ci.getName());
-									}
-								}
+								itRefs.remove();
 							}
 						}
 					}
@@ -412,7 +405,13 @@ public class ComponentServiceImpl extends ServiceImpl implements ComponentServic
 			View view = (View) compToDelete.eContainer();
 			checkNoCIForThisComponent(compToDelete);
 			checkNoBindingToThisComponent(compToDelete);
-			checkNoCIWithDroppedReference(compToDelete);
+			checkNoLinkInvolvingThisComponent(compToDelete);
+			// Note that we don't need to check if some CI still exists with references to a CI of the
+			// dropped
+			// component because this is implicitly tested by checkNoCIForThisComponent(), indeed the
+			// target reference
+			// can't be dropped while it owns instances so when it can be dropped, the ci reference
+			// issue can't exist anymore.
 			view.getComponents().remove(compToDelete);
 			cleanOrphanReferences(compToDelete);
 			pmanager.commit();

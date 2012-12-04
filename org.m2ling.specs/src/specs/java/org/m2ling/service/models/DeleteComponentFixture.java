@@ -2,6 +2,8 @@ package org.m2ling.service.models;
 
 import java.io.IOException;
 
+import org.m2ling.common.dto.core.ComponentDTO;
+import org.m2ling.common.dto.core.ReferenceDTO;
 import org.m2ling.common.exceptions.FunctionalException;
 
 public class DeleteComponentFixture extends AbstractComponentFixture {
@@ -9,34 +11,31 @@ public class DeleteComponentFixture extends AbstractComponentFixture {
 		super();
 	}
 
-	public String testDeleteNoExistingCI() {
+	public String testDelete(String compID) {
 		try {
 			if (!noreset) {
 				reset("Technical");
 			}
-			service.deleteComponent(null, "id_comp_vp2_v2_comp5");
+			service.deleteComponent(null, compID);
 			return "PASS";
 		} catch (FunctionalException fe) {
 			return "FAIL with code " + fe.getCode().name();
 		}
 	}
 
-	public String testDeleteExistingCI() {
-		if (!noreset) {
-			reset("Technical");
-		}
+	public String getReferenceAfterDrop(String hasRefID, String targetID, String refType) throws FunctionalException {
 		try {
-			service.deleteComponent(null, "id_comp_vp2_v2_comp3");
-			return "PASS";
-		} catch (FunctionalException fe) {
-			return "FAIL with code " + fe.getCode().name();
-		}
-	}
-
-	public String testDeleteExistingBinding() {
-		try {
-			service.deleteComponent(null, "id_comp_vp1_v1_comp5");
-			return "PASS";
+			if (!noreset) {
+				reset("Technical");
+			}
+			service.deleteComponent(null, targetID);
+			ComponentDTO compDTO = service.getComponentByID(null, hasRefID);
+			for (ReferenceDTO ref : compDTO.getReferences()) {
+				if (ref.getType().equals(refType)) {
+					return ref.toString();
+				}
+			}
+			return "null";
 		} catch (FunctionalException fe) {
 			return "FAIL with code " + fe.getCode().name();
 		}

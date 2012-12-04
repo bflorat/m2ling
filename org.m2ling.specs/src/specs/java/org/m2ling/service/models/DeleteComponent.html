@@ -9,18 +9,21 @@
 	<H1>Component deletion</H1>
 	<p class='rule'>#COMP20 : A component can't be removed while at least a single component instance of this type exists in the view.</p>
 	<div class='example'>
-		In this case, the <span concordion:execute="#resu=testDeleteExistingCI()"> 
+		When we try to drop <b concordion:set="#compID">id_comp_vp2_v2_comp3</b> having some instances<br/>
+		Then the <span concordion:execute="#resu=testDelete(#compID)"> 
 		service</span> should : <b concordion:assertEquals="#resu">FAIL with code COMP_EXISTING_INSTANCE</b> 
 	</div>
 	<div class='example'>
-		If the component has no associated component instance of its type, the deletion<span concordion:execute="#resu=testDeleteNoExistingCI()"> service</span> 
+		When we try to drop <b concordion:set="#compID">id_comp_vp2_v2_comp5</b> having none instances<br/>
+		Then the <span concordion:execute="#resu=testDelete(#compID)"> service</span> 
 		should : <b concordion:assertEquals="#resu">PASS</b> 
 	</div>
 		
 	<p class='rule'>#COMP21 : A component can't be removed while at least a single component is bound to it.</p>
 	<div class='example'>
-		In this case, the <span concordion:execute="#resu=testDeleteExistingBinding()">
-		 service</span> should : <b concordion:assertEquals="#resu">FAIL with code COMP_EXISTING_BINDING</b> 
+		When we try to drop <b concordion:set="#compID">id_comp_vp1_v1_comp5</b> having none components bond to it<br/>
+		Then the <span concordion:execute="#resu=testDelete(#compID)"> service</span> 
+		should : <b concordion:assertEquals="#resu">FAIL with code COMP_EXISTING_BINDING</b> 
 	</div>
 	
 	<p class='rule'>#COMP22 : When a component without associated CI is dropped, any reference of it from another component
@@ -41,18 +44,19 @@
 		Then the reference should be <b concordion:assertEquals="#resu">targets=[id=id_comp_vp1_v1_comp5.2 name=comp_vp1_v1_comp5.2 ] type=DEPENDS_ON</b>. 
 	</div>
 	
-	<p class='rule'>#COMP23 : The component can't be dropped if at least a single component having reference to the component to be dropped owns associated 
-	component instance having at least a single reference to associated reference at the instance level.</p>
+	<p class='rule'>#COMP23 : A component can't be dropped while a least a single link uses it as source or target.</p>
 	<div class='example'>
-		Given a component id_comp_vp1_v1_comp4.3<br/>
-		With a CONTAINS reference to 
-		  the single id_comp_vp1_v1_comp5.3 component<br/>
-		And its associated id_ci_vp1_v1_comp4.3.1 component instance<br/>
-		With a CONTAINS reference to <b concordion:set="#refType">id_comp_vp1_v1_comp5.3.1</b> component instance<br/>		
-		When <b concordion:set="#targetID">id_comp_vp1_v1_comp5.3</b> is <span concordion:execute="#resu=getReferenceAfterDrop(#hasRefID,#targetID,#refType)"> dropped</span><br/>
-		Then the service should <b concordion:assertEquals="#resu">FAIL with code COMP_REF_IN_USE</b>.
+		Given a link id_link_vp1_v1_comp11.1to12.1 between id_comp_vp1_v1_comp11.1 and id_comp_vp1_v1_comp12.1
+		When we try to drop <b concordion:set="#id">id_comp_vp1_v1_comp11.1</b><br/>
+		Then the <span concordion:execute="#resu=testDelete(#id)"> service</span> 
+		should : <b concordion:assertEquals="#resu">FAIL with code LINK_IN_USE</b> 
 	</div>
-	
+	<div class='example'>
+		Given a link id_link_vp1_v1_comp12.1to13.1 between id_comp_vp1_v1_comp12.1 and id_comp_vp1_v1_comp13.1
+		When we try to drop <b concordion:set="#id">id_comp_vp1_v1_comp13.1</b><br/>
+		Then the <span concordion:execute="#resu=testDelete(#id)"> service</span> 
+		should : <b concordion:assertEquals="#resu">FAIL with code LINK_IN_USE</b> 
+	</div>
 	
 </body>
 </html>

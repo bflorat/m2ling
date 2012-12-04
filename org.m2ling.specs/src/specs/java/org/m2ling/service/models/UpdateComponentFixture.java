@@ -116,8 +116,8 @@ public class UpdateComponentFixture extends AbstractComponentFixture {
 			builder.description(compDTO.getDescription());
 			builder.status(compDTO.getStatus());
 			setDTOReferences(builder, references);
-			builder.type(compDTO.getComponentType());
-			builder.boundType(compDTO.getBoundComponent());
+			builder.type(compDTO.getComponentType()); 
+			builder.boundType(compDTO.getBoundComponent()); 
 			service.checkDTO(builder.build(), AccessType.UPDATE);
 			return "PASS";
 		} catch (FunctionalException ex) {

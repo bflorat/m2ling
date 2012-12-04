@@ -28,7 +28,7 @@ public class ReferenceHelper {
 	private CoreUtil util;
 
 	@Inject
-	ReferenceHelper(CoreUtil util) {
+	public ReferenceHelper(CoreUtil util) {
 		super();
 		this.util = util;
 	}
