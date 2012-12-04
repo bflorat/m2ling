@@ -56,24 +56,24 @@ public class ComponentServiceImpl extends ServiceImpl implements ComponentServic
 		this.refHelper = refHelper;
 	}
 
-	private void checkBeforeDeletion(final ComponentDTO dto) throws FunctionalException {
-		Component compToDelete = util.getComponentByID(dto.getId());
-		// none instance for this component ? note that CI can be in others views than their component
-		for (View view : pmanager.getRoot().getViews()) {
-			for (ComponentInstance instance : view.getComponentInstances()) {
-				if (instance.getComponent().equals(compToDelete)) {
-					throw new FunctionalException(FunctionalException.Code.COMP_EXISTING_INSTANCE, null, "instance name="
-							+ instance.getName());
-				}
-			}
-		}
-		// none component binding against this component ?
+	private void checkNoBindingToThisComponent(Component compToDelete) throws FunctionalException {
 		for (View checkedView : pmanager.getRoot().getViews()) {
 			for (Component checkedComp : checkedView.getComponents()) {
 				Component checkedBoundComp = checkedComp.getBoundComponent();
 				if (checkedBoundComp != null && checkedBoundComp.equals(compToDelete)) {
 					throw new FunctionalException(FunctionalException.Code.COMP_EXISTING_BINDING, null, "component name="
 							+ checkedComp.getName());
+				}
+			}
+		}
+	}
+
+	private void checkNoCIForThisComponent(Component compToDelete) throws FunctionalException {
+		for (View view : pmanager.getRoot().getViews()) {
+			for (ComponentInstance instance : view.getComponentInstances()) {
+				if (instance.getComponent().equals(compToDelete)) {
+					throw new FunctionalException(FunctionalException.Code.COMP_EXISTING_INSTANCE, null, "instance name="
+							+ instance.getName());
 				}
 			}
 		}
@@ -92,8 +92,7 @@ public class ComponentServiceImpl extends ServiceImpl implements ComponentServic
 			refHelper.checkTargetsExistence(refDTO, getManagedType());
 			checkTargetsTypes(thisCompType, refDTO);
 		}
-		// check that we don't drop a used reference (no need to check DELETE access type as we can't
-		// delete a component while instances still exist)
+		// check that we don't drop a used reference
 		if (access == AccessType.UPDATE) {
 			checkReferenceDeletion(dto, target);
 		}
@@ -308,6 +307,51 @@ public class ComponentServiceImpl extends ServiceImpl implements ComponentServic
 	}
 
 	/**
+	 * Drop component orphan references (if the reference contains no more targets, it is dropped)
+	 * 
+	 **/
+	private void cleanOrphanReferences(final Component compToDelete) {
+		// Search for component having a reference to compToDelete
+		for (View view : pmanager.getRoot().getViews()) {
+			for (Component comp : view.getComponents()) {
+				for (Reference ref : comp.getReferences()) {
+					for (HasNameAndID target : ref.getTargets()) {
+						if (target.getId().equals(compToDelete.getId())) {
+							ref.getTargets().remove(target);
+							if (ref.getTargets().size() == 0) {
+								comp.getReferences().remove(ref);
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+
+	private void checkNoCIWithDroppedReference(final Component compToDelete) throws FunctionalException {
+		// Note that CI can be in another view than the component and that self-reference are allowed
+		for (View view : pmanager.getRoot().getViews()) {
+			for (Component comp : view.getComponents()) {
+				for (Reference ref : comp.getReferences()) {
+					for (HasNameAndID target : ref.getTargets()) {
+						if (target.getId().equals(compToDelete.getId())) {
+							// check if a CI use the same dropped reference type
+							for (ComponentInstance ci : util.getComponentsInstancesForComponentID(comp.getId())) {
+								for (Reference ciRef : ci.getReferences()) {
+									if (ciRef.getType() == ref.getType() && ciRef.getComment().equals(comp)) {
+										throw new FunctionalException(FunctionalException.Code.COMP_REF_IN_USE, null, "instance="
+												+ ci.getName());
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+
+	/**
 	 * {@inheritDoc}
 	 */
 	@Override
@@ -364,10 +408,13 @@ public class ComponentServiceImpl extends ServiceImpl implements ComponentServic
 			// Controls
 			ComponentDTO dto = new ComponentDTO.Builder(id, null, null).build();
 			checkID(dto, AccessType.DELETE);
-			checkBeforeDeletion(dto);
-			Component comp = util.getComponentByID(dto.getId());
-			View view = (View) comp.eContainer();
-			view.getComponents().remove(comp);
+			Component compToDelete = util.getComponentByID(dto.getId());
+			View view = (View) compToDelete.eContainer();
+			checkNoCIForThisComponent(compToDelete);
+			checkNoBindingToThisComponent(compToDelete);
+			checkNoCIWithDroppedReference(compToDelete);
+			view.getComponents().remove(compToDelete);
+			cleanOrphanReferences(compToDelete);
 			pmanager.commit();
 		} catch (Exception anyError) {
 			handleAnyException(anyError);
