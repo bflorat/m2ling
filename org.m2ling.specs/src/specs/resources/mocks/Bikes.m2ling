@@ -194,13 +194,13 @@
     <links id="_tUQzg58-dscgfgx" name="ADMINISTRATION" comment="" description="Access from BikesOnline administrative GUI to BikesOnline administrative services" type="_psOW0p8zEeGYS-4UJ-FpAArr" sources="id_comp_view_Logical_BikesOnline_AdminGUI" destinations="_zPeqMJ89EeGNFtlcQfUFgw"/>
   </views>
   <views comment="" description="BikesOnline physical architecture" id="id_view_physical_BikesOnline" name="Physical_BikesOnline" viewPoint="fsdfhjksdhfkjhsdkfj">
-    <componentInstances id="_av1GdKGYEeGWHchb0LRqvg" name="WebServer_1" comment="" status="AVAILABLE" component="id_comp_physical_catalog_ibm_hs21" boundComponentInstance="_Hk3"/>
-    <componentInstances id="_thEX5KGYEeGWHchb0LRqvg" name="AS_1" component="id_comp_physical_catalog_ibm_hs22" boundComponentInstance="_Hk3"/>
-    <componentInstances id="_xZASxKGYEeGWHchb0LRqvg" name="AS_2" component="id_comp_physical_catalog_ibm_hs22" boundComponentInstance="_HkPKsKA2AGg"/>
-    <componentInstances id="id_li_physical_routeur1" name="Internet_Router_1" comment="" component="_Jlytjhmp" boundComponentInstance="_AIVt1KHBEeGIx4XXpoKVSg"/>
-    <componentInstances id="id_li_physical_fw1" name="Firewall_1" comment="" description="" component="_nKCmgp_6EeG3fPi34vn9KQ" boundComponentInstance="_DzMO9KHBEeGIx4XXpoKVSg"/>
-    <componentInstances id="_O3JLxKGZEeGWHchb0LRqvg" name="DataServer_1" description="" component="_Y6hMwp_6EeG3fPi34vn9KQ" boundComponentInstance="_sTQ3ZKAsEeGQjY87lm4AGg"/>
-    <componentInstances id="_jv8xNKGaEeGAboe59Cwkcg" name="Router_2" description="BikesOnline dedicated router" component="_JlK98p_7EeG3fPi34vn9KQ" boundComponentInstance="_x06rhKHAEeGIx4XXpoKVSg"/>
+    <componentInstances id="_av1GdKGYEeGWHchb0LRqvg" name="WebServer_1" comment="" status="AVAILABLE" component="id_comp_physical_catalog_ibm_hs21" boundComponentInstance="id_ci_devicecatalog_hs21_1"/>
+    <componentInstances id="_thEX5KGYEeGWHchb0LRqvg" name="AS_1" component="id_comp_physical_catalog_ibm_hs22" boundComponentInstance="id_ci_devicecatalog_hs22_1"/>
+    <componentInstances id="_xZASxKGYEeGWHchb0LRqvg" name="AS_2" component="id_comp_physical_catalog_ibm_hs22" boundComponentInstance="id_ci_devicecatalog_hs22_2"/>
+    <componentInstances id="id_li_physical_routeur1" name="Internet_Router_1" comment="" component="_Jlytjhmp" boundComponentInstance="id_ci_devicecatalog_cisco2900_1"/>
+    <componentInstances id="id_li_physical_fw1" name="Firewall_1" comment="" description="" component="_nKCmgp_6EeG3fPi34vn9KQ" boundComponentInstance="id_ci_devicecatalog_asa_1"/>
+    <componentInstances id="_O3JLxKGZEeGWHchb0LRqvg" name="DataServer_1" description="" component="_Y6hMwp_6EeG3fPi34vn9KQ" boundComponentInstance="id_ci_devicecatalog_m3000_1"/>
+    <componentInstances id="_jv8xNKGaEeGAboe59Cwkcg" name="Router_2" description="BikesOnline dedicated router" component="_JlK98p_7EeG3fPi34vn9KQ" boundComponentInstance="id_ci_devicecatalog_cisco2800_1"/>
     <linkInstances id="id_li_physical_cable1" name="cable1" source="id_li_physical_routeur1" destination="id_li_physical_fw1" link="id_link_physical_cable5E"/>
     <linkInstances id="id_li_physical_cable2" name="cable2" source="id_li_physical_fw1" destination="_jv8xNKGaEeGAboe59Cwkcg" link="id_link_physical_cable5E"/>
     <linkInstances id="id_li_physical_cable3" name="cable3" source="_jv8xNKGaEeGAboe59Cwkcg" destination="_thEX5KGYEeGWHchb0LRqvg" link="id_link_physical_cable5E"/>
@@ -218,13 +218,13 @@
     <components id="_JlK98p_7EeG3fPi34vn9KQ" name="Cisco-2800" comment="" description="Branch router" type="_kOyogZ9ZEeGNFtlcQfUFgw"/>
     <components id="_jUElEp_7EeG3fPi34vn9KQ" name="Hitashi-HUS100" comment="" description="Hitachi Unified Storage 100 Family" type="_VIxZsZ9bEeGNFtlcQfUFgw"/>
     <links id="id_link_physical_cable5E" name="Class 5E cable" comment="" description="Ethernet gigabit cable" type="id_lt_physical_gigabit" sources="_41zdop_6EeG3fPi34vn9KQ _JlK98p_7EeG3fPi34vn9KQ _Jlytjhmp _nKCmgp_6EeG3fPi34vn9KQ id_comp_physical_catalog_ibm_hs21 id_comp_physical_catalog_ibm_hs22 _Y6hMwp_6EeG3fPi34vn9KQ" destinations="_41zdop_6EeG3fPi34vn9KQ _JlK98p_7EeG3fPi34vn9KQ _Jlytjhmp _nKCmgp_6EeG3fPi34vn9KQ id_comp_physical_catalog_ibm_hs21 id_comp_physical_catalog_ibm_hs22 _Y6hMwp_6EeG3fPi34vn9KQ"/>
-    <componentInstances id="_HkPKsKAsEeGQjY87lm4AGg" name="HS22_1" description="" component="id_comp_physical_catalog_ibm_hs22"/>
-    <componentInstances id="_sTQ3ZKAsEeGQjY87lm4AGg" name="M3000_1" description="" status="FULL" component="_Y6hMwp_6EeG3fPi34vn9KQ"/>
-    <componentInstances id="_HkPKsKA2AGg" name="HS22_2" description="" component="id_comp_physical_catalog_ibm_hs22"/>
-    <componentInstances id="_Hk3" name="HS21_1" description="" component="id_comp_physical_catalog_ibm_hs22"/>
-    <componentInstances id="_x06rhKHAEeGIx4XXpoKVSg" name="Cisco 2800_1" description="" component="_JlK98p_7EeG3fPi34vn9KQ"/>
-    <componentInstances id="_AIVt1KHBEeGIx4XXpoKVSg" name="Cisco 2900_1" component="_Jlytjhmp"/>
-    <componentInstances id="_DzMO9KHBEeGIx4XXpoKVSg" name="ASA_1" component="_nKCmgp_6EeG3fPi34vn9KQ"/>
+    <componentInstances id="id_ci_devicecatalog_hs22_1" name="HS22_1" description="" component="id_comp_physical_catalog_ibm_hs22"/>
+    <componentInstances id="id_ci_devicecatalog_m3000_1" name="M3000_1" description="" status="FULL" component="_Y6hMwp_6EeG3fPi34vn9KQ"/>
+    <componentInstances id="id_ci_devicecatalog_hs22_2" name="HS22_2" description="" component="id_comp_physical_catalog_ibm_hs22"/>
+    <componentInstances id="id_ci_devicecatalog_hs21_1" name="HS21_1" description="" component="id_comp_physical_catalog_ibm_hs21"/>
+    <componentInstances id="id_ci_devicecatalog_cisco2800_1" name="Cisco 2800_1" description="" component="_JlK98p_7EeG3fPi34vn9KQ"/>
+    <componentInstances id="id_ci_devicecatalog_cisco2900_1" name="Cisco 2900_1" component="_Jlytjhmp"/>
+    <componentInstances id="id_ci_devicecatalog_asa_1" name="ASA_1" component="_nKCmgp_6EeG3fPi34vn9KQ"/>
   </views>
   <views comment="" description="BikesOnline deployment environments" id="id_view_deploy" name="Deployment_BikesOnline" viewPoint="id_vp_logical">
     <components id="_vDwQkqTjEeGhbskxmOc77w" name="Production" description="" type="_sgTcYaTjEeGhbskxmOc77w">
@@ -266,7 +266,7 @@
     <components id="_ZKfHEqNKEeGULe7xIq_4Kg" type="_Ybdmtd456" boundComponent="_G9AtYp6REeG"/>
     <components id="_N13tUqNMEeGULe7xIq_4Kg" type="_aazazazaerer" boundComponent="_bJoEgJ89EeGNFtlcQfUFgw"/>
     <links id="id_link_deploy_REST_admin" name="link_deploy_REST_admin" comment="REST link between admin GUI and admin services" description="" type="id_lt_logical_http_rest" sources="id_comp_deploy_gui_admin_bikesonline" destinations="_itGiQqNJEefdfd_4Kgezezez" timeoutMillis="-1"/>
-    <componentInstances id="id_ci_deploy_HS21_1" name="HS21_1" component="id_comp_deploy_IBM_HS21" boundComponentInstance="_Hk3">
+    <componentInstances id="id_ci_deploy_HS21_1" name="HS21_1" component="id_comp_deploy_IBM_HS21" boundComponentInstance="id_ci_devicecatalog_hs21_1">
       <references type="RUNS" targets="id_ci_deploy_OS_HS21_1"/>
     </componentInstances>
     <componentInstances id="id_ci_deploy_OS_HS21_1" name="OS_HS21_1" component="id_comp_deploy_linux3_web_profile">
@@ -280,7 +280,7 @@
       <references type="RUNS" targets="id_comp_deploy_prod_gui_admin_bikesonline_1"/>
     </componentInstances>
     <componentInstances id="id_comp_deploy_prod_gui_admin_bikesonline_1" name="gui_admin_bikesonline_1" component="id_comp_deploy_gui_admin_bikesonline"/>
-    <componentInstances id="id_ci_deploy_HS22_1" name="HS22_1" description="" component="id_comp_deploy_IBM_HS22" boundComponentInstance="_HkPKsKAsEeGQjY87lm4AGg">
+    <componentInstances id="id_ci_deploy_HS22_1" name="HS22_1" description="" component="id_comp_deploy_IBM_HS22" boundComponentInstance="id_ci_devicecatalog_hs22_1">
       <references type="RUNS" targets="id_ci_deploy_OS_HS22_1"/>
     </componentInstances>
     <componentInstances id="id_ci_deploy_OS_HS22_1" name="OS_HS22_1" comment="" component="_eoxQUqMsEeG9sM0bZ_WFcA">
@@ -290,7 +290,7 @@
       <references type="RUNS" targets="_LG40BKNLEeGUrere_4Kg id_comp_deploy_prod_services_admin_bikesonline_1"/>
     </componentInstances>
     <componentInstances id="id_comp_deploy_prod_services_admin_bikesonline_1" name="services_admin_bikesonline_1" comment="" description="" component="_itGiQqNJEefdfd_4Kgezezez"/>
-    <componentInstances id="_iC1uBKMtEeG9sM0bZ_WFcA" component="_5S34QqMoEeGkWPVFom68wQ" boundComponentInstance="_sTQ3ZKAsEeGQjY87lm4AGg">
+    <componentInstances id="_iC1uBKMtEeG9sM0bZ_WFcA" component="_5S34QqMoEeGkWPVFom68wQ" boundComponentInstance="id_ci_devicecatalog_m3000_1">
       <references type="RUNS" targets="_dDF2hKMtEeG9sM0bZ_WFcA"/>
     </componentInstances>
     <componentInstances id="_dDF2hKMtEeG9sM0bZ_WFcA" name="Solaris_ME3000_1" component="_TmWPQqMtEeG9sM0bZ_WFcA">
@@ -301,7 +301,7 @@
     <componentInstances id="_pQiyNKMqEeG9sM0bZ_Wsdsds" name="OS_HS22_2" comment="" component="_eoxQUqMsEeG9sM0bZ_WFcA">
       <references type="RUNS" targets="_UmUCBKMuEeG9sM0bZrzereA"/>
     </componentInstances>
-    <componentInstances id="id_ci_deploy_HS22_2" component="id_comp_deploy_IBM_HS22" boundComponentInstance="_HkPKsKA2AGg">
+    <componentInstances id="id_ci_deploy_HS22_2" component="id_comp_deploy_IBM_HS22" boundComponentInstance="id_ci_devicecatalog_hs22_2">
       <references type="RUNS" targets="_pQiyNKMqEeG9sM0bZ_Wsdsds"/>
     </componentInstances>
     <componentInstances id="_rctPVKNMEeGULe7xIq_4Kg" name="batch_bikeonline_1" component="_N13tUqNMEeGULe7xIq_4Kg"/>

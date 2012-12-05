@@ -10,6 +10,7 @@ import org.m2ling.common.configuration.Conf;
 import org.m2ling.common.dto.core.AccessType;
 import org.m2ling.common.exceptions.FunctionalException;
 import org.m2ling.common.utils.UUT;
+import org.m2ling.common.utils.Utils;
 import org.m2ling.persistence.PersistenceManagerXMIImpl;
 import org.m2ling.presentation.principles.model.ComponentTypeBean;
 import org.m2ling.presentation.principles.model.HasNameAndIDBean;
@@ -19,8 +20,6 @@ import org.m2ling.service.util.CoreUtil;
 import org.m2ling.service.util.DTOConverter.FromDTO;
 import org.m2ling.service.util.DTOConverter.ToDTO;
 import org.m2ling.specs.M2lingFixture;
-
-import com.google.common.base.Strings;
 
 public class AbstractCTFixture extends M2lingFixture {
 	ComponentTypeServiceImpl service;
@@ -66,7 +65,7 @@ public class AbstractCTFixture extends M2lingFixture {
 
 	protected void setReferences(ComponentTypeBean bean, String references) {
 		List<ReferenceBean> refs = new ArrayList<ReferenceBean>();
-		if (Strings.isNullOrEmpty(references)) {
+		if (Utils.isNullOrEmptyAfterTrim(references)) {
 			bean.setReferences(refs);
 		} else {
 			StringTokenizer st = new StringTokenizer(references, ";");

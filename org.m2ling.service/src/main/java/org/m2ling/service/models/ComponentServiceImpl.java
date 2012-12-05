@@ -18,6 +18,7 @@ import org.m2ling.common.dto.core.ReferenceDTO;
 import org.m2ling.common.exceptions.FunctionalException;
 import org.m2ling.common.exceptions.FunctionalException.Code;
 import org.m2ling.common.soa.Context;
+import org.m2ling.common.utils.Utils;
 import org.m2ling.domain.Root;
 import org.m2ling.domain.core.Component;
 import org.m2ling.domain.core.ComponentInstance;
@@ -33,7 +34,6 @@ import org.m2ling.service.common.ServiceImpl;
 import org.m2ling.service.util.CoreUtil;
 import org.m2ling.service.util.DTOConverter;
 
-import com.google.common.base.Strings;
 import com.google.common.collect.Lists;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
@@ -125,7 +125,7 @@ public class ComponentServiceImpl extends ServiceImpl implements ComponentServic
 	private void checkReferenceDeletion(final ComponentDTO dto, Component thisComp) throws FunctionalException {
 		List<Reference> dtoRefs = new ArrayList<Reference>();
 		for (ReferenceDTO r : dto.getReferences()) {
-			dtoRefs.add(fromDTO.newReference(r));
+			dtoRefs.add(fromDTO.newReference(r, Type.COMPONENT));
 		}
 		EList<Reference> currentRefs = thisComp.getReferences();
 		for (Reference currentRef : currentRefs) {
@@ -173,7 +173,7 @@ public class ComponentServiceImpl extends ServiceImpl implements ComponentServic
 	}
 
 	private boolean isNullBinding(final ComponentDTO dto) {
-		return dto.getBoundComponent() == null || Strings.isNullOrEmpty(dto.getBoundComponent().getId());
+		return dto.getBoundComponent() == null || Utils.isNullOrEmptyAfterTrim(dto.getBoundComponent().getId());
 	}
 
 	private void checkBoundComponentLegal(final ComponentDTO dto, ComponentType ct) throws FunctionalException {
@@ -185,14 +185,12 @@ public class ComponentServiceImpl extends ServiceImpl implements ComponentServic
 				throw new FunctionalException(FunctionalException.Code.NULL_ARGUMENT, null, "(bound ID)");
 			}
 			// Check if the bound component exists
-			Component bound = (Component) util.getComponentByID(dto.getBoundComponent().getId());
+			Component bound = util.getComponentByID(dto.getBoundComponent().getId());
 			if (bound == null) {
 				throw new FunctionalException(FunctionalException.Code.TARGET_NOT_FOUND, null, "bound ID="
 						+ dto.getBoundComponent().getId());
 			}
-			// Check that the bound component follows CT definition (no need to check that the bound
-			// component is in the same view than the component to create because the associated
-			// CT controls are already done)
+			// Check that the bound component follows CT definition
 			ComponentType expectedBoundCT = ct.getBoundType();
 			ComponentType checkedBoundCT = bound.getType();
 			// checkedBoundCT can't be null as it comes from the model, expectedBoundCT can be null
@@ -428,7 +426,7 @@ public class ComponentServiceImpl extends ServiceImpl implements ComponentServic
 		ComponentDTO out = null;
 		try {
 			// Controls
-			if (id == null || Strings.isNullOrEmpty(id.trim())) {
+			if (id == null || Utils.isNullOrEmptyAfterTrim(id)) {
 				throw new FunctionalException(FunctionalException.Code.NULL_ARGUMENT, null, "(id)");
 			}
 			Component comp = util.getComponentByID(id);

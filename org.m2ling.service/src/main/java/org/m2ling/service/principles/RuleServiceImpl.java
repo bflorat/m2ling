@@ -14,6 +14,7 @@ import org.m2ling.common.exceptions.FunctionalException;
 import org.m2ling.common.exceptions.FunctionalException.Code;
 import org.m2ling.common.soa.Context;
 import org.m2ling.common.utils.Consts;
+import org.m2ling.common.utils.Utils;
 import org.m2ling.domain.Root;
 import org.m2ling.domain.core.CoreFactory;
 import org.m2ling.domain.core.Rule;
@@ -25,7 +26,6 @@ import org.m2ling.service.common.ServiceImpl;
 import org.m2ling.service.util.CoreUtil;
 import org.m2ling.service.util.DTOConverter;
 
-import com.google.common.base.Strings;
 import com.google.common.collect.Lists;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
@@ -92,7 +92,7 @@ public class RuleServiceImpl extends ServiceImpl implements RuleService {
 		if (dto.getRationale() == null) {
 			throw new FunctionalException(FunctionalException.Code.NULL_ARGUMENT, null, "(rationale)");
 		}
-		if (Strings.isNullOrEmpty(dto.getRationale().trim())) {
+		if (Utils.isNullOrEmptyAfterTrim(dto.getRationale())) {
 			throw new FunctionalException(FunctionalException.Code.VOID_ARGUMENT, null, "(rationale)");
 		}
 		if (dto.getRationale().length() > Consts.MAX_TEXT_SIZE) {

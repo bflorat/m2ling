@@ -14,6 +14,7 @@ import org.m2ling.common.dto.core.LinkInstanceDTO;
 import org.m2ling.common.exceptions.FunctionalException;
 import org.m2ling.common.exceptions.FunctionalException.Code;
 import org.m2ling.common.soa.Context;
+import org.m2ling.common.utils.Utils;
 import org.m2ling.domain.Root;
 import org.m2ling.domain.core.ComponentInstance;
 import org.m2ling.domain.core.Link;
@@ -25,7 +26,6 @@ import org.m2ling.service.common.ServiceImpl;
 import org.m2ling.service.util.CoreUtil;
 import org.m2ling.service.util.DTOConverter;
 
-import com.google.common.base.Strings;
 import com.google.common.collect.Lists;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
@@ -256,7 +256,7 @@ public class LinkInstanceServiceImpl extends ServiceImpl implements LinkInstance
 		LinkInstanceDTO out = null;
 		try {
 			// Controls
-			if (id == null || Strings.isNullOrEmpty(id.trim())) {
+			if (id == null || Utils.isNullOrEmptyAfterTrim(id.trim())) {
 				throw new FunctionalException(FunctionalException.Code.NULL_ARGUMENT, null, "(id)");
 			}
 			LinkInstance li = util.getLinkInstanceByID(id);

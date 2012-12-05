@@ -20,8 +20,6 @@ import org.m2ling.presentation.principles.model.ComponentTypeBean;
 import org.m2ling.presentation.principles.model.HasNameAndIDBean;
 import org.m2ling.presentation.principles.utils.DTOConverter;
 
-import com.google.common.base.Strings;
-
 public class CreateCTFixture extends AbstractCTFixture {
 	public CreateCTFixture() throws IOException {
 		super();
@@ -137,10 +135,10 @@ public class CreateCTFixture extends AbstractCTFixture {
 			reset("Bikes");
 		}
 		String enumeration = "";
-		if (!"null".equals(comps) && !Strings.isNullOrEmpty(comps)) {
+		if (!"null".equals(comps) && !Utils.isNullOrEmptyAfterTrim(comps)) {
 			enumeration += comps;
 		}
-		if (!"null".equals(groups) && !Strings.isNullOrEmpty(groups)) {
+		if (!"null".equals(groups) && !Utils.isNullOrEmptyAfterTrim(groups)) {
 			if (enumeration.length() > 0) {
 				enumeration += "," + groups;
 			} else {

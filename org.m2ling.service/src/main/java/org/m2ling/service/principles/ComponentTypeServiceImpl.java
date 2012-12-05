@@ -18,6 +18,7 @@ import org.m2ling.common.dto.core.ReferenceDTO;
 import org.m2ling.common.exceptions.FunctionalException;
 import org.m2ling.common.exceptions.FunctionalException.Code;
 import org.m2ling.common.soa.Context;
+import org.m2ling.common.utils.Utils;
 import org.m2ling.domain.Root;
 import org.m2ling.domain.core.ArchitectureItem;
 import org.m2ling.domain.core.Component;
@@ -35,7 +36,6 @@ import org.m2ling.service.common.ServiceImpl;
 import org.m2ling.service.util.CoreUtil;
 import org.m2ling.service.util.DTOConverter;
 
-import com.google.common.base.Strings;
 import com.google.common.collect.Lists;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
@@ -120,7 +120,7 @@ public class ComponentTypeServiceImpl extends ServiceImpl implements ComponentTy
 	}
 
 	private boolean isNullBinding(final ComponentTypeDTO dto) {
-		return dto.getBoundType() == null || Strings.isNullOrEmpty(dto.getBoundType().getId());
+		return dto.getBoundType() == null || Utils.isNullOrEmptyAfterTrim(dto.getBoundType().getId());
 	}
 
 	/**
@@ -175,7 +175,7 @@ public class ComponentTypeServiceImpl extends ServiceImpl implements ComponentTy
 	private void checkReferenceDrop(final ComponentTypeDTO dto) throws FunctionalException {
 		List<Reference> dtoRefs = new ArrayList<Reference>();
 		for (ReferenceDTO r : dto.getReferences()) {
-			dtoRefs.add(fromDTO.newReference(r));
+			dtoRefs.add(fromDTO.newReference(r, Type.COMPONENT_TYPE));
 		}
 		ComponentType ct = util.getComponentTypeByID(dto.getId());
 		EList<Reference> currentRefs = ct.getReferences();
@@ -457,7 +457,7 @@ public class ComponentTypeServiceImpl extends ServiceImpl implements ComponentTy
 		ComponentTypeDTO out = null;
 		try {
 			// Controls
-			if (id == null || Strings.isNullOrEmpty(id.trim())) {
+			if (id == null || Utils.isNullOrEmptyAfterTrim(id)) {
 				throw new FunctionalException(FunctionalException.Code.NULL_ARGUMENT, null, "(id)");
 			}
 			ComponentType ct = util.getComponentTypeByID(id);

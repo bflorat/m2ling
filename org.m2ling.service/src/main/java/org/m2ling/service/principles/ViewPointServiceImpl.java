@@ -16,6 +16,7 @@ import org.m2ling.common.exceptions.FunctionalException;
 import org.m2ling.common.exceptions.FunctionalException.Code;
 import org.m2ling.common.soa.Context;
 import org.m2ling.common.utils.Consts;
+import org.m2ling.common.utils.Utils;
 import org.m2ling.domain.Root;
 import org.m2ling.domain.core.ComponentType;
 import org.m2ling.domain.core.Type;
@@ -26,7 +27,6 @@ import org.m2ling.service.common.ServiceImpl;
 import org.m2ling.service.util.CoreUtil;
 import org.m2ling.service.util.DTOConverter;
 
-import com.google.common.base.Strings;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 
@@ -70,7 +70,7 @@ public class ViewPointServiceImpl extends ServiceImpl implements ViewPointServic
 				if (literal == null) {
 					throw new FunctionalException(FunctionalException.Code.NULL_ARGUMENT, null, "statusLiteral #" + index);
 				}
-				if (Strings.isNullOrEmpty(literal.trim())) {
+				if (Utils.isNullOrEmptyAfterTrim(literal)) {
 					throw new FunctionalException(FunctionalException.Code.VOID_ARGUMENT, null, "statusLiteral #" + index);
 				}
 				if (literal.length() > Consts.MAX_LABEL_SIZE) {
@@ -125,7 +125,7 @@ public class ViewPointServiceImpl extends ServiceImpl implements ViewPointServic
 		ViewPointDTO out = null;
 		try {
 			// controls
-			if (id == null || Strings.isNullOrEmpty(id.trim())) {
+			if (id == null || Utils.isNullOrEmptyAfterTrim(id)) {
 				throw new FunctionalException(FunctionalException.Code.NULL_ARGUMENT, null, "(id)");
 			}
 			ViewPoint vp = util.getViewPointByID(id);

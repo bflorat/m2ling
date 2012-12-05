@@ -1,0 +1,420 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:concordion="http://www.concordion.org/2007/concordion">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>Component instance creation</title>
+</head>
+<body>
+	<H1>Component instance creation</H1>
+	<p>Administrators or actors with adequate authorizations can create
+		a new component instance (CI)</p>
+	<h2>Nominal rules</h2>
+	<p>
+		See <a href="../common/Core.html#Requirements">common service
+			requirements</a>
+	</p>
+	<div class="example">
+		A new CI created with
+		<span concordion:set="#caseName">Roundtrip</span>
+		<ul>
+			<li>View id=<b concordion:set="#vID">id_view_deploy</b></li>
+			<li>compID=<b concordion:set="#compID">id_comp_deploy_IBM_HS21</b></li>
+			<li>id=<b concordion:set="#id">a_new_id</b></li>
+			<li>name=<b concordion:set="#name">HS21_3</b></li>
+			<li>description=<b concordion:set="#desc">A HS21 blade server</b></li>
+			<li>comment=<b concordion:set="#comment">Fine X86 server by IBM</b></li>
+			<li>tags=<b concordion:set="#tags">server,x86</b></li>
+			<li>bound id=<b concordion:set="#boundID">id_ci_devicecatalog_hs21_1</b></li>
+			<li>references ids=<b concordion:set="#references">RUNS:id_ci_deploy_OS_HS21_1</b></li>
+			<li>status=<b concordion:set="#status">APPLICABLE</b></li>
+		</ul>
+		should have following characteristics (full round trip from
+		presentation to presentation) : <b
+			concordion:assertEquals="createAndGetComp(#caseName,#vID,#compID,#id,#name,#desc,#comment,#tags,#boundID,#references,#status)">
+			boundInstance=id=id_ci_devicecatalog_hs21_1 name=HS21_1 
+			comment=Fine X86 server by IBM 
+			component=id=id_comp_deploy_IBM_HS21 name=IBM-HS21 
+			description=A HS21 blade server 
+			drop= 
+			id=a_new_id 
+			name=HS21_3 
+			references=[targets=[id=id_ci_deploy_OS_HS21_1 name=OS_HS21_1 ] type=RUNS ] 
+			status=APPLICABLE 
+			tags=server,x86 
+			view=id=id_view_deploy name=Deployment_BikesOnline </b>
+	</div>
+
+	<h3>References rules</h3>
+	<p class='rule'>#COMP1 : Component references must follow types
+		defined in their associated CT. </p>
+	<div class='example'>
+		If a reference target has a wrong type<br/>
+		then the component <span
+			concordion:execute="#resu=testWrongTargetType()">creation</span> should
+		: <b concordion:assertEquals="#resu">FAIL with code COMP_ILLEGAL_REFERENCE</b>
+	</div>
+	<div class='example'>
+		If a reference target is right but has a wrong type (like RUNS instead of DEPENDS_ON)<br/>
+		then the component <span
+			concordion:execute="#resu=testWrongReferenceType()">creation</span> should
+		: <b concordion:assertEquals="#resu">FAIL with code COMP_ILLEGAL_REFERENCE</b>
+	</div>
+	
+	<p class='rule'>#COMP5 : self-references are allowed.</p>
+	<div class='example'>TODO : test to be done</div>
+	
+
+	<p class='rule'>#COMP2 : A reference target can't be null.</p>
+	<div class='example'>
+		In this case, the CT <span concordion:execute="#resu=testNullRef()">creation</span>
+		should : <b concordion:assertEquals="#resu">FAIL with code
+			TARGET_NOT_FOUND</b>
+	</div>
+
+
+	<h3>Binding rules</h3>
+	<p class='rule'>#COMP3 : If a CT is bound, all components of its
+		type should be bound.</p>
+	<div class='example'>
+		If a component has no bound component,<br/>
+		Then the component <span
+			concordion:execute="#resu=testNullBinding()">creation</span> should
+		: <b concordion:assertEquals="#resu">FAIL with code MISSING_BINDING</b>
+	</div>
+	
+	<p class='rule'>#COMP4 : If a component is bound to another component, the bound component type must be those defined in the first component type.</p>
+	<div class='example'>
+		If the bound component type is wrong, the component <span
+			concordion:execute="#resu=testWrongBinding()">creation</span> should
+		: <b concordion:assertEquals="#resu">FAIL with code COMP_ILLEGAL_BINDING</b>
+	</div>
+	
+	<p>Note that rule previous rules ensure implied rules already implemented in associated component types. 
+	For instance, it is impossible to bind a component to an already-bound component (binding chain) 
+	but we don't need to test this because it is already check at the CT level.</p>
+
+
+	<h3>Format controls</h3>
+	<ul>
+		<li>See <a href="../common/Core.html#Requirements">common service
+				requirements</a></li>
+		<li>Description can be null or void, even without bound component</li>
+	</ul>
+	
+	Following service inputs against
+	<b concordion:set="#vpID">id_vp_logical</b> viewpoint should make the
+	service:
+	<div class='example'>
+		<table
+			concordion:execute="#result=checkFormat(#caseName,#vID,#ctID,#id,#name,#desc,#comment,#tags,#boundID,#references,#status)">
+			<tr>
+				<th concordion:set="#caseName">Case</th>
+				<th concordion:set="#vID">ViewID</th>
+				<th concordion:set="#ctID">CT ID</th>
+				<th concordion:set="#id">ID</th>
+				<th concordion:set="#name">Name</th>
+				<th concordion:set="#desc">Description</th>
+				<th concordion:set="#comment">Comment</th>
+				<th concordion:set="#tags">Tags</th>
+				<th concordion:set="#boundID">BoundID</th>
+				<th concordion:set="#references">References</th>
+				<th concordion:set="#status">Status</th>
+				<th concordion:assertEquals="#result">should :</th>
+			</tr>
+			<!-- Nominal -->
+			<tr>
+				<td>Format/Nominal creation</td>
+				<td>id_view_vp_logical_Logical_BikesOnline</td>
+				<td>id_ct_logical_servicecontainer</td>
+				<td>a_new_id</td>
+				<td>ServicesContainer2</td>
+				<td>Runs services (RMI, REST, SOAP...).</td>
+				<td>comment2</td>
+				<td>tags1,tag2</td>
+				<td>id_comp_tech_weblogic</td>
+				<td>RUNS:id_comp_view_Logical_BikesOnline_AdminServices;DEPENDS_ON:id_comp_view_Logical_BikesOnline_PostgreSQL,id_comp_view_Logical_BikesOnline_AuthenticationLDAP</td>
+				<td>APPLICABLE</td>
+				<td>PASS</td>
+			</tr>
+			<!-- Existing Component -->
+			<tr>
+				<td>Format/Existing CT ID</td>
+				<td>id_view_vp_logical_Logical_BikesOnline</td>
+				<td>id_ct_logical_servicecontainer</td>
+				<td>id_comp_view_Logical_BikesOnline_AdminGUI</td>
+				<td>ServicesContainer2</td>
+				<td>Runs services (RMI, REST, SOAP...).</td>
+				<td>comment2</td>
+				<td>tags1,tag2</td>
+				<td>id_comp_tech_weblogic</td>
+				<td>null</td>
+				<td>APPLICABLE</td>
+				<td>FAIL with code DUPLICATES</td>
+			</tr>
+			<!-- View-->
+			<tr>
+				<td>Format/Null view</td>
+				<td>null</td>
+				<td>id_ct_logical_servicecontainer</td>
+				<td>a_new_id</td>
+				<td>ServicesContainer2</td>
+				<td>Runs services (RMI, REST, SOAP...).</td>
+				<td>comment2</td>
+				<td>tags1,tag2</td>
+				<td>id_comp_tech_weblogic</td>
+				<td>null</td>
+				<td>APPLICABLE</td>
+				<td>FAIL with code NULL_ARGUMENT</td>
+			</tr>
+			<tr>
+				<td>Format/Unknown view</td>
+				<td>id_foo</td>
+				<td>id_ct_logical_servicecontainer</td>
+				<td>a_new_id</td>
+				<td>ServicesContainer2</td>
+				<td>Runs services (RMI, REST, SOAP...).</td>
+				<td>comment2</td>
+				<td>tags1,tag2</td>
+				<td>id_comp_tech_weblogic</td>
+				<td>null</td>
+				<td>APPLICABLE</td>
+				<td>FAIL with code TARGET_NOT_FOUND</td>
+			</tr>
+			<!--  Description -->
+			<tr>
+				<td>Format/Null description</td>
+				<td>id_view_vp_logical_Logical_BikesOnline</td>
+				<td>id_ct_logical_servicecontainer</td>
+				<td>a_new_id</td>
+				<td>ServicesContainer2</td>
+				<td>null</td>
+				<td>comment2</td>
+				<td>tags1,tag2</td>
+				<td>id_comp_tech_weblogic</td>
+				<td>RUNS:id_comp_view_Logical_BikesOnline_AdminServices;DEPENDS_ON:id_comp_view_Logical_BikesOnline_PostgreSQL,id_comp_view_Logical_BikesOnline_AuthenticationLDAP</td>
+				<td>APPLICABLE</td>
+				<td>PASS</td>
+			</tr>
+			<tr>
+				<td>Format/Void description</td>
+				<td>id_view_vp_logical_Logical_BikesOnline</td>
+				<td>id_ct_logical_servicecontainer</td>
+				<td>a_new_id</td>
+				<td>ServicesContainer2</td>
+				<td></td>
+				<td>comment2</td>
+				<td>tags1,tag2</td>
+				<td>id_comp_tech_weblogic</td>
+				<td>RUNS:id_comp_view_Logical_BikesOnline_AdminServices;DEPENDS_ON:id_comp_view_Logical_BikesOnline_PostgreSQL,id_comp_view_Logical_BikesOnline_AuthenticationLDAP</td>
+				<td>APPLICABLE</td>
+				<td>PASS</td>
+			</tr>
+			<tr>
+				<td>Format/Void description after trim</td>
+				<td>id_view_vp_logical_Logical_BikesOnline</td>
+				<td>id_ct_logical_servicecontainer</td>
+				<td>a_new_id</td>
+				<td>ServicesContainer2</td>
+				<td>space</td>
+				<td>comment2</td>
+				<td>tags1,tag2</td>
+				<td>id_comp_tech_weblogic</td>
+				<td>RUNS:id_comp_view_Logical_BikesOnline_AdminServices;DEPENDS_ON:id_comp_view_Logical_BikesOnline_PostgreSQL,id_comp_view_Logical_BikesOnline_AuthenticationLDAP</td>
+				<td>APPLICABLE</td>
+				<td>PASS</td>
+			</tr>
+			<!--  Type check -->
+			<tr>
+				<td>Format/Null type</td>
+				<td>id_view_vp_logical_Logical_BikesOnline</td>
+				<td>null</td>
+				<td>a_new_id</td>
+				<td>a name</td>
+				<td>Runs services (RMI, REST, SOAP...).</td>
+				<td>comment2</td>
+				<td>tags1,tag2</td>
+				<td>id_comp_tech_weblogic</td>
+				<td>null</td>
+				<td>APPLICABLE</td>
+				<td>FAIL with code TARGET_NOT_FOUND</td>
+			</tr>
+			<tr>
+				<td>Format/Unexisting type</td>
+				<td>id_view_vp_logical_Logical_BikesOnline</td>
+				<td>id_ct_foo</td>
+				<td>a_new_id</td>
+				<td>a name</td>
+				<td>Runs services (RMI, REST, SOAP...).</td>
+				<td>comment2</td>
+				<td>tags1,tag2</td>
+				<td>id_comp_tech_weblogic</td>
+				<td>null</td>
+				<td>APPLICABLE</td>
+				<td>FAIL with code TARGET_NOT_FOUND</td>
+			</tr>
+			<!-- name check -->
+			<tr>
+				<td>Format/Null name with binding</td>
+				<td>id_view_vp_logical_Logical_BikesOnline</td>
+				<td>id_ct_logical_servicecontainer</td>
+				<td>a_new_id</td>
+				<td>null</td>
+				<td>Runs services (RMI, REST, SOAP...).</td>
+				<td>comment2</td>
+				<td>tags1,tag2</td>
+				<td>id_comp_tech_weblogic</td>
+				<td>null</td>
+				<td>APPLICABLE</td>
+				<td>PASS</td>
+			</tr>
+			<tr>
+				<td>Format/Void comp name with binding</td>
+				<td>id_view_vp_logical_Logical_BikesOnline</td>
+				<td>id_ct_logical_servicecontainer</td>
+				<td>a_new_id</td>
+				<td></td>
+				<td>Runs services (RMI, REST, SOAP...).</td>
+				<td>comment2</td>
+				<td>tags1,tag2</td>
+				<td>id_comp_tech_weblogic</td>
+				<td>null</td>
+				<td>APPLICABLE</td>
+				<td>PASS</td>
+			</tr>
+			<tr>
+				<td>Format/Void comp name after trim with binding</td>
+				<td>id_view_vp_logical_Logical_BikesOnline</td>
+				<td>id_ct_logical_servicecontainer</td>
+				<td>a_new_id</td>
+				<td>space</td>
+				<td>Runs services (RMI, REST, SOAP...).</td>
+				<td>comment2</td>
+				<td>tags1,tag2</td>
+				<td>id_comp_tech_weblogic</td>
+				<td>null</td>
+				<td>APPLICABLE</td>
+				<td>PASS</td>
+			</tr>
+			<tr>
+				<td>Format/Null name without binding</td>
+				<td>id_view_vp_logical_Logical_BikesOnline</td>
+				<td>id_ct_logical_servicecontainer</td>
+				<td>a_new_id</td>
+				<td>null</td>
+				<td>Runs services (RMI, REST, SOAP...).</td>
+				<td>comment2</td>
+				<td>tags1,tag2</td>
+				<td>null</td>
+				<td>null</td>
+				<td>APPLICABLE</td>
+				<td>FAIL with code NULL_ARGUMENT</td>
+			</tr>
+			<tr>
+				<td>Format/Void comp name without binding</td>
+				<td>id_view_vp_logical_Logical_BikesOnline</td>
+				<td>id_ct_logical_servicecontainer</td>
+				<td>a_new_id</td>
+				<td></td>
+				<td>Runs services (RMI, REST, SOAP...).</td>
+				<td>comment2</td>
+				<td>tags1,tag2</td>
+				<td>null</td>
+				<td>null</td>
+				<td>APPLICABLE</td>
+				<td>FAIL with code VOID_ARGUMENT</td>
+			</tr>
+			<tr>
+				<td>Format/Void comp name after trim without binding</td>
+				<td>id_view_vp_logical_Logical_BikesOnline</td>
+				<td>id_ct_logical_servicecontainer</td>
+				<td>a_new_id</td>
+				<td>space</td>
+				<td>Runs services (RMI, REST, SOAP...).</td>
+				<td>comment2</td>
+				<td>tags1,tag2</td>
+				<td>null</td>
+				<td>null</td>
+				<td>APPLICABLE</td>
+				<td>FAIL with code VOID_ARGUMENT</td>
+			</tr>
+			<!-- Comment -->
+			<tr>
+				<td>Format/Null comment</td>
+				<td>id_view_vp_logical_Logical_BikesOnline</td>
+				<td>id_ct_logical_servicecontainer</td>
+				<td>a_new_id</td>
+				<td>ServicesContainer2</td>
+				<td>Runs services (RMI, REST, SOAP...).</td>
+				<td>null</td>
+				<td>tags1,tag2</td>
+				<td>id_comp_tech_weblogic</td>
+				<td>null</td>
+				<td>APPLICABLE</td>
+				<td>PASS</td>
+			</tr>
+			<!-- References -->
+			<!--  Note that is is technically impossible (except by reflection?) 
+			to build a DTO with null reference so we don't test it -->
+			<tr>
+				<td>Format/Non-existing reference</td>
+				<td>id_view_vp_logical_Logical_BikesOnline</td>
+				<td>id_ct_logical_servicecontainer</td>
+				<td>a_new_id</td>
+				<td>ServicesContainer2</td>
+				<td>Runs services (RMI, REST, SOAP...).</td>
+				<td>null</td>
+				<td>tags1,tag2</td>
+				<td>id_comp_tech_weblogic</td>
+				<td>RUNS:id_foo;DEPENDS_ON:id_comp_view_Logical_BikesOnline_PostgreSQL,id_comp_view_Logical_BikesOnline_AuthenticationLDAP</td>
+				<td>APPLICABLE</td>
+				<td>FAIL with code TARGET_NOT_FOUND</td>
+			</tr>
+			<tr>
+				<td>Format/Missing target</td>
+				<td>id_view_vp_logical_Logical_BikesOnline</td>
+				<td>id_ct_logical_servicecontainer</td>
+				<td>a_new_id</td>
+				<td>ServicesContainer2</td>
+				<td>Runs services (RMI, REST, SOAP...).</td>
+				<td>null</td>
+				<td>tags1,tag2</td>
+				<td>id_comp_tech_weblogic</td>
+				<td>RUNS:;DEPENDS_ON:id_ct_logical_rdbms</td>
+				<td>APPLICABLE</td>
+				<td>FAIL with code NONE_TARGET</td>
+			</tr>
+			<!-- Bound type -->
+			<tr>
+				<td>Format/Regular null boundtype</td>
+				<td>id_view_vp_logical_Logical_BikesOnline</td>
+				<td>id_ct_logical_InternetWebClient</td>
+				<td>a_new_id</td>
+				<td>LinuxWebClient</td>
+				<td>A linux web client</td>
+				<td>null</td>
+				<td>null</td>
+				<td>null</td>
+				<td>null</td>
+				<td>APPLICABLE</td>
+				<td>PASS</td>
+			</tr>
+			<tr>
+				<td>Format/Non-existing boundtype</td>
+				<td>id_view_vp_logical_Logical_BikesOnline</td>
+				<td>id_ct_logical_servicecontainer</td>
+				<td>a_new_id</td>
+				<td>ServicesContainer2</td>
+				<td>Runs services (RMI, REST, SOAP...).</td>
+				<td>comment2</td>
+				<td>tags1,tag2</td>
+				<td>id_ct_foo</td>
+				<td>null</td>
+				<td>APPLICABLE</td>
+				<td>FAIL with code TARGET_NOT_FOUND</td>
+			</tr>
+			
+		</table>
+	</div>
+</body>
+</html>

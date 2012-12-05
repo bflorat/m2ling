@@ -69,7 +69,7 @@ public class Utils {
 		}
 		StringBuilder sb = new StringBuilder();
 		for (String s : list) {
-			if (Strings.isNullOrEmpty(s)) {
+			if (isNullOrEmptyAfterTrim(s)) {
 				throw new IllegalArgumentException("Null or empty list element : " + s);
 			}
 			sb.append(s).append(',');
@@ -98,7 +98,7 @@ public class Utils {
 		}
 		StringBuilder sb = new StringBuilder();
 		for (String s : set) {
-			if (Strings.isNullOrEmpty(s)) {
+			if (isNullOrEmptyAfterTrim(s)) {
 				throw new IllegalArgumentException("Null or empty list element : " + s);
 			}
 			sb.append(s).append(',');
@@ -199,7 +199,14 @@ public class Utils {
 		return result;
 	}
 
-	
+	/**
+	 * Return whether a string is null, void or void after applying a trim
+	 * @param stringToTest the string to test
+	 * @return whether a string is null, void or void after applying a trim
+	 */
+	public static boolean isNullOrEmptyAfterTrim(String stringToTest) {
+		return stringToTest == null || "".equals(stringToTest.trim());
+	}
 
 	/**
 	 * Generic toString() method that display all declared fields and those of immediate parent class

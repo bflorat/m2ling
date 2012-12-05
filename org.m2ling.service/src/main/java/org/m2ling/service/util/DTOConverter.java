@@ -23,6 +23,7 @@ import org.m2ling.common.dto.core.RuleDTO;
 import org.m2ling.common.dto.core.StatusEventDTO;
 import org.m2ling.common.dto.core.ViewDTO;
 import org.m2ling.common.dto.core.ViewPointDTO;
+import org.m2ling.common.utils.Utils;
 import org.m2ling.domain.core.ArchitectureItem;
 import org.m2ling.domain.core.Component;
 import org.m2ling.domain.core.ComponentInstance;
@@ -42,10 +43,10 @@ import org.m2ling.domain.core.Reference;
 import org.m2ling.domain.core.ReferenceType;
 import org.m2ling.domain.core.Rule;
 import org.m2ling.domain.core.StatusEvent;
+import org.m2ling.domain.core.Type;
 import org.m2ling.domain.core.View;
 import org.m2ling.domain.core.ViewPoint;
 
-import com.google.common.base.Strings;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 
@@ -134,7 +135,7 @@ public class DTOConverter {
 			// If name is void or null, use bound type one
 			String name = ct.getName();
 			ComponentType boundType = ct.getBoundType();
-			if ((name == null || "".equals(name.trim())) && boundType != null) {
+			if (boundType != null && Utils.isNullOrEmptyAfterTrim(name)) {
 				name = boundType.getName();
 			}
 			HasNameAndIdDTO hniVP = new HasNameAndIdDTO.Builder(vp.getId(), vp.getName()).build();
@@ -146,12 +147,12 @@ public class DTOConverter {
 					builder.addTag(tag);
 				}
 			}
-			if (Strings.isNullOrEmpty(ct.getComment()) && boundType != null) {
+			if (boundType != null && Utils.isNullOrEmptyAfterTrim(ct.getComment())) {
 				builder.comment(boundType.getComment());
 			} else {
 				builder.comment(ct.getComment());
 			}
-			if (Strings.isNullOrEmpty(ct.getDescription()) && boundType != null) {
+			if (boundType != null && Utils.isNullOrEmptyAfterTrim(ct.getDescription())) {
 				builder.description(boundType.getDescription());
 			} else {
 				builder.description(ct.getDescription());
@@ -175,7 +176,7 @@ public class DTOConverter {
 				builder.boundType(hniBoundType);
 				builder.instantiationFactor(ct.getBoundType().getInstantiationFactor());
 				String boundStatus = ct.getBoundType().getStatus();
-				if (ct.getStatus() == null && !Strings.isNullOrEmpty(boundStatus)
+				if (ct.getStatus() == null && !Utils.isNullOrEmptyAfterTrim(boundStatus)
 						&& vp.getStatusLiterals().contains(boundStatus)) {
 					builder.status(boundStatus);
 				}
@@ -202,12 +203,12 @@ public class DTOConverter {
 					builder.addTag(tag);
 				}
 			}
-			if (Strings.isNullOrEmpty(comp.getComment()) && boundComp != null) {
+			if (boundComp != null && Utils.isNullOrEmptyAfterTrim(comp.getComment())) {
 				builder.comment(boundComp.getComment());
 			} else {
 				builder.comment(comp.getComment());
 			}
-			if (Strings.isNullOrEmpty(comp.getDescription()) && boundComp != null) {
+			if (boundComp != null && Utils.isNullOrEmptyAfterTrim(comp.getDescription())) {
 				builder.description(boundComp.getDescription());
 			} else {
 				builder.description(comp.getDescription());
@@ -222,7 +223,7 @@ public class DTOConverter {
 				builder.boundType(hniBoundComp);
 				String boundStatus = comp.getBoundComponent().getStatus();
 				ViewPoint vp = view.getViewPoint();
-				if (comp.getStatus() == null && !Strings.isNullOrEmpty(boundStatus)
+				if (comp.getStatus() == null && !Utils.isNullOrEmptyAfterTrim(boundStatus)
 						&& vp.getStatusLiterals().contains(boundStatus)) {
 					builder.status(boundStatus);
 				}
@@ -239,7 +240,7 @@ public class DTOConverter {
 			// If name is void or null, use bound instance one
 			String name = instance.getName();
 			ComponentInstance boundInstance = instance.getBoundComponentInstance();
-			if (Strings.isNullOrEmpty(instance.getName()) && boundInstance != null) {
+			if (boundInstance != null && Utils.isNullOrEmptyAfterTrim(instance.getName())) {
 				name = boundInstance.getName();
 			}
 			ComponentInstanceDTO.Builder builder = new ComponentInstanceDTO.Builder(instance.getId(), name, viewDTO);
@@ -250,15 +251,15 @@ public class DTOConverter {
 					builder.addTag(tag);
 				}
 			}
-			if ((name == null || "".equals(name.trim())) && boundInstance != null) {
+			if (boundInstance != null && Utils.isNullOrEmptyAfterTrim(instance.getComment())) {
 				builder.comment(boundInstance.getComment());
-			} else {
-				builder.comment(boundInstance.getComment());
+			} else if (boundInstance != null) {
+				builder.comment(instance.getComment());
 			}
-			if (Strings.isNullOrEmpty(boundInstance.getDescription()) && boundInstance != null) {
+			if (boundInstance != null && Utils.isNullOrEmptyAfterTrim(instance.getDescription())) {
 				builder.description(boundInstance.getDescription());
 			} else {
-				builder.description(boundInstance.getDescription());
+				builder.description(instance.getDescription());
 			}
 			for (Reference ref : instance.getReferences()) {
 				ReferenceDTO refDTO = getReferenceDTO(ref);
@@ -394,7 +395,7 @@ public class DTOConverter {
 			((HasNameAndID) item).setId(dto.getId());
 			((HasNameAndID) item).setName(dto.getName());
 			for (String tag : dto.getTags()) {
-				if (!Strings.isNullOrEmpty(tag)) {
+				if (!Utils.isNullOrEmptyAfterTrim(tag)) {
 					((HasTags) item).getTags().add(tag);
 				}
 			}
@@ -414,7 +415,7 @@ public class DTOConverter {
 			ViewPoint vp = CoreFactory.eINSTANCE.createViewPoint();
 			populateCommonValues(vp, dto);
 			for (String status : dto.getStatusLiterals()) {
-				if (!Strings.isNullOrEmpty(status)) {
+				if (!Utils.isNullOrEmptyAfterTrim(status)) {
 					vp.getStatusLiterals().add(status);
 				}
 			}
@@ -444,19 +445,20 @@ public class DTOConverter {
 		 *           the dto
 		 * @return a new reference
 		 */
-		public Reference newReference(ReferenceDTO dto) {
+		public Reference newReference(ReferenceDTO dto, Type type) {
 			Reference reference = CoreFactory.eINSTANCE.createReference();
 			reference.setType(ReferenceType.get(dto.getType()));
 			EList<HasNameAndID> targets = reference.getTargets();
-			for (HasNameAndIdDTO target : dto.getTargets()) {
-				// Try component target
-				Component comp = util.getComponentByID(target.getId());
-				if (comp == null) {
-					// OK, try component type
-					ComponentType compType = util.getComponentTypeByID(target.getId());
+			for (HasNameAndIdDTO targetDTO : dto.getTargets()) {
+				if (type == Type.COMPONENT_TYPE) {
+					ComponentType compType = util.getComponentTypeByID(targetDTO.getId());
 					targets.add(compType);
-				} else {
+				} else if (type == Type.COMPONENT) {
+					Component comp = util.getComponentByID(targetDTO.getId());
 					targets.add(comp);
+				} else if (type == Type.COMPONENT_INSTANCE) {
+					ComponentInstance ci = util.getComponentInstanceByID(targetDTO.getId());
+					targets.add(ci);
 				}
 			}
 			return reference;
@@ -486,7 +488,7 @@ public class DTOConverter {
 				ct.getEnumeration().add(comp);
 			}
 			for (ReferenceDTO refDTO : dto.getReferences()) {
-				Reference reference = newReference(refDTO);
+				Reference reference = newReference(refDTO, Type.COMPONENT_TYPE);
 				ct.getReferences().add(reference);
 			}
 			return ct;
@@ -507,7 +509,7 @@ public class DTOConverter {
 				comp.setBoundComponent(bounded);
 			}
 			for (ReferenceDTO refDTO : dto.getReferences()) {
-				Reference reference = newReference(refDTO);
+				Reference reference = newReference(refDTO, Type.COMPONENT);
 				comp.getReferences().add(reference);
 			}
 			ComponentType type = util.getComponentTypeByID(dto.getComponentType().getId());
@@ -530,7 +532,7 @@ public class DTOConverter {
 				ci.setBoundComponentInstance(bounded);
 			}
 			for (ReferenceDTO refDTO : dto.getReferences()) {
-				Reference reference = newReference(refDTO);
+				Reference reference = newReference(refDTO, Type.COMPONENT_INSTANCE);
 				ci.getReferences().add(reference);
 			}
 			Component comp = util.getComponentByID(dto.getComponent().getId());

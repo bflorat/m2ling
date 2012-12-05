@@ -8,7 +8,7 @@ import java.util.StringTokenizer;
 
 import org.m2ling.common.configuration.Conf;
 import org.m2ling.common.dto.core.AccessType;
-import org.m2ling.common.dto.core.ComponentDTO;
+import org.m2ling.common.dto.core.ComponentInstanceDTO;
 import org.m2ling.common.dto.core.HasNameAndIdDTO;
 import org.m2ling.common.dto.core.ReferenceDTO;
 import org.m2ling.common.exceptions.FunctionalException;
@@ -17,19 +17,19 @@ import org.m2ling.common.utils.Utils;
 import org.m2ling.persistence.PersistenceManagerXMIImpl;
 import org.m2ling.presentation.principles.model.HasNameAndIDBean;
 import org.m2ling.presentation.principles.model.ReferenceBean;
-import org.m2ling.presentation.studio.model.ComponentBean;
+import org.m2ling.presentation.studio.model.ComponentInstanceBean;
 import org.m2ling.service.common.ReferenceHelper;
 import org.m2ling.service.util.CoreUtil;
 import org.m2ling.service.util.DTOConverter.FromDTO;
 import org.m2ling.service.util.DTOConverter.ToDTO;
 import org.m2ling.specs.M2lingFixture;
 
-public class AbstractComponentFixture extends M2lingFixture {
-	ComponentServiceImpl service;
+public class AbstractCIFixture extends M2lingFixture {
+	ComponentInstanceServiceImpl service;
 
 	boolean noreset = false;
 
-	public AbstractComponentFixture() throws IOException {
+	public AbstractCIFixture() throws IOException {
 		super();
 	}
 
@@ -57,13 +57,13 @@ public class AbstractComponentFixture extends M2lingFixture {
 			pm = new PersistenceManagerXMIImpl(logger, configuration);
 			CoreUtil util = new CoreUtil(logger, pm);
 			ReferenceHelper refHelper = new ReferenceHelper(util);
-			service = new ComponentServiceImpl(pm, util, new FromDTO(util), new ToDTO(util), configuration, logger,refHelper);
+			service = new ComponentInstanceServiceImpl(pm, util, new FromDTO(util), new ToDTO(util), configuration, logger,refHelper);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
 
-	protected void setBeanReferences(ComponentBean bean, String references) {
+	protected void setBeanReferences(ComponentInstanceBean bean, String references) {
 		List<ReferenceBean> refs = new ArrayList<ReferenceBean>();
 		if (Utils.isNullOrEmptyAfterTrim(references)) {
 			bean.setReferences(refs);
@@ -99,7 +99,7 @@ public class AbstractComponentFixture extends M2lingFixture {
 		}
 	}
 
-	protected void setDTOReferences(ComponentDTO.Builder builder, String references) {
+	protected void setDTOReferences(ComponentInstanceDTO.Builder builder, String references) {
 		if (Utils.isNullOrEmptyAfterTrim(references)) {
 			return;
 		} else {

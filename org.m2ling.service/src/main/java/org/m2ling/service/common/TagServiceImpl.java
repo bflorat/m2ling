@@ -12,13 +12,13 @@ import org.m2ling.common.exceptions.FunctionalException;
 import org.m2ling.common.exceptions.FunctionalException.Code;
 import org.m2ling.common.security.ACResource;
 import org.m2ling.common.soa.Context;
+import org.m2ling.common.utils.Utils;
 import org.m2ling.domain.core.HasTags;
 import org.m2ling.domain.core.Type;
 import org.m2ling.persistence.PersistenceManager;
 import org.m2ling.service.util.CoreUtil;
 import org.m2ling.service.util.DTOConverter;
 
-import com.google.common.base.Strings;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 
@@ -45,7 +45,7 @@ public class TagServiceImpl extends ServiceImpl implements TagService {
 		if (type == null) {
 			throw new FunctionalException(Code.NULL_ARGUMENT, null, "type");
 		}
-		if (Strings.isNullOrEmpty(itemID)) {
+		if (Utils.isNullOrEmptyAfterTrim(itemID)) {
 			throw new FunctionalException(Code.NULL_ARGUMENT, null, "id=" + itemID);
 		}
 		// check the item existence
@@ -66,7 +66,7 @@ public class TagServiceImpl extends ServiceImpl implements TagService {
 			if (tag.contains(",")) {
 				throw new FunctionalException(Code.TAGS_SEPARATOR, null, tag);
 			}
-			if (Strings.isNullOrEmpty(tag)) {
+			if (Utils.isNullOrEmptyAfterTrim(tag)) {
 				throw new FunctionalException(Code.NULL_ARGUMENT, null, "tag=" + tag);
 			}
 		}

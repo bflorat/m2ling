@@ -21,8 +21,6 @@ import org.m2ling.persistence.PersistenceManager;
 import org.m2ling.service.util.CoreUtil;
 import org.m2ling.service.util.DTOConverter;
 
-import com.google.common.base.Strings;
-
 /**
  * @author "Bertrand Florat <bertrand@florat.net>"
  * 
@@ -119,7 +117,7 @@ abstract public class ServiceImpl {
 		if (dto.getId() == null) {
 			throw new FunctionalException(FunctionalException.Code.NULL_ARGUMENT, null, "(id)");
 		}
-		if (Strings.isNullOrEmpty(dto.getId().trim())) {
+		if (Utils.isNullOrEmptyAfterTrim(dto.getId().trim())) {
 			throw new FunctionalException(FunctionalException.Code.VOID_ARGUMENT, null, "(id)");
 		}
 		if (dto.getId().length() > 100) {
@@ -201,7 +199,7 @@ abstract public class ServiceImpl {
 			if (tag == null) {
 				throw new FunctionalException(FunctionalException.Code.NULL_ARGUMENT, null, "tag #" + index);
 			}
-			if (Strings.isNullOrEmpty(tag.trim())) {
+			if (Utils.isNullOrEmptyAfterTrim(tag.trim())) {
 				throw new FunctionalException(FunctionalException.Code.VOID_ARGUMENT, null, "tag #" + index);
 			}
 			if (tag.length() > Consts.MAX_LABEL_SIZE) {

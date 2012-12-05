@@ -15,8 +15,6 @@ import org.m2ling.presentation.principles.model.ComponentTypeBean;
 import org.m2ling.presentation.principles.model.HasNameAndIDBean;
 import org.m2ling.presentation.principles.utils.DTOConverter;
 
-import com.google.common.base.Strings;
-
 public class UpdateCTFixture extends AbstractCTFixture {
 	public UpdateCTFixture() throws IOException {
 		super();
@@ -195,7 +193,7 @@ public class UpdateCTFixture extends AbstractCTFixture {
 			HasNameAndIDBean boundType = new HasNameAndIDBean();
 			boundType.setId(boundTypeID);
 			bean.setBoundType(boundType);
-			if (Strings.isNullOrEmpty(enumeration)) {
+			if (Utils.isNullOrEmptyAfterTrim(enumeration)) {
 				bean.setEnumeration(new ArrayList<HasNameAndIDBean>());
 			} else {
 				List<String> enumer = Utils.stringListFromString(enumeration);

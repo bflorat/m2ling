@@ -16,6 +16,7 @@ import org.m2ling.common.dto.core.ReferenceDTO;
 import org.m2ling.common.exceptions.FunctionalException;
 import org.m2ling.common.exceptions.FunctionalException.Code;
 import org.m2ling.common.soa.Context;
+import org.m2ling.common.utils.Utils;
 import org.m2ling.domain.Root;
 import org.m2ling.domain.core.Component;
 import org.m2ling.domain.core.ComponentInstance;
@@ -30,7 +31,6 @@ import org.m2ling.service.common.ServiceImpl;
 import org.m2ling.service.util.CoreUtil;
 import org.m2ling.service.util.DTOConverter;
 
-import com.google.common.base.Strings;
 import com.google.common.collect.Lists;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
@@ -106,7 +106,7 @@ public class ComponentInstanceServiceImpl extends ServiceImpl implements Compone
 	}
 
 	private boolean isNullBinding(final ComponentInstanceDTO dto) {
-		return dto.getBoundInstance() == null || Strings.isNullOrEmpty(dto.getBoundInstance().getId());
+		return dto.getBoundInstance() == null || Utils.isNullOrEmptyAfterTrim(dto.getBoundInstance().getId());
 	}
 
 	private void checkBindingIsLegal(final ComponentInstanceDTO dto, Component comp) throws FunctionalException {
@@ -117,18 +117,18 @@ public class ComponentInstanceServiceImpl extends ServiceImpl implements Compone
 			if (dto.getBoundInstance().getId() == null) {
 				throw new FunctionalException(FunctionalException.Code.NULL_ARGUMENT, null, "(bound ID)");
 			}
-			// Check if the bound component exists
-			Component bound = (Component) util.getComponentByID(dto.getBoundInstance().getId());
-			if (bound == null) {
-				throw new FunctionalException(FunctionalException.Code.TARGET_NOT_FOUND, null, "bound ID="
+			// Check if the bound CI exists
+			ComponentInstance boundInstance = util.getComponentInstanceByID(dto.getBoundInstance().getId());
+			if (boundInstance == null) {
+				throw new FunctionalException(FunctionalException.Code.TARGET_NOT_FOUND, null, "bound instance ID="
 						+ dto.getBoundInstance().getId());
 			}
-			// Check that the bound CI follows component definition
+			// Check that the bound CI follows its component definition
 			Component expectedBoundComp = comp.getBoundComponent();
-			Component checkedBoundComp = bound.getBoundComponent();
-			// checkedBoundCT can't be null as it comes from the model, expectedBoundCT can be null
+			Component checkedBoundComp = boundInstance.getComponent();
+			// checkedBoundComp can't be null as it comes from the model, expectedBoundComp can be null
 			if (!checkedBoundComp.equals(expectedBoundComp)) {
-				throw new FunctionalException(FunctionalException.Code.COMP_ILLEGAL_BINDING, null, null);
+				throw new FunctionalException(FunctionalException.Code.CI_ILLEGAL_BINDING, null, null);
 			}
 		}
 	}
@@ -351,7 +351,7 @@ public class ComponentInstanceServiceImpl extends ServiceImpl implements Compone
 		ComponentInstanceDTO out = null;
 		try {
 			// Controls
-			if (id == null || Strings.isNullOrEmpty(id.trim())) {
+			if (id == null || Utils.isNullOrEmptyAfterTrim(id)) {
 				throw new FunctionalException(FunctionalException.Code.NULL_ARGUMENT, null, "(id)");
 			}
 			ComponentInstance ci = util.getComponentInstanceByID(id);
