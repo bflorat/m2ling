@@ -110,14 +110,11 @@ public class ComponentInstanceServiceImpl extends ServiceImpl implements Compone
 	}
 
 	private void checkBindingIsLegal(final ComponentInstanceDTO dto, Component comp) throws FunctionalException {
-		if (comp.getBoundComponent() != null && isNullBinding(dto)) {
-			throw new FunctionalException(FunctionalException.Code.MISSING_BINDING, null, "expected bound type="
-					+ comp.getBoundComponent().getName());
-		} else if (!isNullBinding(dto)) {
-			if (dto.getBoundInstance().getId() == null) {
-				throw new FunctionalException(FunctionalException.Code.NULL_ARGUMENT, null, "(bound ID)");
-			}
-			// Check if the bound CI exists
+		if (comp.getBoundComponent() == null && !isNullBinding(dto)) {
+			throw new FunctionalException(FunctionalException.Code.CI_ILLEGAL_BINDING, null, "No binding defined by component "
+					+ comp.getName());
+		} 
+		if (!isNullBinding(dto)) {
 			ComponentInstance boundInstance = util.getComponentInstanceByID(dto.getBoundInstance().getId());
 			if (boundInstance == null) {
 				throw new FunctionalException(FunctionalException.Code.TARGET_NOT_FOUND, null, "bound instance ID="

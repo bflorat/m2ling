@@ -129,7 +129,7 @@
     </components>
     <components id="_4-yHMprbEeGE7MG94I-e3A" name="BikesOnlineClient" comment="" description="" type="id_ct_logical_InternetWebClient"/>
     <components id="id_comp_view_Logical_BikesOnline_AuthenticationLDAP" name="AuthenticationLDAP" description="" type="id_ct_logical_ldap"/>
-    <components id="_GHLjspxDEeGi7NYPtEuJdA" name="JBoss5 Linux" comment="" description="" type="id_ct_logical_servicecontainer" boundComponent="id_comp_tech_jboss5">
+    <components id="id_comp_logical_jboss5_linux" name="JBoss5 Linux" comment="" description="" type="id_ct_logical_servicecontainer" boundComponent="id_comp_tech_jboss5">
       <references type="RUNS" targets="id_comp_view_Logical_BikesOnline_AdminServices id_comp_view_Logical_BikesOnline_PaymentServices _gmFcgp6VEeGbbcMFSNIrnA"/>
     </components>
     <components id="id_comp_view_Logical_BikesOnline_PostgreSQL" name="PostgreSQL" type="id_ct_logical_rdbms" boundComponent="_G9AtYp6REeG">
@@ -142,8 +142,8 @@
     <components id="id_comp_view_Logical_InternetWebClient" name="LinuxWebClient" comment="" description="A linux browser" type="id_ct_logical_InternetWebClient"/>
     <links id="id_link_logical_stream1" name="Stream1" comment="" description="" type="_oHllkpqkEeGbI4NH3iicSg" sources="_4-yHMprbEeGE7MG94I-e3A" destinations="id_comp_view_Logical_BikesOnline_EndUserGUI"/>
     <links id="id_link_logical_stream2" name="Stream2" type="_2LrDApqyEeGVMag01qc4bw" sources="id_comp_view_Logical_BikesOnline_EndUserGUI" destinations="id_comp_view_Logical_BikesOnline_AuthenticationLDAP"/>
-    <links id="id_link_logical_stream3" name="Stream3" type="id_lt_logical_http_rest" sources="id_comp_view_Logical_BikesOnline_EndUserGUI" destinations="_GHLjspxDEeGi7NYPtEuJdA"/>
-    <links id="id_link_logical_stream4" name="Stream4" type="_4Rfd0pqjEeGQsK1VSbibvw" sources="_GHLjspxDEeGi7NYPtEuJdA"/>
+    <links id="id_link_logical_stream3" name="Stream3" type="id_lt_logical_http_rest" sources="id_comp_view_Logical_BikesOnline_EndUserGUI" destinations="id_comp_logical_jboss5_linux"/>
+    <links id="id_link_logical_stream4" name="Stream4" type="_4Rfd0pqjEeGQsK1VSbibvw" sources="id_comp_logical_jboss5_linux"/>
   </views>
   <views comment="" description="" id="_0oVTkZ55EeGAFeVyyYKoXg" name="Enterprise architecture view" viewPoint="_uP3gkZniEeGeqKlv68ECYA">
     <components id="_Uf_Bop56EeGAFeVyyYKoXg" name="eBusiness" comment="" type="_KEFloJq4EeGVMag01qc4bw">
@@ -208,7 +208,7 @@
     <linkInstances id="id_li_physical_cable5" name="cable5" source="_jv8xNKGaEeGAboe59Cwkcg" destination="_av1GdKGYEeGWHchb0LRqvg" link="id_link_physical_cable5E"/>
     <linkInstances id="id_li_physical_cable6" name="cable6" source="_jv8xNKGaEeGAboe59Cwkcg" destination="_O3JLxKGZEeGWHchb0LRqvg" link="id_link_physical_cable5E"/>
   </views>
-  <views description="List available devices models" id="_Ax_tkZ_6EeG3fPi34vn9KQ" name="DevicesCatalog" viewPoint="fsdfhjksdhfkjhsdkfj">
+  <views description="List available devices models" id="id_view_physical_device_catalog" name="DevicesCatalog" viewPoint="fsdfhjksdhfkjhsdkfj">
     <components id="id_comp_physical_catalog_ibm_hs21" name="IBM-HS21" comment="" description="IBM blade, 16Go RAM, 2 quad-core." type="id_ct_physical_x86_server"/>
     <components id="_Jlytjhmp" name="Cisco-2900" comment="" description="Branch router" type="_kOyogZ9ZEeGNFtlcQfUFgw"/>
     <components id="id_comp_physical_catalog_ibm_hs22" name="IBM-HS22" description="IBM blade, 32Go RAM, 4 quad-core." type="id_ct_physical_x86_server"/>

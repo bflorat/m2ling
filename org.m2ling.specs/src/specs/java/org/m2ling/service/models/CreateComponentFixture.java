@@ -2,6 +2,9 @@ package org.m2ling.service.models;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.StringTokenizer;
+import java.util.logging.Level;
+import java.util.logging.LogRecord;
 
 import org.m2ling.common.dto.core.AccessType;
 import org.m2ling.common.dto.core.ComponentDTO;
@@ -105,15 +108,14 @@ public class CreateComponentFixture extends AbstractComponentFixture {
 	 * @param name
 	 * @return component toString or "Unknown item" or code failure string
 	 */
-	public String createAndGetComp(String justCheck, String caseName, String vID, String ctID, String id, String name,
-			String desc, String comment, String tags, String boundID, String references, String status)
-			throws FunctionalException {
+	public String createAndGetComp(String caseName, String vID, String ctID, String id, String name, String desc,
+			String comment, String tags, String boundID, String references, String status) throws FunctionalException {
 		if (!noreset) {
 			reset("Bikes");
 		}
 		vID = UUT.nul(vID);
-		HasNameAndIDBean view = null;
-		if (vID != null){
+		HasNameAndIDBean view = null; 
+		if (vID != null) {
 			view = HasNameAndIDBean.newInstance(vID, "");
 		}
 		ctID = UUT.nul(ctID);
@@ -136,18 +138,14 @@ public class CreateComponentFixture extends AbstractComponentFixture {
 			bean.setBoundComponent(HasNameAndIDBean.newInstance(boundID, ""));
 			setBeanReferences(bean, references);
 			bean.setStatus(status);
-			bean.setView(view); 
+			bean.setView(view);
 			ComponentDTO dto = new DTOConverter.ToDTO().getComponentDTO(bean);
 			service.createComponent(null, dto);
 			List<ComponentDTO> compDTOS = service.getAllComponents(null, vID);
 			for (ComponentDTO compDTO : compDTOS) {
 				if (compDTO.getId().equals(bean.getId())) {
 					ComponentBean out = new DTOConverter.FromDTO().getComponentBean(compDTO);
-					if (Boolean.parseBoolean(justCheck)) {
-						return "PASS";
-					} else {
-						return out.toString();
-					}
+					return out.toString();
 				}
 			}
 			return "Unknown item";
@@ -155,6 +153,52 @@ public class CreateComponentFixture extends AbstractComponentFixture {
 			return "FAIL with code " + ex.getCode().name();
 		} catch (TechnicalException ex) {
 			return "FAIL with code " + ex.getCode().name();
+		}
+	}
+
+	public String testBoundDerivedAttributes(String caseName, String compAttributes, String boundCompAttributes)
+			throws FunctionalException {
+		if (!noreset) {
+			reset("Bikes");
+		}
+		try {
+			String compName = null;
+			String compTags = null;
+			String compComment = null;
+			String compDescription = null;
+			String boundName = null;
+			String boundTags = null;
+			String boundComment = null;
+			String boundDescription = null;
+			StringTokenizer st = new StringTokenizer(compAttributes, "|");
+			while (st.hasMoreTokens()) {
+				compName = st.nextToken();
+				compTags = st.nextToken();
+				compComment = st.nextToken();
+				compDescription = st.nextToken();  
+			}
+			StringTokenizer stBound = new StringTokenizer(boundCompAttributes, "|");
+			while (stBound.hasMoreTokens()) {
+				boundName = stBound.nextToken();
+				boundTags = stBound.nextToken();
+				boundComment = stBound.nextToken();
+				boundDescription = stBound.nextToken(); 
+			}
+			// First create the component to bind to
+			String resu = createAndGetComp("COMP5", "id_view_tech_catalog", "id_ct_tech_applicationserver", "id_1",
+					boundName, boundDescription, boundComment, boundTags, "null", "", null);
+			logger.log(new LogRecord(Level.INFO, resu));
+			// then create the new CT
+			noreset = true;
+			resu = createAndGetComp("COMP5", "id_view_vp_logical_Logical_BikesOnline", "id_ct_logical_servicecontainer",
+					"id_2", compName, compDescription, compComment, compTags, "id_1", "", null);
+			logger.log(new LogRecord(Level.INFO, resu));
+			// Return the new component attributes
+			ComponentDTO compDTO = service.getComponentByID(null, "id_2");
+			return compDTO.getName() + "|" + compDTO.getTags() + "|" + compDTO.getComment() + "|"
+					+ compDTO.getDescription();
+		} finally {
+			noreset = false;
 		}
 	}
 }

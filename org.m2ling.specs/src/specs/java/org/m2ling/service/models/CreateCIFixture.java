@@ -2,6 +2,9 @@ package org.m2ling.service.models;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.StringTokenizer;
+import java.util.logging.Level;
+import java.util.logging.LogRecord;
 
 import org.m2ling.common.dto.core.AccessType;
 import org.m2ling.common.dto.core.ComponentInstanceDTO;
@@ -38,30 +41,30 @@ public class CreateCIFixture extends AbstractCIFixture {
 		} catch (FunctionalException ex) {
 			return "FAIL with code " + ex.getCode().name();
 		} catch (TechnicalException ex) {
-			return "FAIL with code " + ex.getCode().name();
+			return "FAIL with code " + ex.getCode().name(); 
 		}
 	}
 
 	public String testWrongTargetType() throws FunctionalException {
-		return checkFormat("COMP1/wrong target", "id_view_vp_logical_Logical_BikesOnline",
-				"id_ct_logical_servicecontainer", "id_foo", "Weblogic", "desc", "comment", "", "null",
+		return checkFormat("CI1/wrong target", "id_view_deploy",
+				"id_comp_deploy_IBM_HS21", "id_foo", "name", "desc", "comment", "", "null",
 				"RUNS:id_comp_view_Logical_BikesOnline_AdminGUI", "null");
 	}
 
 	public String testWrongReferenceType() throws FunctionalException {
-		return checkFormat("COMP1/wrong type", "id_view_vp_logical_Logical_BikesOnline",
-				"id_ct_logical_servicecontainer", "id_foo", "Weblogic", "desc", "comment", "", "null",
+		return checkFormat("CI1/wrong type", "id_view_deploy",
+				"id_comp_deploy_IBM_HS21", "id_foo", "name", "desc", "comment", "", "null",
 				"DEPENDS_ON:id_comp_view_Logical_BikesOnline_AdminGUI", "null");
 	}
 
 	public String testNullBinding() throws FunctionalException {
-		return checkFormat("COMP3", "id_view_vp_logical_Logical_BikesOnline", "id_ct_logical_servicecontainer", "id_foo",
-				"Weblogic", "desc", "comment", "", "null", "null", "null");
+		return checkFormat("CI3", "id_view_deploy", "id_comp_deploy_IBM_HS21", "id_foo",
+				"name", "desc", "comment", "", "null", "null", "null");
 	}
 
 	public String testWrongBinding() throws FunctionalException {
-		return checkFormat("COMP4", "id_view_vp_logical_Logical_BikesOnline", "id_ct_logical_servicecontainer", "id_foo",
-				"Weblogic", "desc", "comment", "", "id_comp_tech_solaris", "null", "null");
+		return checkFormat("CI4", "id_view_deploy", "id_comp_deploy_IBM_HS21", "id_foo",
+				"name", "desc", "comment", "", "id_comp_tech_solaris", "null", "null");
 	}
 
 	/*
@@ -76,7 +79,7 @@ public class CreateCIFixture extends AbstractCIFixture {
 			HasNameAndIdDTO view = new HasNameAndIdDTO.Builder(UUT.nul(vID), "").build();
 			ComponentInstanceDTO.Builder builder = new ComponentInstanceDTO.Builder(UUT.nul(id), UUT.nul(name), view);
 			if (UUT.nul(tags) != null) {
-				for (String tag : Utils.stringListFromString(tags)) {
+				for (String tag : Utils.stringListFromString(tags)) { 
 					builder.addTag(tag);
 				}
 			}
@@ -88,7 +91,7 @@ public class CreateCIFixture extends AbstractCIFixture {
 				builder.boundInstance(new HasNameAndIdDTO.Builder(boundID, "").build());
 			}
 			builder.component(new HasNameAndIdDTO.Builder(compID, "").build());
-			service.checkDTO(builder.build(), AccessType.CREATE);
+			service.checkDTO(builder.build(), AccessType.CREATE); 
 			return "PASS";
 		} catch (FunctionalException ex) {
 			return "FAIL with code " + ex.getCode().name();
@@ -133,7 +136,7 @@ public class CreateCIFixture extends AbstractCIFixture {
 			bean.setTags(tags);
 			bean.setComponent(HasNameAndIDBean.newInstance(compID, ""));
 			bean.setBoundInstance(HasNameAndIDBean.newInstance(boundID, ""));
-			setBeanReferences(bean, references);
+			setBeanReferences(bean, references); 
 			bean.setStatus(status);
 			bean.setView(view); 
 			ComponentInstanceDTO dto = new DTOConverter.ToDTO().getComponentInstanceDTO(bean);
@@ -150,6 +153,52 @@ public class CreateCIFixture extends AbstractCIFixture {
 			return "FAIL with code " + ex.getCode().name();
 		} catch (TechnicalException ex) {
 			return "FAIL with code " + ex.getCode().name();
+		}
+	}
+	
+	public String testBoundDerivedAttributes(String caseName, String ciAttributes, String boundCIAttributes)
+			throws FunctionalException {
+		if (!noreset) {
+			reset("Bikes");
+		}
+		try {
+			String compName = null;
+			String compTags = null;
+			String compComment = null;
+			String compDescription = null;
+			String boundName = null;
+			String boundTags = null;
+			String boundComment = null;
+			String boundDescription = null;
+			StringTokenizer st = new StringTokenizer(ciAttributes, "|");
+			while (st.hasMoreTokens()) {
+				compName = st.nextToken();
+				compTags = st.nextToken();
+				compComment = st.nextToken();
+				compDescription = st.nextToken();  
+			}
+			StringTokenizer stBound = new StringTokenizer(boundCIAttributes, "|");
+			while (stBound.hasMoreTokens()) {
+				boundName = stBound.nextToken();
+				boundTags = stBound.nextToken();
+				boundComment = stBound.nextToken();
+				boundDescription = stBound.nextToken(); 
+			}
+			// First create the CI to bind to
+			String resu = createAndGetComp("CI5", "id_view_physical_device_catalog", "id_comp_physical_catalog_ibm_hs21", "id_1",
+					boundName, boundDescription, boundComment, boundTags, "null", "", null);
+			logger.log(new LogRecord(Level.INFO, resu));
+			// then create the new CT
+			noreset = true;
+			resu = createAndGetComp("CI5", "id_view_deploy", "id_comp_deploy_IBM_HS21",
+					"id_2", compName, compDescription, compComment, compTags, "id_1", "", null);
+			logger.log(new LogRecord(Level.INFO, resu));
+			// Return the new CI attributes
+			ComponentInstanceDTO ciDTO = service.getCIByID(null, "id_2");
+			return ciDTO.getName() + "|" + ciDTO.getTags() + "|" + ciDTO.getComment() + "|"
+					+ ciDTO.getDescription();
+		} finally {
+			noreset = false;
 		}
 	}
 }

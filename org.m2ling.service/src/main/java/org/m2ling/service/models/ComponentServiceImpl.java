@@ -181,9 +181,6 @@ public class ComponentServiceImpl extends ServiceImpl implements ComponentServic
 			throw new FunctionalException(FunctionalException.Code.MISSING_BINDING, null, "expected bound type="
 					+ ct.getBoundType().getName());
 		} else if (!isNullBinding(dto)) {
-			if (dto.getBoundComponent().getId() == null) {
-				throw new FunctionalException(FunctionalException.Code.NULL_ARGUMENT, null, "(bound ID)");
-			}
 			// Check if the bound component exists
 			Component bound = util.getComponentByID(dto.getBoundComponent().getId());
 			if (bound == null) {

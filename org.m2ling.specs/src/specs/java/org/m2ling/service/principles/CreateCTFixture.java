@@ -85,8 +85,8 @@ public class CreateCTFixture extends AbstractCTFixture {
 				"null", "", "", "*", "id_ct_logical_servicecontainer", "", "id_comp_tech_jboss5", "APPLICABLE");
 	}
 
-	public String testBoundDerivedName(String caseName, String ctAttributes, String boundCTAttributes)
-			throws FunctionalException {
+	public String testBoundDerivedAttributes(String caseName, String ctAttributes, String boundCTAttributes)
+			throws FunctionalException { 
 		if (!noreset) {
 			reset("Bikes");
 		}

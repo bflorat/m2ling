@@ -36,6 +36,9 @@ public class UUT {
 		else if ("space".equals(s)){
 			return " ";
 		}
+		else if ("void".equals(s)){
+			return "";
+		}
 		return s;
 	}
 }

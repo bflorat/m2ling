@@ -181,20 +181,21 @@
 		VP (no local bindings).</p>
 		<div class='example'>In this case, the CT <span concordion:execute="#resu=testLocalBinding()">creation</span> 
 	should : <b concordion:assertEquals="#resu">FAIL with code LOCAL_BINDING</b> </div>
-	<p class='rule'>#CT11 : If one of following attribute is not provided, a binded CT get
-		them from the bound CT : name, comment, description. Tags from new CT and bound type (if any) are merged.
+	
+	<p class='rule'>#CT11 : If name, comment or description is not provided, a binded CT get
+		them from the bound CT : . Tags from new CT and bound type (if any) are merged.
 		</p>
 		<div class='example'>
-		Given a CT "ServicesContainer" in Logical viewpoint bound to "ApplicationServer" CT in Technical viewpoint<br/>
-		When setting following combination of attributes to ServicesContainer<br/>
+		Given a component "ServicesContainer" in Logical viewpoint bound to "ApplicationServer" CT in Technical viewpoint<br/>
+		When setting following combination of attributes to both CTs<br/>
 		Then the new CT attributes should be :
 			<table
-		concordion:execute="#result=testBoundDerivedName(#caseName,#ctAttributes,#boundCTAttributes)">
+		concordion:execute="#result=testBoundDerivedAttributes(#caseName,#ctAttributes,#boundCTAttributes)">
 				<tr>
 					<th concordion:set="#caseName">Case</th>
 					<th concordion:set="#ctAttributes">New CT attributes (Name|tags|comment|description)</th>
 					<th concordion:set="#boundCTAttributes">Bound CT attributes (Name|tags|comment|description)</th>
-					<th concordion:assertEquals="#result">View from caller :</th>
+					<th concordion:assertEquals="#result">As seen by caller :</th>
 				</tr>
 				<tr>
 					<td>CT11/all null</td>
@@ -209,8 +210,32 @@
 					<td>a name|[taga, tagx, tagy]|comment2|description2</td>
 				</tr>
 				<tr>
+					<td>CT11/void name</td>
+					<td>void|taga|comment2|description2</td>
+					<td>a name|tagx,tagy|a comment|a description</td>
+					<td>a name|[taga, tagx, tagy]|comment2|description2</td>
+				</tr>
+				<tr>
+					<td>CT11/void after trim name</td>
+					<td>space|taga|comment2|description2</td>
+					<td>a name|tagx,tagy|a comment|a description</td>
+					<td>a name|[taga, tagx, tagy]|comment2|description2</td>
+				</tr>
+				<tr>
 					<td>CT11/null desc</td>
 					<td>name2|taga|comment2|null</td>
+					<td>a name|tagx,tagy|a comment|a description</td>
+					<td>name2|[taga, tagx, tagy]|comment2|a description</td>
+				</tr>
+				<tr>
+					<td>CT11/void desc</td>
+					<td>name2|taga|comment2|void</td>
+					<td>a name|tagx,tagy|a comment|a description</td>
+					<td>name2|[taga, tagx, tagy]|comment2|a description</td>
+				</tr>
+				<tr>
+					<td>CT11/void after trim desc</td>
+					<td>name2|taga|comment2|space</td>
 					<td>a name|tagx,tagy|a comment|a description</td>
 					<td>name2|[taga, tagx, tagy]|comment2|a description</td>
 				</tr>
@@ -219,6 +244,18 @@
 					<td>name2|taga|null|null</td>
 					<td>a name|tagx,tagy|a comment|a description</td>
 					<td>name2|[taga, tagx, tagy]|a comment|a description</td>
+				</tr>
+				<tr>
+					<td>CT11/void comment</td>
+					<td>name2|taga|void|desc</td>
+					<td>a name|tagx,tagy|a comment|a description</td>
+					<td>name2|[taga, tagx, tagy]|a comment|desc</td>
+				</tr>
+				<tr>
+					<td>CT11/void comment after trim</td>
+					<td>name2|taga|space|desc</td>
+					<td>a name|tagx,tagy|a comment|a description</td>
+					<td>name2|[taga, tagx, tagy]|a comment|desc</td>
 				</tr>
 				<tr>
 					<td>CT11/null tags and description</td>

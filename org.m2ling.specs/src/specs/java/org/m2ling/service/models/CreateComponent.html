@@ -15,7 +15,7 @@
 			requirements</a>
 	</p>
 	<div class="example">
-		A new component created with<span concordion:set="#justCheck=false" />
+		A new component created with
 		<span concordion:set="#caseName">Roundtrip</span>
 		<ul>
 			<li>View id=<b concordion:set="#vID">id_view_vp_logical_Logical_BikesOnline</b></li>
@@ -33,7 +33,7 @@
 		</ul>
 		should have following characteristics (full round trip from
 		presentation to presentation) : <b
-			concordion:assertEquals="createAndGetComp(#justCheck,#caseName,#vID,#ctID,#id,#name,#desc,#comment,#tags,#boundID,#references,#status)">
+			concordion:assertEquals="createAndGetComp(#caseName,#vID,#ctID,#id,#name,#desc,#comment,#tags,#boundID,#references,#status)">
 			boundComponent=id=id_comp_tech_weblogic name=Weblogic comment=Runs
 			some cool services description=Another service container drop=
 			id=a_new_id name=Weblogic
@@ -49,8 +49,7 @@
 	</div>
 
 	<h3>References rules</h3>
-	<p class='rule'>#COMP1 : Component references must follow types
-		defined in their associated CT. </p>
+	<p class='rule'>#COMP1 : Component references must follow types defined in their associated CT. </p>
 	<div class='example'>
 		If a reference target has a wrong type<br/>
 		then the component <span
@@ -64,10 +63,6 @@
 		: <b concordion:assertEquals="#resu">FAIL with code COMP_ILLEGAL_REFERENCE</b>
 	</div>
 	
-	<p class='rule'>#COMP5 : self-references are allowed.</p>
-	<div class='example'>TODO : test to be done</div>
-	
-
 	<p class='rule'>#COMP2 : A reference target can't be null.</p>
 	<div class='example'>
 		In this case, the CT <span concordion:execute="#resu=testNullRef()">creation</span>
@@ -77,8 +72,7 @@
 
 
 	<h3>Binding rules</h3>
-	<p class='rule'>#COMP3 : If a CT is bound, all components of its
-		type should be bound.</p>
+	<p class='rule'>#COMP3 : If a CT is bound, all components of its type should be bound.</p>
 	<div class='example'>
 		If a component has no bound component,<br/>
 		Then the component <span
@@ -86,12 +80,96 @@
 		: <b concordion:assertEquals="#resu">FAIL with code MISSING_BINDING</b>
 	</div>
 	
-	<p class='rule'>#COMP4 : If a component is bound to another component, the bound component type must be those defined in the first component type.</p>
+	<p class='rule'>#COMP4 : If a component C1 is bound to component C2, C1 component type must be equal to C2 component type.</p>
 	<div class='example'>
 		If the bound component type is wrong, the component <span
 			concordion:execute="#resu=testWrongBinding()">creation</span> should
 		: <b concordion:assertEquals="#resu">FAIL with code COMP_ILLEGAL_BINDING</b>
 	</div>
+	
+	<p class='rule'>#COMP5 : If name, comment or description attribute is not provided, a binded component get
+		them from the bound component. Tags from new component and bound component (if any) are merged.
+		</p>
+		<div class='example'>
+		Given a component id_comp_logical_jboss5_linux in Bikes_Logical view bound to id_comp_tech_jboss5 component in Technical catalog view<br/>
+		When setting following combination of attributes to both components<br/>
+		Then the new component attributes should be :
+			<table
+		concordion:execute="#result=testBoundDerivedAttributes(#caseName,#compAttributes,#boundCompAttributes)">
+				<tr>
+					<th concordion:set="#caseName">Case</th>
+					<th concordion:set="#compAttributes">New comp attributes (Name|tags|comment|description)</th>
+					<th concordion:set="#boundCompAttributes">Bound comp attributes (Name|tags|comment|description)</th>
+					<th concordion:assertEquals="#result">As seen by caller :</th>
+				</tr>
+				<tr>
+					<td>COMP5/all null</td>
+					<td>null|null|null|null</td>
+					<td>a name|tagx,tagy|a comment|a description</td>
+					<td>a name|[tagx, tagy]|a comment|a description</td>
+				</tr>
+				<tr>
+					<td>COMP5/null name</td>
+					<td>null|taga|comment2|description2</td>
+					<td>a name|tagx,tagy|a comment|a description</td>
+					<td>a name|[taga, tagx, tagy]|comment2|description2</td>
+				</tr>
+				<tr>
+					<td>COMP5/void name</td>
+					<td>void|taga|comment2|description2</td>
+					<td>a name|tagx,tagy|a comment|a description</td>
+					<td>a name|[taga, tagx, tagy]|comment2|description2</td>
+				</tr>
+				<tr>
+					<td>COMP5/void after trim name</td>
+					<td>space|taga|comment2|description2</td>
+					<td>a name|tagx,tagy|a comment|a description</td>
+					<td>a name|[taga, tagx, tagy]|comment2|description2</td>
+				</tr>
+				<tr>
+					<td>COMP5/null desc</td>
+					<td>name2|taga|comment2|null</td>
+					<td>a name|tagx,tagy|a comment|a description</td>
+					<td>name2|[taga, tagx, tagy]|comment2|a description</td>
+				</tr>
+				<tr>
+					<td>COMP5/void desc</td>
+					<td>name2|taga|comment2|void</td>
+					<td>a name|tagx,tagy|a comment|a description</td>
+					<td>name2|[taga, tagx, tagy]|comment2|a description</td>
+				</tr>
+				<tr>
+					<td>COMP5/void after trim desc</td>
+					<td>name2|taga|comment2|space</td>
+					<td>a name|tagx,tagy|a comment|a description</td>
+					<td>name2|[taga, tagx, tagy]|comment2|a description</td>
+				</tr>
+				<tr>
+					<td>COMP5/null comment and description</td>
+					<td>name2|taga|null|null</td>
+					<td>a name|tagx,tagy|a comment|a description</td>
+					<td>name2|[taga, tagx, tagy]|a comment|a description</td>
+				</tr>
+				<tr>
+					<td>COMP5/void comment</td>
+					<td>name2|taga|void|desc</td>
+					<td>a name|tagx,tagy|a comment|a description</td>
+					<td>name2|[taga, tagx, tagy]|a comment|desc</td>
+				</tr>
+				<tr>
+					<td>COMP5/void comment after trim</td>
+					<td>name2|taga|space|desc</td>
+					<td>a name|tagx,tagy|a comment|a description</td>
+					<td>name2|[taga, tagx, tagy]|a comment|desc</td>
+				</tr>
+				<tr>
+					<td>COMP5/null tags and description</td>
+					<td>name2|null|comment2|null</td>
+					<td>a name|tagx,tagy|a comment|a description</td>
+					<td>name2|[tagx, tagy]|comment2|a description</td>
+				</tr>
+			</table>
+		</div>
 	
 	<p>Note that rule previous rules ensure implied rules already implemented in associated component types. 
 	For instance, it is impossible to bind a component to an already-bound component (binding chain) 
@@ -142,7 +220,7 @@
 			</tr>
 			<!-- Existing Component -->
 			<tr>
-				<td>Format/Existing CT ID</td>
+				<td>Format/Existing ID</td>
 				<td>id_view_vp_logical_Logical_BikesOnline</td>
 				<td>id_ct_logical_servicecontainer</td>
 				<td>id_comp_view_Logical_BikesOnline_AdminGUI</td>
@@ -387,9 +465,9 @@
 				<td>APPLICABLE</td>
 				<td>FAIL with code NONE_TARGET</td>
 			</tr>
-			<!-- Bound type -->
+			<!-- Bound component -->
 			<tr>
-				<td>Format/Regular null boundtype</td>
+				<td>Format/null bound comp</td>
 				<td>id_view_vp_logical_Logical_BikesOnline</td>
 				<td>id_ct_logical_InternetWebClient</td>
 				<td>a_new_id</td>
@@ -403,7 +481,7 @@
 				<td>PASS</td>
 			</tr>
 			<tr>
-				<td>Format/Non-existing boundtype</td>
+				<td>Format/Non-existing bound comp</td>
 				<td>id_view_vp_logical_Logical_BikesOnline</td>
 				<td>id_ct_logical_servicecontainer</td>
 				<td>a_new_id</td>
@@ -411,7 +489,7 @@
 				<td>Runs services (RMI, REST, SOAP...).</td>
 				<td>comment2</td>
 				<td>tags1,tag2</td>
-				<td>id_ct_foo</td>
+				<td>id_comp_foo</td>
 				<td>null</td>
 				<td>APPLICABLE</td>
 				<td>FAIL with code TARGET_NOT_FOUND</td>
