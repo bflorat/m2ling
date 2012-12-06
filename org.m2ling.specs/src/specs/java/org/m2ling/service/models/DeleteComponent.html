@@ -36,8 +36,7 @@
 		Then the reference should be <b concordion:assertEquals="#resu">null</b>.
 	</div>
 	<div class='example'>
-		Given a CT <b concordion:set="#hasRefID">id_comp_vp1_v1_comp4.1</b><br/>
-		Without associated components <br/>
+		Given a component <b concordion:set="#hasRefID">id_comp_vp1_v1_comp4.1</b><br/>
 		With a <b concordion:set="#refType">DEPENDS_ON</b> reference to 
 		  <b concordion:set="#targetID">id_comp_vp1_v1_comp5.1</b> and id_comp_vp1_v1_comp5.2<br/>
 		When id_comp_vp1_v1_comp5.1 is <span concordion:execute="#resu=getReferenceAfterDrop(#hasRefID,#targetID,#refType)">dropped</span><br/>

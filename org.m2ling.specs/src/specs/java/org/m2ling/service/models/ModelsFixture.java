@@ -10,5 +10,5 @@ import org.m2ling.specs.M2lingFixture;
 /**
  * Void fixture used to get the concordion index file processed and get the breadcrumbs
  */
-public class StudioFixture extends M2lingFixture {
+public class ModelsFixture extends M2lingFixture {
 }

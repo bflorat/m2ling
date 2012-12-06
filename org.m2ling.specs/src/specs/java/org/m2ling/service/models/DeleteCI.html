@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:concordion="http://www.concordion.org/2007/concordion">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>Component instance deletion</title>
+</head>
+<body>
+	<H1>Component instance deletion</H1>
+	<p class='rule'>#CI21 : A CI can't be removed while at least a single CI is bound to it.</p>
+	<div class='example'>
+		When we try to drop <b concordion:set="#compID">id_ci_vp1_v1_comp3_ci2</b> having some components bound to it<br/>
+		Then the <span concordion:execute="#resu=testDelete(#compID)"> service</span> 
+		should : <b concordion:assertEquals="#resu">FAIL with code CI_EXISTING_BINDING</b> 
+	</div>
+	
+	<p class='rule'>#CI22 : When a CI is dropped, any reference of it from another CI
+	should be dropped all together if the reference contains no more targets.</p>
+	<div class='example'>
+		Given a CI <b concordion:set="#hasRefID">id_ci_vp1_v1_comp4.4.1</b><br/>
+		With a <b concordion:set="#refType">CONTAINS</b> reference to 
+		  the single <b concordion:set="#targetID">id_ci_vp1_v1_comp5.4.1</b> target<br/>
+		When id_ci_vp1_v1_comp5.4.1 is <span concordion:execute="#resu=getReferenceAfterDrop(#hasRefID,#targetID,#refType)">dropped</span><br/>
+		Then the reference should be <b concordion:assertEquals="#resu">null</b>.
+	</div>
+	<div class='example'>
+		Given a CI <b concordion:set="#hasRefID">id_ci_vp1_v1_comp4.4.2</b><br/>
+		With a <b concordion:set="#refType">CONTAINS</b> reference to 
+		  <b concordion:set="#targetID">id_ci_vp1_v1_comp5.4.2</b> and id_ci_vp1_v1_comp5.4.3<br/>
+		When id_ci_vp1_v1_comp5.4.2 is <span concordion:execute="#resu=getReferenceAfterDrop(#hasRefID,#targetID,#refType)">dropped</span><br/>
+		Then the reference should be <b concordion:assertEquals="#resu">
+		 targets=[id=id_ci_vp1_v1_comp5.4.3 name=ci_vp1_v1_comp5.4.3 ] type=CONTAINS</b>. 
+	</div>
+	
+	<p class='rule'>#CI23 : A CI can't be dropped while a least a single link instance uses it as source or target.</p>
+	<div class='example'>
+		Given a LI id_li_vp1_v1_comp11.2to12.2.1 between id_ci_vp1_v1_comp11.2.1 and id_ci_vp1_v1_comp12.2.1
+		When we try to drop <b concordion:set="#id">id_ci_vp1_v1_comp11.2.1</b><br/>
+		Then the <span concordion:execute="#resu=testDelete(#id)"> service</span> 
+		should : <b concordion:assertEquals="#resu">FAIL with code LINK_IN_USE</b> 
+	</div>
+	<div class='example'>
+		Given a LI id_li_vp1_v1_comp12.2to13.2.1 between id_ci_vp1_v1_comp12.2.1 and id_ci_vp1_v1_comp13.2.1
+		When we try to drop <b concordion:set="#id">id_ci_vp1_v1_comp13.2.1</b><br/>
+		Then the <span concordion:execute="#resu=testDelete(#id)"> service</span> 
+		should : <b concordion:assertEquals="#resu">FAIL with code LINK_IN_USE</b> 
+	</div>
+	
+</body>
+</html>
