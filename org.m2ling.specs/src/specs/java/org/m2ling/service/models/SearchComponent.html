@@ -9,15 +9,14 @@
 	<H1>Component search search</H1>
 	<p>Administrators or actors with adequate authorizations can search a component.</p>
 	
-	<p class='rule'>It is possible to retrieve all existing components :
+	<p class='rule'>It is possible to retrieve all existing components :</p>
 	<div class="example">
 		Given several existing components in <b concordion:set="#vID">id_view_vp_logical_Logical_BikesOnline</b>view<br/>
 		When we ask for components listing<span concordion:execute="#resu=getAll(#vID)"/><br/>
 		Then we get a number of components <b concordion:assertEquals="#resu">&gt;0</b>.
 	</div>
-	</p>
 	
-	<p class='rule'>It is possible to get components by non null id :
+	<p class='rule'>It is possible to get components by non null id :</p>
 	<div class="example">
 		Given an existing component whose id=<b concordion:set="#id">id_comp_view_Logical_BikesOnline_AdminGUI</b> <br/>
 		When we search for it by ID<span concordion:execute="#resu=getComponentByID(#id)"/><br/>
@@ -28,7 +27,6 @@
 		<span concordion:execute="#resu=getComponentByID(#id)"/>
 		<b concordion:assertEquals="#resu">FAIL with code NULL_ARGUMENT</b>.
 	</div>
-	</p>
 	
 </body>
 </html>

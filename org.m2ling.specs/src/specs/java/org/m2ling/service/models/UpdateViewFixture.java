@@ -62,7 +62,7 @@ public class UpdateViewFixture extends AbstractViewFixture {
 		try {
 			List<String> tagsList = null;
 			if (!tags.equals("null")) {
-				tagsList = Utils.stringListFromString(tags);
+				tagsList = Utils.stringListFromString(tags); 
 			}
 			HasNameAndIdDTO vpDTO = null;
 			if (UUT.nul(vpID) != null) {

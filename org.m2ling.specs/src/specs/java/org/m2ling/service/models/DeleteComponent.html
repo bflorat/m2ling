@@ -21,7 +21,7 @@
 		
 	<p class='rule'>#COMP21 : A component can't be removed while at least a single component is bound to it.</p>
 	<div class='example'>
-		When we try to drop <b concordion:set="#compID">id_comp_vp1_v1_comp5</b> having none components bond to it<br/>
+		When we try to drop <b concordion:set="#compID">id_comp_vp1_v1_comp5</b> having some components bound to it<br/>
 		Then the <span concordion:execute="#resu=testDelete(#compID)"> service</span> 
 		should : <b concordion:assertEquals="#resu">FAIL with code COMP_EXISTING_BINDING</b> 
 	</div>
