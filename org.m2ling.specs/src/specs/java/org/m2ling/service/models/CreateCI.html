@@ -18,7 +18,7 @@
 		A new CI created with
 		<span concordion:set="#caseName">Roundtrip</span>
 		<ul>
-			<li>View id=<b concordion:set="#vID">id_view_deploy</b></li>
+			<li>View id=<b concordion:set="#vID">id_view_deploy_bikesonline</b></li>
 			<li>compID=<b concordion:set="#compID">id_comp_deploy_IBM_HS21</b></li>
 			<li>id=<b concordion:set="#id">a_new_id</b></li>
 			<li>name=<b concordion:set="#name">HS21_3</b></li>
@@ -42,7 +42,7 @@
 			references=[targets=[id=id_ci_deploy_OS_HS21_1 name=OS_HS21_1 ] type=RUNS ] 
 			status=APPLICABLE 
 			tags=server,x86 
-			view=id=id_view_deploy name=Deployment_BikesOnline </b>
+			view=id=id_view_deploy_bikesonline name=Deployment_BikesOnline </b>
 	</div>
 
 	<h3>References rules</h3>
@@ -57,7 +57,7 @@
 		If a reference target is right but has a wrong type (like RUNS instead of DEPENDS_ON)<br/>
 		then the CI <span
 			concordion:execute="#resu=testWrongReferenceType()">creation</span> should
-		: <b concordion:assertEquals="#resu">FAIL with code COMP_ILLEGAL_REFERENCE</b>
+		: <b concordion:assertEquals="#resu">FAIL with code CI_ILLEGAL_REFERENCE</b>
 	</div>
 	
 	<p class='rule'>#CI2 : A reference target can't be null.</p>
@@ -71,14 +71,56 @@
 	<h3>Binding rules</h3>
 	<p class='rule'>#CI3 : If a Component is bound, associated CI can optionally be bound. A CI can be bound only if its associated component is bound though.</p>
 	<div class='example'>
-		TODO, table avec les 4 cas
+		Creating a CI with following component and binding should :
+		<table concordion:execute="#result=testBinding(#caseName,#viewID,#compID,#boundID)">
+			<tr>
+				<th concordion:set="#caseName">Case</th>
+				<th concordion:set="#viewID">View ID</th>
+				<th concordion:set="#compID">Component ID</th>
+				<th>Bound component ID</th>
+				<th concordion:set="#boundID">Bound instance ID</th>
+				<th concordion:assertEquals="#result">Should: </th>
+			</tr>
+			<tr>
+				<td>CI3/none binding</td>
+				<td>id_view_app_sales</td>
+				<td>id_comp_app_sales_admingui</td>
+				<td>null</td>
+				<td>null</td>
+				<td>PASS</td>
+			</tr>
+			<tr>
+				<td>CI3/only comp binding</td>
+				<td>id_view_app_sales</td>
+				<td>id_comp_app_sales_bikesonline</td>
+				<td>id_comp_ea_bikesonline</td>
+				<td>null</td>
+				<td>PASS</td>
+			</tr>
+			<tr>
+				<td>CI3/only CI binding</td>
+				<td>id_view_app_sales</td>
+				<td>id_comp_app_sales_admingui</td>
+				<td>null</td>
+				<td>id_comp_ea_bikesonline</td>
+				<td>FAIL with code CI_ILLEGAL_BINDING</td>
+			</tr>
+			<tr>
+				<td>CI3/both bindings</td>
+				<td>id_view_deploy_bikesonline</td>
+				<td>id_comp_deploy_IBM_HS21</td>
+				<td>id_comp_physical_catalog_ibm_hs21</td>
+				<td>id_ci_devicecatalog_hs21_1</td>
+				<td>PASS</td>
+			</tr>
+		</table>
 	</div>
 	
 	<p class='rule'>#CI4 : If a CI CI1 is bound to the CI CI2, CI1's component must be equal to CI2's component.</p>
 	<div class='example'>
 		If the bound component is wrong, the component <span
 			concordion:execute="#resu=testWrongBinding()">creation</span> should
-		: <b concordion:assertEquals="#resu">FAIL with code COMP_ILLEGAL_BINDING</b>
+		: <b concordion:assertEquals="#resu">FAIL with code CI_ILLEGAL_BINDING</b>
 	</div>
 	
 	<p class='rule'>#CI5 : If name, comment or description attribute is not provided, a binded CI get
@@ -200,7 +242,7 @@
 			<!-- Nominal -->
 			<tr>
 				<td>Format/Nominal creation</td>
-				<td>id_view_deploy</td>
+				<td>id_view_deploy_bikesonline</td>
 				<td>id_comp_deploy_IBM_HS21</td>
 				<td>a_new_id</td>
 				<td>HS21_3</td>
@@ -215,7 +257,7 @@
 			<!-- Existing Component -->
 			<tr>
 				<td>Format/Existing ID</td>
-				<td>id_view_deploy</td>
+				<td>id_view_deploy_bikesonline</td>
 				<td>id_comp_deploy_IBM_HS21</td>
 				<td>id_ci_deploy_HS21_1</td>
 				<td>HS21_3</td>
@@ -259,7 +301,7 @@
 			<!--  Description -->
 			<tr>
 				<td>Format/Null description</td>
-				<td>id_view_deploy</td>
+				<td>id_view_deploy_bikesonline</td>
 				<td>id_comp_deploy_IBM_HS21</td>
 				<td>a_new_id</td>
 				<td>HS21_3</td>
@@ -273,7 +315,7 @@
 			</tr>
 			<tr>
 				<td>Format/Void description</td>
-				<td>id_view_deploy</td>
+				<td>id_view_deploy_bikesonline</td>
 				<td>id_comp_deploy_IBM_HS21</td>
 				<td>a_new_id</td>
 				<td>HS21_3</td>
@@ -287,7 +329,7 @@
 			</tr>
 			<tr>
 				<td>Format/Void description after trim</td>
-				<td>id_view_deploy</td>
+				<td>id_view_deploy_bikesonline</td>
 				<td>id_comp_deploy_IBM_HS21</td>
 				<td>a_new_id</td>
 				<td>HS21_3</td>
@@ -302,7 +344,7 @@
 			<!--  component check -->
 			<tr>
 				<td>Format/Null comp</td>
-				<td>id_view_deploy</td>
+				<td>id_view_deploy_bikesonline</td>
 				<td>null</td>
 				<td>a_new_id</td>
 				<td>HS21_3</td>
@@ -316,7 +358,7 @@
 			</tr>
 			<tr>
 				<td>Format/Unexisting comp</td>
-				<td>id_view_deploy</td>
+				<td>id_view_deploy_bikesonline</td>
 				<td>id_comp_foo</td>
 				<td>a_new_id</td>
 				<td>HS21_3</td>
@@ -331,7 +373,7 @@
 			<!-- name check -->
 			<tr>
 				<td>Format/Null name with binding</td>
-				<td>id_view_deploy</td>
+				<td>id_view_deploy_bikesonline</td>
 				<td>id_comp_deploy_IBM_HS21</td>
 				<td>a_new_id</td>
 				<td>null</td>
@@ -345,7 +387,7 @@
 			</tr>
 			<tr>
 				<td>Format/Void name with binding</td>
-				<td>id_view_deploy</td>
+				<td>id_view_deploy_bikesonline</td>
 				<td>id_comp_deploy_IBM_HS21</td>
 				<td>a_new_id</td>
 				<td>void</td>
@@ -359,7 +401,7 @@
 			</tr>
 			<tr>
 				<td>Format/Void name after trim with binding</td>
-				<td>id_view_deploy</td>
+				<td>id_view_deploy_bikesonline</td>
 				<td>id_comp_deploy_IBM_HS21</td>
 				<td>a_new_id</td>
 				<td>space</td>
@@ -373,7 +415,7 @@
 			</tr>
 			<tr>
 				<td>Format/Null name without binding</td>
-				<td>id_view_deploy</td>
+				<td>id_view_deploy_bikesonline</td>
 				<td>id_comp_deploy_IBM_HS21</td>
 				<td>a_new_id</td>
 				<td>null</td>
@@ -387,7 +429,7 @@
 			</tr>
 			<tr>
 				<td>Format/Void comp name without binding</td>
-				<td>id_view_deploy</td>
+				<td>id_view_deploy_bikesonline</td>
 				<td>id_comp_deploy_IBM_HS21</td>
 				<td>a_new_id</td>
 				<td>void</td>
@@ -401,7 +443,7 @@
 			</tr>
 			<tr>
 				<td>Format/Void name after trim without binding</td>
-				<td>id_view_deploy</td>
+				<td>id_view_deploy_bikesonline</td>
 				<td>id_comp_deploy_IBM_HS21</td>
 				<td>a_new_id</td>
 				<td>space</td>
@@ -416,7 +458,7 @@
 			<!-- Comment -->
 			<tr>
 				<td>Format/Null comment</td>
-				<td>id_view_deploy</td>
+				<td>id_view_deploy_bikesonline</td>
 				<td>id_comp_deploy_IBM_HS21</td>
 				<td>a_new_id</td>
 				<td>HS21_3</td>
@@ -433,7 +475,7 @@
 			to build a DTO with null reference so we don't test it -->
 			<tr>
 				<td>Format/Non-existing reference</td>
-				<td>id_view_deploy</td>
+				<td>id_view_deploy_bikesonline</td>
 				<td>id_comp_deploy_IBM_HS21</td>
 				<td>a_new_id</td>
 				<td>HS21_3</td>
@@ -447,7 +489,7 @@
 			</tr>
 			<tr>
 				<td>Format/Missing target</td>
-				<td>id_view_deploy</td>
+				<td>id_view_deploy_bikesonline</td>
 				<td>id_comp_deploy_IBM_HS21</td>
 				<td>a_new_id</td>
 				<td>HS21_3</td>
@@ -462,7 +504,7 @@
 			<!-- Bound type -->
 			<tr>
 				<td>Format/null bound instance</td>
-				<td>id_view_deploy</td>
+				<td>id_view_deploy_bikesonline</td>
 				<td>id_comp_deploy_IBM_HS21</td>
 				<td>a_new_id</td>
 				<td>HS21_3</td>
@@ -476,7 +518,7 @@
 			</tr>
 			<tr>
 				<td>Format/Non-existing bound instance</td>
-				<td>id_view_deploy</td>
+				<td>id_view_deploy_bikesonline</td>
 				<td>id_comp_deploy_IBM_HS21</td>
 				<td>a_new_id</td>
 				<td>HS21_3</td>

@@ -100,7 +100,7 @@ public class ComponentInstanceServiceImpl extends ServiceImpl implements Compone
 				}
 			}
 			if (!found) {
-				throw new FunctionalException(FunctionalException.Code.COMP_ILLEGAL_REFERENCE, null, "Reference=" + refDTO);
+				throw new FunctionalException(FunctionalException.Code.CI_ILLEGAL_REFERENCE, null, "Reference=" + refDTO);
 			}
 		}
 	}

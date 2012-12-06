@@ -73,7 +73,7 @@
 		yet).</p>
 	<div class='example'>
 		Given an existing component <b concordion:set="#sourceCompID">id_comp_deploy_linux3_web_profile</b> with a single RUNS:id_comp_deploy_production_tomcat6,id_comp_deploy_production_jetty 
-		  in view <b concordion:set="#viewID">id_view_deploy</b><br/> 
+		  in view <b concordion:set="#viewID">id_view_deploy_bikesonline</b><br/> 
 	    When we add a reference so the references are <b concordion:set="#references">RUNS:id_comp_deploy_production_tomcat6,id_comp_deploy_production_jetty,id_comp_deploy_linux3_web_profile</b><br/>
 		<span concordion:execute="#resu=updateReference(#sourceCompID,#references,#viewID)"/><br/>
 		Then the service should <b concordion:assertEquals="#resu">PASS</b><br/> 

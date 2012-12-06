@@ -77,7 +77,7 @@ public class CreateLinkInstanceFixture extends AbstractLinkInstanceFixture {
 			reset("Bikes");
 		}
 		try {
-			HasNameAndIdDTO view = new HasNameAndIdDTO.Builder("id_view_deploy", "").build();
+			HasNameAndIdDTO view = new HasNameAndIdDTO.Builder("id_view_deploy_bikesonline", "").build();
 			HasNameAndIdDTO source = null;
 			HasNameAndIdDTO dest = null;
 			if ("destination".equals(sourceOrDest)) { // wrong "destination"

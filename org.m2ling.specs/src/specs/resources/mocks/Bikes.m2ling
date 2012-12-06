@@ -119,11 +119,11 @@
     <componentTypes id="_aazazazaerer" name="BatchModule" comment="" description="Standalone Java batchs calling services modules" boundType="_aazazazaerer" instantiationFactor="-1"/>
   </viewPoints>
   <views comment="" description="BikesOnline is a online house-built e-commerce solution to sell bikes." id="id_view_vp_logical_Logical_BikesOnline" name="Logical_BikesOnline" viewPoint="id_vp_logical">
-    <components id="id_comp_view_Logical_BikesOnline_AdminGUI" name="AdminGUI" comment="" type="id_ct_logical_guimodule" boundComponent="_hGsf4J89EeGNFtlcQfUFgw"/>
-    <components id="id_comp_view_Logical_BikesOnline_AdminServices" name="AdminServices" type="id_ct_logical_servicemodule" boundComponent="_zPeqMJ89EeGNFtlcQfUFgw"/>
-    <components id="id_comp_view_Logical_BikesOnline_EndUserGUI" name="EndUserGUI" comment="" type="id_ct_logical_guimodule" boundComponent="_osKccJ89EeGNFtlcQfUFgw"/>
-    <components id="id_comp_view_Logical_BikesOnline_PaymentServices" name="PaymentServices" description="" type="id_ct_logical_servicemodule" boundComponent="_9xnzQJ89EeGNFtlcQfUFgw"/>
-    <components id="_gmFcgp6VEeGbbcMFSNIrnA" name="Product Catalog Services" comment="" description="" type="id_ct_app_servicemodule" boundComponent="_VsqREp8zEeGYS-4UJ-FpAA"/>
+    <components id="id_comp_view_Logical_BikesOnline_AdminGUI" name="AdminGUI" comment="" type="id_ct_logical_guimodule" boundComponent="id_comp_app_sales_admingui"/>
+    <components id="id_comp_view_Logical_BikesOnline_AdminServices" name="AdminServices" type="id_ct_logical_servicemodule" boundComponent="id_comp_app_sales_admin_services"/>
+    <components id="id_comp_view_Logical_BikesOnline_EndUserGUI" name="EndUserGUI" comment="" type="id_ct_logical_guimodule" boundComponent="id_comp_app_sales_end_user_gui"/>
+    <components id="id_comp_view_Logical_BikesOnline_PaymentServices" name="PaymentServices" description="" type="id_ct_logical_servicemodule" boundComponent="id_comp_app_sales_payment_services"/>
+    <components id="_gmFcgp6VEeGbbcMFSNIrnA" name="Product Catalog Services" comment="" description="" type="id_ct_app_servicemodule" boundComponent="id_comp_app_sales_product_catalog_services"/>
     <components id="_Y-AZsqgtekejey" name="Jetty" description="" type="_fKtsQZoXEeG71vmJ5CR-iA" boundComponent="id_comp_tech_jetty">
       <references type="RUNS" targets="id_comp_view_Logical_BikesOnline_AdminGUI"/>
     </components>
@@ -150,9 +150,9 @@
       <references targets="_Uf_Bop56EeGAFeVyyYKoXg"/>
     </components>
     <components id="_Gxhtkp56EeGAFeVyyYKoXg" name="Sales" type="_REbGwZq2EeGVMag01qc4bw">
-      <references targets="_qUgd4p56EeGAFeVyyYKoXg"/>
+      <references targets="id_comp_ea_bikesonline"/>
     </components>
-    <components id="_qUgd4p56EeGAFeVyyYKoXg" name="BikesOnline" comment="" type="_c1vGwJq4EeGVMag01qc4bw"/>
+    <components id="id_comp_ea_bikesonline" name="BikesOnline" comment="" type="_c1vGwJq4EeGVMag01qc4bw"/>
   </views>
   <views comment="" description="Describes technical components available in Bikes IS" id="id_view_tech_catalog" name="Technical catalog" viewPoint="id_vp_tech">
     <componentsGroups id="id_grp_tech_servicecontainers" name="Service containers" comment="" components="id_comp_tech_jboss5 id_comp_tech_jboss6"/>
@@ -175,23 +175,23 @@
     <components id="id_comp_tech_oracle" name="Oracle RDBMS" comment="" status="" type="id_ct_tech_persistence"/>
     <components id="id_comp_tech_weblogic" name="Weblogic" comment="" description="" type="id_ct_tech_applicationserver"/>
   </views>
-  <views comment="" description="Contains all Sales applications and there modules" id="_QMVcEZ8zEeGYS-4UJ-FpAA" name="Sales applicative view" viewPoint="id_vp_app">
-    <components id="_O1ehYp80EeGYS-4UJ-FpAA" name="BikesOnline" comment="" description="The main eCommerce Bikes Inc. application." type="id_ct_app_application">
-      <references targets="_hGsf4J89EeGNFtlcQfUFgw _osKccJ89EeGNFtlcQfUFgw _zPeqMJ89EeGNFtlcQfUFgw _9xnzQJ89EeGNFtlcQfUFgw _VsqREp8zEeGYS-4UJ-FpAA"/>
+  <views comment="" description="Contains all Sales applications and there modules" id="id_view_app_sales" name="Sales applicative view" viewPoint="id_vp_app">
+    <components id="id_comp_app_sales_bikesonline" name="BikesOnline" comment="" description="The main eCommerce Bikes Inc. application." type="id_ct_app_application">
+      <references targets="id_comp_app_sales_admingui id_comp_app_sales_end_user_gui id_comp_app_sales_admin_services id_comp_app_sales_payment_services id_comp_app_sales_product_catalog_services"/>
     </components>
-    <components id="_hGsf4J89EeGNFtlcQfUFgw" name="AdminGUI" description="A technical administration  GUI for BikesOnline app." type="id_ct_app_guimodule"/>
-    <components id="_osKccJ89EeGNFtlcQfUFgw" name="EndUserGUI" description="GUI for all end-users BikesOnline app." type="id_ct_app_guimodule"/>
-    <components id="_zPeqMJ89EeGNFtlcQfUFgw" name="AdminServices" comment="" description="Restricted administrative services" type="id_ct_app_servicemodule"/>
-    <components id="_9xnzQJ89EeGNFtlcQfUFgw" name="PaymentServices" description="Secured payment services" type="id_ct_app_servicemodule"/>
-    <components id="_VsqREp8zEeGYS-4UJ-FpAA" name="Product Catalog Services" description="" type="id_ct_app_servicemodule"/>
-    <components id="_fL9Akp80EeGYS-4UJ-FpAA" name="OperationalDashboard" description="&quot;OperationalDashboard&quot; is a BI application" type="id_ct_app_application">
-      <references targets="_bJoEgJ89EeGNFtlcQfUFgw"/>
+    <components id="id_comp_app_sales_admingui" name="AdminGUI" description="A technical administration  GUI for BikesOnline app." type="id_ct_app_guimodule"/>
+    <components id="id_comp_app_sales_end_user_gui" name="EndUserGUI" description="GUI for all end-users BikesOnline app." type="id_ct_app_guimodule"/>
+    <components id="id_comp_app_sales_admin_services" name="AdminServices" comment="" description="Restricted administrative services" type="id_ct_app_servicemodule"/>
+    <components id="id_comp_app_sales_payment_services" name="PaymentServices" description="Secured payment services" type="id_ct_app_servicemodule"/>
+    <components id="id_comp_app_sales_product_catalog_services" name="Product Catalog Services" description="" type="id_ct_app_servicemodule"/>
+    <components id="id_comp_app_sales_operational_dashboard" name="OperationalDashboard" description="&quot;OperationalDashboard&quot; is a BI application" type="id_ct_app_application">
+      <references targets="id_comp_app_sales_odbatchs"/>
     </components>
-    <components id="_bJoEgJ89EeGNFtlcQfUFgw" name="ODBatchs" comment="" type="id_ct_app_guimodule"/>
-    <links id="_Uq7tU58-EeGNFtlcQfUFgw" name="TRANSACTIONS_REPORTING" description="Access from DO batchs to BikesOnline daily transactions for BI purposes." type="_psOW0p8zEeGYS-4UJ-FpAAdgfgf" sources="_bJoEgJ89EeGNFtlcQfUFgw" destinations="_9xnzQJ89EeGNFtlcQfUFgw"/>
-    <links id="_tUQzg58-EeGNFtlcQfUFgw" name="CATALOG_READING" comment="" description="Access from BikesOnline GUI to catalog services " type="_psOW0p8zEeGYS-4UJ-FpAA" sources="id_comp_view_Logical_BikesOnline_EndUserGUI" destinations="_gmFcgp6VEeGbbcMFSNIrnA"/>
-    <links id="_tUQzg58-" name="PAIEMENT_TRANSACTIONS" comment="" description="Access from BikesOnline GUI to payment services" type="_psOW0p8zEeGYS-4UJ-FpAArr" sources="id_comp_view_Logical_BikesOnline_EndUserGUI" destinations="_9xnzQJ89EeGNFtlcQfUFgw"/>
-    <links id="_tUQzg58-dscgfgx" name="ADMINISTRATION" comment="" description="Access from BikesOnline administrative GUI to BikesOnline administrative services" type="_psOW0p8zEeGYS-4UJ-FpAArr" sources="id_comp_view_Logical_BikesOnline_AdminGUI" destinations="_zPeqMJ89EeGNFtlcQfUFgw"/>
+    <components id="id_comp_app_sales_odbatchs" name="ODBatchs" comment="" type="id_ct_app_guimodule"/>
+    <links id="id_link_app_sales_transactions_reporting" name="TRANSACTIONS_REPORTING" description="Access from DO batchs to BikesOnline daily transactions for BI purposes." type="_psOW0p8zEeGYS-4UJ-FpAAdgfgf" sources="id_comp_app_sales_odbatchs" destinations="id_comp_app_sales_payment_services"/>
+    <links id="id_link_app_sales_catalog_reading" name="CATALOG_READING" comment="" description="Access from BikesOnline GUI to catalog services " type="_psOW0p8zEeGYS-4UJ-FpAA" sources="id_comp_view_Logical_BikesOnline_EndUserGUI" destinations="_gmFcgp6VEeGbbcMFSNIrnA"/>
+    <links id="id_link_app_sales_payment_transactions" name="PAIEMENT_TRANSACTIONS" comment="" description="Access from BikesOnline GUI to payment services" type="_psOW0p8zEeGYS-4UJ-FpAArr" sources="id_comp_view_Logical_BikesOnline_EndUserGUI" destinations="id_comp_app_sales_payment_services"/>
+    <links id="id_link_app_sales_administration" name="ADMINISTRATION" comment="" description="Access from BikesOnline administrative GUI to BikesOnline administrative services" type="_psOW0p8zEeGYS-4UJ-FpAArr" sources="id_comp_view_Logical_BikesOnline_AdminGUI" destinations="id_comp_app_sales_admin_services"/>
   </views>
   <views comment="" description="BikesOnline physical architecture" id="id_view_physical_BikesOnline" name="Physical_BikesOnline" viewPoint="fsdfhjksdhfkjhsdkfj">
     <componentInstances id="_av1GdKGYEeGWHchb0LRqvg" name="WebServer_1" comment="" status="AVAILABLE" component="id_comp_physical_catalog_ibm_hs21" boundComponentInstance="id_ci_devicecatalog_hs21_1"/>
@@ -218,15 +218,15 @@
     <components id="_JlK98p_7EeG3fPi34vn9KQ" name="Cisco-2800" comment="" description="Branch router" type="_kOyogZ9ZEeGNFtlcQfUFgw"/>
     <components id="_jUElEp_7EeG3fPi34vn9KQ" name="Hitashi-HUS100" comment="" description="Hitachi Unified Storage 100 Family" type="_VIxZsZ9bEeGNFtlcQfUFgw"/>
     <links id="id_link_physical_cable5E" name="Class 5E cable" comment="" description="Ethernet gigabit cable" type="id_lt_physical_gigabit" sources="_41zdop_6EeG3fPi34vn9KQ _JlK98p_7EeG3fPi34vn9KQ _Jlytjhmp _nKCmgp_6EeG3fPi34vn9KQ id_comp_physical_catalog_ibm_hs21 id_comp_physical_catalog_ibm_hs22 _Y6hMwp_6EeG3fPi34vn9KQ" destinations="_41zdop_6EeG3fPi34vn9KQ _JlK98p_7EeG3fPi34vn9KQ _Jlytjhmp _nKCmgp_6EeG3fPi34vn9KQ id_comp_physical_catalog_ibm_hs21 id_comp_physical_catalog_ibm_hs22 _Y6hMwp_6EeG3fPi34vn9KQ"/>
-    <componentInstances id="id_ci_devicecatalog_hs22_1" name="HS22_1" description="" component="id_comp_physical_catalog_ibm_hs22"/>
-    <componentInstances id="id_ci_devicecatalog_m3000_1" name="M3000_1" description="" status="FULL" component="_Y6hMwp_6EeG3fPi34vn9KQ"/>
-    <componentInstances id="id_ci_devicecatalog_hs22_2" name="HS22_2" description="" component="id_comp_physical_catalog_ibm_hs22"/>
     <componentInstances id="id_ci_devicecatalog_hs21_1" name="HS21_1" description="" component="id_comp_physical_catalog_ibm_hs21"/>
+    <componentInstances id="id_ci_devicecatalog_hs22_1" name="HS22_1" description="" component="id_comp_physical_catalog_ibm_hs22"/>
+    <componentInstances id="id_ci_devicecatalog_hs22_2" name="HS22_2" description="" component="id_comp_physical_catalog_ibm_hs22"/>
+    <componentInstances id="id_ci_devicecatalog_m3000_1" name="M3000_1" description="" status="FULL" component="_Y6hMwp_6EeG3fPi34vn9KQ"/>
     <componentInstances id="id_ci_devicecatalog_cisco2800_1" name="Cisco 2800_1" description="" component="_JlK98p_7EeG3fPi34vn9KQ"/>
     <componentInstances id="id_ci_devicecatalog_cisco2900_1" name="Cisco 2900_1" component="_Jlytjhmp"/>
     <componentInstances id="id_ci_devicecatalog_asa_1" name="ASA_1" component="_nKCmgp_6EeG3fPi34vn9KQ"/>
   </views>
-  <views comment="" description="BikesOnline deployment environments" id="id_view_deploy" name="Deployment_BikesOnline" viewPoint="id_vp_logical">
+  <views comment="" description="BikesOnline deployment environments" id="id_view_deploy_bikesonline" name="Deployment_BikesOnline" viewPoint="id_vp_logical">
     <components id="_vDwQkqTjEeGhbskxmOc77w" name="Production" description="" type="_sgTcYaTjEeGhbskxmOc77w">
       <references targets="id_comp_deploy_IBM_HS21 id_comp_deploy_gui_admin_bikesonline _itGiQqNJEefdfd_4Kgezezez _bTKAYqMhEeGTqOb8fWOx0Q id_comp_deploy_IBM_HS22 _6b6KoqMtEeG9sM0bZ_WFcA id_comp_deploy_production_jetty _eoxQUqMsEeG9sM0bZ_WFcA id_comp_deploy_linux3_web_profile _N13tUqNMEeGULe7xIq_4Kg _0dlLAqMtEeG9sM0bZ_WFcA _5S34QqMoEeGkWPVFom68wQ _itGiQqNJEeGULe7xIq_4Kg _ZKfHEqNKEeGULe7xIq_4Kg _itGiQqNJEeff4Kg _TmWPQqMtEeG9sM0bZ_WFcA id_comp_deploy_production_tomcat6"/>
     </components>
@@ -239,12 +239,12 @@
     <components id="_5S34QqMoEeGkWPVFom68wQ" type="_0pkjcZ9aEeGNFtlcQfU333" boundComponent="_Y6hMwp_6EeG3fPi34vn9KQ">
       <references type="RUNS" targets="_TmWPQqMtEeG9sM0bZ_WFcA"/>
     </components>
-    <components id="_itGiQqNJEefdfd_4Kgezezez" type="_1y2zQZohnnnmJ5CR-iA" boundComponent="_zPeqMJ89EeGNFtlcQfUFgw"/>
-    <components id="_itGiQqNJEeff4Kg" type="_1y2zQZohnnnmJ5CR-iA" boundComponent="_VsqREp8zEeGYS-4UJ-FpAA"/>
+    <components id="_itGiQqNJEefdfd_4Kgezezez" type="_1y2zQZohnnnmJ5CR-iA" boundComponent="id_comp_app_sales_admin_services"/>
+    <components id="_itGiQqNJEeff4Kg" type="_1y2zQZohnnnmJ5CR-iA" boundComponent="id_comp_app_sales_product_catalog_services"/>
     <components id="id_comp_deploy_production_jetty" description="" type="_fKt222vmJ5CR-iA" boundComponent="id_comp_tech_jetty">
       <references type="RUNS" targets="id_comp_deploy_gui_admin_bikesonline"/>
     </components>
-    <components id="_bTKAYqMhEeGTqOb8fWOx0Q" type="_aazazaza" boundComponent="_osKccJ89EeGNFtlcQfUFgw"/>
+    <components id="_bTKAYqMhEeGTqOb8fWOx0Q" type="_aazazaza" boundComponent="id_comp_app_sales_end_user_gui"/>
     <components id="id_comp_deploy_production_tomcat6" type="_fKt222vmJ5CR-iA" boundComponent="_BM4XQp6QEdJ1yNTLVw">
       <references type="RUNS" targets="_bTKAYqMhEeGTqOb8fWOx0Q"/>
     </components>
@@ -261,10 +261,10 @@
     <components id="_6b6KoqMtEeG9sM0bZ_WFcA" name="JBoss5" description="" type="__111CR-iA" boundComponent="id_comp_tech_jboss5">
       <references type="RUNS" targets="_itGiQqNJEefdfd_4Kgezezez _itGiQqNJEeGULe7xIq_4Kg _itGiQqNJEeff4Kg"/>
     </components>
-    <components id="_itGiQqNJEeGULe7xIq_4Kg" type="_1y2zQZohnnnmJ5CR-iA" boundComponent="_9xnzQJ89EeGNFtlcQfUFgw"/>
-    <components id="id_comp_deploy_gui_admin_bikesonline" comment="" description="" type="_aazazaza" boundComponent="_hGsf4J89EeGNFtlcQfUFgw"/>
+    <components id="_itGiQqNJEeGULe7xIq_4Kg" type="_1y2zQZohnnnmJ5CR-iA" boundComponent="id_comp_app_sales_payment_services"/>
+    <components id="id_comp_deploy_gui_admin_bikesonline" comment="" description="" type="_aazazaza" boundComponent="id_comp_app_sales_admingui"/>
     <components id="_ZKfHEqNKEeGULe7xIq_4Kg" type="_Ybdmtd456" boundComponent="_G9AtYp6REeG"/>
-    <components id="_N13tUqNMEeGULe7xIq_4Kg" type="_aazazazaerer" boundComponent="_bJoEgJ89EeGNFtlcQfUFgw"/>
+    <components id="_N13tUqNMEeGULe7xIq_4Kg" type="_aazazazaerer" boundComponent="id_comp_app_sales_odbatchs"/>
     <links id="id_link_deploy_REST_admin" name="link_deploy_REST_admin" comment="REST link between admin GUI and admin services" description="" type="id_lt_logical_http_rest" sources="id_comp_deploy_gui_admin_bikesonline" destinations="_itGiQqNJEefdfd_4Kgezezez" timeoutMillis="-1"/>
     <componentInstances id="id_ci_deploy_HS21_1" name="HS21_1" component="id_comp_deploy_IBM_HS21" boundComponentInstance="id_ci_devicecatalog_hs21_1">
       <references type="RUNS" targets="id_ci_deploy_OS_HS21_1"/>
@@ -290,7 +290,7 @@
       <references type="RUNS" targets="_LG40BKNLEeGUrere_4Kg id_comp_deploy_prod_services_admin_bikesonline_1"/>
     </componentInstances>
     <componentInstances id="id_comp_deploy_prod_services_admin_bikesonline_1" name="services_admin_bikesonline_1" comment="" description="" component="_itGiQqNJEefdfd_4Kgezezez"/>
-    <componentInstances id="_iC1uBKMtEeG9sM0bZ_WFcA" component="_5S34QqMoEeGkWPVFom68wQ" boundComponentInstance="id_ci_devicecatalog_m3000_1">
+    <componentInstances id="id_ci_deploy_bikes_m3000_1" component="_5S34QqMoEeGkWPVFom68wQ" boundComponentInstance="id_ci_devicecatalog_m3000_1">
       <references type="RUNS" targets="_dDF2hKMtEeG9sM0bZ_WFcA"/>
     </componentInstances>
     <componentInstances id="_dDF2hKMtEeG9sM0bZ_WFcA" name="Solaris_ME3000_1" component="_TmWPQqMtEeG9sM0bZ_WFcA">
@@ -309,11 +309,11 @@
       <references type="RUNS" targets="_LG40BKNLEeGULe7xIq_4gg"/>
     </componentInstances>
     <componentInstances id="_LG40BKNLEeGUrere_4Kg" name="services_payment_bikesonline_1" component="_itGiQqNJEeGULe7xIq_4Kg"/>
-    <componentInstances id="_LG40BKNLEeGULe7xIq_4gg" name="services_payment_bikesonline_2" description="" component="_9xnzQJ89EeGNFtlcQfUFgw"/>
+    <componentInstances id="_LG40BKNLEeGULe7xIq_4gg" name="services_payment_bikesonline_2" description="" component="id_comp_app_sales_payment_services"/>
   </views>
-  <stakeholders id="_skmNgZhhEeGGf-qGrGj3yA" name="Applicative Architect" views="id_view_vp_logical_Logical_BikesOnline _QMVcEZ8zEeGYS-4UJ-FpAA" viewPoints="id_vp_app id_vp_logical" actors="eaarchitecterich"/>
+  <stakeholders id="_skmNgZhhEeGGf-qGrGj3yA" name="Applicative Architect" views="id_view_vp_logical_Logical_BikesOnline id_view_app_sales" viewPoints="id_vp_app id_vp_logical" actors="eaarchitecterich"/>
   <stakeholders id="_aB_ysZnaEeGRRqNqlyFgFw" name="Entreprise Architect" views="_0oVTkZ55EeGAFeVyyYKoXg" viewPoints="_uP3gkZniEeGeqKlv68ECYA" actors="pearchitect"/>
-  <stakeholders id="_dX1QoZnbEeGRRqNqlyFgFw" name="Technical Architect" views="id_view_tech_catalog id_view_deploy" viewPoints="id_vp_tech" actors="ktarchitect"/>
+  <stakeholders id="_dX1QoZnbEeGRRqNqlyFgFw" name="Technical Architect" views="id_view_tech_catalog id_view_deploy_bikesonline" viewPoints="id_vp_tech" actors="ktarchitect"/>
   <stakeholders id="_te1CAZneEeGiWdDszZQI0g" name="Support" description="This service provides backup/administration services for the Design office." actors="bsupport"/>
   <stakeholders id="_Tig0gZnfEeGiWdDszZQI0g" name="Operations Architect" description="The operation architect is an operations expert responsible for building SLA/OLA along with the Applicative Architect of each project and to ensure these agrements are followed." viewPoints="fsdfhjksdhfkjhsdkfj" actors="aoarchitect"/>
   <units id="_mWgzQJhkEeGxRNCeID_vlg" name="Design Office" description="This It department produces functional specifications, urbanisation, application architecture and developement."/>
