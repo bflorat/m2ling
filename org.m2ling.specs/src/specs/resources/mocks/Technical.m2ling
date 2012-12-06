@@ -19,6 +19,7 @@
     <componentTypes id="id_ct_vp1_ct4" name="ct_vp1_ct4" description="desc ct_vp1_ct4" status="">
       <references targets="id_ct_vp1_ct5"/>
       <references type="DEPENDS_ON" targets="id_ct_vp1_ct1 id_ct_vp1_ct5"/>
+      <references type="RUNS" targets="id_ct_vp1_ct4"/>
     </componentTypes>
     <componentTypes id="id_ct_vp1_ct5" name="ct_vp1_ct5" description="desc ct_vp1_ct5" status=""/>
     <componentTypes id="id_ct_vp1_ct6" name="ct_vp1_ct6" comment="" description="desc ct_vp1_ct6">
@@ -76,6 +77,7 @@
     <components id="id_comp_vp1_v1_comp13.1" name="comp_vp1_v1_comp13.1" description="" status="" type="id_ct_vp1_ct13"/>
     <components id="id_comp_vp1_v1_comp4.4" name="comp_vp1_v1_comp4.4" comment="" description="" status="" type="id_ct_vp1_ct4">
       <references targets="id_comp_vp1_v1_comp5.4"/>
+      <references type="RUNS" targets="id_comp_vp1_v1_comp4.4"/>
     </components>
     <components id="id_comp_vp1_v1_comp5.4" name="comp_vp1_v1_comp5.4" comment="" description="" status="" type="id_ct_vp1_ct5"/>
     <components id="id_comp_vp1_v1_comp11.2" name="comp_vp1_v1_comp11.2" comment="" status="" type="id_ct_vp1_ct11"/>

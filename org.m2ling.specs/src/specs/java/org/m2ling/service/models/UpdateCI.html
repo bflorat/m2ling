@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:concordion="http://www.concordion.org/2007/concordion">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>Component instance update</title>
+</head>
+<body>
+	<H1>Component instance update</H1>
+	<p>Administrators or actors with adequate authorizations can update
+		a CI.</p>
+	<h2>Binding</h2>
+	<p class='rule'>#CI31- A new bound component have to follow associated component binding rules</p>
+	<div class='example'>
+		An attempt to change a component binding should : 
+		<table
+			concordion:execute="#result=updateBinding(#caseName,#ciID,#boundID)">
+			<tr>
+				<th concordion:set="#caseName">Case</th>
+				<th concordion:set="#ciID">Component ID</th>
+				<th concordion:set="#boundID">New bound ID</th>
+				<th concordion:assertEquals="#result">Should:</th>
+			</tr>
+			<tr>
+				<td>Change binding of a CI</td>
+				<td>id_ci_vp2_v2_comp3_ci2</td>
+				<td>id_ci_vp1_v1_comp3_ci3</td>
+				<td>PASS</td>
+			</tr>
+			<tr>
+				<td>Drop binding</td>
+				<td>id_ci_vp2_v2_comp3_ci2</td>
+				<td>null</td>
+				<td>PASS</td>
+			</tr>
+			<tr>
+				<td>Change to illegal binding</td>
+				<td>id_ci_vp2_v2_comp3_ci2</td>
+				<td>id_ci_vp1_v1_comp5.4.1</td>
+				<td>FAIL with code CI_ILLEGAL_BINDING</td>
+			</tr>
+		</table>
+	</div>
+
+	<h2>References</h2>
+	<p class='rule'>#CI34 : If the component allows it, a CI can refer itself at
+		upgrade (can't be done at creation as this target doesn't exist yet).</p>
+	<div class='example'>
+		Given an existing CI <b concordion:set="#sourceCiID">id_ci_vp1_v1_comp4.4.1</b> with no RUNS reference 
+		  in view <b concordion:set="#viewID">id_vp1_v1</b><br/> 
+	    When we add a reference so the references are <b concordion:set="#references">RUNS:id_ci_vp1_v1_comp4.4.1</b><br/>
+		<span concordion:execute="#resu=updateReference(#sourceCiID,#references,#viewID)"/><br/>
+		Then the service should <b concordion:assertEquals="#resu">PASS</b><br/> 
+	</div>
+
+</body>
+</html>
