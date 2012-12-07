@@ -10,6 +10,7 @@ import org.m2ling.common.dto.core.AccessType;
 import org.m2ling.common.dto.core.ComponentInstanceDTO;
 import org.m2ling.common.dto.core.HasNameAndIdDTO;
 import org.m2ling.common.dto.core.ReferenceDTO;
+import org.m2ling.common.dto.core.ViewDTO;
 import org.m2ling.common.exceptions.FunctionalException;
 import org.m2ling.common.exceptions.TechnicalException;
 import org.m2ling.common.utils.UUT;
@@ -63,7 +64,12 @@ public class CreateCIFixture extends AbstractCIFixture {
 	public String testWrongBinding() throws FunctionalException {
 		return checkFormat("CI4", "id_view_deploy_bikesonline", "id_comp_deploy_IBM_HS21", "id_foo", "name", "desc", "comment", "",
 				"id_ci_deploy_bikes_m3000_1", "null", "null");
-	}  
+	}
+	
+	public String testDifferentView() throws FunctionalException {
+		return checkFormat("CI6", "id_view_physical_BikesOnline", "id_comp_physical_catalog_ibm_hs21", "id_foo", "name", "desc", "comment", "",
+				"null", "null", "null");
+	}	
 
 	/*
 	 * Direct DTO control check (without using presentation layer)
