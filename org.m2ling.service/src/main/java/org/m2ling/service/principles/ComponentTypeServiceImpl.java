@@ -22,7 +22,7 @@ import org.m2ling.domain.core.ComponentType;
 import org.m2ling.domain.core.ViewPoint;
 import org.m2ling.persistence.PersistenceManager;
 import org.m2ling.service.common.ServiceImpl;
-import org.m2ling.service.util.CoreUtil;
+import org.m2ling.service.util.DomainExplorer;
 import org.m2ling.service.util.DTOConverter;
 
 import com.google.common.collect.Lists;
@@ -43,9 +43,9 @@ public class ComponentTypeServiceImpl extends ServiceImpl implements ComponentTy
 	 * Protected constructor to prevent direct instantiation
 	 */
 	@Inject
-	protected ComponentTypeServiceImpl(PersistenceManager pm, CoreUtil util, DTOConverter.FromDTO fromDTO,
+	protected ComponentTypeServiceImpl(PersistenceManager pm, DomainExplorer explorer, DTOConverter.FromDTO fromDTO,
 			DTOConverter.ToDTO toDTO, Conf conf, Logger logger, ComponentTypeServiceChecker checker) {
-		super(pm, util, fromDTO, toDTO, conf, logger);
+		super(pm, explorer, fromDTO, toDTO, conf, logger);
 		this.checker = checker;
 	}
 
@@ -58,7 +58,7 @@ public class ComponentTypeServiceImpl extends ServiceImpl implements ComponentTy
 			// Controls
 			checker.checkDTO(dto, AccessType.UPDATE);
 			// Processing
-			ComponentType ct = util.getComponentTypeByID(dto.getId());
+			ComponentType ct = explorer.getComponentTypeByID(dto.getId());
 			ct.setName(dto.getName());
 			ct.setDescription(dto.getDescription());
 			ct.setComment(dto.getComment());
@@ -67,7 +67,7 @@ public class ComponentTypeServiceImpl extends ServiceImpl implements ComponentTy
 			tags.addAll(dto.getTags());
 			ComponentType boundType = null;
 			if (dto.getBoundType() != null) {
-				boundType = util.getComponentTypeByID(dto.getBoundType().getId());
+				boundType = explorer.getComponentTypeByID(dto.getBoundType().getId());
 			}
 			ct.setBoundType(boundType);
 			ct.setInstantiationFactor(dto.getInstantiationFactor());
@@ -75,7 +75,7 @@ public class ComponentTypeServiceImpl extends ServiceImpl implements ComponentTy
 			enumeration.clear();
 			List<ArchitectureItem> newEnumeration = new ArrayList<ArchitectureItem>(dto.getEnumeration().size());
 			for (HasNameAndIdDTO comp : dto.getEnumeration()) {
-				ArchitectureItem ai = util.getComponentOrGroupByID(comp.getId());
+				ArchitectureItem ai = explorer.getComponentOrGroupByID(comp.getId());
 				newEnumeration.add(ai);
 			}
 			enumeration.addAll(newEnumeration);
@@ -94,7 +94,7 @@ public class ComponentTypeServiceImpl extends ServiceImpl implements ComponentTy
 			// Processing
 			ComponentType ct = fromDTO.newComponentType(dto);
 			// Add the item
-			ViewPoint vp = util.getViewPointByID(dto.getViewPoint().getId());
+			ViewPoint vp = explorer.getViewPointByID(dto.getViewPoint().getId());
 			vp.getComponentTypes().add(ct);
 			pmanager.commit();
 		} catch (Exception anyError) {
@@ -110,7 +110,7 @@ public class ComponentTypeServiceImpl extends ServiceImpl implements ComponentTy
 		List<ComponentTypeDTO> out = Lists.newArrayList();
 		try {
 			// Controls
-			if (util.getViewPointByID(vp) == null) {
+			if (explorer.getViewPointByID(vp) == null) {
 				throw new FunctionalException(Code.TARGET_NOT_FOUND, null, "Viewpoint=" + vp.toString());
 			}
 			Root root = pmanager.getRoot();
@@ -140,7 +140,7 @@ public class ComponentTypeServiceImpl extends ServiceImpl implements ComponentTy
 			// Controls
 			ComponentTypeDTO dto = new ComponentTypeDTO.Builder(null, id, null).build();
 			checker.checkDTO(dto, AccessType.DELETE);
-			ComponentType ctToDelete = util.getComponentTypeByID(dto.getId());
+			ComponentType ctToDelete = explorer.getComponentTypeByID(dto.getId());
 			ViewPoint vp = (ViewPoint) ctToDelete.eContainer();
 			vp.getComponentTypes().remove(ctToDelete);
 			pmanager.commit();
@@ -160,7 +160,7 @@ public class ComponentTypeServiceImpl extends ServiceImpl implements ComponentTy
 			if (id == null || Utils.isNullOrEmptyAfterTrim(id)) {
 				throw new FunctionalException(FunctionalException.Code.NULL_ARGUMENT, null, "(id)");
 			}
-			ComponentType ct = util.getComponentTypeByID(id);
+			ComponentType ct = explorer.getComponentTypeByID(id);
 			if (ct != null) {
 				out = toDTO.getComponentTypeDTO(ct);
 			}

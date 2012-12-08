@@ -11,7 +11,7 @@ import org.m2ling.common.soa.Context;
 import org.m2ling.common.utils.Utils;
 import org.m2ling.domain.core.Type;
 import org.m2ling.persistence.PersistenceManagerXMIImpl;
-import org.m2ling.service.util.CoreUtil;
+import org.m2ling.service.util.DomainExplorer;
 import org.m2ling.service.util.DTOConverter.FromDTO;
 import org.m2ling.service.util.DTOConverter.ToDTO;
 import org.m2ling.specs.M2lingFixture;
@@ -34,11 +34,11 @@ public class TagsFixture extends M2lingFixture {
 		prop.setProperty(PersistenceManagerXMIImpl.SpecificConfiguration.CONF_XMI_PATH, sampleXMI);
 		Conf configuration = new Conf(prop, logger, null);
 		PersistenceManagerXMIImpl pm = new PersistenceManagerXMIImpl(logger, configuration);
-		CoreUtil util = new CoreUtil(logger, pm);
-		FromDTO fromDTO = new FromDTO(util);
-		ReferenceHelper refHelper = new ReferenceHelper(util);
-		TagServiceChecker checker = new  TagServiceChecker(pm, util, fromDTO, refHelper);
-		serviceTag = new TagServiceImpl(pm, util, new FromDTO(util), new ToDTO(util), configuration, logger,checker);
+		DomainExplorer explorer = new DomainExplorer(logger, pm);
+		FromDTO fromDTO = new FromDTO(explorer);
+		ReferenceHelper refHelper = new ReferenceHelper(explorer);
+		TagServiceChecker checker = new  TagServiceChecker(pm, explorer, fromDTO, refHelper);
+		serviceTag = new TagServiceImpl(pm, explorer, new FromDTO(explorer), new ToDTO(explorer), configuration, logger,checker);
 	}
 
 	/**

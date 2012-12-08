@@ -27,7 +27,7 @@ import org.m2ling.domain.core.ViewPoint;
 import org.m2ling.persistence.PersistenceManager;
 import org.m2ling.service.common.ReferenceHelper;
 import org.m2ling.service.common.ServiceChecker;
-import org.m2ling.service.util.CoreUtil;
+import org.m2ling.service.util.DomainExplorer;
 import org.m2ling.service.util.DTOConverter;
 
 import com.google.inject.Inject;
@@ -40,9 +40,9 @@ import com.google.inject.Inject;
  */
 class ComponentTypeServiceChecker extends ServiceChecker {
 	@Inject
-	public ComponentTypeServiceChecker(PersistenceManager pm, CoreUtil util, DTOConverter.FromDTO fromDTO,
+	public ComponentTypeServiceChecker(PersistenceManager pm, DomainExplorer explorer, DTOConverter.FromDTO fromDTO,
 			ReferenceHelper refHelper) {
-		super(pm, util, fromDTO, refHelper);
+		super(pm, explorer, fromDTO, refHelper);
 	}
 
 	/**
@@ -66,7 +66,7 @@ class ComponentTypeServiceChecker extends ServiceChecker {
 		checkNullDTO(dto);
 		checkID(dto, access);
 		if (access == AccessType.DELETE) {
-			ComponentType ctToDelete = util.getComponentTypeByID(dto.getId());
+			ComponentType ctToDelete = explorer.getComponentTypeByID(dto.getId());
 			// at this point, the CT exists (tested in checkID())
 			ViewPoint vp = (ViewPoint) ctToDelete.eContainer();
 			checkNoneComponentForThisCT(ctToDelete);
@@ -75,7 +75,7 @@ class ComponentTypeServiceChecker extends ServiceChecker {
 			checkNoLinkTypeInvolvingThisCT(vp, ctToDelete);
 		}
 		else if (access == AccessType.CREATE || access == AccessType.UPDATE) {
-			target = util.getComponentTypeByID(dto.getId());
+			target = explorer.getComponentTypeByID(dto.getId());
 			if (dto.getBoundType() == null) {
 				checkNameWhenRequired(dto, access);
 			} else {
@@ -111,8 +111,8 @@ class ComponentTypeServiceChecker extends ServiceChecker {
 					+ dto.getInstantiationFactor());
 		}
 		if (access == AccessType.UPDATE) {
-			for (Component comp : util.getComponentsForCTID(dto.getId())) {
-				List<ComponentInstance> instances = util.getComponentsInstancesForComponentID(comp.getId());
+			for (Component comp : explorer.getComponentsForCTID(dto.getId())) {
+				List<ComponentInstance> instances = explorer.getComponentsInstancesForComponentID(comp.getId());
 				if (instances.size() > maxNbInstances) {
 					maxNbInstances = instances.size();
 				}
@@ -129,7 +129,7 @@ class ComponentTypeServiceChecker extends ServiceChecker {
 			checkNoIllegalBindingChange(dto, target);
 		}
 		if (!isNullBinding(dto)) {
-			ComponentType boundCT = util.getComponentTypeByID(dto.getBoundType().getId());
+			ComponentType boundCT = explorer.getComponentTypeByID(dto.getBoundType().getId());
 			checkBoundTypeExists(boundCT);
 			checkBoundTypeIsFromAnotherVP(dto, boundCT);
 			checkNoChainBinding(dto, boundCT);
@@ -137,7 +137,7 @@ class ComponentTypeServiceChecker extends ServiceChecker {
 	}
 
 	private void checkBoundTypeExists(final ComponentType ct) throws FunctionalException {
-		if (ct == null || util.getComponentTypeByID(ct.getId()) == null) {
+		if (ct == null || explorer.getComponentTypeByID(ct.getId()) == null) {
 			throw new FunctionalException(FunctionalException.Code.TARGET_NOT_FOUND, null, "(boundType)");
 		}
 	}
@@ -145,7 +145,7 @@ class ComponentTypeServiceChecker extends ServiceChecker {
 	private void checkNoIllegalBindingChange(final ComponentTypeDTO dto, final ComponentType target)
 			throws FunctionalException {
 		ComponentType currentCT = target.getBoundType();
-		boolean existingCompsForChangedType = (util.getComponentsForCTID(target.getId()).size() > 0);
+		boolean existingCompsForChangedType = (explorer.getComponentsForCTID(target.getId()).size() > 0);
 		// Attempt to drop the bound type
 		if (isNullBinding(dto) && currentCT != null && existingCompsForChangedType) {
 			throw new FunctionalException(FunctionalException.Code.CT_CANNOT_CHANGE_BINDING, null, "Current bound type="
@@ -169,7 +169,7 @@ class ComponentTypeServiceChecker extends ServiceChecker {
 	 */
 	private void checkBoundTypeIsFromAnotherVP(final ComponentTypeDTO dto, ComponentType boundCT)
 			throws FunctionalException {
-		ViewPoint vp = util.getViewPointByID(dto.getViewPoint().getId());
+		ViewPoint vp = explorer.getViewPointByID(dto.getViewPoint().getId());
 		ViewPoint vpBoundType = (ViewPoint) boundCT.eContainer();
 		if (vpBoundType.equals(vp)) {
 			throw new FunctionalException(FunctionalException.Code.LOCAL_BINDING, null, null);
@@ -214,12 +214,12 @@ class ComponentTypeServiceChecker extends ServiceChecker {
 		for (ReferenceDTO r : dto.getReferences()) {
 			dtoRefs.add(fromDTO.newReference(r, Type.COMPONENT_TYPE));
 		}
-		ComponentType ct = util.getComponentTypeByID(dto.getId());
+		ComponentType ct = explorer.getComponentTypeByID(dto.getId());
 		EList<Reference> currentRefs = ct.getReferences();
 		for (Reference currentRef : currentRefs) {
 			if (!refHelper.containsRef(dtoRefs, currentRef)) {
 				// a reference has been dropped
-				for (Component comp : util.getComponentsForCTID(dto.getId())) {
+				for (Component comp : explorer.getComponentsForCTID(dto.getId())) {
 					for (Reference compRef : comp.getReferences()) {
 						for (HasNameAndID target : compRef.getTargets()) {
 							Component compTarget = (Component) target;
@@ -237,9 +237,9 @@ class ComponentTypeServiceChecker extends ServiceChecker {
 	private void checkTargetsAreLocal(final ComponentTypeDTO dto, ReferenceDTO refDTO) throws FunctionalException {
 		// check targets existence and the fact that targets types are local (in the CT VP)
 		// VP can't be null, already controlled
-		ViewPoint thisVP = util.getViewPointByID(dto.getViewPoint().getId());
+		ViewPoint thisVP = explorer.getViewPointByID(dto.getViewPoint().getId());
 		for (HasNameAndIdDTO target : refDTO.getTargets()) {
-			ComponentType ctTarget = util.getComponentTypeByID(target.getId());
+			ComponentType ctTarget = explorer.getComponentTypeByID(target.getId());
 			if (!thisVP.getComponentTypes().contains(ctTarget)) {
 				throw new FunctionalException(FunctionalException.Code.INVALID_REFERENCE_TYPE, null, dto.getReferences()
 						.toString());
@@ -262,17 +262,17 @@ class ComponentTypeServiceChecker extends ServiceChecker {
 				throw new FunctionalException(FunctionalException.Code.NULL_ARGUMENT, null, "(enumeration)");
 			}
 			ArchitectureItem item = null;
-			item = util.getComponentByID(comp.getId());
+			item = explorer.getComponentByID(comp.getId());
 			// unknown component ? ok, search in groups
 			if (item == null) {
-				item = util.getComponentGroupByID(comp.getId());
+				item = explorer.getComponentGroupByID(comp.getId());
 			}
 			// still nothing ? leave in error
 			if (item == null) {
 				throw new FunctionalException(FunctionalException.Code.TARGET_NOT_FOUND, null, "(enumeration)");
 			}
 			// check that every component or group share the same CT = bound type
-			ComponentType ct = util.getComponentTypeForArchitectureItem(item);
+			ComponentType ct = explorer.getComponentTypeForArchitectureItem(item);
 			if (!ct.getId().equals(dto.getBoundType().getId())) {
 				throw new FunctionalException(FunctionalException.Code.INVALID_TYPE, null, "(enumeration)");
 			}
@@ -329,7 +329,7 @@ class ComponentTypeServiceChecker extends ServiceChecker {
 		if (dto.getViewPoint() == null || dto.getViewPoint().getId() == null) {
 			throw new FunctionalException(FunctionalException.Code.NULL_ARGUMENT, null, "(viewpoint)");
 		}
-		ViewPoint vp = util.getViewPointByID(dto.getViewPoint().getId());
+		ViewPoint vp = explorer.getViewPointByID(dto.getViewPoint().getId());
 		if (vp == null) {
 			throw new FunctionalException(FunctionalException.Code.TARGET_NOT_FOUND, null, "viewpoint="
 					+ dto.getViewPoint().getId());

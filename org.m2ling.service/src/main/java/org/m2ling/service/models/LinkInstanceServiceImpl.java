@@ -20,7 +20,7 @@ import org.m2ling.domain.core.LinkInstance;
 import org.m2ling.domain.core.View;
 import org.m2ling.persistence.PersistenceManager;
 import org.m2ling.service.common.ServiceImpl;
-import org.m2ling.service.util.CoreUtil;
+import org.m2ling.service.util.DomainExplorer;
 import org.m2ling.service.util.DTOConverter;
 
 import com.google.common.collect.Lists;
@@ -41,9 +41,9 @@ public class LinkInstanceServiceImpl extends ServiceImpl implements LinkInstance
 	 * Protected constructor to prevent direct instantiation
 	 */
 	@Inject
-	protected LinkInstanceServiceImpl(PersistenceManager pm, CoreUtil util, DTOConverter.FromDTO fromDTO,
+	protected LinkInstanceServiceImpl(PersistenceManager pm, DomainExplorer explorer, DTOConverter.FromDTO fromDTO,
 			DTOConverter.ToDTO toDTO, Conf conf, Logger logger, LinkInstanceServiceChecker checker) {
-		super(pm, util, fromDTO, toDTO, conf, logger);
+		super(pm, explorer, fromDTO, toDTO, conf, logger);
 		this.checker = checker;
 	}
 
@@ -56,16 +56,16 @@ public class LinkInstanceServiceImpl extends ServiceImpl implements LinkInstance
 			// Controls
 			checker.checkDTO(dto, AccessType.UPDATE);
 			// Processing
-			LinkInstance instance = util.getLinkInstanceByID(dto.getId());
+			LinkInstance instance = explorer.getLinkInstanceByID(dto.getId());
 			instance.setName(dto.getName());
 			instance.setDescription(dto.getDescription());
 			instance.setComment(dto.getComment());
 			List<String> tags = instance.getTags();
 			tags.clear();
 			tags.addAll(dto.getTags());
-			ComponentInstance ci = util.getComponentInstanceByID(dto.getSource().getId());
+			ComponentInstance ci = explorer.getComponentInstanceByID(dto.getSource().getId());
 			instance.setSource(ci);
-			ci = util.getComponentInstanceByID(dto.getDestination().getId());
+			ci = explorer.getComponentInstanceByID(dto.getDestination().getId());
 			instance.setDestination(ci);
 			instance.setStatus(dto.getStatus());
 			pmanager.commit();
@@ -85,7 +85,7 @@ public class LinkInstanceServiceImpl extends ServiceImpl implements LinkInstance
 			// Processing
 			LinkInstance instance = fromDTO.newLinkInstance(dto);
 			// Add the item
-			View view = util.getViewByID(dto.getView().getId());
+			View view = explorer.getViewByID(dto.getView().getId());
 			view.getLinkInstances().add(instance);
 			pmanager.commit();
 		} catch (Exception anyError) {
@@ -101,7 +101,7 @@ public class LinkInstanceServiceImpl extends ServiceImpl implements LinkInstance
 		List<LinkInstanceDTO> out = Lists.newArrayList();
 		try {
 			// Controls
-			if (util.getViewByID(vID) == null) {
+			if (explorer.getViewByID(vID) == null) {
 				throw new FunctionalException(Code.TARGET_NOT_FOUND, null, "ViewID=" + vID);
 			}
 			Root root = pmanager.getRoot();
@@ -131,7 +131,7 @@ public class LinkInstanceServiceImpl extends ServiceImpl implements LinkInstance
 			// Controls
 			LinkInstanceDTO dto = new LinkInstanceDTO.Builder(id, null, null).build();
 			checker.checkDTO(dto, AccessType.DELETE);
-			LinkInstance li = util.getLinkInstanceByID(dto.getId());
+			LinkInstance li = explorer.getLinkInstanceByID(dto.getId());
 			View view = (View) li.eContainer();
 			view.getLinks().remove(li);
 			pmanager.commit();
@@ -151,7 +151,7 @@ public class LinkInstanceServiceImpl extends ServiceImpl implements LinkInstance
 			if (id == null || Utils.isNullOrEmptyAfterTrim(id)) {
 				throw new FunctionalException(FunctionalException.Code.NULL_ARGUMENT, null, "(id)");
 			}
-			LinkInstance li = util.getLinkInstanceByID(id);
+			LinkInstance li = explorer.getLinkInstanceByID(id);
 			if (li != null) {
 				out = toDTO.getLinkInstanceDTO(li);
 			}

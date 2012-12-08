@@ -39,14 +39,14 @@ import com.google.inject.Singleton;
  * 
  */
 @Singleton
-public class CoreUtil {
+public class DomainExplorer {
 	@SuppressWarnings("unused")
 	private Logger logger;
 
 	private PersistenceManager pmanager;
 
 	@Inject
-	public CoreUtil(Logger logger, PersistenceManager pm) {
+	public DomainExplorer(Logger logger, PersistenceManager pm) {
 		super();
 		this.logger = logger;
 		this.pmanager = pm;

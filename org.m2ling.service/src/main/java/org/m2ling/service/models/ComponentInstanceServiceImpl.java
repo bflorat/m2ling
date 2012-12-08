@@ -22,7 +22,7 @@ import org.m2ling.domain.core.Reference;
 import org.m2ling.domain.core.View;
 import org.m2ling.persistence.PersistenceManager;
 import org.m2ling.service.common.ServiceImpl;
-import org.m2ling.service.util.CoreUtil;
+import org.m2ling.service.util.DomainExplorer;
 import org.m2ling.service.util.DTOConverter;
 
 import com.google.common.collect.Lists;
@@ -43,9 +43,9 @@ public class ComponentInstanceServiceImpl extends ServiceImpl implements Compone
 	 * Protected constructor to prevent direct instantiation
 	 */
 	@Inject
-	protected ComponentInstanceServiceImpl(PersistenceManager pm, CoreUtil util, DTOConverter.FromDTO fromDTO,
+	protected ComponentInstanceServiceImpl(PersistenceManager pm, DomainExplorer explorer, DTOConverter.FromDTO fromDTO,
 			DTOConverter.ToDTO toDTO, Conf conf, Logger logger, ComponentInstanceServiceChecker checker) {
-		super(pm, util, fromDTO, toDTO, conf, logger);
+		super(pm, explorer, fromDTO, toDTO, conf, logger);
 		this.checker = checker;
 	}
 
@@ -58,7 +58,7 @@ public class ComponentInstanceServiceImpl extends ServiceImpl implements Compone
 			// Controls
 			checker.checkDTO(dto, AccessType.UPDATE);
 			// Processing
-			ComponentInstance ci = util.getComponentInstanceByID(dto.getId());
+			ComponentInstance ci = explorer.getComponentInstanceByID(dto.getId());
 			ci.setName(dto.getName());
 			ci.setDescription(dto.getDescription());
 			ci.setComment(dto.getComment());
@@ -67,7 +67,7 @@ public class ComponentInstanceServiceImpl extends ServiceImpl implements Compone
 			tags.addAll(dto.getTags());
 			ComponentInstance bound = null;
 			if (dto.getBoundInstance() != null) {
-				bound = util.getComponentInstanceByID(dto.getBoundInstance().getId());
+				bound = explorer.getComponentInstanceByID(dto.getBoundInstance().getId());
 			}
 			ci.setBoundComponentInstance(bound);
 			ci.setStatus(dto.getStatus());
@@ -88,7 +88,7 @@ public class ComponentInstanceServiceImpl extends ServiceImpl implements Compone
 			// Processing
 			ComponentInstance ci = fromDTO.newComponentInstance(dto);
 			// Add the item
-			View view = util.getViewByID(dto.getView().getId());
+			View view = explorer.getViewByID(dto.getView().getId());
 			view.getComponentInstances().add(ci);
 			pmanager.commit();
 		} catch (Exception anyError) {
@@ -104,7 +104,7 @@ public class ComponentInstanceServiceImpl extends ServiceImpl implements Compone
 		List<ComponentInstanceDTO> out = Lists.newArrayList();
 		try {
 			// Controls
-			if (util.getViewByID(vID) == null) {
+			if (explorer.getViewByID(vID) == null) {
 				throw new FunctionalException(Code.TARGET_NOT_FOUND, null, "View ID=" + vID.toString());
 			}
 			Root root = pmanager.getRoot();
@@ -134,7 +134,7 @@ public class ComponentInstanceServiceImpl extends ServiceImpl implements Compone
 			// Controls
 			ComponentInstanceDTO dto = new ComponentInstanceDTO.Builder(id, null, null).build();
 			checker.checkDTO(dto, AccessType.DELETE);
-			ComponentInstance ciToDelete = util.getComponentInstanceByID(dto.getId());
+			ComponentInstance ciToDelete = explorer.getComponentInstanceByID(dto.getId());
 			View view = (View) ciToDelete.eContainer();
 			view.getComponentInstances().remove(ciToDelete);
 			cleanOrphanReferences(ciToDelete);
@@ -155,7 +155,7 @@ public class ComponentInstanceServiceImpl extends ServiceImpl implements Compone
 			if (id == null || Utils.isNullOrEmptyAfterTrim(id)) {
 				throw new FunctionalException(FunctionalException.Code.NULL_ARGUMENT, null, "(id)");
 			}
-			ComponentInstance ci = util.getComponentInstanceByID(id);
+			ComponentInstance ci = explorer.getComponentInstanceByID(id);
 			if (ci != null) {
 				out = toDTO.getComponentInstanceDTO(ci);
 			}

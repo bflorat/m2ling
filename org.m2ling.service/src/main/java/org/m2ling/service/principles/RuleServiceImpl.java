@@ -20,7 +20,7 @@ import org.m2ling.domain.core.StatusEvent;
 import org.m2ling.domain.core.ViewPoint;
 import org.m2ling.persistence.PersistenceManager;
 import org.m2ling.service.common.ServiceImpl;
-import org.m2ling.service.util.CoreUtil;
+import org.m2ling.service.util.DomainExplorer;
 import org.m2ling.service.util.DTOConverter;
 
 import com.google.common.collect.Lists;
@@ -41,9 +41,9 @@ public class RuleServiceImpl extends ServiceImpl implements RuleService {
 	 * Protected constructor to prevent direct instantiation
 	 */
 	@Inject
-	protected RuleServiceImpl(PersistenceManager pm, CoreUtil util, DTOConverter.FromDTO fromDTO,
+	protected RuleServiceImpl(PersistenceManager pm, DomainExplorer explorer, DTOConverter.FromDTO fromDTO,
 			DTOConverter.ToDTO toDTO, Conf conf, Logger logger, RuleServiceChecker checker) {
-		super(pm, util, fromDTO, toDTO, conf, logger);
+		super(pm, explorer, fromDTO, toDTO, conf, logger);
 		this.checker = checker;
 	}
 
@@ -56,7 +56,7 @@ public class RuleServiceImpl extends ServiceImpl implements RuleService {
 			// Controls
 			checker.checkDTO(ruleDTO, AccessType.UPDATE);
 			// Processing
-			Rule rule = util.getRuleByID(ruleDTO.getId());
+			Rule rule = explorer.getRuleByID(ruleDTO.getId());
 			rule.setName(ruleDTO.getName());
 			rule.setDescription(ruleDTO.getDescription());
 			rule.setPriority(ruleDTO.getPriority());
@@ -94,7 +94,7 @@ public class RuleServiceImpl extends ServiceImpl implements RuleService {
 			evt.setStatusLiteral(rule.getStatus());
 			history.add(evt);
 			// Add the rule
-			ViewPoint vp = util.getViewPointByID(ruleDTO.getViewPointId());
+			ViewPoint vp = explorer.getViewPointByID(ruleDTO.getViewPointId());
 			vp.getRules().add(rule);
 		} catch (Exception ex) {
 			handleAnyException(ex);
@@ -109,7 +109,7 @@ public class RuleServiceImpl extends ServiceImpl implements RuleService {
 		List<RuleDTO> out = Lists.newArrayList();
 		try {
 			// Controls
-			if (util.getViewPointByID(vp) == null) {
+			if (explorer.getViewPointByID(vp) == null) {
 				throw new FunctionalException(Code.TARGET_NOT_FOUND, null, "Viewpoint=" + vp.toString());
 			}
 			Root root = pmanager.getRoot();
@@ -139,7 +139,7 @@ public class RuleServiceImpl extends ServiceImpl implements RuleService {
 			// Controls
 			RuleDTO dto = new RuleDTO.Builder(null, id, null).build();
 			checker.checkDTO(dto, AccessType.DELETE);
-			Rule rule = util.getRuleByID(dto.getId());
+			Rule rule = explorer.getRuleByID(dto.getId());
 			ViewPoint vp = (ViewPoint) rule.eContainer();
 			vp.getRules().remove(rule);
 		} catch (Exception ex) {

@@ -16,7 +16,7 @@ import org.m2ling.presentation.principles.model.ComponentTypeBean;
 import org.m2ling.presentation.principles.model.HasNameAndIDBean;
 import org.m2ling.presentation.principles.model.ReferenceBean;
 import org.m2ling.service.common.ReferenceHelper;
-import org.m2ling.service.util.CoreUtil;
+import org.m2ling.service.util.DomainExplorer;
 import org.m2ling.service.util.DTOConverter.FromDTO;
 import org.m2ling.service.util.DTOConverter.ToDTO;
 import org.m2ling.specs.M2lingFixture;
@@ -55,11 +55,11 @@ public class AbstractCTFixture extends M2lingFixture {
 		PersistenceManagerXMIImpl pm;
 		try {
 			pm = new PersistenceManagerXMIImpl(logger, configuration);
-			CoreUtil util = new CoreUtil(logger, pm);
-			ReferenceHelper refHelper = new ReferenceHelper(util);
-			FromDTO fromDTO = new FromDTO(util);
-			checker = new ComponentTypeServiceChecker(pm, util, fromDTO, refHelper);
-			service = new ComponentTypeServiceImpl(pm, util, fromDTO, new ToDTO(util), configuration, logger, checker);
+			DomainExplorer explorer = new DomainExplorer(logger, pm);
+			ReferenceHelper refHelper = new ReferenceHelper(explorer);
+			FromDTO fromDTO = new FromDTO(explorer);
+			checker = new ComponentTypeServiceChecker(pm, explorer, fromDTO, refHelper);
+			service = new ComponentTypeServiceImpl(pm, explorer, fromDTO, new ToDTO(explorer), configuration, logger, checker);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

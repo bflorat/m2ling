@@ -13,7 +13,7 @@ import org.m2ling.domain.core.ViewPoint;
 import org.m2ling.persistence.PersistenceManager;
 import org.m2ling.service.common.ReferenceHelper;
 import org.m2ling.service.common.ServiceChecker;
-import org.m2ling.service.util.CoreUtil;
+import org.m2ling.service.util.DomainExplorer;
 import org.m2ling.service.util.DTOConverter.FromDTO;
 
 import com.google.inject.Inject;
@@ -24,8 +24,8 @@ import com.google.inject.Inject;
  */
 public class ViewServiceChecker extends ServiceChecker {
 	@Inject
-	protected ViewServiceChecker(PersistenceManager pm, CoreUtil util, FromDTO fromDTO, ReferenceHelper refHelper) {
-		super(pm, util, fromDTO, refHelper);
+	protected ViewServiceChecker(PersistenceManager pm, DomainExplorer explorer, FromDTO fromDTO, ReferenceHelper refHelper) {
+		super(pm, explorer, fromDTO, refHelper);
 	}
 
 	/**
@@ -66,7 +66,7 @@ public class ViewServiceChecker extends ServiceChecker {
 			} else if (vpDTO.getId() == null || "".equals(vpDTO.getId().trim())) {
 				throw new FunctionalException(Code.VOID_ARGUMENT, null, "(viewpoint id)");
 			} else {
-				ViewPoint vp = util.getViewPointByID(vpDTO.getId());
+				ViewPoint vp = explorer.getViewPointByID(vpDTO.getId());
 				if (vp == null) {
 					throw new FunctionalException(Code.TARGET_NOT_FOUND, null, "Viewpoint id=" + vpDTO.getId());
 				}

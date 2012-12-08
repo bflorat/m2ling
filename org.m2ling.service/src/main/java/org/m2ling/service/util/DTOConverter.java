@@ -70,12 +70,12 @@ public class DTOConverter {
 	 */
 	@Singleton
 	public static class ToDTO {
-		CoreUtil util;
+		DomainExplorer explorer;
 
 		@Inject
-		public ToDTO(CoreUtil util) {
+		public ToDTO(DomainExplorer explorer) {
 			super();
-			this.util = util;
+			this.explorer = explorer;
 		}
 
 		/**
@@ -187,7 +187,7 @@ public class DTOConverter {
 		}
 
 		public ComponentDTO getComponentDTO(Component comp) {
-			View view = util.getViewByItem(comp);
+			View view = explorer.getViewByItem(comp);
 			HasNameAndIdDTO viewDTO = new HasNameAndIdDTO.Builder(view.getId(), view.getName()).build();
 			// If name is void or null, use bound comp one
 			String name = comp.getName();
@@ -235,7 +235,7 @@ public class DTOConverter {
 		}
 
 		public ComponentInstanceDTO getComponentInstanceDTO(ComponentInstance instance) {
-			View view = util.getViewByItem(instance);
+			View view = explorer.getViewByItem(instance);
 			HasNameAndIdDTO viewDTO = new HasNameAndIdDTO.Builder(view.getId(), view.getName()).build();
 			// If name is void or null, use bound instance one
 			String name = instance.getName();
@@ -297,16 +297,16 @@ public class DTOConverter {
 
 		public LinkDTO getLinkDTO(Link link) {
 			// If name is void or null, use bound type one
-			View view = util.getViewByItem(link);
+			View view = explorer.getViewByItem(link);
 			HasNameAndIdDTO viewDTO = new HasNameAndIdDTO.Builder(view.getId(), view.getName()).build();
 			LinkDTO.Builder builder = new LinkDTO.Builder(link.getId(), link.getName(), viewDTO);
 			populateCommonBuilder(builder, link);
-			List<Component> comps = util.getComponentForArchitectureItems(link.getSources());
+			List<Component> comps = explorer.getComponentForArchitectureItems(link.getSources());
 			for (Component comp : comps) {
 				HasNameAndIdDTO hniDTO = new HasNameAndIdDTO.Builder(comp.getId(), comp.getName()).build();
 				builder.addSource(hniDTO);
 			}
-			comps = util.getComponentForArchitectureItems(link.getDestinations());
+			comps = explorer.getComponentForArchitectureItems(link.getDestinations());
 			for (Component comp : comps) {
 				HasNameAndIdDTO hniDTO = new HasNameAndIdDTO.Builder(comp.getId(), comp.getName()).build();
 				builder.addDestination(hniDTO);
@@ -320,7 +320,7 @@ public class DTOConverter {
 
 		public LinkInstanceDTO getLinkInstanceDTO(LinkInstance instance) {
 			// If name is void or null, use bound type one
-			View view = util.getViewByItem(instance);
+			View view = explorer.getViewByItem(instance);
 			HasNameAndIdDTO viewDTO = new HasNameAndIdDTO.Builder(view.getId(), view.getName()).build();
 			LinkInstanceDTO.Builder builder = new LinkInstanceDTO.Builder(instance.getId(), instance.getName(), viewDTO);
 			populateCommonBuilder(builder, instance);
@@ -380,12 +380,12 @@ public class DTOConverter {
 	 */
 	@Singleton
 	public static class FromDTO {
-		CoreUtil util;
+		DomainExplorer explorer;
 
 		@Inject
-		public FromDTO(CoreUtil util) {
+		public FromDTO(DomainExplorer explorer) {
 			super();
-			this.util = util;
+			this.explorer = explorer;
 		}
 
 		/**
@@ -451,13 +451,13 @@ public class DTOConverter {
 			EList<HasNameAndID> targets = reference.getTargets();
 			for (HasNameAndIdDTO targetDTO : dto.getTargets()) {
 				if (type == Type.COMPONENT_TYPE) {
-					ComponentType compType = util.getComponentTypeByID(targetDTO.getId());
+					ComponentType compType = explorer.getComponentTypeByID(targetDTO.getId());
 					targets.add(compType);
 				} else if (type == Type.COMPONENT) {
-					Component comp = util.getComponentByID(targetDTO.getId());
+					Component comp = explorer.getComponentByID(targetDTO.getId());
 					targets.add(comp);
 				} else if (type == Type.COMPONENT_INSTANCE) {
-					ComponentInstance ci = util.getComponentInstanceByID(targetDTO.getId());
+					ComponentInstance ci = explorer.getComponentInstanceByID(targetDTO.getId());
 					targets.add(ci);
 				}
 			}
@@ -475,15 +475,15 @@ public class DTOConverter {
 			ComponentType ct = CoreFactory.eINSTANCE.createComponentType();
 			populateCommonValues(ct, dto);
 			if (dto.getBoundType() != null) {
-				ComponentType boundedType = util.getComponentTypeByID(dto.getBoundType().getId());
+				ComponentType boundedType = explorer.getComponentTypeByID(dto.getBoundType().getId());
 				ct.setBoundType(boundedType);
 			}
 			ct.setInstantiationFactor(dto.getInstantiationFactor());
 			for (HasNameAndIdDTO hni : dto.getEnumeration()) {
-				ArchitectureItem comp = util.getComponentByID(hni.getId());
+				ArchitectureItem comp = explorer.getComponentByID(hni.getId());
 				if (comp == null) {
 					// if comp is null, should be because it is actually a comp group
-					comp = util.getComponentGroupByID(hni.getId());
+					comp = explorer.getComponentGroupByID(hni.getId());
 				}
 				ct.getEnumeration().add(comp);
 			}
@@ -505,14 +505,14 @@ public class DTOConverter {
 			Component comp = CoreFactory.eINSTANCE.createComponent();
 			populateCommonValues(comp, dto);
 			if (dto.getBoundComponent() != null) {
-				Component bounded = util.getComponentByID(dto.getBoundComponent().getId());
+				Component bounded = explorer.getComponentByID(dto.getBoundComponent().getId());
 				comp.setBoundComponent(bounded);
 			}
 			for (ReferenceDTO refDTO : dto.getReferences()) {
 				Reference reference = newReference(refDTO, Type.COMPONENT);
 				comp.getReferences().add(reference);
 			}
-			ComponentType type = util.getComponentTypeByID(dto.getComponentType().getId());
+			ComponentType type = explorer.getComponentTypeByID(dto.getComponentType().getId());
 			comp.setType(type);
 			return comp;
 		}
@@ -528,14 +528,14 @@ public class DTOConverter {
 			ComponentInstance ci = CoreFactory.eINSTANCE.createComponentInstance();
 			populateCommonValues(ci, dto);
 			if (dto.getBoundInstance() != null) {
-				ComponentInstance bounded = util.getComponentInstanceByID(dto.getBoundInstance().getId());
+				ComponentInstance bounded = explorer.getComponentInstanceByID(dto.getBoundInstance().getId());
 				ci.setBoundComponentInstance(bounded);
 			}
 			for (ReferenceDTO refDTO : dto.getReferences()) {
 				Reference reference = newReference(refDTO, Type.COMPONENT_INSTANCE);
 				ci.getReferences().add(reference);
 			}
-			Component comp = util.getComponentByID(dto.getComponent().getId());
+			Component comp = explorer.getComponentByID(dto.getComponent().getId());
 			ci.setComponent(comp);
 			return ci;
 		}
@@ -553,11 +553,11 @@ public class DTOConverter {
 			lt.setLinkAccessType(LinkAccessType.valueOf(dto.getLinkAccessType()));
 			lt.setLinkTemporality(LinkTemporality.valueOf(dto.getLinkTemporality()));
 			for (HasNameAndIdDTO hniDTO : dto.getSourcesTypes()) {
-				ComponentType ct = util.getComponentTypeByID(hniDTO.getId());
+				ComponentType ct = explorer.getComponentTypeByID(hniDTO.getId());
 				lt.getSourceTypes().add(ct);
 			}
 			for (HasNameAndIdDTO hniDTO : dto.getDestinationsTypes()) {
-				ComponentType ct = util.getComponentTypeByID(hniDTO.getId());
+				ComponentType ct = explorer.getComponentTypeByID(hniDTO.getId());
 				lt.getDestinationTypes().add(ct);
 			}
 			return lt;
@@ -574,15 +574,15 @@ public class DTOConverter {
 			Link link = CoreFactory.eINSTANCE.createLink();
 			populateCommonValues(link, dto);
 			for (HasNameAndIdDTO hniDTO : dto.getSources()) {
-				Component comp = util.getComponentByID(hniDTO.getId());
+				Component comp = explorer.getComponentByID(hniDTO.getId());
 				link.getSources().add(comp);
 			}
 			for (HasNameAndIdDTO hniDTO : dto.getDestinations()) {
-				Component comp = util.getComponentByID(hniDTO.getId());
+				Component comp = explorer.getComponentByID(hniDTO.getId());
 				link.getDestinations().add(comp);
 			}
 			link.setTimeoutMillis(dto.getTimeoutMillis());
-			LinkType lt = util.getLinkTypeByID(dto.getLinkType().getId());
+			LinkType lt = explorer.getLinkTypeByID(dto.getLinkType().getId());
 			link.setType(lt);
 			return link;
 		}
@@ -597,11 +597,11 @@ public class DTOConverter {
 		public LinkInstance newLinkInstance(LinkInstanceDTO dto) {
 			LinkInstance li = CoreFactory.eINSTANCE.createLinkInstance();
 			populateCommonValues(li, dto);
-			ComponentInstance ci = util.getComponentInstanceByID(dto.getSource().getId());
+			ComponentInstance ci = explorer.getComponentInstanceByID(dto.getSource().getId());
 			li.setSource(ci);
-			ci = util.getComponentInstanceByID(dto.getDestination().getId());
+			ci = explorer.getComponentInstanceByID(dto.getDestination().getId());
 			li.setDestination(ci);
-			Link link = util.getLinkByID(dto.getLink().getId());
+			Link link = explorer.getLinkByID(dto.getLink().getId());
 			li.setLink(link);
 			return li;
 		}
@@ -636,7 +636,7 @@ public class DTOConverter {
 		public View newView(ViewDTO dto) {
 			View view = CoreFactory.eINSTANCE.createView();
 			populateCommonValues(view, dto);
-			ViewPoint vp = util.getViewPointByID(dto.getViewpoint().getId());
+			ViewPoint vp = explorer.getViewPointByID(dto.getViewpoint().getId());
 			view.setViewPoint(vp);
 			return view;
 		}

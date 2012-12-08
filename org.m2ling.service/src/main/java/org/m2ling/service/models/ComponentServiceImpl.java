@@ -22,7 +22,7 @@ import org.m2ling.domain.core.Reference;
 import org.m2ling.domain.core.View;
 import org.m2ling.persistence.PersistenceManager;
 import org.m2ling.service.common.ServiceImpl;
-import org.m2ling.service.util.CoreUtil;
+import org.m2ling.service.util.DomainExplorer;
 import org.m2ling.service.util.DTOConverter;
 
 import com.google.common.collect.Lists;
@@ -43,9 +43,9 @@ public class ComponentServiceImpl extends ServiceImpl implements ComponentServic
 	 * Protected constructor to prevent direct instantiation
 	 */
 	@Inject
-	protected ComponentServiceImpl(PersistenceManager pm, CoreUtil util, DTOConverter.FromDTO fromDTO,
+	protected ComponentServiceImpl(PersistenceManager pm, DomainExplorer explorer, DTOConverter.FromDTO fromDTO,
 			DTOConverter.ToDTO toDTO, Conf conf, Logger logger, ComponentServiceChecker checker) {
-		super(pm, util, fromDTO, toDTO, conf, logger);
+		super(pm, explorer, fromDTO, toDTO, conf, logger);
 		this.checker = checker;
 	}
 
@@ -58,7 +58,7 @@ public class ComponentServiceImpl extends ServiceImpl implements ComponentServic
 			// Controls
 			checker.checkDTO(dto, AccessType.UPDATE);
 			// Processing
-			Component comp = util.getComponentByID(dto.getId());
+			Component comp = explorer.getComponentByID(dto.getId());
 			comp.setName(dto.getName());
 			comp.setDescription(dto.getDescription());
 			comp.setComment(dto.getComment());
@@ -67,7 +67,7 @@ public class ComponentServiceImpl extends ServiceImpl implements ComponentServic
 			tags.addAll(dto.getTags());
 			Component bound = null;
 			if (dto.getBoundComponent() != null) {
-				bound = util.getComponentByID(dto.getBoundComponent().getId());
+				bound = explorer.getComponentByID(dto.getBoundComponent().getId());
 			}
 			comp.setBoundComponent(bound);
 			comp.setStatus(dto.getStatus());
@@ -88,7 +88,7 @@ public class ComponentServiceImpl extends ServiceImpl implements ComponentServic
 			// Processing
 			Component ct = fromDTO.newComponent(dto);
 			// Add the item
-			View view = util.getViewByID(dto.getView().getId());
+			View view = explorer.getViewByID(dto.getView().getId());
 			view.getComponents().add(ct);
 			pmanager.commit();
 		} catch (Exception anyError) {
@@ -104,7 +104,7 @@ public class ComponentServiceImpl extends ServiceImpl implements ComponentServic
 		List<ComponentDTO> out = Lists.newArrayList();
 		try {
 			// Controls
-			if (util.getViewByID(vID) == null) {
+			if (explorer.getViewByID(vID) == null) {
 				throw new FunctionalException(Code.TARGET_NOT_FOUND, null, "View ID=" + vID.toString());
 			}
 			Root root = pmanager.getRoot();
@@ -134,7 +134,7 @@ public class ComponentServiceImpl extends ServiceImpl implements ComponentServic
 			// Controls
 			ComponentDTO dto = new ComponentDTO.Builder(id, null, null).build();
 			checker.checkDTO(dto, AccessType.DELETE);
-			Component compToDelete = util.getComponentByID(dto.getId());
+			Component compToDelete = explorer.getComponentByID(dto.getId());
 			View view = (View) compToDelete.eContainer();
 			// Note that we don't need to check if some CI still exists with references to a CI of the
 			// dropped
@@ -161,7 +161,7 @@ public class ComponentServiceImpl extends ServiceImpl implements ComponentServic
 			if (id == null || Utils.isNullOrEmptyAfterTrim(id)) {
 				throw new FunctionalException(FunctionalException.Code.NULL_ARGUMENT, null, "(id)");
 			}
-			Component comp = util.getComponentByID(id);
+			Component comp = explorer.getComponentByID(id);
 			if (comp != null) {
 				out = toDTO.getComponentDTO(comp);
 			}

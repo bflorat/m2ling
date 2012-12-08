@@ -8,7 +8,7 @@ import org.m2ling.common.dto.core.AccessType;
 import org.m2ling.common.exceptions.FunctionalException;
 import org.m2ling.persistence.PersistenceManagerXMIImpl;
 import org.m2ling.service.common.ReferenceHelper;
-import org.m2ling.service.util.CoreUtil;
+import org.m2ling.service.util.DomainExplorer;
 import org.m2ling.service.util.DTOConverter.FromDTO;
 import org.m2ling.service.util.DTOConverter.ToDTO;
 import org.m2ling.specs.M2lingFixture;
@@ -46,11 +46,11 @@ public class AbstractLinkInstanceFixture extends M2lingFixture {
 		PersistenceManagerXMIImpl pm;
 		try {
 			pm = new PersistenceManagerXMIImpl(logger, configuration);
-			CoreUtil util = new CoreUtil(logger, pm);
-			ReferenceHelper refHelper = new ReferenceHelper(util);
-			FromDTO fromDTO = new FromDTO(util);
-			checker = new LinkInstanceServiceChecker(pm, util, fromDTO, refHelper);
-			service = new LinkInstanceServiceImpl(pm, util, new FromDTO(util), new ToDTO(util), configuration, logger,
+			DomainExplorer explorer = new DomainExplorer(logger, pm);
+			ReferenceHelper refHelper = new ReferenceHelper(explorer);
+			FromDTO fromDTO = new FromDTO(explorer);
+			checker = new LinkInstanceServiceChecker(pm, explorer, fromDTO, refHelper);
+			service = new LinkInstanceServiceImpl(pm, explorer, new FromDTO(explorer), new ToDTO(explorer), configuration, logger,
 					checker);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block

@@ -18,7 +18,7 @@ import org.m2ling.domain.core.Component;
 import org.m2ling.domain.core.View;
 import org.m2ling.persistence.PersistenceManager;
 import org.m2ling.service.common.ServiceImpl;
-import org.m2ling.service.util.CoreUtil;
+import org.m2ling.service.util.DomainExplorer;
 import org.m2ling.service.util.DTOConverter;
 
 import com.google.common.collect.Lists;
@@ -40,9 +40,9 @@ public class ViewServiceImpl extends ServiceImpl implements ViewService {
 	 * Protected constructor to prevent direct instantiation
 	 */
 	@Inject
-	protected ViewServiceImpl(PersistenceManager pm, CoreUtil util, DTOConverter.FromDTO fromDTO,
+	protected ViewServiceImpl(PersistenceManager pm, DomainExplorer explorer, DTOConverter.FromDTO fromDTO,
 			DTOConverter.ToDTO toDTO, Conf conf, Logger logger, ViewServiceChecker checker) {
-		super(pm, util, fromDTO, toDTO, conf, logger);
+		super(pm, explorer, fromDTO, toDTO, conf, logger);
 		this.checker = checker;
 	}
 
@@ -76,7 +76,7 @@ public class ViewServiceImpl extends ServiceImpl implements ViewService {
 			if (id == null || Utils.isNullOrEmptyAfterTrim(id)) {
 				throw new FunctionalException(FunctionalException.Code.NULL_ARGUMENT, null, "(id)");
 			}
-			View vp = util.getViewByID(id);
+			View vp = explorer.getViewByID(id);
 			if (vp != null) {
 				out = toDTO.getViewDTO(vp);
 			}
@@ -112,7 +112,7 @@ public class ViewServiceImpl extends ServiceImpl implements ViewService {
 			// tests
 			checker.checkDTO(vDTO, AccessType.UPDATE);
 			// Processing (note that VP can't be changed so we don't set here)
-			View view = util.getViewByID(vDTO.getId());
+			View view = explorer.getViewByID(vDTO.getId());
 			view.setName(vDTO.getName());
 			view.setDescription(vDTO.getDescription());
 			view.setComment(vDTO.getComment());
@@ -132,7 +132,7 @@ public class ViewServiceImpl extends ServiceImpl implements ViewService {
 	@Override
 	public void deleteView(final Context context, final String id) throws FunctionalException {
 		try {
-			View view = util.getViewByID(id);
+			View view = explorer.getViewByID(id);
 			if (view == null) {
 				throw new FunctionalException(FunctionalException.Code.TARGET_NOT_FOUND, null, "id=" + id);
 			}

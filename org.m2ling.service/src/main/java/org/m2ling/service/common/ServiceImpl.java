@@ -10,7 +10,7 @@ import org.m2ling.common.configuration.Conf;
 import org.m2ling.common.exceptions.FunctionalException;
 import org.m2ling.common.exceptions.TechnicalException;
 import org.m2ling.persistence.PersistenceManager;
-import org.m2ling.service.util.CoreUtil;
+import org.m2ling.service.util.DomainExplorer;
 import org.m2ling.service.util.DTOConverter;
 
 /**
@@ -49,7 +49,7 @@ abstract public class ServiceImpl {
 	protected DTOConverter.ToDTO toDTO;
 
 	/** Utilities class */
-	protected CoreUtil util;
+	protected DomainExplorer explorer;
 
 	/** Configuration */
 	protected Conf conf;
@@ -57,9 +57,9 @@ abstract public class ServiceImpl {
 	/** the logger */
 	protected java.util.logging.Logger logger;
 
-	protected ServiceImpl(PersistenceManager pm, CoreUtil util, DTOConverter.FromDTO fromDTO, DTOConverter.ToDTO toDTO,
+	protected ServiceImpl(PersistenceManager pm, DomainExplorer explorer, DTOConverter.FromDTO fromDTO, DTOConverter.ToDTO toDTO,
 			Conf conf, Logger logger) {
-		this.util = util;
+		this.explorer = explorer;
 		this.fromDTO = fromDTO;
 		this.toDTO = toDTO;
 		this.pmanager = pm;

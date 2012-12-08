@@ -3,6 +3,8 @@
  */
 package org.m2ling.service.models;
 
+
+
 import java.util.List;
 
 import org.m2ling.common.dto.core.AccessType;
@@ -21,8 +23,8 @@ import org.m2ling.domain.core.View;
 import org.m2ling.persistence.PersistenceManager;
 import org.m2ling.service.common.ReferenceHelper;
 import org.m2ling.service.common.ServiceChecker;
-import org.m2ling.service.util.CoreUtil;
 import org.m2ling.service.util.DTOConverter.FromDTO;
+import org.m2ling.service.util.DomainExplorer;
 
 import com.google.inject.Inject;
 
@@ -32,9 +34,9 @@ import com.google.inject.Inject;
  */
 public class ComponentInstanceServiceChecker extends ServiceChecker {
 	@Inject
-	protected ComponentInstanceServiceChecker(PersistenceManager pm, CoreUtil util, FromDTO fromDTO,
+	protected ComponentInstanceServiceChecker(PersistenceManager pm, DomainExplorer explorer, FromDTO fromDTO,
 			ReferenceHelper refHelper) {
-		super(pm, util, fromDTO, refHelper);
+		super(pm, explorer, fromDTO, refHelper);
 	}
 
 	/**
@@ -58,7 +60,7 @@ public class ComponentInstanceServiceChecker extends ServiceChecker {
 		checkNullDTO(dto);
 		checkID(dto, access);
 		if (access == AccessType.DELETE) {
-			ComponentInstance ciToDelete = util.getComponentInstanceByID(dto.getId());
+			ComponentInstance ciToDelete = explorer.getComponentInstanceByID(dto.getId());
 			checkNoBindingToThisCI(ciToDelete);
 			checkNoLinkInvolvingThisCI(ciToDelete);
 		}
@@ -68,14 +70,14 @@ public class ComponentInstanceServiceChecker extends ServiceChecker {
 			} else {
 				checkNameWhenNotRequired(dto, access);
 			}
-			target = util.getComponentInstanceByID(dto.getId());
+			target = explorer.getComponentInstanceByID(dto.getId());
 			// Check associated view existence
 			View view = null;
 			if (access == AccessType.CREATE) {
 				checkViewIDFormat(dto);
-				view = util.getViewByID(dto.getView().getId());
+				view = explorer.getViewByID(dto.getView().getId());
 			} else {// vID is ignored for access != create
-				view = util.getViewByItem(target);
+				view = explorer.getViewByItem(target);
 			}
 			if (view == null) {
 				throw new FunctionalException(FunctionalException.Code.TARGET_NOT_FOUND, null, "(view)");
@@ -126,8 +128,8 @@ public class ComponentInstanceServiceChecker extends ServiceChecker {
 	private void checkTargetsFollowComponentDefinition(Component thisComp, ReferenceDTO refDTO)
 			throws FunctionalException {
 		for (HasNameAndIdDTO target : refDTO.getTargets()) {
-			ComponentInstance targetCI = util.getComponentInstanceByID(target.getId());
-			Component targetComp = util.getComponentByID(targetCI.getComponent().getId());
+			ComponentInstance targetCI = explorer.getComponentInstanceByID(target.getId());
+			Component targetComp = explorer.getComponentByID(targetCI.getComponent().getId());
 			// Search for a matching known reference
 			boolean found = false;
 			for (Reference thisCompReference : thisComp.getReferences()) {
@@ -156,7 +158,7 @@ public class ComponentInstanceServiceChecker extends ServiceChecker {
 					"No binding defined by component " + comp.getName());
 		}
 		if (!isNullBinding(dto)) {
-			ComponentInstance boundInstance = util.getComponentInstanceByID(dto.getBoundInstance().getId());
+			ComponentInstance boundInstance = explorer.getComponentInstanceByID(dto.getBoundInstance().getId());
 			if (boundInstance == null) {
 				throw new FunctionalException(FunctionalException.Code.TARGET_NOT_FOUND, null, "bound instance ID="
 						+ dto.getBoundInstance().getId());
@@ -199,7 +201,7 @@ public class ComponentInstanceServiceChecker extends ServiceChecker {
 			if (dto.getComponent() == null) {
 				throw new FunctionalException(FunctionalException.Code.NULL_ARGUMENT, null, "(component)");
 			}
-			comp = util.getComponentByID(dto.getComponent().getId());
+			comp = explorer.getComponentByID(dto.getComponent().getId());
 		} else if (access == AccessType.UPDATE) {
 			comp = ci.getComponent();
 		}

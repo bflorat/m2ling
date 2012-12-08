@@ -23,7 +23,7 @@ import org.m2ling.domain.core.LinkType;
 import org.m2ling.domain.core.ViewPoint;
 import org.m2ling.persistence.PersistenceManager;
 import org.m2ling.service.common.ServiceImpl;
-import org.m2ling.service.util.CoreUtil;
+import org.m2ling.service.util.DomainExplorer;
 import org.m2ling.service.util.DTOConverter;
 
 import com.google.common.collect.Lists;
@@ -44,9 +44,9 @@ public class LinkTypeServiceImpl extends ServiceImpl implements LinkTypeService 
 	 * Protected constructor to prevent direct instantiation
 	 */
 	@Inject
-	protected LinkTypeServiceImpl(PersistenceManager pm, CoreUtil util, DTOConverter.FromDTO fromDTO,
+	protected LinkTypeServiceImpl(PersistenceManager pm, DomainExplorer explorer, DTOConverter.FromDTO fromDTO,
 			DTOConverter.ToDTO toDTO, Conf conf, Logger logger, LinkTypeServiceChecker checker) {
-		super(pm, util, fromDTO, toDTO, conf, logger);
+		super(pm, explorer, fromDTO, toDTO, conf, logger);
 		this.checker = checker;
 	}
 
@@ -59,7 +59,7 @@ public class LinkTypeServiceImpl extends ServiceImpl implements LinkTypeService 
 			// Controls
 			checker.checkDTO(dto, AccessType.UPDATE);
 			// Processing
-			LinkType lt = util.getLinkTypeByID(dto.getId());
+			LinkType lt = explorer.getLinkTypeByID(dto.getId());
 			lt.setName(dto.getName());
 			lt.setDescription(dto.getDescription());
 			lt.setComment(dto.getComment());
@@ -71,13 +71,13 @@ public class LinkTypeServiceImpl extends ServiceImpl implements LinkTypeService 
 			List<ComponentType> sources = lt.getSourceTypes();
 			sources.clear();
 			for (HasNameAndIdDTO ctDTO : dto.getSourcesTypes()) {
-				ComponentType ct = util.getComponentTypeByID(ctDTO.getId());
+				ComponentType ct = explorer.getComponentTypeByID(ctDTO.getId());
 				sources.add(ct);
 			}
 			List<ComponentType> destinations = lt.getDestinationTypes();
 			destinations.clear();
 			for (HasNameAndIdDTO ctDTO : dto.getDestinationsTypes()) {
-				ComponentType ct = util.getComponentTypeByID(ctDTO.getId());
+				ComponentType ct = explorer.getComponentTypeByID(ctDTO.getId());
 				destinations.add(ct);
 			}
 			lt.setStatus(dto.getStatus());
@@ -95,7 +95,7 @@ public class LinkTypeServiceImpl extends ServiceImpl implements LinkTypeService 
 			// Processing
 			LinkType lt = fromDTO.newLinkType(dto);
 			// Add the item
-			ViewPoint vp = util.getViewPointByID(dto.getViewPoint().getId());
+			ViewPoint vp = explorer.getViewPointByID(dto.getViewPoint().getId());
 			vp.getLinkTypes().add(lt);
 			pmanager.commit();
 		} catch (Exception anyError) {
@@ -111,7 +111,7 @@ public class LinkTypeServiceImpl extends ServiceImpl implements LinkTypeService 
 		List<LinkTypeDTO> out = Lists.newArrayList();
 		try {
 			// Controls
-			if (util.getViewPointByID(vp) == null) {
+			if (explorer.getViewPointByID(vp) == null) {
 				throw new FunctionalException(Code.TARGET_NOT_FOUND, null, "Viewpoint id=" + vp);
 			}
 			Root root = pmanager.getRoot();
@@ -141,7 +141,7 @@ public class LinkTypeServiceImpl extends ServiceImpl implements LinkTypeService 
 			// Controls
 			LinkTypeDTO dto = new LinkTypeDTO.Builder(null, id, null).build();
 			checker.checkDTO(dto, AccessType.DELETE);
-			LinkType type = util.getLinkTypeByID(dto.getId());
+			LinkType type = explorer.getLinkTypeByID(dto.getId());
 			ViewPoint vp = (ViewPoint) type.eContainer();
 			vp.getLinkTypes().remove(type);
 			pmanager.commit();
@@ -161,7 +161,7 @@ public class LinkTypeServiceImpl extends ServiceImpl implements LinkTypeService 
 			if (id == null || Utils.isNullOrEmptyAfterTrim(id)) {
 				throw new FunctionalException(FunctionalException.Code.NULL_ARGUMENT, null, "(id)");
 			}
-			LinkType lt = util.getLinkTypeByID(id);
+			LinkType lt = explorer.getLinkTypeByID(id);
 			if (lt != null) {
 				out = toDTO.getLinkTypeDTO(lt);
 			}

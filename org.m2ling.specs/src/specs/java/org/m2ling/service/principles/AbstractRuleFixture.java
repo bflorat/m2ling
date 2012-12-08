@@ -13,7 +13,7 @@ import org.m2ling.persistence.PersistenceManagerXMIImpl;
 import org.m2ling.presentation.principles.model.RuleBean;
 import org.m2ling.presentation.principles.utils.DTOConverter;
 import org.m2ling.service.common.ReferenceHelper;
-import org.m2ling.service.util.CoreUtil;
+import org.m2ling.service.util.DomainExplorer;
 import org.m2ling.service.util.DTOConverter.FromDTO;
 import org.m2ling.service.util.DTOConverter.ToDTO;
 import org.m2ling.specs.M2lingFixture;
@@ -23,7 +23,7 @@ public class AbstractRuleFixture extends M2lingFixture {
 
 	RuleServiceChecker checker;
 
-	CoreUtil util;
+	DomainExplorer explorer;
 
 	public AbstractRuleFixture() throws IOException {
 		super();
@@ -52,11 +52,11 @@ public class AbstractRuleFixture extends M2lingFixture {
 		PersistenceManagerXMIImpl pm;
 		try {
 			pm = new PersistenceManagerXMIImpl(logger, configuration);
-			util = new CoreUtil(logger, pm);
-			FromDTO fromDTO = new FromDTO(util);
-			ReferenceHelper refHelper = new ReferenceHelper(util);
-			checker = new RuleServiceChecker(pm, util, fromDTO, refHelper);
-			service = new RuleServiceImpl(pm, util, fromDTO, new ToDTO(util), configuration, logger, checker);
+			explorer = new DomainExplorer(logger, pm);
+			FromDTO fromDTO = new FromDTO(explorer);
+			ReferenceHelper refHelper = new ReferenceHelper(explorer);
+			checker = new RuleServiceChecker(pm, explorer, fromDTO, refHelper);
+			service = new RuleServiceImpl(pm, explorer, fromDTO, new ToDTO(explorer), configuration, logger, checker);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

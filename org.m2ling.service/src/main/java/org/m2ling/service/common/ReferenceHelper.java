@@ -13,7 +13,7 @@ import org.m2ling.domain.core.HasNameAndID;
 import org.m2ling.domain.core.Reference;
 import org.m2ling.domain.core.ReferenceType;
 import org.m2ling.domain.core.Type;
-import org.m2ling.service.util.CoreUtil;
+import org.m2ling.service.util.DomainExplorer;
 
 import com.google.inject.Inject;
 
@@ -25,12 +25,12 @@ import com.google.inject.Inject;
  * 
  */
 public class ReferenceHelper {
-	private CoreUtil util;
+	private DomainExplorer explorer;
 
 	@Inject
-	public ReferenceHelper(CoreUtil util) {
+	public ReferenceHelper(DomainExplorer explorer) {
 		super();
-		this.util = util;
+		this.explorer = explorer;
 	}
 
 	/**
@@ -100,11 +100,11 @@ public class ReferenceHelper {
 			}
 			Object item = null;
 			if (type == Type.COMPONENT) {
-				item = util.getComponentByID(target.getId());
+				item = explorer.getComponentByID(target.getId());
 			} else if (type == Type.COMPONENT_INSTANCE) {
-				item = util.getComponentInstanceByID(target.getId());
+				item = explorer.getComponentInstanceByID(target.getId());
 			} else if (type == Type.COMPONENT_TYPE) {
-				item = util.getComponentTypeByID(target.getId());
+				item = explorer.getComponentTypeByID(target.getId());
 			}
 			if (item == null) {
 				throw new FunctionalException(FunctionalException.Code.TARGET_NOT_FOUND, null, "(references/target)");

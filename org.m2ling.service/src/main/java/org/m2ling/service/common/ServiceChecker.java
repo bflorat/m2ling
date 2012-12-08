@@ -14,7 +14,7 @@ import org.m2ling.common.utils.Utils;
 import org.m2ling.domain.core.Type;
 import org.m2ling.domain.core.ViewPoint;
 import org.m2ling.persistence.PersistenceManager;
-import org.m2ling.service.util.CoreUtil;
+import org.m2ling.service.util.DomainExplorer;
 import org.m2ling.service.util.DTOConverter;
 
 /**
@@ -33,11 +33,11 @@ public abstract class ServiceChecker {
 	protected DTOConverter.FromDTO fromDTO;
 
 	/** Utilities class */
-	protected CoreUtil util;
+	protected DomainExplorer explorer;
 
-	protected ServiceChecker(PersistenceManager pm, CoreUtil util, DTOConverter.FromDTO fromDTO,
+	protected ServiceChecker(PersistenceManager pm, DomainExplorer explorer, DTOConverter.FromDTO fromDTO,
 			ReferenceHelper refHelper) {
-		this.util = util;
+		this.explorer = explorer;
 		this.fromDTO = fromDTO;
 		this.pmanager = pm;
 		this.refHelper = refHelper;
@@ -88,12 +88,12 @@ public abstract class ServiceChecker {
 		}
 		if (access == AccessType.CREATE) {
 			// Check for existing item with the same id
-			if (util.getItemByTypeAndID(getManagedType(),dto.getId()) != null) {
+			if (explorer.getItemByTypeAndID(getManagedType(),dto.getId()) != null) {
 				throw new FunctionalException(FunctionalException.Code.DUPLICATES, null, "id=" + dto.getId());
 			}
 		}
 		if (access == AccessType.DELETE || access == AccessType.READ) {
-			if (util.getItemByTypeAndID(getManagedType(),dto.getId()) == null) {
+			if (explorer.getItemByTypeAndID(getManagedType(),dto.getId()) == null) {
 				throw new FunctionalException(FunctionalException.Code.TARGET_NOT_FOUND, null, "id=" + dto.getId());
 			}
 		}
@@ -189,7 +189,7 @@ public abstract class ServiceChecker {
 		if (vp == null || vp.getId() == null) {
 			throw new FunctionalException(FunctionalException.Code.NULL_ARGUMENT, null, "(viewpoint)");
 		}
-		ViewPoint storedVP = util.getViewPointByID(vp.getId());
+		ViewPoint storedVP = explorer.getViewPointByID(vp.getId());
 		if (storedVP == null) {
 			throw new FunctionalException(FunctionalException.Code.TARGET_NOT_FOUND, null, "Viewpoint id=" + vp.getId());
 		}

@@ -11,7 +11,7 @@ import org.m2ling.common.utils.Utils;
 import org.m2ling.domain.core.HasTags;
 import org.m2ling.domain.core.Type;
 import org.m2ling.persistence.PersistenceManager;
-import org.m2ling.service.util.CoreUtil;
+import org.m2ling.service.util.DomainExplorer;
 import org.m2ling.service.util.DTOConverter.FromDTO;
 
 import com.google.inject.Inject;
@@ -23,8 +23,8 @@ import com.google.inject.Inject;
 class TagServiceChecker extends ServiceChecker {
 	
 	@Inject
-	protected TagServiceChecker(PersistenceManager pm, CoreUtil util, FromDTO fromDTO, ReferenceHelper refHelper) {
-		super(pm, util, fromDTO, refHelper);
+	protected TagServiceChecker(PersistenceManager pm, DomainExplorer explorer, FromDTO fromDTO, ReferenceHelper refHelper) {
+		super(pm, explorer, fromDTO, refHelper);
 	}
 
 	void checkTypeAndID(Type type, String itemID) throws FunctionalException {
@@ -35,7 +35,7 @@ class TagServiceChecker extends ServiceChecker {
 			throw new FunctionalException(Code.NULL_ARGUMENT, null, "id=" + itemID);
 		}
 		// check the item existence
-		Object item = util.getItemByTypeAndID(type, itemID);
+		Object item = explorer.getItemByTypeAndID(type, itemID);
 		if (item == null) {
 			throw new FunctionalException(Code.TARGET_NOT_FOUND, null, "id=" + itemID);
 		}

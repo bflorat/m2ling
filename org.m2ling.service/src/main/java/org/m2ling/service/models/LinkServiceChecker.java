@@ -21,7 +21,7 @@ import org.m2ling.domain.core.View;
 import org.m2ling.persistence.PersistenceManager;
 import org.m2ling.service.common.ReferenceHelper;
 import org.m2ling.service.common.ServiceChecker;
-import org.m2ling.service.util.CoreUtil;
+import org.m2ling.service.util.DomainExplorer;
 import org.m2ling.service.util.DTOConverter.FromDTO;
 
 import com.google.common.collect.Lists;
@@ -33,8 +33,8 @@ import com.google.inject.Inject;
  */
 public class LinkServiceChecker extends ServiceChecker {
 	@Inject
-	protected LinkServiceChecker(PersistenceManager pm, CoreUtil util, FromDTO fromDTO, ReferenceHelper refHelper) {
-		super(pm, util, fromDTO, refHelper);
+	protected LinkServiceChecker(PersistenceManager pm, DomainExplorer explorer, FromDTO fromDTO, ReferenceHelper refHelper) {
+		super(pm, explorer, fromDTO, refHelper);
 	}
 
 	/**
@@ -61,22 +61,22 @@ public class LinkServiceChecker extends ServiceChecker {
 		checkNullDTO(dto);
 		checkID(dto, access);
 		checkNameWhenRequired(dto, access);
-		target = util.getLinkByID(dto.getId());
+		target = explorer.getLinkByID(dto.getId());
 		if (access == AccessType.DELETE) {
 			checkNoLinkInstancesForLink(target, access);
 		} else if (access == AccessType.CREATE || access == AccessType.UPDATE) {
 			if (access == AccessType.CREATE) {
 				checkType(dto);
-				lt = util.getLinkTypeByID(dto.getLinkType().getId());
+				lt = explorer.getLinkTypeByID(dto.getLinkType().getId());
 			} else {
 				lt = target.getType();
 			}
 			// Check associated view existence
 			if (access == AccessType.CREATE) {
 				checkViewIDFormat(dto);
-				view = util.getViewByID(dto.getView().getId());
+				view = explorer.getViewByID(dto.getView().getId());
 			} else {// vID is ignored for access != create
-				view = util.getViewByItem(target);
+				view = explorer.getViewByItem(target);
 			}
 			if (view == null) {
 				throw new FunctionalException(FunctionalException.Code.TARGET_NOT_FOUND, null, "(view)");
@@ -116,12 +116,12 @@ public class LinkServiceChecker extends ServiceChecker {
 		}
 		// check existence of sources and destination Components
 		for (HasNameAndIdDTO compDTO : dto.getSources()) {
-			if (util.getComponentByID(compDTO.getId()) == null) {
+			if (explorer.getComponentByID(compDTO.getId()) == null) {
 				throw new FunctionalException(FunctionalException.Code.TARGET_NOT_FOUND, null, "(source component)");
 			}
 		}
 		for (HasNameAndIdDTO compDTO : dto.getDestinations()) {
-			if (util.getComponentByID(compDTO.getId()) == null) {
+			if (explorer.getComponentByID(compDTO.getId()) == null) {
 				throw new FunctionalException(FunctionalException.Code.TARGET_NOT_FOUND, null, "(destination component)"
 						+ compDTO.getId());
 			}
@@ -135,21 +135,21 @@ public class LinkServiceChecker extends ServiceChecker {
 		if ("".equals(dto.getLinkType().getId().trim())) {
 			throw new FunctionalException(FunctionalException.Code.VOID_ARGUMENT, null, "(Link type)");
 		}
-		if (util.getLinkTypeByID(dto.getLinkType().getId()) == null) {
+		if (explorer.getLinkTypeByID(dto.getLinkType().getId()) == null) {
 			throw new FunctionalException(FunctionalException.Code.TARGET_NOT_FOUND, null, "(Link type)");
 		}
 	}
 
 	private void checkSourcesAndDestinationsConformToLT(final LinkDTO dto, final LinkType lt) throws FunctionalException {
 		for (HasNameAndIdDTO compDTO : dto.getSources()) {
-			Component comp = util.getComponentByID(compDTO.getId());
+			Component comp = explorer.getComponentByID(compDTO.getId());
 			if (comp == null || !lt.getSourceTypes().contains(comp.getType())) {
 				throw new FunctionalException(FunctionalException.Code.LINK_ILLEGAL_SOURCE_OR_DEST, null, "link source="
 						+ dto.getSources());
 			}
 		}
 		for (HasNameAndIdDTO compDTO : dto.getDestinations()) {
-			Component comp = util.getComponentByID(compDTO.getId());
+			Component comp = explorer.getComponentByID(compDTO.getId());
 			if (comp == null || !lt.getDestinationTypes().contains(comp.getType())) {
 				throw new FunctionalException(FunctionalException.Code.LINK_ILLEGAL_SOURCE_OR_DEST, null, "link source="
 						+ dto.getSources());
@@ -178,12 +178,12 @@ public class LinkServiceChecker extends ServiceChecker {
 	private void checkRemovedComponentsNotInUse(final LinkDTO dto, Link target, View view) throws FunctionalException {
 		List<ArchitectureItem> droppedSourceComponents = Lists.newArrayList(target.getSources());
 		for (HasNameAndIdDTO compDTO : dto.getSources()) {
-			Component comp = util.getComponentByID(compDTO.getId());
+			Component comp = explorer.getComponentByID(compDTO.getId());
 			droppedSourceComponents.remove(comp);
 		}
 		List<ArchitectureItem> droppedDestComponents = Lists.newArrayList(target.getDestinations());
 		for (HasNameAndIdDTO compDTO : dto.getDestinations()) {
-			Component comp = util.getComponentByID(compDTO.getId());
+			Component comp = explorer.getComponentByID(compDTO.getId());
 			droppedDestComponents.remove(comp);
 		}
 		if (droppedSourceComponents.size() > 0) {

@@ -13,7 +13,7 @@ import org.m2ling.domain.core.ViewPoint;
 import org.m2ling.persistence.PersistenceManager;
 import org.m2ling.service.common.ReferenceHelper;
 import org.m2ling.service.common.ServiceChecker;
-import org.m2ling.service.util.CoreUtil;
+import org.m2ling.service.util.DomainExplorer;
 import org.m2ling.service.util.DTOConverter.FromDTO;
 
 import com.google.inject.Inject;
@@ -24,8 +24,8 @@ import com.google.inject.Inject;
  */
 public class RuleServiceChecker extends ServiceChecker {
 	@Inject
-	protected RuleServiceChecker(PersistenceManager pm, CoreUtil util, FromDTO fromDTO, ReferenceHelper refHelper) {
-		super(pm, util, fromDTO, refHelper);
+	protected RuleServiceChecker(PersistenceManager pm, DomainExplorer explorer, FromDTO fromDTO, ReferenceHelper refHelper) {
+		super(pm, explorer, fromDTO, refHelper);
 	}
 
 	/**
@@ -49,7 +49,7 @@ public class RuleServiceChecker extends ServiceChecker {
 		checkID(dto, access);
 		checkNameWhenRequired(dto, access);
 		if (access == AccessType.CREATE || access == AccessType.UPDATE) {
-			ViewPoint vp = util.getViewPointByID(dto.getViewPointId());
+			ViewPoint vp = explorer.getViewPointByID(dto.getViewPointId());
 			if (vp == null) {
 				throw new FunctionalException(FunctionalException.Code.TARGET_NOT_FOUND, null, "viewpoint="
 						+ dto.getViewPointId());

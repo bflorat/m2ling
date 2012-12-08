@@ -21,7 +21,7 @@ import org.m2ling.domain.core.View;
 import org.m2ling.domain.core.ViewPoint;
 import org.m2ling.persistence.PersistenceManager;
 import org.m2ling.service.common.ServiceImpl;
-import org.m2ling.service.util.CoreUtil;
+import org.m2ling.service.util.DomainExplorer;
 import org.m2ling.service.util.DTOConverter;
 
 import com.google.inject.Inject;
@@ -41,9 +41,9 @@ public class ViewPointServiceImpl extends ServiceImpl implements ViewPointServic
 	 * Protected constructor to prevent direct instantiation
 	 */
 	@Inject
-	protected ViewPointServiceImpl(PersistenceManager pm, CoreUtil util, DTOConverter.FromDTO fromDTO,
+	protected ViewPointServiceImpl(PersistenceManager pm, DomainExplorer explorer, DTOConverter.FromDTO fromDTO,
 			DTOConverter.ToDTO toDTO, Conf conf, Logger logger, ViewPointServiceChecker checker) {
-		super(pm, util, fromDTO, toDTO, conf, logger);
+		super(pm, explorer, fromDTO, toDTO, conf, logger);
 		this.checker = checker;
 	}
 
@@ -77,7 +77,7 @@ public class ViewPointServiceImpl extends ServiceImpl implements ViewPointServic
 			if (id == null || Utils.isNullOrEmptyAfterTrim(id)) {
 				throw new FunctionalException(FunctionalException.Code.NULL_ARGUMENT, null, "(id)");
 			}
-			ViewPoint vp = util.getViewPointByID(id);
+			ViewPoint vp = explorer.getViewPointByID(id);
 			if (vp != null) {
 				out = toDTO.getViewPointDTO(vp);
 			}
@@ -113,7 +113,7 @@ public class ViewPointServiceImpl extends ServiceImpl implements ViewPointServic
 			// tests
 			checker.checkDTO(vpDTO, AccessType.UPDATE);
 			// Processing
-			ViewPoint vp = util.getViewPointByID(vpDTO.getId());
+			ViewPoint vp = explorer.getViewPointByID(vpDTO.getId());
 			vp.setName(vpDTO.getName());
 			vp.setDescription(vpDTO.getDescription());
 			List<String> status = vp.getStatusLiterals();
@@ -135,7 +135,7 @@ public class ViewPointServiceImpl extends ServiceImpl implements ViewPointServic
 	@Override
 	public void deleteViewPoint(final Context context, final String id) throws FunctionalException {
 		try {
-			ViewPoint vp = util.getViewPointByID(id);
+			ViewPoint vp = explorer.getViewPointByID(id);
 			if (vp == null) {
 				throw new FunctionalException(FunctionalException.Code.TARGET_NOT_FOUND, null, "id=" + id);
 			}

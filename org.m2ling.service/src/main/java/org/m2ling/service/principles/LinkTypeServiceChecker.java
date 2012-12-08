@@ -22,7 +22,7 @@ import org.m2ling.domain.core.ViewPoint;
 import org.m2ling.persistence.PersistenceManager;
 import org.m2ling.service.common.ReferenceHelper;
 import org.m2ling.service.common.ServiceChecker;
-import org.m2ling.service.util.CoreUtil;
+import org.m2ling.service.util.DomainExplorer;
 import org.m2ling.service.util.DTOConverter.FromDTO;
 
 import com.google.common.collect.Lists;
@@ -34,8 +34,8 @@ import com.google.inject.Inject;
  */
 public class LinkTypeServiceChecker extends ServiceChecker {
 	@Inject
-	protected LinkTypeServiceChecker(PersistenceManager pm, CoreUtil util, FromDTO fromDTO, ReferenceHelper refHelper) {
-		super(pm, util, fromDTO, refHelper);
+	protected LinkTypeServiceChecker(PersistenceManager pm, DomainExplorer explorer, FromDTO fromDTO, ReferenceHelper refHelper) {
+		super(pm, explorer, fromDTO, refHelper);
 	}
 
 	/**
@@ -66,7 +66,7 @@ public class LinkTypeServiceChecker extends ServiceChecker {
 			if (dto.getViewPoint() == null || dto.getViewPoint().getId() == null) {
 				throw new FunctionalException(FunctionalException.Code.NULL_ARGUMENT, null, "(viewpoint)");
 			}
-			ViewPoint vp = util.getViewPointByID(dto.getViewPoint().getId());
+			ViewPoint vp = explorer.getViewPointByID(dto.getViewPoint().getId());
 			if (vp == null) {
 				throw new FunctionalException(FunctionalException.Code.TARGET_NOT_FOUND, null, "viewpoint="
 						+ dto.getViewPoint().getId());
@@ -80,7 +80,7 @@ public class LinkTypeServiceChecker extends ServiceChecker {
 			// they are Set
 			checkCTsExistence(dto);
 			if (access == AccessType.UPDATE) {
-				LinkType lt = util.getLinkTypeByID(dto.getId());
+				LinkType lt = explorer.getLinkTypeByID(dto.getId());
 				checkRemovedCTNotInUse(dto, lt);
 			}
 			checkAccessAndTemporalityTypes(dto, access);
@@ -88,7 +88,7 @@ public class LinkTypeServiceChecker extends ServiceChecker {
 	}
 
 	private void checkBeforeDeletion(final LinkTypeDTO dto, AccessType access) throws FunctionalException {
-		LinkType type = util.getLinkTypeByID(dto.getId());
+		LinkType type = explorer.getLinkTypeByID(dto.getId());
 		// Check rule #LT-20 : none link of this type
 		for (View view : pmanager.getRoot().getViews()) {
 			for (Link link : view.getLinks()) {
@@ -103,24 +103,24 @@ public class LinkTypeServiceChecker extends ServiceChecker {
 	private void checkRemovedCTNotInUse(final LinkTypeDTO dto, LinkType lt) throws FunctionalException {
 		List<ComponentType> droppedSourceTypes = Lists.newArrayList(lt.getSourceTypes());
 		for (HasNameAndIdDTO ctDTO : dto.getSourcesTypes()) {
-			ComponentType ct = util.getComponentTypeByID(ctDTO.getId());
+			ComponentType ct = explorer.getComponentTypeByID(ctDTO.getId());
 			droppedSourceTypes.remove(ct);
 		}
 		List<ComponentType> droppedDestTypes = Lists.newArrayList(lt.getDestinationTypes());
 		for (HasNameAndIdDTO ctDTO : dto.getDestinationsTypes()) {
-			ComponentType ct = util.getComponentTypeByID(ctDTO.getId());
+			ComponentType ct = explorer.getComponentTypeByID(ctDTO.getId());
 			droppedDestTypes.remove(ct);
 		}
 		if (droppedDestTypes.size() > 0 || droppedSourceTypes.size() > 0) {
-			for (View v : util.getViewsByVPID(dto.getViewPoint().getId())) {
+			for (View v : explorer.getViewsByVPID(dto.getViewPoint().getId())) {
 				for (Link link : v.getLinks()) {
-					List<Component> comps = util.getComponentForArchitectureItems(link.getSources());
+					List<Component> comps = explorer.getComponentForArchitectureItems(link.getSources());
 					for (Component comp : comps) {
 						if (droppedSourceTypes.contains(comp.getType())) {
 							throw new FunctionalException(Code.LT_EXISTING_LINK, null, "component=" + comp.getName());
 						}
 					}
-					comps = util.getComponentForArchitectureItems(link.getDestinations());
+					comps = explorer.getComponentForArchitectureItems(link.getDestinations());
 					for (Component comp : comps) {
 						if (droppedDestTypes.contains(comp.getType())) {
 							throw new FunctionalException(Code.LT_EXISTING_LINK, null, "component=" + comp.getName());
@@ -142,12 +142,12 @@ public class LinkTypeServiceChecker extends ServiceChecker {
 
 	private void checkCTsExistence(final LinkTypeDTO dto) throws FunctionalException {
 		for (HasNameAndIdDTO ctDTO : dto.getSourcesTypes()) {
-			if (util.getComponentTypeByID(ctDTO.getId()) == null) {
+			if (explorer.getComponentTypeByID(ctDTO.getId()) == null) {
 				throw new FunctionalException(FunctionalException.Code.TARGET_NOT_FOUND, null, "(link type source)");
 			}
 		}
 		for (HasNameAndIdDTO ctDTO : dto.getDestinationsTypes()) {
-			if (util.getComponentTypeByID(ctDTO.getId()) == null) {
+			if (explorer.getComponentTypeByID(ctDTO.getId()) == null) {
 				throw new FunctionalException(FunctionalException.Code.TARGET_NOT_FOUND, null, "(link type destination)");
 			}
 		}

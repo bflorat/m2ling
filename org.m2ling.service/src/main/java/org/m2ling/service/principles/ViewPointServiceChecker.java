@@ -14,7 +14,7 @@ import org.m2ling.domain.core.ViewPoint;
 import org.m2ling.persistence.PersistenceManager;
 import org.m2ling.service.common.ReferenceHelper;
 import org.m2ling.service.common.ServiceChecker;
-import org.m2ling.service.util.CoreUtil;
+import org.m2ling.service.util.DomainExplorer;
 import org.m2ling.service.util.DTOConverter.FromDTO;
 
 import com.google.inject.Inject;
@@ -25,8 +25,8 @@ import com.google.inject.Inject;
  */
 public class ViewPointServiceChecker extends ServiceChecker {
 	@Inject
-	protected ViewPointServiceChecker(PersistenceManager pm, CoreUtil util, FromDTO fromDTO, ReferenceHelper refHelper) {
-		super(pm, util, fromDTO, refHelper);
+	protected ViewPointServiceChecker(PersistenceManager pm, DomainExplorer explorer, FromDTO fromDTO, ReferenceHelper refHelper) {
+		super(pm, explorer, fromDTO, refHelper);
 	}
 
 	/**
@@ -44,7 +44,7 @@ public class ViewPointServiceChecker extends ServiceChecker {
 		// TODO : check status (status of the VP itself, not status literals)
 		if (access == AccessType.CREATE || access == AccessType.UPDATE) {
 			checkNameWhenRequired(dto, access);
-			vp = util.getViewPointByID(dto.getId());
+			vp = explorer.getViewPointByID(dto.getId());
 			// Status literals
 			if (dto.getStatusLiterals() == null) {
 				throw new FunctionalException(FunctionalException.Code.NULL_ARGUMENT, null, "(statusLiteral)");
@@ -73,7 +73,7 @@ public class ViewPointServiceChecker extends ServiceChecker {
 				}
 				// Check if a HasStatus item maps a status that has has been dropped
 				for (String sl : droppedStatusLiterals) {
-					if (util.containsStatusLiteral(vp.getId(), sl)) {
+					if (explorer.containsStatusLiteral(vp.getId(), sl)) {
 						throw new FunctionalException(FunctionalException.Code.STATUS_USED, null, "(status literal)");
 					}
 				}
