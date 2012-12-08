@@ -14,6 +14,7 @@ import org.m2ling.common.dto.core.ComponentInstanceDTO;
 import org.m2ling.common.exceptions.FunctionalException;
 import org.m2ling.common.exceptions.FunctionalException.Code;
 import org.m2ling.common.soa.Context;
+import org.m2ling.common.utils.Utils;
 import org.m2ling.domain.Root;
 import org.m2ling.domain.core.ComponentInstance;
 import org.m2ling.domain.core.HasNameAndID;
@@ -150,6 +151,10 @@ public class ComponentInstanceServiceImpl extends ServiceImpl implements Compone
 	public ComponentInstanceDTO getCIByID(Context context, String id) throws FunctionalException {
 		ComponentInstanceDTO out = null;
 		try {
+			// Controls
+			if (id == null || Utils.isNullOrEmptyAfterTrim(id)) {
+				throw new FunctionalException(FunctionalException.Code.NULL_ARGUMENT, null, "(id)");
+			}
 			ComponentInstance ci = util.getComponentInstanceByID(id);
 			if (ci != null) {
 				out = toDTO.getComponentInstanceDTO(ci);

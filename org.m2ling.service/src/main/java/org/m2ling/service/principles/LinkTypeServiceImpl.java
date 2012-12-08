@@ -14,6 +14,7 @@ import org.m2ling.common.dto.core.LinkTypeDTO;
 import org.m2ling.common.exceptions.FunctionalException;
 import org.m2ling.common.exceptions.FunctionalException.Code;
 import org.m2ling.common.soa.Context;
+import org.m2ling.common.utils.Utils;
 import org.m2ling.domain.Root;
 import org.m2ling.domain.core.ComponentType;
 import org.m2ling.domain.core.LinkAccessType;
@@ -156,6 +157,10 @@ public class LinkTypeServiceImpl extends ServiceImpl implements LinkTypeService 
 	public LinkTypeDTO getLTByID(Context context, String id) throws FunctionalException {
 		LinkTypeDTO out = null;
 		try {
+			// Controls
+			if (id == null || Utils.isNullOrEmptyAfterTrim(id)) {
+				throw new FunctionalException(FunctionalException.Code.NULL_ARGUMENT, null, "(id)");
+			}
 			LinkType lt = util.getLinkTypeByID(id);
 			if (lt != null) {
 				out = toDTO.getLinkTypeDTO(lt);

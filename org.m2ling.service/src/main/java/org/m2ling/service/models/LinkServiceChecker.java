@@ -61,10 +61,10 @@ public class LinkServiceChecker extends ServiceChecker {
 		checkNullDTO(dto);
 		checkID(dto, access);
 		checkNameWhenRequired(dto, access);
-		if (access != AccessType.DELETE) {
+		target = util.getLinkByID(dto.getId());
+		if (access == AccessType.DELETE) {
 			checkNoLinkInstancesForLink(target, access);
 		} else if (access == AccessType.CREATE || access == AccessType.UPDATE) {
-			target = util.getLinkByID(dto.getId());
 			if (access == AccessType.CREATE) {
 				checkType(dto);
 				lt = util.getLinkTypeByID(dto.getLinkType().getId());

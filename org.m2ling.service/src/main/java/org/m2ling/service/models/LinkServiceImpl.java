@@ -14,6 +14,7 @@ import org.m2ling.common.dto.core.LinkDTO;
 import org.m2ling.common.exceptions.FunctionalException;
 import org.m2ling.common.exceptions.FunctionalException.Code;
 import org.m2ling.common.soa.Context;
+import org.m2ling.common.utils.Utils;
 import org.m2ling.domain.Root;
 import org.m2ling.domain.core.ArchitectureItem;
 import org.m2ling.domain.core.Component;
@@ -156,6 +157,10 @@ public class LinkServiceImpl extends ServiceImpl implements LinkService {
 	public LinkDTO getLinkByID(Context context, String id) throws FunctionalException {
 		LinkDTO out = null;
 		try {
+			// Controls
+			if (id == null || Utils.isNullOrEmptyAfterTrim(id)) {
+				throw new FunctionalException(FunctionalException.Code.NULL_ARGUMENT, null, "(id)");
+			}
 			Link link = util.getLinkByID(id);
 			if (link != null) {
 				out = toDTO.getLinkDTO(link);

@@ -15,6 +15,7 @@ import org.m2ling.common.dto.core.HasNameAndIdDTO;
 import org.m2ling.common.exceptions.FunctionalException;
 import org.m2ling.common.exceptions.FunctionalException.Code;
 import org.m2ling.common.soa.Context;
+import org.m2ling.common.utils.Utils;
 import org.m2ling.domain.Root;
 import org.m2ling.domain.core.ArchitectureItem;
 import org.m2ling.domain.core.ComponentType;
@@ -156,6 +157,9 @@ public class ComponentTypeServiceImpl extends ServiceImpl implements ComponentTy
 		ComponentTypeDTO out = null;
 		try {
 			// Controls
+			if (id == null || Utils.isNullOrEmptyAfterTrim(id)) {
+				throw new FunctionalException(FunctionalException.Code.NULL_ARGUMENT, null, "(id)");
+			}
 			ComponentType ct = util.getComponentTypeByID(id);
 			if (ct != null) {
 				out = toDTO.getComponentTypeDTO(ct);

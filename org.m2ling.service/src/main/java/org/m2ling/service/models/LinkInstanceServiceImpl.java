@@ -13,6 +13,7 @@ import org.m2ling.common.dto.core.LinkInstanceDTO;
 import org.m2ling.common.exceptions.FunctionalException;
 import org.m2ling.common.exceptions.FunctionalException.Code;
 import org.m2ling.common.soa.Context;
+import org.m2ling.common.utils.Utils;
 import org.m2ling.domain.Root;
 import org.m2ling.domain.core.ComponentInstance;
 import org.m2ling.domain.core.LinkInstance;
@@ -35,17 +36,16 @@ import com.google.inject.Singleton;
 @Singleton
 public class LinkInstanceServiceImpl extends ServiceImpl implements LinkInstanceService {
 	private LinkInstanceServiceChecker checker;
+
 	/**
 	 * Protected constructor to prevent direct instantiation
 	 */
 	@Inject
 	protected LinkInstanceServiceImpl(PersistenceManager pm, CoreUtil util, DTOConverter.FromDTO fromDTO,
-			DTOConverter.ToDTO toDTO, Conf conf, Logger logger,LinkInstanceServiceChecker checker) {
+			DTOConverter.ToDTO toDTO, Conf conf, Logger logger, LinkInstanceServiceChecker checker) {
 		super(pm, util, fromDTO, toDTO, conf, logger);
 		this.checker = checker;
 	}
-
-	
 
 	/**
 	 * {@inheritDoc}
@@ -147,6 +147,10 @@ public class LinkInstanceServiceImpl extends ServiceImpl implements LinkInstance
 	public LinkInstanceDTO getLinkInstanceByID(Context context, String id) throws FunctionalException {
 		LinkInstanceDTO out = null;
 		try {
+			// Controls
+			if (id == null || Utils.isNullOrEmptyAfterTrim(id)) {
+				throw new FunctionalException(FunctionalException.Code.NULL_ARGUMENT, null, "(id)");
+			}
 			LinkInstance li = util.getLinkInstanceByID(id);
 			if (li != null) {
 				out = toDTO.getLinkInstanceDTO(li);
@@ -156,6 +160,4 @@ public class LinkInstanceServiceImpl extends ServiceImpl implements LinkInstance
 		}
 		return out;
 	}
-
-
 }

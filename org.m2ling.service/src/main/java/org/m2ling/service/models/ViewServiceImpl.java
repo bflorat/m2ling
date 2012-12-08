@@ -12,6 +12,7 @@ import org.m2ling.common.dto.core.AccessType;
 import org.m2ling.common.dto.core.ViewDTO;
 import org.m2ling.common.exceptions.FunctionalException;
 import org.m2ling.common.soa.Context;
+import org.m2ling.common.utils.Utils;
 import org.m2ling.domain.Root;
 import org.m2ling.domain.core.Component;
 import org.m2ling.domain.core.View;
@@ -71,6 +72,10 @@ public class ViewServiceImpl extends ServiceImpl implements ViewService {
 	public ViewDTO getViewByID(final Context context, String id) throws FunctionalException {
 		ViewDTO out = null;
 		try {
+			// Controls
+			if (id == null || Utils.isNullOrEmptyAfterTrim(id)) {
+				throw new FunctionalException(FunctionalException.Code.NULL_ARGUMENT, null, "(id)");
+			}
 			View vp = util.getViewByID(id);
 			if (vp != null) {
 				out = toDTO.getViewDTO(vp);

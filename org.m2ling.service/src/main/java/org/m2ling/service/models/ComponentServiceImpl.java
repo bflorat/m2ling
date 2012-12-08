@@ -14,6 +14,7 @@ import org.m2ling.common.dto.core.ComponentDTO;
 import org.m2ling.common.exceptions.FunctionalException;
 import org.m2ling.common.exceptions.FunctionalException.Code;
 import org.m2ling.common.soa.Context;
+import org.m2ling.common.utils.Utils;
 import org.m2ling.domain.Root;
 import org.m2ling.domain.core.Component;
 import org.m2ling.domain.core.HasNameAndID;
@@ -156,6 +157,10 @@ public class ComponentServiceImpl extends ServiceImpl implements ComponentServic
 	public ComponentDTO getComponentByID(Context context, String id) throws FunctionalException {
 		ComponentDTO out = null;
 		try {
+			// Controls
+			if (id == null || Utils.isNullOrEmptyAfterTrim(id)) {
+				throw new FunctionalException(FunctionalException.Code.NULL_ARGUMENT, null, "(id)");
+			}
 			Component comp = util.getComponentByID(id);
 			if (comp != null) {
 				out = toDTO.getComponentDTO(comp);
