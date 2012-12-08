@@ -10,7 +10,6 @@ import org.m2ling.common.dto.core.AccessType;
 import org.m2ling.common.dto.core.ComponentInstanceDTO;
 import org.m2ling.common.dto.core.HasNameAndIdDTO;
 import org.m2ling.common.dto.core.ReferenceDTO;
-import org.m2ling.common.dto.core.ViewDTO;
 import org.m2ling.common.exceptions.FunctionalException;
 import org.m2ling.common.exceptions.TechnicalException;
 import org.m2ling.common.utils.UUT;
@@ -95,7 +94,7 @@ public class CreateCIFixture extends AbstractCIFixture {
 				builder.boundInstance(new HasNameAndIdDTO.Builder(boundID, "").build());
 			}
 			builder.component(new HasNameAndIdDTO.Builder(compID, "").build());
-			service.checkDTO(builder.build(), AccessType.CREATE);
+			checker.checkDTO(builder.build(), AccessType.CREATE);
 			return "PASS";
 		} catch (FunctionalException ex) {
 			return "FAIL with code " + ex.getCode().name();

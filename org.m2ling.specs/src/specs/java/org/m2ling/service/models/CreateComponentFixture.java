@@ -91,7 +91,7 @@ public class CreateComponentFixture extends AbstractComponentFixture {
 				builder.boundType(new HasNameAndIdDTO.Builder(boundID, "").build());
 			}
 			builder.type(new HasNameAndIdDTO.Builder(ctID, "").build());
-			service.checkDTO(builder.build(), AccessType.CREATE);
+			checker.checkDTO(builder.build(), AccessType.CREATE);
 			return "PASS";
 		} catch (FunctionalException ex) {
 			return "FAIL with code " + ex.getCode().name();

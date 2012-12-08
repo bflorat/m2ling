@@ -119,7 +119,7 @@ public class CreateLTFixture extends AbstractLTFixture {
 				dtoBuilder.addDestinationsType(new HasNameAndIdDTO.Builder(ctID, "").build());
 			}
 			dtoBuilder.status(UUT.nul(status));
-			service.checkDTO(dtoBuilder.build(), AccessType.CREATE);
+			checker.checkDTO(dtoBuilder.build(), AccessType.CREATE);
 			return "PASS";
 		} catch (FunctionalException ex) {
 			return "FAIL with code " + ex.getCode().name();

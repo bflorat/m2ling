@@ -102,7 +102,7 @@ public class CreateLinkFixture extends AbstractLinkFixture {
 			}
 			builder.status("APPLICABLE");
 			dto = builder.build();
-			service.checkDTO(dto, AccessType.CREATE);
+			checker.checkDTO(dto, AccessType.CREATE);
 			return "PASS";
 		} catch (FunctionalException ex) {
 			return "FAIL with code " + ex.getCode().name();
@@ -129,7 +129,7 @@ public class CreateLinkFixture extends AbstractLinkFixture {
 			HasNameAndIdDTO type = new HasNameAndIdDTO.Builder("id_lt_logical_http_rest", "").build();
 			LinkDTO dto = ((LinkDTO.Builder) new LinkDTO.Builder("id_new_link", "new_link",view).type(type).addSource(source)
 					.addDestination(dest).status("APPLICABLE")).build();
-			service.checkDTO(dto, AccessType.CREATE);
+			checker.checkDTO(dto, AccessType.CREATE);
 			return "PASS";
 		} catch (FunctionalException ex) {
 			return "FAIL with code " + ex.getCode().name();
@@ -166,7 +166,7 @@ public class CreateLinkFixture extends AbstractLinkFixture {
 				dtoBuilder.addDestination(new HasNameAndIdDTO.Builder(compID, "").build());
 			}
 			dtoBuilder.status(UUT.nul(status));
-			service.checkDTO(dtoBuilder.build(), AccessType.CREATE);
+			checker.checkDTO(dtoBuilder.build(), AccessType.CREATE);
 			return "PASS";
 		} catch (FunctionalException ex) {
 			return "FAIL with code " + ex.getCode().name();

@@ -58,7 +58,7 @@ public class CreateViewFixture extends AbstractViewFixture {
 					builder.addTag(tag);
 				}
 			}
-			service.checkDTO(builder.build(), AccessType.CREATE);
+			checker.checkDTO(builder.build(), AccessType.CREATE);
 			return "PASS";
 		} catch (FunctionalException ex) {
 			return "FAIL with code " + ex.getCode().name();

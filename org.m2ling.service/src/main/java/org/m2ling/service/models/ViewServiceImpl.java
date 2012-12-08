@@ -9,17 +9,12 @@ import java.util.logging.Logger;
 
 import org.m2ling.common.configuration.Conf;
 import org.m2ling.common.dto.core.AccessType;
-import org.m2ling.common.dto.core.HasNameAndIdDTO;
 import org.m2ling.common.dto.core.ViewDTO;
 import org.m2ling.common.exceptions.FunctionalException;
-import org.m2ling.common.exceptions.FunctionalException.Code;
 import org.m2ling.common.soa.Context;
-import org.m2ling.common.utils.Utils;
 import org.m2ling.domain.Root;
 import org.m2ling.domain.core.Component;
-import org.m2ling.domain.core.Type;
 import org.m2ling.domain.core.View;
-import org.m2ling.domain.core.ViewPoint;
 import org.m2ling.persistence.PersistenceManager;
 import org.m2ling.service.common.ServiceImpl;
 import org.m2ling.service.util.CoreUtil;
@@ -38,42 +33,16 @@ import com.google.inject.Singleton;
  */
 @Singleton
 public class ViewServiceImpl extends ServiceImpl implements ViewService {
+	private ViewServiceChecker checker;
+
 	/**
 	 * Protected constructor to prevent direct instantiation
 	 */
 	@Inject
 	protected ViewServiceImpl(PersistenceManager pm, CoreUtil util, DTOConverter.FromDTO fromDTO,
-			DTOConverter.ToDTO toDTO, Conf conf, Logger logger) {
+			DTOConverter.ToDTO toDTO, Conf conf, Logger logger, ViewServiceChecker checker) {
 		super(pm, util, fromDTO, toDTO, conf, logger);
-	}
-
-	void checkDTO(final ViewDTO dto, final AccessType access) throws FunctionalException {
-		checkNullDTO(dto);
-		checkID(dto,access);
-		checkNameWhenRequired(dto, access);
-		checkVP(dto, access);
-		if (access == AccessType.CREATE || access == AccessType.UPDATE) {
-			checkDescriptionMandatory(dto.getDescription());
-			checkComment(dto.getComment());
-			checkStatus(dto.getViewpoint(), dto.getStatus());
-			checkTags(dto.getTags());
-		}
-	}
-
-	void checkVP(final ViewDTO dto, final AccessType access) throws FunctionalException {
-		HasNameAndIdDTO vpDTO = dto.getViewpoint();
-		if (access == AccessType.CREATE) {
-			if (vpDTO == null) {
-				throw new FunctionalException(Code.NULL_ARGUMENT, null, "(viewpoint id)");
-			} else if (vpDTO.getId() == null || "".equals(vpDTO.getId().trim())) {
-				throw new FunctionalException(Code.VOID_ARGUMENT, null, "(viewpoint id)");
-			} else {
-				ViewPoint vp = util.getViewPointByID(vpDTO.getId());
-				if (vp == null) {
-					throw new FunctionalException(Code.TARGET_NOT_FOUND, null, "Viewpoint id=" + vpDTO.getId());
-				}
-			}
-		}
+		this.checker = checker;
 	}
 
 	/**
@@ -102,10 +71,6 @@ public class ViewServiceImpl extends ServiceImpl implements ViewService {
 	public ViewDTO getViewByID(final Context context, String id) throws FunctionalException {
 		ViewDTO out = null;
 		try {
-			// controls
-			if (id == null || Utils.isNullOrEmptyAfterTrim(id)) {
-				throw new FunctionalException(FunctionalException.Code.NULL_ARGUMENT, null, "(id)");
-			}
 			View vp = util.getViewByID(id);
 			if (vp != null) {
 				out = toDTO.getViewDTO(vp);
@@ -123,7 +88,7 @@ public class ViewServiceImpl extends ServiceImpl implements ViewService {
 	public void createView(final Context context, final ViewDTO dto) throws FunctionalException {
 		try {
 			// test DTO
-			checkDTO(dto, AccessType.CREATE);
+			checker.checkDTO(dto, AccessType.CREATE);
 			// Processing
 			View view = fromDTO.newView(dto);
 			Root root = pmanager.getRoot();
@@ -140,7 +105,7 @@ public class ViewServiceImpl extends ServiceImpl implements ViewService {
 	public void updateView(final Context context, final ViewDTO vDTO) throws FunctionalException {
 		try {
 			// tests
-			checkDTO(vDTO, AccessType.UPDATE);
+			checker.checkDTO(vDTO, AccessType.UPDATE);
 			// Processing (note that VP can't be changed so we don't set here)
 			View view = util.getViewByID(vDTO.getId());
 			view.setName(vDTO.getName());
@@ -183,13 +148,5 @@ public class ViewServiceImpl extends ServiceImpl implements ViewService {
 		} catch (Exception anyError) {
 			handleAnyException(anyError);
 		}
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	protected Type getManagedType() {
-		return Type.VIEW;
 	}
 }

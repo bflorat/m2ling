@@ -73,7 +73,7 @@ public class UpdateViewFixture extends AbstractViewFixture {
 			for (String tag : tagsList) {
 				builder.addTag(tag);
 			}
-			service.checkDTO(builder.build(), AccessType.UPDATE);
+			checker.checkDTO(builder.build(), AccessType.UPDATE);
 			return "PASS";
 		} catch (FunctionalException ex) {
 			return "FAIL with code " + ex.getCode();

@@ -13,13 +13,9 @@ import org.m2ling.common.configuration.Conf;
 import org.m2ling.common.dto.core.AccessType;
 import org.m2ling.common.dto.core.ViewPointDTO;
 import org.m2ling.common.exceptions.FunctionalException;
-import org.m2ling.common.exceptions.FunctionalException.Code;
 import org.m2ling.common.soa.Context;
-import org.m2ling.common.utils.Consts;
-import org.m2ling.common.utils.Utils;
 import org.m2ling.domain.Root;
 import org.m2ling.domain.core.ComponentType;
-import org.m2ling.domain.core.Type;
 import org.m2ling.domain.core.View;
 import org.m2ling.domain.core.ViewPoint;
 import org.m2ling.persistence.PersistenceManager;
@@ -38,64 +34,16 @@ import com.google.inject.Singleton;
  */
 @Singleton
 public class ViewPointServiceImpl extends ServiceImpl implements ViewPointService {
+	private ViewPointServiceChecker checker;
+
 	/**
 	 * Protected constructor to prevent direct instantiation
 	 */
 	@Inject
 	protected ViewPointServiceImpl(PersistenceManager pm, CoreUtil util, DTOConverter.FromDTO fromDTO,
-			DTOConverter.ToDTO toDTO, Conf conf, Logger logger) {
+			DTOConverter.ToDTO toDTO, Conf conf, Logger logger, ViewPointServiceChecker checker) {
 		super(pm, util, fromDTO, toDTO, conf, logger);
-	}
-
-	void checkDTO(final ViewPointDTO dto, final AccessType access) throws FunctionalException {
-		ViewPoint vp = null;
-		checkNullDTO(dto);
-		checkID(dto, access);
-		checkNameWhenRequired(dto, access);
-		// TODO : check status (status of the VP itself, not status literals)
-		if (access != AccessType.CREATE) {
-			// VP existence
-			vp = util.getViewPointByID(dto.getId());
-			if (vp == null) {
-				throw new FunctionalException(Code.TARGET_NOT_FOUND, null, dto.getId());
-			}
-		}
-		if (access == AccessType.CREATE || access == AccessType.UPDATE) {
-			// Status literals
-			if (dto.getStatusLiterals() == null) {
-				throw new FunctionalException(FunctionalException.Code.NULL_ARGUMENT, null, "(statusLiteral)");
-			}
-			int index = 1;
-			for (String literal : dto.getStatusLiterals()) {
-				if (literal == null) {
-					throw new FunctionalException(FunctionalException.Code.NULL_ARGUMENT, null, "statusLiteral #" + index);
-				}
-				if (Utils.isNullOrEmptyAfterTrim(literal)) {
-					throw new FunctionalException(FunctionalException.Code.VOID_ARGUMENT, null, "statusLiteral #" + index);
-				}
-				if (literal.length() > Consts.MAX_LABEL_SIZE) {
-					throw new FunctionalException(FunctionalException.Code.SIZE_EXCEEDED, null, "statusLiteral #" + index);
-				}
-				index++;
-			}
-			checkDescriptionMandatory(dto.getDescription());
-			checkComment(dto.getComment());
-			checkTags(dto.getTags());
-		}
-		if (access == AccessType.UPDATE) {
-			checkStatus(dto.getId(), dto.getStatus());
-			EList<String> droppedStatusLiterals = vp.getStatusLiterals();
-			for (String literal : dto.getStatusLiterals()) {
-				droppedStatusLiterals.remove(literal);
-			}
-			// Check if a HasStatus item maps a status that has has been dropped
-			for (String sl : droppedStatusLiterals) {
-				if (util.containsStatusLiteral(vp.getId(), sl)) {
-					throw new FunctionalException(FunctionalException.Code.STATUS_USED, null, "(status literal)");
-				}
-			}
-			// Note that status literal unicity is ensure by the use of a Set in DTO
-		}
+		this.checker = checker;
 	}
 
 	/**
@@ -124,10 +72,6 @@ public class ViewPointServiceImpl extends ServiceImpl implements ViewPointServic
 	public ViewPointDTO getViewPointByID(final Context context, String id) throws FunctionalException {
 		ViewPointDTO out = null;
 		try {
-			// controls
-			if (id == null || Utils.isNullOrEmptyAfterTrim(id)) {
-				throw new FunctionalException(FunctionalException.Code.NULL_ARGUMENT, null, "(id)");
-			}
 			ViewPoint vp = util.getViewPointByID(id);
 			if (vp != null) {
 				out = toDTO.getViewPointDTO(vp);
@@ -145,7 +89,7 @@ public class ViewPointServiceImpl extends ServiceImpl implements ViewPointServic
 	public void createViewPoint(final Context context, final ViewPointDTO vpDTO) throws FunctionalException {
 		try {
 			// test DTO
-			checkDTO(vpDTO, AccessType.CREATE);
+			checker.checkDTO(vpDTO, AccessType.CREATE);
 			// Processing
 			ViewPoint vp = fromDTO.newViewPoint(vpDTO);
 			Root root = pmanager.getRoot();
@@ -162,7 +106,7 @@ public class ViewPointServiceImpl extends ServiceImpl implements ViewPointServic
 	public void updateViewPoint(final Context context, final ViewPointDTO vpDTO) throws FunctionalException {
 		try {
 			// tests
-			checkDTO(vpDTO, AccessType.UPDATE);
+			checker.checkDTO(vpDTO, AccessType.UPDATE);
 			// Processing
 			ViewPoint vp = util.getViewPointByID(vpDTO.getId());
 			vp.setName(vpDTO.getName());
@@ -214,13 +158,5 @@ public class ViewPointServiceImpl extends ServiceImpl implements ViewPointServic
 		} catch (Exception ex) {
 			handleAnyException(ex);
 		}
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	protected Type getManagedType() {
-		return Type.VIEWPOINT;
 	}
 }

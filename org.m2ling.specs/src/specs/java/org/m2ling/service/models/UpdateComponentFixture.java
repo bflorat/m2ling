@@ -36,7 +36,7 @@ public class UpdateComponentFixture extends AbstractComponentFixture {
 			}
 			builder.boundType(new HasNameAndIdDTO.Builder(boundID, "").build());
 			builder.type(compDTO.getComponentType());
-			service.checkDTO(builder.build(), AccessType.UPDATE);
+			checker.checkDTO(builder.build(), AccessType.UPDATE);
 			return "PASS";
 		} catch (FunctionalException ex) {
 			return "FAIL with code " + ex.getCode().name();
@@ -64,7 +64,7 @@ public class UpdateComponentFixture extends AbstractComponentFixture {
 				builder.boundType(new HasNameAndIdDTO.Builder(compDTO.getBoundComponent().getId(), "").build());
 			}
 			builder.type(compDTO.getComponentType());
-			service.checkDTO(builder.build(), AccessType.UPDATE);
+			checker.checkDTO(builder.build(), AccessType.UPDATE);
 			return "PASS";
 		} catch (FunctionalException ex) {
 			return "FAIL with code " + ex.getCode().name();
@@ -92,7 +92,7 @@ public class UpdateComponentFixture extends AbstractComponentFixture {
 				builder.boundType(new HasNameAndIdDTO.Builder(compDTO.getBoundComponent().getId(), "").build());
 			}
 			builder.type(compDTO.getComponentType());
-			service.checkDTO(builder.build(), AccessType.UPDATE);
+			checker.checkDTO(builder.build(), AccessType.UPDATE);
 			return "PASS";
 		} catch (FunctionalException ex) {
 			return "FAIL with code " + ex.getCode().name();
@@ -118,7 +118,7 @@ public class UpdateComponentFixture extends AbstractComponentFixture {
 			setDTOReferences(builder, references);
 			builder.type(compDTO.getComponentType()); 
 			builder.boundType(compDTO.getBoundComponent()); 
-			service.checkDTO(builder.build(), AccessType.UPDATE);
+			checker.checkDTO(builder.build(), AccessType.UPDATE);
 			return "PASS";
 		} catch (FunctionalException ex) {
 			return "FAIL with code " + ex.getCode().name();

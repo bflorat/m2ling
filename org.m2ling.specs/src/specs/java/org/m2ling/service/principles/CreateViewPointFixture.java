@@ -68,7 +68,7 @@ public class CreateViewPointFixture extends AbstractViewPointFixture {
 			for (String statusLiteral : Utils.stringListFromString(statusLiterals)) {
 				builder.addStatusLiteral(UUT.nul(statusLiteral));
 			}
-			service.checkDTO(builder.build(), AccessType.CREATE);
+			checker.checkDTO(builder.build(), AccessType.CREATE);
 			return "PASS";
 		} catch (FunctionalException ex) {
 			return "FAIL with code " + ex.getCode().name();

@@ -12,6 +12,7 @@ import org.m2ling.common.utils.UUT;
 import org.m2ling.persistence.PersistenceManagerXMIImpl;
 import org.m2ling.presentation.principles.model.RuleBean;
 import org.m2ling.presentation.principles.utils.DTOConverter;
+import org.m2ling.service.common.ReferenceHelper;
 import org.m2ling.service.util.CoreUtil;
 import org.m2ling.service.util.DTOConverter.FromDTO;
 import org.m2ling.service.util.DTOConverter.ToDTO;
@@ -19,6 +20,9 @@ import org.m2ling.specs.M2lingFixture;
 
 public class AbstractRuleFixture extends M2lingFixture {
 	RuleServiceImpl service;
+
+	RuleServiceChecker checker;
+
 	CoreUtil util;
 
 	public AbstractRuleFixture() throws IOException {
@@ -28,7 +32,7 @@ public class AbstractRuleFixture extends M2lingFixture {
 	public String getCheckNullDTO() {
 		reset("Technical");
 		try {
-			service.checkDTO(null, AccessType.CREATE);
+			checker.checkDTO(null, AccessType.CREATE);
 			return "PASS";
 		} catch (FunctionalException ex) {
 			return "FAIL";
@@ -49,13 +53,16 @@ public class AbstractRuleFixture extends M2lingFixture {
 		try {
 			pm = new PersistenceManagerXMIImpl(logger, configuration);
 			util = new CoreUtil(logger, pm);
-			service = new RuleServiceImpl(pm, util, new FromDTO(util), new ToDTO(util), configuration, logger);
+			FromDTO fromDTO = new FromDTO(util);
+			ReferenceHelper refHelper = new ReferenceHelper(util);
+			checker = new RuleServiceChecker(pm, util, fromDTO, refHelper);
+			service = new RuleServiceImpl(pm, util, fromDTO, new ToDTO(util), configuration, logger, checker);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
-	
+
 	/**
 	 * Create a Rule from a presentation layer bean (to test it too), then search it back
 	 * 
@@ -64,8 +71,8 @@ public class AbstractRuleFixture extends M2lingFixture {
 	 * @return
 	 * @throws FunctionalException
 	 */
-	public String createAndGetRule(String id, String vpID, String name, String description, String comment, String status,
-			int priority, String rationale, String exceptions, String tags) throws FunctionalException {
+	public String createAndGetRule(String id, String vpID, String name, String description, String comment,
+			String status, int priority, String rationale, String exceptions, String tags) throws FunctionalException {
 		reset("Technical");
 		RuleBean bean = new RuleBean();
 		bean.setComment(comment);
@@ -92,17 +99,18 @@ public class AbstractRuleFixture extends M2lingFixture {
 		}
 		return "rule not found";
 	}
-	
-	public String getCheckDTOVerification(String caseName, String accessType,String id, String name, String description, String rationale,
-			String exceptions, String comment, String tags, String status, String priority) {
+
+	public String getCheckDTOVerification(String caseName, String accessType, String id, String name,
+			String description, String rationale, String exceptions, String comment, String tags, String status,
+			String priority) {
 		reset("Technical");
-		id=UUT.nul(id);
-		name=UUT.nul(name);
-		description=UUT.nul(description);
-		comment=UUT.nul(comment);
-		status=UUT.nul(status);
-		exceptions=UUT.nul(exceptions);
-		rationale=UUT.nul(rationale);		
+		id = UUT.nul(id);
+		name = UUT.nul(name);
+		description = UUT.nul(description);
+		comment = UUT.nul(comment);
+		status = UUT.nul(status);
+		exceptions = UUT.nul(exceptions);
+		rationale = UUT.nul(rationale);
 		try {
 			RuleBean bean = new RuleBean();
 			bean.setComment(comment);
@@ -116,11 +124,10 @@ public class AbstractRuleFixture extends M2lingFixture {
 			bean.setTags(tags);
 			bean.setViewPointId("id_vp1");
 			RuleDTO dto = new DTOConverter.ToDTO().getRuleDTO(bean);
-			service.checkDTO(dto, AccessType.valueOf(accessType));
+			checker.checkDTO(dto, AccessType.valueOf(accessType));
 			return "PASS";
 		} catch (FunctionalException ex) {
-			return "FAIL with code "+ex.getCode().name();
+			return "FAIL with code " + ex.getCode().name();
 		}
 	}
-
 }

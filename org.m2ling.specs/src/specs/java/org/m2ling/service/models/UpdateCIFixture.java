@@ -36,7 +36,7 @@ public class UpdateCIFixture extends AbstractCIFixture {
 			}
 			builder.boundInstance(new HasNameAndIdDTO.Builder(boundID, "").build());
 			builder.component(ciDTO.getComponent());
-			service.checkDTO(builder.build(), AccessType.UPDATE);
+			checker.checkDTO(builder.build(), AccessType.UPDATE);
 			return "PASS";
 		} catch (FunctionalException ex) {
 			return "FAIL with code " + ex.getCode().name();
@@ -62,7 +62,7 @@ public class UpdateCIFixture extends AbstractCIFixture {
 			setDTOReferences(builder, references);
 			builder.component(ciDTO.getComponent());
 			builder.boundInstance(ciDTO.getBoundInstance());
-			service.checkDTO(builder.build(), AccessType.UPDATE);
+			checker.checkDTO(builder.build(), AccessType.UPDATE);
 			return "PASS";
 		} catch (FunctionalException ex) {
 			return "FAIL with code " + ex.getCode().name();

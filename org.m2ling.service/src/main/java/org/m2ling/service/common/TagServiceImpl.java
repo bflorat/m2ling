@@ -32,44 +32,16 @@ import com.google.inject.Singleton;
 @ACResource
 @Singleton
 public class TagServiceImpl extends ServiceImpl implements TagService {
+	private TagServiceChecker checker;
+
 	/**
 	 * @see ServiceImpl
 	 */
 	@Inject
 	protected TagServiceImpl(PersistenceManager pm, CoreUtil util, DTOConverter.FromDTO fromDTO,
-			DTOConverter.ToDTO toDTO, Conf conf, Logger logger) {
+			DTOConverter.ToDTO toDTO, Conf conf, Logger logger, TagServiceChecker checker) {
 		super(pm, util, fromDTO, toDTO, conf, logger);
-	}
-
-	private void checkTypeAndID(Type type, String itemID) throws FunctionalException {
-		if (type == null) {
-			throw new FunctionalException(Code.NULL_ARGUMENT, null, "type");
-		}
-		if (Utils.isNullOrEmptyAfterTrim(itemID)) {
-			throw new FunctionalException(Code.NULL_ARGUMENT, null, "id=" + itemID);
-		}
-		// check the item existence
-		Object item = util.getItemByTypeAndID(type, itemID);
-		if (item == null) {
-			throw new FunctionalException(Code.TARGET_NOT_FOUND, null, "id=" + itemID);
-		}
-		if (!(item instanceof HasTags)) {
-			throw new FunctionalException(Code.TAGS_NOT_SUPPORTED, null, itemID);
-		}
-	}
-
-	private void checkTagsList(List<String> tags) throws FunctionalException {
-		if (tags == null || tags.size() == 0) {
-			throw new FunctionalException(Code.NULL_ARGUMENT, null, "tags=" + tags);
-		}
-		for (String tag : tags) {
-			if (tag.contains(",")) {
-				throw new FunctionalException(Code.TAGS_SEPARATOR, null, tag);
-			}
-			if (Utils.isNullOrEmptyAfterTrim(tag)) {
-				throw new FunctionalException(Code.NULL_ARGUMENT, null, "tag=" + tag);
-			}
-		}
+		this.checker = checker;
 	}
 
 	/*
@@ -81,8 +53,8 @@ public class TagServiceImpl extends ServiceImpl implements TagService {
 	@Override
 	public void addTags(Context context, Type type, String id, List<String> tags) throws FunctionalException {
 		{ // Controls
-			checkTypeAndID(type, id);
-			checkTagsList(tags);
+			checker.checkTypeAndID(type, id);
+			checker.checkTagsList(tags);
 		}
 		HasTags htags = (HasTags) util.getViewPointByID(id);
 		htags.getTags().addAll(tags);
@@ -98,8 +70,8 @@ public class TagServiceImpl extends ServiceImpl implements TagService {
 	@ACResource
 	public void setTags(Context context, Type type, String itemID, List<String> tags) throws FunctionalException {
 		{ // Controls
-			checkTypeAndID(type, itemID);
-			checkTagsList(tags);
+			checker.checkTypeAndID(type, itemID);
+			checker.checkTagsList(tags);
 		}
 		HasTags htags = (HasTags) util.getItemByTypeAndID(type, itemID);
 		// We clear and reuse the existing list to endorse defensive copy.
@@ -117,7 +89,7 @@ public class TagServiceImpl extends ServiceImpl implements TagService {
 	public void removeTag(Context context, Type type, String itemID, String tag) throws FunctionalException {
 		List<String> tags = null;
 		{ // Controls
-			checkTypeAndID(type, itemID);
+			checker.checkTypeAndID(type, itemID);
 			HasTags htags = (HasTags) util.getItemByTypeAndID(type, itemID);
 			tags = htags.getTags();
 			if (!tags.contains(tag)) {
@@ -136,7 +108,7 @@ public class TagServiceImpl extends ServiceImpl implements TagService {
 	 */
 	@Override
 	public List<String> getAllTags(Context context, Type type, String itemID) throws FunctionalException {
-		checkTypeAndID(type, itemID);
+		checker.checkTypeAndID(type, itemID);
 		HasTags htags = (HasTags) util.getItemByTypeAndID(type, itemID);
 		List<String> tags = htags.getTags();
 		if (tags == null) {
@@ -145,15 +117,5 @@ public class TagServiceImpl extends ServiceImpl implements TagService {
 			throw new IllegalStateException(msg);
 		}
 		return tags;
-	}
-	
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.m2ling.service.common.ServiceImpl#getType()
-	 */
-	@Override
-	protected Type getManagedType() {
-		return null;
 	}
 }

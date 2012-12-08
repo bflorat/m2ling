@@ -13,13 +13,10 @@ import org.m2ling.common.dto.core.RuleDTO;
 import org.m2ling.common.exceptions.FunctionalException;
 import org.m2ling.common.exceptions.FunctionalException.Code;
 import org.m2ling.common.soa.Context;
-import org.m2ling.common.utils.Consts;
-import org.m2ling.common.utils.Utils;
 import org.m2ling.domain.Root;
 import org.m2ling.domain.core.CoreFactory;
 import org.m2ling.domain.core.Rule;
 import org.m2ling.domain.core.StatusEvent;
-import org.m2ling.domain.core.Type;
 import org.m2ling.domain.core.ViewPoint;
 import org.m2ling.persistence.PersistenceManager;
 import org.m2ling.service.common.ServiceImpl;
@@ -38,66 +35,16 @@ import com.google.inject.Singleton;
  */
 @Singleton
 public class RuleServiceImpl extends ServiceImpl implements RuleService {
+	private RuleServiceChecker checker;
+
 	/**
 	 * Protected constructor to prevent direct instantiation
 	 */
 	@Inject
 	protected RuleServiceImpl(PersistenceManager pm, CoreUtil util, DTOConverter.FromDTO fromDTO,
-			DTOConverter.ToDTO toDTO, Conf conf, Logger logger) {
+			DTOConverter.ToDTO toDTO, Conf conf, Logger logger, RuleServiceChecker checker) {
 		super(pm, util, fromDTO, toDTO, conf, logger);
-	}
-
-	/**
-	 * Centralize all service entry verifications
-	 * 
-	 * @param dto
-	 * @param access
-	 *           : type of access
-	 * @throws FunctionalException
-	 */
-	void checkDTO(final RuleDTO dto, AccessType access) throws FunctionalException {
-		checkNullDTO(dto);
-		checkID(dto, access);
-		checkNameWhenRequired(dto, access);
-		if (access == AccessType.CREATE || access == AccessType.UPDATE) {
-			ViewPoint vp = util.getViewPointByID(dto.getViewPointId());
-			if (vp == null) {
-				throw new FunctionalException(FunctionalException.Code.TARGET_NOT_FOUND, null, "viewpoint="
-						+ dto.getViewPointId());
-			}
-			checkStatus(dto.getViewPointId(), dto.getStatus());
-			checkDescriptionMandatory(dto.getDescription());
-			checkRationale(dto);
-			checkExceptions(dto);
-			checkComment(dto.getComment());
-			checkTags(dto.getTags());
-		}
-	}
-
-	/**
-	 * @param dto
-	 * @throws FunctionalException
-	 */
-	private void checkExceptions(final RuleDTO dto) throws FunctionalException {
-		if (dto.getExceptions() != null && dto.getExceptions().length() > Consts.MAX_TEXT_SIZE) {
-			throw new FunctionalException(FunctionalException.Code.SIZE_EXCEEDED, null, "(exceptions)");
-		}
-	}
-
-	/**
-	 * @param dto
-	 * @throws FunctionalException
-	 */
-	private void checkRationale(final RuleDTO dto) throws FunctionalException {
-		if (dto.getRationale() == null) {
-			throw new FunctionalException(FunctionalException.Code.NULL_ARGUMENT, null, "(rationale)");
-		}
-		if (Utils.isNullOrEmptyAfterTrim(dto.getRationale())) {
-			throw new FunctionalException(FunctionalException.Code.VOID_ARGUMENT, null, "(rationale)");
-		}
-		if (dto.getRationale().length() > Consts.MAX_TEXT_SIZE) {
-			throw new FunctionalException(FunctionalException.Code.SIZE_EXCEEDED, null, "(rationale)");
-		}
+		this.checker = checker;
 	}
 
 	/**
@@ -107,7 +54,7 @@ public class RuleServiceImpl extends ServiceImpl implements RuleService {
 	public void updateRule(final Context context, final RuleDTO ruleDTO) throws FunctionalException {
 		try {
 			// Controls
-			checkDTO(ruleDTO, AccessType.UPDATE);
+			checker.checkDTO(ruleDTO, AccessType.UPDATE);
 			// Processing
 			Rule rule = util.getRuleByID(ruleDTO.getId());
 			rule.setName(ruleDTO.getName());
@@ -137,7 +84,7 @@ public class RuleServiceImpl extends ServiceImpl implements RuleService {
 	public void createRule(final Context context, final RuleDTO ruleDTO) throws FunctionalException {
 		try {
 			// Controls
-			checkDTO(ruleDTO, AccessType.CREATE);
+			checker.checkDTO(ruleDTO, AccessType.CREATE);
 			// Processing
 			Rule rule = fromDTO.newRule(ruleDTO);
 			// Set history
@@ -191,20 +138,12 @@ public class RuleServiceImpl extends ServiceImpl implements RuleService {
 		try {
 			// Controls
 			RuleDTO dto = new RuleDTO.Builder(null, id, null).build();
-			checkDTO(dto, AccessType.DELETE);
+			checker.checkDTO(dto, AccessType.DELETE);
 			Rule rule = util.getRuleByID(dto.getId());
 			ViewPoint vp = (ViewPoint) rule.eContainer();
 			vp.getRules().remove(rule);
 		} catch (Exception ex) {
 			handleAnyException(ex);
 		}
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	protected Type getManagedType() {
-		return Type.RULE;
 	}
 }

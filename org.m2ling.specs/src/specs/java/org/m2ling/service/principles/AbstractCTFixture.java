@@ -23,6 +23,7 @@ import org.m2ling.specs.M2lingFixture;
 
 public class AbstractCTFixture extends M2lingFixture {
 	ComponentTypeServiceImpl service;
+	ComponentTypeServiceChecker checker;
 
 	boolean noreset = false;
 
@@ -35,7 +36,7 @@ public class AbstractCTFixture extends M2lingFixture {
 			reset("Technical");
 		}
 		try {
-			service.checkDTO(null, AccessType.CREATE);
+			checker.checkDTO(null, AccessType.CREATE);
 			return "PASS";
 		} catch (FunctionalException ex) {
 			return "FAIL";
@@ -56,7 +57,9 @@ public class AbstractCTFixture extends M2lingFixture {
 			pm = new PersistenceManagerXMIImpl(logger, configuration);
 			CoreUtil util = new CoreUtil(logger, pm);
 			ReferenceHelper refHelper = new ReferenceHelper(util);
-			service = new ComponentTypeServiceImpl(pm, util, new FromDTO(util), new ToDTO(util), configuration, logger,refHelper);
+			FromDTO fromDTO = new FromDTO(util);
+			checker = new ComponentTypeServiceChecker(pm, util, fromDTO, refHelper);
+			service = new ComponentTypeServiceImpl(pm, util, fromDTO, new ToDTO(util), configuration, logger, checker);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

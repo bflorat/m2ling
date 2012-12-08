@@ -90,7 +90,7 @@ public class CreateLinkInstanceFixture extends AbstractLinkInstanceFixture {
 			HasNameAndIdDTO link = new HasNameAndIdDTO.Builder("id_link_deploy_REST_admin", "").build();
 			LinkInstanceDTO dto = ((LinkInstanceDTO.Builder) new LinkInstanceDTO.Builder("id_new_li", "new_li", view)
 					.link(link).source(source).destination(dest).status("APPLICABLE")).build();
-			service.checkDTO(dto, AccessType.CREATE);
+			checker.checkDTO(dto, AccessType.CREATE);
 			return "PASS";
 		} catch (FunctionalException ex) {
 			return "FAIL with code " + ex.getCode().name();
@@ -121,7 +121,7 @@ public class CreateLinkInstanceFixture extends AbstractLinkInstanceFixture {
 			dtoBuilder.source(sourceDTO);
 			dtoBuilder.destination(destDTO);
 			dtoBuilder.status(UUT.nul(status));
-			service.checkDTO(dtoBuilder.build(), AccessType.CREATE);
+			checker.checkDTO(dtoBuilder.build(), AccessType.CREATE);
 			return "PASS";
 		} catch (FunctionalException ex) {
 			return "FAIL with code " + ex.getCode().name();

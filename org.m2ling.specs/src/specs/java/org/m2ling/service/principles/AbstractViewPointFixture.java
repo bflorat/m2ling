@@ -7,6 +7,7 @@ import org.m2ling.common.configuration.Conf;
 import org.m2ling.common.dto.core.AccessType;
 import org.m2ling.common.exceptions.FunctionalException;
 import org.m2ling.persistence.PersistenceManagerXMIImpl;
+import org.m2ling.service.common.ReferenceHelper;
 import org.m2ling.service.util.CoreUtil;
 import org.m2ling.service.util.DTOConverter.FromDTO;
 import org.m2ling.service.util.DTOConverter.ToDTO;
@@ -14,6 +15,7 @@ import org.m2ling.specs.M2lingFixture;
 
 public class AbstractViewPointFixture extends M2lingFixture {
 	ViewPointServiceImpl service;
+	ViewPointServiceChecker checker;
 	PersistenceManagerXMIImpl pm;
 
 	public AbstractViewPointFixture() throws IOException {
@@ -23,7 +25,7 @@ public class AbstractViewPointFixture extends M2lingFixture {
 	public String getCheckNullDTO() {
 		reset("Technical");
 		try {
-			service.checkDTO(null, AccessType.CREATE);
+			checker.checkDTO(null, AccessType.CREATE);
 			return "PASS";
 		} catch (FunctionalException ex) {
 			return "FAIL";
@@ -43,7 +45,10 @@ public class AbstractViewPointFixture extends M2lingFixture {
 		try {
 			pm = new PersistenceManagerXMIImpl(logger, configuration);
 			CoreUtil util = new CoreUtil(logger, pm);
-			service = new ViewPointServiceImpl(pm, util, new FromDTO(util), new ToDTO(util), configuration, logger);
+			FromDTO fromDTO = new FromDTO(util);
+			ReferenceHelper refHelper = new ReferenceHelper(util);
+			checker = new ViewPointServiceChecker(pm, util, fromDTO, refHelper);
+			service = new ViewPointServiceImpl(pm, util, new FromDTO(util), new ToDTO(util), configuration, logger,checker);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

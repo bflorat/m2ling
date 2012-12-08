@@ -125,7 +125,7 @@ public class UpdateViewPointFixture extends AbstractViewPointFixture {
 			for (String statusLiteral : statusLiteralsList) {
 				builder.addStatusLiteral(statusLiteral);
 			}
-			service.checkDTO(builder.build(), AccessType.UPDATE);
+			checker.checkDTO(builder.build(), AccessType.UPDATE);
 			return "PASS";
 		} catch (FunctionalException ex) {
 			return "FAIL";

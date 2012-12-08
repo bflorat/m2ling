@@ -35,7 +35,10 @@ public class TagsFixture extends M2lingFixture {
 		Conf configuration = new Conf(prop, logger, null);
 		PersistenceManagerXMIImpl pm = new PersistenceManagerXMIImpl(logger, configuration);
 		CoreUtil util = new CoreUtil(logger, pm);
-		serviceTag = new TagServiceImpl(pm, util, new FromDTO(util), new ToDTO(util), configuration, logger);
+		FromDTO fromDTO = new FromDTO(util);
+		ReferenceHelper refHelper = new ReferenceHelper(util);
+		TagServiceChecker checker = new  TagServiceChecker(pm, util, fromDTO, refHelper);
+		serviceTag = new TagServiceImpl(pm, util, new FromDTO(util), new ToDTO(util), configuration, logger,checker);
 	}
 
 	/**
