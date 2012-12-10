@@ -94,6 +94,7 @@ public interface Link extends ArchitectureItem {
 
 	/**
 	 * Returns the value of the '<em><b>Timeout Millis</b></em>' attribute.
+	 * The default value is <code>"-1"</code>.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Timeout Millis</em>' attribute isn't clear,
@@ -103,7 +104,7 @@ public interface Link extends ArchitectureItem {
 	 * @return the value of the '<em>Timeout Millis</em>' attribute.
 	 * @see #setTimeoutMillis(long)
 	 * @see org.m2ling.domain.core.CorePackage#getLink_TimeoutMillis()
-	 * @model
+	 * @model default="-1"
 	 * @generated
 	 */
 	long getTimeoutMillis();

@@ -47,7 +47,23 @@ public enum LinkTemporality implements Enumerator {
 	 * @generated
 	 * @ordered
 	 */
-	ASYNC_PUSH(2, "ASYNC_PUSH", "ASYNC_PUSH");
+	ASYNC_PUSH(2, "ASYNC_PUSH", "ASYNC_PUSH"), /**
+	 * The '<em><b>ASYNC</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #ASYNC_VALUE
+	 * @generated
+	 * @ordered
+	 */
+	ASYNC(3, "ASYNC", "ASYNC"), /**
+	 * The '<em><b>SCHEDULED</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #SCHEDULED_VALUE
+	 * @generated
+	 * @ordered
+	 */
+	SCHEDULED(4, "SCHEDULED", "SCHEDULED");
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -102,6 +118,36 @@ public enum LinkTemporality implements Enumerator {
 	public static final int ASYNC_PUSH_VALUE = 2;
 
 	/**
+	 * The '<em><b>ASYNC</b></em>' literal value.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of '<em><b>ASYNC</b></em>' literal object isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @see #ASYNC
+	 * @model
+	 * @generated
+	 * @ordered
+	 */
+	public static final int ASYNC_VALUE = 3;
+
+	/**
+	 * The '<em><b>SCHEDULED</b></em>' literal value.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of '<em><b>SCHEDULED</b></em>' literal object isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @see #SCHEDULED
+	 * @model
+	 * @generated
+	 * @ordered
+	 */
+	public static final int SCHEDULED_VALUE = 4;
+
+	/**
 	 * An array of all the '<em><b>Link Temporality</b></em>' enumerators.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -112,6 +158,8 @@ public enum LinkTemporality implements Enumerator {
 			SYNC,
 			ASYNC_PULL,
 			ASYNC_PUSH,
+			ASYNC,
+			SCHEDULED,
 		};
 
 	/**
@@ -165,6 +213,8 @@ public enum LinkTemporality implements Enumerator {
 			case SYNC_VALUE: return SYNC;
 			case ASYNC_PULL_VALUE: return ASYNC_PULL;
 			case ASYNC_PUSH_VALUE: return ASYNC_PUSH;
+			case ASYNC_VALUE: return ASYNC;
+			case SCHEDULED_VALUE: return SCHEDULED;
 		}
 		return null;
 	}

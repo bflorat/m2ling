@@ -78,7 +78,7 @@ public class LinkImpl extends ArchitectureItemImpl implements Link {
 	 * @generated
 	 * @ordered
 	 */
-	protected static final long TIMEOUT_MILLIS_EDEFAULT = 0L;
+	protected static final long TIMEOUT_MILLIS_EDEFAULT = -1L;
 
 	/**
 	 * The cached value of the '{@link #getTimeoutMillis() <em>Timeout Millis</em>}' attribute.

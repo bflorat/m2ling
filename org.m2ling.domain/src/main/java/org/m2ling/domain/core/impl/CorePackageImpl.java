@@ -1953,7 +1953,7 @@ public class CorePackageImpl extends EPackageImpl implements CorePackage {
 		initEReference(getLink_Type(), this.getLinkType(), null, "type", null, 1, 1, Link.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getLink_Sources(), this.getArchitectureItem(), null, "sources", null, 1, -1, Link.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getLink_Destinations(), this.getArchitectureItem(), null, "destinations", null, 1, -1, Link.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getLink_TimeoutMillis(), ecorePackage.getELong(), "timeoutMillis", null, 0, 1, Link.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getLink_TimeoutMillis(), ecorePackage.getELong(), "timeoutMillis", "-1", 0, 1, Link.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(linkInstanceEClass, LinkInstance.class, "LinkInstance", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getLinkInstance_Source(), this.getComponentInstance(), null, "source", null, 1, 1, LinkInstance.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -2054,6 +2054,8 @@ public class CorePackageImpl extends EPackageImpl implements CorePackage {
 		addEEnumLiteral(linkTemporalityEEnum, LinkTemporality.SYNC);
 		addEEnumLiteral(linkTemporalityEEnum, LinkTemporality.ASYNC_PULL);
 		addEEnumLiteral(linkTemporalityEEnum, LinkTemporality.ASYNC_PUSH);
+		addEEnumLiteral(linkTemporalityEEnum, LinkTemporality.ASYNC);
+		addEEnumLiteral(linkTemporalityEEnum, LinkTemporality.SCHEDULED);
 
 		initEEnum(linkAccessTypeEEnum, LinkAccessType.class, "LinkAccessType");
 		addEEnumLiteral(linkAccessTypeEEnum, LinkAccessType.CREATE);

@@ -224,6 +224,8 @@
       <eLiterals name="SYNC"/>
       <eLiterals name="ASYNC_PULL" value="1"/>
       <eLiterals name="ASYNC_PUSH" value="2"/>
+      <eLiterals name="ASYNC" value="3" literal="ASYNC"/>
+      <eLiterals name="SCHEDULED" value="4" literal="SCHEDULED"/>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EEnum" name="LinkAccessType">
       <eLiterals name="CREATE"/>

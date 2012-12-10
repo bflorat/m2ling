@@ -3,7 +3,6 @@
  */
 package org.m2ling.presentation.principles;
 
-
 /**
  * Valid temporality for link types
  * 
@@ -15,5 +14,7 @@ package org.m2ling.presentation.principles;
 public enum LinkTemporality {
 	SYNC,
 	ASYNC_PULL,
-	ASYNC_PUSH;
+	ASYNC_PUSH,
+	ASYNC,
+	SCHEDULED;
 }
