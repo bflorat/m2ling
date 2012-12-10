@@ -46,7 +46,8 @@ public class RuleServiceChecker extends ServiceChecker {
 	 */
 	void checkDTO(final RuleDTO dto, AccessType access) throws FunctionalException {
 		checkNullDTO(dto);
-		checkID(dto, access);
+		checkIdFormat(dto, access);
+		checkItemExistence(dto, access);
 		checkNameWhenRequired(dto, access);
 		if (access == AccessType.CREATE || access == AccessType.UPDATE) {
 			ViewPoint vp = explorer.getViewPointByID(dto.getViewPointId());

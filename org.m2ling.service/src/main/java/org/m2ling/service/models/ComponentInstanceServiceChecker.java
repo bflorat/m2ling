@@ -3,8 +3,6 @@
  */
 package org.m2ling.service.models;
 
-
-
 import java.util.List;
 
 import org.m2ling.common.dto.core.AccessType;
@@ -58,7 +56,8 @@ public class ComponentInstanceServiceChecker extends ServiceChecker {
 	void checkDTO(final ComponentInstanceDTO dto, final AccessType access) throws FunctionalException {
 		ComponentInstance target = null;
 		checkNullDTO(dto);
-		checkID(dto, access);
+		checkIdFormat(dto, access);
+		checkItemExistence(dto, access);
 		if (access == AccessType.DELETE) {
 			ComponentInstance ciToDelete = explorer.getComponentInstanceByID(dto.getId());
 			checkNoBindingToThisCI(ciToDelete);

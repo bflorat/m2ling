@@ -58,7 +58,8 @@ public class ComponentServiceChecker extends ServiceChecker {
 	void checkDTO(final ComponentDTO dto, final AccessType access) throws FunctionalException {
 		Component target = null;
 		checkNullDTO(dto);
-		checkID(dto, access);
+		checkIdFormat(dto, access);
+		checkItemExistence(dto, access);
 		if (access == AccessType.DELETE) {
 			Component compToDelete = explorer.getComponentByID(dto.getId());
 			checkNoCIForThisComponent(compToDelete);

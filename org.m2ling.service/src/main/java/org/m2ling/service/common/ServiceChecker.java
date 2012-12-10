@@ -75,7 +75,7 @@ public abstract class ServiceChecker {
 	 * @param dto
 	 * @throws FunctionalException
 	 */
-	protected void checkID(final AbstractCommonDTO dto, AccessType access) throws FunctionalException {
+	protected void checkIdFormat(final AbstractCommonDTO dto, AccessType access) throws FunctionalException {
 		// Check id
 		if (dto.getId() == null) {
 			throw new FunctionalException(FunctionalException.Code.NULL_ARGUMENT, null, "(id)");
@@ -86,14 +86,23 @@ public abstract class ServiceChecker {
 		if (dto.getId().length() > 100) {
 			throw new FunctionalException(FunctionalException.Code.SIZE_EXCEEDED, null, "(id)");
 		}
+	}
+
+	/**
+	 * Detect dup or unexisting items
+	 * 
+	 * @param dto
+	 * @throws FunctionalException
+	 */
+	protected void checkItemExistence(final AbstractCommonDTO dto, AccessType access) throws FunctionalException {
 		if (access == AccessType.CREATE) {
 			// Check for existing item with the same id
-			if (explorer.getItemByTypeAndID(getManagedType(),dto.getId()) != null) {
+			if (explorer.getItemByTypeAndID(getManagedType(), dto.getId()) != null) {
 				throw new FunctionalException(FunctionalException.Code.DUPLICATES, null, "id=" + dto.getId());
 			}
 		}
 		if (access == AccessType.DELETE || access == AccessType.READ) {
-			if (explorer.getItemByTypeAndID(getManagedType(),dto.getId()) == null) {
+			if (explorer.getItemByTypeAndID(getManagedType(), dto.getId()) == null) {
 				throw new FunctionalException(FunctionalException.Code.TARGET_NOT_FOUND, null, "id=" + dto.getId());
 			}
 		}

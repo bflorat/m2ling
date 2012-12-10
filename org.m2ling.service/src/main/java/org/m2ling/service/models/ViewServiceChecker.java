@@ -47,7 +47,8 @@ public class ViewServiceChecker extends ServiceChecker {
 	 */
 	void checkDTO(final ViewDTO dto, final AccessType access) throws FunctionalException {
 		checkNullDTO(dto);
-		checkID(dto, access);
+		checkIdFormat(dto, access);
+		checkItemExistence(dto, access);
 		if (access == AccessType.CREATE || access == AccessType.UPDATE) {
 			checkNameWhenRequired(dto, access);
 			checkVP(dto, access);

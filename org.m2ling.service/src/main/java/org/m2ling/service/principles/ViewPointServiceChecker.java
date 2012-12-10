@@ -40,7 +40,8 @@ public class ViewPointServiceChecker extends ServiceChecker {
 	void checkDTO(final ViewPointDTO dto, final AccessType access) throws FunctionalException {
 		ViewPoint vp = null;
 		checkNullDTO(dto);
-		checkID(dto, access);
+		checkIdFormat(dto, access);
+		checkItemExistence(dto, access);
 		// TODO : check status (status of the VP itself, not status literals)
 		if (access == AccessType.CREATE || access == AccessType.UPDATE) {
 			checkNameWhenRequired(dto, access);

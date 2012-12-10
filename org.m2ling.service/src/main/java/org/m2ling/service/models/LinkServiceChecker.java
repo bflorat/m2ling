@@ -59,7 +59,8 @@ public class LinkServiceChecker extends ServiceChecker {
 		View view = null;
 		LinkType lt = null;
 		checkNullDTO(dto);
-		checkID(dto, access);
+		checkIdFormat(dto, access);
+		checkItemExistence(dto, access);
 		checkNameWhenRequired(dto, access);
 		target = explorer.getLinkByID(dto.getId());
 		if (access == AccessType.DELETE) {

@@ -56,7 +56,8 @@ public class LinkTypeServiceChecker extends ServiceChecker {
 	 */
 	void checkDTO(final LinkTypeDTO dto, AccessType access) throws FunctionalException {
 		checkNullDTO(dto);
-		checkID(dto, access);
+		checkIdFormat(dto, access);
+		checkItemExistence(dto, access);
 		checkNameWhenRequired(dto, access);
 		// check before deletion
 		if (access == AccessType.DELETE) {

@@ -52,7 +52,8 @@ public class LinkInstanceServiceChecker extends ServiceChecker {
 		View view = null;
 		Link link = null;
 		checkNullDTO(dto);
-		checkID(dto, access);
+		checkIdFormat(dto, access);
+		checkItemExistence(dto, access);
 		if (access == AccessType.CREATE || access == AccessType.UPDATE) {
 			target = explorer.getLinkInstanceByID(dto.getId());
 			if (access == AccessType.CREATE) {
