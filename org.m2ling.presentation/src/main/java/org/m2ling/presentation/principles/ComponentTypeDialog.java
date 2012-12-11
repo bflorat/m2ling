@@ -295,7 +295,7 @@ public class ComponentTypeDialog extends Window {
 				return description;
 			} else if ("comment".equals(propertyId)) {
 				TextArea comment = new TextArea();
-				comment.setHeight(12, UNITS_EX);
+				comment.setHeight(10, UNITS_EX);
 				comment.setWidth("100%");
 				comment.setCaption(msg.get("mf.comments"));
 				comment.setDescription(msg.get("pr.7"));

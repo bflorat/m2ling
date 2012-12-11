@@ -69,7 +69,7 @@
     </componentTypes>
   </viewPoints>
   <viewPoints description="Show applicative component from one or more applications and applicative links between them. Middleware are not modelised." id="id_vp_app" name="Applicative architecture">
-    <componentTypes id="id_ct_app_application" name="Application" comment="" description="An application implements a coherent set of information systems business services. It is built out of one or more applicative modules." status="STUDIED" boundType="_c1vGwJq4EeGVMag01qc4bw" enumeration="id_comp_ea_operational_dashboard id_comp_ea_bikesonline">
+    <componentTypes id="id_ct_app_application" name="Application" comment="" description="An application implements a coherent set of information systems business services. It is built out of one or more applicative modules." status="STUDIED" boundType="_c1vGwJq4EeGVMag01qc4bw" enumeration="id_comp_ea_bikesonline">
       <tags>fdfd</tags>
       <tags>ttr</tags>
       <references targets="id_ct_app_guimodule id_ct_app_batchmodule id_ct_app_servicemodule"/>

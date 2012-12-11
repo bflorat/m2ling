@@ -12,6 +12,7 @@ import org.m2ling.common.configuration.Conf;
 import org.m2ling.common.dto.core.AccessType;
 import org.m2ling.common.dto.core.ComponentTypeDTO;
 import org.m2ling.common.dto.core.HasNameAndIdDTO;
+import org.m2ling.common.dto.core.ReferenceDTO;
 import org.m2ling.common.exceptions.FunctionalException;
 import org.m2ling.common.exceptions.FunctionalException.Code;
 import org.m2ling.common.soa.Context;
@@ -19,11 +20,13 @@ import org.m2ling.common.utils.Utils;
 import org.m2ling.domain.Root;
 import org.m2ling.domain.core.ArchitectureItem;
 import org.m2ling.domain.core.ComponentType;
+import org.m2ling.domain.core.Reference;
+import org.m2ling.domain.core.Type;
 import org.m2ling.domain.core.ViewPoint;
 import org.m2ling.persistence.PersistenceManager;
 import org.m2ling.service.common.ServiceImpl;
-import org.m2ling.service.util.DomainExplorer;
 import org.m2ling.service.util.DTOConverter;
+import org.m2ling.service.util.DomainExplorer;
 
 import com.google.common.collect.Lists;
 import com.google.inject.Inject;
@@ -79,6 +82,12 @@ public class ComponentTypeServiceImpl extends ServiceImpl implements ComponentTy
 				newEnumeration.add(ai);
 			}
 			enumeration.addAll(newEnumeration);
+			List<Reference> references = ct.getReferences();
+			references.clear();
+			for (ReferenceDTO refDTO : dto.getReferences()) {
+				Reference ref = fromDTO.newReference(refDTO, Type.COMPONENT_TYPE);
+				references.add(ref);
+			}
 			ct.setStatus(dto.getStatus());
 			pmanager.commit();
 		} catch (Exception anyError) {

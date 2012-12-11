@@ -443,20 +443,22 @@ public class DTOConverter {
 		 * 
 		 * @param dto
 		 *           the dto
+		 * @param itemType
+		 *           : the kind of item the reference belongs to
 		 * @return a new reference
 		 */
-		public Reference newReference(ReferenceDTO dto, Type type) {
+		public Reference newReference(ReferenceDTO dto, Type itemType) {
 			Reference reference = CoreFactory.eINSTANCE.createReference();
 			reference.setType(ReferenceType.get(dto.getType()));
 			EList<HasNameAndID> targets = reference.getTargets();
 			for (HasNameAndIdDTO targetDTO : dto.getTargets()) {
-				if (type == Type.COMPONENT_TYPE) {
+				if (itemType == Type.COMPONENT_TYPE) {
 					ComponentType compType = explorer.getComponentTypeByID(targetDTO.getId());
 					targets.add(compType);
-				} else if (type == Type.COMPONENT) {
+				} else if (itemType == Type.COMPONENT) {
 					Component comp = explorer.getComponentByID(targetDTO.getId());
 					targets.add(comp);
-				} else if (type == Type.COMPONENT_INSTANCE) {
+				} else if (itemType == Type.COMPONENT_INSTANCE) {
 					ComponentInstance ci = explorer.getComponentInstanceByID(targetDTO.getId());
 					targets.add(ci);
 				}

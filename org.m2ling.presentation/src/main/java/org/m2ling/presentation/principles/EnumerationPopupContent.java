@@ -42,6 +42,17 @@ public class EnumerationPopupContent implements PopupView.Content {
 	private final Window window;
 
 	private final ComponentService compService;
+	
+	@Inject
+	public EnumerationPopupContent(@Assisted ComponentTypeBean ctBean, ComponentService compService,
+			@Assisted Window window, Msg msg, Logger logger) {
+		super();
+		this.ctBean = ctBean;
+		this.window = window;
+		this.logger = logger;
+		this.msg = msg;
+		this.compService = compService;
+	}
 
 	@Override
 	public Component getPopupComponent() {
@@ -93,14 +104,5 @@ public class EnumerationPopupContent implements PopupView.Content {
 		return (ctBean.getEnumeration().size() == 0) ? "[" + msg.get("pr.54") + "]" : ctBean.getEnumerationAsString();
 	}
 
-	@Inject
-	public EnumerationPopupContent(@Assisted ComponentTypeBean ctBean, ComponentService compService,
-			@Assisted Window window, Msg msg, Logger logger) {
-		super();
-		this.ctBean = ctBean;
-		this.window = window;
-		this.logger = logger;
-		this.msg = msg;
-		this.compService = compService;
-	}
+	
 }

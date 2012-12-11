@@ -48,6 +48,19 @@ public class TargetsPopupContent implements PopupView.Content {
 	private final FromDTO fromDTO;
 
 	private final ComponentTypeService ctService;
+	
+	@Inject
+	public TargetsPopupContent(@Assisted ComponentTypeBean ctBean, @Assisted ReferenceBean refBean,
+			ComponentTypeService ctService, @Assisted Window window, Msg msg, Logger logger, FromDTO fromDTO) {
+		super();
+		this.ctBean = ctBean;
+		this.refBean = refBean;
+		this.window = window;
+		this.logger = logger;
+		this.msg = msg;
+		this.ctService = ctService;
+		this.fromDTO = fromDTO;
+	}
 
 	public Component getPopupComponent() {
 		List<ComponentTypeDTO> cts = null;
@@ -93,16 +106,5 @@ public class TargetsPopupContent implements PopupView.Content {
 		return (refBean.getTargets().size() == 0) ? "[" + msg.get("pr.41") + "]" : refBean.toTargetsString();
 	}
 
-	@Inject
-	public TargetsPopupContent(@Assisted ComponentTypeBean ctBean, @Assisted ReferenceBean refBean,
-			ComponentTypeService ctService, @Assisted Window window, Msg msg, Logger logger, FromDTO fromDTO) {
-		super();
-		this.ctBean = ctBean;
-		this.refBean = refBean;
-		this.window = window;
-		this.logger = logger;
-		this.msg = msg;
-		this.ctService = ctService;
-		this.fromDTO = fromDTO;
-	}
+	
 }
