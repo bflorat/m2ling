@@ -11,19 +11,21 @@ import java.util.logging.Logger;
 import org.m2ling.common.configuration.Conf;
 import org.m2ling.common.dto.core.AccessType;
 import org.m2ling.common.dto.core.ComponentDTO;
+import org.m2ling.common.dto.core.HasNameAndIdDTO;
 import org.m2ling.common.exceptions.FunctionalException;
-import org.m2ling.common.exceptions.FunctionalException.Code;
 import org.m2ling.common.soa.Context;
 import org.m2ling.common.utils.Utils;
 import org.m2ling.domain.Root;
 import org.m2ling.domain.core.Component;
+import org.m2ling.domain.core.ComponentGroup;
+import org.m2ling.domain.core.ComponentType;
 import org.m2ling.domain.core.HasNameAndID;
 import org.m2ling.domain.core.Reference;
 import org.m2ling.domain.core.View;
 import org.m2ling.persistence.PersistenceManager;
 import org.m2ling.service.common.ServiceImpl;
-import org.m2ling.service.util.DomainExplorer;
 import org.m2ling.service.util.DTOConverter;
+import org.m2ling.service.util.DomainExplorer;
 
 import com.google.common.collect.Lists;
 import com.google.inject.Inject;
@@ -100,13 +102,10 @@ public class ComponentServiceImpl extends ServiceImpl implements ComponentServic
 	 * {@inheritDoc}
 	 */
 	@Override
-	public List<ComponentDTO> getAllComponents(final Context context, final String vID) throws FunctionalException {
+	public List<ComponentDTO> getAllComponentsByView(final Context context, final String vID) throws FunctionalException {
 		List<ComponentDTO> out = Lists.newArrayList();
 		try {
-			// Controls
-			if (explorer.getViewByID(vID) == null) {
-				throw new FunctionalException(Code.TARGET_NOT_FOUND, null, "View ID=" + vID.toString());
-			}
+			checker.checkViewExists(vID);
 			Root root = pmanager.getRoot();
 			for (View checked : root.getViews()) {
 				if (checked.getId().equals(vID)) {
@@ -129,6 +128,55 @@ public class ComponentServiceImpl extends ServiceImpl implements ComponentServic
 	 * {@inheritDoc}
 	 */
 	@Override
+	public List<HasNameAndIdDTO> getComponentsAndGroupByCT(Context context, String ctID) throws FunctionalException {
+		List<HasNameAndIdDTO> out = Lists.newArrayList();
+		try {
+			// Controls
+			checker.checkCTExists(ctID);
+			addComponentsResults(ctID, out);
+			addComponentGroupsResults(ctID, out);
+			Collections.sort(out);
+		} catch (Exception anyError) {
+			handleAnyException(anyError);
+		}
+		return out;
+	}
+
+	private void addComponentsResults(String ctID, List<HasNameAndIdDTO> out) {
+		Root root = pmanager.getRoot();
+		for (View view : root.getViews()) {
+			for (Component comp : view.getComponents()) {
+				if (comp.getType().getId().equals(ctID)) {
+					HasNameAndIdDTO dto = new HasNameAndIdDTO.Builder(comp.getId(), comp.getName()).build();
+					out.add(dto);
+				}
+			}
+		}
+	}
+
+	private void addComponentGroupsResults(String ctID, List<HasNameAndIdDTO> out) {
+		Root root = pmanager.getRoot();
+		for (View view : root.getViews()) {
+			for (ComponentGroup group : view.getComponentsGroups()) {
+				List<Component> components = group.getComponents();
+				if (components.size() == 0) {
+					return;
+				}
+				// Remember : all components of a group must have the same CT
+				Component firstFound = components.get(0);
+				ComponentType ct = firstFound.getType();
+				if (ct.getId().equals(ctID)) {
+					HasNameAndIdDTO dto = new HasNameAndIdDTO.Builder(group.getId(), group.getName()).build();
+					out.add(dto);
+				}
+			}
+		}
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
 	public void deleteComponent(final Context context, final String id) throws FunctionalException {
 		try {
 			// Controls
@@ -137,10 +185,8 @@ public class ComponentServiceImpl extends ServiceImpl implements ComponentServic
 			Component compToDelete = explorer.getComponentByID(dto.getId());
 			View view = (View) compToDelete.eContainer();
 			// Note that we don't need to check if some CI still exists with references to a CI of the
-			// dropped
-			// component because this is implicitly tested by checkNoCIForThisComponent(), indeed the
-			// target reference
-			// can't be dropped while it owns instances so when it can be dropped, the ci reference
+			// dropped component because this is implicitly tested by checkNoCIForThisComponent(), indeed the
+			// target reference can't be dropped while it owns instances so when it can be dropped, the ci reference
 			// issue can't exist anymore.
 			view.getComponents().remove(compToDelete);
 			cleanOrphanReferences(compToDelete);

@@ -32,6 +32,7 @@
     <componentTypes id="id_ct_vp1_ct11" name="ct_vp1_ct11" comment="" description="desc  ct_vp1_ct11"/>
     <componentTypes id="id_ct_vp1_ct12" name="ct_vp1_ct12" comment="" description="desc  ct_vp1_ct12"/>
     <componentTypes id="id_ct_vp1_ct13" name="ct_vp1_ct13" comment="" description="desc  ct_vp1_ct13" status=""/>
+    <componentTypes id="id_ct_vp1_ct14" name="ct_vp1_ct14" description="desc ct_vp1_ct14" status=""/>
     <linkTypes id="id_lt_vp1_no_link" name="lt_vp1_no_link" comment="" description="desc" sourceTypes="id_ct_vp1_ct1" destinationTypes="id_ct_vp1_ct1"/>
     <linkTypes id="id_lt_vp1_link_type_1" name="lt_vp1_link_type_1" comment="" description="desc" sourceTypes="id_ct_vp1_ct1 id_ct_vp1_ct2" destinationTypes="id_ct_vp1_ct1 id_ct_vp1_ct2"/>
     <linkTypes id="id_lt_vp1_ct8to9" name="lt_vp1_ct8to9" comment="" description="desc lt_vp1_ct8to9" sourceTypes="id_ct_vp1_ct8" destinationTypes="id_ct_vp1_ct9"/>
@@ -122,5 +123,10 @@
     <componentInstances id="id_ci_vp2_v2_comp1_ci1" name="ci_vp2_v2_comp1_ci1" comment="" status="" component="id_comp_vp2_v2_comp1"/>
     <componentInstances id="id_ci_vp2_v2_comp3_ci2" name="ci_vp2_v2_comp3_ci2" comment="" description="" component="id_comp_vp2_v2_comp3" boundComponentInstance="id_ci_vp1_v1_comp3_ci2"/>
     <linkInstances id="id_li_vp2_v2_l1_1" name="link_vp2_v2_l1_1" comment="" description="" status="" source="id_ci_vp2_v2_comp1_ci1" destination="id_ci_vp2_v2_comp3_ci1" link="id_link_vp2_v2_l1"/>
+  </views>
+  <views id="id_view_vp1_test_comp_by_ct" name="vp1_test_comp_by_ct" viewPoint="id_vp1">
+    <componentsGroups id="id_group_vp1_test_comp_by_ct_1" name="group_vp1_test_comp_by_ct_1" comment="" components="id_comp_vp1_test_comp_by_ct_1 id_comp_vp1_test_comp_by_ct_2"/>
+    <components id="id_comp_vp1_test_comp_by_ct_1" name="comp_vp1_test_comp_by_ct_1" status="" type="id_ct_vp1_ct14"/>
+    <components id="id_comp_vp1_test_comp_by_ct_2" name="comp_vp1_test_comp_by_ct_2" description="" type="id_ct_vp1_ct14"/>
   </views>
 </m2ling_domain:Root>

@@ -22,6 +22,7 @@ import org.m2ling.common.dto.core.ViewPointDTO;
 import org.m2ling.common.exceptions.FunctionalException;
 import org.m2ling.common.utils.Consts;
 import org.m2ling.common.utils.Utils;
+import org.m2ling.presentation.UtilGUI;
 import org.m2ling.presentation.events.Events;
 import org.m2ling.presentation.events.ObservationManager;
 import org.m2ling.presentation.i18n.Msg;
@@ -43,7 +44,6 @@ import com.vaadin.data.Item;
 import com.vaadin.data.Property;
 import com.vaadin.data.Property.ValueChangeEvent;
 import com.vaadin.data.util.BeanItem;
-import com.vaadin.data.util.BeanItemContainer;
 import com.vaadin.data.validator.AbstractValidator;
 import com.vaadin.terminal.ThemeResource;
 import com.vaadin.ui.Alignment;
@@ -55,13 +55,13 @@ import com.vaadin.ui.DefaultFieldFactory;
 import com.vaadin.ui.Field;
 import com.vaadin.ui.Form;
 import com.vaadin.ui.GridLayout;
+import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.Label;
 import com.vaadin.ui.NativeButton;
 import com.vaadin.ui.Panel;
 import com.vaadin.ui.PopupView;
 import com.vaadin.ui.Select;
 import com.vaadin.ui.TextArea;
-import com.vaadin.ui.TwinColSelect;
 import com.vaadin.ui.VerticalLayout;
 import com.vaadin.ui.Window;
 
@@ -92,6 +92,8 @@ public class ComponentTypeDialog extends Window {
 	private Form form;
 
 	private final ObservationManager obs;
+
+	private final PrinciplesGUIFactory factory;
 
 	private Command ok = new Command() {
 		public void execute() {
@@ -138,14 +140,10 @@ public class ComponentTypeDialog extends Window {
 		}
 	};
 
-	/**
-	 * Build the dialog
-	 * 
-	 */
 	@Inject
 	public ComponentTypeDialog(Logger logger, @Assisted @Nullable BeanItem<ComponentTypeBean> ctBeanItem,
 			ComponentTypeService ctService, DTOConverter.ToDTO toDTO, DTOConverter.FromDTO fromDTO, Msg msg,
-			ViewPointService vpService, ObservationManager obs) {
+			ViewPointService vpService, ObservationManager obs, PrinciplesGUIFactory factory) {
 		super(Strings.isNullOrEmpty(ctBeanItem.getBean().getId()) ? msg.get("pr.38") : ctBeanItem.getBean().getName());
 		this.beanItem = ctBeanItem;
 		this.ctService = ctService;
@@ -155,6 +153,7 @@ public class ComponentTypeDialog extends Window {
 		this.fromDTO = fromDTO;
 		this.msg = msg;
 		this.obs = obs;
+		this.factory = factory;
 		newCT = Strings.isNullOrEmpty(ctBeanItem.getBean().getId());
 		if (newCT) {
 			beanItem.getItemProperty("id").setValue(UUID.randomUUID().toString());
@@ -177,6 +176,12 @@ public class ComponentTypeDialog extends Window {
 		form.setItemDataSource(beanItem);
 		form.setVisibleItemProperties(Arrays.asList(new String[] { "name", "tags", "description", "status", "boundType",
 				"instantiationFactor", "comment" }));
+		// Enumeration
+		PopupView.Content enumerationContent = factory.getEnumerationPopupContentFor(ctBean, getWindow());
+		PopupView enumeration = new PopupView(enumerationContent);
+		enumeration.setHideOnMouseOut(false);
+		enumeration.setWidth("60%");
+		HorizontalLayout enumerationLayout = UtilGUI.getComponentWithLabel(msg.get("pr.32") + ": ", enumeration);
 		// Icon uploader
 		HasNameAndIDBean hniBean = HasNameAndIDBean.newInstance(ctBean.getId(), ctBean.getName());
 		IconUploader uploader = new IconUploader(hniBean, Consts.CONF_CT_ICONS_LOCATION, logger, msg);
@@ -184,6 +189,7 @@ public class ComponentTypeDialog extends Window {
 		OKCancel okc = new OKCancel(ok, cancel);
 		panel.addComponent(new HelpPanel(msg.get("help.1")));
 		panel.addComponent(form);
+		panel.addComponent(enumerationLayout);
 		// References
 		Panel references = new Panel(msg.get("pr.33"));
 		references.setWidth("100%");
@@ -254,62 +260,17 @@ public class ComponentTypeDialog extends Window {
 			}
 		});
 		type.setSizeUndefined();
-		PopupView targets = new PopupView(new PopupView.Content() {
-			@Override
-			public Component getPopupComponent() {
-				List<ComponentTypeDTO> cts = null;
-				BeanItemContainer<HasNameAndIDBean> container = new BeanItemContainer<HasNameAndIDBean>(
-						HasNameAndIDBean.class);
-				final TwinColSelect tcs = new TwinColSelect(msg.get("pr.41"), container);
-				tcs.setItemCaptionMode(Select.ITEM_CAPTION_MODE_PROPERTY);
-				tcs.setItemCaptionPropertyId("name");
-				try {
-					// Add all CT (including itself)
-					cts = ctService.getAllCT(null, ctBean.getViewPoint().getId());
-					for (ComponentTypeDTO ctDTO : cts) {
-						ComponentTypeBean ctBean = fromDTO.getComponentTypeBean(ctDTO);
-						HasNameAndIDBean hsi = HasNameAndIDBean.newInstance(ctBean.getId(), ctBean.getName());
-						container.addItem(hsi);
-					}
-				} catch (FunctionalException fe) {
-					logger.log(Level.SEVERE, fe.getDetailedMessage(), fe);
-					getWindow().showNotification(msg.humanMessage(fe), Notification.TYPE_ERROR_MESSAGE);
-				}
-				tcs.setRows(10);
-				tcs.setNullSelectionAllowed(false);
-				tcs.setMultiSelect(true);
-				tcs.setLeftColumnCaption(msg.get("gal.14"));
-				tcs.setRightColumnCaption(msg.get("gal.15"));
-				tcs.setWidth("350px");
-				tcs.setImmediate(true);
-				tcs.addListener(new Property.ValueChangeListener() {
-					@Override
-					public void valueChange(ValueChangeEvent event) {
-						refBean.getTargets().clear();
-						@SuppressWarnings("unchecked")
-						java.util.Set<HasNameAndIDBean> selectedItems = (java.util.Set<HasNameAndIDBean>) tcs.getValue();
-						for (HasNameAndIDBean selected : selectedItems) {
-							refBean.getTargets().add(selected);
-						}
-					}
-				});
-				return tcs;
-			}
-
-			@Override
-			public String getMinimizedValueAsHTML() {
-				return (refBean.getTargets().size() == 0) ? "[" + msg.get("pr.41") + "]" : refBean.toTargetsString();
-			}
-		});
-		targets.setHideOnMouseOut(false);
-		targets.setWidth("60%");
+		PopupView.Content targetsPopupContent = factory.getTargetsPopupContentFor(ctBean, refBean, getWindow());
+		PopupView targetsPopup = new PopupView(targetsPopupContent);
+		targetsPopup.setHideOnMouseOut(false);
+		targetsPopup.setWidth("60%");
 		gl.addComponent(drop, 0, row);
 		gl.setComponentAlignment(drop, Alignment.MIDDLE_RIGHT);
 		gl.addComponent(type, 1, row);
 		gl.addComponent(new Label(": "), 2, row);
 		gl.setComponentAlignment(type, Alignment.MIDDLE_LEFT);
-		gl.addComponent(targets, 3, row);
-		gl.setComponentAlignment(targets, Alignment.MIDDLE_CENTER);
+		gl.addComponent(targetsPopup, 3, row);
+		gl.setComponentAlignment(targetsPopup, Alignment.MIDDLE_CENTER);
 		gl.setColumnExpandRatio(3, 1);
 	}
 
@@ -386,14 +347,6 @@ public class ComponentTypeDialog extends Window {
 				status.setCaption(msg.get("gal.7"));
 				status.setNullSelectionAllowed(true);
 				return status;
-			} else if ("enumeration".equals(propertyId)) {
-				Select enumeration = new Select();
-				enumeration.setCaption(msg.get("pr.32"));
-				enumeration.setDescription(msg.get("pr.36"));
-				// TODO : call future m2studio services to get components and component groups
-				// from views of others viewpoints.
-				// TODO : use a TwinColumnSelector like we use for references
-				return enumeration;
 			} else {
 				return super.createField(item, propertyId, uiContext);
 			}

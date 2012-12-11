@@ -6,6 +6,7 @@ package org.m2ling.service.models;
 import java.util.List;
 
 import org.m2ling.common.dto.core.ComponentDTO;
+import org.m2ling.common.dto.core.HasNameAndIdDTO;
 import org.m2ling.common.exceptions.FunctionalException;
 import org.m2ling.common.soa.Context;
 
@@ -46,18 +47,25 @@ public interface ComponentService {
 	 * Return an alphabetically ordered list of available Component given a view ID. If none
 	 * Component is available, a void list is returned.
 	 * 
-	 * <p>
-	 * Components are sorted by name.
-	 * </p>
-	 * 
-	 * 
 	 * @param vID
 	 *           the view ID
 	 * @throws FunctionalException
 	 *            if the viewpoint doesn't exist
 	 * @return all available Component for given viewpoint
 	 */
-	List<ComponentDTO> getAllComponents(Context context, String vID) throws FunctionalException;
+	List<ComponentDTO> getAllComponentsByView(Context context, String vID) throws FunctionalException;
+
+	/**
+	 * Return an alphabetically ordered list of available Component or components group of the
+	 * provided CT type. If none Component is available, a void list is returned.
+	 * 
+	 * @param vID
+	 *           the view ID
+	 * @throws FunctionalException
+	 *            if the CT doesn't exist
+	 * @return all available Component for given CT
+	 */
+	List<HasNameAndIdDTO> getComponentsAndGroupByCT(Context context, String ctID) throws FunctionalException;
 
 	/**
 	 * Return the Component DTO given an ID if it exist, null otherwise.

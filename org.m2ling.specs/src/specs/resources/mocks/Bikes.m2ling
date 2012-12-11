@@ -69,7 +69,7 @@
     </componentTypes>
   </viewPoints>
   <viewPoints description="Show applicative component from one or more applications and applicative links between them. Middleware are not modelised." id="id_vp_app" name="Applicative architecture">
-    <componentTypes id="id_ct_app_application" name="Application" comment="" description="An application implements a coherent set of information systems business services. It is built out of one or more applicative modules." status="STUDIED" boundType="_c1vGwJq4EeGVMag01qc4bw">
+    <componentTypes id="id_ct_app_application" name="Application" comment="" description="An application implements a coherent set of information systems business services. It is built out of one or more applicative modules." status="STUDIED" boundType="_c1vGwJq4EeGVMag01qc4bw" enumeration="id_comp_ea_operational_dashboard id_comp_ea_bikesonline">
       <tags>fdfd</tags>
       <tags>ttr</tags>
       <references targets="id_ct_app_guimodule id_ct_app_batchmodule id_ct_app_servicemodule"/>
@@ -153,6 +153,7 @@
       <references targets="id_comp_ea_bikesonline"/>
     </components>
     <components id="id_comp_ea_bikesonline" name="BikesOnline" comment="" type="_c1vGwJq4EeGVMag01qc4bw"/>
+    <components id="id_comp_ea_operational_dashboard" name="Operational Dashboard" comment="" type="_c1vGwJq4EeGVMag01qc4bw"/>
   </views>
   <views comment="" description="Describes technical components available in Bikes IS" id="id_view_tech_catalog" name="Technical catalog" viewPoint="id_vp_tech">
     <componentsGroups id="id_grp_tech_servicecontainers" name="Service containers" comment="" components="id_comp_tech_jboss5 id_comp_tech_jboss6"/>
@@ -184,7 +185,7 @@
     <components id="id_comp_app_sales_admin_services" name="AdminServices" comment="" description="Restricted administrative services" type="id_ct_app_servicemodule"/>
     <components id="id_comp_app_sales_payment_services" name="PaymentServices" description="Secured payment services" type="id_ct_app_servicemodule"/>
     <components id="id_comp_app_sales_product_catalog_services" name="Product Catalog Services" description="" type="id_ct_app_servicemodule"/>
-    <components id="id_comp_app_sales_operational_dashboard" name="OperationalDashboard" description="&quot;OperationalDashboard&quot; is a BI application" type="id_ct_app_application">
+    <components id="id_comp_app_sales_operational_dashboard" name="OperationalDashboard" description="&quot;OperationalDashboard&quot; is a BI application" type="id_ct_app_application" boundComponent="id_comp_ea_operational_dashboard">
       <references targets="id_comp_app_sales_odbatchs"/>
     </components>
     <components id="id_comp_app_sales_odbatchs" name="ODBatchs" comment="" type="id_ct_app_guimodule"/>
@@ -265,7 +266,7 @@
     <components id="id_comp_deploy_gui_admin_bikesonline" comment="" description="" type="_aazazaza" boundComponent="id_comp_app_sales_admingui"/>
     <components id="_ZKfHEqNKEeGULe7xIq_4Kg" type="_Ybdmtd456" boundComponent="_G9AtYp6REeG"/>
     <components id="_N13tUqNMEeGULe7xIq_4Kg" type="_aazazazaerer" boundComponent="id_comp_app_sales_odbatchs"/>
-    <links id="id_link_deploy_REST_admin" name="link_deploy_REST_admin" comment="REST link between admin GUI and admin services" description="" type="id_lt_logical_http_rest" sources="id_comp_deploy_gui_admin_bikesonline" destinations="_itGiQqNJEefdfd_4Kgezezez" timeoutMillis="-1"/>
+    <links id="id_link_deploy_REST_admin" name="link_deploy_REST_admin" comment="REST link between admin GUI and admin services" description="" type="id_lt_logical_http_rest" sources="id_comp_deploy_gui_admin_bikesonline" destinations="_itGiQqNJEefdfd_4Kgezezez"/>
     <componentInstances id="id_ci_deploy_HS21_1" name="HS21_1" component="id_comp_deploy_IBM_HS21" boundComponentInstance="id_ci_devicecatalog_hs21_1">
       <references type="RUNS" targets="id_ci_deploy_OS_HS21_1"/>
     </componentInstances>

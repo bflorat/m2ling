@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.List;
 
 import org.m2ling.common.dto.core.ComponentDTO;
+import org.m2ling.common.dto.core.HasNameAndIdDTO;
 import org.m2ling.common.exceptions.FunctionalException;
 import org.m2ling.common.utils.UUT;
 
@@ -16,7 +17,7 @@ public class SearchComponentFixture extends AbstractComponentFixture {
 		if (!noreset) {
 			reset("Bikes");
 		}
-		List<ComponentDTO> list = service.getAllComponents(null, vID);
+		List<ComponentDTO> list = service.getAllComponentsByView(null, vID);
 		return (list.size() > 0) ? ">0" : "=0";
 	}
 
@@ -34,5 +35,18 @@ public class SearchComponentFixture extends AbstractComponentFixture {
 			return "unkwown component";
 		}
 		return dto.getName();
+	}
+
+	public String getComponentsAndGroups(String ctID) {
+		if (!noreset) {
+			reset("Technical");
+		}
+		List<HasNameAndIdDTO> list = null;
+		try {  
+			list = service.getComponentsAndGroupByCT(null, UUT.nul(ctID));
+		} catch (FunctionalException fe) {
+			return "FAIL with code " + fe.getCode().name();
+		}
+		return list.toString(); 
 	}
 }

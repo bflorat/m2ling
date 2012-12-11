@@ -141,7 +141,7 @@ public class CreateComponentFixture extends AbstractComponentFixture {
 			bean.setView(view);
 			ComponentDTO dto = new DTOConverter.ToDTO().getComponentDTO(bean);
 			service.createComponent(null, dto);
-			List<ComponentDTO> compDTOS = service.getAllComponents(null, vID);
+			List<ComponentDTO> compDTOS = service.getAllComponentsByView(null, vID);
 			for (ComponentDTO compDTO : compDTOS) {
 				if (compDTO.getId().equals(bean.getId())) {
 					ComponentBean out = new DTOConverter.FromDTO().getComponentBean(compDTO);

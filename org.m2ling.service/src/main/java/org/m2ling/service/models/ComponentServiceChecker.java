@@ -12,6 +12,7 @@ import org.m2ling.common.dto.core.ComponentDTO;
 import org.m2ling.common.dto.core.HasNameAndIdDTO;
 import org.m2ling.common.dto.core.ReferenceDTO;
 import org.m2ling.common.exceptions.FunctionalException;
+import org.m2ling.common.exceptions.FunctionalException.Code;
 import org.m2ling.common.utils.Utils;
 import org.m2ling.domain.core.Component;
 import org.m2ling.domain.core.ComponentInstance;
@@ -35,7 +36,8 @@ import com.google.inject.Inject;
  */
 public class ComponentServiceChecker extends ServiceChecker {
 	@Inject
-	protected ComponentServiceChecker(PersistenceManager pm, DomainExplorer explorer, FromDTO fromDTO, ReferenceHelper refHelper) {
+	protected ComponentServiceChecker(PersistenceManager pm, DomainExplorer explorer, FromDTO fromDTO,
+			ReferenceHelper refHelper) {
 		super(pm, explorer, fromDTO, refHelper);
 	}
 
@@ -45,6 +47,18 @@ public class ComponentServiceChecker extends ServiceChecker {
 	@Override
 	protected Type getManagedType() {
 		return Type.COMPONENT;
+	}
+
+	void checkViewExists(String vID) throws FunctionalException {
+		if (explorer.getViewByID(vID) == null) {
+			throw new FunctionalException(Code.TARGET_NOT_FOUND, null, "View ID=" + vID);
+		}
+	}
+
+	void checkCTExists(String ctID) throws FunctionalException {
+		if (explorer.getComponentTypeByID(ctID) == null) {
+			throw new FunctionalException(Code.TARGET_NOT_FOUND, null, "View ID=" + ctID);
+		}
 	}
 
 	/**

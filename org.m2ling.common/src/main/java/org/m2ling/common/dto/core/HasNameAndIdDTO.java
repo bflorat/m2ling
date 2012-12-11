@@ -10,7 +10,7 @@ import org.m2ling.common.utils.Utils;
 /**
  * Inter-layer HasNameAndId communication object
  */
-public final class HasNameAndIdDTO {
+public final class HasNameAndIdDTO implements Comparable<HasNameAndIdDTO> {
 	private final String id;
 
 	private final String name;
@@ -19,6 +19,23 @@ public final class HasNameAndIdDTO {
 		super();
 		id = builder.id;
 		name = builder.name;
+	}
+
+	@Override
+	public int compareTo(HasNameAndIdDTO other) {
+		if (other == null) {
+			return 1;
+		}
+		if (getName() == null && other.getName() == null) {
+			return 0;
+		}
+		if (other.getName() == null) {
+			return 1;
+		}
+		if (getName() == null) {
+			return -1;
+		}
+		return getName().compareTo(other.getName());
 	}
 
 	/**
