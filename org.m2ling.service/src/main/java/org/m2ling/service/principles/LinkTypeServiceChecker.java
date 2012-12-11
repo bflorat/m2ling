@@ -34,7 +34,8 @@ import com.google.inject.Inject;
  */
 public class LinkTypeServiceChecker extends ServiceChecker {
 	@Inject
-	protected LinkTypeServiceChecker(PersistenceManager pm, DomainExplorer explorer, FromDTO fromDTO, ReferenceHelper refHelper) {
+	protected LinkTypeServiceChecker(PersistenceManager pm, DomainExplorer explorer, FromDTO fromDTO,
+			ReferenceHelper refHelper) {
 		super(pm, explorer, fromDTO, refHelper);
 	}
 
@@ -155,17 +156,22 @@ public class LinkTypeServiceChecker extends ServiceChecker {
 	}
 
 	private void checkAccessAndTemporalityTypes(final LinkTypeDTO dto, AccessType access) throws FunctionalException {
-		try {
-			LinkAccessType.valueOf(dto.getLinkAccessType());
-		} catch (Exception iea) {
-			throw new FunctionalException(FunctionalException.Code.LT_ILLEGAL_ACCESS_TYPE, null, "link name="
-					+ dto.getName());
+		// access type or temporality can be null to mean 'unset'
+		if (dto.getLinkAccessType() != null) {
+			try {
+				LinkAccessType.valueOf(dto.getLinkAccessType());
+			} catch (Exception iea) {
+				throw new FunctionalException(FunctionalException.Code.LT_ILLEGAL_ACCESS_TYPE, null, "link name="
+						+ dto.getName());
+			}
 		}
-		try {
-			LinkTemporality.valueOf(dto.getLinkTemporality());
-		} catch (Exception iea) {
-			throw new FunctionalException(FunctionalException.Code.LT_ILLEGAL_TEMPORALITY, null, "link name="
-					+ dto.getName());
+		if (dto.getLinkTemporality() != null) {
+			try {
+				LinkTemporality.valueOf(dto.getLinkTemporality());
+			} catch (Exception iea) {
+				throw new FunctionalException(FunctionalException.Code.LT_ILLEGAL_TEMPORALITY, null, "link name="
+						+ dto.getName());
+			}
 		}
 	}
 }

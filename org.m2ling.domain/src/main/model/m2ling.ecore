@@ -113,8 +113,10 @@
           upperBound="-1" eType="#//core/ComponentType"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="destinationTypes" lowerBound="1"
           upperBound="-1" eType="#//core/ComponentType"/>
-      <eStructuralFeatures xsi:type="ecore:EAttribute" name="linkAccessType" eType="#//core/LinkAccessType"/>
-      <eStructuralFeatures xsi:type="ecore:EAttribute" name="linkTemporality" eType="#//core/LinkTemporality"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="linkAccessType" eType="#//core/LinkAccessType"
+          defaultValueLiteral="UNSET"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="linkTemporality" eType="#//core/LinkTemporality"
+          defaultValueLiteral="UNSET"/>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="Link" eSuperTypes="#//core/ArchitectureItem">
       <eStructuralFeatures xsi:type="ecore:EReference" name="type" lowerBound="1"
@@ -221,6 +223,7 @@
           eType="#//core/HasNameAndID"/>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EEnum" name="LinkTemporality">
+      <eLiterals name="UNSET" value="-1" literal="UNSET"/>
       <eLiterals name="SYNC"/>
       <eLiterals name="ASYNC_PULL" value="1"/>
       <eLiterals name="ASYNC_PUSH" value="2"/>
@@ -228,6 +231,7 @@
       <eLiterals name="SCHEDULED" value="4" literal="SCHEDULED"/>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EEnum" name="LinkAccessType">
+      <eLiterals name="UNSET" value="-1" literal="UNSET"/>
       <eLiterals name="CREATE"/>
       <eLiterals name="READ" value="1"/>
       <eLiterals name="UPDATE" value="2"/>

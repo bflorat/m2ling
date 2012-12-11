@@ -20,6 +20,14 @@ import org.eclipse.emf.common.util.Enumerator;
  */
 public enum LinkAccessType implements Enumerator {
 	/**
+	 * The '<em><b>UNSET</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #UNSET_VALUE
+	 * @generated
+	 * @ordered
+	 */
+	UNSET(-1, "UNSET", "UNSET"), /**
 	 * The '<em><b>CREATE</b></em>' literal object.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -115,6 +123,21 @@ public enum LinkAccessType implements Enumerator {
 	 * @generated
 	 */
 	public static final String copyright = "Copyright (C) 2012 Bertrand Florat";
+
+	/**
+	 * The '<em><b>UNSET</b></em>' literal value.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of '<em><b>UNSET</b></em>' literal object isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @see #UNSET
+	 * @model
+	 * @generated
+	 * @ordered
+	 */
+	public static final int UNSET_VALUE = -1;
 
 	/**
 	 * The '<em><b>CREATE</b></em>' literal value.
@@ -259,6 +282,7 @@ public enum LinkAccessType implements Enumerator {
 	 */
 	private static final LinkAccessType[] VALUES_ARRAY =
 		new LinkAccessType[] {
+			UNSET,
 			CREATE,
 			READ,
 			UPDATE,
@@ -318,6 +342,7 @@ public enum LinkAccessType implements Enumerator {
 	 */
 	public static LinkAccessType get(int value) {
 		switch (value) {
+			case UNSET_VALUE: return UNSET;
 			case CREATE_VALUE: return CREATE;
 			case READ_VALUE: return READ;
 			case UPDATE_VALUE: return UPDATE;

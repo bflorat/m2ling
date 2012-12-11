@@ -66,8 +66,16 @@ public class LinkTypeServiceImpl extends ServiceImpl implements LinkTypeService 
 			List<String> tags = lt.getTags();
 			tags.clear();
 			tags.addAll(dto.getTags());
-			lt.setLinkAccessType(LinkAccessType.valueOf(dto.getLinkAccessType()));
-			lt.setLinkTemporality(LinkTemporality.valueOf(dto.getLinkTemporality()));
+			if (dto.getLinkAccessType() != null) {
+				lt.setLinkAccessType(LinkAccessType.valueOf(dto.getLinkAccessType()));
+			} else {
+				lt.setLinkAccessType(LinkAccessType.UNSET);
+			}
+			if (dto.getLinkTemporality() != null) {
+				lt.setLinkTemporality(LinkTemporality.valueOf(dto.getLinkTemporality()));
+			} else {
+				lt.setLinkTemporality(LinkTemporality.UNSET);
+			}
 			List<ComponentType> sources = lt.getSourceTypes();
 			sources.clear();
 			for (HasNameAndIdDTO ctDTO : dto.getSourcesTypes()) {

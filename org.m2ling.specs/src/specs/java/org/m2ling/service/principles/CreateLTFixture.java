@@ -154,8 +154,8 @@ public class CreateLTFixture extends AbstractLTFixture {
 		try {
 			HasNameAndIdDTO vp = new HasNameAndIdDTO.Builder("id_vp_logical", "").build();
 			HasNameAndIdDTO source = new HasNameAndIdDTO.Builder("id_ct_logical_guimodule", "").build();
-			LinkTypeDTO dto = ((LinkTypeDTO.Builder) (new LinkTypeDTO.Builder(vp, "id_lt_logical_lt1", "lt1").linkAccessType("RW")
-					.linkTemporality("SYNC").addSourcesType(source)).description("desc")).build();
+			LinkTypeDTO dto = ((LinkTypeDTO.Builder) (new LinkTypeDTO.Builder(vp, "id_lt_logical_lt1", "lt1")
+					.linkAccessType("RW").linkTemporality("SYNC").addSourcesType(source)).description("desc")).build();
 			service.createLT(null, dto);
 			return "Unknown item";
 		} catch (FunctionalException ex) {

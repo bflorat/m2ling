@@ -67,6 +67,7 @@ public interface LinkType extends ConceptItem {
 
 	/**
 	 * Returns the value of the '<em><b>Link Access Type</b></em>' attribute.
+	 * The default value is <code>"UNSET"</code>.
 	 * The literals are from the enumeration {@link org.m2ling.domain.core.LinkAccessType}.
 	 * <!-- begin-user-doc -->
 	 * <p>
@@ -78,7 +79,7 @@ public interface LinkType extends ConceptItem {
 	 * @see org.m2ling.domain.core.LinkAccessType
 	 * @see #setLinkAccessType(LinkAccessType)
 	 * @see org.m2ling.domain.core.CorePackage#getLinkType_LinkAccessType()
-	 * @model
+	 * @model default="UNSET"
 	 * @generated
 	 */
 	LinkAccessType getLinkAccessType();
@@ -96,6 +97,7 @@ public interface LinkType extends ConceptItem {
 
 	/**
 	 * Returns the value of the '<em><b>Link Temporality</b></em>' attribute.
+	 * The default value is <code>"UNSET"</code>.
 	 * The literals are from the enumeration {@link org.m2ling.domain.core.LinkTemporality}.
 	 * <!-- begin-user-doc -->
 	 * <p>
@@ -107,7 +109,7 @@ public interface LinkType extends ConceptItem {
 	 * @see org.m2ling.domain.core.LinkTemporality
 	 * @see #setLinkTemporality(LinkTemporality)
 	 * @see org.m2ling.domain.core.CorePackage#getLinkType_LinkTemporality()
-	 * @model
+	 * @model default="UNSET"
 	 * @generated
 	 */
 	LinkTemporality getLinkTemporality();

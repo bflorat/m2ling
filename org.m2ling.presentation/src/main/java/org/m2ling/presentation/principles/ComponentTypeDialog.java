@@ -320,8 +320,8 @@ public class ComponentTypeDialog extends Window {
 				try {
 					List<ViewPointDTO> vpsDTO = vpService.getAllViewPoints(null);
 					for (ViewPointDTO vpDTO : vpsDTO) {
-						if (!(vpDTO.getId().equals(ctBean.getViewPoint().getId()))) {// Ignore CT from
-																											// local VP
+						// Ignore CT from local VP
+						if (!(vpDTO.getId().equals(ctBean.getViewPoint().getId()))) {
 							List<ComponentTypeDTO> cts = ctService.getAllCT(null, vpDTO.getId());
 							for (ComponentTypeDTO ctDTO : cts) {
 								HasNameAndIDBean bound = HasNameAndIDBean.newInstance(ctDTO.getId(), ctDTO.getName());

@@ -19,9 +19,9 @@ import org.m2ling.presentation.principles.LinkTemporality;
 public class LinkTypeBean extends AbstractCommonBean {
 	private HasNameAndIDBean vp;
 
-	private String linkTemporality = LinkTemporality.SYNC.name();
+	private String linkTemporality;
 
-	private String linkAccessType = LinkAccessType.READ.name();
+	private String linkAccessType;
 
 	/** Sources */
 	private Set<HasNameAndIDBean> sourcesTypes = new LinkedHashSet<HasNameAndIDBean>();

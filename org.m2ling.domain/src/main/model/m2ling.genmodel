@@ -37,11 +37,15 @@
         <genEnumLiterals ecoreEnumLiteral="m2ling.ecore#//core/ReferenceType/ADMINS"/>
       </genEnums>
       <genEnums typeSafeEnumCompatible="false" ecoreEnum="m2ling.ecore#//core/LinkTemporality">
+        <genEnumLiterals ecoreEnumLiteral="m2ling.ecore#//core/LinkTemporality/UNSET"/>
         <genEnumLiterals ecoreEnumLiteral="m2ling.ecore#//core/LinkTemporality/SYNC"/>
         <genEnumLiterals ecoreEnumLiteral="m2ling.ecore#//core/LinkTemporality/ASYNC_PULL"/>
         <genEnumLiterals ecoreEnumLiteral="m2ling.ecore#//core/LinkTemporality/ASYNC_PUSH"/>
+        <genEnumLiterals ecoreEnumLiteral="m2ling.ecore#//core/LinkTemporality/ASYNC"/>
+        <genEnumLiterals ecoreEnumLiteral="m2ling.ecore#//core/LinkTemporality/SCHEDULED"/>
       </genEnums>
       <genEnums typeSafeEnumCompatible="false" ecoreEnum="m2ling.ecore#//core/LinkAccessType">
+        <genEnumLiterals ecoreEnumLiteral="m2ling.ecore#//core/LinkAccessType/UNSET"/>
         <genEnumLiterals ecoreEnumLiteral="m2ling.ecore#//core/LinkAccessType/CREATE"/>
         <genEnumLiterals ecoreEnumLiteral="m2ling.ecore#//core/LinkAccessType/READ"/>
         <genEnumLiterals ecoreEnumLiteral="m2ling.ecore#//core/LinkAccessType/UPDATE"/>

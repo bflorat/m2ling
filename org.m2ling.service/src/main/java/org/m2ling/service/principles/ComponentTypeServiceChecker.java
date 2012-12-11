@@ -74,8 +74,7 @@ class ComponentTypeServiceChecker extends ServiceChecker {
 			checkNoneBindingToThisCT(ctToDelete);
 			checkNoReferenceToThisCT(vp, ctToDelete);
 			checkNoLinkTypeInvolvingThisCT(vp, ctToDelete);
-		}
-		else if (access == AccessType.CREATE || access == AccessType.UPDATE) {
+		} else if (access == AccessType.CREATE || access == AccessType.UPDATE) {
 			target = explorer.getComponentTypeByID(dto.getId());
 			if (dto.getBoundType() == null) {
 				checkNameWhenRequired(dto, access);
@@ -102,8 +101,7 @@ class ComponentTypeServiceChecker extends ServiceChecker {
 		}
 	}
 
-	void checkIF(final ComponentTypeDTO dto, AccessType access, final ComponentType ct)
-			throws FunctionalException {
+	void checkIF(final ComponentTypeDTO dto, AccessType access, final ComponentType ct) throws FunctionalException {
 		int ifactor = dto.getInstantiationFactor();
 		int maxNbInstances = 0;
 		// Instantiation factor, -1 or any positive value is valid
@@ -145,17 +143,18 @@ class ComponentTypeServiceChecker extends ServiceChecker {
 
 	private void checkNoIllegalBindingChange(final ComponentTypeDTO dto, final ComponentType target)
 			throws FunctionalException {
-		ComponentType currentCT = target.getBoundType();
+		ComponentType currentBoundCT = target.getBoundType();
 		boolean existingCompsForChangedType = (explorer.getComponentsForCTID(target.getId()).size() > 0);
 		// Attempt to drop the bound type
-		if (isNullBinding(dto) && currentCT != null && existingCompsForChangedType) {
+		if (isNullBinding(dto) && currentBoundCT != null && existingCompsForChangedType) {
 			throw new FunctionalException(FunctionalException.Code.CT_CANNOT_CHANGE_BINDING, null, "Current bound type="
-					+ dto.getBoundType());
+					+ target.getBoundType().getName());
 		}
-		// Attempt to change the bound type (note that we handle the case where currentCT is null)
-		if (!isNullBinding(dto) && !dto.getBoundType().getId().equals(currentCT.getId()) && existingCompsForChangedType) {
+		// Attempt to change the bound type (note that currentBoundCT can be null)
+		if (!isNullBinding(dto) && currentBoundCT != null && !dto.getBoundType().getId().equals(currentBoundCT.getId())
+				&& existingCompsForChangedType) {
 			throw new FunctionalException(FunctionalException.Code.CT_CANNOT_CHANGE_BINDING, null, "Current bound type="
-					+ dto.getBoundType());
+					+ ((currentBoundCT == null) ? "null" : currentBoundCT.getName()));
 		}
 	}
 

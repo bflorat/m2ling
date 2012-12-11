@@ -150,6 +150,7 @@ public class ViewPointDialog extends Window {
 				description.setHeight(12, UNITS_EX);
 				description.setWidth("100%");
 				description.setDescription(msg.get("pr.6"));
+				description.setRequired(true);
 				return description;
 			} else if ("comment".equals(propertyId)) {
 				TextArea comment = new TextArea();

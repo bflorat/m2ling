@@ -1946,8 +1946,8 @@ public class CorePackageImpl extends EPackageImpl implements CorePackage {
 		initEClass(linkTypeEClass, LinkType.class, "LinkType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getLinkType_SourceTypes(), this.getComponentType(), null, "sourceTypes", null, 1, -1, LinkType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getLinkType_DestinationTypes(), this.getComponentType(), null, "destinationTypes", null, 1, -1, LinkType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getLinkType_LinkAccessType(), this.getLinkAccessType(), "linkAccessType", null, 0, 1, LinkType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getLinkType_LinkTemporality(), this.getLinkTemporality(), "linkTemporality", null, 0, 1, LinkType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getLinkType_LinkAccessType(), this.getLinkAccessType(), "linkAccessType", "UNSET", 0, 1, LinkType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getLinkType_LinkTemporality(), this.getLinkTemporality(), "linkTemporality", "UNSET", 0, 1, LinkType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(linkEClass, Link.class, "Link", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getLink_Type(), this.getLinkType(), null, "type", null, 1, 1, Link.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -2051,6 +2051,7 @@ public class CorePackageImpl extends EPackageImpl implements CorePackage {
 		addEEnumLiteral(referenceTypeEEnum, ReferenceType.ADMINS);
 
 		initEEnum(linkTemporalityEEnum, LinkTemporality.class, "LinkTemporality");
+		addEEnumLiteral(linkTemporalityEEnum, LinkTemporality.UNSET);
 		addEEnumLiteral(linkTemporalityEEnum, LinkTemporality.SYNC);
 		addEEnumLiteral(linkTemporalityEEnum, LinkTemporality.ASYNC_PULL);
 		addEEnumLiteral(linkTemporalityEEnum, LinkTemporality.ASYNC_PUSH);
@@ -2058,6 +2059,7 @@ public class CorePackageImpl extends EPackageImpl implements CorePackage {
 		addEEnumLiteral(linkTemporalityEEnum, LinkTemporality.SCHEDULED);
 
 		initEEnum(linkAccessTypeEEnum, LinkAccessType.class, "LinkAccessType");
+		addEEnumLiteral(linkAccessTypeEEnum, LinkAccessType.UNSET);
 		addEEnumLiteral(linkAccessTypeEEnum, LinkAccessType.CREATE);
 		addEEnumLiteral(linkAccessTypeEEnum, LinkAccessType.READ);
 		addEEnumLiteral(linkAccessTypeEEnum, LinkAccessType.UPDATE);

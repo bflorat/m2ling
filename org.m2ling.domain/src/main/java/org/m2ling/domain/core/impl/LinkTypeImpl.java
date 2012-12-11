@@ -68,7 +68,7 @@ public class LinkTypeImpl extends ConceptItemImpl implements LinkType {
 	 * @generated
 	 * @ordered
 	 */
-	protected static final LinkAccessType LINK_ACCESS_TYPE_EDEFAULT = LinkAccessType.CREATE;
+	protected static final LinkAccessType LINK_ACCESS_TYPE_EDEFAULT = LinkAccessType.UNSET;
 
 	/**
 	 * The cached value of the '{@link #getLinkAccessType() <em>Link Access Type</em>}' attribute.
@@ -88,7 +88,7 @@ public class LinkTypeImpl extends ConceptItemImpl implements LinkType {
 	 * @generated
 	 * @ordered
 	 */
-	protected static final LinkTemporality LINK_TEMPORALITY_EDEFAULT = LinkTemporality.SYNC;
+	protected static final LinkTemporality LINK_TEMPORALITY_EDEFAULT = LinkTemporality.UNSET;
 
 	/**
 	 * The cached value of the '{@link #getLinkTemporality() <em>Link Temporality</em>}' attribute.

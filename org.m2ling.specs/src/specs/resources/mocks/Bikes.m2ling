@@ -79,7 +79,7 @@
     <componentTypes id="id_ct_app_batchmodule" name="BatchModule" comment="" description="A batch module contains one or more batchs computing complex and batch operations."/>
     <linkTypes id="_psOW0p8zEeGYS-4UJ-FpAA" name="SERVICE_SYNC_READ" comment="" description="Synchronous call to read-only services" sourceTypes="id_ct_app_guimodule" destinationTypes="id_ct_app_servicemodule" linkTemporality="ASYNC_PULL"/>
     <linkTypes id="_psOW0p8zEeGYS-4UJ-FpAArr" name="SERVICE_SYNC_RW" comment="" description="Synchronous call to Read and write services" sourceTypes="id_ct_app_guimodule" destinationTypes="id_ct_app_servicemodule"/>
-    <linkTypes id="_psOW0p8zEeGYS-4UJ-FpAAdgfgf" name="SERVICE_ASYNC_READ" comment="hop hop" description="Asynchronous call to read-only services used to retrieve large amount of data." status="STUDIED" sourceTypes="id_ct_app_batchmodule id_ct_app_guimodule" destinationTypes="id_ct_app_servicemodule" linkTemporality="ASYNC_PUSH">
+    <linkTypes id="_psOW0p8zEeGYS-4UJ-FpAAdgfgf" name="SERVICE_ASYNC_READ" comment="hop hop" description="Asynchronous call to read-only services used to retrieve large amount of data." status="STUDIED" sourceTypes="id_ct_app_batchmodule id_ct_app_guimodule" destinationTypes="id_ct_app_servicemodule">
       <tags>tag1</tags>
     </linkTypes>
     <rules id="dfsdhfkjehzlkm343" name="R1" comment="This rule emphases the rule of a portal." description="Direct call between GUI modules are forbidden." status="VALIDATED" priority="3" rationale="This makes centralized access control posssible">
@@ -117,6 +117,9 @@
     </componentTypes>
     <componentTypes id="_ha8mE333Mag01qc4bw" name="LDAP directory" comment="" description="" boundType="id_ct_tech_persistence" enumeration="_cjliUJ6TEeGyndJ1yNTLVw" instantiationFactor="-1"/>
     <componentTypes id="_aazazazaerer" name="BatchModule" comment="" description="Standalone Java batchs calling services modules" boundType="_aazazazaerer" instantiationFactor="-1"/>
+  </viewPoints>
+  <viewPoints comment="" description="dfds" id="ae5121ed-9639-40e3-ac49-d20c98510edb" name="hop">
+    <componentTypes id="f0db0e7c-1d41-49b4-83f9-491846368e77" name="ct1" comment="" description="dsqdqs" instantiationFactor="-1"/>
   </viewPoints>
   <views comment="" description="BikesOnline is a online house-built e-commerce solution to sell bikes." id="id_view_vp_logical_Logical_BikesOnline" name="Logical_BikesOnline" viewPoint="id_vp_logical">
     <components id="id_comp_view_Logical_BikesOnline_AdminGUI" name="AdminGUI" comment="" type="id_ct_logical_guimodule" boundComponent="id_comp_app_sales_admingui"/>

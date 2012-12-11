@@ -235,7 +235,8 @@ public class LinkTypeDialog extends Window {
 				}
 				linkTemporality.setCaption(msg.get("pr.45"));
 				linkTemporality.setDescription(msg.get("pr.50"));
-				linkTemporality.setRequired(true);
+				linkTemporality.setImmediate(true);
+				linkTemporality.setNullSelectionAllowed(true);
 				return linkTemporality;
 			} else if ("linkAccessType".equals(propertyId)) {
 				Select linkAccessType = new Select();
@@ -246,7 +247,6 @@ public class LinkTypeDialog extends Window {
 				linkAccessType.setNullSelectionAllowed(true);
 				linkAccessType.setDescription(msg.get("pr.51"));
 				linkAccessType.setImmediate(true);
-				linkAccessType.setRequired(true);
 				return linkAccessType;
 			} else if ("sourcesTypes".equals(propertyId)) {
 				SourceDestSelection l = new SourceDestSelection(msg.get("pr.47"));

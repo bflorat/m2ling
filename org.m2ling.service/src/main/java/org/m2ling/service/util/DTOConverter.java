@@ -282,8 +282,12 @@ public class DTOConverter {
 			HasNameAndIdDTO hniVP = new HasNameAndIdDTO.Builder(vp.getId(), vp.getName()).build();
 			LinkTypeDTO.Builder builder = new LinkTypeDTO.Builder(hniVP, lt.getId(), lt.getName());
 			populateCommonBuilder(builder, lt);
-			builder.linkAccessType(lt.getLinkAccessType().getLiteral());
-			builder.linkTemporality(lt.getLinkTemporality().getLiteral());
+			if (lt.getLinkAccessType() != LinkAccessType.UNSET) {
+				builder.linkAccessType(lt.getLinkAccessType().getLiteral());
+			}
+			if (lt.getLinkTemporality() != LinkTemporality.UNSET) {
+				builder.linkTemporality(lt.getLinkTemporality().getLiteral());
+			}
 			for (ComponentType ct : lt.getSourceTypes()) {
 				HasNameAndIdDTO hniDTO = new HasNameAndIdDTO.Builder(ct.getId(), ct.getName()).build();
 				builder.addSourcesType(hniDTO);
@@ -552,8 +556,17 @@ public class DTOConverter {
 		public LinkType newLinkType(LinkTypeDTO dto) {
 			LinkType lt = CoreFactory.eINSTANCE.createLinkType();
 			populateCommonValues(lt, dto);
-			lt.setLinkAccessType(LinkAccessType.valueOf(dto.getLinkAccessType()));
-			lt.setLinkTemporality(LinkTemporality.valueOf(dto.getLinkTemporality()));
+			// access ans temporality type can be null to mean 'unset'
+			if (dto.getLinkAccessType() == null) {
+				lt.setLinkAccessType(LinkAccessType.UNSET);
+			} else {
+				lt.setLinkAccessType(LinkAccessType.valueOf(dto.getLinkAccessType()));
+			}
+			if (dto.getLinkTemporality() == null) {
+				lt.setLinkTemporality(LinkTemporality.UNSET);
+			} else {
+				lt.setLinkTemporality(LinkTemporality.valueOf(dto.getLinkTemporality()));
+			}
 			for (HasNameAndIdDTO hniDTO : dto.getSourcesTypes()) {
 				ComponentType ct = explorer.getComponentTypeByID(hniDTO.getId());
 				lt.getSourceTypes().add(ct);

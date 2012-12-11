@@ -20,6 +20,14 @@ import org.eclipse.emf.common.util.Enumerator;
  */
 public enum LinkTemporality implements Enumerator {
 	/**
+	 * The '<em><b>UNSET</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #UNSET_VALUE
+	 * @generated
+	 * @ordered
+	 */
+	UNSET(-1, "UNSET", "UNSET"), /**
 	 * The '<em><b>SYNC</b></em>' literal object.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -71,6 +79,21 @@ public enum LinkTemporality implements Enumerator {
 	 * @generated
 	 */
 	public static final String copyright = "Copyright (C) 2012 Bertrand Florat";
+
+	/**
+	 * The '<em><b>UNSET</b></em>' literal value.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of '<em><b>UNSET</b></em>' literal object isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @see #UNSET
+	 * @model
+	 * @generated
+	 * @ordered
+	 */
+	public static final int UNSET_VALUE = -1;
 
 	/**
 	 * The '<em><b>SYNC</b></em>' literal value.
@@ -155,6 +178,7 @@ public enum LinkTemporality implements Enumerator {
 	 */
 	private static final LinkTemporality[] VALUES_ARRAY =
 		new LinkTemporality[] {
+			UNSET,
 			SYNC,
 			ASYNC_PULL,
 			ASYNC_PUSH,
@@ -210,6 +234,7 @@ public enum LinkTemporality implements Enumerator {
 	 */
 	public static LinkTemporality get(int value) {
 		switch (value) {
+			case UNSET_VALUE: return UNSET;
 			case SYNC_VALUE: return SYNC;
 			case ASYNC_PULL_VALUE: return ASYNC_PULL;
 			case ASYNC_PUSH_VALUE: return ASYNC_PUSH;
