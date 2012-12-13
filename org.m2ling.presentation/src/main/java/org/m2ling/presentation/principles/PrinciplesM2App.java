@@ -5,22 +5,19 @@
  */
 package org.m2ling.presentation.principles;
 
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.logging.Logger;
 
 import org.m2ling.common.dto.core.ViewPointDTO;
-import org.m2ling.presentation.GuiModule;
+import org.m2ling.presentation.M2App;
 import org.m2ling.presentation.events.Events;
 import org.m2ling.presentation.events.ObservationManager;
 import org.m2ling.presentation.events.Observer;
 import org.m2ling.presentation.i18n.Msg;
 import org.m2ling.presentation.principles.model.ViewPointBean;
 import org.m2ling.presentation.principles.utils.DTOConverter;
-import org.m2ling.presentation.widgets.HelpPanel;
-import org.m2ling.presentation.widgets.SidebarEntry;
 import org.m2ling.service.principles.ViewPointService;
 
 import com.google.inject.Inject;
@@ -38,7 +35,7 @@ import com.vaadin.ui.themes.BaseTheme;
  */
 @SuppressWarnings("serial")
 @SessionScoped
-public class PrinciplesGuiModule extends GuiModule implements Observer {
+public class PrinciplesM2App extends M2App implements Observer {
 	private List<ViewPointDTO> vpsDTO;
 
 	private ViewPointService vpService;
@@ -47,7 +44,7 @@ public class PrinciplesGuiModule extends GuiModule implements Observer {
 
 	private PrinciplesGUIFactory dialogFactory;
 
-	private PrinciplesGUIFactory panelFactory;
+	private PrinciplesGUIFactory factory;
 
 	private ObservationManager obs;
 
@@ -58,13 +55,12 @@ public class PrinciplesGuiModule extends GuiModule implements Observer {
 	private VerticalLayout root;
 
 	@Inject
-	public PrinciplesGuiModule(ViewPointService vpService, Logger logger, PrinciplesGUIFactory dialogFactory,
+	public PrinciplesM2App(ViewPointService vpService, Logger logger, PrinciplesGUIFactory dialogFactory,
 			PrinciplesGUIFactory panelFactory, ObservationManager obs, DTOConverter.FromDTO fromDTO, Msg msg) {
 		super();
 		this.vpService = vpService;
 		this.logger = logger;
-		this.dialogFactory = dialogFactory;
-		this.panelFactory = panelFactory;
+		this.factory = panelFactory;
 		this.obs = obs;
 		this.fromDTO = fromDTO;
 		this.msg = msg;
@@ -100,7 +96,7 @@ public class PrinciplesGuiModule extends GuiModule implements Observer {
 			addComponent(new Label("<br/>", Label.CONTENT_RAW));
 			for (ViewPointDTO dto : vpsDTO) {
 				ViewPointBean bean = fromDTO.getViewPointBean(dto);
-				ViewPointPanel panel = panelFactory.getViewPointPanelFor(bean);
+				ViewPointPanel panel = factory.getViewPointPanelFor(bean);
 				addComponent(panel);
 			}
 		}
@@ -126,18 +122,6 @@ public class PrinciplesGuiModule extends GuiModule implements Observer {
 		vert.addComponent(noneVPLabel);
 		vert.addComponent(create);
 		return vert;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.m2ling.presentation.GuiModule#getAccordionEntries()
-	 */
-	@Override
-	public List<SidebarEntry> getEntries() {
-		// None entry
-		List<SidebarEntry> out = new ArrayList<SidebarEntry>();
-		return out;
 	}
 
 	/*

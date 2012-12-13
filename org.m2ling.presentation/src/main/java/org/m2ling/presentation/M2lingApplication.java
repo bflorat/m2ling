@@ -5,7 +5,8 @@ import java.util.logging.Logger;
 
 import org.m2ling.common.configuration.Conf;
 import org.m2ling.presentation.i18n.Msg;
-import org.m2ling.presentation.principles.PrinciplesGuiModule;
+import org.m2ling.presentation.principles.PrinciplesM2App;
+import org.m2ling.presentation.studio.StudioM2App;
 
 import com.google.inject.Inject;
 import com.google.inject.servlet.SessionScoped;
@@ -22,19 +23,28 @@ import com.vaadin.ui.Window.Notification;
 @SessionScoped
 public class M2lingApplication extends Application {
 	private Window mainWindow;
+
 	private MenuBar menu;
+
 	private Logger logger;
-	private PrinciplesGuiModule principlesGuiModule;
+
+	private PrinciplesM2App principlesApp;
+
+	private StudioM2App studioApp;
+
 	@SuppressWarnings("unused")
-	private GuiModule currentApp;
+	private M2App currentApp;
+
 	private VerticalLayout root;
+
 	private final Msg msg;
 
 	@Inject
-	public M2lingApplication(Logger logger, PrinciplesGuiModule principles, Conf conf, Msg msg) {
+	public M2lingApplication(Logger logger, PrinciplesM2App principles, StudioM2App studioApp, Conf conf, Msg msg) {
 		super();
 		this.logger = logger;
-		this.principlesGuiModule = principles;
+		this.principlesApp = principles;
+		this.studioApp = studioApp;
 		this.msg = msg;
 	}
 
@@ -51,7 +61,7 @@ public class M2lingApplication extends Application {
 		initMenu();
 		root.setSpacing(true);
 		// set m2principles app by default
-		setApp(principlesGuiModule);
+		setApp(principlesApp);
 	}
 
 	private void initMenu() {
@@ -60,14 +70,20 @@ public class M2lingApplication extends Application {
 		menu.setHeight("30px");
 		menu.setStyleName("app");
 		// m2principles
-		menu.addItem("m2principles", null, new MenuBar.Command() {
+		menu.addItem(msg.get("app.1"), null, new MenuBar.Command() {
 			public void menuSelected(MenuBar.MenuItem selectedItem) {
-				setApp(principlesGuiModule);
+				setApp(principlesApp);
+			}
+		});
+		// m2studio
+		menu.addItem(msg.get("app.2"), null, new MenuBar.Command() {
+			public void menuSelected(MenuBar.MenuItem selectedItem) {
+				setApp(studioApp);
 			}
 		});
 	}
 
-	private void setApp(GuiModule app) {
+	private void setApp(M2App app) {
 		root.removeAllComponents();
 		// Logo
 		ThemeResource resLogo = new ThemeResource("img/m2ling_logo.png");
